@@ -1,0 +1,55 @@
+{
+  "ORG": {
+    "title": "Practitioner Organization Unit",
+    "source": "https://hl7-definition.caristix.com/v2/HL7v2.4/Segments/ORG",
+    "fields": [
+      { "seq": 1, "name": "Set ID - ORG", "length": "60", "type": "SI", "opt": "R", "rep": "-", "table": "" },
+      { "seq": 2, "name": "Organization Unit Code", "length": "250", "type": "CE", "opt": "O", "rep": "-", "table": "0405" },
+      { "seq": 3, "name": "Organization Unit Type Code - ORG", "length": "250", "type": "CE", "opt": "O", "rep": "-", "table": "0474" },
+      { "seq": 4, "name": "Primary Org Unit Indicator", "length": "1", "type": "ID", "opt": "O", "rep": "-", "table": "0136" },
+      { "seq": 5, "name": "Practitioner Org Unit Identifier", "length": "60", "type": "CX", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 6, "name": "Health Care Provider Type Code", "length": "250", "type": "CE", "opt": "O", "rep": "-", "table": "0452" },
+      { "seq": 7, "name": "Health Care Provider Classification Code", "length": "250", "type": "CE", "opt": "O", "rep": "-", "table": "0453" },
+      { "seq": 8, "name": "Health Care Provider Area of Specialization Code", "length": "250", "type": "CE", "opt": "O", "rep": "-", "table": "0454" },
+      { "seq": 9, "name": "Effective Date Range", "length": "52", "type": "DR", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 10, "name": "Employment Status Code", "length": "2", "type": "CE", "opt": "O", "rep": "-", "table": "0066" },
+      { "seq": 11, "name": "Board Approval Indicator", "length": "1", "type": "ID", "opt": "O", "rep": "-", "table": "0136" },
+      { "seq": 12, "name": "Primary Care Physician Indicator", "length": "1", "type": "ID", "opt": "O", "rep": "-", "table": "0136" }
+    ]
+  },
+  "AFF": {
+    "title": "Professional Affiliation",
+    "source": "https://hl7-definition.caristix.com/v2/HL7v2.4/Segments/AFF",
+    "fields": [
+      { "seq": 1, "name": "Set ID - AFF", "length": "60", "type": "SI", "opt": "R", "rep": "-", "table": "" },
+      { "seq": 2, "name": "Professional Organization", "length": "250", "type": "XON", "opt": "R", "rep": "-", "table": "" },
+      { "seq": 3, "name": "Professional Organization Address", "length": "250", "type": "XAD", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 4, "name": "Professional Organization Affiliation Date Range", "length": "52", "type": "DR", "opt": "O", "rep": "*", "table": "" },
+      { "seq": 5, "name": "Professional Affiliation Additional Information", "length": "60", "type": "ST", "opt": "O", "rep": "-", "table": "" }
+    ]
+  },
+  "LAN": {
+    "title": "Language Detail",
+    "source": "https://hl7-definition.caristix.com/v2/HL7v2.4/Segments/LAN",
+    "fields": [
+      { "seq": 1, "name": "Set ID - LAN", "length": "60", "type": "SI", "opt": "R", "rep": "-", "table": "" },
+      { "seq": 2, "name": "Language Code", "length": "250", "type": "CE", "opt": "R", "rep": "-", "table": "0296" },
+      { "seq": 3, "name": "Language Ability Code", "length": "250", "type": "CE", "opt": "O", "rep": "*", "table": "0403" },
+      { "seq": 4, "name": "Language Proficiency Code", "length": "250", "type": "CE", "opt": "O", "rep": "-", "table": "0404" }
+    ]
+  },
+  "EDU": {
+    "title": "Educational Detail",
+    "source": "https://hl7-definition.caristix.com/v2/HL7v2.4/Segments/EDU",
+    "fields": [
+      { "seq": 1, "name": "Set ID - EDU", "length": "60", "type": "SI", "opt": "R", "rep": "-", "table": "" },
+      { "seq": 2, "name": "Academic Degree", "length": "10", "type": "IS", "opt": "O", "rep": "-", "table": "0360" },
+      { "seq": 3, "name": "Academic Degree Program Date Range", "length": "52", "type": "DR", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 4, "name": "Academic Degree Program Participation Date Range", "length": "52", "type": "DR", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 5, "name": "Academic Degree Granted Date", "length": "8", "type": "DT", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 6, "name": "School", "length": "250", "type": "XON", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 7, "name": "School Type Code", "length": "250", "type": "CE", "opt": "O", "rep": "-", "table": "0402" },
+      { "seq": 8, "name": "School Address", "length": "250", "type": "XAD", "opt": "O", "rep": "-", "table": "" }
+    ]
+  }
+}

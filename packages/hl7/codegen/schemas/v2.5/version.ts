@@ -42,13 +42,14 @@ export const V2_5_MESSAGES = [
 /**
  * v2.5 — re-exports v2.4, except for the messages listed above (generated against the v2.5
  * segments) and the SFT (Software), SPM (Specimen), TQ1 (Timing/Quantity) and TQ2
- * (Timing/Quantity Relationship) segments introduced in 2.5. SRM is unchanged since v2.3.
+ * (Timing/Quantity Relationship) and CER (Certificate Detail) segments introduced in 2.5, and the
+ * EDU subclass that adds EDU-9. SRM is unchanged since v2.3.
  */
 export const V2_5: VersionSchema = {
   version: "v2.5",
   baseVersion: "v2.4",
   reexport: true,
-  ownSegments: ["SFT", "SPM", "TQ1", "TQ2"],
+  ownSegments: ["SFT", "SPM", "TQ1", "TQ2", "CER", "EDU"],
   segments: [],
   messages: V2_5_MESSAGES,
 };

@@ -116,8 +116,8 @@ codegen/
     fieldPositionTest.ts
   generate.ts          # entry point — registers VERSIONS and runs them
   generate-barrels.ts, generate-package-exports.mjs
-  generate-v23-segments.ts, generate-field-position-tests.ts   # segment tooling (see docs/ROADMAP-SEGMENTS.md)
-  spec/, validate/     # v2.3 segment field tables and their checks
+  generate-segments.ts, generate-field-position-tests.ts   # segment tooling (see docs/ROADMAP-SEGMENTS.md)
+  spec/, validate/     # per-version segment field tables (<version>-segments.json) and their checks
 ```
 
 ## Adding a message

@@ -1,7 +1,7 @@
 /**
  * Message structure for MFN^M02 messages (HL7 v2.5).
  *
- * Structure: MSH [{SFT}] MFI { MF_STAFF: MFE STF [{PRA}] [{NTE}] }
+ * Structure: MSH [{SFT}] MFI { MF_STAFF: MFE STF [{PRA}] [{ORG}] [{AFF}] [{LAN}] [{EDU}] [{CER}] [{NTE}] }
  *
  * @module
  */
@@ -22,6 +22,11 @@ export const MFN_M02_STRUCTURE: StructureItem[] = [
       { name: "MFE", required: true, repeating: false },
       { name: "STF", required: true, repeating: false },
       { name: "PRA", required: false, repeating: true },
+      { name: "ORG", required: false, repeating: true },
+      { name: "AFF", required: false, repeating: true },
+      { name: "LAN", required: false, repeating: true },
+      { name: "EDU", required: false, repeating: true },
+      { name: "CER", required: false, repeating: true },
       { name: "NTE", required: false, repeating: true },
     ],
   },

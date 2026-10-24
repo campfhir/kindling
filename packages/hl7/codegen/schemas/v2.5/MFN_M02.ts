@@ -6,9 +6,7 @@ import { SFT, group, optList, req } from "../helpers";
  *
  * MSH [{SFT}] MFI { MF_STAFF: MFE STF [{PRA}] [{ORG}] [{AFF}] [{LAN}] [{EDU}] [{CER}] [{NTE}] }
  *
- * Compared with v2.3: SFT, a repeating PRA and NTEs per entry. The ORG, AFF, LAN, EDU and CER
- * segments have no classes in this library yet, so they are not part of the structure: the parser
- * skips them with a warning (see docs/ROADMAP-SEGMENTS.md).
+ * Compared with v2.4: SFT, a repeating PRA and ORG, and the AFF, LAN, EDU, CER and NTE lists.
  * Source: https://hl7-definition.caristix.com/v2/HL7v2.5/TriggerEvents/MFN_M02
  */
 export const MFN_M02_SCHEMA: MessageSchema = {
@@ -19,6 +17,6 @@ export const MFN_M02_SCHEMA: MessageSchema = {
     req("MSH"),
     SFT,
     req("MFI"),
-    group("MF_STAFF", true, true, [req("MFE"), req("STF"), optList("PRA"), optList("NTE")], { as: "staffEntries", exportTypeName: "ParsedStaffEntry", builderTypeName: "StaffEntry" }),
+    group("MF_STAFF", true, true, [req("MFE"), req("STF"), optList("PRA"), optList("ORG"), optList("AFF"), optList("LAN"), optList("EDU"), optList("CER"), optList("NTE")], { as: "staffEntries", exportTypeName: "ParsedStaffEntry", builderTypeName: "StaffEntry" }),
   ],
 };
