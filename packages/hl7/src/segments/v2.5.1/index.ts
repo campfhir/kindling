@@ -38,6 +38,7 @@ export * from "./ODS.ts";
 export * from "./ODT.ts";
 export * from "./ORC.ts";
 export * from "./PD1.ts";
+export * from "./PDA.ts";
 export * from "./PID.ts";
 export * from "./PR1.ts";
 export * from "./PRA.ts";

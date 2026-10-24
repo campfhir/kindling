@@ -100,10 +100,12 @@ patient group (Caristix lists it from v2.5) and does not model the v2.5 `[{TQ1}]
 Done in 0.13: ADT A20, DFT P03 and BAR P01/P02/P05/P06 for v2.3 and v2.5.1, structures checked per
 event on hl7-definition.caristix.com (v2.3 and v2.5.1) and HAPI v23 (DFT_P03, BAR_P01). The BAR
 VISIT group has no required segment, so the parser opens a new visit when a segment appears out of
-group order. The v2.5.1 parsers swap in the v2.5.1 segment classes on the v2.3 structures, as the
-ADT messages do; v2.5.1 additions are skipped with a warning: `[{SFT}]`, `ROL` after PD1/PV2 and in
-INSURANCE, repeating `IN3`, the COMMON ORDER groups and the `NTE` after `FT1` in DFT^P03, and
-`ABS`/`BLC`/`RMI` at the end of the BAR^P05 visit.
+group order. DFT^P03 and the ADT family now have their own v2.5 shapes (also used by v2.5.1): ADT
+gains `[{SFT}]`, the `ROL`s after PV2 and in INSURANCE, repeating `IN3` and the trailing `PDA` (new
+`PDA` segment, introduced in v2.4); DFT^P03 gains `[{SFT}]`, the `ROL`s, the COMMON ORDER groups
+before and inside FINANCIAL, the `NTE` after `FT1` and repeating `IN3`. Only BAR still parses v2.5.1
+on the v2.3 structure (its additions, including `ABS`/`BLC`/`RMI` at the end of the BAR^P05 visit,
+are skipped with a warning). The v2.4 ADT/DFT messages still re-export v2.3 and therefore lack `PDA`.
 
 Suggested order: **queries (A19 QRY/ADR, SQM/SQR, …) → MFN → orders/pharmacy → the rest.**
 

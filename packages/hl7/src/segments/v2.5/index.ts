@@ -73,6 +73,7 @@ export * from "./OM6.ts";
 export * from "./ORC.ts";
 export * from "./PCR.ts";
 export * from "./PD1.ts";
+export * from "./PDA.ts";
 export * from "./PDC.ts";
 export * from "./PEO.ts";
 export * from "./PES.ts";

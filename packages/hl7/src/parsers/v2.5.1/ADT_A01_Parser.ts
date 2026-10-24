@@ -1,11 +1,7 @@
-/**
- * Parser for ADT^A01 messages (HL7 v2.5.1).
- *
- * @module
- */
-import type { Result } from "../../types/result.ts";
-import type { EncodingCharacters } from "../../types/encoding.ts";
+import { Result } from "../../types/result.ts";
+import { EncodingCharacters } from "../../types/encoding.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { EVN } from "../../segments/v2.5.1/EVN.ts";
 import { PID } from "../../segments/v2.5.1/PID.ts";
 import { PD1 } from "../../segments/v2.5.1/PD1.ts";
@@ -26,120 +22,108 @@ import { IN3 } from "../../segments/v2.5.1/IN3.ts";
 import { ACC } from "../../segments/v2.5.1/ACC.ts";
 import { UB1 } from "../../segments/v2.5.1/UB1.ts";
 import { UB2 } from "../../segments/v2.5.1/UB2.ts";
+import { PDA } from "../../segments/v2.5.1/PDA.ts";
 import {
   ADT_A01_Parser as ADT_A01_Parser_base,
-  type ParsedADT_A01,
-  type ParsedProcedure,
-  type ParsedInsuranceGroup,
+  ParsedADT_A01,
+  ParsedProcedure,
+  ParsedInsuranceGroup,
 } from "../v2.5/ADT_A01_Parser.ts";
 
 export type { ParsedADT_A01, ParsedProcedure, ParsedInsuranceGroup };
 
 /** Parser for HL7 ADT^A01 (v2.5.1) messages. */
 export class ADT_A01_Parser extends ADT_A01_Parser_base {
-  /** Parse msh. */
   protected override parseMSH(s: string): Result<MSH> {
     return MSH.parse(s);
   }
 
-  /** Parse evn. */
+  protected override parseSFT(s: string, e: EncodingCharacters): Result<SFT> {
+    return SFT.parse(s, e);
+  }
+
   protected override parseEVN(s: string, e: EncodingCharacters): Result<EVN> {
     return EVN.parse(s, e);
   }
 
-  /** Parse pid. */
   protected override parsePID(s: string, e: EncodingCharacters): Result<PID> {
     return PID.parse(s, e);
   }
 
-  /** Parse pd1. */
   protected override parsePD1(s: string, e: EncodingCharacters): Result<PD1> {
     return PD1.parse(s, e);
   }
 
-  /** Parse rol. */
   protected override parseROL(s: string, e: EncodingCharacters): Result<ROL> {
     return ROL.parse(s, e);
   }
 
-  /** Parse nk1. */
   protected override parseNK1(s: string, e: EncodingCharacters): Result<NK1> {
     return NK1.parse(s, e);
   }
 
-  /** Parse pv1. */
   protected override parsePV1(s: string, e: EncodingCharacters): Result<PV1> {
     return PV1.parse(s, e);
   }
 
-  /** Parse pv2. */
   protected override parsePV2(s: string, e: EncodingCharacters): Result<PV2> {
     return PV2.parse(s, e);
   }
 
-  /** Parse db1. */
   protected override parseDB1(s: string, e: EncodingCharacters): Result<DB1> {
     return DB1.parse(s, e);
   }
 
-  /** Parse obx. */
   protected override parseOBX(s: string, e: EncodingCharacters): Result<OBX> {
     return OBX.parse(s, e);
   }
 
-  /** Parse al1. */
   protected override parseAL1(s: string, e: EncodingCharacters): Result<AL1> {
     return AL1.parse(s, e);
   }
 
-  /** Parse dg1. */
   protected override parseDG1(s: string, e: EncodingCharacters): Result<DG1> {
     return DG1.parse(s, e);
   }
 
-  /** Parse drg. */
   protected override parseDRG(s: string, e: EncodingCharacters): Result<DRG> {
     return DRG.parse(s, e);
   }
 
-  /** Parse pr1. */
   protected override parsePR1(s: string, e: EncodingCharacters): Result<PR1> {
     return PR1.parse(s, e);
   }
 
-  /** Parse gt1. */
   protected override parseGT1(s: string, e: EncodingCharacters): Result<GT1> {
     return GT1.parse(s, e);
   }
 
-  /** Parse in1. */
   protected override parseIN1(s: string, e: EncodingCharacters): Result<IN1> {
     return IN1.parse(s, e);
   }
 
-  /** Parse in2. */
   protected override parseIN2(s: string, e: EncodingCharacters): Result<IN2> {
     return IN2.parse(s, e);
   }
 
-  /** Parse in3. */
   protected override parseIN3(s: string, e: EncodingCharacters): Result<IN3> {
     return IN3.parse(s, e);
   }
 
-  /** Parse acc. */
   protected override parseACC(s: string, e: EncodingCharacters): Result<ACC> {
     return ACC.parse(s, e);
   }
 
-  /** Parse ub1. */
   protected override parseUB1(s: string, e: EncodingCharacters): Result<UB1> {
     return UB1.parse(s, e);
   }
 
-  /** Parse ub2. */
   protected override parseUB2(s: string, e: EncodingCharacters): Result<UB2> {
     return UB2.parse(s, e);
+  }
+
+  protected override parsePDA(s: string, e: EncodingCharacters): Result<PDA> {
+    return PDA.parse(s, e);
   }
 }
 

@@ -100,8 +100,8 @@ export const V2_5_1: VersionSchema = {
     "MSA", "ERR",
     // Scheduling requests and document management
     "ARQ", "APR", "TXA",
-    // Bed status
-    "NPU",
+    // Bed status, death and autopsy
+    "NPU", "PDA",
     // Pharmacy
     "RXO", "RXE", "RXD", "RXA", "RXR",
     // Timing / Specimen

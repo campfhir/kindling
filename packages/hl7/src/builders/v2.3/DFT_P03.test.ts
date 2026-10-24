@@ -36,7 +36,7 @@ describe("DFT_P03 builder (v2.3)", () => {
     expect(createDFT_P03(msh(), evn(), pid(), [{ ft1: new FT1().setId("1") }], { pv2: new PV2() }).verify().errors).toEqual(["PV2 requires PV1"]);
   });
 
-  test("encodes every group in spec order and round-trips through v2.3 and v2.5.1", () => {
+  test("encodes every group in spec order and round-trips", () => {
     const wire = createDFT_P03(msh(), evn(), pid(), [
       { ft1: new FT1().setId("1"), procedures: [{ pr1: new PR1().setId("1"), rolList: [new ROL()] }, { pr1: new PR1().setId("2") }] },
       { ft1: new FT1().setId("2") },
@@ -50,8 +50,8 @@ describe("DFT_P03 builder (v2.3)", () => {
       "FT1", "PR1", "ROL", "PR1", "FT1",
       "DG1", "DRG", "GT1", "IN1", "IN2", "IN3", "IN1", "ACC",
     ]);
-    for (const parse of [parseDFT_P03, parseDFT_P03_v251]) {
-      const result = parse(wire);
+    {
+      const result = parseDFT_P03(wire);
       expect(result.ok).toBe(true);
       const v = result.val!;
       expect(ParserUtils.getComponent(v.pid.fields[4], 0)).toBe("Doe");
@@ -65,6 +65,12 @@ describe("DFT_P03 builder (v2.3)", () => {
       expect(v.acc).toBeTruthy();
       expect(v.message.encode()).toBe(wire);
     }
+    // The v2.5.1 parser (v2.5 structure) also accepts a v2.3 wire message; IN3 is a list there.
+    const v251 = parseDFT_P03_v251(wire);
+    expect(v251.ok).toBe(true);
+    expect(v251.val!.financials).toHaveLength(2);
+    expect(v251.val!.insurances[0].in3List).toHaveLength(1);
+    expect(v251.val!.message.encode()).toBe(wire);
   });
 });
 

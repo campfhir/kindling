@@ -7,6 +7,7 @@ import { MessageSchema } from "../../../src/types/schema";
  *
  * The spec lists the patient segments flat, twice (the first PID is linked to the second);
  * they are modelled here as one group that occurs exactly twice.
+ * v2.5/v2.5.1 add [{SFT}] after MSH (see the v2.5.1 schema).
  * Source: https://hl7-definition.caristix.com/v2/HL7v2.3/TriggerEvents/ADT_A24
  */
 export const ADT_A24_SCHEMA: MessageSchema = {

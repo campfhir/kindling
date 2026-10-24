@@ -6,10 +6,8 @@ import { MessageSchema } from "../../../src/types/schema";
  * MSH EVN PID [PD1] [PV1] [PV2] [{DB1}] [{OBX}] { FT1 [{ PR1 [{ROL}] }] }
  * [{DG1}] [DRG] [{GT1}] [{ IN1 [IN2] [IN3] }] [ACC]
  *
- * Checked on hl7-definition.caristix.com (v2.3) and HAPI v23. v2.5.1 adds [{SFT}], ROL after PD1
- * and PV2, optional COMMON ORDER groups before and inside the FINANCIAL group, an NTE after FT1,
- * repeating IN3 and ROL in the INSURANCE group; the v2.5.1 parser here swaps in the v2.5.1
- * segment classes on this structure and skips those additions with a warning.
+ * Checked on hl7-definition.caristix.com (v2.3) and HAPI v23. v2.4 is identical; v2.5/v2.5.1 have
+ * their own structure (see the v2.5.1 schema).
  */
 export const DFT_P03_SCHEMA: MessageSchema = {
   messageType: "DFT",
