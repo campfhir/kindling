@@ -1,19 +1,26 @@
-// @generated wrapper — copied from the base version so it wraps this version's base module
-import { Result } from "../../types/result.ts";
-import {
-  MDM_T02_Parser,
-  ParsedMDM_T02,
-} from "./MDM_T02_Parser.ts";
+/**
+ * Parser for MDM^T10 messages (HL7 v2.5).
+ *
+ * Structure: MSH [{SFT}] EVN PID PV1 [{ COMMON_ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] OBR [{NTE}] }] TXA { OBSERVATION: OBX [{NTE}] }
+ * Shares the MDM^T02 structure.
+ *
+ * @module
+ */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { Result } from "../../types/result.ts";
+import { MDM_T02_Parser, type ParsedMDM_T02 } from "./MDM_T02_Parser.ts";
 
-/** Structured result of parsing an HL7 MDM^T10 (v2.3) message. */
+export type { ParsedMDMOrder, ParsedMDMTiming, ParsedMDMObservation } from "./MDM_T02_Parser.ts";
+/** Structured result of parsing an HL7 MDM^T10 (HL7 v2.5) message. */
 export type ParsedMDM_T10 = ParsedMDM_T02;
 
-/** Parser for HL7 MDM^T10 (v2.3) messages. */
+/** Parser for HL7 MDM^T10 (HL7 v2.5) messages. */
 export class MDM_T10_Parser extends MDM_T02_Parser {
+  /** The message name used in error messages. */
   protected override readonly messageName: string = "MDM_T10";
 }
 
-/** Parses an HL7 MDM^T10 (v2.3) message string into a structured result. */
+/** Parses an HL7 MDM^T10 (HL7 v2.5) message string into a structured result. */
 export function parseMDM_T10(messageString: string): Result<ParsedMDM_T10> {
   return new MDM_T10_Parser().parse(messageString);
 }

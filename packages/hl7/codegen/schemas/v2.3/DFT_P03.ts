@@ -1,60 +1,36 @@
-import { MessageSchema } from "../../../src/types/schema";
+import type { MessageSchema } from "../../../src/types/schema";
+import { group, opt, optList, req } from "../helpers";
 
 /**
- * DFT^P03 - Post Detail Financial Transaction (HL7 v2.3)
+ * DFT^P03 - Post Detail Financial Transaction (HL7 v2.3, chapter 6)
  *
- * MSH EVN PID [PD1] [PV1] [PV2] [{DB1}] [{OBX}] { FT1 [{ PR1 [{ROL}] }] }
- * [{DG1}] [DRG] [{GT1}] [{ IN1 [IN2] [IN3] }] [ACC]
+ * MSH EVN PID [PD1] [PV1] [PV2] [{DB1}] [{OBX}] { FINANCIAL: FT1 [{ FINANCIAL_PROCEDURE: PR1 [{ROL}] }] }
+ * [{DG1}] [DRG] [{GT1}] [{ INSURANCE: IN1 [IN2] [IN3] }] [ACC]
  *
- * Checked on hl7-definition.caristix.com (v2.3) and HAPI v23. v2.4 is identical; v2.5/v2.5.1 have
- * their own structure (see the v2.5.1 schema).
+ * Checked on hl7-definition.caristix.com (v2.3) and HAPI v23. v2.4 and v2.5 have their own
+ * structures (see those schemas).
  */
 export const DFT_P03_SCHEMA: MessageSchema = {
   messageType: "DFT",
   triggerEvent: "P03",
   version: "2.3",
   structure: [
-    { name: "MSH", required: true, repeating: false },
-    { name: "EVN", required: true, repeating: false },
-    { name: "PID", required: true, repeating: false },
-    { name: "PD1", required: false, repeating: false },
-    { name: "PV1", required: false, repeating: false },
-    { name: "PV2", required: false, repeating: false },
-    { name: "DB1", required: false, repeating: true },
-    { name: "OBX", required: false, repeating: true },
-    {
-      name: "FINANCIAL",
-      required: true,
-      repeating: true,
-      exportTypeName: "ParsedDFTFinancial",
-      segments: [
-        { name: "FT1", required: true, repeating: false },
-        {
-          name: "FINANCIAL_PROCEDURE",
-          required: false,
-          repeating: true,
-          exportTypeName: "ParsedDFTProcedure",
-          segments: [
-            { name: "PR1", required: true, repeating: false },
-            { name: "ROL", required: false, repeating: true },
-          ],
-        },
-      ],
-    },
-    { name: "DG1", required: false, repeating: true },
-    { name: "DRG", required: false, repeating: false },
-    { name: "GT1", required: false, repeating: true },
-    {
-      name: "INSURANCE",
-      required: false,
-      repeating: true,
-      exportTypeName: "ParsedDFTInsurance",
-      segments: [
-        { name: "IN1", required: true, repeating: false },
-        { name: "IN2", required: false, repeating: false },
-        { name: "IN3", required: false, repeating: false },
-      ],
-    },
-    { name: "ACC", required: false, repeating: false },
+    req("MSH"),
+    req("EVN"),
+    req("PID"),
+    opt("PD1"),
+    opt("PV1"),
+    opt("PV2"),
+    optList("DB1"),
+    optList("OBX"),
+    group("FINANCIAL", true, true, [
+      req("FT1"),
+      group("FINANCIAL_PROCEDURE", false, true, [req("PR1"), optList("ROL")], { as: "procedures", exportTypeName: "ParsedDFTProcedure" }),
+    ], { exportTypeName: "ParsedDFTFinancial" }),
+    optList("DG1"),
+    opt("DRG"),
+    optList("GT1"),
+    group("INSURANCE", false, true, [req("IN1"), opt("IN2"), opt("IN3")], { as: "insurances", exportTypeName: "ParsedDFTInsurance" }),
+    opt("ACC"),
   ],
 };

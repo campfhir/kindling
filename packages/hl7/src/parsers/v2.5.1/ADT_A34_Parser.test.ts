@@ -4,6 +4,7 @@ import { ParserUtils } from "../../types/parser.ts";
 
 const minimalMessage = [
   "MSH|^~\\&|SEND|SFAC|RECV|RFAC|20231015120000||ADT^A34^ADT_A34|MSG001|P|2.5.1",
+  "EVN|A34|20231015120000",
   "PID|1||12345^^^MRN^MR||Doe^John^Q||19800115|M",
   "MRG|OLD-12345^^^MRN^MR",
 ].join("\r");
@@ -26,47 +27,48 @@ describe("parseADT_A34 — minimal message", () => {
 
   test("extracts MSH", () => {
     const result = parseADT_A34(minimalMessage);
-    expect(result.val!.msh.name).toBe("MSH");
-    expect(ParserUtils.getComponent(result.val!.msh.fields[1], 0)).toBe("SEND");
+    expect(result.val!.header.name).toBe("MSH");
+    expect(ParserUtils.getComponent(result.val!.header.fields[1], 0)).toBe("SEND");
   });
 
   test("extracts PID", () => {
     const result = parseADT_A34(minimalMessage);
-    expect(result.val!.pid).toBeTruthy();
-    const familyName = ParserUtils.getComponent(result.val!.pid.fields[4], 0);
+    expect(result.val!.patient).toBeTruthy();
+    const familyName = ParserUtils.getComponent(result.val!.patient.fields[4], 0);
     expect(familyName).toBe("Doe");
   });
 
   test("extracts MRG", () => {
     const result = parseADT_A34(minimalMessage);
-    expect(result.val!.mrg).toBeTruthy();
-    expect(result.val!.mrg.name).toBe("MRG");
+    expect(result.val!.merge).toBeTruthy();
+    expect(result.val!.merge.name).toBe("MRG");
   });
 
-  test("EVN is absent in minimal message", () => {
-    const result = parseADT_A34(minimalMessage);
-    expect(result.val!.evn).toBeUndefined();
+  test("EVN is required", () => {
+    const result = parseADT_A34(minimalMessage.replace("EVN|A34|20231015120000\r", ""));
+    expect(result.ok).toBe(false);
+    expect(result.err!.message).toMatch(/ADT_A34 message must contain an EVN segment/);
   });
 });
 
 describe("parseADT_A34 — optional segments", () => {
   test("extracts EVN", () => {
     const result = parseADT_A34(fullMessage);
-    expect(result.val!.evn).toBeTruthy();
-    expect(result.val!.evn!.name).toBe("EVN");
+    expect(result.val!.event).toBeTruthy();
+    expect(result.val!.event!.name).toBe("EVN");
   });
 
   test("extracts PD1", () => {
     const result = parseADT_A34(fullMessage);
-    expect(result.val!.pd1).toBeTruthy();
-    expect(result.val!.pd1!.name).toBe("PD1");
+    expect(result.val!.patientDemographics).toBeTruthy();
+    expect(result.val!.patientDemographics!.name).toBe("PD1");
   });
 
   test("extracts PV1", () => {
     const result = parseADT_A34(fullMessage);
-    expect(result.val!.pv1).toBeTruthy();
-    expect(result.val!.pv1!.name).toBe("PV1");
-    const patientClass = ParserUtils.getComponent(result.val!.pv1!.fields[1], 0);
+    expect(result.val!.visit).toBeTruthy();
+    expect(result.val!.visit!.name).toBe("PV1");
+    const patientClass = ParserUtils.getComponent(result.val!.visit!.fields[1], 0);
     expect(patientClass).toBe("I");
   });
 });
@@ -86,6 +88,7 @@ describe("parseADT_A34 — error cases", () => {
   test("returns error when PID is missing", () => {
     const msg = [
       "MSH|^~\\&|SEND|SFAC|RECV|RFAC|20231015||ADT^A34^ADT_A34|MSG002|P|2.5.1",
+      "EVN|A34",
       "MRG|OLD-12345^^^MRN^MR",
     ].join("\r");
 
@@ -97,6 +100,7 @@ describe("parseADT_A34 — error cases", () => {
   test("returns error when MRG is missing", () => {
     const msg = [
       "MSH|^~\\&|SEND|SFAC|RECV|RFAC|20231015||ADT^A34^ADT_A34|MSG003|P|2.5.1",
+      "EVN|A34",
       "PID|1||12345^^^MRN^MR||Doe^John",
     ].join("\r");
 

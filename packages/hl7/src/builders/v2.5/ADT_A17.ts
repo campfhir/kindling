@@ -1,9 +1,15 @@
 /**
- * Builder for ADT^A17 messages (HL7 2.3).
- * Compared with v2.3 only [{SFT}] after MSH is new.
+ * Builder for ADT^A17 messages (HL7 v2.5).
+ *
+ * Structure: MSH [{SFT}] EVN { PATIENT: PID [PD1] PV1 [PV2] [{DB1}] [{OBX}] }
  *
  * @module
  */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
+import { ADT_A17_STRUCTURE } from "../../structures/v2.5/ADT_A17.ts";
 import type { MSH } from "../../segments/v2.5/MSH.ts";
 import type { SFT } from "../../segments/v2.5/SFT.ts";
 import type { EVN } from "../../segments/v2.5/EVN.ts";
@@ -13,52 +19,53 @@ import type { PV1 } from "../../segments/v2.5/PV1.ts";
 import type { PV2 } from "../../segments/v2.5/PV2.ts";
 import type { DB1 } from "../../segments/v2.5/DB1.ts";
 import type { OBX } from "../../segments/v2.5/OBX.ts";
-import { type EncodingCharacters, DEFAULT_ENCODING } from "../../types/encoding.ts";
 
-/** SwapPatient — one of the two patients swapping beds in an HL7 ADT^A17 (2.3) message. */
-export interface SwapPatient<TPID extends PID = PID, TPV1 extends PV1 = PV1> {
-  /** The pid value. */
-  pid: TPID;
-  /** The pd1 value. */
-  pd1?: PD1;
-  /** The pv1 value. */
-  pv1: TPV1;
-  /** The pv2 value. */
-  pv2?: PV2;
-  /** The db1 list value. */
-  db1List?: DB1[];
-  /** The obx list value. */
-  obxList?: OBX[];
+/** The PATIENT group of an ADT^A17 (HL7 v2.5) message being built. */
+export interface SwapPatient {
+  /** The PID segment. */
+  patient: PID;
+  /** The PD1 segment. */
+  patientDemographics?: PD1;
+  /** The PV1 segment. */
+  visit: PV1;
+  /** The PV2 segment. */
+  visitDetails?: PV2;
+  /** The DB1 segments. */
+  disabilities?: DB1[];
+  /** The OBX segments. */
+  observations?: OBX[];
 }
 
-/** Builder for HL7 ADT^A17 (2.3) messages. */
-export class ADT_A17<
-  TMSH extends MSH = MSH,
-  TEVN extends EVN = EVN,
-  TPID extends PID = PID,
-  TPV1 extends PV1 = PV1,
-> {
+/** The optional segments and groups of an ADT^A17 (HL7 v2.5) message. */
+export interface ADT_A17Options {
+  /** The SFT segments. */
+  software?: SFT[];
+}
+
+/** Builder for HL7 ADT^A17 (HL7 v2.5) messages. */
+export class ADT_A17<TMSH extends MSH = MSH, TEVN extends EVN = EVN> {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "ADT_A17";
+  /** The structure the message is verified against and encoded in. */
+  protected readonly structure: StructureItem[] = ADT_A17_STRUCTURE;
+
   /** Constructor. */
   constructor(
-    public msh: TMSH,
-    public evn: TEVN,
-    public patient1: SwapPatient<TPID, TPV1>,
-    public patient2: SwapPatient<TPID, TPV1>,
-    public options: { /** Software segments, which follow MSH. */ sftList?: SFT[] } = {},
-    private encoding: EncodingCharacters = DEFAULT_ENCODING,
+    public header: TMSH,
+    public event: TEVN,
+    public patients: SwapPatient[],
+    public options: ADT_A17Options = {},
+    protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
+
+  /** The message as one object keyed by structure property name (what verify() and encode() work on). */
+  toInput(): StructureInput {
+    return { ...this.options, header: this.header, event: this.event, patients: this.patients };
+  }
 
   /** Validates the message structure, returning a result. */
   verify(): { valid: boolean; errors: string[] } {
-    const errors: string[] = [];
-
-    if (!this.msh) errors.push("MSH segment is required");
-    if (!this.evn) errors.push("EVN segment is required");
-    if (!this.patient1?.pid) errors.push("PID segment is required for patient 1");
-    if (!this.patient1?.pv1) errors.push("PV1 segment is required for patient 1");
-    if (!this.patient2?.pid) errors.push("PID segment is required for patient 2");
-    if (!this.patient2?.pv1) errors.push("PV1 segment is required for patient 2");
-
+    const errors = verifyStructure(this.structure, this.toInput());
     return { valid: errors.length === 0, errors };
   }
 
@@ -66,43 +73,19 @@ export class ADT_A17<
   encode(): string {
     const verification = this.verify();
     if (!verification.valid) {
-      throw new Error(
-        `Cannot encode invalid ADT_A17 message:\n${verification.errors.join("\n")}`,
-      );
+      throw new Error(`Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`);
     }
-
-    const segments: string[] = [];
-    const enc = this.encoding;
-
-    segments.push(this.msh.encode(enc));
-    for (const s of this.options.sftList ?? []) segments.push(s.encode(enc));
-    segments.push(this.evn.encode(enc));
-    for (const p of [this.patient1, this.patient2]) {
-      segments.push(p.pid.encode(enc));
-      if (p.pd1) segments.push(p.pd1.encode(enc));
-      segments.push(p.pv1.encode(enc));
-      if (p.pv2) segments.push(p.pv2.encode(enc));
-      if (p.db1List) p.db1List.forEach((x) => segments.push(x.encode(enc)));
-      if (p.obxList) p.obxList.forEach((x) => segments.push(x.encode(enc)));
-    }
-
-    return segments.join("\r");
+    return encodeStructure(this.structure, this.toInput(), this.encoding);
   }
 }
 
-/** Builds an HL7 ADT^A17 (2.3) message. */
-export function createADT_A17<
-  TMSH extends MSH = MSH,
-  TEVN extends EVN = EVN,
-  TPID extends PID = PID,
-  TPV1 extends PV1 = PV1,
->(
-  msh: TMSH,
-  evn: TEVN,
-  patient1: SwapPatient<TPID, TPV1>,
-  patient2: SwapPatient<TPID, TPV1>,
-  options: ADT_A17<TMSH, TEVN, TPID, TPV1>["options"] = {},
-  encoding?: EncodingCharacters,
-): ADT_A17<TMSH, TEVN, TPID, TPV1> {
-  return new ADT_A17(msh, evn, patient1, patient2, options, encoding);
+/** Builds an HL7 ADT^A17 (HL7 v2.5) message. */
+export function createADT_A17<TMSH extends MSH = MSH, TEVN extends EVN = EVN>(
+  header: TMSH,
+  event: TEVN,
+  patients: SwapPatient[],
+  options: ADT_A17Options = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
+): ADT_A17<TMSH, TEVN> {
+  return new ADT_A17(header, event, patients, options, encoding);
 }

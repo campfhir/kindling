@@ -1,133 +1,26 @@
-import { Result } from "../../types/result.ts";
-import { EncodingCharacters } from "../../types/encoding.ts";
-import { MSH } from "../../segments/v2.5.1/MSH.ts";
-import { SFT } from "../../segments/v2.5.1/SFT.ts";
-import { EVN } from "../../segments/v2.5.1/EVN.ts";
-import { PID } from "../../segments/v2.5.1/PID.ts";
-import { PD1 } from "../../segments/v2.5.1/PD1.ts";
-import { ROL } from "../../segments/v2.5.1/ROL.ts";
-import { NK1 } from "../../segments/v2.5.1/NK1.ts";
-import { PV1 } from "../../segments/v2.5.1/PV1.ts";
-import { PV2 } from "../../segments/v2.5.1/PV2.ts";
-import { DB1 } from "../../segments/v2.5.1/DB1.ts";
-import { OBX } from "../../segments/v2.5.1/OBX.ts";
-import { AL1 } from "../../segments/v2.5.1/AL1.ts";
-import { DG1 } from "../../segments/v2.5.1/DG1.ts";
-import { DRG } from "../../segments/v2.5.1/DRG.ts";
-import { PR1 } from "../../segments/v2.5.1/PR1.ts";
-import { GT1 } from "../../segments/v2.5.1/GT1.ts";
-import { IN1 } from "../../segments/v2.5.1/IN1.ts";
-import { IN2 } from "../../segments/v2.5.1/IN2.ts";
-import { IN3 } from "../../segments/v2.5.1/IN3.ts";
-import { ACC } from "../../segments/v2.5.1/ACC.ts";
-import { UB1 } from "../../segments/v2.5.1/UB1.ts";
-import { UB2 } from "../../segments/v2.5.1/UB2.ts";
-import { PDA } from "../../segments/v2.5.1/PDA.ts";
-import {
-  ADT_A28_Parser as ADT_A28_Parser_base,
-  ParsedADT_A28,
-  ParsedProcedure,
-  ParsedInsuranceGroup,
-} from "../v2.5/ADT_A28_Parser.ts";
+/**
+ * Parser for ADT^A28 messages (HL7 v2.5.1).
+ *
+ * Structure: MSH [{SFT}] EVN PID [PD1] [{ROL}] [{NK1}] PV1 [PV2] [{ROL}] [{DB1}] [{OBX}] [{AL1}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] }] [{GT1}] [{ INSURANCE: IN1 [IN2] [{IN3}] [{ROL}] }] [ACC] [UB1] [UB2] [PDA]
+ * Shares the ADT^A01 structure.
+ *
+ * @module
+ */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { Result } from "../../types/result.ts";
+import { ADT_A01_Parser, type ParsedADT_A01 } from "./ADT_A01_Parser.ts";
 
-export type { ParsedADT_A28, ParsedProcedure, ParsedInsuranceGroup };
+export type { ParsedProcedure, ParsedInsuranceGroup } from "./ADT_A01_Parser.ts";
+/** Structured result of parsing an HL7 ADT^A28 (HL7 v2.5.1) message. */
+export type ParsedADT_A28 = ParsedADT_A01;
 
-/** Parser for HL7 ADT^A28 (v2.5.1) messages. */
-export class ADT_A28_Parser extends ADT_A28_Parser_base {
-  protected override parseMSH(s: string): Result<MSH> {
-    return MSH.parse(s);
-  }
-
-  protected override parseSFT(s: string, e: EncodingCharacters): Result<SFT> {
-    return SFT.parse(s, e);
-  }
-
-  protected override parseEVN(s: string, e: EncodingCharacters): Result<EVN> {
-    return EVN.parse(s, e);
-  }
-
-  protected override parsePID(s: string, e: EncodingCharacters): Result<PID> {
-    return PID.parse(s, e);
-  }
-
-  protected override parsePD1(s: string, e: EncodingCharacters): Result<PD1> {
-    return PD1.parse(s, e);
-  }
-
-  protected override parseROL(s: string, e: EncodingCharacters): Result<ROL> {
-    return ROL.parse(s, e);
-  }
-
-  protected override parseNK1(s: string, e: EncodingCharacters): Result<NK1> {
-    return NK1.parse(s, e);
-  }
-
-  protected override parsePV1(s: string, e: EncodingCharacters): Result<PV1> {
-    return PV1.parse(s, e);
-  }
-
-  protected override parsePV2(s: string, e: EncodingCharacters): Result<PV2> {
-    return PV2.parse(s, e);
-  }
-
-  protected override parseDB1(s: string, e: EncodingCharacters): Result<DB1> {
-    return DB1.parse(s, e);
-  }
-
-  protected override parseOBX(s: string, e: EncodingCharacters): Result<OBX> {
-    return OBX.parse(s, e);
-  }
-
-  protected override parseAL1(s: string, e: EncodingCharacters): Result<AL1> {
-    return AL1.parse(s, e);
-  }
-
-  protected override parseDG1(s: string, e: EncodingCharacters): Result<DG1> {
-    return DG1.parse(s, e);
-  }
-
-  protected override parseDRG(s: string, e: EncodingCharacters): Result<DRG> {
-    return DRG.parse(s, e);
-  }
-
-  protected override parsePR1(s: string, e: EncodingCharacters): Result<PR1> {
-    return PR1.parse(s, e);
-  }
-
-  protected override parseGT1(s: string, e: EncodingCharacters): Result<GT1> {
-    return GT1.parse(s, e);
-  }
-
-  protected override parseIN1(s: string, e: EncodingCharacters): Result<IN1> {
-    return IN1.parse(s, e);
-  }
-
-  protected override parseIN2(s: string, e: EncodingCharacters): Result<IN2> {
-    return IN2.parse(s, e);
-  }
-
-  protected override parseIN3(s: string, e: EncodingCharacters): Result<IN3> {
-    return IN3.parse(s, e);
-  }
-
-  protected override parseACC(s: string, e: EncodingCharacters): Result<ACC> {
-    return ACC.parse(s, e);
-  }
-
-  protected override parseUB1(s: string, e: EncodingCharacters): Result<UB1> {
-    return UB1.parse(s, e);
-  }
-
-  protected override parseUB2(s: string, e: EncodingCharacters): Result<UB2> {
-    return UB2.parse(s, e);
-  }
-
-  protected override parsePDA(s: string, e: EncodingCharacters): Result<PDA> {
-    return PDA.parse(s, e);
-  }
+/** Parser for HL7 ADT^A28 (HL7 v2.5.1) messages. */
+export class ADT_A28_Parser extends ADT_A01_Parser {
+  /** The message name used in error messages. */
+  protected override readonly messageName: string = "ADT_A28";
 }
 
-/** Parses an HL7 ADT^A28 (v2.5.1) message string into a structured result. */
+/** Parses an HL7 ADT^A28 (HL7 v2.5.1) message string into a structured result. */
 export function parseADT_A28(messageString: string): Result<ParsedADT_A28> {
   return new ADT_A28_Parser().parse(messageString);
 }

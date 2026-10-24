@@ -74,7 +74,7 @@ test("encode() produces correct segment order", () => {
 
 test("encode() includes NK1 before PV1", () => {
   const msg = createADT_A28(makeMSH(), makeEVN(), makePID(), makePV1(), {
-    nk1List: [new NK1().setId("1")],
+    nextOfKin: [new NK1().setId("1")],
   });
   const names = msg.encode().split("\r").map((s) => s.substring(0, 3));
   expect(names.indexOf("NK1")).toBeLessThan(names.indexOf("PV1"));
@@ -82,7 +82,7 @@ test("encode() includes NK1 before PV1", () => {
 
 test("encode() places procedure groups after PV1", () => {
   const msg = createADT_A28(makeMSH(), makeEVN(), makePID(), makePV1(), {
-    procedures: [{ pr1: new PR1().setId("1") }],
+    procedures: [{ procedure: new PR1().setId("1") }],
   });
   const names = msg.encode().split("\r").map((s) => s.substring(0, 3));
   expect(names.indexOf("PR1")).toBeGreaterThan(names.indexOf("PV1"));
@@ -90,8 +90,8 @@ test("encode() places procedure groups after PV1", () => {
 
 test("encode() places GT1 before IN1", () => {
   const msg = createADT_A28(makeMSH(), makeEVN(), makePID(), makePV1(), {
-    gt1List: [new GT1().setId("1")],
-    insuranceGroups: [{ in1: new IN1().setId("1").insurancePlanId({ code: "PPO" }) }],
+    guarantors: [new GT1().setId("1")],
+    insuranceGroups: [{ insurance: new IN1().setId("1").insurancePlanId({ code: "PPO" }) }],
   });
   const names = msg.encode().split("\r").map((s) => s.substring(0, 3));
   expect(names.indexOf("GT1")).toBeLessThan(names.indexOf("IN1"));
@@ -100,9 +100,9 @@ test("encode() places GT1 before IN1", () => {
 test("encode() interleaves IN2 and IN3 inside insurance group", () => {
   const msg = createADT_A28(makeMSH(), makeEVN(), makePID(), makePV1(), {
     insuranceGroups: [{
-      in1: new IN1().setId("1").insurancePlanId({ code: "PPO" }),
-      in2: new IN2().insuredSsn("SSN123"),
-      in3List: [new IN3().setId("1")],
+      insurance: new IN1().setId("1").insurancePlanId({ code: "PPO" }),
+      insuranceDetails: new IN2().insuredSsn("SSN123"),
+      insuranceCertifications: [new IN3().setId("1")],
     }],
   });
   const names = msg.encode().split("\r").map((s) => s.substring(0, 3));
@@ -112,7 +112,7 @@ test("encode() interleaves IN2 and IN3 inside insurance group", () => {
 
 test("encode() includes AL1 list after PV1", () => {
   const msg = createADT_A28(makeMSH(), makeEVN(), makePID(), makePV1(), {
-    al1List: [new AL1().setId("1")],
+    allergies: [new AL1().setId("1")],
   });
   const names = msg.encode().split("\r").map((s) => s.substring(0, 3));
   expect(names.includes("AL1")).toBe(true);
@@ -121,16 +121,16 @@ test("encode() includes AL1 list after PV1", () => {
 
 test("round-trip: build → encode → parse", () => {
   const msg = createADT_A28(makeMSH(), makeEVN(), makePID(), makePV1(), {
-    nk1List: [new NK1().setId("1")],
-    al1List: [new AL1().setId("1")],
-    procedures: [{ pr1: new PR1().setId("1") }],
-    insuranceGroups: [{ in1: new IN1().setId("1").insurancePlanId({ code: "PPO" }) }],
+    nextOfKin: [new NK1().setId("1")],
+    allergies: [new AL1().setId("1")],
+    procedures: [{ procedure: new PR1().setId("1") }],
+    insuranceGroups: [{ insurance: new IN1().setId("1").insurancePlanId({ code: "PPO" }) }],
   });
 
   const parsed = parseADT_A28(msg.encode());
   expect(parsed.ok).toBe(true);
-  expect(parsed.val!.nk1List!.length).toBe(1);
-  expect(parsed.val!.al1List!.length).toBe(1);
+  expect(parsed.val!.nextOfKin!.length).toBe(1);
+  expect(parsed.val!.allergies!.length).toBe(1);
   expect(parsed.val!.procedures!.length).toBe(1);
   expect(parsed.val!.insuranceGroups!.length).toBe(1);
 });

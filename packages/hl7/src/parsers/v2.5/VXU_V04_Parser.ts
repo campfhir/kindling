@@ -1,17 +1,15 @@
 /**
- * Parser for VXU^V04 messages (HL7 v2.5): unsolicited vaccination record update.
+ * Parser for VXU^V04 messages (HL7 v2.5).
  *
- * Structure (HL7 v2.5):
- *   MSH [{SFT}] PID [PD1] [{NK1}] [ PV1 [PV2] ] [{GT1}] [{ IN1 [IN2] [IN3] }]
- *   [{ ORC [{ TQ1 [{TQ2}] }] RXA [RXR] [{ OBX [{NTE}] }] }]
- *
- * Compared with v2.4: SFT is new, ORC is required in each vaccination group, and the
- * ORC is followed by an optional repeating timing group (TQ1 with its TQ2 segments).
+ * Structure: MSH [{SFT}] PID [PD1] [{NK1}] [ PATIENT: PV1 [PV2] ] [{GT1}] [{ INSURANCE: IN1 [IN2] [IN3] }] [{ ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] RXA [RXR] [{ OBSERVATION: OBX [{NTE}] }] }]
  *
  * @module
  */
-import { Err } from "../../utils/err.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../../types/result.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
+import { VXU_V04_STRUCTURE } from "../../structures/v2.5/VXU_V04.ts";
 import { MSH } from "../../segments/v2.5/MSH.ts";
 import { SFT } from "../../segments/v2.5/SFT.ts";
 import { PID } from "../../segments/v2.5/PID.ts";
@@ -30,383 +28,109 @@ import { RXA } from "../../segments/v2.5/RXA.ts";
 import { RXR } from "../../segments/v2.5/RXR.ts";
 import { OBX } from "../../segments/v2.5/OBX.ts";
 import { NTE } from "../../segments/v2.5/NTE.ts";
-import type { HL7Message } from "../../types/message.ts";
-import type { Segment } from "../../types/segment.ts";
-import type { EncodingCharacters } from "../../types/encoding.ts";
-import {
-  misplacedSegment,
-  readMessageHeader,
-  segmentParseFailure,
-} from "../../utils/messageParsing.ts";
 
-/** The PV1/PV2 pair. */
-export interface ParsedVisit {
-  /** The pv1 value. */
-  pv1: PV1;
-  /** The pv2 value. */
-  pv2?: PV2;
-}
-
-/** A repeating IN1 group. */
+/** The INSURANCE group of a parsed VXU^V04 (HL7 v2.5) message. */
 export interface ParsedInsurance {
-  /** The in1 value. */
-  in1: IN1;
-  /** The in2 value. */
-  in2?: IN2;
-  /** The in3 value. */
-  in3?: IN3;
+  /** The IN1 segment. */
+  insurance: IN1;
+  /** The IN2 segment. */
+  insuranceDetails?: IN2;
+  /** The IN3 segment. */
+  insuranceCertification?: IN3;
 }
 
-/** An OBX with the NTE segments that follow it. */
-export interface ParsedObservation {
-  /** The obx value. */
-  obx: OBX;
-  /** The notes value. */
-  notes: NTE[];
-}
-
-/** A repeating timing group: TQ1 with its TQ2 segments. */
-export interface ParsedTiming {
-  /** The tq1 value. */
-  tq1: TQ1;
-  /** The TQ2 segments. */
-  tq2List: TQ2[];
-}
-
-/** A repeating vaccination group: ORC [timing] RXA [RXR] and its observations. */
+/** The ORDER group of a parsed VXU^V04 (HL7 v2.5) message. */
 export interface ParsedVaccination {
-  /** The orc value. */
-  orc: ORC;
-  /** The timing groups. */
-  timing: ParsedTiming[];
-  /** The rxa value. */
-  rxa: RXA;
-  /** The rxr value. */
-  rxr?: RXR;
-  /** The observations value. */
-  observations: ParsedObservation[];
+  /** The ORC segment. */
+  commonOrder: ORC;
+  /** The TIMING groups. */
+  timings?: ParsedTiming[];
+  /** The RXA segment. */
+  administration: RXA;
+  /** The RXR segment. */
+  route?: RXR;
+  /** The OBSERVATION groups. */
+  observations?: ParsedObservation[];
 }
 
-/** Structured result of parsing an HL7 VXU^V04 (v2.3) message. */
-export interface ParsedVXU_V04 {
-  /** The message value. */
-  message: HL7Message;
-  /** The msh value. */
-  msh: MSH;
-  /** The software segments. */
-  sftList: SFT[];
-  /** The pid value. */
-  pid: PID;
-  /** The pd1 value. */
-  pd1?: PD1;
+/** The TIMING group of a parsed VXU^V04 (HL7 v2.5) message. */
+export interface ParsedTiming {
+  /** The TQ1 segment. */
+  timing: TQ1;
+  /** The TQ2 segments. */
+  timingRelationships?: TQ2[];
+}
+
+/** The OBSERVATION group of a parsed VXU^V04 (HL7 v2.5) message. */
+export interface ParsedObservation {
+  /** The OBX segment. */
+  observation: OBX;
+  /** The NTE segments. */
+  notes?: NTE[];
+}
+
+/** Structured result of parsing an HL7 VXU^V04 (HL7 v2.5) message. */
+export interface ParsedVXU_V04 extends ParsedMessageBase {
+  /** The MSH segment. */
+  header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
+  /** The PID segment. */
+  patient: PID;
+  /** The PD1 segment. */
+  patientDemographics?: PD1;
   /** The NK1 segments. */
-  nk1List: NK1[];
-  /** The visit value. */
-  visit?: ParsedVisit;
-  /** The guarantor segments. */
-  gt1List: GT1[];
-  /** The insurance value. */
-  insurance: ParsedInsurance[];
-  /** The vaccination groups. */
-  orders: ParsedVaccination[];
+  nextOfKin?: NK1[];
+  /** The PV1 segment. */
+  visit?: PV1;
+  /** The PV2 segment. */
+  visitDetails?: PV2;
+  /** The GT1 segments. */
+  guarantors?: GT1[];
+  /** The INSURANCE groups. */
+  insurances?: ParsedInsurance[];
+  /** The ORDER groups. */
+  orders?: ParsedVaccination[];
 }
 
-/** Parser for HL7 VXU^V04 (v2.3) messages. */
+/** The segment parsers of VXU^V04 (HL7 v2.5). */
+const PARSERS: SegmentParsers = {
+  MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
+  PID: (s, e) => PID.parse(s, e),
+  PD1: (s, e) => PD1.parse(s, e),
+  NK1: (s, e) => NK1.parse(s, e),
+  PV1: (s, e) => PV1.parse(s, e),
+  PV2: (s, e) => PV2.parse(s, e),
+  GT1: (s, e) => GT1.parse(s, e),
+  IN1: (s, e) => IN1.parse(s, e),
+  IN2: (s, e) => IN2.parse(s, e),
+  IN3: (s, e) => IN3.parse(s, e),
+  ORC: (s, e) => ORC.parse(s, e),
+  TQ1: (s, e) => TQ1.parse(s, e),
+  TQ2: (s, e) => TQ2.parse(s, e),
+  RXA: (s, e) => RXA.parse(s, e),
+  RXR: (s, e) => RXR.parse(s, e),
+  OBX: (s, e) => OBX.parse(s, e),
+  NTE: (s, e) => NTE.parse(s, e),
+};
+
+/** Parser for HL7 VXU^V04 (HL7 v2.5) messages. */
 export class VXU_V04_Parser {
-  /** Parse msh. */
-  protected parseMSH(s: string): Result<MSH> {
-    return MSH.parse(s);
-  }
-  /** Parse sft. */
-  protected parseSFT(s: string, e: EncodingCharacters): Result<SFT> {
-    return SFT.parse(s, e);
-  }
-  /** Parse pid. */
-  protected parsePID(s: string, e: EncodingCharacters): Result<PID> {
-    return PID.parse(s, e);
-  }
-  /** Parse pd1. */
-  protected parsePD1(s: string, e: EncodingCharacters): Result<PD1> {
-    return PD1.parse(s, e);
-  }
-  /** Parse nk1. */
-  protected parseNK1(s: string, e: EncodingCharacters): Result<NK1> {
-    return NK1.parse(s, e);
-  }
-  /** Parse pv1. */
-  protected parsePV1(s: string, e: EncodingCharacters): Result<PV1> {
-    return PV1.parse(s, e);
-  }
-  /** Parse pv2. */
-  protected parsePV2(s: string, e: EncodingCharacters): Result<PV2> {
-    return PV2.parse(s, e);
-  }
-  /** Parse gt1. */
-  protected parseGT1(s: string, e: EncodingCharacters): Result<GT1> {
-    return GT1.parse(s, e);
-  }
-  /** Parse in1. */
-  protected parseIN1(s: string, e: EncodingCharacters): Result<IN1> {
-    return IN1.parse(s, e);
-  }
-  /** Parse in2. */
-  protected parseIN2(s: string, e: EncodingCharacters): Result<IN2> {
-    return IN2.parse(s, e);
-  }
-  /** Parse in3. */
-  protected parseIN3(s: string, e: EncodingCharacters): Result<IN3> {
-    return IN3.parse(s, e);
-  }
-  /** Parse orc. */
-  protected parseORC(s: string, e: EncodingCharacters): Result<ORC> {
-    return ORC.parse(s, e);
-  }
-  /** Parse tq1. */
-  protected parseTQ1(s: string, e: EncodingCharacters): Result<TQ1> {
-    return TQ1.parse(s, e);
-  }
-  /** Parse tq2. */
-  protected parseTQ2(s: string, e: EncodingCharacters): Result<TQ2> {
-    return TQ2.parse(s, e);
-  }
-  /** Parse rxa. */
-  protected parseRXA(s: string, e: EncodingCharacters): Result<RXA> {
-    return RXA.parse(s, e);
-  }
-  /** Parse rxr. */
-  protected parseRXR(s: string, e: EncodingCharacters): Result<RXR> {
-    return RXR.parse(s, e);
-  }
-  /** Parse obx. */
-  protected parseOBX(s: string, e: EncodingCharacters): Result<OBX> {
-    return OBX.parse(s, e);
-  }
-  /** Parse nte. */
-  protected parseNTE(s: string, e: EncodingCharacters): Result<NTE> {
-    return NTE.parse(s, e);
-  }
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "VXU_V04";
+  /** The structure the message is parsed against. */
+  protected readonly structure: StructureItem[] = VXU_V04_STRUCTURE;
+  /** The segment parsers, keyed by segment name. */
+  protected readonly parsers: SegmentParsers = PARSERS;
 
   /** Parses the input string into a structured instance. */
   parse(messageString: string): Result<ParsedVXU_V04> {
-    try {
-      const header = readMessageHeader(messageString, (s) => this.parseMSH(s));
-      if (!header.ok || !header.val) return header as Result<never>;
-      const { segments, msh, encoding, message } = header.val;
-
-      const sftList: SFT[] = [];
-      let pid: PID | undefined;
-      let pd1: PD1 | undefined;
-      const nk1List: NK1[] = [];
-      let visit: ParsedVisit | undefined;
-      const gt1List: GT1[] = [];
-      const insurance: ParsedInsurance[] = [];
-      let currentInsurance: ParsedInsurance | undefined;
-      const orders: ParsedVaccination[] = [];
-      /** The vaccination group being filled; it is complete once it has an RXA. */
-      let pending: { orc: ORC; timing: ParsedTiming[]; rxa?: RXA; rxr?: RXR; observations: ParsedObservation[] } | undefined;
-      let timing: ParsedTiming | undefined;
-      let observation: ParsedObservation | undefined;
-
-      for (let i = 1; i < segments.length; i++) {
-        const segmentStr = segments[i];
-        const segmentType = segmentStr.substring(0, 3);
-        const line = i + 1;
-        // Parses the segment with the matching protected method and records it.
-        const read = <T extends Segment>(
-          fn: (s: string, e: EncodingCharacters) => Result<T>,
-        ): Result<T> => {
-          const result = fn.call(this, segmentStr, encoding);
-          if (result.ok && result.val) message.addSegment(result.val);
-          return result;
-        };
-        /** Closes the previous vaccination group; an ORC without an RXA is an error. */
-        const closeGroup = (): Result<never> | undefined => {
-          if (!pending) return undefined;
-          if (!pending.rxa) {
-            return misplacedSegment("ORC", line, "is not followed by an RXA segment before the next group") as Result<never>;
-          }
-          orders.push(pending as ParsedVaccination);
-          pending = undefined;
-          observation = undefined;
-          timing = undefined;
-          return undefined;
-        };
-
-        switch (segmentType) {
-          case "SFT": {
-            const result = read(this.parseSFT);
-            if (!result.ok || !result.val) return segmentParseFailure("SFT", line, result);
-            if (pid) return misplacedSegment("SFT", line, "must appear before the PID segment");
-            sftList.push(result.val);
-            break;
-          }
-
-          case "PID": {
-            const result = read(this.parsePID);
-            if (!result.ok || !result.val) return segmentParseFailure("PID", line, result);
-            if (pid) return misplacedSegment("PID", line, "appears more than once");
-            pid = result.val;
-            break;
-          }
-
-          case "PD1": {
-            const result = read(this.parsePD1);
-            if (!result.ok || !result.val) return segmentParseFailure("PD1", line, result);
-            if (!pid) return misplacedSegment("PD1", line, "found without preceding PID segment");
-            pd1 = result.val;
-            break;
-          }
-
-          case "NK1": {
-            const result = read(this.parseNK1);
-            if (!result.ok || !result.val) return segmentParseFailure("NK1", line, result);
-            if (!pid) return misplacedSegment("NK1", line, "found without preceding PID segment");
-            nk1List.push(result.val);
-            break;
-          }
-
-          case "PV1": {
-            const result = read(this.parsePV1);
-            if (!result.ok || !result.val) return segmentParseFailure("PV1", line, result);
-            if (!pid) return misplacedSegment("PV1", line, "found without preceding PID segment");
-            visit = { pv1: result.val };
-            break;
-          }
-
-          case "PV2": {
-            const result = read(this.parsePV2);
-            if (!result.ok || !result.val) return segmentParseFailure("PV2", line, result);
-            if (!visit) return misplacedSegment("PV2", line, "found without preceding PV1 segment");
-            visit.pv2 = result.val;
-            break;
-          }
-
-          case "GT1": {
-            const result = read(this.parseGT1);
-            if (!result.ok || !result.val) return segmentParseFailure("GT1", line, result);
-            if (!pid) return misplacedSegment("GT1", line, "found without preceding PID segment");
-            gt1List.push(result.val);
-            break;
-          }
-
-          case "IN1": {
-            const result = read(this.parseIN1);
-            if (!result.ok || !result.val) return segmentParseFailure("IN1", line, result);
-            if (!pid) return misplacedSegment("IN1", line, "found without preceding PID segment");
-            currentInsurance = { in1: result.val };
-            insurance.push(currentInsurance);
-            break;
-          }
-
-          case "IN2": {
-            const result = read(this.parseIN2);
-            if (!result.ok || !result.val) return segmentParseFailure("IN2", line, result);
-            if (!currentInsurance) return misplacedSegment("IN2", line, "found without preceding IN1 segment");
-            currentInsurance.in2 = result.val;
-            break;
-          }
-
-          case "IN3": {
-            const result = read(this.parseIN3);
-            if (!result.ok || !result.val) return segmentParseFailure("IN3", line, result);
-            if (!currentInsurance) return misplacedSegment("IN3", line, "found without preceding IN1 segment");
-            currentInsurance.in3 = result.val;
-            break;
-          }
-
-          case "ORC": {
-            const result = read(this.parseORC);
-            if (!result.ok || !result.val) return segmentParseFailure("ORC", line, result);
-            const closed = closeGroup();
-            if (closed) return closed;
-            pending = { orc: result.val, timing: [], observations: [] };
-            timing = undefined;
-            break;
-          }
-
-          case "TQ1": {
-            const result = read(this.parseTQ1);
-            if (!result.ok || !result.val) return segmentParseFailure("TQ1", line, result);
-            if (!pending || pending.rxa) return misplacedSegment("TQ1", line, "must follow an ORC and precede the RXA");
-            timing = { tq1: result.val, tq2List: [] };
-            pending.timing.push(timing);
-            break;
-          }
-
-          case "TQ2": {
-            const result = read(this.parseTQ2);
-            if (!result.ok || !result.val) return segmentParseFailure("TQ2", line, result);
-            if (!timing || !pending || pending.rxa) return misplacedSegment("TQ2", line, "found without preceding TQ1 segment");
-            timing.tq2List.push(result.val);
-            break;
-          }
-
-          case "RXA": {
-            const result = read(this.parseRXA);
-            if (!result.ok || !result.val) return segmentParseFailure("RXA", line, result);
-            if (!pending || pending.rxa) {
-              return misplacedSegment("RXA", line, "found without a preceding ORC segment (ORC is required in v2.5)");
-            }
-            pending.rxa = result.val;
-            break;
-          }
-
-          case "RXR": {
-            const result = read(this.parseRXR);
-            if (!result.ok || !result.val) return segmentParseFailure("RXR", line, result);
-            if (!pending?.rxa) return misplacedSegment("RXR", line, "found without preceding RXA segment");
-            if (pending.rxr) return misplacedSegment("RXR", line, "appears more than once in the group");
-            pending.rxr = result.val;
-            break;
-          }
-
-          case "OBX": {
-            const result = read(this.parseOBX);
-            if (!result.ok || !result.val) return segmentParseFailure("OBX", line, result);
-            if (!pending?.rxa) return misplacedSegment("OBX", line, "found without preceding RXA segment");
-            observation = { obx: result.val, notes: [] };
-            pending.observations.push(observation);
-            break;
-          }
-
-          case "NTE": {
-            const result = read(this.parseNTE);
-            if (!result.ok || !result.val) return segmentParseFailure("NTE", line, result);
-            if (!observation) return misplacedSegment("NTE", line, "found without preceding OBX segment");
-            observation.notes.push(result.val);
-            break;
-          }
-
-          default:
-            console.warn(`Skipping unsupported segment type '${segmentType}' at line ${line}`);
-            break;
-        }
-      }
-
-      if (pending) {
-        if (!pending.rxa) {
-          return { ok: false, err: new Err("ORC is not followed by an RXA segment") };
-        }
-        orders.push(pending as ParsedVaccination);
-      }
-      if (!pid) {
-        return { ok: false, err: new Err("VXU_V04 message must contain a PID segment") };
-      }
-
-      return {
-        ok: true,
-        val: { message, msh, sftList, pid, pd1, nk1List, visit, gt1List, insurance, orders },
-      };
-    } catch (error) {
-      return {
-        ok: false,
-        err: new Err(`Failed to parse VXU_V04 message: ${error}`),
-      };
-    }
+    return parseStructure<ParsedVXU_V04>(this.messageName, this.structure, this.parsers, messageString);
   }
 }
 
-/** Parses an HL7 VXU^V04 (v2.3) message string into a structured result. */
+/** Parses an HL7 VXU^V04 (HL7 v2.5) message string into a structured result. */
 export function parseVXU_V04(messageString: string): Result<ParsedVXU_V04> {
   return new VXU_V04_Parser().parse(messageString);
 }

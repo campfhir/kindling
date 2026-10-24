@@ -1,64 +1,38 @@
 /**
  * Builder for ORU^R31 messages (HL7 v2.5.1).
  *
+ * Structure: MSH [{SFT}] PID [PD1] [ VISIT: PV1 [PV2] ] ORC OBR [{NTE}] [{ TIMING_QTY: TQ1 [{TQ2}] }] { OBSERVATION: OBX [{NTE}] }
+ * Shares the ORU^R30 structure.
+ *
  * @module
  */
-import {
-  ORU_R30,
-  type PatientResultR30,
-  type SimplePatientResultR30,
-} from "./ORU_R30.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { PID } from "../../segments/v2.5.1/PID.ts";
+import type { ORC } from "../../segments/v2.5.1/ORC.ts";
+import type { OBR } from "../../segments/v2.5.1/OBR.ts";
+import { ORU_R30, type ORU_R30Options, type TimingQty, type ObservationGroup } from "./ORU_R30.ts";
 
-export type {
-  PatientResultR30 as PatientResultR31,
-  OrderObservationR30 as OrderObservationR31,
-  SimplePatientResultR30 as SimplePatientResultR31,
-  SimpleOrderObservationR30 as SimpleOrderObservationR31,
-} from "./ORU_R30.ts";
+export type { TimingQty, ObservationGroup };
+/** The optional segments and groups of an ORU^R31 (HL7 v2.5.1) message. */
+export type ORU_R31Options = ORU_R30Options;
 
-/** Builder for HL7 ORU^R31 (v2.5.1) messages. */
-export class ORU_R31 extends ORU_R30 {
-  /** The message name value. */
-  protected override readonly messageName = "ORU_R31";
-
-  /** Validates the message structure, returning a result. */
-  verify(): { valid: boolean; errors: string[] } {
-    const result = super.verify();
-    if (this.msh) {
-      const { triggerEvent } = this.msh.getMessageType();
-      if (triggerEvent && triggerEvent !== "R31") {
-        result.errors.push(`MSH-9 trigger event must be "R31", got "${triggerEvent}"`);
-      }
-    }
-    return { valid: result.errors.length === 0, errors: result.errors };
-  }
-
-  /** Encodes this message to its HL7 wire string. */
-  encode(options?: { renumberSetIds?: boolean }): string {
-    const verification = this.verify();
-    if (!verification.valid) {
-      throw new Error(
-        `Cannot encode invalid ORU_R31 message:\n${verification.errors.join("\n")}`,
-      );
-    }
-    return super.encode(options);
-  }
+/** Builder for HL7 ORU^R31 (HL7 v2.5.1) messages. */
+export class ORU_R31<TMSH extends MSH = MSH, TPID extends PID = PID, TORC extends ORC = ORC, TOBR extends OBR = OBR> extends ORU_R30<TMSH, TPID, TORC, TOBR> {
+  /** The message name used in error messages. */
+  protected override readonly messageName: string = "ORU_R31";
 }
 
-/** Builds an HL7 ORU^R31 (v2.5.1) message. */
-export function createORU_R31(
-  msh: MSH,
-  patientResults: SimplePatientResultR30[] = [],
-): ORU_R31 {
-  const convertedResults: PatientResultR30[] = patientResults.map((pr) => ({
-    pid: pr.pid,
-    pv1: pr.pv1,
-    orderObservations: pr.orderObservations.map((oo) => ({
-      orc: oo.orc,
-      obr: oo.obr,
-      obxList: oo.observations,
-    })),
-  }));
-  return new ORU_R31(msh, convertedResults);
+/** Builds an HL7 ORU^R31 (HL7 v2.5.1) message. */
+export function createORU_R31<TMSH extends MSH = MSH, TPID extends PID = PID, TORC extends ORC = ORC, TOBR extends OBR = OBR>(
+  header: TMSH,
+  patient: TPID,
+  commonOrder: TORC,
+  observationRequest: TOBR,
+  observations: ObservationGroup[],
+  options: ORU_R31Options = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
+): ORU_R31<TMSH, TPID, TORC, TOBR> {
+  return new ORU_R31(header, patient, commonOrder, observationRequest, observations, options, encoding);
 }

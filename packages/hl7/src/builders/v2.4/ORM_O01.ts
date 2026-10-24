@@ -1,18 +1,15 @@
 /**
  * Builder for ORM^O01 messages (HL7 v2.4).
  *
- * Structure (HL7 v2.4; CTD and FT1 are new compared with v2.3):
- *   MSH [{NTE}]
- *   [ PID [PD1] [{NTE}] [ PV1 [PV2] ] [{ IN1 [IN2] [IN3] }] [GT1] [{AL1}] ]
- *   { ORC
- *     [ <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [CTD] [{DG1}] [{ OBX [{NTE}] }] ]
- *     [{FT1}] [{CTI}] [BLG] }
- *
- * v2.5 made IN3 repeating; its builder overrides `maxIn3PerInsurance` (1 here, as in the v2.4
- * specification). The IN3 segments are given as `in3List` in both versions.
+ * Structure: MSH [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC [ ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [CTD] [{DG1}] [{ OBSERVATION: OBX [{NTE}] }] ] [{FT1}] [{CTI}] [BLG] }
  *
  * @module
  */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
+import { ORM_O01_STRUCTURE } from "../../structures/v2.4/ORM_O01.ts";
 import type { MSH } from "../../segments/v2.4/MSH.ts";
 import type { NTE } from "../../segments/v2.4/NTE.ts";
 import type { PID } from "../../segments/v2.4/PID.ts";
@@ -37,130 +34,98 @@ import type { OBX } from "../../segments/v2.4/OBX.ts";
 import type { FT1 } from "../../segments/v2.4/FT1.ts";
 import type { CTI } from "../../segments/v2.4/CTI.ts";
 import type { BLG } from "../../segments/v2.4/BLG.ts";
-import { type EncodingCharacters, DEFAULT_ENCODING } from "../../types/encoding.ts";
 
-/** The order detail segment of an order: one of OBR, RQD, RQ1, RXO, ODS or ODT. */
-export type OrderDetailSegment = OBR | RQD | RQ1 | RXO | ODS | ODT;
-
-/** An OBX with the NTE segments that follow it. */
-export interface ObservationGroup<TObx extends OBX = OBX> {
-  /** The obx value. */
-  obx: TObx;
-  /** The notes value. */
-  notes?: NTE[];
+/** The INSURANCE group of an ORM^O01 (HL7 v2.4) message being built. */
+export interface InsuranceGroup {
+  /** The IN1 segment. */
+  insurance: IN1;
+  /** The IN2 segment. */
+  insuranceDetails?: IN2;
+  /** The IN3 segment. */
+  insuranceCertification?: IN3;
 }
 
-/** The order detail segment with its notes, diagnoses and observations. */
-export interface OrderDetailGroup<TDetail extends OrderDetailSegment = OrderDetailSegment> {
-  /** The order detail segment. */
-  segment: TDetail;
-  /** The notes value. */
+/** The ORDER group of an ORM^O01 (HL7 v2.4) message being built. */
+export interface OrderGroup {
+  /** The ORC segment. */
+  commonOrder: ORC;
+  /** The ORDER DETAIL group. */
+  detail?: OrderDetailGroup;
+  /** The FT1 segments. */
+  transactions?: FT1[];
+  /** The CTI segments. */
+  clinicalTrials?: CTI[];
+  /** The BLG segment. */
+  billing?: BLG;
+}
+
+/** The ORDER DETAIL group of an ORM^O01 (HL7 v2.4) message being built. */
+export interface OrderDetailGroup {
+  /** One of OBR, RQD, RQ1, RXO, ODS, ODT. */
+  segment: OBR | RQD | RQ1 | RXO | ODS | ODT;
+  /** The NTE segments. */
   notes?: NTE[];
-  /** The ctd value. */
-  ctd?: CTD;
-  /** The diagnoses value. */
+  /** The CTD segment. */
+  contact?: CTD;
+  /** The DG1 segments. */
   diagnoses?: DG1[];
-  /** The observations value. */
+  /** The OBSERVATION groups. */
   observations?: ObservationGroup[];
 }
 
-/** A repeating ORC group. */
-export interface OrderGroup<TOrc extends ORC = ORC> {
-  /** The orc value. */
-  orc: TOrc;
-  /** The detail value. */
-  detail?: OrderDetailGroup;
-  /** The financial transaction segments. */
-  ftList?: FT1[];
-  /** The clinical trial identification segments. */
-  ctiList?: CTI[];
-  /** The blg value. */
-  blg?: BLG;
-}
-
-/** An IN1 with its optional IN2 and IN3. */
-export interface InsuranceGroup<TIn1 extends IN1 = IN1> {
-  /** The in1 value. */
-  in1: TIn1;
-  /** The in2 value. */
-  in2?: IN2;
-  /** The IN3 segments. */
-  in3List?: IN3[];
-}
-
-/** The optional patient group. */
-export interface PatientGroup<TPid extends PID = PID> {
-  /** The pid value. */
-  pid: TPid;
-  /** The pd1 value. */
-  pd1?: PD1;
-  /** The notes value. */
+/** The OBSERVATION group of an ORM^O01 (HL7 v2.4) message being built. */
+export interface ObservationGroup {
+  /** The OBX segment. */
+  observation: OBX;
+  /** The NTE segments. */
   notes?: NTE[];
-  /** The PV1 and optional PV2. */
-  visit?: { pv1: PV1; pv2?: PV2 };
-  /** The insurance value. */
-  insurance?: InsuranceGroup[];
-  /** The gt1 value. */
-  gt1?: GT1;
-  /** The allergies value. */
+}
+
+/** The optional segments and groups of an ORM^O01 (HL7 v2.4) message. */
+export interface ORM_O01Options {
+  /** The NTE segments. */
+  notes?: NTE[];
+  /** The PID segment. */
+  patient?: PID;
+  /** The PD1 segment. */
+  patientDemographics?: PD1;
+  /** The NTE segments. */
+  patientNotes?: NTE[];
+  /** The PV1 segment. */
+  visit?: PV1;
+  /** The PV2 segment. */
+  visitDetails?: PV2;
+  /** The INSURANCE groups. */
+  insurances?: InsuranceGroup[];
+  /** The GT1 segment. */
+  guarantor?: GT1;
+  /** The AL1 segments. */
   allergies?: AL1[];
 }
 
-/** Builder for HL7 ORM^O01 (v2.4) messages. */
-export class ORM_O01<
-  TMsh extends MSH = MSH,
-  TPid extends PID = PID,
-  TOrc extends ORC = ORC,
-> {
-  /** How many IN3 segments an insurance group may hold: one in v2.4, repeating from v2.5. */
-  protected readonly maxIn3PerInsurance: number = 1;
+/** Builder for HL7 ORM^O01 (HL7 v2.4) messages. */
+export class ORM_O01<TMSH extends MSH = MSH> {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "ORM_O01";
+  /** The structure the message is verified against and encoded in. */
+  protected readonly structure: StructureItem[] = ORM_O01_STRUCTURE;
 
   /** Constructor. */
   constructor(
-    public msh: TMsh,
-    public orders: OrderGroup<TOrc>[],
-    public options: {
-      /** NTE segments that follow MSH. */
-      notes?: NTE[];
-      /** The patient group; only needed when entering orders for a specific patient. */
-      patient?: PatientGroup<TPid>;
-    } = {},
-    private encoding: EncodingCharacters = DEFAULT_ENCODING,
+    public header: TMSH,
+    public orders: OrderGroup[],
+    public options: ORM_O01Options = {},
+    protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
+
+  /** The message as one object keyed by structure property name (what verify() and encode() work on). */
+  toInput(): StructureInput {
+    return { ...this.options, header: this.header, orders: this.orders };
+  }
 
   /** Validates the message structure, returning a result. */
   verify(): { valid: boolean; errors: string[] } {
-    const errors: string[] = [];
-
-    if (!this.msh) errors.push("MSH segment is required");
-    if (!this.orders || this.orders.length === 0) {
-      errors.push("At least one order (ORC) is required");
-    }
-
-    const patient = this.options.patient;
-    if (patient) {
-      if (!patient.pid) errors.push("Patient group: PID segment is required");
-      if (patient.visit && !patient.visit.pv1) {
-        errors.push("Patient group: PV1 segment is required when a visit is present");
-      }
-      (patient.insurance ?? []).forEach((ins, i) => {
-        if (!ins.in1) errors.push(`Insurance group ${i + 1}: IN1 segment is required`);
-        if ((ins.in3List?.length ?? 0) > this.maxIn3PerInsurance) {
-          errors.push(`Insurance group ${i + 1}: at most ${this.maxIn3PerInsurance} IN3 segment(s) allowed`);
-        }
-      });
-    }
-
-    (this.orders ?? []).forEach((order, i) => {
-      if (!order.orc) errors.push(`Order ${i + 1}: ORC segment is required`);
-      if (order.detail && !order.detail.segment) {
-        errors.push(`Order ${i + 1}: order detail segment is required when a detail group is present`);
-      }
-      (order.detail?.observations ?? []).forEach((o, j) => {
-        if (!o.obx) errors.push(`Order ${i + 1}, observation ${j + 1}: OBX segment is required`);
-      });
-    });
-
+    const errors = verifyStructure(this.structure, this.toInput());
     return { valid: errors.length === 0, errors };
   }
 
@@ -168,65 +133,18 @@ export class ORM_O01<
   encode(): string {
     const verification = this.verify();
     if (!verification.valid) {
-      throw new Error(
-        `Cannot encode invalid ORM_O01 message:\n${verification.errors.join("\n")}`,
-      );
+      throw new Error(`Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`);
     }
-
-    const enc = this.encoding;
-    const segments: string[] = [this.msh.encode(enc)];
-    const add = (seg: { encode(e?: EncodingCharacters): string }) => segments.push(seg.encode(enc));
-
-    this.options.notes?.forEach(add);
-
-    const patient = this.options.patient;
-    if (patient) {
-      add(patient.pid);
-      if (patient.pd1) add(patient.pd1);
-      patient.notes?.forEach(add);
-      if (patient.visit) {
-        add(patient.visit.pv1);
-        if (patient.visit.pv2) add(patient.visit.pv2);
-      }
-      for (const ins of patient.insurance ?? []) {
-        add(ins.in1);
-        if (ins.in2) add(ins.in2);
-        ins.in3List?.forEach(add);
-      }
-      if (patient.gt1) add(patient.gt1);
-      patient.allergies?.forEach(add);
-    }
-
-    for (const order of this.orders) {
-      add(order.orc);
-      if (order.detail) {
-        add(order.detail.segment);
-        order.detail.notes?.forEach(add);
-        if (order.detail.ctd) add(order.detail.ctd);
-        order.detail.diagnoses?.forEach(add);
-        for (const obs of order.detail.observations ?? []) {
-          add(obs.obx);
-          obs.notes?.forEach(add);
-        }
-      }
-      order.ftList?.forEach(add);
-      order.ctiList?.forEach(add);
-      if (order.blg) add(order.blg);
-    }
-
-    return segments.join("\r");
+    return encodeStructure(this.structure, this.toInput(), this.encoding);
   }
 }
 
-/** Builds an HL7 ORM^O01 (v2.4) message. */
-export function createORM_O01<
-  TMsh extends MSH = MSH,
-  TPid extends PID = PID,
-  TOrc extends ORC = ORC,
->(
-  msh: TMsh,
-  orders: OrderGroup<TOrc>[],
-  options: ORM_O01<TMsh, TPid, TOrc>["options"] = {},
-): ORM_O01<TMsh, TPid, TOrc> {
-  return new ORM_O01(msh, orders, options);
+/** Builds an HL7 ORM^O01 (HL7 v2.4) message. */
+export function createORM_O01<TMSH extends MSH = MSH>(
+  header: TMSH,
+  orders: OrderGroup[],
+  options: ORM_O01Options = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
+): ORM_O01<TMSH> {
+  return new ORM_O01(header, orders, options, encoding);
 }

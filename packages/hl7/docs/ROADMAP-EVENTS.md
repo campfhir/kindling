@@ -83,7 +83,7 @@ VXU^V04 is also done for every version: v2.3 and v2.3.1 are identical, v2.4 adds
 
 Done in 0.11: ADT A17, A24, A32, A33, A46, A48, A49, A50 and A51 for v2.3 and v2.5.1, structures
 checked on hl7-definition.caristix.com (and HAPI for A17/A24). `A17`/`A24` carry two patient
-groups (`patient1`/`patient2`). `A32`/`A33` reuse the `ADT_A01` builder and parser the way `A21`
+groups (`patients[0]`/`patients[1]` since 0.14). `A32`/`A33` reuse the `ADT_A01` builder and parser the way `A21`
 does; `A46`/`A48`/`A49` reuse `ADT_A34` (`MSH EVN PID [PD1] MRG`); `A50`/`A51` require `PV1` in the
 spec but, like `A18`, reuse `ADT_A34` where `PV1` is an option. The optional `[{SFT}]` that v2.5.1
 adds after `MSH` is not modelled, consistent with the other v2.5.1 ADT messages here.
@@ -104,8 +104,23 @@ group order. ADT, DFT^P03 and BAR have their own shapes per version: v2.4 adds t
 PD1/PV2 and in INSURANCE, repeating `IN3`, the trailing `PDA` in the A01 family (new `PDA`
 segment), the COMMON ORDER groups in DFT^P03 and `ABS`/`BLC`/`RMI` closing the BAR^P05 visit (new
 segments); v2.5 (also v2.5.1) adds `[{SFT}]` everywhere plus, in DFT^P03, the TQ1/TQ2 timing and
-the `NTE` after `FT1`. Wrapper events (A02…, SRR S02…, MDM T03…) are copied into each version
-whose base message is hand-written there, so `parsers/v2.5/ADT_A02` wraps the v2.5 `ADT_A01`.
+the `NTE` after `FT1`. Wrapper events (A02…, SRR S02…, MDM T03…) wrap the base message of their
+own version, so `parsers/v2.5/ADT_A02` wraps the v2.5 `ADT_A01`.
+
+Done in 0.14: every parser and builder is generated from its message structure
+(`codegen/schemas/`, see `codegen/README.md`), for every version. Structures were made faithful to
+the standard where the hand-written code had drifted (checked on hl7-definition.caristix.com):
+v2.3 ADT^A01 has no `ROL` after `PD1` and a single `IN3`; ORU^R01 carries its OBSERVATION groups
+(`observations: [{ observation, notes }]`), `[{CTI}]` and `[DSC]`, and from v2.5 `[{SFT}]`, the TIMING
+QTY groups, `[CTD]`, `[{FT1}]` and SPECIMEN groups; ORU^R30–R32 are one patient and one order per
+message (`pid`, `orc`, `obr`, `observations` at the top level) with `[{SFT}]`, `[PD1]`, the VISIT
+group, `[{NTE}]` and TIMING QTY; SIU gains `[{TQ1}]` after `SCH` in v2.5; MFN^M02 gains `[{SFT}]`,
+repeating `PRA` and `[{NTE}]` in v2.5 (its `ORG`/`AFF`/`LAN`/`EDU`/`CER` segments have no classes yet
+and are skipped); ORR^O02's order detail is optional in every version. Known gap: v2.4 ORU^R01
+still mirrors v2.3 (the standard adds `[CTD]` and `[{FT1}]` there). Properties are named after
+what a segment holds rather than its code (`patient`, `visit`, `notes`, `diagnoses`,
+`observationRequest`, `header`; see `SEGMENT_NAMES` in `src/types/schema.ts`), and ORM/ORR/VXU inline
+their PATIENT and visit groups so `patient`, `visit`, `insurances` sit at the top level.
 
 Suggested order: **queries (A19 QRY/ADR, SQM/SQR, …) → MFN → orders/pharmacy → the rest.**
 

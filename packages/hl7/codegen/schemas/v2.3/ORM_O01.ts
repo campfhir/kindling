@@ -1,85 +1,45 @@
-import { MessageSchema } from "../../../src/types/schema";
+import type { MessageSchema } from "../../../src/types/schema";
+import { choice, group, opt, optList, req } from "../helpers";
+
+/** The order detail segment alternatives of ORM^O01 / ORR^O02. */
+export const ORDER_DETAIL_SEGMENTS = ["OBR", "RQD", "RQ1", "RXO", "ODS", "ODT"];
 
 /**
- * ORM^O01 - General Order Message (HL7 v2.3, chapter 4 section 4.2.1).
+ * ORM^O01 - General Order Message (HL7 v2.3, chapter 4 section 4.2.1). The PATIENT and
+ * PATIENT_VISIT groups are inlined, so `patient`, `visit`, `insurances`, ... sit at the top level.
  *
- * The order detail slot is a choice of OBR, RQD, RQ1, RXO, ODS or ODT; the schema lists
- * all six as optional so codegen wires up a parse method for each.
+ * MSH [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ]
+ * { ORDER: ORC [ ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{DG1}] [{ OBSERVATION: OBX [{NTE}] }] ] [{CTI}] [BLG] }
+ *
+ * Source: https://hl7-definition.caristix.com/v2/HL7v2.3/TriggerEvents/ORM_O01 (CTI and BLG sit
+ * inside ORDER as in HAPI v23 ORM_O01_ORDER).
  */
 export const ORM_O01_SCHEMA: MessageSchema = {
   messageType: "ORM",
   triggerEvent: "O01",
   version: "2.3",
   structure: [
-    { name: "MSH", required: true, repeating: false },
-    { name: "NTE", required: false, repeating: true },
-    {
-      name: "PATIENT",
-      exportTypeName: "ParsedOrderPatient",
-      required: false,
-      repeating: false,
-      segments: [
-        { name: "PID", required: true, repeating: false },
-        { name: "PD1", required: false, repeating: false },
-        { name: "NTE", required: false, repeating: true },
-        {
-          name: "PATIENT_VISIT",
-          exportTypeName: "ParsedVisit",
-          required: false,
-          repeating: false,
-          segments: [
-            { name: "PV1", required: true, repeating: false },
-            { name: "PV2", required: false, repeating: false },
-          ],
-        },
-        {
-          name: "INSURANCE",
-          exportTypeName: "ParsedInsurance",
-          required: false,
-          repeating: true,
-          segments: [
-            { name: "IN1", required: true, repeating: false },
-            { name: "IN2", required: false, repeating: false },
-            { name: "IN3", required: false, repeating: false },
-          ],
-        },
-        { name: "GT1", required: false, repeating: false },
-        { name: "AL1", required: false, repeating: true },
-      ],
-    },
-    {
-      name: "ORDER",
-      required: true,
-      repeating: true,
-      segments: [
-        { name: "ORC", required: true, repeating: false },
-        {
-          name: "ORDER_DETAIL",
-          required: false,
-          repeating: false,
-          segments: [
-            { name: "OBR", required: false, repeating: false },
-            { name: "RQD", required: false, repeating: false },
-            { name: "RQ1", required: false, repeating: false },
-            { name: "RXO", required: false, repeating: false },
-            { name: "ODS", required: false, repeating: false },
-            { name: "ODT", required: false, repeating: false },
-            { name: "NTE", required: false, repeating: true },
-            { name: "DG1", required: false, repeating: true },
-            {
-              name: "OBSERVATION",
-              required: false,
-              repeating: true,
-              segments: [
-                { name: "OBX", required: true, repeating: false },
-                { name: "NTE", required: false, repeating: true },
-              ],
-            },
-          ],
-        },
-        { name: "CTI", required: false, repeating: true },
-        { name: "BLG", required: false, repeating: false },
-      ],
-    },
+    req("MSH"),
+    optList("NTE"),
+    group("PATIENT", false, false, [
+      req("PID"),
+      opt("PD1"),
+      optList("NTE", { as: "patientNotes" }),
+      group("PATIENT_VISIT", false, false, [req("PV1"), opt("PV2")], { inline: true }),
+      group("INSURANCE", false, true, [req("IN1"), opt("IN2"), opt("IN3")], { exportTypeName: "ParsedInsurance" }),
+      opt("GT1"),
+      optList("AL1"),
+    ], { inline: true }),
+    group("ORDER", true, true, [
+      req("ORC"),
+      group("ORDER_DETAIL", false, false, [
+        choice(ORDER_DETAIL_SEGMENTS, true),
+        optList("NTE"),
+        optList("DG1"),
+        group("OBSERVATION", false, true, [req("OBX"), optList("NTE")], { exportTypeName: "ParsedObservation" }),
+      ], { as: "detail" }),
+      optList("CTI"),
+      opt("BLG"),
+    ]),
   ],
 };

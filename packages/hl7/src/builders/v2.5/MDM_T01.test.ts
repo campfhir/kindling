@@ -28,50 +28,52 @@ const MSH_LINE = (ev: string) => `MSH|^~\\&|HIS|HOSP|EMR|HOSP|20231015120000||MD
 
 describe("MDM_T01 / MDM_T02 (v2.5): SFT, common orders with timing, OBX with NTEs", () => {
   const orders = () => [
-    { orc: new ORC().orderControl("NW"), timing: [{ tq1: new TQ1().setId("1"), tq2List: [new TQ2().setId("1")] }], obr: new OBR().setId("1"), nteList: [new NTE().setId("1").comment("order note")] },
-    { orc: new ORC().orderControl("NW"), obr: new OBR().setId("2") },
+    { commonOrder: new ORC().orderControl("NW"), timings: [{ timing: new TQ1().setId("1"), timingRelationships: [new TQ2().setId("1")] }], observationRequest: new OBR().setId("1"), notes: [new NTE().setId("1").comment("order note")] },
+    { commonOrder: new ORC().orderControl("NW"), observationRequest: new OBR().setId("2") },
   ];
 
   test("T01 encodes orders before TXA and round-trips through v2.5 and v2.5.1", () => {
-    const wire = createMDM_T01(msh("T01"), evn("T01"), pid(), pv1(), txa(), { sftList: [new SFT()], orders: orders() }).encode();
+    const wire = createMDM_T01(msh("T01"), evn("T01"), pid(), pv1(), txa(), { software: [new SFT()], orders: orders() }).encode();
     expect(types(wire)).toEqual(["MSH", "SFT", "EVN", "PID", "PV1", "ORC", "TQ1", "TQ2", "OBR", "NTE", "ORC", "OBR", "TXA"]);
     for (const parse of [parseMDM_T01, parseMDM_T01_v251]) {
       const result = parse(wire);
       expect(result.ok).toBe(true);
       const v = result.val!;
-      expect(v.sftList).toHaveLength(1);
+      expect(v.software).toHaveLength(1);
       expect(v.orders).toHaveLength(2);
-      expect(v.orders[0].timing[0].tq2List).toHaveLength(1);
-      expect(v.orders[0].nteList).toHaveLength(1);
-      expect(v.orders[1].timing).toHaveLength(0);
+      expect(v.orders![0].timings![0].timingRelationships).toHaveLength(1);
+      expect(v.orders![0].notes).toHaveLength(1);
+      expect(v.orders![1].timings).toHaveLength(0);
       expect(v.message.encode()).toBe(wire);
     }
   });
 
   test("T02 encodes observations with their notes after TXA", () => {
     const wire = createMDM_T02(msh("T02"), evn("T02"), pid(), pv1(), txa(), [
-      { obx: new OBX().setId("1"), nteList: [new NTE().setId("1"), new NTE().setId("2")] },
-      { obx: new OBX().setId("2") },
+      { observation: new OBX().setId("1"), notes: [new NTE().setId("1"), new NTE().setId("2")] },
+      { observation: new OBX().setId("2") },
     ]).encode();
     expect(types(wire)).toEqual(["MSH", "EVN", "PID", "PV1", "TXA", "OBX", "NTE", "NTE", "OBX"]);
     for (const parse of [parseMDM_T02, parseMDM_T02_v251]) {
       const result = parse(wire);
       expect(result.ok).toBe(true);
-      expect(result.val!.observations.map((o) => o.nteList.length)).toEqual([2, 0]);
+      expect(result.val!.observations.map((o) => o.notes!.length)).toEqual([2, 0]);
       expect(result.val!.message.encode()).toBe(wire);
     }
     expect(createMDM_T02(msh("T02"), evn("T02"), pid(), pv1(), txa(), []).verify().errors).toEqual(["At least one OBSERVATION group (OBX) is required"]);
-    expect(createMDM_T01(msh("T01"), evn("T01"), pid(), pv1(), txa(), { orders: [{ orc: new ORC(), obr: null as any }] }).verify().errors).toEqual(["COMMON ORDER group 1: OBR segment is required"]);
+    expect(createMDM_T01(msh("T01"), evn("T01"), pid(), pv1(), txa(), { orders: [{ commonOrder: new ORC(), observationRequest: null as any }] }).verify().errors).toEqual(["COMMON ORDER group 1: OBR segment is required"]);
   });
 
   const body = ["EVN|T02", "PID|1||1||Doe", "PV1|1|I"];
   test.each([
-    [["ORC|NW", "TXA|1", "OBX|1"], /TXA segment at line 6 found before the last order has its OBR/],
-    [["ORC|NW", "TQ2|1", "OBR|1", "TXA|1", "OBX|1"], /TQ2 segment at line 6 must follow a TQ1 segment/],
-    [["ORC|NW", "NTE|1", "OBR|1", "TXA|1", "OBX|1"], /NTE segment at line 6 must follow an OBR or OBX segment/],
-    [["ORC|NW", "ORC|NW", "OBR|1", "TXA|1", "OBX|1"], /ORC segment at line 6 starts a new order before the previous order has its OBR/],
-    [["TXA|1", "ORC|NW", "OBR|1", "OBX|1"], /ORC segment at line 6 must appear between PV1 and TXA/],
-    [["SFT|x"], /SFT segment at line 5 must appear before the EVN segment/],
+    // An ORC opens a COMMON ORDER group whose OBR is required; whatever follows instead is reported
+    // as the missing OBR.
+    [["ORC|NW", "TXA|1", "OBX|1"], /MDM_T02 message must contain an OBR segment/],
+    [["ORC|NW", "TQ2|1", "OBR|1", "TXA|1", "OBX|1"], /MDM_T02 message must contain an OBR segment/],
+    [["ORC|NW", "NTE|1", "OBR|1", "TXA|1", "OBX|1"], /MDM_T02 message must contain an OBR segment/],
+    [["ORC|NW", "ORC|NW", "OBR|1", "TXA|1", "OBX|1"], /MDM_T02 message must contain an OBR segment/],
+    [["TXA|1", "ORC|NW", "OBR|1", "OBX|1"], /MDM_T02 message must contain at least one OBX segment/],
+    [["SFT|x"], /MDM_T02 message must contain a TXA segment/],
     [["TXA|1"], /MDM_T02 message must contain at least one OBX segment/],
   ])("rejects %j", (lines, pattern) => {
     const result = parseMDM_T02([MSH_LINE("T02"), ...body, ...lines].join("\r"));

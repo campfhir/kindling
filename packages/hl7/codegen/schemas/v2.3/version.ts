@@ -1,89 +1,25 @@
-import { VersionSchema } from "../../../src/types/schema";
+import type { VersionSchema } from "../../../src/types/schema";
 import { ACK_SCHEMA } from "./ACK";
 import { ORM_O01_SCHEMA } from "./ORM_O01";
 import { ORR_O02_SCHEMA } from "./ORR_O02";
 import { ORU_R01_SCHEMA } from "./ORU_R01";
 import { VXU_V04_SCHEMA } from "./VXU_V04";
 import { MFN_M02_SCHEMA } from "./MFN_M02";
-import { ADT_A28_SCHEMA } from "./ADT_A28";
+import { ADT_A01_FAMILY } from "./ADT_A01";
 import { ADT_A17_SCHEMA } from "./ADT_A17";
 import { ADT_A24_SCHEMA } from "./ADT_A24";
 import { ADT_A20_SCHEMA } from "./ADT_A20";
+import { ADT_A34_FAMILY } from "./ADT_A34";
 import { DFT_P03_SCHEMA } from "./DFT_P03";
 import { BAR_P01_SCHEMA, BAR_P02_SCHEMA, BAR_P05_SCHEMA, BAR_P06_SCHEMA } from "./BAR_P01";
-import { SRM_S01_SCHEMA, SRM_S02_SCHEMA, SRM_S03_SCHEMA, SRM_S04_SCHEMA, SRM_S05_SCHEMA, SRM_S06_SCHEMA, SRM_S07_SCHEMA, SRM_S08_SCHEMA, SRM_S09_SCHEMA, SRM_S10_SCHEMA, SRM_S11_SCHEMA } from "./SRM_S01";
-import { SRR_S01_SCHEMA, SRR_S02_SCHEMA, SRR_S03_SCHEMA, SRR_S04_SCHEMA, SRR_S05_SCHEMA, SRR_S06_SCHEMA, SRR_S07_SCHEMA, SRR_S08_SCHEMA, SRR_S09_SCHEMA, SRR_S10_SCHEMA, SRR_S11_SCHEMA } from "./SRR_S01";
-import { MDM_T01_SCHEMA, MDM_T02_SCHEMA, MDM_T03_SCHEMA, MDM_T04_SCHEMA, MDM_T05_SCHEMA, MDM_T06_SCHEMA, MDM_T07_SCHEMA, MDM_T08_SCHEMA, MDM_T09_SCHEMA, MDM_T10_SCHEMA, MDM_T11_SCHEMA } from "./MDM_T01";
-import {
-  ADT_A01_SCHEMA,
-  ADT_A02_SCHEMA,
-  ADT_A03_SCHEMA,
-  ADT_A04_SCHEMA,
-  ADT_A05_SCHEMA,
-  ADT_A06_SCHEMA,
-  ADT_A07_SCHEMA,
-  ADT_A08_SCHEMA,
-  ADT_A09_SCHEMA,
-  ADT_A10_SCHEMA,
-  ADT_A11_SCHEMA,
-  ADT_A12_SCHEMA,
-  ADT_A13_SCHEMA,
-  ADT_A14_SCHEMA,
-  ADT_A15_SCHEMA,
-  ADT_A16_SCHEMA,
-  ADT_A21_SCHEMA,
-  ADT_A22_SCHEMA,
-  ADT_A23_SCHEMA,
-  ADT_A25_SCHEMA,
-  ADT_A26_SCHEMA,
-  ADT_A27_SCHEMA,
-  ADT_A29_SCHEMA,
-  ADT_A31_SCHEMA,
-  ADT_A32_SCHEMA,
-  ADT_A33_SCHEMA,
-  ADT_A38_SCHEMA,
-} from "./ADT_A01";
-import {
-  ADT_A18_SCHEMA,
-  ADT_A30_SCHEMA,
-  ADT_A34_SCHEMA,
-  ADT_A35_SCHEMA,
-  ADT_A36_SCHEMA,
-  ADT_A37_SCHEMA,
-  ADT_A39_SCHEMA,
-  ADT_A40_SCHEMA,
-  ADT_A41_SCHEMA,
-  ADT_A42_SCHEMA,
-  ADT_A43_SCHEMA,
-  ADT_A44_SCHEMA,
-  ADT_A45_SCHEMA,
-  ADT_A46_SCHEMA,
-  ADT_A47_SCHEMA,
-  ADT_A48_SCHEMA,
-  ADT_A49_SCHEMA,
-  ADT_A50_SCHEMA,
-  ADT_A51_SCHEMA,
-} from "./ADT_A34";
-import {
-  SIU_S12_SCHEMA,
-  SIU_S13_SCHEMA,
-  SIU_S14_SCHEMA,
-  SIU_S15_SCHEMA,
-  SIU_S16_SCHEMA,
-  SIU_S17_SCHEMA,
-  SIU_S18_SCHEMA,
-  SIU_S19_SCHEMA,
-  SIU_S20_SCHEMA,
-  SIU_S21_SCHEMA,
-  SIU_S22_SCHEMA,
-  SIU_S23_SCHEMA,
-  SIU_S24_SCHEMA,
-  SIU_S26_SCHEMA,
-} from "./SIU_S12";
+import { SIU_FAMILY } from "./SIU_S12";
+import { SRM_FAMILY } from "./SRM_S01";
+import { SRR_FAMILY } from "./SRR_S01";
+import { MDM_FAMILY } from "./MDM_T01";
 
 /**
- * v2.3 is the base version — no baseVersion, no segment wrappers to generate.
- * Codegen generates base parser stubs and builder stubs only.
+ * v2.3 is the base version: its segments are hand-written, and every message listed here gets a
+ * generated structure, parser and builder.
  */
 export const V2_3: VersionSchema = {
   version: "v2.3",
@@ -95,114 +31,19 @@ export const V2_3: VersionSchema = {
     ORU_R01_SCHEMA,
     VXU_V04_SCHEMA,
     MFN_M02_SCHEMA,
-    // ADT
-    ADT_A01_SCHEMA,
-    ADT_A02_SCHEMA,
-    ADT_A03_SCHEMA,
-    ADT_A04_SCHEMA,
-    ADT_A05_SCHEMA,
-    ADT_A06_SCHEMA,
-    ADT_A07_SCHEMA,
-    ADT_A08_SCHEMA,
-    ADT_A09_SCHEMA,
-    ADT_A10_SCHEMA,
-    ADT_A11_SCHEMA,
-    ADT_A12_SCHEMA,
-    ADT_A13_SCHEMA,
-    ADT_A14_SCHEMA,
-    ADT_A15_SCHEMA,
-    ADT_A16_SCHEMA,
-    ADT_A21_SCHEMA,
-    ADT_A22_SCHEMA,
-    ADT_A23_SCHEMA,
-    ADT_A25_SCHEMA,
-    ADT_A26_SCHEMA,
-    ADT_A27_SCHEMA,
-    ADT_A28_SCHEMA,
-    ADT_A29_SCHEMA,
-    ADT_A31_SCHEMA,
-    ADT_A32_SCHEMA,
-    ADT_A33_SCHEMA,
-    ADT_A38_SCHEMA,
-    // ADT swap/link (two patient groups)
+    ...ADT_A01_FAMILY,
     ADT_A17_SCHEMA,
     ADT_A24_SCHEMA,
     ADT_A20_SCHEMA,
-    // Financial
+    ...ADT_A34_FAMILY,
     DFT_P03_SCHEMA,
     BAR_P01_SCHEMA,
     BAR_P02_SCHEMA,
     BAR_P05_SCHEMA,
     BAR_P06_SCHEMA,
-    // ADT merge/move
-    ADT_A18_SCHEMA,
-    ADT_A30_SCHEMA,
-    ADT_A34_SCHEMA,
-    ADT_A35_SCHEMA,
-    ADT_A36_SCHEMA,
-    ADT_A37_SCHEMA,
-    ADT_A39_SCHEMA,
-    ADT_A40_SCHEMA,
-    ADT_A41_SCHEMA,
-    ADT_A42_SCHEMA,
-    ADT_A43_SCHEMA,
-    ADT_A44_SCHEMA,
-    ADT_A45_SCHEMA,
-    ADT_A46_SCHEMA,
-    ADT_A47_SCHEMA,
-    ADT_A48_SCHEMA,
-    ADT_A49_SCHEMA,
-    ADT_A50_SCHEMA,
-    ADT_A51_SCHEMA,
-    // SIU
-    SIU_S12_SCHEMA,
-    SIU_S13_SCHEMA,
-    SIU_S14_SCHEMA,
-    SIU_S15_SCHEMA,
-    SIU_S16_SCHEMA,
-    SIU_S17_SCHEMA,
-    SIU_S18_SCHEMA,
-    SIU_S19_SCHEMA,
-    SIU_S20_SCHEMA,
-    SIU_S21_SCHEMA,
-    SIU_S22_SCHEMA,
-    SIU_S23_SCHEMA,
-    SIU_S24_SCHEMA,
-    SIU_S26_SCHEMA,
-    // Scheduling requests and responses
-    SRM_S01_SCHEMA,
-    SRM_S02_SCHEMA,
-    SRM_S03_SCHEMA,
-    SRM_S04_SCHEMA,
-    SRM_S05_SCHEMA,
-    SRM_S06_SCHEMA,
-    SRM_S07_SCHEMA,
-    SRM_S08_SCHEMA,
-    SRM_S09_SCHEMA,
-    SRM_S10_SCHEMA,
-    SRM_S11_SCHEMA,
-    SRR_S01_SCHEMA,
-    SRR_S02_SCHEMA,
-    SRR_S03_SCHEMA,
-    SRR_S04_SCHEMA,
-    SRR_S05_SCHEMA,
-    SRR_S06_SCHEMA,
-    SRR_S07_SCHEMA,
-    SRR_S08_SCHEMA,
-    SRR_S09_SCHEMA,
-    SRR_S10_SCHEMA,
-    SRR_S11_SCHEMA,
-    // Medical document management
-    MDM_T01_SCHEMA,
-    MDM_T02_SCHEMA,
-    MDM_T03_SCHEMA,
-    MDM_T04_SCHEMA,
-    MDM_T05_SCHEMA,
-    MDM_T06_SCHEMA,
-    MDM_T07_SCHEMA,
-    MDM_T08_SCHEMA,
-    MDM_T09_SCHEMA,
-    MDM_T10_SCHEMA,
-    MDM_T11_SCHEMA,
+    ...SIU_FAMILY,
+    ...SRM_FAMILY,
+    ...SRR_FAMILY,
+    ...MDM_FAMILY,
   ],
 };

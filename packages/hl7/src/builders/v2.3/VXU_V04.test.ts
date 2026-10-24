@@ -26,21 +26,22 @@ const msh = () => makeMSH().encode();
 
 function fullMessage() {
   return createVXU_V04(makeMSH(), makePID(), {
-    pd1: new PD1(),
-    nk1List: [new NK1().setId("1"), new NK1().setId("2")],
-    visit: { pv1: new PV1().patientClass("O"), pv2: new PV2() },
-    insurance: [{ in1: new IN1().setId("1"), in2: new IN2(), in3: new IN3() }, { in1: new IN1().setId("2") }],
+    patientDemographics: new PD1(),
+    nextOfKin: [new NK1().setId("1"), new NK1().setId("2")],
+    visit: new PV1().patientClass("O"),
+    visitDetails: new PV2(),
+    insurances: [{ insurance: new IN1().setId("1"), insuranceDetails: new IN2(), insuranceCertification: new IN3() }, { insurance: new IN1().setId("2") }],
     orders: [
       {
-        orc: makeORC(),
-        rxa: makeRXA("1"),
-        rxr: new RXR().route({ code: "IM" }),
+        commonOrder: makeORC(),
+        administration: makeRXA("1"),
+        route: new RXR().route({ code: "IM" }),
         observations: [
-          { obx: new OBX().setId("1").valueType("CE"), notes: [new NTE().setId("1").comment("n1"), new NTE().setId("2").comment("n2")] },
-          { obx: new OBX().setId("2").valueType("CE") },
+          { observation: new OBX().setId("1").valueType("CE"), notes: [new NTE().setId("1").comment("n1"), new NTE().setId("2").comment("n2")] },
+          { observation: new OBX().setId("2").valueType("CE") },
         ],
       },
-      { rxa: makeRXA("2") },
+      { administration: makeRXA("2") },
     ],
   });
 }
@@ -63,30 +64,29 @@ describe("VXU_V04 builder (v2.3)", () => {
 
   test("verify() requires MSH, PID, and the RXA of every order", () => {
     // @ts-expect-error missing required segments
-    const result = new VXU_V04(null, null, { orders: [{ orc: makeORC() }] }).verify();
-    expect(result.errors).toEqual(["MSH segment is required", "PID segment is required", "Order 1: RXA segment is required"]);
+    const result = new VXU_V04(null, null, { orders: [{ commonOrder: makeORC() }] }).verify();
+    expect(result.errors).toEqual(["MSH segment is required", "PID segment is required", "ORDER group 1: RXA segment is required"]);
   });
 
   test("verify() checks nested required segments", () => {
     const msg = new VXU_V04(makeMSH(), makePID(), {
+      visitDetails: new PV2(),
       // @ts-expect-error missing required segments
-      visit: { pv2: new PV2() },
+      insurances: [{ insuranceDetails: new IN2() }],
       // @ts-expect-error missing required segments
-      insurance: [{ in2: new IN2() }],
-      // @ts-expect-error missing required segments
-      orders: [{ rxa: makeRXA(), observations: [{ notes: [] }] }],
+      orders: [{ administration: makeRXA(), observations: [{ notes: [] }] }],
     });
     expect(msg.verify().errors).toEqual([
-      "PV1 segment is required when a visit is present",
-      "Insurance group 1: IN1 segment is required",
-      "Order 1, observation 1: OBX segment is required",
+      "PV1 segment is required",
+      "INSURANCE group 1: IN1 segment is required",
+      "ORDER group 1: OBSERVATION group 1: OBX segment is required",
     ]);
   });
 
   test("GT1 is not part of the v2.3 structure", () => {
-    const msg = createVXU_V04(makeMSH(), makePID(), { gt1List: [new GT1().setId("1")] });
-    expect(msg.verify().errors).toEqual(["GT1 segments are not part of VXU^V04 in this version"]);
-    expect(() => msg.encode()).toThrow(/GT1/);
+    const msg = createVXU_V04(makeMSH(), makePID(), { guarantors: [new GT1().setId("1")] } as any);
+    expect(msg.verify().errors).toEqual(['Unknown property "guarantors"']);
+    expect(() => msg.encode()).toThrow(/guarantors/);
   });
 });
 
@@ -97,19 +97,19 @@ describe("VXU_V04 parser (v2.3)", () => {
     expect(result.ok).toBe(true);
     if (!result.ok) return;
     const { val } = result;
-    expect(val.pid).toBeInstanceOf(PID);
-    expect(val.pd1).toBeInstanceOf(PD1);
-    expect(val.nk1List).toHaveLength(2);
-    expect(val.visit?.pv2).toBeInstanceOf(PV2);
-    expect(val.gt1List).toEqual([]);
-    expect(val.insurance).toHaveLength(2);
-    expect(val.insurance[0].in2).toBeInstanceOf(IN2);
-    expect(val.insurance[0].in3).toBeInstanceOf(IN3);
+    expect(val.patient).toBeInstanceOf(PID);
+    expect(val.patientDemographics).toBeInstanceOf(PD1);
+    expect(val.nextOfKin).toHaveLength(2);
+    expect(val.visitDetails).toBeInstanceOf(PV2);
+    expect("guarantors" in val).toBe(false);
+    expect(val.insurances).toHaveLength(2);
+    expect(val.insurances![0].insuranceDetails).toBeInstanceOf(IN2);
+    expect(val.insurances![0].insuranceCertification).toBeInstanceOf(IN3);
     expect(val.orders).toHaveLength(2);
-    expect(val.orders[0].orc).toBeInstanceOf(ORC);
-    expect(val.orders[0].rxr).toBeInstanceOf(RXR);
-    expect(val.orders[0].observations.map((o) => o.notes.length)).toEqual([2, 0]);
-    expect(val.orders[1].orc).toBeUndefined();
+    expect(val.orders![0].commonOrder).toBeInstanceOf(ORC);
+    expect(val.orders![0].route).toBeInstanceOf(RXR);
+    expect(val.orders![0].observations!.map((o) => o.notes!.length)).toEqual([2, 0]);
+    expect(val.orders![1].commonOrder).toBeUndefined();
     expect(val.message.segments).toHaveLength(wire.split("\r").length);
   });
 
@@ -122,16 +122,13 @@ describe("VXU_V04 parser (v2.3)", () => {
   test("a new RXA without an ORC starts a new group", () => {
     const result = parseVXU_V04([msh(), "PID|1", "RXA|0|1", "OBX|1|CE", "RXA|0|2"].join("\r"));
     expect(result.ok).toBe(true);
-    if (result.ok) expect(result.val.orders.map((o) => o.observations.length)).toEqual([1, 0]);
+    if (result.ok) expect(result.val.orders!.map((o) => o.observations!.length)).toEqual([1, 0]);
   });
 
   test("skips GT1, which is not part of the v2.3 structure", () => {
     const result = parseVXU_V04([msh(), "PID|1", "GT1|1", "RXA|0|1"].join("\r"));
     expect(result.ok).toBe(true);
-    if (result.ok) {
-      expect(result.val.gt1List).toEqual([]);
-      expect(result.val.message.segments.map((s) => s.name)).not.toContain("GT1");
-    }
+    if (result.ok) expect(result.val.message.segments.map((s) => s.name)).not.toContain("GT1");
   });
 
   test.each([

@@ -43,7 +43,7 @@ console.log(
 console.log("\n");
 
 // Extract the data for modification
-const msh = parseResult.val.msh;
+const msh = parseResult.val.header;
 const patientResult = parseResult.val.patientResults[0]; // First (and only) patient
 
 // ============================================
@@ -63,7 +63,7 @@ const hgbObx = new OBX()
   .abnormalFlags("N")
   .observationResultStatus("F");
 
-patientResult.orderObservations[0].obxList.unshift(hgbObx); // Add to beginning
+patientResult.orderObservations[0].observations!.unshift({ observation: hgbObx }); // Add to beginning
 console.log("✓ Added Hemoglobin OBX to BEGINNING of CBC order");
 
 // Add OBX to MIDDLE of first order (CBC) - after first item
@@ -78,7 +78,7 @@ const hctObx = new OBX()
   .abnormalFlags("N")
   .observationResultStatus("F");
 
-patientResult.orderObservations[0].obxList.splice(2, 0, hctObx); // Insert at position 2
+patientResult.orderObservations[0].observations!.splice(2, 0, { observation: hctObx }); // Insert at position 2
 console.log("✓ Added Hematocrit OBX to MIDDLE of CBC order");
 
 // Add OBX to END of first order (CBC)
@@ -93,10 +93,10 @@ const pltObx = new OBX()
   .abnormalFlags("N")
   .observationResultStatus("F");
 
-patientResult.orderObservations[0].obxList.push(pltObx); // Add to end
+patientResult.orderObservations[0].observations!.push({ observation: pltObx }); // Add to end
 console.log("✓ Added Platelets OBX to END of CBC order");
 console.log(
-  `  CBC now has ${patientResult.orderObservations[0].obxList.length} OBX segments`,
+  `  CBC now has ${patientResult.orderObservations[0].observations!.length} OBX segments`,
 );
 console.log("\n");
 
@@ -126,8 +126,8 @@ const sodiumObx = new OBX()
   .observationResultStatus("F");
 
 patientResult.orderObservations.unshift({
-  obr: sodiumObr,
-  obxList: [sodiumObx],
+  observationRequest: sodiumObr,
+  observations: [{ observation: sodiumObx }],
 });
 console.log("✓ Added Sodium test to BEGINNING");
 
@@ -152,8 +152,8 @@ const potassiumObx = new OBX()
   .observationResultStatus("F");
 
 patientResult.orderObservations.splice(1, 0, {
-  obr: potassiumObr,
-  obxList: [potassiumObx],
+  observationRequest: potassiumObr,
+  observations: [{ observation: potassiumObx }],
 });
 console.log("✓ Added Potassium test to MIDDLE");
 
@@ -178,8 +178,8 @@ const creatinineObx = new OBX()
   .observationResultStatus("F");
 
 patientResult.orderObservations.push({
-  obr: creatinineObr,
-  obxList: [creatinineObx],
+  observationRequest: creatinineObr,
+  observations: [{ observation: creatinineObx }],
 });
 console.log("✓ Added Creatinine test to END");
 console.log(
@@ -228,7 +228,7 @@ console.log(
   `  Orders: ${reParseResult.val.patientResults[0].orderObservations.length}`,
 );
 console.log(
-  `  CBC OBX count: ${reParseResult.val.patientResults[0].orderObservations[2].obxList.length}`,
+  `  CBC OBX count: ${reParseResult.val.patientResults[0].orderObservations[2].observations!.length}`,
 );
 console.log("\n");
 

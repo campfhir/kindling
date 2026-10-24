@@ -1,16 +1,15 @@
 /**
- * Parser for SRR^S01 messages (HL7 2.5): scheduled request response, new appointment booking.
+ * Parser for SRR^S01 messages (HL7 v2.5).
  *
- * Structure:
- *   MSH MSA [{ERR}] [ SCH [{TQ1}] [{NTE}] [{ PID [PV1] [PV2] [{DG1}] }]
- *   { RGS [{ AIS [{NTE}] }] [{ AIG [{NTE}] }] [{ AIL [{NTE}] }] [{ AIP [{NTE}] }] } ]
- *
- * Compared with v2.3/v2.4: ERR repeats and [{TQ1}] follows SCH. v2.5.1 is identical.
+ * Structure: MSH MSA [{ERR}] [ SCHEDULE: SCH [{TQ1}] [{NTE}] [{ PATIENT: PID [PV1] [PV2] [{DG1}] }] { RESOURCES: RGS [{ SERVICE: AIS [{NTE}] }] [{ GENERAL_RESOURCE: AIG [{NTE}] }] [{ LOCATION_RESOURCE: AIL [{NTE}] }] [{ PERSONNEL_RESOURCE: AIP [{NTE}] }] } ]
  *
  * @module
  */
-import { Err } from "../../utils/err.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../../types/result.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
+import { SRR_S01_STRUCTURE } from "../../structures/v2.5/SRR_S01.ts";
 import { MSH } from "../../segments/v2.5/MSH.ts";
 import { MSA } from "../../segments/v2.5/MSA.ts";
 import { ERR } from "../../segments/v2.5/ERR.ts";
@@ -26,275 +25,126 @@ import { AIS } from "../../segments/v2.5/AIS.ts";
 import { AIG } from "../../segments/v2.5/AIG.ts";
 import { AIL } from "../../segments/v2.5/AIL.ts";
 import { AIP } from "../../segments/v2.5/AIP.ts";
-import type { HL7Message } from "../../types/message.ts";
-import type { EncodingCharacters } from "../../types/encoding.ts";
-import {
-  misplacedSegment,
-  readMessageHeader,
-  segmentParseFailure,
-} from "../../utils/messageParsing.ts";
 
-/** ParsedSRRPatient — one PATIENT group of a parsed SRR message. */
-export interface ParsedSRRPatient {
-  /** The pid value. */
-  pid: PID;
-  /** The pv1 value. */
-  pv1?: PV1;
-  /** The pv2 value. */
-  pv2?: PV2;
-  /** The dg1 list value. */
-  dg1List: DG1[];
-}
-
-/** ParsedSRRService — an AIS with its NTEs. */
-export interface ParsedSRRService {
-  /** The ais value. */
-  ais: AIS;
-  /** The nte list value. */
-  nteList: NTE[];
-}
-
-/** ParsedSRRGeneralResource — an AIG with its NTEs. */
-export interface ParsedSRRGeneralResource {
-  /** The aig value. */
-  aig: AIG;
-  /** The nte list value. */
-  nteList: NTE[];
-}
-
-/** ParsedSRRLocationResource — an AIL with its NTEs. */
-export interface ParsedSRRLocationResource {
-  /** The ail value. */
-  ail: AIL;
-  /** The nte list value. */
-  nteList: NTE[];
-}
-
-/** ParsedSRRPersonnelResource — an AIP with its NTEs. */
-export interface ParsedSRRPersonnelResource {
-  /** The aip value. */
-  aip: AIP;
-  /** The nte list value. */
-  nteList: NTE[];
-}
-
-/** ParsedSRRResources — one RESOURCES group (RGS and its resource segments). */
-export interface ParsedSRRResources {
-  /** The rgs value. */
-  rgs: RGS;
-  /** The services value. */
-  services: ParsedSRRService[];
-  /** The general resources value. */
-  generalResources: ParsedSRRGeneralResource[];
-  /** The location resources value. */
-  locationResources: ParsedSRRLocationResource[];
-  /** The personnel resources value. */
-  personnelResources: ParsedSRRPersonnelResource[];
-}
-
-/** ParsedSRRSchedule — the SCHEDULE group: the SCH with its patients and resources. */
+/** The SCHEDULE group of a parsed SRR^S01 (HL7 v2.5) message. */
 export interface ParsedSRRSchedule {
-  /** The sch value. */
-  sch: SCH;
-  /** The tq1 list value (timing/quantity, after SCH). */
-  tq1List: TQ1[];
-  /** The nte list value (notes on the schedule). */
-  nteList: NTE[];
-  /** The patients value. */
-  patients: ParsedSRRPatient[];
-  /** The resources value. */
+  /** The SCH segment. */
+  appointment: SCH;
+  /** The TQ1 segments. */
+  timings?: TQ1[];
+  /** The NTE segments. */
+  notes?: NTE[];
+  /** The PATIENT groups. */
+  patients?: ParsedSRRPatient[];
+  /** The RESOURCES groups. */
   resources: ParsedSRRResources[];
 }
 
-/** Structured result of parsing an HL7 SRR^S01 (2.5) message. */
-export interface ParsedSRR_S01 {
-  /** The message value. */
-  message: HL7Message;
-  /** The msh value. */
-  msh: MSH;
-  /** The msa value. */
-  msa: MSA;
-  /** The error segments, which follow MSA. */
-  errList: ERR[];
-  /** The schedule value. */
+/** The PATIENT group of a parsed SRR^S01 (HL7 v2.5) message. */
+export interface ParsedSRRPatient {
+  /** The PID segment. */
+  patient: PID;
+  /** The PV1 segment. */
+  visit?: PV1;
+  /** The PV2 segment. */
+  visitDetails?: PV2;
+  /** The DG1 segments. */
+  diagnoses?: DG1[];
+}
+
+/** The RESOURCES group of a parsed SRR^S01 (HL7 v2.5) message. */
+export interface ParsedSRRResources {
+  /** The RGS segment. */
+  resourceGroup: RGS;
+  /** The SERVICE groups. */
+  services?: ParsedSRRService[];
+  /** The GENERAL RESOURCE groups. */
+  generalResources?: ParsedSRRGeneralResource[];
+  /** The LOCATION RESOURCE groups. */
+  locationResources?: ParsedSRRLocationResource[];
+  /** The PERSONNEL RESOURCE groups. */
+  personnelResources?: ParsedSRRPersonnelResource[];
+}
+
+/** The SERVICE group of a parsed SRR^S01 (HL7 v2.5) message. */
+export interface ParsedSRRService {
+  /** The AIS segment. */
+  service: AIS;
+  /** The NTE segments. */
+  notes?: NTE[];
+}
+
+/** The GENERAL RESOURCE group of a parsed SRR^S01 (HL7 v2.5) message. */
+export interface ParsedSRRGeneralResource {
+  /** The AIG segment. */
+  generalResource: AIG;
+  /** The NTE segments. */
+  notes?: NTE[];
+}
+
+/** The LOCATION RESOURCE group of a parsed SRR^S01 (HL7 v2.5) message. */
+export interface ParsedSRRLocationResource {
+  /** The AIL segment. */
+  location: AIL;
+  /** The NTE segments. */
+  notes?: NTE[];
+}
+
+/** The PERSONNEL RESOURCE group of a parsed SRR^S01 (HL7 v2.5) message. */
+export interface ParsedSRRPersonnelResource {
+  /** The AIP segment. */
+  personnel: AIP;
+  /** The NTE segments. */
+  notes?: NTE[];
+}
+
+/** Structured result of parsing an HL7 SRR^S01 (HL7 v2.5) message. */
+export interface ParsedSRR_S01 extends ParsedMessageBase {
+  /** The MSH segment. */
+  header: MSH;
+  /** The MSA segment. */
+  acknowledgment: MSA;
+  /** The ERR segments. */
+  errors?: ERR[];
+  /** The SCHEDULE group. */
   schedule?: ParsedSRRSchedule;
 }
 
-/** Parser for HL7 SRR^S01 (2.5) messages. */
-export class SRR_S01_Parser {
-  /** The message name value. */
-  protected readonly messageName: string = "SRR_S01";
+/** The segment parsers of SRR^S01 (HL7 v2.5). */
+const PARSERS: SegmentParsers = {
+  MSH: (s) => MSH.parse(s),
+  MSA: (s, e) => MSA.parse(s, e),
+  ERR: (s, e) => ERR.parse(s, e),
+  SCH: (s, e) => SCH.parse(s, e),
+  TQ1: (s, e) => TQ1.parse(s, e),
+  NTE: (s, e) => NTE.parse(s, e),
+  PID: (s, e) => PID.parse(s, e),
+  PV1: (s, e) => PV1.parse(s, e),
+  PV2: (s, e) => PV2.parse(s, e),
+  DG1: (s, e) => DG1.parse(s, e),
+  RGS: (s, e) => RGS.parse(s, e),
+  AIS: (s, e) => AIS.parse(s, e),
+  AIG: (s, e) => AIG.parse(s, e),
+  AIL: (s, e) => AIL.parse(s, e),
+  AIP: (s, e) => AIP.parse(s, e),
+};
 
-  /** Parse msh. */
-  protected parseMSH(s: string): Result<MSH> { return MSH.parse(s); }
-  /** Parse msa. */
-  protected parseMSA(s: string, e: EncodingCharacters): Result<MSA> { return MSA.parse(s, e); }
-  /** Parse err. */
-  protected parseERR(s: string, e: EncodingCharacters): Result<ERR> { return ERR.parse(s, e); }
-  /** Parse sch. */
-  protected parseSCH(s: string, e: EncodingCharacters): Result<SCH> { return SCH.parse(s, e); }
-  /** Parse tq1. */
-  protected parseTQ1(s: string, e: EncodingCharacters): Result<TQ1> { return TQ1.parse(s, e); }
-  /** Parse nte. */
-  protected parseNTE(s: string, e: EncodingCharacters): Result<NTE> { return NTE.parse(s, e); }
-  /** Parse pid. */
-  protected parsePID(s: string, e: EncodingCharacters): Result<PID> { return PID.parse(s, e); }
-  /** Parse pv1. */
-  protected parsePV1(s: string, e: EncodingCharacters): Result<PV1> { return PV1.parse(s, e); }
-  /** Parse pv2. */
-  protected parsePV2(s: string, e: EncodingCharacters): Result<PV2> { return PV2.parse(s, e); }
-  /** Parse dg1. */
-  protected parseDG1(s: string, e: EncodingCharacters): Result<DG1> { return DG1.parse(s, e); }
-  /** Parse rgs. */
-  protected parseRGS(s: string, e: EncodingCharacters): Result<RGS> { return RGS.parse(s, e); }
-  /** Parse ais. */
-  protected parseAIS(s: string, e: EncodingCharacters): Result<AIS> { return AIS.parse(s, e); }
-  /** Parse aig. */
-  protected parseAIG(s: string, e: EncodingCharacters): Result<AIG> { return AIG.parse(s, e); }
-  /** Parse ail. */
-  protected parseAIL(s: string, e: EncodingCharacters): Result<AIL> { return AIL.parse(s, e); }
-  /** Parse aip. */
-  protected parseAIP(s: string, e: EncodingCharacters): Result<AIP> { return AIP.parse(s, e); }
+/** Parser for HL7 SRR^S01 (HL7 v2.5) messages. */
+export class SRR_S01_Parser {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "SRR_S01";
+  /** The structure the message is parsed against. */
+  protected readonly structure: StructureItem[] = SRR_S01_STRUCTURE;
+  /** The segment parsers, keyed by segment name. */
+  protected readonly parsers: SegmentParsers = PARSERS;
 
   /** Parses the input string into a structured instance. */
   parse(messageString: string): Result<ParsedSRR_S01> {
-    try {
-      const header = readMessageHeader(messageString, (s) => this.parseMSH(s));
-      if (!header.ok || !header.val) return header as Result<never>;
-      const { segments, msh, encoding, message } = header.val;
-
-      let msa: MSA | undefined;
-      const errList: ERR[] = [];
-      let schedule: ParsedSRRSchedule | undefined;
-      let patient: ParsedSRRPatient | undefined;
-      let resource: ParsedSRRResources | undefined;
-      let entry: { nteList: NTE[] } | undefined;
-
-      for (let i = 1; i < segments.length; i++) {
-        const segmentStr = segments[i];
-        const segmentType = segmentStr.substring(0, 3);
-        const line = i + 1;
-
-        switch (segmentType) {
-          case "MSA": {
-            const r = this.parseMSA(segmentStr, encoding);
-            if (!r.ok || !r.val) return segmentParseFailure("MSA", line, r);
-            if (msa) return misplacedSegment("MSA", line, "appears more than once");
-            msa = r.val; message.addSegment(r.val); break;
-          }
-          case "ERR": {
-            const r = this.parseERR(segmentStr, encoding);
-            if (!r.ok || !r.val) return segmentParseFailure("ERR", line, r);
-            if (!msa || schedule) return misplacedSegment("ERR", line, "must follow MSA and precede SCH");
-            errList.push(r.val); message.addSegment(r.val); break;
-          }
-          case "SCH": {
-            const r = this.parseSCH(segmentStr, encoding);
-            if (!r.ok || !r.val) return segmentParseFailure("SCH", line, r);
-            if (!msa) return misplacedSegment("SCH", line, "found without preceding MSA segment");
-            if (schedule) return misplacedSegment("SCH", line, "appears more than once");
-            schedule = { sch: r.val, tq1List: [], nteList: [], patients: [], resources: [] };
-            message.addSegment(r.val); break;
-          }
-          case "TQ1": {
-            const r = this.parseTQ1(segmentStr, encoding);
-            if (!r.ok || !r.val) return segmentParseFailure("TQ1", line, r);
-            if (!schedule || patient || resource || schedule.nteList.length) return misplacedSegment("TQ1", line, "must directly follow SCH");
-            schedule.tq1List.push(r.val); message.addSegment(r.val); break;
-          }
-          case "NTE": {
-            const r = this.parseNTE(segmentStr, encoding);
-            if (!r.ok || !r.val) return segmentParseFailure("NTE", line, r);
-            if (entry) entry.nteList.push(r.val);
-            else if (schedule && !patient && !resource) schedule.nteList.push(r.val);
-            else return misplacedSegment("NTE", line, "must follow SCH or a resource segment (AIS, AIG, AIL, AIP)");
-            message.addSegment(r.val); break;
-          }
-          case "PID": {
-            const r = this.parsePID(segmentStr, encoding);
-            if (!r.ok || !r.val) return segmentParseFailure("PID", line, r);
-            if (!schedule) return misplacedSegment("PID", line, "found without preceding SCH segment");
-            if (resource) return misplacedSegment("PID", line, "must appear before the RESOURCES groups");
-            patient = { pid: r.val, dg1List: [] };
-            schedule.patients.push(patient); message.addSegment(r.val); break;
-          }
-          case "PV1": {
-            const r = this.parsePV1(segmentStr, encoding);
-            if (!r.ok || !r.val) return segmentParseFailure("PV1", line, r);
-            if (!patient || resource) return misplacedSegment("PV1", line, "must follow a PID segment");
-            if (patient.pv1) return misplacedSegment("PV1", line, "appears more than once for the same patient");
-            patient.pv1 = r.val; message.addSegment(r.val); break;
-          }
-          case "PV2": {
-            const r = this.parsePV2(segmentStr, encoding);
-            if (!r.ok || !r.val) return segmentParseFailure("PV2", line, r);
-            if (!patient || resource) return misplacedSegment("PV2", line, "must follow a PID segment");
-            if (patient.pv2) return misplacedSegment("PV2", line, "appears more than once for the same patient");
-            patient.pv2 = r.val; message.addSegment(r.val); break;
-          }
-          case "DG1": {
-            const r = this.parseDG1(segmentStr, encoding);
-            if (!r.ok || !r.val) return segmentParseFailure("DG1", line, r);
-            if (!patient || resource) return misplacedSegment("DG1", line, "must follow a PID segment");
-            patient.dg1List.push(r.val); message.addSegment(r.val); break;
-          }
-          case "RGS": {
-            const r = this.parseRGS(segmentStr, encoding);
-            if (!r.ok || !r.val) return segmentParseFailure("RGS", line, r);
-            if (!schedule) return misplacedSegment("RGS", line, "found without preceding SCH segment");
-            resource = { rgs: r.val, services: [], generalResources: [], locationResources: [], personnelResources: [] };
-            schedule.resources.push(resource); entry = undefined; patient = undefined;
-            message.addSegment(r.val); break;
-          }
-          case "AIS": {
-            const r = this.parseAIS(segmentStr, encoding);
-            if (!r.ok || !r.val) return segmentParseFailure("AIS", line, r);
-            if (!resource) return misplacedSegment("AIS", line, "must follow an RGS segment");
-            const e: ParsedSRRService = { ais: r.val, nteList: [] };
-            resource.services.push(e); entry = e; message.addSegment(r.val); break;
-          }
-          case "AIG": {
-            const r = this.parseAIG(segmentStr, encoding);
-            if (!r.ok || !r.val) return segmentParseFailure("AIG", line, r);
-            if (!resource) return misplacedSegment("AIG", line, "must follow an RGS segment");
-            const e: ParsedSRRGeneralResource = { aig: r.val, nteList: [] };
-            resource.generalResources.push(e); entry = e; message.addSegment(r.val); break;
-          }
-          case "AIL": {
-            const r = this.parseAIL(segmentStr, encoding);
-            if (!r.ok || !r.val) return segmentParseFailure("AIL", line, r);
-            if (!resource) return misplacedSegment("AIL", line, "must follow an RGS segment");
-            const e: ParsedSRRLocationResource = { ail: r.val, nteList: [] };
-            resource.locationResources.push(e); entry = e; message.addSegment(r.val); break;
-          }
-          case "AIP": {
-            const r = this.parseAIP(segmentStr, encoding);
-            if (!r.ok || !r.val) return segmentParseFailure("AIP", line, r);
-            if (!resource) return misplacedSegment("AIP", line, "must follow an RGS segment");
-            const e: ParsedSRRPersonnelResource = { aip: r.val, nteList: [] };
-            resource.personnelResources.push(e); entry = e; message.addSegment(r.val); break;
-          }
-          default:
-            console.warn(`Skipping unsupported segment type '${segmentType}' at line ${line}`);
-            break;
-        }
-      }
-
-      if (!msa) {
-        return { ok: false, err: new Err(`${this.messageName} message must contain an MSA segment`) };
-      }
-      if (schedule && schedule.resources.length === 0) {
-        return { ok: false, err: new Err(`${this.messageName} message must contain at least one RGS segment when SCH is present`) };
-      }
-
-      return { ok: true, val: { message, msh, msa, errList, schedule } };
-    } catch (error) {
-      return { ok: false, err: new Err(`Failed to parse ${this.messageName} message: ${error}`) };
-    }
+    return parseStructure<ParsedSRR_S01>(this.messageName, this.structure, this.parsers, messageString);
   }
 }
 
-/** Parses an HL7 SRR^S01 (2.5) message string into a structured result. */
+/** Parses an HL7 SRR^S01 (HL7 v2.5) message string into a structured result. */
 export function parseSRR_S01(messageString: string): Result<ParsedSRR_S01> {
   return new SRR_S01_Parser().parse(messageString);
 }

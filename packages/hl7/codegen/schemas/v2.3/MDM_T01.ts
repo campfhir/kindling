@@ -1,4 +1,5 @@
-import { MessageSchema } from "../../../src/types/schema";
+import type { MessageSchema } from "../../../src/types/schema";
+import { wrappers } from "../helpers";
 
 /**
  * MDM^T01 - Original Document Notification (HL7 v2.3): MSH EVN PID PV1 TXA
@@ -28,12 +29,15 @@ export const MDM_T02_SCHEMA: MessageSchema = {
   structure: [...MDM_T01_SCHEMA.structure, { name: "OBX", required: true, repeating: true }],
 };
 
-export const MDM_T03_SCHEMA: MessageSchema = { ...MDM_T01_SCHEMA, triggerEvent: "T03", baseMessage: "MDM_T01" };
-export const MDM_T04_SCHEMA: MessageSchema = { ...MDM_T02_SCHEMA, triggerEvent: "T04", baseMessage: "MDM_T02" };
-export const MDM_T05_SCHEMA: MessageSchema = { ...MDM_T01_SCHEMA, triggerEvent: "T05", baseMessage: "MDM_T01" };
-export const MDM_T06_SCHEMA: MessageSchema = { ...MDM_T02_SCHEMA, triggerEvent: "T06", baseMessage: "MDM_T02" };
-export const MDM_T07_SCHEMA: MessageSchema = { ...MDM_T01_SCHEMA, triggerEvent: "T07", baseMessage: "MDM_T01" };
-export const MDM_T08_SCHEMA: MessageSchema = { ...MDM_T02_SCHEMA, triggerEvent: "T08", baseMessage: "MDM_T02" };
-export const MDM_T09_SCHEMA: MessageSchema = { ...MDM_T01_SCHEMA, triggerEvent: "T09", baseMessage: "MDM_T01" };
-export const MDM_T10_SCHEMA: MessageSchema = { ...MDM_T02_SCHEMA, triggerEvent: "T10", baseMessage: "MDM_T02" };
-export const MDM_T11_SCHEMA: MessageSchema = { ...MDM_T01_SCHEMA, triggerEvent: "T11", baseMessage: "MDM_T01" };
+/** The notification events (no content) sharing the T01 structure. */
+export const MDM_T01_EVENTS = ["T03", "T05", "T07", "T09", "T11"];
+/** The content events sharing the T02 structure. */
+export const MDM_T02_EVENTS = ["T04", "T06", "T08", "T10"];
+
+/** T01, T02 and the events wrapping them. */
+export const MDM_FAMILY: MessageSchema[] = [
+  MDM_T01_SCHEMA,
+  ...wrappers(MDM_T01_SCHEMA, MDM_T01_EVENTS),
+  MDM_T02_SCHEMA,
+  ...wrappers(MDM_T02_SCHEMA, MDM_T02_EVENTS),
+];

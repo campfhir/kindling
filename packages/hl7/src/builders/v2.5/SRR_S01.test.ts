@@ -19,14 +19,14 @@ const MSH_LINE = "MSH|^~\\&|RIS|HOSP|SCHED|HOSP|20231015120000||SRR^S01^SRR_S01|
 
 describe("SRR_S01 (v2.5): repeating ERR and TQ1 after SCH", () => {
   test("encodes and round-trips through the v2.5 and v2.5.1 parsers", () => {
-    const build = (create: typeof createSRR_S01) =>
+    const build = (create: (...args: any[]) => { encode(): string }) =>
       create(msh(), msa(), {
-        errList: [new ERR(), new ERR()],
+        errors: [new ERR(), new ERR()],
         schedule: {
-          sch: new SCH(),
-          tq1List: [new TQ1().setId("1"), new TQ1().setId("2")],
-          nteList: [new NTE().setId("1").comment("booked")],
-          resources: [{ rgs: new RGS().setId("1"), services: [{ ais: new AIS().setId("1") }] }],
+          appointment: new SCH(),
+          timings: [new TQ1().setId("1"), new TQ1().setId("2")],
+          notes: [new NTE().setId("1").comment("booked")],
+          resources: [{ resourceGroup: new RGS().setId("1"), services: [{ service: new AIS().setId("1") }] }],
         },
       }).encode();
     const wire = build(createSRR_S01);
@@ -35,17 +35,17 @@ describe("SRR_S01 (v2.5): repeating ERR and TQ1 after SCH", () => {
     for (const parse of [parseSRR_S01, parseSRR_S01_v251]) {
       const result = parse(wire);
       expect(result.ok).toBe(true);
-      expect(result.val!.errList).toHaveLength(2);
-      expect(result.val!.schedule!.tq1List).toHaveLength(2);
-      expect(result.val!.schedule!.nteList).toHaveLength(1);
+      expect(result.val!.errors).toHaveLength(2);
+      expect(result.val!.schedule!.timings).toHaveLength(2);
+      expect(result.val!.schedule!.notes).toHaveLength(1);
       expect(result.val!.message.encode()).toBe(wire);
     }
   });
 
   test.each([
-    [["MSA|AA|1", "SCH|1", "NTE|1||x", "TQ1|1", "RGS|1"], /TQ1 segment at line 5 must directly follow SCH/],
-    [["MSA|AA|1", "TQ1|1"], /TQ1 segment at line 3 must directly follow SCH/],
-    [["MSA|AA|1", "SCH|1", "ERR|1", "RGS|1"], /ERR segment at line 4 must follow MSA and precede SCH/],
+    [["MSA|AA|1", "SCH|1", "NTE|1||x", "TQ1|1", "RGS|1"], /SRR_S01 message must contain at least one RGS segment/],
+    [["MSA|AA|1", "TQ1|1"], /TQ1 segment at line 3 is not allowed at this position in SRR_S01/],
+    [["MSA|AA|1", "SCH|1", "ERR|1", "RGS|1"], /SRR_S01 message must contain at least one RGS segment/],
   ])("rejects %j", (lines, pattern) => {
     const result = parseSRR_S01([MSH_LINE, ...lines].join("\r"));
     expect(result.ok).toBe(false);

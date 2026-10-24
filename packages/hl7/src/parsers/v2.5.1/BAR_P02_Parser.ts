@@ -1,5 +1,15 @@
-import { Result } from "../../types/result.ts";
-import { EncodingCharacters } from "../../types/encoding.ts";
+/**
+ * Parser for BAR^P02 messages (HL7 v2.5.1).
+ *
+ * Structure: MSH [{SFT}] EVN { PATIENT: PID [PD1] [PV1] [{DB1}] }
+ *
+ * @module
+ */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { Result } from "../../types/result.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
+import { BAR_P02_STRUCTURE } from "../../structures/v2.5.1/BAR_P02.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
 import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { EVN } from "../../segments/v2.5.1/EVN.ts";
@@ -7,46 +17,58 @@ import { PID } from "../../segments/v2.5.1/PID.ts";
 import { PD1 } from "../../segments/v2.5.1/PD1.ts";
 import { PV1 } from "../../segments/v2.5.1/PV1.ts";
 import { DB1 } from "../../segments/v2.5.1/DB1.ts";
-import {
-  BAR_P02_Parser as BAR_P02_Parser_base,
-  ParsedBAR_P02,
-  ParsedBARPurgePatient,
-} from "../v2.5/BAR_P02_Parser.ts";
 
-export type { ParsedBAR_P02, ParsedBARPurgePatient };
+/** The PATIENT group of a parsed BAR^P02 (HL7 v2.5.1) message. */
+export interface ParsedBARPurgePatient {
+  /** The PID segment. */
+  patient: PID;
+  /** The PD1 segment. */
+  patientDemographics?: PD1;
+  /** The PV1 segment. */
+  visit?: PV1;
+  /** The DB1 segments. */
+  disabilities?: DB1[];
+}
 
-/** Parser for HL7 BAR^P02 (v2.5.1) messages. */
-export class BAR_P02_Parser extends BAR_P02_Parser_base {
-  protected override parseMSH(s: string): Result<MSH> {
-    return MSH.parse(s);
-  }
+/** Structured result of parsing an HL7 BAR^P02 (HL7 v2.5.1) message. */
+export interface ParsedBAR_P02 extends ParsedMessageBase {
+  /** The MSH segment. */
+  header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
+  /** The EVN segment. */
+  event: EVN;
+  /** The PATIENT groups. */
+  patients: ParsedBARPurgePatient[];
+}
 
-  protected override parseSFT(s: string, e: EncodingCharacters): Result<SFT> {
-    return SFT.parse(s, e);
-  }
+/** The segment parsers of BAR^P02 (HL7 v2.5.1). */
+const PARSERS: SegmentParsers = {
+  MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
+  EVN: (s, e) => EVN.parse(s, e),
+  PID: (s, e) => PID.parse(s, e),
+  PD1: (s, e) => PD1.parse(s, e),
+  PV1: (s, e) => PV1.parse(s, e),
+  DB1: (s, e) => DB1.parse(s, e),
+};
 
-  protected override parseEVN(s: string, e: EncodingCharacters): Result<EVN> {
-    return EVN.parse(s, e);
-  }
+/** Parser for HL7 BAR^P02 (HL7 v2.5.1) messages. */
+export class BAR_P02_Parser {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "BAR_P02";
+  /** The structure the message is parsed against. */
+  protected readonly structure: StructureItem[] = BAR_P02_STRUCTURE;
+  /** The segment parsers, keyed by segment name. */
+  protected readonly parsers: SegmentParsers = PARSERS;
 
-  protected override parsePID(s: string, e: EncodingCharacters): Result<PID> {
-    return PID.parse(s, e);
-  }
-
-  protected override parsePD1(s: string, e: EncodingCharacters): Result<PD1> {
-    return PD1.parse(s, e);
-  }
-
-  protected override parsePV1(s: string, e: EncodingCharacters): Result<PV1> {
-    return PV1.parse(s, e);
-  }
-
-  protected override parseDB1(s: string, e: EncodingCharacters): Result<DB1> {
-    return DB1.parse(s, e);
+  /** Parses the input string into a structured instance. */
+  parse(messageString: string): Result<ParsedBAR_P02> {
+    return parseStructure<ParsedBAR_P02>(this.messageName, this.structure, this.parsers, messageString);
   }
 }
 
-/** Parses an HL7 BAR^P02 (v2.5.1) message string into a structured result. */
+/** Parses an HL7 BAR^P02 (HL7 v2.5.1) message string into a structured result. */
 export function parseBAR_P02(messageString: string): Result<ParsedBAR_P02> {
   return new BAR_P02_Parser().parse(messageString);
 }

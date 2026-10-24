@@ -33,8 +33,8 @@ describe("ACK builder", () => {
 
   test("encodes SFT segments before MSA and ERR segments after it", () => {
     const wire = createACK(makeMSH(), makeMSA(), {
-      sftList: [new SFT(), new SFT()],
-      errList: [new ERR().errorLocation({ segmentId: "PID" }), new ERR().severity("E")],
+      software: [new SFT(), new SFT()],
+      errors: [new ERR().errorLocation({ segmentId: "PID" }), new ERR().severity("E")],
     }).encode();
     expect(wire.split("\r").map((s) => s.slice(0, 3))).toEqual(["MSH", "SFT", "SFT", "MSA", "ERR", "ERR"]);
   });
@@ -43,8 +43,8 @@ describe("ACK builder", () => {
 describe("ACK round trip", () => {
   test("parse(encode()) preserves SFT, MSA and every ERR in order", () => {
     const wire = createACK(makeMSH(), makeMSA().textMessage("ok"), {
-      sftList: [new SFT(), new SFT()],
-      errList: [
+      software: [new SFT(), new SFT()],
+      errors: [
         new ERR().errorLocation({ segmentId: "PID", segmentSequence: "1", fieldPosition: "5" }).hl7ErrorCode({ code: "101", text: "Required field missing" }).severity("E"),
         new ERR().severity("W"),
       ],
@@ -52,10 +52,10 @@ describe("ACK round trip", () => {
     const result = parseACK(wire);
     expect(result.ok).toBe(true);
     if (!result.ok) return;
-    expect(result.val.sftList).toHaveLength(2);
-    expect(result.val.msa.encode()).toBe("MSA|AA|MSG1|ok");
-    expect(result.val.errList).toHaveLength(2);
-    expect(result.val.errList[0].encode()).toBe("ERR||PID^1^5|101^Required field missing|E");
+    expect(result.val.software).toHaveLength(2);
+    expect(result.val.acknowledgment.encode()).toBe("MSA|AA|MSG1|ok");
+    expect(result.val.errors).toHaveLength(2);
+    expect(result.val.errors![0].encode()).toBe("ERR||PID^1^5|101^Required field missing|E");
     expect(result.val.message.segments).toHaveLength(wire.split("\r").length);
   });
 
@@ -63,8 +63,8 @@ describe("ACK round trip", () => {
     const result = parseACK(createACK(makeMSH(), makeMSA()).encode());
     expect(result.ok).toBe(true);
     if (result.ok) {
-      expect(result.val.sftList).toEqual([]);
-      expect(result.val.errList).toEqual([]);
+      expect(result.val.software).toEqual([]);
+      expect(result.val.errors).toEqual([]);
     }
   });
 });

@@ -15,10 +15,10 @@ const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
 const msh = () => makeMSH().encode();
 
 const withGt1 = () => createVXU_V04(makeMSH(), makePID(), {
-  visit: { pv1: new PV1().patientClass("O") },
-  gt1List: [new GT1().setId("1"), new GT1().setId("2")],
-  insurance: [{ in1: new IN1().setId("1") }],
-  orders: [{ rxa: makeRXA("1") }],
+  visit: new PV1().patientClass("O"),
+  guarantors: [new GT1().setId("1"), new GT1().setId("2")],
+  insurances: [{ insurance: new IN1().setId("1") }],
+  orders: [{ administration: makeRXA("1") }],
 });
 
 describe("VXU_V04 (v2.4): adds [{GT1}] after the visit group", () => {
@@ -32,7 +32,7 @@ describe("VXU_V04 (v2.4): adds [{GT1}] after the visit group", () => {
   });
 
   test("the ORC is still optional in v2.4", () => {
-    expect(createVXU_V04(makeMSH(), makePID(), { orders: [{ rxa: makeRXA() }] }).verify().valid).toBe(true);
+    expect(createVXU_V04(makeMSH(), makePID(), { orders: [{ administration: makeRXA() }] }).verify().valid).toBe(true);
     expect(parseVXU_V04([msh(), "PID|1", "RXA|0|1"].join("\r")).ok).toBe(true);
   });
 
@@ -40,9 +40,9 @@ describe("VXU_V04 (v2.4): adds [{GT1}] after the visit group", () => {
     const result = parseVXU_V04(withGt1().encode());
     expect(result.ok).toBe(true);
     if (result.ok) {
-      expect(result.val.gt1List).toHaveLength(2);
-      expect(result.val.gt1List[0]).toBeInstanceOf(GT1);
-      expect(result.val.insurance).toHaveLength(1);
+      expect(result.val.guarantors).toHaveLength(2);
+      expect(result.val.guarantors![0]).toBeInstanceOf(GT1);
+      expect(result.val.insurances).toHaveLength(1);
       expect(result.val.message.segments).toHaveLength(7);
     }
   });

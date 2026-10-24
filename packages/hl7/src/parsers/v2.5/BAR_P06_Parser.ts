@@ -1,122 +1,66 @@
 /**
- * Parser for BAR^P06 messages (HL7 2.5): end account. Structure: MSH [{SFT}] EVN { PID [PV1] }
- * Compared with v2.3/v2.4 only [{SFT}] is new (identical in v2.5.1).
+ * Parser for BAR^P06 messages (HL7 v2.5).
+ *
+ * Structure: MSH [{SFT}] EVN { PATIENT: PID [PV1] }
  *
  * @module
  */
-import { Err } from "../../utils/err.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../../types/result.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
+import { BAR_P06_STRUCTURE } from "../../structures/v2.5/BAR_P06.ts";
 import { MSH } from "../../segments/v2.5/MSH.ts";
 import { SFT } from "../../segments/v2.5/SFT.ts";
 import { EVN } from "../../segments/v2.5/EVN.ts";
 import { PID } from "../../segments/v2.5/PID.ts";
 import { PV1 } from "../../segments/v2.5/PV1.ts";
-import type { HL7Message } from "../../types/message.ts";
-import type { EncodingCharacters } from "../../types/encoding.ts";
-import {
-  misplacedSegment,
-  readMessageHeader,
-  segmentParseFailure,
-} from "../../utils/messageParsing.ts";
 
-/** ParsedBAREndPatient — one PATIENT group of a BAR^P06 message. */
+/** The PATIENT group of a parsed BAR^P06 (HL7 v2.5) message. */
 export interface ParsedBAREndPatient {
-  /** The pid value. */
-  pid: PID;
-  /** The pv1 value. */
-  pv1?: PV1;
+  /** The PID segment. */
+  patient: PID;
+  /** The PV1 segment. */
+  visit?: PV1;
 }
 
-/** Structured result of parsing an HL7 BAR^P06 (v2.3) message. */
-export interface ParsedBAR_P06 {
-  /** The message value. */
-  message: HL7Message;
-  /** The msh value. */
-  msh: MSH;
-  /** The software segments, which follow MSH. */
-  sftList: SFT[];
-  /** The evn value. */
-  evn: EVN;
-  /** The patients value (at least one). */
+/** Structured result of parsing an HL7 BAR^P06 (HL7 v2.5) message. */
+export interface ParsedBAR_P06 extends ParsedMessageBase {
+  /** The MSH segment. */
+  header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
+  /** The EVN segment. */
+  event: EVN;
+  /** The PATIENT groups. */
   patients: ParsedBAREndPatient[];
 }
 
-/** Parser for HL7 BAR^P06 (v2.3) messages. */
-export class BAR_P06_Parser {
-  /** The message name value. */
-  protected readonly messageName: string = "BAR_P06";
+/** The segment parsers of BAR^P06 (HL7 v2.5). */
+const PARSERS: SegmentParsers = {
+  MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
+  EVN: (s, e) => EVN.parse(s, e),
+  PID: (s, e) => PID.parse(s, e),
+  PV1: (s, e) => PV1.parse(s, e),
+};
 
-  /** Parse msh. */
-  protected parseMSH(s: string): Result<MSH> { return MSH.parse(s); }
-  /** Parse sft. */
-  protected parseSFT(s: string, e: EncodingCharacters): Result<SFT> { return SFT.parse(s, e); }
-  /** Parse evn. */
-  protected parseEVN(s: string, e: EncodingCharacters): Result<EVN> { return EVN.parse(s, e); }
-  /** Parse pid. */
-  protected parsePID(s: string, e: EncodingCharacters): Result<PID> { return PID.parse(s, e); }
-  /** Parse pv1. */
-  protected parsePV1(s: string, e: EncodingCharacters): Result<PV1> { return PV1.parse(s, e); }
+/** Parser for HL7 BAR^P06 (HL7 v2.5) messages. */
+export class BAR_P06_Parser {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "BAR_P06";
+  /** The structure the message is parsed against. */
+  protected readonly structure: StructureItem[] = BAR_P06_STRUCTURE;
+  /** The segment parsers, keyed by segment name. */
+  protected readonly parsers: SegmentParsers = PARSERS;
 
   /** Parses the input string into a structured instance. */
   parse(messageString: string): Result<ParsedBAR_P06> {
-    try {
-      const header = readMessageHeader(messageString, (s) => this.parseMSH(s));
-      if (!header.ok || !header.val) return header as Result<never>;
-      const { segments, msh, encoding, message } = header.val;
-
-      const sftList: SFT[] = [];
-      let evn: EVN | undefined;
-      const patients: ParsedBAREndPatient[] = [];
-      let patient: ParsedBAREndPatient | undefined;
-
-      for (let i = 1; i < segments.length; i++) {
-        const segmentStr = segments[i];
-        const segmentType = segmentStr.substring(0, 3);
-        const line = i + 1;
-
-        switch (segmentType) {
-          case "SFT": {
-            const r = this.parseSFT(segmentStr, encoding);
-            if (!r.ok || !r.val) return segmentParseFailure("SFT", line, r);
-            if (evn) return misplacedSegment("SFT", line, "must appear before the EVN segment");
-            sftList.push(r.val); message.addSegment(r.val); break;
-          }
-          case "EVN": {
-            const r = this.parseEVN(segmentStr, encoding);
-            if (!r.ok || !r.val) return segmentParseFailure("EVN", line, r);
-            if (evn) return misplacedSegment("EVN", line, "appears more than once");
-            evn = r.val; message.addSegment(r.val); break;
-          }
-          case "PID": {
-            const r = this.parsePID(segmentStr, encoding);
-            if (!r.ok || !r.val) return segmentParseFailure("PID", line, r);
-            if (!evn) return misplacedSegment("PID", line, "must follow the EVN segment");
-            patient = { pid: r.val }; patients.push(patient); message.addSegment(r.val); break;
-          }
-          case "PV1": {
-            const r = this.parsePV1(segmentStr, encoding);
-            if (!r.ok || !r.val) return segmentParseFailure("PV1", line, r);
-            if (!patient) return misplacedSegment("PV1", line, "must follow a PID segment");
-            if (patient.pv1) return misplacedSegment("PV1", line, "appears more than once for the same patient");
-            patient.pv1 = r.val; message.addSegment(r.val); break;
-          }
-          default:
-            console.warn(`Skipping unsupported segment type '${segmentType}' at line ${line}`);
-            break;
-        }
-      }
-
-      if (!evn) return { ok: false, err: new Err(`${this.messageName} message must contain an EVN segment`) };
-      if (patients.length === 0) return { ok: false, err: new Err(`${this.messageName} message must contain at least one PID segment`) };
-
-      return { ok: true, val: { message, msh, sftList, evn, patients } };
-    } catch (error) {
-      return { ok: false, err: new Err(`Failed to parse ${this.messageName} message: ${error}`) };
-    }
+    return parseStructure<ParsedBAR_P06>(this.messageName, this.structure, this.parsers, messageString);
   }
 }
 
-/** Parses an HL7 BAR^P06 (v2.3) message string into a structured result. */
+/** Parses an HL7 BAR^P06 (HL7 v2.5) message string into a structured result. */
 export function parseBAR_P06(messageString: string): Result<ParsedBAR_P06> {
   return new BAR_P06_Parser().parse(messageString);
 }

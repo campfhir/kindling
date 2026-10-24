@@ -41,13 +41,13 @@ for (const [label, builders, parsers, is251] of [
 
     test.each([18, 19, 20, 21, 22, 23, 24])("SIU^S%i reuses SIU_S12", (n) => {
       const name = `SIU_S${n}`;
-      const encoded = builders[`create${name}`](msh("SIU", `S${n}`), new SCH(), [], [], [{ rgs: new RGS().setId("1") }]).encode();
-      check(name, encoded, `MSH|^~\\&|TEST|||||SIU^S${n}`, /SIU message must contain an SCH segment/);
+      const encoded = builders[`create${name}`](msh("SIU", `S${n}`), new SCH(), [{ resourceGroup: new RGS().setId("1") }]).encode();
+      check(name, encoded, `MSH|^~\\&|TEST|||||SIU^S${n}`, new RegExp(`${name} message must contain an SCH segment`));
     });
 
     test.each(Array.from({ length: 10 }, (_, i) => i + 2))("SRM^S%02d reuses SRM_S01", (n) => {
       const name = `SRM_S${pad(n)}`;
-      const encoded = builders[`create${name}`](msh("SRM", `S${pad(n)}`), new ARQ(), { resources: [{ rgs: new RGS().setId("1") }] }).encode();
+      const encoded = builders[`create${name}`](msh("SRM", `S${pad(n)}`), new ARQ(), [{ resourceGroup: new RGS().setId("1") }]).encode();
       check(name, encoded, `MSH|^~\\&|TEST|||||SRM^S${pad(n)}\rARQ|1`, new RegExp(`${name} message must contain at least one RGS`));
     });
 
@@ -65,7 +65,7 @@ for (const [label, builders, parsers, is251] of [
 
     test.each([4, 6, 8, 10])("MDM^T%02d reuses MDM_T02", (n) => {
       const name = `MDM_T${pad(n)}`;
-      const content = is251 ? [{ obx: new OBX().setId("1") }] : [new OBX().setId("1")];
+      const content = is251 ? [{ observation: new OBX().setId("1") }] : [new OBX().setId("1")];
       const encoded = builders[`create${name}`](msh("MDM", `T${pad(n)}`), new EVN().eventTypeCode(`T${pad(n)}`), new PID().setId("1"), new PV1().patientClass("I"), new TXA().setId("1"), content).encode();
       expect((encoded as string).split("\r").map((s: string) => s.slice(0, 3))).toEqual(["MSH", "EVN", "PID", "PV1", "TXA", "OBX"]);
       check(name, encoded, `MSH|^~\\&|TEST|||||MDM^T${pad(n)}\rEVN|1\rPID|1\rPV1|1\rTXA|1`, new RegExp(`${name} message must contain at least one OBX`));

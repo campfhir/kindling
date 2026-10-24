@@ -94,8 +94,8 @@ test("encode() includes optional PD1 and NK1 before PV1", () => {
   const pd1 = new PD1();
   const nk1 = new NK1().setId("1");
   const msg = createADT_A28(makeMSH(), makeEVN(), makePID(), makePV1(), {
-    pd1,
-    nk1List: [nk1],
+    patientDemographics: pd1,
+    nextOfKin: [nk1],
   });
   const segments = msg.encode().split("\r");
   const names = segments.map((s) => s.substring(0, 3));
@@ -104,26 +104,17 @@ test("encode() includes optional PD1 and NK1 before PV1", () => {
   expect(names.indexOf("NK1")).toBeLessThan(names.indexOf("PV1"));
 });
 
-test("encode() includes patient-level ROL after PD1 and before PV1", () => {
-  const pd1 = new PD1();
-  const rol = new ROL();
-  const msg = createADT_A28(makeMSH(), makeEVN(), makePID(), makePV1(), {
-    pd1,
-    rolList: [rol],
-  });
-  const segments = msg.encode().split("\r");
-  const names = segments.map((s) => s.substring(0, 3));
-
-  expect(names.indexOf("ROL")).toBeGreaterThan(names.indexOf("PD1"));
-  expect(names.indexOf("ROL")).toBeLessThan(names.indexOf("PV1"));
+test("verify() rejects a patient-level ROL: not part of the v2.3 structure", () => {
+  const msg = createADT_A28(makeMSH(), makeEVN(), makePID(), makePV1(), { patientDemographics: new PD1(), roles: [new ROL()] } as any);
+  expect(msg.verify().errors).toEqual(['Unknown property "roles"']);
 });
 
 test("encode() places AL1 and DG1 after OBX list", () => {
   const al1 = new AL1().setId("1");
   const dg1 = new DG1().setId("1");
   const msg = createADT_A28(makeMSH(), makeEVN(), makePID(), makePV1(), {
-    al1List: [al1],
-    dg1List: [dg1],
+    allergies: [al1],
+    diagnoses: [dg1],
   });
   const segments = msg.encode().split("\r");
   const names = segments.map((s) => s.substring(0, 3));
@@ -137,7 +128,7 @@ test("encode() places AL1 and DG1 after OBX list", () => {
 test("encode() places procedure groups after DRG", () => {
   const pr1 = new PR1().setId("1");
   const msg = createADT_A28(makeMSH(), makeEVN(), makePID(), makePV1(), {
-    procedures: [{ pr1 }],
+    procedures: [{ procedure: pr1 }],
   });
   const segments = msg.encode().split("\r");
   const names = segments.map((s) => s.substring(0, 3));
@@ -150,7 +141,7 @@ test("encode() interleaves ROL inside procedure group", () => {
   const pr1 = new PR1().setId("1");
   const rol = new ROL();
   const msg = createADT_A28(makeMSH(), makeEVN(), makePID(), makePV1(), {
-    procedures: [{ pr1, rolList: [rol] }],
+    procedures: [{ procedure: pr1, roles: [rol] }],
   });
   const segments = msg.encode().split("\r");
   const names = segments.map((s) => s.substring(0, 3));
@@ -164,8 +155,8 @@ test("encode() places GT1 before insurance groups", () => {
   const gt1 = new GT1().setId("1");
   const in1 = new IN1().setId("1").insurancePlanId({ code: "PPO" });
   const msg = createADT_A28(makeMSH(), makeEVN(), makePID(), makePV1(), {
-    gt1List: [gt1],
-    insuranceGroups: [{ in1 }],
+    guarantors: [gt1],
+    insuranceGroups: [{ insurance: in1 }],
   });
   const segments = msg.encode().split("\r");
   const names = segments.map((s) => s.substring(0, 3));
@@ -178,7 +169,7 @@ test("encode() interleaves IN2 and IN3 inside insurance group", () => {
   const in2 = new IN2().insuredSsn("SSN12345");
   const in3 = new IN3().setId("1");
   const msg = createADT_A28(makeMSH(), makeEVN(), makePID(), makePV1(), {
-    insuranceGroups: [{ in1, in2, in3List: [in3] }],
+    insuranceGroups: [{ insurance: in1, insuranceDetails: in2, insuranceCertification: in3 }],
   });
   const segments = msg.encode().split("\r");
   const names = segments.map((s) => s.substring(0, 3));
@@ -194,7 +185,7 @@ test("encode() handles multiple insurance groups in order", () => {
   const in1a = new IN1().setId("1").insurancePlanId({ code: "PPO" });
   const in1b = new IN1().setId("2").insurancePlanId({ code: "HMO" });
   const msg = createADT_A28(makeMSH(), makeEVN(), makePID(), makePV1(), {
-    insuranceGroups: [{ in1: in1a }, { in1: in1b }],
+    insuranceGroups: [{ insurance: in1a }, { insurance: in1b }],
   });
   const segments = msg.encode().split("\r");
   const in1Segments = segments.filter((s) => s.startsWith("IN1|"));
@@ -213,10 +204,10 @@ test("round-trip: build → encode → parse", () => {
     makePID(),
     makePV1(),
     {
-      nk1List: [nk1],
-      al1List: [al1],
-      procedures: [{ pr1 }],
-      insuranceGroups: [{ in1 }],
+      nextOfKin: [nk1],
+      allergies: [al1],
+      procedures: [{ procedure: pr1 }],
+      insuranceGroups: [{ insurance: in1 }],
     },
   );
 
@@ -224,10 +215,10 @@ test("round-trip: build → encode → parse", () => {
   const parsed = parseADT_A28(encoded);
 
   expect(parsed.ok).toBe(true);
-  expect(parsed.val!.pid).toBeTruthy();
-  expect(parsed.val!.pv1).toBeTruthy();
-  expect(parsed.val!.nk1List!.length).toBe(1);
-  expect(parsed.val!.al1List!.length).toBe(1);
+  expect(parsed.val!.patient).toBeTruthy();
+  expect(parsed.val!.visit).toBeTruthy();
+  expect(parsed.val!.nextOfKin!.length).toBe(1);
+  expect(parsed.val!.allergies!.length).toBe(1);
   expect(parsed.val!.procedures!.length).toBe(1);
   expect(parsed.val!.insuranceGroups!.length).toBe(1);
 });

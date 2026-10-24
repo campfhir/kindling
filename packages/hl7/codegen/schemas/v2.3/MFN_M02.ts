@@ -1,41 +1,20 @@
-import { MessageSchema } from "../../../src/types/schema";
+import type { MessageSchema } from "../../../src/types/schema";
+import { group, opt, req } from "../helpers";
 
+/**
+ * MFN^M02 - Master File Notification: Staff/Practitioner (HL7 v2.3, chapter 8).
+ *
+ * MSH MFI { MF_STAFF: MFE STF [PRA] }
+ *
+ * Source: https://hl7-definition.caristix.com/v2/HL7v2.3/TriggerEvents/MFN_M02
+ */
 export const MFN_M02_SCHEMA: MessageSchema = {
   messageType: "MFN",
   triggerEvent: "M02",
   version: "2.3",
   structure: [
-    {
-      name: "MSH",
-      required: true,
-      repeating: false,
-    },
-    {
-      name: "MFI",
-      required: true,
-      repeating: false,
-    },
-    {
-      name: "MF_STAFF",
-      required: true,
-      repeating: true,
-      segments: [
-        {
-          name: "MFE",
-          required: true,
-          repeating: false,
-        },
-        {
-          name: "STF",
-          required: true,
-          repeating: false,
-        },
-        {
-          name: "PRA",
-          required: false,
-          repeating: false,
-        },
-      ],
-    },
+    req("MSH"),
+    req("MFI"),
+    group("MF_STAFF", true, true, [req("MFE"), req("STF"), opt("PRA")], { as: "staffEntries", exportTypeName: "ParsedStaffEntry", builderTypeName: "StaffEntry" }),
   ],
 };

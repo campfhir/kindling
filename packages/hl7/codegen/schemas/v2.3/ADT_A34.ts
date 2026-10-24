@@ -1,41 +1,26 @@
-import { MessageSchema } from "../../../src/types/schema";
+import type { MessageSchema } from "../../../src/types/schema";
+import { opt, req, wrappers } from "../helpers";
 
 /**
- * ADT^A34 - Merge Patient Information – Patient ID Only (HL7 v2.3)
- * Base schema for merge/link/move messages that require a MRG segment.
+ * ADT^A34 - Merge Patient Information – Patient ID Only (HL7 v2.3, chapter 3).
+ *
+ * MSH EVN PID [PD1] MRG [PV1]
+ *
+ * Base structure for the merge/link/move events that carry an MRG segment. A18, A50 and A51
+ * (change visit number / alternate visit ID) require PV1 per the standard: MSH EVN PID [PD1] MRG PV1
+ * (hl7-definition.caristix.com, v2.3). They reuse this structure, which accepts PV1 as an option.
+ * v2.5/v2.5.1 add [{SFT}] after MSH (see the v2.5 schema).
+ * Source: https://hl7-definition.caristix.com/v2/HL7v2.3/TriggerEvents/ADT_A34
  */
 export const ADT_A34_SCHEMA: MessageSchema = {
   messageType: "ADT",
   triggerEvent: "A34",
   version: "2.3",
-  structure: [
-    { name: "MSH", required: true,  repeating: false },
-    { name: "EVN", required: true,  repeating: false },
-    { name: "PID", required: true,  repeating: false },
-    { name: "PD1", required: false, repeating: false },
-    { name: "MRG", required: true,  repeating: false },
-    { name: "PV1", required: false, repeating: false },
-  ],
+  structure: [req("MSH"), req("EVN"), req("PID"), opt("PD1"), req("MRG"), opt("PV1")],
 };
 
-export const ADT_A18_SCHEMA: MessageSchema = { ...ADT_A34_SCHEMA, triggerEvent: "A18", baseMessage: "ADT_A34" };
-export const ADT_A30_SCHEMA: MessageSchema = { ...ADT_A34_SCHEMA, triggerEvent: "A30", baseMessage: "ADT_A34" };
-export const ADT_A35_SCHEMA: MessageSchema = { ...ADT_A34_SCHEMA, triggerEvent: "A35", baseMessage: "ADT_A34" };
-export const ADT_A36_SCHEMA: MessageSchema = { ...ADT_A34_SCHEMA, triggerEvent: "A36", baseMessage: "ADT_A34" };
-export const ADT_A37_SCHEMA: MessageSchema = { ...ADT_A34_SCHEMA, triggerEvent: "A37", baseMessage: "ADT_A34" };
-export const ADT_A39_SCHEMA: MessageSchema = { ...ADT_A34_SCHEMA, triggerEvent: "A39", baseMessage: "ADT_A34" };
-export const ADT_A40_SCHEMA: MessageSchema = { ...ADT_A34_SCHEMA, triggerEvent: "A40", baseMessage: "ADT_A34" };
-export const ADT_A41_SCHEMA: MessageSchema = { ...ADT_A34_SCHEMA, triggerEvent: "A41", baseMessage: "ADT_A34" };
-export const ADT_A42_SCHEMA: MessageSchema = { ...ADT_A34_SCHEMA, triggerEvent: "A42", baseMessage: "ADT_A34" };
-export const ADT_A43_SCHEMA: MessageSchema = { ...ADT_A34_SCHEMA, triggerEvent: "A43", baseMessage: "ADT_A34" };
-export const ADT_A44_SCHEMA: MessageSchema = { ...ADT_A34_SCHEMA, triggerEvent: "A44", baseMessage: "ADT_A34" };
-export const ADT_A45_SCHEMA: MessageSchema = { ...ADT_A34_SCHEMA, triggerEvent: "A45", baseMessage: "ADT_A34" };
-export const ADT_A46_SCHEMA: MessageSchema = { ...ADT_A34_SCHEMA, triggerEvent: "A46", baseMessage: "ADT_A34" };
-export const ADT_A47_SCHEMA: MessageSchema = { ...ADT_A34_SCHEMA, triggerEvent: "A47", baseMessage: "ADT_A34" };
-export const ADT_A48_SCHEMA: MessageSchema = { ...ADT_A34_SCHEMA, triggerEvent: "A48", baseMessage: "ADT_A34" };
-export const ADT_A49_SCHEMA: MessageSchema = { ...ADT_A34_SCHEMA, triggerEvent: "A49", baseMessage: "ADT_A34" };
-// A50/A51 (change visit number / alternate visit ID) require PV1: MSH EVN PID [PD1] MRG PV1
-// (hl7-definition.caristix.com, v2.3 ADT_A50/ADT_A51). Like A18 they reuse the A34 builder,
-// which accepts PV1 as an option.
-export const ADT_A50_SCHEMA: MessageSchema = { ...ADT_A34_SCHEMA, triggerEvent: "A50", baseMessage: "ADT_A34" };
-export const ADT_A51_SCHEMA: MessageSchema = { ...ADT_A34_SCHEMA, triggerEvent: "A51", baseMessage: "ADT_A34" };
+/** The trigger events that share the A34 structure. */
+export const ADT_A34_EVENTS = ["A18", "A30", "A35", "A36", "A37", "A39", "A40", "A41", "A42", "A43", "A44", "A45", "A46", "A47", "A48", "A49", "A50", "A51"];
+
+/** A34 and the merge/link/move events wrapping it. */
+export const ADT_A34_FAMILY: MessageSchema[] = [ADT_A34_SCHEMA, ...wrappers(ADT_A34_SCHEMA, ADT_A34_EVENTS)];

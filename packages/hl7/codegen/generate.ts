@@ -1,37 +1,40 @@
 /**
- * HL7 Mapper Code Generator
+ * HL7 code generator.
  *
- * Generates segment wrappers, parser stubs, and builder stubs for all
- * registered HL7 versions. Driven entirely by the schemas/ directory.
+ * Driven entirely by the schemas in `schemas/`: every registered `VersionSchema` yields, per
+ * message, a structure module, a parser and a builder (see `generators/message.ts`), and derived
+ * versions also get a wrapper class per segment their messages use. Versions that are
+ * structurally identical to their predecessor (`reexport: true`) mirror its modules as
+ * re-exports, except for the messages they define themselves.
  *
  * Usage:
  *   pnpm codegen           # generate everything
  *   pnpm codegen --dry-run # print files without writing
  */
 
-import { writeFileSync, mkdirSync, existsSync, readdirSync, readFileSync } from "node:fs";
+import { writeFileSync, mkdirSync, existsSync, readdirSync, readFileSync, unlinkSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import type { VersionConfig, ParserConfig, BuilderConfig } from "./types.ts";
-import type {
-  VersionSchema,
-  MessageSchema,
-  SegmentDefinition,
-  SegmentGroup,
-} from "../src/types/schema.ts";
-import { isSegmentGroup } from "../src/types/schema.ts";
+import type { VersionSchema } from "../src/types/schema.ts";
+import { segmentNames } from "../src/types/schema.ts";
 import { V2_3 } from "./schemas/v2.3/version.ts";
 import { V2_3_1 } from "./schemas/v2.3.1/version.ts";
 import { V2_4 } from "./schemas/v2.4/version.ts";
 import { V2_5 } from "./schemas/v2.5/version.ts";
 import { V2_5_1 } from "./schemas/v2.5.1/version.ts";
 import { generateSegment } from "./generators/segment.ts";
-import { generateBaseParser } from "./generators/baseParser.ts";
-import { generateParser } from "./generators/parser.ts";
-import { generateBuilder } from "./generators/builder.ts";
-import { generateWrapperParser } from "./generators/wrapperParser.ts";
-import { generateWrapperBuilder } from "./generators/wrapperBuilder.ts";
-import { generateLocalWrapper, generateReexport, LOCAL_WRAPPER_MARKER, REEXPORT_MARKER } from "./generators/reexport.ts";
+import { generateReexport, LOCAL_WRAPPER_MARKER, REEXPORT_MARKER } from "./generators/reexport.ts";
+import {
+  MESSAGE_MARKER,
+  generateBuilderWrapper,
+  generateMessageBuilder,
+  generateMessageParser,
+  generateParserWrapper,
+  generateStructureModule,
+  generateStructureWrapper,
+  messageName,
+  validateStructure,
+} from "./generators/message.ts";
 
 const ROOT = join(fileURLToPath(import.meta.url), "../..");
 const DRY_RUN = process.argv.includes("--dry-run");
@@ -40,113 +43,40 @@ const DRY_RUN = process.argv.includes("--dry-run");
 
 const VERSIONS: VersionSchema[] = [V2_3, V2_3_1, V2_4, V2_5, V2_5_1];
 
-// ── Schema → VersionConfig derivation ────────────────────────────────────────
-
-function toPascalCase(s: string): string {
-  return s
-    .split("_")
-    .map((p) => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase())
-    .join("");
-}
-
-function flatUniqueSegments(
-  structure: (SegmentDefinition | SegmentGroup)[],
-): string[] {
-  const seen = new Set<string>();
-  const result: string[] = [];
-  function collect(items: (SegmentDefinition | SegmentGroup)[]) {
-    for (const item of items) {
-      if (isSegmentGroup(item)) {
-        collect(item.segments);
-      } else if (!seen.has(item.name)) {
-        seen.add(item.name);
-        result.push(item.name);
-      }
-    }
-  }
-  collect(structure);
-  return result;
-}
-
-/** "ADT_A01" for ADT^A01, or just "ACK" for messages with no trigger event. */
-function messageName(schema: Pick<MessageSchema, "messageType" | "triggerEvent">): string {
-  return schema.triggerEvent ? `${schema.messageType}_${schema.triggerEvent}` : schema.messageType;
-}
-
-function deriveExportTypes(schema: MessageSchema): string[] {
-  const msgName = messageName(schema);
-  const types = [`Parsed${msgName}`];
-  function collectGroups(items: (SegmentDefinition | SegmentGroup)[]) {
-    for (const item of items) {
-      if (isSegmentGroup(item)) {
-        types.push(item.exportTypeName ?? `Parsed${toPascalCase(item.name)}`);
-        collectGroups(item.segments);
-      }
-    }
-  }
-  collectGroups(schema.structure);
-  return types;
-}
-
-function schemaToParserConfig(schema: MessageSchema): ParserConfig {
-  const msgName = messageName(schema);
-  const allSegs = flatUniqueSegments(schema.structure);
-  const segments = ["MSH", ...allSegs.filter((s) => s !== "MSH")];
-  return {
-    name: `${msgName}_Parser`,
-    parseFn: `parse${msgName}`,
-    exportTypes: deriveExportTypes(schema),
-    segments,
-    baseMessage: schema.baseMessage,
-  };
-}
-
-function schemaToBuilderConfig(schema: MessageSchema): BuilderConfig {
-  const msgName = messageName(schema);
-  const allSegs = flatUniqueSegments(schema.structure);
-  return {
-    name: msgName,
-    segments: allSegs.filter((s) => s !== "MSH"),
-    baseMessage: schema.baseMessage,
-  };
-}
-
-function fromVersionSchema(vs: VersionSchema): VersionConfig {
-  return {
-    version: vs.version,
-    baseVersion: vs.baseVersion,
-    segments: vs.segments,
-    parsers: vs.messages.map(schemaToParserConfig),
-    builders: vs.messages.map(schemaToBuilderConfig),
-  };
-}
+/** The module kinds generated per message. */
+const MESSAGE_KINDS = ["structures", "parsers", "builders"] as const;
+type MessageKind = (typeof MESSAGE_KINDS)[number];
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
+const rel = (p: string) => p.replace(ROOT + "/", "");
+
 function write(filePath: string, content: string) {
   if (DRY_RUN) {
-    console.log(`[dry-run] ${filePath.replace(ROOT + "/", "")}`);
+    console.log(`[dry-run] ${rel(filePath)}`);
     return;
   }
+  if (existsSync(filePath) && readFileSync(filePath, "utf8") === content) return;
   mkdirSync(dirname(filePath), { recursive: true });
   writeFileSync(filePath, content, "utf8");
-  console.log(`wrote  ${filePath.replace(ROOT + "/", "")}`);
+  console.log(`wrote  ${rel(filePath)}`);
 }
 
-// ── Generator ─────────────────────────────────────────────────────────────────
+/** Files codegen owns: anything carrying one of its markers. Everything else is hand-written. */
+const isGenerated = (source: string) =>
+  source.includes(MESSAGE_MARKER) || source.includes(REEXPORT_MARKER) || source.includes(LOCAL_WRAPPER_MARKER);
 
-// Builds a set of "MessageType_TriggerEvent" names for a given version schema.
-// Includes messages inherited through re-export versions.
-function messageNameSet(vs: VersionSchema, all: Map<string, VersionSchema>): Set<string> {
-  const names = new Set(vs.messages.map(messageName));
-  const base = vs.baseVersion ? all.get(vs.baseVersion) : undefined;
-  if (vs.reexport && base) {
-    for (const n of messageNameSet(base, all)) names.add(n);
+/** Writes a generated module unless a hand-written file (no marker) already sits there. */
+function writeGenerated(filePath: string, content: string, produced: Set<string>): void {
+  produced.add(filePath);
+  if (existsSync(filePath) && !isGenerated(readFileSync(filePath, "utf8"))) {
+    console.log(`skip   ${rel(filePath)}  (hand-written)`);
+    return;
   }
-  return names;
+  write(filePath, content);
 }
 
-// Module names (no extension, no tests, no barrel) in a src/<kind>/<version> dir.
+/** Module names (no extension, no tests, no barrel) in a src/<kind>/<version> dir. */
 function moduleNames(kind: string, version: string): string[] {
   const dir = join(ROOT, "src", kind, version);
   if (!existsSync(dir)) return [];
@@ -156,141 +86,113 @@ function moduleNames(kind: string, version: string): string[] {
     .sort();
 }
 
-// Re-export version: mirror every module of the base version, except those
-// hand-written for this version (`ownSegments`).
-const isGenerated = (source: string) => source.includes(REEXPORT_MARKER) || source.includes(LOCAL_WRAPPER_MARKER);
+/** File name of a message module of the given kind. */
+const moduleFile = (kind: MessageKind, msg: string) => (kind === "parsers" ? `${msg}_Parser` : msg);
 
-/** Module a wrapper file wraps (`from "./ADT_A01_Parser.ts"` → ADT_A01_Parser), or undefined. */
-function wrapperTarget(source: string): string | undefined {
-  const m = /from "\.\/(\w+)\.ts"/.exec(source);
-  return m?.[1];
+// ── Messages ──────────────────────────────────────────────────────────────────
+
+/** Generates the structure, parser and builder modules of one version's messages. */
+function generateMessages(vs: VersionSchema, produced: Set<string>): void {
+  const byName = new Map(vs.messages.map((m) => [messageName(m), m]));
+  for (const schema of vs.messages) {
+    const name = messageName(schema);
+    validateStructure(schema);
+    let files: Record<MessageKind, string>;
+    if (schema.baseMessage) {
+      const base = byName.get(schema.baseMessage);
+      if (!base) throw new Error(`${vs.version}: ${name} wraps ${schema.baseMessage}, which is not a message of this version`);
+      if (JSON.stringify(base.structure) !== JSON.stringify(schema.structure)) {
+        throw new Error(`${vs.version}: ${name} wraps ${schema.baseMessage} but has a different structure`);
+      }
+      files = {
+        structures: generateStructureWrapper(schema, vs.version),
+        parsers: generateParserWrapper(schema, vs.version),
+        builders: generateBuilderWrapper(schema, vs.version),
+      };
+    } else {
+      files = {
+        structures: generateStructureModule(schema, vs.version),
+        parsers: generateMessageParser(schema, vs.version),
+        builders: generateMessageBuilder(schema, vs.version),
+      };
+    }
+    for (const kind of MESSAGE_KINDS) {
+      writeGenerated(join(ROOT, "src", kind, vs.version, `${moduleFile(kind, name)}.ts`), files[kind], produced);
+    }
+  }
 }
 
-/** Follows `export * from "../vX/name.ts"` re-exports down to the module that defines `name`. */
-function resolveModule(kind: string, version: string, name: string): { version: string; source: string } {
-  const source = readFileSync(join(ROOT, "src", kind, version, `${name}.ts`), "utf8");
-  const m = source.includes(REEXPORT_MARKER) ? /from "\.\.\/(v[\d.]+)\/(\w+)\.ts"/.exec(source) : null;
-  return m ? resolveModule(kind, m[1], m[2]) : { version, source };
+/** Every segment the version's messages use, plus the ones listed explicitly. */
+function neededSegments(vs: VersionSchema): string[] {
+  const names = new Set(vs.segments);
+  for (const m of vs.messages) segmentNames(m.structure).forEach((n) => names.add(n));
+  return [...names].sort();
 }
 
-/** Does `version` have its own (non re-exported) copy of module `name`? */
-function isLocal(kind: string, version: string, name: string): boolean {
-  const p = join(ROOT, "src", kind, version, `${name}.ts`);
-  return existsSync(p) && !readFileSync(p, "utf8").includes(REEXPORT_MARKER);
+// ── Versions ──────────────────────────────────────────────────────────────────
+
+/** Base version (hand-written segments) or derived version (generated segment wrappers). */
+function generateVersion(vs: VersionSchema, produced: Set<string>): void {
+  if (vs.baseVersion) {
+    console.log(`\n── ${vs.version} (extends ${vs.baseVersion}) ──\n`);
+    const own = new Set(vs.ownSegments ?? []);
+    for (const seg of neededSegments(vs)) {
+      const segPath = join(ROOT, "src/segments", vs.version, `${seg}.ts`);
+      if (own.has(seg)) continue;
+      if (!existsSync(join(ROOT, "src/segments", vs.baseVersion, `${seg}.ts`))) {
+        throw new Error(`${vs.version}: segment ${seg} is used by a message but ${vs.baseVersion} has no ${seg}.ts`);
+      }
+      // Segment wrappers may gain version-specific fields by hand, so an existing file is kept.
+      if (existsSync(segPath)) continue;
+      write(segPath, generateSegment(seg, vs.version, vs.baseVersion));
+    }
+  } else {
+    console.log(`\n── ${vs.version} (base) ──\n`);
+    for (const m of vs.messages) {
+      for (const seg of segmentNames(m.structure)) {
+        if (!existsSync(join(ROOT, "src/segments", vs.version, `${seg}.ts`))) {
+          throw new Error(`${vs.version}: ${messageName(m)} uses segment ${seg} but src/segments/${vs.version}/${seg}.ts does not exist`);
+        }
+      }
+    }
+  }
+  generateMessages(vs, produced);
 }
 
-function generateReexportVersion(vs: VersionSchema) {
+/**
+ * Re-export version: generate its own messages, then mirror every other module of the base
+ * version (segments, structures, parsers, builders) as `export * from "../<base>/X.ts"`.
+ * Segments first introduced in this version (`ownSegments`) are hand-written and left alone.
+ */
+function generateReexportVersion(vs: VersionSchema, produced: Set<string>): void {
   const baseVersion = vs.baseVersion!;
   console.log(`\n── ${vs.version} (re-exports ${baseVersion}) ──\n`);
   const own = new Set(vs.ownSegments ?? []);
-  for (const kind of ["segments", "parsers", "builders"] as const) {
-    for (const name of moduleNames(kind, baseVersion)) {
-      if (kind === "segments" && own.has(name)) continue;
-      const target = join(ROOT, "src", kind, vs.version, `${name}.ts`);
-      if (existsSync(target) && !isGenerated(readFileSync(target, "utf8"))) {
-        console.log(`skip   ${target.replace(ROOT + "/", "")}  (hand-written)`);
-        continue;
-      }
-      // A wrapper module (ADT_A02 around ADT_A01, SRR_S02 around SRR_S01, ...) must wrap this
-      // version's base when the base is hand-written here, so it is copied instead of re-exported.
-      const resolved = kind === "segments" ? undefined : resolveModule(kind, baseVersion, name);
-      const wrapped = resolved && wrapperTarget(resolved.source);
-      if (resolved && wrapped && isLocal(kind, vs.version, wrapped)) {
-        write(target, generateLocalWrapper(resolved.source, name, vs.version, resolved.version));
-        continue;
-      }
-      write(target, generateReexport(kind, name, vs.version, baseVersion));
-    }
-  }
   for (const seg of own) {
     const p = join(ROOT, "src/segments", vs.version, `${seg}.ts`);
-    if (!existsSync(p) && !DRY_RUN) {
-      throw new Error(`${vs.version}: ownSegments lists ${seg} but ${p} does not exist`);
+    if (!existsSync(p) && !DRY_RUN) throw new Error(`${vs.version}: ownSegments lists ${seg} but ${rel(p)} does not exist`);
+  }
+  generateMessages(vs, produced);
+  for (const kind of ["segments", ...MESSAGE_KINDS] as const) {
+    for (const name of moduleNames(kind, baseVersion)) {
+      const target = join(ROOT, "src", kind, vs.version, `${name}.ts`);
+      if (kind === "segments" && own.has(name)) continue;
+      if (produced.has(target)) continue;
+      writeGenerated(target, generateReexport(kind, name, vs.version, baseVersion), produced);
     }
   }
 }
 
-function generate(config: VersionConfig, baseSchema?: VersionSchema, allVersions = new Map<string, VersionSchema>()) {
-  const { version, baseVersion, segments, parsers, builders } = config;
-
-  if (!baseVersion) {
-    // Base version — generate parser stubs and builder stubs only.
-    // Segments are hand-written.
-    console.log(`\n── ${version} (base) ──\n`);
-
-    for (const parser of parsers) {
-      const parserPath = join(ROOT, "src/parsers", version, `${parser.name}.ts`);
-      if (existsSync(parserPath)) {
-        console.log(`skip   ${parserPath.replace(ROOT + "/", "")}  (already exists)`);
-        continue;
-      }
-      if (parser.baseMessage) {
-        write(parserPath, generateWrapperParser(parser, parser.baseMessage));
-      } else {
-        write(parserPath, generateBaseParser(parser, version));
-      }
-    }
-    for (const builder of builders ?? []) {
-      const builderPath = join(ROOT, "src/builders", version, `${builder.name}.ts`);
-      if (existsSync(builderPath)) {
-        console.log(`skip   ${builderPath.replace(ROOT + "/", "")}  (already exists)`);
-        continue;
-      }
-      if (builder.baseMessage) {
-        write(builderPath, generateWrapperBuilder(builder, builder.baseMessage));
-      } else {
-        write(builderPath, generateBuilder(builder, version, version));
-      }
-    }
-  } else {
-    // Derived version — generate segment wrappers, parser overrides, builder stubs.
-    console.log(`\n── ${version} (extends ${baseVersion}) ──\n`);
-
-    // Messages that exist in the base version can use derived overrides.
-    // Messages new to this version need standalone base stubs instead.
-    const baseMessages = baseSchema ? messageNameSet(baseSchema, allVersions) : new Set<string>();
-
-    for (const seg of segments) {
-      const segPath = join(ROOT, "src/segments", version, `${seg}.ts`);
-      if (existsSync(segPath)) {
-        console.log(`skip   ${segPath.replace(ROOT + "/", "")}  (already exists)`);
-        continue;
-      }
-      write(segPath, generateSegment(seg, version, baseVersion));
-    }
-
-    for (const parser of parsers) {
-      const parserPath = join(ROOT, "src/parsers", version, `${parser.name}.ts`);
-      if (existsSync(parserPath)) {
-        console.log(`skip   ${parserPath.replace(ROOT + "/", "")}  (already exists)`);
-        continue;
-      }
-      const msgName = parser.name.replace(/_Parser$/, "");
-      if (parser.baseMessage) {
-        // Wrapper: extend the same-version base parser
-        write(parserPath, generateWrapperParser(parser, parser.baseMessage));
-      } else if (baseMessages.has(msgName)) {
-        // Standard derived override: override parse methods to use this version's segments
-        write(parserPath, generateParser(parser, version, baseVersion));
-      } else {
-        console.log(`note   ${parser.name} is new in ${version} — generating base stub`);
-        write(parserPath, generateBaseParser(parser, version));
-      }
-    }
-
-    for (const builder of builders ?? []) {
-      const builderPath = join(ROOT, "src/builders", version, `${builder.name}.ts`);
-      if (existsSync(builderPath)) {
-        console.log(`skip   ${builderPath.replace(ROOT + "/", "")}  (already exists)`);
-        continue;
-      }
-      if (builder.baseMessage) {
-        write(builderPath, generateWrapperBuilder(builder, builder.baseMessage));
-      } else if (baseMessages.has(builder.name)) {
-        write(builderPath, generateBuilder(builder, version, baseVersion));
-      } else {
-        console.log(`note   ${builder.name} is new in ${version} — generating base stub`);
-        write(builderPath, generateBuilder(builder, version, version));
+/** Deletes generated message modules that no schema produces any more. */
+function removeStale(vs: VersionSchema, produced: Set<string>): void {
+  for (const kind of MESSAGE_KINDS) {
+    for (const name of moduleNames(kind, vs.version)) {
+      const p = join(ROOT, "src", kind, vs.version, `${name}.ts`);
+      if (produced.has(p) || !isGenerated(readFileSync(p, "utf8"))) continue;
+      if (DRY_RUN) console.log(`[dry-run] delete ${rel(p)}`);
+      else {
+        unlinkSync(p);
+        console.log(`removed ${rel(p)}`);
       }
     }
   }
@@ -298,15 +200,15 @@ function generate(config: VersionConfig, baseSchema?: VersionSchema, allVersions
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 
-// Build a version lookup so each derived version can find its base schema.
-const versionMap = new Map<string, VersionSchema>(VERSIONS.map((vs) => [vs.version, vs]));
-
+const seen = new Set<string>();
 for (const vs of VERSIONS) {
-  const baseSchema = vs.baseVersion ? versionMap.get(vs.baseVersion) : undefined;
-  if (vs.reexport) {
-    generateReexportVersion(vs);
-  } else {
-    generate(fromVersionSchema(vs), baseSchema, versionMap);
+  if (vs.baseVersion && !seen.has(vs.baseVersion)) {
+    throw new Error(`${vs.version}: base version ${vs.baseVersion} must be registered before it`);
   }
+  seen.add(vs.version);
+  const produced = new Set<string>();
+  if (vs.reexport) generateReexportVersion(vs, produced);
+  else generateVersion(vs, produced);
+  removeStale(vs, produced);
 }
 console.log("\nDone.");

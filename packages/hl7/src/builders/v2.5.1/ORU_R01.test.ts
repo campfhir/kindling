@@ -8,14 +8,14 @@ import { OBX } from "../../segments/v2.5.1/OBX.ts";
 
 test("createORU_R01 returns ORU_R01 instance", () => {
   const msh = new MSH().sendingApplication("APP").messageType({ messageCode: "ORU", triggerEvent: "R01" });
-  const message = createORU_R01(msh);
+  const message = createORU_R01(msh, []);
 
   expect(message instanceof ORU_R01).toBeTruthy();
 });
 
 test("ORU_R01 verify() detects missing MSH segment", () => {
   // deno-lint-ignore no-explicit-any
-  const message = new ORU_R01(null as any);
+  const message = new ORU_R01(null as any, []);
   const result = message.verify();
 
   expect(result.valid).toBe(false);
@@ -30,7 +30,7 @@ test("ORU_R01 verify() detects missing patient results", () => {
 
   expect(result.valid).toBe(false);
   expect(result.errors.some((e) =>
-      e.includes("At least one patient result is required"),
+      e.includes("At least one PATIENT RESULT group (PID/ORC/OBR) is required"),
     ), ).toBeTruthy();
 });
 
@@ -40,7 +40,7 @@ test("ORU_R01 verify() detects missing order observations", () => {
 
   const message = createORU_R01(msh, [
     {
-      pid,
+      patient: pid,
       orderObservations: [],
     },
   ]);
@@ -49,7 +49,7 @@ test("ORU_R01 verify() detects missing order observations", () => {
 
   expect(result.valid).toBe(false);
   expect(result.errors.some((e) =>
-      e.includes("At least one order observation is required"),
+      e.includes("PATIENT RESULT group 1: At least one ORDER OBSERVATION group (ORC/OBR) is required"),
     ), ).toBeTruthy();
 });
 
@@ -62,8 +62,8 @@ test("ORU_R01 encodes valid message with minimal data", () => {
 
   const message = createORU_R01(msh, [
     {
-      pid,
-      orderObservations: [{ obr, obxList: [obx] }],
+      patient: pid,
+      orderObservations: [{ observationRequest: obr, observations: [{ observation: obx }] }],
     },
   ]);
 
@@ -87,9 +87,9 @@ test("ORU_R01 encodes message with PV1", () => {
 
   const message = createORU_R01(msh, [
     {
-      pid,
-      pv1,
-      orderObservations: [{ obr, obxList: [obx] }],
+      patient: pid,
+      visit: pv1,
+      orderObservations: [{ observationRequest: obr, observations: [{ observation: obx }] }],
     },
   ]);
 
@@ -111,8 +111,8 @@ test("ORU_R01 handles multiple OBX segments", () => {
 
   const message = createORU_R01(msh, [
     {
-      pid,
-      orderObservations: [{ obr, obxList: [obx1, obx2, obx3] }],
+      patient: pid,
+      orderObservations: [{ observationRequest: obr, observations: [{ observation: obx1 }, { observation: obx2 }, { observation: obx3 }] }],
     },
   ]);
 
@@ -135,10 +135,10 @@ test("ORU_R01 handles multiple order observations", () => {
 
   const message = createORU_R01(msh, [
     {
-      pid,
+      patient: pid,
       orderObservations: [
-        { obr: obr1, obxList: [obx1] },
-        { obr: obr2, obxList: [obx2] },
+        { observationRequest: obr1, observations: [{ observation: obx1 }] },
+        { observationRequest: obr2, observations: [{ observation: obx2 }] },
       ],
     },
   ]);
@@ -162,12 +162,12 @@ test("ORU_R01 handles multiple patient results", () => {
 
   const message = createORU_R01(msh, [
     {
-      pid: pid1,
-      orderObservations: [{ obr: obr1, obxList: [obx1] }],
+      patient: pid1,
+      orderObservations: [{ observationRequest: obr1, observations: [{ observation: obx1 }] }],
     },
     {
-      pid: pid2,
-      orderObservations: [{ obr: obr2, obxList: [obx2] }],
+      patient: pid2,
+      orderObservations: [{ observationRequest: obr2, observations: [{ observation: obx2 }] }],
     },
   ]);
 
@@ -203,8 +203,8 @@ test("ORU_R01 encodes to valid HL7 string", () => {
 
   const message = createORU_R01(msh, [
     {
-      pid,
-      orderObservations: [{ obr, obxList: [obx] }],
+      patient: pid,
+      orderObservations: [{ observationRequest: obr, observations: [{ observation: obx }] }],
     },
   ]);
 
@@ -224,7 +224,7 @@ test("ORU_R01 handles patient result without PID", () => {
 
   const message = createORU_R01(msh, [
     {
-      orderObservations: [{ obr, obxList: [obx] }],
+      orderObservations: [{ observationRequest: obr, observations: [{ observation: obx }] }],
     },
   ]);
 

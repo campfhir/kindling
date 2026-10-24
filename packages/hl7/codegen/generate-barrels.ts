@@ -6,9 +6,10 @@
  *   pnpm barrels           # generate all index.ts barrel files
  *   pnpm barrels --dry-run # print without writing
  *
- * Segments:  export * (all exports — class names are globally unique)
- * Builders:  export { create* } only (avoids structural type name conflicts)
- * Parsers:   export { parse* } only (same reason)
+ * Segments:   export * (all exports — class names are globally unique)
+ * Structures: export * (one <MSG>_STRUCTURE constant per module)
+ * Builders:   export { create* } only (avoids structural type name conflicts)
+ * Parsers:    export { parse* } only (same reason)
  */
 
 import { readdirSync, writeFileSync } from "node:fs";
@@ -58,6 +59,7 @@ function parserBarrel(absDir: string): string {
 
 const BARRELS = [
   { kind: "segments", barrel: segmentBarrel },
+  { kind: "structures", barrel: segmentBarrel },
   { kind: "builders", barrel: builderBarrel },
   { kind: "parsers", barrel: parserBarrel },
 ];
@@ -74,9 +76,9 @@ const DIRS: { dir: string; barrel: (absDir: string) => string }[] = BARRELS.flat
 
 // Module doc for a barrel, derived from its directory (kind + version).
 function barrelModuleDoc(dir: string): string {
-  const [, kind, ver] = dir.match(/src\/(segments|builders|parsers)\/(v[\d.]+)/)!;
-  const noun = { segments: "segment classes", builders: "message builders", parsers: "message parsers" }[
-    kind as "segments" | "builders" | "parsers"
+  const [, kind, ver] = dir.match(/src\/(segments|structures|builders|parsers)\/(v[\d.]+)/)!;
+  const noun = { segments: "segment classes", structures: "message structures", builders: "message builders", parsers: "message parsers" }[
+    kind as "segments" | "structures" | "builders" | "parsers"
   ];
   return `/**\n * Barrel re-exporting all HL7 ${ver} ${noun}.\n *\n * @module\n */\n`;
 }

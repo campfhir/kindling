@@ -84,12 +84,12 @@ const obx3 = new OBX()
   .dateTimeOfObservation(messageDateTime);
 
 const patientResult: PatientResult = {
-  pid,
-  pv1,
+  patient: pid,
+  visit: pv1,
   orderObservations: [
     {
-      obr,
-      obxList: [obx1, obx2, obx3],
+      observationRequest: obr,
+      observations: [{ observation: obx1 }, { observation: obx2 }, { observation: obx3 }],
     },
   ],
 };

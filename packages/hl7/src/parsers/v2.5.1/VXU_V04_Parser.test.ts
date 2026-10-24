@@ -13,21 +13,21 @@ import { RXA } from "../../segments/v2.5.1/RXA.ts";
 
 test("parses SFT and the timing group into v2.5.1 classes", () => {
   const wire = createVXU_V04(new MSH().messageType({ messageCode: "VXU", triggerEvent: "V04" }), new PID().setId("1"), {
-    sftList: [new SFT()],
+    software: [new SFT()],
     orders: [{
-      orc: new ORC().orderControl("RE"),
-      timing: [{ tq1: new TQ1().setId("1"), tq2List: [new TQ2().setId("1")] }],
-      rxa: new RXA().giveSubIdCounter("0").administrationSubIdCounter("1"),
+      commonOrder: new ORC().orderControl("RE"),
+      timings: [{ timing: new TQ1().setId("1"), timingRelationships: [new TQ2().setId("1")] }],
+      administration: new RXA().giveSubIdCounter("0").administrationSubIdCounter("1"),
     }],
   }).encode();
   const result = parseVXU_V04(wire);
   expect(result.ok).toBe(true);
   if (!result.ok) return;
-  expect(result.val.sftList[0]).toBeInstanceOf(SFT);
-  expect(result.val.pid).toBeInstanceOf(PID);
-  expect(result.val.orders[0].timing[0].tq1).toBeInstanceOf(TQ1);
-  expect(result.val.orders[0].timing[0].tq2List[0]).toBeInstanceOf(TQ2);
-  expect(result.val.orders[0].rxa).toBeInstanceOf(RXA);
+  expect(result.val.software![0]).toBeInstanceOf(SFT);
+  expect(result.val.patient).toBeInstanceOf(PID);
+  expect(result.val.orders![0].timings![0].timing).toBeInstanceOf(TQ1);
+  expect(result.val.orders![0].timings![0].timingRelationships![0]).toBeInstanceOf(TQ2);
+  expect(result.val.orders![0].administration).toBeInstanceOf(RXA);
 });
 
 test("still requires the ORC", () => {

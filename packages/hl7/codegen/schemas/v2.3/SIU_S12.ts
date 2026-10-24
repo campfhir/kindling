@@ -1,4 +1,5 @@
-import { MessageSchema } from "../../../src/types/schema";
+import type { MessageSchema } from "../../../src/types/schema";
+import { wrappers } from "../helpers";
 
 /**
  * SIU^S12 - Notification of New Appointment Booking (HL7 v2.3)
@@ -84,16 +85,8 @@ export const SIU_S12_SCHEMA: MessageSchema = {
   ],
 };
 
-export const SIU_S13_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S13" };
-export const SIU_S14_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S14" };
-export const SIU_S15_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S15" };
-export const SIU_S16_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S16" };
-export const SIU_S17_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S17" };
-export const SIU_S18_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S18", baseMessage: "SIU_S12" };
-export const SIU_S19_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S19", baseMessage: "SIU_S12" };
-export const SIU_S20_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S20", baseMessage: "SIU_S12" };
-export const SIU_S21_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S21", baseMessage: "SIU_S12" };
-export const SIU_S22_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S22", baseMessage: "SIU_S12" };
-export const SIU_S23_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S23", baseMessage: "SIU_S12" };
-export const SIU_S24_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S24", baseMessage: "SIU_S12" };
-export const SIU_S26_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S26" };
+/** The trigger events that share the S12 structure. */
+export const SIU_EVENTS = ["S13", "S14", "S15", "S16", "S17", "S18", "S19", "S20", "S21", "S22", "S23", "S24", "S26"];
+
+/** S12 and the events wrapping it. */
+export const SIU_FAMILY: MessageSchema[] = [SIU_S12_SCHEMA, ...wrappers(SIU_S12_SCHEMA, SIU_EVENTS)];

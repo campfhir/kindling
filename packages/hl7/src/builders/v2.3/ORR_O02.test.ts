@@ -16,19 +16,20 @@ const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
 
 const fullMessage = () =>
   createORR_O02(makeMSH(), makeMSA(), {
-    err: new ERR().errorCodeAndLocation("101"),
+    error: new ERR().errorCodeAndLocation("101"),
     notes: [new NTE().setId("1").comment("header")],
-    patient: { pid: new PID().setId("1"), notes: [new NTE().setId("1").comment("patient")] },
+    patient: new PID().setId("1"),
+    patientNotes: [new NTE().setId("1").comment("patient")],
     orders: [
       {
-        orc: new ORC().orderControl("OK").placerOrderNumber("1"),
+        commonOrder: new ORC().orderControl("OK").placerOrderNumber("1"),
         detail: {
           segment: new OBR().setId("1"),
           notes: [new NTE().setId("1").comment("detail")],
-          ctiList: [new CTI().sponsorStudyId({ entityIdentifier: "S1" })],
+          clinicalTrials: [new CTI().sponsorStudyId({ entityIdentifier: "S1" })],
         },
       },
-      { orc: new ORC().orderControl("OK").placerOrderNumber("2") },
+      { commonOrder: new ORC().orderControl("OK").placerOrderNumber("2") },
     ],
   });
 
@@ -66,16 +67,16 @@ describe("ORR_O02 parser", () => {
     expect(result.ok).toBe(true);
     if (!result.ok) return;
     const { val } = result;
-    expect(val.msa.encode()).toBe("MSA|AA|M1");
-    expect(val.err).toBeInstanceOf(ERR);
+    expect(val.acknowledgment.encode()).toBe("MSA|AA|M1");
+    expect(val.error).toBeInstanceOf(ERR);
     expect(val.notes).toHaveLength(1);
-    expect(val.patient?.pid).toBeInstanceOf(PID);
-    expect(val.patient?.notes).toHaveLength(1);
+    expect(val.patient).toBeInstanceOf(PID);
+    expect(val.patientNotes).toHaveLength(1);
     expect(val.orders).toHaveLength(2);
-    expect(val.orders[0].detail?.segment).toBeInstanceOf(OBR);
-    expect(val.orders[0].detail?.notes).toHaveLength(1);
-    expect(val.orders[0].detail?.ctiList).toHaveLength(1);
-    expect(val.orders[1].detail).toBeUndefined();
+    expect(val.orders![0].detail?.segment).toBeInstanceOf(OBR);
+    expect(val.orders![0].detail?.notes).toHaveLength(1);
+    expect(val.orders![0].detail?.clinicalTrials).toHaveLength(1);
+    expect(val.orders![1].detail).toBeUndefined();
     expect(val.message.segments).toHaveLength(wire.split("\r").length);
   });
 
