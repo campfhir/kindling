@@ -34,7 +34,7 @@ See [ROADMAP.md](ROADMAP.md) for where each package is heading.
 ├── packages/
 │   └── hl7/                 # @campfhir/hl7 — src/, codegen/, examples/, docs/, README.md
 ├── .github/
-│   ├── workflows/           # ci.yml, publish.yml, bump-version.yml, tag-releases.yml
+│   ├── workflows/           # ci.yml, publish.yml, bump-version.yml, tag-releases.yml, deprecate-old-versions.yml
 │   └── scripts/             # release helpers (all workspace-aware)
 ├── eslint.config.mjs        # shared lint config
 ├── tsconfig.base.json       # shared compiler options; packages extend it

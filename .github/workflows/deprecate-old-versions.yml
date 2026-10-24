@@ -1,0 +1,51 @@
+name: Deprecate old versions
+
+# Deprecates every published version of each workspace package that is older than the three most
+# recent stable releases, so installing an old version warns and points at the current one. Runs
+# daily (staged releases are approved outside GitHub) and on demand; a manual run is a dry run
+# unless you say otherwise.
+#
+# `npm deprecate` cannot use trusted publishing (OIDC), so this needs the NPM_TOKEN repository
+# secret: a granular access token with read and write access to the @campfhir packages. Without
+# the secret the job reports that it skipped. See CONTRIBUTING.md.
+on:
+  schedule:
+    - cron: "41 6 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Only list what would be deprecated"
+        type: boolean
+        default: true
+      keep:
+        description: "How many of the most recent stable releases to keep undeprecated"
+        type: string
+        default: "3"
+
+concurrency:
+  group: deprecate-old-versions
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deprecate:
+    runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+          registry-url: https://registry.npmjs.org
+      - name: Skipped (no NPM_TOKEN secret)
+        if: env.NODE_AUTH_TOKEN == '' && !(github.event_name == 'workflow_dispatch' && inputs.dry_run)
+        run: echo "::notice::NPM_TOKEN is not set; nothing was deprecated. Add the secret to enable this workflow."
+      - name: Deprecate versions older than the newest releases
+        if: env.NODE_AUTH_TOKEN != '' || (github.event_name == 'workflow_dispatch' && inputs.dry_run)
+        env:
+          KEEP: ${{ github.event_name == 'workflow_dispatch' && inputs.keep || '3' }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '--dry-run' || '' }}
+        run: node .github/scripts/deprecate-old-versions.mjs --keep "$KEEP" $DRY_RUN

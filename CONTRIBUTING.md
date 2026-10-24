@@ -70,6 +70,15 @@ published.
   (e.g. `@campfhir/hl7@0.11.0`), hourly and on pushes to `main`, using the `gitHead` npm records.
   Versions published without one are listed in `.github/release-tags.json`. Versions of
   `@campfhir/hl7` up to 0.10.0 keep their existing `v<version>` tags.
+- `deprecate-old-versions.yml` deprecates, daily, every published version of each package that is
+  older than the three most recent stable releases, with a message pointing at the latest one
+  (`.github/scripts/deprecate-old-versions.mjs`; prereleases newer than the oldest kept release
+  are left alone, and already-deprecated versions are skipped). `npm deprecate` is not available
+  through trusted publishing, so the workflow needs the `NPM_TOKEN` repository secret: a granular
+  access token with read and write access to the `@campfhir` packages (and 2FA bypass, since CI
+  cannot answer a one-time password). Without the secret the job reports that it skipped. Run it
+  from the Actions tab with *dry run* ticked to preview; un-deprecating is a manual
+  `npm deprecate <name>@<version> ""`.
 
 ## Standards facts
 
