@@ -23,7 +23,7 @@ See [ROADMAP.md](ROADMAP.md) for where each package is heading.
 - **Zero runtime dependencies**, dual CJS/ESM builds, and support for Node.js, Bun, browsers and
   edge runtimes.
 - **Versioned subpaths** when the standard has versions (`@campfhir/hl7/segments/v2.5.1`).
-- **Tests next to the code** (`*.test.ts`, Vitest), run on Node 20, 22 and 24 in CI.
+- **Tests next to the code** (`*.test.ts`, Vitest), run on Node 22 and 24 in CI.
 - **One toolchain.** Lint, TypeScript and build settings live at the repository root; each package
   only adds its own `package.json`, `tsconfig.json`, `tsup.config.ts` and `vitest.config.ts`.
 

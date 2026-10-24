@@ -39,10 +39,10 @@ jobs:
           echo "::error::Run this from a release branch, not ${{ github.ref_name }}. Merge the branch afterwards to stage the release."
           exit 1
 
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          node-version: 24
+          node-version: lts/*
 
       - name: Bump package.json
         id: bump

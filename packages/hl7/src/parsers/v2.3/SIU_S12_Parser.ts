@@ -102,6 +102,9 @@ export interface ParsedSIU_S12 {
 
 /** Parser for HL7 SIU^S12 (v2.3) messages. */
 export class SIU_S12_Parser {
+  /** The message name value (overridden by the S13–S26 wrappers). */
+  protected readonly messageName: string = "SIU_S12";
+
   /** Parse msh. */
   protected parseMSH(s: string): Result<MSH> {
     return MSH.parse(s);
@@ -516,7 +519,7 @@ export class SIU_S12_Parser {
         },
       };
     } catch (error) {
-      return { ok: false, err: new Err(`Failed to parse SIU_S12 message: ${error}`) };
+      return { ok: false, err: new Err(`Failed to parse ${this.messageName} message: ${error}`) };
     }
   }
 }

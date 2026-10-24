@@ -3,9 +3,12 @@ import { MessageSchema } from "../../../src/types/schema";
 /**
  * SIU^S12 - Notification of New Appointment Booking (HL7 v2.3)
  * S13: Rescheduling  S14: Modification  S15: Cancellation
- * S16: Discontinuation  S17: Deletion  S26: Patient No-Show
+ * S16: Discontinuation  S17: Deletion  S18–S24: Addition/Modification/Cancellation/Discontinuation/
+ * Deletion of service or resource, Blocked and Opened schedule time slots  S26: Patient No-Show
  *
- * All SIU trigger events share the same message structure.
+ * All SIU trigger events share the same message structure (checked on hl7-definition.caristix.com
+ * for S12, S18 and S24 in v2.3). Caristix lists no PD1 in the v2.3 PATIENT group; it appears in
+ * v2.5, where [{TQ1}] also follows SCH. Both are kept as optional here, TQ1 is not modelled yet.
  */
 export const SIU_S12_SCHEMA: MessageSchema = {
   messageType: "SIU",
@@ -86,4 +89,11 @@ export const SIU_S14_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: 
 export const SIU_S15_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S15" };
 export const SIU_S16_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S16" };
 export const SIU_S17_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S17" };
+export const SIU_S18_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S18", baseMessage: "SIU_S12" };
+export const SIU_S19_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S19", baseMessage: "SIU_S12" };
+export const SIU_S20_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S20", baseMessage: "SIU_S12" };
+export const SIU_S21_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S21", baseMessage: "SIU_S12" };
+export const SIU_S22_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S22", baseMessage: "SIU_S12" };
+export const SIU_S23_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S23", baseMessage: "SIU_S12" };
+export const SIU_S24_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S24", baseMessage: "SIU_S12" };
 export const SIU_S26_SCHEMA: MessageSchema = { ...SIU_S12_SCHEMA, triggerEvent: "S26" };
