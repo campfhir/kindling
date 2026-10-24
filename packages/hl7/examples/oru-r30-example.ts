@@ -1,5 +1,5 @@
 import { MSH, PID, PV1, ORC, OBR, OBX } from "../src/segments/v2.5.1/index.ts";
-import { createORU_R30, type PatientResultR30 } from "../src/builders/v2.5.1/ORU_R30.ts";
+import { createORU_R30 } from "../src/builders/v2.5.1/ORU_R30.ts";
 
 function formatDateTime(date: Date): string {
   const year = date.getFullYear();
@@ -75,26 +75,8 @@ const obx1 = new OBX()
   .abnormalFlags("H")
   .observationResultStatus("F")
   .dateTimeOfObservation(messageDateTime);
-// Build the complete ORU^R30 message
-const patientResult: PatientResultR30 = {
-  pid,
-  pv1,
-  orderObservations: [
-    {
-      orc,
-      obr,
-      obxList: [obx1],
-    },
-  ],
-};
-
-const message = createORU_R30(msh, [
-  {
-    pid,
-    pv1,
-    orderObservations: [{ orc, obr, observations: [obx1] }],
-  },
-]);
+// Build the complete ORU^R30 message: one patient, one order, its observations
+const message = createORU_R30(msh, pid, orc, obr, [{ obx: obx1 }], { pv1 });
 
 const encodedMessage = message.encode();
 

@@ -1,12 +1,15 @@
 /**
- * Builder for BAR^P05 messages (HL7 2.4): update account.
+ * Builder for BAR^P05 messages (HL7 v2.4).
  *
- * Structure:
- *   MSH EVN PID [PD1] [{ROL}] { [PV1] [PV2] [{ROL}] [{DB1}] [{OBX}] [{AL1}] [{DG1}] [DRG]
- *   [{ PR1 [{ROL}] }] [{GT1}] [{NK1}] [{ IN1 [IN2] [{IN3}] [{ROL}] }] [ACC] [UB1] [UB2] [ABS] [{BLC}] [RMI] }
+ * Structure: MSH EVN PID [PD1] [{ROL}] { VISIT: [PV1] [PV2] [{ROL}] [{DB1}] [{OBX}] [{AL1}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] }] [{GT1}] [{NK1}] [{ INSURANCE: IN1 [IN2] [{IN3}] [{ROL}] }] [ACC] [UB1] [UB2] [ABS] [{BLC}] [RMI] }
  *
  * @module
  */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
+import { BAR_P05_STRUCTURE } from "../../structures/v2.4/BAR_P05.ts";
 import type { MSH } from "../../segments/v2.4/MSH.ts";
 import type { EVN } from "../../segments/v2.4/EVN.ts";
 import type { PID } from "../../segments/v2.4/PID.ts";
@@ -31,138 +34,100 @@ import type { UB2 } from "../../segments/v2.4/UB2.ts";
 import type { ABS } from "../../segments/v2.4/ABS.ts";
 import type { BLC } from "../../segments/v2.4/BLC.ts";
 import type { RMI } from "../../segments/v2.4/RMI.ts";
-import { type EncodingCharacters, DEFAULT_ENCODING } from "../../types/encoding.ts";
 
-/** BARProcedureGroup — a PR1 with its ROLs. */
-export interface BARProcedureGroup {
-  /** The pr1 value. */
-  pr1: PR1;
-  /** The rol list value. */
-  rolList?: ROL[];
-}
-
-/** BARInsuranceGroup — an IN1 with its IN2, IN3s and ROLs. */
-export interface BARInsuranceGroup {
-  /** The in1 value. */
-  in1: IN1;
-  /** The in2 value. */
-  in2?: IN2;
-  /** The in3 list value. */
-  in3List?: IN3[];
-  /** The rol list value. */
-  rolList?: ROL[];
-}
-
-/** BARVisitGroup — one VISIT group (account). Every member is optional, but a visit must not be empty. */
+/** The VISIT group of an BAR^P05 (HL7 v2.4) message being built. */
 export interface BARVisitGroup {
-  /** The pv1 value. */
+  /** The PV1 segment. */
   pv1?: PV1;
-  /** The pv2 value. */
+  /** The PV2 segment. */
   pv2?: PV2;
-  /** The visit rol list value (ROLs after PV1/PV2). */
+  /** The ROL segments. */
   visitRolList?: ROL[];
-  /** The db1 list value. */
+  /** The DB1 segments. */
   db1List?: DB1[];
-  /** The obx list value. */
+  /** The OBX segments. */
   obxList?: OBX[];
-  /** The al1 list value. */
+  /** The AL1 segments. */
   al1List?: AL1[];
-  /** The dg1 list value. */
+  /** The DG1 segments. */
   dg1List?: DG1[];
-  /** The drg value. */
+  /** The DRG segment. */
   drg?: DRG;
-  /** The procedures value. */
+  /** The PROCEDURE groups. */
   procedures?: BARProcedureGroup[];
-  /** The gt1 list value. */
+  /** The GT1 segments. */
   gt1List?: GT1[];
-  /** The nk1 list value. */
+  /** The NK1 segments. */
   nk1List?: NK1[];
-  /** The insurances value. */
+  /** The INSURANCE groups. */
   insurances?: BARInsuranceGroup[];
-  /** The acc value. */
+  /** The ACC segment. */
   acc?: ACC;
-  /** The ub1 value. */
+  /** The UB1 segment. */
   ub1?: UB1;
-  /** The ub2 value. */
+  /** The UB2 segment. */
   ub2?: UB2;
-  /** The abs value. */
+  /** The ABS segment. */
   abs?: ABS;
-  /** The blc list value. */
+  /** The BLC segments. */
   blcList?: BLC[];
-  /** The rmi value. */
+  /** The RMI segment. */
   rmi?: RMI;
 }
 
-/** Encodes one VISIT group in spec order. */
-export function encodeBARVisit(v: BARVisitGroup, enc: EncodingCharacters): string[] {
-  const out: string[] = [];
-  if (v.pv1) out.push(v.pv1.encode(enc));
-  if (v.pv2) out.push(v.pv2.encode(enc));
-  for (const s of v.visitRolList ?? []) out.push(s.encode(enc));
-  for (const s of v.db1List ?? []) out.push(s.encode(enc));
-  for (const s of v.obxList ?? []) out.push(s.encode(enc));
-  for (const s of v.al1List ?? []) out.push(s.encode(enc));
-  for (const s of v.dg1List ?? []) out.push(s.encode(enc));
-  if (v.drg) out.push(v.drg.encode(enc));
-  for (const p of v.procedures ?? []) {
-    out.push(p.pr1.encode(enc));
-    for (const rol of p.rolList ?? []) out.push(rol.encode(enc));
-  }
-  for (const s of v.gt1List ?? []) out.push(s.encode(enc));
-  for (const s of v.nk1List ?? []) out.push(s.encode(enc));
-  for (const ins of v.insurances ?? []) {
-    out.push(ins.in1.encode(enc));
-    if (ins.in2) out.push(ins.in2.encode(enc));
-    for (const s of ins.in3List ?? []) out.push(s.encode(enc));
-    for (const s of ins.rolList ?? []) out.push(s.encode(enc));
-  }
-  if (v.acc) out.push(v.acc.encode(enc));
-  if (v.ub1) out.push(v.ub1.encode(enc));
-  if (v.ub2) out.push(v.ub2.encode(enc));
-  if (v.abs) out.push(v.abs.encode(enc));
-  for (const s of v.blcList ?? []) out.push(s.encode(enc));
-  if (v.rmi) out.push(v.rmi.encode(enc));
-  return out;
+/** The PROCEDURE group of an BAR^P05 (HL7 v2.4) message being built. */
+export interface BARProcedureGroup {
+  /** The PR1 segment. */
+  pr1: PR1;
+  /** The ROL segments. */
+  rolList?: ROL[];
 }
 
-/** Builder for HL7 BAR^P05 (2.4) messages. */
+/** The INSURANCE group of an BAR^P05 (HL7 v2.4) message being built. */
+export interface BARInsuranceGroup {
+  /** The IN1 segment. */
+  in1: IN1;
+  /** The IN2 segment. */
+  in2?: IN2;
+  /** The IN3 segments. */
+  in3List?: IN3[];
+  /** The ROL segments. */
+  rolList?: ROL[];
+}
+
+/** The optional segments and groups of an BAR^P05 (HL7 v2.4) message. */
+export interface BAR_P05Options {
+  /** The PD1 segment. */
+  pd1?: PD1;
+  /** The ROL segments. */
+  rolList?: ROL[];
+}
+
+/** Builder for HL7 BAR^P05 (HL7 v2.4) messages. */
 export class BAR_P05<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID> {
-  /** The message name value. */
+  /** The message name used in error messages. */
   protected readonly messageName: string = "BAR_P05";
+  /** The structure the message is verified against and encoded in. */
+  protected readonly structure: StructureItem[] = BAR_P05_STRUCTURE;
 
   /** Constructor. */
   constructor(
     public msh: TMSH,
     public evn: TEVN,
     public pid: TPID,
-    /** The VISIT groups (accounts); at least one, none empty. */
     public visits: BARVisitGroup[],
-    public options: {
-      pd1?: PD1;
-      /** Patient-level ROLs (after PD1). */
-      rolList?: ROL[];
-    } = {},
-    private encoding: EncodingCharacters = DEFAULT_ENCODING,
+    public options: BAR_P05Options = {},
+    protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
+
+  /** The message as one object keyed by structure property name (what verify() and encode() work on). */
+  toInput(): StructureInput {
+    return { ...this.options, msh: this.msh, evn: this.evn, pid: this.pid, visits: this.visits };
+  }
 
   /** Validates the message structure, returning a result. */
   verify(): { valid: boolean; errors: string[] } {
-    const errors: string[] = [];
-    if (!this.msh) errors.push("MSH segment is required");
-    if (!this.evn) errors.push("EVN segment is required");
-    if (!this.pid) errors.push("PID segment is required");
-    if (!this.visits || this.visits.length === 0) errors.push("At least one VISIT group is required");
-    (this.visits ?? []).forEach((v, i) => {
-      if (encodeBARVisit(v, this.encoding).length === 0) errors.push(`VISIT group ${i + 1} is empty`);
-      if (v.pv2 && !v.pv1) errors.push(`VISIT group ${i + 1}: PV2 requires PV1`);
-      if (v.visitRolList?.length && !v.pv1) errors.push(`VISIT group ${i + 1}: visit-level ROLs require PV1`);
-      (v.procedures ?? []).forEach((p, j) => {
-        if (!p.pr1) errors.push(`VISIT group ${i + 1}, procedure ${j + 1}: PR1 segment is required`);
-      });
-      (v.insurances ?? []).forEach((ins, j) => {
-        if (!ins.in1) errors.push(`VISIT group ${i + 1}, insurance ${j + 1}: IN1 segment is required`);
-      });
-    });
+    const errors = verifyStructure(this.structure, this.toInput());
     return { valid: errors.length === 0, errors };
   }
 
@@ -170,29 +135,20 @@ export class BAR_P05<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
   encode(): string {
     const verification = this.verify();
     if (!verification.valid) {
-      throw new Error(
-        `Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`,
-      );
+      throw new Error(`Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`);
     }
-    const enc = this.encoding;
-    const o = this.options;
-    const out = [this.msh.encode(enc)];
-    out.push(this.evn.encode(enc), this.pid.encode(enc));
-    if (o.pd1) out.push(o.pd1.encode(enc));
-    for (const s of o.rolList ?? []) out.push(s.encode(enc));
-    for (const v of this.visits) out.push(...encodeBARVisit(v, enc));
-    return out.join("\r");
+    return encodeStructure(this.structure, this.toInput(), this.encoding);
   }
 }
 
-/** Builds an HL7 BAR^P05 (2.4) message. */
+/** Builds an HL7 BAR^P05 (HL7 v2.4) message. */
 export function createBAR_P05<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID>(
   msh: TMSH,
   evn: TEVN,
   pid: TPID,
   visits: BARVisitGroup[],
-  options: BAR_P05<TMSH, TEVN, TPID>["options"] = {},
-  encoding?: EncodingCharacters,
+  options: BAR_P05Options = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): BAR_P05<TMSH, TEVN, TPID> {
   return new BAR_P05(msh, evn, pid, visits, options, encoding);
 }

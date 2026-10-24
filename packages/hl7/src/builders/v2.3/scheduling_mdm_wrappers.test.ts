@@ -41,13 +41,13 @@ for (const [label, builders, parsers, is251] of [
 
     test.each([18, 19, 20, 21, 22, 23, 24])("SIU^S%i reuses SIU_S12", (n) => {
       const name = `SIU_S${n}`;
-      const encoded = builders[`create${name}`](msh("SIU", `S${n}`), new SCH(), [], [], [{ rgs: new RGS().setId("1") }]).encode();
-      check(name, encoded, `MSH|^~\\&|TEST|||||SIU^S${n}`, /SIU message must contain an SCH segment/);
+      const encoded = builders[`create${name}`](msh("SIU", `S${n}`), new SCH(), [{ rgs: new RGS().setId("1") }]).encode();
+      check(name, encoded, `MSH|^~\\&|TEST|||||SIU^S${n}`, new RegExp(`${name} message must contain an SCH segment`));
     });
 
     test.each(Array.from({ length: 10 }, (_, i) => i + 2))("SRM^S%02d reuses SRM_S01", (n) => {
       const name = `SRM_S${pad(n)}`;
-      const encoded = builders[`create${name}`](msh("SRM", `S${pad(n)}`), new ARQ(), { resources: [{ rgs: new RGS().setId("1") }] }).encode();
+      const encoded = builders[`create${name}`](msh("SRM", `S${pad(n)}`), new ARQ(), [{ rgs: new RGS().setId("1") }]).encode();
       check(name, encoded, `MSH|^~\\&|TEST|||||SRM^S${pad(n)}\rARQ|1`, new RegExp(`${name} message must contain at least one RGS`));
     });
 

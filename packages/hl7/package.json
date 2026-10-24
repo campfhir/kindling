@@ -1,6 +1,6 @@
 {
   "name": "@campfhir/hl7",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "Zero-dependency TypeScript library for building and parsing HL7v2 messages (v2.3, 2.3.1, 2.4, 2.5 & 2.5.1). Runs on Node.js, Bun, browsers, and Cloudflare Workers.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -60,6 +60,56 @@
       "require": "./dist/segments/v2.5.1/*.js",
       "import": "./dist/segments/v2.5.1/*.mjs",
       "types": "./dist/segments/v2.5.1/*.d.ts"
+    },
+    "./structures/v2.3": {
+      "require": "./dist/structures/v2.3/index.js",
+      "import": "./dist/structures/v2.3/index.mjs",
+      "types": "./dist/structures/v2.3/index.d.ts"
+    },
+    "./structures/v2.3/*": {
+      "require": "./dist/structures/v2.3/*.js",
+      "import": "./dist/structures/v2.3/*.mjs",
+      "types": "./dist/structures/v2.3/*.d.ts"
+    },
+    "./structures/v2.3.1": {
+      "require": "./dist/structures/v2.3.1/index.js",
+      "import": "./dist/structures/v2.3.1/index.mjs",
+      "types": "./dist/structures/v2.3.1/index.d.ts"
+    },
+    "./structures/v2.3.1/*": {
+      "require": "./dist/structures/v2.3.1/*.js",
+      "import": "./dist/structures/v2.3.1/*.mjs",
+      "types": "./dist/structures/v2.3.1/*.d.ts"
+    },
+    "./structures/v2.4": {
+      "require": "./dist/structures/v2.4/index.js",
+      "import": "./dist/structures/v2.4/index.mjs",
+      "types": "./dist/structures/v2.4/index.d.ts"
+    },
+    "./structures/v2.4/*": {
+      "require": "./dist/structures/v2.4/*.js",
+      "import": "./dist/structures/v2.4/*.mjs",
+      "types": "./dist/structures/v2.4/*.d.ts"
+    },
+    "./structures/v2.5": {
+      "require": "./dist/structures/v2.5/index.js",
+      "import": "./dist/structures/v2.5/index.mjs",
+      "types": "./dist/structures/v2.5/index.d.ts"
+    },
+    "./structures/v2.5/*": {
+      "require": "./dist/structures/v2.5/*.js",
+      "import": "./dist/structures/v2.5/*.mjs",
+      "types": "./dist/structures/v2.5/*.d.ts"
+    },
+    "./structures/v2.5.1": {
+      "require": "./dist/structures/v2.5.1/index.js",
+      "import": "./dist/structures/v2.5.1/index.mjs",
+      "types": "./dist/structures/v2.5.1/index.d.ts"
+    },
+    "./structures/v2.5.1/*": {
+      "require": "./dist/structures/v2.5.1/*.js",
+      "import": "./dist/structures/v2.5.1/*.mjs",
+      "types": "./dist/structures/v2.5.1/*.d.ts"
     },
     "./parsers/v2.3": {
       "require": "./dist/parsers/v2.3/index.js",

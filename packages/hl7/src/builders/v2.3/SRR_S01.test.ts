@@ -28,7 +28,7 @@ describe("SRR_S01 builder (v2.3)", () => {
   test("verify() requires MSH, MSA and, with a schedule, SCH and a RESOURCES group", () => {
     expect(new SRR_S01(null as any, null as any).verify().errors).toEqual(["MSH segment is required", "MSA segment is required"]);
     const noResources = createSRR_S01(msh(), msa(), { schedule: { sch: new SCH(), resources: [] } });
-    expect(noResources.verify().errors).toEqual(["At least one RESOURCES group (RGS) is required in the SCHEDULE group"]);
+    expect(noResources.verify().errors).toEqual(["SCHEDULE group 1: At least one RESOURCES group (RGS) is required"]);
   });
 
   test("encodes the schedule group in spec order and round-trips", () => {
@@ -46,8 +46,8 @@ describe("SRR_S01 builder (v2.3)", () => {
     const v = result.val!;
     expect(v.err).toBeUndefined();
     expect(v.schedule!.nteList).toHaveLength(1);
-    expect(ParserUtils.getComponent(v.schedule!.patients[0].pid.fields[4], 0)).toBe("Doe");
-    expect(v.schedule!.resources[0].services[0].nteList).toHaveLength(1);
+    expect(ParserUtils.getComponent(v.schedule!.patients![0].pid.fields[4], 0)).toBe("Doe");
+    expect(v.schedule!.resources[0].services![0].nteList).toHaveLength(1);
     expect(v.schedule!.resources[0].locationResources).toHaveLength(1);
     expect(v.message.encode()).toBe(wire);
   });
@@ -62,12 +62,12 @@ describe("parseSRR_S01 (v2.3)", () => {
   });
 
   test.each([
-    [["ERR|1"], /ERR segment at line 2 must follow MSA/],
-    [["MSA|AA|1", "ERR|1", "ERR|2"], /ERR segment at line 4 appears more than once/],
-    [["MSA|AA|1", "SCH|1"], /must contain at least one RGS segment when SCH is present/],
-    [["MSA|AA|1", "PID|1"], /PID segment at line 3 found without preceding SCH segment/],
-    [["MSA|AA|1", "SCH|1", "RGS|1", "NTE|1||x"], /NTE segment at line 5 must follow SCH or a resource segment/],
-    [["SCH|1", "RGS|1"], /SCH segment at line 2 found without preceding MSA segment/],
+    [["ERR|1"], /SRR_S01 message must contain an MSA segment/],
+    [["MSA|AA|1", "ERR|1", "ERR|2"], /ERR segment at line 4 is not allowed at this position in SRR_S01/],
+    [["MSA|AA|1", "SCH|1"], /must contain at least one RGS segment/],
+    [["MSA|AA|1", "PID|1"], /PID segment at line 3 is not allowed at this position in SRR_S01/],
+    [["MSA|AA|1", "SCH|1", "RGS|1", "NTE|1||x"], /NTE segment at line 5 is not allowed at this position in SRR_S01/],
+    [["SCH|1", "RGS|1"], /SRR_S01 message must contain an MSA segment/],
   ])("rejects %j", (lines, pattern) => {
     const result = parseSRR_S01([MSH_LINE, ...lines].join("\r"));
     expect(result.ok).toBe(false);

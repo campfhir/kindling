@@ -75,3 +75,9 @@ add the segments introduced after 2.3, e.g. `TQ2`, `PRT`, `QPD`, `RCP`, `QID`, `
 2. Field-position tests (hand-written with the marker, or generated with `pnpm test:positions`).
 3. Round-trip test (encode → parse → encode).
 4. Barrel regenerated (`pnpm barrels`), `pnpm lint && pnpm typecheck && pnpm test` green.
+
+## Wanted by messages already modelled
+
+- **ORG, AFF, LAN, EDU, CER** (v2.5): the MF STAFF group of MFN^M02 carries them from v2.5 on
+  (`MFE STF [{PRA}] [{ORG}] [{AFF}] [{LAN}] [{EDU}] [{CER}] [{NTE}]`, hl7-definition.caristix.com).
+  Until they have classes the generated v2.5/v2.5.1 MFN^M02 parsers skip them with a warning.

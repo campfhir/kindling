@@ -1,157 +1,154 @@
 # codegen
 
-Internal build tool for generating HL7 segment wrappers, parser stubs, and builder stubs from schema definitions.
+Internal build tool that generates the HL7 message code (structures, parsers and builders) and the
+per-version segment wrappers from the schemas in `schemas/`. Segments themselves are hand-written.
 
 ## Usage
 
 ```sh
 pnpm codegen           # generate everything
 pnpm codegen --dry-run # print what would be written without touching files
+pnpm barrels           # regenerate the index.ts barrels
+pnpm exports           # regenerate the package.json "exports" map
 ```
+
+After changing a schema run all three (`pnpm codegen && pnpm barrels && pnpm exports`); CI fails
+if the committed output drifts (`pnpm codegen:check`).
 
 ## How it works
 
-Codegen reads every `VersionSchema` registered in `generate.ts` and produces files under `src/`. Versions are processed in order — bases before derived versions.
+A message is described once, as the standard's message table reads, by a `MessageSchema`
+(`src/types/schema.ts`): an ordered list of segments, choices (`<OBR|RQD|...>`) and groups, each
+required or optional, repeating or not. From every message of every registered version codegen
+writes three modules:
 
-### Two kinds of versions
+| Module | Contents |
+| --- | --- |
+| `src/structures/<v>/<MSG>.ts` | `<MSG>_STRUCTURE: StructureItem[]` — the structure as data |
+| `src/parsers/<v>/<MSG>_Parser.ts` | `Parsed<MSG>` and one `Parsed*` interface per group, `<MSG>_Parser`, `parse<MSG>()` |
+| `src/builders/<v>/<MSG>.ts` | one `*Group` interface per group, `<MSG>Options`, the `<MSG>` builder class, `create<MSG>()` |
 
-**Base versions** (e.g. `v2.3`) have no `baseVersion`. Their segments are hand-written. Codegen generates:
-- `src/parsers/v2.3/<MessageType>_Parser.ts` — parser stub with full switch-case skeleton
-- `src/builders/v2.3/<MessageType>.ts` — builder stub
+Parsers and builders contain no message-specific logic. They hand the structure and the segment
+classes of their version to the engine in `src/types/structure.ts`:
 
-**Derived versions** (e.g. `v2.5.1`) extend a base. Codegen generates:
-- `src/segments/v2.5.1/<SEG>.ts` — thin wrapper that extends the base segment class
-- `src/parsers/v2.5.1/<MessageType>_Parser.ts` — override that swaps in v2.5.1 segment classes
-- `src/builders/v2.5.1/<MessageType>.ts` — builder stub
+- `parseStructure` walks the raw segments against the structure like a recursive-descent parser.
+  A repeating group starts a new instance whenever the next segment can begin one; a required item
+  that is missing, or a known segment where the structure does not allow it, is an error; segments
+  the structure never mentions (Z segments) are skipped with a warning.
+- `verifyStructure` checks a builder's input (required items, min/max occurrences, choices,
+  unknown properties) and `encodeStructure` writes it out in structure order.
 
-**Re-export versions** (`reexport: true`, e.g. `v2.3.1`, `v2.4`, `v2.5`) are identical to their
-`baseVersion`. Codegen mirrors every segment, parser and builder module of the base as
-`export * from "../<base>/X.ts"`. Segments first introduced in the version are hand-written and
-listed in `ownSegments` (e.g. `SPM` in v2.5); codegen skips those and later re-export versions
-inherit them. To diverge from the base (say v2.4 changes `PID`), replace the generated
-`src/segments/v2.4/PID.ts` with a hand-written class extending the v2.3.1 one. Codegen skips any
-file that lacks the `@generated re-export` marker, and later re-export versions pick up your
-class automatically. Wrapper modules (`ADT_A02` around `ADT_A01`, `SRR_S02` around `SRR_S01`, …) are
-copied into a re-export version instead of re-exported when that version has its own copy of the
-module they wrap, so the wrapper follows the local base; those copies carry the
-`@generated wrapper` marker and are regenerated like re-exports.
+Every generated file carries the `// @generated message` marker. Codegen regenerates marked files
+and deletes marked files no schema produces any more; a file without the marker is hand-written and
+is left alone (and logged as skipped), which is how a message can be customised when the generated
+one does not fit.
 
-After adding or moving files run `pnpm codegen && pnpm barrels && pnpm exports`; CI fails if the
-committed output drifts (`pnpm codegen:check`).
+### Naming
 
-### Skipping completed files
+Property names come from the structure: a segment is its lower-cased name (`pid`), a repeating
+segment gets a `List` suffix (`nteList`), a group is camel-cased and pluralised when it repeats
+(`PATIENT_RESULT` → `patientResults`), a choice is `segment`. Override them with `as` when the
+same segment appears twice at one level (`optList("ROL", { as: "visitRolList" })`) or to keep a
+friendlier name (`as: "insuranceGroups"`). Group type names default to `Parsed<PascalCase>` and
+`<PascalCase>Group`; override them with `exportTypeName` and `builderTypeName`.
 
-Files containing a `const _TODO =` syntax error are stubs — codegen will overwrite them. Once a developer removes that line (i.e. completes the file), codegen will skip it forever.
+A group marked `inline: true` contributes its fields to the enclosing object instead of nesting
+them (`PATIENT: PID [PD1] [VISIT: PV1 [PV2]]` reads as `pid`, `pd1`, `pv1`, `pv2`) while still
+parsing and verifying as a unit.
 
-Parser overrides (in derived versions) are skipped if the file already exists at all, since they typically don't need hand-editing.
+### Builders
 
----
+Every builder has the same shape: the required top-level items are constructor parameters, in
+structure order, followed by `options` (the optional ones) and `encoding`:
+
+```ts
+createADT_A01(msh, evn, pid, pv1, { pd1, nk1List, insuranceGroups: [{ in1, in2 }] });
+createORU_R01(msh, [{ pid, orderObservations: [{ obr, observations: [{ obx }] }] }]);
+createACK(msh, msa, { err });
+```
+
+`verify()` returns `{ valid, errors }`, `encode()` throws when invalid, and `toInput()` gives the
+object the two work on. A parsed message has the same shape as the builder input, so
+parse → edit → rebuild works without conversion.
+
+### Versions
+
+`schemas/<version>/version.ts` registers a `VersionSchema`; `generate.ts` lists them in order,
+bases before derived versions.
+
+- **Base version** (`v2.3`): hand-written segments; every message generated.
+- **Derived version** (`v2.5.1`, `baseVersion` set): a wrapper class is generated for every
+  segment its messages use (`segments` lists extra ones), extending the base version's class.
+  An existing wrapper file is never overwritten, so 2.5.1-specific fields can be added by hand.
+  Every message is generated against these classes.
+- **Re-export version** (`reexport: true`: `v2.3.1`, `v2.4`, `v2.5`): the messages it lists are
+  generated (against its own segment modules); every other segment, structure, parser and builder
+  of the base version is mirrored as `export * from "../<base>/X.ts"`. Segments first introduced
+  in the version are hand-written and listed in `ownSegments`.
+
+Events that share a structure (ADT^A02 … reuse ADT^A01) set `baseMessage`; codegen then emits
+thin wrappers (a parser subclass, a builder subclass and a structure alias) around the base
+message of the same version. The `wrappers()` helper builds such a family from an event list.
 
 ## Directory structure
 
 ```
 codegen/
   schemas/
-    v2.3/
-      ORU_R01.ts       # MessageSchema definition
-      MFN_M02.ts
-      ADT_A28.ts
-      version.ts       # VersionSchema — registers all v2.3 messages
-      index.ts
-    v2.5.1/
-      ORU_R01.ts       # Spreads v2.3 schema with version: "2.5.1"
-      MFN_M02.ts
-      ADT_A28.ts       # { ...ADT_A28_V2_3, version: "2.5.1" }
-      ORU_R30.ts
-      version.ts       # VersionSchema — segments list + all v2.5.1 messages
-      index.ts
+    helpers.ts         # req/opt/reqList/optList/group/choice, withSft, wrappers, reversion
+    v2.3/              # one file per message family + version.ts + index.ts
+    v2.3.1/            # re-export version: version.ts only
+    v2.4/              # messages that changed in 2.4 (ADT A01 family, BAR, DFT, ORM, VXU)
+    v2.5/              # messages that changed in 2.5 (+ SFT, TQ1/TQ2, SPM, ORU^R30 ...)
+    v2.5.1/            # re-versions the v2.5 list (nothing changed between 2.5 and 2.5.1)
   generators/
-    segment.ts         # Generates segment wrapper files
-    baseParser.ts      # Generates base parser stubs (for base versions)
-    parser.ts          # Generates parser override files (for derived versions)
-    builder.ts         # Generates builder stub files
-  generate.ts          # Entry point — registers VERSIONS, runs generate()
-  types.ts             # VersionConfig / ParserConfig / BuilderConfig interfaces
-  README.md            # This file
+    message.ts         # structure, parser and builder modules (+ baseMessage wrappers)
+    segment.ts         # derived-version segment wrapper classes
+    reexport.ts        # re-export modules
+    fieldPositionTest.ts
+  generate.ts          # entry point — registers VERSIONS and runs them
+  generate-barrels.ts, generate-package-exports.mjs
+  generate-v23-segments.ts, generate-field-position-tests.ts   # segment tooling (see docs/ROADMAP-SEGMENTS.md)
+  spec/, validate/     # v2.3 segment field tables and their checks
 ```
 
----
+## Adding a message
 
-## Adding a new message type
-
-1. **Define the schema in the base version:**
-
-   Create `codegen/schemas/v2.3/ADT_A31.ts`:
+1. Write the schema in `schemas/<version>/<MSG>.ts` with the helpers, citing the source page
+   (hl7.org, hl7.eu or hl7-definition.caristix.com) in the doc comment:
 
    ```ts
-   import { MessageSchema } from "../../../src/types/schema";
-
    export const ADT_A31_SCHEMA: MessageSchema = {
      messageType: "ADT",
      triggerEvent: "A31",
      version: "2.3",
-     structure: [
-       { name: "MSH", required: true, repeating: false },
-       { name: "EVN", required: true, repeating: false },
-       { name: "PID", required: true, repeating: false },
-       // ...
-     ],
+     structure: [req("MSH"), req("EVN"), req("PID"), opt("PD1"), optList("NK1"), req("PV1")],
    };
    ```
 
-2. **Add it to the base version schema:**
+   Every segment the structure names must have a class in `src/segments/<base version>/`.
 
-   In `codegen/schemas/v2.3/version.ts`, import and add to `messages`.
+2. Add it to that version's `messages` in `version.ts` (and re-version it in the later versions
+   whose structure is the same; a version that differs gets its own schema file).
 
-3. **Spread into derived versions:**
+3. `pnpm codegen && pnpm barrels && pnpm exports`, then write tests against the generated
+   `create<MSG>` / `parse<MSG>`.
 
-   In `codegen/schemas/v2.5.1/ADT_A31.ts`:
+## Adding a version
 
-   ```ts
-   import { ADT_A31_SCHEMA as base } from "../v2.3/ADT_A31";
-   export const ADT_A31_SCHEMA = { ...base, version: "2.5.1" };
-   ```
+Create `schemas/vX.Y/version.ts`:
 
-   Then add to `codegen/schemas/v2.5.1/version.ts`.
+```ts
+export const V2_6: VersionSchema = {
+  version: "v2.6",
+  baseVersion: "v2.5.1",
+  reexport: true,            // omit (and list `segments`) for a version with its own segment classes
+  ownSegments: [],           // segments first introduced in 2.6, hand-written in src/segments/v2.6/
+  segments: [],
+  messages: [...],           // only the messages whose structure changed
+};
+```
 
-4. **Run codegen:**
-
-   ```sh
-   pnpm codegen
-   ```
-
-   This generates the parser stub in `src/parsers/v2.3/` and the override + builder in `src/parsers/v2.5.1/` and `src/builders/v2.5.1/`.
-
-5. **Complete the base parser stub:**
-
-   Open `src/parsers/v2.3/ADT_A31_Parser.ts`. Fill in:
-   - The `ParsedADT_A31` type interface
-   - State variables above the `for` loop
-   - Assignments in each `switch` case
-   - The final `return` value
-
-   Remove all `const _TODO =` lines when done. The file will now compile.
-
----
-
-## Adding a new HL7 version
-
-1. Create `codegen/schemas/vX.X/` with message schema files and a `version.ts`:
-
-   ```ts
-   export const V_X_X: VersionSchema = {
-     version: "vX.X",
-     baseVersion: "v2.5.1",   // omit if this is a new base version
-     segments: ["MSH", "PID", ...],
-     messages: [...],
-   };
-   ```
-
-2. Register it in `codegen/generate.ts`:
-
-   ```ts
-   import { V_X_X } from "./schemas/vX.X/version.ts";
-   const VERSIONS: VersionSchema[] = [V2_3, V2_5_1, V_X_X];
-   ```
-
-3. Run `pnpm codegen`.
+Register it in `generate.ts` after its base version and run codegen. Everything the version does
+not define is mirrored from its base, so a new version starts complete and is refined message by
+message.

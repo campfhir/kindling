@@ -87,7 +87,7 @@ const patientResult: PatientResult = {
   orderObservations: [
     {
       obr,
-      obxList: [obx1, obx2],
+      observations: [{ obx: obx1 }, { obx: obx2 }],
     },
   ],
 };
@@ -119,7 +119,7 @@ console.log(
 );
 console.log(
   "Observations (OBX):",
-  parsed.patientResults[0].orderObservations[0].obxList.length,
+  parsed.patientResults[0].orderObservations[0].observations!.length,
 );
 
 console.log("\n3. Extracting Data from Parsed Message");
@@ -160,8 +160,8 @@ console.log("  Service ID:", ParserUtils.getComponent(obrFields[3], 0));
 console.log("  Service Name:", ParserUtils.getComponent(obrFields[3], 1));
 
 console.log("\nOBX Data:");
-parsed.patientResults[0].orderObservations[0].obxList.forEach(
-  (obx, idx) => {
+parsed.patientResults[0].orderObservations[0].observations!.forEach(
+  ({ obx }, idx) => {
     const obxFields = obx.fields;
     console.log(`  Observation ${idx + 1}:`);
     console.log("    Type:", ParserUtils.getComponent(obxFields[1], 0));

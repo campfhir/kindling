@@ -31,11 +31,11 @@ describe("v2.5.1 ACK", () => {
     const result = parseACK(wire);
     expect(result.ok).toBe(true);
     if (!result.ok) return;
-    expect(result.val.sftList[0]).toBeInstanceOf(SFT);
+    expect(result.val.sftList![0]).toBeInstanceOf(SFT);
     expect(result.val.msa).toBeInstanceOf(MSA);
     expect(result.val.errList).toHaveLength(2);
-    expect(result.val.errList[0]).toBeInstanceOf(ERR);
-    expect(result.val.errList[0].encode()).toBe("ERR" + "|".repeat(12) + "555");
+    expect(result.val.errList![0]).toBeInstanceOf(ERR);
+    expect(result.val.errList![0].encode()).toBe("ERR" + "|".repeat(12) + "555");
   });
 
   test("still rejects a message with no MSA", () => {
@@ -50,7 +50,7 @@ describe("v2.5.1 ORM^O01", () => {
       [{
         orc: new ORC().orderControl("NW"),
         detail: { segment: new OBR().setId("1"), ctd: new CTD().contactRole({ identifier: "EP" }, { identifier: "CP" }) },
-        ftList: [new FT1().setId("1").transactionReferenceKey("7")],
+        ft1List: [new FT1().setId("1").transactionReferenceKey("7")],
       }],
       { patient: { pid: new PID().setId("1"), insurance: [{ in1: new IN1().setId("1"), in3List: [new IN3(), new IN3()] }] } },
     ).encode();
@@ -61,10 +61,10 @@ describe("v2.5.1 ORM^O01", () => {
     expect(order.detail?.segment).toBeInstanceOf(OBR);
     expect(order.detail?.ctd).toBeInstanceOf(CTD);
     expect(order.detail?.ctd?.encode()).toBe("CTD|EP~CP");
-    expect(order.ftList[0]).toBeInstanceOf(FT1);
-    expect(order.ftList[0].encode().split("|")[31]).toBe("7");
+    expect(order.ft1List![0]).toBeInstanceOf(FT1);
+    expect(order.ft1List![0].encode().split("|")[31]).toBe("7");
     expect(result.val.patient?.pid).toBeInstanceOf(PID);
-    expect(result.val.patient?.insurance[0].in3List).toHaveLength(2);
+    expect(result.val.patient?.insurance![0].in3List).toHaveLength(2);
   });
 });
 
@@ -79,7 +79,7 @@ describe("v2.5.1 ORR^O02", () => {
     expect(result.ok).toBe(true);
     if (!result.ok) return;
     expect(result.val.errList).toHaveLength(2);
-    expect(result.val.errList[0]).toBeInstanceOf(ERR);
-    expect(result.val.orders[0].detail?.segment).toBeInstanceOf(OBR);
+    expect(result.val.errList![0]).toBeInstanceOf(ERR);
+    expect(result.val.orders![0].detail?.segment).toBeInstanceOf(OBR);
   });
 });

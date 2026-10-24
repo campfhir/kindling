@@ -1,15 +1,15 @@
 /**
  * Builder for ORR^O02 messages (HL7 v2.3).
  *
- * Structure:
- *   MSH MSA [ERR] [{NTE}]
- *   [ PID [{NTE}] { ORC [ <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}] ] } ]
- *
- * The specification notes that PID may be omitted (especially on error), so the
- * builder accepts orders with or without a patient.
+ * Structure: MSH MSA [ERR] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [ ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}] ] } ]
  *
  * @module
  */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
+import { ORR_O02_STRUCTURE } from "../../structures/v2.3/ORR_O02.ts";
 import type { MSH } from "../../segments/v2.3/MSH.ts";
 import type { MSA } from "../../segments/v2.3/MSA.ts";
 import type { ERR } from "../../segments/v2.3/ERR.ts";
@@ -23,77 +23,68 @@ import type { RXO } from "../../segments/v2.3/RXO.ts";
 import type { ODS } from "../../segments/v2.3/ODS.ts";
 import type { ODT } from "../../segments/v2.3/ODT.ts";
 import type { CTI } from "../../segments/v2.3/CTI.ts";
-import { type EncodingCharacters, DEFAULT_ENCODING } from "../../types/encoding.ts";
 
-/** The order detail segment of an order: one of OBR, RQD, RQ1, RXO, ODS or ODT. */
-export type ResponseDetailSegment = OBR | RQD | RQ1 | RXO | ODS | ODT;
-
-/** The order detail segment with its notes and clinical trial identification segments. */
-export interface ResponseDetailGroup {
-  /** The order detail segment. */
-  segment: ResponseDetailSegment;
-  /** The notes value. */
-  notes?: NTE[];
-  /** The clinical trial identification segments. */
-  ctiList?: CTI[];
+/** The PATIENT group of an ORR^O02 (HL7 v2.3) message being built. */
+export interface ResponsePatientGroup {
+  /** The PID segment. */
+  pid: PID;
+  /** The NTE segments. */
+  nteList?: NTE[];
 }
 
-/** A repeating ORC group. */
-export interface ResponseOrderGroup<TOrc extends ORC = ORC> {
-  /** The orc value. */
-  orc: TOrc;
-  /** The detail value. */
+/** The ORDER group of an ORR^O02 (HL7 v2.3) message being built. */
+export interface ResponseOrderGroup {
+  /** The ORC segment. */
+  orc: ORC;
+  /** The ORDER DETAIL group. */
   detail?: ResponseDetailGroup;
 }
 
-/** The PID segment and the notes that follow it. */
-export interface ResponsePatientGroup<TPid extends PID = PID> {
-  /** The pid value. */
-  pid: TPid;
-  /** The notes value. */
-  notes?: NTE[];
+/** The ORDER DETAIL group of an ORR^O02 (HL7 v2.3) message being built. */
+export interface ResponseDetailGroup {
+  /** One of OBR, RQD, RQ1, RXO, ODS, ODT. */
+  segment: OBR | RQD | RQ1 | RXO | ODS | ODT;
+  /** The NTE segments. */
+  nteList?: NTE[];
+  /** The CTI segments. */
+  ctiList?: CTI[];
 }
 
-/** Builder for HL7 ORR^O02 (v2.3) messages. */
-export class ORR_O02<
-  TMsh extends MSH = MSH,
-  TMsa extends MSA = MSA,
-  TPid extends PID = PID,
-  TOrc extends ORC = ORC,
-> {
+/** The optional segments and groups of an ORR^O02 (HL7 v2.3) message. */
+export interface ORR_O02Options {
+  /** The ERR segment. */
+  err?: ERR;
+  /** The NTE segments. */
+  nteList?: NTE[];
+  /** The PATIENT group. */
+  patient?: ResponsePatientGroup;
+  /** The ORDER groups. */
+  orders?: ResponseOrderGroup[];
+}
+
+/** Builder for HL7 ORR^O02 (HL7 v2.3) messages. */
+export class ORR_O02<TMSH extends MSH = MSH, TMSA extends MSA = MSA> {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "ORR_O02";
+  /** The structure the message is verified against and encoded in. */
+  protected readonly structure: StructureItem[] = ORR_O02_STRUCTURE;
+
   /** Constructor. */
   constructor(
-    public msh: TMsh,
-    public msa: TMsa,
-    public options: {
-      /** The ERR segment. */
-      err?: ERR;
-      /** NTE segments that follow MSA/ERR. */
-      notes?: NTE[];
-      /** The PID segment with its notes. */
-      patient?: ResponsePatientGroup<TPid>;
-      /** The ORC groups. */
-      orders?: ResponseOrderGroup<TOrc>[];
-    } = {},
-    private encoding: EncodingCharacters = DEFAULT_ENCODING,
+    public msh: TMSH,
+    public msa: TMSA,
+    public options: ORR_O02Options = {},
+    protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
+
+  /** The message as one object keyed by structure property name (what verify() and encode() work on). */
+  toInput(): StructureInput {
+    return { ...this.options, msh: this.msh, msa: this.msa };
+  }
 
   /** Validates the message structure, returning a result. */
   verify(): { valid: boolean; errors: string[] } {
-    const errors: string[] = [];
-
-    if (!this.msh) errors.push("MSH segment is required");
-    if (!this.msa) errors.push("MSA segment is required");
-    if (this.options.patient && !this.options.patient.pid) {
-      errors.push("Patient group: PID segment is required");
-    }
-    (this.options.orders ?? []).forEach((order, i) => {
-      if (!order.orc) errors.push(`Order ${i + 1}: ORC segment is required`);
-      if (order.detail && !order.detail.segment) {
-        errors.push(`Order ${i + 1}: order detail segment is required when a detail group is present`);
-      }
-    });
-
+    const errors = verifyStructure(this.structure, this.toInput());
     return { valid: errors.length === 0, errors };
   }
 
@@ -101,48 +92,18 @@ export class ORR_O02<
   encode(): string {
     const verification = this.verify();
     if (!verification.valid) {
-      throw new Error(
-        `Cannot encode invalid ORR_O02 message:\n${verification.errors.join("\n")}`,
-      );
+      throw new Error(`Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`);
     }
-
-    const enc = this.encoding;
-    const segments: string[] = [];
-    const add = (seg: { encode(e?: EncodingCharacters): string }) => segments.push(seg.encode(enc));
-
-    add(this.msh);
-    add(this.msa);
-    if (this.options.err) add(this.options.err);
-    this.options.notes?.forEach(add);
-
-    if (this.options.patient) {
-      add(this.options.patient.pid);
-      this.options.patient.notes?.forEach(add);
-    }
-
-    for (const order of this.options.orders ?? []) {
-      add(order.orc);
-      if (order.detail) {
-        add(order.detail.segment);
-        order.detail.notes?.forEach(add);
-        order.detail.ctiList?.forEach(add);
-      }
-    }
-
-    return segments.join("\r");
+    return encodeStructure(this.structure, this.toInput(), this.encoding);
   }
 }
 
-/** Builds an HL7 ORR^O02 (v2.3) message. */
-export function createORR_O02<
-  TMsh extends MSH = MSH,
-  TMsa extends MSA = MSA,
-  TPid extends PID = PID,
-  TOrc extends ORC = ORC,
->(
-  msh: TMsh,
-  msa: TMsa,
-  options: ORR_O02<TMsh, TMsa, TPid, TOrc>["options"] = {},
-): ORR_O02<TMsh, TMsa, TPid, TOrc> {
-  return new ORR_O02(msh, msa, options);
+/** Builds an HL7 ORR^O02 (HL7 v2.3) message. */
+export function createORR_O02<TMSH extends MSH = MSH, TMSA extends MSA = MSA>(
+  msh: TMSH,
+  msa: TMSA,
+  options: ORR_O02Options = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
+): ORR_O02<TMSH, TMSA> {
+  return new ORR_O02(msh, msa, options, encoding);
 }

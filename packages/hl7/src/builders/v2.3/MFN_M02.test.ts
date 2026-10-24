@@ -69,7 +69,7 @@ describe("MFN_M02 builder", () => {
 
     const result = message.verify();
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.includes("At least one staff entry"))).toBe(true);
+    expect(result.errors.some((e) => e.includes("At least one MF STAFF group (MFE) is required"))).toBe(true);
   });
 
   test("encode() produces parseable MFN_M02 message", () => {

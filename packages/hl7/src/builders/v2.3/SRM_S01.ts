@@ -1,14 +1,15 @@
 /**
- * Builder for SRM^S01 messages (HL7 v2.3): schedule request, new appointment booking.
+ * Builder for SRM^S01 messages (HL7 v2.3).
  *
- * Structure:
- *   MSH ARQ [APR] [{NTE}] [{ PID [PV1] [PV2] [{OBX}] [{DG1}] }]
- *   { RGS [{ AIS [APR] [{NTE}] }] [{ AIG [APR] [{NTE}] }] [{ AIL [APR] [{NTE}] }] [{ AIP [APR] [{NTE}] }] }
- *
- * S02–S11 share this structure, which is unchanged through v2.5.1.
+ * Structure: MSH ARQ [APR] [{NTE}] [{ PATIENT: PID [PV1] [PV2] [{OBX}] [{DG1}] }] { RESOURCES: RGS [{ SERVICE: AIS [APR] [{NTE}] }] [{ GENERAL_RESOURCE: AIG [APR] [{NTE}] }] [{ LOCATION_RESOURCE: AIL [APR] [{NTE}] }] [{ PERSONNEL_RESOURCE: AIP [APR] [{NTE}] }] }
  *
  * @module
  */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
+import { SRM_S01_STRUCTURE } from "../../structures/v2.3/SRM_S01.ts";
 import type { MSH } from "../../segments/v2.3/MSH.ts";
 import type { ARQ } from "../../segments/v2.3/ARQ.ts";
 import type { APR } from "../../segments/v2.3/APR.ts";
@@ -23,112 +24,109 @@ import type { AIS } from "../../segments/v2.3/AIS.ts";
 import type { AIG } from "../../segments/v2.3/AIG.ts";
 import type { AIL } from "../../segments/v2.3/AIL.ts";
 import type { AIP } from "../../segments/v2.3/AIP.ts";
-import { type EncodingCharacters, DEFAULT_ENCODING } from "../../types/encoding.ts";
 
-/** SRMPatientGroup — a PATIENT group of an SRM message. */
+/** The PATIENT group of an SRM^S01 (HL7 v2.3) message being built. */
 export interface SRMPatientGroup {
-  /** The pid value. */
+  /** The PID segment. */
   pid: PID;
-  /** The pv1 value. */
+  /** The PV1 segment. */
   pv1?: PV1;
-  /** The pv2 value. */
+  /** The PV2 segment. */
   pv2?: PV2;
-  /** The obx list value. */
+  /** The OBX segments. */
   obxList?: OBX[];
-  /** The dg1 list value. */
+  /** The DG1 segments. */
   dg1List?: DG1[];
 }
 
-/** SRMServiceGroup — an AIS with its optional APR and NTEs. */
-export interface SRMServiceGroup {
-  /** The ais value. */
-  ais: AIS;
-  /** The apr value. */
-  apr?: APR;
-  /** The nte list value. */
-  nteList?: NTE[];
-}
-
-/** SRMGeneralResourceGroup — an AIG with its optional APR and NTEs. */
-export interface SRMGeneralResourceGroup {
-  /** The aig value. */
-  aig: AIG;
-  /** The apr value. */
-  apr?: APR;
-  /** The nte list value. */
-  nteList?: NTE[];
-}
-
-/** SRMLocationResourceGroup — an AIL with its optional APR and NTEs. */
-export interface SRMLocationResourceGroup {
-  /** The ail value. */
-  ail: AIL;
-  /** The apr value. */
-  apr?: APR;
-  /** The nte list value. */
-  nteList?: NTE[];
-}
-
-/** SRMPersonnelResourceGroup — an AIP with its optional APR and NTEs. */
-export interface SRMPersonnelResourceGroup {
-  /** The aip value. */
-  aip: AIP;
-  /** The apr value. */
-  apr?: APR;
-  /** The nte list value. */
-  nteList?: NTE[];
-}
-
-/** SRMResourcesGroup — a RESOURCES group: the RGS and the resources requested under it. */
+/** The RESOURCES group of an SRM^S01 (HL7 v2.3) message being built. */
 export interface SRMResourcesGroup {
-  /** The rgs value. */
+  /** The RGS segment. */
   rgs: RGS;
-  /** The services value. */
+  /** The SERVICE groups. */
   services?: SRMServiceGroup[];
-  /** The general resources value. */
+  /** The GENERAL RESOURCE groups. */
   generalResources?: SRMGeneralResourceGroup[];
-  /** The location resources value. */
+  /** The LOCATION RESOURCE groups. */
   locationResources?: SRMLocationResourceGroup[];
-  /** The personnel resources value. */
+  /** The PERSONNEL RESOURCE groups. */
   personnelResources?: SRMPersonnelResourceGroup[];
 }
 
-/** Builder for HL7 SRM^S01 (v2.3) messages. */
+/** The SERVICE group of an SRM^S01 (HL7 v2.3) message being built. */
+export interface SRMServiceGroup {
+  /** The AIS segment. */
+  ais: AIS;
+  /** The APR segment. */
+  apr?: APR;
+  /** The NTE segments. */
+  nteList?: NTE[];
+}
+
+/** The GENERAL RESOURCE group of an SRM^S01 (HL7 v2.3) message being built. */
+export interface SRMGeneralResourceGroup {
+  /** The AIG segment. */
+  aig: AIG;
+  /** The APR segment. */
+  apr?: APR;
+  /** The NTE segments. */
+  nteList?: NTE[];
+}
+
+/** The LOCATION RESOURCE group of an SRM^S01 (HL7 v2.3) message being built. */
+export interface SRMLocationResourceGroup {
+  /** The AIL segment. */
+  ail: AIL;
+  /** The APR segment. */
+  apr?: APR;
+  /** The NTE segments. */
+  nteList?: NTE[];
+}
+
+/** The PERSONNEL RESOURCE group of an SRM^S01 (HL7 v2.3) message being built. */
+export interface SRMPersonnelResourceGroup {
+  /** The AIP segment. */
+  aip: AIP;
+  /** The APR segment. */
+  apr?: APR;
+  /** The NTE segments. */
+  nteList?: NTE[];
+}
+
+/** The optional segments and groups of an SRM^S01 (HL7 v2.3) message. */
+export interface SRM_S01Options {
+  /** The APR segment. */
+  apr?: APR;
+  /** The NTE segments. */
+  nteList?: NTE[];
+  /** The PATIENT groups. */
+  patients?: SRMPatientGroup[];
+}
+
+/** Builder for HL7 SRM^S01 (HL7 v2.3) messages. */
 export class SRM_S01<TMSH extends MSH = MSH, TARQ extends ARQ = ARQ> {
-  /** The message name value. */
+  /** The message name used in error messages. */
   protected readonly messageName: string = "SRM_S01";
+  /** The structure the message is verified against and encoded in. */
+  protected readonly structure: StructureItem[] = SRM_S01_STRUCTURE;
 
   /** Constructor. */
   constructor(
     public msh: TMSH,
     public arq: TARQ,
-    public options: {
-      /** Appointment preferences for the whole request (follows ARQ). */
-      apr?: APR;
-      /** Notes on the request (follow ARQ/APR). */
-      nteList?: NTE[];
-      patients?: SRMPatientGroup[];
-      /** At least one RESOURCES group is required. */
-      resources?: SRMResourcesGroup[];
-    } = {},
-    private encoding: EncodingCharacters = DEFAULT_ENCODING,
+    public resources: SRMResourcesGroup[],
+    public options: SRM_S01Options = {},
+    protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
+
+  /** The message as one object keyed by structure property name (what verify() and encode() work on). */
+  toInput(): StructureInput {
+    return { ...this.options, msh: this.msh, arq: this.arq, resources: this.resources };
+  }
 
   /** Validates the message structure, returning a result. */
   verify(): { valid: boolean; errors: string[] } {
-    const errors: string[] = [];
-    const resources = this.options.resources ?? [];
-
-    if (!this.msh) errors.push("MSH segment is required");
-    if (!this.arq) errors.push("ARQ segment is required");
-    if (resources.length === 0) errors.push("At least one RESOURCES group (RGS) is required");
-    resources.forEach((rg, i) => {
-      if (!rg.rgs) errors.push(`RESOURCES group ${i + 1}: RGS segment is required`);
-    });
-    (this.options.patients ?? []).forEach((p, i) => {
-      if (!p.pid) errors.push(`PATIENT group ${i + 1}: PID segment is required`);
-    });
-
+    const errors = verifyStructure(this.structure, this.toInput());
     return { valid: errors.length === 0, errors };
   }
 
@@ -136,53 +134,19 @@ export class SRM_S01<TMSH extends MSH = MSH, TARQ extends ARQ = ARQ> {
   encode(): string {
     const verification = this.verify();
     if (!verification.valid) {
-      throw new Error(
-        `Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`,
-      );
+      throw new Error(`Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`);
     }
-
-    const out: string[] = [];
-    const enc = this.encoding;
-    const o = this.options;
-
-    out.push(this.msh.encode(enc));
-    out.push(this.arq.encode(enc));
-    if (o.apr) out.push(o.apr.encode(enc));
-    for (const nte of o.nteList ?? []) out.push(nte.encode(enc));
-
-    for (const p of o.patients ?? []) {
-      out.push(p.pid.encode(enc));
-      if (p.pv1) out.push(p.pv1.encode(enc));
-      if (p.pv2) out.push(p.pv2.encode(enc));
-      for (const obx of p.obxList ?? []) out.push(obx.encode(enc));
-      for (const dg1 of p.dg1List ?? []) out.push(dg1.encode(enc));
-    }
-
-    for (const rg of o.resources ?? []) {
-      out.push(rg.rgs.encode(enc));
-      const entries: { seg: { encode(e: EncodingCharacters): string }; apr?: APR; nteList?: NTE[] }[] = [
-        ...(rg.services ?? []).map((s) => ({ seg: s.ais, apr: s.apr, nteList: s.nteList })),
-        ...(rg.generalResources ?? []).map((g) => ({ seg: g.aig, apr: g.apr, nteList: g.nteList })),
-        ...(rg.locationResources ?? []).map((l) => ({ seg: l.ail, apr: l.apr, nteList: l.nteList })),
-        ...(rg.personnelResources ?? []).map((p) => ({ seg: p.aip, apr: p.apr, nteList: p.nteList })),
-      ];
-      for (const e of entries) {
-        out.push(e.seg.encode(enc));
-        if (e.apr) out.push(e.apr.encode(enc));
-        for (const nte of e.nteList ?? []) out.push(nte.encode(enc));
-      }
-    }
-
-    return out.join("\r");
+    return encodeStructure(this.structure, this.toInput(), this.encoding);
   }
 }
 
-/** Builds an HL7 SRM^S01 (v2.3) message. */
+/** Builds an HL7 SRM^S01 (HL7 v2.3) message. */
 export function createSRM_S01<TMSH extends MSH = MSH, TARQ extends ARQ = ARQ>(
   msh: TMSH,
   arq: TARQ,
-  options: SRM_S01<TMSH, TARQ>["options"] = {},
-  encoding?: EncodingCharacters,
+  resources: SRMResourcesGroup[],
+  options: SRM_S01Options = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): SRM_S01<TMSH, TARQ> {
-  return new SRM_S01(msh, arq, options, encoding);
+  return new SRM_S01(msh, arq, resources, options, encoding);
 }

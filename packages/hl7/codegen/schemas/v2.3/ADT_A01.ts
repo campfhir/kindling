@@ -1,40 +1,47 @@
-import { MessageSchema } from "../../../src/types/schema";
-import { ADT_A28_SCHEMA } from "./ADT_A28";
+import type { MessageSchema } from "../../../src/types/schema";
+import { group, opt, optList, req, wrappers } from "../helpers";
 
 /**
- * ADT^A01 - Admit/Visit Notification (HL7 v2.3)
- * Same structure as A28; trigger event is the distinguishing factor.
+ * ADT^A01 - Admit/Visit Notification (HL7 v2.3, chapter 3).
+ *
+ * MSH EVN PID [PD1] [{NK1}] PV1 [PV2] [{DB1}] [{OBX}] [{AL1}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] }]
+ * [{GT1}] [{ INSURANCE: IN1 [IN2] [IN3] }] [ACC] [UB1] [UB2]
+ *
+ * The same structure serves A02–A16, A21–A23, A25–A29, A31–A33 and A38 (checked per event on
+ * hl7-definition.caristix.com, v2.3); v2.4 adds ROLs, a repeating IN3 and PDA, v2.5 adds SFT.
+ * Source: https://hl7-definition.caristix.com/v2/HL7v2.3/TriggerEvents/ADT_A01
  */
 export const ADT_A01_SCHEMA: MessageSchema = {
-  ...ADT_A28_SCHEMA,
+  messageType: "ADT",
   triggerEvent: "A01",
+  version: "2.3",
+  structure: [
+    req("MSH"),
+    req("EVN"),
+    req("PID"),
+    opt("PD1"),
+    optList("NK1"),
+    req("PV1"),
+    opt("PV2"),
+    optList("DB1"),
+    optList("OBX"),
+    optList("AL1"),
+    optList("DG1"),
+    opt("DRG"),
+    group("PROCEDURE", false, true, [req("PR1"), optList("ROL")]),
+    optList("GT1"),
+    group("INSURANCE", false, true, [req("IN1"), opt("IN2"), opt("IN3")], { as: "insuranceGroups", exportTypeName: "ParsedInsuranceGroup" }),
+    opt("ACC"),
+    opt("UB1"),
+    opt("UB2"),
+  ],
 };
 
-export const ADT_A02_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A02", baseMessage: "ADT_A01" };
-export const ADT_A03_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A03", baseMessage: "ADT_A01" };
-export const ADT_A04_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A04", baseMessage: "ADT_A01" };
-export const ADT_A05_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A05", baseMessage: "ADT_A01" };
-export const ADT_A06_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A06", baseMessage: "ADT_A01" };
-export const ADT_A07_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A07", baseMessage: "ADT_A01" };
-export const ADT_A08_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A08", baseMessage: "ADT_A01" };
-export const ADT_A09_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A09", baseMessage: "ADT_A01" };
-export const ADT_A10_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A10", baseMessage: "ADT_A01" };
-export const ADT_A11_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A11", baseMessage: "ADT_A01" };
-export const ADT_A12_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A12", baseMessage: "ADT_A01" };
-export const ADT_A13_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A13", baseMessage: "ADT_A01" };
-export const ADT_A14_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A14", baseMessage: "ADT_A01" };
-export const ADT_A15_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A15", baseMessage: "ADT_A01" };
-export const ADT_A16_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A16", baseMessage: "ADT_A01" };
-export const ADT_A21_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A21", baseMessage: "ADT_A01" };
-export const ADT_A22_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A22", baseMessage: "ADT_A01" };
-export const ADT_A23_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A23", baseMessage: "ADT_A01" };
-export const ADT_A25_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A25", baseMessage: "ADT_A01" };
-export const ADT_A26_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A26", baseMessage: "ADT_A01" };
-export const ADT_A27_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A27", baseMessage: "ADT_A01" };
-export const ADT_A29_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A29", baseMessage: "ADT_A01" };
-export const ADT_A31_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A31", baseMessage: "ADT_A01" };
-// A32/A33 (cancel patient arriving/departing - tracking) have the A21 structure:
-// MSH EVN PID [PD1] PV1 [PV2] [{DB1}] [{OBX}] (hl7-definition.caristix.com, v2.3 ADT_A32/ADT_A33).
-export const ADT_A32_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A32", baseMessage: "ADT_A01" };
-export const ADT_A33_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A33", baseMessage: "ADT_A01" };
-export const ADT_A38_SCHEMA: MessageSchema = { ...ADT_A01_SCHEMA, triggerEvent: "A38", baseMessage: "ADT_A01" };
+/** The trigger events that share the A01 structure. */
+export const ADT_A01_EVENTS = [
+  "A02", "A03", "A04", "A05", "A06", "A07", "A08", "A09", "A10", "A11", "A12", "A13", "A14", "A15", "A16",
+  "A21", "A22", "A23", "A25", "A26", "A27", "A28", "A29", "A31", "A32", "A33", "A38",
+];
+
+/** A02–A38 as wrappers around ADT_A01. */
+export const ADT_A01_FAMILY: MessageSchema[] = [ADT_A01_SCHEMA, ...wrappers(ADT_A01_SCHEMA, ADT_A01_EVENTS)];

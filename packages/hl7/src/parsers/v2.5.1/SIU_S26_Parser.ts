@@ -1,111 +1,26 @@
 /**
  * Parser for SIU^S26 messages (HL7 v2.5.1).
  *
+ * Structure: MSH SCH [{TQ1}] [{NTE}] [{ PATIENT: PID [PD1] [PV1] [PV2] [{OBX}] [{DG1}] }] { RESOURCES: RGS [{ SERVICE: AIS [{NTE}] }] [{ GENERAL_RESOURCE: AIG [{NTE}] }] [{ LOCATION_RESOURCE: AIL [{NTE}] }] [{ PERSONNEL_RESOURCE: AIP [{NTE}] }] }
+ * Shares the SIU^S12 structure.
+ *
  * @module
  */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../../types/result.ts";
-import type { EncodingCharacters } from "../../types/encoding.ts";
-import { MSH } from "../../segments/v2.5.1/MSH.ts";
-import { SCH } from "../../segments/v2.5.1/SCH.ts";
-import { NTE } from "../../segments/v2.5.1/NTE.ts";
-import { PID } from "../../segments/v2.5.1/PID.ts";
-import { PD1 } from "../../segments/v2.5.1/PD1.ts";
-import { PV1 } from "../../segments/v2.5.1/PV1.ts";
-import { PV2 } from "../../segments/v2.5.1/PV2.ts";
-import { OBX } from "../../segments/v2.5.1/OBX.ts";
-import { DG1 } from "../../segments/v2.5.1/DG1.ts";
-import { RGS } from "../../segments/v2.5.1/RGS.ts";
-import { AIS } from "../../segments/v2.5.1/AIS.ts";
-import { AIG } from "../../segments/v2.5.1/AIG.ts";
-import { AIL } from "../../segments/v2.5.1/AIL.ts";
-import { AIP } from "../../segments/v2.5.1/AIP.ts";
-import {
-  SIU_S26_Parser as SIU_S26_Parser_base,
-  type ParsedSIU_S26,
-  type ParsedSIUPatient,
-  type ParsedSIUResources,
-  type ParsedSIUService,
-  type ParsedSIUGeneralResource,
-  type ParsedSIULocationResource,
-  type ParsedSIUPersonnelResource,
-} from "../v2.5/SIU_S26_Parser.ts";
+import { SIU_S12_Parser, type ParsedSIU_S12 } from "./SIU_S12_Parser.ts";
 
-export type { ParsedSIU_S26, ParsedSIUPatient, ParsedSIUResources, ParsedSIUService, ParsedSIUGeneralResource, ParsedSIULocationResource, ParsedSIUPersonnelResource };
+export type { ParsedSIUPatient, ParsedSIUResources, ParsedSIUService, ParsedSIUGeneralResource, ParsedSIULocationResource, ParsedSIUPersonnelResource } from "./SIU_S12_Parser.ts";
+/** Structured result of parsing an HL7 SIU^S26 (HL7 v2.5.1) message. */
+export type ParsedSIU_S26 = ParsedSIU_S12;
 
-/** Parser for HL7 SIU^S26 (v2.5.1) messages. */
-export class SIU_S26_Parser extends SIU_S26_Parser_base {
-  /** Parse msh. */
-  protected override parseMSH(s: string): Result<MSH> {
-    return MSH.parse(s);
-  }
-
-  /** Parse sch. */
-  protected override parseSCH(s: string, e: EncodingCharacters): Result<SCH> {
-    return SCH.parse(s, e);
-  }
-
-  /** Parse nte. */
-  protected override parseNTE(s: string, e: EncodingCharacters): Result<NTE> {
-    return NTE.parse(s, e);
-  }
-
-  /** Parse pid. */
-  protected override parsePID(s: string, e: EncodingCharacters): Result<PID> {
-    return PID.parse(s, e);
-  }
-
-  /** Parse pd1. */
-  protected override parsePD1(s: string, e: EncodingCharacters): Result<PD1> {
-    return PD1.parse(s, e);
-  }
-
-  /** Parse pv1. */
-  protected override parsePV1(s: string, e: EncodingCharacters): Result<PV1> {
-    return PV1.parse(s, e);
-  }
-
-  /** Parse pv2. */
-  protected override parsePV2(s: string, e: EncodingCharacters): Result<PV2> {
-    return PV2.parse(s, e);
-  }
-
-  /** Parse obx. */
-  protected override parseOBX(s: string, e: EncodingCharacters): Result<OBX> {
-    return OBX.parse(s, e);
-  }
-
-  /** Parse dg1. */
-  protected override parseDG1(s: string, e: EncodingCharacters): Result<DG1> {
-    return DG1.parse(s, e);
-  }
-
-  /** Parse rgs. */
-  protected override parseRGS(s: string, e: EncodingCharacters): Result<RGS> {
-    return RGS.parse(s, e);
-  }
-
-  /** Parse ais. */
-  protected override parseAIS(s: string, e: EncodingCharacters): Result<AIS> {
-    return AIS.parse(s, e);
-  }
-
-  /** Parse aig. */
-  protected override parseAIG(s: string, e: EncodingCharacters): Result<AIG> {
-    return AIG.parse(s, e);
-  }
-
-  /** Parse ail. */
-  protected override parseAIL(s: string, e: EncodingCharacters): Result<AIL> {
-    return AIL.parse(s, e);
-  }
-
-  /** Parse aip. */
-  protected override parseAIP(s: string, e: EncodingCharacters): Result<AIP> {
-    return AIP.parse(s, e);
-  }
+/** Parser for HL7 SIU^S26 (HL7 v2.5.1) messages. */
+export class SIU_S26_Parser extends SIU_S12_Parser {
+  /** The message name used in error messages. */
+  protected override readonly messageName: string = "SIU_S26";
 }
 
-/** Parses an HL7 SIU^S26 (v2.5.1) message string into a structured result. */
+/** Parses an HL7 SIU^S26 (HL7 v2.5.1) message string into a structured result. */
 export function parseSIU_S26(messageString: string): Result<ParsedSIU_S26> {
   return new SIU_S26_Parser().parse(messageString);
 }

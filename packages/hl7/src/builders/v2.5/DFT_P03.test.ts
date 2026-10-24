@@ -62,39 +62,39 @@ describe("DFT_P03 (v2.5): SFT, ROLs, order groups, FT1 notes, repeating IN3", ()
       expect(v.rolList).toHaveLength(1);
       expect(v.visitRolList).toHaveLength(1);
       expect(v.orders).toHaveLength(2);
-      expect(v.orders[0].timing[0].tq2List).toHaveLength(1);
-      expect(v.orders[0].obrNteList).toHaveLength(1);
-      expect(v.orders[1].orc).toBeTruthy();
-      expect(v.orders[1].obr).toBeUndefined();
-      expect(v.orders[1].observations).toHaveLength(2);
+      expect(v.orders![0].timing![0].tq2List).toHaveLength(1);
+      expect(v.orders![0].obrNteList).toHaveLength(1);
+      expect(v.orders![1].orc).toBeTruthy();
+      expect(v.orders![1].obr).toBeUndefined();
+      expect(v.orders![1].observations).toHaveLength(2);
       expect(v.financials).toHaveLength(2);
       expect(v.financials[0].nte).toBeTruthy();
-      expect(v.financials[0].procedures[0].rolList).toHaveLength(1);
+      expect(v.financials[0].procedures![0].rolList).toHaveLength(1);
       expect(v.financials[0].orders).toHaveLength(1);
-      expect(v.financials[0].orders[0].observations[0].nteList).toHaveLength(1);
+      expect(v.financials[0].orders![0].observations![0].nteList).toHaveLength(1);
       expect(v.financials[1].orders).toHaveLength(0);
-      expect(v.insurances[0].in3List).toHaveLength(2);
-      expect(v.insurances[0].rolList).toHaveLength(1);
+      expect(v.insurances![0].in3List).toHaveLength(2);
+      expect(v.insurances![0].rolList).toHaveLength(1);
       expect(v.message.encode()).toBe(wire);
     }
   });
 
   test("verify() rejects empty order groups and notes without OBR", () => {
     const msg = new DFT_P03(msh(), evn(), pid(), [{ ft1: new FT1(), orders: [{}] }], { orders: [{}] });
-    expect(msg.verify().errors).toEqual(["COMMON ORDER group 1 is empty", "FINANCIAL group 1 COMMON ORDER group 1 is empty"]);
+    expect(msg.verify().errors).toEqual(["COMMON ORDER group 1 is empty", "FINANCIAL group 1: FINANCIAL COMMON ORDER group 1 is empty"]);
     expect(createDFT_P03(msh(), evn(), pid(), [{ ft1: new FT1() }], { orders: [{ orc: new ORC(), obrNteList: [new NTE()] }] }).verify().errors)
-      .toEqual(["COMMON ORDER group 1: OBR notes require an OBR"]);
+      .toEqual(["COMMON ORDER group 1: OBR segment is required"]);
   });
 
   const body = ["EVN|P03", "PID|1||1||Doe"];
   test.each([
-    [["ORC|NW", "FT1|1", "ORC|NW", "OBR|1", "PR1|1"], /PR1 segment at line 8 must appear before the order groups of its FT1/],
-    [["TQ2|1", "FT1|1"], /TQ2 segment at line 4 must follow a TQ1 segment/],
-    [["NTE|1", "FT1|1"], /NTE segment at line 4 must follow FT1, an OBR or an OBX segment/],
-    [["FT1|1", "NTE|1", "NTE|2"], /NTE segment at line 6 must follow FT1, an OBR or an OBX segment/],
-    [["FT1|1", "DG1|1", "OBX|1"], /OBX segment at line 6 must appear before DG1, DRG, GT1, IN1 and ACC/],
-    [["PV1|1|O", "ROL|1", "DB1|1", "ROL|2", "FT1|1"], /ROL segment at line 7 must follow PD1, PV1\/PV2, a PR1 or an insurance segment/],
-    [["DB1|1", "PV1|1|O", "FT1|1"], /PV1 segment at line 5 must follow PID and precede DB1/],
+    [["ORC|NW", "FT1|1", "ORC|NW", "OBR|1", "PR1|1"], /PR1 segment at line 8 is not allowed at this position in DFT_P03/],
+    [["TQ2|1", "FT1|1"], /DFT_P03 message must contain at least one FT1 segment/],
+    [["NTE|1", "FT1|1"], /DFT_P03 message must contain at least one FT1 segment/],
+    [["FT1|1", "NTE|1", "NTE|2"], /NTE segment at line 6 is not allowed at this position in DFT_P03/],
+    [["FT1|1", "DG1|1", "OBX|1"], /OBX segment at line 6 is not allowed at this position in DFT_P03/],
+    [["PV1|1|O", "ROL|1", "DB1|1", "ROL|2", "FT1|1"], /DFT_P03 message must contain at least one FT1 segment/],
+    [["DB1|1", "PV1|1|O", "FT1|1"], /DFT_P03 message must contain at least one FT1 segment/],
   ])("rejects %j", (lines, pattern) => {
     const result = parseDFT_P03([MSH_LINE, ...body, ...lines].join("\r"));
     expect(result.ok).toBe(false);
@@ -105,11 +105,11 @@ describe("DFT_P03 (v2.5): SFT, ROLs, order groups, FT1 notes, repeating IN3", ()
     const result = parseDFT_P03([MSH_LINE, ...body, "ORC|NW", "OBR|1", "ORC|NW", "OBX|1", "TQ1|1", "FT1|1", "OBX|1", "OBX|2", "OBR|2"].join("\r"));
     expect(result.ok).toBe(true);
     const v = result.val!;
-    expect(v.orders.map((o) => [Boolean(o.orc), Boolean(o.obr), o.timing.length, o.observations.length])).toEqual([
+    expect(v.orders!.map((o) => [Boolean(o.orc), Boolean(o.obr), o.timing!.length, o.observations!.length])).toEqual([
       [true, true, 0, 0],
       [true, false, 0, 1],
       [false, false, 1, 0],
     ]);
-    expect(v.financials[0].orders.map((o) => [Boolean(o.obr), o.observations.length])).toEqual([[false, 2], [true, 0]]);
+    expect(v.financials[0].orders!.map((o) => [Boolean(o.obr), o.observations!.length])).toEqual([[false, 2], [true, 0]]);
   });
 });

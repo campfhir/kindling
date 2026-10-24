@@ -1,36 +1,56 @@
-import { Result } from "../../types/result.ts";
-import { EncodingCharacters } from "../../types/encoding.ts";
+/**
+ * Parser for ADT^A20 messages (HL7 v2.5.1).
+ *
+ * Structure: MSH [{SFT}] EVN NPU
+ *
+ * @module
+ */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { Result } from "../../types/result.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
+import { ADT_A20_STRUCTURE } from "../../structures/v2.5.1/ADT_A20.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
 import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { EVN } from "../../segments/v2.5.1/EVN.ts";
 import { NPU } from "../../segments/v2.5.1/NPU.ts";
-import {
-  ADT_A20_Parser as ADT_A20_Parser_base,
-  ParsedADT_A20,
-} from "../v2.5/ADT_A20_Parser.ts";
 
-export type { ParsedADT_A20 };
+/** Structured result of parsing an HL7 ADT^A20 (HL7 v2.5.1) message. */
+export interface ParsedADT_A20 extends ParsedMessageBase {
+  /** The MSH segment. */
+  msh: MSH;
+  /** The SFT segments. */
+  sftList?: SFT[];
+  /** The EVN segment. */
+  evn: EVN;
+  /** The NPU segment. */
+  npu: NPU;
+}
 
-/** Parser for HL7 ADT^A20 (v2.5.1) messages. */
-export class ADT_A20_Parser extends ADT_A20_Parser_base {
-  protected override parseMSH(s: string): Result<MSH> {
-    return MSH.parse(s);
-  }
+/** The segment parsers of ADT^A20 (HL7 v2.5.1). */
+const PARSERS: SegmentParsers = {
+  MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
+  EVN: (s, e) => EVN.parse(s, e),
+  NPU: (s, e) => NPU.parse(s, e),
+};
 
-  protected override parseSFT(s: string, e: EncodingCharacters): Result<SFT> {
-    return SFT.parse(s, e);
-  }
+/** Parser for HL7 ADT^A20 (HL7 v2.5.1) messages. */
+export class ADT_A20_Parser {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "ADT_A20";
+  /** The structure the message is parsed against. */
+  protected readonly structure: StructureItem[] = ADT_A20_STRUCTURE;
+  /** The segment parsers, keyed by segment name. */
+  protected readonly parsers: SegmentParsers = PARSERS;
 
-  protected override parseEVN(s: string, e: EncodingCharacters): Result<EVN> {
-    return EVN.parse(s, e);
-  }
-
-  protected override parseNPU(s: string, e: EncodingCharacters): Result<NPU> {
-    return NPU.parse(s, e);
+  /** Parses the input string into a structured instance. */
+  parse(messageString: string): Result<ParsedADT_A20> {
+    return parseStructure<ParsedADT_A20>(this.messageName, this.structure, this.parsers, messageString);
   }
 }
 
-/** Parses an HL7 ADT^A20 (v2.5.1) message string into a structured result. */
+/** Parses an HL7 ADT^A20 (HL7 v2.5.1) message string into a structured result. */
 export function parseADT_A20(messageString: string): Result<ParsedADT_A20> {
   return new ADT_A20_Parser().parse(messageString);
 }

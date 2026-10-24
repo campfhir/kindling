@@ -39,22 +39,23 @@ src/
 │   ├── ValueExtractor.ts     # Path-based value extraction utility
 │   ├── CustomSegment.ts      # Generic segment for Z-segments and custom use
 │   └── MessageEditor.ts      # Fluent segment insertion API
+│   └── structure.ts          # Structure-driven parse / verify / encode engine
 ├── segments/                 # Segment definitions by version
 │   ├── v2.3/                 # hand-written base segments
 │   ├── v2.3.1/               # re-exports of v2.3 (generated)
-│   ├── v2.4/                 # re-exports of v2.3.1 (generated)
-│   ├── v2.5/                 # re-exports + SFT, SPM, TQ1
+│   ├── v2.4/                 # re-exports of v2.3.1 + PDA, ABS, BLC, RMI
+│   ├── v2.5/                 # re-exports + SFT, SPM, TQ1, TQ2
 │   └── v2.5.1/               # extends v2.5 with 2.5.1-specific fields
-├── parsers/                  # Message parsers by version
-│   ├── testdata/             # 30 sample HL7 messages for integration tests
-│   │   ├── ORU_R01/          # 15 lab result messages
-│   │   └── ORU_R30/          # 15 point-of-care observation messages
-│   ├── v2.3/                 # 49 parsers (ADT A01-A51 except A19, DFT P03, BAR P01-P06, ORU_R01, MFN_M02, SIU S12-S26, SRM/SRR S01-S11, MDM T01-T11)
-│   └── v2.5.1/               # 58 parsers (ADT A01-A51 except A19, DFT P03, BAR P01-P06, ORU R01/R30/R31/R32, MFN_M02, SIU S12-S26, SRM/SRR S01-S11, MDM T01-T11)
-├── builders/                 # Message builders by version
-│   ├── v2.3/                 # 53 builders (ADT A01-A51 except A19, DFT P03, BAR P01-P06, ORU_R01, MFN_M02, SIU S12-S26, SRM/SRR S01-S11, MDM T01-T11)
-│   └── v2.5.1/               # 55 builders (ADT A01-A51 except A19, DFT P03, BAR P01-P06, ORU R01/R30/R31/R32, MFN_M02, SIU S12-S26, SRM/SRR S01-S11, MDM T01-T11)
+├── structures/               # Generated: each message's structure as data (<MSG>_STRUCTURE)
+├── parsers/                  # Generated message parsers by version (v2.3 … v2.5.1)
+│   └── testdata/             # 30 sample HL7 messages for integration tests
+└── builders/                 # Generated message builders by version (v2.3 … v2.5.1)
 ```
+
+Parsers, builders and structures are generated from the message schemas in `codegen/schemas/`
+(ADT A01–A51 except A19, ACK, BAR P01/P02/P05/P06, DFT P03, MDM T01–T11, MFN M02, ORM O01,
+ORR O02, ORU R01 and R30–R32, SIU S12–S26, SRM/SRR S01–S11, VXU V04), each in the shape the
+standard gives it for that version. See [codegen/README.md](codegen/README.md).
 
 ## Installation
 
@@ -141,10 +142,20 @@ Builders and parsers are imported individually or via the barrel (create*/parse*
 import { createORU_R01 } from '@campfhir/hl7/builders/v2.5.1';
 import { parseORU_R01 } from '@campfhir/hl7/parsers/v2.5.1';
 
-// Per-file — includes types like PatientResult, OrderObservation
+// Per-file — includes types like PatientResult, OrderObservation, ParsedORU_R01
 import { createORU_R01, PatientResult } from '@campfhir/hl7/builders/v2.5.1/ORU_R01';
-import { parseORU_R01 } from '@campfhir/hl7/parsers/v2.5.1/ORU_R01_Parser';
+import { parseORU_R01, type ParsedORU_R01 } from '@campfhir/hl7/parsers/v2.5.1/ORU_R01_Parser';
+
+// The message structure itself, as data
+import { ORU_R01_STRUCTURE } from '@campfhir/hl7/structures/v2.5.1';
 ```
+
+Every builder takes the message's required segments and groups as positional arguments, in the
+order of the standard's message table, then an `options` object for the optional ones:
+`createADT_A01(msh, evn, pid, pv1, { pd1, nk1List, insuranceGroups })`,
+`createACK(msh, msa, { err })`. `verify()` lists what is missing or misplaced and `encode()` throws
+when the message is invalid. A parsed message has the same shape as the builder input, so a message
+can be parsed, edited and rebuilt without conversion.
 
 ## Usage Examples
 
@@ -203,7 +214,7 @@ const obx = new OBX()
 const patientResult: PatientResult = {
   pid,
   pv1,
-  orderObservations: [{ obr, obxList: [obx] }],
+  orderObservations: [{ obr, observations: [{ obx }] }],
 };
 
 const message = createORU_R01(msh, [patientResult]);
@@ -224,8 +235,8 @@ OBX|1|NM|718-7^Hemoglobin^LN|1|15.5|g/dL^grams per deciliter^UCUM|13.5-17.5||||F
 
 const result = parseORU_R01(hl7String);
 
-if (result.success) {
-  const parsed = result.data!;
+if (result.ok) {
+  const parsed = result.val;
 
   // Access MSH data
   console.log('Sending App:', ParserUtils.getComponent(parsed.msh.fields[1], 0));
@@ -235,7 +246,7 @@ if (result.success) {
   console.log('Patient Name:', ParserUtils.getComponent(pidFields[4], 0));
 
   // Access observations
-  parsed.patientResults[0].orderObservations[0].obxList.forEach(obx => {
+  parsed.patientResults[0].orderObservations[0].observations!.forEach(({ obx }) => {
     const name = ParserUtils.getComponent(obx.fields[2], 1);
     const value = ParserUtils.getComponent(obx.fields[4], 0);
     console.log(`${name}: ${value}`);
@@ -244,7 +255,7 @@ if (result.success) {
   // Re-encode (round-trip)
   console.log(parsed.message.encode());
 } else {
-  console.error('Parse error:', result.error);
+  console.error('Parse error:', result.err.message);
 }
 ```
 
@@ -384,7 +395,6 @@ npx tsx examples/parser-example.ts                 # Parse and round-trip
 npx tsx examples/oru-r30-example.ts                # Build ORU^R30 (point-of-care)
 npx tsx examples/parse-modify-encode-example.ts    # Parse, modify, re-encode
 npx tsx examples/value-extractor-example.ts        # Value extraction
-npx tsx examples/automatic-setid-renumbering.ts    # SetID auto-renumbering
 ```
 
 ## Architecture
@@ -399,18 +409,27 @@ const msh = new MSH()
   .receivingApplication('SYS');
 ```
 
-### Parser Architecture
+### Structure-driven messages
 
-Parsers convert HL7 strings into structured segment objects. Each message parser orchestrates individual segment parsers to reconstruct the full message structure including groups (patient results, order observations):
+A message's structure — the ordered segments, choices and groups of the standard's message table —
+is data (`src/structures/<version>/<MSG>.ts`, generated from `codegen/schemas/`). The parser and
+builder of a message are generated too and contain no message-specific logic: they hand the
+structure and the segment classes of their version to the engine in `src/types/structure.ts`.
+`parseStructure` walks the raw segments against the structure (a repeating group starts a new
+instance whenever the next segment can begin one; missing required items and misplaced known
+segments are errors; unknown segments such as Z segments are skipped with a warning),
+`verifyStructure` checks a builder's input and `encodeStructure` writes it out in order.
 
 ```typescript
-export class ORU_R01_Parser {
-  parse(input: string): Result<ParsedORU_R01> { ... }
-}
+import { parseStructure } from '@campfhir/hl7';
+import { ORU_R01_STRUCTURE } from '@campfhir/hl7/structures/v2.5.1';
 
-// or use the convenience function:
-const result = parseORU_R01(hl7String);
+// what parseORU_R01 does, given the v2.5.1 segment parsers
+const result = parseStructure('ORU_R01', ORU_R01_STRUCTURE, parsers, hl7String);
 ```
+
+Adding a message therefore means writing its schema (with the source page it was checked
+against), not a parser.
 
 ### Version Organization
 
@@ -428,13 +447,14 @@ Segments, builders, and parsers are organized by HL7 version (`v2.3`, `v2.5.1`),
 
 ### Adding a New Message Type
 
-1. Create a builder in `src/builders/v2.5.1/<MSG_TYPE>.ts`
-2. Create a parser in `src/parsers/v2.5.1/<MSG_TYPE>_Parser.ts`
+1. Describe the message in `codegen/schemas/<version>/<MSG_TYPE>.ts` (see [codegen/README.md](codegen/README.md))
+2. Register it in that version's `version.ts` and run `pnpm codegen && pnpm barrels && pnpm exports`
+3. Add tests for the generated `create<MSG_TYPE>` and `parse<MSG_TYPE>`
 
 ### Adding a New HL7 Version
 
-1. Create `src/segments/v2.X/`, `src/builders/v2.X/`, `src/parsers/v2.X/`
-2. Implement version-specific segments, builders, and parsers
+1. Add `codegen/schemas/v2.X/version.ts` naming its base version and the messages whose structure changed
+2. Hand-write the segments the version introduces in `src/segments/v2.X/`; everything else is generated or mirrored from the base version
 
 ## Design Decisions
 

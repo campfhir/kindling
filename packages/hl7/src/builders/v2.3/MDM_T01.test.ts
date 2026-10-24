@@ -57,8 +57,8 @@ describe("parseMDM_T01 / parseMDM_T02 (v2.3)", () => {
 
   test("T02 without OBX, OBX before TXA, and T01 without TXA are rejected", () => {
     expect(parseMDM_T02([MSH_LINE("T02"), ...body].join("\r")).err!.message).toMatch(/MDM_T02 message must contain at least one OBX segment/);
-    expect(parseMDM_T02([MSH_LINE("T02"), ...body.slice(0, 3), "OBX|1|TX", "TXA|1"].join("\r")).err!.message).toMatch(/OBX segment at line 5 must follow the TXA segment/);
+    expect(parseMDM_T02([MSH_LINE("T02"), ...body.slice(0, 3), "OBX|1|TX", "TXA|1"].join("\r")).err!.message).toMatch(/MDM_T02 message must contain a TXA segment/);
     expect(parseMDM_T01([MSH_LINE("T01"), ...body.slice(0, 3)].join("\r")).err!.message).toMatch(/MDM_T01 message must contain a TXA segment/);
-    expect(parseMDM_T01([MSH_LINE("T01"), "EVN|T01", "PV1|1|I"].join("\r")).err!.message).toMatch(/PV1 segment at line 3 must follow the PID segment/);
+    expect(parseMDM_T01([MSH_LINE("T01"), "EVN|T01", "PV1|1|I"].join("\r")).err!.message).toMatch(/MDM_T01 message must contain a PID segment/);
   });
 });

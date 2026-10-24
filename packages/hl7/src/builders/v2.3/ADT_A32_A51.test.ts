@@ -47,15 +47,15 @@ for (const [label, builders, parsers] of [
         const parse = (parsers as Record<string, unknown>)[`parseADT_${event}`] as (s: string) => Result<{ mrg: unknown }>;
         const mrg = new MRG().priorPatientId({ id: "OLD-1" });
         const options = event === "A50" || event === "A51" ? { pv1: new PV1().patientClass("I") } : {};
-        const encoded = create(msh(event), pid(), mrg, options).encode();
-        const expected = ["MSH", "PID", "MRG", ...(options.pv1 ? ["PV1"] : [])];
+        const encoded = create(msh(event), new EVN().eventTypeCode(event), pid(), mrg, options).encode();
+        const expected = ["MSH", "EVN", "PID", "MRG", ...(options.pv1 ? ["PV1"] : [])];
         expect(encoded.split("\r").map((s) => s.substring(0, 3))).toEqual(expected);
         const parsed = parse(encoded);
         expect(parsed.ok).toBe(true);
         expect(parsed.val!.mrg).toBeTruthy();
-        const missingMrg = parse(`MSH|^~\\&|TEST|||||ADT^${event}\rPID|1`);
+        const missingMrg = parse(`MSH|^~\\&|TEST|||||ADT^${event}\rEVN|${event}\rPID|1`);
         expect(missingMrg.ok).toBe(false);
-        expect(missingMrg.err!.message).toContain(`ADT_${event} message must contain a MRG segment`);
+        expect(missingMrg.err!.message).toContain(`ADT_${event} message must contain an MRG segment`);
       });
     }
   });

@@ -37,7 +37,7 @@ function fullMessage() {
         ],
         rxa: makeRXA("1"),
         rxr: new RXR().route({ code: "IM" }),
-        observations: [{ obx: new OBX().setId("1").valueType("CE"), notes: [new NTE().setId("1").comment("n")] }],
+        observations: [{ obx: new OBX().setId("1").valueType("CE"), nteList: [new NTE().setId("1").comment("n")] }],
       },
       { orc: makeORC(), rxa: makeRXA("2") },
     ],
@@ -64,9 +64,9 @@ describe("VXU_V04 builder (v2.5)", () => {
       orders: [{ rxa: makeRXA() }, { orc: makeORC() }, { orc: makeORC(), rxa: makeRXA(), timing: [{ tq2List: [] }] }],
     });
     expect(msg.verify().errors).toEqual([
-      "Order 1: ORC segment is required",
-      "Order 2: RXA segment is required",
-      "Order 3, timing 1: TQ1 segment is required",
+      "ORDER group 1: ORC segment is required",
+      "ORDER group 2: RXA segment is required",
+      "ORDER group 3: TIMING group 1: TQ1 segment is required",
     ]);
     expect(() => msg.encode()).toThrow(/ORC segment is required/);
   });
@@ -82,13 +82,13 @@ describe("VXU_V04 parser (v2.5)", () => {
     expect(val.sftList).toHaveLength(2);
     expect(val.gt1List).toHaveLength(1);
     expect(val.orders).toHaveLength(2);
-    expect(val.orders[0].orc).toBeInstanceOf(ORC);
-    expect(val.orders[0].timing.map((t) => t.tq2List.length)).toEqual([2, 0]);
-    expect(val.orders[0].timing[0].tq1).toBeInstanceOf(TQ1);
-    expect(val.orders[0].timing[0].tq2List[0]).toBeInstanceOf(TQ2);
-    expect(val.orders[0].rxa).toBeInstanceOf(RXA);
-    expect(val.orders[0].observations[0].notes).toHaveLength(1);
-    expect(val.orders[1].timing).toEqual([]);
+    expect(val.orders![0].orc).toBeInstanceOf(ORC);
+    expect(val.orders![0].timing!.map((t) => t.tq2List!.length)).toEqual([2, 0]);
+    expect(val.orders![0].timing![0].tq1).toBeInstanceOf(TQ1);
+    expect(val.orders![0].timing![0].tq2List![0]).toBeInstanceOf(TQ2);
+    expect(val.orders![0].rxa).toBeInstanceOf(RXA);
+    expect(val.orders![0].observations![0].nteList).toHaveLength(1);
+    expect(val.orders![1].timing).toEqual([]);
     expect(val.message.segments).toHaveLength(wire.split("\r").length);
   });
 

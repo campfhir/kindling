@@ -1,51 +1,61 @@
 /**
- * Builder for BAR^P02 messages (HL7 v2.3): purge patient accounts. Structure: MSH EVN { PID [PD1] [PV1] [{DB1}] }
+ * Builder for BAR^P02 messages (HL7 v2.3).
+ *
+ * Structure: MSH EVN { PATIENT: PID [PD1] [PV1] [{DB1}] }
  *
  * @module
  */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
+import { BAR_P02_STRUCTURE } from "../../structures/v2.3/BAR_P02.ts";
 import type { MSH } from "../../segments/v2.3/MSH.ts";
 import type { EVN } from "../../segments/v2.3/EVN.ts";
 import type { PID } from "../../segments/v2.3/PID.ts";
 import type { PD1 } from "../../segments/v2.3/PD1.ts";
 import type { PV1 } from "../../segments/v2.3/PV1.ts";
 import type { DB1 } from "../../segments/v2.3/DB1.ts";
-import { type EncodingCharacters, DEFAULT_ENCODING } from "../../types/encoding.ts";
 
-/** BARPurgePatientGroup — one PATIENT group of a BAR^P02 message. */
+/** The PATIENT group of an BAR^P02 (HL7 v2.3) message being built. */
 export interface BARPurgePatientGroup {
-  /** The pid value. */
+  /** The PID segment. */
   pid: PID;
-  /** The pd1 value. */
+  /** The PD1 segment. */
   pd1?: PD1;
-  /** The pv1 value. */
+  /** The PV1 segment. */
   pv1?: PV1;
-  /** The db1 list value. */
+  /** The DB1 segments. */
   db1List?: DB1[];
 }
 
-/** Builder for HL7 BAR^P02 (v2.3) messages. */
+/** The optional segments and groups of an BAR^P02 (HL7 v2.3) message. The message has none. */
+export type BAR_P02Options = Record<string, never>;
+
+/** Builder for HL7 BAR^P02 (HL7 v2.3) messages. */
 export class BAR_P02<TMSH extends MSH = MSH, TEVN extends EVN = EVN> {
-  /** The message name value. */
+  /** The message name used in error messages. */
   protected readonly messageName: string = "BAR_P02";
+  /** The structure the message is verified against and encoded in. */
+  protected readonly structure: StructureItem[] = BAR_P02_STRUCTURE;
 
   /** Constructor. */
   constructor(
     public msh: TMSH,
     public evn: TEVN,
-    /** The PATIENT groups; at least one is required. */
     public patients: BARPurgePatientGroup[],
-    private encoding: EncodingCharacters = DEFAULT_ENCODING,
+    public options: BAR_P02Options = {},
+    protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
+
+  /** The message as one object keyed by structure property name (what verify() and encode() work on). */
+  toInput(): StructureInput {
+    return { ...this.options, msh: this.msh, evn: this.evn, patients: this.patients };
+  }
 
   /** Validates the message structure, returning a result. */
   verify(): { valid: boolean; errors: string[] } {
-    const errors: string[] = [];
-    if (!this.msh) errors.push("MSH segment is required");
-    if (!this.evn) errors.push("EVN segment is required");
-    if (!this.patients || this.patients.length === 0) errors.push("At least one PATIENT group (PID) is required");
-    (this.patients ?? []).forEach((p, i) => {
-      if (!p.pid) errors.push(`PATIENT group ${i + 1}: PID segment is required`);
-    });
+    const errors = verifyStructure(this.structure, this.toInput());
     return { valid: errors.length === 0, errors };
   }
 
@@ -53,28 +63,19 @@ export class BAR_P02<TMSH extends MSH = MSH, TEVN extends EVN = EVN> {
   encode(): string {
     const verification = this.verify();
     if (!verification.valid) {
-      throw new Error(
-        `Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`,
-      );
+      throw new Error(`Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`);
     }
-    const enc = this.encoding;
-    const out = [this.msh.encode(enc), this.evn.encode(enc)];
-    for (const p of this.patients) {
-      out.push(p.pid.encode(enc));
-      if (p.pd1) out.push(p.pd1.encode(enc));
-      if (p.pv1) out.push(p.pv1.encode(enc));
-      for (const s of p.db1List ?? []) out.push(s.encode(enc));
-    }
-    return out.join("\r");
+    return encodeStructure(this.structure, this.toInput(), this.encoding);
   }
 }
 
-/** Builds an HL7 BAR^P02 (v2.3) message. */
+/** Builds an HL7 BAR^P02 (HL7 v2.3) message. */
 export function createBAR_P02<TMSH extends MSH = MSH, TEVN extends EVN = EVN>(
   msh: TMSH,
   evn: TEVN,
   patients: BARPurgePatientGroup[],
-  encoding?: EncodingCharacters,
+  options: BAR_P02Options = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): BAR_P02<TMSH, TEVN> {
-  return new BAR_P02(msh, evn, patients, encoding);
+  return new BAR_P02(msh, evn, patients, options, encoding);
 }

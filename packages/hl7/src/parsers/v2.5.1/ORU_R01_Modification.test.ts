@@ -26,7 +26,7 @@ test("Parse and modify - Add OBX to beginning of order", () => {
   expect(parseResult.val).toBeTruthy();
 
   const patientResult = parseResult.val!.patientResults[0];
-  const originalObxCount = patientResult.orderObservations[0].obxList.length;
+  const originalObxCount = patientResult.orderObservations[0].observations!.length;
 
   // Add OBX to beginning
   const newObx = new OBX()
@@ -40,10 +40,10 @@ test("Parse and modify - Add OBX to beginning of order", () => {
     .abnormalFlags("N")
     .observationResultStatus("F");
 
-  patientResult.orderObservations[0].obxList.unshift(newObx);
+  patientResult.orderObservations[0].observations!.unshift({ obx: newObx });
 
   // Verify modification
-  expect(patientResult.orderObservations[0].obxList.length, ).toBe(originalObxCount + 1);
+  expect(patientResult.orderObservations[0].observations!.length, ).toBe(originalObxCount + 1);
 
   // Re-encode and verify
   const rebuilt = createORU_R01(parseResult.val!.msh, [patientResult]);
@@ -52,7 +52,7 @@ test("Parse and modify - Add OBX to beginning of order", () => {
   const reParseResult = parseORU_R01(reencoded);
   expect(reParseResult.ok).toBe(true);
   expect(reParseResult.val).toBeTruthy();
-  expect(reParseResult.val!.patientResults[0].orderObservations[0].obxList.length, ).toBe(originalObxCount + 1);
+  expect(reParseResult.val!.patientResults[0].orderObservations[0].observations!.length, ).toBe(originalObxCount + 1);
 });
 
 test("Parse and modify - Add OBX to middle of order", () => {
@@ -61,7 +61,7 @@ test("Parse and modify - Add OBX to middle of order", () => {
   expect(parseResult.val).toBeTruthy();
 
   const patientResult = parseResult.val!.patientResults[0];
-  const originalObxCount = patientResult.orderObservations[0].obxList.length;
+  const originalObxCount = patientResult.orderObservations[0].observations!.length;
 
   // Add OBX to middle (after first item)
   const newObx = new OBX()
@@ -75,10 +75,10 @@ test("Parse and modify - Add OBX to middle of order", () => {
     .abnormalFlags("N")
     .observationResultStatus("F");
 
-  patientResult.orderObservations[0].obxList.splice(1, 0, newObx);
+  patientResult.orderObservations[0].observations!.splice(1, 0, { obx: newObx });
 
   // Verify modification
-  expect(patientResult.orderObservations[0].obxList.length, ).toBe(originalObxCount + 1);
+  expect(patientResult.orderObservations[0].observations!.length, ).toBe(originalObxCount + 1);
 
   // Re-encode and verify
   const rebuilt = createORU_R01(parseResult.val!.msh, [patientResult]);
@@ -87,7 +87,7 @@ test("Parse and modify - Add OBX to middle of order", () => {
   const reParseResult = parseORU_R01(reencoded);
   expect(reParseResult.ok).toBe(true);
   expect(reParseResult.val).toBeTruthy();
-  expect(reParseResult.val!.patientResults[0].orderObservations[0].obxList.length, ).toBe(originalObxCount + 1);
+  expect(reParseResult.val!.patientResults[0].orderObservations[0].observations!.length, ).toBe(originalObxCount + 1);
 });
 
 test("Parse and modify - Add OBX to end of order", () => {
@@ -96,7 +96,7 @@ test("Parse and modify - Add OBX to end of order", () => {
   expect(parseResult.val).toBeTruthy();
 
   const patientResult = parseResult.val!.patientResults[0];
-  const originalObxCount = patientResult.orderObservations[0].obxList.length;
+  const originalObxCount = patientResult.orderObservations[0].observations!.length;
 
   // Add OBX to end
   const newObx = new OBX()
@@ -110,10 +110,10 @@ test("Parse and modify - Add OBX to end of order", () => {
     .abnormalFlags("N")
     .observationResultStatus("F");
 
-  patientResult.orderObservations[0].obxList.push(newObx);
+  patientResult.orderObservations[0].observations!.push({ obx: newObx });
 
   // Verify modification
-  expect(patientResult.orderObservations[0].obxList.length, ).toBe(originalObxCount + 1);
+  expect(patientResult.orderObservations[0].observations!.length, ).toBe(originalObxCount + 1);
 
   // Re-encode and verify
   const rebuilt = createORU_R01(parseResult.val!.msh, [patientResult]);
@@ -122,7 +122,7 @@ test("Parse and modify - Add OBX to end of order", () => {
   const reParseResult = parseORU_R01(reencoded);
   expect(reParseResult.ok).toBe(true);
   expect(reParseResult.val).toBeTruthy();
-  expect(reParseResult.val!.patientResults[0].orderObservations[0].obxList.length, ).toBe(originalObxCount + 1);
+  expect(reParseResult.val!.patientResults[0].orderObservations[0].observations!.length, ).toBe(originalObxCount + 1);
 });
 
 test("Parse and modify - Add OBR to beginning", () => {
@@ -155,7 +155,7 @@ test("Parse and modify - Add OBR to beginning", () => {
 
   patientResult.orderObservations.unshift({
     obr: newObr,
-    obxList: [newObx],
+    observations: [{ obx: newObx }],
   });
 
   // Verify modification
@@ -201,7 +201,7 @@ test("Parse and modify - Add OBR to middle", () => {
 
   patientResult.orderObservations.splice(1, 0, {
     obr: newObr,
-    obxList: [newObx],
+    observations: [{ obx: newObx }],
   });
 
   // Verify modification
@@ -247,7 +247,7 @@ test("Parse and modify - Add OBR to end", () => {
 
   patientResult.orderObservations.push({
     obr: newObr,
-    obxList: [newObx],
+    observations: [{ obx: newObx }],
   });
 
   // Verify modification
@@ -299,7 +299,7 @@ test("Parse and modify - Add OBR with ORC", () => {
   patientResult.orderObservations.push({
     orc: newOrc,
     obr: newObr,
-    obxList: [newObx],
+    observations: [{ obx: newObx }],
   });
 
   // Re-encode and verify ORC is preserved
@@ -326,7 +326,7 @@ test("Parse and modify - Multiple operations", () => {
 
   // Track original counts
   const originalOrderCount = patientResult.orderObservations.length;
-  const originalCbcObxCount = patientResult.orderObservations[0].obxList.length;
+  const originalCbcObxCount = patientResult.orderObservations[0].observations!.length;
 
   // 1. Add OBX to existing CBC order
   const hgbObx = new OBX()
@@ -340,7 +340,7 @@ test("Parse and modify - Multiple operations", () => {
     .abnormalFlags("N")
     .observationResultStatus("F");
 
-  patientResult.orderObservations[0].obxList.push(hgbObx);
+  patientResult.orderObservations[0].observations!.push({ obx: hgbObx });
 
   // 2. Add new order at beginning
   const naObr = new OBR()
@@ -364,7 +364,7 @@ test("Parse and modify - Multiple operations", () => {
 
   patientResult.orderObservations.unshift({
     obr: naObr,
-    obxList: [naObx],
+    observations: [{ obx: naObx }],
   });
 
   // 3. Add new order at end
@@ -389,12 +389,12 @@ test("Parse and modify - Multiple operations", () => {
 
   patientResult.orderObservations.push({
     obr: kObr,
-    obxList: [kObx],
+    observations: [{ obx: kObx }],
   });
 
   // Verify all modifications
   expect(patientResult.orderObservations.length, "Should have 2 more orders").toBe(originalOrderCount + 2);
-  expect(patientResult.orderObservations[1].obxList.length, "CBC should have 1 more OBX").toBe(originalCbcObxCount + 1);
+  expect(patientResult.orderObservations[1].observations!.length, "CBC should have 1 more OBX").toBe(originalCbcObxCount + 1);
 
   // Re-encode and verify
   const rebuilt = createORU_R01(parseResult.val!.msh, [patientResult]);
@@ -404,7 +404,7 @@ test("Parse and modify - Multiple operations", () => {
   expect(reParseResult.ok).toBe(true);
   expect(reParseResult.val).toBeTruthy();
   expect(reParseResult.val!.patientResults[0].orderObservations.length, ).toBe(originalOrderCount + 2);
-  expect(reParseResult.val!.patientResults[0].orderObservations[1].obxList.length, ).toBe(originalCbcObxCount + 1);
+  expect(reParseResult.val!.patientResults[0].orderObservations[1].observations!.length, ).toBe(originalCbcObxCount + 1);
 });
 
 test("Parse and modify - Preserve all ORCs in round-trip", () => {

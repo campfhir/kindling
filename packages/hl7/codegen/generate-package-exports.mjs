@@ -7,7 +7,7 @@ import { resolve } from "node:path";
 const ROOT = resolve(process.cwd());
 const pkgPath = resolve(ROOT, "package.json");
 const pkg = JSON.parse(readFileSync(pkgPath, "utf8"));
-const KINDS = ["segments", "parsers", "builders"];
+const KINDS = ["segments", "structures", "parsers", "builders"];
 
 const entry = (path) => ({
   require: `./dist/${path}.js`,

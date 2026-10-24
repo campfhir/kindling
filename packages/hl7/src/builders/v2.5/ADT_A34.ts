@@ -1,11 +1,15 @@
 /**
- * Builder for ADT^A34 messages (HL7 v2.5): MSH [{SFT}] EVN PID [PD1] MRG [PV1].
+ * Builder for ADT^A34 messages (HL7 v2.5).
  *
- * The merge/move/change events (A18, A30, A35–A37, A39–A51) reuse this builder; PV1 is an
- * option so the events that require it can pass it.
+ * Structure: MSH [{SFT}] EVN PID [PD1] MRG [PV1]
  *
  * @module
  */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
+import { ADT_A34_STRUCTURE } from "../../structures/v2.5/ADT_A34.ts";
 import type { MSH } from "../../segments/v2.5/MSH.ts";
 import type { SFT } from "../../segments/v2.5/SFT.ts";
 import type { EVN } from "../../segments/v2.5/EVN.ts";
@@ -13,41 +17,42 @@ import type { PID } from "../../segments/v2.5/PID.ts";
 import type { PD1 } from "../../segments/v2.5/PD1.ts";
 import type { MRG } from "../../segments/v2.5/MRG.ts";
 import type { PV1 } from "../../segments/v2.5/PV1.ts";
-import { type EncodingCharacters, DEFAULT_ENCODING } from "../../types/encoding.ts";
 
-/** Builder for HL7 ADT^A34 (v2.5) messages. */
-export class ADT_A34<
-  TMSH extends MSH = MSH,
-  TEVN extends EVN = EVN,
-  TPID extends PID = PID,
-  TPD1 extends PD1 = PD1,
-  TMRG extends MRG = MRG,
-  TPV1 extends PV1 = PV1,
-> {
-  /** The message name value. */
+/** The optional segments and groups of an ADT^A34 (HL7 v2.5) message. */
+export interface ADT_A34Options {
+  /** The SFT segments. */
+  sftList?: SFT[];
+  /** The PD1 segment. */
+  pd1?: PD1;
+  /** The PV1 segment. */
+  pv1?: PV1;
+}
+
+/** Builder for HL7 ADT^A34 (HL7 v2.5) messages. */
+export class ADT_A34<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TMRG extends MRG = MRG> {
+  /** The message name used in error messages. */
   protected readonly messageName: string = "ADT_A34";
+  /** The structure the message is verified against and encoded in. */
+  protected readonly structure: StructureItem[] = ADT_A34_STRUCTURE;
 
   /** Constructor. */
   constructor(
     public msh: TMSH,
+    public evn: TEVN,
     public pid: TPID,
     public mrg: TMRG,
-    public options: {
-      /** Software segments, which follow MSH. */
-      sftList?: SFT[];
-      evn?: TEVN;
-      pd1?: TPD1;
-      pv1?: TPV1;
-    } = {},
-    private encoding: EncodingCharacters = DEFAULT_ENCODING,
+    public options: ADT_A34Options = {},
+    protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
+
+  /** The message as one object keyed by structure property name (what verify() and encode() work on). */
+  toInput(): StructureInput {
+    return { ...this.options, msh: this.msh, evn: this.evn, pid: this.pid, mrg: this.mrg };
+  }
 
   /** Validates the message structure, returning a result. */
   verify(): { valid: boolean; errors: string[] } {
-    const errors: string[] = [];
-    if (!this.msh) errors.push("MSH segment is required");
-    if (!this.pid) errors.push("PID segment is required");
-    if (!this.mrg) errors.push("MRG segment is required");
+    const errors = verifyStructure(this.structure, this.toInput());
     return { valid: errors.length === 0, errors };
   }
 
@@ -55,37 +60,20 @@ export class ADT_A34<
   encode(): string {
     const verification = this.verify();
     if (!verification.valid) {
-      throw new Error(
-        `Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`,
-      );
+      throw new Error(`Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`);
     }
-    const enc = this.encoding;
-    const o = this.options;
-    const out: string[] = [this.msh.encode(enc)];
-    for (const s of o.sftList ?? []) out.push(s.encode(enc));
-    if (o.evn) out.push(o.evn.encode(enc));
-    out.push(this.pid.encode(enc));
-    if (o.pd1) out.push(o.pd1.encode(enc));
-    out.push(this.mrg.encode(enc));
-    if (o.pv1) out.push(o.pv1.encode(enc));
-    return out.join("\r");
+    return encodeStructure(this.structure, this.toInput(), this.encoding);
   }
 }
 
-/** Builds an HL7 ADT^A34 (v2.5) message. */
-export function createADT_A34<
-  TMSH extends MSH = MSH,
-  TEVN extends EVN = EVN,
-  TPID extends PID = PID,
-  TPD1 extends PD1 = PD1,
-  TMRG extends MRG = MRG,
-  TPV1 extends PV1 = PV1,
->(
+/** Builds an HL7 ADT^A34 (HL7 v2.5) message. */
+export function createADT_A34<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TMRG extends MRG = MRG>(
   msh: TMSH,
+  evn: TEVN,
   pid: TPID,
   mrg: TMRG,
-  options: ADT_A34<TMSH, TEVN, TPID, TPD1, TMRG, TPV1>["options"] = {},
-  encoding?: EncodingCharacters,
-): ADT_A34<TMSH, TEVN, TPID, TPD1, TMRG, TPV1> {
-  return new ADT_A34(msh, pid, mrg, options, encoding);
+  options: ADT_A34Options = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
+): ADT_A34<TMSH, TEVN, TPID, TMRG> {
+  return new ADT_A34(msh, evn, pid, mrg, options, encoding);
 }

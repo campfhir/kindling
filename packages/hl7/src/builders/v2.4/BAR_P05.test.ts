@@ -46,12 +46,12 @@ describe("BAR (v2.4): ROLs, repeating IN3, and ABS/BLC/RMI in P05", () => {
     expect(v.rolList).toHaveLength(1);
     expect(v.visits).toHaveLength(2);
     expect(v.visits[0].visitRolList).toHaveLength(1);
-    expect(v.visits[0].insurances[0].in3List).toHaveLength(2);
-    expect(v.visits[0].insurances[0].rolList).toHaveLength(1);
+    expect(v.visits[0].insurances![0].in3List).toHaveLength(2);
+    expect(v.visits[0].insurances![0].rolList).toHaveLength(1);
     expect(ParserUtils.getComponent(v.visits[0].abs!.fields[8], 0)).toBe("ELE");
     expect(ParserUtils.getComponent(v.visits[0].abs!.fields[11], 0)).toBe("39");
     expect(v.visits[0].blcList).toHaveLength(2);
-    expect(ParserUtils.getComponent(v.visits[0].blcList[0].fields[1], 1)).toBe("U");
+    expect(ParserUtils.getComponent(v.visits[0].blcList![0].fields[1], 1)).toBe("U");
     expect(ParserUtils.getComponent(v.visits[0].rmi!.fields[0], 0)).toBe("FALL");
     expect(v.visits[1].blcList).toHaveLength(0);
     expect(v.message.encode()).toBe(wire);

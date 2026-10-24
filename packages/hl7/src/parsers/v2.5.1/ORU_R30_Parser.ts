@@ -1,277 +1,102 @@
 /**
  * Parser for ORU^R30 messages (HL7 v2.5.1).
  *
+ * Structure: MSH [{SFT}] PID [PD1] [ VISIT: PV1 [PV2] ] ORC OBR [{NTE}] [{ TIMING_QTY: TQ1 [{TQ2}] }] { OBSERVATION: OBX [{NTE}] }
+ *
  * @module
  */
-import { Err } from "../../utils/err.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../../types/result.ts";
-import { HL7Message } from "../../types/message.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
+import { ORU_R30_STRUCTURE } from "../../structures/v2.5.1/ORU_R30.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { PID } from "../../segments/v2.5.1/PID.ts";
+import { PD1 } from "../../segments/v2.5.1/PD1.ts";
 import { PV1 } from "../../segments/v2.5.1/PV1.ts";
+import { PV2 } from "../../segments/v2.5.1/PV2.ts";
 import { ORC } from "../../segments/v2.5.1/ORC.ts";
 import { OBR } from "../../segments/v2.5.1/OBR.ts";
+import { NTE } from "../../segments/v2.5.1/NTE.ts";
+import { TQ1 } from "../../segments/v2.5.1/TQ1.ts";
+import { TQ2 } from "../../segments/v2.5.1/TQ2.ts";
 import { OBX } from "../../segments/v2.5.1/OBX.ts";
 
-/** Structured result of parsing an HL7 ORU^R30 (v2.5.1) message. */
-export interface ParsedORU_R30 {
-  /** The message value. */
-  message: HL7Message;
-  /** The msh value. */
+/** The TIMING QTY group of a parsed ORU^R30 (HL7 v2.5.1) message. */
+export interface ParsedTimingQty {
+  /** The TQ1 segment. */
+  tq1: TQ1;
+  /** The TQ2 segments. */
+  tq2List?: TQ2[];
+}
+
+/** The OBSERVATION group of a parsed ORU^R30 (HL7 v2.5.1) message. */
+export interface ParsedObservation {
+  /** The OBX segment. */
+  obx: OBX;
+  /** The NTE segments. */
+  nteList?: NTE[];
+}
+
+/** Structured result of parsing an HL7 ORU^R30 (HL7 v2.5.1) message. */
+export interface ParsedORU_R30 extends ParsedMessageBase {
+  /** The MSH segment. */
   msh: MSH;
-  /** The patient results value. */
-  patientResults: ParsedPatientResultR30[];
-}
-
-/** Structured result of parsing an HL7 ORU^R30 (v2.5.1) message. */
-export interface ParsedPatientResultR30 {
-  /** The pid value. */
-  pid?: PID;
-  /** The pv1 value. */
+  /** The SFT segments. */
+  sftList?: SFT[];
+  /** The PID segment. */
+  pid: PID;
+  /** The PD1 segment. */
+  pd1?: PD1;
+  /** The PV1 segment. */
   pv1?: PV1;
-  /** The order observations value. */
-  orderObservations: ParsedOrderObservationR30[];
-}
-
-/** Structured result of parsing an HL7 ORU^R30 (v2.5.1) message. */
-export interface ParsedOrderObservationR30 {
-  /** The orc value. */
+  /** The PV2 segment. */
+  pv2?: PV2;
+  /** The ORC segment. */
   orc: ORC;
-  /** The obr value. */
+  /** The OBR segment. */
   obr: OBR;
-  /** The obx list value. */
-  obxList: OBX[];
+  /** The NTE segments. */
+  obrNteList?: NTE[];
+  /** The TIMING QTY groups. */
+  timing?: ParsedTimingQty[];
+  /** The OBSERVATION groups. */
+  observations: ParsedObservation[];
 }
 
-/** Parser for HL7 ORU^R30 (v2.5.1) messages. */
+/** The segment parsers of ORU^R30 (HL7 v2.5.1). */
+const PARSERS: SegmentParsers = {
+  MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
+  PID: (s, e) => PID.parse(s, e),
+  PD1: (s, e) => PD1.parse(s, e),
+  PV1: (s, e) => PV1.parse(s, e),
+  PV2: (s, e) => PV2.parse(s, e),
+  ORC: (s, e) => ORC.parse(s, e),
+  OBR: (s, e) => OBR.parse(s, e),
+  NTE: (s, e) => NTE.parse(s, e),
+  TQ1: (s, e) => TQ1.parse(s, e),
+  TQ2: (s, e) => TQ2.parse(s, e),
+  OBX: (s, e) => OBX.parse(s, e),
+};
+
+/** Parser for HL7 ORU^R30 (HL7 v2.5.1) messages. */
 export class ORU_R30_Parser {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "ORU_R30";
+  /** The structure the message is parsed against. */
+  protected readonly structure: StructureItem[] = ORU_R30_STRUCTURE;
+  /** The segment parsers, keyed by segment name. */
+  protected readonly parsers: SegmentParsers = PARSERS;
+
   /** Parses the input string into a structured instance. */
   parse(messageString: string): Result<ParsedORU_R30> {
-    try {
-      const segments = messageString
-        .split(/\r\n|\r|\n/)
-        .filter((s) => s.trim().length > 0);
-
-      if (segments.length === 0) {
-        return { ok: false, err: new Err("Empty message") };
-      }
-
-      const mshSegment = segments[0];
-      if (!mshSegment.startsWith("MSH")) {
-        return {
-          ok: false,
-          err: new Err("Message must start with MSH segment"),
-        };
-      }
-
-      const mshResult = MSH.parse(mshSegment);
-      if (!mshResult.ok || !mshResult.val) {
-        return {
-          ok: false,
-          err: new Err(mshResult.err.message || "Failed to parse MSH segment"),
-        };
-      }
-
-      const msh = mshResult.val;
-      // Get encoding from the parsed MSH segment
-      const encoding = msh.getEncoding();
-      const message = new HL7Message(encoding);
-      message.addSegment(msh);
-
-      type InProgressOrderObservationR30 = Omit<ParsedOrderObservationR30, "obr"> & {
-        obr: OBR | null;
-      };
-
-      const isComplete = (
-        obs: InProgressOrderObservationR30,
-      ): obs is ParsedOrderObservationR30 => obs.obr !== null;
-
-      const patientResults: ParsedPatientResultR30[] = [];
-      let currentPatientResult: ParsedPatientResultR30 | null = null;
-      let currentOrderObservation: InProgressOrderObservationR30 | null = null;
-
-      for (let i = 1; i < segments.length; i++) {
-        const segmentStr = segments[i];
-        const segmentType = segmentStr.substring(0, 3);
-
-        switch (segmentType) {
-          case "PID": {
-            if (currentPatientResult && currentOrderObservation && isComplete(currentOrderObservation)) {
-              currentPatientResult.orderObservations.push(currentOrderObservation);
-            }
-            if (currentOrderObservation) {
-              currentOrderObservation = null;
-            }
-            if (currentPatientResult) {
-              patientResults.push(currentPatientResult);
-            }
-
-            const pidResult = PID.parse(segmentStr, encoding);
-            if (!pidResult.ok || !pidResult.val) {
-              return {
-                ok: false,
-                err: new Err(
-                  `Failed to parse PID segment at line ${i + 1}: ${pidResult.err.message}`,
-                ),
-              };
-            }
-
-            currentPatientResult = {
-              pid: pidResult.val,
-              orderObservations: [],
-            };
-            message.addSegment(pidResult.val);
-            break;
-          }
-
-          case "PV1": {
-            const pv1Result = PV1.parse(segmentStr, encoding);
-            if (!pv1Result.ok || !pv1Result.val) {
-              return {
-                ok: false,
-                err: new Err(
-                  `Failed to parse PV1 segment at line ${i + 1}: ${pv1Result.err.message}`,
-                ),
-              };
-            }
-
-            if (currentPatientResult) {
-              currentPatientResult.pv1 = pv1Result.val;
-            }
-            message.addSegment(pv1Result.val);
-            break;
-          }
-
-          case "ORC": {
-            if (currentOrderObservation) {
-              if (isComplete(currentOrderObservation)) {
-                currentPatientResult?.orderObservations.push(currentOrderObservation);
-              }
-              currentOrderObservation = null;
-            }
-
-            const orcResult = ORC.parse(segmentStr, encoding);
-            if (!orcResult.ok || !orcResult.val) {
-              return {
-                ok: false,
-                err: new Err(
-                  `Failed to parse ORC segment at line ${i + 1}: ${orcResult.err.message}`,
-                ),
-              };
-            }
-
-            if (!currentPatientResult) {
-              currentPatientResult = {
-                orderObservations: [],
-              };
-            }
-
-            currentOrderObservation = {
-              orc: orcResult.val,
-              obr: null,
-              obxList: [],
-            };
-            message.addSegment(orcResult.val);
-            break;
-          }
-
-          case "OBR": {
-            const obrResult = OBR.parse(segmentStr, encoding);
-            if (!obrResult.ok || !obrResult.val) {
-              return {
-                ok: false,
-                err: new Err(
-                  `Failed to parse OBR segment at line ${i + 1}: ${obrResult.err.message}`,
-                ),
-              };
-            }
-
-            if (!currentOrderObservation) {
-              return {
-                ok: false,
-                err: new Err(
-                  `OBR segment at line ${i + 1} found without preceding ORC segment`,
-                ),
-              };
-            }
-
-            currentOrderObservation.obr = obrResult.val;
-            message.addSegment(obrResult.val);
-            break;
-          }
-
-          case "OBX": {
-            const obxResult = OBX.parse(segmentStr, encoding);
-            if (!obxResult.ok || !obxResult.val) {
-              return {
-                ok: false,
-                err: new Err(
-                  `Failed to parse OBX segment at line ${i + 1}: ${obxResult.err.message}`,
-                ),
-              };
-            }
-
-            if (!currentOrderObservation || !currentOrderObservation.obr) {
-              return {
-                ok: false,
-                err: new Err(
-                  `OBX segment at line ${i + 1} found without preceding OBR segment`,
-                ),
-              };
-            }
-
-            currentOrderObservation.obxList.push(obxResult.val);
-            message.addSegment(obxResult.val);
-            break;
-          }
-
-          default:
-            return {
-              ok: false,
-              err: new Err(
-                `Unsupported segment type '${segmentType}' at line ${i + 1}`,
-              ),
-            };
-        }
-      }
-
-      if (currentOrderObservation && isComplete(currentOrderObservation)) {
-        currentPatientResult?.orderObservations.push(currentOrderObservation);
-      }
-
-      if (currentPatientResult) {
-        patientResults.push(currentPatientResult);
-      }
-
-      if (patientResults.length === 0) {
-        return {
-          ok: false,
-          err: new Err(
-            "ORU_R30 message must contain at least one patient result",
-          ),
-        };
-      }
-
-      return {
-        ok: true,
-        val: {
-          message,
-          msh,
-          patientResults,
-        },
-      };
-    } catch (error) {
-      return {
-        ok: false,
-        err: new Err(`Failed to parse ORU_R30 message: ${error}`),
-      };
-    }
+    return parseStructure<ParsedORU_R30>(this.messageName, this.structure, this.parsers, messageString);
   }
 }
 
-/** Parses an HL7 ORU^R30 (v2.5.1) message string into a structured result. */
+/** Parses an HL7 ORU^R30 (HL7 v2.5.1) message string into a structured result. */
 export function parseORU_R30(messageString: string): Result<ParsedORU_R30> {
-  const parser = new ORU_R30_Parser();
-  return parser.parse(messageString);
+  return new ORU_R30_Parser().parse(messageString);
 }
-

@@ -23,12 +23,12 @@ test("DFT_P03 (v2.4): order groups without timing, no FT1 note, no SFT", () => {
   expect(result.ok).toBe(true);
   expect(result.val!.rolList).toHaveLength(1);
   expect(result.val!.orders).toHaveLength(1);
-  expect(result.val!.financials[0].orders[0].obrNteList).toHaveLength(1);
-  expect(result.val!.financials[0].orders[0].observations).toHaveLength(1);
-  expect("timing" in result.val!.orders[0]).toBe(false);
+  expect(result.val!.financials[0].orders![0].obrNteList).toHaveLength(1);
+  expect(result.val!.financials[0].orders![0].observations).toHaveLength(1);
+  expect("timing" in result.val!.orders![0]).toBe(false);
   expect(result.val!.message.encode()).toBe(wire);
   // No NTE directly after FT1 in v2.4.
   const bad = parseDFT_P03([MSH_LINE, "EVN|P03", "PID|1", "FT1|1", "NTE|1"].join("\r"));
   expect(bad.ok).toBe(false);
-  expect(bad.err!.message).toMatch(/NTE segment at line 5 must follow an OBR or an OBX segment/);
+  expect(bad.err!.message).toMatch(/NTE segment at line 5 is not allowed at this position in DFT_P03/);
 });

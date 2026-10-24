@@ -1,5 +1,15 @@
-import { Result } from "../../types/result.ts";
-import { EncodingCharacters } from "../../types/encoding.ts";
+/**
+ * Parser for BAR^P01 messages (HL7 v2.5.1).
+ *
+ * Structure: MSH [{SFT}] EVN PID [PD1] [{ROL}] { VISIT: [PV1] [PV2] [{ROL}] [{DB1}] [{OBX}] [{AL1}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] }] [{GT1}] [{NK1}] [{ INSURANCE: IN1 [IN2] [{IN3}] [{ROL}] }] [ACC] [UB1] [UB2] }
+ *
+ * @module
+ */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { Result } from "../../types/result.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
+import { BAR_P01_STRUCTURE } from "../../structures/v2.5.1/BAR_P01.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
 import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { EVN } from "../../segments/v2.5.1/EVN.ts";
@@ -22,108 +32,121 @@ import { IN3 } from "../../segments/v2.5.1/IN3.ts";
 import { ACC } from "../../segments/v2.5.1/ACC.ts";
 import { UB1 } from "../../segments/v2.5.1/UB1.ts";
 import { UB2 } from "../../segments/v2.5.1/UB2.ts";
-import {
-  BAR_P01_Parser as BAR_P01_Parser_base,
-  ParsedBAR_P01,
-  ParsedBARVisit,
-  ParsedBARProcedure,
-  ParsedBARInsurance,
-} from "../v2.5/BAR_P01_Parser.ts";
 
-export type { ParsedBAR_P01, ParsedBARVisit, ParsedBARProcedure, ParsedBARInsurance };
+/** The VISIT group of a parsed BAR^P01 (HL7 v2.5.1) message. */
+export interface ParsedBARVisit {
+  /** The PV1 segment. */
+  pv1?: PV1;
+  /** The PV2 segment. */
+  pv2?: PV2;
+  /** The ROL segments. */
+  visitRolList?: ROL[];
+  /** The DB1 segments. */
+  db1List?: DB1[];
+  /** The OBX segments. */
+  obxList?: OBX[];
+  /** The AL1 segments. */
+  al1List?: AL1[];
+  /** The DG1 segments. */
+  dg1List?: DG1[];
+  /** The DRG segment. */
+  drg?: DRG;
+  /** The PROCEDURE groups. */
+  procedures?: ParsedBARProcedure[];
+  /** The GT1 segments. */
+  gt1List?: GT1[];
+  /** The NK1 segments. */
+  nk1List?: NK1[];
+  /** The INSURANCE groups. */
+  insurances?: ParsedBARInsurance[];
+  /** The ACC segment. */
+  acc?: ACC;
+  /** The UB1 segment. */
+  ub1?: UB1;
+  /** The UB2 segment. */
+  ub2?: UB2;
+}
 
-/** Parser for HL7 BAR^P01 (v2.5.1) messages. */
-export class BAR_P01_Parser extends BAR_P01_Parser_base {
-  protected override parseMSH(s: string): Result<MSH> {
-    return MSH.parse(s);
-  }
+/** The PROCEDURE group of a parsed BAR^P01 (HL7 v2.5.1) message. */
+export interface ParsedBARProcedure {
+  /** The PR1 segment. */
+  pr1: PR1;
+  /** The ROL segments. */
+  rolList?: ROL[];
+}
 
-  protected override parseSFT(s: string, e: EncodingCharacters): Result<SFT> {
-    return SFT.parse(s, e);
-  }
+/** The INSURANCE group of a parsed BAR^P01 (HL7 v2.5.1) message. */
+export interface ParsedBARInsurance {
+  /** The IN1 segment. */
+  in1: IN1;
+  /** The IN2 segment. */
+  in2?: IN2;
+  /** The IN3 segments. */
+  in3List?: IN3[];
+  /** The ROL segments. */
+  rolList?: ROL[];
+}
 
-  protected override parseEVN(s: string, e: EncodingCharacters): Result<EVN> {
-    return EVN.parse(s, e);
-  }
+/** Structured result of parsing an HL7 BAR^P01 (HL7 v2.5.1) message. */
+export interface ParsedBAR_P01 extends ParsedMessageBase {
+  /** The MSH segment. */
+  msh: MSH;
+  /** The SFT segments. */
+  sftList?: SFT[];
+  /** The EVN segment. */
+  evn: EVN;
+  /** The PID segment. */
+  pid: PID;
+  /** The PD1 segment. */
+  pd1?: PD1;
+  /** The ROL segments. */
+  rolList?: ROL[];
+  /** The VISIT groups. */
+  visits: ParsedBARVisit[];
+}
 
-  protected override parsePID(s: string, e: EncodingCharacters): Result<PID> {
-    return PID.parse(s, e);
-  }
+/** The segment parsers of BAR^P01 (HL7 v2.5.1). */
+const PARSERS: SegmentParsers = {
+  MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
+  EVN: (s, e) => EVN.parse(s, e),
+  PID: (s, e) => PID.parse(s, e),
+  PD1: (s, e) => PD1.parse(s, e),
+  ROL: (s, e) => ROL.parse(s, e),
+  PV1: (s, e) => PV1.parse(s, e),
+  PV2: (s, e) => PV2.parse(s, e),
+  DB1: (s, e) => DB1.parse(s, e),
+  OBX: (s, e) => OBX.parse(s, e),
+  AL1: (s, e) => AL1.parse(s, e),
+  DG1: (s, e) => DG1.parse(s, e),
+  DRG: (s, e) => DRG.parse(s, e),
+  PR1: (s, e) => PR1.parse(s, e),
+  GT1: (s, e) => GT1.parse(s, e),
+  NK1: (s, e) => NK1.parse(s, e),
+  IN1: (s, e) => IN1.parse(s, e),
+  IN2: (s, e) => IN2.parse(s, e),
+  IN3: (s, e) => IN3.parse(s, e),
+  ACC: (s, e) => ACC.parse(s, e),
+  UB1: (s, e) => UB1.parse(s, e),
+  UB2: (s, e) => UB2.parse(s, e),
+};
 
-  protected override parsePD1(s: string, e: EncodingCharacters): Result<PD1> {
-    return PD1.parse(s, e);
-  }
+/** Parser for HL7 BAR^P01 (HL7 v2.5.1) messages. */
+export class BAR_P01_Parser {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "BAR_P01";
+  /** The structure the message is parsed against. */
+  protected readonly structure: StructureItem[] = BAR_P01_STRUCTURE;
+  /** The segment parsers, keyed by segment name. */
+  protected readonly parsers: SegmentParsers = PARSERS;
 
-  protected override parseROL(s: string, e: EncodingCharacters): Result<ROL> {
-    return ROL.parse(s, e);
-  }
-
-  protected override parsePV1(s: string, e: EncodingCharacters): Result<PV1> {
-    return PV1.parse(s, e);
-  }
-
-  protected override parsePV2(s: string, e: EncodingCharacters): Result<PV2> {
-    return PV2.parse(s, e);
-  }
-
-  protected override parseDB1(s: string, e: EncodingCharacters): Result<DB1> {
-    return DB1.parse(s, e);
-  }
-
-  protected override parseOBX(s: string, e: EncodingCharacters): Result<OBX> {
-    return OBX.parse(s, e);
-  }
-
-  protected override parseAL1(s: string, e: EncodingCharacters): Result<AL1> {
-    return AL1.parse(s, e);
-  }
-
-  protected override parseDG1(s: string, e: EncodingCharacters): Result<DG1> {
-    return DG1.parse(s, e);
-  }
-
-  protected override parseDRG(s: string, e: EncodingCharacters): Result<DRG> {
-    return DRG.parse(s, e);
-  }
-
-  protected override parsePR1(s: string, e: EncodingCharacters): Result<PR1> {
-    return PR1.parse(s, e);
-  }
-
-  protected override parseGT1(s: string, e: EncodingCharacters): Result<GT1> {
-    return GT1.parse(s, e);
-  }
-
-  protected override parseNK1(s: string, e: EncodingCharacters): Result<NK1> {
-    return NK1.parse(s, e);
-  }
-
-  protected override parseIN1(s: string, e: EncodingCharacters): Result<IN1> {
-    return IN1.parse(s, e);
-  }
-
-  protected override parseIN2(s: string, e: EncodingCharacters): Result<IN2> {
-    return IN2.parse(s, e);
-  }
-
-  protected override parseIN3(s: string, e: EncodingCharacters): Result<IN3> {
-    return IN3.parse(s, e);
-  }
-
-  protected override parseACC(s: string, e: EncodingCharacters): Result<ACC> {
-    return ACC.parse(s, e);
-  }
-
-  protected override parseUB1(s: string, e: EncodingCharacters): Result<UB1> {
-    return UB1.parse(s, e);
-  }
-
-  protected override parseUB2(s: string, e: EncodingCharacters): Result<UB2> {
-    return UB2.parse(s, e);
+  /** Parses the input string into a structured instance. */
+  parse(messageString: string): Result<ParsedBAR_P01> {
+    return parseStructure<ParsedBAR_P01>(this.messageName, this.structure, this.parsers, messageString);
   }
 }
 
-/** Parses an HL7 BAR^P01 (v2.5.1) message string into a structured result. */
+/** Parses an HL7 BAR^P01 (HL7 v2.5.1) message string into a structured result. */
 export function parseBAR_P01(messageString: string): Result<ParsedBAR_P01> {
   return new BAR_P01_Parser().parse(messageString);
 }

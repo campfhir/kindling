@@ -4,6 +4,7 @@ import { ParserUtils } from "../../types/parser.ts";
 
 const minimalMessage = [
   "MSH|^~\\&|SEND|SFAC|RECV|RFAC|20231015120000||ADT^A34^ADT_A34|MSG001|P|2.5.1",
+  "EVN|A34|20231015120000",
   "PID|1||12345^^^MRN^MR||Doe^John^Q||19800115|M",
   "MRG|OLD-12345^^^MRN^MR",
 ].join("\r");
@@ -43,9 +44,10 @@ describe("parseADT_A34 — minimal message", () => {
     expect(result.val!.mrg.name).toBe("MRG");
   });
 
-  test("EVN is absent in minimal message", () => {
-    const result = parseADT_A34(minimalMessage);
-    expect(result.val!.evn).toBeUndefined();
+  test("EVN is required", () => {
+    const result = parseADT_A34(minimalMessage.replace("EVN|A34|20231015120000\r", ""));
+    expect(result.ok).toBe(false);
+    expect(result.err!.message).toMatch(/ADT_A34 message must contain an EVN segment/);
   });
 });
 
@@ -86,6 +88,7 @@ describe("parseADT_A34 — error cases", () => {
   test("returns error when PID is missing", () => {
     const msg = [
       "MSH|^~\\&|SEND|SFAC|RECV|RFAC|20231015||ADT^A34^ADT_A34|MSG002|P|2.5.1",
+      "EVN|A34",
       "MRG|OLD-12345^^^MRN^MR",
     ].join("\r");
 
@@ -97,6 +100,7 @@ describe("parseADT_A34 — error cases", () => {
   test("returns error when MRG is missing", () => {
     const msg = [
       "MSH|^~\\&|SEND|SFAC|RECV|RFAC|20231015||ADT^A34^ADT_A34|MSG003|P|2.5.1",
+      "EVN|A34",
       "PID|1||12345^^^MRN^MR||Doe^John",
     ].join("\r");
 

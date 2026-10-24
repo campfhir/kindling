@@ -1,14 +1,15 @@
 /**
- * Builder for DFT^P03 messages (HL7 2.5): post detail financial transactions.
+ * Builder for DFT^P03 messages (HL7 v2.5).
  *
- * Structure:
- *   MSH [{SFT}] EVN PID [PD1] [{ROL}] [PV1] [PV2] [{ROL}] [{DB1}]
- *   [{ COMMON ORDER: [ORC] [{ TQ1 [{TQ2}] }] [ OBR [{NTE}] ] [{ OBX [{NTE}] }] }]
- *   { FINANCIAL: FT1 [NTE] [{ PR1 [{ROL}] }] [{ FINANCIAL COMMON ORDER: same shape }] }
- *   [{DG1}] [DRG] [{GT1}] [{ IN1 [IN2] [{IN3}] [{ROL}] }] [ACC]
+ * Structure: MSH [{SFT}] EVN PID [PD1] [{ROL}] [PV1] [PV2] [{ROL}] [{DB1}] [{ COMMON_ORDER: [ORC] [{ TIMING_QUANTITY: TQ1 [{TQ2}] }] [ ORDER: OBR [{NTE}] ] [{ OBSERVATION: OBX [{NTE}] }] }] { FINANCIAL: FT1 [NTE] [{ FINANCIAL_PROCEDURE: PR1 [{ROL}] }] [{ FINANCIAL_COMMON_ORDER: [ORC] [{ FINANCIAL_TIMING_QUANTITY: TQ1 [{TQ2}] }] [ FINANCIAL_ORDER: OBR [{NTE}] ] [{ FINANCIAL_OBSERVATION: OBX [{NTE}] }] }] } [{DG1}] [DRG] [{GT1}] [{ INSURANCE: IN1 [IN2] [{IN3}] [{ROL}] }] [ACC]
  *
  * @module
  */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
+import { DFT_P03_STRUCTURE } from "../../structures/v2.5/DFT_P03.ts";
 import type { MSH } from "../../segments/v2.5/MSH.ts";
 import type { SFT } from "../../segments/v2.5/SFT.ts";
 import type { EVN } from "../../segments/v2.5/EVN.ts";
@@ -33,155 +34,154 @@ import type { IN1 } from "../../segments/v2.5/IN1.ts";
 import type { IN2 } from "../../segments/v2.5/IN2.ts";
 import type { IN3 } from "../../segments/v2.5/IN3.ts";
 import type { ACC } from "../../segments/v2.5/ACC.ts";
-import { type EncodingCharacters, DEFAULT_ENCODING } from "../../types/encoding.ts";
 
-/** DFTTimingGroup — a TQ1 with its TQ2 segments. */
-export interface DFTTimingGroup {
-  /** The tq1 value. */
-  tq1: TQ1;
-  /** The tq2 list value. */
-  tq2List?: TQ2[];
-}
-
-/** DFTObservationGroup — an OBX with the NTEs that follow it. */
-export interface DFTObservationGroup {
-  /** The obx value. */
-  obx: OBX;
-  /** The nte list value. */
-  nteList?: NTE[];
-}
-
-/** DFTOrderGroup — a COMMON ORDER group; every member is optional, but the group must not be empty. */
+/** The COMMON ORDER group of an DFT^P03 (HL7 v2.5) message being built. */
 export interface DFTOrderGroup {
-  /** The orc value. */
+  /** The ORC segment. */
   orc?: ORC;
-  /** The timing value. */
+  /** The TIMING QUANTITY groups. */
   timing?: DFTTimingGroup[];
-  /** The obr value. */
+  /** The OBR segment. */
   obr?: OBR;
-  /** The obr nte list value (notes after OBR). */
+  /** The NTE segments. */
   obrNteList?: NTE[];
-  /** The observations value. */
+  /** The OBSERVATION groups. */
   observations?: DFTObservationGroup[];
 }
 
-/** DFTProcedureGroup — a PR1 with its ROLs. */
-export interface DFTProcedureGroup {
-  /** The pr1 value. */
-  pr1: PR1;
-  /** The rol list value. */
-  rolList?: ROL[];
+/** The TIMING QUANTITY group of an DFT^P03 (HL7 v2.5) message being built. */
+export interface DFTTimingGroup {
+  /** The TQ1 segment. */
+  tq1: TQ1;
+  /** The TQ2 segments. */
+  tq2List?: TQ2[];
 }
 
-/** DFTFinancialGroup — an FT1 transaction with its note, procedures and order groups. */
+/** The OBSERVATION group of an DFT^P03 (HL7 v2.5) message being built. */
+export interface DFTObservationGroup {
+  /** The OBX segment. */
+  obx: OBX;
+  /** The NTE segments. */
+  nteList?: NTE[];
+}
+
+/** The FINANCIAL group of an DFT^P03 (HL7 v2.5) message being built. */
 export interface DFTFinancialGroup {
-  /** The ft1 value. */
+  /** The FT1 segment. */
   ft1: FT1;
-  /** The nte value (note after FT1). */
+  /** The NTE segment. */
   nte?: NTE;
-  /** The procedures value. */
+  /** The FINANCIAL PROCEDURE groups. */
   procedures?: DFTProcedureGroup[];
-  /** The orders value (FINANCIAL COMMON ORDER groups). */
-  orders?: DFTOrderGroup[];
+  /** The FINANCIAL COMMON ORDER groups. */
+  orders?: DFTFinancialOrderGroup[];
 }
 
-/** DFTInsuranceGroup — an IN1 with its IN2, IN3s and ROLs. */
-export interface DFTInsuranceGroup {
-  /** The in1 value. */
-  in1: IN1;
-  /** The in2 value. */
-  in2?: IN2;
-  /** The in3 list value. */
-  in3List?: IN3[];
-  /** The rol list value. */
+/** The FINANCIAL PROCEDURE group of an DFT^P03 (HL7 v2.5) message being built. */
+export interface DFTProcedureGroup {
+  /** The PR1 segment. */
+  pr1: PR1;
+  /** The ROL segments. */
   rolList?: ROL[];
 }
 
-/** Encodes one COMMON ORDER group in spec order. */
-function encodeOrder(o: DFTOrderGroup, enc: EncodingCharacters): string[] {
-  const out: string[] = [];
-  if (o.orc) out.push(o.orc.encode(enc));
-  for (const t of o.timing ?? []) {
-    out.push(t.tq1.encode(enc));
-    for (const s of t.tq2List ?? []) out.push(s.encode(enc));
-  }
-  if (o.obr) out.push(o.obr.encode(enc));
-  for (const s of o.obrNteList ?? []) out.push(s.encode(enc));
-  for (const ob of o.observations ?? []) {
-    out.push(ob.obx.encode(enc));
-    for (const s of ob.nteList ?? []) out.push(s.encode(enc));
-  }
-  return out;
+/** The FINANCIAL COMMON ORDER group of an DFT^P03 (HL7 v2.5) message being built. */
+export interface DFTFinancialOrderGroup {
+  /** The ORC segment. */
+  orc?: ORC;
+  /** The FINANCIAL TIMING QUANTITY groups. */
+  timing?: DFTFinancialTimingGroup[];
+  /** The OBR segment. */
+  obr?: OBR;
+  /** The NTE segments. */
+  obrNteList?: NTE[];
+  /** The FINANCIAL OBSERVATION groups. */
+  observations?: DFTFinancialObservationGroup[];
 }
 
-/** Builder for HL7 DFT^P03 (2.5) messages. */
+/** The FINANCIAL TIMING QUANTITY group of an DFT^P03 (HL7 v2.5) message being built. */
+export interface DFTFinancialTimingGroup {
+  /** The TQ1 segment. */
+  tq1: TQ1;
+  /** The TQ2 segments. */
+  tq2List?: TQ2[];
+}
+
+/** The FINANCIAL OBSERVATION group of an DFT^P03 (HL7 v2.5) message being built. */
+export interface DFTFinancialObservationGroup {
+  /** The OBX segment. */
+  obx: OBX;
+  /** The NTE segments. */
+  nteList?: NTE[];
+}
+
+/** The INSURANCE group of an DFT^P03 (HL7 v2.5) message being built. */
+export interface DFTInsuranceGroup {
+  /** The IN1 segment. */
+  in1: IN1;
+  /** The IN2 segment. */
+  in2?: IN2;
+  /** The IN3 segments. */
+  in3List?: IN3[];
+  /** The ROL segments. */
+  rolList?: ROL[];
+}
+
+/** The optional segments and groups of an DFT^P03 (HL7 v2.5) message. */
+export interface DFT_P03Options {
+  /** The SFT segments. */
+  sftList?: SFT[];
+  /** The PD1 segment. */
+  pd1?: PD1;
+  /** The ROL segments. */
+  rolList?: ROL[];
+  /** The PV1 segment. */
+  pv1?: PV1;
+  /** The PV2 segment. */
+  pv2?: PV2;
+  /** The ROL segments. */
+  visitRolList?: ROL[];
+  /** The DB1 segments. */
+  db1List?: DB1[];
+  /** The COMMON ORDER groups. */
+  orders?: DFTOrderGroup[];
+  /** The DG1 segments. */
+  dg1List?: DG1[];
+  /** The DRG segment. */
+  drg?: DRG;
+  /** The GT1 segments. */
+  gt1List?: GT1[];
+  /** The INSURANCE groups. */
+  insurances?: DFTInsuranceGroup[];
+  /** The ACC segment. */
+  acc?: ACC;
+}
+
+/** Builder for HL7 DFT^P03 (HL7 v2.5) messages. */
 export class DFT_P03<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID> {
-  /** The message name value. */
+  /** The message name used in error messages. */
   protected readonly messageName: string = "DFT_P03";
+  /** The structure the message is verified against and encoded in. */
+  protected readonly structure: StructureItem[] = DFT_P03_STRUCTURE;
 
   /** Constructor. */
   constructor(
     public msh: TMSH,
     public evn: TEVN,
     public pid: TPID,
-    /** The FT1 transactions; at least one is required. */
     public financials: DFTFinancialGroup[],
-    public options: {
-      /** Software segments, which follow MSH. */
-      sftList?: SFT[];
-      pd1?: PD1;
-      /** Patient-level ROLs (after PD1). */
-      rolList?: ROL[];
-      pv1?: PV1;
-      pv2?: PV2;
-      /** Visit-level ROLs (after PV1/PV2). */
-      visitRolList?: ROL[];
-      db1List?: DB1[];
-      /** COMMON ORDER groups before the first FT1. */
-      orders?: DFTOrderGroup[];
-      dg1List?: DG1[];
-      drg?: DRG;
-      gt1List?: GT1[];
-      insurances?: DFTInsuranceGroup[];
-      acc?: ACC;
-    } = {},
-    private encoding: EncodingCharacters = DEFAULT_ENCODING,
+    public options: DFT_P03Options = {},
+    protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
+
+  /** The message as one object keyed by structure property name (what verify() and encode() work on). */
+  toInput(): StructureInput {
+    return { ...this.options, msh: this.msh, evn: this.evn, pid: this.pid, financials: this.financials };
+  }
 
   /** Validates the message structure, returning a result. */
   verify(): { valid: boolean; errors: string[] } {
-    const errors: string[] = [];
-    const o = this.options;
-    if (!this.msh) errors.push("MSH segment is required");
-    if (!this.evn) errors.push("EVN segment is required");
-    if (!this.pid) errors.push("PID segment is required");
-    if (!this.financials || this.financials.length === 0) errors.push("At least one FINANCIAL group (FT1) is required");
-    const checkOrders = (list: DFTOrderGroup[] | undefined, scope: string) => {
-      const where = scope ? `${scope} ` : "";
-      (list ?? []).forEach((g, i) => {
-        if (encodeOrder(g, this.encoding).length === 0) errors.push(`${where}COMMON ORDER group ${i + 1} is empty`);
-        if (g.obrNteList?.length && !g.obr) errors.push(`${where}COMMON ORDER group ${i + 1}: OBR notes require an OBR`);
-        (g.timing ?? []).forEach((t, j) => {
-          if (!t.tq1) errors.push(`${where}COMMON ORDER group ${i + 1}, TIMING ${j + 1}: TQ1 segment is required`);
-        });
-        (g.observations ?? []).forEach((ob, j) => {
-          if (!ob.obx) errors.push(`${where}COMMON ORDER group ${i + 1}, observation ${j + 1}: OBX segment is required`);
-        });
-      });
-    };
-    checkOrders(o.orders, "");
-    (this.financials ?? []).forEach((f, i) => {
-      if (!f.ft1) errors.push(`FINANCIAL group ${i + 1}: FT1 segment is required`);
-      (f.procedures ?? []).forEach((p, j) => {
-        if (!p.pr1) errors.push(`FINANCIAL group ${i + 1}, procedure ${j + 1}: PR1 segment is required`);
-      });
-      checkOrders(f.orders, `FINANCIAL group ${i + 1}`);
-    });
-    (o.insurances ?? []).forEach((ins, i) => {
-      if (!ins.in1) errors.push(`INSURANCE group ${i + 1}: IN1 segment is required`);
-    });
-    if (o.pv2 && !o.pv1) errors.push("PV2 requires PV1");
-    if (o.visitRolList?.length && !o.pv1) errors.push("Visit-level ROLs require PV1");
+    const errors = verifyStructure(this.structure, this.toInput());
     return { valid: errors.length === 0, errors };
   }
 
@@ -189,53 +189,20 @@ export class DFT_P03<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
   encode(): string {
     const verification = this.verify();
     if (!verification.valid) {
-      throw new Error(
-        `Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`,
-      );
+      throw new Error(`Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`);
     }
-    const enc = this.encoding;
-    const o = this.options;
-    const out: string[] = [this.msh.encode(enc)];
-    for (const s of o.sftList ?? []) out.push(s.encode(enc));
-    out.push(this.evn.encode(enc), this.pid.encode(enc));
-    if (o.pd1) out.push(o.pd1.encode(enc));
-    for (const s of o.rolList ?? []) out.push(s.encode(enc));
-    if (o.pv1) out.push(o.pv1.encode(enc));
-    if (o.pv2) out.push(o.pv2.encode(enc));
-    for (const s of o.visitRolList ?? []) out.push(s.encode(enc));
-    for (const s of o.db1List ?? []) out.push(s.encode(enc));
-    for (const g of o.orders ?? []) out.push(...encodeOrder(g, enc));
-    for (const f of this.financials) {
-      out.push(f.ft1.encode(enc));
-      if (f.nte) out.push(f.nte.encode(enc));
-      for (const p of f.procedures ?? []) {
-        out.push(p.pr1.encode(enc));
-        for (const rol of p.rolList ?? []) out.push(rol.encode(enc));
-      }
-      for (const g of f.orders ?? []) out.push(...encodeOrder(g, enc));
-    }
-    for (const s of o.dg1List ?? []) out.push(s.encode(enc));
-    if (o.drg) out.push(o.drg.encode(enc));
-    for (const s of o.gt1List ?? []) out.push(s.encode(enc));
-    for (const ins of o.insurances ?? []) {
-      out.push(ins.in1.encode(enc));
-      if (ins.in2) out.push(ins.in2.encode(enc));
-      for (const s of ins.in3List ?? []) out.push(s.encode(enc));
-      for (const s of ins.rolList ?? []) out.push(s.encode(enc));
-    }
-    if (o.acc) out.push(o.acc.encode(enc));
-    return out.join("\r");
+    return encodeStructure(this.structure, this.toInput(), this.encoding);
   }
 }
 
-/** Builds an HL7 DFT^P03 (2.5) message. */
+/** Builds an HL7 DFT^P03 (HL7 v2.5) message. */
 export function createDFT_P03<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID>(
   msh: TMSH,
   evn: TEVN,
   pid: TPID,
   financials: DFTFinancialGroup[],
-  options: DFT_P03<TMSH, TEVN, TPID>["options"] = {},
-  encoding?: EncodingCharacters,
+  options: DFT_P03Options = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): DFT_P03<TMSH, TEVN, TPID> {
   return new DFT_P03(msh, evn, pid, financials, options, encoding);
 }

@@ -23,11 +23,11 @@ test("parses SFT and the timing group into v2.5.1 classes", () => {
   const result = parseVXU_V04(wire);
   expect(result.ok).toBe(true);
   if (!result.ok) return;
-  expect(result.val.sftList[0]).toBeInstanceOf(SFT);
+  expect(result.val.sftList![0]).toBeInstanceOf(SFT);
   expect(result.val.pid).toBeInstanceOf(PID);
-  expect(result.val.orders[0].timing[0].tq1).toBeInstanceOf(TQ1);
-  expect(result.val.orders[0].timing[0].tq2List[0]).toBeInstanceOf(TQ2);
-  expect(result.val.orders[0].rxa).toBeInstanceOf(RXA);
+  expect(result.val.orders![0].timing![0].tq1).toBeInstanceOf(TQ1);
+  expect(result.val.orders![0].timing![0].tq2List![0]).toBeInstanceOf(TQ2);
+  expect(result.val.orders![0].rxa).toBeInstanceOf(RXA);
 });
 
 test("still requires the ORC", () => {

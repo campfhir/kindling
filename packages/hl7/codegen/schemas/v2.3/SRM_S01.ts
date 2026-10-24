@@ -1,4 +1,5 @@
-import { MessageSchema } from "../../../src/types/schema";
+import type { MessageSchema } from "../../../src/types/schema";
+import { wrappers } from "../helpers";
 
 /**
  * SRM^S01 - Schedule Request: New Appointment Booking (HL7 v2.3)
@@ -51,13 +52,8 @@ export const SRM_S01_SCHEMA: MessageSchema = {
   ],
 };
 
-export const SRM_S02_SCHEMA: MessageSchema = { ...SRM_S01_SCHEMA, triggerEvent: "S02", baseMessage: "SRM_S01" };
-export const SRM_S03_SCHEMA: MessageSchema = { ...SRM_S01_SCHEMA, triggerEvent: "S03", baseMessage: "SRM_S01" };
-export const SRM_S04_SCHEMA: MessageSchema = { ...SRM_S01_SCHEMA, triggerEvent: "S04", baseMessage: "SRM_S01" };
-export const SRM_S05_SCHEMA: MessageSchema = { ...SRM_S01_SCHEMA, triggerEvent: "S05", baseMessage: "SRM_S01" };
-export const SRM_S06_SCHEMA: MessageSchema = { ...SRM_S01_SCHEMA, triggerEvent: "S06", baseMessage: "SRM_S01" };
-export const SRM_S07_SCHEMA: MessageSchema = { ...SRM_S01_SCHEMA, triggerEvent: "S07", baseMessage: "SRM_S01" };
-export const SRM_S08_SCHEMA: MessageSchema = { ...SRM_S01_SCHEMA, triggerEvent: "S08", baseMessage: "SRM_S01" };
-export const SRM_S09_SCHEMA: MessageSchema = { ...SRM_S01_SCHEMA, triggerEvent: "S09", baseMessage: "SRM_S01" };
-export const SRM_S10_SCHEMA: MessageSchema = { ...SRM_S01_SCHEMA, triggerEvent: "S10", baseMessage: "SRM_S01" };
-export const SRM_S11_SCHEMA: MessageSchema = { ...SRM_S01_SCHEMA, triggerEvent: "S11", baseMessage: "SRM_S01" };
+/** The trigger events that share the S01 structure. */
+export const SRM_EVENTS = ["S02", "S03", "S04", "S05", "S06", "S07", "S08", "S09", "S10", "S11"];
+
+/** S01 and the events wrapping it. */
+export const SRM_FAMILY: MessageSchema[] = [SRM_S01_SCHEMA, ...wrappers(SRM_S01_SCHEMA, SRM_EVENTS)];

@@ -14,17 +14,20 @@ function makeMSH() {
 function makePID() {
   return new PID().setId("1").patientName({ familyName: "Doe", givenName: "John" });
 }
+function makeEVN() {
+  return new EVN().eventTypeCode("A34").recordedDateTime("20231015120000");
+}
 function makeMRG() {
   return new MRG().priorPatientId({ id: "OLD-12345" });
 }
 
 test("createADT_A34 returns ADT_A34 instance", () => {
-  const msg = createADT_A34(makeMSH(), makePID(), makeMRG());
+  const msg = createADT_A34(makeMSH(), makeEVN(), makePID(), makeMRG());
   expect(msg instanceof ADT_A34).toBe(true);
 });
 
 test("verify() passes with all required segments", () => {
-  const msg = createADT_A34(makeMSH(), makePID(), makeMRG());
+  const msg = createADT_A34(makeMSH(), makeEVN(), makePID(), makeMRG());
   const result = msg.verify();
   expect(result.valid).toBe(true);
   expect(result.errors).toHaveLength(0);
@@ -32,7 +35,7 @@ test("verify() passes with all required segments", () => {
 
 test("verify() fails when MSH is missing", () => {
   // deno-lint-ignore no-explicit-any
-  const msg = new ADT_A34(null as any, makePID(), makeMRG());
+  const msg = new ADT_A34(null as any, makeEVN(), makePID(), makeMRG());
   const result = msg.verify();
   expect(result.valid).toBe(false);
   expect(result.errors.some((e) => e.includes("MSH"))).toBe(true);
@@ -40,7 +43,7 @@ test("verify() fails when MSH is missing", () => {
 
 test("verify() fails when PID is missing", () => {
   // deno-lint-ignore no-explicit-any
-  const msg = new ADT_A34(makeMSH(), null as any, makeMRG());
+  const msg = new ADT_A34(makeMSH(), makeEVN(), null as any, makeMRG());
   const result = msg.verify();
   expect(result.valid).toBe(false);
   expect(result.errors.some((e) => e.includes("PID"))).toBe(true);
@@ -48,7 +51,7 @@ test("verify() fails when PID is missing", () => {
 
 test("verify() fails when MRG is missing", () => {
   // deno-lint-ignore no-explicit-any
-  const msg = new ADT_A34(makeMSH(), makePID(), null as any);
+  const msg = new ADT_A34(makeMSH(), makeEVN(), makePID(), null as any);
   const result = msg.verify();
   expect(result.valid).toBe(false);
   expect(result.errors.some((e) => e.includes("MRG"))).toBe(true);
@@ -56,32 +59,26 @@ test("verify() fails when MRG is missing", () => {
 
 test("encode() throws when message is invalid", () => {
   // deno-lint-ignore no-explicit-any
-  const msg = new ADT_A34(null as any, makePID(), makeMRG());
+  const msg = new ADT_A34(null as any, makeEVN(), makePID(), makeMRG());
   expect(() => msg.encode()).toThrow();
 });
 
 test("encode() produces correct segment order for minimal message", () => {
-  const msg = createADT_A34(makeMSH(), makePID(), makeMRG());
+  const msg = createADT_A34(makeMSH(), makeEVN(), makePID(), makeMRG());
   const segments = msg.encode().split("\r");
 
-  expect(segments[0].startsWith("MSH|")).toBe(true);
-  expect(segments[1].startsWith("PID|")).toBe(true);
-  expect(segments[2].startsWith("MRG|")).toBe(true);
+  expect(segments.map((s) => s.substring(0, 3))).toEqual(["MSH", "EVN", "PID", "MRG"]);
 });
 
-test("encode() places optional EVN before PID", () => {
-  const evn = new EVN().eventTypeCode("A34").recordedDateTime("20231015120000");
-  const msg = createADT_A34(makeMSH(), makePID(), makeMRG(), { evn });
-  const segments = msg.encode().split("\r");
-  const names = segments.map((s) => s.substring(0, 3));
-
-  expect(names.includes("EVN")).toBe(true);
-  expect(names.indexOf("EVN")).toBeLessThan(names.indexOf("PID"));
+test("verify() fails when EVN is missing", () => {
+  // deno-lint-ignore no-explicit-any
+  const msg = new ADT_A34(makeMSH(), null as any, makePID(), makeMRG());
+  expect(msg.verify().errors).toEqual(["EVN segment is required"]);
 });
 
 test("encode() places optional PD1 after PID and before MRG", () => {
   const pd1 = new PD1();
-  const msg = createADT_A34(makeMSH(), makePID(), makeMRG(), { pd1 });
+  const msg = createADT_A34(makeMSH(), makeEVN(), makePID(), makeMRG(), { pd1 });
   const segments = msg.encode().split("\r");
   const names = segments.map((s) => s.substring(0, 3));
 
@@ -91,7 +88,7 @@ test("encode() places optional PD1 after PID and before MRG", () => {
 
 test("encode() places optional PV1 after MRG", () => {
   const pv1 = new PV1().patientClass("I");
-  const msg = createADT_A34(makeMSH(), makePID(), makeMRG(), { pv1 });
+  const msg = createADT_A34(makeMSH(), makeEVN(), makePID(), makeMRG(), { pv1 });
   const segments = msg.encode().split("\r");
   const names = segments.map((s) => s.substring(0, 3));
 
@@ -99,10 +96,9 @@ test("encode() places optional PV1 after MRG", () => {
 });
 
 test("encode() includes all optional segments in correct order", () => {
-  const evn = new EVN().eventTypeCode("A34").recordedDateTime("20231015120000");
   const pd1 = new PD1();
   const pv1 = new PV1().patientClass("I");
-  const msg = createADT_A34(makeMSH(), makePID(), makeMRG(), { evn, pd1, pv1 });
+  const msg = createADT_A34(makeMSH(), makeEVN(), makePID(), makeMRG(), { pd1, pv1 });
   const segments = msg.encode().split("\r");
   const names = segments.map((s) => s.substring(0, 3));
 
@@ -110,8 +106,7 @@ test("encode() includes all optional segments in correct order", () => {
 });
 
 test("round-trip: build → encode → parse", () => {
-  const evn = new EVN().eventTypeCode("A34").recordedDateTime("20231015120000");
-  const msg = createADT_A34(makeMSH(), makePID(), makeMRG(), { evn });
+  const msg = createADT_A34(makeMSH(), makeEVN(), makePID(), makeMRG());
 
   const encoded = msg.encode();
   const parsed = parseADT_A34(encoded);

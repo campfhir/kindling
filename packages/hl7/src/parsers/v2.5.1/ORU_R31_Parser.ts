@@ -1,20 +1,26 @@
 /**
  * Parser for ORU^R31 messages (HL7 v2.5.1).
  *
+ * Structure: MSH [{SFT}] PID [PD1] [ VISIT: PV1 [PV2] ] ORC OBR [{NTE}] [{ TIMING_QTY: TQ1 [{TQ2}] }] { OBSERVATION: OBX [{NTE}] }
+ * Shares the ORU^R30 structure.
+ *
  * @module
  */
-import { parseORU_R30 } from "./ORU_R30_Parser.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { Result } from "../../types/result.ts";
+import { ORU_R30_Parser, type ParsedORU_R30 } from "./ORU_R30_Parser.ts";
 
-export type {
-  ParsedORU_R30 as ParsedORU_R31,
-  ParsedPatientResultR30 as ParsedPatientResultR31,
-  ParsedOrderObservationR30 as ParsedOrderObservationR31,
-  ORU_R30_Parser as ORU_R31_Parser,
-} from "./ORU_R30_Parser.ts";
+export type { ParsedTimingQty, ParsedObservation } from "./ORU_R30_Parser.ts";
+/** Structured result of parsing an HL7 ORU^R31 (HL7 v2.5.1) message. */
+export type ParsedORU_R31 = ParsedORU_R30;
 
-/** Parses an HL7 ORU^R31 (v2.5.1) message string into a structured result. */
-export function parseORU_R31(
-  messageString: string,
-): ReturnType<typeof parseORU_R30> {
-  return parseORU_R30(messageString);
+/** Parser for HL7 ORU^R31 (HL7 v2.5.1) messages. */
+export class ORU_R31_Parser extends ORU_R30_Parser {
+  /** The message name used in error messages. */
+  protected override readonly messageName: string = "ORU_R31";
+}
+
+/** Parses an HL7 ORU^R31 (HL7 v2.5.1) message string into a structured result. */
+export function parseORU_R31(messageString: string): Result<ParsedORU_R31> {
+  return new ORU_R31_Parser().parse(messageString);
 }

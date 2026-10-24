@@ -1,7 +1,85 @@
 /**
- * MFN_M02 builder for HL7 v2.5 — identical to v2.4, re-exported.
+ * Builder for MFN^M02 messages (HL7 v2.5).
+ *
+ * Structure: MSH [{SFT}] MFI { MF_STAFF: MFE STF [{PRA}] [{NTE}] }
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.4/MFN_M02.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
+import { MFN_M02_STRUCTURE } from "../../structures/v2.5/MFN_M02.ts";
+import type { MSH } from "../../segments/v2.5/MSH.ts";
+import type { SFT } from "../../segments/v2.5/SFT.ts";
+import type { MFI } from "../../segments/v2.5/MFI.ts";
+import type { MFE } from "../../segments/v2.5/MFE.ts";
+import type { STF } from "../../segments/v2.5/STF.ts";
+import type { PRA } from "../../segments/v2.5/PRA.ts";
+import type { NTE } from "../../segments/v2.5/NTE.ts";
+
+/** The MF STAFF group of an MFN^M02 (HL7 v2.5) message being built. */
+export interface StaffEntry {
+  /** The MFE segment. */
+  mfe: MFE;
+  /** The STF segment. */
+  stf: STF;
+  /** The PRA segments. */
+  praList?: PRA[];
+  /** The NTE segments. */
+  nteList?: NTE[];
+}
+
+/** The optional segments and groups of an MFN^M02 (HL7 v2.5) message. */
+export interface MFN_M02Options {
+  /** The SFT segments. */
+  sftList?: SFT[];
+}
+
+/** Builder for HL7 MFN^M02 (HL7 v2.5) messages. */
+export class MFN_M02<TMSH extends MSH = MSH, TMFI extends MFI = MFI> {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "MFN_M02";
+  /** The structure the message is verified against and encoded in. */
+  protected readonly structure: StructureItem[] = MFN_M02_STRUCTURE;
+
+  /** Constructor. */
+  constructor(
+    public msh: TMSH,
+    public mfi: TMFI,
+    public staffEntries: StaffEntry[],
+    public options: MFN_M02Options = {},
+    protected encoding: EncodingCharacters = DEFAULT_ENCODING,
+  ) {}
+
+  /** The message as one object keyed by structure property name (what verify() and encode() work on). */
+  toInput(): StructureInput {
+    return { ...this.options, msh: this.msh, mfi: this.mfi, staffEntries: this.staffEntries };
+  }
+
+  /** Validates the message structure, returning a result. */
+  verify(): { valid: boolean; errors: string[] } {
+    const errors = verifyStructure(this.structure, this.toInput());
+    return { valid: errors.length === 0, errors };
+  }
+
+  /** Encodes this message to its HL7 wire string. */
+  encode(): string {
+    const verification = this.verify();
+    if (!verification.valid) {
+      throw new Error(`Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`);
+    }
+    return encodeStructure(this.structure, this.toInput(), this.encoding);
+  }
+}
+
+/** Builds an HL7 MFN^M02 (HL7 v2.5) message. */
+export function createMFN_M02<TMSH extends MSH = MSH, TMFI extends MFI = MFI>(
+  msh: TMSH,
+  mfi: TMFI,
+  staffEntries: StaffEntry[],
+  options: MFN_M02Options = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
+): MFN_M02<TMSH, TMFI> {
+  return new MFN_M02(msh, mfi, staffEntries, options, encoding);
+}

@@ -19,7 +19,7 @@ const MSH_LINE = "MSH|^~\\&|RIS|HOSP|SCHED|HOSP|20231015120000||SRR^S01^SRR_S01|
 
 describe("SRR_S01 (v2.5): repeating ERR and TQ1 after SCH", () => {
   test("encodes and round-trips through the v2.5 and v2.5.1 parsers", () => {
-    const build = (create: typeof createSRR_S01) =>
+    const build = (create: (...args: any[]) => { encode(): string }) =>
       create(msh(), msa(), {
         errList: [new ERR(), new ERR()],
         schedule: {
@@ -43,9 +43,9 @@ describe("SRR_S01 (v2.5): repeating ERR and TQ1 after SCH", () => {
   });
 
   test.each([
-    [["MSA|AA|1", "SCH|1", "NTE|1||x", "TQ1|1", "RGS|1"], /TQ1 segment at line 5 must directly follow SCH/],
-    [["MSA|AA|1", "TQ1|1"], /TQ1 segment at line 3 must directly follow SCH/],
-    [["MSA|AA|1", "SCH|1", "ERR|1", "RGS|1"], /ERR segment at line 4 must follow MSA and precede SCH/],
+    [["MSA|AA|1", "SCH|1", "NTE|1||x", "TQ1|1", "RGS|1"], /SRR_S01 message must contain at least one RGS segment/],
+    [["MSA|AA|1", "TQ1|1"], /TQ1 segment at line 3 is not allowed at this position in SRR_S01/],
+    [["MSA|AA|1", "SCH|1", "ERR|1", "RGS|1"], /SRR_S01 message must contain at least one RGS segment/],
   ])("rejects %j", (lines, pattern) => {
     const result = parseSRR_S01([MSH_LINE, ...lines].join("\r"));
     expect(result.ok).toBe(false);

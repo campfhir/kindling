@@ -63,7 +63,7 @@ const hgbObx = new OBX()
   .abnormalFlags("N")
   .observationResultStatus("F");
 
-patientResult.orderObservations[0].obxList.unshift(hgbObx); // Add to beginning
+patientResult.orderObservations[0].observations!.unshift({ obx: hgbObx }); // Add to beginning
 console.log("✓ Added Hemoglobin OBX to BEGINNING of CBC order");
 
 // Add OBX to MIDDLE of first order (CBC) - after first item
@@ -78,7 +78,7 @@ const hctObx = new OBX()
   .abnormalFlags("N")
   .observationResultStatus("F");
 
-patientResult.orderObservations[0].obxList.splice(2, 0, hctObx); // Insert at position 2
+patientResult.orderObservations[0].observations!.splice(2, 0, { obx: hctObx }); // Insert at position 2
 console.log("✓ Added Hematocrit OBX to MIDDLE of CBC order");
 
 // Add OBX to END of first order (CBC)
@@ -93,10 +93,10 @@ const pltObx = new OBX()
   .abnormalFlags("N")
   .observationResultStatus("F");
 
-patientResult.orderObservations[0].obxList.push(pltObx); // Add to end
+patientResult.orderObservations[0].observations!.push({ obx: pltObx }); // Add to end
 console.log("✓ Added Platelets OBX to END of CBC order");
 console.log(
-  `  CBC now has ${patientResult.orderObservations[0].obxList.length} OBX segments`,
+  `  CBC now has ${patientResult.orderObservations[0].observations!.length} OBX segments`,
 );
 console.log("\n");
 
@@ -127,7 +127,7 @@ const sodiumObx = new OBX()
 
 patientResult.orderObservations.unshift({
   obr: sodiumObr,
-  obxList: [sodiumObx],
+  observations: [{ obx: sodiumObx }],
 });
 console.log("✓ Added Sodium test to BEGINNING");
 
@@ -153,7 +153,7 @@ const potassiumObx = new OBX()
 
 patientResult.orderObservations.splice(1, 0, {
   obr: potassiumObr,
-  obxList: [potassiumObx],
+  observations: [{ obx: potassiumObx }],
 });
 console.log("✓ Added Potassium test to MIDDLE");
 
@@ -179,7 +179,7 @@ const creatinineObx = new OBX()
 
 patientResult.orderObservations.push({
   obr: creatinineObr,
-  obxList: [creatinineObx],
+  observations: [{ obx: creatinineObx }],
 });
 console.log("✓ Added Creatinine test to END");
 console.log(
@@ -228,7 +228,7 @@ console.log(
   `  Orders: ${reParseResult.val.patientResults[0].orderObservations.length}`,
 );
 console.log(
-  `  CBC OBX count: ${reParseResult.val.patientResults[0].orderObservations[2].obxList.length}`,
+  `  CBC OBX count: ${reParseResult.val.patientResults[0].orderObservations[2].observations!.length}`,
 );
 console.log("\n");
 

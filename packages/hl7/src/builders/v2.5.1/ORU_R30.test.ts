@@ -1,456 +1,85 @@
-import { describe, it, expect } from "vitest";
-import { createORU_R30 } from "./ORU_R30.ts";
-import { createORU_R31 } from "./ORU_R31.ts";
-import { createORU_R32 } from "./ORU_R32.ts";
-import { PID } from "../../segments/v2.5.1/PID.ts";
-import { ORC } from "../../segments/v2.5.1/ORC.ts";
-import { OBX } from "../../segments/v2.5.1/OBX.ts";
+import { describe, test, expect } from "vitest";
+import { createORU_R30, ORU_R30 } from "./ORU_R30.ts";
+import { createORU_R31, ORU_R31 } from "./ORU_R31.ts";
+import { createORU_R32, ORU_R32 } from "./ORU_R32.ts";
+import { parseORU_R30 } from "../../parsers/v2.5.1/ORU_R30_Parser.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
-import { OBR } from "../../segments/v2.5.1/OBR.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
+import { PID } from "../../segments/v2.5.1/PID.ts";
+import { PD1 } from "../../segments/v2.5.1/PD1.ts";
 import { PV1 } from "../../segments/v2.5.1/PV1.ts";
+import { PV2 } from "../../segments/v2.5.1/PV2.ts";
+import { ORC } from "../../segments/v2.5.1/ORC.ts";
+import { OBR } from "../../segments/v2.5.1/OBR.ts";
+import { NTE } from "../../segments/v2.5.1/NTE.ts";
+import { TQ1 } from "../../segments/v2.5.1/TQ1.ts";
+import { TQ2 } from "../../segments/v2.5.1/TQ2.ts";
+import { OBX } from "../../segments/v2.5.1/OBX.ts";
 
-describe("ORU_R30 Builder", () => {
-  describe("createORU_R30", () => {
-    it("should create minimal ORU^R30 message", () => {
-      const msh = new MSH()
-        .sendingApplication("POC_DEVICE")
-        .sendingFacility("Bedside Lab")
-        .receivingApplication("LIS")
-        .receivingFacility("Main Lab")
-        .messageType({ messageCode: "ORU", triggerEvent: "R30" })
-        .messageControlId("MSG12345")
-        .versionId("2.5.1");
-      const orc = new ORC().orderControl("NW").placerOrderNumber("POC12345");
-      const obr = new OBR()
-        .setId("1")
-        .placerOrderNumber("POC12345")
-        .universalServiceIdentifier({ identifier: "GLUC", text: "Glucose", nameOfCodingSystem: "LN" });
+const msh = (ev = "R30") => new MSH().sendingApplication("POC").messageType({ messageCode: "ORU", triggerEvent: ev }).messageControlId("1");
+const pid = () => new PID().setId("1").patientName({ familyName: "Smith", givenName: "Jane" });
+const orc = () => new ORC().orderControl("NW").placerOrderNumber("POC1");
+const obr = () => new OBR().setId("1").universalServiceIdentifier({ identifier: "GLUC", text: "Glucose", nameOfCodingSystem: "LN" });
+const obx = (id: string, value: string) => new OBX().setId(id).valueType("NM").observationValue(value);
+const types = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
 
-      const message = createORU_R30(msh, [
-        {
-          orderObservations: [{ orc, obr, observations: [] }],
-        },
-      ]);
-      const encoded = message.encode();
-      const segments = encoded.split("\r");
+describe("ORU_R30 builder (v2.5.1)", () => {
+  test("createORU_R30 returns an ORU_R30; R31 and R32 are their own classes", () => {
+    expect(createORU_R30(msh(), pid(), orc(), obr(), [{ obx: obx("1", "185") }])).toBeInstanceOf(ORU_R30);
+    expect(createORU_R31(msh("R31"), pid(), orc(), obr(), [{ obx: obx("1", "185") }])).toBeInstanceOf(ORU_R31);
+    expect(createORU_R32(msh("R32"), pid(), orc(), obr(), [{ obx: obx("1", "185") }])).toBeInstanceOf(ORU_R32);
+  });
 
-      expect(segments[0].substring(0, 3)).toBe("MSH");
-      expect(segments[1].substring(0, 3)).toBe("ORC");
-    });
-    it("should create ORU^R30 message with patient demographics", () => {
-      const msh = new MSH()
-        .sendingApplication("POC_DEVICE")
-        .messageType({ messageCode: "ORU", triggerEvent: "R30" })
-        .messageControlId("MSG12345")
-        .versionId("2.5.1");
-      const pid = new PID()
-        .setId("1")
-        .patientIdentifierList({ id: "98765", checkDigit: "", checkDigitScheme: "", assigningAuthority: "MRN", identifierTypeCode: "MR" })
-        .patientName({ familyName: "Smith", givenName: "Jane", middleName: "M" });
-      const orc = new ORC().orderControl("NW").placerOrderNumber("POC12345");
-      const obr = new OBR()
-        .setId("1")
-        .placerOrderNumber("POC12345")
-        .universalServiceIdentifier({ identifier: "GLUC", text: "Glucose", nameOfCodingSystem: "LN" });
+  test("verify() requires MSH, PID, ORC, OBR and at least one observation with an OBX", () => {
+    expect(new ORU_R30(null as any, null as any, null as any, null as any, []).verify().errors).toEqual([
+      "MSH segment is required",
+      "PID segment is required",
+      "ORC segment is required",
+      "OBR segment is required",
+      "At least one OBSERVATION group (OBX) is required",
+    ]);
+    const noObx = createORU_R30(msh(), pid(), orc(), obr(), [{ obx: obx("1", "1") }, { nteList: [new NTE()] } as any]);
+    expect(noObx.verify().errors).toEqual(["OBSERVATION group 2: OBX segment is required"]);
+    expect(() => noObx.encode()).toThrow(/Cannot encode invalid ORU_R30 message/);
+    expect(() => createORU_R31(msh("R31"), pid(), orc(), obr(), []).encode()).toThrow(/Cannot encode invalid ORU_R31 message/);
+  });
 
-      const message = createORU_R30(msh, [
-        {
-          pid,
-          orderObservations: [{ orc, obr, observations: [] }],
-        },
-      ]);
-      const encoded = message.encode();
-      const segments = encoded.split("\r");
+  test("encodes the minimal message", () => {
+    const wire = createORU_R30(msh(), pid(), orc(), obr(), [{ obx: obx("1", "185") }]).encode();
+    expect(types(wire)).toEqual(["MSH", "PID", "ORC", "OBR", "OBX"]);
+    expect(wire).toContain("ORU^R30");
+  });
 
-      expect(segments[0].substring(0, 3)).toBe("MSH");
-      expect(segments[2].substring(0, 3)).toBe("ORC");
-    });
-    it("should create ORU^R30 message with visit information", () => {
-      const msh = new MSH()
-        .sendingApplication("POC_DEVICE")
-        .messageType({ messageCode: "ORU", triggerEvent: "R30" })
-        .messageControlId("MSG12345")
-        .versionId("2.5.1");
-      const pid = new PID()
-        .setId("1")
-        .patientIdentifierList({ id: "98765", checkDigit: "", checkDigitScheme: "", assigningAuthority: "MRN", identifierTypeCode: "MR" })
-        .patientName({ familyName: "Smith", givenName: "Jane" });
-      const pv1 = new PV1().setId("1").patientClass("E");
+  test("encodes every optional segment and group in spec order and round-trips", () => {
+    const wire = createORU_R30(msh(), pid(), orc(), obr(), [
+      { obx: obx("1", "185"), nteList: [new NTE().setId("1").comment("high"), new NTE().setId("2").comment("repeat")] },
+      { obx: obx("2", "210") },
+    ], {
+      sftList: [new SFT().softwareVendorOrganization("Kindling")],
+      pd1: new PD1(),
+      pv1: new PV1().patientClass("E"),
+      pv2: new PV2(),
+      obrNteList: [new NTE().setId("1").comment("order note")],
+      timing: [{ tq1: new TQ1().setId("1"), tq2List: [new TQ2().setId("1")] }, { tq1: new TQ1().setId("2") }],
+    }).encode();
+    expect(types(wire)).toEqual([
+      "MSH", "SFT", "PID", "PD1", "PV1", "PV2", "ORC", "OBR", "NTE", "TQ1", "TQ2", "TQ1", "OBX", "NTE", "NTE", "OBX",
+    ]);
+    const result = parseORU_R30(wire);
+    expect(result.ok).toBe(true);
+    const v = result.val!;
+    expect(v.sftList).toHaveLength(1);
+    expect(v.pv2).toBeTruthy();
+    expect(v.obrNteList).toHaveLength(1);
+    expect(v.timing!.map((t) => t.tq2List!.length)).toEqual([1, 0]);
+    expect(v.observations.map((o) => o.nteList!.length)).toEqual([2, 0]);
+    expect(v.message.encode()).toBe(wire);
+  });
 
-      const orc = new ORC().orderControl("NW").placerOrderNumber("POC12345");
-      const obr = new OBR()
-        .setId("1")
-        .placerOrderNumber("POC12345")
-        .universalServiceIdentifier({ identifier: "GLUC", text: "Glucose", nameOfCodingSystem: "LN" });
-
-      const message = createORU_R30(msh, [
-        {
-          pid,
-          pv1,
-          orderObservations: [{ orc, obr, observations: [] }],
-        },
-      ]);
-      const encoded = message.encode();
-      const segments = encoded.split("\r");
-
-      expect(segments[0].substring(0, 3)).toBe("MSH");
-      expect(segments[2].substring(0, 3)).toBe("PV1");
-      expect(segments[4].substring(0, 3)).toBe("OBR");
-    });
-
-    it("should create ORU^R30 message with observations", () => {
-      const msh = new MSH()
-        .sendingApplication("POC_DEVICE")
-        .messageType({ messageCode: "ORU", triggerEvent: "R30" })
-        .messageControlId("MSG12345")
-        .versionId("2.5.1");
-      const orc = new ORC().orderControl("NW").placerOrderNumber("POC12345");
-      const obr = new OBR()
-        .setId("1")
-        .placerOrderNumber("POC12345")
-        .universalServiceIdentifier({ identifier: "GLUC", text: "Glucose", nameOfCodingSystem: "LN" });
-
-      const obx = new OBX()
-        .setId("1")
-        .valueType("NM")
-        .observationIdentifier({ identifier: "2339-0", text: "Glucose POC", nameOfCodingSystem: "LN" })
-        .observationSubId("1")
-        .observationValue("185");
-
-      const message = createORU_R30(msh, [
-        {
-          orderObservations: [{ orc, obr, observations: [obx] }],
-        },
-      ]);
-      const encoded = message.encode();
-      const segments = encoded.split("\r");
-
-      expect(segments[0].substring(0, 3)).toBe("MSH");
-      expect(segments[2].substring(0, 3)).toBe("OBR");
-      expect(segments[3].includes("185")).toBeTruthy();
-    });
-    it("should create ORU^R30 message with multiple observations", () => {
-      const msh = new MSH()
-        .sendingApplication("POC_DEVICE")
-        .messageType({ messageCode: "ORU", triggerEvent: "R30" })
-        .messageControlId("MSG12345")
-        .versionId("2.5.1");
-      const orc = new ORC().orderControl("NW").placerOrderNumber("POC12345");
-      const obr = new OBR()
-        .setId("1")
-        .placerOrderNumber("POC12345")
-        .universalServiceIdentifier({ identifier: "GLUC", text: "Glucose", nameOfCodingSystem: "LN" });
-
-      const obx1 = new OBX()
-        .setId("1")
-        .valueType("NM")
-        .observationIdentifier({ identifier: "2339-0", text: "Glucose", nameOfCodingSystem: "LN" })
-        .observationValue("185");
-
-      const obx2 = new OBX()
-        .setId("2")
-        .valueType("NM")
-        .observationIdentifier({ identifier: "2093-3", text: "Cholesterol", nameOfCodingSystem: "LN" })
-        .observationValue("210");
-
-      const message = createORU_R30(msh, [
-        {
-          orderObservations: [{ orc, obr, observations: [obx1, obx2] }],
-        },
-      ]);
-      const encoded = message.encode();
-      const segments = encoded.split("\r");
-
-      expect(segments.length).toBe(5);
-      expect(segments[4].substring(0, 3)).toBe("OBX");
-      expect(segments[4].includes("Cholesterol")).toBeTruthy();
-    });
-
-    it("should create ORU^R30 message with multiple order observations", () => {
-      const msh = new MSH()
-        .sendingApplication("POC_DEVICE")
-        .messageType({ messageCode: "ORU", triggerEvent: "R30" })
-        .messageControlId("MSG12345")
-        .versionId("2.5.1");
-      const orc1 = new ORC().orderControl("NW").placerOrderNumber("POC12345");
-      const obr1 = new OBR()
-        .setId("1")
-        .placerOrderNumber("POC12345")
-        .universalServiceIdentifier({ identifier: "GLUC", text: "Glucose", nameOfCodingSystem: "LN" });
-
-      const obx1 = new OBX()
-        .setId("1")
-        .valueType("NM")
-        .observationIdentifier({ identifier: "2339-0", text: "Glucose", nameOfCodingSystem: "LN" })
-        .observationValue("185");
-      const orc2 = new ORC().orderControl("NW").placerOrderNumber("POC12346");
-      const obr2 = new OBR()
-        .setId("2")
-        .placerOrderNumber("POC12346")
-        .universalServiceIdentifier({ identifier: "GLUC", text: "Glucose", nameOfCodingSystem: "LN" });
-
-      const obx2 = new OBX()
-        .setId("1")
-        .valueType("NM")
-        .observationIdentifier({ identifier: "718-7", text: "Hemoglobin", nameOfCodingSystem: "LN" })
-        .observationValue("14.5");
-      const message = createORU_R30(msh, [
-        {
-          orderObservations: [
-            { orc: orc1, obr: obr1, observations: [obx1] },
-            { orc: orc2, obr: obr2, observations: [obx2] },
-          ],
-        },
-      ]);
-      const encoded = message.encode();
-      const segments = encoded.split("\r");
-
-      expect(segments[0].substring(0, 3)).toBe("MSH");
-      expect(segments[2].substring(0, 3)).toBe("OBR");
-      expect(segments[4].substring(0, 3)).toBe("ORC");
-      expect(segments[6].substring(0, 3)).toBe("OBX");
-    });
-
-    it("should create ORU^R30 message with multiple patients", () => {
-      const msh = new MSH()
-        .sendingApplication("POC_DEVICE")
-        .messageType({ messageCode: "ORU", triggerEvent: "R30" })
-        .messageControlId("MSG12345")
-        .versionId("2.5.1");
-      const pid1 = new PID()
-        .setId("1")
-        .patientIdentifierList({ id: "98765", checkDigit: "", checkDigitScheme: "", assigningAuthority: "MRN" })
-        .patientName({ familyName: "Smith", givenName: "Jane" });
-      const orc1 = new ORC().orderControl("NW").placerOrderNumber("POC12345");
-      const obr1 = new OBR()
-        .setId("1")
-        .placerOrderNumber("POC12345")
-        .universalServiceIdentifier({ identifier: "GLUC", text: "Glucose", nameOfCodingSystem: "LN" });
-
-      const pid2 = new PID()
-        .setId("1")
-        .patientIdentifierList({ id: "98766", checkDigit: "", checkDigitScheme: "", assigningAuthority: "MRN" })
-        .patientName({ familyName: "Doe", givenName: "John" });
-      const orc2 = new ORC().orderControl("NW").placerOrderNumber("POC12346");
-      const obr2 = new OBR()
-        .setId("1")
-        .placerOrderNumber("POC12346")
-        .universalServiceIdentifier({ identifier: "GLUC", text: "Glucose", nameOfCodingSystem: "LN" });
-
-      const message = createORU_R30(msh, [
-        {
-          pid: pid1,
-          orderObservations: [{ orc: orc1, obr: obr1, observations: [] }],
-        },
-        {
-          pid: pid2,
-          orderObservations: [{ orc: orc2, obr: obr2, observations: [] }],
-        },
-      ]);
-      const encoded = message.encode();
-      const segments = encoded.split("\r");
-
-      expect(segments[0].substring(0, 3)).toBe("MSH");
-      expect(segments[1].includes("Smith")).toBeTruthy();
-      expect(segments[3].substring(0, 3)).toBe("OBR");
-      expect(segments[4].includes("Doe")).toBeTruthy();
-      expect(segments[6].substring(0, 3)).toBe("OBR");
-    });
-
-    describe("createORU_R31", () => {
-      it("should create ORU^R31 message", () => {
-        const msh = new MSH()
-          .sendingApplication("POC_DEVICE")
-          .messageType({ messageCode: "ORU", triggerEvent: "R31" })
-          .messageControlId("MSG12345")
-          .versionId("2.5.1");
-        const orc = new ORC().orderControl("NW").placerOrderNumber("POC12345");
-        const obr = new OBR()
-          .setId("1")
-          .placerOrderNumber("POC12345")
-          .universalServiceIdentifier({ identifier: "GLUC", text: "Glucose", nameOfCodingSystem: "LN" });
-
-        const message = createORU_R31(msh, [
-          {
-            orderObservations: [{ orc, obr, observations: [] }],
-          },
-        ]);
-        const encoded = message.encode();
-        const segments = encoded.split("\r");
-
-        expect(segments[0].substring(0, 3)).toBe("MSH");
-        expect(segments[1].substring(0, 3)).toBe("ORC");
-      });
-      it("should create ORU^R31 with complete patient data", () => {
-        const msh = new MSH()
-          .sendingApplication("POC_DEVICE")
-          .messageType({ messageCode: "ORU", triggerEvent: "R31" })
-          .messageControlId("MSG12345")
-          .versionId("2.5.1");
-        const pid = new PID()
-          .setId("1")
-          .patientIdentifierList({ id: "98765", checkDigit: "", checkDigitScheme: "", assigningAuthority: "MRN" })
-          .patientName({ familyName: "Smith", givenName: "Jane" });
-        const pv1 = new PV1().setId("1").patientClass("I");
-        const orc = new ORC().orderControl("NW").placerOrderNumber("POC12345");
-        const obr = new OBR()
-          .setId("1")
-          .placerOrderNumber("POC12345")
-          .universalServiceIdentifier({ identifier: "GLUC", text: "Glucose", nameOfCodingSystem: "LN" });
-
-        const obx = new OBX()
-          .setId("1")
-          .valueType("NM")
-          .observationIdentifier({ identifier: "2339-0", text: "Glucose", nameOfCodingSystem: "LN" })
-          .observationValue("185");
-        const message = createORU_R31(msh, [
-          {
-            pid,
-            pv1,
-            orderObservations: [{ orc, obr, observations: [obx] }],
-          },
-        ]);
-        const encoded = message.encode();
-        const segments = encoded.split("\r");
-
-        expect(segments.length).toBe(6);
-      });
-    });
-
-    describe("createORU_R32", () => {
-      it("should create ORU^R32 message", () => {
-        const msh = new MSH()
-          .sendingApplication("POC_DEVICE")
-          .messageType({ messageCode: "ORU", triggerEvent: "R32" })
-          .messageControlId("MSG12345")
-          .versionId("2.5.1");
-        const orc = new ORC().orderControl("NW").placerOrderNumber("POC12345");
-        const obr = new OBR()
-          .setId("1")
-          .placerOrderNumber("POC12345")
-          .universalServiceIdentifier({ identifier: "GLUC", text: "Glucose", nameOfCodingSystem: "LN" });
-
-        const message = createORU_R32(msh, [
-          {
-            orderObservations: [{ orc, obr, observations: [] }],
-          },
-        ]);
-        const encoded = message.encode();
-        const segments = encoded.split("\r");
-
-        expect(segments[0].substring(0, 3)).toBe("MSH");
-        expect(segments[1].substring(0, 3)).toBe("ORC");
-      });
-      it("should create ORU^R32 with complete patient data", () => {
-        const msh = new MSH()
-          .sendingApplication("POC_DEVICE")
-          .messageType({ messageCode: "ORU", triggerEvent: "R32" })
-          .messageControlId("MSG12345")
-          .versionId("2.5.1");
-        const pid = new PID()
-          .setId("1")
-          .patientIdentifierList({ id: "98765", checkDigit: "", checkDigitScheme: "", assigningAuthority: "MRN" })
-          .patientName({ familyName: "Smith", givenName: "Jane" });
-        const pv1 = new PV1().setId("1").patientClass("O");
-        const orc = new ORC().orderControl("NW").placerOrderNumber("POC12345");
-        const obr = new OBR()
-          .setId("1")
-          .placerOrderNumber("POC12345")
-          .universalServiceIdentifier({ identifier: "GLUC", text: "Glucose", nameOfCodingSystem: "LN" });
-
-        const obx = new OBX()
-          .setId("1")
-          .valueType("NM")
-          .observationIdentifier({ identifier: "2339-0", text: "Glucose", nameOfCodingSystem: "LN" })
-          .observationValue("185");
-        const message = createORU_R32(msh, [
-          {
-            pid,
-            pv1,
-            orderObservations: [{ orc, obr, observations: [obx] }],
-          },
-        ]);
-        const encoded = message.encode();
-        const segments = encoded.split("\r");
-
-        expect(segments.length).toBe(6);
-      });
-
-      describe("Segment Ordering Validation", () => {
-        it("should maintain correct segment order: MSH, PID, PV1, ORC, OBR, OBX", () => {
-          const msh = new MSH()
-            .sendingApplication("POC_DEVICE")
-            .messageType({ messageCode: "ORU", triggerEvent: "R30" })
-            .messageControlId("MSG12345")
-            .versionId("2.5.1");
-          const pid = new PID()
-            .setId("1")
-            .patientIdentifierList({ id: "98765", checkDigit: "", checkDigitScheme: "", assigningAuthority: "MRN" })
-            .patientName({ familyName: "Smith", givenName: "Jane" });
-          const pv1 = new PV1().setId("1").patientClass("E");
-          const orc = new ORC()
-            .orderControl("NW")
-            .placerOrderNumber("POC12345");
-          const obr = new OBR()
-            .setId("1")
-            .placerOrderNumber("POC12345")
-            .universalServiceIdentifier({ identifier: "GLUC", text: "Glucose", nameOfCodingSystem: "LN" });
-
-          const obx = new OBX()
-            .setId("1")
-            .valueType("NM")
-            .observationIdentifier({ identifier: "2339-0", text: "Glucose", nameOfCodingSystem: "LN" })
-            .observationValue("185");
-          const message = createORU_R30(msh, [
-            {
-              pid,
-              pv1,
-              orderObservations: [{ orc, obr, observations: [obx] }],
-            },
-          ]);
-          const encoded = message.encode();
-          const segments = encoded.split("\r");
-
-          expect(segments[0].substring(0, 3)).toBe("MSH");
-          expect(segments[2].substring(0, 3)).toBe("PV1");
-          expect(segments[4].substring(0, 3)).toBe("OBR");
-        });
-        it("should require ORC before OBR", () => {
-          const msh = new MSH()
-            .sendingApplication("POC_DEVICE")
-            .messageType({ messageCode: "ORU", triggerEvent: "R30" })
-            .messageControlId("MSG12345")
-            .versionId("2.5.1");
-          const orc = new ORC()
-            .orderControl("NW")
-            .placerOrderNumber("POC12345");
-          const obr = new OBR()
-            .setId("1")
-            .placerOrderNumber("POC12345")
-            .universalServiceIdentifier({ identifier: "GLUC", text: "Glucose", nameOfCodingSystem: "LN" });
-
-          // This should work - ORC followed by OBR
-          const message = createORU_R30(msh, [
-            {
-              orderObservations: [{ orc, obr, observations: [] }],
-            },
-          ]);
-          const encoded = message.encode();
-          const segments = encoded.split("\r");
-
-          // Verify ORC comes before OBR
-          let orcIndex = -1;
-          let obrIndex = -1;
-
-          segments.forEach((seg, idx) => {
-            if (seg.startsWith("ORC")) orcIndex = idx;
-            if (seg.startsWith("OBR")) obrIndex = idx;
-          });
-          expect(orcIndex !== -1, "ORC segment should exist").toBeTruthy();
-          expect(obrIndex !== -1, "OBR segment should exist").toBeTruthy();
-          expect(orcIndex < obrIndex, "ORC should come before OBR").toBeTruthy();
-        });
-      });
-    });
+  test("the parsed result can be modified and rebuilt", () => {
+    const parsed = parseORU_R30(createORU_R30(msh(), pid(), orc(), obr(), [{ obx: obx("1", "185") }]).encode()).val!;
+    parsed.observations.push({ obx: obx("2", "190"), nteList: [] });
+    const rebuilt = createORU_R30(parsed.msh, parsed.pid, parsed.orc, parsed.obr, parsed.observations, { pv1: parsed.pv1 }).encode();
+    expect(types(rebuilt)).toEqual(["MSH", "PID", "ORC", "OBR", "OBX", "OBX"]);
   });
 });

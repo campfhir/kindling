@@ -41,7 +41,7 @@ describe("BAR (v2.5): SFT after MSH on every event", () => {
       expect(result.val!.visits[0].visitRolList).toHaveLength(1);
       expect(result.val!.message.encode()).toBe(wire);
     }
-    expect(parseBAR_P01([MSH_LINE("P01"), "EVN|P01", "SFT|x", "PID|1", "PV1|1"].join("\r")).err!.message).toMatch(/SFT segment at line 3 must appear before the EVN segment/);
+    expect(parseBAR_P01([MSH_LINE("P01"), "EVN|P01", "SFT|x", "PID|1", "PV1|1"].join("\r")).err!.message).toMatch(/BAR_P01 message must contain a PID segment/);
   });
 
   test("P05 round-trips with ABS/BLC/RMI through v2.5 and v2.5.1", () => {
@@ -69,6 +69,6 @@ describe("BAR (v2.5): SFT after MSH on every event", () => {
       expect(parse(p06).val!.sftList).toHaveLength(2);
       expect(parse(p06).val!.message.encode()).toBe(p06);
     }
-    expect(parseBAR_P06([MSH_LINE("P06"), "EVN|P06", "SFT|x", "PID|1"].join("\r")).err!.message).toMatch(/SFT segment at line 3 must appear before the EVN segment/);
+    expect(parseBAR_P06([MSH_LINE("P06"), "EVN|P06", "SFT|x", "PID|1"].join("\r")).err!.message).toMatch(/BAR_P06 message must contain at least one PID segment/);
   });
 });

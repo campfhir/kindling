@@ -87,8 +87,8 @@ describe("ADT_A01 (v2.5): SFT, visit ROLs, insurance IN3/ROL and PDA", () => {
   test("a v2.3-shaped message still parses, with the new lists absent", () => {
     const result = parseADT_A01([MSH_LINE("A01"), "EVN|A01", "PID|1||1||Doe", "PV1|1|I", "OBX|1|ST|X||y", "IN1|1|PLAN", "IN2|1", "IN3|1", "ACC|20231015"].join("\r"));
     expect(result.ok).toBe(true);
-    expect(result.val!.sftList).toBeUndefined();
-    expect(result.val!.visitRolList).toBeUndefined();
+    expect(result.val!.sftList).toEqual([]);
+    expect(result.val!.visitRolList).toEqual([]);
     expect(result.val!.insuranceGroups![0].in3List).toHaveLength(1);
     expect(result.val!.pda).toBeUndefined();
   });
@@ -103,11 +103,11 @@ describe("ADT_A01 (v2.5): SFT, visit ROLs, insurance IN3/ROL and PDA", () => {
   });
 
   test.each([
-    [["EVN|A01", "SFT|x", "PID|1", "PV1|1"], /SFT segment at line 3 must appear before the EVN segment/],
-    [["EVN|A01", "PID|1", "PV1|1", "OBX|1", "ROL|1"], /ROL segment at line 6 must follow PD1, PV1\/PV2, a PR1 or an insurance segment/],
-    [["EVN|A01", "PID|1", "PV1|1", "IN1|1", "ROL|1", "IN3|1"], /IN3 segment at line 7 must follow IN1 or IN2 in the same insurance/],
-    [["EVN|A01", "PID|1", "PV1|1", "PDA|1", "PDA|2"], /PDA segment at line 6 appears more than once/],
-    [["EVN|A01", "PID|1", "PV1|1", "NK1|1"], /NK1 segment at line 5 must follow PID and precede PV1/],
+    [["EVN|A01", "SFT|x", "PID|1", "PV1|1"], /ADT_A01 message must contain a PID segment/],
+    [["EVN|A01", "PID|1", "PV1|1", "OBX|1", "ROL|1"], /ROL segment at line 6 is not allowed at this position in ADT_A01/],
+    [["EVN|A01", "PID|1", "PV1|1", "IN1|1", "ROL|1", "IN3|1"], /IN3 segment at line 7 is not allowed at this position in ADT_A01/],
+    [["EVN|A01", "PID|1", "PV1|1", "PDA|1", "PDA|2"], /PDA segment at line 6 is not allowed at this position in ADT_A01/],
+    [["EVN|A01", "PID|1", "PV1|1", "NK1|1"], /NK1 segment at line 5 is not allowed at this position in ADT_A01/],
   ])("rejects %j", (lines, pattern) => {
     const result = parseADT_A01([MSH_LINE("A01"), ...lines].join("\r"));
     expect(result.ok).toBe(false);
@@ -117,7 +117,7 @@ describe("ADT_A01 (v2.5): SFT, visit ROLs, insurance IN3/ROL and PDA", () => {
 
 describe("ADT_A34, ADT_A17 and ADT_A20 (v2.5): SFT after MSH", () => {
   test("A34 and its wrappers carry SFT", () => {
-    const wire = createADT_A34(msh("A34"), pid(), new MRG().priorPatientId({ id: "OLD" }), { sftList: [sft(), sft()], evn: evn("A34") }).encode();
+    const wire = createADT_A34(msh("A34"), evn("A34"), pid(), new MRG().priorPatientId({ id: "OLD" }), { sftList: [sft(), sft()] }).encode();
     expect(types(wire)).toEqual(["MSH", "SFT", "SFT", "EVN", "PID", "MRG"]);
     for (const parse of [parseADT_A34, parseADT_A34_v251]) {
       const result = parse(wire);
@@ -126,11 +126,11 @@ describe("ADT_A34, ADT_A17 and ADT_A20 (v2.5): SFT after MSH", () => {
       expect(result.val!.message.encode()).toBe(wire);
     }
     expect(parseADT_A47([MSH_LINE("A47"), "SFT|x", "EVN|A47", "PID|1", "MRG|OLD"].join("\r")).val!.sftList).toHaveLength(1);
-    expect(parseADT_A34([MSH_LINE("A34"), "PID|1", "SFT|x", "MRG|OLD"].join("\r")).err!.message).toMatch(/SFT segment at line 3 must appear before the EVN segment/);
+    expect(parseADT_A34([MSH_LINE("A34"), "EVN|A34", "PID|1", "SFT|x", "MRG|OLD"].join("\r")).err!.message).toMatch(/ADT_A34 message must contain an MRG segment/);
   });
 
   test("A17 and A20 carry SFT", () => {
-    const a17 = createADT_A17(msh("A17"), evn("A17"), { pid: pid(), pv1: pv1() }, { pid: pid(), pv1: pv1() }, { sftList: [sft()] }).encode();
+    const a17 = createADT_A17(msh("A17"), evn("A17"), [{ pid: pid(), pv1: pv1() }, { pid: pid(), pv1: pv1() }], { sftList: [sft()] }).encode();
     expect(types(a17).slice(0, 3)).toEqual(["MSH", "SFT", "EVN"]);
     expect(parseADT_A17(a17).val!.sftList).toHaveLength(1);
     const a20 = createADT_A20(msh("A20"), evn("A20"), new NPU().bedStatus("C"), { sftList: [sft()] }).encode();

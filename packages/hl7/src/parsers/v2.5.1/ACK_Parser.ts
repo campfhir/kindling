@@ -1,34 +1,56 @@
-import { Result } from "../../types/result";
-import { EncodingCharacters } from "../../types/encoding";
-import { MSH } from "../../segments/v2.5.1/MSH";
-import { SFT } from "../../segments/v2.5.1/SFT";
-import { MSA } from "../../segments/v2.5.1/MSA";
-import { ERR } from "../../segments/v2.5.1/ERR";
-import {
-  ACK_Parser as ACK_Parser_base,
-  ParsedACK,
-} from "../v2.5/ACK_Parser";
+/**
+ * Parser for ACK messages (HL7 v2.5.1).
+ *
+ * Structure: MSH [{SFT}] MSA [{ERR}]
+ *
+ * @module
+ */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { Result } from "../../types/result.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
+import { ACK_STRUCTURE } from "../../structures/v2.5.1/ACK.ts";
+import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
+import { MSA } from "../../segments/v2.5.1/MSA.ts";
+import { ERR } from "../../segments/v2.5.1/ERR.ts";
 
-export type { ParsedACK };
+/** Structured result of parsing an HL7 ACK (HL7 v2.5.1) message. */
+export interface ParsedACK extends ParsedMessageBase {
+  /** The MSH segment. */
+  msh: MSH;
+  /** The SFT segments. */
+  sftList?: SFT[];
+  /** The MSA segment. */
+  msa: MSA;
+  /** The ERR segments. */
+  errList?: ERR[];
+}
 
-export class ACK_Parser extends ACK_Parser_base {
-  protected override parseMSH(s: string): Result<MSH> {
-    return MSH.parse(s);
-  }
+/** The segment parsers of ACK (HL7 v2.5.1). */
+const PARSERS: SegmentParsers = {
+  MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
+  MSA: (s, e) => MSA.parse(s, e),
+  ERR: (s, e) => ERR.parse(s, e),
+};
 
-  protected override parseSFT(s: string, e: EncodingCharacters): Result<SFT> {
-    return SFT.parse(s, e);
-  }
+/** Parser for HL7 ACK (HL7 v2.5.1) messages. */
+export class ACK_Parser {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "ACK";
+  /** The structure the message is parsed against. */
+  protected readonly structure: StructureItem[] = ACK_STRUCTURE;
+  /** The segment parsers, keyed by segment name. */
+  protected readonly parsers: SegmentParsers = PARSERS;
 
-  protected override parseMSA(s: string, e: EncodingCharacters): Result<MSA> {
-    return MSA.parse(s, e);
-  }
-
-  protected override parseERR(s: string, e: EncodingCharacters): Result<ERR> {
-    return ERR.parse(s, e);
+  /** Parses the input string into a structured instance. */
+  parse(messageString: string): Result<ParsedACK> {
+    return parseStructure<ParsedACK>(this.messageName, this.structure, this.parsers, messageString);
   }
 }
 
+/** Parses an HL7 ACK (HL7 v2.5.1) message string into a structured result. */
 export function parseACK(messageString: string): Result<ParsedACK> {
   return new ACK_Parser().parse(messageString);
 }

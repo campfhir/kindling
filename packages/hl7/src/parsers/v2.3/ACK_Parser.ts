@@ -1,100 +1,52 @@
 /**
- * Parser for ACK messages (HL7 v2.3): MSH, MSA, [ERR].
+ * Parser for ACK messages (HL7 v2.3).
+ *
+ * Structure: MSH MSA [ERR]
  *
  * @module
  */
-import { Err } from "../../utils/err.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../../types/result.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
+import { ACK_STRUCTURE } from "../../structures/v2.3/ACK.ts";
 import { MSH } from "../../segments/v2.3/MSH.ts";
 import { MSA } from "../../segments/v2.3/MSA.ts";
 import { ERR } from "../../segments/v2.3/ERR.ts";
-import type { HL7Message } from "../../types/message.ts";
-import type { EncodingCharacters } from "../../types/encoding.ts";
-import {
-  misplacedSegment,
-  readMessageHeader,
-  segmentParseFailure,
-} from "../../utils/messageParsing.ts";
 
-/** Structured result of parsing an HL7 ACK (v2.3) message. */
-export interface ParsedACK {
-  /** The message value. */
-  message: HL7Message;
-  /** The msh value. */
+/** Structured result of parsing an HL7 ACK (HL7 v2.3) message. */
+export interface ParsedACK extends ParsedMessageBase {
+  /** The MSH segment. */
   msh: MSH;
-  /** The msa value. */
+  /** The MSA segment. */
   msa: MSA;
-  /** The err value. */
+  /** The ERR segment. */
   err?: ERR;
 }
 
-/** Parser for HL7 ACK (v2.3) messages. */
+/** The segment parsers of ACK (HL7 v2.3). */
+const PARSERS: SegmentParsers = {
+  MSH: (s) => MSH.parse(s),
+  MSA: (s, e) => MSA.parse(s, e),
+  ERR: (s, e) => ERR.parse(s, e),
+};
+
+/** Parser for HL7 ACK (HL7 v2.3) messages. */
 export class ACK_Parser {
-  /** Parse msh. */
-  protected parseMSH(s: string): Result<MSH> {
-    return MSH.parse(s);
-  }
-  /** Parse msa. */
-  protected parseMSA(s: string, e: EncodingCharacters): Result<MSA> {
-    return MSA.parse(s, e);
-  }
-  /** Parse err. */
-  protected parseERR(s: string, e: EncodingCharacters): Result<ERR> {
-    return ERR.parse(s, e);
-  }
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "ACK";
+  /** The structure the message is parsed against. */
+  protected readonly structure: StructureItem[] = ACK_STRUCTURE;
+  /** The segment parsers, keyed by segment name. */
+  protected readonly parsers: SegmentParsers = PARSERS;
 
   /** Parses the input string into a structured instance. */
   parse(messageString: string): Result<ParsedACK> {
-    try {
-      const header = readMessageHeader(messageString, (s) => this.parseMSH(s));
-      if (!header.ok || !header.val) return header as Result<never>;
-      const { segments, msh, encoding, message } = header.val;
-
-      let msa: MSA | undefined;
-      let err: ERR | undefined;
-
-      for (let i = 1; i < segments.length; i++) {
-        const segmentStr = segments[i];
-        const segmentType = segmentStr.substring(0, 3);
-
-        switch (segmentType) {
-          case "MSA": {
-            const result = this.parseMSA(segmentStr, encoding);
-            if (!result.ok || !result.val) return segmentParseFailure("MSA", i + 1, result);
-            if (msa) return misplacedSegment("MSA", i + 1, "appears more than once");
-            msa = result.val;
-            message.addSegment(msa);
-            break;
-          }
-          case "ERR": {
-            const result = this.parseERR(segmentStr, encoding);
-            if (!result.ok || !result.val) return segmentParseFailure("ERR", i + 1, result);
-            if (!msa) return misplacedSegment("ERR", i + 1, "found without preceding MSA segment");
-            if (err) return misplacedSegment("ERR", i + 1, "appears more than once");
-            err = result.val;
-            message.addSegment(err);
-            break;
-          }
-          default:
-            console.warn(
-              `Skipping unsupported segment type '${segmentType}' at line ${i + 1}`,
-            );
-            break;
-        }
-      }
-
-      if (!msa) {
-        return { ok: false, err: new Err("ACK message must contain an MSA segment") };
-      }
-
-      return { ok: true, val: { message, msh, msa, err } };
-    } catch (error) {
-      return { ok: false, err: new Err(`Failed to parse ACK message: ${error}`) };
-    }
+    return parseStructure<ParsedACK>(this.messageName, this.structure, this.parsers, messageString);
   }
 }
 
-/** Parses an HL7 ACK (v2.3) message string into a structured result. */
+/** Parses an HL7 ACK (HL7 v2.3) message string into a structured result. */
 export function parseACK(messageString: string): Result<ParsedACK> {
   return new ACK_Parser().parse(messageString);
 }

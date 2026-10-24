@@ -41,11 +41,9 @@ const MSH_LINE = (ev: string) => `MSH|^~\\&|ADT|HOSP|AR|HOSP|20231015120000||BAR
 describe("BAR_P01 / BAR_P05 (v2.3)", () => {
   test("verify() requires the header segments and a non-empty visit", () => {
     expect(new BAR_P01(null as any, null as any, null as any, []).verify().errors).toEqual([
-      "MSH segment is required", "EVN segment is required", "PID segment is required", "At least one VISIT group is required",
+      "MSH segment is required", "EVN segment is required", "PID segment is required",
     ]);
-    expect(createBAR_P01(msh("P01"), evn("P01"), pid(), [{}, { pv2: new PV2() }]).verify().errors).toEqual([
-      "VISIT group 1 is empty", "VISIT group 2: PV2 requires PV1",
-    ]);
+    expect(createBAR_P01(msh("P01"), evn("P01"), pid(), [{}, { pv2: new PV2() }]).verify().errors).toEqual(["VISIT group 1 is empty"]);
   });
 
   test("encodes two visits in spec order and the parser splits them again", () => {
@@ -71,8 +69,8 @@ describe("BAR_P01 / BAR_P05 (v2.3)", () => {
       expect(v.pd1).toBeTruthy();
       expect(v.visits).toHaveLength(2);
       expect(v.visits[0].dg1List).toHaveLength(2);
-      expect(v.visits[0].procedures[0].rolList).toHaveLength(1);
-      expect(v.visits[0].insurances[0].in3).toBeTruthy();
+      expect(v.visits[0].procedures![0].rolList).toHaveLength(1);
+      expect(v.visits[0].insurances![0].in3).toBeTruthy();
       expect(v.visits[0].ub2).toBeTruthy();
       expect(v.visits[1].pv1).toBeTruthy();
       expect(v.visits[1].dg1List).toHaveLength(1);
@@ -83,7 +81,7 @@ describe("BAR_P01 / BAR_P05 (v2.3)", () => {
     const v251 = parseBAR_P01_v251(wire);
     expect(v251.ok).toBe(true);
     expect(v251.val!.visits).toHaveLength(2);
-    expect(v251.val!.visits[0].insurances[0].in3List).toHaveLength(1);
+    expect(v251.val!.visits[0].insurances![0].in3List).toHaveLength(1);
     expect(v251.val!.message.encode()).toBe(wire);
   });
 
@@ -103,14 +101,16 @@ describe("BAR_P01 / BAR_P05 (v2.3)", () => {
     const wire = createBAR_P05(msh("P05"), evn("P05"), pid(), [{ pv1: new PV1().patientClass("I") }]).encode();
     expect(wire).toContain("BAR^P05");
     expect(parseBAR_P05(wire).ok).toBe(true);
-    expect(parseBAR_P05([MSH_LINE("P05"), "EVN|P05", "PID|1"].join("\r")).err!.message).toMatch(/BAR_P05 message must contain at least one VISIT group segment/);
+    // Every VISIT segment is optional, so a message without any parses with no visits.
+    expect(parseBAR_P05([MSH_LINE("P05"), "EVN|P05", "PID|1"].join("\r")).val!.visits).toEqual([]);
+    expect(parseBAR_P05([MSH_LINE("P05"), "EVN|P05"].join("\r")).err!.message).toMatch(/BAR_P05 message must contain a PID segment/);
   });
 
   test.each([
-    [["EVN|P01", "PID|1", "PV1|1|I", "PD1|1"], /PD1 segment at line 5 must directly follow PID/],
-    [["EVN|P01", "PID|1", "ROL|1"], /ROL segment at line 4 must follow a PR1 segment/],
-    [["EVN|P01", "PID|1", "PV1|1|I", "IN3|1"], /IN3 segment at line 5 must follow IN1 or IN2/],
-    [["EVN|P01", "PV1|1|I"], /PV1 segment at line 3 must follow PID/],
+    [["EVN|P01", "PID|1", "PV1|1|I", "PD1|1"], /PD1 segment at line 5 is not allowed at this position in BAR_P01/],
+    [["EVN|P01", "PID|1", "ROL|1"], /ROL segment at line 4 is not allowed at this position in BAR_P01/],
+    [["EVN|P01", "PID|1", "PV1|1|I", "IN3|1"], /IN3 segment at line 5 is not allowed at this position in BAR_P01/],
+    [["EVN|P01", "PV1|1|I"], /BAR_P01 message must contain a PID segment/],
   ])("rejects %j", (lines, pattern) => {
     const result = parseBAR_P01([MSH_LINE("P01"), ...lines].join("\r"));
     expect(result.ok).toBe(false);
@@ -128,10 +128,10 @@ describe("BAR_P02 and BAR_P06 (v2.3)", () => {
     for (const parse of [parseBAR_P02, parseBAR_P02_v251]) {
       const result = parse(wire);
       expect(result.ok).toBe(true);
-      expect(result.val!.patients.map((p) => p.db1List.length)).toEqual([2, 0]);
+      expect(result.val!.patients.map((p) => p.db1List!.length)).toEqual([2, 0]);
       expect(result.val!.message.encode()).toBe(wire);
     }
-    expect(parseBAR_P02([MSH_LINE("P02"), "EVN|P02", "PID|1", "PV1|1", "PV1|2"].join("\r")).err!.message).toMatch(/PV1 segment at line 5 appears more than once/);
+    expect(parseBAR_P02([MSH_LINE("P02"), "EVN|P02", "PID|1", "PV1|1", "PV1|2"].join("\r")).err!.message).toMatch(/PV1 segment at line 5 is not allowed at this position in BAR_P02/);
     expect(parseBAR_P02([MSH_LINE("P02"), "EVN|P02"].join("\r")).err!.message).toMatch(/BAR_P02 message must contain at least one PID segment/);
     expect(createBAR_P02(msh("P02"), evn("P02"), []).verify().errors).toEqual(["At least one PATIENT group (PID) is required"]);
   });
@@ -145,6 +145,6 @@ describe("BAR_P02 and BAR_P06 (v2.3)", () => {
       expect(result.val!.patients[1].pv1).toBeUndefined();
       expect(result.val!.message.encode()).toBe(wire);
     }
-    expect(parseBAR_P06([MSH_LINE("P06"), "PID|1"].join("\r")).err!.message).toMatch(/PID segment at line 2 must follow the EVN segment/);
+    expect(parseBAR_P06([MSH_LINE("P06"), "PID|1"].join("\r")).err!.message).toMatch(/BAR_P06 message must contain an EVN segment/);
   });
 });

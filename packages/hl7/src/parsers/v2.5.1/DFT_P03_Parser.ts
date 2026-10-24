@@ -1,5 +1,15 @@
-import { Result } from "../../types/result.ts";
-import { EncodingCharacters } from "../../types/encoding.ts";
+/**
+ * Parser for DFT^P03 messages (HL7 v2.5.1).
+ *
+ * Structure: MSH [{SFT}] EVN PID [PD1] [{ROL}] [PV1] [PV2] [{ROL}] [{DB1}] [{ COMMON_ORDER: [ORC] [{ TIMING_QUANTITY: TQ1 [{TQ2}] }] [ ORDER: OBR [{NTE}] ] [{ OBSERVATION: OBX [{NTE}] }] }] { FINANCIAL: FT1 [NTE] [{ FINANCIAL_PROCEDURE: PR1 [{ROL}] }] [{ FINANCIAL_COMMON_ORDER: [ORC] [{ FINANCIAL_TIMING_QUANTITY: TQ1 [{TQ2}] }] [ FINANCIAL_ORDER: OBR [{NTE}] ] [{ FINANCIAL_OBSERVATION: OBX [{NTE}] }] }] } [{DG1}] [DRG] [{GT1}] [{ INSURANCE: IN1 [IN2] [{IN3}] [{ROL}] }] [ACC]
+ *
+ * @module
+ */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { Result } from "../../types/result.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
+import { DFT_P03_STRUCTURE } from "../../structures/v2.5.1/DFT_P03.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
 import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { EVN } from "../../segments/v2.5.1/EVN.ts";
@@ -24,122 +34,181 @@ import { IN1 } from "../../segments/v2.5.1/IN1.ts";
 import { IN2 } from "../../segments/v2.5.1/IN2.ts";
 import { IN3 } from "../../segments/v2.5.1/IN3.ts";
 import { ACC } from "../../segments/v2.5.1/ACC.ts";
-import {
-  DFT_P03_Parser as DFT_P03_Parser_base,
-  ParsedDFT_P03,
-  ParsedDFTOrder,
-  ParsedDFTTiming,
-  ParsedDFTObservation,
-  ParsedDFTFinancial,
-  ParsedDFTProcedure,
-  ParsedDFTFinancialOrder,
-  ParsedDFTFinancialTiming,
-  ParsedDFTFinancialObservation,
-  ParsedDFTInsurance,
-} from "../v2.5/DFT_P03_Parser.ts";
 
-export type { ParsedDFT_P03, ParsedDFTOrder, ParsedDFTTiming, ParsedDFTObservation, ParsedDFTFinancial, ParsedDFTProcedure, ParsedDFTFinancialOrder, ParsedDFTFinancialTiming, ParsedDFTFinancialObservation, ParsedDFTInsurance };
+/** The COMMON ORDER group of a parsed DFT^P03 (HL7 v2.5.1) message. */
+export interface ParsedDFTOrder {
+  /** The ORC segment. */
+  orc?: ORC;
+  /** The TIMING QUANTITY groups. */
+  timing?: ParsedDFTTiming[];
+  /** The OBR segment. */
+  obr?: OBR;
+  /** The NTE segments. */
+  obrNteList?: NTE[];
+  /** The OBSERVATION groups. */
+  observations?: ParsedDFTObservation[];
+}
 
-/** Parser for HL7 DFT^P03 (v2.5.1) messages. */
-export class DFT_P03_Parser extends DFT_P03_Parser_base {
-  protected override parseMSH(s: string): Result<MSH> {
-    return MSH.parse(s);
-  }
+/** The TIMING QUANTITY group of a parsed DFT^P03 (HL7 v2.5.1) message. */
+export interface ParsedDFTTiming {
+  /** The TQ1 segment. */
+  tq1: TQ1;
+  /** The TQ2 segments. */
+  tq2List?: TQ2[];
+}
 
-  protected override parseSFT(s: string, e: EncodingCharacters): Result<SFT> {
-    return SFT.parse(s, e);
-  }
+/** The OBSERVATION group of a parsed DFT^P03 (HL7 v2.5.1) message. */
+export interface ParsedDFTObservation {
+  /** The OBX segment. */
+  obx: OBX;
+  /** The NTE segments. */
+  nteList?: NTE[];
+}
 
-  protected override parseEVN(s: string, e: EncodingCharacters): Result<EVN> {
-    return EVN.parse(s, e);
-  }
+/** The FINANCIAL group of a parsed DFT^P03 (HL7 v2.5.1) message. */
+export interface ParsedDFTFinancial {
+  /** The FT1 segment. */
+  ft1: FT1;
+  /** The NTE segment. */
+  nte?: NTE;
+  /** The FINANCIAL PROCEDURE groups. */
+  procedures?: ParsedDFTProcedure[];
+  /** The FINANCIAL COMMON ORDER groups. */
+  orders?: ParsedDFTFinancialOrder[];
+}
 
-  protected override parsePID(s: string, e: EncodingCharacters): Result<PID> {
-    return PID.parse(s, e);
-  }
+/** The FINANCIAL PROCEDURE group of a parsed DFT^P03 (HL7 v2.5.1) message. */
+export interface ParsedDFTProcedure {
+  /** The PR1 segment. */
+  pr1: PR1;
+  /** The ROL segments. */
+  rolList?: ROL[];
+}
 
-  protected override parsePD1(s: string, e: EncodingCharacters): Result<PD1> {
-    return PD1.parse(s, e);
-  }
+/** The FINANCIAL COMMON ORDER group of a parsed DFT^P03 (HL7 v2.5.1) message. */
+export interface ParsedDFTFinancialOrder {
+  /** The ORC segment. */
+  orc?: ORC;
+  /** The FINANCIAL TIMING QUANTITY groups. */
+  timing?: ParsedDFTFinancialTiming[];
+  /** The OBR segment. */
+  obr?: OBR;
+  /** The NTE segments. */
+  obrNteList?: NTE[];
+  /** The FINANCIAL OBSERVATION groups. */
+  observations?: ParsedDFTFinancialObservation[];
+}
 
-  protected override parseROL(s: string, e: EncodingCharacters): Result<ROL> {
-    return ROL.parse(s, e);
-  }
+/** The FINANCIAL TIMING QUANTITY group of a parsed DFT^P03 (HL7 v2.5.1) message. */
+export interface ParsedDFTFinancialTiming {
+  /** The TQ1 segment. */
+  tq1: TQ1;
+  /** The TQ2 segments. */
+  tq2List?: TQ2[];
+}
 
-  protected override parsePV1(s: string, e: EncodingCharacters): Result<PV1> {
-    return PV1.parse(s, e);
-  }
+/** The FINANCIAL OBSERVATION group of a parsed DFT^P03 (HL7 v2.5.1) message. */
+export interface ParsedDFTFinancialObservation {
+  /** The OBX segment. */
+  obx: OBX;
+  /** The NTE segments. */
+  nteList?: NTE[];
+}
 
-  protected override parsePV2(s: string, e: EncodingCharacters): Result<PV2> {
-    return PV2.parse(s, e);
-  }
+/** The INSURANCE group of a parsed DFT^P03 (HL7 v2.5.1) message. */
+export interface ParsedDFTInsurance {
+  /** The IN1 segment. */
+  in1: IN1;
+  /** The IN2 segment. */
+  in2?: IN2;
+  /** The IN3 segments. */
+  in3List?: IN3[];
+  /** The ROL segments. */
+  rolList?: ROL[];
+}
 
-  protected override parseDB1(s: string, e: EncodingCharacters): Result<DB1> {
-    return DB1.parse(s, e);
-  }
+/** Structured result of parsing an HL7 DFT^P03 (HL7 v2.5.1) message. */
+export interface ParsedDFT_P03 extends ParsedMessageBase {
+  /** The MSH segment. */
+  msh: MSH;
+  /** The SFT segments. */
+  sftList?: SFT[];
+  /** The EVN segment. */
+  evn: EVN;
+  /** The PID segment. */
+  pid: PID;
+  /** The PD1 segment. */
+  pd1?: PD1;
+  /** The ROL segments. */
+  rolList?: ROL[];
+  /** The PV1 segment. */
+  pv1?: PV1;
+  /** The PV2 segment. */
+  pv2?: PV2;
+  /** The ROL segments. */
+  visitRolList?: ROL[];
+  /** The DB1 segments. */
+  db1List?: DB1[];
+  /** The COMMON ORDER groups. */
+  orders?: ParsedDFTOrder[];
+  /** The FINANCIAL groups. */
+  financials: ParsedDFTFinancial[];
+  /** The DG1 segments. */
+  dg1List?: DG1[];
+  /** The DRG segment. */
+  drg?: DRG;
+  /** The GT1 segments. */
+  gt1List?: GT1[];
+  /** The INSURANCE groups. */
+  insurances?: ParsedDFTInsurance[];
+  /** The ACC segment. */
+  acc?: ACC;
+}
 
-  protected override parseORC(s: string, e: EncodingCharacters): Result<ORC> {
-    return ORC.parse(s, e);
-  }
+/** The segment parsers of DFT^P03 (HL7 v2.5.1). */
+const PARSERS: SegmentParsers = {
+  MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
+  EVN: (s, e) => EVN.parse(s, e),
+  PID: (s, e) => PID.parse(s, e),
+  PD1: (s, e) => PD1.parse(s, e),
+  ROL: (s, e) => ROL.parse(s, e),
+  PV1: (s, e) => PV1.parse(s, e),
+  PV2: (s, e) => PV2.parse(s, e),
+  DB1: (s, e) => DB1.parse(s, e),
+  ORC: (s, e) => ORC.parse(s, e),
+  TQ1: (s, e) => TQ1.parse(s, e),
+  TQ2: (s, e) => TQ2.parse(s, e),
+  OBR: (s, e) => OBR.parse(s, e),
+  NTE: (s, e) => NTE.parse(s, e),
+  OBX: (s, e) => OBX.parse(s, e),
+  FT1: (s, e) => FT1.parse(s, e),
+  PR1: (s, e) => PR1.parse(s, e),
+  DG1: (s, e) => DG1.parse(s, e),
+  DRG: (s, e) => DRG.parse(s, e),
+  GT1: (s, e) => GT1.parse(s, e),
+  IN1: (s, e) => IN1.parse(s, e),
+  IN2: (s, e) => IN2.parse(s, e),
+  IN3: (s, e) => IN3.parse(s, e),
+  ACC: (s, e) => ACC.parse(s, e),
+};
 
-  protected override parseTQ1(s: string, e: EncodingCharacters): Result<TQ1> {
-    return TQ1.parse(s, e);
-  }
+/** Parser for HL7 DFT^P03 (HL7 v2.5.1) messages. */
+export class DFT_P03_Parser {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "DFT_P03";
+  /** The structure the message is parsed against. */
+  protected readonly structure: StructureItem[] = DFT_P03_STRUCTURE;
+  /** The segment parsers, keyed by segment name. */
+  protected readonly parsers: SegmentParsers = PARSERS;
 
-  protected override parseTQ2(s: string, e: EncodingCharacters): Result<TQ2> {
-    return TQ2.parse(s, e);
-  }
-
-  protected override parseOBR(s: string, e: EncodingCharacters): Result<OBR> {
-    return OBR.parse(s, e);
-  }
-
-  protected override parseNTE(s: string, e: EncodingCharacters): Result<NTE> {
-    return NTE.parse(s, e);
-  }
-
-  protected override parseOBX(s: string, e: EncodingCharacters): Result<OBX> {
-    return OBX.parse(s, e);
-  }
-
-  protected override parseFT1(s: string, e: EncodingCharacters): Result<FT1> {
-    return FT1.parse(s, e);
-  }
-
-  protected override parsePR1(s: string, e: EncodingCharacters): Result<PR1> {
-    return PR1.parse(s, e);
-  }
-
-  protected override parseDG1(s: string, e: EncodingCharacters): Result<DG1> {
-    return DG1.parse(s, e);
-  }
-
-  protected override parseDRG(s: string, e: EncodingCharacters): Result<DRG> {
-    return DRG.parse(s, e);
-  }
-
-  protected override parseGT1(s: string, e: EncodingCharacters): Result<GT1> {
-    return GT1.parse(s, e);
-  }
-
-  protected override parseIN1(s: string, e: EncodingCharacters): Result<IN1> {
-    return IN1.parse(s, e);
-  }
-
-  protected override parseIN2(s: string, e: EncodingCharacters): Result<IN2> {
-    return IN2.parse(s, e);
-  }
-
-  protected override parseIN3(s: string, e: EncodingCharacters): Result<IN3> {
-    return IN3.parse(s, e);
-  }
-
-  protected override parseACC(s: string, e: EncodingCharacters): Result<ACC> {
-    return ACC.parse(s, e);
+  /** Parses the input string into a structured instance. */
+  parse(messageString: string): Result<ParsedDFT_P03> {
+    return parseStructure<ParsedDFT_P03>(this.messageName, this.structure, this.parsers, messageString);
   }
 }
 
-/** Parses an HL7 DFT^P03 (v2.5.1) message string into a structured result. */
+/** Parses an HL7 DFT^P03 (HL7 v2.5.1) message string into a structured result. */
 export function parseDFT_P03(messageString: string): Result<ParsedDFT_P03> {
   return new DFT_P03_Parser().parse(messageString);
 }

@@ -17,9 +17,9 @@ const withIn3s = (n: number) =>
   });
 
 describe("ORM_O01 (v2.5)", () => {
-  test("extends the v2.4 builder", () => {
+  test("is its own class (IN3 repeats in v2.5)", () => {
     expect(withIn3s(1)).toBeInstanceOf(ORM_O01);
-    expect(withIn3s(1)).toBeInstanceOf(ORM_O01_v24);
+    expect(withIn3s(1)).not.toBeInstanceOf(ORM_O01_v24);
   });
 
   test("the builder accepts repeated IN3 and encodes them in order", () => {
@@ -31,7 +31,7 @@ describe("ORM_O01 (v2.5)", () => {
   test("the parser keeps repeated IN3", () => {
     const result = parseORM_O01(withIn3s(3).encode());
     expect(result.ok).toBe(true);
-    if (result.ok) expect(result.val.patient?.insurance[0].in3List).toHaveLength(3);
+    if (result.ok) expect(result.val.patient?.insurance![0].in3List).toHaveLength(3);
   });
 
   test("the v2.4 parser still rejects the same message", () => {

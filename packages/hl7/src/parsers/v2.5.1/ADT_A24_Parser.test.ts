@@ -19,7 +19,7 @@ describe("parseADT_A24", () => {
   test("parses a full message into two patient groups", () => {
     const result = parseADT_A24(fullMessage);
     expect(result.ok).toBe(true);
-    const { evn, patient1, patient2, message } = result.val!;
+    const { evn, patients: [patient1, patient2], message } = result.val!;
     expect(ParserUtils.getComponent(evn.fields[0], 0)).toBe("A24");
 
     expect(ParserUtils.getComponent(patient1.pid.fields[4], 1)).toBe("John");
@@ -50,12 +50,12 @@ describe("parseADT_A24", () => {
   test("fails with three PIDs", () => {
     const result = parseADT_A24([MSH, "EVN|A24", "PID|1", "PID|2", "PID|3"].join("\r"));
     expect(result.ok).toBe(false);
-    expect(result.err!.message).toMatch(/exactly two PID segments \(found 3\)/);
+    expect(result.err!.message).toMatch(/PID segment at line 5 is not allowed at this position in ADT_A24/);
   });
 
   test("fails when DB1 precedes the first PID", () => {
     const result = parseADT_A24([MSH, "EVN|A24", "DB1|1", "PID|1", "PID|2"].join("\r"));
     expect(result.ok).toBe(false);
-    expect(result.err!.message).toMatch(/DB1 at line 3 appears before any PID segment/);
+    expect(result.err!.message).toMatch(/ADT_A24 message must contain at least 2 PATIENT groups/);
   });
 });

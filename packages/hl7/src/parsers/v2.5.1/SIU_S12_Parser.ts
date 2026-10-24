@@ -1,12 +1,18 @@
 /**
  * Parser for SIU^S12 messages (HL7 v2.5.1).
  *
+ * Structure: MSH SCH [{TQ1}] [{NTE}] [{ PATIENT: PID [PD1] [PV1] [PV2] [{OBX}] [{DG1}] }] { RESOURCES: RGS [{ SERVICE: AIS [{NTE}] }] [{ GENERAL_RESOURCE: AIG [{NTE}] }] [{ LOCATION_RESOURCE: AIL [{NTE}] }] [{ PERSONNEL_RESOURCE: AIP [{NTE}] }] }
+ *
  * @module
  */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../../types/result.ts";
-import type { EncodingCharacters } from "../../types/encoding.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
+import { SIU_S12_STRUCTURE } from "../../structures/v2.5.1/SIU_S12.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
 import { SCH } from "../../segments/v2.5.1/SCH.ts";
+import { TQ1 } from "../../segments/v2.5.1/TQ1.ts";
 import { NTE } from "../../segments/v2.5.1/NTE.ts";
 import { PID } from "../../segments/v2.5.1/PID.ts";
 import { PD1 } from "../../segments/v2.5.1/PD1.ts";
@@ -19,93 +25,120 @@ import { AIS } from "../../segments/v2.5.1/AIS.ts";
 import { AIG } from "../../segments/v2.5.1/AIG.ts";
 import { AIL } from "../../segments/v2.5.1/AIL.ts";
 import { AIP } from "../../segments/v2.5.1/AIP.ts";
-import {
-  SIU_S12_Parser as SIU_S12_Parser_base,
-  type ParsedSIU_S12,
-  type ParsedSIUPatient,
-  type ParsedSIUResources,
-  type ParsedSIUService,
-  type ParsedSIUGeneralResource,
-  type ParsedSIULocationResource,
-  type ParsedSIUPersonnelResource,
-} from "../v2.5/SIU_S12_Parser.ts";
 
-export type { ParsedSIU_S12, ParsedSIUPatient, ParsedSIUResources, ParsedSIUService, ParsedSIUGeneralResource, ParsedSIULocationResource, ParsedSIUPersonnelResource };
+/** The PATIENT group of a parsed SIU^S12 (HL7 v2.5.1) message. */
+export interface ParsedSIUPatient {
+  /** The PID segment. */
+  pid: PID;
+  /** The PD1 segment. */
+  pd1?: PD1;
+  /** The PV1 segment. */
+  pv1?: PV1;
+  /** The PV2 segment. */
+  pv2?: PV2;
+  /** The OBX segments. */
+  obxList?: OBX[];
+  /** The DG1 segments. */
+  dg1List?: DG1[];
+}
 
-/** Parser for HL7 SIU^S12 (v2.5.1) messages. */
-export class SIU_S12_Parser extends SIU_S12_Parser_base {
-  /** Parse msh. */
-  protected override parseMSH(s: string): Result<MSH> {
-    return MSH.parse(s);
-  }
+/** The RESOURCES group of a parsed SIU^S12 (HL7 v2.5.1) message. */
+export interface ParsedSIUResources {
+  /** The RGS segment. */
+  rgs: RGS;
+  /** The SERVICE groups. */
+  services?: ParsedSIUService[];
+  /** The GENERAL RESOURCE groups. */
+  generalResources?: ParsedSIUGeneralResource[];
+  /** The LOCATION RESOURCE groups. */
+  locationResources?: ParsedSIULocationResource[];
+  /** The PERSONNEL RESOURCE groups. */
+  personnelResources?: ParsedSIUPersonnelResource[];
+}
 
-  /** Parse sch. */
-  protected override parseSCH(s: string, e: EncodingCharacters): Result<SCH> {
-    return SCH.parse(s, e);
-  }
+/** The SERVICE group of a parsed SIU^S12 (HL7 v2.5.1) message. */
+export interface ParsedSIUService {
+  /** The AIS segment. */
+  ais: AIS;
+  /** The NTE segments. */
+  nteList?: NTE[];
+}
 
-  /** Parse nte. */
-  protected override parseNTE(s: string, e: EncodingCharacters): Result<NTE> {
-    return NTE.parse(s, e);
-  }
+/** The GENERAL RESOURCE group of a parsed SIU^S12 (HL7 v2.5.1) message. */
+export interface ParsedSIUGeneralResource {
+  /** The AIG segment. */
+  aig: AIG;
+  /** The NTE segments. */
+  nteList?: NTE[];
+}
 
-  /** Parse pid. */
-  protected override parsePID(s: string, e: EncodingCharacters): Result<PID> {
-    return PID.parse(s, e);
-  }
+/** The LOCATION RESOURCE group of a parsed SIU^S12 (HL7 v2.5.1) message. */
+export interface ParsedSIULocationResource {
+  /** The AIL segment. */
+  ail: AIL;
+  /** The NTE segments. */
+  nteList?: NTE[];
+}
 
-  /** Parse pd1. */
-  protected override parsePD1(s: string, e: EncodingCharacters): Result<PD1> {
-    return PD1.parse(s, e);
-  }
+/** The PERSONNEL RESOURCE group of a parsed SIU^S12 (HL7 v2.5.1) message. */
+export interface ParsedSIUPersonnelResource {
+  /** The AIP segment. */
+  aip: AIP;
+  /** The NTE segments. */
+  nteList?: NTE[];
+}
 
-  /** Parse pv1. */
-  protected override parsePV1(s: string, e: EncodingCharacters): Result<PV1> {
-    return PV1.parse(s, e);
-  }
+/** Structured result of parsing an HL7 SIU^S12 (HL7 v2.5.1) message. */
+export interface ParsedSIU_S12 extends ParsedMessageBase {
+  /** The MSH segment. */
+  msh: MSH;
+  /** The SCH segment. */
+  sch: SCH;
+  /** The TQ1 segments. */
+  tq1List?: TQ1[];
+  /** The NTE segments. */
+  nteList?: NTE[];
+  /** The PATIENT groups. */
+  patients?: ParsedSIUPatient[];
+  /** The RESOURCES groups. */
+  resources: ParsedSIUResources[];
+}
 
-  /** Parse pv2. */
-  protected override parsePV2(s: string, e: EncodingCharacters): Result<PV2> {
-    return PV2.parse(s, e);
-  }
+/** The segment parsers of SIU^S12 (HL7 v2.5.1). */
+const PARSERS: SegmentParsers = {
+  MSH: (s) => MSH.parse(s),
+  SCH: (s, e) => SCH.parse(s, e),
+  TQ1: (s, e) => TQ1.parse(s, e),
+  NTE: (s, e) => NTE.parse(s, e),
+  PID: (s, e) => PID.parse(s, e),
+  PD1: (s, e) => PD1.parse(s, e),
+  PV1: (s, e) => PV1.parse(s, e),
+  PV2: (s, e) => PV2.parse(s, e),
+  OBX: (s, e) => OBX.parse(s, e),
+  DG1: (s, e) => DG1.parse(s, e),
+  RGS: (s, e) => RGS.parse(s, e),
+  AIS: (s, e) => AIS.parse(s, e),
+  AIG: (s, e) => AIG.parse(s, e),
+  AIL: (s, e) => AIL.parse(s, e),
+  AIP: (s, e) => AIP.parse(s, e),
+};
 
-  /** Parse obx. */
-  protected override parseOBX(s: string, e: EncodingCharacters): Result<OBX> {
-    return OBX.parse(s, e);
-  }
+/** Parser for HL7 SIU^S12 (HL7 v2.5.1) messages. */
+export class SIU_S12_Parser {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "SIU_S12";
+  /** The structure the message is parsed against. */
+  protected readonly structure: StructureItem[] = SIU_S12_STRUCTURE;
+  /** The segment parsers, keyed by segment name. */
+  protected readonly parsers: SegmentParsers = PARSERS;
 
-  /** Parse dg1. */
-  protected override parseDG1(s: string, e: EncodingCharacters): Result<DG1> {
-    return DG1.parse(s, e);
-  }
-
-  /** Parse rgs. */
-  protected override parseRGS(s: string, e: EncodingCharacters): Result<RGS> {
-    return RGS.parse(s, e);
-  }
-
-  /** Parse ais. */
-  protected override parseAIS(s: string, e: EncodingCharacters): Result<AIS> {
-    return AIS.parse(s, e);
-  }
-
-  /** Parse aig. */
-  protected override parseAIG(s: string, e: EncodingCharacters): Result<AIG> {
-    return AIG.parse(s, e);
-  }
-
-  /** Parse ail. */
-  protected override parseAIL(s: string, e: EncodingCharacters): Result<AIL> {
-    return AIL.parse(s, e);
-  }
-
-  /** Parse aip. */
-  protected override parseAIP(s: string, e: EncodingCharacters): Result<AIP> {
-    return AIP.parse(s, e);
+  /** Parses the input string into a structured instance. */
+  parse(messageString: string): Result<ParsedSIU_S12> {
+    return parseStructure<ParsedSIU_S12>(this.messageName, this.structure, this.parsers, messageString);
   }
 }
 
-/** Parses an HL7 SIU^S12 (v2.5.1) message string into a structured result. */
+/** Parses an HL7 SIU^S12 (HL7 v2.5.1) message string into a structured result. */
 export function parseSIU_S12(messageString: string): Result<ParsedSIU_S12> {
   return new SIU_S12_Parser().parse(messageString);
 }

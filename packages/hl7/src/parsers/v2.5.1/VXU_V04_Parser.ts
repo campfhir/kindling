@@ -1,109 +1,142 @@
-import { Result } from "../../types/result";
-import { EncodingCharacters } from "../../types/encoding";
-import { MSH } from "../../segments/v2.5.1/MSH";
-import { SFT } from "../../segments/v2.5.1/SFT";
-import { PID } from "../../segments/v2.5.1/PID";
-import { PD1 } from "../../segments/v2.5.1/PD1";
-import { NK1 } from "../../segments/v2.5.1/NK1";
-import { PV1 } from "../../segments/v2.5.1/PV1";
-import { PV2 } from "../../segments/v2.5.1/PV2";
-import { GT1 } from "../../segments/v2.5.1/GT1";
-import { IN1 } from "../../segments/v2.5.1/IN1";
-import { IN2 } from "../../segments/v2.5.1/IN2";
-import { IN3 } from "../../segments/v2.5.1/IN3";
-import { ORC } from "../../segments/v2.5.1/ORC";
-import { TQ1 } from "../../segments/v2.5.1/TQ1";
-import { TQ2 } from "../../segments/v2.5.1/TQ2";
-import { RXA } from "../../segments/v2.5.1/RXA";
-import { RXR } from "../../segments/v2.5.1/RXR";
-import { OBX } from "../../segments/v2.5.1/OBX";
-import { NTE } from "../../segments/v2.5.1/NTE";
-import {
-  VXU_V04_Parser as VXU_V04_Parser_base,
-  ParsedVXU_V04,
-  ParsedVisit,
-  ParsedInsurance,
-  ParsedVaccination,
-  ParsedTiming,
-  ParsedObservation,
-} from "../v2.5/VXU_V04_Parser";
+/**
+ * Parser for VXU^V04 messages (HL7 v2.5.1).
+ *
+ * Structure: MSH [{SFT}] PID [PD1] [{NK1}] [ PATIENT: PV1 [PV2] ] [{GT1}] [{ INSURANCE: IN1 [IN2] [IN3] }] [{ ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] RXA [RXR] [{ OBSERVATION: OBX [{NTE}] }] }]
+ *
+ * @module
+ */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { Result } from "../../types/result.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
+import { VXU_V04_STRUCTURE } from "../../structures/v2.5.1/VXU_V04.ts";
+import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
+import { PID } from "../../segments/v2.5.1/PID.ts";
+import { PD1 } from "../../segments/v2.5.1/PD1.ts";
+import { NK1 } from "../../segments/v2.5.1/NK1.ts";
+import { PV1 } from "../../segments/v2.5.1/PV1.ts";
+import { PV2 } from "../../segments/v2.5.1/PV2.ts";
+import { GT1 } from "../../segments/v2.5.1/GT1.ts";
+import { IN1 } from "../../segments/v2.5.1/IN1.ts";
+import { IN2 } from "../../segments/v2.5.1/IN2.ts";
+import { IN3 } from "../../segments/v2.5.1/IN3.ts";
+import { ORC } from "../../segments/v2.5.1/ORC.ts";
+import { TQ1 } from "../../segments/v2.5.1/TQ1.ts";
+import { TQ2 } from "../../segments/v2.5.1/TQ2.ts";
+import { RXA } from "../../segments/v2.5.1/RXA.ts";
+import { RXR } from "../../segments/v2.5.1/RXR.ts";
+import { OBX } from "../../segments/v2.5.1/OBX.ts";
+import { NTE } from "../../segments/v2.5.1/NTE.ts";
 
-export type { ParsedVXU_V04, ParsedVisit, ParsedInsurance, ParsedVaccination, ParsedTiming, ParsedObservation };
+/** The PATIENT group of a parsed VXU^V04 (HL7 v2.5.1) message. */
+export interface ParsedVisit {
+  /** The PV1 segment. */
+  pv1: PV1;
+  /** The PV2 segment. */
+  pv2?: PV2;
+}
 
-export class VXU_V04_Parser extends VXU_V04_Parser_base {
-  protected override parseMSH(s: string): Result<MSH> {
-    return MSH.parse(s);
-  }
+/** The INSURANCE group of a parsed VXU^V04 (HL7 v2.5.1) message. */
+export interface ParsedInsurance {
+  /** The IN1 segment. */
+  in1: IN1;
+  /** The IN2 segment. */
+  in2?: IN2;
+  /** The IN3 segment. */
+  in3?: IN3;
+}
 
-  protected override parseSFT(s: string, e: EncodingCharacters): Result<SFT> {
-    return SFT.parse(s, e);
-  }
+/** The ORDER group of a parsed VXU^V04 (HL7 v2.5.1) message. */
+export interface ParsedVaccination {
+  /** The ORC segment. */
+  orc: ORC;
+  /** The TIMING groups. */
+  timing?: ParsedTiming[];
+  /** The RXA segment. */
+  rxa: RXA;
+  /** The RXR segment. */
+  rxr?: RXR;
+  /** The OBSERVATION groups. */
+  observations?: ParsedObservation[];
+}
 
-  protected override parsePID(s: string, e: EncodingCharacters): Result<PID> {
-    return PID.parse(s, e);
-  }
+/** The TIMING group of a parsed VXU^V04 (HL7 v2.5.1) message. */
+export interface ParsedTiming {
+  /** The TQ1 segment. */
+  tq1: TQ1;
+  /** The TQ2 segments. */
+  tq2List?: TQ2[];
+}
 
-  protected override parsePD1(s: string, e: EncodingCharacters): Result<PD1> {
-    return PD1.parse(s, e);
-  }
+/** The OBSERVATION group of a parsed VXU^V04 (HL7 v2.5.1) message. */
+export interface ParsedObservation {
+  /** The OBX segment. */
+  obx: OBX;
+  /** The NTE segments. */
+  nteList?: NTE[];
+}
 
-  protected override parseNK1(s: string, e: EncodingCharacters): Result<NK1> {
-    return NK1.parse(s, e);
-  }
+/** Structured result of parsing an HL7 VXU^V04 (HL7 v2.5.1) message. */
+export interface ParsedVXU_V04 extends ParsedMessageBase {
+  /** The MSH segment. */
+  msh: MSH;
+  /** The SFT segments. */
+  sftList?: SFT[];
+  /** The PID segment. */
+  pid: PID;
+  /** The PD1 segment. */
+  pd1?: PD1;
+  /** The NK1 segments. */
+  nk1List?: NK1[];
+  /** The PATIENT group. */
+  visit?: ParsedVisit;
+  /** The GT1 segments. */
+  gt1List?: GT1[];
+  /** The INSURANCE groups. */
+  insurance?: ParsedInsurance[];
+  /** The ORDER groups. */
+  orders?: ParsedVaccination[];
+}
 
-  protected override parsePV1(s: string, e: EncodingCharacters): Result<PV1> {
-    return PV1.parse(s, e);
-  }
+/** The segment parsers of VXU^V04 (HL7 v2.5.1). */
+const PARSERS: SegmentParsers = {
+  MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
+  PID: (s, e) => PID.parse(s, e),
+  PD1: (s, e) => PD1.parse(s, e),
+  NK1: (s, e) => NK1.parse(s, e),
+  PV1: (s, e) => PV1.parse(s, e),
+  PV2: (s, e) => PV2.parse(s, e),
+  GT1: (s, e) => GT1.parse(s, e),
+  IN1: (s, e) => IN1.parse(s, e),
+  IN2: (s, e) => IN2.parse(s, e),
+  IN3: (s, e) => IN3.parse(s, e),
+  ORC: (s, e) => ORC.parse(s, e),
+  TQ1: (s, e) => TQ1.parse(s, e),
+  TQ2: (s, e) => TQ2.parse(s, e),
+  RXA: (s, e) => RXA.parse(s, e),
+  RXR: (s, e) => RXR.parse(s, e),
+  OBX: (s, e) => OBX.parse(s, e),
+  NTE: (s, e) => NTE.parse(s, e),
+};
 
-  protected override parsePV2(s: string, e: EncodingCharacters): Result<PV2> {
-    return PV2.parse(s, e);
-  }
+/** Parser for HL7 VXU^V04 (HL7 v2.5.1) messages. */
+export class VXU_V04_Parser {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "VXU_V04";
+  /** The structure the message is parsed against. */
+  protected readonly structure: StructureItem[] = VXU_V04_STRUCTURE;
+  /** The segment parsers, keyed by segment name. */
+  protected readonly parsers: SegmentParsers = PARSERS;
 
-  protected override parseGT1(s: string, e: EncodingCharacters): Result<GT1> {
-    return GT1.parse(s, e);
-  }
-
-  protected override parseIN1(s: string, e: EncodingCharacters): Result<IN1> {
-    return IN1.parse(s, e);
-  }
-
-  protected override parseIN2(s: string, e: EncodingCharacters): Result<IN2> {
-    return IN2.parse(s, e);
-  }
-
-  protected override parseIN3(s: string, e: EncodingCharacters): Result<IN3> {
-    return IN3.parse(s, e);
-  }
-
-  protected override parseORC(s: string, e: EncodingCharacters): Result<ORC> {
-    return ORC.parse(s, e);
-  }
-
-  protected override parseTQ1(s: string, e: EncodingCharacters): Result<TQ1> {
-    return TQ1.parse(s, e);
-  }
-
-  protected override parseTQ2(s: string, e: EncodingCharacters): Result<TQ2> {
-    return TQ2.parse(s, e);
-  }
-
-  protected override parseRXA(s: string, e: EncodingCharacters): Result<RXA> {
-    return RXA.parse(s, e);
-  }
-
-  protected override parseRXR(s: string, e: EncodingCharacters): Result<RXR> {
-    return RXR.parse(s, e);
-  }
-
-  protected override parseOBX(s: string, e: EncodingCharacters): Result<OBX> {
-    return OBX.parse(s, e);
-  }
-
-  protected override parseNTE(s: string, e: EncodingCharacters): Result<NTE> {
-    return NTE.parse(s, e);
+  /** Parses the input string into a structured instance. */
+  parse(messageString: string): Result<ParsedVXU_V04> {
+    return parseStructure<ParsedVXU_V04>(this.messageName, this.structure, this.parsers, messageString);
   }
 }
 
+/** Parses an HL7 VXU^V04 (HL7 v2.5.1) message string into a structured result. */
 export function parseVXU_V04(messageString: string): Result<ParsedVXU_V04> {
   return new VXU_V04_Parser().parse(messageString);
 }

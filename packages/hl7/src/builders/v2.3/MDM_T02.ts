@@ -1,20 +1,31 @@
 /**
- * Builder for MDM^T02 messages (HL7 v2.3): MSH EVN PID PV1 TXA {OBX}.
+ * Builder for MDM^T02 messages (HL7 v2.3).
+ *
+ * Structure: MSH EVN PID PV1 TXA {OBX}
  *
  * @module
  */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
+import { MDM_T02_STRUCTURE } from "../../structures/v2.3/MDM_T02.ts";
 import type { MSH } from "../../segments/v2.3/MSH.ts";
 import type { EVN } from "../../segments/v2.3/EVN.ts";
 import type { PID } from "../../segments/v2.3/PID.ts";
 import type { PV1 } from "../../segments/v2.3/PV1.ts";
 import type { TXA } from "../../segments/v2.3/TXA.ts";
 import type { OBX } from "../../segments/v2.3/OBX.ts";
-import { type EncodingCharacters, DEFAULT_ENCODING } from "../../types/encoding.ts";
 
-/** Builder for HL7 MDM^T02 (v2.3) messages. */
+/** The optional segments and groups of an MDM^T02 (HL7 v2.3) message. The message has none. */
+export type MDM_T02Options = Record<string, never>;
+
+/** Builder for HL7 MDM^T02 (HL7 v2.3) messages. */
 export class MDM_T02<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TPV1 extends PV1 = PV1, TTXA extends TXA = TXA> {
-  /** The message name value. */
+  /** The message name used in error messages. */
   protected readonly messageName: string = "MDM_T02";
+  /** The structure the message is verified against and encoded in. */
+  protected readonly structure: StructureItem[] = MDM_T02_STRUCTURE;
 
   /** Constructor. */
   constructor(
@@ -23,20 +34,19 @@ export class MDM_T02<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
     public pid: TPID,
     public pv1: TPV1,
     public txa: TTXA,
-    /** Document content; at least one OBX is required. */
     public obxList: OBX[],
-    private encoding: EncodingCharacters = DEFAULT_ENCODING,
+    public options: MDM_T02Options = {},
+    protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
+
+  /** The message as one object keyed by structure property name (what verify() and encode() work on). */
+  toInput(): StructureInput {
+    return { ...this.options, msh: this.msh, evn: this.evn, pid: this.pid, pv1: this.pv1, txa: this.txa, obxList: this.obxList };
+  }
 
   /** Validates the message structure, returning a result. */
   verify(): { valid: boolean; errors: string[] } {
-    const errors: string[] = [];
-    if (!this.msh) errors.push("MSH segment is required");
-    if (!this.evn) errors.push("EVN segment is required");
-    if (!this.pid) errors.push("PID segment is required");
-    if (!this.pv1) errors.push("PV1 segment is required");
-    if (!this.txa) errors.push("TXA segment is required");
-    if (!this.obxList || this.obxList.length === 0) errors.push("At least one OBX segment is required");
+    const errors = verifyStructure(this.structure, this.toInput());
     return { valid: errors.length === 0, errors };
   }
 
@@ -44,18 +54,13 @@ export class MDM_T02<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
   encode(): string {
     const verification = this.verify();
     if (!verification.valid) {
-      throw new Error(
-        `Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`,
-      );
+      throw new Error(`Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`);
     }
-    const enc = this.encoding;
-    const out = [this.msh.encode(enc), this.evn.encode(enc), this.pid.encode(enc), this.pv1.encode(enc), this.txa.encode(enc)];
-    for (const obx of this.obxList) out.push(obx.encode(enc));
-    return out.join("\r");
+    return encodeStructure(this.structure, this.toInput(), this.encoding);
   }
 }
 
-/** Builds an HL7 MDM^T02 (v2.3) message. */
+/** Builds an HL7 MDM^T02 (HL7 v2.3) message. */
 export function createMDM_T02<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TPV1 extends PV1 = PV1, TTXA extends TXA = TXA>(
   msh: TMSH,
   evn: TEVN,
@@ -63,7 +68,8 @@ export function createMDM_T02<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TP
   pv1: TPV1,
   txa: TTXA,
   obxList: OBX[],
-  encoding?: EncodingCharacters,
+  options: MDM_T02Options = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): MDM_T02<TMSH, TEVN, TPID, TPV1, TTXA> {
-  return new MDM_T02(msh, evn, pid, pv1, txa, obxList, encoding);
+  return new MDM_T02(msh, evn, pid, pv1, txa, obxList, options, encoding);
 }

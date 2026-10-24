@@ -103,18 +103,9 @@ test("encode() includes optional PD1 and NK1 before PV1", () => {
   expect(names.indexOf("NK1")).toBeLessThan(names.indexOf("PV1"));
 });
 
-test("encode() includes patient-level ROL after PD1 and before PV1", () => {
-  const pd1 = new PD1();
-  const rol = new ROL();
-  const msg = createADT_A01(makeMSH(), makeEVN(), makePID(), makePV1(), {
-    pd1,
-    rolList: [rol],
-  });
-  const segments = msg.encode().split("\r");
-  const names = segments.map((s) => s.substring(0, 3));
-
-  expect(names.indexOf("ROL")).toBeGreaterThan(names.indexOf("PD1"));
-  expect(names.indexOf("ROL")).toBeLessThan(names.indexOf("PV1"));
+test("verify() rejects a patient-level ROL: not part of the v2.3 structure", () => {
+  const msg = createADT_A01(makeMSH(), makeEVN(), makePID(), makePV1(), { pd1: new PD1(), rolList: [new ROL()] } as any);
+  expect(msg.verify().errors).toEqual(['Unknown property "rolList"']);
 });
 
 test("encode() places AL1 and DG1 after PV1", () => {
@@ -175,7 +166,7 @@ test("encode() interleaves IN2 and IN3 inside insurance group", () => {
   const in2 = new IN2().insuredSsn("SSN12345");
   const in3 = new IN3().setId("1");
   const msg = createADT_A01(makeMSH(), makeEVN(), makePID(), makePV1(), {
-    insuranceGroups: [{ in1, in2, in3List: [in3] }],
+    insuranceGroups: [{ in1, in2, in3 }],
   });
   const segments = msg.encode().split("\r");
   const names = segments.map((s) => s.substring(0, 3));

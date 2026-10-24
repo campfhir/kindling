@@ -54,7 +54,8 @@ describe("re-export versions", () => {
 
   test("parsers and builders are re-exported", () => {
     expect(par231.parseADT_A01).toBe(par23.parseADT_A01);
-    expect(par25.parseORU_R01).toBe(par23.parseORU_R01);
+    expect(par24.parseORU_R01).toBe(par23.parseORU_R01);
+    expect(par25.parseORU_R01).not.toBe(par23.parseORU_R01); // v2.5 ORU^R01 gains SFT, TQ1, SPM, ...
     expect(bld24.createSIU_S12).toBe(bld23.createSIU_S12);
   });
 

@@ -19,6 +19,7 @@ export * from "./CTI.ts";
 export * from "./DB1.ts";
 export * from "./DG1.ts";
 export * from "./DRG.ts";
+export * from "./DSC.ts";
 export * from "./ERR.ts";
 export * from "./EVN.ts";
 export * from "./FT1.ts";

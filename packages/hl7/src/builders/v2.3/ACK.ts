@@ -1,32 +1,48 @@
 /**
- * Builder for ACK messages (HL7 v2.3): MSH, MSA, [ERR].
+ * Builder for ACK messages (HL7 v2.3).
+ *
+ * Structure: MSH MSA [ERR]
  *
  * @module
  */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
+import { ACK_STRUCTURE } from "../../structures/v2.3/ACK.ts";
 import type { MSH } from "../../segments/v2.3/MSH.ts";
 import type { MSA } from "../../segments/v2.3/MSA.ts";
 import type { ERR } from "../../segments/v2.3/ERR.ts";
-import { type EncodingCharacters, DEFAULT_ENCODING } from "../../types/encoding.ts";
 
-/** Builder for HL7 ACK (v2.3) messages. */
-export class ACK<
-  TMsh extends MSH = MSH,
-  TMsa extends MSA = MSA,
-  TErr extends ERR = ERR,
-> {
+/** The optional segments and groups of an ACK (HL7 v2.3) message. */
+export interface ACKOptions {
+  /** The ERR segment. */
+  err?: ERR;
+}
+
+/** Builder for HL7 ACK (HL7 v2.3) messages. */
+export class ACK<TMSH extends MSH = MSH, TMSA extends MSA = MSA> {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "ACK";
+  /** The structure the message is verified against and encoded in. */
+  protected readonly structure: StructureItem[] = ACK_STRUCTURE;
+
   /** Constructor. */
   constructor(
-    public msh: TMsh,
-    public msa: TMsa,
-    public err?: TErr,
-    private encoding: EncodingCharacters = DEFAULT_ENCODING,
+    public msh: TMSH,
+    public msa: TMSA,
+    public options: ACKOptions = {},
+    protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
+
+  /** The message as one object keyed by structure property name (what verify() and encode() work on). */
+  toInput(): StructureInput {
+    return { ...this.options, msh: this.msh, msa: this.msa };
+  }
 
   /** Validates the message structure, returning a result. */
   verify(): { valid: boolean; errors: string[] } {
-    const errors: string[] = [];
-    if (!this.msh) errors.push("MSH segment is required");
-    if (!this.msa) errors.push("MSA segment is required");
+    const errors = verifyStructure(this.structure, this.toInput());
     return { valid: errors.length === 0, errors };
   }
 
@@ -34,22 +50,18 @@ export class ACK<
   encode(): string {
     const verification = this.verify();
     if (!verification.valid) {
-      throw new Error(
-        `Cannot encode invalid ACK message:\n${verification.errors.join("\n")}`,
-      );
+      throw new Error(`Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`);
     }
-
-    const segments = [this.msh.encode(this.encoding), this.msa.encode(this.encoding)];
-    if (this.err) segments.push(this.err.encode(this.encoding));
-    return segments.join("\r");
+    return encodeStructure(this.structure, this.toInput(), this.encoding);
   }
 }
 
-/** Builds an HL7 ACK (v2.3) message. */
-export function createACK<
-  TMsh extends MSH = MSH,
-  TMsa extends MSA = MSA,
-  TErr extends ERR = ERR,
->(msh: TMsh, msa: TMsa, err?: TErr): ACK<TMsh, TMsa, TErr> {
-  return new ACK(msh, msa, err);
+/** Builds an HL7 ACK (HL7 v2.3) message. */
+export function createACK<TMSH extends MSH = MSH, TMSA extends MSA = MSA>(
+  msh: TMSH,
+  msa: TMSA,
+  options: ACKOptions = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
+): ACK<TMSH, TMSA> {
+  return new ACK(msh, msa, options, encoding);
 }

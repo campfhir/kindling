@@ -37,10 +37,10 @@ function fullMessage() {
         orc: makeORC("ORD1"),
         detail: {
           segment: new OBR().setId("1").placerOrderNumber("ORD1"),
-          notes: [new NTE().setId("1").comment("detail note")],
-          diagnoses: [new DG1().setId("1")],
+          nteList: [new NTE().setId("1").comment("detail note")],
+          dg1List: [new DG1().setId("1")],
           observations: [
-            { obx: new OBX().setId("1").valueType("ST"), notes: [new NTE().setId("1").comment("obx note")] },
+            { obx: new OBX().setId("1").valueType("ST"), nteList: [new NTE().setId("1").comment("obx note")] },
             { obx: new OBX().setId("2").valueType("ST") },
           ],
         },
@@ -50,15 +50,15 @@ function fullMessage() {
       { orc: makeORC("ORD2"), detail: { segment: new RXO().requestedGiveCode({ code: "RX1" }) } },
     ],
     {
-      notes: [new NTE().setId("1").comment("header note")],
+      nteList: [new NTE().setId("1").comment("header note")],
       patient: {
         pid: new PID().setId("1"),
         pd1: new PD1(),
-        notes: [new NTE().setId("1").comment("patient note")],
+        nteList: [new NTE().setId("1").comment("patient note")],
         visit: { pv1: new PV1().patientClass("I"), pv2: new PV2() },
         insurance: [{ in1: new IN1().setId("1"), in2: new IN2(), in3: new IN3() }, { in1: new IN1().setId("2") }],
         gt1: new GT1().setId("1"),
-        allergies: [new AL1().setId("1")],
+        al1List: [new AL1().setId("1")],
       },
     },
   );
@@ -72,7 +72,7 @@ describe("ORM_O01 builder", () => {
   test("verify() requires MSH and at least one order", () => {
     const result = new ORM_O01(makeMSH(), []).verify();
     expect(result.valid).toBe(false);
-    expect(result.errors).toContain("At least one order (ORC) is required");
+    expect(result.errors).toContain("At least one ORDER group (ORC) is required");
     expect(new ORM_O01(null as any, [{ orc: makeORC() }]).verify().errors).toContain("MSH segment is required");
   });
 
@@ -88,12 +88,12 @@ describe("ORM_O01 builder", () => {
       { patient: { pid: null, visit: { pv1: null }, insurance: [{ in1: null }] } as any },
     );
     expect(msg.verify().errors).toEqual([
-      "Patient group: PID segment is required",
-      "Patient group: PV1 segment is required when a visit is present",
-      "Insurance group 1: IN1 segment is required",
-      "Order 1: ORC segment is required",
-      "Order 2: order detail segment is required when a detail group is present",
-      "Order 3, observation 1: OBX segment is required",
+      "PATIENT group 1: PID segment is required",
+      "PATIENT group 1: PATIENT VISIT group 1: PV1 segment is required",
+      "PATIENT group 1: INSURANCE group 1: IN1 segment is required",
+      "ORDER group 1: ORC segment is required",
+      "ORDER group 2: ORDER DETAIL group 1: One of OBR, RQD, RQ1, RXO, ODS, ODT is required",
+      "ORDER group 3: ORDER DETAIL group 1: OBSERVATION group 1: OBX segment is required",
     ]);
   });
 
@@ -123,24 +123,24 @@ describe("ORM_O01 parser", () => {
     if (!result.ok) return;
     const { val } = result;
 
-    expect(val.notes).toHaveLength(1);
+    expect(val.nteList).toHaveLength(1);
     expect(val.patient?.pid).toBeInstanceOf(PID);
     expect(val.patient?.pd1).toBeInstanceOf(PD1);
-    expect(val.patient?.notes).toHaveLength(1);
+    expect(val.patient?.nteList).toHaveLength(1);
     expect(val.patient?.visit?.pv2).toBeInstanceOf(PV2);
     expect(val.patient?.insurance).toHaveLength(2);
-    expect(val.patient?.insurance[0].in2).toBeInstanceOf(IN2);
-    expect(val.patient?.insurance[0].in3).toBeInstanceOf(IN3);
-    expect(val.patient?.insurance[1].in2).toBeUndefined();
+    expect(val.patient?.insurance![0].in2).toBeInstanceOf(IN2);
+    expect(val.patient?.insurance![0].in3).toBeInstanceOf(IN3);
+    expect(val.patient?.insurance![1].in2).toBeUndefined();
     expect(val.patient?.gt1).toBeInstanceOf(GT1);
-    expect(val.patient?.allergies).toHaveLength(1);
+    expect(val.patient?.al1List).toHaveLength(1);
 
     expect(val.orders).toHaveLength(2);
     const first = val.orders[0];
     expect(first.detail?.segment).toBeInstanceOf(OBR);
-    expect(first.detail?.notes).toHaveLength(1);
-    expect(first.detail?.diagnoses).toHaveLength(1);
-    expect(first.detail?.observations.map((o) => o.notes.length)).toEqual([1, 0]);
+    expect(first.detail?.nteList).toHaveLength(1);
+    expect(first.detail?.dg1List).toHaveLength(1);
+    expect(first.detail?.observations!.map((o) => o.nteList!.length)).toEqual([1, 0]);
     expect(first.ctiList).toHaveLength(1);
     expect(first.blg).toBeInstanceOf(BLG);
     expect(val.orders[1].detail?.segment).toBeInstanceOf(RXO);
@@ -181,8 +181,8 @@ describe("ORM_O01 parser", () => {
     );
     expect(result.ok).toBe(true);
     if (!result.ok) return;
-    expect(result.val.orders[0].detail?.notes).toHaveLength(0);
-    expect(result.val.orders[0].detail?.observations[0].notes).toHaveLength(1);
+    expect(result.val.orders[0].detail?.nteList).toHaveLength(0);
+    expect(result.val.orders[0].detail?.observations![0].nteList).toHaveLength(1);
   });
 
   const msh = () => makeMSH().encode();

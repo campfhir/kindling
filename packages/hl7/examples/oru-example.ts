@@ -89,7 +89,7 @@ const patientResult: PatientResult = {
   orderObservations: [
     {
       obr,
-      obxList: [obx1, obx2, obx3],
+      observations: [{ obx: obx1 }, { obx: obx2 }, { obx: obx3 }],
     },
   ],
 };

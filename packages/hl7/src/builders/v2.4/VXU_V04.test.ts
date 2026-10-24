@@ -41,7 +41,7 @@ describe("VXU_V04 (v2.4): adds [{GT1}] after the visit group", () => {
     expect(result.ok).toBe(true);
     if (result.ok) {
       expect(result.val.gt1List).toHaveLength(2);
-      expect(result.val.gt1List[0]).toBeInstanceOf(GT1);
+      expect(result.val.gt1List![0]).toBeInstanceOf(GT1);
       expect(result.val.insurance).toHaveLength(1);
       expect(result.val.message.segments).toHaveLength(7);
     }

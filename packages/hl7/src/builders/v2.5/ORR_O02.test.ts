@@ -17,14 +17,14 @@ const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
 const fullMessage = () =>
   createORR_O02(makeMSH(), makeMSA(), {
     errList: [new ERR().severity("E"), new ERR().severity("W")],
-    notes: [new NTE().setId("1").comment("header")],
-    patient: { pid: new PID().setId("1"), notes: [new NTE().setId("1").comment("patient")] },
+    nteList: [new NTE().setId("1").comment("header")],
+    patient: { pid: new PID().setId("1"), nteList: [new NTE().setId("1").comment("patient")] },
     orders: [
       {
         orc: new ORC().orderControl("OK").placerOrderNumber("1"),
         detail: {
           segment: new OBR().setId("1"),
-          notes: [new NTE().setId("1").comment("detail")],
+          nteList: [new NTE().setId("1").comment("detail")],
           ctiList: [new CTI().sponsorStudyId({ entityIdentifier: "S1" })],
         },
       },
@@ -44,11 +44,10 @@ describe("ORR_O02 builder", () => {
     ]);
   });
 
-  test("verify() requires the order detail segment of every order", () => {
-    // @ts-expect-error detail is required in v2.5
-    const noDetail = createORR_O02(makeMSH(), makeMSA(), { orders: [{ orc: new ORC().orderControl("OK") }] });
-    expect(noDetail.verify().errors).toEqual(["Order 1: order detail segment (OBR, RQD, RQ1, RXO, ODS or ODT) is required"]);
-    expect(() => noDetail.encode()).toThrow(/order detail segment/);
+  test("verify() requires the order detail segment once a detail group is present", () => {
+    const noDetail = createORR_O02(makeMSH(), makeMSA(), { orders: [{ orc: new ORC().orderControl("OK"), detail: {} as any }] });
+    expect(noDetail.verify().errors).toEqual(["ORDER group 1: ORDER DETAIL group 1: One of OBR, RQD, RQ1, RXO, ODS, ODT is required"]);
+    expect(() => noDetail.encode()).toThrow(/One of OBR/);
   });
 
   test("a minimal message is MSH + MSA", () => {
@@ -75,15 +74,15 @@ describe("ORR_O02 parser", () => {
     const { val } = result;
     expect(val.msa.encode()).toBe("MSA|AA|M1");
     expect(val.errList).toHaveLength(2);
-    expect(val.errList[0]).toBeInstanceOf(ERR);
-    expect(val.notes).toHaveLength(1);
+    expect(val.errList![0]).toBeInstanceOf(ERR);
+    expect(val.nteList).toHaveLength(1);
     expect(val.patient?.pid).toBeInstanceOf(PID);
-    expect(val.patient?.notes).toHaveLength(1);
+    expect(val.patient?.nteList).toHaveLength(1);
     expect(val.orders).toHaveLength(2);
-    expect(val.orders[0].detail?.segment).toBeInstanceOf(OBR);
-    expect(val.orders[0].detail?.notes).toHaveLength(1);
-    expect(val.orders[0].detail?.ctiList).toHaveLength(1);
-    expect(val.orders[1].detail?.segment).toBeInstanceOf(OBR);
+    expect(val.orders![0].detail?.segment).toBeInstanceOf(OBR);
+    expect(val.orders![0].detail?.nteList).toHaveLength(1);
+    expect(val.orders![0].detail?.ctiList).toHaveLength(1);
+    expect(val.orders![1].detail?.segment).toBeInstanceOf(OBR);
     expect(val.message.segments).toHaveLength(wire.split("\r").length);
   });
 
@@ -102,14 +101,18 @@ describe("ORR_O02 parser", () => {
     if (result.ok) expect(result.val.orders).toHaveLength(1);
   });
 
+  test("the order detail segment is optional (ORC-only responses)", () => {
+    const result = parseORR_O02([makeMSH().encode(), "MSA|AA|1", "ORC|OK|1", "ORC|OK|2", "OBR|1"].join("\r"));
+    expect(result.ok).toBe(true);
+    if (result.ok) expect(result.val.orders!.map((o) => o.detail?.segment.name)).toEqual([undefined, "OBR"]);
+  });
+
   const msh = () => makeMSH().encode();
   test.each([
     ["empty", ""],
     ["no MSA", msh()],
     ["a second MSA", [msh(), "MSA|AA|1", "MSA|AA|2"].join("\r")],
     ["ERR before MSA", [msh(), "ERR|1", "MSA|AA|1"].join("\r")],
-    ["an ORC with no order detail segment (required from v2.4)", [msh(), "MSA|AA|1", "ORC|OK|1"].join("\r")],
-    ["an earlier ORC with no order detail segment", [msh(), "MSA|AA|1", "ORC|OK|1", "ORC|OK|2", "OBR|1"].join("\r")],
     ["a PID with no ORC after it", [msh(), "MSA|AA|1", "PID|1"].join("\r")],
     ["detail without ORC", [msh(), "MSA|AA|1", "OBR|1"].join("\r")],
     ["two details for one ORC", [msh(), "MSA|AA|1", "ORC|OK|1", "OBR|1", "OBR|2"].join("\r")],

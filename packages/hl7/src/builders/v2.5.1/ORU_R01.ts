@@ -1,266 +1,148 @@
 /**
  * Builder for ORU^R01 messages (HL7 v2.5.1).
  *
+ * Structure: MSH [{SFT}] { PATIENT_RESULT: [ PATIENT: PID [PD1] [{NTE}] [{NK1}] [ VISIT: PV1 [PV2] ] ] { ORDER_OBSERVATION: [ORC] OBR [{NTE}] [{ TIMING_QTY: TQ1 [{TQ2}] }] [CTD] [{ OBSERVATION: OBX [{NTE}] }] [{FT1}] [{CTI}] [{ SPECIMEN: SPM [{OBX}] }] } } [DSC]
+ *
  * @module
  */
-import type { MSH } from "../../segments/v2.5/MSH.ts";
-import type { PID } from "../../segments/v2.5/PID.ts";
-import type { PD1 } from "../../segments/v2.5/PD1.ts";
-import type { NK1 } from "../../segments/v2.5/NK1.ts";
-import type { NTE } from "../../segments/v2.5/NTE.ts";
-import type { PV1 } from "../../segments/v2.5/PV1.ts";
-import type { ORC } from "../../segments/v2.5/ORC.ts";
-import type { OBR } from "../../segments/v2.5/OBR.ts";
-import type { OBX } from "../../segments/v2.5/OBX.ts";
-// v2.5.1 imports for defaults
-import type { PID as PID_251 } from "../../segments/v2.5.1/PID.ts";
-import type { PD1 as PD1_251 } from "../../segments/v2.5.1/PD1.ts";
-import type { NK1 as NK1_251 } from "../../segments/v2.5.1/NK1.ts";
-import type { NTE as NTE_251 } from "../../segments/v2.5.1/NTE.ts";
-import type { PV1 as PV1_251 } from "../../segments/v2.5.1/PV1.ts";
-import type { ORC as ORC_251 } from "../../segments/v2.5.1/ORC.ts";
-import type { OBR as OBR_251 } from "../../segments/v2.5.1/OBR.ts";
-import type { OBX as OBX_251 } from "../../segments/v2.5.1/OBX.ts";
-import type { MSH as MSH_251 } from "../../segments/v2.5.1/MSH.ts";
-import type { CTI } from "../../segments/v2.5/CTI.ts";
-import type { CTI as CTI_251 } from "../../segments/v2.5.1/CTI.ts";
-import { type EncodingCharacters, DEFAULT_ENCODING } from "../../types/encoding.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
+import { ORU_R01_STRUCTURE } from "../../structures/v2.5.1/ORU_R01.ts";
+import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
+import type { PID } from "../../segments/v2.5.1/PID.ts";
+import type { PD1 } from "../../segments/v2.5.1/PD1.ts";
+import type { NTE } from "../../segments/v2.5.1/NTE.ts";
+import type { NK1 } from "../../segments/v2.5.1/NK1.ts";
+import type { PV1 } from "../../segments/v2.5.1/PV1.ts";
+import type { PV2 } from "../../segments/v2.5.1/PV2.ts";
+import type { ORC } from "../../segments/v2.5.1/ORC.ts";
+import type { OBR } from "../../segments/v2.5.1/OBR.ts";
+import type { TQ1 } from "../../segments/v2.5.1/TQ1.ts";
+import type { TQ2 } from "../../segments/v2.5.1/TQ2.ts";
+import type { CTD } from "../../segments/v2.5.1/CTD.ts";
+import type { OBX } from "../../segments/v2.5.1/OBX.ts";
+import type { FT1 } from "../../segments/v2.5.1/FT1.ts";
+import type { CTI } from "../../segments/v2.5.1/CTI.ts";
+import type { SPM } from "../../segments/v2.5.1/SPM.ts";
+import type { DSC } from "../../segments/v2.5.1/DSC.ts";
 
-/** OBXWithNotes — a data structure used to build an HL7 ORU^R01 (v2.5.1) message. */
-export interface OBXWithNotes<TOBX extends OBX = OBX_251, TNTE extends NTELike = NTE_251> {
-  /** The obx value. */
-  obx: TOBX;
-  /** The nte list value. */
-  nteList?: TNTE[];
+/** The PATIENT RESULT group of an ORU^R01 (HL7 v2.5.1) message being built. */
+export interface PatientResult {
+  /** The PID segment. */
+  pid?: PID;
+  /** The PD1 segment. */
+  pd1?: PD1;
+  /** The NTE segments. */
+  nteList?: NTE[];
+  /** The NK1 segments. */
+  nk1List?: NK1[];
+  /** The PV1 segment. */
+  pv1?: PV1;
+  /** The PV2 segment. */
+  pv2?: PV2;
+  /** The ORDER OBSERVATION groups. */
+  orderObservations: OrderObservation[];
 }
 
-/** OrderObservation — a data structure used to build an HL7 ORU^R01 (v2.5.1) message. */
-export interface OrderObservation<
-  TORC extends ORC = ORC_251,
-  TOBR extends OBR = OBR_251,
-  TOBX extends OBX = OBX_251,
-  TNTE extends NTELike = NTE_251,
-  TCTI extends CTI = CTI_251,
-> {
-  /** The orc value. */
-  orc?: TORC;
-  /** The obr value. */
-  obr: TOBR;
-  /** The obr nte list value. */
-  obrNteList?: TNTE[];
-  /** The obx list value. */
-  obxList: TOBX[] | OBXWithNotes<TOBX, TNTE>[];
-  /** The obx nte map value. */
-  obxNteMap?: Map<number, TNTE[]>; // Alternative way to associate NTE with OBX
-  /** The cti list value. */
-  ctiList?: TCTI[];
+/** The ORDER OBSERVATION group of an ORU^R01 (HL7 v2.5.1) message being built. */
+export interface OrderObservation {
+  /** The ORC segment. */
+  orc?: ORC;
+  /** The OBR segment. */
+  obr: OBR;
+  /** The NTE segments. */
+  obrNteList?: NTE[];
+  /** The TIMING QTY groups. */
+  timing?: TimingQty[];
+  /** The CTD segment. */
+  ctd?: CTD;
+  /** The OBSERVATION groups. */
+  observations?: ObservationGroup[];
+  /** The FT1 segments. */
+  ft1List?: FT1[];
+  /** The CTI segments. */
+  ctiList?: CTI[];
+  /** The SPECIMEN groups. */
+  specimens?: Specimen[];
 }
 
-/** The PD1 shape this builder needs: it only encodes the segment, so a v2.3 PD1 also fits. */
-type PD1Like = Pick<PD1, "encode">;
-
-/** The NTE shape this builder needs: it only encodes the segment, so a v2.3 NTE also fits. */
-type NTELike = Pick<NTE, "encode">;
-
-/** PatientResult — a data structure used to build an HL7 ORU^R01 (v2.5.1) message. */
-export interface PatientResult<
-  TPID extends PID = PID_251,
-  TPD1 extends PD1Like = PD1_251,
-  TNK1 extends NK1 = NK1_251,
-  TNTE extends NTELike = NTE_251,
-  TPV1 extends PV1 = PV1_251,
-  TORC extends ORC = ORC_251,
-  TOBR extends OBR = OBR_251,
-  TOBX extends OBX = OBX_251,
-> {
-  /** The pid value. */
-  pid?: TPID;
-  /** The pd1 value. */
-  pd1?: TPD1;
-  /** The nk1 list value. */
-  nk1List?: TNK1[];
-  /** The nte list value. */
-  nteList?: TNTE[];
-  /** The pv1 value. */
-  pv1?: TPV1;
-  /** The order observations value. */
-  orderObservations: OrderObservation<TORC, TOBR, TOBX, TNTE>[];
+/** The TIMING QTY group of an ORU^R01 (HL7 v2.5.1) message being built. */
+export interface TimingQty {
+  /** The TQ1 segment. */
+  tq1: TQ1;
+  /** The TQ2 segments. */
+  tq2List?: TQ2[];
 }
 
-/** Builder for HL7 ORU^R01 (v2.5.1) messages. */
-export class ORU_R01<
-  TMSH extends MSH = MSH_251,
-  TPID extends PID = PID_251,
-  TPD1 extends PD1Like = PD1_251,
-  TNK1 extends NK1 = NK1_251,
-  TNTE extends NTELike = NTE_251,
-  TPV1 extends PV1 = PV1_251,
-  TORC extends ORC = ORC_251,
-  TOBR extends OBR = OBR_251,
-  TOBX extends OBX = OBX_251,
-> {
+/** The OBSERVATION group of an ORU^R01 (HL7 v2.5.1) message being built. */
+export interface ObservationGroup {
+  /** The OBX segment. */
+  obx: OBX;
+  /** The NTE segments. */
+  nteList?: NTE[];
+}
+
+/** The SPECIMEN group of an ORU^R01 (HL7 v2.5.1) message being built. */
+export interface Specimen {
+  /** The SPM segment. */
+  spm: SPM;
+  /** The OBX segments. */
+  obxList?: OBX[];
+}
+
+/** The optional segments and groups of an ORU^R01 (HL7 v2.5.1) message. */
+export interface ORU_R01Options {
+  /** The SFT segments. */
+  sftList?: SFT[];
+  /** The DSC segment. */
+  dsc?: DSC;
+}
+
+/** Builder for HL7 ORU^R01 (HL7 v2.5.1) messages. */
+export class ORU_R01<TMSH extends MSH = MSH> {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "ORU_R01";
+  /** The structure the message is verified against and encoded in. */
+  protected readonly structure: StructureItem[] = ORU_R01_STRUCTURE;
+
   /** Constructor. */
   constructor(
     public msh: TMSH,
-    public patientResults: PatientResult<TPID, TPD1, TNK1, TNTE, TPV1, TORC, TOBR, TOBX>[] = [],
-    private encoding: EncodingCharacters = DEFAULT_ENCODING,
+    public patientResults: PatientResult[],
+    public options: ORU_R01Options = {},
+    protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
+
+  /** The message as one object keyed by structure property name (what verify() and encode() work on). */
+  toInput(): StructureInput {
+    return { ...this.options, msh: this.msh, patientResults: this.patientResults };
+  }
 
   /** Validates the message structure, returning a result. */
   verify(): { valid: boolean; errors: string[] } {
-    const errors: string[] = [];
-
-    if (!this.msh) {
-      errors.push("MSH segment is required for ORU_R01 message");
-    }
-
-    if (this.patientResults.length === 0) {
-      errors.push(
-        "At least one patient result is required for ORU_R01 message",
-      );
-    }
-
-    for (let i = 0; i < this.patientResults.length; i++) {
-      const patientResult = this.patientResults[i];
-
-      if (patientResult.orderObservations.length === 0) {
-        errors.push(
-          `Patient result ${i + 1}: At least one order observation is required`,
-        );
-      }
-    }
-
-    return {
-      valid: errors.length === 0,
-      errors,
-    };
+    const errors = verifyStructure(this.structure, this.toInput());
+    return { valid: errors.length === 0, errors };
   }
 
   /** Encodes this message to its HL7 wire string. */
-  encode(options?: { renumberSetIds?: boolean }): string {
+  encode(): string {
     const verification = this.verify();
     if (!verification.valid) {
-      throw new Error(
-        `Cannot encode invalid ORU_R01 message:\n${verification.errors.join("\n")}`,
-      );
+      throw new Error(`Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`);
     }
-
-    const segments: string[] = [];
-
-    // Add MSH segment
-    segments.push(this.msh.encode(this.encoding));
-
-    // Add patient results
-    for (const patientResult of this.patientResults) {
-      if (patientResult.pid) {
-        segments.push(patientResult.pid.encode(this.encoding));
-      }
-
-      // Add PD1 after PID
-      if (patientResult.pd1) {
-        segments.push(patientResult.pd1.encode(this.encoding));
-      }
-
-      // Add NK1 segments after PD1
-      if (patientResult.nk1List) {
-        for (const nk1 of patientResult.nk1List) {
-          segments.push(nk1.encode(this.encoding));
-        }
-      }
-
-      // Add NTE segments after NK1 (patient notes)
-      if (patientResult.nteList) {
-        for (const nte of patientResult.nteList) {
-          segments.push(nte.encode(this.encoding));
-        }
-      }
-
-      if (patientResult.pv1) {
-        segments.push(patientResult.pv1.encode(this.encoding));
-      }
-
-      // Renumber OBR and OBX Set IDs if requested
-      if (options?.renumberSetIds) {
-        patientResult.orderObservations.forEach((orderObs, obrIndex) => {
-          orderObs.obr.setId(String(obrIndex + 1));
-          orderObs.obxList.forEach((obxItem, obxIndex) => {
-            // Handle both OBX and OBXWithNotes
-            const obx = "obx" in obxItem ? obxItem.obx : obxItem;
-            obx.setId(String(obxIndex + 1));
-          });
-        });
-      }
-
-      for (const orderObs of patientResult.orderObservations) {
-        // Add ORC if present (typically before OBR)
-        if (orderObs.orc) {
-          segments.push(orderObs.orc.encode(this.encoding));
-        }
-
-        segments.push(orderObs.obr.encode(this.encoding));
-
-        // Add NTE segments after OBR (order notes)
-        if (orderObs.obrNteList) {
-          for (const nte of orderObs.obrNteList) {
-            segments.push(nte.encode(this.encoding));
-          }
-        }
-
-        for (let obxIdx = 0; obxIdx < orderObs.obxList.length; obxIdx++) {
-          const obxItem = orderObs.obxList[obxIdx];
-
-          // Handle both OBX and OBXWithNotes formats
-          if ("obx" in obxItem) {
-            // OBXWithNotes format
-            segments.push(obxItem.obx.encode(this.encoding));
-            // Add NTE segments after OBX (observation notes)
-            if (obxItem.nteList) {
-              for (const nte of obxItem.nteList) {
-                segments.push(nte.encode(this.encoding));
-              }
-            }
-          } else {
-            // Plain OBX format (backwards compatibility)
-            segments.push(obxItem.encode(this.encoding));
-
-            // Check if there are NTE segments for this OBX in the map
-            if (orderObs.obxNteMap) {
-              const nteList = orderObs.obxNteMap.get(obxIdx);
-              if (nteList) {
-                for (const nte of nteList) {
-                  segments.push(nte.encode(this.encoding));
-                }
-              }
-            }
-          }
-        }
-
-        if (orderObs.ctiList) {
-          for (const cti of orderObs.ctiList) {
-            segments.push(cti.encode(this.encoding));
-          }
-        }
-      }
-    }
-
-    return segments.join("\r");
+    return encodeStructure(this.structure, this.toInput(), this.encoding);
   }
 }
 
-/** Builds an HL7 ORU^R01 (v2.5.1) message. */
-export function createORU_R01<
-  TMSH extends MSH = MSH_251,
-  TPID extends PID = PID_251,
-  TPD1 extends PD1Like = PD1_251,
-  TNK1 extends NK1 = NK1_251,
-  TNTE extends NTELike = NTE_251,
-  TPV1 extends PV1 = PV1_251,
-  TORC extends ORC = ORC_251,
-  TOBR extends OBR = OBR_251,
-  TOBX extends OBX = OBX_251,
->(
+/** Builds an HL7 ORU^R01 (HL7 v2.5.1) message. */
+export function createORU_R01<TMSH extends MSH = MSH>(
   msh: TMSH,
-  patientResults: PatientResult<TPID, TPD1, TNK1, TNTE, TPV1, TORC, TOBR, TOBX>[] = [],
-): ORU_R01<TMSH, TPID, TPD1, TNK1, TNTE, TPV1, TORC, TOBR, TOBX> {
-  return new ORU_R01(msh, patientResults);
+  patientResults: PatientResult[],
+  options: ORU_R01Options = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
+): ORU_R01<TMSH> {
+  return new ORU_R01(msh, patientResults, options, encoding);
 }

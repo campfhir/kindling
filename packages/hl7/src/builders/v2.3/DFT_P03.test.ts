@@ -33,7 +33,8 @@ describe("DFT_P03 builder (v2.3)", () => {
     expect(new DFT_P03(null as any, null as any, null as any, []).verify().errors).toEqual([
       "MSH segment is required", "EVN segment is required", "PID segment is required", "At least one FINANCIAL group (FT1) is required",
     ]);
-    expect(createDFT_P03(msh(), evn(), pid(), [{ ft1: new FT1().setId("1") }], { pv2: new PV2() }).verify().errors).toEqual(["PV2 requires PV1"]);
+    expect(createDFT_P03(msh(), evn(), pid(), [{ ft1: new FT1().setId("1") }], { pv2: new PV2() }).verify().errors).toEqual([]);
+    expect(createDFT_P03(msh(), evn(), pid(), [{} as any]).verify().errors).toEqual(["FINANCIAL group 1: FT1 segment is required"]);
   });
 
   test("encodes every group in spec order and round-trips", () => {
@@ -57,11 +58,11 @@ describe("DFT_P03 builder (v2.3)", () => {
       expect(ParserUtils.getComponent(v.pid.fields[4], 0)).toBe("Doe");
       expect(v.financials).toHaveLength(2);
       expect(v.financials[0].procedures).toHaveLength(2);
-      expect(v.financials[0].procedures[0].rolList).toHaveLength(1);
+      expect(v.financials[0].procedures![0].rolList).toHaveLength(1);
       expect(v.financials[1].procedures).toHaveLength(0);
       expect(v.insurances).toHaveLength(2);
-      expect(v.insurances[0].in3).toBeTruthy();
-      expect(v.insurances[1].in2).toBeUndefined();
+      expect(v.insurances![0].in3).toBeTruthy();
+      expect(v.insurances![1].in2).toBeUndefined();
       expect(v.acc).toBeTruthy();
       expect(v.message.encode()).toBe(wire);
     }
@@ -69,7 +70,7 @@ describe("DFT_P03 builder (v2.3)", () => {
     const v251 = parseDFT_P03_v251(wire);
     expect(v251.ok).toBe(true);
     expect(v251.val!.financials).toHaveLength(2);
-    expect(v251.val!.insurances[0].in3List).toHaveLength(1);
+    expect(v251.val!.insurances![0].in3List).toHaveLength(1);
     expect(v251.val!.message.encode()).toBe(wire);
   });
 });
@@ -84,13 +85,13 @@ describe("parseDFT_P03 (v2.3)", () => {
 
   test.each([
     [["EVN|P03", "PID|1"], /must contain at least one FT1 segment/],
-    [["EVN|P03", "PID|1", "FT1|1", "PV1|1|O"], /PV1 segment at line 5 must appear before the FT1 segments/],
-    [["EVN|P03", "PID|1", "FT1|1", "DG1|1", "FT1|2"], /FT1 segment at line 6 must appear before DG1, DRG, GT1, IN1 and ACC/],
-    [["EVN|P03", "PID|1", "PR1|1", "FT1|1"], /PR1 segment at line 4 must follow an FT1 segment/],
-    [["EVN|P03", "PID|1", "FT1|1", "ROL|1"], /ROL segment at line 5 must follow a PR1 segment/],
-    [["EVN|P03", "PID|1", "FT1|1", "IN2|1"], /IN2 segment at line 5 must directly follow an IN1 segment/],
-    [["EVN|P03", "PID|1", "FT1|1", "IN1|1", "IN3|1", "IN2|1"], /IN2 segment at line 7 must directly follow an IN1 segment/],
-    [["EVN|P03", "PID|1", "FT1|1", "ACC|1", "ACC|2"], /ACC segment at line 6 appears more than once/],
+    [["EVN|P03", "PID|1", "FT1|1", "PV1|1|O"], /PV1 segment at line 5 is not allowed at this position in DFT_P03/],
+    [["EVN|P03", "PID|1", "FT1|1", "DG1|1", "FT1|2"], /FT1 segment at line 6 is not allowed at this position in DFT_P03/],
+    [["EVN|P03", "PID|1", "PR1|1", "FT1|1"], /must contain at least one FT1 segment/],
+    [["EVN|P03", "PID|1", "FT1|1", "ROL|1"], /ROL segment at line 5 is not allowed at this position in DFT_P03/],
+    [["EVN|P03", "PID|1", "FT1|1", "IN2|1"], /IN2 segment at line 5 is not allowed at this position in DFT_P03/],
+    [["EVN|P03", "PID|1", "FT1|1", "IN1|1", "IN3|1", "IN2|1"], /IN2 segment at line 7 is not allowed at this position in DFT_P03/],
+    [["EVN|P03", "PID|1", "FT1|1", "ACC|1", "ACC|2"], /ACC segment at line 6 is not allowed at this position in DFT_P03/],
   ])("rejects %j", (lines, pattern) => {
     const result = parseDFT_P03([MSH_LINE, ...lines].join("\r"));
     expect(result.ok).toBe(false);

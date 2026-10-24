@@ -1,15 +1,15 @@
 /**
- * Builder for VXU^V04 messages (HL7 v2.5): unsolicited vaccination record update.
+ * Builder for VXU^V04 messages (HL7 v2.5).
  *
- * Structure (HL7 v2.5):
- *   MSH [{SFT}] PID [PD1] [{NK1}] [ PV1 [PV2] ] [{GT1}] [{ IN1 [IN2] [IN3] }]
- *   [{ ORC [{ TQ1 [{TQ2}] }] RXA [RXR] [{ OBX [{NTE}] }] }]
- *
- * Compared with v2.4: SFT is new, ORC is required in each vaccination group, and the
- * ORC is followed by an optional repeating timing group (TQ1 with its TQ2 segments).
+ * Structure: MSH [{SFT}] PID [PD1] [{NK1}] [ PATIENT: PV1 [PV2] ] [{GT1}] [{ INSURANCE: IN1 [IN2] [IN3] }] [{ ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] RXA [RXR] [{ OBSERVATION: OBX [{NTE}] }] }]
  *
  * @module
  */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
+import { VXU_V04_STRUCTURE } from "../../structures/v2.5/VXU_V04.ts";
 import type { MSH } from "../../segments/v2.5/MSH.ts";
 import type { SFT } from "../../segments/v2.5/SFT.ts";
 import type { PID } from "../../segments/v2.5/PID.ts";
@@ -28,99 +28,96 @@ import type { RXA } from "../../segments/v2.5/RXA.ts";
 import type { RXR } from "../../segments/v2.5/RXR.ts";
 import type { OBX } from "../../segments/v2.5/OBX.ts";
 import type { NTE } from "../../segments/v2.5/NTE.ts";
-import { type EncodingCharacters, DEFAULT_ENCODING } from "../../types/encoding.ts";
 
-/** An OBX with the NTE segments that follow it. */
-export interface ObservationGroup<TObx extends OBX = OBX> {
-  /** The obx value. */
-  obx: TObx;
-  /** The notes value. */
-  notes?: NTE[];
+/** The PATIENT group of an VXU^V04 (HL7 v2.5) message being built. */
+export interface VisitGroup {
+  /** The PV1 segment. */
+  pv1: PV1;
+  /** The PV2 segment. */
+  pv2?: PV2;
 }
 
-/** A repeating timing group: TQ1 with its TQ2 segments. */
+/** The INSURANCE group of an VXU^V04 (HL7 v2.5) message being built. */
+export interface InsuranceGroup {
+  /** The IN1 segment. */
+  in1: IN1;
+  /** The IN2 segment. */
+  in2?: IN2;
+  /** The IN3 segment. */
+  in3?: IN3;
+}
+
+/** The ORDER group of an VXU^V04 (HL7 v2.5) message being built. */
+export interface VaccinationGroup {
+  /** The ORC segment. */
+  orc: ORC;
+  /** The TIMING groups. */
+  timing?: TimingGroup[];
+  /** The RXA segment. */
+  rxa: RXA;
+  /** The RXR segment. */
+  rxr?: RXR;
+  /** The OBSERVATION groups. */
+  observations?: ObservationGroup[];
+}
+
+/** The TIMING group of an VXU^V04 (HL7 v2.5) message being built. */
 export interface TimingGroup {
-  /** The tq1 value. */
+  /** The TQ1 segment. */
   tq1: TQ1;
   /** The TQ2 segments. */
   tq2List?: TQ2[];
 }
 
-/** A repeating vaccination group: ORC [timing] RXA [RXR] and its observations. */
-export interface VaccinationGroup<TRxa extends RXA = RXA> {
-  /** The orc value, required in v2.5. */
-  orc: ORC;
-  /** The timing groups. */
-  timing?: TimingGroup[];
-  /** The rxa value. */
-  rxa: TRxa;
-  /** The rxr value. */
-  rxr?: RXR;
-  /** The observations value. */
-  observations?: ObservationGroup[];
+/** The OBSERVATION group of an VXU^V04 (HL7 v2.5) message being built. */
+export interface ObservationGroup {
+  /** The OBX segment. */
+  obx: OBX;
+  /** The NTE segments. */
+  nteList?: NTE[];
 }
 
-/** An IN1 with its optional IN2 and IN3. */
-export interface InsuranceGroup<TIn1 extends IN1 = IN1> {
-  /** The in1 value. */
-  in1: TIn1;
-  /** The in2 value. */
-  in2?: IN2;
-  /** The in3 value. */
-  in3?: IN3;
+/** The optional segments and groups of an VXU^V04 (HL7 v2.5) message. */
+export interface VXU_V04Options {
+  /** The SFT segments. */
+  sftList?: SFT[];
+  /** The PD1 segment. */
+  pd1?: PD1;
+  /** The NK1 segments. */
+  nk1List?: NK1[];
+  /** The PATIENT group. */
+  visit?: VisitGroup;
+  /** The GT1 segments. */
+  gt1List?: GT1[];
+  /** The INSURANCE groups. */
+  insurance?: InsuranceGroup[];
+  /** The ORDER groups. */
+  orders?: VaccinationGroup[];
 }
 
-/** Builder for HL7 VXU^V04 (v2.3) messages. */
-export class VXU_V04<
-  TMsh extends MSH = MSH,
-  TPid extends PID = PID,
-  TRxa extends RXA = RXA,
-> {
+/** Builder for HL7 VXU^V04 (HL7 v2.5) messages. */
+export class VXU_V04<TMSH extends MSH = MSH, TPID extends PID = PID> {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "VXU_V04";
+  /** The structure the message is verified against and encoded in. */
+  protected readonly structure: StructureItem[] = VXU_V04_STRUCTURE;
+
   /** Constructor. */
   constructor(
-    public msh: TMsh,
-    public pid: TPid,
-    public options: {
-      /** SFT segments, encoded between MSH and PID. */
-      sftList?: SFT[];
-      /** The pd1 value. */
-      pd1?: PD1;
-      /** The NK1 segments. */
-      nk1List?: NK1[];
-      /** The PV1 and optional PV2. */
-      visit?: { pv1: PV1; pv2?: PV2 };
-      /** The guarantor segments. */
-      gt1List?: GT1[];
-      /** The insurance value. */
-      insurance?: InsuranceGroup[];
-      /** The vaccination groups. */
-      orders?: VaccinationGroup<TRxa>[];
-    } = {},
-    private encoding: EncodingCharacters = DEFAULT_ENCODING,
+    public msh: TMSH,
+    public pid: TPID,
+    public options: VXU_V04Options = {},
+    protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
+
+  /** The message as one object keyed by structure property name (what verify() and encode() work on). */
+  toInput(): StructureInput {
+    return { ...this.options, msh: this.msh, pid: this.pid };
+  }
 
   /** Validates the message structure, returning a result. */
   verify(): { valid: boolean; errors: string[] } {
-    const errors: string[] = [];
-    const o = this.options;
-
-    if (!this.msh) errors.push("MSH segment is required");
-    if (!this.pid) errors.push("PID segment is required");
-    if (o.visit && !o.visit.pv1) errors.push("PV1 segment is required when a visit is present");
-    (o.insurance ?? []).forEach((ins, i) => {
-      if (!ins.in1) errors.push(`Insurance group ${i + 1}: IN1 segment is required`);
-    });
-    (o.orders ?? []).forEach((order, i) => {
-      if (!order.orc) errors.push(`Order ${i + 1}: ORC segment is required`);
-      if (!order.rxa) errors.push(`Order ${i + 1}: RXA segment is required`);
-      (order.timing ?? []).forEach((t, j) => {
-        if (!t.tq1) errors.push(`Order ${i + 1}, timing ${j + 1}: TQ1 segment is required`);
-      });
-      (order.observations ?? []).forEach((obs, j) => {
-        if (!obs.obx) errors.push(`Order ${i + 1}, observation ${j + 1}: OBX segment is required`);
-      });
-    });
-
+    const errors = verifyStructure(this.structure, this.toInput());
     return { valid: errors.length === 0, errors };
   }
 
@@ -128,58 +125,18 @@ export class VXU_V04<
   encode(): string {
     const verification = this.verify();
     if (!verification.valid) {
-      throw new Error(
-        `Cannot encode invalid VXU_V04 message:\n${verification.errors.join("\n")}`,
-      );
+      throw new Error(`Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`);
     }
-
-    const enc = this.encoding;
-    const o = this.options;
-    const segments: string[] = [];
-    const add = (seg: { encode(e?: EncodingCharacters): string }) => segments.push(seg.encode(enc));
-
-    add(this.msh);
-    o.sftList?.forEach(add);
-    add(this.pid);
-    if (o.pd1) add(o.pd1);
-    o.nk1List?.forEach(add);
-    if (o.visit) {
-      add(o.visit.pv1);
-      if (o.visit.pv2) add(o.visit.pv2);
-    }
-    o.gt1List?.forEach(add);
-    for (const ins of o.insurance ?? []) {
-      add(ins.in1);
-      if (ins.in2) add(ins.in2);
-      if (ins.in3) add(ins.in3);
-    }
-    for (const order of o.orders ?? []) {
-      add(order.orc);
-      for (const t of order.timing ?? []) {
-        add(t.tq1);
-        t.tq2List?.forEach(add);
-      }
-      add(order.rxa);
-      if (order.rxr) add(order.rxr);
-      for (const obs of order.observations ?? []) {
-        add(obs.obx);
-        obs.notes?.forEach(add);
-      }
-    }
-
-    return segments.join("\r");
+    return encodeStructure(this.structure, this.toInput(), this.encoding);
   }
 }
 
-/** Builds an HL7 VXU^V04 (v2.3) message. */
-export function createVXU_V04<
-  TMsh extends MSH = MSH,
-  TPid extends PID = PID,
-  TRxa extends RXA = RXA,
->(
-  msh: TMsh,
-  pid: TPid,
-  options: VXU_V04<TMsh, TPid, TRxa>["options"] = {},
-): VXU_V04<TMsh, TPid, TRxa> {
-  return new VXU_V04(msh, pid, options);
+/** Builds an HL7 VXU^V04 (HL7 v2.5) message. */
+export function createVXU_V04<TMSH extends MSH = MSH, TPID extends PID = PID>(
+  msh: TMSH,
+  pid: TPID,
+  options: VXU_V04Options = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
+): VXU_V04<TMSH, TPID> {
+  return new VXU_V04(msh, pid, options, encoding);
 }

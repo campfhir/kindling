@@ -32,14 +32,14 @@ describe("ACK builder", () => {
 
   test("encodes ERR after MSA", () => {
     const err = new ERR().errorCodeAndLocation("101");
-    const segments = createACK(makeMSH(), makeMSA(), err).encode().split("\r");
+    const segments = createACK(makeMSH(), makeMSA(), { err }).encode().split("\r");
     expect(segments.map((s) => s.slice(0, 3))).toEqual(["MSH", "MSA", "ERR"]);
   });
 });
 
 describe("ACK round trip", () => {
   test("parse(encode()) preserves the segments", () => {
-    const wire = createACK(makeMSH(), makeMSA().textMessage("ok"), new ERR().errorCodeAndLocation("101")).encode();
+    const wire = createACK(makeMSH(), makeMSA().textMessage("ok"), { err: new ERR().errorCodeAndLocation("101") }).encode();
     const result = parseACK(wire);
     expect(result.ok).toBe(true);
     if (!result.ok) return;
@@ -53,7 +53,7 @@ describe("ACK round trip", () => {
       { segmentId: "PID", sequence: "1", fieldPosition: "5", codeIdentifyingError: { identifier: "101", text: "Required field missing" } },
       { segmentId: "PV1", sequence: "1", fieldPosition: "2", codeIdentifyingError: { identifier: "102" } },
     );
-    const result = parseACK(createACK(makeMSH(), makeMSA().acknowledgmentCode("AE"), err).encode());
+    const result = parseACK(createACK(makeMSH(), makeMSA().acknowledgmentCode("AE"), { err }).encode());
     expect(result.ok).toBe(true);
     if (result.ok) {
       expect(result.val.err?.encode()).toBe("ERR|PID^1^5^101&Required field missing~PV1^1^2^102");

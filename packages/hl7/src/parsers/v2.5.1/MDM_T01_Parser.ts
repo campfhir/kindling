@@ -1,5 +1,15 @@
-import { Result } from "../../types/result.ts";
-import { EncodingCharacters } from "../../types/encoding.ts";
+/**
+ * Parser for MDM^T01 messages (HL7 v2.5.1).
+ *
+ * Structure: MSH [{SFT}] EVN PID PV1 [{ COMMON_ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] OBR [{NTE}] }] TXA
+ *
+ * @module
+ */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { Result } from "../../types/result.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
+import { MDM_T01_STRUCTURE } from "../../structures/v2.5.1/MDM_T01.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
 import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { EVN } from "../../segments/v2.5.1/EVN.ts";
@@ -11,63 +21,76 @@ import { TQ2 } from "../../segments/v2.5.1/TQ2.ts";
 import { OBR } from "../../segments/v2.5.1/OBR.ts";
 import { NTE } from "../../segments/v2.5.1/NTE.ts";
 import { TXA } from "../../segments/v2.5.1/TXA.ts";
-import {
-  MDM_T01_Parser as MDM_T01_Parser_base,
-  ParsedMDM_T01,
-  ParsedMDMOrder,
-  ParsedMDMTiming,
-} from "../v2.5/MDM_T01_Parser.ts";
 
-export type { ParsedMDM_T01, ParsedMDMOrder, ParsedMDMTiming };
+/** The COMMON ORDER group of a parsed MDM^T01 (HL7 v2.5.1) message. */
+export interface ParsedMDMOrder {
+  /** The ORC segment. */
+  orc: ORC;
+  /** The TIMING groups. */
+  timing?: ParsedMDMTiming[];
+  /** The OBR segment. */
+  obr: OBR;
+  /** The NTE segments. */
+  nteList?: NTE[];
+}
 
-/** Parser for HL7 MDM^T01 (v2.5.1) messages. */
-export class MDM_T01_Parser extends MDM_T01_Parser_base {
-  protected override parseMSH(s: string): Result<MSH> {
-    return MSH.parse(s);
-  }
+/** The TIMING group of a parsed MDM^T01 (HL7 v2.5.1) message. */
+export interface ParsedMDMTiming {
+  /** The TQ1 segment. */
+  tq1: TQ1;
+  /** The TQ2 segments. */
+  tq2List?: TQ2[];
+}
 
-  protected override parseSFT(s: string, e: EncodingCharacters): Result<SFT> {
-    return SFT.parse(s, e);
-  }
+/** Structured result of parsing an HL7 MDM^T01 (HL7 v2.5.1) message. */
+export interface ParsedMDM_T01 extends ParsedMessageBase {
+  /** The MSH segment. */
+  msh: MSH;
+  /** The SFT segments. */
+  sftList?: SFT[];
+  /** The EVN segment. */
+  evn: EVN;
+  /** The PID segment. */
+  pid: PID;
+  /** The PV1 segment. */
+  pv1: PV1;
+  /** The COMMON ORDER groups. */
+  orders?: ParsedMDMOrder[];
+  /** The TXA segment. */
+  txa: TXA;
+}
 
-  protected override parseEVN(s: string, e: EncodingCharacters): Result<EVN> {
-    return EVN.parse(s, e);
-  }
+/** The segment parsers of MDM^T01 (HL7 v2.5.1). */
+const PARSERS: SegmentParsers = {
+  MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
+  EVN: (s, e) => EVN.parse(s, e),
+  PID: (s, e) => PID.parse(s, e),
+  PV1: (s, e) => PV1.parse(s, e),
+  ORC: (s, e) => ORC.parse(s, e),
+  TQ1: (s, e) => TQ1.parse(s, e),
+  TQ2: (s, e) => TQ2.parse(s, e),
+  OBR: (s, e) => OBR.parse(s, e),
+  NTE: (s, e) => NTE.parse(s, e),
+  TXA: (s, e) => TXA.parse(s, e),
+};
 
-  protected override parsePID(s: string, e: EncodingCharacters): Result<PID> {
-    return PID.parse(s, e);
-  }
+/** Parser for HL7 MDM^T01 (HL7 v2.5.1) messages. */
+export class MDM_T01_Parser {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "MDM_T01";
+  /** The structure the message is parsed against. */
+  protected readonly structure: StructureItem[] = MDM_T01_STRUCTURE;
+  /** The segment parsers, keyed by segment name. */
+  protected readonly parsers: SegmentParsers = PARSERS;
 
-  protected override parsePV1(s: string, e: EncodingCharacters): Result<PV1> {
-    return PV1.parse(s, e);
-  }
-
-  protected override parseORC(s: string, e: EncodingCharacters): Result<ORC> {
-    return ORC.parse(s, e);
-  }
-
-  protected override parseTQ1(s: string, e: EncodingCharacters): Result<TQ1> {
-    return TQ1.parse(s, e);
-  }
-
-  protected override parseTQ2(s: string, e: EncodingCharacters): Result<TQ2> {
-    return TQ2.parse(s, e);
-  }
-
-  protected override parseOBR(s: string, e: EncodingCharacters): Result<OBR> {
-    return OBR.parse(s, e);
-  }
-
-  protected override parseNTE(s: string, e: EncodingCharacters): Result<NTE> {
-    return NTE.parse(s, e);
-  }
-
-  protected override parseTXA(s: string, e: EncodingCharacters): Result<TXA> {
-    return TXA.parse(s, e);
+  /** Parses the input string into a structured instance. */
+  parse(messageString: string): Result<ParsedMDM_T01> {
+    return parseStructure<ParsedMDM_T01>(this.messageName, this.structure, this.parsers, messageString);
   }
 }
 
-/** Parses an HL7 MDM^T01 (v2.5.1) message string into a structured result. */
+/** Parses an HL7 MDM^T01 (HL7 v2.5.1) message string into a structured result. */
 export function parseMDM_T01(messageString: string): Result<ParsedMDM_T01> {
   return new MDM_T01_Parser().parse(messageString);
 }

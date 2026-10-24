@@ -24,6 +24,6 @@ test("verify() and the parser require EVN and NPU", () => {
   expect(new ADT_A20(null as any, null as any, null as any).verify().errors).toEqual(["MSH segment is required", "EVN segment is required", "NPU segment is required"]);
   const MSH_LINE = "MSH|^~\\&|ADT|HOSP|BED|HOSP|20231015120000||ADT^A20^ADT_A20|MSG001|P|2.3";
   expect(parseADT_A20([MSH_LINE, "EVN|A20"].join("\r")).err!.message).toMatch(/ADT_A20 message must contain an NPU segment/);
-  expect(parseADT_A20([MSH_LINE, "NPU|WEST^101^1|C"].join("\r")).err!.message).toMatch(/NPU segment at line 2 must follow the EVN segment/);
-  expect(parseADT_A20([MSH_LINE, "EVN|A20", "NPU|WEST^101^1|C", "NPU|WEST^102^1|O"].join("\r")).err!.message).toMatch(/NPU segment at line 4 appears more than once/);
+  expect(parseADT_A20([MSH_LINE, "NPU|WEST^101^1|C"].join("\r")).err!.message).toMatch(/ADT_A20 message must contain an EVN segment/);
+  expect(parseADT_A20([MSH_LINE, "EVN|A20", "NPU|WEST^101^1|C", "NPU|WEST^102^1|O"].join("\r")).err!.message).toMatch(/NPU segment at line 4 is not allowed at this position in ADT_A20/);
 });

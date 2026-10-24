@@ -55,7 +55,7 @@ describe("ACK round trip", () => {
     expect(result.val.sftList).toHaveLength(2);
     expect(result.val.msa.encode()).toBe("MSA|AA|MSG1|ok");
     expect(result.val.errList).toHaveLength(2);
-    expect(result.val.errList[0].encode()).toBe("ERR||PID^1^5|101^Required field missing|E");
+    expect(result.val.errList![0].encode()).toBe("ERR||PID^1^5|101^Required field missing|E");
     expect(result.val.message.segments).toHaveLength(wire.split("\r").length);
   });
 
