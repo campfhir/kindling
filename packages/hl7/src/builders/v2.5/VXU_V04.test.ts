@@ -24,22 +24,22 @@ const msh = () => makeMSH().encode();
 
 function fullMessage() {
   return createVXU_V04(makeMSH(), makePID(), {
-    sftList: [new SFT(), new SFT()],
-    visit: { pv1: new PV1().patientClass("O") },
-    gt1List: [new GT1().setId("1")],
-    insurance: [{ in1: new IN1().setId("1") }],
+    software: [new SFT(), new SFT()],
+    visit: new PV1().patientClass("O"),
+    guarantors: [new GT1().setId("1")],
+    insurances: [{ insurance: new IN1().setId("1") }],
     orders: [
       {
-        orc: makeORC(),
-        timing: [
-          { tq1: new TQ1().setId("1"), tq2List: [new TQ2().setId("1"), new TQ2().setId("2")] },
-          { tq1: new TQ1().setId("2") },
+        commonOrder: makeORC(),
+        timings: [
+          { timing: new TQ1().setId("1"), timingRelationships: [new TQ2().setId("1"), new TQ2().setId("2")] },
+          { timing: new TQ1().setId("2") },
         ],
-        rxa: makeRXA("1"),
-        rxr: new RXR().route({ code: "IM" }),
-        observations: [{ obx: new OBX().setId("1").valueType("CE"), nteList: [new NTE().setId("1").comment("n")] }],
+        administration: makeRXA("1"),
+        route: new RXR().route({ code: "IM" }),
+        observations: [{ observation: new OBX().setId("1").valueType("CE"), notes: [new NTE().setId("1").comment("n")] }],
       },
-      { orc: makeORC(), rxa: makeRXA("2") },
+      { commonOrder: makeORC(), administration: makeRXA("2") },
     ],
   });
 }
@@ -61,7 +61,7 @@ describe("VXU_V04 builder (v2.5)", () => {
   test("verify() requires the ORC and RXA of every order and the TQ1 of every timing group", () => {
     const msg = new VXU_V04(makeMSH(), makePID(), {
       // @ts-expect-error missing required segments
-      orders: [{ rxa: makeRXA() }, { orc: makeORC() }, { orc: makeORC(), rxa: makeRXA(), timing: [{ tq2List: [] }] }],
+      orders: [{ administration: makeRXA() }, { commonOrder: makeORC() }, { commonOrder: makeORC(), administration: makeRXA(), timings: [{ timingRelationships: [] }] }],
     });
     expect(msg.verify().errors).toEqual([
       "ORDER group 1: ORC segment is required",
@@ -79,16 +79,16 @@ describe("VXU_V04 parser (v2.5)", () => {
     expect(result.ok).toBe(true);
     if (!result.ok) return;
     const { val } = result;
-    expect(val.sftList).toHaveLength(2);
-    expect(val.gt1List).toHaveLength(1);
+    expect(val.software).toHaveLength(2);
+    expect(val.guarantors).toHaveLength(1);
     expect(val.orders).toHaveLength(2);
-    expect(val.orders![0].orc).toBeInstanceOf(ORC);
-    expect(val.orders![0].timing!.map((t) => t.tq2List!.length)).toEqual([2, 0]);
-    expect(val.orders![0].timing![0].tq1).toBeInstanceOf(TQ1);
-    expect(val.orders![0].timing![0].tq2List![0]).toBeInstanceOf(TQ2);
-    expect(val.orders![0].rxa).toBeInstanceOf(RXA);
-    expect(val.orders![0].observations![0].nteList).toHaveLength(1);
-    expect(val.orders![1].timing).toEqual([]);
+    expect(val.orders![0].commonOrder).toBeInstanceOf(ORC);
+    expect(val.orders![0].timings!.map((t) => t.timingRelationships!.length)).toEqual([2, 0]);
+    expect(val.orders![0].timings![0].timing).toBeInstanceOf(TQ1);
+    expect(val.orders![0].timings![0].timingRelationships![0]).toBeInstanceOf(TQ2);
+    expect(val.orders![0].administration).toBeInstanceOf(RXA);
+    expect(val.orders![0].observations![0].notes).toHaveLength(1);
+    expect(val.orders![1].timings).toEqual([]);
     expect(val.message.segments).toHaveLength(wire.split("\r").length);
   });
 

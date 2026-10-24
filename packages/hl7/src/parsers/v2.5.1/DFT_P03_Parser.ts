@@ -38,13 +38,13 @@ import { ACC } from "../../segments/v2.5.1/ACC.ts";
 /** The COMMON ORDER group of a parsed DFT^P03 (HL7 v2.5.1) message. */
 export interface ParsedDFTOrder {
   /** The ORC segment. */
-  orc?: ORC;
+  commonOrder?: ORC;
   /** The TIMING QUANTITY groups. */
-  timing?: ParsedDFTTiming[];
+  timings?: ParsedDFTTiming[];
   /** The OBR segment. */
-  obr?: OBR;
+  observationRequest?: OBR;
   /** The NTE segments. */
-  obrNteList?: NTE[];
+  notes?: NTE[];
   /** The OBSERVATION groups. */
   observations?: ParsedDFTObservation[];
 }
@@ -52,25 +52,25 @@ export interface ParsedDFTOrder {
 /** The TIMING QUANTITY group of a parsed DFT^P03 (HL7 v2.5.1) message. */
 export interface ParsedDFTTiming {
   /** The TQ1 segment. */
-  tq1: TQ1;
+  timing: TQ1;
   /** The TQ2 segments. */
-  tq2List?: TQ2[];
+  timingRelationships?: TQ2[];
 }
 
 /** The OBSERVATION group of a parsed DFT^P03 (HL7 v2.5.1) message. */
 export interface ParsedDFTObservation {
   /** The OBX segment. */
-  obx: OBX;
+  observation: OBX;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The FINANCIAL group of a parsed DFT^P03 (HL7 v2.5.1) message. */
 export interface ParsedDFTFinancial {
   /** The FT1 segment. */
-  ft1: FT1;
+  transaction: FT1;
   /** The NTE segment. */
-  nte?: NTE;
+  note?: NTE;
   /** The FINANCIAL PROCEDURE groups. */
   procedures?: ParsedDFTProcedure[];
   /** The FINANCIAL COMMON ORDER groups. */
@@ -80,21 +80,21 @@ export interface ParsedDFTFinancial {
 /** The FINANCIAL PROCEDURE group of a parsed DFT^P03 (HL7 v2.5.1) message. */
 export interface ParsedDFTProcedure {
   /** The PR1 segment. */
-  pr1: PR1;
+  procedure: PR1;
   /** The ROL segments. */
-  rolList?: ROL[];
+  roles?: ROL[];
 }
 
 /** The FINANCIAL COMMON ORDER group of a parsed DFT^P03 (HL7 v2.5.1) message. */
 export interface ParsedDFTFinancialOrder {
   /** The ORC segment. */
-  orc?: ORC;
+  commonOrder?: ORC;
   /** The FINANCIAL TIMING QUANTITY groups. */
-  timing?: ParsedDFTFinancialTiming[];
+  timings?: ParsedDFTFinancialTiming[];
   /** The OBR segment. */
-  obr?: OBR;
+  observationRequest?: OBR;
   /** The NTE segments. */
-  obrNteList?: NTE[];
+  notes?: NTE[];
   /** The FINANCIAL OBSERVATION groups. */
   observations?: ParsedDFTFinancialObservation[];
 }
@@ -102,67 +102,67 @@ export interface ParsedDFTFinancialOrder {
 /** The FINANCIAL TIMING QUANTITY group of a parsed DFT^P03 (HL7 v2.5.1) message. */
 export interface ParsedDFTFinancialTiming {
   /** The TQ1 segment. */
-  tq1: TQ1;
+  timing: TQ1;
   /** The TQ2 segments. */
-  tq2List?: TQ2[];
+  timingRelationships?: TQ2[];
 }
 
 /** The FINANCIAL OBSERVATION group of a parsed DFT^P03 (HL7 v2.5.1) message. */
 export interface ParsedDFTFinancialObservation {
   /** The OBX segment. */
-  obx: OBX;
+  observation: OBX;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The INSURANCE group of a parsed DFT^P03 (HL7 v2.5.1) message. */
 export interface ParsedDFTInsurance {
   /** The IN1 segment. */
-  in1: IN1;
+  insurance: IN1;
   /** The IN2 segment. */
-  in2?: IN2;
+  insuranceDetails?: IN2;
   /** The IN3 segments. */
-  in3List?: IN3[];
+  insuranceCertifications?: IN3[];
   /** The ROL segments. */
-  rolList?: ROL[];
+  roles?: ROL[];
 }
 
 /** Structured result of parsing an HL7 DFT^P03 (HL7 v2.5.1) message. */
 export interface ParsedDFT_P03 extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The SFT segments. */
-  sftList?: SFT[];
+  software?: SFT[];
   /** The EVN segment. */
-  evn: EVN;
+  event: EVN;
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The ROL segments. */
-  rolList?: ROL[];
+  roles?: ROL[];
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
   /** The PV2 segment. */
-  pv2?: PV2;
+  visitDetails?: PV2;
   /** The ROL segments. */
-  visitRolList?: ROL[];
+  visitRoles?: ROL[];
   /** The DB1 segments. */
-  db1List?: DB1[];
+  disabilities?: DB1[];
   /** The COMMON ORDER groups. */
   orders?: ParsedDFTOrder[];
   /** The FINANCIAL groups. */
   financials: ParsedDFTFinancial[];
   /** The DG1 segments. */
-  dg1List?: DG1[];
+  diagnoses?: DG1[];
   /** The DRG segment. */
-  drg?: DRG;
+  diagnosisRelatedGroup?: DRG;
   /** The GT1 segments. */
-  gt1List?: GT1[];
+  guarantors?: GT1[];
   /** The INSURANCE groups. */
   insurances?: ParsedDFTInsurance[];
   /** The ACC segment. */
-  acc?: ACC;
+  accident?: ACC;
 }
 
 /** The segment parsers of DFT^P03 (HL7 v2.5.1). */

@@ -313,7 +313,7 @@ export function generateMessageParser(schema: MessageSchema, version: string): s
   const parsedInterface = renderInterface(
     `Parsed${name}`,
     `Structured result of parsing an HL7 ${label} (${versionLabel(version)}) message.`,
-    [{ name: "msh", tsType: "MSH", optional: false, doc: "The MSH segment." }, ...topFields],
+    [{ name: itemField(schema.structure[0]), tsType: "MSH", optional: false, doc: "The MSH segment." }, ...topFields],
     " extends ParsedMessageBase",
   );
 

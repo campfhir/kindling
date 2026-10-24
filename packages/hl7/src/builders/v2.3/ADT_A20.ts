@@ -26,16 +26,16 @@ export class ADT_A20<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TNPU extend
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
-    public evn: TEVN,
-    public npu: TNPU,
+    public header: TMSH,
+    public event: TEVN,
+    public bedStatus: TNPU,
     public options: ADT_A20Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, evn: this.evn, npu: this.npu };
+    return { ...this.options, header: this.header, event: this.event, bedStatus: this.bedStatus };
   }
 
   /** Validates the message structure, returning a result. */
@@ -56,11 +56,11 @@ export class ADT_A20<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TNPU extend
 
 /** Builds an HL7 ADT^A20 (HL7 v2.3) message. */
 export function createADT_A20<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TNPU extends NPU = NPU>(
-  msh: TMSH,
-  evn: TEVN,
-  npu: TNPU,
+  header: TMSH,
+  event: TEVN,
+  bedStatus: TNPU,
   options: ADT_A20Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): ADT_A20<TMSH, TEVN, TNPU> {
-  return new ADT_A20(msh, evn, npu, options, encoding);
+  return new ADT_A20(header, event, bedStatus, options, encoding);
 }

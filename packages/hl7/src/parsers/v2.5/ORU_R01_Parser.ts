@@ -32,17 +32,17 @@ import { DSC } from "../../segments/v2.5/DSC.ts";
 /** The PATIENT RESULT group of a parsed ORU^R01 (HL7 v2.5) message. */
 export interface ParsedPatientResult {
   /** The PID segment. */
-  pid?: PID;
+  patient?: PID;
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
   /** The NK1 segments. */
-  nk1List?: NK1[];
+  nextOfKin?: NK1[];
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
   /** The PV2 segment. */
-  pv2?: PV2;
+  visitDetails?: PV2;
   /** The ORDER OBSERVATION groups. */
   orderObservations: ParsedOrderObservation[];
 }
@@ -50,21 +50,21 @@ export interface ParsedPatientResult {
 /** The ORDER OBSERVATION group of a parsed ORU^R01 (HL7 v2.5) message. */
 export interface ParsedOrderObservation {
   /** The ORC segment. */
-  orc?: ORC;
+  commonOrder?: ORC;
   /** The OBR segment. */
-  obr: OBR;
+  observationRequest: OBR;
   /** The NTE segments. */
-  obrNteList?: NTE[];
+  notes?: NTE[];
   /** The TIMING QTY groups. */
-  timing?: ParsedTimingQty[];
+  timings?: ParsedTimingQty[];
   /** The CTD segment. */
-  ctd?: CTD;
+  contact?: CTD;
   /** The OBSERVATION groups. */
   observations?: ParsedObservation[];
   /** The FT1 segments. */
-  ft1List?: FT1[];
+  transactions?: FT1[];
   /** The CTI segments. */
-  ctiList?: CTI[];
+  clinicalTrials?: CTI[];
   /** The SPECIMEN groups. */
   specimens?: ParsedSpecimen[];
 }
@@ -72,37 +72,37 @@ export interface ParsedOrderObservation {
 /** The TIMING QTY group of a parsed ORU^R01 (HL7 v2.5) message. */
 export interface ParsedTimingQty {
   /** The TQ1 segment. */
-  tq1: TQ1;
+  timing: TQ1;
   /** The TQ2 segments. */
-  tq2List?: TQ2[];
+  timingRelationships?: TQ2[];
 }
 
 /** The OBSERVATION group of a parsed ORU^R01 (HL7 v2.5) message. */
 export interface ParsedObservation {
   /** The OBX segment. */
-  obx: OBX;
+  observation: OBX;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The SPECIMEN group of a parsed ORU^R01 (HL7 v2.5) message. */
 export interface ParsedSpecimen {
   /** The SPM segment. */
-  spm: SPM;
+  specimen: SPM;
   /** The OBX segments. */
-  obxList?: OBX[];
+  observations?: OBX[];
 }
 
 /** Structured result of parsing an HL7 ORU^R01 (HL7 v2.5) message. */
 export interface ParsedORU_R01 extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The SFT segments. */
-  sftList?: SFT[];
+  software?: SFT[];
   /** The PATIENT RESULT groups. */
   patientResults: ParsedPatientResult[];
   /** The DSC segment. */
-  dsc?: DSC;
+  continuation?: DSC;
 }
 
 /** The segment parsers of ORU^R01 (HL7 v2.5). */

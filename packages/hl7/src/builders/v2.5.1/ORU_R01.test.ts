@@ -40,7 +40,7 @@ test("ORU_R01 verify() detects missing order observations", () => {
 
   const message = createORU_R01(msh, [
     {
-      pid,
+      patient: pid,
       orderObservations: [],
     },
   ]);
@@ -62,8 +62,8 @@ test("ORU_R01 encodes valid message with minimal data", () => {
 
   const message = createORU_R01(msh, [
     {
-      pid,
-      orderObservations: [{ obr, observations: [{ obx: obx }] }],
+      patient: pid,
+      orderObservations: [{ observationRequest: obr, observations: [{ observation: obx }] }],
     },
   ]);
 
@@ -87,9 +87,9 @@ test("ORU_R01 encodes message with PV1", () => {
 
   const message = createORU_R01(msh, [
     {
-      pid,
-      pv1,
-      orderObservations: [{ obr, observations: [{ obx: obx }] }],
+      patient: pid,
+      visit: pv1,
+      orderObservations: [{ observationRequest: obr, observations: [{ observation: obx }] }],
     },
   ]);
 
@@ -111,8 +111,8 @@ test("ORU_R01 handles multiple OBX segments", () => {
 
   const message = createORU_R01(msh, [
     {
-      pid,
-      orderObservations: [{ obr, observations: [{ obx: obx1 }, { obx: obx2 }, { obx: obx3 }] }],
+      patient: pid,
+      orderObservations: [{ observationRequest: obr, observations: [{ observation: obx1 }, { observation: obx2 }, { observation: obx3 }] }],
     },
   ]);
 
@@ -135,10 +135,10 @@ test("ORU_R01 handles multiple order observations", () => {
 
   const message = createORU_R01(msh, [
     {
-      pid,
+      patient: pid,
       orderObservations: [
-        { obr: obr1, observations: [{ obx: obx1 }] },
-        { obr: obr2, observations: [{ obx: obx2 }] },
+        { observationRequest: obr1, observations: [{ observation: obx1 }] },
+        { observationRequest: obr2, observations: [{ observation: obx2 }] },
       ],
     },
   ]);
@@ -162,12 +162,12 @@ test("ORU_R01 handles multiple patient results", () => {
 
   const message = createORU_R01(msh, [
     {
-      pid: pid1,
-      orderObservations: [{ obr: obr1, observations: [{ obx: obx1 }] }],
+      patient: pid1,
+      orderObservations: [{ observationRequest: obr1, observations: [{ observation: obx1 }] }],
     },
     {
-      pid: pid2,
-      orderObservations: [{ obr: obr2, observations: [{ obx: obx2 }] }],
+      patient: pid2,
+      orderObservations: [{ observationRequest: obr2, observations: [{ observation: obx2 }] }],
     },
   ]);
 
@@ -203,8 +203,8 @@ test("ORU_R01 encodes to valid HL7 string", () => {
 
   const message = createORU_R01(msh, [
     {
-      pid,
-      orderObservations: [{ obr, observations: [{ obx: obx }] }],
+      patient: pid,
+      orderObservations: [{ observationRequest: obr, observations: [{ observation: obx }] }],
     },
   ]);
 
@@ -224,7 +224,7 @@ test("ORU_R01 handles patient result without PID", () => {
 
   const message = createORU_R01(msh, [
     {
-      orderObservations: [{ obr, observations: [{ obx: obx }] }],
+      orderObservations: [{ observationRequest: obr, observations: [{ observation: obx }] }],
     },
   ]);
 

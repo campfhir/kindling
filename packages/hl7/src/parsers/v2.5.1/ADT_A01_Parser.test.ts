@@ -39,27 +39,27 @@ describe("parseADT_A01 — minimal message", () => {
 
   test("extracts MSH", () => {
     const result = parseADT_A01(minimalMessage);
-    expect(result.val!.msh.name).toBe("MSH");
-    expect(ParserUtils.getComponent(result.val!.msh.fields[1], 0)).toBe("SEND");
+    expect(result.val!.header.name).toBe("MSH");
+    expect(ParserUtils.getComponent(result.val!.header.fields[1], 0)).toBe("SEND");
   });
 
   test("extracts EVN", () => {
     const result = parseADT_A01(minimalMessage);
-    expect(result.val!.evn).toBeTruthy();
-    expect(result.val!.evn!.name).toBe("EVN");
+    expect(result.val!.event).toBeTruthy();
+    expect(result.val!.event!.name).toBe("EVN");
   });
 
   test("extracts PID", () => {
     const result = parseADT_A01(minimalMessage);
-    expect(result.val!.pid).toBeTruthy();
-    const familyName = ParserUtils.getComponent(result.val!.pid.fields[4], 0);
+    expect(result.val!.patient).toBeTruthy();
+    const familyName = ParserUtils.getComponent(result.val!.patient.fields[4], 0);
     expect(familyName).toBe("Doe");
   });
 
   test("extracts PV1", () => {
     const result = parseADT_A01(minimalMessage);
-    expect(result.val!.pv1).toBeTruthy();
-    const patientClass = ParserUtils.getComponent(result.val!.pv1!.fields[1], 0);
+    expect(result.val!.visit).toBeTruthy();
+    const patientClass = ParserUtils.getComponent(result.val!.visit!.fields[1], 0);
     expect(patientClass).toBe("I");
   });
 });
@@ -67,57 +67,57 @@ describe("parseADT_A01 — minimal message", () => {
 describe("parseADT_A01 — optional segments", () => {
   test("extracts PD1", () => {
     const result = parseADT_A01(fullMessage);
-    expect(result.val!.pd1).toBeTruthy();
-    expect(result.val!.pd1!.name).toBe("PD1");
+    expect(result.val!.patientDemographics).toBeTruthy();
+    expect(result.val!.patientDemographics!.name).toBe("PD1");
   });
 
   test("extracts patient-level ROL list", () => {
     const result = parseADT_A01(fullMessage);
-    expect(result.val!.rolList).toBeTruthy();
-    expect(result.val!.rolList!.length).toBe(1);
-    expect(result.val!.rolList![0].name).toBe("ROL");
+    expect(result.val!.roles).toBeTruthy();
+    expect(result.val!.roles!.length).toBe(1);
+    expect(result.val!.roles![0].name).toBe("ROL");
   });
 
   test("extracts NK1 list", () => {
     const result = parseADT_A01(fullMessage);
-    expect(result.val!.nk1List).toBeTruthy();
-    expect(result.val!.nk1List!.length).toBe(1);
+    expect(result.val!.nextOfKin).toBeTruthy();
+    expect(result.val!.nextOfKin!.length).toBe(1);
   });
 
   test("extracts PV2", () => {
     const result = parseADT_A01(fullMessage);
-    expect(result.val!.pv2).toBeTruthy();
-    expect(result.val!.pv2!.name).toBe("PV2");
+    expect(result.val!.visitDetails).toBeTruthy();
+    expect(result.val!.visitDetails!.name).toBe("PV2");
   });
 
   test("extracts OBX list", () => {
     const result = parseADT_A01(fullMessage);
-    expect(result.val!.obxList).toBeTruthy();
-    expect(result.val!.obxList!.length).toBe(1);
+    expect(result.val!.observations).toBeTruthy();
+    expect(result.val!.observations!.length).toBe(1);
   });
 
   test("extracts AL1 list", () => {
     const result = parseADT_A01(fullMessage);
-    expect(result.val!.al1List).toBeTruthy();
-    expect(result.val!.al1List!.length).toBe(1);
+    expect(result.val!.allergies).toBeTruthy();
+    expect(result.val!.allergies!.length).toBe(1);
   });
 
   test("extracts DG1 list", () => {
     const result = parseADT_A01(fullMessage);
-    expect(result.val!.dg1List).toBeTruthy();
-    expect(result.val!.dg1List!.length).toBe(1);
+    expect(result.val!.diagnoses).toBeTruthy();
+    expect(result.val!.diagnoses!.length).toBe(1);
   });
 
   test("extracts GT1 list", () => {
     const result = parseADT_A01(fullMessage);
-    expect(result.val!.gt1List).toBeTruthy();
-    expect(result.val!.gt1List!.length).toBe(1);
+    expect(result.val!.guarantors).toBeTruthy();
+    expect(result.val!.guarantors!.length).toBe(1);
   });
 
   test("extracts ACC", () => {
     const result = parseADT_A01(fullMessage);
-    expect(result.val!.acc).toBeTruthy();
-    expect(result.val!.acc!.name).toBe("ACC");
+    expect(result.val!.accident).toBeTruthy();
+    expect(result.val!.accident!.name).toBe("ACC");
   });
 });
 
@@ -126,15 +126,15 @@ describe("parseADT_A01 — procedure groups", () => {
     const result = parseADT_A01(fullMessage);
     expect(result.val!.procedures).toBeTruthy();
     expect(result.val!.procedures!.length).toBe(1);
-    expect(result.val!.procedures![0].pr1.name).toBe("PR1");
+    expect(result.val!.procedures![0].procedure.name).toBe("PR1");
   });
 
   test("procedure ROL belongs to procedure group, not patient-level", () => {
     const result = parseADT_A01(fullMessage);
-    expect(result.val!.rolList!.length).toBe(1);
+    expect(result.val!.roles!.length).toBe(1);
     const proc = result.val!.procedures![0];
-    expect(proc.rolList).toBeTruthy();
-    expect(proc.rolList!.length).toBe(1);
+    expect(proc.roles).toBeTruthy();
+    expect(proc.roles!.length).toBe(1);
   });
 
   test("handles multiple procedure groups", () => {
@@ -158,15 +158,15 @@ describe("parseADT_A01 — insurance groups", () => {
     const result = parseADT_A01(fullMessage);
     expect(result.val!.insuranceGroups).toBeTruthy();
     expect(result.val!.insuranceGroups!.length).toBe(1);
-    expect(result.val!.insuranceGroups![0].in1.name).toBe("IN1");
+    expect(result.val!.insuranceGroups![0].insurance.name).toBe("IN1");
   });
 
   test("extracts IN2 and IN3 within insurance group", () => {
     const result = parseADT_A01(fullMessage);
     const ins = result.val!.insuranceGroups![0];
-    expect(ins.in2).toBeTruthy();
-    expect(ins.in3List).toBeTruthy();
-    expect(ins.in3List!.length).toBe(1);
+    expect(ins.insuranceDetails).toBeTruthy();
+    expect(ins.insuranceCertifications).toBeTruthy();
+    expect(ins.insuranceCertifications!.length).toBe(1);
   });
 
   test("handles multiple insurance groups", () => {

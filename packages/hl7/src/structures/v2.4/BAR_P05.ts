@@ -22,7 +22,7 @@ export const BAR_P05_STRUCTURE: StructureItem[] = [
     segments: [
       { name: "PV1", required: false, repeating: false },
       { name: "PV2", required: false, repeating: false },
-      { name: "ROL", required: false, repeating: true, as: "visitRolList" },
+      { name: "ROL", required: false, repeating: true, as: "visitRoles" },
       { name: "DB1", required: false, repeating: true },
       { name: "OBX", required: false, repeating: true },
       { name: "AL1", required: false, repeating: true },

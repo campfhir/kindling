@@ -21,12 +21,12 @@ describe("SRR_S01 (v2.5): repeating ERR and TQ1 after SCH", () => {
   test("encodes and round-trips through the v2.5 and v2.5.1 parsers", () => {
     const build = (create: (...args: any[]) => { encode(): string }) =>
       create(msh(), msa(), {
-        errList: [new ERR(), new ERR()],
+        errors: [new ERR(), new ERR()],
         schedule: {
-          sch: new SCH(),
-          tq1List: [new TQ1().setId("1"), new TQ1().setId("2")],
-          nteList: [new NTE().setId("1").comment("booked")],
-          resources: [{ rgs: new RGS().setId("1"), services: [{ ais: new AIS().setId("1") }] }],
+          appointment: new SCH(),
+          timings: [new TQ1().setId("1"), new TQ1().setId("2")],
+          notes: [new NTE().setId("1").comment("booked")],
+          resources: [{ resourceGroup: new RGS().setId("1"), services: [{ service: new AIS().setId("1") }] }],
         },
       }).encode();
     const wire = build(createSRR_S01);
@@ -35,9 +35,9 @@ describe("SRR_S01 (v2.5): repeating ERR and TQ1 after SCH", () => {
     for (const parse of [parseSRR_S01, parseSRR_S01_v251]) {
       const result = parse(wire);
       expect(result.ok).toBe(true);
-      expect(result.val!.errList).toHaveLength(2);
-      expect(result.val!.schedule!.tq1List).toHaveLength(2);
-      expect(result.val!.schedule!.nteList).toHaveLength(1);
+      expect(result.val!.errors).toHaveLength(2);
+      expect(result.val!.schedule!.timings).toHaveLength(2);
+      expect(result.val!.schedule!.notes).toHaveLength(1);
       expect(result.val!.message.encode()).toBe(wire);
     }
   });

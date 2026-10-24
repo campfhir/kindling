@@ -26,13 +26,13 @@ export class ORU_R31<TMSH extends MSH = MSH, TPID extends PID = PID, TORC extend
 
 /** Builds an HL7 ORU^R31 (HL7 v2.5.1) message. */
 export function createORU_R31<TMSH extends MSH = MSH, TPID extends PID = PID, TORC extends ORC = ORC, TOBR extends OBR = OBR>(
-  msh: TMSH,
-  pid: TPID,
-  orc: TORC,
-  obr: TOBR,
+  header: TMSH,
+  patient: TPID,
+  commonOrder: TORC,
+  observationRequest: TOBR,
   observations: ObservationGroup[],
   options: ORU_R31Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): ORU_R31<TMSH, TPID, TORC, TOBR> {
-  return new ORU_R31(msh, pid, orc, obr, observations, options, encoding);
+  return new ORU_R31(header, patient, commonOrder, observationRequest, observations, options, encoding);
 }

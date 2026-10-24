@@ -25,32 +25,24 @@ import { RXR } from "../../segments/v2.3/RXR.ts";
 import { OBX } from "../../segments/v2.3/OBX.ts";
 import { NTE } from "../../segments/v2.3/NTE.ts";
 
-/** The PATIENT group of a parsed VXU^V04 (HL7 v2.3) message. */
-export interface ParsedVisit {
-  /** The PV1 segment. */
-  pv1: PV1;
-  /** The PV2 segment. */
-  pv2?: PV2;
-}
-
 /** The INSURANCE group of a parsed VXU^V04 (HL7 v2.3) message. */
 export interface ParsedInsurance {
   /** The IN1 segment. */
-  in1: IN1;
+  insurance: IN1;
   /** The IN2 segment. */
-  in2?: IN2;
+  insuranceDetails?: IN2;
   /** The IN3 segment. */
-  in3?: IN3;
+  insuranceCertification?: IN3;
 }
 
 /** The ORDER group of a parsed VXU^V04 (HL7 v2.3) message. */
 export interface ParsedVaccination {
   /** The ORC segment. */
-  orc?: ORC;
+  commonOrder?: ORC;
   /** The RXA segment. */
-  rxa: RXA;
+  administration: RXA;
   /** The RXR segment. */
-  rxr?: RXR;
+  route?: RXR;
   /** The OBSERVATION groups. */
   observations?: ParsedObservation[];
 }
@@ -58,25 +50,27 @@ export interface ParsedVaccination {
 /** The OBSERVATION group of a parsed VXU^V04 (HL7 v2.3) message. */
 export interface ParsedObservation {
   /** The OBX segment. */
-  obx: OBX;
+  observation: OBX;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** Structured result of parsing an HL7 VXU^V04 (HL7 v2.3) message. */
 export interface ParsedVXU_V04 extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The NK1 segments. */
-  nk1List?: NK1[];
-  /** The PATIENT group. */
-  visit?: ParsedVisit;
+  nextOfKin?: NK1[];
+  /** The PV1 segment. */
+  visit?: PV1;
+  /** The PV2 segment. */
+  visitDetails?: PV2;
   /** The INSURANCE groups. */
-  insurance?: ParsedInsurance[];
+  insurances?: ParsedInsurance[];
   /** The ORDER groups. */
   orders?: ParsedVaccination[];
 }

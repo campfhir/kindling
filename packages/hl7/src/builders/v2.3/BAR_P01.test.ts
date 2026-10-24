@@ -43,20 +43,20 @@ describe("BAR_P01 / BAR_P05 (v2.3)", () => {
     expect(new BAR_P01(null as any, null as any, null as any, []).verify().errors).toEqual([
       "MSH segment is required", "EVN segment is required", "PID segment is required",
     ]);
-    expect(createBAR_P01(msh("P01"), evn("P01"), pid(), [{}, { pv2: new PV2() }]).verify().errors).toEqual(["VISIT group 1 is empty"]);
+    expect(createBAR_P01(msh("P01"), evn("P01"), pid(), [{}, { visitDetails: new PV2() }]).verify().errors).toEqual(["VISIT group 1 is empty"]);
   });
 
   test("encodes two visits in spec order and the parser splits them again", () => {
     const wire = createBAR_P01(msh("P01"), evn("P01"), pid(), [
       {
-        pv1: new PV1().patientClass("I"), pv2: new PV2(), db1List: [new DB1().setId("1")], obxList: [new OBX().setId("1")],
-        al1List: [new AL1().setId("1")], dg1List: [new DG1().setId("1"), new DG1().setId("2")], drg: new DRG(),
-        procedures: [{ pr1: new PR1().setId("1"), rolList: [new ROL()] }], gt1List: [new GT1().setId("1")],
-        nk1List: [new NK1().setId("1")], insurances: [{ in1: new IN1().setId("1"), in2: new IN2(), in3: new IN3().setId("1") }],
-        acc: new ACC(), ub1: new UB1(), ub2: new UB2(),
+        visit: new PV1().patientClass("I"), visitDetails: new PV2(), disabilities: [new DB1().setId("1")], observations: [new OBX().setId("1")],
+        allergies: [new AL1().setId("1")], diagnoses: [new DG1().setId("1"), new DG1().setId("2")], diagnosisRelatedGroup: new DRG(),
+        procedures: [{ procedure: new PR1().setId("1"), roles: [new ROL()] }], guarantors: [new GT1().setId("1")],
+        nextOfKin: [new NK1().setId("1")], insurances: [{ insurance: new IN1().setId("1"), insuranceDetails: new IN2(), insuranceCertification: new IN3().setId("1") }],
+        accident: new ACC(), ub82: new UB1(), ub92: new UB2(),
       },
-      { pv1: new PV1().patientClass("O"), dg1List: [new DG1().setId("1")] },
-    ], { pd1: new PD1() }).encode();
+      { visit: new PV1().patientClass("O"), diagnoses: [new DG1().setId("1")] },
+    ], { patientDemographics: new PD1() }).encode();
     expect(types(wire)).toEqual([
       "MSH", "EVN", "PID", "PD1",
       "PV1", "PV2", "DB1", "OBX", "AL1", "DG1", "DG1", "DRG", "PR1", "ROL", "GT1", "NK1", "IN1", "IN2", "IN3", "ACC", "UB1", "UB2",
@@ -66,22 +66,22 @@ describe("BAR_P01 / BAR_P05 (v2.3)", () => {
       const result = parseBAR_P01(wire);
       expect(result.ok).toBe(true);
       const v = result.val!;
-      expect(v.pd1).toBeTruthy();
+      expect(v.patientDemographics).toBeTruthy();
       expect(v.visits).toHaveLength(2);
-      expect(v.visits[0].dg1List).toHaveLength(2);
-      expect(v.visits[0].procedures![0].rolList).toHaveLength(1);
-      expect(v.visits[0].insurances![0].in3).toBeTruthy();
-      expect(v.visits[0].ub2).toBeTruthy();
-      expect(v.visits[1].pv1).toBeTruthy();
-      expect(v.visits[1].dg1List).toHaveLength(1);
-      expect(v.visits[1].acc).toBeUndefined();
+      expect(v.visits[0].diagnoses).toHaveLength(2);
+      expect(v.visits[0].procedures![0].roles).toHaveLength(1);
+      expect(v.visits[0].insurances![0].insuranceCertification).toBeTruthy();
+      expect(v.visits[0].ub92).toBeTruthy();
+      expect(v.visits[1].visit).toBeTruthy();
+      expect(v.visits[1].diagnoses).toHaveLength(1);
+      expect(v.visits[1].accident).toBeUndefined();
       expect(v.message.encode()).toBe(wire);
     }
     // The v2.5.1 parser (v2.5 shape, IN3 as a list) accepts the same wire message.
     const v251 = parseBAR_P01_v251(wire);
     expect(v251.ok).toBe(true);
     expect(v251.val!.visits).toHaveLength(2);
-    expect(v251.val!.visits[0].insurances![0].in3List).toHaveLength(1);
+    expect(v251.val!.visits[0].insurances![0].insuranceCertifications).toHaveLength(1);
     expect(v251.val!.message.encode()).toBe(wire);
   });
 
@@ -90,15 +90,15 @@ describe("BAR_P01 / BAR_P05 (v2.3)", () => {
     expect(result.ok).toBe(true);
     const visits = result.val!.visits;
     expect(visits).toHaveLength(3);
-    expect(visits[0].dg1List).toHaveLength(1);
-    expect(visits[0].acc).toBeTruthy();
-    expect(visits[1].db1List).toHaveLength(1);
-    expect(visits[1].gt1List).toHaveLength(2);
-    expect(visits[2].pv1).toBeTruthy();
+    expect(visits[0].diagnoses).toHaveLength(1);
+    expect(visits[0].accident).toBeTruthy();
+    expect(visits[1].disabilities).toHaveLength(1);
+    expect(visits[1].guarantors).toHaveLength(2);
+    expect(visits[2].visit).toBeTruthy();
   });
 
   test("P05 reuses P01 under its own name", () => {
-    const wire = createBAR_P05(msh("P05"), evn("P05"), pid(), [{ pv1: new PV1().patientClass("I") }]).encode();
+    const wire = createBAR_P05(msh("P05"), evn("P05"), pid(), [{ visit: new PV1().patientClass("I") }]).encode();
     expect(wire).toContain("BAR^P05");
     expect(parseBAR_P05(wire).ok).toBe(true);
     // Every VISIT segment is optional, so a message without any parses with no visits.
@@ -121,14 +121,14 @@ describe("BAR_P01 / BAR_P05 (v2.3)", () => {
 describe("BAR_P02 and BAR_P06 (v2.3)", () => {
   test("P02 encodes PATIENT groups with PD1, PV1 and DB1 and round-trips", () => {
     const wire = createBAR_P02(msh("P02"), evn("P02"), [
-      { pid: pid("1"), pd1: new PD1(), pv1: new PV1().patientClass("I"), db1List: [new DB1().setId("1"), new DB1().setId("2")] },
-      { pid: pid("2") },
+      { patient: pid("1"), patientDemographics: new PD1(), visit: new PV1().patientClass("I"), disabilities: [new DB1().setId("1"), new DB1().setId("2")] },
+      { patient: pid("2") },
     ]).encode();
     expect(types(wire)).toEqual(["MSH", "EVN", "PID", "PD1", "PV1", "DB1", "DB1", "PID"]);
     for (const parse of [parseBAR_P02, parseBAR_P02_v251]) {
       const result = parse(wire);
       expect(result.ok).toBe(true);
-      expect(result.val!.patients.map((p) => p.db1List!.length)).toEqual([2, 0]);
+      expect(result.val!.patients.map((p) => p.disabilities!.length)).toEqual([2, 0]);
       expect(result.val!.message.encode()).toBe(wire);
     }
     expect(parseBAR_P02([MSH_LINE("P02"), "EVN|P02", "PID|1", "PV1|1", "PV1|2"].join("\r")).err!.message).toMatch(/PV1 segment at line 5 is not allowed at this position in BAR_P02/);
@@ -137,12 +137,12 @@ describe("BAR_P02 and BAR_P06 (v2.3)", () => {
   });
 
   test("P06 encodes PATIENT groups with PV1 and round-trips", () => {
-    const wire = createBAR_P06(msh("P06"), evn("P06"), [{ pid: pid("1"), pv1: new PV1().patientClass("I") }, { pid: pid("2") }]).encode();
+    const wire = createBAR_P06(msh("P06"), evn("P06"), [{ patient: pid("1"), visit: new PV1().patientClass("I") }, { patient: pid("2") }]).encode();
     expect(types(wire)).toEqual(["MSH", "EVN", "PID", "PV1", "PID"]);
     for (const parse of [parseBAR_P06, parseBAR_P06_v251]) {
       const result = parse(wire);
       expect(result.ok).toBe(true);
-      expect(result.val!.patients[1].pv1).toBeUndefined();
+      expect(result.val!.patients[1].visit).toBeUndefined();
       expect(result.val!.message.encode()).toBe(wire);
     }
     expect(parseBAR_P06([MSH_LINE("P06"), "PID|1"].join("\r")).err!.message).toMatch(/BAR_P06 message must contain an EVN segment/);

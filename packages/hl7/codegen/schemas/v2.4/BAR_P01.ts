@@ -5,7 +5,7 @@ import { group, opt, optList, req } from "../helpers";
 const VISIT_ITEMS: StructureItem[] = [
   opt("PV1"),
   opt("PV2"),
-  optList("ROL", { as: "visitRolList" }),
+  optList("ROL", { as: "visitRoles" }),
   optList("DB1"),
   optList("OBX"),
   optList("AL1"),

@@ -28,23 +28,23 @@ import { AIP } from "../../segments/v2.3/AIP.ts";
 /** The PATIENT group of a parsed SIU^S12 (HL7 v2.3) message. */
 export interface ParsedSIUPatient {
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
   /** The PV2 segment. */
-  pv2?: PV2;
+  visitDetails?: PV2;
   /** The OBX segments. */
-  obxList?: OBX[];
+  observations?: OBX[];
   /** The DG1 segments. */
-  dg1List?: DG1[];
+  diagnoses?: DG1[];
 }
 
 /** The RESOURCES group of a parsed SIU^S12 (HL7 v2.3) message. */
 export interface ParsedSIUResources {
   /** The RGS segment. */
-  rgs: RGS;
+  resourceGroup: RGS;
   /** The SERVICE groups. */
   services?: ParsedSIUService[];
   /** The GENERAL RESOURCE groups. */
@@ -58,43 +58,43 @@ export interface ParsedSIUResources {
 /** The SERVICE group of a parsed SIU^S12 (HL7 v2.3) message. */
 export interface ParsedSIUService {
   /** The AIS segment. */
-  ais: AIS;
+  service: AIS;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The GENERAL RESOURCE group of a parsed SIU^S12 (HL7 v2.3) message. */
 export interface ParsedSIUGeneralResource {
   /** The AIG segment. */
-  aig: AIG;
+  generalResource: AIG;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The LOCATION RESOURCE group of a parsed SIU^S12 (HL7 v2.3) message. */
 export interface ParsedSIULocationResource {
   /** The AIL segment. */
-  ail: AIL;
+  location: AIL;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The PERSONNEL RESOURCE group of a parsed SIU^S12 (HL7 v2.3) message. */
 export interface ParsedSIUPersonnelResource {
   /** The AIP segment. */
-  aip: AIP;
+  personnel: AIP;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** Structured result of parsing an HL7 SIU^S12 (HL7 v2.3) message. */
 export interface ParsedSIU_S12 extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The SCH segment. */
-  sch: SCH;
+  appointment: SCH;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
   /** The PATIENT groups. */
   patients?: ParsedSIUPatient[];
   /** The RESOURCES groups. */

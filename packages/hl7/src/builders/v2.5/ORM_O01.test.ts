@@ -12,8 +12,9 @@ import { ORC } from "../../segments/v2.5/ORC.ts";
 
 const makeMSH = () => new MSH().messageType({ messageCode: "ORM", triggerEvent: "O01" }).messageControlId("1");
 const withIn3s = (n: number) =>
-  createORM_O01(makeMSH(), [{ orc: new ORC().orderControl("NW") }], {
-    patient: { pid: new PID().setId("1"), insurance: [{ in1: new IN1().setId("1"), in3List: Array.from({ length: n }, () => new IN3()) }] },
+  createORM_O01(makeMSH(), [{ commonOrder: new ORC().orderControl("NW") }], {
+    patient: new PID().setId("1"),
+    insurances: [{ insurance: new IN1().setId("1"), insuranceCertifications: Array.from({ length: n }, () => new IN3()) }],
   });
 
 describe("ORM_O01 (v2.5)", () => {
@@ -31,7 +32,7 @@ describe("ORM_O01 (v2.5)", () => {
   test("the parser keeps repeated IN3", () => {
     const result = parseORM_O01(withIn3s(3).encode());
     expect(result.ok).toBe(true);
-    if (result.ok) expect(result.val.patient?.insurance![0].in3List).toHaveLength(3);
+    if (result.ok) expect(result.val.insurances![0].insuranceCertifications).toHaveLength(3);
   });
 
   test("the v2.4 parser still rejects the same message", () => {

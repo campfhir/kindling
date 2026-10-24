@@ -26,12 +26,12 @@ export class ADT_A33<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
 /** Builds an HL7 ADT^A33 (HL7 v2.5.1) message. */
 export function createADT_A33<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TPV1 extends PV1 = PV1>(
-  msh: TMSH,
-  evn: TEVN,
-  pid: TPID,
-  pv1: TPV1,
+  header: TMSH,
+  event: TEVN,
+  patient: TPID,
+  visit: TPV1,
   options: ADT_A33Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): ADT_A33<TMSH, TEVN, TPID, TPV1> {
-  return new ADT_A33(msh, evn, pid, pv1, options, encoding);
+  return new ADT_A33(header, event, patient, visit, options, encoding);
 }

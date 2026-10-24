@@ -28,21 +28,21 @@ import { AIP } from "../../segments/v2.5.1/AIP.ts";
 /** The PATIENT group of a parsed SRM^S01 (HL7 v2.5.1) message. */
 export interface ParsedSRMPatient {
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
   /** The PV2 segment. */
-  pv2?: PV2;
+  visitDetails?: PV2;
   /** The OBX segments. */
-  obxList?: OBX[];
+  observations?: OBX[];
   /** The DG1 segments. */
-  dg1List?: DG1[];
+  diagnoses?: DG1[];
 }
 
 /** The RESOURCES group of a parsed SRM^S01 (HL7 v2.5.1) message. */
 export interface ParsedSRMResources {
   /** The RGS segment. */
-  rgs: RGS;
+  resourceGroup: RGS;
   /** The SERVICE groups. */
   services?: ParsedSRMService[];
   /** The GENERAL RESOURCE groups. */
@@ -56,53 +56,53 @@ export interface ParsedSRMResources {
 /** The SERVICE group of a parsed SRM^S01 (HL7 v2.5.1) message. */
 export interface ParsedSRMService {
   /** The AIS segment. */
-  ais: AIS;
+  service: AIS;
   /** The APR segment. */
-  apr?: APR;
+  appointmentPreferences?: APR;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The GENERAL RESOURCE group of a parsed SRM^S01 (HL7 v2.5.1) message. */
 export interface ParsedSRMGeneralResource {
   /** The AIG segment. */
-  aig: AIG;
+  generalResource: AIG;
   /** The APR segment. */
-  apr?: APR;
+  appointmentPreferences?: APR;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The LOCATION RESOURCE group of a parsed SRM^S01 (HL7 v2.5.1) message. */
 export interface ParsedSRMLocationResource {
   /** The AIL segment. */
-  ail: AIL;
+  location: AIL;
   /** The APR segment. */
-  apr?: APR;
+  appointmentPreferences?: APR;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The PERSONNEL RESOURCE group of a parsed SRM^S01 (HL7 v2.5.1) message. */
 export interface ParsedSRMPersonnelResource {
   /** The AIP segment. */
-  aip: AIP;
+  personnel: AIP;
   /** The APR segment. */
-  apr?: APR;
+  appointmentPreferences?: APR;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** Structured result of parsing an HL7 SRM^S01 (HL7 v2.5.1) message. */
 export interface ParsedSRM_S01 extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The ARQ segment. */
-  arq: ARQ;
+  appointmentRequest: ARQ;
   /** The APR segment. */
-  apr?: APR;
+  appointmentPreferences?: APR;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
   /** The PATIENT groups. */
   patients?: ParsedSRMPatient[];
   /** The RESOURCES groups. */

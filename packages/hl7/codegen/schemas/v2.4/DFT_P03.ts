@@ -25,11 +25,11 @@ export const DFT_P03_SCHEMA: MessageSchema = {
     optList("ROL"),
     opt("PV1"),
     opt("PV2"),
-    optList("ROL", { as: "visitRolList" }),
+    optList("ROL", { as: "visitRoles" }),
     optList("DB1"),
     group("COMMON_ORDER", false, true, [
       opt("ORC"),
-      group("ORDER", false, false, [req("OBR"), optList("NTE", { as: "obrNteList" })], { inline: true }),
+      group("ORDER", false, false, [req("OBR"), optList("NTE")], { inline: true }),
       group("OBSERVATION", false, true, [req("OBX"), optList("NTE")], { exportTypeName: "ParsedDFTObservation" }),
     ], { as: "orders", exportTypeName: "ParsedDFTOrder" }),
     group("FINANCIAL", true, true, [
@@ -37,7 +37,7 @@ export const DFT_P03_SCHEMA: MessageSchema = {
       group("FINANCIAL_PROCEDURE", false, true, [req("PR1"), optList("ROL")], { as: "procedures", exportTypeName: "ParsedDFTProcedure" }),
       group("FINANCIAL_COMMON_ORDER", false, true, [
         opt("ORC"),
-        group("FINANCIAL_ORDER", false, false, [req("OBR"), optList("NTE", { as: "obrNteList" })], { inline: true }),
+        group("FINANCIAL_ORDER", false, false, [req("OBR"), optList("NTE")], { inline: true }),
         group("FINANCIAL_OBSERVATION", false, true, [req("OBX"), optList("NTE")], { as: "observations", exportTypeName: "ParsedDFTFinancialObservation" }),
       ], { as: "orders", exportTypeName: "ParsedDFTFinancialOrder" }),
     ], { exportTypeName: "ParsedDFTFinancial" }),

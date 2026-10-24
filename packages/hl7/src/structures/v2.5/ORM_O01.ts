@@ -16,15 +16,16 @@ export const ORM_O01_STRUCTURE: StructureItem[] = [
     name: "PATIENT",
     required: false,
     repeating: false,
+    inline: true,
     segments: [
       { name: "PID", required: true, repeating: false },
       { name: "PD1", required: false, repeating: false },
-      { name: "NTE", required: false, repeating: true },
+      { name: "NTE", required: false, repeating: true, as: "patientNotes" },
       {
         name: "PATIENT_VISIT",
         required: false,
         repeating: false,
-        as: "visit",
+        inline: true,
         segments: [
           { name: "PV1", required: true, repeating: false },
           { name: "PV2", required: false, repeating: false },
@@ -34,7 +35,6 @@ export const ORM_O01_STRUCTURE: StructureItem[] = [
         name: "INSURANCE",
         required: false,
         repeating: true,
-        as: "insurance",
         segments: [
           { name: "IN1", required: true, repeating: false },
           { name: "IN2", required: false, repeating: false },

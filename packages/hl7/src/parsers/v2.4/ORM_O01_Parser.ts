@@ -35,54 +35,28 @@ import { FT1 } from "../../segments/v2.4/FT1.ts";
 import { CTI } from "../../segments/v2.4/CTI.ts";
 import { BLG } from "../../segments/v2.4/BLG.ts";
 
-/** The PATIENT group of a parsed ORM^O01 (HL7 v2.4) message. */
-export interface ParsedOrderPatient {
-  /** The PID segment. */
-  pid: PID;
-  /** The PD1 segment. */
-  pd1?: PD1;
-  /** The NTE segments. */
-  nteList?: NTE[];
-  /** The PATIENT VISIT group. */
-  visit?: ParsedVisit;
-  /** The INSURANCE groups. */
-  insurance?: ParsedInsurance[];
-  /** The GT1 segment. */
-  gt1?: GT1;
-  /** The AL1 segments. */
-  al1List?: AL1[];
-}
-
-/** The PATIENT VISIT group of a parsed ORM^O01 (HL7 v2.4) message. */
-export interface ParsedVisit {
-  /** The PV1 segment. */
-  pv1: PV1;
-  /** The PV2 segment. */
-  pv2?: PV2;
-}
-
 /** The INSURANCE group of a parsed ORM^O01 (HL7 v2.4) message. */
 export interface ParsedInsurance {
   /** The IN1 segment. */
-  in1: IN1;
+  insurance: IN1;
   /** The IN2 segment. */
-  in2?: IN2;
+  insuranceDetails?: IN2;
   /** The IN3 segment. */
-  in3?: IN3;
+  insuranceCertification?: IN3;
 }
 
 /** The ORDER group of a parsed ORM^O01 (HL7 v2.4) message. */
 export interface ParsedOrder {
   /** The ORC segment. */
-  orc: ORC;
+  commonOrder: ORC;
   /** The ORDER DETAIL group. */
   detail?: ParsedOrderDetail;
   /** The FT1 segments. */
-  ft1List?: FT1[];
+  transactions?: FT1[];
   /** The CTI segments. */
-  ctiList?: CTI[];
+  clinicalTrials?: CTI[];
   /** The BLG segment. */
-  blg?: BLG;
+  billing?: BLG;
 }
 
 /** The ORDER DETAIL group of a parsed ORM^O01 (HL7 v2.4) message. */
@@ -90,11 +64,11 @@ export interface ParsedOrderDetail {
   /** One of OBR, RQD, RQ1, RXO, ODS, ODT. */
   segment: OBR | RQD | RQ1 | RXO | ODS | ODT;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
   /** The CTD segment. */
-  ctd?: CTD;
+  contact?: CTD;
   /** The DG1 segments. */
-  dg1List?: DG1[];
+  diagnoses?: DG1[];
   /** The OBSERVATION groups. */
   observations?: ParsedObservation[];
 }
@@ -102,19 +76,33 @@ export interface ParsedOrderDetail {
 /** The OBSERVATION group of a parsed ORM^O01 (HL7 v2.4) message. */
 export interface ParsedObservation {
   /** The OBX segment. */
-  obx: OBX;
+  observation: OBX;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** Structured result of parsing an HL7 ORM^O01 (HL7 v2.4) message. */
 export interface ParsedORM_O01 extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The NTE segments. */
-  nteList?: NTE[];
-  /** The PATIENT group. */
-  patient?: ParsedOrderPatient;
+  notes?: NTE[];
+  /** The PID segment. */
+  patient?: PID;
+  /** The PD1 segment. */
+  patientDemographics?: PD1;
+  /** The NTE segments. */
+  patientNotes?: NTE[];
+  /** The PV1 segment. */
+  visit?: PV1;
+  /** The PV2 segment. */
+  visitDetails?: PV2;
+  /** The INSURANCE groups. */
+  insurances?: ParsedInsurance[];
+  /** The GT1 segment. */
+  guarantor?: GT1;
+  /** The AL1 segments. */
+  allergies?: AL1[];
   /** The ORDER groups. */
   orders: ParsedOrder[];
 }

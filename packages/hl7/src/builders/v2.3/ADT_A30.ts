@@ -25,12 +25,12 @@ export class ADT_A30<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
 /** Builds an HL7 ADT^A30 (HL7 v2.3) message. */
 export function createADT_A30<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TMRG extends MRG = MRG>(
-  msh: TMSH,
-  evn: TEVN,
-  pid: TPID,
-  mrg: TMRG,
+  header: TMSH,
+  event: TEVN,
+  patient: TPID,
+  merge: TMRG,
   options: ADT_A30Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): ADT_A30<TMSH, TEVN, TPID, TMRG> {
-  return new ADT_A30(msh, evn, pid, mrg, options, encoding);
+  return new ADT_A30(header, event, patient, merge, options, encoding);
 }

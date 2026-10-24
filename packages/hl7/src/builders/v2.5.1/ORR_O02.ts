@@ -24,18 +24,10 @@ import type { ODS } from "../../segments/v2.5.1/ODS.ts";
 import type { ODT } from "../../segments/v2.5.1/ODT.ts";
 import type { CTI } from "../../segments/v2.5.1/CTI.ts";
 
-/** The PATIENT group of an ORR^O02 (HL7 v2.5.1) message being built. */
-export interface ResponsePatientGroup {
-  /** The PID segment. */
-  pid: PID;
-  /** The NTE segments. */
-  nteList?: NTE[];
-}
-
 /** The ORDER group of an ORR^O02 (HL7 v2.5.1) message being built. */
 export interface ResponseOrderGroup {
   /** The ORC segment. */
-  orc: ORC;
+  commonOrder: ORC;
   /** The ORDER DETAIL group. */
   detail?: ResponseDetailGroup;
 }
@@ -45,19 +37,21 @@ export interface ResponseDetailGroup {
   /** One of OBR, RQD, RQ1, RXO, ODS, ODT. */
   segment: OBR | RQD | RQ1 | RXO | ODS | ODT;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
   /** The CTI segments. */
-  ctiList?: CTI[];
+  clinicalTrials?: CTI[];
 }
 
 /** The optional segments and groups of an ORR^O02 (HL7 v2.5.1) message. */
 export interface ORR_O02Options {
   /** The ERR segments. */
-  errList?: ERR[];
+  errors?: ERR[];
   /** The NTE segments. */
-  nteList?: NTE[];
-  /** The PATIENT group. */
-  patient?: ResponsePatientGroup;
+  notes?: NTE[];
+  /** The PID segment. */
+  patient?: PID;
+  /** The NTE segments. */
+  patientNotes?: NTE[];
   /** The ORDER groups. */
   orders?: ResponseOrderGroup[];
 }
@@ -71,15 +65,15 @@ export class ORR_O02<TMSH extends MSH = MSH, TMSA extends MSA = MSA> {
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
-    public msa: TMSA,
+    public header: TMSH,
+    public acknowledgment: TMSA,
     public options: ORR_O02Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, msa: this.msa };
+    return { ...this.options, header: this.header, acknowledgment: this.acknowledgment };
   }
 
   /** Validates the message structure, returning a result. */
@@ -100,10 +94,10 @@ export class ORR_O02<TMSH extends MSH = MSH, TMSA extends MSA = MSA> {
 
 /** Builds an HL7 ORR^O02 (HL7 v2.5.1) message. */
 export function createORR_O02<TMSH extends MSH = MSH, TMSA extends MSA = MSA>(
-  msh: TMSH,
-  msa: TMSA,
+  header: TMSH,
+  acknowledgment: TMSA,
   options: ORR_O02Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): ORR_O02<TMSH, TMSA> {
-  return new ORR_O02(msh, msa, options, encoding);
+  return new ORR_O02(header, acknowledgment, options, encoding);
 }

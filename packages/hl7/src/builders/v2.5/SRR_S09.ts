@@ -24,10 +24,10 @@ export class SRR_S09<TMSH extends MSH = MSH, TMSA extends MSA = MSA> extends SRR
 
 /** Builds an HL7 SRR^S09 (HL7 v2.5) message. */
 export function createSRR_S09<TMSH extends MSH = MSH, TMSA extends MSA = MSA>(
-  msh: TMSH,
-  msa: TMSA,
+  header: TMSH,
+  acknowledgment: TMSA,
   options: SRR_S09Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): SRR_S09<TMSH, TMSA> {
-  return new SRR_S09(msh, msa, options, encoding);
+  return new SRR_S09(header, acknowledgment, options, encoding);
 }

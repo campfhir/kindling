@@ -19,11 +19,11 @@ import type { PRA } from "../../segments/v2.3/PRA.ts";
 /** The MF STAFF group of an MFN^M02 (HL7 v2.3) message being built. */
 export interface StaffEntry {
   /** The MFE segment. */
-  mfe: MFE;
+  entry: MFE;
   /** The STF segment. */
-  stf: STF;
+  staff: STF;
   /** The PRA segment. */
-  pra?: PRA;
+  practitioner?: PRA;
 }
 
 /** The optional segments and groups of an MFN^M02 (HL7 v2.3) message. The message has none. */
@@ -38,8 +38,8 @@ export class MFN_M02<TMSH extends MSH = MSH, TMFI extends MFI = MFI> {
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
-    public mfi: TMFI,
+    public header: TMSH,
+    public masterFile: TMFI,
     public staffEntries: StaffEntry[],
     public options: MFN_M02Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
@@ -47,7 +47,7 @@ export class MFN_M02<TMSH extends MSH = MSH, TMFI extends MFI = MFI> {
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, mfi: this.mfi, staffEntries: this.staffEntries };
+    return { ...this.options, header: this.header, masterFile: this.masterFile, staffEntries: this.staffEntries };
   }
 
   /** Validates the message structure, returning a result. */
@@ -68,11 +68,11 @@ export class MFN_M02<TMSH extends MSH = MSH, TMFI extends MFI = MFI> {
 
 /** Builds an HL7 MFN^M02 (HL7 v2.3) message. */
 export function createMFN_M02<TMSH extends MSH = MSH, TMFI extends MFI = MFI>(
-  msh: TMSH,
-  mfi: TMFI,
+  header: TMSH,
+  masterFile: TMFI,
   staffEntries: StaffEntry[],
   options: MFN_M02Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): MFN_M02<TMSH, TMFI> {
-  return new MFN_M02(msh, mfi, staffEntries, options, encoding);
+  return new MFN_M02(header, masterFile, staffEntries, options, encoding);
 }

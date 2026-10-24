@@ -39,77 +39,77 @@ import { RMI } from "../../segments/v2.5.1/RMI.ts";
 /** The VISIT group of a parsed BAR^P05 (HL7 v2.5.1) message. */
 export interface ParsedBARVisit {
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
   /** The PV2 segment. */
-  pv2?: PV2;
+  visitDetails?: PV2;
   /** The ROL segments. */
-  visitRolList?: ROL[];
+  visitRoles?: ROL[];
   /** The DB1 segments. */
-  db1List?: DB1[];
+  disabilities?: DB1[];
   /** The OBX segments. */
-  obxList?: OBX[];
+  observations?: OBX[];
   /** The AL1 segments. */
-  al1List?: AL1[];
+  allergies?: AL1[];
   /** The DG1 segments. */
-  dg1List?: DG1[];
+  diagnoses?: DG1[];
   /** The DRG segment. */
-  drg?: DRG;
+  diagnosisRelatedGroup?: DRG;
   /** The PROCEDURE groups. */
   procedures?: ParsedBARProcedure[];
   /** The GT1 segments. */
-  gt1List?: GT1[];
+  guarantors?: GT1[];
   /** The NK1 segments. */
-  nk1List?: NK1[];
+  nextOfKin?: NK1[];
   /** The INSURANCE groups. */
   insurances?: ParsedBARInsurance[];
   /** The ACC segment. */
-  acc?: ACC;
+  accident?: ACC;
   /** The UB1 segment. */
-  ub1?: UB1;
+  ub82?: UB1;
   /** The UB2 segment. */
-  ub2?: UB2;
+  ub92?: UB2;
   /** The ABS segment. */
-  abs?: ABS;
+  abstract?: ABS;
   /** The BLC segments. */
-  blcList?: BLC[];
+  bloodCodes?: BLC[];
   /** The RMI segment. */
-  rmi?: RMI;
+  riskManagementIncident?: RMI;
 }
 
 /** The PROCEDURE group of a parsed BAR^P05 (HL7 v2.5.1) message. */
 export interface ParsedBARProcedure {
   /** The PR1 segment. */
-  pr1: PR1;
+  procedure: PR1;
   /** The ROL segments. */
-  rolList?: ROL[];
+  roles?: ROL[];
 }
 
 /** The INSURANCE group of a parsed BAR^P05 (HL7 v2.5.1) message. */
 export interface ParsedBARInsurance {
   /** The IN1 segment. */
-  in1: IN1;
+  insurance: IN1;
   /** The IN2 segment. */
-  in2?: IN2;
+  insuranceDetails?: IN2;
   /** The IN3 segments. */
-  in3List?: IN3[];
+  insuranceCertifications?: IN3[];
   /** The ROL segments. */
-  rolList?: ROL[];
+  roles?: ROL[];
 }
 
 /** Structured result of parsing an HL7 BAR^P05 (HL7 v2.5.1) message. */
 export interface ParsedBAR_P05 extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The SFT segments. */
-  sftList?: SFT[];
+  software?: SFT[];
   /** The EVN segment. */
-  evn: EVN;
+  event: EVN;
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The ROL segments. */
-  rolList?: ROL[];
+  roles?: ROL[];
   /** The VISIT groups. */
   visits: ParsedBARVisit[];
 }

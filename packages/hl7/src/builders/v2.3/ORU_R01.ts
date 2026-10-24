@@ -26,17 +26,17 @@ import type { DSC } from "../../segments/v2.3/DSC.ts";
 /** The PATIENT RESULT group of an ORU^R01 (HL7 v2.3) message being built. */
 export interface PatientResult {
   /** The PID segment. */
-  pid?: PID;
+  patient?: PID;
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The NK1 segments. */
-  nk1List?: NK1[];
+  nextOfKin?: NK1[];
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
   /** The PV2 segment. */
-  pv2?: PV2;
+  visitDetails?: PV2;
   /** The ORDER OBSERVATION groups. */
   orderObservations: OrderObservation[];
 }
@@ -44,29 +44,29 @@ export interface PatientResult {
 /** The ORDER OBSERVATION group of an ORU^R01 (HL7 v2.3) message being built. */
 export interface OrderObservation {
   /** The ORC segment. */
-  orc?: ORC;
+  commonOrder?: ORC;
   /** The OBR segment. */
-  obr: OBR;
+  observationRequest: OBR;
   /** The NTE segments. */
-  obrNteList?: NTE[];
+  notes?: NTE[];
   /** The OBSERVATION groups. */
   observations?: ObservationGroup[];
   /** The CTI segments. */
-  ctiList?: CTI[];
+  clinicalTrials?: CTI[];
 }
 
 /** The OBSERVATION group of an ORU^R01 (HL7 v2.3) message being built. */
 export interface ObservationGroup {
   /** The OBX segment. */
-  obx: OBX;
+  observation: OBX;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The optional segments and groups of an ORU^R01 (HL7 v2.3) message. */
 export interface ORU_R01Options {
   /** The DSC segment. */
-  dsc?: DSC;
+  continuation?: DSC;
 }
 
 /** Builder for HL7 ORU^R01 (HL7 v2.3) messages. */
@@ -78,7 +78,7 @@ export class ORU_R01<TMSH extends MSH = MSH> {
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
+    public header: TMSH,
     public patientResults: PatientResult[],
     public options: ORU_R01Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
@@ -86,7 +86,7 @@ export class ORU_R01<TMSH extends MSH = MSH> {
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, patientResults: this.patientResults };
+    return { ...this.options, header: this.header, patientResults: this.patientResults };
   }
 
   /** Validates the message structure, returning a result. */
@@ -107,10 +107,10 @@ export class ORU_R01<TMSH extends MSH = MSH> {
 
 /** Builds an HL7 ORU^R01 (HL7 v2.3) message. */
 export function createORU_R01<TMSH extends MSH = MSH>(
-  msh: TMSH,
+  header: TMSH,
   patientResults: PatientResult[],
   options: ORU_R01Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): ORU_R01<TMSH> {
-  return new ORU_R01(msh, patientResults, options, encoding);
+  return new ORU_R01(header, patientResults, options, encoding);
 }

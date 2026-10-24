@@ -29,11 +29,11 @@ import type { AIP } from "../../segments/v2.5.1/AIP.ts";
 /** The SCHEDULE group of an SRR^S01 (HL7 v2.5.1) message being built. */
 export interface SRRScheduleGroup {
   /** The SCH segment. */
-  sch: SCH;
+  appointment: SCH;
   /** The TQ1 segments. */
-  tq1List?: TQ1[];
+  timings?: TQ1[];
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
   /** The PATIENT groups. */
   patients?: SRRPatientGroup[];
   /** The RESOURCES groups. */
@@ -43,19 +43,19 @@ export interface SRRScheduleGroup {
 /** The PATIENT group of an SRR^S01 (HL7 v2.5.1) message being built. */
 export interface SRRPatientGroup {
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
   /** The PV2 segment. */
-  pv2?: PV2;
+  visitDetails?: PV2;
   /** The DG1 segments. */
-  dg1List?: DG1[];
+  diagnoses?: DG1[];
 }
 
 /** The RESOURCES group of an SRR^S01 (HL7 v2.5.1) message being built. */
 export interface SRRResourcesGroup {
   /** The RGS segment. */
-  rgs: RGS;
+  resourceGroup: RGS;
   /** The SERVICE groups. */
   services?: SRRServiceGroup[];
   /** The GENERAL RESOURCE groups. */
@@ -69,39 +69,39 @@ export interface SRRResourcesGroup {
 /** The SERVICE group of an SRR^S01 (HL7 v2.5.1) message being built. */
 export interface SRRServiceGroup {
   /** The AIS segment. */
-  ais: AIS;
+  service: AIS;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The GENERAL RESOURCE group of an SRR^S01 (HL7 v2.5.1) message being built. */
 export interface SRRGeneralResourceGroup {
   /** The AIG segment. */
-  aig: AIG;
+  generalResource: AIG;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The LOCATION RESOURCE group of an SRR^S01 (HL7 v2.5.1) message being built. */
 export interface SRRLocationResourceGroup {
   /** The AIL segment. */
-  ail: AIL;
+  location: AIL;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The PERSONNEL RESOURCE group of an SRR^S01 (HL7 v2.5.1) message being built. */
 export interface SRRPersonnelResourceGroup {
   /** The AIP segment. */
-  aip: AIP;
+  personnel: AIP;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The optional segments and groups of an SRR^S01 (HL7 v2.5.1) message. */
 export interface SRR_S01Options {
   /** The ERR segments. */
-  errList?: ERR[];
+  errors?: ERR[];
   /** The SCHEDULE group. */
   schedule?: SRRScheduleGroup;
 }
@@ -115,15 +115,15 @@ export class SRR_S01<TMSH extends MSH = MSH, TMSA extends MSA = MSA> {
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
-    public msa: TMSA,
+    public header: TMSH,
+    public acknowledgment: TMSA,
     public options: SRR_S01Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, msa: this.msa };
+    return { ...this.options, header: this.header, acknowledgment: this.acknowledgment };
   }
 
   /** Validates the message structure, returning a result. */
@@ -144,10 +144,10 @@ export class SRR_S01<TMSH extends MSH = MSH, TMSA extends MSA = MSA> {
 
 /** Builds an HL7 SRR^S01 (HL7 v2.5.1) message. */
 export function createSRR_S01<TMSH extends MSH = MSH, TMSA extends MSA = MSA>(
-  msh: TMSH,
-  msa: TMSA,
+  header: TMSH,
+  acknowledgment: TMSA,
   options: SRR_S01Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): SRR_S01<TMSH, TMSA> {
-  return new SRR_S01(msh, msa, options, encoding);
+  return new SRR_S01(header, acknowledgment, options, encoding);
 }

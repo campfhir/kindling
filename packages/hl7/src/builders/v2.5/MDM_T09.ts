@@ -27,13 +27,13 @@ export class MDM_T09<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
 /** Builds an HL7 MDM^T09 (HL7 v2.5) message. */
 export function createMDM_T09<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TPV1 extends PV1 = PV1, TTXA extends TXA = TXA>(
-  msh: TMSH,
-  evn: TEVN,
-  pid: TPID,
-  pv1: TPV1,
-  txa: TTXA,
+  header: TMSH,
+  event: TEVN,
+  patient: TPID,
+  visit: TPV1,
+  document: TTXA,
   options: MDM_T09Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): MDM_T09<TMSH, TEVN, TPID, TPV1, TTXA> {
-  return new MDM_T09(msh, evn, pid, pv1, txa, options, encoding);
+  return new MDM_T09(header, event, patient, visit, document, options, encoding);
 }

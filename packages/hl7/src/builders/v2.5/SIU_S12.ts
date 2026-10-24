@@ -29,23 +29,23 @@ import type { AIP } from "../../segments/v2.5/AIP.ts";
 /** The PATIENT group of an SIU^S12 (HL7 v2.5) message being built. */
 export interface SIUPatientGroup {
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
   /** The PV2 segment. */
-  pv2?: PV2;
+  visitDetails?: PV2;
   /** The OBX segments. */
-  obxList?: OBX[];
+  observations?: OBX[];
   /** The DG1 segments. */
-  dg1List?: DG1[];
+  diagnoses?: DG1[];
 }
 
 /** The RESOURCES group of an SIU^S12 (HL7 v2.5) message being built. */
 export interface SIUResourcesGroup {
   /** The RGS segment. */
-  rgs: RGS;
+  resourceGroup: RGS;
   /** The SERVICE groups. */
   services?: SIUServiceGroup[];
   /** The GENERAL RESOURCE groups. */
@@ -59,41 +59,41 @@ export interface SIUResourcesGroup {
 /** The SERVICE group of an SIU^S12 (HL7 v2.5) message being built. */
 export interface SIUServiceGroup {
   /** The AIS segment. */
-  ais: AIS;
+  service: AIS;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The GENERAL RESOURCE group of an SIU^S12 (HL7 v2.5) message being built. */
 export interface SIUGeneralResourceGroup {
   /** The AIG segment. */
-  aig: AIG;
+  generalResource: AIG;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The LOCATION RESOURCE group of an SIU^S12 (HL7 v2.5) message being built. */
 export interface SIULocationResourceGroup {
   /** The AIL segment. */
-  ail: AIL;
+  location: AIL;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The PERSONNEL RESOURCE group of an SIU^S12 (HL7 v2.5) message being built. */
 export interface SIUPersonnelResourceGroup {
   /** The AIP segment. */
-  aip: AIP;
+  personnel: AIP;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The optional segments and groups of an SIU^S12 (HL7 v2.5) message. */
 export interface SIU_S12Options {
   /** The TQ1 segments. */
-  tq1List?: TQ1[];
+  timings?: TQ1[];
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
   /** The PATIENT groups. */
   patients?: SIUPatientGroup[];
 }
@@ -107,8 +107,8 @@ export class SIU_S12<TMSH extends MSH = MSH, TSCH extends SCH = SCH> {
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
-    public sch: TSCH,
+    public header: TMSH,
+    public appointment: TSCH,
     public resources: SIUResourcesGroup[],
     public options: SIU_S12Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
@@ -116,7 +116,7 @@ export class SIU_S12<TMSH extends MSH = MSH, TSCH extends SCH = SCH> {
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, sch: this.sch, resources: this.resources };
+    return { ...this.options, header: this.header, appointment: this.appointment, resources: this.resources };
   }
 
   /** Validates the message structure, returning a result. */
@@ -137,11 +137,11 @@ export class SIU_S12<TMSH extends MSH = MSH, TSCH extends SCH = SCH> {
 
 /** Builds an HL7 SIU^S12 (HL7 v2.5) message. */
 export function createSIU_S12<TMSH extends MSH = MSH, TSCH extends SCH = SCH>(
-  msh: TMSH,
-  sch: TSCH,
+  header: TMSH,
+  appointment: TSCH,
   resources: SIUResourcesGroup[],
   options: SIU_S12Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): SIU_S12<TMSH, TSCH> {
-  return new SIU_S12(msh, sch, resources, options, encoding);
+  return new SIU_S12(header, appointment, resources, options, encoding);
 }

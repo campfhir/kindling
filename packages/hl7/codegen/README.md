@@ -45,15 +45,23 @@ one does not fit.
 
 ### Naming
 
-Property names come from the structure: a segment is its lower-cased name (`pid`), a repeating
-segment gets a `List` suffix (`nteList`), a group is camel-cased and pluralised when it repeats
-(`PATIENT_RESULT` → `patientResults`), a choice is `segment`. Override them with `as` when the
-same segment appears twice at one level (`optList("ROL", { as: "visitRolList" })`) or to keep a
-friendlier name (`as: "insuranceGroups"`). Group type names default to `Parsed<PascalCase>` and
-`<PascalCase>Group`; override them with `exportTypeName` and `builderTypeName`.
+Property names come from the structure and read as what the segment holds, not its code. The
+`SEGMENT_NAMES` table in `src/types/schema.ts` gives every segment a singular and a plural name
+(`PID` → `patient`, `NTE` → `note`/`notes`, `DG1` → `diagnosis`/`diagnoses`, `OBR` →
+`observationRequest`, `MSH` → `header`); a segment appearing once at a level uses the singular,
+a repeating one the plural. Segments missing from the table fall back to their code (`zpd`,
+`zpdList`). A group is camel-cased and pluralised when it repeats (`PATIENT_RESULT` →
+`patientResults`), a choice is `segment`. Names only have to be unique within one level, so the
+same segment can be `visit` in one message and sit inside a `visits` group in another; override
+with `as` when two items at one level would clash (`optList("ROL", { as: "visitRoles" })`,
+`optList("NTE", { as: "patientNotes" })`) or to keep a specific name (`as: "insuranceGroups"`).
+Codegen refuses a structure with duplicate names at one level. Group type names default to
+`Parsed<PascalCase>` and `<PascalCase>Group`; override them with `exportTypeName` and
+`builderTypeName`.
 
 A group marked `inline: true` contributes its fields to the enclosing object instead of nesting
-them (`PATIENT: PID [PD1] [VISIT: PV1 [PV2]]` reads as `pid`, `pd1`, `pv1`, `pv2`) while still
+them (`PATIENT: PID [PD1] [VISIT: PV1 [PV2]]` reads as `patient`, `patientDemographics`, `visit`,
+`visitDetails`) while still
 parsing and verifying as a unit.
 
 ### Builders
@@ -62,9 +70,9 @@ Every builder has the same shape: the required top-level items are constructor p
 structure order, followed by `options` (the optional ones) and `encoding`:
 
 ```ts
-createADT_A01(msh, evn, pid, pv1, { pd1, nk1List, insuranceGroups: [{ in1, in2 }] });
-createORU_R01(msh, [{ pid, orderObservations: [{ obr, observations: [{ obx }] }] }]);
-createACK(msh, msa, { err });
+createADT_A01(msh, evn, pid, pv1, { nextOfKin: [nk1], insuranceGroups: [{ insurance: in1, insuranceDetails: in2 }] });
+createORU_R01(msh, [{ patient: pid, orderObservations: [{ observationRequest: obr, observations: [{ observation: obx }] }] }]);
+createACK(msh, msa, { error: err });
 ```
 
 `verify()` returns `{ valid, errors }`, `encode()` throws when invalid, and `toInput()` gives the

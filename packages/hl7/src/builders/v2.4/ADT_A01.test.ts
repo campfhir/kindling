@@ -21,17 +21,17 @@ const types = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
 describe("ADT_A01 (v2.4): PDA, ROLs and repeating IN3, no SFT", () => {
   test("encodes and round-trips, and the wrapper events use the v2.4 shape", () => {
     const wire = createADT_A02(msh("A02"), new EVN().eventTypeCode("A02"), new PID().setId("1"), new PV1().patientClass("I"), {
-      visitRolList: [new ROL()],
-      insuranceGroups: [{ in1: new IN1().setId("1"), in3List: [new IN3().setId("1"), new IN3().setId("2")], rolList: [new ROL()] }],
-      pda: new PDA().deathCertifiedIndicator("Y").coronerIndicator("N"),
+      visitRoles: [new ROL()],
+      insuranceGroups: [{ insurance: new IN1().setId("1"), insuranceCertifications: [new IN3().setId("1"), new IN3().setId("2")], roles: [new ROL()] }],
+      deathAndAutopsy: new PDA().deathCertifiedIndicator("Y").coronerIndicator("N"),
     }).encode();
     expect(types(wire)).toEqual(["MSH", "EVN", "PID", "PV1", "ROL", "IN1", "IN3", "IN3", "ROL", "PDA"]);
     expect(wire).toContain("ADT^A02");
     const result = parseADT_A02(wire);
     expect(result.ok).toBe(true);
-    expect(result.val!.visitRolList).toHaveLength(1);
-    expect(result.val!.insuranceGroups![0].in3List).toHaveLength(2);
-    expect(ParserUtils.getComponent(result.val!.pda!.fields[2], 0)).toBe("Y");
+    expect(result.val!.visitRoles).toHaveLength(1);
+    expect(result.val!.insuranceGroups![0].insuranceCertifications).toHaveLength(2);
+    expect(ParserUtils.getComponent(result.val!.deathAndAutopsy!.fields[2], 0)).toBe("Y");
     expect(result.val!.message.encode()).toBe(wire);
     expect("sftList" in result.val!).toBe(false);
   });

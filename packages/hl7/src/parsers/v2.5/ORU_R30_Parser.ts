@@ -26,41 +26,41 @@ import { OBX } from "../../segments/v2.5/OBX.ts";
 /** The TIMING QTY group of a parsed ORU^R30 (HL7 v2.5) message. */
 export interface ParsedTimingQty {
   /** The TQ1 segment. */
-  tq1: TQ1;
+  timing: TQ1;
   /** The TQ2 segments. */
-  tq2List?: TQ2[];
+  timingRelationships?: TQ2[];
 }
 
 /** The OBSERVATION group of a parsed ORU^R30 (HL7 v2.5) message. */
 export interface ParsedObservation {
   /** The OBX segment. */
-  obx: OBX;
+  observation: OBX;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** Structured result of parsing an HL7 ORU^R30 (HL7 v2.5) message. */
 export interface ParsedORU_R30 extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The SFT segments. */
-  sftList?: SFT[];
+  software?: SFT[];
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
   /** The PV2 segment. */
-  pv2?: PV2;
+  visitDetails?: PV2;
   /** The ORC segment. */
-  orc: ORC;
+  commonOrder: ORC;
   /** The OBR segment. */
-  obr: OBR;
+  observationRequest: OBR;
   /** The NTE segments. */
-  obrNteList?: NTE[];
+  notes?: NTE[];
   /** The TIMING QTY groups. */
-  timing?: ParsedTimingQty[];
+  timings?: ParsedTimingQty[];
   /** The OBSERVATION groups. */
   observations: ParsedObservation[];
 }

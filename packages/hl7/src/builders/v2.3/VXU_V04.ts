@@ -25,32 +25,24 @@ import type { RXR } from "../../segments/v2.3/RXR.ts";
 import type { OBX } from "../../segments/v2.3/OBX.ts";
 import type { NTE } from "../../segments/v2.3/NTE.ts";
 
-/** The PATIENT group of an VXU^V04 (HL7 v2.3) message being built. */
-export interface VisitGroup {
-  /** The PV1 segment. */
-  pv1: PV1;
-  /** The PV2 segment. */
-  pv2?: PV2;
-}
-
 /** The INSURANCE group of an VXU^V04 (HL7 v2.3) message being built. */
 export interface InsuranceGroup {
   /** The IN1 segment. */
-  in1: IN1;
+  insurance: IN1;
   /** The IN2 segment. */
-  in2?: IN2;
+  insuranceDetails?: IN2;
   /** The IN3 segment. */
-  in3?: IN3;
+  insuranceCertification?: IN3;
 }
 
 /** The ORDER group of an VXU^V04 (HL7 v2.3) message being built. */
 export interface VaccinationGroup {
   /** The ORC segment. */
-  orc?: ORC;
+  commonOrder?: ORC;
   /** The RXA segment. */
-  rxa: RXA;
+  administration: RXA;
   /** The RXR segment. */
-  rxr?: RXR;
+  route?: RXR;
   /** The OBSERVATION groups. */
   observations?: ObservationGroup[];
 }
@@ -58,21 +50,23 @@ export interface VaccinationGroup {
 /** The OBSERVATION group of an VXU^V04 (HL7 v2.3) message being built. */
 export interface ObservationGroup {
   /** The OBX segment. */
-  obx: OBX;
+  observation: OBX;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The optional segments and groups of an VXU^V04 (HL7 v2.3) message. */
 export interface VXU_V04Options {
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The NK1 segments. */
-  nk1List?: NK1[];
-  /** The PATIENT group. */
-  visit?: VisitGroup;
+  nextOfKin?: NK1[];
+  /** The PV1 segment. */
+  visit?: PV1;
+  /** The PV2 segment. */
+  visitDetails?: PV2;
   /** The INSURANCE groups. */
-  insurance?: InsuranceGroup[];
+  insurances?: InsuranceGroup[];
   /** The ORDER groups. */
   orders?: VaccinationGroup[];
 }
@@ -86,15 +80,15 @@ export class VXU_V04<TMSH extends MSH = MSH, TPID extends PID = PID> {
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
-    public pid: TPID,
+    public header: TMSH,
+    public patient: TPID,
     public options: VXU_V04Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, pid: this.pid };
+    return { ...this.options, header: this.header, patient: this.patient };
   }
 
   /** Validates the message structure, returning a result. */
@@ -115,10 +109,10 @@ export class VXU_V04<TMSH extends MSH = MSH, TPID extends PID = PID> {
 
 /** Builds an HL7 VXU^V04 (HL7 v2.3) message. */
 export function createVXU_V04<TMSH extends MSH = MSH, TPID extends PID = PID>(
-  msh: TMSH,
-  pid: TPID,
+  header: TMSH,
+  patient: TPID,
   options: VXU_V04Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): VXU_V04<TMSH, TPID> {
-  return new VXU_V04(msh, pid, options, encoding);
+  return new VXU_V04(header, patient, options, encoding);
 }

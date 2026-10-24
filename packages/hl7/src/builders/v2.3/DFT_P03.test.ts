@@ -33,18 +33,18 @@ describe("DFT_P03 builder (v2.3)", () => {
     expect(new DFT_P03(null as any, null as any, null as any, []).verify().errors).toEqual([
       "MSH segment is required", "EVN segment is required", "PID segment is required", "At least one FINANCIAL group (FT1) is required",
     ]);
-    expect(createDFT_P03(msh(), evn(), pid(), [{ ft1: new FT1().setId("1") }], { pv2: new PV2() }).verify().errors).toEqual([]);
+    expect(createDFT_P03(msh(), evn(), pid(), [{ transaction: new FT1().setId("1") }], { visitDetails: new PV2() }).verify().errors).toEqual([]);
     expect(createDFT_P03(msh(), evn(), pid(), [{} as any]).verify().errors).toEqual(["FINANCIAL group 1: FT1 segment is required"]);
   });
 
   test("encodes every group in spec order and round-trips", () => {
     const wire = createDFT_P03(msh(), evn(), pid(), [
-      { ft1: new FT1().setId("1"), procedures: [{ pr1: new PR1().setId("1"), rolList: [new ROL()] }, { pr1: new PR1().setId("2") }] },
-      { ft1: new FT1().setId("2") },
+      { transaction: new FT1().setId("1"), procedures: [{ procedure: new PR1().setId("1"), roles: [new ROL()] }, { procedure: new PR1().setId("2") }] },
+      { transaction: new FT1().setId("2") },
     ], {
-      pd1: new PD1(), pv1: new PV1().patientClass("O"), pv2: new PV2(), db1List: [new DB1().setId("1")], obxList: [new OBX().setId("1")],
-      dg1List: [new DG1().setId("1")], drg: new DRG(), gt1List: [new GT1().setId("1")],
-      insurances: [{ in1: new IN1().setId("1"), in2: new IN2(), in3: new IN3().setId("1") }, { in1: new IN1().setId("2") }], acc: new ACC(),
+      patientDemographics: new PD1(), visit: new PV1().patientClass("O"), visitDetails: new PV2(), disabilities: [new DB1().setId("1")], observations: [new OBX().setId("1")],
+      diagnoses: [new DG1().setId("1")], diagnosisRelatedGroup: new DRG(), guarantors: [new GT1().setId("1")],
+      insurances: [{ insurance: new IN1().setId("1"), insuranceDetails: new IN2(), insuranceCertification: new IN3().setId("1") }, { insurance: new IN1().setId("2") }], accident: new ACC(),
     }).encode();
     expect(types(wire)).toEqual([
       "MSH", "EVN", "PID", "PD1", "PV1", "PV2", "DB1", "OBX",
@@ -55,22 +55,22 @@ describe("DFT_P03 builder (v2.3)", () => {
       const result = parseDFT_P03(wire);
       expect(result.ok).toBe(true);
       const v = result.val!;
-      expect(ParserUtils.getComponent(v.pid.fields[4], 0)).toBe("Doe");
+      expect(ParserUtils.getComponent(v.patient.fields[4], 0)).toBe("Doe");
       expect(v.financials).toHaveLength(2);
       expect(v.financials[0].procedures).toHaveLength(2);
-      expect(v.financials[0].procedures![0].rolList).toHaveLength(1);
+      expect(v.financials[0].procedures![0].roles).toHaveLength(1);
       expect(v.financials[1].procedures).toHaveLength(0);
       expect(v.insurances).toHaveLength(2);
-      expect(v.insurances![0].in3).toBeTruthy();
-      expect(v.insurances![1].in2).toBeUndefined();
-      expect(v.acc).toBeTruthy();
+      expect(v.insurances![0].insuranceCertification).toBeTruthy();
+      expect(v.insurances![1].insuranceDetails).toBeUndefined();
+      expect(v.accident).toBeTruthy();
       expect(v.message.encode()).toBe(wire);
     }
     // The v2.5.1 parser (v2.5 structure) also accepts a v2.3 wire message; IN3 is a list there.
     const v251 = parseDFT_P03_v251(wire);
     expect(v251.ok).toBe(true);
     expect(v251.val!.financials).toHaveLength(2);
-    expect(v251.val!.insurances![0].in3List).toHaveLength(1);
+    expect(v251.val!.insurances![0].insuranceCertifications).toHaveLength(1);
     expect(v251.val!.message.encode()).toBe(wire);
   });
 });
@@ -80,7 +80,7 @@ describe("parseDFT_P03 (v2.3)", () => {
     const result = parseDFT_P03([MSH_LINE, "EVN|P03|20231015120000", "PID|1||12345^^^MRN^MR||Doe^John", "FT1|1||||20231015|20231015|CG|Office visit"].join("\r"));
     expect(result.ok).toBe(true);
     expect(result.val!.financials).toHaveLength(1);
-    expect(result.val!.pv1).toBeUndefined();
+    expect(result.val!.visit).toBeUndefined();
   });
 
   test.each([

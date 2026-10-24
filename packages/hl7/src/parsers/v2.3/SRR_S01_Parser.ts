@@ -28,9 +28,9 @@ import { AIP } from "../../segments/v2.3/AIP.ts";
 /** The SCHEDULE group of a parsed SRR^S01 (HL7 v2.3) message. */
 export interface ParsedSRRSchedule {
   /** The SCH segment. */
-  sch: SCH;
+  appointment: SCH;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
   /** The PATIENT groups. */
   patients?: ParsedSRRPatient[];
   /** The RESOURCES groups. */
@@ -40,19 +40,19 @@ export interface ParsedSRRSchedule {
 /** The PATIENT group of a parsed SRR^S01 (HL7 v2.3) message. */
 export interface ParsedSRRPatient {
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
   /** The PV2 segment. */
-  pv2?: PV2;
+  visitDetails?: PV2;
   /** The DG1 segments. */
-  dg1List?: DG1[];
+  diagnoses?: DG1[];
 }
 
 /** The RESOURCES group of a parsed SRR^S01 (HL7 v2.3) message. */
 export interface ParsedSRRResources {
   /** The RGS segment. */
-  rgs: RGS;
+  resourceGroup: RGS;
   /** The SERVICE groups. */
   services?: ParsedSRRService[];
   /** The GENERAL RESOURCE groups. */
@@ -66,43 +66,43 @@ export interface ParsedSRRResources {
 /** The SERVICE group of a parsed SRR^S01 (HL7 v2.3) message. */
 export interface ParsedSRRService {
   /** The AIS segment. */
-  ais: AIS;
+  service: AIS;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The GENERAL RESOURCE group of a parsed SRR^S01 (HL7 v2.3) message. */
 export interface ParsedSRRGeneralResource {
   /** The AIG segment. */
-  aig: AIG;
+  generalResource: AIG;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The LOCATION RESOURCE group of a parsed SRR^S01 (HL7 v2.3) message. */
 export interface ParsedSRRLocationResource {
   /** The AIL segment. */
-  ail: AIL;
+  location: AIL;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The PERSONNEL RESOURCE group of a parsed SRR^S01 (HL7 v2.3) message. */
 export interface ParsedSRRPersonnelResource {
   /** The AIP segment. */
-  aip: AIP;
+  personnel: AIP;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** Structured result of parsing an HL7 SRR^S01 (HL7 v2.3) message. */
 export interface ParsedSRR_S01 extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The MSA segment. */
-  msa: MSA;
+  acknowledgment: MSA;
   /** The ERR segment. */
-  err?: ERR;
+  error?: ERR;
   /** The SCHEDULE group. */
   schedule?: ParsedSRRSchedule;
 }

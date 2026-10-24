@@ -26,12 +26,12 @@ export const ORU_R30_STRUCTURE: StructureItem[] = [
   },
   { name: "ORC", required: true, repeating: false },
   { name: "OBR", required: true, repeating: false },
-  { name: "NTE", required: false, repeating: true, as: "obrNteList" },
+  { name: "NTE", required: false, repeating: true },
   {
     name: "TIMING_QTY",
     required: false,
     repeating: true,
-    as: "timing",
+    as: "timings",
     segments: [
       { name: "TQ1", required: true, repeating: false },
       { name: "TQ2", required: false, repeating: true },

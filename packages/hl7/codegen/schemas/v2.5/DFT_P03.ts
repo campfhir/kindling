@@ -4,8 +4,8 @@ import { SFT, group, opt, optList, req } from "../helpers";
 /** [ORC] [{ TIMING_QUANTITY: TQ1 [{TQ2}] }] [ ORDER: OBR [{NTE}] ] [{ OBSERVATION: OBX [{NTE}] }] */
 const commonOrder = (prefix: string): StructureItem[] => [
   opt("ORC"),
-  group(`${prefix}TIMING_QUANTITY`, false, true, [req("TQ1"), optList("TQ2")], { as: "timing", exportTypeName: `ParsedDFT${prefix ? "Financial" : ""}Timing` }),
-  group(`${prefix}ORDER`, false, false, [req("OBR"), optList("NTE", { as: "obrNteList" })], { inline: true }),
+  group(`${prefix}TIMING_QUANTITY`, false, true, [req("TQ1"), optList("TQ2")], { as: "timings", exportTypeName: `ParsedDFT${prefix ? "Financial" : ""}Timing` }),
+  group(`${prefix}ORDER`, false, false, [req("OBR"), optList("NTE")], { inline: true }),
   group(`${prefix}OBSERVATION`, false, true, [req("OBX"), optList("NTE")], { as: "observations", exportTypeName: `ParsedDFT${prefix ? "Financial" : ""}Observation` }),
 ];
 
@@ -33,7 +33,7 @@ export const DFT_P03_SCHEMA: MessageSchema = {
     optList("ROL"),
     opt("PV1"),
     opt("PV2"),
-    optList("ROL", { as: "visitRolList" }),
+    optList("ROL", { as: "visitRoles" }),
     optList("DB1"),
     group("COMMON_ORDER", false, true, commonOrder(""), { as: "orders", exportTypeName: "ParsedDFTOrder" }),
     group("FINANCIAL", true, true, [

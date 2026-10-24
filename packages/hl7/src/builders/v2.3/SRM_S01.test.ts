@@ -34,19 +34,19 @@ describe("SRM_S01 builder (v2.3)", () => {
   test("encodes every group in spec order", () => {
     const wire = createSRM_S01(msh(), arq(), [
       {
-        rgs: new RGS().setId("1"),
-        services: [{ ais: new AIS().setId("1"), apr: new APR(), nteList: [new NTE().setId("1").comment("service note")] }],
-        generalResources: [{ aig: new AIG().setId("1") }],
-        locationResources: [{ ail: new AIL().setId("1"), nteList: [new NTE().setId("1")] }],
-        personnelResources: [{ aip: new AIP().setId("1"), apr: new APR() }],
+        resourceGroup: new RGS().setId("1"),
+        services: [{ service: new AIS().setId("1"), appointmentPreferences: new APR(), notes: [new NTE().setId("1").comment("service note")] }],
+        generalResources: [{ generalResource: new AIG().setId("1") }],
+        locationResources: [{ location: new AIL().setId("1"), notes: [new NTE().setId("1")] }],
+        personnelResources: [{ personnel: new AIP().setId("1"), appointmentPreferences: new APR() }],
       },
-      { rgs: new RGS().setId("2") },
+      { resourceGroup: new RGS().setId("2") },
     ], {
-      apr: new APR().timeSelectionCriteria("PREFSTART"),
-      nteList: [new NTE().setId("1").comment("request note")],
+      appointmentPreferences: new APR().timeSelectionCriteria("PREFSTART"),
+      notes: [new NTE().setId("1").comment("request note")],
       patients: [
-        { pid: new PID().setId("1").patientName({ familyName: "Doe", givenName: "John" }), pv1: new PV1().patientClass("O"), obxList: [new OBX().setId("1")], dg1List: [new DG1().setId("1")] },
-        { pid: new PID().setId("2") },
+        { patient: new PID().setId("1").patientName({ familyName: "Doe", givenName: "John" }), visit: new PV1().patientClass("O"), observations: [new OBX().setId("1")], diagnoses: [new DG1().setId("1")] },
+        { patient: new PID().setId("2") },
       ],
     }).encode();
     expect(types(wire)).toEqual([
@@ -61,19 +61,19 @@ describe("SRM_S01 builder (v2.3)", () => {
       const result = parse(wire);
       expect(result.ok).toBe(true);
       const v = result.val!;
-      expect(v.apr).toBeTruthy();
-      expect(v.nteList).toHaveLength(1);
+      expect(v.appointmentPreferences).toBeTruthy();
+      expect(v.notes).toHaveLength(1);
       expect(v.patients).toHaveLength(2);
-      expect(ParserUtils.getComponent(v.patients![0].pid.fields[4], 0)).toBe("Doe");
-      expect(v.patients![0].obxList).toHaveLength(1);
-      expect(v.patients![1].pv1).toBeUndefined();
+      expect(ParserUtils.getComponent(v.patients![0].patient.fields[4], 0)).toBe("Doe");
+      expect(v.patients![0].observations).toHaveLength(1);
+      expect(v.patients![1].visit).toBeUndefined();
       expect(v.resources).toHaveLength(2);
       const rg = v.resources[0];
-      expect(rg.services![0].apr).toBeTruthy();
-      expect(rg.services![0].nteList).toHaveLength(1);
+      expect(rg.services![0].appointmentPreferences).toBeTruthy();
+      expect(rg.services![0].notes).toHaveLength(1);
       expect(rg.generalResources).toHaveLength(1);
-      expect(rg.locationResources![0].nteList).toHaveLength(1);
-      expect(rg.personnelResources![0].apr).toBeTruthy();
+      expect(rg.locationResources![0].notes).toHaveLength(1);
+      expect(rg.personnelResources![0].appointmentPreferences).toBeTruthy();
       expect(v.resources[1].services).toHaveLength(0);
       expect(v.message.encode()).toBe(wire);
     }
@@ -99,11 +99,11 @@ describe("parseSRM_S01 (v2.3)", () => {
     ].join("\r"));
     expect(result.ok).toBe(true);
     const v = result.val!;
-    expect(v.apr).toBeUndefined();
-    expect(v.nteList!.map((n) => ParserUtils.getComponent(n.fields[2], 0))).toEqual(["request note"]);
-    expect(v.resources[0].services![0].nteList).toHaveLength(2);
-    expect(v.resources[0].services![0].apr).toBeTruthy();
-    expect(v.resources[0].personnelResources![0].nteList).toHaveLength(1);
+    expect(v.appointmentPreferences).toBeUndefined();
+    expect(v.notes!.map((n) => ParserUtils.getComponent(n.fields[2], 0))).toEqual(["request note"]);
+    expect(v.resources[0].services![0].notes).toHaveLength(2);
+    expect(v.resources[0].services![0].appointmentPreferences).toBeTruthy();
+    expect(v.resources[0].personnelResources![0].notes).toHaveLength(1);
     expect(v.message.segments).toHaveLength(11);
   });
 

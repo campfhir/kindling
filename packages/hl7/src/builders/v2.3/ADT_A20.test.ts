@@ -15,7 +15,7 @@ test("ADT_A20 encodes MSH EVN NPU and round-trips through v2.3 and v2.5.1", () =
   for (const parse of [parseADT_A20, parseADT_A20_v251]) {
     const result = parse(wire);
     expect(result.ok).toBe(true);
-    expect(ParserUtils.getComponent(result.val!.npu.fields[1], 0)).toBe("C");
+    expect(ParserUtils.getComponent(result.val!.bedStatus.fields[1], 0)).toBe("C");
     expect(result.val!.message.encode()).toBe(wire);
   }
 });

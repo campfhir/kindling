@@ -59,7 +59,8 @@ const STRUCTURE: StructureItem[] = [
 
 describe("schema helpers", () => {
   test("field names, first segments and effective requiredness", () => {
-    expect(itemField({ name: "NTE", required: false, repeating: true })).toBe("nteList");
+    expect(itemField({ name: "NTE", required: false, repeating: true })).toBe("notes");
+    expect(itemField({ name: "ZPD", required: false, repeating: true })).toBe("zpdList");
     expect(itemField({ name: "PATIENT_RESULT", required: true, repeating: true, segments: [] })).toBe("patientResults");
     expect(itemField({ name: "RESOURCES", required: true, repeating: true, segments: [] })).toBe("resources");
     expect(itemField({ oneOf: ["OBR", "RQD"], required: true })).toBe("segment");
@@ -81,21 +82,21 @@ describe("parseStructure", () => {
     ));
     expect(r.ok).toBe(true);
     const v = r.val as any;
-    expect(v.msh).toBeInstanceOf(MSH);
+    expect(v.header).toBeInstanceOf(MSH);
     expect(v.patientResults).toHaveLength(2);
     const [first, second] = v.patientResults;
-    expect(first.patient.nteList).toHaveLength(1);
-    expect(first.patient.pv1).toBeInstanceOf(PV1);
+    expect(first.patient.notes).toHaveLength(1);
+    expect(first.patient.visit).toBeInstanceOf(PV1);
     expect(first.orders).toHaveLength(2);
-    expect(first.orders[0].orc).toBeInstanceOf(ORC);
+    expect(first.orders[0].commonOrder).toBeInstanceOf(ORC);
     expect(first.orders[0].detail).toBeInstanceOf(OBR);
-    expect(first.orders[0].nteList).toHaveLength(1);
-    expect(first.orders[0].observations.map((o: any) => [o.obx.fields[0].components[0].subComponents[0], o.nteList.length])).toEqual([["1", 1], ["2", 0]]);
-    expect(first.orders[0].dg1List).toHaveLength(1);
-    expect(first.orders[1].orc).toBeUndefined();
+    expect(first.orders[0].notes).toHaveLength(1);
+    expect(first.orders[0].observations.map((o: any) => [o.observation.fields[0].components[0].subComponents[0], o.notes.length])).toEqual([["1", 1], ["2", 0]]);
+    expect(first.orders[0].diagnoses).toHaveLength(1);
+    expect(first.orders[1].commonOrder).toBeUndefined();
     expect(first.orders[1].detail).toBeInstanceOf(RQD);
     expect(first.orders[1].observations).toHaveLength(1);
-    expect(second.patient.pid).toBeInstanceOf(PID);
+    expect(second.patient.patient).toBeInstanceOf(PID);
     expect(second.orders[0].detail).toBeInstanceOf(OBR);
     expect(names(v)).toEqual(["MSH", "PID", "NTE", "PV1", "ORC", "OBR", "NTE", "OBX", "NTE", "OBX", "DG1", "RQD", "OBX", "PID", "OBR"]);
     expect(v.message.encode()).toBe(wire(
@@ -160,11 +161,11 @@ describe("verifyStructure and encodeStructure", () => {
 
   test("encodes builder input in structure order, including choices and nested groups", () => {
     const input = {
-      msh,
+      header: msh,
       patientResults: [{
-        patient: { pid: new PID().setId("1"), nteList: [new NTE().setId("1")] },
+        patient: { patient: new PID().setId("1"), notes: [new NTE().setId("1")] },
         orders: [
-          { orc: new ORC().orderControl("NW"), detail: new OBR().setId("1"), observations: [{ obx: new OBX().setId("1"), nteList: [new NTE().setId("2")] }], dg1List: [new DG1()] },
+          { commonOrder: new ORC().orderControl("NW"), detail: new OBR().setId("1"), observations: [{ observation: new OBX().setId("1"), notes: [new NTE().setId("2")] }], diagnoses: [new DG1()] },
           { detail: new RQD(), observations: [] },
         ],
       }],
@@ -177,11 +178,11 @@ describe("verifyStructure and encodeStructure", () => {
 
   test("lists what is missing, with group context", () => {
     expect(verifyStructure(STRUCTURE, {})).toEqual(["MSH segment is required", "At least one PATIENT RESULT group (PID/ORC/OBR/RQD) is required"]);
-    expect(verifyStructure(STRUCTURE, { msh, patientResults: [{ patient: {}, orders: [{ detail: new EVN() }] }] })).toEqual([
+    expect(verifyStructure(STRUCTURE, { header: msh, patientResults: [{ patient: {}, orders: [{ detail: new EVN() }] }] })).toEqual([
       "PATIENT RESULT group 1: PATIENT group 1: PID segment is required",
       "PATIENT RESULT group 1: ORDER group 1: detail must be one of OBR, RQD",
     ]);
-    expect(verifyStructure(STRUCTURE, { msh, patientResults: [{ orders: [{}] }] })).toEqual([
+    expect(verifyStructure(STRUCTURE, { header: msh, patientResults: [{ orders: [{}] }] })).toEqual([
       "PATIENT RESULT group 1: ORDER group 1: One of OBR, RQD is required",
     ]);
   });
@@ -191,9 +192,9 @@ describe("verifyStructure and encodeStructure", () => {
       { name: "MSH", required: true, repeating: false },
       { name: "OBX", required: true, repeating: true, minOccurrences: 2, maxOccurrences: 3 },
     ];
-    expect(verifyStructure(s, { msh, obxList: [new OBX()] })).toEqual(["At least 2 OBX segments are required"]);
-    expect(verifyStructure(s, { msh, obxList: [new OBX(), new OBX(), new OBX(), new OBX()] })).toEqual(["At most 3 OBX segments allowed"]);
-    expect(verifyStructure(s, { msh })).toEqual(["At least 2 OBX segments are required"]);
+    expect(verifyStructure(s, { header: msh, observations: [new OBX()] })).toEqual(["At least 2 OBX segments are required"]);
+    expect(verifyStructure(s, { header: msh, observations: [new OBX(), new OBX(), new OBX(), new OBX()] })).toEqual(["At most 3 OBX segments allowed"]);
+    expect(verifyStructure(s, { header: msh })).toEqual(["At least 2 OBX segments are required"]);
   });
 });
 
@@ -225,17 +226,17 @@ describe("inline groups", () => {
     expect(r.ok).toBe(true);
     const results = (r.val as any).patientResults;
     expect(results).toHaveLength(2);
-    expect(results[0].pid.name).toBe("PID");
-    expect(results[0].pv1.name).toBe("PV1");
-    expect(results[0].obrList).toHaveLength(2);
-    expect(results[1].pv1).toBeUndefined();
+    expect(results[0].patient.name).toBe("PID");
+    expect(results[0].visit.name).toBe("PV1");
+    expect(results[0].observationRequests).toHaveLength(2);
+    expect(results[1].visit).toBeUndefined();
     // PV1 cannot open a PATIENT RESULT group, so none is found at all.
     expect(parseStructure("TEST", INLINE, PARSERS, wire("PV1|1", "OBR|1")).err!.message).toBe("TEST message must contain at least one PID/OBR segment");
   });
 
   test("encodes and verifies the flattened fields", () => {
     const msh = new MSH().sendingApplication("APP").messageType({ messageCode: "ORU", triggerEvent: "R01" });
-    const input = { msh, patientResults: [{ pid: new PID(), pv1: new PV1(), obrList: [new OBR()] }, { pv2: new PV2(), obrList: [new OBR()] }] };
+    const input = { header: msh, patientResults: [{ patient: new PID(), visit: new PV1(), observationRequests: [new OBR()] }, { visitDetails: new PV2(), observationRequests: [new OBR()] }] };
     expect(encodeStructure(INLINE, input, DEFAULT_ENCODING).split("\r").map((s) => s.slice(0, 3))).toEqual(["MSH", "PID", "PV1", "OBR", "PV2", "OBR"]);
     expect(verifyStructure(INLINE, input)).toEqual([
       "PATIENT RESULT group 2: PID segment is required",

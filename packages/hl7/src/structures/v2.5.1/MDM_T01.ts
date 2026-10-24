@@ -26,7 +26,7 @@ export const MDM_T01_STRUCTURE: StructureItem[] = [
         name: "TIMING",
         required: false,
         repeating: true,
-        as: "timing",
+        as: "timings",
         segments: [
           { name: "TQ1", required: true, repeating: false },
           { name: "TQ2", required: false, repeating: true },

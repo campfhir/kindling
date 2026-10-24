@@ -25,39 +25,39 @@ import { TXA } from "../../segments/v2.5/TXA.ts";
 /** The COMMON ORDER group of a parsed MDM^T01 (HL7 v2.5) message. */
 export interface ParsedMDMOrder {
   /** The ORC segment. */
-  orc: ORC;
+  commonOrder: ORC;
   /** The TIMING groups. */
-  timing?: ParsedMDMTiming[];
+  timings?: ParsedMDMTiming[];
   /** The OBR segment. */
-  obr: OBR;
+  observationRequest: OBR;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The TIMING group of a parsed MDM^T01 (HL7 v2.5) message. */
 export interface ParsedMDMTiming {
   /** The TQ1 segment. */
-  tq1: TQ1;
+  timing: TQ1;
   /** The TQ2 segments. */
-  tq2List?: TQ2[];
+  timingRelationships?: TQ2[];
 }
 
 /** Structured result of parsing an HL7 MDM^T01 (HL7 v2.5) message. */
 export interface ParsedMDM_T01 extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The SFT segments. */
-  sftList?: SFT[];
+  software?: SFT[];
   /** The EVN segment. */
-  evn: EVN;
+  event: EVN;
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PV1 segment. */
-  pv1: PV1;
+  visit: PV1;
   /** The COMMON ORDER groups. */
   orders?: ParsedMDMOrder[];
   /** The TXA segment. */
-  txa: TXA;
+  document: TXA;
 }
 
 /** The segment parsers of MDM^T01 (HL7 v2.5). */

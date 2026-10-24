@@ -28,21 +28,21 @@ import type { AIP } from "../../segments/v2.5.1/AIP.ts";
 /** The PATIENT group of an SRM^S01 (HL7 v2.5.1) message being built. */
 export interface SRMPatientGroup {
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
   /** The PV2 segment. */
-  pv2?: PV2;
+  visitDetails?: PV2;
   /** The OBX segments. */
-  obxList?: OBX[];
+  observations?: OBX[];
   /** The DG1 segments. */
-  dg1List?: DG1[];
+  diagnoses?: DG1[];
 }
 
 /** The RESOURCES group of an SRM^S01 (HL7 v2.5.1) message being built. */
 export interface SRMResourcesGroup {
   /** The RGS segment. */
-  rgs: RGS;
+  resourceGroup: RGS;
   /** The SERVICE groups. */
   services?: SRMServiceGroup[];
   /** The GENERAL RESOURCE groups. */
@@ -56,49 +56,49 @@ export interface SRMResourcesGroup {
 /** The SERVICE group of an SRM^S01 (HL7 v2.5.1) message being built. */
 export interface SRMServiceGroup {
   /** The AIS segment. */
-  ais: AIS;
+  service: AIS;
   /** The APR segment. */
-  apr?: APR;
+  appointmentPreferences?: APR;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The GENERAL RESOURCE group of an SRM^S01 (HL7 v2.5.1) message being built. */
 export interface SRMGeneralResourceGroup {
   /** The AIG segment. */
-  aig: AIG;
+  generalResource: AIG;
   /** The APR segment. */
-  apr?: APR;
+  appointmentPreferences?: APR;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The LOCATION RESOURCE group of an SRM^S01 (HL7 v2.5.1) message being built. */
 export interface SRMLocationResourceGroup {
   /** The AIL segment. */
-  ail: AIL;
+  location: AIL;
   /** The APR segment. */
-  apr?: APR;
+  appointmentPreferences?: APR;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The PERSONNEL RESOURCE group of an SRM^S01 (HL7 v2.5.1) message being built. */
 export interface SRMPersonnelResourceGroup {
   /** The AIP segment. */
-  aip: AIP;
+  personnel: AIP;
   /** The APR segment. */
-  apr?: APR;
+  appointmentPreferences?: APR;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The optional segments and groups of an SRM^S01 (HL7 v2.5.1) message. */
 export interface SRM_S01Options {
   /** The APR segment. */
-  apr?: APR;
+  appointmentPreferences?: APR;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
   /** The PATIENT groups. */
   patients?: SRMPatientGroup[];
 }
@@ -112,8 +112,8 @@ export class SRM_S01<TMSH extends MSH = MSH, TARQ extends ARQ = ARQ> {
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
-    public arq: TARQ,
+    public header: TMSH,
+    public appointmentRequest: TARQ,
     public resources: SRMResourcesGroup[],
     public options: SRM_S01Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
@@ -121,7 +121,7 @@ export class SRM_S01<TMSH extends MSH = MSH, TARQ extends ARQ = ARQ> {
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, arq: this.arq, resources: this.resources };
+    return { ...this.options, header: this.header, appointmentRequest: this.appointmentRequest, resources: this.resources };
   }
 
   /** Validates the message structure, returning a result. */
@@ -142,11 +142,11 @@ export class SRM_S01<TMSH extends MSH = MSH, TARQ extends ARQ = ARQ> {
 
 /** Builds an HL7 SRM^S01 (HL7 v2.5.1) message. */
 export function createSRM_S01<TMSH extends MSH = MSH, TARQ extends ARQ = ARQ>(
-  msh: TMSH,
-  arq: TARQ,
+  header: TMSH,
+  appointmentRequest: TARQ,
   resources: SRMResourcesGroup[],
   options: SRM_S01Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): SRM_S01<TMSH, TARQ> {
-  return new SRM_S01(msh, arq, resources, options, encoding);
+  return new SRM_S01(header, appointmentRequest, resources, options, encoding);
 }

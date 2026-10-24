@@ -17,11 +17,11 @@ import { NPU } from "../../segments/v2.3/NPU.ts";
 /** Structured result of parsing an HL7 ADT^A20 (HL7 v2.3) message. */
 export interface ParsedADT_A20 extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The EVN segment. */
-  evn: EVN;
+  event: EVN;
   /** The NPU segment. */
-  npu: NPU;
+  bedStatus: NPU;
 }
 
 /** The segment parsers of ADT^A20 (HL7 v2.3). */

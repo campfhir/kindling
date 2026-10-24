@@ -7,7 +7,7 @@ import { ORDER_DETAIL_SEGMENTS } from "./ORM_O01";
  *
  * MSH MSA [ERR] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [ ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}] ] } ]
  *
- * The RESPONSE group is inlined, so `patient` and `orders` sit at the top level.
+ * The RESPONSE and PATIENT groups are inlined, so `patient`, `patientNotes` and `orders` sit at the top level.
  * Source: https://hl7-definition.caristix.com/v2/HL7v2.3/TriggerEvents/ORR_O02
  */
 export const ORR_O02_SCHEMA: MessageSchema = {
@@ -20,7 +20,7 @@ export const ORR_O02_SCHEMA: MessageSchema = {
     opt("ERR"),
     optList("NTE"),
     group("RESPONSE", false, false, [
-      group("PATIENT", false, false, [req("PID"), optList("NTE")], { exportTypeName: "ParsedResponsePatient" }),
+      group("PATIENT", false, false, [req("PID"), optList("NTE", { as: "patientNotes" })], { inline: true }),
       group("ORDER", true, true, [
         req("ORC"),
         group("ORDER_DETAIL", false, false, [choice(ORDER_DETAIL_SEGMENTS, true), optList("NTE"), optList("CTI")], { as: "detail", exportTypeName: "ParsedResponseDetail" }),

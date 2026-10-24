@@ -25,7 +25,7 @@ export const ADT_A01_SCHEMA: MessageSchema = {
     optList("NK1"),
     req("PV1"),
     opt("PV2"),
-    optList("ROL", { as: "visitRolList" }),
+    optList("ROL", { as: "visitRoles" }),
     optList("DB1"),
     optList("OBX"),
     optList("AL1"),

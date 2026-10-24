@@ -36,65 +36,65 @@ import type { UB2 } from "../../segments/v2.5.1/UB2.ts";
 /** The VISIT group of an BAR^P01 (HL7 v2.5.1) message being built. */
 export interface BARVisitGroup {
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
   /** The PV2 segment. */
-  pv2?: PV2;
+  visitDetails?: PV2;
   /** The ROL segments. */
-  visitRolList?: ROL[];
+  visitRoles?: ROL[];
   /** The DB1 segments. */
-  db1List?: DB1[];
+  disabilities?: DB1[];
   /** The OBX segments. */
-  obxList?: OBX[];
+  observations?: OBX[];
   /** The AL1 segments. */
-  al1List?: AL1[];
+  allergies?: AL1[];
   /** The DG1 segments. */
-  dg1List?: DG1[];
+  diagnoses?: DG1[];
   /** The DRG segment. */
-  drg?: DRG;
+  diagnosisRelatedGroup?: DRG;
   /** The PROCEDURE groups. */
   procedures?: BARProcedureGroup[];
   /** The GT1 segments. */
-  gt1List?: GT1[];
+  guarantors?: GT1[];
   /** The NK1 segments. */
-  nk1List?: NK1[];
+  nextOfKin?: NK1[];
   /** The INSURANCE groups. */
   insurances?: BARInsuranceGroup[];
   /** The ACC segment. */
-  acc?: ACC;
+  accident?: ACC;
   /** The UB1 segment. */
-  ub1?: UB1;
+  ub82?: UB1;
   /** The UB2 segment. */
-  ub2?: UB2;
+  ub92?: UB2;
 }
 
 /** The PROCEDURE group of an BAR^P01 (HL7 v2.5.1) message being built. */
 export interface BARProcedureGroup {
   /** The PR1 segment. */
-  pr1: PR1;
+  procedure: PR1;
   /** The ROL segments. */
-  rolList?: ROL[];
+  roles?: ROL[];
 }
 
 /** The INSURANCE group of an BAR^P01 (HL7 v2.5.1) message being built. */
 export interface BARInsuranceGroup {
   /** The IN1 segment. */
-  in1: IN1;
+  insurance: IN1;
   /** The IN2 segment. */
-  in2?: IN2;
+  insuranceDetails?: IN2;
   /** The IN3 segments. */
-  in3List?: IN3[];
+  insuranceCertifications?: IN3[];
   /** The ROL segments. */
-  rolList?: ROL[];
+  roles?: ROL[];
 }
 
 /** The optional segments and groups of an BAR^P01 (HL7 v2.5.1) message. */
 export interface BAR_P01Options {
   /** The SFT segments. */
-  sftList?: SFT[];
+  software?: SFT[];
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The ROL segments. */
-  rolList?: ROL[];
+  roles?: ROL[];
 }
 
 /** Builder for HL7 BAR^P01 (HL7 v2.5.1) messages. */
@@ -106,9 +106,9 @@ export class BAR_P01<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
-    public evn: TEVN,
-    public pid: TPID,
+    public header: TMSH,
+    public event: TEVN,
+    public patient: TPID,
     public visits: BARVisitGroup[],
     public options: BAR_P01Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
@@ -116,7 +116,7 @@ export class BAR_P01<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, evn: this.evn, pid: this.pid, visits: this.visits };
+    return { ...this.options, header: this.header, event: this.event, patient: this.patient, visits: this.visits };
   }
 
   /** Validates the message structure, returning a result. */
@@ -137,12 +137,12 @@ export class BAR_P01<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
 /** Builds an HL7 BAR^P01 (HL7 v2.5.1) message. */
 export function createBAR_P01<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID>(
-  msh: TMSH,
-  evn: TEVN,
-  pid: TPID,
+  header: TMSH,
+  event: TEVN,
+  patient: TPID,
   visits: BARVisitGroup[],
   options: BAR_P01Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): BAR_P01<TMSH, TEVN, TPID> {
-  return new BAR_P01(msh, evn, pid, visits, options, encoding);
+  return new BAR_P01(header, event, patient, visits, options, encoding);
 }

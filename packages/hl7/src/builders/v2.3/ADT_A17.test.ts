@@ -20,8 +20,8 @@ function makeEVN() {
 }
 function makePatient(id: string, familyName: string, bed: string) {
   return {
-    pid: new PID().setId(id).patientName({ familyName, givenName: "Pat" }),
-    pv1: new PV1().patientClass("I").assignedPatientLocation({ pointOfCare: "WEST", room: bed }),
+    patient: new PID().setId(id).patientName({ familyName, givenName: "Pat" }),
+    visit: new PV1().patientClass("I").assignedPatientLocation({ pointOfCare: "WEST", room: bed }),
   };
 }
 
@@ -36,7 +36,7 @@ test("verify() passes with both patients complete", () => {
 });
 
 test("verify() reports missing MSH, EVN and patient segments", () => {
-  const msg = new ADT_A17(null as any, null as any, [{ pid: null as any, pv1: null as any }, {} as any]);
+  const msg = new ADT_A17(null as any, null as any, [{ patient: null as any, visit: null as any }, {} as any]);
   const result = msg.verify();
   expect(result.valid).toBe(false);
   expect(result.errors).toEqual([
@@ -51,17 +51,17 @@ test("verify() reports missing MSH, EVN and patient segments", () => {
 });
 
 test("encode() throws when a patient has no PV1", () => {
-  const msg = new ADT_A17(makeMSH(), makeEVN(), [makePatient("1", "Doe", "101"), { pid: new PID().setId("2"), pv1: null as any }]);
+  const msg = new ADT_A17(makeMSH(), makeEVN(), [makePatient("1", "Doe", "101"), { patient: new PID().setId("2"), visit: null as any }]);
   expect(() => msg.encode()).toThrow(/PATIENT group 2: PV1 segment is required/);
 });
 
 test("encode() emits both patient groups in spec order", () => {
   const p1 = {
     ...makePatient("1", "Doe", "101"),
-    pd1: new PD1(),
-    pv2: new PV2().visitDescription("Observation"),
-    db1List: [new DB1().setId("1"), new DB1().setId("2")],
-    obxList: [new OBX().setId("1").valueType("ST")],
+    patientDemographics: new PD1(),
+    visitDetails: new PV2().visitDescription("Observation"),
+    disabilities: [new DB1().setId("1"), new DB1().setId("2")],
+    observations: [new OBX().setId("1").valueType("ST")],
   };
   const p2 = makePatient("2", "Roe", "102");
   const segments = createADT_A17(makeMSH(), makeEVN(), [p1, p2]).encode().split("\r");
@@ -75,12 +75,12 @@ test("round-trips through the v2.3 and v2.5.1 parsers", () => {
   for (const parse of [parseADT_A17, parseADT_A17_v251]) {
     const result = parse(encoded);
     expect(result.ok).toBe(true);
-    const { patients: [patient1, patient2], evn } = result.val!;
+    const { patients: [patient1, patient2], event: evn } = result.val!;
     expect(ParserUtils.getComponent(evn.fields[0], 0)).toBe("A17");
-    expect(ParserUtils.getComponent(patient1.pid.fields[4], 0)).toBe("Doe");
-    expect(ParserUtils.getComponent(patient2.pid.fields[4], 0)).toBe("Roe");
-    expect(ParserUtils.getComponent(patient1.pv1.fields[2], 1)).toBe("101");
-    expect(ParserUtils.getComponent(patient2.pv1.fields[2], 1)).toBe("102");
+    expect(ParserUtils.getComponent(patient1.patient.fields[4], 0)).toBe("Doe");
+    expect(ParserUtils.getComponent(patient2.patient.fields[4], 0)).toBe("Roe");
+    expect(ParserUtils.getComponent(patient1.visit.fields[2], 1)).toBe("101");
+    expect(ParserUtils.getComponent(patient2.visit.fields[2], 1)).toBe("102");
     expect(result.val!.message.encode()).toBe(encoded);
   }
 });

@@ -23,27 +23,27 @@ import { OBX } from "../../segments/v2.5/OBX.ts";
 /** The PATIENT group of a parsed ADT^A17 (HL7 v2.5) message. */
 export interface ParsedSwapPatient {
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The PV1 segment. */
-  pv1: PV1;
+  visit: PV1;
   /** The PV2 segment. */
-  pv2?: PV2;
+  visitDetails?: PV2;
   /** The DB1 segments. */
-  db1List?: DB1[];
+  disabilities?: DB1[];
   /** The OBX segments. */
-  obxList?: OBX[];
+  observations?: OBX[];
 }
 
 /** Structured result of parsing an HL7 ADT^A17 (HL7 v2.5) message. */
 export interface ParsedADT_A17 extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The SFT segments. */
-  sftList?: SFT[];
+  software?: SFT[];
   /** The EVN segment. */
-  evn: EVN;
+  event: EVN;
   /** The PATIENT groups. */
   patients: ParsedSwapPatient[];
 }

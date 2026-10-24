@@ -152,10 +152,13 @@ import { ORU_R01_STRUCTURE } from '@campfhir/hl7/structures/v2.5.1';
 
 Every builder takes the message's required segments and groups as positional arguments, in the
 order of the standard's message table, then an `options` object for the optional ones:
-`createADT_A01(msh, evn, pid, pv1, { pd1, nk1List, insuranceGroups })`,
-`createACK(msh, msa, { err })`. `verify()` lists what is missing or misplaced and `encode()` throws
-when the message is invalid. A parsed message has the same shape as the builder input, so a message
-can be parsed, edited and rebuilt without conversion.
+`createADT_A01(msh, evn, pid, pv1, { patientDemographics, nextOfKin, insuranceGroups })`,
+`createACK(msh, msa, { error })`. Properties are named after what the segment holds, not its code:
+`patient` (PID), `visit` (PV1), `notes` (NTE), `diagnoses` (DG1), `commonOrder` (ORC),
+`observationRequest` (OBR), `observations` (OBX); the message header is `header`. `verify()` lists
+what is missing or misplaced and `encode()` throws when the message is invalid. A parsed message
+has the same shape as the builder input, so a message can be parsed, edited and rebuilt without
+conversion.
 
 ## Usage Examples
 
@@ -212,9 +215,9 @@ const obx = new OBX()
   .observationResultStatus('F');
 
 const patientResult: PatientResult = {
-  pid,
-  pv1,
-  orderObservations: [{ obr, observations: [{ obx }] }],
+  patient: pid,
+  visit: pv1,
+  orderObservations: [{ observationRequest: obr, observations: [{ observation: obx }] }],
 };
 
 const message = createORU_R01(msh, [patientResult]);
@@ -239,14 +242,14 @@ if (result.ok) {
   const parsed = result.val;
 
   // Access MSH data
-  console.log('Sending App:', ParserUtils.getComponent(parsed.msh.fields[1], 0));
+  console.log('Sending App:', ParserUtils.getComponent(parsed.header.fields[1], 0));
 
   // Access patient data
-  const pidFields = parsed.patientResults[0].pid!.fields;
+  const pidFields = parsed.patientResults[0].patient!.fields;
   console.log('Patient Name:', ParserUtils.getComponent(pidFields[4], 0));
 
   // Access observations
-  parsed.patientResults[0].orderObservations[0].observations!.forEach(({ obx }) => {
+  parsed.patientResults[0].orderObservations[0].observations!.forEach(({ observation: obx }) => {
     const name = ParserUtils.getComponent(obx.fields[2], 1);
     const value = ParserUtils.getComponent(obx.fields[4], 0);
     console.log(`${name}: ${value}`);

@@ -30,14 +30,14 @@ describe("ORU_R30_Parser", () => {
     const result = parser.parse([MSH_LINE(), ...minimal].join("\r"));
     expect(result.ok).toBe(true);
     const v = result.val!;
-    expect(ParserUtils.getComponent(v.pid.fields[4], 0)).toBe("Smith");
-    expect(ParserUtils.getComponent(v.orc.fields[0], 0)).toBe("NW");
-    expect(ParserUtils.getComponent(v.obr.fields[3], 0)).toBe("GLUC");
+    expect(ParserUtils.getComponent(v.patient.fields[4], 0)).toBe("Smith");
+    expect(ParserUtils.getComponent(v.commonOrder.fields[0], 0)).toBe("NW");
+    expect(ParserUtils.getComponent(v.observationRequest.fields[3], 0)).toBe("GLUC");
     expect(v.observations).toHaveLength(1);
-    expect(ParserUtils.getComponent(v.observations[0].obx.fields[4], 0)).toBe("185");
-    expect(v.pv1).toBeUndefined();
-    expect(v.timing).toEqual([]);
-    expect(v.obrNteList).toEqual([]);
+    expect(ParserUtils.getComponent(v.observations[0].observation.fields[4], 0)).toBe("185");
+    expect(v.visit).toBeUndefined();
+    expect(v.timings).toEqual([]);
+    expect(v.notes).toEqual([]);
   });
 
   it("parses every optional segment and group in spec order", () => {
@@ -61,20 +61,20 @@ describe("ORU_R30_Parser", () => {
     const result = parseORU_R30(wire);
     expect(result.ok).toBe(true);
     const v = result.val!;
-    expect(v.sftList).toHaveLength(1);
-    expect(v.pd1).toBeTruthy();
-    expect(ParserUtils.getComponent(v.pv1!.fields[1], 0)).toBe("E");
-    expect(v.pv2).toBeTruthy();
-    expect(v.obrNteList).toHaveLength(1);
-    expect(v.timing).toHaveLength(1);
-    expect(v.timing![0].tq2List).toHaveLength(1);
-    expect(v.observations.map((o) => o.nteList!.length)).toEqual([2, 0]);
+    expect(v.software).toHaveLength(1);
+    expect(v.patientDemographics).toBeTruthy();
+    expect(ParserUtils.getComponent(v.visit!.fields[1], 0)).toBe("E");
+    expect(v.visitDetails).toBeTruthy();
+    expect(v.notes).toHaveLength(1);
+    expect(v.timings).toHaveLength(1);
+    expect(v.timings![0].timingRelationships).toHaveLength(1);
+    expect(v.observations.map((o) => o.notes!.length)).toEqual([2, 0]);
     expect(v.message.segments).toHaveLength(15);
     expect(v.message.encode()).toBe(wire);
   });
 
   it("R31 and R32 parse under their own names", () => {
-    expect(parseORU_R31([MSH_LINE("R31"), ...minimal].join("\r")).val!.msh.encode()).toContain("ORU^R31");
+    expect(parseORU_R31([MSH_LINE("R31"), ...minimal].join("\r")).val!.header.encode()).toContain("ORU^R31");
     expect(parseORU_R32([MSH_LINE("R32"), ...minimal].join("\r")).ok).toBe(true);
     expect(parseORU_R31([MSH_LINE("R31")].join("\r")).err!.message).toBe("ORU_R31 message must contain a PID segment");
   });
@@ -112,8 +112,8 @@ describe("ORU_R30_Parser", () => {
         new PID().setId("1").patientName({ familyName: "Smith", givenName: "Jane" }),
         new ORC().orderControl("NW").placerOrderNumber("POC1"),
         new OBR().setId("1").universalServiceIdentifier({ identifier: "GLUC", text: "Glucose", nameOfCodingSystem: "LN" }),
-        [{ obx: new OBX().setId("1").valueType("NM").observationValue("185") }],
-        { pv1: new PV1().patientClass("E") },
+        [{ observation: new OBX().setId("1").valueType("NM").observationValue("185") }],
+        { visit: new PV1().patientClass("E") },
       ).encode();
     for (const [create, parse, ev] of [
       [createORU_R30, parseORU_R30, "R30"],
@@ -125,7 +125,7 @@ describe("ORU_R30_Parser", () => {
       const result = parse(wire);
       expect(result.ok).toBe(true);
       expect(result.val!.message.encode()).toBe(wire);
-      expect(ParserUtils.getComponent(result.val!.observations[0].obx.fields[4], 0)).toBe("185");
+      expect(ParserUtils.getComponent(result.val!.observations[0].observation.fields[4], 0)).toBe("185");
     }
   });
 });
@@ -144,10 +144,10 @@ describe("ORU_R30 Integration Tests - validated example messages", () => {
       const result = parseORU_R30(read(testFile));
       expect(result.ok, `Failed to parse ${testFile}: ${result.err?.message}`).toBe(true);
       const v = result.val!;
-      expect(v.msh.getMessageType().messageCode).toBe("ORU");
-      expect(v.pid).toBeTruthy();
-      expect(v.pv1).toBeTruthy();
-      expect(v.orc).toBeTruthy();
+      expect(v.header.getMessageType().messageCode).toBe("ORU");
+      expect(v.patient).toBeTruthy();
+      expect(v.visit).toBeTruthy();
+      expect(v.commonOrder).toBeTruthy();
       expect(v.observations.length, `No OBX in ${testFile}`).toBeGreaterThan(0);
 
       const again = parseORU_R30(v.message.encode());

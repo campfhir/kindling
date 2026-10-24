@@ -25,7 +25,7 @@ describe("MDM_T01 / MDM_T02 builders (v2.3)", () => {
     expect(types(wire)).toEqual(["MSH", "EVN", "PID", "PV1", "TXA"]);
     const result = parseMDM_T01(wire);
     expect(result.ok).toBe(true);
-    expect(ParserUtils.getComponent(result.val!.txa.fields[1], 0)).toBe("DS");
+    expect(ParserUtils.getComponent(result.val!.document.fields[1], 0)).toBe("DS");
     expect(result.val!.message.encode()).toBe(wire);
   });
 
@@ -34,7 +34,7 @@ describe("MDM_T01 / MDM_T02 builders (v2.3)", () => {
     expect(types(wire)).toEqual(["MSH", "EVN", "PID", "PV1", "TXA", "OBX", "OBX"]);
     const result = parseMDM_T02(wire);
     expect(result.ok).toBe(true);
-    expect(result.val!.obxList).toHaveLength(2);
+    expect(result.val!.observations).toHaveLength(2);
     expect(result.val!.message.encode()).toBe(wire);
     expect(new MDM_T02(msh("T02"), evn("T02"), pid(), pv1(), txa(), []).verify().errors).toEqual(["At least one OBX segment is required"]);
   });
@@ -52,7 +52,7 @@ describe("parseMDM_T01 / parseMDM_T02 (v2.3)", () => {
   test("T02 parses OBX content after TXA", () => {
     const result = parseMDM_T02([MSH_LINE("T02"), ...body, "OBX|1|TX|DS^Discharge summary||Line one", "OBX|2|TX|DS^Discharge summary||Line two"].join("\r"));
     expect(result.ok).toBe(true);
-    expect(ParserUtils.getComponent(result.val!.obxList[1].fields[4], 0)).toBe("Line two");
+    expect(ParserUtils.getComponent(result.val!.observations[1].fields[4], 0)).toBe("Line two");
   });
 
   test("T02 without OBX, OBX before TXA, and T01 without TXA are rejected", () => {

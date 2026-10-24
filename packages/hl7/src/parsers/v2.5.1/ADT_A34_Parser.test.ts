@@ -27,21 +27,21 @@ describe("parseADT_A34 — minimal message", () => {
 
   test("extracts MSH", () => {
     const result = parseADT_A34(minimalMessage);
-    expect(result.val!.msh.name).toBe("MSH");
-    expect(ParserUtils.getComponent(result.val!.msh.fields[1], 0)).toBe("SEND");
+    expect(result.val!.header.name).toBe("MSH");
+    expect(ParserUtils.getComponent(result.val!.header.fields[1], 0)).toBe("SEND");
   });
 
   test("extracts PID", () => {
     const result = parseADT_A34(minimalMessage);
-    expect(result.val!.pid).toBeTruthy();
-    const familyName = ParserUtils.getComponent(result.val!.pid.fields[4], 0);
+    expect(result.val!.patient).toBeTruthy();
+    const familyName = ParserUtils.getComponent(result.val!.patient.fields[4], 0);
     expect(familyName).toBe("Doe");
   });
 
   test("extracts MRG", () => {
     const result = parseADT_A34(minimalMessage);
-    expect(result.val!.mrg).toBeTruthy();
-    expect(result.val!.mrg.name).toBe("MRG");
+    expect(result.val!.merge).toBeTruthy();
+    expect(result.val!.merge.name).toBe("MRG");
   });
 
   test("EVN is required", () => {
@@ -54,21 +54,21 @@ describe("parseADT_A34 — minimal message", () => {
 describe("parseADT_A34 — optional segments", () => {
   test("extracts EVN", () => {
     const result = parseADT_A34(fullMessage);
-    expect(result.val!.evn).toBeTruthy();
-    expect(result.val!.evn!.name).toBe("EVN");
+    expect(result.val!.event).toBeTruthy();
+    expect(result.val!.event!.name).toBe("EVN");
   });
 
   test("extracts PD1", () => {
     const result = parseADT_A34(fullMessage);
-    expect(result.val!.pd1).toBeTruthy();
-    expect(result.val!.pd1!.name).toBe("PD1");
+    expect(result.val!.patientDemographics).toBeTruthy();
+    expect(result.val!.patientDemographics!.name).toBe("PD1");
   });
 
   test("extracts PV1", () => {
     const result = parseADT_A34(fullMessage);
-    expect(result.val!.pv1).toBeTruthy();
-    expect(result.val!.pv1!.name).toBe("PV1");
-    const patientClass = ParserUtils.getComponent(result.val!.pv1!.fields[1], 0);
+    expect(result.val!.visit).toBeTruthy();
+    expect(result.val!.visit!.name).toBe("PV1");
+    const patientClass = ParserUtils.getComponent(result.val!.visit!.fields[1], 0);
     expect(patientClass).toBe("I");
   });
 });

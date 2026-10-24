@@ -24,11 +24,11 @@ export class SRM_S10<TMSH extends MSH = MSH, TARQ extends ARQ = ARQ> extends SRM
 
 /** Builds an HL7 SRM^S10 (HL7 v2.3) message. */
 export function createSRM_S10<TMSH extends MSH = MSH, TARQ extends ARQ = ARQ>(
-  msh: TMSH,
-  arq: TARQ,
+  header: TMSH,
+  appointmentRequest: TARQ,
   resources: SRMResourcesGroup[],
   options: SRM_S10Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): SRM_S10<TMSH, TARQ> {
-  return new SRM_S10(msh, arq, resources, options, encoding);
+  return new SRM_S10(header, appointmentRequest, resources, options, encoding);
 }

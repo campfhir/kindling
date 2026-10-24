@@ -25,12 +25,12 @@ export class BAR_P05<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
 /** Builds an HL7 BAR^P05 (HL7 v2.3) message. */
 export function createBAR_P05<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID>(
-  msh: TMSH,
-  evn: TEVN,
-  pid: TPID,
+  header: TMSH,
+  event: TEVN,
+  patient: TPID,
   visits: BARVisitGroup[],
   options: BAR_P05Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): BAR_P05<TMSH, TEVN, TPID> {
-  return new BAR_P05(msh, evn, pid, visits, options, encoding);
+  return new BAR_P05(header, event, patient, visits, options, encoding);
 }

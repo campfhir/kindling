@@ -24,7 +24,7 @@ export const MDM_T01_SCHEMA: MessageSchema = {
     req("PV1"),
     group("COMMON_ORDER", false, true, [
       req("ORC"),
-      group("TIMING", false, true, [req("TQ1"), optList("TQ2")], { as: "timing", exportTypeName: "ParsedMDMTiming" }),
+      group("TIMING", false, true, [req("TQ1"), optList("TQ2")], { as: "timings", exportTypeName: "ParsedMDMTiming" }),
       req("OBR"),
       optList("NTE"),
     ], { as: "orders", exportTypeName: "ParsedMDMOrder" }),

@@ -36,59 +36,59 @@ import type { PDA } from "../../segments/v2.4/PDA.ts";
 /** The PROCEDURE group of an ADT^A01 (HL7 v2.4) message being built. */
 export interface ProcedureGroup {
   /** The PR1 segment. */
-  pr1: PR1;
+  procedure: PR1;
   /** The ROL segments. */
-  rolList?: ROL[];
+  roles?: ROL[];
 }
 
 /** The INSURANCE group of an ADT^A01 (HL7 v2.4) message being built. */
 export interface InsuranceGroup {
   /** The IN1 segment. */
-  in1: IN1;
+  insurance: IN1;
   /** The IN2 segment. */
-  in2?: IN2;
+  insuranceDetails?: IN2;
   /** The IN3 segments. */
-  in3List?: IN3[];
+  insuranceCertifications?: IN3[];
   /** The ROL segments. */
-  rolList?: ROL[];
+  roles?: ROL[];
 }
 
 /** The optional segments and groups of an ADT^A01 (HL7 v2.4) message. */
 export interface ADT_A01Options {
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The ROL segments. */
-  rolList?: ROL[];
+  roles?: ROL[];
   /** The NK1 segments. */
-  nk1List?: NK1[];
+  nextOfKin?: NK1[];
   /** The PV2 segment. */
-  pv2?: PV2;
+  visitDetails?: PV2;
   /** The ROL segments. */
-  visitRolList?: ROL[];
+  visitRoles?: ROL[];
   /** The DB1 segments. */
-  db1List?: DB1[];
+  disabilities?: DB1[];
   /** The OBX segments. */
-  obxList?: OBX[];
+  observations?: OBX[];
   /** The AL1 segments. */
-  al1List?: AL1[];
+  allergies?: AL1[];
   /** The DG1 segments. */
-  dg1List?: DG1[];
+  diagnoses?: DG1[];
   /** The DRG segment. */
-  drg?: DRG;
+  diagnosisRelatedGroup?: DRG;
   /** The PROCEDURE groups. */
   procedures?: ProcedureGroup[];
   /** The GT1 segments. */
-  gt1List?: GT1[];
+  guarantors?: GT1[];
   /** The INSURANCE groups. */
   insuranceGroups?: InsuranceGroup[];
   /** The ACC segment. */
-  acc?: ACC;
+  accident?: ACC;
   /** The UB1 segment. */
-  ub1?: UB1;
+  ub82?: UB1;
   /** The UB2 segment. */
-  ub2?: UB2;
+  ub92?: UB2;
   /** The PDA segment. */
-  pda?: PDA;
+  deathAndAutopsy?: PDA;
 }
 
 /** Builder for HL7 ADT^A01 (HL7 v2.4) messages. */
@@ -100,17 +100,17 @@ export class ADT_A01<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
-    public evn: TEVN,
-    public pid: TPID,
-    public pv1: TPV1,
+    public header: TMSH,
+    public event: TEVN,
+    public patient: TPID,
+    public visit: TPV1,
     public options: ADT_A01Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, evn: this.evn, pid: this.pid, pv1: this.pv1 };
+    return { ...this.options, header: this.header, event: this.event, patient: this.patient, visit: this.visit };
   }
 
   /** Validates the message structure, returning a result. */
@@ -131,12 +131,12 @@ export class ADT_A01<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
 /** Builds an HL7 ADT^A01 (HL7 v2.4) message. */
 export function createADT_A01<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TPV1 extends PV1 = PV1>(
-  msh: TMSH,
-  evn: TEVN,
-  pid: TPID,
-  pv1: TPV1,
+  header: TMSH,
+  event: TEVN,
+  patient: TPID,
+  visit: TPV1,
   options: ADT_A01Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): ADT_A01<TMSH, TEVN, TPID, TPV1> {
-  return new ADT_A01(msh, evn, pid, pv1, options, encoding);
+  return new ADT_A01(header, event, patient, visit, options, encoding);
 }

@@ -29,13 +29,13 @@ for (const [label, builders, parsers] of [
     for (const event of A01_LIKE) {
       test(`ADT^${event} (A01 structure) builds, encodes and parses`, () => {
         const create = (builders as Record<string, unknown>)[`createADT_${event}`] as typeof b23.createADT_A01;
-        const parse = (parsers as Record<string, unknown>)[`parseADT_${event}`] as (s: string) => Result<{ pid: unknown }>;
+        const parse = (parsers as Record<string, unknown>)[`parseADT_${event}`] as (s: string) => Result<{ patient: unknown }>;
         const encoded = create(msh(event), new EVN().eventTypeCode(event), pid(), new PV1().patientClass("I")).encode();
         expect(encoded.split("\r").map((s) => s.substring(0, 3))).toEqual(["MSH", "EVN", "PID", "PV1"]);
         expect(encoded).toContain(`ADT^${event}`);
         const parsed = parse(encoded);
         expect(parsed.ok).toBe(true);
-        expect(parsed.val!.pid).toBeTruthy();
+        expect(parsed.val!.patient).toBeTruthy();
         const missingPid = parse(`MSH|^~\\&|TEST|||||ADT^${event}\rEVN|${event}`);
         expect(missingPid.ok).toBe(false);
         expect(missingPid.err!.message).toContain(`ADT_${event} message must contain a PID segment`);
@@ -44,15 +44,15 @@ for (const [label, builders, parsers] of [
     for (const event of A34_LIKE) {
       test(`ADT^${event} (A34 structure) builds, encodes and parses`, () => {
         const create = (builders as Record<string, unknown>)[`createADT_${event}`] as typeof b23.createADT_A34;
-        const parse = (parsers as Record<string, unknown>)[`parseADT_${event}`] as (s: string) => Result<{ mrg: unknown }>;
+        const parse = (parsers as Record<string, unknown>)[`parseADT_${event}`] as (s: string) => Result<{ merge: unknown }>;
         const mrg = new MRG().priorPatientId({ id: "OLD-1" });
-        const options = event === "A50" || event === "A51" ? { pv1: new PV1().patientClass("I") } : {};
+        const options = event === "A50" || event === "A51" ? { visit: new PV1().patientClass("I") } : {};
         const encoded = create(msh(event), new EVN().eventTypeCode(event), pid(), mrg, options).encode();
-        const expected = ["MSH", "EVN", "PID", "MRG", ...(options.pv1 ? ["PV1"] : [])];
+        const expected = ["MSH", "EVN", "PID", "MRG", ...(options.visit ? ["PV1"] : [])];
         expect(encoded.split("\r").map((s) => s.substring(0, 3))).toEqual(expected);
         const parsed = parse(encoded);
         expect(parsed.ok).toBe(true);
-        expect(parsed.val!.mrg).toBeTruthy();
+        expect(parsed.val!.merge).toBeTruthy();
         const missingMrg = parse(`MSH|^~\\&|TEST|||||ADT^${event}\rEVN|${event}\rPID|1`);
         expect(missingMrg.ok).toBe(false);
         expect(missingMrg.err!.message).toContain(`ADT_${event} message must contain an MRG segment`);

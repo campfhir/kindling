@@ -32,7 +32,7 @@ import type { ACC } from "../../segments/v2.3/ACC.ts";
 /** The FINANCIAL group of an DFT^P03 (HL7 v2.3) message being built. */
 export interface DFTFinancialGroup {
   /** The FT1 segment. */
-  ft1: FT1;
+  transaction: FT1;
   /** The FINANCIAL PROCEDURE groups. */
   procedures?: DFTProcedureGroup[];
 }
@@ -40,43 +40,43 @@ export interface DFTFinancialGroup {
 /** The FINANCIAL PROCEDURE group of an DFT^P03 (HL7 v2.3) message being built. */
 export interface DFTProcedureGroup {
   /** The PR1 segment. */
-  pr1: PR1;
+  procedure: PR1;
   /** The ROL segments. */
-  rolList?: ROL[];
+  roles?: ROL[];
 }
 
 /** The INSURANCE group of an DFT^P03 (HL7 v2.3) message being built. */
 export interface DFTInsuranceGroup {
   /** The IN1 segment. */
-  in1: IN1;
+  insurance: IN1;
   /** The IN2 segment. */
-  in2?: IN2;
+  insuranceDetails?: IN2;
   /** The IN3 segment. */
-  in3?: IN3;
+  insuranceCertification?: IN3;
 }
 
 /** The optional segments and groups of an DFT^P03 (HL7 v2.3) message. */
 export interface DFT_P03Options {
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
   /** The PV2 segment. */
-  pv2?: PV2;
+  visitDetails?: PV2;
   /** The DB1 segments. */
-  db1List?: DB1[];
+  disabilities?: DB1[];
   /** The OBX segments. */
-  obxList?: OBX[];
+  observations?: OBX[];
   /** The DG1 segments. */
-  dg1List?: DG1[];
+  diagnoses?: DG1[];
   /** The DRG segment. */
-  drg?: DRG;
+  diagnosisRelatedGroup?: DRG;
   /** The GT1 segments. */
-  gt1List?: GT1[];
+  guarantors?: GT1[];
   /** The INSURANCE groups. */
   insurances?: DFTInsuranceGroup[];
   /** The ACC segment. */
-  acc?: ACC;
+  accident?: ACC;
 }
 
 /** Builder for HL7 DFT^P03 (HL7 v2.3) messages. */
@@ -88,9 +88,9 @@ export class DFT_P03<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
-    public evn: TEVN,
-    public pid: TPID,
+    public header: TMSH,
+    public event: TEVN,
+    public patient: TPID,
     public financials: DFTFinancialGroup[],
     public options: DFT_P03Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
@@ -98,7 +98,7 @@ export class DFT_P03<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, evn: this.evn, pid: this.pid, financials: this.financials };
+    return { ...this.options, header: this.header, event: this.event, patient: this.patient, financials: this.financials };
   }
 
   /** Validates the message structure, returning a result. */
@@ -119,12 +119,12 @@ export class DFT_P03<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
 /** Builds an HL7 DFT^P03 (HL7 v2.3) message. */
 export function createDFT_P03<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID>(
-  msh: TMSH,
-  evn: TEVN,
-  pid: TPID,
+  header: TMSH,
+  event: TEVN,
+  patient: TPID,
   financials: DFTFinancialGroup[],
   options: DFT_P03Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): DFT_P03<TMSH, TEVN, TPID> {
-  return new DFT_P03(msh, evn, pid, financials, options, encoding);
+  return new DFT_P03(header, event, patient, financials, options, encoding);
 }

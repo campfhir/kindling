@@ -19,19 +19,19 @@ import { PRA } from "../../segments/v2.3/PRA.ts";
 /** The MF STAFF group of a parsed MFN^M02 (HL7 v2.3) message. */
 export interface ParsedStaffEntry {
   /** The MFE segment. */
-  mfe: MFE;
+  entry: MFE;
   /** The STF segment. */
-  stf: STF;
+  staff: STF;
   /** The PRA segment. */
-  pra?: PRA;
+  practitioner?: PRA;
 }
 
 /** Structured result of parsing an HL7 MFN^M02 (HL7 v2.3) message. */
 export interface ParsedMFN_M02 extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The MFI segment. */
-  mfi: MFI;
+  masterFile: MFI;
   /** The MF STAFF groups. */
   staffEntries: ParsedStaffEntry[];
 }

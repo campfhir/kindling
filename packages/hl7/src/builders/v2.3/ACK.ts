@@ -17,7 +17,7 @@ import type { ERR } from "../../segments/v2.3/ERR.ts";
 /** The optional segments and groups of an ACK (HL7 v2.3) message. */
 export interface ACKOptions {
   /** The ERR segment. */
-  err?: ERR;
+  error?: ERR;
 }
 
 /** Builder for HL7 ACK (HL7 v2.3) messages. */
@@ -29,15 +29,15 @@ export class ACK<TMSH extends MSH = MSH, TMSA extends MSA = MSA> {
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
-    public msa: TMSA,
+    public header: TMSH,
+    public acknowledgment: TMSA,
     public options: ACKOptions = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, msa: this.msa };
+    return { ...this.options, header: this.header, acknowledgment: this.acknowledgment };
   }
 
   /** Validates the message structure, returning a result. */
@@ -58,10 +58,10 @@ export class ACK<TMSH extends MSH = MSH, TMSA extends MSA = MSA> {
 
 /** Builds an HL7 ACK (HL7 v2.3) message. */
 export function createACK<TMSH extends MSH = MSH, TMSA extends MSA = MSA>(
-  msh: TMSH,
-  msa: TMSA,
+  header: TMSH,
+  acknowledgment: TMSA,
   options: ACKOptions = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): ACK<TMSH, TMSA> {
-  return new ACK(msh, msa, options, encoding);
+  return new ACK(header, acknowledgment, options, encoding);
 }

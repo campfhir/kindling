@@ -82,12 +82,12 @@ const obx2 = new OBX()
   .dateTimeOfObservation(messageDateTime);
 
 const patientResult: PatientResult = {
-  pid,
-  pv1,
+  patient: pid,
+  visit: pv1,
   orderObservations: [
     {
-      obr,
-      observations: [{ obx: obx1 }, { obx: obx2 }],
+      observationRequest: obr,
+      observations: [{ observation: obx1 }, { observation: obx2 }],
     },
   ],
 };
@@ -125,7 +125,7 @@ console.log(
 console.log("\n3. Extracting Data from Parsed Message");
 console.log("-".repeat(80));
 
-const mshFields = parsed.msh.fields;
+const mshFields = parsed.header.fields;
 console.log("MSH Data:");
 console.log(
   "  Sending Application:",
@@ -137,7 +137,7 @@ console.log("  Trigger Event:", ParserUtils.getComponent(mshFields[7], 1));
 console.log("  Message Control ID:", ParserUtils.getComponent(mshFields[8], 0));
 console.log("  Version:", ParserUtils.getComponent(mshFields[10], 0));
 
-const pidFields = parsed.patientResults[0].pid!.fields;
+const pidFields = parsed.patientResults[0].patient!.fields;
 console.log("\nPID Data:");
 console.log("  Patient ID:", ParserUtils.getComponent(pidFields[2], 0));
 console.log("  ID Type:", ParserUtils.getComponent(pidFields[2], 4));
@@ -146,7 +146,7 @@ console.log("  Given Name:", ParserUtils.getComponent(pidFields[4], 1));
 console.log("  DOB:", ParserUtils.getComponent(pidFields[6], 0));
 console.log("  Sex:", ParserUtils.getComponent(pidFields[7], 0));
 
-const obrFields = parsed.patientResults[0].orderObservations[0].obr.fields;
+const obrFields = parsed.patientResults[0].orderObservations[0].observationRequest.fields;
 console.log("\nOBR Data:");
 console.log(
   "  Placer Order Number:",
@@ -161,7 +161,7 @@ console.log("  Service Name:", ParserUtils.getComponent(obrFields[3], 1));
 
 console.log("\nOBX Data:");
 parsed.patientResults[0].orderObservations[0].observations!.forEach(
-  ({ obx }, idx) => {
+  ({ observation: obx }, idx) => {
     const obxFields = obx.fields;
     console.log(`  Observation ${idx + 1}:`);
     console.log("    Type:", ParserUtils.getComponent(obxFields[1], 0));

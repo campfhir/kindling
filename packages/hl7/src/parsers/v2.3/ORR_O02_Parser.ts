@@ -24,18 +24,10 @@ import { ODS } from "../../segments/v2.3/ODS.ts";
 import { ODT } from "../../segments/v2.3/ODT.ts";
 import { CTI } from "../../segments/v2.3/CTI.ts";
 
-/** The PATIENT group of a parsed ORR^O02 (HL7 v2.3) message. */
-export interface ParsedResponsePatient {
-  /** The PID segment. */
-  pid: PID;
-  /** The NTE segments. */
-  nteList?: NTE[];
-}
-
 /** The ORDER group of a parsed ORR^O02 (HL7 v2.3) message. */
 export interface ParsedResponseOrder {
   /** The ORC segment. */
-  orc: ORC;
+  commonOrder: ORC;
   /** The ORDER DETAIL group. */
   detail?: ParsedResponseDetail;
 }
@@ -45,23 +37,25 @@ export interface ParsedResponseDetail {
   /** One of OBR, RQD, RQ1, RXO, ODS, ODT. */
   segment: OBR | RQD | RQ1 | RXO | ODS | ODT;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
   /** The CTI segments. */
-  ctiList?: CTI[];
+  clinicalTrials?: CTI[];
 }
 
 /** Structured result of parsing an HL7 ORR^O02 (HL7 v2.3) message. */
 export interface ParsedORR_O02 extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The MSA segment. */
-  msa: MSA;
+  acknowledgment: MSA;
   /** The ERR segment. */
-  err?: ERR;
+  error?: ERR;
   /** The NTE segments. */
-  nteList?: NTE[];
-  /** The PATIENT group. */
-  patient?: ParsedResponsePatient;
+  notes?: NTE[];
+  /** The PID segment. */
+  patient?: PID;
+  /** The NTE segments. */
+  patientNotes?: NTE[];
   /** The ORDER groups. */
   orders?: ParsedResponseOrder[];
 }

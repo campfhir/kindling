@@ -26,12 +26,12 @@ export class ADT_A15<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
 /** Builds an HL7 ADT^A15 (HL7 v2.3) message. */
 export function createADT_A15<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TPV1 extends PV1 = PV1>(
-  msh: TMSH,
-  evn: TEVN,
-  pid: TPID,
-  pv1: TPV1,
+  header: TMSH,
+  event: TEVN,
+  patient: TPID,
+  visit: TPV1,
   options: ADT_A15Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): ADT_A15<TMSH, TEVN, TPID, TPV1> {
-  return new ADT_A15(msh, evn, pid, pv1, options, encoding);
+  return new ADT_A15(header, event, patient, visit, options, encoding);
 }

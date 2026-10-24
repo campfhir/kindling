@@ -27,14 +27,14 @@ describe("BAR (v2.4): ROLs, repeating IN3, and ABS/BLC/RMI in P05", () => {
   test("P05 closes each visit with ABS, BLC and RMI", () => {
     const wire = createBAR_P05(msh("P05"), evn("P05"), pid(), [
       {
-        pv1: new PV1().patientClass("I"), visitRolList: [new ROL()],
-        insurances: [{ in1: new IN1().setId("1"), in3List: [new IN3().setId("1"), new IN3().setId("2")], rolList: [new ROL()] }],
-        abs: new ABS().caseCategoryCode({ identifier: "ELE", text: "Elective" }).gestationPeriodWeeks(39).stillbornIndicator("N"),
-        blcList: [new BLC().bloodProductCode("PRBC").bloodAmount({ quantity: 2, units: "U" }), new BLC().bloodProductCode("FFP")],
-        rmi: new RMI().riskManagementIncidentCode({ identifier: "FALL" }).dateTimeIncident("20231015120000"),
+        visit: new PV1().patientClass("I"), visitRoles: [new ROL()],
+        insurances: [{ insurance: new IN1().setId("1"), insuranceCertifications: [new IN3().setId("1"), new IN3().setId("2")], roles: [new ROL()] }],
+        abstract: new ABS().caseCategoryCode({ identifier: "ELE", text: "Elective" }).gestationPeriodWeeks(39).stillbornIndicator("N"),
+        bloodCodes: [new BLC().bloodProductCode("PRBC").bloodAmount({ quantity: 2, units: "U" }), new BLC().bloodProductCode("FFP")],
+        riskManagementIncident: new RMI().riskManagementIncidentCode({ identifier: "FALL" }).dateTimeIncident("20231015120000"),
       },
-      { pv1: new PV1().patientClass("O"), abs: new ABS() },
-    ], { rolList: [new ROL()] }).encode();
+      { visit: new PV1().patientClass("O"), abstract: new ABS() },
+    ], { roles: [new ROL()] }).encode();
     expect(types(wire)).toEqual([
       "MSH", "EVN", "PID", "ROL",
       "PV1", "ROL", "IN1", "IN3", "IN3", "ROL", "ABS", "BLC", "BLC", "RMI",
@@ -43,22 +43,22 @@ describe("BAR (v2.4): ROLs, repeating IN3, and ABS/BLC/RMI in P05", () => {
     const result = parseBAR_P05(wire);
     expect(result.ok).toBe(true);
     const v = result.val!;
-    expect(v.rolList).toHaveLength(1);
+    expect(v.roles).toHaveLength(1);
     expect(v.visits).toHaveLength(2);
-    expect(v.visits[0].visitRolList).toHaveLength(1);
-    expect(v.visits[0].insurances![0].in3List).toHaveLength(2);
-    expect(v.visits[0].insurances![0].rolList).toHaveLength(1);
-    expect(ParserUtils.getComponent(v.visits[0].abs!.fields[8], 0)).toBe("ELE");
-    expect(ParserUtils.getComponent(v.visits[0].abs!.fields[11], 0)).toBe("39");
-    expect(v.visits[0].blcList).toHaveLength(2);
-    expect(ParserUtils.getComponent(v.visits[0].blcList![0].fields[1], 1)).toBe("U");
-    expect(ParserUtils.getComponent(v.visits[0].rmi!.fields[0], 0)).toBe("FALL");
-    expect(v.visits[1].blcList).toHaveLength(0);
+    expect(v.visits[0].visitRoles).toHaveLength(1);
+    expect(v.visits[0].insurances![0].insuranceCertifications).toHaveLength(2);
+    expect(v.visits[0].insurances![0].roles).toHaveLength(1);
+    expect(ParserUtils.getComponent(v.visits[0].abstract!.fields[8], 0)).toBe("ELE");
+    expect(ParserUtils.getComponent(v.visits[0].abstract!.fields[11], 0)).toBe("39");
+    expect(v.visits[0].bloodCodes).toHaveLength(2);
+    expect(ParserUtils.getComponent(v.visits[0].bloodCodes![0].fields[1], 1)).toBe("U");
+    expect(ParserUtils.getComponent(v.visits[0].riskManagementIncident!.fields[0], 0)).toBe("FALL");
+    expect(v.visits[1].bloodCodes).toHaveLength(0);
     expect(v.message.encode()).toBe(wire);
   });
 
   test("P01 does not take ABS/BLC/RMI, and a second ABS starts a new visit in P05", () => {
-    const p01 = createBAR_P01(msh("P01"), evn("P01"), pid(), [{ pv1: new PV1().patientClass("I") }]).encode();
+    const p01 = createBAR_P01(msh("P01"), evn("P01"), pid(), [{ visit: new PV1().patientClass("I") }]).encode();
     expect(parseBAR_P01(p01).ok).toBe(true);
     const warn = console.warn;
     const warnings: string[] = [];
@@ -72,7 +72,7 @@ describe("BAR (v2.4): ROLs, repeating IN3, and ABS/BLC/RMI in P05", () => {
     const twoAbs = parseBAR_P05([MSH_LINE("P05"), "EVN|P05", "PID|1", "ABS|1", "ABS|2", "RMI|1"].join("\r"));
     expect(twoAbs.ok).toBe(true);
     expect(twoAbs.val!.visits).toHaveLength(2);
-    expect(twoAbs.val!.visits[1].rmi).toBeTruthy();
+    expect(twoAbs.val!.visits[1].riskManagementIncident).toBeTruthy();
   });
 
   test("P02 and P06 are unchanged in v2.4", () => {

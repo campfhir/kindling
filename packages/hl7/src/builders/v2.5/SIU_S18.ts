@@ -24,11 +24,11 @@ export class SIU_S18<TMSH extends MSH = MSH, TSCH extends SCH = SCH> extends SIU
 
 /** Builds an HL7 SIU^S18 (HL7 v2.5) message. */
 export function createSIU_S18<TMSH extends MSH = MSH, TSCH extends SCH = SCH>(
-  msh: TMSH,
-  sch: TSCH,
+  header: TMSH,
+  appointment: TSCH,
   resources: SIUResourcesGroup[],
   options: SIU_S18Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): SIU_S18<TMSH, TSCH> {
-  return new SIU_S18(msh, sch, resources, options, encoding);
+  return new SIU_S18(header, appointment, resources, options, encoding);
 }

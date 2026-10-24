@@ -24,9 +24,10 @@ export const ORR_O02_STRUCTURE: StructureItem[] = [
         name: "PATIENT",
         required: false,
         repeating: false,
+        inline: true,
         segments: [
           { name: "PID", required: true, repeating: false },
-          { name: "NTE", required: false, repeating: true },
+          { name: "NTE", required: false, repeating: true, as: "patientNotes" },
         ],
       },
       {

@@ -16,19 +16,20 @@ const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
 
 const fullMessage = () =>
   createORR_O02(makeMSH(), makeMSA(), {
-    errList: [new ERR().severity("E"), new ERR().severity("W")],
-    nteList: [new NTE().setId("1").comment("header")],
-    patient: { pid: new PID().setId("1"), nteList: [new NTE().setId("1").comment("patient")] },
+    errors: [new ERR().severity("E"), new ERR().severity("W")],
+    notes: [new NTE().setId("1").comment("header")],
+    patient: new PID().setId("1"),
+    patientNotes: [new NTE().setId("1").comment("patient")],
     orders: [
       {
-        orc: new ORC().orderControl("OK").placerOrderNumber("1"),
+        commonOrder: new ORC().orderControl("OK").placerOrderNumber("1"),
         detail: {
           segment: new OBR().setId("1"),
-          nteList: [new NTE().setId("1").comment("detail")],
-          ctiList: [new CTI().sponsorStudyId({ entityIdentifier: "S1" })],
+          notes: [new NTE().setId("1").comment("detail")],
+          clinicalTrials: [new CTI().sponsorStudyId({ entityIdentifier: "S1" })],
         },
       },
-      { orc: new ORC().orderControl("OK").placerOrderNumber("2"), detail: { segment: new OBR().setId("2") } },
+      { commonOrder: new ORC().orderControl("OK").placerOrderNumber("2"), detail: { segment: new OBR().setId("2") } },
     ],
   });
 
@@ -45,7 +46,7 @@ describe("ORR_O02 builder", () => {
   });
 
   test("verify() requires the order detail segment once a detail group is present", () => {
-    const noDetail = createORR_O02(makeMSH(), makeMSA(), { orders: [{ orc: new ORC().orderControl("OK"), detail: {} as any }] });
+    const noDetail = createORR_O02(makeMSH(), makeMSA(), { orders: [{ commonOrder: new ORC().orderControl("OK"), detail: {} as any }] });
     expect(noDetail.verify().errors).toEqual(["ORDER group 1: ORDER DETAIL group 1: One of OBR, RQD, RQ1, RXO, ODS, ODT is required"]);
     expect(() => noDetail.encode()).toThrow(/One of OBR/);
   });
@@ -72,16 +73,16 @@ describe("ORR_O02 parser", () => {
     expect(result.ok).toBe(true);
     if (!result.ok) return;
     const { val } = result;
-    expect(val.msa.encode()).toBe("MSA|AA|M1");
-    expect(val.errList).toHaveLength(2);
-    expect(val.errList![0]).toBeInstanceOf(ERR);
-    expect(val.nteList).toHaveLength(1);
-    expect(val.patient?.pid).toBeInstanceOf(PID);
-    expect(val.patient?.nteList).toHaveLength(1);
+    expect(val.acknowledgment.encode()).toBe("MSA|AA|M1");
+    expect(val.errors).toHaveLength(2);
+    expect(val.errors![0]).toBeInstanceOf(ERR);
+    expect(val.notes).toHaveLength(1);
+    expect(val.patient).toBeInstanceOf(PID);
+    expect(val.patientNotes).toHaveLength(1);
     expect(val.orders).toHaveLength(2);
     expect(val.orders![0].detail?.segment).toBeInstanceOf(OBR);
-    expect(val.orders![0].detail?.nteList).toHaveLength(1);
-    expect(val.orders![0].detail?.ctiList).toHaveLength(1);
+    expect(val.orders![0].detail?.notes).toHaveLength(1);
+    expect(val.orders![0].detail?.clinicalTrials).toHaveLength(1);
     expect(val.orders![1].detail?.segment).toBeInstanceOf(OBR);
     expect(val.message.segments).toHaveLength(wire.split("\r").length);
   });

@@ -27,14 +27,14 @@ export class MDM_T04<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
 /** Builds an HL7 MDM^T04 (HL7 v2.5.1) message. */
 export function createMDM_T04<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TPV1 extends PV1 = PV1, TTXA extends TXA = TXA>(
-  msh: TMSH,
-  evn: TEVN,
-  pid: TPID,
-  pv1: TPV1,
-  txa: TTXA,
+  header: TMSH,
+  event: TEVN,
+  patient: TPID,
+  visit: TPV1,
+  document: TTXA,
   observations: MDMObservationGroup[],
   options: MDM_T04Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): MDM_T04<TMSH, TEVN, TPID, TPV1, TTXA> {
-  return new MDM_T04(msh, evn, pid, pv1, txa, observations, options, encoding);
+  return new MDM_T04(header, event, patient, visit, document, observations, options, encoding);
 }

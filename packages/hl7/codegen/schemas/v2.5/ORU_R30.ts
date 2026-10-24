@@ -23,8 +23,8 @@ export const ORU_R30_SCHEMA: MessageSchema = {
     group("VISIT", false, false, [req("PV1"), opt("PV2")], { inline: true }),
     req("ORC"),
     req("OBR"),
-    optList("NTE", { as: "obrNteList" }),
-    group("TIMING_QTY", false, true, [req("TQ1"), optList("TQ2")], { as: "timing", exportTypeName: "ParsedTimingQty", builderTypeName: "TimingQty" }),
+    optList("NTE"),
+    group("TIMING_QTY", false, true, [req("TQ1"), optList("TQ2")], { as: "timings", exportTypeName: "ParsedTimingQty", builderTypeName: "TimingQty" }),
     group("OBSERVATION", true, true, [req("OBX"), optList("NTE")], { as: "observations", exportTypeName: "ParsedObservation", builderTypeName: "ObservationGroup" }),
   ],
 };

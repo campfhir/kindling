@@ -25,17 +25,17 @@ const msh = (code: string, event?: string) =>
 describe("v2.5.1 ACK", () => {
   test("parses SFT, MSA and repeating ERR into v2.5.1 classes", () => {
     const wire = createACK(msh("ACK"), new MSA().acknowledgmentCode("AE").messageControlId("9"), {
-      sftList: [new SFT()],
-      errList: [new ERR().helpDeskContactPoint({ telephoneNumber: "555" }), new ERR().overrideType({ code: "O" })],
+      software: [new SFT()],
+      errors: [new ERR().helpDeskContactPoint({ telephoneNumber: "555" }), new ERR().overrideType({ code: "O" })],
     }).encode();
     const result = parseACK(wire);
     expect(result.ok).toBe(true);
     if (!result.ok) return;
-    expect(result.val.sftList![0]).toBeInstanceOf(SFT);
-    expect(result.val.msa).toBeInstanceOf(MSA);
-    expect(result.val.errList).toHaveLength(2);
-    expect(result.val.errList![0]).toBeInstanceOf(ERR);
-    expect(result.val.errList![0].encode()).toBe("ERR" + "|".repeat(12) + "555");
+    expect(result.val.software![0]).toBeInstanceOf(SFT);
+    expect(result.val.acknowledgment).toBeInstanceOf(MSA);
+    expect(result.val.errors).toHaveLength(2);
+    expect(result.val.errors![0]).toBeInstanceOf(ERR);
+    expect(result.val.errors![0].encode()).toBe("ERR" + "|".repeat(12) + "555");
   });
 
   test("still rejects a message with no MSA", () => {
@@ -48,38 +48,38 @@ describe("v2.5.1 ORM^O01", () => {
     const wire = createORM_O01(
       msh("ORM", "O01"),
       [{
-        orc: new ORC().orderControl("NW"),
-        detail: { segment: new OBR().setId("1"), ctd: new CTD().contactRole({ identifier: "EP" }, { identifier: "CP" }) },
-        ft1List: [new FT1().setId("1").transactionReferenceKey("7")],
+        commonOrder: new ORC().orderControl("NW"),
+        detail: { segment: new OBR().setId("1"), contact: new CTD().contactRole({ identifier: "EP" }, { identifier: "CP" }) },
+        transactions: [new FT1().setId("1").transactionReferenceKey("7")],
       }],
-      { patient: { pid: new PID().setId("1"), insurance: [{ in1: new IN1().setId("1"), in3List: [new IN3(), new IN3()] }] } },
+      { patient: new PID().setId("1"), insurances: [{ insurance: new IN1().setId("1"), insuranceCertifications: [new IN3(), new IN3()] }] },
     ).encode();
     const result = parseORM_O01(wire);
     expect(result.ok).toBe(true);
     if (!result.ok) return;
     const order = result.val.orders[0];
     expect(order.detail?.segment).toBeInstanceOf(OBR);
-    expect(order.detail?.ctd).toBeInstanceOf(CTD);
-    expect(order.detail?.ctd?.encode()).toBe("CTD|EP~CP");
-    expect(order.ft1List![0]).toBeInstanceOf(FT1);
-    expect(order.ft1List![0].encode().split("|")[31]).toBe("7");
-    expect(result.val.patient?.pid).toBeInstanceOf(PID);
-    expect(result.val.patient?.insurance![0].in3List).toHaveLength(2);
+    expect(order.detail?.contact).toBeInstanceOf(CTD);
+    expect(order.detail?.contact?.encode()).toBe("CTD|EP~CP");
+    expect(order.transactions![0]).toBeInstanceOf(FT1);
+    expect(order.transactions![0].encode().split("|")[31]).toBe("7");
+    expect(result.val.patient).toBeInstanceOf(PID);
+    expect(result.val.insurances![0].insuranceCertifications).toHaveLength(2);
   });
 });
 
 describe("v2.5.1 ORR^O02", () => {
   test("parses repeating ERR and the order group into v2.5.1 classes", () => {
     const wire = createORR_O02(msh("ORR", "O02"), new MSA().acknowledgmentCode("AA").messageControlId("1"), {
-      errList: [new ERR().severity("W"), new ERR().severity("I")],
-      patient: { pid: new PID().setId("1") },
-      orders: [{ orc: new ORC().orderControl("OK"), detail: { segment: new OBR().setId("1") } }],
+      errors: [new ERR().severity("W"), new ERR().severity("I")],
+      patient: new PID().setId("1"),
+      orders: [{ commonOrder: new ORC().orderControl("OK"), detail: { segment: new OBR().setId("1") } }],
     }).encode();
     const result = parseORR_O02(wire);
     expect(result.ok).toBe(true);
     if (!result.ok) return;
-    expect(result.val.errList).toHaveLength(2);
-    expect(result.val.errList![0]).toBeInstanceOf(ERR);
+    expect(result.val.errors).toHaveLength(2);
+    expect(result.val.errors![0]).toBeInstanceOf(ERR);
     expect(result.val.orders![0].detail?.segment).toBeInstanceOf(OBR);
   });
 });

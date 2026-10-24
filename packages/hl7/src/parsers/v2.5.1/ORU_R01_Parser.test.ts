@@ -28,9 +28,9 @@ test("parseORU_R01 extracts MSH segment", () => {
   const result = parseORU_R01(validORUMessage);
 
   expect(result.val).toBeTruthy();
-  expect(result.val!.msh.name).toBe("MSH");
+  expect(result.val!.header.name).toBe("MSH");
 
-  const sendingApp = ParserUtils.getComponent(result.val!.msh.fields[1], 0);
+  const sendingApp = ParserUtils.getComponent(result.val!.header.fields[1], 0);
   expect(sendingApp).toBe("LAB");
 });
 
@@ -46,9 +46,9 @@ test("parseORU_R01 extracts PID from patient result", () => {
 
   expect(result.val).toBeTruthy();
   const patientResult = result.val!.patientResults[0];
-  expect(patientResult.pid).toBeTruthy();
+  expect(patientResult.patient).toBeTruthy();
 
-  const familyName = ParserUtils.getComponent(patientResult.pid!.fields[4], 0);
+  const familyName = ParserUtils.getComponent(patientResult.patient!.fields[4], 0);
   expect(familyName).toBe("Doe");
 });
 
@@ -57,10 +57,10 @@ test("parseORU_R01 extracts PV1 from patient result", () => {
 
   expect(result.val).toBeTruthy();
   const patientResult = result.val!.patientResults[0];
-  expect(patientResult.pv1).toBeTruthy();
+  expect(patientResult.visit).toBeTruthy();
 
   const patientClass = ParserUtils.getComponent(
-    patientResult.pv1!.fields[1],
+    patientResult.visit!.fields[1],
     0,
   );
   expect(patientClass).toBe("I");
@@ -79,9 +79,9 @@ test("parseORU_R01 extracts OBR from order observation", () => {
 
   expect(result.val).toBeTruthy();
   const orderObs = result.val!.patientResults[0].orderObservations[0];
-  expect(orderObs.obr).toBeTruthy();
+  expect(orderObs.observationRequest).toBeTruthy();
 
-  const placerOrder = ParserUtils.getComponent(orderObs.obr.fields[1], 0);
+  const placerOrder = ParserUtils.getComponent(orderObs.observationRequest.fields[1], 0);
   expect(placerOrder).toBe("ORD123");
 });
 
@@ -99,8 +99,8 @@ test("parseORU_R01 extracts OBX values correctly", () => {
   expect(result.val).toBeTruthy();
   const observations = result.val!.patientResults[0].orderObservations[0].observations;
 
-  const value1 = ParserUtils.getComponent(observations![0].obx.fields[4], 0);
-  const value2 = ParserUtils.getComponent(observations![1].obx.fields[4], 0);
+  const value1 = ParserUtils.getComponent(observations![0].observation.fields[4], 0);
+  const value2 = ParserUtils.getComponent(observations![1].observation.fields[4], 0);
 
   expect(value1).toBe("15.5");
   expect(value2).toBe("5.2");
@@ -154,7 +154,7 @@ OBX|1|NM|718-7^Hemoglobin^LN|1|15.5|g/dL||||||F`;
 
   expect(result.ok).toBe(true);
   expect(result.val).toBeTruthy();
-  expect(result.val!.patientResults[0].pid).toBe(undefined);
+  expect(result.val!.patientResults[0].patient).toBe(undefined);
 });
 
 test("parseORU_R01 handles message without PV1", () => {
@@ -167,7 +167,7 @@ OBX|1|NM|718-7^Hemoglobin^LN|1|15.5|g/dL||||||F`;
 
   expect(result.ok).toBe(true);
   expect(result.val).toBeTruthy();
-  expect(result.val!.patientResults[0].pv1).toBe(undefined);
+  expect(result.val!.patientResults[0].visit).toBe(undefined);
 });
 
 test("parseORU_R01 handles multiple order observations", () => {
@@ -218,9 +218,9 @@ OBX|1|NM|718-7^Hemoglobin^LN|1|15.5|g/dL||||||F`;
 
   // Verify NTE was parsed as patient note
   const patientResult = result.val!.patientResults[0];
-  expect(patientResult.nteList).toBeTruthy();
-  expect(patientResult.nteList!.length).toBe(1);
-  expect(patientResult.nteList![0].getComment()).toBe(
+  expect(patientResult.notes).toBeTruthy();
+  expect(patientResult.notes!.length).toBe(1);
+  expect(patientResult.notes![0].getComment()).toBe(
     "Patient has difficulty providing samples",
   );
 });
@@ -243,7 +243,7 @@ describe("ORU_R01 Integration Tests - Parse validated example messages", () => {
         `Failed to parse ${testFile}: ${result.err?.message}`,
       ).toBe(true);
       expect(result.val, `No data returned for ${testFile}`).toBeTruthy();
-      expect(result.val!.msh, `No MSH segment in ${testFile}`).toBeTruthy();
+      expect(result.val!.header, `No MSH segment in ${testFile}`).toBeTruthy();
       expect(
         result.val!.patientResults.length > 0,
         `No patient results in ${testFile}`,
@@ -326,7 +326,7 @@ describe("ORU_R01 Integration Tests - Specific message validations", () => {
     );
     expect(result.ok).toBe(true);
     const observations = result.val!.patientResults[0].orderObservations[0].observations;
-    const hasCriticalValues = observations!.some(({ obx }) => {
+    const hasCriticalValues = observations!.some(({ observation: obx }) => {
       const flags = obx.getAbnormalFlags();
       return flags.includes("HH") || flags.includes("LL");
     });
@@ -373,11 +373,11 @@ OBX|1|NM|2345-7^Glucose^LN|1|95|mg/dL|70-100|N|||F`;
     const patient = parseResult.val!.patientResults[0];
 
     expect(
-      patient.orderObservations[0].obr.fields[0]?.components[0]
+      patient.orderObservations[0].observationRequest.fields[0]?.components[0]
         ?.subComponents[0],
     ).toBe("1");
     expect(
-      patient.orderObservations[1].obr.fields[0]?.components[0]
+      patient.orderObservations[1].observationRequest.fields[0]?.components[0]
         ?.subComponents[0],
     ).toBe("2");
 
@@ -394,24 +394,24 @@ OBX|1|NM|2345-7^Glucose^LN|1|95|mg/dL|70-100|N|||F`;
       .observationSubId("1")
       .observationValue("140")
       .units({ identifier: "mmol/L" });
-    patient.orderObservations.unshift({ obr: newObr, observations: [{ obx: newObx }] });
+    patient.orderObservations.unshift({ observationRequest: newObr, observations: [{ observation: newObx }] });
 
     const reParseResult = parseORU_R01(
-      createORU_R01(parseResult.val!.msh, [patient]).encode(),
+      createORU_R01(parseResult.val!.header, [patient]).encode(),
     );
     expect(reParseResult.ok).toBeTruthy();
     const rePatient = reParseResult.val!.patientResults[0];
 
     expect(
-      rePatient.orderObservations[0].obr.fields[0]?.components[0]
+      rePatient.orderObservations[0].observationRequest.fields[0]?.components[0]
         ?.subComponents[0],
     ).toBe("99");
     expect(
-      rePatient.orderObservations[1].obr.fields[0]?.components[0]
+      rePatient.orderObservations[1].observationRequest.fields[0]?.components[0]
         ?.subComponents[0],
     ).toBe("1");
     expect(
-      rePatient.orderObservations[2].obr.fields[0]?.components[0]
+      rePatient.orderObservations[2].observationRequest.fields[0]?.components[0]
         ?.subComponents[0],
     ).toBe("2");
   });
@@ -431,10 +431,10 @@ OBX|1|NM|2345-7^Glucose^LN|1|95|mg/dL|70-100|N|||F`;
 
     expect(firstOrder.observations!.length).toBe(2);
     expect(
-      firstOrder.observations![0].obx.fields[0]?.components[0]?.subComponents[0],
+      firstOrder.observations![0].observation.fields[0]?.components[0]?.subComponents[0],
     ).toBe("1");
     expect(
-      firstOrder.observations![1].obx.fields[0]?.components[0]?.subComponents[0],
+      firstOrder.observations![1].observation.fields[0]?.components[0]?.subComponents[0],
     ).toBe("2");
 
     const newObx = new OBX()
@@ -444,10 +444,10 @@ OBX|1|NM|2345-7^Glucose^LN|1|95|mg/dL|70-100|N|||F`;
       .observationSubId("1")
       .observationValue("4.2")
       .units({ identifier: "mmol/L" });
-    firstOrder.observations!.splice(1, 0, { obx: newObx });
+    firstOrder.observations!.splice(1, 0, { observation: newObx });
 
     const reParseResult = parseORU_R01(
-      createORU_R01(parseResult.val!.msh, [
+      createORU_R01(parseResult.val!.header, [
         parseResult.val!.patientResults[0],
       ]).encode(),
     );
@@ -456,15 +456,15 @@ OBX|1|NM|2345-7^Glucose^LN|1|95|mg/dL|70-100|N|||F`;
 
     expect(reOrder.observations!.length).toBe(3);
     expect(
-      reOrder.observations![0].obx.fields[0]?.components[0]?.subComponents[0],
+      reOrder.observations![0].observation.fields[0]?.components[0]?.subComponents[0],
       "First OBX should remain Set ID 1",
     ).toBe("1");
     expect(
-      reOrder.observations![1].obx.fields[0]?.components[0]?.subComponents[0],
+      reOrder.observations![1].observation.fields[0]?.components[0]?.subComponents[0],
       "Inserted OBX should keep Set ID 77",
     ).toBe("77");
     expect(
-      reOrder.observations![2].obx.fields[0]?.components[0]?.subComponents[0],
+      reOrder.observations![2].observation.fields[0]?.components[0]?.subComponents[0],
       "Last OBX should remain Set ID 2",
     ).toBe("2");
   });
@@ -496,26 +496,26 @@ OBX|1|NM|2345-7^Glucose^LN|1|95|mg/dL|70-100|N|||F`;
       .observationValue("140")
       .units({ identifier: "mmol/L" });
 
-    patient.orderObservations[0].obr.setId("2");
-    patient.orderObservations[1].obr.setId("3");
-    patient.orderObservations.unshift({ obr: newObr, observations: [{ obx: newObx }] });
+    patient.orderObservations[0].observationRequest.setId("2");
+    patient.orderObservations[1].observationRequest.setId("3");
+    patient.orderObservations.unshift({ observationRequest: newObr, observations: [{ observation: newObx }] });
 
     const reParseResult = parseORU_R01(
-      createORU_R01(parseResult.val!.msh, [patient]).encode(),
+      createORU_R01(parseResult.val!.header, [patient]).encode(),
     );
     expect(reParseResult.ok).toBeTruthy();
     const rePatient = reParseResult.val!.patientResults[0];
 
     expect(
-      rePatient.orderObservations[0].obr.fields[0]?.components[0]
+      rePatient.orderObservations[0].observationRequest.fields[0]?.components[0]
         ?.subComponents[0],
     ).toBe("1");
     expect(
-      rePatient.orderObservations[1].obr.fields[0]?.components[0]
+      rePatient.orderObservations[1].observationRequest.fields[0]?.components[0]
         ?.subComponents[0],
     ).toBe("2");
     expect(
-      rePatient.orderObservations[2].obr.fields[0]?.components[0]
+      rePatient.orderObservations[2].observationRequest.fields[0]?.components[0]
         ?.subComponents[0],
     ).toBe("3");
   });
@@ -540,24 +540,24 @@ OBX|1|NM|2345-7^Glucose^LN|1|95|mg/dL|70-100|N|||F`;
       .observationSubId("1")
       .observationValue("4.2")
       .units({ identifier: "mmol/L" });
-    firstOrder.observations![1].obx.setId("3");
-    firstOrder.observations!.splice(1, 0, { obx: newObx });
+    firstOrder.observations![1].observation.setId("3");
+    firstOrder.observations!.splice(1, 0, { observation: newObx });
 
     const reParseResult = parseORU_R01(
-      createORU_R01(parseResult.val!.msh, [
+      createORU_R01(parseResult.val!.header, [
         parseResult.val!.patientResults[0],
       ]).encode(),
     );
     expect(reParseResult.ok).toBeTruthy();
     const reOrder = reParseResult.val!.patientResults[0].orderObservations[0];
 
-    expect(reOrder.observations![0].obx.fields[0]?.components[0]?.subComponents[0]).toBe(
+    expect(reOrder.observations![0].observation.fields[0]?.components[0]?.subComponents[0]).toBe(
       "1",
     );
-    expect(reOrder.observations![1].obx.fields[0]?.components[0]?.subComponents[0]).toBe(
+    expect(reOrder.observations![1].observation.fields[0]?.components[0]?.subComponents[0]).toBe(
       "2",
     );
-    expect(reOrder.observations![2].obx.fields[0]?.components[0]?.subComponents[0]).toBe(
+    expect(reOrder.observations![2].observation.fields[0]?.components[0]?.subComponents[0]).toBe(
       "3",
     );
   });

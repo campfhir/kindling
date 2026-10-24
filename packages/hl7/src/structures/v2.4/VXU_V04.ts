@@ -18,7 +18,7 @@ export const VXU_V04_STRUCTURE: StructureItem[] = [
     name: "PATIENT",
     required: false,
     repeating: false,
-    as: "visit",
+    inline: true,
     segments: [
       { name: "PV1", required: true, repeating: false },
       { name: "PV2", required: false, repeating: false },
@@ -29,7 +29,6 @@ export const VXU_V04_STRUCTURE: StructureItem[] = [
     name: "INSURANCE",
     required: false,
     repeating: true,
-    as: "insurance",
     segments: [
       { name: "IN1", required: true, repeating: false },
       { name: "IN2", required: false, repeating: false },

@@ -23,23 +23,23 @@ import type { OBX } from "../../segments/v2.5/OBX.ts";
 /** The PATIENT group of an ADT^A17 (HL7 v2.5) message being built. */
 export interface SwapPatient {
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The PV1 segment. */
-  pv1: PV1;
+  visit: PV1;
   /** The PV2 segment. */
-  pv2?: PV2;
+  visitDetails?: PV2;
   /** The DB1 segments. */
-  db1List?: DB1[];
+  disabilities?: DB1[];
   /** The OBX segments. */
-  obxList?: OBX[];
+  observations?: OBX[];
 }
 
 /** The optional segments and groups of an ADT^A17 (HL7 v2.5) message. */
 export interface ADT_A17Options {
   /** The SFT segments. */
-  sftList?: SFT[];
+  software?: SFT[];
 }
 
 /** Builder for HL7 ADT^A17 (HL7 v2.5) messages. */
@@ -51,8 +51,8 @@ export class ADT_A17<TMSH extends MSH = MSH, TEVN extends EVN = EVN> {
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
-    public evn: TEVN,
+    public header: TMSH,
+    public event: TEVN,
     public patients: SwapPatient[],
     public options: ADT_A17Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
@@ -60,7 +60,7 @@ export class ADT_A17<TMSH extends MSH = MSH, TEVN extends EVN = EVN> {
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, evn: this.evn, patients: this.patients };
+    return { ...this.options, header: this.header, event: this.event, patients: this.patients };
   }
 
   /** Validates the message structure, returning a result. */
@@ -81,11 +81,11 @@ export class ADT_A17<TMSH extends MSH = MSH, TEVN extends EVN = EVN> {
 
 /** Builds an HL7 ADT^A17 (HL7 v2.5) message. */
 export function createADT_A17<TMSH extends MSH = MSH, TEVN extends EVN = EVN>(
-  msh: TMSH,
-  evn: TEVN,
+  header: TMSH,
+  event: TEVN,
   patients: SwapPatient[],
   options: ADT_A17Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): ADT_A17<TMSH, TEVN> {
-  return new ADT_A17(msh, evn, patients, options, encoding);
+  return new ADT_A17(header, event, patients, options, encoding);
 }

@@ -28,7 +28,7 @@ export const ORU_R01_SCHEMA: MessageSchema = {
       group("ORDER_OBSERVATION", true, true, [
         opt("ORC"),
         req("OBR"),
-        optList("NTE", { as: "obrNteList" }),
+        optList("NTE"),
         group("OBSERVATION", false, true, [req("OBX"), optList("NTE")], { as: "observations", exportTypeName: "ParsedObservation", builderTypeName: "ObservationGroup" }),
         optList("CTI"),
       ], { builderTypeName: "OrderObservation" }),

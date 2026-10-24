@@ -21,11 +21,11 @@ import type { PV1 } from "../../segments/v2.5.1/PV1.ts";
 /** The optional segments and groups of an ADT^A34 (HL7 v2.5.1) message. */
 export interface ADT_A34Options {
   /** The SFT segments. */
-  sftList?: SFT[];
+  software?: SFT[];
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
 }
 
 /** Builder for HL7 ADT^A34 (HL7 v2.5.1) messages. */
@@ -37,17 +37,17 @@ export class ADT_A34<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
-    public evn: TEVN,
-    public pid: TPID,
-    public mrg: TMRG,
+    public header: TMSH,
+    public event: TEVN,
+    public patient: TPID,
+    public merge: TMRG,
     public options: ADT_A34Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, evn: this.evn, pid: this.pid, mrg: this.mrg };
+    return { ...this.options, header: this.header, event: this.event, patient: this.patient, merge: this.merge };
   }
 
   /** Validates the message structure, returning a result. */
@@ -68,12 +68,12 @@ export class ADT_A34<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
 /** Builds an HL7 ADT^A34 (HL7 v2.5.1) message. */
 export function createADT_A34<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TMRG extends MRG = MRG>(
-  msh: TMSH,
-  evn: TEVN,
-  pid: TPID,
-  mrg: TMRG,
+  header: TMSH,
+  event: TEVN,
+  patient: TPID,
+  merge: TMRG,
   options: ADT_A34Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): ADT_A34<TMSH, TEVN, TPID, TMRG> {
-  return new ADT_A34(msh, evn, pid, mrg, options, encoding);
+  return new ADT_A34(header, event, patient, merge, options, encoding);
 }

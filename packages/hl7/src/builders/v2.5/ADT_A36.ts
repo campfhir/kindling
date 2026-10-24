@@ -25,12 +25,12 @@ export class ADT_A36<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
 /** Builds an HL7 ADT^A36 (HL7 v2.5) message. */
 export function createADT_A36<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TMRG extends MRG = MRG>(
-  msh: TMSH,
-  evn: TEVN,
-  pid: TPID,
-  mrg: TMRG,
+  header: TMSH,
+  event: TEVN,
+  patient: TPID,
+  merge: TMRG,
   options: ADT_A36Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): ADT_A36<TMSH, TEVN, TPID, TMRG> {
-  return new ADT_A36(msh, evn, pid, mrg, options, encoding);
+  return new ADT_A36(header, event, patient, merge, options, encoding);
 }

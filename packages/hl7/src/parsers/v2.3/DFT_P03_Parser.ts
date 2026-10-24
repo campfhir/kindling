@@ -32,7 +32,7 @@ import { ACC } from "../../segments/v2.3/ACC.ts";
 /** The FINANCIAL group of a parsed DFT^P03 (HL7 v2.3) message. */
 export interface ParsedDFTFinancial {
   /** The FT1 segment. */
-  ft1: FT1;
+  transaction: FT1;
   /** The FINANCIAL PROCEDURE groups. */
   procedures?: ParsedDFTProcedure[];
 }
@@ -40,51 +40,51 @@ export interface ParsedDFTFinancial {
 /** The FINANCIAL PROCEDURE group of a parsed DFT^P03 (HL7 v2.3) message. */
 export interface ParsedDFTProcedure {
   /** The PR1 segment. */
-  pr1: PR1;
+  procedure: PR1;
   /** The ROL segments. */
-  rolList?: ROL[];
+  roles?: ROL[];
 }
 
 /** The INSURANCE group of a parsed DFT^P03 (HL7 v2.3) message. */
 export interface ParsedDFTInsurance {
   /** The IN1 segment. */
-  in1: IN1;
+  insurance: IN1;
   /** The IN2 segment. */
-  in2?: IN2;
+  insuranceDetails?: IN2;
   /** The IN3 segment. */
-  in3?: IN3;
+  insuranceCertification?: IN3;
 }
 
 /** Structured result of parsing an HL7 DFT^P03 (HL7 v2.3) message. */
 export interface ParsedDFT_P03 extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The EVN segment. */
-  evn: EVN;
+  event: EVN;
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
   /** The PV2 segment. */
-  pv2?: PV2;
+  visitDetails?: PV2;
   /** The DB1 segments. */
-  db1List?: DB1[];
+  disabilities?: DB1[];
   /** The OBX segments. */
-  obxList?: OBX[];
+  observations?: OBX[];
   /** The FINANCIAL groups. */
   financials: ParsedDFTFinancial[];
   /** The DG1 segments. */
-  dg1List?: DG1[];
+  diagnoses?: DG1[];
   /** The DRG segment. */
-  drg?: DRG;
+  diagnosisRelatedGroup?: DRG;
   /** The GT1 segments. */
-  gt1List?: GT1[];
+  guarantors?: GT1[];
   /** The INSURANCE groups. */
   insurances?: ParsedDFTInsurance[];
   /** The ACC segment. */
-  acc?: ACC;
+  accident?: ACC;
 }
 
 /** The segment parsers of DFT^P03 (HL7 v2.3). */

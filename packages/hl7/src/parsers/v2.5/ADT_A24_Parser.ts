@@ -21,23 +21,23 @@ import { DB1 } from "../../segments/v2.5/DB1.ts";
 /** The PATIENT group of a parsed ADT^A24 (HL7 v2.5) message. */
 export interface ParsedLinkedPatient {
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
   /** The DB1 segments. */
-  db1List?: DB1[];
+  disabilities?: DB1[];
 }
 
 /** Structured result of parsing an HL7 ADT^A24 (HL7 v2.5) message. */
 export interface ParsedADT_A24 extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The SFT segments. */
-  sftList?: SFT[];
+  software?: SFT[];
   /** The EVN segment. */
-  evn: EVN;
+  event: EVN;
   /** The PATIENT groups. */
   patients: ParsedLinkedPatient[];
 }

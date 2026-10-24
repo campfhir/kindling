@@ -25,12 +25,12 @@ export class ADT_A39<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
 /** Builds an HL7 ADT^A39 (HL7 v2.5.1) message. */
 export function createADT_A39<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TMRG extends MRG = MRG>(
-  msh: TMSH,
-  evn: TEVN,
-  pid: TPID,
-  mrg: TMRG,
+  header: TMSH,
+  event: TEVN,
+  patient: TPID,
+  merge: TMRG,
   options: ADT_A39Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): ADT_A39<TMSH, TEVN, TPID, TMRG> {
-  return new ADT_A39(msh, evn, pid, mrg, options, encoding);
+  return new ADT_A39(header, event, patient, merge, options, encoding);
 }

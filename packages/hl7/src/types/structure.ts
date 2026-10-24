@@ -49,8 +49,8 @@ export type StructureValue = Record<string, unknown>;
 export interface ParsedMessageBase {
   /** All segments in wire order. */
   message: HL7Message;
-  /** The message header. */
-  msh: MSH;
+  /** The message header (MSH). */
+  header: MSH;
 }
 
 /** "an MSH segment", "a PID segment": segment names are spelled out letter by letter. */
@@ -69,7 +69,7 @@ function describeMissing(messageName: string, item: StructureItem): string {
 
 /**
  * Parses `messageString` against `structure` (whose first item is MSH) using `parsers`.
- * The result holds `message`, `msh` and one property per structure item (see `itemField`).
+ * The result holds `message`, `header` (MSH) and one property per structure item (see `itemField`).
  */
 export function parseStructure<T extends ParsedMessageBase = ParsedMessageBase & StructureValue>(
   messageName: string,
@@ -202,7 +202,7 @@ export function parseStructure<T extends ParsedMessageBase = ParsedMessageBase &
     if (leftover) {
       return { ok: false, err: new Err(`${leftover} segment at line ${pos + 1} is not allowed at this position in ${messageName}`) };
     }
-    return { ok: true, val: { message, msh, ...value } } as unknown as Result<T>;
+    return { ok: true, val: { message, header: msh, ...value } } as unknown as Result<T>;
   } catch (error) {
     return { ok: false, err: new Err(`Failed to parse ${messageName} message: ${error}`) };
   }
@@ -239,7 +239,7 @@ function encodeItems(items: StructureItem[], value: StructureInput, encoding: En
   }
 }
 
-/** Encodes a builder's input (including `msh`) against `structure` into the wire string. */
+/** Encodes a builder's input (including `header`) against `structure` into the wire string. */
 export function encodeStructure(structure: StructureItem[], value: StructureInput, encoding: EncodingCharacters): string {
   const out: string[] = [];
   encodeItems(structure, value, encoding, out);

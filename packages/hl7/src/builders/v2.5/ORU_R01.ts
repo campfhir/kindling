@@ -32,17 +32,17 @@ import type { DSC } from "../../segments/v2.5/DSC.ts";
 /** The PATIENT RESULT group of an ORU^R01 (HL7 v2.5) message being built. */
 export interface PatientResult {
   /** The PID segment. */
-  pid?: PID;
+  patient?: PID;
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
   /** The NK1 segments. */
-  nk1List?: NK1[];
+  nextOfKin?: NK1[];
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
   /** The PV2 segment. */
-  pv2?: PV2;
+  visitDetails?: PV2;
   /** The ORDER OBSERVATION groups. */
   orderObservations: OrderObservation[];
 }
@@ -50,21 +50,21 @@ export interface PatientResult {
 /** The ORDER OBSERVATION group of an ORU^R01 (HL7 v2.5) message being built. */
 export interface OrderObservation {
   /** The ORC segment. */
-  orc?: ORC;
+  commonOrder?: ORC;
   /** The OBR segment. */
-  obr: OBR;
+  observationRequest: OBR;
   /** The NTE segments. */
-  obrNteList?: NTE[];
+  notes?: NTE[];
   /** The TIMING QTY groups. */
-  timing?: TimingQty[];
+  timings?: TimingQty[];
   /** The CTD segment. */
-  ctd?: CTD;
+  contact?: CTD;
   /** The OBSERVATION groups. */
   observations?: ObservationGroup[];
   /** The FT1 segments. */
-  ft1List?: FT1[];
+  transactions?: FT1[];
   /** The CTI segments. */
-  ctiList?: CTI[];
+  clinicalTrials?: CTI[];
   /** The SPECIMEN groups. */
   specimens?: Specimen[];
 }
@@ -72,33 +72,33 @@ export interface OrderObservation {
 /** The TIMING QTY group of an ORU^R01 (HL7 v2.5) message being built. */
 export interface TimingQty {
   /** The TQ1 segment. */
-  tq1: TQ1;
+  timing: TQ1;
   /** The TQ2 segments. */
-  tq2List?: TQ2[];
+  timingRelationships?: TQ2[];
 }
 
 /** The OBSERVATION group of an ORU^R01 (HL7 v2.5) message being built. */
 export interface ObservationGroup {
   /** The OBX segment. */
-  obx: OBX;
+  observation: OBX;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The SPECIMEN group of an ORU^R01 (HL7 v2.5) message being built. */
 export interface Specimen {
   /** The SPM segment. */
-  spm: SPM;
+  specimen: SPM;
   /** The OBX segments. */
-  obxList?: OBX[];
+  observations?: OBX[];
 }
 
 /** The optional segments and groups of an ORU^R01 (HL7 v2.5) message. */
 export interface ORU_R01Options {
   /** The SFT segments. */
-  sftList?: SFT[];
+  software?: SFT[];
   /** The DSC segment. */
-  dsc?: DSC;
+  continuation?: DSC;
 }
 
 /** Builder for HL7 ORU^R01 (HL7 v2.5) messages. */
@@ -110,7 +110,7 @@ export class ORU_R01<TMSH extends MSH = MSH> {
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
+    public header: TMSH,
     public patientResults: PatientResult[],
     public options: ORU_R01Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
@@ -118,7 +118,7 @@ export class ORU_R01<TMSH extends MSH = MSH> {
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, patientResults: this.patientResults };
+    return { ...this.options, header: this.header, patientResults: this.patientResults };
   }
 
   /** Validates the message structure, returning a result. */
@@ -139,10 +139,10 @@ export class ORU_R01<TMSH extends MSH = MSH> {
 
 /** Builds an HL7 ORU^R01 (HL7 v2.5) message. */
 export function createORU_R01<TMSH extends MSH = MSH>(
-  msh: TMSH,
+  header: TMSH,
   patientResults: PatientResult[],
   options: ORU_R01Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): ORU_R01<TMSH> {
-  return new ORU_R01(msh, patientResults, options, encoding);
+  return new ORU_R01(header, patientResults, options, encoding);
 }

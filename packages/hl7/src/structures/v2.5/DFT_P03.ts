@@ -18,7 +18,7 @@ export const DFT_P03_STRUCTURE: StructureItem[] = [
   { name: "ROL", required: false, repeating: true },
   { name: "PV1", required: false, repeating: false },
   { name: "PV2", required: false, repeating: false },
-  { name: "ROL", required: false, repeating: true, as: "visitRolList" },
+  { name: "ROL", required: false, repeating: true, as: "visitRoles" },
   { name: "DB1", required: false, repeating: true },
   {
     name: "COMMON_ORDER",
@@ -31,7 +31,7 @@ export const DFT_P03_STRUCTURE: StructureItem[] = [
         name: "TIMING_QUANTITY",
         required: false,
         repeating: true,
-        as: "timing",
+        as: "timings",
         segments: [
           { name: "TQ1", required: true, repeating: false },
           { name: "TQ2", required: false, repeating: true },
@@ -44,7 +44,7 @@ export const DFT_P03_STRUCTURE: StructureItem[] = [
         inline: true,
         segments: [
           { name: "OBR", required: true, repeating: false },
-          { name: "NTE", required: false, repeating: true, as: "obrNteList" },
+          { name: "NTE", required: false, repeating: true },
         ],
       },
       {
@@ -87,7 +87,7 @@ export const DFT_P03_STRUCTURE: StructureItem[] = [
             name: "FINANCIAL_TIMING_QUANTITY",
             required: false,
             repeating: true,
-            as: "timing",
+            as: "timings",
             segments: [
               { name: "TQ1", required: true, repeating: false },
               { name: "TQ2", required: false, repeating: true },
@@ -100,7 +100,7 @@ export const DFT_P03_STRUCTURE: StructureItem[] = [
             inline: true,
             segments: [
               { name: "OBR", required: true, repeating: false },
-              { name: "NTE", required: false, repeating: true, as: "obrNteList" },
+              { name: "NTE", required: false, repeating: true },
             ],
           },
           {

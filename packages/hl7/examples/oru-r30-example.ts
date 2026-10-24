@@ -76,7 +76,7 @@ const obx1 = new OBX()
   .observationResultStatus("F")
   .dateTimeOfObservation(messageDateTime);
 // Build the complete ORU^R30 message: one patient, one order, its observations
-const message = createORU_R30(msh, pid, orc, obr, [{ obx: obx1 }], { pv1 });
+const message = createORU_R30(msh, pid, orc, obr, [{ observation: obx1 }], { visit: pv1 });
 
 const encodedMessage = message.encode();
 

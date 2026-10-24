@@ -111,13 +111,16 @@ Done in 0.14: every parser and builder is generated from its message structure
 (`codegen/schemas/`, see `codegen/README.md`), for every version. Structures were made faithful to
 the standard where the hand-written code had drifted (checked on hl7-definition.caristix.com):
 v2.3 ADT^A01 has no `ROL` after `PD1` and a single `IN3`; ORU^R01 carries its OBSERVATION groups
-(`observations: [{ obx, nteList }]`), `[{CTI}]` and `[DSC]`, and from v2.5 `[{SFT}]`, the TIMING
+(`observations: [{ observation, notes }]`), `[{CTI}]` and `[DSC]`, and from v2.5 `[{SFT}]`, the TIMING
 QTY groups, `[CTD]`, `[{FT1}]` and SPECIMEN groups; ORU^R30–R32 are one patient and one order per
 message (`pid`, `orc`, `obr`, `observations` at the top level) with `[{SFT}]`, `[PD1]`, the VISIT
 group, `[{NTE}]` and TIMING QTY; SIU gains `[{TQ1}]` after `SCH` in v2.5; MFN^M02 gains `[{SFT}]`,
 repeating `PRA` and `[{NTE}]` in v2.5 (its `ORG`/`AFF`/`LAN`/`EDU`/`CER` segments have no classes yet
 and are skipped); ORR^O02's order detail is optional in every version. Known gap: v2.4 ORU^R01
-still mirrors v2.3 (the standard adds `[CTD]` and `[{FT1}]` there).
+still mirrors v2.3 (the standard adds `[CTD]` and `[{FT1}]` there). Properties are named after
+what a segment holds rather than its code (`patient`, `visit`, `notes`, `diagnoses`,
+`observationRequest`, `header`; see `SEGMENT_NAMES` in `src/types/schema.ts`), and ORM/ORR/VXU inline
+their PATIENT and visit groups so `patient`, `visit`, `insurances` sit at the top level.
 
 Suggested order: **queries (A19 QRY/ADR, SQM/SQR, …) → MFN → orders/pharmacy → the rest.**
 

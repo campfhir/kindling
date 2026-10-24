@@ -21,19 +21,19 @@ import { PV1 } from "../../segments/v2.5.1/PV1.ts";
 /** Structured result of parsing an HL7 ADT^A34 (HL7 v2.5.1) message. */
 export interface ParsedADT_A34 extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The SFT segments. */
-  sftList?: SFT[];
+  software?: SFT[];
   /** The EVN segment. */
-  evn: EVN;
+  event: EVN;
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The MRG segment. */
-  mrg: MRG;
+  merge: MRG;
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
 }
 
 /** The segment parsers of ADT^A34 (HL7 v2.5.1). */

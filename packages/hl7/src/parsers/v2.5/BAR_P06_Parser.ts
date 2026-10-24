@@ -19,19 +19,19 @@ import { PV1 } from "../../segments/v2.5/PV1.ts";
 /** The PATIENT group of a parsed BAR^P06 (HL7 v2.5) message. */
 export interface ParsedBAREndPatient {
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
 }
 
 /** Structured result of parsing an HL7 BAR^P06 (HL7 v2.5) message. */
 export interface ParsedBAR_P06 extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The SFT segments. */
-  sftList?: SFT[];
+  software?: SFT[];
   /** The EVN segment. */
-  evn: EVN;
+  event: EVN;
   /** The PATIENT groups. */
   patients: ParsedBAREndPatient[];
 }

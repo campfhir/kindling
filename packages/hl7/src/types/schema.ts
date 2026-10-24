@@ -136,7 +136,81 @@ export function pascalCase(name: string): string {
   return c.charAt(0).toUpperCase() + c.slice(1);
 }
 
-/** Property name of a structure item in parsed results and builder inputs. */
+/**
+ * Readable property names for segments: `[one, many]`, used when a segment appears once or
+ * repeats at a level of a message. Segments not listed fall back to their lower-cased code
+ * (`zpd`, with a `List` suffix when repeating). Override per message with `as` when two items at
+ * one level would share a name.
+ */
+export const SEGMENT_NAMES: Record<string, [one: string, many: string]> = {
+  MSH: ["header", "headers"],
+  SFT: ["software", "software"],
+  EVN: ["event", "events"],
+  PID: ["patient", "patients"],
+  PD1: ["patientDemographics", "patientDemographics"],
+  NK1: ["nextOfKin", "nextOfKin"],
+  PV1: ["visit", "visits"],
+  PV2: ["visitDetails", "visitDetails"],
+  ROL: ["role", "roles"],
+  DB1: ["disability", "disabilities"],
+  OBX: ["observation", "observations"],
+  AL1: ["allergy", "allergies"],
+  DG1: ["diagnosis", "diagnoses"],
+  DRG: ["diagnosisRelatedGroup", "diagnosisRelatedGroups"],
+  PR1: ["procedure", "procedures"],
+  GT1: ["guarantor", "guarantors"],
+  IN1: ["insurance", "insurances"],
+  IN2: ["insuranceDetails", "insuranceDetails"],
+  IN3: ["insuranceCertification", "insuranceCertifications"],
+  ACC: ["accident", "accidents"],
+  UB1: ["ub82", "ub82s"],
+  UB2: ["ub92", "ub92s"],
+  PDA: ["deathAndAutopsy", "deathAndAutopsies"],
+  ABS: ["abstract", "abstracts"],
+  BLC: ["bloodCode", "bloodCodes"],
+  RMI: ["riskManagementIncident", "riskManagementIncidents"],
+  MRG: ["merge", "merges"],
+  NPU: ["bedStatus", "bedStatuses"],
+  MSA: ["acknowledgment", "acknowledgments"],
+  ERR: ["error", "errors"],
+  NTE: ["note", "notes"],
+  ORC: ["commonOrder", "commonOrders"],
+  OBR: ["observationRequest", "observationRequests"],
+  TXA: ["document", "documents"],
+  SCH: ["appointment", "appointments"],
+  ARQ: ["appointmentRequest", "appointmentRequests"],
+  APR: ["appointmentPreferences", "appointmentPreferences"],
+  RGS: ["resourceGroup", "resourceGroups"],
+  AIS: ["service", "services"],
+  AIG: ["generalResource", "generalResources"],
+  AIL: ["location", "locations"],
+  AIP: ["personnel", "personnel"],
+  MFI: ["masterFile", "masterFiles"],
+  MFE: ["entry", "entries"],
+  STF: ["staff", "staff"],
+  PRA: ["practitioner", "practitioners"],
+  RXA: ["administration", "administrations"],
+  RXR: ["route", "routes"],
+  RXO: ["pharmacyOrder", "pharmacyOrders"],
+  RQD: ["requisition", "requisitions"],
+  RQ1: ["requisitionSupplier", "requisitionSuppliers"],
+  ODS: ["dietOrder", "dietOrders"],
+  ODT: ["dietTray", "dietTrays"],
+  BLG: ["billing", "billings"],
+  CTI: ["clinicalTrial", "clinicalTrials"],
+  CTD: ["contact", "contacts"],
+  FT1: ["transaction", "transactions"],
+  TQ1: ["timing", "timings"],
+  TQ2: ["timingRelationship", "timingRelationships"],
+  SPM: ["specimen", "specimens"],
+  DSC: ["continuation", "continuations"],
+};
+
+/**
+ * Property name of a structure item in parsed results and builder inputs: the `as` override, else
+ * the segment's readable name (`patient`, `notes`), `segment` for a choice, or the camel-cased
+ * group name pluralised with `s` when the group repeats (`patientResults`, `visit`).
+ */
 export function itemField(item: StructureItem): string {
   if (item.as) return item.as;
   if (isSegmentChoice(item)) return "segment";
@@ -144,6 +218,8 @@ export function itemField(item: StructureItem): string {
     const base = camelCase(item.name);
     return item.repeating && !base.endsWith("s") ? `${base}s` : base;
   }
+  const names = SEGMENT_NAMES[item.name];
+  if (names) return item.repeating ? names[1] : names[0];
   const base = item.name.toLowerCase();
   return item.repeating ? `${base}List` : base;
 }

@@ -21,12 +21,12 @@ export const ORM_O01_SCHEMA: MessageSchema = {
     group("PATIENT", false, false, [
       req("PID"),
       opt("PD1"),
-      optList("NTE"),
-      group("PATIENT_VISIT", false, false, [req("PV1"), opt("PV2")], { as: "visit", exportTypeName: "ParsedVisit" }),
-      group("INSURANCE", false, true, [req("IN1"), opt("IN2"), optList("IN3")], { as: "insurance", exportTypeName: "ParsedInsurance" }),
+      optList("NTE", { as: "patientNotes" }),
+      group("PATIENT_VISIT", false, false, [req("PV1"), opt("PV2")], { inline: true }),
+      group("INSURANCE", false, true, [req("IN1"), opt("IN2"), optList("IN3")], { exportTypeName: "ParsedInsurance" }),
       opt("GT1"),
       optList("AL1"),
-    ], { exportTypeName: "ParsedOrderPatient", builderTypeName: "PatientGroup" }),
+    ], { inline: true }),
     group("ORDER", true, true, [
       req("ORC"),
       group("ORDER_DETAIL", false, false, [

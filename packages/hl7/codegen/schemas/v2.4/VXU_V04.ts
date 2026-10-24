@@ -19,9 +19,9 @@ export const VXU_V04_SCHEMA: MessageSchema = {
     req("PID"),
     opt("PD1"),
     optList("NK1"),
-    group("PATIENT", false, false, [req("PV1"), opt("PV2")], { as: "visit", exportTypeName: "ParsedVisit" }),
+    group("PATIENT", false, false, [req("PV1"), opt("PV2")], { inline: true }),
     optList("GT1"),
-    group("INSURANCE", false, true, [req("IN1"), opt("IN2"), opt("IN3")], { as: "insurance", exportTypeName: "ParsedInsurance" }),
+    group("INSURANCE", false, true, [req("IN1"), opt("IN2"), opt("IN3")], { exportTypeName: "ParsedInsurance" }),
     group("ORDER", false, true, [
       opt("ORC"),
       req("RXA"),

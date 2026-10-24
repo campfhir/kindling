@@ -40,13 +40,13 @@ test("Parse and modify - Add OBX to beginning of order", () => {
     .abnormalFlags("N")
     .observationResultStatus("F");
 
-  patientResult.orderObservations[0].observations!.unshift({ obx: newObx });
+  patientResult.orderObservations[0].observations!.unshift({ observation: newObx });
 
   // Verify modification
   expect(patientResult.orderObservations[0].observations!.length, ).toBe(originalObxCount + 1);
 
   // Re-encode and verify
-  const rebuilt = createORU_R01(parseResult.val!.msh, [patientResult]);
+  const rebuilt = createORU_R01(parseResult.val!.header, [patientResult]);
   const reencoded = rebuilt.encode();
 
   const reParseResult = parseORU_R01(reencoded);
@@ -75,13 +75,13 @@ test("Parse and modify - Add OBX to middle of order", () => {
     .abnormalFlags("N")
     .observationResultStatus("F");
 
-  patientResult.orderObservations[0].observations!.splice(1, 0, { obx: newObx });
+  patientResult.orderObservations[0].observations!.splice(1, 0, { observation: newObx });
 
   // Verify modification
   expect(patientResult.orderObservations[0].observations!.length, ).toBe(originalObxCount + 1);
 
   // Re-encode and verify
-  const rebuilt = createORU_R01(parseResult.val!.msh, [patientResult]);
+  const rebuilt = createORU_R01(parseResult.val!.header, [patientResult]);
   const reencoded = rebuilt.encode();
 
   const reParseResult = parseORU_R01(reencoded);
@@ -110,13 +110,13 @@ test("Parse and modify - Add OBX to end of order", () => {
     .abnormalFlags("N")
     .observationResultStatus("F");
 
-  patientResult.orderObservations[0].observations!.push({ obx: newObx });
+  patientResult.orderObservations[0].observations!.push({ observation: newObx });
 
   // Verify modification
   expect(patientResult.orderObservations[0].observations!.length, ).toBe(originalObxCount + 1);
 
   // Re-encode and verify
-  const rebuilt = createORU_R01(parseResult.val!.msh, [patientResult]);
+  const rebuilt = createORU_R01(parseResult.val!.header, [patientResult]);
   const reencoded = rebuilt.encode();
 
   const reParseResult = parseORU_R01(reencoded);
@@ -154,15 +154,15 @@ test("Parse and modify - Add OBR to beginning", () => {
     .observationResultStatus("F");
 
   patientResult.orderObservations.unshift({
-    obr: newObr,
-    observations: [{ obx: newObx }],
+    observationRequest: newObr,
+    observations: [{ observation: newObx }],
   });
 
   // Verify modification
   expect(patientResult.orderObservations.length, ).toBe(originalOrderCount + 1);
 
   // Re-encode and verify
-  const rebuilt = createORU_R01(parseResult.val!.msh, [patientResult]);
+  const rebuilt = createORU_R01(parseResult.val!.header, [patientResult]);
   const reencoded = rebuilt.encode();
 
   const reParseResult = parseORU_R01(reencoded);
@@ -200,15 +200,15 @@ test("Parse and modify - Add OBR to middle", () => {
     .observationResultStatus("F");
 
   patientResult.orderObservations.splice(1, 0, {
-    obr: newObr,
-    observations: [{ obx: newObx }],
+    observationRequest: newObr,
+    observations: [{ observation: newObx }],
   });
 
   // Verify modification
   expect(patientResult.orderObservations.length, ).toBe(originalOrderCount + 1);
 
   // Re-encode and verify
-  const rebuilt = createORU_R01(parseResult.val!.msh, [patientResult]);
+  const rebuilt = createORU_R01(parseResult.val!.header, [patientResult]);
   const reencoded = rebuilt.encode();
 
   const reParseResult = parseORU_R01(reencoded);
@@ -246,15 +246,15 @@ test("Parse and modify - Add OBR to end", () => {
     .observationResultStatus("F");
 
   patientResult.orderObservations.push({
-    obr: newObr,
-    observations: [{ obx: newObx }],
+    observationRequest: newObr,
+    observations: [{ observation: newObx }],
   });
 
   // Verify modification
   expect(patientResult.orderObservations.length, ).toBe(originalOrderCount + 1);
 
   // Re-encode and verify
-  const rebuilt = createORU_R01(parseResult.val!.msh, [patientResult]);
+  const rebuilt = createORU_R01(parseResult.val!.header, [patientResult]);
   const reencoded = rebuilt.encode();
 
   const reParseResult = parseORU_R01(reencoded);
@@ -297,13 +297,13 @@ test("Parse and modify - Add OBR with ORC", () => {
     .observationResultStatus("F");
 
   patientResult.orderObservations.push({
-    orc: newOrc,
-    obr: newObr,
-    observations: [{ obx: newObx }],
+    commonOrder: newOrc,
+    observationRequest: newObr,
+    observations: [{ observation: newObx }],
   });
 
   // Re-encode and verify ORC is preserved
-  const rebuilt = createORU_R01(parseResult.val!.msh, [patientResult]);
+  const rebuilt = createORU_R01(parseResult.val!.header, [patientResult]);
   const reencoded = rebuilt.encode();
 
   const reParseResult = parseORU_R01(reencoded);
@@ -314,7 +314,7 @@ test("Parse and modify - Add OBR with ORC", () => {
     reParseResult.val!.patientResults[0].orderObservations[
       reParseResult.val!.patientResults[0].orderObservations.length - 1
     ];
-  expect(lastOrder.orc, "ORC should be preserved").toBeTruthy();
+  expect(lastOrder.commonOrder, "ORC should be preserved").toBeTruthy();
 });
 
 test("Parse and modify - Multiple operations", () => {
@@ -340,7 +340,7 @@ test("Parse and modify - Multiple operations", () => {
     .abnormalFlags("N")
     .observationResultStatus("F");
 
-  patientResult.orderObservations[0].observations!.push({ obx: hgbObx });
+  patientResult.orderObservations[0].observations!.push({ observation: hgbObx });
 
   // 2. Add new order at beginning
   const naObr = new OBR()
@@ -363,8 +363,8 @@ test("Parse and modify - Multiple operations", () => {
     .observationResultStatus("F");
 
   patientResult.orderObservations.unshift({
-    obr: naObr,
-    observations: [{ obx: naObx }],
+    observationRequest: naObr,
+    observations: [{ observation: naObx }],
   });
 
   // 3. Add new order at end
@@ -388,8 +388,8 @@ test("Parse and modify - Multiple operations", () => {
     .observationResultStatus("F");
 
   patientResult.orderObservations.push({
-    obr: kObr,
-    observations: [{ obx: kObx }],
+    observationRequest: kObr,
+    observations: [{ observation: kObx }],
   });
 
   // Verify all modifications
@@ -397,7 +397,7 @@ test("Parse and modify - Multiple operations", () => {
   expect(patientResult.orderObservations[1].observations!.length, "CBC should have 1 more OBX").toBe(originalCbcObxCount + 1);
 
   // Re-encode and verify
-  const rebuilt = createORU_R01(parseResult.val!.msh, [patientResult]);
+  const rebuilt = createORU_R01(parseResult.val!.header, [patientResult]);
   const reencoded = rebuilt.encode();
 
   const reParseResult = parseORU_R01(reencoded);
@@ -413,12 +413,12 @@ test("Parse and modify - Preserve all ORCs in round-trip", () => {
   expect(parseResult.val).toBeTruthy();
 
   // Verify original ORCs are present
-  expect(parseResult.val!.patientResults[0].orderObservations[0].orc).toBeTruthy();
-  expect(parseResult.val!.patientResults[0].orderObservations[1].orc).toBeTruthy();
+  expect(parseResult.val!.patientResults[0].orderObservations[0].commonOrder).toBeTruthy();
+  expect(parseResult.val!.patientResults[0].orderObservations[1].commonOrder).toBeTruthy();
 
   // Re-encode
   const rebuilt = createORU_R01(
-    parseResult.val!.msh,
+    parseResult.val!.header,
     parseResult.val!.patientResults,
   );
   const reencoded = rebuilt.encode();
@@ -427,6 +427,6 @@ test("Parse and modify - Preserve all ORCs in round-trip", () => {
   const reParseResult = parseORU_R01(reencoded);
   expect(reParseResult.ok).toBe(true);
   expect(reParseResult.val).toBeTruthy();
-  expect(reParseResult.val!.patientResults[0].orderObservations[0].orc, "First ORC should be preserved").toBeTruthy();
-  expect(reParseResult.val!.patientResults[0].orderObservations[1].orc, "Second ORC should be preserved").toBeTruthy();
+  expect(reParseResult.val!.patientResults[0].orderObservations[0].commonOrder, "First ORC should be preserved").toBeTruthy();
+  expect(reParseResult.val!.patientResults[0].orderObservations[1].commonOrder, "Second ORC should be preserved").toBeTruthy();
 });

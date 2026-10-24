@@ -28,18 +28,18 @@ export class MDM_T01<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
-    public evn: TEVN,
-    public pid: TPID,
-    public pv1: TPV1,
-    public txa: TTXA,
+    public header: TMSH,
+    public event: TEVN,
+    public patient: TPID,
+    public visit: TPV1,
+    public document: TTXA,
     public options: MDM_T01Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, evn: this.evn, pid: this.pid, pv1: this.pv1, txa: this.txa };
+    return { ...this.options, header: this.header, event: this.event, patient: this.patient, visit: this.visit, document: this.document };
   }
 
   /** Validates the message structure, returning a result. */
@@ -60,13 +60,13 @@ export class MDM_T01<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
 /** Builds an HL7 MDM^T01 (HL7 v2.3) message. */
 export function createMDM_T01<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TPV1 extends PV1 = PV1, TTXA extends TXA = TXA>(
-  msh: TMSH,
-  evn: TEVN,
-  pid: TPID,
-  pv1: TPV1,
-  txa: TTXA,
+  header: TMSH,
+  event: TEVN,
+  patient: TPID,
+  visit: TPV1,
+  document: TTXA,
   options: MDM_T01Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): MDM_T01<TMSH, TEVN, TPID, TPV1, TTXA> {
-  return new MDM_T01(msh, evn, pid, pv1, txa, options, encoding);
+  return new MDM_T01(header, event, patient, visit, document, options, encoding);
 }

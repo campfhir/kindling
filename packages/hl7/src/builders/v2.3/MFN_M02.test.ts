@@ -32,21 +32,21 @@ function buildBasicMessage() {
     .administrativeSex("M")
     .activeInactiveFlag("A");
 
-  return { msh, mfi, mfe, stf };
+  return { header: msh, masterFile: mfi, entry: mfe, staff: stf };
 }
 
 describe("MFN_M02 builder", () => {
   test("createMFN_M02 returns MFN_M02 instance", () => {
-    const { msh, mfi, mfe, stf } = buildBasicMessage();
-    const message = createMFN_M02(msh, mfi, [{ mfe, stf }]);
+    const { header: msh, masterFile: mfi, entry: mfe, staff: stf } = buildBasicMessage();
+    const message = createMFN_M02(msh, mfi, [{ entry: mfe, staff: stf }]);
 
     expect(message instanceof MFN_M02).toBeTruthy();
   });
 
   test("verify() detects missing MSH", () => {
-    const { mfi, mfe, stf } = buildBasicMessage();
+    const { masterFile: mfi, entry: mfe, staff: stf } = buildBasicMessage();
     // deno-lint-ignore no-explicit-any
-    const message = new MFN_M02(null as any, mfi, [{ mfe, stf }]);
+    const message = new MFN_M02(null as any, mfi, [{ entry: mfe, staff: stf }]);
 
     const result = message.verify();
     expect(result.valid).toBe(false);
@@ -54,9 +54,9 @@ describe("MFN_M02 builder", () => {
   });
 
   test("verify() detects missing MFI", () => {
-    const { msh, mfe, stf } = buildBasicMessage();
+    const { header: msh, entry: mfe, staff: stf } = buildBasicMessage();
     // deno-lint-ignore no-explicit-any
-    const message = new MFN_M02(msh, null as any, [{ mfe, stf }]);
+    const message = new MFN_M02(msh, null as any, [{ entry: mfe, staff: stf }]);
 
     const result = message.verify();
     expect(result.valid).toBe(false);
@@ -64,7 +64,7 @@ describe("MFN_M02 builder", () => {
   });
 
   test("verify() detects empty staff entries", () => {
-    const { msh, mfi } = buildBasicMessage();
+    const { header: msh, masterFile: mfi } = buildBasicMessage();
     const message = new MFN_M02(msh, mfi, []);
 
     const result = message.verify();
@@ -73,39 +73,39 @@ describe("MFN_M02 builder", () => {
   });
 
   test("encode() produces parseable MFN_M02 message", () => {
-    const { msh, mfi, mfe, stf } = buildBasicMessage();
-    const message = createMFN_M02(msh, mfi, [{ mfe, stf }]);
+    const { header: msh, masterFile: mfi, entry: mfe, staff: stf } = buildBasicMessage();
+    const message = createMFN_M02(msh, mfi, [{ entry: mfe, staff: stf }]);
 
     const encoded = message.encode();
     const parsed = parseMFN_M02(encoded);
 
     expect(parsed.ok).toBe(true);
     expect(parsed.val?.staffEntries.length).toBe(1);
-    expect(parsed.val?.staffEntries[0].stf.getStaffName().familyName).toBe("Smith");
+    expect(parsed.val?.staffEntries[0].staff.getStaffName().familyName).toBe("Smith");
   });
 
   test("encode() includes PRA when present", () => {
-    const { msh, mfi, mfe, stf } = buildBasicMessage();
+    const { header: msh, masterFile: mfi, entry: mfe, staff: stf } = buildBasicMessage();
 
     const pra = new PRA()
       .primaryKeyValue({ identifier: "DOC001" })
       .practitionerCategory("OP");
 
-    const message = createMFN_M02(msh, mfi, [{ mfe, stf, pra }]);
+    const message = createMFN_M02(msh, mfi, [{ entry: mfe, staff: stf, practitioner: pra }]);
     const encoded = message.encode();
     const parsed = parseMFN_M02(encoded);
 
     expect(parsed.ok).toBe(true);
-    expect(parsed.val?.staffEntries[0].pra).toBeDefined();
-    expect(parsed.val?.staffEntries[0].pra?.getPractitionerCategory()).toBe("OP");
+    expect(parsed.val?.staffEntries[0].practitioner).toBeDefined();
+    expect(parsed.val?.staffEntries[0].practitioner?.getPractitionerCategory()).toBe("OP");
   });
 
   test("encode() handles multiple staff entries", () => {
-    const { msh, mfi } = buildBasicMessage();
+    const { header: msh, masterFile: mfi } = buildBasicMessage();
 
     const entries = ["DOC001", "DOC002", "DOC003"].map((id, i) => ({
-      mfe: new MFE().recordLevelEventCode("MAD").mfnControlId(`CTL00${i + 1}`).primaryKeyValue(id),
-      stf: new STF().primaryKeyValue({ identifier: id }).staffName({ familyName: `Doctor${i + 1}` }).activeInactiveFlag("A"),
+      entry: new MFE().recordLevelEventCode("MAD").mfnControlId(`CTL00${i + 1}`).primaryKeyValue(id),
+      staff: new STF().primaryKeyValue({ identifier: id }).staffName({ familyName: `Doctor${i + 1}` }).activeInactiveFlag("A"),
     }));
 
     const message = createMFN_M02(msh, mfi, entries);
@@ -117,8 +117,8 @@ describe("MFN_M02 builder", () => {
   });
 
   test("encode() round-trips through parse", () => {
-    const { msh, mfi, mfe, stf } = buildBasicMessage();
-    const message = createMFN_M02(msh, mfi, [{ mfe, stf }]);
+    const { header: msh, masterFile: mfi, entry: mfe, staff: stf } = buildBasicMessage();
+    const message = createMFN_M02(msh, mfi, [{ entry: mfe, staff: stf }]);
     const encoded = message.encode();
 
     const parsed = parseMFN_M02(encoded);
@@ -126,8 +126,8 @@ describe("MFN_M02 builder", () => {
 
     // Re-encode from parsed data
     const rebuilt = createMFN_M02(
-      parsed.val!.msh,
-      parsed.val!.mfi,
+      parsed.val!.header,
+      parsed.val!.masterFile,
       parsed.val!.staffEntries,
     );
     const reencoded = rebuilt.encode();

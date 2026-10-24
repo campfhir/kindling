@@ -21,19 +21,19 @@ import type { DB1 } from "../../segments/v2.5.1/DB1.ts";
 /** The PATIENT group of an BAR^P02 (HL7 v2.5.1) message being built. */
 export interface BARPurgePatientGroup {
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
   /** The DB1 segments. */
-  db1List?: DB1[];
+  disabilities?: DB1[];
 }
 
 /** The optional segments and groups of an BAR^P02 (HL7 v2.5.1) message. */
 export interface BAR_P02Options {
   /** The SFT segments. */
-  sftList?: SFT[];
+  software?: SFT[];
 }
 
 /** Builder for HL7 BAR^P02 (HL7 v2.5.1) messages. */
@@ -45,8 +45,8 @@ export class BAR_P02<TMSH extends MSH = MSH, TEVN extends EVN = EVN> {
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
-    public evn: TEVN,
+    public header: TMSH,
+    public event: TEVN,
     public patients: BARPurgePatientGroup[],
     public options: BAR_P02Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
@@ -54,7 +54,7 @@ export class BAR_P02<TMSH extends MSH = MSH, TEVN extends EVN = EVN> {
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, evn: this.evn, patients: this.patients };
+    return { ...this.options, header: this.header, event: this.event, patients: this.patients };
   }
 
   /** Validates the message structure, returning a result. */
@@ -75,11 +75,11 @@ export class BAR_P02<TMSH extends MSH = MSH, TEVN extends EVN = EVN> {
 
 /** Builds an HL7 BAR^P02 (HL7 v2.5.1) message. */
 export function createBAR_P02<TMSH extends MSH = MSH, TEVN extends EVN = EVN>(
-  msh: TMSH,
-  evn: TEVN,
+  header: TMSH,
+  event: TEVN,
   patients: BARPurgePatientGroup[],
   options: BAR_P02Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): BAR_P02<TMSH, TEVN> {
-  return new BAR_P02(msh, evn, patients, options, encoding);
+  return new BAR_P02(header, event, patients, options, encoding);
 }

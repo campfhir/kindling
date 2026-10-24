@@ -19,15 +19,15 @@ import type { PV1 } from "../../segments/v2.5.1/PV1.ts";
 /** The PATIENT group of an BAR^P06 (HL7 v2.5.1) message being built. */
 export interface BAREndPatientGroup {
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
 }
 
 /** The optional segments and groups of an BAR^P06 (HL7 v2.5.1) message. */
 export interface BAR_P06Options {
   /** The SFT segments. */
-  sftList?: SFT[];
+  software?: SFT[];
 }
 
 /** Builder for HL7 BAR^P06 (HL7 v2.5.1) messages. */
@@ -39,8 +39,8 @@ export class BAR_P06<TMSH extends MSH = MSH, TEVN extends EVN = EVN> {
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
-    public evn: TEVN,
+    public header: TMSH,
+    public event: TEVN,
     public patients: BAREndPatientGroup[],
     public options: BAR_P06Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
@@ -48,7 +48,7 @@ export class BAR_P06<TMSH extends MSH = MSH, TEVN extends EVN = EVN> {
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, evn: this.evn, patients: this.patients };
+    return { ...this.options, header: this.header, event: this.event, patients: this.patients };
   }
 
   /** Validates the message structure, returning a result. */
@@ -69,11 +69,11 @@ export class BAR_P06<TMSH extends MSH = MSH, TEVN extends EVN = EVN> {
 
 /** Builds an HL7 BAR^P06 (HL7 v2.5.1) message. */
 export function createBAR_P06<TMSH extends MSH = MSH, TEVN extends EVN = EVN>(
-  msh: TMSH,
-  evn: TEVN,
+  header: TMSH,
+  event: TEVN,
   patients: BAREndPatientGroup[],
   options: BAR_P06Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): BAR_P06<TMSH, TEVN> {
-  return new BAR_P06(msh, evn, patients, options, encoding);
+  return new BAR_P06(header, event, patients, options, encoding);
 }

@@ -17,11 +17,11 @@ import { ERR } from "../../segments/v2.3/ERR.ts";
 /** Structured result of parsing an HL7 ACK (HL7 v2.3) message. */
 export interface ParsedACK extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The MSA segment. */
-  msa: MSA;
+  acknowledgment: MSA;
   /** The ERR segment. */
-  err?: ERR;
+  error?: ERR;
 }
 
 /** The segment parsers of ACK (HL7 v2.3). */

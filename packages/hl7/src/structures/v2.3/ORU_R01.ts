@@ -45,7 +45,7 @@ export const ORU_R01_STRUCTURE: StructureItem[] = [
         segments: [
           { name: "ORC", required: false, repeating: false },
           { name: "OBR", required: true, repeating: false },
-          { name: "NTE", required: false, repeating: true, as: "obrNteList" },
+          { name: "NTE", required: false, repeating: true },
           {
             name: "OBSERVATION",
             required: false,

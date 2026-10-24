@@ -20,17 +20,17 @@ import { OBX } from "../../segments/v2.3/OBX.ts";
 /** Structured result of parsing an HL7 MDM^T02 (HL7 v2.3) message. */
 export interface ParsedMDM_T02 extends ParsedMessageBase {
   /** The MSH segment. */
-  msh: MSH;
+  header: MSH;
   /** The EVN segment. */
-  evn: EVN;
+  event: EVN;
   /** The PID segment. */
-  pid: PID;
+  patient: PID;
   /** The PV1 segment. */
-  pv1: PV1;
+  visit: PV1;
   /** The TXA segment. */
-  txa: TXA;
+  document: TXA;
   /** The OBX segments. */
-  obxList: OBX[];
+  observations: OBX[];
 }
 
 /** The segment parsers of MDM^T02 (HL7 v2.3). */

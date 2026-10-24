@@ -26,33 +26,33 @@ import type { OBX } from "../../segments/v2.5.1/OBX.ts";
 /** The TIMING QTY group of an ORU^R30 (HL7 v2.5.1) message being built. */
 export interface TimingQty {
   /** The TQ1 segment. */
-  tq1: TQ1;
+  timing: TQ1;
   /** The TQ2 segments. */
-  tq2List?: TQ2[];
+  timingRelationships?: TQ2[];
 }
 
 /** The OBSERVATION group of an ORU^R30 (HL7 v2.5.1) message being built. */
 export interface ObservationGroup {
   /** The OBX segment. */
-  obx: OBX;
+  observation: OBX;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The optional segments and groups of an ORU^R30 (HL7 v2.5.1) message. */
 export interface ORU_R30Options {
   /** The SFT segments. */
-  sftList?: SFT[];
+  software?: SFT[];
   /** The PD1 segment. */
-  pd1?: PD1;
+  patientDemographics?: PD1;
   /** The PV1 segment. */
-  pv1?: PV1;
+  visit?: PV1;
   /** The PV2 segment. */
-  pv2?: PV2;
+  visitDetails?: PV2;
   /** The NTE segments. */
-  obrNteList?: NTE[];
+  notes?: NTE[];
   /** The TIMING QTY groups. */
-  timing?: TimingQty[];
+  timings?: TimingQty[];
 }
 
 /** Builder for HL7 ORU^R30 (HL7 v2.5.1) messages. */
@@ -64,10 +64,10 @@ export class ORU_R30<TMSH extends MSH = MSH, TPID extends PID = PID, TORC extend
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
-    public pid: TPID,
-    public orc: TORC,
-    public obr: TOBR,
+    public header: TMSH,
+    public patient: TPID,
+    public commonOrder: TORC,
+    public observationRequest: TOBR,
     public observations: ObservationGroup[],
     public options: ORU_R30Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
@@ -75,7 +75,7 @@ export class ORU_R30<TMSH extends MSH = MSH, TPID extends PID = PID, TORC extend
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, pid: this.pid, orc: this.orc, obr: this.obr, observations: this.observations };
+    return { ...this.options, header: this.header, patient: this.patient, commonOrder: this.commonOrder, observationRequest: this.observationRequest, observations: this.observations };
   }
 
   /** Validates the message structure, returning a result. */
@@ -96,13 +96,13 @@ export class ORU_R30<TMSH extends MSH = MSH, TPID extends PID = PID, TORC extend
 
 /** Builds an HL7 ORU^R30 (HL7 v2.5.1) message. */
 export function createORU_R30<TMSH extends MSH = MSH, TPID extends PID = PID, TORC extends ORC = ORC, TOBR extends OBR = OBR>(
-  msh: TMSH,
-  pid: TPID,
-  orc: TORC,
-  obr: TOBR,
+  header: TMSH,
+  patient: TPID,
+  commonOrder: TORC,
+  observationRequest: TOBR,
   observations: ObservationGroup[],
   options: ORU_R30Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): ORU_R30<TMSH, TPID, TORC, TOBR> {
-  return new ORU_R30(msh, pid, orc, obr, observations, options, encoding);
+  return new ORU_R30(header, patient, commonOrder, observationRequest, observations, options, encoding);
 }

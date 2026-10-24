@@ -78,7 +78,7 @@ test("verify() fails when EVN is missing", () => {
 
 test("encode() places optional PD1 after PID and before MRG", () => {
   const pd1 = new PD1();
-  const msg = createADT_A34(makeMSH(), makeEVN(), makePID(), makeMRG(), { pd1 });
+  const msg = createADT_A34(makeMSH(), makeEVN(), makePID(), makeMRG(), { patientDemographics: pd1 });
   const segments = msg.encode().split("\r");
   const names = segments.map((s) => s.substring(0, 3));
 
@@ -88,7 +88,7 @@ test("encode() places optional PD1 after PID and before MRG", () => {
 
 test("encode() places optional PV1 after MRG", () => {
   const pv1 = new PV1().patientClass("I");
-  const msg = createADT_A34(makeMSH(), makeEVN(), makePID(), makeMRG(), { pv1 });
+  const msg = createADT_A34(makeMSH(), makeEVN(), makePID(), makeMRG(), { visit: pv1 });
   const segments = msg.encode().split("\r");
   const names = segments.map((s) => s.substring(0, 3));
 
@@ -98,7 +98,7 @@ test("encode() places optional PV1 after MRG", () => {
 test("encode() includes all optional segments in correct order", () => {
   const pd1 = new PD1();
   const pv1 = new PV1().patientClass("I");
-  const msg = createADT_A34(makeMSH(), makeEVN(), makePID(), makeMRG(), { pd1, pv1 });
+  const msg = createADT_A34(makeMSH(), makeEVN(), makePID(), makeMRG(), { patientDemographics: pd1, visit: pv1 });
   const segments = msg.encode().split("\r");
   const names = segments.map((s) => s.substring(0, 3));
 
@@ -112,7 +112,7 @@ test("round-trip: build → encode → parse", () => {
   const parsed = parseADT_A34(encoded);
 
   expect(parsed.ok).toBe(true);
-  expect(parsed.val!.pid).toBeTruthy();
-  expect(parsed.val!.mrg).toBeTruthy();
-  expect(parsed.val!.evn).toBeTruthy();
+  expect(parsed.val!.patient).toBeTruthy();
+  expect(parsed.val!.merge).toBeTruthy();
+  expect(parsed.val!.event).toBeTruthy();
 });

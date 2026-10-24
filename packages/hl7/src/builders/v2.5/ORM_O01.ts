@@ -35,54 +35,28 @@ import type { FT1 } from "../../segments/v2.5/FT1.ts";
 import type { CTI } from "../../segments/v2.5/CTI.ts";
 import type { BLG } from "../../segments/v2.5/BLG.ts";
 
-/** The PATIENT group of an ORM^O01 (HL7 v2.5) message being built. */
-export interface PatientGroup {
-  /** The PID segment. */
-  pid: PID;
-  /** The PD1 segment. */
-  pd1?: PD1;
-  /** The NTE segments. */
-  nteList?: NTE[];
-  /** The PATIENT VISIT group. */
-  visit?: VisitGroup;
-  /** The INSURANCE groups. */
-  insurance?: InsuranceGroup[];
-  /** The GT1 segment. */
-  gt1?: GT1;
-  /** The AL1 segments. */
-  al1List?: AL1[];
-}
-
-/** The PATIENT VISIT group of an ORM^O01 (HL7 v2.5) message being built. */
-export interface VisitGroup {
-  /** The PV1 segment. */
-  pv1: PV1;
-  /** The PV2 segment. */
-  pv2?: PV2;
-}
-
 /** The INSURANCE group of an ORM^O01 (HL7 v2.5) message being built. */
 export interface InsuranceGroup {
   /** The IN1 segment. */
-  in1: IN1;
+  insurance: IN1;
   /** The IN2 segment. */
-  in2?: IN2;
+  insuranceDetails?: IN2;
   /** The IN3 segments. */
-  in3List?: IN3[];
+  insuranceCertifications?: IN3[];
 }
 
 /** The ORDER group of an ORM^O01 (HL7 v2.5) message being built. */
 export interface OrderGroup {
   /** The ORC segment. */
-  orc: ORC;
+  commonOrder: ORC;
   /** The ORDER DETAIL group. */
   detail?: OrderDetailGroup;
   /** The FT1 segments. */
-  ft1List?: FT1[];
+  transactions?: FT1[];
   /** The CTI segments. */
-  ctiList?: CTI[];
+  clinicalTrials?: CTI[];
   /** The BLG segment. */
-  blg?: BLG;
+  billing?: BLG;
 }
 
 /** The ORDER DETAIL group of an ORM^O01 (HL7 v2.5) message being built. */
@@ -90,11 +64,11 @@ export interface OrderDetailGroup {
   /** One of OBR, RQD, RQ1, RXO, ODS, ODT. */
   segment: OBR | RQD | RQ1 | RXO | ODS | ODT;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
   /** The CTD segment. */
-  ctd?: CTD;
+  contact?: CTD;
   /** The DG1 segments. */
-  dg1List?: DG1[];
+  diagnoses?: DG1[];
   /** The OBSERVATION groups. */
   observations?: ObservationGroup[];
 }
@@ -102,17 +76,31 @@ export interface OrderDetailGroup {
 /** The OBSERVATION group of an ORM^O01 (HL7 v2.5) message being built. */
 export interface ObservationGroup {
   /** The OBX segment. */
-  obx: OBX;
+  observation: OBX;
   /** The NTE segments. */
-  nteList?: NTE[];
+  notes?: NTE[];
 }
 
 /** The optional segments and groups of an ORM^O01 (HL7 v2.5) message. */
 export interface ORM_O01Options {
   /** The NTE segments. */
-  nteList?: NTE[];
-  /** The PATIENT group. */
-  patient?: PatientGroup;
+  notes?: NTE[];
+  /** The PID segment. */
+  patient?: PID;
+  /** The PD1 segment. */
+  patientDemographics?: PD1;
+  /** The NTE segments. */
+  patientNotes?: NTE[];
+  /** The PV1 segment. */
+  visit?: PV1;
+  /** The PV2 segment. */
+  visitDetails?: PV2;
+  /** The INSURANCE groups. */
+  insurances?: InsuranceGroup[];
+  /** The GT1 segment. */
+  guarantor?: GT1;
+  /** The AL1 segments. */
+  allergies?: AL1[];
 }
 
 /** Builder for HL7 ORM^O01 (HL7 v2.5) messages. */
@@ -124,7 +112,7 @@ export class ORM_O01<TMSH extends MSH = MSH> {
 
   /** Constructor. */
   constructor(
-    public msh: TMSH,
+    public header: TMSH,
     public orders: OrderGroup[],
     public options: ORM_O01Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
@@ -132,7 +120,7 @@ export class ORM_O01<TMSH extends MSH = MSH> {
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, msh: this.msh, orders: this.orders };
+    return { ...this.options, header: this.header, orders: this.orders };
   }
 
   /** Validates the message structure, returning a result. */
@@ -153,10 +141,10 @@ export class ORM_O01<TMSH extends MSH = MSH> {
 
 /** Builds an HL7 ORM^O01 (HL7 v2.5) message. */
 export function createORM_O01<TMSH extends MSH = MSH>(
-  msh: TMSH,
+  header: TMSH,
   orders: OrderGroup[],
   options: ORM_O01Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): ORM_O01<TMSH> {
-  return new ORM_O01(msh, orders, options, encoding);
+  return new ORM_O01(header, orders, options, encoding);
 }
