@@ -1,9 +1,11 @@
 import { Result } from "../../types/result.ts";
 import { EncodingCharacters } from "../../types/encoding.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { EVN } from "../../segments/v2.5.1/EVN.ts";
 import { PID } from "../../segments/v2.5.1/PID.ts";
 import { PD1 } from "../../segments/v2.5.1/PD1.ts";
+import { ROL } from "../../segments/v2.5.1/ROL.ts";
 import { PV1 } from "../../segments/v2.5.1/PV1.ts";
 import { PV2 } from "../../segments/v2.5.1/PV2.ts";
 import { DB1 } from "../../segments/v2.5.1/DB1.ts";
@@ -12,7 +14,6 @@ import { AL1 } from "../../segments/v2.5.1/AL1.ts";
 import { DG1 } from "../../segments/v2.5.1/DG1.ts";
 import { DRG } from "../../segments/v2.5.1/DRG.ts";
 import { PR1 } from "../../segments/v2.5.1/PR1.ts";
-import { ROL } from "../../segments/v2.5.1/ROL.ts";
 import { GT1 } from "../../segments/v2.5.1/GT1.ts";
 import { NK1 } from "../../segments/v2.5.1/NK1.ts";
 import { IN1 } from "../../segments/v2.5.1/IN1.ts";
@@ -37,6 +38,10 @@ export class BAR_P01_Parser extends BAR_P01_Parser_base {
     return MSH.parse(s);
   }
 
+  protected override parseSFT(s: string, e: EncodingCharacters): Result<SFT> {
+    return SFT.parse(s, e);
+  }
+
   protected override parseEVN(s: string, e: EncodingCharacters): Result<EVN> {
     return EVN.parse(s, e);
   }
@@ -47,6 +52,10 @@ export class BAR_P01_Parser extends BAR_P01_Parser_base {
 
   protected override parsePD1(s: string, e: EncodingCharacters): Result<PD1> {
     return PD1.parse(s, e);
+  }
+
+  protected override parseROL(s: string, e: EncodingCharacters): Result<ROL> {
+    return ROL.parse(s, e);
   }
 
   protected override parsePV1(s: string, e: EncodingCharacters): Result<PV1> {
@@ -79,10 +88,6 @@ export class BAR_P01_Parser extends BAR_P01_Parser_base {
 
   protected override parsePR1(s: string, e: EncodingCharacters): Result<PR1> {
     return PR1.parse(s, e);
-  }
-
-  protected override parseROL(s: string, e: EncodingCharacters): Result<ROL> {
-    return ROL.parse(s, e);
   }
 
   protected override parseGT1(s: string, e: EncodingCharacters): Result<GT1> {

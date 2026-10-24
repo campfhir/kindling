@@ -3,6 +3,7 @@
  *
  * @module
  */
+export * from "./ABS.ts";
 export * from "./ACC.ts";
 export * from "./ADD.ts";
 export * from "./AIG.ts";
@@ -14,6 +15,7 @@ export * from "./APR.ts";
 export * from "./ARQ.ts";
 export * from "./AUT.ts";
 export * from "./BHS.ts";
+export * from "./BLC.ts";
 export * from "./BLG.ts";
 export * from "./BTS.ts";
 export * from "./CDM.ts";
@@ -94,6 +96,7 @@ export * from "./RDF.ts";
 export * from "./RDT.ts";
 export * from "./RF1.ts";
 export * from "./RGS.ts";
+export * from "./RMI.ts";
 export * from "./ROL.ts";
 export * from "./RQ1.ts";
 export * from "./RQD.ts";

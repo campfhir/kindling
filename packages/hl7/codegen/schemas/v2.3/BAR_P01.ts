@@ -8,10 +8,8 @@ import { MessageSchema } from "../../../src/types/schema";
  *
  * Every segment of the repeating VISIT group is optional, so the parser starts a new visit when
  * a segment appears out of group order (for example a second PV1). P05 (update account) has the
- * same structure. Checked on hl7-definition.caristix.com (v2.3) and HAPI v23. v2.5.1 adds
- * [{SFT}], ROL after PD1 and PV2, repeating IN3 and ROL in INSURANCE, and for P05 ABS, BLC and
- * RMI at the end of the visit; the v2.5.1 parsers here swap in the v2.5.1 segment classes on
- * this structure and skip those additions with a warning.
+ * same structure. Checked on hl7-definition.caristix.com (v2.3) and HAPI v23. v2.4 and v2.5 have
+ * their own shapes (see the v2.5.1 schema).
  */
 export const BAR_P01_SCHEMA: MessageSchema = {
   messageType: "BAR",

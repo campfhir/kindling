@@ -9,7 +9,7 @@ import { parseBAR_P06 } from "../../parsers/v2.3/BAR_P06_Parser.ts";
 import { parseBAR_P01 as parseBAR_P01_v251 } from "../../parsers/v2.5.1/BAR_P01_Parser.ts";
 import { parseBAR_P02 as parseBAR_P02_v251 } from "../../parsers/v2.5.1/BAR_P02_Parser.ts";
 import { parseBAR_P06 as parseBAR_P06_v251 } from "../../parsers/v2.5.1/BAR_P06_Parser.ts";
-import { createBAR_P05 } from "../v2.5.1/BAR_P05.ts";
+import { createBAR_P05 } from "./BAR_P05.ts";
 import { MSH } from "../../segments/v2.3/MSH.ts";
 import { EVN } from "../../segments/v2.3/EVN.ts";
 import { PID } from "../../segments/v2.3/PID.ts";
@@ -64,8 +64,8 @@ describe("BAR_P01 / BAR_P05 (v2.3)", () => {
       "PV1", "PV2", "DB1", "OBX", "AL1", "DG1", "DG1", "DRG", "PR1", "ROL", "GT1", "NK1", "IN1", "IN2", "IN3", "ACC", "UB1", "UB2",
       "PV1", "DG1",
     ]);
-    for (const parse of [parseBAR_P01, parseBAR_P01_v251]) {
-      const result = parse(wire);
+    {
+      const result = parseBAR_P01(wire);
       expect(result.ok).toBe(true);
       const v = result.val!;
       expect(v.pd1).toBeTruthy();
@@ -79,6 +79,12 @@ describe("BAR_P01 / BAR_P05 (v2.3)", () => {
       expect(v.visits[1].acc).toBeUndefined();
       expect(v.message.encode()).toBe(wire);
     }
+    // The v2.5.1 parser (v2.5 shape, IN3 as a list) accepts the same wire message.
+    const v251 = parseBAR_P01_v251(wire);
+    expect(v251.ok).toBe(true);
+    expect(v251.val!.visits).toHaveLength(2);
+    expect(v251.val!.visits[0].insurances[0].in3List).toHaveLength(1);
+    expect(v251.val!.message.encode()).toBe(wire);
   });
 
   test("a visit without PV1 starts at any group segment, and out-of-order segments open a new visit", () => {

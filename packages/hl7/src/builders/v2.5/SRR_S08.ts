@@ -1,7 +1,2 @@
-/**
- * SRR_S08 builder for HL7 v2.5 — identical to v2.4, re-exported.
- *
- * @module
- */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.4/SRR_S08.ts";
+// @generated wrapper — copied from the base version so it wraps this version's base module
+export { SRR_S01 as SRR_S08, createSRR_S01 as createSRR_S08 } from "./SRR_S01.ts";

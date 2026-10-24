@@ -1,16 +1,17 @@
 /**
- * Parser for DFT^P03 messages (HL7 v2.5): post detail financial transactions.
+ * Parser for DFT^P03 messages (HL7 2.5): post detail financial transactions.
  *
- * Structure (v2.5, identical in v2.5.1):
+ * Structure:
  *   MSH [{SFT}] EVN PID [PD1] [{ROL}] [PV1] [PV2] [{ROL}] [{DB1}]
  *   [{ COMMON ORDER: [ORC] [{ TQ1 [{TQ2}] }] [ OBR [{NTE}] ] [{ OBX [{NTE}] }] }]
  *   { FINANCIAL: FT1 [NTE] [{ PR1 [{ROL}] }] [{ FINANCIAL COMMON ORDER: same shape }] }
  *   [{DG1}] [DRG] [{GT1}] [{ IN1 [IN2] [{IN3}] [{ROL}] }] [ACC]
  *
  * Every member of a COMMON ORDER group is optional, so a new order group starts when an order
- * segment appears out of group order (a second ORC, a TQ1 after an OBR, …). Order groups that
- * follow an FT1 belong to that FINANCIAL group. Compared with v2.3: SFT, the ROLs after PD1,
- * PV2 and in INSURANCE, the order groups, the NTE after FT1 and repeating IN3 are new.
+ * segment appears out of group order (a second ORC, an OBR after an OBX, …). Order groups that
+ * follow an FT1 belong to that FINANCIAL group.
+ * Compared with v2.4: [{SFT}], the TIMING group (TQ1/TQ2) in the order groups and the NTE after
+ * FT1 are new (identical in v2.5.1).
  *
  * @module
  */
@@ -117,7 +118,7 @@ export interface ParsedDFTInsurance {
   rolList: ROL[];
 }
 
-/** Structured result of parsing an HL7 DFT^P03 (v2.5) message. */
+/** Structured result of parsing an HL7 DFT^P03 (2.5) message. */
 export interface ParsedDFT_P03 {
   /** The message value. */
   message: HL7Message;
@@ -157,7 +158,7 @@ export interface ParsedDFT_P03 {
   acc?: ACC;
 }
 
-/** Parser for HL7 DFT^P03 (v2.5) messages. */
+/** Parser for HL7 DFT^P03 (2.5) messages. */
 export class DFT_P03_Parser {
   /** The message name value. */
   protected readonly messageName: string = "DFT_P03";

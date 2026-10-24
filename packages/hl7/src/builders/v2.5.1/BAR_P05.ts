@@ -1,1 +1,6 @@
-export { BAR_P01 as BAR_P05, createBAR_P01 as createBAR_P05 } from "./BAR_P01.ts";
+/**
+ * BAR_P05 builder for HL7 v2.5.1 — identical to v2.5, re-exported.
+ *
+ * @module
+ */
+export * from "../v2.5/BAR_P05.ts";

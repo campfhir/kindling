@@ -1,5 +1,5 @@
 /**
- * Builder for ADT^A28 messages (HL7 v2.5): same structure as ADT^A01.
+ * Builder for ADT^A28 messages (HL7 2.5): same structure as ADT^A01.
  *
  * @module
  */

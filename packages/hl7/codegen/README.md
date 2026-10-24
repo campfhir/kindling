@@ -31,7 +31,10 @@ listed in `ownSegments` (e.g. `SPM` in v2.5); codegen skips those and later re-e
 inherit them. To diverge from the base (say v2.4 changes `PID`), replace the generated
 `src/segments/v2.4/PID.ts` with a hand-written class extending the v2.3.1 one. Codegen skips any
 file that lacks the `@generated re-export` marker, and later re-export versions pick up your
-class automatically.
+class automatically. Wrapper modules (`ADT_A02` around `ADT_A01`, `SRR_S02` around `SRR_S01`, …) are
+copied into a re-export version instead of re-exported when that version has its own copy of the
+module they wrap, so the wrapper follows the local base; those copies carry the
+`@generated wrapper` marker and are regenerated like re-exports.
 
 After adding or moving files run `pnpm codegen && pnpm barrels && pnpm exports`; CI fails if the
 committed output drifts (`pnpm codegen:check`).

@@ -1,7 +1,25 @@
 /**
- * ADT_A44_Parser parser for HL7 v2.5 — identical to v2.4, re-exported.
+ * Parser for ADT^A44 messages (HL7 v2.5).
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.4/ADT_A44_Parser.ts";
+// @generated wrapper — copied from the base version so it wraps this version's base module
+import type { Result } from "../../types/result.ts";
+import {
+  ADT_A34_Parser,
+  type ParsedADT_A34,
+} from "./ADT_A34_Parser.ts";
+
+/** Structured result of parsing an HL7 ADT^A44 (v2.3) message. */
+export type ParsedADT_A44 = ParsedADT_A34;
+
+/** Parser for HL7 ADT^A44 (v2.3) messages. */
+export class ADT_A44_Parser extends ADT_A34_Parser {
+  /** The message name value. */
+  protected override readonly messageName: string = "ADT_A44";
+}
+
+/** Parses an HL7 ADT^A44 (v2.3) message string into a structured result. */
+export function parseADT_A44(messageString: string): Result<ParsedADT_A44> {
+  return new ADT_A44_Parser().parse(messageString);
+}

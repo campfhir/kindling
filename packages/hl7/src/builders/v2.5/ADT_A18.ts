@@ -1,7 +1,7 @@
 /**
- * ADT_A18 builder for HL7 v2.5 — identical to v2.4, re-exported.
+ * Builder for ADT^A18 messages (HL7 v2.5).
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.4/ADT_A18.ts";
+// @generated wrapper — copied from the base version so it wraps this version's base module
+export { ADT_A34 as ADT_A18, createADT_A34 as createADT_A18 } from "./ADT_A34.ts";

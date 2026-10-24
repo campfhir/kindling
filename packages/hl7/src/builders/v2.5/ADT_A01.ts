@@ -1,7 +1,7 @@
 /**
- * Builder for ADT^A01 messages (HL7 v2.5): admit/visit notification.
+ * Builder for ADT^A01 messages (HL7 2.5): admit/visit notification.
  *
- * Structure (v2.5, identical in v2.5.1):
+ * Structure:
  *   MSH [{SFT}] EVN PID [PD1] [{ROL}] [{NK1}] PV1 [PV2] [{ROL}] [{DB1}] [{OBX}] [{AL1}] [{DG1}] [DRG]
  *   [{ PR1 [{ROL}] }] [{GT1}] [{ IN1 [IN2] [{IN3}] [{ROL}] }] [ACC] [UB1] [UB2] [PDA]
  *
@@ -54,7 +54,7 @@ export interface InsuranceGroup<TIN1 extends IN1 = IN1> {
   rolList?: ROL[];
 }
 
-/** Builder for HL7 ADT^A01 (v2.5) messages. */
+/** Builder for HL7 ADT^A01 (2.5) messages. */
 export class ADT_A01<
   TMSH extends MSH = MSH,
   TEVN extends EVN = EVN,
@@ -157,7 +157,7 @@ export class ADT_A01<
   }
 }
 
-/** Builds an HL7 ADT^A01 (v2.5) message. */
+/** Builds an HL7 ADT^A01 (2.5) message. */
 export function createADT_A01<
   TMSH extends MSH = MSH,
   TEVN extends EVN = EVN,

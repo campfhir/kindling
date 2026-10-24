@@ -1,13 +1,13 @@
 /**
- * Parser for ADT^A01 messages (HL7 v2.5): admit/visit notification.
+ * Parser for ADT^A01 messages (HL7 2.5): admit/visit notification.
  *
- * Structure (v2.5, identical in v2.5.1):
+ * Structure:
  *   MSH [{SFT}] EVN PID [PD1] [{ROL}] [{NK1}] PV1 [PV2] [{ROL}] [{DB1}] [{OBX}] [{AL1}] [{DG1}] [DRG]
  *   [{ PR1 [{ROL}] }] [{GT1}] [{ IN1 [IN2] [{IN3}] [{ROL}] }] [ACC] [UB1] [UB2] [PDA]
  *
- * Compared with v2.3: [{SFT}], the ROLs after PV2 and inside INSURANCE, repeating IN3 and the
- * trailing PDA are new. The other A01-shaped events (A02–A16, A21–A23, A25–A29, A31–A33, A38)
- * reuse this parser under their own names.
+ * Compared with v2.4 only [{SFT}] after MSH is new (identical in v2.5.1).
+ * The other A01-shaped events (A02–A16, A21–A23, A25–A29, A31–A33, A38) reuse this parser under
+ * their own names.
  *
  * @module
  */
@@ -64,7 +64,7 @@ export interface ParsedInsuranceGroup {
   rolList?: ROL[];
 }
 
-/** Structured result of parsing an HL7 ADT^A01 (v2.5) message. */
+/** Structured result of parsing an HL7 ADT^A01 (2.5) message. */
 export interface ParsedADT_A01 {
   /** The message value. */
   message: HL7Message;
@@ -116,7 +116,7 @@ export interface ParsedADT_A01 {
 
 const some = <T,>(list: T[]): T[] | undefined => (list.length ? list : undefined);
 
-/** Parser for HL7 ADT^A01 (v2.5) messages. */
+/** Parser for HL7 ADT^A01 (2.5) messages. */
 export class ADT_A01_Parser {
   /** The message name value. */
   protected readonly messageName: string = "ADT_A01";

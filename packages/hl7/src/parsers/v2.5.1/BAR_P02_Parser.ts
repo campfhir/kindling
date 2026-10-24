@@ -1,6 +1,7 @@
 import { Result } from "../../types/result.ts";
 import { EncodingCharacters } from "../../types/encoding.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { EVN } from "../../segments/v2.5.1/EVN.ts";
 import { PID } from "../../segments/v2.5.1/PID.ts";
 import { PD1 } from "../../segments/v2.5.1/PD1.ts";
@@ -18,6 +19,10 @@ export type { ParsedBAR_P02, ParsedBARPurgePatient };
 export class BAR_P02_Parser extends BAR_P02_Parser_base {
   protected override parseMSH(s: string): Result<MSH> {
     return MSH.parse(s);
+  }
+
+  protected override parseSFT(s: string, e: EncodingCharacters): Result<SFT> {
+    return SFT.parse(s, e);
   }
 
   protected override parseEVN(s: string, e: EncodingCharacters): Result<EVN> {

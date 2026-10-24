@@ -1,7 +1,27 @@
-/**
- * SRR_S11_Parser parser for HL7 v2.5 — identical to v2.4, re-exported.
- *
- * @module
- */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.4/SRR_S11_Parser.ts";
+// @generated wrapper — copied from the base version so it wraps this version's base module
+import { Result } from "../../types/result.ts";
+import {
+  SRR_S01_Parser,
+  ParsedSRR_S01,
+  ParsedSRRSchedule,
+  ParsedSRRPatient,
+  ParsedSRRResources,
+  ParsedSRRService,
+  ParsedSRRGeneralResource,
+  ParsedSRRLocationResource,
+  ParsedSRRPersonnelResource,
+} from "./SRR_S01_Parser.ts";
+
+export type { ParsedSRRSchedule, ParsedSRRPatient, ParsedSRRResources, ParsedSRRService, ParsedSRRGeneralResource, ParsedSRRLocationResource, ParsedSRRPersonnelResource };
+/** Structured result of parsing an HL7 SRR^S11 (v2.3) message. */
+export type ParsedSRR_S11 = ParsedSRR_S01;
+
+/** Parser for HL7 SRR^S11 (v2.3) messages. */
+export class SRR_S11_Parser extends SRR_S01_Parser {
+  protected override readonly messageName: string = "SRR_S11";
+}
+
+/** Parses an HL7 SRR^S11 (v2.3) message string into a structured result. */
+export function parseSRR_S11(messageString: string): Result<ParsedSRR_S11> {
+  return new SRR_S11_Parser().parse(messageString);
+}

@@ -1,7 +1,7 @@
 /**
- * ADT_A31 builder for HL7 v2.4 — identical to v2.3.1, re-exported.
+ * Builder for ADT^A31 messages (HL7 v2.4).
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3.1/ADT_A31.ts";
+// @generated wrapper — copied from the base version so it wraps this version's base module
+export { ADT_A01 as ADT_A31, createADT_A01 as createADT_A31 } from "./ADT_A01.ts";

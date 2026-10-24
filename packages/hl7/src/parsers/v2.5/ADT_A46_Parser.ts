@@ -1,7 +1,19 @@
-/**
- * ADT_A46_Parser parser for HL7 v2.5 — identical to v2.4, re-exported.
- *
- * @module
- */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.4/ADT_A46_Parser.ts";
+// @generated wrapper — copied from the base version so it wraps this version's base module
+import { Result } from "../../types/result.ts";
+import {
+  ADT_A34_Parser,
+  ParsedADT_A34,
+} from "./ADT_A34_Parser.ts";
+
+/** Structured result of parsing an HL7 ADT^A46 (v2.3) message. */
+export type ParsedADT_A46 = ParsedADT_A34;
+
+/** Parser for HL7 ADT^A46 (v2.3) messages. */
+export class ADT_A46_Parser extends ADT_A34_Parser {
+  protected override readonly messageName: string = "ADT_A46";
+}
+
+/** Parses an HL7 ADT^A46 (v2.3) message string into a structured result. */
+export function parseADT_A46(messageString: string): Result<ParsedADT_A46> {
+  return new ADT_A46_Parser().parse(messageString);
+}

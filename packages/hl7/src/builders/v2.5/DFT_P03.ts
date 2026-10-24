@@ -1,7 +1,7 @@
 /**
- * Builder for DFT^P03 messages (HL7 v2.5): post detail financial transactions.
+ * Builder for DFT^P03 messages (HL7 2.5): post detail financial transactions.
  *
- * Structure (v2.5, identical in v2.5.1):
+ * Structure:
  *   MSH [{SFT}] EVN PID [PD1] [{ROL}] [PV1] [PV2] [{ROL}] [{DB1}]
  *   [{ COMMON ORDER: [ORC] [{ TQ1 [{TQ2}] }] [ OBR [{NTE}] ] [{ OBX [{NTE}] }] }]
  *   { FINANCIAL: FT1 [NTE] [{ PR1 [{ROL}] }] [{ FINANCIAL COMMON ORDER: same shape }] }
@@ -114,7 +114,7 @@ function encodeOrder(o: DFTOrderGroup, enc: EncodingCharacters): string[] {
   return out;
 }
 
-/** Builder for HL7 DFT^P03 (v2.5) messages. */
+/** Builder for HL7 DFT^P03 (2.5) messages. */
 export class DFT_P03<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID> {
   /** The message name value. */
   protected readonly messageName: string = "DFT_P03";
@@ -228,7 +228,7 @@ export class DFT_P03<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
   }
 }
 
-/** Builds an HL7 DFT^P03 (v2.5) message. */
+/** Builds an HL7 DFT^P03 (2.5) message. */
 export function createDFT_P03<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID>(
   msh: TMSH,
   evn: TEVN,

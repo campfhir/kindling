@@ -1,7 +1,7 @@
 /**
- * ADT_A23 builder for HL7 v2.4 — identical to v2.3.1, re-exported.
+ * Builder for ADT^A23 messages (HL7 v2.4).
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3.1/ADT_A23.ts";
+// @generated wrapper — copied from the base version so it wraps this version's base module
+export { ADT_A01 as ADT_A23, createADT_A01 as createADT_A23 } from "./ADT_A01.ts";
