@@ -51,7 +51,7 @@ which does not rewrite `workspace:` specifiers, so switch that step to pack with
 Packages are versioned and released independently. Only the package whose version changed is
 published.
 
-- Every PR and push to `main` runs **lint, typecheck, codegen check, tests (Node 20/22/24),
+- Every PR and push to `main` runs **lint, typecheck, codegen check, tests (Node 22 and 24),
   build and a smoke test** of every built entry point of every package
   (`.github/workflows/ci.yml`).
 - To prepare a release, run **Bump version** from the Actions tab with the release branch

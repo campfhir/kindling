@@ -23,7 +23,10 @@ Legend: ✅ builder + parser exist · ⬜ not started
 | ORM | O01 | ✅ | ✅ |
 | ORR | O02 | ✅ | ✅ |
 | VXU | V04 (unsolicited vaccination update) | ✅ | ✅ |
-| SIU | S12–S17, S26 | ✅ | ✅ |
+| SIU | S12–S24, S26 | ✅ | ✅ |
+| SRM | S01–S11 (schedule requests) | ✅ | ✅ |
+| SRR | S01–S11 (schedule request responses) | ✅ | ✅ |
+| MDM | T01–T11 (document management) | ✅ | ✅ |
 
 ## Remaining for v2.3
 
@@ -57,7 +60,6 @@ Legend: ✅ builder + parser exist · ⬜ not started
 |---|---|---|
 | ⬜ BAR | P01 add/update account, P02 purge | BLG |
 | ⬜ DFT | P03 post detail financial transactions | FT1 |
-| ⬜ MDM | T01–T11 document management | TXA |
 | ⬜ PEX | P07/P08 product experience | PEO, PES, PCR |
 | ⬜ PPR / PPT / PPG / PPP / PRR | Problem/goal/pathway (PC1–PC3, PC6–PCC etc.) | PRB, GOL, PTH, VAR |
 
@@ -66,8 +68,7 @@ Legend: ✅ builder + parser exist · ⬜ not started
 |---|---|---|
 | ⬜ MFN | M01 (non-specific), M03 (test/observation), M04 (charge description), M05 (location), M06 (clinical study), M07 (clinical study schedule), M08–M12 | CDM, PRC, OM1–OM7, LOC…, CM0–CM2 |
 | ⬜ MFK | Master file application acknowledgment | MFA |
-| ⬜ SIU | S18–S25 (cancel/discontinue/delete variants), S27–S32 if in scope | — |
-| ⬜ SRM / SRR | Schedule request / response (S01–S11) | ARQ-equivalents |
+| ⬜ SQM / SQR | S25 schedule query / response | QRD, QRF (query batch) |
 | ⬜ RQI / RPI / RPL / RPR / RQP / RQC / RQA / RPA | Referral & patient information | RF1, PRD |
 | ⬜ CRM / CSU | Clinical study registration / unsolicited data | CSR, CSS |
 | ⬜ VXQ / VXR / VXX | Immunization query / response / response (VXU^V04 is done) | QRD, QRF |
@@ -88,7 +89,16 @@ does; `A46`/`A48`/`A49` reuse `ADT_A34` (`MSH EVN PID [PD1] MRG`); `A50`/`A51` r
 spec but, like `A18`, reuse `ADT_A34` where `PV1` is an option. The optional `[{SFT}]` that v2.5.1
 adds after `MSH` is not modelled, consistent with the other v2.5.1 ADT messages here.
 
-Suggested order: **remaining ADT (A19, A20) → DFT/BAR → MDM → queries/MFN → the rest.**
+Done in 0.12: SIU S18–S24 (wrappers of S12), SRM S01–S11, SRR S01–S11 and MDM T01–T11 for v2.3 and
+v2.5.1, structures checked per event on hl7-definition.caristix.com (v2.3, v2.4, v2.5, v2.5.1) and
+HAPI v23/v251. SRM is unchanged through v2.5.1. SRR and MDM have two shapes: v2.3 (also v2.4) and
+v2.5 (also v2.5.1): SRR gains repeating `ERR` and `[{TQ1}]` after `SCH`; MDM gains `[{SFT}]`, the
+COMMON ORDER group (`ORC [{TQ1 [{TQ2}]}] OBR [{NTE}]`) and, in the content events, NTEs under each
+`OBX`. Known gaps: `segments/v2.4` re-exports v2.3 for SRR and MDM although v2.4 already matches
+v2.3 there, so nothing is missing for v2.4; the existing SIU model includes `PD1` in the v2.3
+patient group (Caristix lists it from v2.5) and does not model the v2.5 `[{TQ1}]` after `SCH`.
+
+Suggested order: **remaining ADT (A19, A20) → DFT/BAR → queries (incl. SQM/SQR) → MFN → the rest.**
 
 ## v2.5.1 parity
 After v2.3 is complete, bring v2.5.1 to parity with the same messages, then add the 2.5.1 additions:

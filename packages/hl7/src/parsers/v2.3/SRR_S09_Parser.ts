@@ -1,0 +1,26 @@
+import { Result } from "../../types/result.ts";
+import {
+  SRR_S01_Parser,
+  ParsedSRR_S01,
+  ParsedSRRSchedule,
+  ParsedSRRPatient,
+  ParsedSRRResources,
+  ParsedSRRService,
+  ParsedSRRGeneralResource,
+  ParsedSRRLocationResource,
+  ParsedSRRPersonnelResource,
+} from "./SRR_S01_Parser.ts";
+
+export type { ParsedSRRSchedule, ParsedSRRPatient, ParsedSRRResources, ParsedSRRService, ParsedSRRGeneralResource, ParsedSRRLocationResource, ParsedSRRPersonnelResource };
+/** Structured result of parsing an HL7 SRR^S09 (v2.3) message. */
+export type ParsedSRR_S09 = ParsedSRR_S01;
+
+/** Parser for HL7 SRR^S09 (v2.3) messages. */
+export class SRR_S09_Parser extends SRR_S01_Parser {
+  protected override readonly messageName: string = "SRR_S09";
+}
+
+/** Parses an HL7 SRR^S09 (v2.3) message string into a structured result. */
+export function parseSRR_S09(messageString: string): Result<ParsedSRR_S09> {
+  return new SRR_S09_Parser().parse(messageString);
+}
