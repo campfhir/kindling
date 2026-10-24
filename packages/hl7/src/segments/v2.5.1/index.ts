@@ -30,6 +30,7 @@ export * from "./MRG.ts";
 export * from "./MSA.ts";
 export * from "./MSH.ts";
 export * from "./NK1.ts";
+export * from "./NPU.ts";
 export * from "./NTE.ts";
 export * from "./OBR.ts";
 export * from "./OBX.ts";

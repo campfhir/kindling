@@ -1,0 +1,93 @@
+import { describe, test, expect } from "vitest";
+import { createDFT_P03, DFT_P03 } from "./DFT_P03.ts";
+import { parseDFT_P03 } from "../../parsers/v2.3/DFT_P03_Parser.ts";
+import { parseDFT_P03 as parseDFT_P03_v251 } from "../../parsers/v2.5.1/DFT_P03_Parser.ts";
+import { MSH } from "../../segments/v2.3/MSH.ts";
+import { EVN } from "../../segments/v2.3/EVN.ts";
+import { PID } from "../../segments/v2.3/PID.ts";
+import { PD1 } from "../../segments/v2.3/PD1.ts";
+import { PV1 } from "../../segments/v2.3/PV1.ts";
+import { PV2 } from "../../segments/v2.3/PV2.ts";
+import { DB1 } from "../../segments/v2.3/DB1.ts";
+import { OBX } from "../../segments/v2.3/OBX.ts";
+import { FT1 } from "../../segments/v2.3/FT1.ts";
+import { PR1 } from "../../segments/v2.3/PR1.ts";
+import { ROL } from "../../segments/v2.3/ROL.ts";
+import { DG1 } from "../../segments/v2.3/DG1.ts";
+import { DRG } from "../../segments/v2.3/DRG.ts";
+import { GT1 } from "../../segments/v2.3/GT1.ts";
+import { IN1 } from "../../segments/v2.3/IN1.ts";
+import { IN2 } from "../../segments/v2.3/IN2.ts";
+import { IN3 } from "../../segments/v2.3/IN3.ts";
+import { ACC } from "../../segments/v2.3/ACC.ts";
+import { ParserUtils } from "../../types/parser.ts";
+
+const msh = () => new MSH().sendingApplication("BILL").messageType({ messageCode: "DFT", triggerEvent: "P03" });
+const evn = () => new EVN().eventTypeCode("P03");
+const pid = () => new PID().setId("1").patientName({ familyName: "Doe", givenName: "John" });
+const types = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const MSH_LINE = "MSH|^~\\&|BILL|HOSP|AR|HOSP|20231015120000||DFT^P03^DFT_P03|MSG001|P|2.3";
+
+describe("DFT_P03 builder (v2.3)", () => {
+  test("verify() requires MSH, EVN, PID and an FT1", () => {
+    expect(new DFT_P03(null as any, null as any, null as any, []).verify().errors).toEqual([
+      "MSH segment is required", "EVN segment is required", "PID segment is required", "At least one FINANCIAL group (FT1) is required",
+    ]);
+    expect(createDFT_P03(msh(), evn(), pid(), [{ ft1: new FT1().setId("1") }], { pv2: new PV2() }).verify().errors).toEqual(["PV2 requires PV1"]);
+  });
+
+  test("encodes every group in spec order and round-trips through v2.3 and v2.5.1", () => {
+    const wire = createDFT_P03(msh(), evn(), pid(), [
+      { ft1: new FT1().setId("1"), procedures: [{ pr1: new PR1().setId("1"), rolList: [new ROL()] }, { pr1: new PR1().setId("2") }] },
+      { ft1: new FT1().setId("2") },
+    ], {
+      pd1: new PD1(), pv1: new PV1().patientClass("O"), pv2: new PV2(), db1List: [new DB1().setId("1")], obxList: [new OBX().setId("1")],
+      dg1List: [new DG1().setId("1")], drg: new DRG(), gt1List: [new GT1().setId("1")],
+      insurances: [{ in1: new IN1().setId("1"), in2: new IN2(), in3: new IN3().setId("1") }, { in1: new IN1().setId("2") }], acc: new ACC(),
+    }).encode();
+    expect(types(wire)).toEqual([
+      "MSH", "EVN", "PID", "PD1", "PV1", "PV2", "DB1", "OBX",
+      "FT1", "PR1", "ROL", "PR1", "FT1",
+      "DG1", "DRG", "GT1", "IN1", "IN2", "IN3", "IN1", "ACC",
+    ]);
+    for (const parse of [parseDFT_P03, parseDFT_P03_v251]) {
+      const result = parse(wire);
+      expect(result.ok).toBe(true);
+      const v = result.val!;
+      expect(ParserUtils.getComponent(v.pid.fields[4], 0)).toBe("Doe");
+      expect(v.financials).toHaveLength(2);
+      expect(v.financials[0].procedures).toHaveLength(2);
+      expect(v.financials[0].procedures[0].rolList).toHaveLength(1);
+      expect(v.financials[1].procedures).toHaveLength(0);
+      expect(v.insurances).toHaveLength(2);
+      expect(v.insurances[0].in3).toBeTruthy();
+      expect(v.insurances[1].in2).toBeUndefined();
+      expect(v.acc).toBeTruthy();
+      expect(v.message.encode()).toBe(wire);
+    }
+  });
+});
+
+describe("parseDFT_P03 (v2.3)", () => {
+  test("parses a minimal wire message", () => {
+    const result = parseDFT_P03([MSH_LINE, "EVN|P03|20231015120000", "PID|1||12345^^^MRN^MR||Doe^John", "FT1|1||||20231015|20231015|CG|Office visit"].join("\r"));
+    expect(result.ok).toBe(true);
+    expect(result.val!.financials).toHaveLength(1);
+    expect(result.val!.pv1).toBeUndefined();
+  });
+
+  test.each([
+    [["EVN|P03", "PID|1"], /must contain at least one FT1 segment/],
+    [["EVN|P03", "PID|1", "FT1|1", "PV1|1|O"], /PV1 segment at line 5 must appear before the FT1 segments/],
+    [["EVN|P03", "PID|1", "FT1|1", "DG1|1", "FT1|2"], /FT1 segment at line 6 must appear before DG1, DRG, GT1, IN1 and ACC/],
+    [["EVN|P03", "PID|1", "PR1|1", "FT1|1"], /PR1 segment at line 4 must follow an FT1 segment/],
+    [["EVN|P03", "PID|1", "FT1|1", "ROL|1"], /ROL segment at line 5 must follow a PR1 segment/],
+    [["EVN|P03", "PID|1", "FT1|1", "IN2|1"], /IN2 segment at line 5 must directly follow an IN1 segment/],
+    [["EVN|P03", "PID|1", "FT1|1", "IN1|1", "IN3|1", "IN2|1"], /IN2 segment at line 7 must directly follow an IN1 segment/],
+    [["EVN|P03", "PID|1", "FT1|1", "ACC|1", "ACC|2"], /ACC segment at line 6 appears more than once/],
+  ])("rejects %j", (lines, pattern) => {
+    const result = parseDFT_P03([MSH_LINE, ...lines].join("\r"));
+    expect(result.ok).toBe(false);
+    expect(result.err!.message).toMatch(pattern);
+  });
+});

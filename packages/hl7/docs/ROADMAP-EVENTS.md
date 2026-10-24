@@ -15,7 +15,9 @@ Legend: ✅ builder + parser exist · ⬜ not started
 
 | Family | Events | v2.3 | v2.5.1 |
 |---|---|---|---|
-| ADT | A01–A18, A21–A51 | ✅ | ✅ |
+| ADT | A01–A18, A20–A51 (A19 is the QRY/ADR patient query, see queries) | ✅ | ✅ |
+| DFT | P03 (post detail financial transactions) | ✅ | ✅ |
+| BAR | P01, P02, P05, P06 (add/purge/update/end account) | ✅ | ✅ |
 | ORU | R01 | ✅ | ✅ |
 | ORU | R30, R31, R32 | n/a (2.5+) | ✅ |
 | MFN | M02 (staff/practitioner) | ✅ | ✅ |
@@ -34,7 +36,6 @@ Legend: ✅ builder + parser exist · ⬜ not started
 | Event | Description | Needs |
 |---|---|---|
 | ⬜ A19 | Patient query (QRY/ADR response) | QRD, QRF |
-| ⬜ A20 | Bed status update | NPU |
 
 ### Acknowledgments and queries (high priority — unblock everything else)
 | Message | Notes | Needs |
@@ -58,8 +59,6 @@ Legend: ✅ builder + parser exist · ⬜ not started
 ### Financial and documents
 | Message | Events | Needs |
 |---|---|---|
-| ⬜ BAR | P01 add/update account, P02 purge | BLG |
-| ⬜ DFT | P03 post detail financial transactions | FT1 |
 | ⬜ PEX | P07/P08 product experience | PEO, PES, PCR |
 | ⬜ PPR / PPT / PPG / PPP / PRR | Problem/goal/pathway (PC1–PC3, PC6–PCC etc.) | PRB, GOL, PTH, VAR |
 
@@ -98,7 +97,15 @@ COMMON ORDER group (`ORC [{TQ1 [{TQ2}]}] OBR [{NTE}]`) and, in the content event
 v2.3 there, so nothing is missing for v2.4; the existing SIU model includes `PD1` in the v2.3
 patient group (Caristix lists it from v2.5) and does not model the v2.5 `[{TQ1}]` after `SCH`.
 
-Suggested order: **remaining ADT (A19, A20) → DFT/BAR → queries (incl. SQM/SQR) → MFN → the rest.**
+Done in 0.13: ADT A20, DFT P03 and BAR P01/P02/P05/P06 for v2.3 and v2.5.1, structures checked per
+event on hl7-definition.caristix.com (v2.3 and v2.5.1) and HAPI v23 (DFT_P03, BAR_P01). The BAR
+VISIT group has no required segment, so the parser opens a new visit when a segment appears out of
+group order. The v2.5.1 parsers swap in the v2.5.1 segment classes on the v2.3 structures, as the
+ADT messages do; v2.5.1 additions are skipped with a warning: `[{SFT}]`, `ROL` after PD1/PV2 and in
+INSURANCE, repeating `IN3`, the COMMON ORDER groups and the `NTE` after `FT1` in DFT^P03, and
+`ABS`/`BLC`/`RMI` at the end of the BAR^P05 visit.
+
+Suggested order: **queries (A19 QRY/ADR, SQM/SQR, …) → MFN → orders/pharmacy → the rest.**
 
 ## v2.5.1 parity
 After v2.3 is complete, bring v2.5.1 to parity with the same messages, then add the 2.5.1 additions:
