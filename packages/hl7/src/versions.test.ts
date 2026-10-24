@@ -13,6 +13,16 @@ import * as bld23 from "./builders/v2.3/index.ts";
 import * as bld24 from "./builders/v2.4/index.ts";
 
 describe("segment introduction by version", () => {
+  test("PDA, ABS, BLC and RMI are introduced in v2.4", () => {
+    for (const name of ["PDA", "ABS", "BLC", "RMI"]) {
+      expect(name in seg23).toBe(false);
+      expect(name in seg231).toBe(false);
+      expect(name in seg24).toBe(true);
+      expect(name in seg25).toBe(true);
+      expect(name in seg251).toBe(true);
+    }
+  });
+
   test("SFT, SPM and TQ1 are introduced in v2.5", () => {
     for (const name of ["SFT", "SPM", "TQ1"]) {
       expect(name in seg23).toBe(false);
@@ -45,7 +55,20 @@ describe("re-export versions", () => {
   test("parsers and builders are re-exported", () => {
     expect(par231.parseADT_A01).toBe(par23.parseADT_A01);
     expect(par25.parseORU_R01).toBe(par23.parseORU_R01);
-    expect(bld24.createADT_A01).toBe(bld23.createADT_A01);
+    expect(bld24.createSIU_S12).toBe(bld23.createSIU_S12);
+  });
+
+  test("ADT has its own shapes in v2.4 (PDA) and v2.5 (SFT), and the wrapper events follow", () => {
+    expect(par231.parseADT_A02).toBe(par23.parseADT_A02);
+    expect(bld24.createADT_A01).not.toBe(bld23.createADT_A01);
+    expect(par24.parseADT_A02).not.toBe(par23.parseADT_A02);
+    expect(par25.parseADT_A02).not.toBe(par24.parseADT_A02);
+    // A34-shaped events change only in v2.5 (SFT); SRR/MDM wrappers follow their v2.5 bases.
+    expect(par24.parseADT_A47).toBe(par23.parseADT_A47);
+    expect(par25.parseADT_A47).not.toBe(par23.parseADT_A47);
+    expect(par24.parseSRR_S02).toBe(par23.parseSRR_S02);
+    expect(par25.parseSRR_S02).not.toBe(par23.parseSRR_S02);
+    expect(par25.parseMDM_T03).not.toBe(par23.parseMDM_T03);
   });
 });
 

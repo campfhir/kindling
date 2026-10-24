@@ -23,7 +23,20 @@ import {
 
 export const ADT_A18_SCHEMA: MessageSchema = { ...A18_V23, version: "2.5.1", baseMessage: "ADT_A34" };
 export const ADT_A30_SCHEMA: MessageSchema = { ...A30_V23, version: "2.5.1", baseMessage: "ADT_A34" };
-export const ADT_A34_SCHEMA: MessageSchema = { ...A34_V23, version: "2.5.1" };
+/**
+ * ADT^A34 (v2.5.1, identical to v2.5): MSH [{SFT}] EVN PID [PD1] MRG, plus an optional PV1 so
+ * the events that require it (A18, A50, A51) can reuse it. Compared with v2.3 only SFT is new.
+ * The v2.5 builder and parser are hand-written in src/<kind>/v2.5.
+ */
+export const ADT_A34_SCHEMA: MessageSchema = {
+  ...A34_V23,
+  version: "2.5.1",
+  structure: [
+    { name: "MSH", required: true, repeating: false },
+    { name: "SFT", required: false, repeating: true },
+    ...A34_V23.structure.slice(1),
+  ],
+};
 export const ADT_A35_SCHEMA: MessageSchema = { ...A35_V23, version: "2.5.1", baseMessage: "ADT_A34" };
 export const ADT_A36_SCHEMA: MessageSchema = { ...A36_V23, version: "2.5.1", baseMessage: "ADT_A34" };
 export const ADT_A37_SCHEMA: MessageSchema = { ...A37_V23, version: "2.5.1", baseMessage: "ADT_A34" };

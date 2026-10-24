@@ -1,7 +1,2 @@
-/**
- * MDM_T09 builder for HL7 v2.5 — identical to v2.4, re-exported.
- *
- * @module
- */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.4/MDM_T09.ts";
+// @generated wrapper — copied from the base version so it wraps this version's base module
+export { MDM_T01 as MDM_T09, createMDM_T01 as createMDM_T09 } from "./MDM_T01.ts";

@@ -29,8 +29,8 @@ FT1, FTS, GT1, IN1, IN2, IN3, MFE, MFI, MRG, MSA, MSH, NK1, NTE, OBR, OBX, ODS, 
 PID, PR1, PRA, PV1, PV2, QAK, QRD, QRF, RGS, ROL, RQ1, RQD, RXA, RXD, RXE, RXO, RXR, SCH, STF,
 UB1, UB2
 
-Segments are placed in the version that introduced them: `SFT`, `SPM` and `TQ1` are in
-`segments/v2.5`; later versions re-export them. `ROL` and `DB1` both have v2.3 definitions, so
+Segments are placed in the version that introduced them: `PDA`, `ABS`, `BLC` and `RMI` are in
+`segments/v2.4`, and `SFT`, `SPM`, `TQ1` and `TQ2` are in `segments/v2.5`; later versions re-export them. `ROL` and `DB1` both have v2.3 definitions, so
 they stay in `segments/v2.3`. (Version-specific fields are layered, not moved: `ROL` fields 9–12, `ACC` fields 7–10 and `PD1` fields 13–21 are v2.4 overrides in `segments/v2.4`; `ACC` field 11 is a v2.5 override. The v2.3 classes stop at the v2.3 field count. `DB1` has the same eight fields in v2.3, v2.4 and v2.5. Field 3 (CX) repeats in all three, and v2.3 now models that. v2.4 widens its maximum length to 250, which is not enforced, and hl7.eu names field 4 "Disability Indicator" in v2.4 and "Disabled Indicator" in v2.3 and v2.5.) Moving a
 segment is `git mv` into the introducing version directory, adding it to that version's
 `ownSegments` in `codegen/schemas/`, and running `pnpm codegen && pnpm barrels`.

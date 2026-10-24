@@ -9,6 +9,9 @@ import { MFN_M02_SCHEMA } from "./MFN_M02";
 import { ADT_A28_SCHEMA } from "./ADT_A28";
 import { ADT_A17_SCHEMA } from "./ADT_A17";
 import { ADT_A24_SCHEMA } from "./ADT_A24";
+import { ADT_A20_SCHEMA } from "./ADT_A20";
+import { DFT_P03_SCHEMA } from "./DFT_P03";
+import { BAR_P01_SCHEMA, BAR_P02_SCHEMA, BAR_P05_SCHEMA, BAR_P06_SCHEMA } from "./BAR_P01";
 import { SRM_S01_SCHEMA, SRM_S02_SCHEMA, SRM_S03_SCHEMA, SRM_S04_SCHEMA, SRM_S05_SCHEMA, SRM_S06_SCHEMA, SRM_S07_SCHEMA, SRM_S08_SCHEMA, SRM_S09_SCHEMA, SRM_S10_SCHEMA, SRM_S11_SCHEMA } from "./SRM_S01";
 import { SRR_S01_SCHEMA, SRR_S02_SCHEMA, SRR_S03_SCHEMA, SRR_S04_SCHEMA, SRR_S05_SCHEMA, SRR_S06_SCHEMA, SRR_S07_SCHEMA, SRR_S08_SCHEMA, SRR_S09_SCHEMA, SRR_S10_SCHEMA, SRR_S11_SCHEMA } from "./SRR_S01";
 import { MDM_T01_SCHEMA, MDM_T02_SCHEMA, MDM_T03_SCHEMA, MDM_T04_SCHEMA, MDM_T05_SCHEMA, MDM_T06_SCHEMA, MDM_T07_SCHEMA, MDM_T08_SCHEMA, MDM_T09_SCHEMA, MDM_T10_SCHEMA, MDM_T11_SCHEMA } from "./MDM_T01";
@@ -97,6 +100,8 @@ export const V2_5_1: VersionSchema = {
     "MSA", "ERR",
     // Scheduling requests and document management
     "ARQ", "APR", "TXA",
+    // Bed status, death and autopsy, abstract, blood code, risk management
+    "NPU", "PDA", "ABS", "BLC", "RMI",
     // Pharmacy
     "RXO", "RXE", "RXD", "RXA", "RXR",
     // Timing / Specimen
@@ -150,6 +155,13 @@ export const V2_5_1: VersionSchema = {
     // ADT swap/link (two patient groups)
     ADT_A17_SCHEMA,
     ADT_A24_SCHEMA,
+    ADT_A20_SCHEMA,
+    // Financial
+    DFT_P03_SCHEMA,
+    BAR_P01_SCHEMA,
+    BAR_P02_SCHEMA,
+    BAR_P05_SCHEMA,
+    BAR_P06_SCHEMA,
     // ADT merge/move
     ADT_A18_SCHEMA,
     ADT_A30_SCHEMA,

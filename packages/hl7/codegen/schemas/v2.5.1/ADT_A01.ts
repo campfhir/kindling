@@ -1,6 +1,6 @@
 import { MessageSchema } from "../../../src/types/schema";
+import { ADT_A28_SCHEMA } from "./ADT_A28";
 import {
-  ADT_A01_SCHEMA as A01_V23,
   ADT_A02_SCHEMA as A02_V23,
   ADT_A03_SCHEMA as A03_V23,
   ADT_A04_SCHEMA as A04_V23,
@@ -29,7 +29,8 @@ import {
   ADT_A38_SCHEMA as A38_V23,
 } from "../v2.3/ADT_A01";
 
-export const ADT_A01_SCHEMA: MessageSchema = { ...A01_V23, version: "2.5.1" };
+/** ADT^A01 (v2.5.1): the A28 structure under the A01 trigger (see ADT_A28.ts). */
+export const ADT_A01_SCHEMA: MessageSchema = { ...ADT_A28_SCHEMA, triggerEvent: "A01" };
 export const ADT_A02_SCHEMA: MessageSchema = { ...A02_V23, version: "2.5.1", baseMessage: "ADT_A01" };
 export const ADT_A03_SCHEMA: MessageSchema = { ...A03_V23, version: "2.5.1", baseMessage: "ADT_A01" };
 export const ADT_A04_SCHEMA: MessageSchema = { ...A04_V23, version: "2.5.1", baseMessage: "ADT_A01" };

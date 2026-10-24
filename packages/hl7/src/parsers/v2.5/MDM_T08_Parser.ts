@@ -1,7 +1,19 @@
-/**
- * MDM_T08_Parser parser for HL7 v2.5 — identical to v2.4, re-exported.
- *
- * @module
- */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.4/MDM_T08_Parser.ts";
+// @generated wrapper — copied from the base version so it wraps this version's base module
+import { Result } from "../../types/result.ts";
+import {
+  MDM_T02_Parser,
+  ParsedMDM_T02,
+} from "./MDM_T02_Parser.ts";
+
+/** Structured result of parsing an HL7 MDM^T08 (v2.3) message. */
+export type ParsedMDM_T08 = ParsedMDM_T02;
+
+/** Parser for HL7 MDM^T08 (v2.3) messages. */
+export class MDM_T08_Parser extends MDM_T02_Parser {
+  protected override readonly messageName: string = "MDM_T08";
+}
+
+/** Parses an HL7 MDM^T08 (v2.3) message string into a structured result. */
+export function parseMDM_T08(messageString: string): Result<ParsedMDM_T08> {
+  return new MDM_T08_Parser().parse(messageString);
+}

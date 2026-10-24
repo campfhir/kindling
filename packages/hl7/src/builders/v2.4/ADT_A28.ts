@@ -1,7 +1,6 @@
 /**
- * ADT_A28 builder for HL7 v2.4 — identical to v2.3.1, re-exported.
+ * Builder for ADT^A28 messages (HL7 2.4): same structure as ADT^A01.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3.1/ADT_A28.ts";
+export { type ProcedureGroup, type InsuranceGroup, ADT_A01 as ADT_A28, createADT_A01 as createADT_A28 } from "./ADT_A01.ts";

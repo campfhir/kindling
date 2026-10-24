@@ -31,7 +31,7 @@ import { generateParser } from "./generators/parser.ts";
 import { generateBuilder } from "./generators/builder.ts";
 import { generateWrapperParser } from "./generators/wrapperParser.ts";
 import { generateWrapperBuilder } from "./generators/wrapperBuilder.ts";
-import { generateReexport, REEXPORT_MARKER } from "./generators/reexport.ts";
+import { generateLocalWrapper, generateReexport, LOCAL_WRAPPER_MARKER, REEXPORT_MARKER } from "./generators/reexport.ts";
 
 const ROOT = join(fileURLToPath(import.meta.url), "../..");
 const DRY_RUN = process.argv.includes("--dry-run");
@@ -158,6 +158,27 @@ function moduleNames(kind: string, version: string): string[] {
 
 // Re-export version: mirror every module of the base version, except those
 // hand-written for this version (`ownSegments`).
+const isGenerated = (source: string) => source.includes(REEXPORT_MARKER) || source.includes(LOCAL_WRAPPER_MARKER);
+
+/** Module a wrapper file wraps (`from "./ADT_A01_Parser.ts"` → ADT_A01_Parser), or undefined. */
+function wrapperTarget(source: string): string | undefined {
+  const m = /from "\.\/(\w+)\.ts"/.exec(source);
+  return m?.[1];
+}
+
+/** Follows `export * from "../vX/name.ts"` re-exports down to the module that defines `name`. */
+function resolveModule(kind: string, version: string, name: string): { version: string; source: string } {
+  const source = readFileSync(join(ROOT, "src", kind, version, `${name}.ts`), "utf8");
+  const m = source.includes(REEXPORT_MARKER) ? /from "\.\.\/(v[\d.]+)\/(\w+)\.ts"/.exec(source) : null;
+  return m ? resolveModule(kind, m[1], m[2]) : { version, source };
+}
+
+/** Does `version` have its own (non re-exported) copy of module `name`? */
+function isLocal(kind: string, version: string, name: string): boolean {
+  const p = join(ROOT, "src", kind, version, `${name}.ts`);
+  return existsSync(p) && !readFileSync(p, "utf8").includes(REEXPORT_MARKER);
+}
+
 function generateReexportVersion(vs: VersionSchema) {
   const baseVersion = vs.baseVersion!;
   console.log(`\n── ${vs.version} (re-exports ${baseVersion}) ──\n`);
@@ -166,8 +187,16 @@ function generateReexportVersion(vs: VersionSchema) {
     for (const name of moduleNames(kind, baseVersion)) {
       if (kind === "segments" && own.has(name)) continue;
       const target = join(ROOT, "src", kind, vs.version, `${name}.ts`);
-      if (existsSync(target) && !readFileSync(target, "utf8").includes(REEXPORT_MARKER)) {
+      if (existsSync(target) && !isGenerated(readFileSync(target, "utf8"))) {
         console.log(`skip   ${target.replace(ROOT + "/", "")}  (hand-written)`);
+        continue;
+      }
+      // A wrapper module (ADT_A02 around ADT_A01, SRR_S02 around SRR_S01, ...) must wrap this
+      // version's base when the base is hand-written here, so it is copied instead of re-exported.
+      const resolved = kind === "segments" ? undefined : resolveModule(kind, baseVersion, name);
+      const wrapped = resolved && wrapperTarget(resolved.source);
+      if (resolved && wrapped && isLocal(kind, vs.version, wrapped)) {
+        write(target, generateLocalWrapper(resolved.source, name, vs.version, resolved.version));
         continue;
       }
       write(target, generateReexport(kind, name, vs.version, baseVersion));

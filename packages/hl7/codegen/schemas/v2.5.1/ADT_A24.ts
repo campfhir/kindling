@@ -1,9 +1,17 @@
 import { MessageSchema } from "../../../src/types/schema";
-import { ADT_A24_SCHEMA as A24_V23 } from "../v2.3/ADT_A24";
+import { ADT_A24_SCHEMA as V23 } from "../v2.3/ADT_A24";
 
 /**
- * ADT^A24 - Link Patient Information (HL7 v2.5.1). Same as v2.3 apart from the optional
- * [{SFT}] after MSH, which the v2.5.1 ADT messages in this library do not model yet.
+ * ADT^A24 (HL7 v2.5.1, identical to v2.5): the v2.3 structure with [{SFT}] after MSH. The v2.5
+ * builder and parser are hand-written in src/<kind>/v2.5.
  * Source: https://hl7-definition.caristix.com/v2/HL7v2.5.1/TriggerEvents/ADT_A24
  */
-export const ADT_A24_SCHEMA: MessageSchema = { ...A24_V23, version: "2.5.1" };
+export const ADT_A24_SCHEMA: MessageSchema = {
+  ...V23,
+  version: "2.5.1",
+  structure: [
+    { name: "MSH", required: true, repeating: false },
+    { name: "SFT", required: false, repeating: true },
+    ...V23.structure.slice(1),
+  ],
+};
