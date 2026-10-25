@@ -17,12 +17,13 @@ A modular TypeScript library for building and parsing HL7v2 messages, published 
 - **Value Extraction**: Path-based field/component extraction utility
 - **Custom Segments**: Build Z-segments and other custom segments with a simple field-setter API
 - **Message Editor**: Fluent API for inserting segments into, or updating field values in, any built message without modifying the builder
-- **Comprehensive Tests**: 609 tests across 25 test files, co-located with source (Go style)
+- **Comprehensive Tests**: 9,370 tests across 405 test files, co-located with source (Go style)
 
 ## Roadmap
 
-See [ROADMAP.md](ROADMAP.md) — HL7 v2.3 completion first, then v2.5.1 parity. Checklists of the
-remaining [segments](docs/ROADMAP-SEGMENTS.md) and [event types](docs/ROADMAP-EVENTS.md).
+See [ROADMAP.md](ROADMAP.md) — v2.3 through v2.5.1 are complete; the next step is the latest HL7 version,
+v2.9.1, with its plan in the same file. Checklists of the remaining [segments](docs/ROADMAP-SEGMENTS.md)
+and [event types](docs/ROADMAP-EVENTS.md).
 
 ## Project Structure
 
@@ -131,7 +132,7 @@ PID-38). Segments are available from the version that introduced them:
 
 The root `parse()` dispatches a version once it is complete: 1.0 parses v2.3, 1.1 adds v2.3.1,
 1.2 adds v2.4 (2.0 drops CommonJS and Node < 24), 2.1 adds v2.5 and 2.2 adds v2.5.1; a later
-version (2.6, 2.7, …) would join in its own minor release, see the [roadmap](ROADMAP.md). Every segment field
+version (the latest, v2.9.1, and the releases between) would join in its own minor release, see the [roadmap](ROADMAP.md). Every segment field
 and every message structure of a dispatched version has been checked against hl7.eu, Caristix and
 HAPI: see [docs/validation](docs/validation/README.md).
 

@@ -371,6 +371,8 @@ async function main(): Promise<void> {
   lines.push("when it differs by a recorded, dated decision (`codegen/validate/message-notes.json`), `differs` when it");
   lines.push("differs and nothing records why, and `undecided` when the sources disagree and hl7.eu has no table.");
   lines.push("");
+  lines.push("In the event table each source cell says whether that source's shape matches ours: ✓ when it does, `differs` when it does not, and — when the source has no table for the event. Every structure with a `differs` cell is drawn side by side below, with the status and the dated reason where one is recorded.");
+  lines.push("");
   const counts = { ok: 0, accepted: 0, differs: 0, undecided: 0 } as Record<string, number>;
   for (const r of results) counts[r.status]++;
   lines.push("## Summary");
@@ -392,7 +394,7 @@ async function main(): Promise<void> {
   lines.push("");
   lines.push("| Event | hl7.eu | Caristix | HAPI | Decided by | Status | Note |");
   lines.push("|---|---|---|---|---|---|---|");
-  const cell = (r: (typeof results)[number], src?: Line[]) => (src === undefined ? "—" : shape(src) === shape(r.ours) ? "= ours" : "differs");
+  const cell = (r: (typeof results)[number], src?: Line[]) => (src === undefined ? "—" : shape(src) === shape(r.ours) ? "✓" : "differs");
   for (const r of results) {
     lines.push(`| [${r.event}](#${r.event.toLowerCase()}) | ${cell(r, r.eu)} | ${cell(r, r.cx)} | ${cell(r, r.hp)} | ${r.basis} | ${r.status} | ${r.note ? `${r.note.date}: ${r.note.note}` : ""} |`);
   }
