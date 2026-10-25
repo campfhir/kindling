@@ -1,7 +1,7 @@
 /**
  * Builder for OSR^Q06 messages (HL7 v2.5).
  *
- * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] QRD [QRF] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] [ ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}] ] } ] [DSC]
+ * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] QRD [QRF] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }]  ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}]  } ] [DSC]
  *
  * @module
  */
@@ -37,7 +37,7 @@ export interface ResponseOrderGroup {
   /** The TIMING groups. */
   timings?: TimingGroup[];
   /** The ORDER DETAIL group. */
-  detail?: ResponseDetailGroup;
+  detail: ResponseDetailGroup;
 }
 
 /** The TIMING group of an OSR^Q06 (HL7 v2.5) message being built. */

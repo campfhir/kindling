@@ -2,7 +2,7 @@ import type { MessageSchema, SegmentGroup } from "../../../src/types/schema";
 import { SFT, group, opt, optList, req, reversion, withSft, wrappers } from "../helpers";
 import { DSR_Q01_SCHEMA as DSR_Q01_V23, DSR_Q03_SCHEMA as DSR_Q03_V23 } from "../v2.3/DSR_Q01";
 import { EDR_R07_SCHEMA as EDR_R07_V23, ERP_R09_SCHEMA as ERP_R09_V23 } from "../v2.3/EQQ_Q01";
-import { OSQ_Q06_SCHEMA as OSQ_Q06_V23, OSR_ORDER_DETAIL, osrResponse } from "../v2.3/OSQ_Q06";
+import { OSQ_Q06_SCHEMA as OSQ_Q06_V23, osrOrderDetail, osrResponse } from "../v2.3/OSQ_Q06";
 import { ORF_OBSERVATION, orfQueryResponse } from "../v2.3/ORF_R04";
 import { QRY_A19_SCHEMA as QRY_A19_V23 } from "../v2.3/QRY_A19";
 import { QCK_Q02_SCHEMA as QCK_Q02_V23, QRY_Q01_SCHEMA as QRY_Q01_V23, QRY_R02_SCHEMA as QRY_R02_V23 } from "../v2.3/QRY_Q01";
@@ -128,9 +128,12 @@ export const ORF_W02_SCHEMA: MessageSchema = {
 
 /**
  * OSR^Q06: MSH MSA [{ERR}] [{SFT}] [{NTE}] QRD [QRF] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }]
- *   [ ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}] ] } ] [DSC]
+ *   ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}] } ] [DSC]
  *
- * Compared with v2.3: ERR repeats, SFT follows it, and each order gains the TIMING group.
+ * Compared with v2.4: ERR repeats, SFT follows it, and each order gains the TIMING group. The
+ * order detail stays required as in v2.4: the hl7.eu v2.5 and v2.5.1 tables show the choice without
+ * brackets and HAPI v25/v251 add its members as required; Caristix alone marks it optional.
+ * Sources: https://www.hl7.eu/HL7v2x/v25/std25/ch04.html, https://www.hl7.eu/HL7v2x/v251/std251/ch04.html (4.4.3).
  */
 export const OSR_Q06_SCHEMA: MessageSchema = {
   messageType: "OSR",
@@ -138,7 +141,7 @@ export const OSR_Q06_SCHEMA: MessageSchema = {
   version: "2.5",
   structure: [
     req("MSH"), req("MSA"), optList("ERR"), SFT, optList("NTE"), req("QRD"), opt("QRF"),
-    osrResponse([req("ORC"), timing("TIMING", "ParsedTiming"), OSR_ORDER_DETAIL]),
+    osrResponse([req("ORC"), timing("TIMING", "ParsedTiming"), osrOrderDetail("required")]),
     opt("DSC"),
   ],
 };

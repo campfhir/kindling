@@ -1,7 +1,7 @@
 /**
  * Parser for OSR^Q06 messages (HL7 v2.5.1).
  *
- * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] QRD [QRF] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] [ ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}] ] } ] [DSC]
+ * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] QRD [QRF] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }]  ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}]  } ] [DSC]
  *
  * @module
  */
@@ -37,7 +37,7 @@ export interface ParsedResponseOrder {
   /** The TIMING groups. */
   timings?: ParsedTiming[];
   /** The ORDER DETAIL group. */
-  detail?: ParsedResponseDetail;
+  detail: ParsedResponseDetail;
 }
 
 /** The TIMING group of a parsed OSR^Q06 (HL7 v2.5.1) message. */

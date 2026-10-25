@@ -1,5 +1,5 @@
 import type { MessageSchema, StructureItem } from "../../../src/types/schema";
-import { choice, group, opt, optList, req } from "../helpers";
+import { choice, group, opt, optList, req, type Usage } from "../helpers";
 import { ORDER_DETAIL_SEGMENTS } from "./ORM_O01";
 
 /**
@@ -25,18 +25,21 @@ export function osrResponse(order: StructureItem[]) {
   ], { inline: true });
 }
 
-/** The ORDER_DETAIL group of OSR^Q06, as `detail`. */
-export const OSR_ORDER_DETAIL = group("ORDER_DETAIL", "optional", "single", [choice(ORDER_DETAIL_SEGMENTS, "required"), optList("NTE"), optList("CTI")], { as: "detail", exportTypeName: "ParsedResponseDetail" });
+/** The ORDER_DETAIL group of OSR^Q06, as `detail`: optional in v2.3 and v2.3.1, required from v2.4 on. */
+export const osrOrderDetail = (usage: Usage) =>
+  group("ORDER_DETAIL", usage, "single", [choice(ORDER_DETAIL_SEGMENTS, "required"), optList("NTE"), optList("CTI")], { as: "detail", exportTypeName: "ParsedResponseDetail" });
 
 /**
  * OSR^Q06 - Order Status Response (HL7 v2.3, chapter 4 section 4.2.4).
  *
  * MSH MSA [ERR] [{NTE}] QRD [QRF] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [ ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}] ] } ] [DSC]
  *
- * The RESPONSE and PATIENT groups are inlined as in ORR^O02. The order detail is optional here as
- * in v2.3 and v2.5 (Caristix lists it as required in v2.4 only, which is not modelled). v2.5 adds
- * [{SFT}] after a repeating ERR and the TIMING groups (see the v2.5 schema).
- * Source: https://hl7-definition.caristix.com/v2/HL7v2.3/TriggerEvents/OSR_Q06
+ * The RESPONSE and PATIENT groups are inlined as in ORR^O02. The order detail is optional in v2.3
+ * (`[Order Detail Segment]` on hl7.eu, OBR optional in HAPI v23) and v2.3.1 (Caristix); from v2.4
+ * on the choice is required (see the v2.4 schema). v2.5 adds [{SFT}] after a repeating ERR and
+ * the TIMING groups (see the v2.5 schema).
+ * Sources: https://hl7-definition.caristix.com/v2/HL7v2.3/TriggerEvents/OSR_Q06,
+ * https://www.hl7.eu/HL7v2x/v23/std23/ch4.htm (4.2.3).
  */
 export const OSR_Q06_SCHEMA: MessageSchema = {
   messageType: "OSR",
@@ -49,7 +52,7 @@ export const OSR_Q06_SCHEMA: MessageSchema = {
     optList("NTE"),
     req("QRD"),
     opt("QRF"),
-    osrResponse([req("ORC"), OSR_ORDER_DETAIL]),
+    osrResponse([req("ORC"), osrOrderDetail("optional")]),
     opt("DSC"),
   ],
 };

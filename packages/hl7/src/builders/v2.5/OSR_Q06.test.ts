@@ -1,4 +1,4 @@
-/** OSR^Q06 (v2.5): MSH MSA [{ERR}] [{SFT}] [{NTE}] QRD [QRF] [ [PID [{NTE}]] { ORC [{TQ1 [{TQ2}]}] [<detail> [{NTE}] [{CTI}]] } ] [DSC]. */
+/** OSR^Q06 (v2.5): MSH MSA [{ERR}] [{SFT}] [{NTE}] QRD [QRF] [ [PID [{NTE}]] { ORC [{TQ1 [{TQ2}]}] <detail> [{NTE}] [{CTI}] } ] [DSC]. */
 import { describe, test, expect } from "vitest";
 import { createOSR_Q06 } from "./OSR_Q06.ts";
 import { parseOSR_Q06 } from "../../parsers/v2.5/OSR_Q06_Parser.ts";
@@ -31,5 +31,13 @@ describe("OSR_Q06 (v2.5)", () => {
     expect(result.val!.message.encode()).toBe(wire);
     // In v2.4 the ERR does not repeat: the second one stops the parser before the QRD it expects.
     expect(parseOSR_Q06_v24(wire).err!.message).toBe("OSR_Q06 message must contain a QRD segment");
+  });
+
+  test("the order detail stays required (as in v2.4)", () => {
+    const msg = createOSR_Q06(new MSH().messageType({ messageCode: "OSR", triggerEvent: "Q06" }).messageControlId("O1"), new MSA().acknowledgmentCode("AA").messageControlId("Q1"), new QRD().queryFormatCode("R").queryPriority("I").queryId("Q1"), {
+      // @ts-expect-error the detail is required from v2.4
+      orders: [{ commonOrder: new ORC().orderControl("SC"), timings: [{ timing: new TQ1().setId("1") }] }],
+    });
+    expect(msg.verify().errors).toEqual(["ORDER group 1: At least one ORDER DETAIL group (OBR/RQD/RQ1/RXO/ODS/ODT) is required"]);
   });
 });

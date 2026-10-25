@@ -201,9 +201,10 @@ describe("queries", () => {
     expect(par25.parseORF_W02).not.toBe(par24.parseORF_W02);
   });
 
-  test("v2.4 changes VXR^V03 (GT1) only among the remaining queries; v2.5 adds SFT to nearly all", () => {
+  test("v2.4 changes VXR^V03 (GT1) and OSR^Q06 (required detail) among the remaining queries; v2.5 adds SFT to nearly all", () => {
     expect(par24.parseVXR_V03).not.toBe(par23.parseVXR_V03);
-    for (const fn of ["parseQRY_Q01", "parseQRY_Q02", "parseDSR_Q01", "parseDSR_Q03", "parseQCK_Q02", "parseUDM_Q05", "parseEDR_R07", "parseERP_R09", "parseSQM_S25", "parseSQR_S25", "parseVXQ_V01", "parseVXX_V02", "parseOSQ_Q06", "parseOSR_Q06", "parseQRY_T12", "parseQRY_R02"] as const) {
+    expect(par24.parseOSR_Q06).not.toBe(par23.parseOSR_Q06);
+    for (const fn of ["parseQRY_Q01", "parseQRY_Q02", "parseDSR_Q01", "parseDSR_Q03", "parseQCK_Q02", "parseUDM_Q05", "parseEDR_R07", "parseERP_R09", "parseSQM_S25", "parseSQR_S25", "parseVXQ_V01", "parseVXX_V02", "parseOSQ_Q06", "parseQRY_T12", "parseQRY_R02"] as const) {
       expect(par24[fn]).toBe(par23[fn]);
     }
     for (const fn of ["parseQRY_Q01", "parseQRY_Q02", "parseDSR_Q01", "parseDSR_Q03", "parseQCK_Q02", "parseUDM_Q05", "parseEDR_R07", "parseERP_R09", "parseSQR_S25", "parseVXQ_V01", "parseVXX_V02", "parseVXR_V03", "parseOSQ_Q06", "parseOSR_Q06", "parseQRY_R02", "parseQRY_A19"] as const) {

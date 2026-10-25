@@ -139,9 +139,11 @@ ORF and `[{GT1}]` to VXR^V03 and withdraws UDM^R06; v2.5 (also v2.5.1) adds `[{S
 but QRY^T12, DOC^T12, SQM^S25 and SQR^S25 (after `MSA` in VXX/VXR and after a now repeating `ERR` in
 OSR^Q06), the TQ1/TQ2 timing groups to ORF^R04 (not W02, which becomes its own message), OSR^Q06 and
 VXR^V03 (with a required `ORC`), repeating `ERR` to ORF, OSR and SQR^S25 plus `[{TQ1}]` after `SCH`,
-and withdraws QRY^P04 and DSR^P04. Known gap: Caristix lists OSR^Q06's order detail as required in
-v2.4 only; it stays optional in every version here. An NTE after an OBR in ORF is parsed as an order
-note, never as an OBSERVATION group without OBX.
+and withdraws QRY^P04 and DSR^P04. OSR^Q06's order detail (the OBR/RQD/RQ1/RXO/ODS/ODT choice) is
+optional in v2.3 and v2.3.1 and required from v2.4 on, following the hl7.eu chapter 4 tables
+(v2.3, v2.4, v2.5, v2.5.1) and HAPI; Caristix marks it optional again in v2.5/v2.5.1, which is
+not followed. An NTE after an OBR in ORF is parsed as an order note, never as an OBSERVATION group
+without OBX.
 
 Suggested order: **MFN → orders/pharmacy → the rest.**
 
