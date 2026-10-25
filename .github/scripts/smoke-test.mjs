@@ -1,5 +1,6 @@
 // Loads every built entry point of each package (or of the packages named as arguments) with
-// both CommonJS require() and native ESM import(), and checks that each "types" file exists, so a
+// native ESM import() and, for a "default" or "require" condition, with CommonJS require() too
+// (Node 24 loads an ES module from require()), and checks that each "types" file exists, so a
 // broken "exports" map, an extensionless ESM import or a missing declaration fails CI instead of
 // a consumer. A wildcard entry ("./parsers/v2.4/*") is checked on the first file it matches. The
 // built package must also stay under MAX_DIST_MB (what npm unpacks), so a build change that
@@ -55,9 +56,9 @@ for (const pkg of packages) {
       try {
         if (!existsSync(file)) throw new Error("file is missing (did the build run?)");
         if (condition === "types") continue;
-        if (condition === "require") require(file);
-        else if (condition === "import") await import(pathToFileURL(file).href);
-        else continue;
+        if (condition === "require" || condition === "default") require(file);
+        if (condition === "import" || condition === "default") await import(pathToFileURL(file).href);
+        if (!["require", "import", "default"].includes(condition)) continue;
         loaded++;
       } catch (err) {
         failures++;

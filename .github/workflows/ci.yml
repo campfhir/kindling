@@ -15,7 +15,7 @@ permissions:
 
 # Every job runs across the whole workspace (packages/*), so a new package is covered as soon
 # as it has the standard scripts (lint via the root eslint config, typecheck, test, build).
-# Tests run on every supported Node release line (engines: >=22); other jobs use the current LTS.
+# Tests run on every supported Node release line (engines: >=24); other jobs use Node 24.
 jobs:
   lint-typecheck:
     runs-on: ubuntu-latest
@@ -24,7 +24,7 @@ jobs:
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v7
         with:
-          node-version: lts/*
+          node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
@@ -37,7 +37,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [22, 24]
+        node-version: [24, 26]
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
@@ -55,11 +55,11 @@ jobs:
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v7
         with:
-          node-version: lts/*
+          node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - name: Smoke-test every built entry point (CJS and ESM)
+      - name: Smoke-test every built entry point
         run: pnpm smoke
       - name: Check what each package would publish
         run: pnpm -r exec npm pack --dry-run

@@ -9,15 +9,18 @@ const pkgPath = resolve(ROOT, "package.json");
 const pkg = JSON.parse(readFileSync(pkgPath, "utf8"));
 const KINDS = ["segments", "structures", "parsers", "builders"];
 
-// "types" comes first: TypeScript takes the first matching condition, and the build writes one
-// .d.ts per entry (no .d.mts), so it must win over "import" for ESM consumers too.
+// The package is ESM only ("type": "module"): one .js and one .d.ts per entry. "types" comes
+// first because TypeScript takes the first matching condition; "default" (rather than "import")
+// lets Node's require(esm) load the module from CommonJS code too.
 const entry = (path) => ({
   types: `./dist/${path}.d.ts`,
-  require: `./dist/${path}.js`,
-  import: `./dist/${path}.mjs`,
+  default: `./dist/${path}.js`,
 });
-const typesFirst = (target) =>
-  typeof target === "string" ? target : Object.fromEntries(Object.entries(target).sort(([a], [b]) => (a === "types" ? -1 : b === "types" ? 1 : 0)));
+const normalized = (target) => {
+  if (typeof target === "string") return target;
+  const js = target.default ?? target.import ?? target.require;
+  return { types: target.types, default: js.replace(/\.mjs$/, ".js") };
+};
 
 // Compare versions numerically so v2.5 < v2.5.1 < v2.10.
 const versionKey = (v) => v.slice(1).split(".").map(Number);
@@ -43,7 +46,7 @@ for (const kind of KINDS) {
 }
 
 const isVersioned = (k) => KINDS.some((kind) => k.startsWith(`./${kind}/`));
-const kept = Object.entries(pkg.exports).filter(([k]) => !isVersioned(k)).map(([k, v]) => [k, typesFirst(v)]);
+const kept = Object.entries(pkg.exports).filter(([k]) => !isVersioned(k)).map(([k, v]) => [k, normalized(v)]);
 const root = kept.filter(([k]) => k === ".");
 const rest = kept.filter(([k]) => k !== ".");
 pkg.exports = Object.fromEntries([...root, ...Object.entries(versioned), ...rest]);

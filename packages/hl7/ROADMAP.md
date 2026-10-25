@@ -8,11 +8,11 @@ Goal: a complete, well-tested TypeScript implementation of HL7 v2, published to 
 | 1 | **HL7 v2.3 complete** — every segment and event type | ✅ every event type and segment built, every field checked against hl7.eu, Caristix and HAPI (see the validation ledger), every composite and date field typed (0.19); the root `parse()` dispatches any v2.3 message on MSH-9/MSH-12 (1.0) |
 | 2 | **HL7 v2.3.1 complete** and wired into `parse()` | ✅ 1.1: every segment field and message structure checked against hl7.eu, Caristix and HAPI (segment and message ledgers), 53 segments with their own 2.3.1 class, all 276 messages generated against them |
 | 3 | **HL7 v2.4 complete** and wired into `parse()` | ✅ 1.2: every segment field and message structure checked against the hl7.eu v2.4 chapters, Caristix and HAPI (segment and message ledgers), 94 segments with their own 2.4 class (28 of them new in 2.4), all 334 messages (57 new in 2.4) generated against them |
-| 4 | **HL7 v2.5 complete** and wired into `parse()` | ⬜ 1.3 |
-| 5 | **HL7 v2.5.1 complete** and wired into `parse()` | ⬜ 1.4 |
+| 4 | **HL7 v2.5 complete** and wired into `parse()` | ⬜ 2.1 |
+| 5 | **HL7 v2.5.1 complete** and wired into `parse()` | ⬜ 2.2 |
 | 6 | Later versions (2.6, 2.7, 2.8…) as demand dictates | ⬜ |
 
-Each version joins the root parser in its own minor release once every one of its event types and
+2.0 made the package ESM only (Node 24 or later). Each version joins the root parser in its own minor release once every one of its event types and
 segments is built and checked: `parse()` reads MSH-12 and refuses a version it does not dispatch
 yet (the caller can still name the version to parse as, and every version's individual
 `parse<MSG>()` functions are available from day one). Wiring a version is one entry in the

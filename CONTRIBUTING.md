@@ -22,7 +22,7 @@ scanning `packages/*/package.json`, so nothing else has to be registered.
    - `package.json`: `"name": "@campfhir/<name>"`, `"version": "0.1.0"`, `"license": "MIT"`,
      `"files": ["dist"]`, `"publishConfig": { "access": "public", "provenance": true }`,
      `"repository": { "type": "git", "url": "git+https://github.com/campfhir/kindling.git", "directory": "packages/<name>" }`,
-     an `"exports"` map (with `require`, `import` and `types` conditions for every entry) and the
+     an `"exports"` map (with `types` and `default` conditions for every entry), `"type": "module"` and the
      standard scripts: `build`, `clean`, `test`, `typecheck`, `lint` (`eslint .`). Add
      `codegen:check` only if the package has generated files.
    - `tsconfig.json` extending `../../tsconfig.base.json` (set `rootDir`, `outDir`, `include`).
@@ -31,8 +31,8 @@ scanning `packages/*/package.json`, so nothing else has to be registered.
    - `src/` with tests next to the code (`*.test.ts`), and a `README.md` (npm shows it on the
      package page).
 2. Follow the shared conventions: a fluent, chainable builder API typed against the standard,
-   parsers whose output round-trips back to the wire format, zero runtime dependencies, dual
-   CJS/ESM output, and versioned subpaths when the standard has versions.
+   parsers whose output round-trips back to the wire format, zero runtime dependencies, ESM-only
+   output (Node >= 24), and versioned subpaths when the standard has versions.
 3. Run `pnpm install` (adds the package to `pnpm-lock.yaml`), then `pnpm verify`.
 4. Add the package to the tables in [README.md](README.md) and [ROADMAP.md](ROADMAP.md).
 5. On npmjs.com, add a **trusted publisher** for the package: GitHub Actions, owner `campfhir`,
@@ -52,7 +52,7 @@ which does not rewrite `workspace:` specifiers, so switch that step to pack with
 Packages are versioned and released independently. Only the package whose version changed is
 published.
 
-- Every PR and push to `main` runs **lint, typecheck, codegen check, tests (Node 22 and 24),
+- Every PR and push to `main` runs **lint, typecheck, codegen check, tests (Node 24 and 26),
   build and a smoke test** of every built entry point of every package
   (`.github/workflows/ci.yml`).
 - To prepare a release, run **Bump version** from the Actions tab with the release branch

@@ -229,7 +229,7 @@ OBX|1|NM|718-7^Hemoglobin^LN|1|15.5|g/dL||||||F`;
 // Integration tests — parse validated example .hl7 files
 // ---------------------------------------------------------------------------
 
-const testDataDir = join(__dirname, "..", "testdata", "ORU_R01");
+const testDataDir = join(import.meta.dirname, "..", "testdata", "ORU_R01");
 const testFiles = readdirSync(testDataDir).filter((f) => f.endsWith(".hl7"));
 
 describe("ORU_R01 Integration Tests - Parse validated example messages", () => {
