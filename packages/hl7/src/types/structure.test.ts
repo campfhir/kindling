@@ -124,6 +124,37 @@ describe("parseStructure", () => {
     expect((parseStructure("OMD", structure, PARSERS, [MSH_LINE, "ORC|NW", "ORC|NW"].join("\r")).val as unknown as { diets: unknown[] }).diets).toHaveLength(2);
   });
 
+  test("a shared start segment stays with the group when the sibling group can start at the next segment", () => {
+    // CSU^C09-style: [{ OBSERVATION: [ORC] OBR {OBX} }] { PHARM: [ORC] { ADMIN: PID DG1 } } — OBX then PID ends the observations.
+    const structure: StructureItem[] = [
+      { name: "MSH", required: true, repeating: false },
+      { name: "OBSERVATION", required: false, repeating: true, segments: [{ name: "ORC", required: false, repeating: false }, { name: "OBR", required: true, repeating: false }, { name: "OBX", required: true, repeating: true }] },
+      { name: "PHARM", required: true, repeating: true, segments: [{ name: "ORC", required: false, repeating: false }, { name: "ADMIN", required: true, repeating: true, segments: [{ name: "PID", required: true, repeating: false }, { name: "DG1", required: true, repeating: false }] }] },
+    ];
+    const result = parseStructure("CSU", structure, PARSERS, [MSH_LINE, "ORC|NW", "OBR|1", "OBX|1", "OBX|2", "PID|1", "DG1|1", "PID|2", "DG1|2"].join("\r"));
+    expect(result.err?.message).toBeUndefined();
+    const val = result.val as unknown as { observations: { observations: unknown[] }[]; pharms: { admins: unknown[] }[] };
+    expect(val.observations[0].observations).toHaveLength(2);
+    expect(val.pharms[0].admins).toHaveLength(2);
+  });
+
+  test("a repeating group hands a failed extra instance to a sibling segment of the same name", () => {
+    // SUR^P09-style: { PRODUCT: OBR OBX } OBR { DETAIL: PID OBX NTE } — the OBR without an OBX is the lone segment.
+    const structure: StructureItem[] = [
+      { name: "MSH", required: true, repeating: false },
+      { name: "PRODUCT", required: true, repeating: true, segments: [{ name: "OBR", required: true, repeating: false }, { name: "OBX", required: true, repeating: false }] },
+      { name: "OBR", required: true, repeating: false },
+      { name: "DETAIL", required: true, repeating: true, segments: [{ name: "PID", required: true, repeating: false }, { name: "OBX", required: true, repeating: false }, { name: "NTE", required: true, repeating: false }] },
+    ];
+    const result = parseStructure("SUR", structure, PARSERS, [MSH_LINE, "OBR|1", "OBX|1", "OBR|2", "OBX|2", "OBR|3", "PID|1", "OBX|3", "NTE|1"].join("\r"));
+    expect(result.err?.message).toBeUndefined();
+    const val = result.val as unknown as { products: unknown[]; observationRequest: { setId: () => string }; details: unknown[] };
+    expect(val.products).toHaveLength(2);
+    expect(val.details).toHaveLength(1);
+    // Without the lone OBR the message is still rejected.
+    expect(parseStructure("SUR", structure, PARSERS, [MSH_LINE, "OBR|1", "OBX|1", "PID|1", "OBX|3", "NTE|1"].join("\r")).err?.message).toBe("SUR message must contain an OBR segment");
+  });
+
   test("an order without a patient is allowed, since PATIENT is optional", () => {
     const r = parseStructure("TEST", STRUCTURE, PARSERS, wire("OBR|1"));
     expect(r.ok).toBe(true);

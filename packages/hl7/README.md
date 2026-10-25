@@ -59,7 +59,10 @@ QRY Q01/Q02/P04/R02/T12, QCK Q02, DSR Q01/Q03/P04, UDM Q05/R06, EQQ/RQQ/SPQ/VQQ/
 ERP R09, SQM/SQR S25, VXQ V01, VXX V02, VXR V03, ORF R04/W02, OSQ/OSR Q06, DOC T12, and the master
 files: MFN M01–M15, MFK M01–M15, MFQ/MFR M01–M13, MFD MFA, and the orders: OMD/ORD, OMS/ORS,
 OMN/ORN, RDO/RRO, RDE/RRE, RDS/RRD, RGV/RRG, RAS/RRA with their v2.4 event numbers, the pharmacy
-queries QRY Q26–Q30 with ROR/RAR/RDR/RER/RGR, ORU W01), each in the shape the
+queries QRY Q26–Q30 with ROR/RAR/RDR/RER/RGR, ORU W01, and the patient care, referral, clinical
+trial, product experience and application management messages: PPR/PRR, PGL/PPV, PPP/PTR, PPG/PPT,
+QRY PC4/PC9/PCE/PCK, RQI/RPI/RPL/RPR, RQP, RQC/RCI/RCL, PIN, RQA/RPA, REF/RRI, CRM, CSU, PEX, SUR,
+NMQ/NMR/NMD — every trigger event of the HL7 v2.3 event list), each in the shape the
 standard gives it for that version. See [codegen/README.md](codegen/README.md).
 
 ## Installation

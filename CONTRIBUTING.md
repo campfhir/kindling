@@ -26,7 +26,8 @@ scanning `packages/*/package.json`, so nothing else has to be registered.
      standard scripts: `build`, `clean`, `test`, `typecheck`, `lint` (`eslint .`). Add
      `codegen:check` only if the package has generated files.
    - `tsconfig.json` extending `../../tsconfig.base.json` (set `rootDir`, `outDir`, `include`).
-   - `tsup.config.ts` and `vitest.config.ts` (copy them from `packages/hl7`).
+   - `tsup.config.ts`, `tsconfig.build.json` and `vitest.config.ts` (copy them from `packages/hl7`;
+     tsup writes the JavaScript and a declaration-only `tsc` pass writes the `.d.ts` files).
    - `src/` with tests next to the code (`*.test.ts`), and a `README.md` (npm shows it on the
      package page).
 2. Follow the shared conventions: a fluent, chainable builder API typed against the standard,

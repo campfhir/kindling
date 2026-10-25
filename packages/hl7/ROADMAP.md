@@ -5,7 +5,7 @@ Goal: a complete, well-tested TypeScript implementation of HL7 v2, published to 
 
 | Phase | Scope | Status |
 |---|---|---|
-| 1 | **HL7 v2.3 complete** — every segment and event type | 🚧 in progress |
+| 1 | **HL7 v2.3 complete** — every segment and event type | ✅ every event type and segment built, every field checked against hl7.eu, Caristix and HAPI (see the validation ledger), every composite and date field typed (0.19) |
 | 2 | **HL7 v2.5.1 parity** with v2.3, plus 2.5.1-only segments/messages | ⬜ |
 | 3 | Later versions (2.4, 2.6, 2.7, 2.8…) as demand dictates | ⬜ |
 

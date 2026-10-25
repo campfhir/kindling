@@ -50,4 +50,8 @@ describe("NSC field positions", () => {
   test("NSC-8 New Application", () => {
     assertField(new NSC().newApplication(SENTINEL), 8);
   });
+
+  test("NSC-9 New Facility", () => {
+    assertField(new NSC().newFacility(SENTINEL), 9);
+  });
 });

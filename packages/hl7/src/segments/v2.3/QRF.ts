@@ -10,6 +10,7 @@ import type { Result } from "../../types/result.ts";
 import { BaseSegment, type Repeated, repetitions } from "../../types/segment.ts";
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
+import { components, tqParts, type TQ } from "../../utils/composites.ts";
 import {
   formatHL7Date,
   DateTimeLayout,
@@ -103,11 +104,13 @@ export class QRF extends BaseSegment {
 
   /**
    * QRF-9 When Quantity/Timing Qualifier (chainable).
-   * Components are written in TQ order; the TQ layout is not yet modelled as named parameters.
-   * @param components - TQ components, in order
+   * Takes a TQ object (quantity, interval, duration, start/end date/time, priority, condition, text,
+   * conjunction, order sequencing) or the TQ components as strings, in order.
+   * @param value - A TQ object, or the first component when strings are passed
+   * @param rest - Further components when strings are passed
    */
-  whenQuantityTimingQualifier(...components: string[]): this {
-    this.fields[8] = this.createComponentsField(components);
+  whenQuantityTimingQualifier(value: TQ | string, ...rest: string[]): this {
+    this.fields[8] = typeof value === "string" ? this.createComponentsField([value, ...rest]) : this.createField(components(tqParts(value)));
     return this;
   }
 

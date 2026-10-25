@@ -53,3 +53,14 @@ describe("QRF parse/encode", () => {
     expect(QRF.parse("QRD|W1", DEFAULT_ENCODING).ok).toBe(false);
   });
 });
+
+describe("QRF-9 timing/quantity", () => {
+  test("writes a TQ object in component order with nested sub-components", () => {
+    const qrf = new QRF().whenQuantityTimingQualifier({ quantity: { quantity: "1", units: "DOSE" }, interval: { repeatPattern: "QD" }, startDateTime: "20231015", endDateTime: "20231022", priority: "R" });
+    expect(qrf.encode().split("|")[9]).toBe("1&DOSE^QD^^20231015^20231022^R");
+  });
+
+  test("still takes the components as strings", () => {
+    expect(new QRF().whenQuantityTimingQualifier("1", "QD", "", "20231015").encode().split("|")[9]).toBe("1^QD^^20231015");
+  });
+});

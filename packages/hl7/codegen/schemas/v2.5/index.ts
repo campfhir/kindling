@@ -16,4 +16,5 @@ export * from "./VXU_V04";
 export * from "./queries";
 export * from "./master-files";
 export * from "./orders";
+export * from "./care";
 export { V2_5, V2_5_MESSAGES } from "./version";

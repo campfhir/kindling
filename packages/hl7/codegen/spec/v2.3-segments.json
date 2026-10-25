@@ -639,7 +639,7 @@
    {
     "seq": 1,
     "name": "Placer Appointment ID",
-    "length": "75",
+    "length": "22",
     "type": "EI",
     "opt": "R",
     "rep": "-",
@@ -648,7 +648,7 @@
    {
     "seq": 2,
     "name": "Filler Appointment ID",
-    "length": "75",
+    "length": "22",
     "type": "EI",
     "opt": "C",
     "rep": "-",
@@ -666,7 +666,7 @@
    {
     "seq": 4,
     "name": "Placer Group Number",
-    "length": "75",
+    "length": "37",
     "type": "EI",
     "opt": "O",
     "rep": "-",
@@ -767,7 +767,7 @@
     "name": "Placer Contact Person",
     "length": "48",
     "type": "XCN",
-    "opt": "R",
+    "opt": "O",
     "rep": "-",
     "table": ""
    },
@@ -1360,7 +1360,7 @@
     "name": "Study Phase Identifier",
     "length": "60",
     "type": "CE",
-    "opt": "R",
+    "opt": "C",
     "rep": "-",
     "table": ""
    },
@@ -1424,7 +1424,7 @@
     "name": "Study Phase Identifier",
     "length": "60",
     "type": "CE",
-    "opt": "R",
+    "opt": "C",
     "rep": "-",
     "table": ""
    },
@@ -1451,7 +1451,7 @@
     "name": "Study Phase Evaluability",
     "length": "60",
     "type": "CE",
-    "opt": "C",
+    "opt": "O",
     "rep": "-",
     "table": ""
    }
@@ -1614,7 +1614,7 @@
     "name": "Study Scheduled Time Point",
     "length": "60",
     "type": "CE",
-    "opt": "R",
+    "opt": "O",
     "rep": "-",
     "table": ""
    },
@@ -2302,7 +2302,7 @@
    {
     "seq": 1,
     "name": "Facility ID",
-    "length": "20",
+    "length": "60",
     "type": "EI",
     "opt": "R",
     "rep": "∞",
@@ -2356,7 +2356,7 @@
    {
     "seq": 7,
     "name": "Contact Address",
-    "length": "200",
+    "length": "60",
     "type": "XAD",
     "opt": "O",
     "rep": "∞",
@@ -4845,7 +4845,7 @@
    {
     "seq": 1,
     "name": "Primary Key Value",
-    "length": "200",
+    "length": "20",
     "type": "PL",
     "opt": "R",
     "rep": "-",
@@ -4854,7 +4854,7 @@
    {
     "seq": 2,
     "name": "Segment Action Code",
-    "length": "1",
+    "length": "3",
     "type": "ID",
     "opt": "O",
     "rep": "-",
@@ -4895,7 +4895,7 @@
    {
     "seq": 1,
     "name": "LDP Primary Key Value",
-    "length": "200",
+    "length": "20",
     "type": "PL",
     "opt": "R",
     "rep": "-",
@@ -4949,7 +4949,7 @@
    {
     "seq": 7,
     "name": "Activation Date",
-    "length": "26",
+    "length": "19",
     "type": "TS",
     "opt": "O",
     "rep": "-",
@@ -4958,7 +4958,7 @@
    {
     "seq": 8,
     "name": "Inactivation Date - LDP",
-    "length": "26",
+    "length": "19",
     "type": "TS",
     "opt": "O",
     "rep": "-",
@@ -4999,7 +4999,7 @@
    {
     "seq": 1,
     "name": "Primary Key Value",
-    "length": "200",
+    "length": "20",
     "type": "PL",
     "opt": "R",
     "rep": "-",
@@ -5076,7 +5076,7 @@
    {
     "seq": 1,
     "name": "Primary Key Value",
-    "length": "200",
+    "length": "20",
     "type": "PL",
     "opt": "R",
     "rep": "-",
@@ -5940,7 +5940,7 @@
    {
     "seq": 1,
     "name": "Bed Location",
-    "length": "80",
+    "length": "12",
     "type": "PL",
     "opt": "R",
     "rep": "-",
@@ -5951,7 +5951,7 @@
     "name": "Bed Status",
     "length": "1",
     "type": "IS",
-    "opt": "O",
+    "opt": "B",
     "rep": "-",
     "table": "0116"
    }
@@ -5964,7 +5964,7 @@
     "seq": 1,
     "name": "Network Change Type",
     "length": "4",
-    "type": "ID",
+    "type": "IS",
     "opt": "R",
     "rep": "-",
     "table": "0333"
@@ -6010,7 +6010,7 @@
     "name": "New CPU",
     "length": "30",
     "type": "ST",
-    "opt": "O",
+    "opt": "C",
     "rep": "-",
     "table": ""
    },
@@ -6031,6 +6031,15 @@
     "opt": "O",
     "rep": "-",
     "table": ""
+   },
+   {
+    "seq": 9,
+    "name": "New Facility",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
    }
   ]
  },
@@ -6042,7 +6051,7 @@
     "name": "Statistics Available",
     "length": "1",
     "type": "ID",
-    "opt": "R",
+    "opt": "O",
     "rep": "-",
     "table": "0136"
    },
@@ -6837,7 +6846,7 @@
     "name": "Sequence Number",
     "length": "4",
     "type": "NM",
-    "opt": "R",
+    "opt": "O",
     "rep": "-",
     "table": ""
    },
@@ -6881,7 +6890,7 @@
     "seq": 6,
     "name": "Observation Description",
     "length": "200",
-    "type": "TX",
+    "type": "CE",
     "opt": "O",
     "rep": "-",
     "table": ""
@@ -6970,7 +6979,7 @@
    {
     "seq": 16,
     "name": "Observation Producing Department/Section",
-    "length": "1",
+    "length": "60",
     "type": "CE",
     "opt": "O",
     "rep": "∞",
@@ -6990,7 +6999,7 @@
     "name": "Nature of Test/Observation",
     "length": "1",
     "type": "ID",
-    "opt": "R",
+    "opt": "O",
     "rep": "-",
     "table": "0174"
    },
@@ -7412,9 +7421,9 @@
    {
     "seq": 7,
     "name": "Value Type",
-    "length": "3",
+    "length": "2",
     "type": "ID",
-    "opt": "O",
+    "opt": "R",
     "rep": "-",
     "table": "0125"
    }
@@ -7806,7 +7815,7 @@
    {
     "seq": 3,
     "name": "Product Class",
-    "length": "60",
+    "length": "30",
     "type": "CE",
     "opt": "O",
     "rep": "-",
@@ -7905,7 +7914,7 @@
    {
     "seq": 14,
     "name": "Product Evaluation Performed",
-    "length": "60",
+    "length": "8",
     "type": "CE",
     "opt": "O",
     "rep": "-",
@@ -7959,7 +7968,7 @@
    {
     "seq": 20,
     "name": "Relatedness Assessment",
-    "length": "1",
+    "length": "8",
     "type": "ID",
     "opt": "O",
     "rep": "-",
@@ -7986,7 +7995,7 @@
    {
     "seq": 23,
     "name": "Indirect Exposure Mechanism",
-    "length": "1",
+    "length": "2",
     "type": "ID",
     "opt": "O",
     "rep": "3",
@@ -8406,7 +8415,7 @@
    {
     "seq": 18,
     "name": "Cause Of Death",
-    "length": "60",
+    "length": "30",
     "type": "CE",
     "opt": "O",
     "rep": "∞",
@@ -9329,7 +9338,7 @@
     "name": "Facility ID",
     "length": "60",
     "type": "EI",
-    "opt": "O",
+    "opt": "R",
     "rep": "∞",
     "table": ""
    },
@@ -9521,7 +9530,7 @@
    {
     "seq": 5,
     "name": "Provider Communication Information",
-    "length": "100",
+    "length": "20",
     "type": "XTN",
     "opt": "O",
     "rep": "∞",
@@ -11967,7 +11976,7 @@
     "name": "Give Sub-ID Counter",
     "length": "4",
     "type": "ID",
-    "opt": "R",
+    "opt": "O",
     "rep": "-",
     "table": ""
    },
@@ -11976,7 +11985,7 @@
     "name": "Dispense Sub-ID Counter",
     "length": "4",
     "type": "NM",
-    "opt": "O",
+    "opt": "R",
     "rep": "-",
     "table": ""
    },
@@ -12039,7 +12048,7 @@
     "name": "Administration Notes",
     "length": "200",
     "type": "CE",
-    "opt": "O",
+    "opt": "C",
     "rep": "∞",
     "table": ""
    },
@@ -13050,7 +13059,7 @@
     "name": "Filler Order Number",
     "length": "22",
     "type": "EI",
-    "opt": "O",
+    "opt": "C",
     "rep": "-",
     "table": ""
    },
@@ -13113,7 +13122,7 @@
     "name": "Authentication Person, Time Stamp",
     "length": "60",
     "type": "PPN",
-    "opt": "C",
+    "opt": "O",
     "rep": "∞",
     "table": ""
    },

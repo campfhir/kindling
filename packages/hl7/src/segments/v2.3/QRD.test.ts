@@ -80,3 +80,10 @@ describe("QRD parse/encode", () => {
     expect(QRD.parse("QRF|W1", DEFAULT_ENCODING).ok).toBe(false);
   });
 });
+
+describe("QRD-11 value ranges", () => {
+  test("writes first and last data code values, repeating", () => {
+    const qrd = new QRD().whatDataCodeValueQualifier({ firstDataCodeValue: "A000", lastDataCodeValue: "A999" }, "B1");
+    expect(qrd.encode().split("|")[11]).toBe("A000^A999~B1");
+  });
+});

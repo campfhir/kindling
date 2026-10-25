@@ -4,10 +4,10 @@ Tracks message structures (builders in `src/builders/<version>/`, parsers in
 `src/parsers/<version>/`, schemas in `codegen/schemas/<version>/`).
 HL7 v2.3 completeness comes first, then v2.5.1 parity (see [ROADMAP.md](../ROADMAP.md)).
 
-> The "to build" lists come from the HL7 v2.3 message/event tables compiled from memory of the
-> spec. **Verify structures against the official spec before implementing** and fix this file in
-> the same PR if something is wrong. Many messages need segments from
-> [ROADMAP-SEGMENTS.md](./ROADMAP-SEGMENTS.md) first — dependencies are noted.
+> The event list is the HL7 v2.3 trigger event list of the Caristix reference, cross-checked on the
+> hl7.eu chapter pages. **Verify structures against the official spec before implementing** and fix
+> this file in the same PR if something is wrong. Messages need their segments from
+> [ROADMAP-SEGMENTS.md](./ROADMAP-SEGMENTS.md) first.
 
 Legend: ✅ builder + parser exist · ⬜ not started
 
@@ -49,35 +49,30 @@ Legend: ✅ builder + parser exist · ⬜ not started
 | RDE / RRE, RDS / RRD, RGV / RRG, RAS / RRA | pharmacy encoded order, dispense, give, administration (O01/O02; O11–O18 from 2.4) | ✅ | ✅ |
 | QRY Q26–Q30, ROR / RAR / RDR / RER / RGR | pharmacy queries and responses | ✅ | ✅ |
 | ORU | W01 waveform result | ✅ | ✅ |
+| PPR / PRR | PC1–PC3 problem add/update/delete, PC5 problem response | ✅ | ✅ |
+| PGL / PPV | PC6–PC8 goal add/update/delete, PCA goal response | ✅ | ✅ |
+| PPP / PTR | PCB–PCD pathway (problem-oriented), PCF pathway response | ✅ | ✅ |
+| PPG / PPT | PCG, PCH, PCJ pathway (goal-oriented), PCL pathway response | ✅ | ✅ |
+| QRY | PC4, PC9, PCE, PCK patient care queries | ✅ | ✅ |
+| RQI / RPI / RPL / RPR | I01–I03 insurance information requests and the I01/I04, I02, I03 responses | ✅ | ✅ |
+| RQP / RQC / RCI / RCL | I04 patient demographics, I05/I06 clinical information requests and responses | ✅ | ✅ |
+| PIN | I07 unsolicited insurance information | ✅ | ✅ |
+| RQA / RPA | I08–I11 treatment authorization requests and responses | ✅ | ✅ |
+| REF / RRI | I12–I15 patient referral and responses | ✅ | ✅ |
+| CRM | C01–C08 clinical study registration | ✅ | ✅ |
+| CSU | C09–C12 unsolicited study data | ✅ | ✅ |
+| PEX | P07, P08 product experience | ✅ | ✅ |
+| SUR | P09 summary product experience report | ✅ | ✅ |
+| NMQ / NMR / NMD | N01 application management query and response, N02 application management data | ✅ | ✅ |
 
 ## Remaining for v2.3
 
-### Acknowledgments
-| Message | Notes | Needs |
-|---|---|---|
-| ⬜ MCF | Delayed acknowledgment | — |
-
-### Orders and results
-| Message | Events | Needs |
-|---|---|---|
-| ⬜ ORU | R03 (not in the Caristix v2.3 event list; verify) | ✅ |
-| ⬜ RRI | Referral responses (see referrals) | RF1, PRD |
-
-### Financial and documents
-| Message | Events | Needs |
-|---|---|---|
-| ⬜ PEX | P07/P08 product experience | PEO, PES, PCR |
-| ⬜ PPR / PPT / PPG / PPP / PRR | Problem/goal/pathway (PC1–PC3, PC6–PCC etc.) | PRB, GOL, PTH, VAR |
-
-### Master files and scheduling
-| Message | Events | Needs |
-|---|---|---|
-| ⬜ RQI / RPI / RPL / RPR / RQP / RQC / RQA / RPA | Referral & patient information | RF1, PRD |
-| ⬜ CRM / CSU | Clinical study registration / unsolicited data | CSR, CSS |
-| ⬜ EAC / EAN / EAR / ESR / ESU | Equipment automation | ECD, ECR, EQU, SAC |
-| ⬜ INR / INU / LSR / LSU | Inventory / specimen automation | INV, ISD |
-| ⬜ NMD / NMQ / NMR | Network management | NCK, NDS, NSC, NST |
-| ⬜ STC | Patient state | — |
+Every trigger event of the HL7 v2.3 event list (276 events on the Caristix reference, checked
+against the hl7.eu chapter pages) has a builder and a parser. Messages the earlier draft of this
+list named but that are not v2.3 events are out of scope here: MCF (the v2.1/v2.2 delayed
+acknowledgment) and ORU^R03 are not in the v2.3 list, and STC, the equipment automation messages
+(EAC/EAN/EAR/ESR/ESU) and the inventory and laboratory automation messages (INR/INU/LSR/LSU) were
+introduced in v2.4 and belong to the later-version work below.
 
 Done in 0.9: ACK, ORM^O01, ORR^O02 for v2.3 and v2.5.1 (`ORM`/`ORR` cover the OBR, RQD, RQ1, RXO, ODS and ODT order detail choices). Where the structures differ by version (checked on hl7.eu): v2.4 adds `[CTD]` and `[{FT1}]` to `ORM^O01`; v2.5 adds `[{SFT}]` and repeating `ERR` to `ACK`, repeating `ERR` to `ORR^O02`, and repeating `IN3` to `ORM^O01`. v2.3.1 matches v2.3 for all three, and v2.5.1 matches v2.5.
 
@@ -193,7 +188,33 @@ opens both another instance of a repeating group and a later sibling group (ORC 
 instance is parsed speculatively and handed to the sibling if it stops at a segment only the
 sibling can take.
 
-Suggested order: **patient care → referrals → the rest.**
+Done in 0.19: the patient care messages of chapter 12 (PPR^PC1–PC3, PGL^PC6–PC8, PPP^PCB–PCD,
+PPG^PCG/PCH/PCJ, the PRR^PC5, PPV^PCA, PTR^PCF and PPT^PCL responses and QRY^PC4/PC9/PCE/PCK), the
+referral messages of chapter 11 (RQI^I01–I03, RPI^I01/I04, RPL^I02, RPR^I03, RQP^I04, RQC^I05/I06,
+RCI^I05, RCL^I06, PIN^I07, RQA/RPA^I08–I11, REF/RRI^I12–I15), the clinical trial messages of chapter
+7 (CRM^C01–C08, CSU^C09–C12), the product experience messages PEX^P07/P08 and SUR^P09 and the
+application management messages NMQ/NMR^N01 and NMD^N02 of chapter 14, for v2.3 through v2.5.1.
+Structures from the Caristix reference cross-checked on the hl7.eu chapter pages (in v2.3 the
+application management messages are Appendix C, `std23/appc.htm`, and chapter 14 from v2.4 on;
+SUR^P09 was cross-checked with HAPI's v2.3). Two corrections came out of those pages: NMR's ERR is
+a single `[ERR]` in the v2.3 and v2.4 text (Caristix and HAPI list it as repeating in v2.3 and
+v2.3.1), and NSC-9 New Facility is in the v2.3 NSC table, so the v2.3 segment now has nine fields
+and v2.4 no longer needs its own. The problem, goal and pathway messages share one set of
+groups (`problems`, `goals`, `pathways`, each with `roles`, `variances`, `observations`, `orders`
+and nested goals/problems/pathways); referrals read `providers`, `insurances`, `procedures` with
+their `authorization`, `notes` and `observations`; CSU nests `studyPhases` → `studySchedules` →
+`studyObservations`/`studyPharms` → `administrations`; PEX nests `experiences` → `observations` →
+`causes` with `rxOrder`, `rxAdministrations`, `associatedPerson` and `studies`. Per version: v2.3.1
+adds `[QAK]` to the four care responses and makes the CSU study observations required; v2.4 makes
+CSP optional in CSU and lets RQC^I05/I06 repeat GT1; v2.5 (also
+v2.5.1) adds `[{SFT}]` everywhere except QRY^PC4 and SUR^P09, repeating `ERR` in the care
+responses and NMR, optional `TIMING_QTY` groups after OBR in CSU and required ones after each RXE
+in PEX. The parser's speculative parse of a shared start segment was refined for this batch: an
+instance is kept when it stops at a segment that can *start* the sibling (OBX then RXA in CSU),
+and a repeating group hands a failed extra instance back when its start segment is also the next
+sibling segment (the lone PSH of SUR^P09).
+
+Next: the later-version messages listed under v2.5.1 parity.
 
 ## v2.5.1 parity
 After v2.3 is complete, bring v2.5.1 to parity with the same messages, then add the 2.5.1 additions:

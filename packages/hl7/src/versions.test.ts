@@ -317,3 +317,52 @@ describe("orders and pharmacy", () => {
     expect(par25.parseRDE_O11).not.toBe(par24.parseRDE_O11);
   });
 });
+
+describe("patient care, referrals and the rest", () => {
+  test("the problem, goal, pathway, referral, clinical study, product experience and network segments exist from v2.3", () => {
+    for (const name of ["PRB", "GOL", "PTH", "VAR", "ROL", "PRD", "CTD", "RF1", "AUT", "CSR", "CSP", "CSS", "PEO", "PES", "PCR", "PSH", "PDC", "FAC", "NCK", "NST", "NSC"]) {
+      expect(name in seg23).toBe(true);
+      expect(name in seg251).toBe(true);
+    }
+  });
+
+  test("v2.3.1 adds QAK to the care responses and requires the CSU observations; the rest is re-exported", () => {
+    for (const fn of ["parsePRR_PC5", "parsePPV_PCA", "parsePTR_PCF", "parsePPT_PCL", "parseCSU_C09", "parseCSU_C12"] as const) {
+      expect(par231[fn]).not.toBe(par23[fn]);
+    }
+    for (const fn of ["parsePRR_PC5", "parsePPV_PCA", "parsePTR_PCF", "parsePPT_PCL"] as const) {
+      expect(par24[fn]).toBe(par231[fn]);
+    }
+    for (const fn of ["parsePPR_PC1", "parsePGL_PC6", "parsePPP_PCB", "parsePPG_PCG", "parseQRY_PC4", "parseRQI_I01", "parseREF_I12", "parseRRI_I12", "parseCRM_C01", "parsePEX_P07", "parseNMQ_N01", "parseNMD_N02"] as const) {
+      expect(par231[fn]).toBe(par23[fn]);
+      expect(par24[fn]).toBe(par23[fn]);
+    }
+  });
+
+  test("v2.4 changes CSU^C09 (optional CSP) and RQC^I05/I06 (repeating GT1); NMR^N01 stays v2.3's", () => {
+    for (const fn of ["parseCSU_C09", "parseRQC_I06"] as const) {
+      expect(par24[fn]).not.toBe(par231[fn]);
+      expect(par25[fn]).not.toBe(par24[fn]);
+    }
+    expect(par231.parseNMR_N01).toBe(par23.parseNMR_N01);
+    expect(par24.parseNMR_N01).toBe(par23.parseNMR_N01);
+    expect(par25.parseNMR_N01).not.toBe(par23.parseNMR_N01);
+    expect(par24.parseRQC_I05).not.toBe(par23.parseRQC_I05);
+    expect(par24.parseRQI_I01).toBe(par23.parseRQI_I01);
+  });
+
+  test("v2.5 adds SFT to everything but QRY^PC4 and SUR^P09, which are v2.3's in every version", () => {
+    for (const fn of ["parsePPR_PC1", "parsePRR_PC5", "parseQRY_PC9", "parseRQI_I01", "parseREF_I15", "parseRRI_I12", "parsePIN_I07", "parseCRM_C08", "parsePEX_P08", "parseNMQ_N01", "parseNMD_N02"] as const) {
+      expect(par25[fn]).not.toBe(par24[fn]);
+      expect(typeof par251[fn]).toBe("function");
+    }
+    for (const fn of ["parseQRY_PC4", "parseSUR_P09"] as const) {
+      expect(par231[fn]).toBe(par23[fn]);
+      expect(par24[fn]).toBe(par23[fn]);
+      expect(par25[fn]).toBe(par23[fn]);
+      expect(typeof par251[fn]).toBe("function");
+    }
+    expect("createQRY_PC9" in bld23).toBe(true);
+    expect("createQRY_PC9" in bld251).toBe(true);
+  });
+});
