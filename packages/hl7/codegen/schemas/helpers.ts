@@ -68,6 +68,17 @@ export function wrappers(base: MessageSchema, events: string[]): MessageSchema[]
   return events.map((triggerEvent) => ({ ...base, triggerEvent, baseMessage: nameOf(base) }));
 }
 
+/** The first group named `name` at any depth, or undefined. */
+export function findDeep(items: StructureItem[], name: string): SegmentGroup | undefined {
+  for (const item of items) {
+    if (!("segments" in item)) continue;
+    if (item.name === name) return item;
+    const inner = findDeep(item.segments, name);
+    if (inner) return inner;
+  }
+  return undefined;
+}
+
 /** Replaces the first item named `name` at any depth (segment or group) with `replacement`. */
 export function replaceDeep(schema: MessageSchema, name: string, replacement: StructureItem): MessageSchema {
   let done = false;

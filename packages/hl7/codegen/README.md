@@ -85,13 +85,14 @@ parse → edit → rebuild works without conversion.
 bases before derived versions.
 
 - **Base version** (`v2.3`): hand-written segments; every message generated.
-- **Derived version** (`v2.5.1`, `baseVersion` set): a wrapper class is generated for every
+- **Derived version** (`baseVersion` set without `reexport`): a wrapper class is generated for every
   segment its messages use (`segments` lists extra ones), extending the base version's class.
-  An existing wrapper file is never overwritten, so 2.5.1-specific fields can be added by hand.
-  Every message is generated against these classes.
-- **Re-export version** (`reexport: true`: `v2.3.1`, `v2.4`, `v2.5`): the messages it lists are
-  generated against its own segment modules (v2.3.1, v2.4 and v2.5 list every message, so all 276,
-  334 and 387 of them are generated against the 2.3.1, 2.4 and 2.5 segment classes; v2.5 derives
+  An existing wrapper file is never overwritten, so version-specific fields can be added by hand.
+  Every message is generated against these classes. No version uses this since 2.2 (v2.5.1 was
+  one until its sweep); it stays available for a later version.
+- **Re-export version** (`reexport: true`: `v2.3.1`, `v2.4`, `v2.5`, `v2.5.1`): the messages it lists are
+  generated against its own segment modules (v2.3.1, v2.4, v2.5 and v2.5.1 list every message, so all
+  276, 334, 387 and 387 of them are generated against their own segment classes; v2.5 derives
   the unchanged ones from the v2.4 list, with `[{SFT}]` after MSH unless the message kept its older
   shape, see `codegen/schemas/v2.5/version.ts`); every other segment, structure, parser and builder of the base version
   is mirrored as `export * from "../<base>/X.ts"`. A segment of the version that has its own module
@@ -123,7 +124,7 @@ codegen/
     v2.3.1/            # every message re-versioned from v2.3, plus the 2.3.1 changes (ADT.ts, changed.ts, …)
     v2.4/              # every message re-versioned from v2.3.1, plus the 2.4 changes (ADT.ts, …) and the 57 new 2.4 messages
     v2.5/              # every message derived from v2.4 (+ SFT), plus the 2.5 changes (ADT.ts, laboratory.ts, QBP.ts, …) and the 50 new 2.5 messages
-    v2.5.1/            # re-versions the v2.5 list (the 2.5.1 sweep is pending)
+    v2.5.1/            # every message re-versioned from v2.5, plus the two 2.5.1 changes (QRY^PC4 SFT, RRE^O26 ENCODING)
   generators/
     message.ts         # structure, parser and builder modules (+ baseMessage wrappers)
     segment.ts         # derived-version segment wrapper classes

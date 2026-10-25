@@ -1,7 +1,7 @@
 /**
  * Builder for QRY^PC4 messages (HL7 v2.5.1).
  *
- * Structure: MSH QRD [QRF]
+ * Structure: MSH [{SFT}] QRD [QRF]
  *
  * @module
  */
@@ -11,11 +11,14 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { QRY_PC4_STRUCTURE } from "../../structures/v2.5.1/QRY_PC4.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { QRD } from "../../segments/v2.5.1/QRD.ts";
 import type { QRF } from "../../segments/v2.5.1/QRF.ts";
 
 /** The optional segments and groups of an QRY^PC4 (HL7 v2.5.1) message. */
 export interface QRY_PC4Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The QRF segment. */
   queryFilter?: QRF;
 }

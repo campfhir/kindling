@@ -46,7 +46,7 @@ describe("segment introduction by version", () => {
     expect("OM7" in seg231).toBe(false);
     expect("OM7" in seg24).toBe(true);
     expect(seg25.OM7).toBe(seg24.OM7);
-    expect(Object.getPrototypeOf(seg251.OM7)).toBe(seg25.OM7);
+    expect(seg251.OM7).toBe(seg25.OM7);
   });
 
   test("CER and IIM are introduced in v2.5", () => {
@@ -86,9 +86,12 @@ describe("re-export versions", () => {
     expect(seg25.AL1).toBe(seg24.AL1); // unchanged through 2.5
   });
 
-  test("v2.5.1 builds on v2.5, not v2.3", () => {
-    expect(Object.getPrototypeOf(seg251.PID)).toBe(seg25.PID);
-    expect(seg251.SFT.prototype).toBeInstanceOf(seg25.SFT);
+  test("v2.5.1 builds on v2.5, not v2.3: it re-exports the v2.5 class unless the 2.5.1 table changed (OBR-50, OBX-20 to OBX-25, ORC-31)", () => {
+    expect(seg251.PID).toBe(seg25.PID);
+    expect(seg251.SFT).toBe(seg25.SFT);
+    expect(Object.getPrototypeOf(seg251.OBX)).toBe(seg25.OBX);
+    expect(Object.getPrototypeOf(seg251.OBR)).toBe(seg25.OBR);
+    expect(Object.getPrototypeOf(seg251.ORC)).toBe(seg25.ORC);
   });
 
   test("v2.3.1, v2.4 and v2.5 generate every message against their own segments", () => {

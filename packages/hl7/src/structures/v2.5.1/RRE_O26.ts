@@ -1,7 +1,7 @@
 /**
  * Message structure for RRE^O26 messages (HL7 v2.5.1).
  *
- * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] [ ENCODING: RXE [{NTE}] { TIMING_ENCODED: TQ1 [{TQ2}] } {RXR} [{RXC}] ] } ]
+ * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] [ ENCODING: RXE { TIMING_ENCODED: TQ1 [{TQ2}] } {RXR} [{RXC}] ] } ]
  *
  * @module
  */
@@ -50,7 +50,6 @@ export const RRE_O26_STRUCTURE: StructureItem[] = [
             repeating: false,
             segments: [
               { name: "RXE", required: true, repeating: false },
-              { name: "NTE", required: false, repeating: true },
               {
                 name: "TIMING_ENCODED",
                 required: true,

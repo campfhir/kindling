@@ -1,7 +1,7 @@
 /**
  * Parser for QRY^PC4 messages (HL7 v2.5.1).
  *
- * Structure: MSH QRD [QRF]
+ * Structure: MSH [{SFT}] QRD [QRF]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
 import { QRY_PC4_STRUCTURE } from "../../structures/v2.5.1/QRY_PC4.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { QRD } from "../../segments/v2.5.1/QRD.ts";
 import { QRF } from "../../segments/v2.5.1/QRF.ts";
 
@@ -18,6 +19,8 @@ import { QRF } from "../../segments/v2.5.1/QRF.ts";
 export interface ParsedQRY_PC4 extends ParsedMessageBase {
   /** The MSH segment. */
   header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
   /** The QRD segment. */
   query: QRD;
   /** The QRF segment. */
@@ -27,6 +30,7 @@ export interface ParsedQRY_PC4 extends ParsedMessageBase {
 /** The segment parsers of QRY^PC4 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
   QRD: (s, e) => QRD.parse(s, e),
   QRF: (s, e) => QRF.parse(s, e),
 };

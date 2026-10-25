@@ -1,0 +1,1075 @@
+{
+ "OBR": {
+  "title": "Observation Request",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Set ID - OBR",
+    "length": "4",
+    "type": "SI",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 2,
+    "name": "Placer Order Number",
+    "length": "22",
+    "type": "EI",
+    "opt": "C",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 3,
+    "name": "Filler Order Number",
+    "length": "22",
+    "type": "EI",
+    "opt": "C",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 4,
+    "name": "Universal Service Identifier",
+    "length": "250",
+    "type": "CE",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 5,
+    "name": "Priority",
+    "length": "2",
+    "type": "ID",
+    "opt": "B",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 6,
+    "name": "Requested Date/Time",
+    "length": "26",
+    "type": "TS",
+    "opt": "B",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 7,
+    "name": "Observation Date/Time #",
+    "length": "26",
+    "type": "TS",
+    "opt": "C",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 8,
+    "name": "Observation End Date/Time #",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 9,
+    "name": "Collection Volume *",
+    "length": "20",
+    "type": "CQ",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 10,
+    "name": "Collector Identifier *",
+    "length": "250",
+    "type": "XCN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 11,
+    "name": "Specimen Action Code *",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0065",
+    "inherited": true
+   },
+   {
+    "seq": 12,
+    "name": "Danger Code",
+    "length": "250",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 13,
+    "name": "Relevant Clinical Info.",
+    "length": "300",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 14,
+    "name": "Specimen Received Date/Time *",
+    "length": "26",
+    "type": "TS",
+    "opt": "B",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 15,
+    "name": "Specimen Source",
+    "length": "300",
+    "type": "SPS",
+    "opt": "B",
+    "rep": "-",
+    "table": "0070",
+    "inherited": true
+   },
+   {
+    "seq": 16,
+    "name": "Ordering Provider",
+    "length": "250",
+    "type": "XCN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 17,
+    "name": "Order Callback Phone Number",
+    "length": "250",
+    "type": "XTN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 18,
+    "name": "Placer Field 1",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 19,
+    "name": "Placer Field 2",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 20,
+    "name": "Filler Field 1 +",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 21,
+    "name": "Filler Field 2 +",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 22,
+    "name": "Results Rpt/Status Chng - Date/Time +",
+    "length": "26",
+    "type": "TS",
+    "opt": "C",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 23,
+    "name": "Charge to Practice +",
+    "length": "40",
+    "type": "MOC",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 24,
+    "name": "Diagnostic Serv Sect ID",
+    "length": "10",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0074",
+    "inherited": true
+   },
+   {
+    "seq": 25,
+    "name": "Result Status +",
+    "length": "1",
+    "type": "ID",
+    "opt": "C",
+    "rep": "-",
+    "table": "0123",
+    "inherited": true
+   },
+   {
+    "seq": 26,
+    "name": "Parent Result +",
+    "length": "400",
+    "type": "PRL",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 27,
+    "name": "Quantity/Timing",
+    "length": "200",
+    "type": "TQ",
+    "opt": "B",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 28,
+    "name": "Result Copies To",
+    "length": "250",
+    "type": "XCN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 29,
+    "name": "Parent",
+    "length": "200",
+    "type": "EIP",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 30,
+    "name": "Transportation Mode",
+    "length": "20",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0124",
+    "inherited": true
+   },
+   {
+    "seq": 31,
+    "name": "Reason for Study",
+    "length": "250",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 32,
+    "name": "Principal Result Interpreter +",
+    "length": "200",
+    "type": "NDL",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 33,
+    "name": "Assistant Result Interpreter +",
+    "length": "200",
+    "type": "NDL",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 34,
+    "name": "Technician +",
+    "length": "200",
+    "type": "NDL",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 35,
+    "name": "Transcriptionist +",
+    "length": "200",
+    "type": "NDL",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 36,
+    "name": "Scheduled Date/Time +",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 37,
+    "name": "Number of Sample Containers *",
+    "length": "4",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 38,
+    "name": "Transport Logistics of Collected Sample *",
+    "length": "250",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 39,
+    "name": "Collector's Comment *",
+    "length": "250",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 40,
+    "name": "Transport Arrangement Responsibility",
+    "length": "250",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 41,
+    "name": "Transport Arranged",
+    "length": "30",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0224",
+    "inherited": true
+   },
+   {
+    "seq": 42,
+    "name": "Escort Required",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0225",
+    "inherited": true
+   },
+   {
+    "seq": 43,
+    "name": "Planned Patient Transport Comment",
+    "length": "250",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 44,
+    "name": "Procedure Code",
+    "length": "250",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "0088",
+    "inherited": true
+   },
+   {
+    "seq": 45,
+    "name": "Procedure Code Modifier",
+    "length": "250",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0340",
+    "inherited": true
+   },
+   {
+    "seq": 46,
+    "name": "Placer Supplemental Service Information",
+    "length": "250",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0411",
+    "inherited": true
+   },
+   {
+    "seq": 47,
+    "name": "Filler Supplemental Service Information",
+    "length": "250",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0411",
+    "inherited": true
+   },
+   {
+    "seq": 48,
+    "name": "Medically Necessary Duplicate Procedure Reason.",
+    "length": "250",
+    "type": "CWE",
+    "opt": "C",
+    "rep": "-",
+    "table": "0476",
+    "inherited": true
+   },
+   {
+    "seq": 49,
+    "name": "Result Handling",
+    "length": "2",
+    "type": "IS",
+    "opt": "O",
+    "rep": "-",
+    "table": "0507",
+    "inherited": true
+   },
+   {
+    "seq": 50,
+    "name": "Parent Universal Service Identifier",
+    "length": "250",
+    "type": "CWE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   }
+  ],
+  "extends": "v2.5",
+  "source": "https://hl7-definition.caristix.com/v2/HL7v2.5.1/Segments/OBR (decided against https://www.hl7.eu/HL7v251segmOBR.htm and HAPI v251, see docs/validation/v2.5.1-segment-ledger.md)"
+ },
+ "OBX": {
+  "title": "Observation/Result",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Set ID - OBX",
+    "length": "4",
+    "type": "SI",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 2,
+    "name": "Value Type",
+    "length": "2",
+    "type": "ID",
+    "opt": "C",
+    "rep": "-",
+    "table": "0125",
+    "inherited": true
+   },
+   {
+    "seq": 3,
+    "name": "Observation Identifier",
+    "length": "250",
+    "type": "CE",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 4,
+    "name": "Observation Sub-Id",
+    "length": "20",
+    "type": "ST",
+    "opt": "C",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 5,
+    "name": "Observation Value",
+    "length": "99999",
+    "type": "VARIES",
+    "opt": "C",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 6,
+    "name": "Units",
+    "length": "250",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 7,
+    "name": "References Range",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 8,
+    "name": "Abnormal Flags",
+    "length": "5",
+    "type": "IS",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0078",
+    "inherited": true
+   },
+   {
+    "seq": 9,
+    "name": "Probability",
+    "length": "5",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 10,
+    "name": "Nature of Abnormal Test",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0080",
+    "inherited": true
+   },
+   {
+    "seq": 11,
+    "name": "Observation Result Status",
+    "length": "1",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0085",
+    "inherited": true
+   },
+   {
+    "seq": 12,
+    "name": "Date Last Observation Normal Value",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 13,
+    "name": "User Defined Access Checks",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 14,
+    "name": "Date/Time of the Observation",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 15,
+    "name": "Producer's ID",
+    "length": "250",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 16,
+    "name": "Responsible Observer",
+    "length": "250",
+    "type": "XCN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 17,
+    "name": "Observation Method",
+    "length": "250",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 18,
+    "name": "Equipment Instance Identifier",
+    "length": "22",
+    "type": "EI",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 19,
+    "name": "Date/Time of the Analysis",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 20,
+    "name": "Reserved for harmonization with V2.6",
+    "length": "0",
+    "type": "VARIES",
+    "opt": "X",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 21,
+    "name": "Reserved for harmonization with V2.6",
+    "length": "0",
+    "type": "VARIES",
+    "opt": "X",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 22,
+    "name": "Reserved for harmonization with V2.6",
+    "length": "0",
+    "type": "VARIES",
+    "opt": "X",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 23,
+    "name": "Performing Organization Name",
+    "length": "567",
+    "type": "XON",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 24,
+    "name": "Performing Organization Address",
+    "length": "631",
+    "type": "XAD",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 25,
+    "name": "Performing Organization Medical Director",
+    "length": "3002",
+    "type": "XCN",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   }
+  ],
+  "extends": "v2.5",
+  "source": "https://hl7-definition.caristix.com/v2/HL7v2.5.1/Segments/OBX (decided against https://www.hl7.eu/HL7v251segmOBX.htm and HAPI v251, see docs/validation/v2.5.1-segment-ledger.md)"
+ },
+ "ORC": {
+  "title": "Common Order",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Order Control",
+    "length": "2",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0119",
+    "inherited": true
+   },
+   {
+    "seq": 2,
+    "name": "Placer Order Number",
+    "length": "22",
+    "type": "EI",
+    "opt": "C",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 3,
+    "name": "Filler Order Number",
+    "length": "22",
+    "type": "EI",
+    "opt": "C",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 4,
+    "name": "Placer Group Number",
+    "length": "22",
+    "type": "EI",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 5,
+    "name": "Order Status",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0038",
+    "inherited": true
+   },
+   {
+    "seq": 6,
+    "name": "Response Flag",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0121",
+    "inherited": true
+   },
+   {
+    "seq": 7,
+    "name": "Quantity/Timing",
+    "length": "200",
+    "type": "TQ",
+    "opt": "B",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 8,
+    "name": "Parent",
+    "length": "200",
+    "type": "EIP",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 9,
+    "name": "Date/Time of Transaction",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 10,
+    "name": "Entered By",
+    "length": "250",
+    "type": "XCN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 11,
+    "name": "Verified By",
+    "length": "250",
+    "type": "XCN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 12,
+    "name": "Ordering Provider",
+    "length": "250",
+    "type": "XCN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 13,
+    "name": "Enterer's Location",
+    "length": "80",
+    "type": "PL",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 14,
+    "name": "Call Back Phone Number",
+    "length": "250",
+    "type": "XTN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 15,
+    "name": "Order Effective Date/Time",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 16,
+    "name": "Order Control Code Reason",
+    "length": "250",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 17,
+    "name": "Entering Organization",
+    "length": "250",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 18,
+    "name": "Entering Device",
+    "length": "250",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 19,
+    "name": "Action By",
+    "length": "250",
+    "type": "XCN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 20,
+    "name": "Advanced Beneficiary Notice Code",
+    "length": "250",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "0339",
+    "inherited": true
+   },
+   {
+    "seq": 21,
+    "name": "Ordering Facility Name",
+    "length": "250",
+    "type": "XON",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 22,
+    "name": "Ordering Facility Address",
+    "length": "250",
+    "type": "XAD",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 23,
+    "name": "Ordering Facility Phone Number",
+    "length": "250",
+    "type": "XTN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 24,
+    "name": "Ordering Provider Address",
+    "length": "250",
+    "type": "XAD",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 25,
+    "name": "Order Status Modifier",
+    "length": "250",
+    "type": "CWE",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 26,
+    "name": "Advanced Beneficiary Notice Override Reason",
+    "length": "60",
+    "type": "CWE",
+    "opt": "C",
+    "rep": "-",
+    "table": "0552",
+    "inherited": true
+   },
+   {
+    "seq": 27,
+    "name": "Filler's Expected Availability Date/Time",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": true
+   },
+   {
+    "seq": 28,
+    "name": "Confidentiality Code",
+    "length": "250",
+    "type": "CWE",
+    "opt": "O",
+    "rep": "-",
+    "table": "0177",
+    "inherited": true
+   },
+   {
+    "seq": 29,
+    "name": "Order Type",
+    "length": "250",
+    "type": "CWE",
+    "opt": "O",
+    "rep": "-",
+    "table": "0482",
+    "inherited": true
+   },
+   {
+    "seq": 30,
+    "name": "Enterer Authorization Mode",
+    "length": "250",
+    "type": "CNE",
+    "opt": "O",
+    "rep": "-",
+    "table": "0483",
+    "inherited": true
+   },
+   {
+    "seq": 31,
+    "name": "Parent Universal Service Identifier",
+    "length": "250",
+    "type": "CWE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   }
+  ],
+  "extends": "v2.5",
+  "source": "https://hl7-definition.caristix.com/v2/HL7v2.5.1/Segments/ORC (decided against https://www.hl7.eu/HL7v251segmORC.htm and HAPI v251, see docs/validation/v2.5.1-segment-ledger.md)"
+ }
+}
