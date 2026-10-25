@@ -46,6 +46,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - name: Fetch the external HL7 sample messages (fixture tests)
+        run: pnpm --filter @campfhir/hl7 fixtures:fetch
       - run: pnpm test
 
   build:

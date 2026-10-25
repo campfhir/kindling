@@ -1,6 +1,6 @@
 {
   "name": "@campfhir/hl7",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Zero-dependency TypeScript library for building and parsing HL7v2 messages (v2.3, 2.3.1, 2.4, 2.5 & 2.5.1). Runs on Node.js, Bun, browsers, and Cloudflare Workers.",
   "type": "module",
   "main": "dist/index.js",
@@ -191,7 +191,9 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "exports": "node codegen/generate-package-exports.mjs",
-    "codegen:check": "pnpm codegen && pnpm barrels && pnpm exports && test -z \"$(git status --porcelain -- src package.json)\""
+    "codegen:check": "pnpm codegen && pnpm barrels && pnpm exports && test -z \"$(git status --porcelain -- src package.json)\"",
+    "fixtures:fetch": "node scripts/fetch-fixtures.mjs",
+    "fixtures:generate": "python3 fixtures/generate.py"
   },
   "keywords": [
     "hl7",

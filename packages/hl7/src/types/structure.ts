@@ -122,7 +122,9 @@ export function parseStructure<T extends ParsedMessageBase = ParsedMessageBase &
     };
 
     // Parses one sequence of items into `out`; returns false when a required item is missing.
-    const parseSequence = (list: StructureItem[], out: StructureValue): boolean => {
+    // `outer` names the segments the enclosing groups could take next instead (another instance
+    // of a repeating group, or the start of a sibling that follows it).
+    const parseSequence = (list: StructureItem[], out: StructureValue, outer: ReadonlySet<string> = NO_SEGMENTS): boolean => {
       for (const item of list) {
         if (failure) return false;
         const field = itemField(item);
@@ -141,7 +143,7 @@ export function parseStructure<T extends ParsedMessageBase = ParsedMessageBase &
         if (isSegmentGroup(item) && item.inline) {
           const next = peek();
           if (next && firstSegments(item).includes(next)) {
-            if (!parseSequence(item.segments, out)) return false;
+            if (!parseSequence(item.segments, out, outer)) return false;
           } else if (!isRequired(item)) {
             emptyLists(item.segments, out);
           } else {
@@ -159,14 +161,22 @@ export function parseStructure<T extends ParsedMessageBase = ParsedMessageBase &
             const next = peek();
             if (!next || !starts.has(next)) break;
             const instance: StructureValue = {};
+            // What the enclosing groups could take after this instance: another instance of this
+            // group, a sibling up to the first required one, and whatever `outer` already names.
+            const inner = new Set(outer);
+            if (item.repeating && instances.length + 1 < (item.maxOccurrences ?? Infinity)) for (const s of starts) inner.add(s);
+            for (const s of openers(siblings)) inner.add(s);
             // A segment that also opens a later sibling (ORC opens both the diet and the tray orders
             // of OMD^O01; PSH opens the PRODUCT group of SUR^P09 and follows it) is parsed
             // speculatively once this group's minimum is met: when the instance fails, or stops at a
             // segment that only the inside of a sibling can take, it is handed over to the sibling.
+            // The same goes for a segment an enclosing group could take (the ORC of a new ORDER of
+            // OMG^O19 also opens the optional PRIOR_RESULT group inside the previous order): a
+            // failed instance is undone and left to the enclosing group.
             const rivals = instances.length >= min ? rivalItems(siblings, next) : [];
-            if (rivals.length > 0) {
+            if (rivals.length > 0 || (instances.length >= min && outer.has(next))) {
               const snapshot = { pos, count: message.segments.length };
-              const ok = parseSequence(item.segments, instance);
+              const ok = parseSequence(item.segments, instance, inner);
               const after = ok && !failure ? peek() : undefined;
               const rivalNames = new Set(segmentNames(rivals));
               const rivalStarts = new Set(rivals.flatMap(firstSegments));
@@ -179,7 +189,7 @@ export function parseStructure<T extends ParsedMessageBase = ParsedMessageBase &
               instances.push(instance);
               continue;
             }
-            if (!parseSequence(item.segments, instance)) return false;
+            if (!parseSequence(item.segments, instance, inner)) return false;
             instances.push(instance);
           }
           if (instances.length < min && isRequired(item)) {
@@ -227,6 +237,18 @@ export function parseStructure<T extends ParsedMessageBase = ParsedMessageBase &
   } catch (error) {
     return { ok: false, err: new Err(`Failed to parse ${messageName} message: ${error}`) };
   }
+}
+
+const NO_SEGMENTS: ReadonlySet<string> = new Set();
+
+/** The segments that open any of `siblings`, up to and including the first required one. */
+function openers(siblings: StructureItem[]): string[] {
+  const out: string[] = [];
+  for (const sibling of siblings) {
+    out.push(...firstSegments(sibling));
+    if (isRequired(sibling)) break;
+  }
+  return out;
 }
 
 /** The siblings (groups or segments), up to and including the first required one, that `next` can open. */

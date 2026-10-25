@@ -30,8 +30,12 @@ src/
 ├── parsers/<version>/         # one test file per message parser (+ integration tests)
 ├── parsers/testdata/          # sample .hl7 messages read by the integration tests
 ├── builders/<version>/        # one test file per message builder
-└── utils/                     # ValueExtractor, MessageEditor, date utilities, CustomSegment
+├── utils/                     # ValueExtractor, MessageEditor, date utilities, CustomSegment
+└── fixtures.test.ts           # every message of ../fixtures through parse() (see ../fixtures/README.md)
 ```
+
+The fixture tests need the external sample collections for their second half: run
+`pnpm fixtures:fetch` once (CI does); until then that half is skipped with a warning.
 
 Field-position tests for segments are generated from the segment sources with
 `pnpm test:positions` (see `codegen/README.md`); do not edit those by hand.

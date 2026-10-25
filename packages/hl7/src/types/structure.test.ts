@@ -155,6 +155,37 @@ describe("parseStructure", () => {
     expect(parseStructure("SUR", structure, PARSERS, [MSH_LINE, "OBR|1", "OBX|1", "PID|1", "OBX|3", "NTE|1"].join("\r")).err?.message).toBe("SUR message must contain an OBR segment");
   });
 
+  test("a nested group opened by the enclosing group's start segment is undone when it fails", () => {
+    // OMG^O19-style: { ORDER: ORC OBR [{OBX}] [{ PRIOR_RESULT: { ORDER_PRIOR: [ORC] OBR {OBX} } }] } — an ORC OBR
+    // pair without OBX cannot be a prior result, so it is left to open the next order instead.
+    const structure: StructureItem[] = [
+      { name: "MSH", required: true, repeating: false },
+      { name: "ORDER", required: true, repeating: true, segments: [
+        { name: "ORC", required: true, repeating: false },
+        { name: "OBR", required: true, repeating: false },
+        { name: "OBX", required: false, repeating: true },
+        { name: "PRIOR_RESULT", required: false, repeating: true, segments: [
+          { name: "ORDER_PRIOR", required: true, repeating: true, segments: [
+            { name: "ORC", required: false, repeating: false },
+            { name: "OBR", required: true, repeating: false },
+            { name: "OBX", required: true, repeating: true },
+          ] },
+        ] },
+      ] },
+    ];
+    const result = parseStructure("OMG", structure, PARSERS, [MSH_LINE, "ORC|1", "OBR|1", "ORC|2", "OBR|2", "ORC|3", "OBR|3"].join("\r"));
+    expect(result.err?.message).toBeUndefined();
+    const val = result.val as unknown as { orders: { priorResults: unknown[] }[] };
+    expect(val.orders).toHaveLength(3);
+    expect(val.orders[0].priorResults).toEqual([]);
+    // With an OBX the pair is a prior result of the first order, as before.
+    const prior = parseStructure("OMG", structure, PARSERS, [MSH_LINE, "ORC|1", "OBR|1", "ORC|2", "OBR|2", "OBX|1"].join("\r"));
+    expect((prior.val as unknown as { orders: { priorResults: unknown[] }[] }).orders).toHaveLength(1);
+    expect((prior.val as unknown as { orders: { priorResults: unknown[] }[] }).orders[0].priorResults).toHaveLength(1);
+    // A prior result opened by a segment the enclosing group cannot take is parsed for real.
+    expect(parseStructure("OMG", structure, PARSERS, [MSH_LINE, "ORC|1", "OBR|1", "OBR|2"].join("\r")).err?.message).toBe("OMG message must contain at least one OBX segment");
+  });
+
   test("an order without a patient is allowed, since PATIENT is optional", () => {
     const r = parseStructure("TEST", STRUCTURE, PARSERS, wire("OBR|1"));
     expect(r.ok).toBe(true);
