@@ -57,6 +57,7 @@ jobs:
         run: |
           pnpm exec eslint "packages/${{ matrix.folder }}"
           pnpm --filter "${{ matrix.name }}" typecheck
+          pnpm --filter "${{ matrix.name }}" run --if-present fixtures:fetch
           pnpm --filter "${{ matrix.name }}" test
           pnpm --filter "${{ matrix.name }}" build
           node .github/scripts/smoke-test.mjs "${{ matrix.folder }}"

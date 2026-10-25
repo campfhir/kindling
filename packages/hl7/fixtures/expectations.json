@@ -1,0 +1,426 @@
+{
+  "$comment": "Expected deviations of the fixture messages (src/fixtures.test.ts). Every message of fixtures/generated/*.hl7 and of fixtures/external/<source>/** must parse with parse() and encode back to the same wire text unless a record here says otherwise: `error` is a substring of the expected parse error, `dropped` lists the segments the structure does not know (they are skipped with a warning, so the round trip loses them). `messages` names the messages of a file: its MSH-9 for a generated file, its 1-based position for an external file holding several messages (omitted for a one-message file). `reason` keys into `reasons`; `why` gives the specifics. A record nothing matches fails the test, so a fix that makes a message parse must remove its record.",
+  "reasons": {
+    "choice-alternatives": "hl7apy has no choice construct: where the standard allows one of OBR, RQD, RQ1, RXO, ODS and ODT as the order detail segment, the generated message carries all of them one after another, and the second one is out of place.",
+    "hl7apy-name": "hl7apy's message list names the structure after an event the version does not have; the standard's name is in `why`.",
+    "hl7apy-structure": "hl7apy's structure differs from the one the message ledger settled on (docs/validation/<version>-message-ledger.md: hl7.eu decides unless Caristix and HAPI agree against it); the generated message follows hl7apy's.",
+    "hapi-example": "An example query profile that HAPI ships as a class and hl7apy lists as a message; not an event of the standard.",
+    "unsupported-version": "MSH-12 names a version this package does not parse.",
+    "unknown-type": "MSH-9 names no message type of the version.",
+    "nonconformant": "The sample does not follow the standard's message table for its version (the ledger of that version confirms ours): a required segment is missing or a segment is out of place, as `why` says.",
+    "not-kept": "parse() reads the message but encode() does not write it back the same; `lossy` says what is lost."
+  },
+  "generated": {
+    "v2.3.min.hl7": [
+      {
+        "messages": ["ARD^A19^ARD_A19", "EDR^Q01^EDR_Q01", "ERP^Q01^ERP_Q01", "RAS^O01^RAS_O01"],
+        "error": "Unknown HL7 v2.3 message type",
+        "reason": "hl7apy-name",
+        "why": "v2.3 has ADR^A19 (the A19 response), EDR^R07 and ERP^R09 (the R07/R09 query responses) and RAS^O02 (pharmacy administration); see the v2.3 message ledger."
+      },
+      {
+        "messages": ["MFN^M06^MFN_M06"],
+        "error": "MFN_M06 message must contain a CM0 segment",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy's v2.3 MFN_M06 carries a CDM charge description record (the standard's M04); Caristix and HAPI v23 give M06 the clinical study record { MFE CM0 [{CM1 [{CM2}]}] } (v2.3 message ledger MFN_M06)."
+      },
+      {
+        "messages": ["MFN^M09^MFN_M09"],
+        "error": "MFN_M09 message must contain an OM1 segment",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy, like HAPI v23, leaves out the OM1 that hl7.eu ch8 8.7 and Caristix require after MFE (v2.3 message ledger MFN_M09)."
+      },
+      {
+        "messages": ["MFN^M10^MFN_M10"],
+        "error": "MFN_M10 message must contain at least one MFE segment",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy makes the MFE group optional; hl7.eu ch8 8.7 and Caristix require at least one { MFE OM1 [ OM5 [{OM4}] ] } (v2.3 message ledger MFN_M10)."
+      },
+      {
+        "messages": ["RAR^RAR^RAR_RAR"],
+        "error": "RAR_RAR message must contain an RXR segment",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy, like HAPI v23, makes RXR optional after RXA; hl7.eu and Caristix require it (v2.3 message ledger RAR_RAR)."
+      }
+    ],
+    "v2.3.full.hl7": [
+      {
+        "messages": ["ARD^A19^ARD_A19", "EDR^Q01^EDR_Q01", "ERP^Q01^ERP_Q01", "RAS^O01^RAS_O01"],
+        "error": "Unknown HL7 v2.3 message type",
+        "reason": "hl7apy-name",
+        "why": "v2.3 has ADR^A19 (the A19 response), EDR^R07 and ERP^R09 (the R07/R09 query responses) and RAS^O02 (pharmacy administration); see the v2.3 message ledger."
+      },
+      {
+        "messages": ["MFN^M06^MFN_M06"],
+        "error": "MFN_M06 message must contain a CM0 segment",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy's v2.3 MFN_M06 carries a CDM charge description record (the standard's M04); Caristix and HAPI v23 give M06 the clinical study record { MFE CM0 [{CM1 [{CM2}]}] } (v2.3 message ledger MFN_M06)."
+      },
+      {
+        "messages": ["MFN^M07^MFN_M07"],
+        "dropped": ["CM1", "CM1"],
+        "reason": "hl7apy-structure",
+        "why": "hl7apy, like Caristix and HAPI v23, puts the M06 phase record (CM1) under M07; hl7.eu ch8 8.10 case 2 has { MFE CM0 [{CM2}] } (v2.3 message ledger MFN_M07)."
+      },
+      {
+        "messages": ["MFN^M09^MFN_M09"],
+        "error": "MFN_M09 message must contain an OM1 segment",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy, like HAPI v23, leaves out the OM1 that hl7.eu ch8 8.7 and Caristix require after MFE (v2.3 message ledger MFN_M09)."
+      },
+      {
+        "messages": ["MFN^M10^MFN_M10"],
+        "error": "MFN_M10 message must contain at least one MFE segment",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy makes the MFE group optional; hl7.eu ch8 8.7 and Caristix require at least one { MFE OM1 [ OM5 [{OM4}] ] } (v2.3 message ledger MFN_M10)."
+      },
+      {
+        "messages": ["ORM^O01^ORM_O01", "ORR^O02^ORR_O02"],
+        "error": "RQD segment at line",
+        "reason": "choice-alternatives"
+      },
+      {
+        "messages": ["RAR^RAR^RAR_RAR"],
+        "error": "RAR_RAR message must contain an RXR segment",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy, like HAPI v23, makes RXR optional after RXA; hl7.eu and Caristix require it (v2.3 message ledger RAR_RAR)."
+      }
+    ],
+    "v2.3.1.min.hl7": [
+      {
+        "messages": ["MFN^M08^MFN_M08"],
+        "error": "MFN_M08 message must contain an OM1 segment",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy, like HAPI v231, makes OM1 optional; hl7.eu ch8 8.7 has { MFE OM1 [OM2] [OM3] [OM4] } (v2.3.1 message ledger MFN_M08)."
+      },
+      {
+        "messages": ["RDS^O01^RDS_O01"],
+        "error": "RDS_O01 message must contain at least one OBX segment",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy, like HAPI v231, makes the OBSERVATION group optional; hl7.eu ch4 4.8.9 has { OBX [{NTE}] } required (v2.3.1 message ledger RDS_O01)."
+      }
+    ],
+    "v2.3.1.full.hl7": [
+      {
+        "messages": ["MFR^M01^MFR_M01"],
+        "dropped": ["QAK"],
+        "reason": "hl7apy-structure",
+        "why": "hl7apy puts a QAK after ERR; Caristix 2.3.1, the only source with a table for this event, has none (v2.3.1 message ledger MFR_M01)."
+      },
+      {
+        "messages": ["ORM^O01^ORM_O01", "ORR^O02^ORR_O02"],
+        "error": "RQD segment at line",
+        "reason": "choice-alternatives"
+      },
+      {
+        "messages": ["OSR^Q06^OSR_Q06", "PGL^PC6^PGL_PC6", "PPG^PCG^PPG_PCG", "PPP^PCB^PPP_PCB", "PPR^PC1^PPR_PC1", "PPT^PCL^PPT_PCL", "PPV^PCA^PPV_PCA", "PRR^PC5^PRR_PC5", "PTR^PCF^PTR_PCF"],
+        "error": "RXO segment at line",
+        "reason": "choice-alternatives"
+      }
+    ],
+    "v2.4.min.hl7": [
+      {
+        "messages": ["DFT^P11^DFT_P11"],
+        "error": "Unknown HL7 v2.4 message type",
+        "reason": "hl7apy-name",
+        "why": "DFT^P11 is a v2.5 event; the v2.4 Caristix event list, which the v2.4 message ledger covers in full, does not have it."
+      },
+      {
+        "messages": ["QBP^K13^QBP_K13"],
+        "error": "Unknown HL7 v2.4 message type",
+        "reason": "hl7apy-name",
+        "why": "K13 is the trigger of the RTB^K13 response to QBP^Q13; QBP_K13 is hl7apy's name for a query shaped like that response."
+      },
+      {
+        "messages": ["QBP^Z73^QBP_Z73", "RSP^Z82^RSP_Z82", "RSP^Z86^RSP_Z86", "RSP^Z88^RSP_Z88", "RSP^Z90^RSP_Z90", "RTB^Z74^RTB_Z74"],
+        "error": "Unknown HL7 v2.4 message type",
+        "reason": "hapi-example"
+      }
+    ],
+    "v2.4.full.hl7": [
+      {
+        "messages": ["DFT^P11^DFT_P11"],
+        "error": "Unknown HL7 v2.4 message type",
+        "reason": "hl7apy-name",
+        "why": "DFT^P11 is a v2.5 event; the v2.4 Caristix event list, which the v2.4 message ledger covers in full, does not have it."
+      },
+      {
+        "messages": ["ORM^O01^ORM_O01", "ORR^O02^ORR_O02", "OSR^Q06^OSR_Q06"],
+        "error": "RQD segment at line",
+        "reason": "choice-alternatives"
+      },
+      {
+        "messages": ["PGL^PC6^PGL_PC6", "PPG^PCG^PPG_PCG", "PPP^PCB^PPP_PCB", "PPR^PC1^PPR_PC1", "PPT^PCL^PPT_PCL", "PPV^PCA^PPV_PCA", "PRR^PC5^PRR_PC5", "PTR^PCF^PTR_PCF"],
+        "error": "RXO segment at line",
+        "reason": "choice-alternatives"
+      },
+      {
+        "messages": ["QBP^K13^QBP_K13"],
+        "error": "Unknown HL7 v2.4 message type",
+        "reason": "hl7apy-name",
+        "why": "K13 is the trigger of the RTB^K13 response to QBP^Q13; QBP_K13 is hl7apy's name for a query shaped like that response."
+      },
+      {
+        "messages": ["QBP^Z73^QBP_Z73", "RSP^Z82^RSP_Z82", "RSP^Z86^RSP_Z86", "RSP^Z88^RSP_Z88", "RSP^Z90^RSP_Z90", "RTB^Z74^RTB_Z74"],
+        "error": "Unknown HL7 v2.4 message type",
+        "reason": "hapi-example"
+      }
+    ],
+    "v2.5.min.hl7": [
+      {
+        "messages": ["QBP^K13^QBP_K13"],
+        "error": "Unknown HL7 v2.5 message type",
+        "reason": "hl7apy-name",
+        "why": "K13 is the trigger of the RTB^K13 response to QBP^Q13; QBP_K13 is hl7apy's name for a query shaped like that response."
+      },
+      {
+        "messages": ["RSP^Q11^RSP_Q11"],
+        "error": "Unknown HL7 v2.5 message type",
+        "reason": "hl7apy-name",
+        "why": "Q11 is the trigger of the QBP^Q11 query; its response is RSP^K11."
+      }
+    ],
+    "v2.5.full.hl7": [
+      {
+        "messages": ["MFR^M04^MFR_M04"],
+        "dropped": ["LCH", "LCH"],
+        "reason": "hl7apy-structure",
+        "why": "hl7apy, like HAPI v25, puts [{LCH}] between CDM and PRC; the 8.8 charge description record (Caristix 2.5, ours) has { MFE CDM [{PRC}] } (v2.5 message ledger MFR_M04)."
+      },
+      {
+        "messages": ["ORM^O01^ORM_O01", "ORR^O02^ORR_O02", "OSR^Q06^OSR_Q06"],
+        "error": "RQD segment at line",
+        "reason": "choice-alternatives"
+      },
+      {
+        "messages": ["QBP^K13^QBP_K13"],
+        "error": "Unknown HL7 v2.5 message type",
+        "reason": "hl7apy-name",
+        "why": "K13 is the trigger of the RTB^K13 response to QBP^Q13; QBP_K13 is hl7apy's name for a query shaped like that response."
+      },
+      {
+        "messages": ["QRY^PC4^QRY_PC4"],
+        "dropped": ["SFT"],
+        "reason": "hl7apy-structure",
+        "why": "hl7apy, like HAPI v25, gives the v2.5 QRY^PC4 an SFT; hl7.eu ch12 and Caristix 2.5 do not (it appears in v2.5.1; v2.5 message ledger QRY_PC4)."
+      },
+      {
+        "messages": ["RSP^K11^RSP_K11"],
+        "dropped": ["RDF", "RDT"],
+        "reason": "hl7apy-structure",
+        "why": "hl7apy, like HAPI v25, fills the segment pattern of RSP^K11 with the tabular RDF [{RDT}]; hl7.eu ch5 and Caristix 2.5 leave it to the query profile (v2.5 message ledger RSP_K11)."
+      },
+      {
+        "messages": ["RSP^K21^RSP_K21"],
+        "error": "PID segment at line",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy, like HAPI v25, repeats the QUERY_RESPONSE group; hl7.eu ch3 and Caristix 2.5 have it once (v2.5 message ledger RSP_K21)."
+      },
+      {
+        "messages": ["RSP^Q11^RSP_Q11"],
+        "error": "Unknown HL7 v2.5 message type",
+        "reason": "hl7apy-name",
+        "why": "Q11 is the trigger of the QBP^Q11 query; its response is RSP^K11."
+      }
+    ],
+    "v2.5.1.min.hl7": [
+      {
+        "messages": ["RSP^Q11^RSP_Q11"],
+        "error": "Unknown HL7 v2.5.1 message type",
+        "reason": "hl7apy-name",
+        "why": "Q11 is the trigger of the QBP^Q11 query; its response is RSP^K11."
+      }
+    ],
+    "v2.5.1.full.hl7": [
+      {
+        "messages": ["ORM^O01^ORM_O01", "ORR^O02^ORR_O02", "OSR^Q06^OSR_Q06"],
+        "error": "RQD segment at line",
+        "reason": "choice-alternatives"
+      },
+      {
+        "messages": ["RSP^K11^RSP_K11"],
+        "dropped": ["RDF", "RDT"],
+        "reason": "hl7apy-structure",
+        "why": "hl7apy, like HAPI v251, fills the segment pattern of RSP^K11 with the tabular RDF [{RDT}]; hl7.eu ch5 and Caristix 2.5.1 leave it to the query profile (v2.5.1 message ledger RSP_K11)."
+      },
+      {
+        "messages": ["RSP^Q11^RSP_Q11"],
+        "error": "Unknown HL7 v2.5.1 message type",
+        "reason": "hl7apy-name",
+        "why": "Q11 is the trigger of the QBP^Q11 query; its response is RSP^K11."
+      }
+    ]
+  },
+  "external": {
+    "sample-hl7-messages": {
+      "HL7V2Examples-master/Radiology/Mixed Rediology V2 Messages/FujiFilm2.hl7": [
+        {
+          "error": "HL7 version '2.2' (MSH-12) is not supported",
+          "reason": "unsupported-version"
+        }
+      ],
+      "HL7V2Examples-master/Radiology/Mixed Rediology V2 Messages/FujiFilm3.hl7": [
+        {
+          "error": "HL7 version '2.2' (MSH-12) is not supported",
+          "reason": "unsupported-version"
+        }
+      ],
+      "HL7V2Examples-master/Radiology/Mixed Rediology V2 Messages/FujiFilm4.hl7": [
+        {
+          "error": "HL7 version '2.2' (MSH-12) is not supported",
+          "reason": "unsupported-version"
+        }
+      ],
+      "HL7V2Examples-master/Radiology/Mixed Rediology V2 Messages/Sample for DOH 20100223031515P2O1F1_(JKLUGEDI)_mdx_63.hl7": [
+        {
+          "error": "Unknown HL7 v2.3.1 message type 'ORU^HL7^ORU_HL7'",
+          "reason": "unknown-type"
+        }
+      ],
+      "HL7V2Examples-master/SMD/REF Messages/Grahame Grieve Examples/discharge.hl7": [
+        {
+          "error": "OBR segment at line 16 is not allowed at this position in REF_I12",
+          "reason": "nonconformant",
+          "why": "An NTE between PR1 and OBR, and ORC RXO RXR orders after PV1, which REF^I12 does not have (hl7.eu v2.3.1 ch11)."
+        }
+      ],
+      "HL7V2Examples-master/SMD/REF Messages/Grahame Grieve Examples/referral.hl7": [
+        {
+          "error": "OBR segment at line 16 is not allowed at this position in REF_I12",
+          "reason": "nonconformant",
+          "why": "An NTE between PR1 and OBR, and ORC RXO RXR orders after PV1, which REF^I12 does not have (hl7.eu v2.3.1 ch11)."
+        }
+      ],
+      "Mirth-Connect-Resources-master/Sample Collection.hl7": [
+        {
+          "messages": [1],
+          "error": "Unknown HL7 v2.3.1 message type 'ORU^RO1'",
+          "reason": "unknown-type",
+          "why": "The trigger is spelled RO1 (letter O)."
+        },
+        {
+          "messages": [7, 11, 15],
+          "error": "DG1 segment at line 7 is not allowed",
+          "reason": "nonconformant",
+          "why": "GT1 before DG1 in a v2.3 ADT^A01/A05/A13; the message table has DG1 before GT1."
+        },
+        {
+          "messages": [12, 26],
+          "error": "ADT_A08 message must contain a PV1 segment",
+          "reason": "nonconformant",
+          "why": "No PV1 (required in ADT^A08)."
+        },
+        {
+          "messages": [16, 17, 21, 22, 37, 52],
+          "error": "ADT_A04 message must contain an EVN segment",
+          "reason": "nonconformant",
+          "why": "No EVN (required in ADT^A04 of v2.5 and v2.5.1)."
+        },
+        {
+          "messages": [23],
+          "error": "NTE segment at line 14 is not allowed at this position in VXU_V04",
+          "reason": "nonconformant",
+          "why": "An NTE right after RXR; in VXU^V04 notes follow an OBX."
+        },
+        {
+          "messages": [41, 65],
+          "error": "HL7 version '2.2' (MSH-12) is not supported",
+          "reason": "unsupported-version"
+        },
+        {
+          "messages": [55],
+          "error": "RXA segment at line 10 is not allowed at this position in VXR_V03",
+          "reason": "nonconformant",
+          "why": "RXA without the ORC that opens every ORDER group of VXR^V03 in v2.5.1."
+        },
+        {
+          "messages": [58],
+          "error": "AIL segment at line 8 is not allowed at this position in SIU_S13",
+          "reason": "nonconformant",
+          "why": "AIL after AIP; in the RESOURCES group of SIU^S12/S13 the location (AIL) precedes the personnel (AIP)."
+        },
+        {
+          "messages": [63],
+          "error": "ORU_R01 message must contain an OBR segment",
+          "reason": "nonconformant",
+          "why": "Two NTEs between ORC and OBR in a v2.3 ORU^R01; notes follow the OBR."
+        },
+        {
+          "messages": [61],
+          "lossy": "the fifth encoding character",
+          "reason": "not-kept",
+          "why": "MSH-2 is ^~\\\\&# (the truncation character of v2.7 in a v2.5.1 message); MSH keeps the four encoding characters of the version."
+        },
+        {
+          "messages": [67, 69, 71, 72, 74, 76, 78, 80, 82, 84, 86, 87, 89, 91, 93, 95, 97, 99, 101, 102, 104, 106, 108, 110, 112, 114, 116, 117, 119, 121, 123, 125, 127, 129, 131, 132, 134, 136, 138, 140, 142, 144, 146, 147, 149, 151, 153, 155, 157, 159, 161, 162, 164, 166, 168, 170, 172, 174, 176, 177, 179, 181, 183, 185, 187, 189],
+          "error": "ADT_A31 message must contain a PV1 segment",
+          "reason": "nonconformant",
+          "why": "MSH EVN PID PD1 NK1 and no PV1 (required in ADT^A31 of v2.3.1; v2.3.1 message ledger ADT_A31)."
+        }
+      ],
+      "hl7-samples-main/ADT/1632738177-A01.txt": [
+        {
+          "error": "DG1 segment at line 7 is not allowed",
+          "reason": "nonconformant",
+          "why": "GT1 before DG1 in a v2.3 ADT^A01; the message table has DG1 before GT1."
+        }
+      ],
+      "hl7-samples-main/ADT/1632738325-A05.txt": [
+        {
+          "error": "DG1 segment at line 7 is not allowed",
+          "reason": "nonconformant",
+          "why": "GT1 before DG1 in a v2.3 ADT^A05; the message table has DG1 before GT1."
+        }
+      ],
+      "hl7-samples-main/ADT/1632738347-A08.txt": [
+        {
+          "error": "ADT_A08 message must contain a PV1 segment",
+          "reason": "nonconformant",
+          "why": "No PV1 (required in ADT^A08)."
+        }
+      ],
+      "hl7-samples-main/ADT/1632738390-A13.txt": [
+        {
+          "error": "DG1 segment at line 7 is not allowed",
+          "reason": "nonconformant",
+          "why": "GT1 before DG1 in a v2.3 ADT^A13; the message table has DG1 before GT1."
+        }
+      ],
+      "hl7-samples-main/ADT/1632738405-A04.txt": [
+        {
+          "error": "ADT_A04 message must contain an EVN segment",
+          "reason": "nonconformant",
+          "why": "No EVN (required in ADT^A04 of v2.5)."
+        }
+      ],
+      "hl7-samples-main/ADT/1632738410-A04.txt": [
+        {
+          "error": "ADT_A04 message must contain an EVN segment",
+          "reason": "nonconformant",
+          "why": "No EVN (required in ADT^A04 of v2.5)."
+        }
+      ],
+      "hl7-samples-main/ADT/1632738460-A04.txt": [
+        {
+          "error": "ADT_A04 message must contain an EVN segment",
+          "reason": "nonconformant",
+          "why": "No EVN (required in ADT^A04 of v2.5.1)."
+        }
+      ],
+      "hl7-samples-main/ADT/1632738471-A04.txt": [
+        {
+          "error": "ADT_A04 message must contain an EVN segment",
+          "reason": "nonconformant",
+          "why": "No EVN (required in ADT^A04 of v2.5)."
+        }
+      ],
+      "hl7-samples-main/ADT/1632738516-A08.txt": [
+        {
+          "error": "ADT_A08 message must contain a PV1 segment",
+          "reason": "nonconformant",
+          "why": "No PV1 (required in ADT^A08)."
+        }
+      ]
+    }
+  }
+}

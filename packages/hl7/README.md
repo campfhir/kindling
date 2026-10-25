@@ -55,6 +55,10 @@ src/
 ├── parsers/                  # Generated message parsers by version (v2.3 … v2.5.1); messages.ts = structure name → parser
 │   └── testdata/             # 30 sample HL7 messages for integration tests
 └── builders/                 # Generated message builders by version (v2.3 … v2.5.1)
+fixtures/
+├── generated/                # One message per structure and version, from hl7apy's structures (fixture tests)
+├── external/                 # Real-world sample collections, fetched by `pnpm fixtures:fetch` (not committed)
+└── expectations.json         # The fixture messages that do not parse or round-trip, and why
 ```
 
 Parsers, builders and structures are generated from the message schemas in `codegen/schemas/`
@@ -88,12 +92,17 @@ pnpm build
 ## Testing
 
 ```bash
-pnpm test        # unit tests
-pnpm lint        # eslint (shared config at the repository root)
-pnpm typecheck   # tsc --noEmit
+pnpm test             # unit tests
+pnpm lint             # eslint (shared config at the repository root)
+pnpm typecheck        # tsc --noEmit
+pnpm fixtures:fetch   # clone the external sample collections the fixture tests read (CI does this)
 ```
 
 Tests use [Vitest](https://vitest.dev/) and run directly against TypeScript source via `tsx`.
+The fixture tests (`src/fixtures.test.ts`) parse and round-trip every message of
+[`fixtures/`](fixtures/README.md): one generated message per structure and version, and the
+real-world sample collections; `fixtures/expectations.json` is the list of messages that do not
+parse, each with its reason.
 
 ## Runtime support
 
