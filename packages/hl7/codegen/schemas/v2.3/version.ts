@@ -16,6 +16,39 @@ import { SIU_FAMILY } from "./SIU_S12";
 import { SRM_FAMILY } from "./SRM_S01";
 import { SRR_FAMILY } from "./SRR_S01";
 import { MDM_FAMILY } from "./MDM_T01";
+import { ADR_A19_SCHEMA, QRY_A19_SCHEMA } from "./QRY_A19";
+import { QCK_Q02_SCHEMA, QRY_Q01_FAMILY, QRY_R02_SCHEMA } from "./QRY_Q01";
+import { DSR_Q01_FAMILY, DSR_Q03_SCHEMA } from "./DSR_Q01";
+import { UDM_Q05_FAMILY } from "./UDM_Q05";
+import { ENHANCED_QUERY_MESSAGES } from "./EQQ_Q01";
+import { SQM_S25_SCHEMA, SQR_S25_SCHEMA } from "./SQM_S25";
+import { VXQ_V01_SCHEMA, VXR_V03_SCHEMA, VXX_V02_SCHEMA } from "./VXQ_V01";
+import { ORF_R04_FAMILY } from "./ORF_R04";
+import { OSQ_Q06_SCHEMA, OSR_Q06_SCHEMA } from "./OSQ_Q06";
+import { DOC_T12_SCHEMA, QRY_T12_SCHEMA } from "./QRY_T12";
+
+/** The query messages of v2.3 (chapters 2, 3, 4, 6, 7, 9 and 10). */
+export const QUERY_MESSAGES = [
+  QRY_A19_SCHEMA,
+  ADR_A19_SCHEMA,
+  ...QRY_Q01_FAMILY,
+  QRY_R02_SCHEMA,
+  QCK_Q02_SCHEMA,
+  ...DSR_Q01_FAMILY,
+  DSR_Q03_SCHEMA,
+  ...UDM_Q05_FAMILY,
+  ...ENHANCED_QUERY_MESSAGES,
+  SQM_S25_SCHEMA,
+  SQR_S25_SCHEMA,
+  VXQ_V01_SCHEMA,
+  VXX_V02_SCHEMA,
+  VXR_V03_SCHEMA,
+  ...ORF_R04_FAMILY,
+  OSQ_Q06_SCHEMA,
+  OSR_Q06_SCHEMA,
+  QRY_T12_SCHEMA,
+  DOC_T12_SCHEMA,
+];
 
 /**
  * v2.3 is the base version: its segments are hand-written, and every message listed here gets a
@@ -45,5 +78,6 @@ export const V2_3: VersionSchema = {
     ...SRM_FAMILY,
     ...SRR_FAMILY,
     ...MDM_FAMILY,
+    ...QUERY_MESSAGES,
   ],
 };

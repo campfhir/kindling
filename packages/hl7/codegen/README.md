@@ -92,7 +92,9 @@ bases before derived versions.
 - **Re-export version** (`reexport: true`: `v2.3.1`, `v2.4`, `v2.5`): the messages it lists are
   generated (against its own segment modules); every other segment, structure, parser and builder
   of the base version is mirrored as `export * from "../<base>/X.ts"`. Segments first introduced
-  in the version are hand-written and listed in `ownSegments`.
+  in the version are hand-written and listed in `ownSegments`; messages the version withdrew are
+  listed in `withdrawnMessages` (`"UDM_R06"` in v2.4) and are not mirrored, so they disappear
+  from that version on.
 
 Events that share a structure (ADT^A02 … reuse ADT^A01) set `baseMessage`; codegen then emits
 thin wrappers (a parser subclass, a builder subclass and a structure alias) around the base
@@ -155,6 +157,7 @@ export const V2_6: VersionSchema = {
   baseVersion: "v2.5.1",
   reexport: true,            // omit (and list `segments`) for a version with its own segment classes
   ownSegments: [],           // segments first introduced in 2.6, hand-written in src/segments/v2.6/
+  withdrawnMessages: [],     // messages of v2.5.1 that 2.6 no longer defines ("UDM_R06" style names)
   segments: [],
   messages: [...],           // only the messages whose structure changed
 };

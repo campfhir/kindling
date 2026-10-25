@@ -1,7 +1,11 @@
+export * from "./ADR_A19";
 export * from "./ADT_A01";
 export * from "./BAR_P01";
 export * from "./DFT_P03";
 export * from "./MFN_M02";
+export * from "./ORF_R04";
 export * from "./ORM_O01";
+export * from "./OSQ_Q06";
+export * from "./VXR_V03";
 export * from "./VXU_V04";
 export { V2_4 } from "./version";

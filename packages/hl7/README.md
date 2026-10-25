@@ -53,8 +53,10 @@ src/
 ```
 
 Parsers, builders and structures are generated from the message schemas in `codegen/schemas/`
-(ADT A01–A51 except A19, ACK, BAR P01/P02/P05/P06, DFT P03, MDM T01–T11, MFN M02, ORM O01,
-ORR O02, ORU R01 and R30–R32, SIU S12–S26, SRM/SRR S01–S11, VXU V04), each in the shape the
+(ADT A01–A51, ACK, BAR P01/P02/P05/P06, DFT P03, MDM T01–T11, MFN M02, ORM O01, ORR O02,
+ORU R01 and R30–R32, SIU S12–S26, SRM/SRR S01–S11, VXU V04, and the queries: QRY/ADR A19,
+QRY Q01/Q02/P04/R02/T12, QCK Q02, DSR Q01/Q03/P04, UDM Q05/R06, EQQ/RQQ/SPQ/VQQ/TBR, EDR R07,
+ERP R09, SQM/SQR S25, VXQ V01, VXX V02, VXR V03, ORF R04/W02, OSQ/OSR Q06, DOC T12), each in the shape the
 standard gives it for that version. See [codegen/README.md](codegen/README.md).
 
 ## Installation
