@@ -1,7 +1,7 @@
 /**
  * Message structure for NMR^N01 messages (HL7 v2.3).
  *
- * Structure: MSH MSA [{ERR}] [QRD] { CLOCK_AND_STATS_WITH_NOTES_ALT: [NCK] [{NTE}] [NST] [{NTE}] [NSC] [{NTE}] }
+ * Structure: MSH MSA [ERR] [QRD] { CLOCK_AND_STATS_WITH_NOTES_ALT: [NCK] [{NTE}] [NST] [{NTE}] [NSC] [{NTE}] }
  *
  * @module
  */
@@ -12,7 +12,7 @@ import type { StructureItem } from "../../types/schema.ts";
 export const NMR_N01_STRUCTURE: StructureItem[] = [
   { name: "MSH", required: true, repeating: false },
   { name: "MSA", required: true, repeating: false },
-  { name: "ERR", required: false, repeating: true },
+  { name: "ERR", required: false, repeating: false },
   { name: "QRD", required: false, repeating: false },
   {
     name: "CLOCK_AND_STATS_WITH_NOTES_ALT",

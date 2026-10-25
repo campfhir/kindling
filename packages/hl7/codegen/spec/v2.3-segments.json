@@ -5964,7 +5964,7 @@
     "seq": 1,
     "name": "Network Change Type",
     "length": "4",
-    "type": "ID",
+    "type": "IS",
     "opt": "R",
     "rep": "-",
     "table": "0333"
@@ -6026,6 +6026,15 @@
    {
     "seq": 8,
     "name": "New Application",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 9,
+    "name": "New Facility",
     "length": "30",
     "type": "ST",
     "opt": "O",

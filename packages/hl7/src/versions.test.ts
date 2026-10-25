@@ -339,11 +339,14 @@ describe("patient care, referrals and the rest", () => {
     }
   });
 
-  test("v2.4 changes CSU^C09 (optional CSP), NMR^N01 (single ERR) and RQC^I05/I06 (repeating GT1)", () => {
-    for (const fn of ["parseCSU_C09", "parseNMR_N01", "parseRQC_I06"] as const) {
+  test("v2.4 changes CSU^C09 (optional CSP) and RQC^I05/I06 (repeating GT1); NMR^N01 stays v2.3's", () => {
+    for (const fn of ["parseCSU_C09", "parseRQC_I06"] as const) {
       expect(par24[fn]).not.toBe(par231[fn]);
       expect(par25[fn]).not.toBe(par24[fn]);
     }
+    expect(par231.parseNMR_N01).toBe(par23.parseNMR_N01);
+    expect(par24.parseNMR_N01).toBe(par23.parseNMR_N01);
+    expect(par25.parseNMR_N01).not.toBe(par23.parseNMR_N01);
     expect(par24.parseRQC_I05).not.toBe(par23.parseRQC_I05);
     expect(par24.parseRQI_I01).toBe(par23.parseRQI_I01);
   });

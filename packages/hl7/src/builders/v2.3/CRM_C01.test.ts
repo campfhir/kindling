@@ -137,7 +137,7 @@ describe("application management (v2.3)", () => {
     expect(names(nmq)).toEqual(["MSH", "QRD", "NCK", "NST", "NCK", "NSC"]);
     expect(parseNMQ_N01(nmq).val!.clockAndStatistics).toHaveLength(2);
 
-    const nmr = createNMR_N01(msh("NMR", "N01"), new MSA().acknowledgmentCode("AA").messageControlId("Q1"), [{ systemClock: new NCK(), clockNotes: [new NTE()], applicationStatus: new NSC(), statusNotes: [new NTE(), new NTE()] }], { errors: [new ERR()] }).encode();
+    const nmr = createNMR_N01(msh("NMR", "N01"), new MSA().acknowledgmentCode("AA").messageControlId("Q1"), [{ systemClock: new NCK(), clockNotes: [new NTE()], applicationStatus: new NSC(), statusNotes: [new NTE(), new NTE()] }], { error: new ERR() }).encode();
     expect(names(nmr)).toEqual(["MSH", "MSA", "ERR", "NCK", "NTE", "NSC", "NTE", "NTE"]);
     const parsedNmr = parseNMR_N01(nmr).val!;
     expect(parsedNmr.clockAndStatistics[0].clockNotes).toHaveLength(1);

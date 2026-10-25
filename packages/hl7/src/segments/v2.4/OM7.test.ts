@@ -19,7 +19,7 @@ function assertField(seg: OM7, splitIndex: number): void {
 }
 
 describe("OM7 field positions", () => {
-  test("OM7-1 Sequence Number Test Observation Master File", () => {
+  test("OM7-1 Sequence Number", () => {
     assertField(new OM7().sequenceNumber(SENTINEL), 1);
   });
 

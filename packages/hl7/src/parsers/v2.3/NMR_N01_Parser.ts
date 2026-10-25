@@ -1,7 +1,7 @@
 /**
  * Parser for NMR^N01 messages (HL7 v2.3).
  *
- * Structure: MSH MSA [{ERR}] [QRD] { CLOCK_AND_STATS_WITH_NOTES_ALT: [NCK] [{NTE}] [NST] [{NTE}] [NSC] [{NTE}] }
+ * Structure: MSH MSA [ERR] [QRD] { CLOCK_AND_STATS_WITH_NOTES_ALT: [NCK] [{NTE}] [NST] [{NTE}] [NSC] [{NTE}] }
  *
  * @module
  */
@@ -41,8 +41,8 @@ export interface ParsedNMR_N01 extends ParsedMessageBase {
   header: MSH;
   /** The MSA segment. */
   acknowledgment: MSA;
-  /** The ERR segments. */
-  errors?: ERR[];
+  /** The ERR segment. */
+  error?: ERR;
   /** The QRD segment. */
   query?: QRD;
   /** The CLOCK AND STATS WITH NOTES ALT groups. */

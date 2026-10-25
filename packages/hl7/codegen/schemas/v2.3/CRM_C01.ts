@@ -86,19 +86,28 @@ export const SUR_P09_SCHEMA = schema("SUR", "P09", [
   ], { as: "facilities", exportTypeName: "ParsedFacility", builderTypeName: "Facility" }),
 ]);
 
-/** NMQ^N01 - Application Management Query: MSH [ QRY_WITH_DETAIL: QRD [QRF] ] { CLOCK_AND_STATISTICS: [NCK] [NST] [NSC] } */
+/**
+ * NMQ^N01 - Application Management Query: MSH [ QRY_WITH_DETAIL: QRD [QRF] ] { CLOCK_AND_STATISTICS: [NCK] [NST] [NSC] }
+ * NMQ, NMR and NMD are Appendix C (Network Management) of v2.3, https://www.hl7.eu/HL7v2x/v23/std23/appc.htm,
+ * and chapter 14 from v2.4 on, https://www.hl7.eu/HL7v2x/v24/std24/ch14.htm; same structures on Caristix.
+ */
 export const nmq = (version: string, head: StructureItem[]): MessageSchema => schema("NMQ", "N01", [
   ...head,
   group("QRY_WITH_DETAIL", "optional", "single", [req("QRD"), opt("QRF")], { inline: true }),
   group("CLOCK_AND_STATISTICS", "required", "repeating", [opt("NCK"), opt("NST"), opt("NSC")], { as: "clockAndStatistics", exportTypeName: "ParsedClockAndStatistics", builderTypeName: "ClockAndStatistics" }),
 ], version);
 export const NMQ_N01_SCHEMA = nmq("2.3", [req("MSH")]);
-/** NMR^N01 - Application Management Response: MSH MSA [{ERR}] [QRD] { [NCK] [{NTE}] [NST] [{NTE}] [NSC] [{NTE}] } (Caristix v2.3 lists ERR as repeating, v2.4 as single; hl7.eu has no v2.3 chapter 14 page). */
+/**
+ * NMR^N01 - Application Management Response: MSH MSA [ERR] [QRD] { [NCK] [{NTE}] [NST] [{NTE}] [NSC] [{NTE}] }
+ * The v2.3 text (Appendix C, Network Management, https://www.hl7.eu/HL7v2x/v23/std23/appc.htm) and the
+ * v2.4 chapter 14 (https://www.hl7.eu/HL7v2x/v24/std24/ch14.htm) both show a single [ERR]; Caristix
+ * and HAPI list it as repeating in v2.3 and v2.3.1, which does not match the printed standard.
+ */
 export const nmr = (version: string, head: StructureItem[]): MessageSchema => schema("NMR", "N01", [
   ...head, opt("QRD"),
   group("CLOCK_AND_STATS_WITH_NOTES_ALT", "required", "repeating", [opt("NCK"), optList("NTE", { as: "clockNotes" }), opt("NST"), optList("NTE", { as: "statisticsNotes" }), opt("NSC"), optList("NTE", { as: "statusNotes" })], { as: "clockAndStatistics", exportTypeName: "ParsedClockAndStatistics", builderTypeName: "ClockAndStatistics" }),
 ], version);
-export const NMR_N01_SCHEMA = nmr("2.3", [req("MSH"), req("MSA"), optList("ERR")]);
+export const NMR_N01_SCHEMA = nmr("2.3", [req("MSH"), req("MSA"), opt("ERR")]);
 /** NMD^N02 - Application Management Data: MSH { CLOCK_AND_STATS_WITH_NOTES: [ CLOCK: NCK [{NTE}] ] [ APP_STATS: NST [{NTE}] ] [ APP_STATUS: NSC [{NTE}] ] } (the inner groups are inlined). */
 export const nmd = (version: string, head: StructureItem[]): MessageSchema => schema("NMD", "N02", [
   ...head,

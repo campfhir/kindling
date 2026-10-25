@@ -194,16 +194,19 @@ referral messages of chapter 11 (RQI^I01–I03, RPI^I01/I04, RPL^I02, RPR^I03, R
 RCI^I05, RCL^I06, PIN^I07, RQA/RPA^I08–I11, REF/RRI^I12–I15), the clinical trial messages of chapter
 7 (CRM^C01–C08, CSU^C09–C12), the product experience messages PEX^P07/P08 and SUR^P09 and the
 application management messages NMQ/NMR^N01 and NMD^N02 of chapter 14, for v2.3 through v2.5.1.
-Structures from the Caristix reference cross-checked on the hl7.eu chapter pages (chapter 14 is
-missing from hl7.eu's v2.3 set, so NMQ/NMR/NMD were cross-checked with HAPI's v2.3 and v2.4
-structures, and SUR^P09 with HAPI's v2.3). The problem, goal and pathway messages share one set of
+Structures from the Caristix reference cross-checked on the hl7.eu chapter pages (in v2.3 the
+application management messages are Appendix C, `std23/appc.htm`, and chapter 14 from v2.4 on;
+SUR^P09 was cross-checked with HAPI's v2.3). Two corrections came out of those pages: NMR's ERR is
+a single `[ERR]` in the v2.3 and v2.4 text (Caristix and HAPI list it as repeating in v2.3 and
+v2.3.1), and NSC-9 New Facility is in the v2.3 NSC table, so the v2.3 segment now has nine fields
+and v2.4 no longer needs its own. The problem, goal and pathway messages share one set of
 groups (`problems`, `goals`, `pathways`, each with `roles`, `variances`, `observations`, `orders`
 and nested goals/problems/pathways); referrals read `providers`, `insurances`, `procedures` with
 their `authorization`, `notes` and `observations`; CSU nests `studyPhases` → `studySchedules` →
 `studyObservations`/`studyPharms` → `administrations`; PEX nests `experiences` → `observations` →
 `causes` with `rxOrder`, `rxAdministrations`, `associatedPerson` and `studies`. Per version: v2.3.1
 adds `[QAK]` to the four care responses and makes the CSU study observations required; v2.4 makes
-CSP optional in CSU, gives NMR a single `[ERR]` and lets RQC^I05/I06 repeat GT1; v2.5 (also
+CSP optional in CSU and lets RQC^I05/I06 repeat GT1; v2.5 (also
 v2.5.1) adds `[{SFT}]` everywhere except QRY^PC4 and SUR^P09, repeating `ERR` in the care
 responses and NMR, optional `TIMING_QTY` groups after OBR in CSU and required ones after each RXE
 in PEX. The parser's speculative parse of a shared start segment was refined for this batch: an

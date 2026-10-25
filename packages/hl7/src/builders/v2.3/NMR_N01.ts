@@ -1,7 +1,7 @@
 /**
  * Builder for NMR^N01 messages (HL7 v2.3).
  *
- * Structure: MSH MSA [{ERR}] [QRD] { CLOCK_AND_STATS_WITH_NOTES_ALT: [NCK] [{NTE}] [NST] [{NTE}] [NSC] [{NTE}] }
+ * Structure: MSH MSA [ERR] [QRD] { CLOCK_AND_STATS_WITH_NOTES_ALT: [NCK] [{NTE}] [NST] [{NTE}] [NSC] [{NTE}] }
  *
  * @module
  */
@@ -37,8 +37,8 @@ export interface ClockAndStatistics {
 
 /** The optional segments and groups of an NMR^N01 (HL7 v2.3) message. */
 export interface NMR_N01Options {
-  /** The ERR segments. */
-  errors?: ERR[];
+  /** The ERR segment. */
+  error?: ERR;
   /** The QRD segment. */
   query?: QRD;
 }
