@@ -1,0 +1,12 @@
+{
+  // Declaration output for the published package: one .d.ts per source file under dist/, next to the
+  // .js/.mjs that tsup writes. Tests are left out. `pnpm build` runs this after tsup.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+    "outDir": "./dist"
+  },
+  "exclude": ["node_modules", "dist", "examples", "src/**/*.test.ts"]
+}
