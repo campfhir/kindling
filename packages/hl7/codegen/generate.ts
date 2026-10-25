@@ -76,12 +76,15 @@ function writeGenerated(filePath: string, content: string, produced: Set<string>
   write(filePath, content);
 }
 
-/** Module names (no extension, no tests, no barrel) in a src/<kind>/<version> dir. */
+/** Files `pnpm barrels` owns in every versioned directory: never mirrored or deleted here. */
+const BARREL_FILES = new Set(["index.ts", "messages.ts"]);
+
+/** Module names (no extension, no tests, no barrel or registry) in a src/<kind>/<version> dir. */
 function moduleNames(kind: string, version: string): string[] {
   const dir = join(ROOT, "src", kind, version);
   if (!existsSync(dir)) return [];
   return readdirSync(dir)
-    .filter((f) => f.endsWith(".ts") && !/\.(\w+\.)?test\.ts$/.test(f) && f !== "index.ts")
+    .filter((f) => f.endsWith(".ts") && !/\.(\w+\.)?test\.ts$/.test(f) && !BARREL_FILES.has(f))
     .map((f) => f.slice(0, -3))
     .sort();
 }

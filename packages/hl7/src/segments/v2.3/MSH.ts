@@ -195,6 +195,12 @@ export class MSH extends BaseSegment {
     };
   }
 
+  /** MSH-12 Version ID: the version as sent (`2.3`), the first component when the field is a VID. */
+  getVersionId(): string {
+    const field = this.fields[10];
+    return field ? ParserUtils.getComponent(field, 0).trim() : "";
+  }
+
   /** Encodes this message to its HL7 wire string. */
   encode(_encoding?: EncodingCharacters): string {
     const encoding = _encoding ?? this._encoding ?? DEFAULT_ENCODING;

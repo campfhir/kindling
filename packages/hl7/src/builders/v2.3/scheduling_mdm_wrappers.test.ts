@@ -25,8 +25,8 @@ const msh = (type: string, event: string) => new MSH().sendingApplication("TEST"
 const pad = (n: number) => String(n).padStart(2, "0");
 
 for (const [label, builders, parsers, is251] of [
-  ["v2.3", b23 as Fns, p23 as Fns, false],
-  ["v2.5.1", b251 as Fns, p251 as Fns, true],
+  ["v2.3", b23 as Fns, p23 as unknown as Fns, false],
+  ["v2.5.1", b251 as Fns, p251 as unknown as Fns, true],
 ] as const) {
   describe(`${label} scheduling and MDM wrappers`, () => {
     const check = (name: string, encoded: string, missing: string, expectedError: RegExp) => {
