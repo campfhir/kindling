@@ -15,7 +15,18 @@ Legend: ✅ builder + parser exist · ⬜ not started
 
 | Family | Events | v2.3 | v2.5.1 |
 |---|---|---|---|
-| ADT | A01–A18, A20–A51 (A19 is the QRY/ADR patient query, see queries) | ✅ | ✅ |
+| ADT | A01–A18, A20–A51 | ✅ | ✅ |
+| QRY / ADR | A19 patient query and response | ✅ | ✅ |
+| QRY / QCK / DSR | Q01, Q02, Q03, P04 original-mode queries, acknowledgment and display responses (P04 withdrawn in 2.5) | ✅ | ✅ |
+| QRY | R02 (results), T12 (document) | ✅ | ✅ |
+| UDM | Q05, R06 unsolicited display update (R06 withdrawn in 2.4) | ✅ | ✅ |
+| EQQ / RQQ / SPQ / VQQ / TBR | Q01 enhanced-mode queries and tabular response (Q04, Q09, Q08, Q07, R08 from 2.3.1) | ✅ | ✅ |
+| EDR / ERP | R07 enhanced display response, R09 event replay response | ✅ | ✅ |
+| SQM / SQR | S25 schedule query and response | ✅ | ✅ |
+| VXQ / VXX / VXR | V01 vaccination query, V02 multiple matches, V03 record | ✅ | ✅ |
+| ORF | R04, W02 observation query responses | ✅ | ✅ |
+| OSQ / OSR | Q06 order status query and response | ✅ | ✅ |
+| DOC | T12 document query response | ✅ | ✅ |
 | DFT | P03 (post detail financial transactions) | ✅ | ✅ |
 | BAR | P01, P02, P05, P06 (add/purge/update/end account) | ✅ | ✅ |
 | ORU | R01 | ✅ | ✅ |
@@ -32,26 +43,15 @@ Legend: ✅ builder + parser exist · ⬜ not started
 
 ## Remaining for v2.3
 
-### ADT gaps
-| Event | Description | Needs |
-|---|---|---|
-| ⬜ A19 | Patient query (QRY/ADR response) | QRD, QRF |
-
-### Acknowledgments and queries (high priority — unblock everything else)
+### Acknowledgments
 | Message | Notes | Needs |
 |---|---|---|
 | ⬜ MCF | Delayed acknowledgment | — |
-| ⬜ QRY / QCK / DSR / DSC | Original-mode queries | QRD, QRF, QAK, DSP, DSC |
-| ⬜ ADR | ADT response | QRD, QRF |
-| ⬜ UDM | Unsolicited display update | URD, URS, DSP |
-| ⬜ EDR / ERP / SQR / SQM | Event replay / stored procedure queries | ERQ, QRD |
 
 ### Orders and results
 | Message | Events | Needs |
 |---|---|---|
 | ⬜ ORU | R01 variants (unsolicited) and R03 | ✅ |
-| ⬜ ORF | R04 (query response for observations) | QRD, QRF |
-| ⬜ OSQ / OSR | Order status query / response | QRD |
 | ⬜ RDE / RDS / RGV / RAS | Pharmacy encoded order, dispense, give, administration (O01/O02, O13/O14, O15/O16, O17) | RXC, RXG |
 | ⬜ RRA / RRD / RRE / RRG / RRI | Pharmacy responses | RXC, RXG |
 | ⬜ OMD / OMN / OMS / OMG | Diet, non-stock, stock, general orders | ODS, ODT |
@@ -67,15 +67,12 @@ Legend: ✅ builder + parser exist · ⬜ not started
 |---|---|---|
 | ⬜ MFN | M01 (non-specific), M03 (test/observation), M04 (charge description), M05 (location), M06 (clinical study), M07 (clinical study schedule), M08–M12 | CDM, PRC, OM1–OM7, LOC…, CM0–CM2 |
 | ⬜ MFK | Master file application acknowledgment | MFA |
-| ⬜ SQM / SQR | S25 schedule query / response | QRD, QRF (query batch) |
 | ⬜ RQI / RPI / RPL / RPR / RQP / RQC / RQA / RPA | Referral & patient information | RF1, PRD |
 | ⬜ CRM / CSU | Clinical study registration / unsolicited data | CSR, CSS |
-| ⬜ VXQ / VXR / VXX | Immunization query / response / response (VXU^V04 is done) | QRD, QRF |
 | ⬜ EAC / EAN / EAR / ESR / ESU | Equipment automation | ECD, ECR, EQU, SAC |
 | ⬜ INR / INU / LSR / LSU | Inventory / specimen automation | INV, ISD |
 | ⬜ NMD / NMQ / NMR | Network management | NCK, NDS, NSC, NST |
 | ⬜ STC | Patient state | — |
-| ⬜ OSQ, OSR | See orders | — |
 
 Done in 0.9: ACK, ORM^O01, ORR^O02 for v2.3 and v2.5.1 (`ORM`/`ORR` cover the OBR, RQD, RQ1, RXO, ODS and ODT order detail choices). Where the structures differ by version (checked on hl7.eu): v2.4 adds `[CTD]` and `[{FT1}]` to `ORM^O01`; v2.5 adds `[{SFT}]` and repeating `ERR` to `ACK`, repeating `ERR` to `ORR^O02`, and repeating `IN3` to `ORM^O01`. v2.3.1 matches v2.3 for all three, and v2.5.1 matches v2.5.
 
@@ -127,7 +124,26 @@ v2.4 (new ORG segment) and `MSH [{SFT}] MFI { MFE STF [{PRA}] [{ORG}] [{AFF}] [{
 [{NTE}] }` in v2.5/v2.5.1 (new AFF, LAN, EDU in 2.4 and CER in 2.5; EDU-9 added in 2.5), structures
 and field tables from hl7-definition.caristix.com (v2.4, v2.5, v2.5.1).
 
-Suggested order: **queries (A19 QRY/ADR, SQM/SQR, …) → MFN → orders/pharmacy → the rest.**
+Done in 0.16: the v2.3 queries (chapters 2–10): QRY/ADR^A19, QRY^Q01/Q02/P04/R02/T12, QCK^Q02,
+DSR^Q01/Q03/P04, UDM^Q05/R06, the enhanced-mode EQQ/RQQ/SPQ/VQQ^Q01 with TBR^Q01, EDR^R07, ERP^R09,
+SQM/SQR^S25, VXQ^V01/VXX^V02/VXR^V03, ORF^R04/W02, OSQ/OSR^Q06 and DOC^T12, every structure checked
+per event and version on hl7-definition.caristix.com (v2.3, v2.3.1, v2.4, v2.5, v2.5.1). Properties
+read `query` (QRD), `queryFilter` (QRF), `queryAcknowledgment` (QAK), `displayLines` (DSP),
+`rowDefinition`/`rows` (RDF/RDT), `updateDefinition`/`updateSelection` (URD/URS). ADR^A19's
+QUERY_RESPONSE groups reuse the ADT^A01 body of their version after an optional EVN; SQM's REQUEST,
+SQR's PATIENT, VXR's visit and ORF/OSR's PATIENT groups are inlined. Per version: v2.3.1 adds `[QAK]`
+to ADR^A19 (with a repeating `IN3`), ORF^R04/W02 (trailing `[ERR] [QAK]`) and DOC^T12, and renumbers
+the enhanced-mode events to EQQ^Q04, VQQ^Q07, SPQ^Q08, RQQ^Q09 and TBR^R08 (the Q01 events are
+withdrawn from v2.3.1 on, via `withdrawnMessages`); v2.4 adds the A01 `ROL`s to ADR^A19, `[CTD]` to
+ORF and `[{GT1}]` to VXR^V03 and withdraws UDM^R06; v2.5 (also v2.5.1) adds `[{SFT}]` to every query
+but QRY^T12, DOC^T12, SQM^S25 and SQR^S25 (after `MSA` in VXX/VXR and after a now repeating `ERR` in
+OSR^Q06), the TQ1/TQ2 timing groups to ORF^R04 (not W02, which becomes its own message), OSR^Q06 and
+VXR^V03 (with a required `ORC`), repeating `ERR` to ORF, OSR and SQR^S25 plus `[{TQ1}]` after `SCH`,
+and withdraws QRY^P04 and DSR^P04. Known gap: Caristix lists OSR^Q06's order detail as required in
+v2.4 only; it stays optional in every version here. An NTE after an OBR in ORF is parsed as an order
+note, never as an OBSERVATION group without OBX.
+
+Suggested order: **MFN → orders/pharmacy → the rest.**
 
 ## v2.5.1 parity
 After v2.3 is complete, bring v2.5.1 to parity with the same messages, then add the 2.5.1 additions:

@@ -162,7 +162,8 @@ function generateVersion(vs: VersionSchema, produced: Set<string>): void {
 /**
  * Re-export version: generate its own messages, then mirror every other module of the base
  * version (segments, structures, parsers, builders) as `export * from "../<base>/X.ts"`.
- * Segments first introduced in this version (`ownSegments`) are hand-written and left alone.
+ * Segments first introduced in this version (`ownSegments`) are hand-written and left alone, and
+ * messages the version withdrew (`withdrawnMessages`) are not mirrored.
  */
 function generateReexportVersion(vs: VersionSchema, produced: Set<string>): void {
   const baseVersion = vs.baseVersion!;
@@ -173,10 +174,12 @@ function generateReexportVersion(vs: VersionSchema, produced: Set<string>): void
     if (!existsSync(p) && !DRY_RUN) throw new Error(`${vs.version}: ownSegments lists ${seg} but ${rel(p)} does not exist`);
   }
   generateMessages(vs, produced);
+  const withdrawn = new Set((vs.withdrawnMessages ?? []).flatMap((m) => MESSAGE_KINDS.map((kind) => moduleFile(kind, m))));
   for (const kind of ["segments", ...MESSAGE_KINDS] as const) {
     for (const name of moduleNames(kind, baseVersion)) {
       const target = join(ROOT, "src", kind, vs.version, `${name}.ts`);
       if (kind === "segments" && own.has(name)) continue;
+      if (kind !== "segments" && withdrawn.has(name)) continue;
       if (produced.has(target)) continue;
       writeGenerated(target, generateReexport(kind, name, vs.version, baseVersion), produced);
     }

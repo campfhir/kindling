@@ -107,6 +107,12 @@ export interface VersionSchema {
    * re-export versions pick them up automatically.
    */
   ownSegments?: string[];
+  /**
+   * Messages of the base version that this version no longer defines (`"UDM_R06"`, ...). A
+   * re-export version mirrors every module of its base except these, so they disappear from this
+   * version and the ones re-exporting it.
+   */
+  withdrawnMessages?: string[];
   segments: string[];
   messages: MessageSchema[];
 }
@@ -209,6 +215,18 @@ export const SEGMENT_NAMES: Record<string, [one: string, many: string]> = {
   TQ2: ["timingRelationship", "timingRelationships"],
   SPM: ["specimen", "specimens"],
   DSC: ["continuation", "continuations"],
+  QRD: ["query", "queries"],
+  QRF: ["queryFilter", "queryFilters"],
+  QAK: ["queryAcknowledgment", "queryAcknowledgments"],
+  DSP: ["displayLine", "displayLines"],
+  URD: ["updateDefinition", "updateDefinitions"],
+  URS: ["updateSelection", "updateSelections"],
+  ERQ: ["eventReplayQuery", "eventReplayQueries"],
+  EQL: ["embeddedQuery", "embeddedQueries"],
+  SPR: ["storedProcedureRequest", "storedProcedureRequests"],
+  VTQ: ["virtualTableQuery", "virtualTableQueries"],
+  RDF: ["rowDefinition", "rowDefinitions"],
+  RDT: ["row", "rows"],
 };
 
 /**
