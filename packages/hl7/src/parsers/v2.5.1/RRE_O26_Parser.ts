@@ -1,7 +1,7 @@
 /**
  * Parser for RRE^O26 messages (HL7 v2.5.1).
  *
- * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] [ ENCODING: RXE [{NTE}] { TIMING_ENCODED: TQ1 [{TQ2}] } {RXR} [{RXC}] ] } ]
+ * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] [ ENCODING: RXE { TIMING_ENCODED: TQ1 [{TQ2}] } {RXR} [{RXC}] ] } ]
  *
  * @module
  */
@@ -61,8 +61,6 @@ export interface ParsedTiming {
 export interface ParsedEncoding {
   /** The RXE segment. */
   encodedOrder: RXE;
-  /** The NTE segments. */
-  notes?: NTE[];
   /** The TIMING ENCODED groups. */
   timingEncodeds: ParsedTimingEncoded[];
   /** The RXR segments. */

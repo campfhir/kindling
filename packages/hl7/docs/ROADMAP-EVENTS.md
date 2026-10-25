@@ -269,14 +269,19 @@ RSP/RTB/RDY and QSB^Z83, PMU^B07/B08, BAR^P12 and DFT^P11. Withdrawn in 2.5: QRY
 MFD^MFA, RSP^K13/K15 and RTB^Q13. Every v2.5 message is generated against the v2.5 segment
 modules (`codegen/schemas/v2.5/version.ts`), and v2.5.1 derives every message v2.5 carries.
 
-Next: the 2.5.1 sweep (segment and message ledgers against hl7.eu v251, Caristix 2.5.1 and HAPI v251).
+Done in 2.2 (v2.5.1 complete): `docs/validation/v2.5.1-message-ledger.md` compares all 387
+structures with the hl7.eu v2.5.1 chapters (`std251/ch02.html` …), Caristix 2.5.1 and HAPI v251
+(364 match, 23 accepted with the same dated notes as 2.5, 0 differ). 2.5.1 changes two
+structures: QRY^PC4 (and PC9, PCE, PCK) gains `[{SFT}]` and RRE^O26's ENCODING group loses the
+`[{NTE}]` after RXE (hl7.eu and HAPI, against Caristix). v2.5.1 is now a re-export version of v2.5
+like the others: every message generated against the v2.5.1 segment modules
+(`codegen/schemas/v2.5.1/version.ts`).
 
 ## v2.5.1 parity
-After v2.3 is complete, bring v2.5.1 to parity with the same messages, then add the 2.5.1 additions:
-ORU R30–R32 ✅, ACK, QBP/RSP/RTB (conformance-based queries; need QPD, RCP, QAK, QID), OML/OMI
-(O21–O23), OUL, ORL, RDE O11/RDS O13, RAS O17, VXU V04, MFN (M01–M17), SIU/SRM scheduling
-(S01–S26), ADT up through A62, MDM T01–T11, BAR P01–P12, DFT P03/P11.
-
+Done in 2.2: every version from 2.3 to 2.5.1 has every event of its release implemented, checked
+against hl7.eu, Caristix and HAPI (see the ledgers above). Later versions (2.6, 2.7, 2.8, …) would
+follow the same path: a segment ledger and a message ledger against the three sources, the
+changed structures written by hand or drafted from the Caristix tables.
 ## Definition of done (per event)
 1. Structure verified per version against the sources in `CLAUDE.md` (hl7.org, hl7.eu, the
    Caristix reference, HAPI as a cross-check) and cited in the schema's doc comment.

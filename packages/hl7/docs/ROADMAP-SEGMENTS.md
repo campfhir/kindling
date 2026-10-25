@@ -145,13 +145,18 @@ differs in lengths only). The other 95 re-export the 2.4, 2.3.1 or 2.3 class. Th
 between the sources (FT1-23 length, MSA-5 type and usage, PID-38 repetition, STF-30 type) are
 decided by hl7.eu and recorded in the ledger rows.
 
-## v2.5.1 parity
-v2.5.1 segments are generated as thin wrappers over the v2.5 classes (`pnpm codegen`), so every
-segment must still be re-evaluated for v2.5.1 field changes (the 2.4 and 2.5 ledgers are the
-model: a v2.5.1 segment ledger against hl7.eu v251, Caristix 2.5.1 and HAPI v251). The segments 2.4 introduced (`QPD`, `RCP`, `QID`,
-`IAM`, `GP1`/`GP2`, `CNS`, …) are done in 1.2; `TQ2`, `PRT`, `OH1`–`OH4` and the other later
-additions follow with their versions.
+## Validation ledger (v2.5.1)
 
+[`docs/validation/v2.5.1-segment-ledger.md`](validation/v2.5.1-segment-ledger.md): every field of the
+150 segments of 2.5.1 against hl7.eu (`v251/hl7v251segm<SEG>.htm`), Caristix 2.5.1 and HAPI v251,
+0 open issues. 2.5.1 changes three tables: OBR-50 (Parent Universal Service Identifier), OBX-20 to
+OBX-25 (Observation Site, Observation Instance Identifier, Mood Code, Performing Organization Name,
+Address and Medical Director) and ORC-31 (Parent Universal Service Identifier); OBR, OBX and ORC get
+a generated subclass of the 2.5 class (`codegen/spec/v2.5.1-segments.json`) and the other 147
+re-export the 2.5 class (v2.5.1 is a re-export version since 2.2; the hand-extended wrapper classes
+it had before are gone). The 7 contradictions between the sources (FT1-23 length, MSA-5 type and
+usage, OBX-20/21/22 type and usage, PID-38 repetition, STF-30 type) are decided by hl7.eu and
+recorded in the ledger rows. Later versions (2.6, 2.7, …) would follow the same path.
 ## Definition of done (per segment)
 1. Class + parser with all fields positioned per spec, including repeats and required flags.
 2. Field-position tests (hand-written with the marker, or generated with `pnpm test:positions`).

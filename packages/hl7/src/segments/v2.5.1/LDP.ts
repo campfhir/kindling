@@ -1,32 +1,7 @@
 /**
- * LDP segment definition for HL7 v2.5.1.
+ * LDP segment for HL7 v2.5.1 — identical to v2.5, re-exported.
  *
  * @module
  */
-import { Err } from "../../utils/err.ts";
-import type { Result } from "../../types/result.ts";
-import type { EncodingCharacters } from "../../types/encoding.ts";
-import { ParserUtils } from "../../types/parser.ts";
-import { LDP as LDP_base } from "../v2.5/LDP.ts";
-
-/**
- * LDP segment (HL7 v2.5.1)
- * Extends v2.5 LDP. Add v2.5.1-specific fields here as needed.
- */
-export class LDP extends LDP_base {
-  /** Parses the input string into a structured instance. */
-  static override parse(
-    segmentString: string,
-    encoding: EncodingCharacters,
-  ): Result<LDP> {
-    const parts = segmentString.split(encoding.fieldSeparator);
-    if (parts[0] !== "LDP") {
-      return { ok: false, err: new Err(`Expected LDP segment, got ${parts[0]}`) };
-    }
-    const seg = new LDP();
-    for (let i = 1; i < parts.length; i++) {
-      seg.fields[i - 1] = ParserUtils.parseField(parts[i], encoding);
-    }
-    return { ok: true, val: seg };
-  }
-}
+// @generated re-export — replace this file by hand to diverge from the base version
+export * from "../v2.5/LDP.ts";

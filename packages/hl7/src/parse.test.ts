@@ -86,18 +86,18 @@ describe("selectParser", () => {
   });
 
   test("rejects a version this release does not dispatch, unless the caller picks one", () => {
-    expect(SUPPORTED_VERSIONS).toEqual(["2.3", "2.3.1", "2.4", "2.5"]);
-    const other = selectParser(MSH("ADT^A01", "2.5.1"));
+    expect(SUPPORTED_VERSIONS).toEqual(["2.3", "2.3.1", "2.4", "2.5", "2.5.1"]);
+    const other = selectParser(MSH("ADT^A01", "2.6"));
     expect(other.ok).toBe(false);
     expect(other.err?.message).toBe(
-      "HL7 version '2.5.1' (MSH-12) is not supported by this release, which parses 2.3, 2.3.1, 2.4, 2.5; pass { version: \"2.5\" } to parse the message as that version",
+      "HL7 version '2.6' (MSH-12) is not supported by this release, which parses 2.3, 2.3.1, 2.4, 2.5, 2.5.1; pass { version: \"2.5.1\" } to parse the message as that version",
     );
-    const forced = select(MSH("ADT^A01", "2.5.1"), { version: "2.3" });
-    expect(forced).toMatchObject({ version: "2.3", structure: "ADT_A01", messageType: { version: "2.5.1" } });
+    const forced = select(MSH("ADT^A01", "2.6"), { version: "2.3" });
+    expect(forced).toMatchObject({ version: "2.3", structure: "ADT_A01", messageType: { version: "2.6" } });
   });
 
   test("rejects an empty MSH-12, unless the caller picks a version", () => {
-    expect(selectParser(MSH("ADT^A01", "")).err?.message).toBe('MSH-12 Version ID is empty; pass { version: "2.5" } to choose the version to parse as');
+    expect(selectParser(MSH("ADT^A01", "")).err?.message).toBe('MSH-12 Version ID is empty; pass { version: "2.5.1" } to choose the version to parse as');
     expect(select(MSH("ADT^A01", ""), { version: "2.3" }).structure).toBe("ADT_A01");
   });
 
@@ -206,14 +206,14 @@ describe("parse", () => {
   test("passes selection errors through", () => {
     expect(parse("").err?.message).toBe("Empty message");
     expect(parse(MSH("ZZZ^Z01")).err?.message).toBe("Unknown HL7 v2.3 message type 'ZZZ^Z01' (MSH-9)");
-    expect(parse(MSH("ADT^A01", "2.5.1")).err?.message).toMatch(/not supported by this release/);
+    expect(parse(MSH("ADT^A01", "2.6")).err?.message).toMatch(/not supported by this release/);
   });
 
-  test("parses a 2.5.1-labelled feed as 2.4 on request, and 2.3.1, 2.4 and 2.5 feeds natively", () => {
+  test("parses a 2.6-labelled feed as 2.4 on request, and 2.3.1 to 2.5.1 feeds natively", () => {
     const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
-    const message = [MSH("ADT^A01^ADT_A01", "2.5.1"), "EVN|A01", "PID|1||1", "PV1|1|O", "ZPD|custom"].join("\r");
+    const message = [MSH("ADT^A01^ADT_A01", "2.6"), "EVN|A01", "PID|1||1", "PV1|1|O", "ZPD|custom"].join("\r");
     const result = parse(message, { version: "2.4" });
-    expect(result.val).toMatchObject({ kind: "message", version: "2.4", structure: "ADT_A01", messageType: { version: "2.5.1", messageStructure: "ADT_A01" } });
+    expect(result.val).toMatchObject({ kind: "message", version: "2.4", structure: "ADT_A01", messageType: { version: "2.6", messageStructure: "ADT_A01" } });
     // A 2.4 A01 ends with PDA and carries ROLs after PD1 and PV2.
     const v24 = parse([MSH("ADT^A01^ADT_A01", "2.4"), "EVN|A01", "PID|1||1", "ROL|1|AD|AT", "PV1|1|O", "PV2|", "ROL|2|AD|CP", "PDA|"].join("\r"));
     expect(v24.val).toMatchObject({ kind: "message", version: "2.4", structure: "ADT_A01" });

@@ -830,5 +830,142 @@
    "note": "hl7.eu ch5 (the Z82 example): the reader nests the PATIENT and VISIT brackets oddly and brackets the QUERY_RESPONSE; Caristix 2.5 and HAPI v25 agree on a required, repeating QUERY_RESPONSE holding [ PATIENT: PID [PD1] [{NTE}] [ VISIT: {AL1} PV1 [PV2] ] ] and the COMMON_ORDER group (ours). TIMING and TIMING_ENCODED are optional and repeating as hl7.eu and HAPI print them (Caristix: required, single).",
    "accept": true
   }
+ },
+ "v2.5.1": {
+  "ADT_A17": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch3 (std251/ch03.html), Caristix 2.5.1 and HAPI v251 list the two patients flat (PID [PD1] PV1 [PV2] [{DB1}] [{OBX}] twice); modelled as one PATIENT group occurring exactly twice, as in v2.3, v2.4 and v2.5.",
+   "accept": true
+  },
+  "ADT_A24": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch3 (std251/ch03.html), Caristix 2.5.1 and HAPI v251 list the two patients flat (PID [PD1] [PV1] [{DB1}] twice); modelled as one PATIENT group occurring exactly twice, as in v2.3, v2.4 and v2.5.",
+   "accept": true
+  },
+  "MFK_M02": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M02 caption into the master file record table that follows it. Caristix 2.5.1 appends the M02 and M04 records to the acknowledgment; HAPI v251 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M04": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M04 caption into the master file record table that follows it. Caristix 2.5.1 appends the M02 and M04 records to the acknowledgment; HAPI v251 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M05": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M05 caption into the master file record table that follows it. Caristix 2.5.1 appends the M02 and M04 records to the acknowledgment; HAPI v251 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M06": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M06 caption into the master file record table that follows it. Caristix 2.5.1 appends the M02 and M04 records to the acknowledgment; HAPI v251 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M07": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M07 caption into the master file record table that follows it. Caristix 2.5.1 appends the M02 and M04 records to the acknowledgment; HAPI v251 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M08": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M08 caption into the master file record table that follows it. Caristix 2.5.1 appends the M02 and M04 records to the acknowledgment; HAPI v251 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M09": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M09 caption into the master file record table that follows it. Caristix 2.5.1 appends the M02 and M04 records to the acknowledgment; HAPI v251 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M10": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M10 caption into the master file record table that follows it. Caristix 2.5.1 appends the M02 and M04 records to the acknowledgment; HAPI v251 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M11": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M11 caption into the master file record table that follows it. Caristix 2.5.1 appends the M02 and M04 records to the acknowledgment; HAPI v251 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M12": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M12 caption into the master file record table that follows it. Caristix 2.5.1 appends the M02 and M04 records to the acknowledgment; HAPI v251 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFN_M01": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.1: MSH [{SFT}] MFI { MFE [...] }, the entry a repeating MFE followed by the HL7 or Z segments of the record; modelled as a repeating MF group holding the MFE (entries[]), the same messages. Caristix 2.5.1 lists no MFN^M01 and HAPI v251 has no class for it.",
+   "accept": true
+  },
+  "MFN_M03": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.8.1: MSH [{SFT}] MFI { MF_TEST: MFE OM1 ... }, the \"...\" row standing for the other OM segments of the test record (8.8.2 to 8.8.7), which the reader prints as a second OM1; modelled as MFE OM1 as in v2.3, v2.4 and v2.5. Caristix 2.5.1 lists no MFN^M03 and HAPI v251 has no class for it.",
+   "accept": true
+  },
+  "MFR_M01": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3: MSH [{SFT}] MSA [{ERR}] [QAK] QRD [QRF] MFI { MFE [...] } [DSC], the entry a bare repeating MFE with its record elided; modelled as a repeating MF_QUERY group holding the MFE. Caristix 2.5.1 and HAPI v251 have no class for this event.",
+   "accept": true
+  },
+  "MFR_M03": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3: MSH [{SFT}] MSA [{ERR}] [QAK] QRD [QRF] MFI { MFE [...] } [DSC], the entry a bare repeating MFE with its record elided; modelled as a repeating MF_QUERY group holding the MFE. Caristix 2.5.1 and HAPI v251 have no class for this event.",
+   "accept": true
+  },
+  "MFR_M08": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3: MSH [{SFT}] MSA [{ERR}] [QAK] QRD [QRF] MFI { MFE [...] } [DSC], the entry a bare repeating MFE with its record elided; modelled as a repeating MF_QUERY group holding the MFE. Caristix 2.5.1 and HAPI v251 have no class for this event.",
+   "accept": true
+  },
+  "MFR_M09": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3: MSH [{SFT}] MSA [{ERR}] [QAK] QRD [QRF] MFI { MFE [...] } [DSC], the entry a bare repeating MFE with its record elided; modelled as a repeating MF_QUERY group holding the MFE. Caristix 2.5.1 and HAPI v251 have no class for this event.",
+   "accept": true
+  },
+  "MFR_M10": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3: MSH [{SFT}] MSA [{ERR}] [QAK] QRD [QRF] MFI { MFE [...] } [DSC], the entry a bare repeating MFE with its record elided; modelled as a repeating MF_QUERY group holding the MFE. Caristix 2.5.1 and HAPI v251 have no class for this event.",
+   "accept": true
+  },
+  "MFR_M11": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3: MSH [{SFT}] MSA [{ERR}] [QAK] QRD [QRF] MFI { MFE [...] } [DSC], the entry a bare repeating MFE with its record elided; modelled as a repeating MF_QUERY group holding the MFE. Caristix 2.5.1 and HAPI v251 have no class for this event.",
+   "accept": true
+  },
+  "MFR_M12": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3: MSH [{SFT}] MSA [{ERR}] [QAK] QRD [QRF] MFI { MFE [...] } [DSC], the entry a bare repeating MFE with its record elided; modelled as a repeating MF_QUERY group holding the MFE. Caristix 2.5.1 and HAPI v251 have no class for this event.",
+   "accept": true
+  },
+  "MFR_M13": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3: MSH [{SFT}] MSA [{ERR}] [QAK] QRD [QRF] MFI { MFE [...] } [DSC], the entry a bare repeating MFE with its record elided; modelled as a repeating MF_QUERY group holding the MFE. Caristix 2.5.1 and HAPI v251 have no class for this event.",
+   "accept": true
+  },
+  "MFR_M02": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3: MSH [{SFT}] MSA [{ERR}] [QAK] QRD [QRF] MFI { MFE [...] } [DSC], the entry a bare repeating MFE with its record elided; modelled as a repeating MF_QUERY group holding the MFE and the 8.7 staff record (STF [{PRA}] [{ORG}] [{AFF}] [{LAN}] [{EDU}] [{CER}] [{NTE}]). Caristix 2.5.1 and HAPI v251 have no class for this event.",
+   "accept": true
+  },
+  "MFR_M04": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3 prints the bare MFE entry; Caristix 2.5.1 gives MF_QUERY: MFE CDM [{PRC}] (the 8.8 charge description record, ours); HAPI v251 adds [{LCH}] between CDM and PRC, which the record does not have.",
+   "accept": true
+  },
+  "RDY_Z80": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch5 (the Z80 example): MSH [{SFT}] MSA [ERR] QAK QPD [{DSP}] [DSC]; the reader picks up the DSP lines of the example message that follows the table. Caristix 2.5.1 agrees with ours; HAPI v251 models the response as an RDF [{RDT}] row definition instead of DSPs.",
+   "accept": true
+  }
  }
 }

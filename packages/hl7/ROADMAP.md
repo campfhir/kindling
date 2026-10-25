@@ -9,7 +9,7 @@ Goal: a complete, well-tested TypeScript implementation of HL7 v2, published to 
 | 2 | **HL7 v2.3.1 complete** and wired into `parse()` | ✅ 1.1: every segment field and message structure checked against hl7.eu, Caristix and HAPI (segment and message ledgers), 53 segments with their own 2.3.1 class, all 276 messages generated against them |
 | 3 | **HL7 v2.4 complete** and wired into `parse()` | ✅ 1.2: every segment field and message structure checked against the hl7.eu v2.4 chapters, Caristix and HAPI (segment and message ledgers), 94 segments with their own 2.4 class (28 of them new in 2.4), all 334 messages (57 new in 2.4) generated against them |
 | 4 | **HL7 v2.5 complete** and wired into `parse()` | ✅ 2.1: every segment field and message structure checked against the hl7.eu v2.5 chapters, Caristix and HAPI (segment and message ledgers), 55 segments with their own 2.5 class (6 of them new in 2.5), all 387 messages (50 new in 2.5) generated against them |
-| 5 | **HL7 v2.5.1 complete** and wired into `parse()` | ⬜ 2.2 |
+| 5 | **HL7 v2.5.1 complete** and wired into `parse()` | ✅ 2.2: every segment field and message structure checked against the hl7.eu v2.5.1 chapters, Caristix and HAPI (segment and message ledgers); 2.5.1 changes three segment tables (OBR, OBX, ORC) and two structures (QRY^PC4, RRE^O26), all 387 messages generated against the 2.5.1 segments |
 | 6 | Later versions (2.6, 2.7, 2.8…) as demand dictates | ⬜ |
 
 2.0 made the package ESM only (Node 24 or later). Each version joins the root parser in its own minor release once every one of its event types and
