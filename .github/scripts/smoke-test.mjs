@@ -1,10 +1,12 @@
 // Loads every built entry point of each package (or of the packages named as arguments) with
 // both CommonJS require() and native ESM import(), and checks that each "types" file exists, so a
 // broken "exports" map, an extensionless ESM import or a missing declaration fails CI instead of
-// a consumer.
+// a consumer. A wildcard entry ("./parsers/v2.4/*") is checked on the first file it matches. The
+// built package must also stay under MAX_DIST_MB (what npm unpacks), so a build change that
+// multiplies the output is caught here rather than on npm.
 //
 //   node .github/scripts/smoke-test.mjs [package ...]
-import { existsSync } from "node:fs";
+import { existsSync, readdirSync, statSync } from "node:fs";
 import { createRequire } from "node:module";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -12,15 +14,43 @@ import { findPackage, listPackages } from "./packages.mjs";
 
 const selected = process.argv.slice(2);
 const packages = selected.length ? selected.map(findPackage) : listPackages();
+const MAX_DIST_MB = 20;
+
+/** Every file under dir, recursively, with its size. */
+function filesUnder(dir) {
+  const out = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) out.push(...filesUnder(path));
+    else out.push({ path, size: statSync(path).size });
+  }
+  return out;
+}
+
+/** The first file a wildcard target ("./dist/parsers/v2.4/*.mjs") matches, as the concrete target. */
+function firstMatch(pkgDir, pattern) {
+  const [before, after] = pattern.split("*");
+  const relDir = before.slice(0, before.lastIndexOf("/"));
+  const prefix = before.slice(before.lastIndexOf("/") + 1);
+  const dir = join(pkgDir, relDir);
+  if (!existsSync(dir)) return undefined;
+  const name = readdirSync(dir).sort().find((f) => f.startsWith(prefix) && f.endsWith(after) && f !== `index${after}`);
+  return name ? `${relDir}/${name}` : undefined;
+}
 
 let failures = 0;
 for (const pkg of packages) {
   const require = createRequire(join(pkg.dir, "package.json"));
   let loaded = 0;
   for (const [subpath, target] of Object.entries(pkg.exports ?? {})) {
-    if (subpath.includes("*")) continue; // wildcard entries are covered by the barrels
     const entries = typeof target === "string" ? { require: target } : target;
-    for (const [condition, rel] of Object.entries(entries)) {
+    for (const [condition, pattern] of Object.entries(entries)) {
+      const rel = pattern.includes("*") ? firstMatch(pkg.dir, pattern) : pattern;
+      if (!rel) {
+        failures++;
+        console.error(`FAIL ${pkg.name} ${subpath} (${condition} -> ${pattern}): no file matches the wildcard`);
+        continue;
+      }
       const file = join(pkg.dir, rel);
       try {
         if (!existsSync(file)) throw new Error("file is missing (did the build run?)");
@@ -35,7 +65,14 @@ for (const pkg of packages) {
       }
     }
   }
-  console.log(`${pkg.name}: loaded ${loaded} entry points`);
+  const dist = join(pkg.dir, "dist");
+  const files = existsSync(dist) ? filesUnder(dist) : [];
+  const mb = files.reduce((n, f) => n + f.size, 0) / 1e6;
+  console.log(`${pkg.name}: loaded ${loaded} entry points; dist ${mb.toFixed(1)} MB in ${files.length} files`);
+  if (mb > MAX_DIST_MB) {
+    failures++;
+    console.error(`FAIL ${pkg.name}: dist is ${mb.toFixed(1)} MB, more than ${MAX_DIST_MB} MB`);
+  }
 }
 if (failures) {
   console.error(`${failures} entry point(s) failed to load`);

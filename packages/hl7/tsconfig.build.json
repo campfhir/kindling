@@ -1,10 +1,12 @@
 {
-  // Declaration output for the published package: one .d.ts per source file under dist/, next to the
-  // .js/.mjs that tsup writes. Tests are left out. `pnpm build` runs this after tsup.
+  // The CommonJS output and the declarations of the published package: one .js and one .d.ts per
+  // source file under dist/, next to the .mjs that tsup writes (`.ts` import specifiers are rewritten
+  // to `.js` by rewriteRelativeImportExtensions). tsc's CommonJS is compact (`exports.x = …`, no
+  // per-file interop helpers); scripts/minify-cjs.mjs then drops its comments and whitespace. Tests
+  // are left out. `pnpm build` runs this after tsup.
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "declaration": true,
-    "emitDeclarationOnly": true,
     "noEmit": false,
     "outDir": "./dist"
   },
