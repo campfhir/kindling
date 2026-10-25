@@ -1,0 +1,6 @@
+{
+ "CON": {
+  "date": "2026-10-25",
+  "note": "HAPI v25 has no field table for CON (its CON_ class declares no fields), so the segment is decided between hl7.eu and Caristix, which agree on all 25 fields."
+ }
+}

@@ -34,9 +34,11 @@ describe("segment introduction by version", () => {
       expect(name in seg25).toBe(true);
       expect(name in seg251).toBe(true);
     }
-    // EDU gains EDU-9 in v2.5, so v2.5 has its own subclass; the others are re-exported.
-    expect(seg25.ORG).toBe(seg24.ORG);
+    // EDU gains EDU-9 in v2.5 and an ORG field's length changes, so v2.5 has its own subclass of each; AFF and LAN are re-exported.
+    expect(Object.getPrototypeOf(seg25.ORG)).toBe(seg24.ORG);
     expect(Object.getPrototypeOf(seg25.EDU)).toBe(seg24.EDU);
+    expect(seg25.AFF).toBe(seg24.AFF);
+    expect(seg25.LAN).toBe(seg24.LAN);
   });
 
   test("OM7 is introduced in v2.4", () => {
@@ -79,8 +81,9 @@ describe("re-export versions", () => {
     expect(Object.getPrototypeOf(seg231.PID)).toBe(seg23.PID); // PID-6, PID-10 and PID-22 repeat in 2.3.1
     expect(Object.getPrototypeOf(seg24.PID)).toBe(seg231.PID); // PID-31 to PID-38 are new in 2.4
     expect(Object.getPrototypeOf(seg24.OBX)).toBe(seg231.OBX); // OBX-18 and OBX-19 are new in 2.4
-    expect(seg25.OBX).toBe(seg24.OBX);
+    expect(Object.getPrototypeOf(seg25.OBX)).toBe(seg24.OBX); // OBX-5's length changes in 2.5 (the table is recorded in the 2.5 spec)
     expect(seg24.NK1).toBe(seg231.NK1); // unchanged through 2.4
+    expect(seg25.AL1).toBe(seg24.AL1); // unchanged through 2.5
   });
 
   test("v2.5.1 builds on v2.5, not v2.3", () => {

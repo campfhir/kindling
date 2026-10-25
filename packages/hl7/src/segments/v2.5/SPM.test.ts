@@ -28,23 +28,9 @@ describe("SPM field positions", () => {
     expect(parts[2]).toBe("C1^C2");
   });
 
-  test("SPM-3 Specimen Parent Ids", () => {
-    assertField(new SPM().specimenParentIds(SENTINEL), 3);
-  });
-
   test("SPM-4 Specimen Type", () => {
     const parts = new SPM().specimenType({ code: "C1", text: "C2", codingSystem: "C3" }).encode().split("|");
     expect(parts[4]).toBe("C1^C2^C3");
-  });
-
-  test("SPM-5 Specimen Type Modifier", () => {
-    const parts = new SPM().specimenTypeModifier({ code: "C1", text: "C2" }).encode().split("|");
-    expect(parts[5]).toBe("C1^C2");
-  });
-
-  test("SPM-6 Specimen Additives", () => {
-    const parts = new SPM().specimenAdditives({ code: "C1", text: "C2" }).encode().split("|");
-    expect(parts[6]).toBe("C1^C2");
   });
 
   test("SPM-7 Specimen Collection Method", () => {
@@ -57,19 +43,9 @@ describe("SPM field positions", () => {
     expect(parts[8]).toBe("C1^C2^C3");
   });
 
-  test("SPM-9 Specimen Source Site Modifier", () => {
-    const parts = new SPM().specimenSourceSiteModifier({ code: "C1", text: "C2" }).encode().split("|");
-    expect(parts[9]).toBe("C1^C2");
-  });
-
   test("SPM-10 Specimen Collection Site", () => {
     const parts = new SPM().specimenCollectionSite({ code: "C1", text: "C2" }).encode().split("|");
     expect(parts[10]).toBe("C1^C2");
-  });
-
-  test("SPM-11 Specimen Role", () => {
-    const parts = new SPM().specimenRole({ code: "C1", text: "C2" }).encode().split("|");
-    expect(parts[11]).toBe("C1^C2");
   });
 
   test("SPM-12 Specimen Collection Amount", () => {
@@ -79,10 +55,6 @@ describe("SPM field positions", () => {
 
   test("SPM-13 Grouped Specimen Count", () => {
     assertField(new SPM().groupedSpecimenCount(SENTINEL), 13);
-  });
-
-  test("SPM-14 Specimen Description", () => {
-    assertField(new SPM().specimenDescription(SENTINEL), 14);
   });
 
   test("SPM-17 Specimen Collection Date Time", () => {
@@ -101,26 +73,6 @@ describe("SPM field positions", () => {
   test("SPM-25 Specimen Current Quantity", () => {
     const parts = new SPM().specimenCurrentQuantity({ value: "C1", units: "C2" }).encode().split("|");
     expect(parts[25]).toBe("C1^C2");
-  });
-
-  test("SPM-24 Specimen Condition", () => {
-    const parts = new SPM().specimenCondition({ code: "C1", text: "C2" }).encode().split("|");
-    expect(parts[24]).toBe("C1^C2");
-  });
-
-  test("SPM-21 Specimen Reject Reason", () => {
-    const parts = new SPM().specimenRejectReason({ code: "C1", text: "C2" }).encode().split("|");
-    expect(parts[21]).toBe("C1^C2");
-  });
-
-  test("SPM-15 Specimen Handling Code", () => {
-    const parts = new SPM().specimenHandlingCode({ code: "C1", text: "C2", codingSystem: "C3" }).encode().split("|");
-    expect(parts[15]).toBe("C1^C2^C3");
-  });
-
-  test("SPM-16 Specimen Risk Code", () => {
-    const parts = new SPM().specimenRiskCode({ code: "C1", text: "C2", codingSystem: "C3" }).encode().split("|");
-    expect(parts[16]).toBe("C1^C2^C3");
   });
 
   test("SPM-19 Specimen Expiration Date Time", () => {

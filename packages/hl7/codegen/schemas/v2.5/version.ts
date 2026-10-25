@@ -53,7 +53,7 @@ export const V2_5: VersionSchema = {
   version: "v2.5",
   baseVersion: "v2.4",
   reexport: true,
-  ownSegments: ["SFT", "SPM", "TQ1", "TQ2", "CER", "EDU", "IIM"],
+  ownSegments: ["SFT", "SPM", "TQ1", "TQ2", "CER", "EDU", "IIM", "BPO", "BPX", "BTX", "CON", "IPC", "OVR"],
   withdrawnMessages: ["QRY_P04", "DSR_P04", "MFD_MFA"],
   segments: [],
   messages: V2_5_MESSAGES,

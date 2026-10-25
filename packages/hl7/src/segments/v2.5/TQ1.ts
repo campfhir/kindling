@@ -43,14 +43,14 @@ export class TQ1 extends BaseSegment {
   }
 
   /** TQ1-3 Repeat Pattern (chainable). */
-  repeatPattern(value: string): this {
-    this.fields[2] = this.createField(value);
+  repeatPattern(...values: string[]): this {
+    this.fields[2] = this.createRepeatingField(values.map((v) => this.createField(v)));
     return this;
   }
 
   /** TQ1-4 Explicit Time (chainable). */
-  explicitTime(value: string): this {
-    this.fields[3] = this.createField(value);
+  explicitTime(...values: string[]): this {
+    this.fields[3] = this.createRepeatingField(values.map((v) => this.createField(v)));
     return this;
   }
 
@@ -59,8 +59,10 @@ export class TQ1 extends BaseSegment {
    * @param value - TQ1-5.1 Value
    * @param units - TQ1-5.2 Units
    */
-  relativeTime({ value, units }: { value: string; units?: string }): this {
-    this.fields[4] = this.createComponentsField([value, units || ""]);
+  relativeTime(...values: { value: string; units?: string }[]): this {
+    this.fields[4] = this.createRepeatingField(
+      values.map(({ value, units }) => this.createComponentsField([value, units || ""])),
+    );
     return this;
   }
 
@@ -102,8 +104,10 @@ export class TQ1 extends BaseSegment {
    * @param text - TQ1-9.2 Text
    * @param codingSystem - TQ1-9.3 Coding System
    */
-  priority({ code, text, codingSystem }: { code: string; text?: string; codingSystem?: string }): this {
-    this.fields[8] = this.createComponentsField([code, text || "", codingSystem || ""]);
+  priority(...values: { code: string; text?: string; codingSystem?: string }[]): this {
+    this.fields[8] = this.createRepeatingField(
+      values.map(({ code, text, codingSystem }) => this.createComponentsField([code, text || "", codingSystem || ""])),
+    );
     return this;
   }
 

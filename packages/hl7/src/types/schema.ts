@@ -288,6 +288,12 @@ export const SEGMENT_NAMES: Record<string, [one: string, many: string]> = {
   NSC: ["applicationStatus", "applicationStatuses"],
   FAC: ["facility", "facilities"],
   IIM: ["inventoryItem", "inventoryItems"],
+  BPO: ["bloodProductOrder", "bloodProductOrders"],
+  BPX: ["bloodProductDispenseStatus", "bloodProductDispenseStatuses"],
+  BTX: ["bloodProductTransfusion", "bloodProductTransfusions"],
+  CON: ["consent", "consents"],
+  IPC: ["imagingProcedureControl", "imagingProcedureControls"],
+  OVR: ["override", "overrides"],
 };
 
 /**

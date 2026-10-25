@@ -189,10 +189,12 @@ function readSetters(seg, src) {
     if (!sig) continue;
     const params = sig[1];
     const body = chunk.slice(sig[0].length);
-    const at = body.match(/this\.fields\[(\d+)\]\s*=[^;]*?this\.(createRepeatingField|createComponentsField|createField)/);
+    // `this.createField(...)`, `this.createComponentsField(...)`, `this.createRepeatingField(...)` or a
+    // helper of the class (`this.cwe(value)`, `this.eiRepetitions(values)`).
+    const at = body.match(/this\.fields\[(\d+)\]\s*=[^;]*?this\.(\w+)\(/);
     if (!at) continue;
     const seq = Number(at[1]) + offset;
-    const repeating = at[2] === "createRepeatingField" || /^\.\.\./.test(params.trim());
+    const repeating = /Repeating|Repetitions/.test(at[2]) || /^\.\.\./.test(params.trim());
     const typed = /\{[^}]*\}\s*:\s*\{/.test(params) || /Repeated<\{/.test(params) || /\(\{/.test(params) || /: \{/.test(params) || /Input\b/.test(params);
     const raw = /SegmentFieldValue/.test(params);
     const entry = fields.get(seq) ?? { seq, setters: [], repeating: false, typed: false, raw: false };
@@ -522,16 +524,21 @@ if (adopt.length) {
   for (const seg of adopt) {
     const r = results.find((x) => x.seg === seg);
     if (!r) throw new Error(`--adopt: no segment ${seg}`);
-    // A generated class starts from its spec table; a hand-written class or a segment new in the version from nothing.
+    // The field table starts from the spec of a generated class (its names, tables and lengths), or from
+    // nothing for a hand-written class or a segment new in the version; the decided values are applied below.
     const baseSpec = r.generated ? (specOf(r.classVersion)[seg] ?? [...specs.values()].map((s) => s[seg]).find(Boolean)) : undefined;
     const entry = baseSpec
       ? JSON.parse(JSON.stringify(baseSpec))
       : { title: readCaristixTitle(seg) ?? seg, fields: [] };
-    if (!r.generated && r.classVersion !== "none") {
-      // A hand-written class is carried into this version as a generated subclass: the fields it already
-      // implements as decided are inherited, a setter it implements differently is overridden, the rest are new.
+    if (r.classVersion !== "none") {
+      // An existing class (hand-written or generated, of this version's base or older) is carried into this
+      // version as a generated subclass: the fields it already implements as decided are inherited, a setter
+      // it implements differently is overridden, the rest are new.
       entry.extends = r.classVersion;
-      for (const f of entry.fields) delete f.inherited, delete f.overrides;
+      for (const f of entry.fields) {
+        delete f.inherited;
+        delete f.overrides;
+      }
       const seen = new Set(entry.fields.map((f) => f.seq));
       for (const x of r.rows.filter((x) => x.type.value && !seen.has(x.seq))) entry.fields.push({ seq: x.seq, name: x.name, length: "", type: x.type.value, opt: "O", rep: "-", table: x.table });
     }
@@ -541,7 +548,9 @@ if (adopt.length) {
       for (const f of entry.fields) {
         const row = r.rows.find((x) => x.seq === f.seq);
         if (!row?.ours) continue;
-        if (!row.issues.length) f.inherited = true;
+        // A length or usage change is a spec value only; the setter changes when the type or the repetition does.
+        const shapeIssues = row.issues.filter((i) => !/^spec (length|usage) /.test(i));
+        if (!shapeIssues.length) f.inherited = true;
         else {
           const setter = row.ours.setters?.find((n) => !n.startsWith("("));
           if (setter) f.overrides = setter;

@@ -103,6 +103,7 @@ function isRepeating(f: SpecField): boolean {
 const COMPOSITES: Record<string, { type: string; parts: string }> = {
   CE: { type: "CodedInput", parts: "codedParts" }, // CE or the { code, text, codingSystem } shape the hand-written classes take
   CWE: { type: "CodedElement", parts: "cweParts" },
+  CNE: { type: "CodedElement", parts: "cweParts" }, // same components as CWE
   CX: { type: "CX", parts: "cxParts" },
   XCN: { type: "XCN", parts: "xcnParts" },
   XPN: { type: "XPN", parts: "xpnParts" },
