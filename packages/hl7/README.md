@@ -57,7 +57,9 @@ Parsers, builders and structures are generated from the message schemas in `code
 ORU R01 and R30–R32, SIU S12–S26, SRM/SRR S01–S11, VXU V04, and the queries: QRY/ADR A19,
 QRY Q01/Q02/P04/R02/T12, QCK Q02, DSR Q01/Q03/P04, UDM Q05/R06, EQQ/RQQ/SPQ/VQQ/TBR, EDR R07,
 ERP R09, SQM/SQR S25, VXQ V01, VXX V02, VXR V03, ORF R04/W02, OSQ/OSR Q06, DOC T12, and the master
-files: MFN M01–M15, MFK M01–M15, MFQ/MFR M01–M13, MFD MFA), each in the shape the
+files: MFN M01–M15, MFK M01–M15, MFQ/MFR M01–M13, MFD MFA, and the orders: OMD/ORD, OMS/ORS,
+OMN/ORN, RDO/RRO, RDE/RRE, RDS/RRD, RGV/RRG, RAS/RRA with their v2.4 event numbers, the pharmacy
+queries QRY Q26–Q30 with ROR/RAR/RDR/RER/RGR, ORU W01), each in the shape the
 standard gives it for that version. See [codegen/README.md](codegen/README.md).
 
 ## Installation
@@ -422,8 +424,11 @@ is data (`src/structures/<version>/<MSG>.ts`, generated from `codegen/schemas/`)
 builder of a message are generated too and contain no message-specific logic: they hand the
 structure and the segment classes of their version to the engine in `src/types/structure.ts`.
 `parseStructure` walks the raw segments against the structure (a repeating group starts a new
-instance whenever the next segment can begin one; missing required items and misplaced known
-segments are errors; unknown segments such as Z segments are skipped with a warning),
+instance whenever the next segment can begin one, and when that segment also opens a later sibling
+group, as ORC does for the diet and tray orders of OMD, the instance is parsed speculatively and
+handed to the sibling if it stops at a segment only the sibling can take; missing required items
+and misplaced known segments are errors; unknown segments such as Z segments are skipped with a
+warning),
 `verifyStructure` checks a builder's input and `encodeStructure` writes it out in order.
 
 ```typescript

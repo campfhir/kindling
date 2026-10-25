@@ -43,6 +43,12 @@ Legend: ✅ builder + parser exist · ⬜ not started
 | SRM | S01–S11 (schedule requests) | ✅ | ✅ |
 | SRR | S01–S11 (schedule request responses) | ✅ | ✅ |
 | MDM | T01–T11 (document management) | ✅ | ✅ |
+| OMD / ORD | O01/O02 diet orders (O03/O04 from 2.4) | ✅ | ✅ |
+| OMS / ORS, OMN / ORN | O01/O02 stock and nonstock requisitions (O05/O06, O07/O08 from 2.4) | ✅ | ✅ |
+| RDO / RRO | O01/O02 pharmacy order (withdrawn in 2.4) | ✅ | n/a |
+| RDE / RRE, RDS / RRD, RGV / RRG, RAS / RRA | pharmacy encoded order, dispense, give, administration (O01/O02; O11–O18 from 2.4) | ✅ | ✅ |
+| QRY Q26–Q30, ROR / RAR / RDR / RER / RGR | pharmacy queries and responses | ✅ | ✅ |
+| ORU | W01 waveform result | ✅ | ✅ |
 
 ## Remaining for v2.3
 
@@ -54,10 +60,8 @@ Legend: ✅ builder + parser exist · ⬜ not started
 ### Orders and results
 | Message | Events | Needs |
 |---|---|---|
-| ⬜ ORU | R01 variants (unsolicited) and R03 | ✅ |
-| ⬜ RDE / RDS / RGV / RAS | Pharmacy encoded order, dispense, give, administration (O01/O02, O13/O14, O15/O16, O17) | RXC, RXG |
-| ⬜ RRA / RRD / RRE / RRG / RRI | Pharmacy responses | RXC, RXG |
-| ⬜ OMD / OMN / OMS / OMG | Diet, non-stock, stock, general orders | ODS, ODT |
+| ⬜ ORU | R03 (not in the Caristix v2.3 event list; verify) | ✅ |
+| ⬜ RRI | Referral responses (see referrals) | RF1, PRD |
 
 ### Financial and documents
 | Message | Events | Needs |
@@ -167,7 +171,29 @@ OM7 segment in `segments/v2.4`) from v2.4 and MFN^M15 (`MFE IIM`, with the new I
 tables from hl7-definition.caristix.com cross-checked on hl7.eu (OM7 is unchanged through 2.5.1, IIM
 in 2.5.1).
 
-Suggested order: **orders/pharmacy → patient care → referrals → the rest.**
+Done in 0.18: the orders and pharmacy messages of chapter 4 for v2.3 through v2.5.1: the diet
+orders OMD/ORD, the stock and nonstock requisitions OMS/ORS and OMN/ORN, the pharmacy order RDO/RRO,
+the encoded order RDE/RRE, dispense RDS/RRD, give RGV/RRG and administration RAS/RRA, the pharmacy
+queries QRY^Q26–Q30 with their ROR/RAR/RDR/RER/RGR responses, and ORU^W01. Structures from the
+hl7.eu chapter 4 pages (v2.3, v2.4, v2.5, v2.5.1) cross-checked on hl7-definition.caristix.com and
+HAPI. In the v2.3 text the diet, supply and pharmacy orders are ORM/ORR variants; the OMD/OMS/OMN/
+RDO message types are the names Caristix and v2.3.1 give them, and RAS/RRA are "events O02/O02" in
+v2.3 (RAS^O01 from v2.3.1, O17 from v2.4). Orders inline their PATIENT groups (`patient`, `visit`,
+`insurances`, ...) and read `commonOrder`, `detail` (RXO with `notes`, `routes`, `components`),
+`encoding`/`encodedOrder`, `dispense`, `gives`, `administrations`, `observations`; the query
+responses carry `definitions: [{ query, patient, orders }]`. Per version: v2.4 renumbers every
+event (OMD^O03, OMS^O05, OMN^O07, RDE^O11, RDS^O13, RGV^O15, RAS^O17 and the matching
+acknowledgments), withdraws the v2.3 events and RDO/RRO, makes the supply RQD required, the diet
+and RDE/RDS observations optional, adds `[{FT1}]` to RDS and gives ORU^W01 its own shape (NK1, CTD,
+FT1); v2.5 (also v2.5.1) adds `[{SFT}]`, the `TIMING` groups after ORC, `TIMING_ENCODED` after RXE
+and `TIMING_GIVE` after RXG, NTEs after RXE/RXD, repeating `COMPONENT` groups, `[{FT1}] [BLG]` in
+RDE, grouped `administrations` in RAS, repeating ERR in the acknowledgments and query responses and
+SPECIMEN groups in ORU^W01. The parser gained one piece of lookahead for this batch: when a segment
+opens both another instance of a repeating group and a later sibling group (ORC in OMD/ORD), the
+instance is parsed speculatively and handed to the sibling if it stops at a segment only the
+sibling can take.
+
+Suggested order: **patient care → referrals → the rest.**
 
 ## v2.5.1 parity
 After v2.3 is complete, bring v2.5.1 to parity with the same messages, then add the 2.5.1 additions:

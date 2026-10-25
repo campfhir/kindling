@@ -15,9 +15,6 @@ import { V2_5_MESSAGES } from "../v2.5/version";
 export const V2_5_1: VersionSchema = {
   version: "v2.5.1",
   baseVersion: "v2.5",
-  segments: [
-    // Pharmacy and other segments without a message here yet, kept so their wrappers exist.
-    "RXE", "RXD",
-  ],
+  segments: [],
   messages: reversionAll([...V2_5_MESSAGES, ...SRM_FAMILY, SQM_S25_SCHEMA, QRY_T12_SCHEMA, DOC_T12_SCHEMA], "2.5.1"),
 };

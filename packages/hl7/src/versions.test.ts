@@ -275,3 +275,45 @@ describe("master files", () => {
     expect("createMFD_MFA" in bld251).toBe(false);
   });
 });
+
+describe("orders and pharmacy", () => {
+  test("the pharmacy, diet and supply segments exist from v2.3", () => {
+    for (const name of ["RXO", "RXE", "RXD", "RXG", "RXA", "RXR", "RXC", "ODS", "ODT", "RQD", "RQ1", "BLG"]) {
+      expect(name in seg23).toBe(true);
+      expect(name in seg251).toBe(true);
+    }
+  });
+
+  test("v2.3.1 renumbers RAS^O02 to O01; v2.4 renumbers everything and withdraws the v2.3 events", () => {
+    expect("createRAS_O02" in bld23).toBe(true);
+    expect("createRAS_O02" in bld231).toBe(false);
+    expect("createRAS_O01" in bld231).toBe(true);
+    expect("createRAS_O01" in bld24).toBe(false);
+    for (const name of ["OMD_O01", "ORD_O02", "OMS_O01", "ORS_O02", "OMN_O01", "ORN_O02", "RDO_O01", "RRO_O02", "RDE_O01", "RRE_O02", "RDS_O01", "RRD_O02", "RGV_O01", "RRG_O02", "RRA_O02"]) {
+      expect(`create${name}` in bld231).toBe(true);
+      expect(`create${name}` in bld24).toBe(false);
+      expect(`create${name}` in bld251).toBe(false);
+    }
+    for (const name of ["OMD_O03", "ORD_O04", "OMS_O05", "ORS_O06", "OMN_O07", "ORN_O08", "RDE_O11", "RRE_O12", "RDS_O13", "RRD_O14", "RGV_O15", "RRG_O16", "RAS_O17", "RRA_O18"]) {
+      expect(`create${name}` in bld231).toBe(false);
+      expect(`create${name}` in bld24).toBe(true);
+      expect(`create${name}` in bld25).toBe(true);
+      expect(`create${name}` in bld251).toBe(true);
+    }
+    expect("createRDO_O01" in bld24).toBe(false);
+    expect("createRRO_O02" in bld24).toBe(false);
+  });
+
+  test("the pharmacy queries are v2.3's through v2.4 and gain SFT in v2.5; ORU^W01 wraps R01 only in v2.3", () => {
+    for (const fn of ["parseQRY_Q26", "parseQRY_Q30", "parseROR_ROR", "parseRAR_RAR", "parseRDR_RDR", "parseRER_RER", "parseRGR_RGR"] as const) {
+      expect(par231[fn]).toBe(par23[fn]);
+      expect(par24[fn]).toBe(par23[fn]);
+      expect(par25[fn]).not.toBe(par24[fn]);
+      expect(typeof par251[fn]).toBe("function");
+    }
+    expect(par231.parseORU_W01).toBe(par23.parseORU_W01);
+    expect(par24.parseORU_W01).not.toBe(par23.parseORU_W01);
+    expect(par25.parseORU_W01).not.toBe(par24.parseORU_W01);
+    expect(par25.parseRDE_O11).not.toBe(par24.parseRDE_O11);
+  });
+});

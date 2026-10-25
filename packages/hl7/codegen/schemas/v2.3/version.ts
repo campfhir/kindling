@@ -30,6 +30,15 @@ import { MFN_MESSAGES } from "./MFN_M01";
 import { MFD_MFA_SCHEMA, MFK_FAMILY } from "./MFK_M01";
 import { MFQ_FAMILY } from "./MFQ_M01";
 import { MFR_MESSAGES } from "./MFR_M01";
+import { OMD_O01_SCHEMA, ORD_O02_SCHEMA } from "./OMD_O01";
+import { OMN_O01_SCHEMA, OMS_O01_SCHEMA, ORN_O02_SCHEMA, ORS_O02_SCHEMA } from "./OMS_O01";
+import { RDO_O01_SCHEMA, RRO_O02_SCHEMA } from "./RDO_O01";
+import { RDE_O01_SCHEMA, RRE_O02_SCHEMA } from "./RDE_O01";
+import { RDS_O01_SCHEMA, RRD_O02_SCHEMA } from "./RDS_O01";
+import { RGV_O01_SCHEMA, RRG_O02_SCHEMA } from "./RGV_O01";
+import { RAS_O02_SCHEMA, RRA_O02_SCHEMA } from "./RAS_O02";
+import { PHARMACY_QUERY_RESPONSES, QRY_Q26_FAMILY } from "./QRY_Q26";
+import { ORU_W01_SCHEMA } from "./ORU_W01";
 
 /** The query messages of v2.3 (chapters 2, 3, 4, 6, 7, 9 and 10). */
 export const QUERY_MESSAGES = [
@@ -56,6 +65,19 @@ export const QUERY_MESSAGES = [
 
 /** The master file messages of v2.3 (chapter 8); MFN^M02 is registered separately. */
 export const MASTER_FILE_MESSAGES = [...MFN_MESSAGES, ...MFK_FAMILY, MFD_MFA_SCHEMA, ...MFQ_FAMILY, ...MFR_MESSAGES];
+
+/** The order and pharmacy messages of v2.3 (chapter 4 sections 4.6–4.8, chapter 7 W01). */
+export const ORDER_MESSAGES = [
+  OMD_O01_SCHEMA, ORD_O02_SCHEMA,
+  OMS_O01_SCHEMA, ORS_O02_SCHEMA, OMN_O01_SCHEMA, ORN_O02_SCHEMA,
+  RDO_O01_SCHEMA, RRO_O02_SCHEMA,
+  RDE_O01_SCHEMA, RRE_O02_SCHEMA,
+  RDS_O01_SCHEMA, RRD_O02_SCHEMA,
+  RGV_O01_SCHEMA, RRG_O02_SCHEMA,
+  RAS_O02_SCHEMA, RRA_O02_SCHEMA,
+  ...QRY_Q26_FAMILY, ...PHARMACY_QUERY_RESPONSES,
+  ORU_W01_SCHEMA,
+];
 
 /**
  * v2.3 is the base version: its segments are hand-written, and every message listed here gets a
@@ -87,5 +109,6 @@ export const V2_3: VersionSchema = {
     ...MDM_FAMILY,
     ...QUERY_MESSAGES,
     ...MASTER_FILE_MESSAGES,
+    ...ORDER_MESSAGES,
   ],
 };
