@@ -41,11 +41,14 @@ export {
 } from "./types/structure.ts";
 export { ParserUtils, type SegmentParser } from "./types/parser.ts";
 
-// The root parser: any HL7 v2 message, dispatched on MSH-9 and MSH-12 to its generated parser.
+// The root parser: any HL7 v2 input, one message dispatched on MSH-9 and MSH-12 to its generated
+// parser, or a batch file.
+export { parse, selectParser, type ParsedHL7, type ParsedHL7Batch, type SelectedParser, type SelectedBatchParser } from "./parse.ts";
 export {
-  parse,
-  selectParser,
+  parseMessage,
+  selectMessageParser,
   identifyMessage,
+  isBatchInput,
   SUPPORTED_VERSIONS,
   type HL7Version,
   type MessageType,
@@ -54,9 +57,9 @@ export {
   type ParseOptions,
   type ParsedHL7Message,
   type ParsedHL7MessageOf,
-  type SelectedParser,
-  type SelectedParserOf,
-} from "./parse.ts";
+  type SelectedMessageParser,
+  type SelectedMessageParserOf,
+} from "./dispatch.ts";
 export {
   parseBatch,
   encodeBatch,

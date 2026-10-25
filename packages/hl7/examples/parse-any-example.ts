@@ -1,10 +1,11 @@
-import { parse, selectParser, parseBatch } from "../src/index.ts";
+import { parse, selectParser } from "../src/index.ts";
 
 /**
  * Example: parse messages of unknown type with the root parser.
  *
  * `parse()` reads MSH-9 and MSH-12, picks the generated parser of that message in that version
- * and runs it; `structure` narrows `parsed` to the message's own shape.
+ * and runs it; `structure` narrows `parsed` to the message's own shape. A batch file comes back
+ * with `kind: "batch"` instead.
  */
 const messages = [
   `MSH|^~\\&|ADT|Hospital|EMR|Clinic|20231115140500||ADT^A01|MSG001|P|2.3
@@ -27,6 +28,7 @@ for (const raw of messages) {
     console.log(`✗ ${selected.err.message}`);
     continue;
   }
+  if (selected.val.kind === "batch") continue;
   console.log(`→ ${selected.val.messageType.messageCode}^${selected.val.messageType.triggerEvent} is ${selected.val.structure} (HL7 v${selected.val.version})`);
 
   const result = parse(raw);
@@ -34,6 +36,7 @@ for (const raw of messages) {
     console.log(`✗ ${result.err.message}`);
     continue;
   }
+  if (result.val.kind === "batch") continue;
   switch (result.val.structure) {
     case "ADT_A01":
       console.log(`  admitted ${result.val.parsed.patient.encode()} to ${result.val.parsed.visit.encode()}`);
@@ -51,8 +54,8 @@ for (const raw of messages) {
   }
 }
 
-// A batch file: every message goes through parse(), a bad one does not fail the batch.
-const batch = parseBatch(
+// A batch file: parse() hands it to parseBatch(); every message is dispatched, a bad one does not fail the batch.
+const batch = parse(
   [
     "FHS|^~\\&|ADT|Hospital|EMR|Clinic|20231115140500||nightly",
     "BHS|^~\\&|ADT|Hospital|EMR|Clinic|20231115140500||adt",
@@ -61,7 +64,7 @@ const batch = parseBatch(
     "FTS|1",
   ].join("\r"),
 );
-if (batch.ok) {
+if (batch.ok && batch.val.kind === "batch") {
   for (const [i, b] of batch.val.batches.entries()) {
     console.log(`batch ${i + 1}: ${b.messages.filter((m) => m.ok).length} of ${b.messages.length} messages parsed, trailer ${b.trailer?.encode()}`);
     b.messages.forEach((m) => (m.ok ? console.log(`  ${m.val.structure}`) : console.log(`  ✗ ${m.err.message}`, m.err.meta)));

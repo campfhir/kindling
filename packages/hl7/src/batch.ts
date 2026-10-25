@@ -16,7 +16,7 @@
  * ```
  *
  * Every envelope segment is optional, so a bare run of messages is a file of one batch, and a
- * single message is a batch of one. Each message is handed to the root {@link parse}, so a batch
+ * single message is a batch of one. Each message is handed to {@link parseMessage}, so a batch
  * may mix message types and versions; a message that fails to parse does not fail the batch, its
  * entry in `messages` carries the error (with the batch number, message number and line in its
  * metadata) and the other messages are still returned.
@@ -34,7 +34,7 @@ import { BHS } from "./segments/v2.3/BHS.ts";
 import { BTS } from "./segments/v2.3/BTS.ts";
 import { QRD } from "./segments/v2.3/QRD.ts";
 import { QRF } from "./segments/v2.3/QRF.ts";
-import { parse, type ParseOptions, type ParsedHL7Message } from "./parse.ts";
+import { parseMessage, type ParseOptions, type ParsedHL7Message } from "./dispatch.ts";
 
 /** One batch of a parsed file. */
 export interface ParsedBatch {
@@ -45,7 +45,7 @@ export interface ParsedBatch {
   /** The QRF segment of a batch sent as a query response. */
   queryFilter?: QRF;
   /**
-   * One entry per message of the batch, in order: the root `parse()` result of that message. A
+   * One entry per message of the batch, in order: the `parseMessage()` result of that message. A
    * failed entry's error carries `{ batch, message, line }` metadata (1-based; the line is that of
    * the message's MSH in the input).
    */
@@ -76,7 +76,7 @@ const firstValue = (segment: { fields: { components: { subComponents: string[] }
 
 /**
  * Parses an HL7 batch file (or a single batch, or a bare run of messages) into its file header,
- * batches and file trailer, each message parsed by the root {@link parse} with `options`.
+ * batches and file trailer, each message parsed by {@link parseMessage} with `options`.
  *
  * Fails for an empty input, an envelope segment that cannot be parsed, a segment outside any
  * message or after FTS, and a second FHS. A BTS-1 or FTS-1 that disagrees with the messages or
@@ -141,7 +141,7 @@ export function parseBatch(batchString: string, options: ParseOptions = {}): Res
       const target = currentBatch();
       let end = i + 1;
       while (end < lines.length && nameOf(lines[end]) !== "MSH" && !ENVELOPE.has(nameOf(lines[end]))) end++;
-      const result = parse(lines.slice(i, end).join("\r"), options);
+      const result = parseMessage(lines.slice(i, end).join("\r"), options);
       if (!result.ok) {
         result.err.withMetadata({ batch: file.batches.length, message: target.messages.length + 1, line: i + 1 });
       }

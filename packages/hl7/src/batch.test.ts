@@ -37,7 +37,7 @@ describe("parseBatch", () => {
     expect(file.batches[0].trailer?.encode()).toBe("BTS|2|done|10~20");
     expect(file.batches[1].header).toBeInstanceOf(BHS);
     expect(file.batches[1].trailer).toBeInstanceOf(BTS);
-    // Each message is exactly what the root parse() returns for it.
+    // Each message is exactly what parse() returns for it on its own.
     expect(file.batches[0].messages[0].val).toEqual(parse(A01("M1")).val);
     const first = file.batches[0].messages[0].val!;
     if (first.structure === "ADT_A01") expect(first.parsed.visit.fields[1].components[0].subComponents[0]).toBe("I");
@@ -141,9 +141,11 @@ describe("parseBatch", () => {
     expect(parseBatch("FHS|^~").err?.message).toBe("Failed to parse FHS segment at line 1: Invalid encoding characters in FHS segment");
   });
 
-  test("parse() points a batch at parseBatch()", () => {
-    expect(parse(FILE).err?.message).toBe("Message starts with FHS: it is a batch file, use parseBatch()");
-    expect(parse(["BHS|^~\\&|APP", A01("1")].join("\r")).err?.message).toBe("Message starts with BHS: it is a batch file, use parseBatch()");
+  test("parse() hands a batch to parseBatch() and says so", () => {
+    const result = parse(FILE);
+    if (!result.val || result.val.kind !== "batch") throw new Error("expected a batch");
+    expect(structures(result.val)).toEqual([["ADT_A01", "ORU_R01"], ["ACK"]]);
+    expect(parse(A01("1")).val?.kind).toBe("message");
   });
 });
 

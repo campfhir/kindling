@@ -29,7 +29,8 @@ remaining [segments](docs/ROADMAP-SEGMENTS.md) and [event types](docs/ROADMAP-EV
 ```
 src/
 ├── index.ts                  # Core type exports and the root parse()
-├── parse.ts                  # parse(), selectParser(), identifyMessage(): MSH-9/MSH-12 dispatch
+├── parse.ts                  # parse(), selectParser(): one message or a batch file
+├── dispatch.ts               # parseMessage(), identifyMessage(): MSH-9/MSH-12 dispatch to the generated parsers
 ├── batch.ts                  # parseBatch(), encodeBatch(): the batch protocol (FHS/BHS … BTS/FTS)
 ├── types/                    # Version-agnostic core types
 │   ├── encoding.ts           # HL7 encoding characters
@@ -177,16 +178,19 @@ conversion.
 
 ### Parsing any message
 
-The root `parse()` reads MSH-9 (message type and trigger event) and MSH-12 (version), picks the
-generated parser of that message in that version and runs it. The result carries `version` and
-`structure`, so a `switch` or `if` on `structure` narrows `parsed` to the message's own shape
-(`ParsedADT_A01`, `ParsedORU_R01`, …), the very object `parseADT_A01()` would return.
+The root `parse()` takes any HL7 v2 input. One message is dispatched on MSH-9 (message type and
+trigger event) and MSH-12 (version) to the generated parser of that message in that version; the
+result has `kind: 'message'`, `version` and `structure`, and a `switch` or `if` on `structure`
+narrows `parsed` to the message's own shape (`ParsedADT_A01`, `ParsedORU_R01`, …), the very object
+`parseADT_A01()` would return. A batch file (FHS or BHS first, or more than one MSH) is parsed by
+`parseBatch()` instead and comes back with `kind: 'batch'` (see [Batches](#batches)).
 
 ```typescript
 import { parse } from '@campfhir/hl7';
 
 const result = parse(hl7String);
 if (!result.ok) throw new Error(result.err.message); // "Unknown HL7 v2.3 message type 'ZZZ^Z01' (MSH-9)", "ADT_A01 message must contain a PID segment", …
+if (result.val.kind === 'batch') return handleBatch(result.val); // fileHeader, batches, fileTrailer, warnings
 
 switch (result.val.structure) {
   case 'ADT_A01':
@@ -203,10 +207,11 @@ switch (result.val.structure) {
 }
 ```
 
-`selectParser(hl7String)` stops one step earlier and returns the parser it would run
-(`{ version, structure, messageType, parse }`), and `identifyMessage(hl7String)` returns only what
-MSH-9 and MSH-12 say. `MESSAGES` of `@campfhir/hl7/parsers/v2.3` is the map they dispatch on
-(message structure name → parser).
+`selectParser(hl7String)` stops one step earlier and returns the parser it would run: for a message
+`{ kind: 'message', version, structure, messageType, parse }`, for a batch `{ kind: 'batch', parse }`.
+`parseMessage()` and `selectMessageParser()` are the single-message halves (a batch is an error to
+them), and `identifyMessage(hl7String)` returns only what MSH-9 and MSH-12 say. `MESSAGES` of
+`@campfhir/hl7/parsers/v2.3` is the map they dispatch on (message structure name → parser).
 
 Versions are wired one per release (`SUPPORTED_VERSIONS`): 1.0 dispatches HL7 v2.3, and every
 MSH-12 value outside that list is an error until its release. To parse such a feed anyway, or one
@@ -222,9 +227,11 @@ acknowledges), then on MSH-9.3 when a sender includes it.
 ### Batches
 
 `parseBatch()` reads an HL7 batch file, `[FHS] { [BHS] [QRD] [QRF] { [MSH …] } [BTS] } [FTS]`
-(hl7.eu v2.3 chapter 2, §2.23.3), and hands every message to `parse()`, so a batch may mix message
-types. Every envelope segment is optional: a bare run of messages is a file of one batch, and a
-single message is a batch of one. A message that fails to parse does not fail the batch; its entry
+(hl7.eu v2.3 chapter 2, §2.23.3), and dispatches every message as `parse()` does, so a batch may
+mix message types. `parse()` itself calls it for any input that starts with FHS or BHS or holds
+more than one MSH, and returns its result with `kind: 'batch'`. Every envelope segment is
+optional: a bare run of messages is a file of one batch, and a single message is a batch of one.
+A message that fails to parse does not fail the batch; its entry
 in `messages` carries the error, with the batch number, message number and line in `err.meta`.
 A BTS-1 or FTS-1 count that disagrees with what the file holds is listed in `warnings`.
 
