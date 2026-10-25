@@ -7,7 +7,8 @@ A modular TypeScript library for building and parsing HL7v2 messages, published 
 ## Features
 
 - **Fluent Interface**: Type-safe segment construction with fluent API
-- **Parser**: Parse HL7v2 message strings back into structured data
+- **Parser**: Parse HL7v2 message strings back into structured data; `parse()` reads MSH-9 and
+  MSH-12 and picks the right message parser itself (see [Parsing any message](#parsing-any-message))
 - **Round-trip Support**: Build messages and parse them back with full fidelity
 - **Modular Architecture**: Organized by HL7 version for easy extension
 - **Version Support**: HL7 v2.3, v2.3.1, v2.4, v2.5 and v2.5.1 (see [Versions](#versions))
@@ -26,7 +27,8 @@ remaining [segments](docs/ROADMAP-SEGMENTS.md) and [event types](docs/ROADMAP-EV
 
 ```
 src/
-├── index.ts                  # Core type exports
+├── index.ts                  # Core type exports and the root parse()
+├── parse.ts                  # parse(), selectParser(), identifyMessage(): MSH-9/MSH-12 dispatch
 ├── types/                    # Version-agnostic core types
 │   ├── encoding.ts           # HL7 encoding characters
 │   ├── segment.ts            # Base segment types and classes
@@ -47,7 +49,7 @@ src/
 │   ├── v2.5/                 # re-exports + SFT, SPM, TQ1, TQ2, CER (and EDU-9)
 │   └── v2.5.1/               # extends v2.5 with 2.5.1-specific fields
 ├── structures/               # Generated: each message's structure as data (<MSG>_STRUCTURE)
-├── parsers/                  # Generated message parsers by version (v2.3 … v2.5.1)
+├── parsers/                  # Generated message parsers by version (v2.3 … v2.5.1); messages.ts = structure name → parser
 │   └── testdata/             # 30 sample HL7 messages for integration tests
 └── builders/                 # Generated message builders by version (v2.3 … v2.5.1)
 ```
@@ -114,14 +116,15 @@ version that introduced them:
 | `v2.5.1` | v2.5 | Version-specific fields and messages (e.g. `ORU_R30–R32`) |
 
 Version-specific differences in 2.3.1, 2.4 and 2.5 are filled in as they are implemented — see the
-[roadmap](ROADMAP.md).
+[roadmap](ROADMAP.md). The root `parse()` dispatches a version once it is complete: 1.0 parses
+v2.3, and each later version joins in its own minor release.
 
 ## Imports
 
 Core types, utilities, and the message editor are exported from the package root:
 
 ```typescript
-import { BaseSegment, HL7Message, ParserUtils, extractValue, CustomSegment, MessageEditor } from '@campfhir/hl7';
+import { parse, BaseSegment, HL7Message, ParserUtils, extractValue, CustomSegment, MessageEditor } from '@campfhir/hl7';
 
 // Date formatting utility (Go-style layout strings)
 import { dateUtils, DateOnly, DateTime } from '@campfhir/hl7';
@@ -169,6 +172,50 @@ has the same shape as the builder input, so a message can be parsed, edited and 
 conversion.
 
 ## Usage Examples
+
+### Parsing any message
+
+The root `parse()` reads MSH-9 (message type and trigger event) and MSH-12 (version), picks the
+generated parser of that message in that version and runs it. The result carries `version` and
+`structure`, so a `switch` or `if` on `structure` narrows `parsed` to the message's own shape
+(`ParsedADT_A01`, `ParsedORU_R01`, …), the very object `parseADT_A01()` would return.
+
+```typescript
+import { parse } from '@campfhir/hl7';
+
+const result = parse(hl7String);
+if (!result.ok) throw new Error(result.err.message); // "Unknown HL7 v2.3 message type 'ZZZ^Z01' (MSH-9)", "ADT_A01 message must contain a PID segment", …
+
+switch (result.val.structure) {
+  case 'ADT_A01':
+  case 'ADT_A04':
+    console.log(result.val.parsed.patient.encode(), result.val.parsed.visit.encode());
+    break;
+  case 'ORU_R01':
+    for (const { observations } of result.val.parsed.patientResults[0].orderObservations) {
+      observations?.forEach(({ observation }) => console.log(observation.encode()));
+    }
+    break;
+  case 'ACK':
+    console.log(result.val.parsed.acknowledgment.encode());
+}
+```
+
+`selectParser(hl7String)` stops one step earlier and returns the parser it would run
+(`{ version, structure, messageType, parse }`), and `identifyMessage(hl7String)` returns only what
+MSH-9 and MSH-12 say. `MESSAGES` of `@campfhir/hl7/parsers/v2.3` is the map they dispatch on
+(message structure name → parser).
+
+Versions are wired one per release (`SUPPORTED_VERSIONS`): 1.0 dispatches HL7 v2.3, and every
+MSH-12 value outside that list is an error until its release. To parse such a feed anyway, or one
+that leaves MSH-12 empty, name the version to parse as: `parse(hl7String, { version: '2.3' })`.
+The individual parsers of every version (`parseADT_A01` of `@campfhir/hl7/parsers/v2.5.1`, …)
+stay available regardless.
+
+In v2.3 MSH-9 has two components, message type and trigger event (`ADT^A01`); the message
+structure component (`ADT^A01^ADT_A01`) arrives in v2.3.1. The dispatcher keys on
+`<type>_<event>` first, then on the type alone (`ACK`, whose event names the message it
+acknowledges), then on MSH-9.3 when a sender includes it.
 
 ### Building an ORU^R01 Message
 
@@ -402,6 +449,7 @@ new MessageEditor(message)
 
 ```bash
 npx tsx examples/oru-example.ts                    # Build ORU^R01 message
+npx tsx examples/parse-any-example.ts              # Root parse(): dispatch on MSH-9/MSH-12
 npx tsx examples/parser-example.ts                 # Parse and round-trip
 npx tsx examples/oru-r30-example.ts                # Build ORU^R30 (point-of-care)
 npx tsx examples/parse-modify-encode-example.ts    # Parse, modify, re-encode

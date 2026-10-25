@@ -366,3 +366,17 @@ describe("patient care, referrals and the rest", () => {
     expect("createQRY_PC9" in bld251).toBe(true);
   });
 });
+
+describe("message registries", () => {
+  test("every version maps each of its parsers under its structure name", () => {
+    for (const [par, count] of [[par23, 276], [par231, 276], [par24, 277], [par25, 283], [par251, 283]] as const) {
+      const names = Object.keys(par.MESSAGES);
+      expect(names).toHaveLength(count);
+      for (const name of names) {
+        expect(par.MESSAGES[name as keyof typeof par.MESSAGES]).toBe(par[`parse${name}` as keyof typeof par]);
+      }
+    }
+    expect(par231.MESSAGES.ADT_A01).toBe(par23.MESSAGES.ADT_A01);
+    expect(par25.MESSAGES.ACK).not.toBe(par23.MESSAGES.ACK);
+  });
+});

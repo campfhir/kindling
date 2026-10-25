@@ -1,11 +1,12 @@
 /**
  * `@campfhir/hl7` — a zero-dependency TypeScript library for building and
- * parsing HL7v2 messages (v2.3 & v2.5.1), runnable on Node.js, Bun,
+ * parsing HL7v2 messages (v2.3 … v2.5.1), runnable on Node.js, Bun,
  * browsers, and Cloudflare Workers.
  *
- * This root entrypoint exposes the version-agnostic core: encoding, segment
- * and message primitives, schema types, the parser utilities, value
- * extraction, date formatting, custom segments, and the message editor.
+ * This root entrypoint exposes the root parser (`parse()`, which reads MSH-9 and MSH-12 and
+ * dispatches to the generated parser of the message) and the version-agnostic core: encoding,
+ * segment and message primitives, schema types, the parser utilities, value extraction, date
+ * formatting, custom segments, and the message editor.
  *
  * Versioned segments, parsers, and builders are imported from their own
  * subpaths, e.g. `@campfhir/hl7/segments/v2.5.1` or
@@ -39,12 +40,29 @@ export {
 } from "./types/structure.ts";
 export { ParserUtils, type SegmentParser } from "./types/parser.ts";
 
+// The root parser: any HL7 v2 message, dispatched on MSH-9 and MSH-12 to its generated parser.
+export {
+  parse,
+  selectParser,
+  identifyMessage,
+  SUPPORTED_VERSIONS,
+  type HL7Version,
+  type MessageType,
+  type MessageStructureOf,
+  type ParsedMessageOf,
+  type ParseOptions,
+  type ParsedHL7Message,
+  type ParsedHL7MessageOf,
+  type SelectedParser,
+  type SelectedParserOf,
+} from "./parse.ts";
+
 export * from "./utils/ValueExtractor.ts";
 export { dateUtils, type LayoutName, type FormatOptions, Layout, ANSIC, UnixDate, RubyDate, RFC822, RFC822Z, RFC850, RFC1123, RFC1123Z, RFC3339, RFC3339Nano, Kitchen, Stamp, StampMilli, StampMicro, StampNano, DateTime, DateOnly, TimeOnly } from "./utils/dateUtils.ts";
 export { CustomSegment } from "./utils/CustomSegment.ts";
 export { MessageEditor, InsertionBuilder, PositionedInsertionBuilder } from "./utils/MessageEditor.ts";
 
 // Versioned segments, structures, parsers, and builders must be imported directly:
-//   import { OBX } from "@nems.org/hl7/segments/v2.5.1"
-//   import { parseORU_R01 } from "@nems.org/hl7/parsers/v2.5.1"
-//   import { parseMFN_M02 } from "@nems.org/hl7/parsers/v2.3"
+//   import { OBX } from "@campfhir/hl7/segments/v2.5.1"
+//   import { parseORU_R01 } from "@campfhir/hl7/parsers/v2.5.1"
+//   import { parseMFN_M02 } from "@campfhir/hl7/parsers/v2.3"

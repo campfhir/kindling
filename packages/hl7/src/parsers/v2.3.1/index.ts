@@ -279,3 +279,4 @@ export { parseVXQ_V01 } from "./VXQ_V01_Parser.ts";
 export { parseVXR_V03 } from "./VXR_V03_Parser.ts";
 export { parseVXU_V04 } from "./VXU_V04_Parser.ts";
 export { parseVXX_V02 } from "./VXX_V02_Parser.ts";
+export { MESSAGES, type MessageStructure, type ParsedMessage } from "./messages.ts";

@@ -1,0 +1,52 @@
+import { parse, selectParser } from "../src/index.ts";
+
+/**
+ * Example: parse messages of unknown type with the root parser.
+ *
+ * `parse()` reads MSH-9 and MSH-12, picks the generated parser of that message in that version
+ * and runs it; `structure` narrows `parsed` to the message's own shape.
+ */
+const messages = [
+  `MSH|^~\\&|ADT|Hospital|EMR|Clinic|20231115140500||ADT^A01|MSG001|P|2.3
+EVN|A01|20231115140500
+PID|1||123456789^^^MRN||DOE^JOHN^A||19750225|M
+PV1|1|I|ICU^101^A`,
+  `MSH|^~\\&|LAB|Hospital|EMR|Clinic|20231115140500||ORU^R01|MSG002|P|2.3
+PID|1||123456789^^^MRN||DOE^JOHN^A
+OBR|1|ORD123|LAB456|CBC^Complete Blood Count^L
+OBX|1|NM|6690-2^WBC^LN|1|7.5|10*3/uL|4.0-11.0|N|||F`,
+  `MSH|^~\\&|EMR|Clinic|ADT|Hospital|20231115140501||ACK^A01|MSG003|P|2.3
+MSA|AA|MSG001`,
+  `MSH|^~\\&|EMR|Clinic|ADT|Hospital|20231115140501||ZZZ^Z01|MSG004|P|2.3`,
+  `MSH|^~\\&|EMR|Clinic|ADT|Hospital|20231115140501||ADT^A01|MSG005|P|2.5.1`,
+];
+
+for (const raw of messages) {
+  const selected = selectParser(raw);
+  if (!selected.ok) {
+    console.log(`✗ ${selected.err.message}`);
+    continue;
+  }
+  console.log(`→ ${selected.val.messageType.messageCode}^${selected.val.messageType.triggerEvent} is ${selected.val.structure} (HL7 v${selected.val.version})`);
+
+  const result = parse(raw);
+  if (!result.ok) {
+    console.log(`✗ ${result.err.message}`);
+    continue;
+  }
+  switch (result.val.structure) {
+    case "ADT_A01":
+      console.log(`  admitted ${result.val.parsed.patient.encode()} to ${result.val.parsed.visit.encode()}`);
+      break;
+    case "ORU_R01":
+      for (const { orderObservations } of result.val.parsed.patientResults) {
+        for (const { observations } of orderObservations) observations?.forEach(({ observation }) => console.log(`  ${observation.encode()}`));
+      }
+      break;
+    case "ACK":
+      console.log(`  ${result.val.parsed.acknowledgment.encode()}`);
+      break;
+    default:
+      console.log(`  ${result.val.parsed.message.encode().split("\r").length} segments`);
+  }
+}

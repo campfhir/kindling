@@ -53,6 +53,9 @@ describe("MSH field positions", () => {
 
   test("MSH-12 Version ID", () => {
     assertField(new MSH().versionId(SENTINEL), 11);
+    expect(new MSH().versionId("2.3").getVersionId()).toBe("2.3");
+    expect(MSH.parse("MSH|^~\\&|APP||||||ADT^A01|1|P|2.5.1^USA").val!.getVersionId()).toBe("2.5.1");
+    expect(new MSH().getVersionId()).toBe("");
   });
 
   test("MSH-13 Sequence Number", () => {

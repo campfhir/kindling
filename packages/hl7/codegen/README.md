@@ -8,7 +8,7 @@ per-version segment wrappers from the schemas in `schemas/`. Segments themselves
 ```sh
 pnpm codegen           # generate everything
 pnpm codegen --dry-run # print what would be written without touching files
-pnpm barrels           # regenerate the index.ts barrels
+pnpm barrels           # regenerate the index.ts barrels and the parsers' messages.ts registries
 pnpm exports           # regenerate the package.json "exports" map
 ```
 
@@ -99,6 +99,14 @@ bases before derived versions.
 Events that share a structure (ADT^A02 … reuse ADT^A01) set `baseMessage`; codegen then emits
 thin wrappers (a parser subclass, a builder subclass and a structure alias) around the base
 message of the same version. The `wrappers()` helper builds such a family from an event list.
+
+### Message registries
+
+`pnpm barrels` also writes `src/parsers/<version>/messages.ts`: the `MESSAGES` map from message
+structure name (`ADT_A01`, `ACK`) to that version's `parse<MSG>()`, with the `MessageStructure`
+and `ParsedMessage<S>` types derived from it. The root `parse()` (`src/parse.ts`) reads MSH-9 and
+MSH-12 and dispatches on the registry of the version; a version is wired into it by adding its
+registry to the `REGISTRIES` table there, one version per release.
 
 ## Directory structure
 
