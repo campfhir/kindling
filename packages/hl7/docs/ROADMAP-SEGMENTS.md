@@ -39,7 +39,8 @@ segment is `git mv` into the introducing version directory, adding it to that ve
 
 ### Unverified details in built segments
 
-- `AIG-5` (Resource Group) repeats in the Caristix v2.3 table (repeat ∞) but `AIG.resourceGroup()` writes a single value; making it repeat is a breaking signature change.
+(Kept from the first sweep; the ledger above is the current state of every field.)
+
 - `AIP-4` is named "Resource Role" in the Caristix table; the setter is still `resourceType()` for API compatibility.
 - `AL1-2` is named "Allergy Type" in the Caristix table; the setter is `allergenTypeCode()`.
 - `QRD-11` (What Data Code Value Qualifier) is typed `CM_VR` on hl7.eu. It is written as
@@ -59,15 +60,34 @@ from the Caristix reference (the same generator produces later versions' segment
 
 APR, ARQ, AUT, CDM, CM0, CM1, CM2, CSP, CSR, CSS, EQL, ERQ, FAC, GOL, LCC, LCH, LDP, LOC, LRL, MFA, NCK, NPU, NSC, NST, OM1, OM2, OM3, OM4, OM5, OM6, PCR, PDC, PEO, PES, PRB, PRC, PRD, PSH, PTH, RDF, RDT, RF1, RXC, RXG, SPR, TXA, URD, URS, VAR, VTQ
 
-Generated classes are correct on field positions and repetition (the position and round-trip
-tests cover them), but their setters take raw HL7 values (`SegmentFieldValue`) and have no typed
-composite helpers. Each needs two things before it counts as done: a field-by-field review of
-types and usage against hl7.eu, and typed helpers where the segment is used in messages. Replace
-a generated file with a hand-written class and the generator will leave it alone.
+Generated classes are correct on field positions, repetition and the composite datatypes that have a
+typed object in `utils/composites.ts` (CE, CX, XCN, XPN, XAD, XTN, EI, PI, PL, CP, PLN, LA2, XON, CWE);
+their other setters take raw HL7 values. `src/segments/v2.3/generated.test.ts` checks every
+generated setter, repetition and composite against the spec, and `roundtrip.test.ts` parses and
+re-encodes every one of the 110 classes. Replace a generated file with a hand-written class and the
+generator will leave it alone.
 
-The spec JSON of the generated v2.3 segments has not been checked field by field against hl7.eu
-(see `docs/validation/` for the checks done so far); treat it as the Caristix reference until that
-review is done.
+## Validation ledger (v2.3)
+
+Every field of every v2.3 segment is compared with three sources in
+[`docs/validation/v2.3-segment-ledger.md`](validation/v2.3-segment-ledger.md): the hl7.eu segment
+pages (authoritative), the Caristix tables (validation reference) and HAPI's v2.3 field definitions
+(cross-check). hl7.eu decides a disputed type, repeat, usage or length unless Caristix and HAPI
+agree with each other against it; every disagreement is written in the field's row either way, with
+the date the sources were read. Hand-written decisions (a count or value that overrides the rule,
+or a deliberate divergence) live in `codegen/validate/ledger-v23-notes.json` with their date and
+reason. To refresh: `codegen/validate/fetch-v23-sources.sh <dir>` then
+`node codegen/validate/ledger-v23.mjs <dir>` (add `--fix-spec` to write the decided values into
+`codegen/spec/v2.3-segments.json`, then regenerate the classes). The ledger also records, per
+segment, which tests exist (position tests, hand-written tests, round trip, spec-driven) and which
+setters only the position tests call.
+
+Sweep of 2026-10-25: the spec of the generated classes was corrected on 40 values (lengths and
+usages Caristix had differently from hl7.eu and HAPI, NSC-1's type, OM1-6's type); AIP-5 now takes
+repetitions; parsed fields now expose their repetitions (`Field.repetitions`), which the parser used
+to leave joined inside the first component; and MSH/BHS/FHS now encode repeating fields (they used
+to drop everything after the first repetition). The earlier reports in `docs/validation/` are kept
+for their history; the ledger supersedes them.
 
 ## v2.5.1 parity
 v2.5.1 segments are generated as thin wrappers over the v2.3 base (`pnpm codegen`), so every

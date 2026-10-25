@@ -109,11 +109,7 @@ export class BHS extends BaseSegment {
   /** Encodes the segment, writing the encoding characters into BHS-2. */
   encode(_encoding?: EncodingCharacters): string {
     const encoding = _encoding ?? this._encoding ?? DEFAULT_ENCODING;
-    const encodedFields = this.fields.slice(1).map((field) => {
-      return field.components
-        .map((comp) => comp.subComponents.join(encoding.subComponentSeparator))
-        .join(encoding.componentSeparator);
-    });
+    const encodedFields = this.fields.slice(1).map((field) => this.encodeField(field, encoding));
 
     const encodingChars =
       encoding.componentSeparator +

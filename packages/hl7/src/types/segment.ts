@@ -57,8 +57,8 @@ export abstract class BaseSegment implements Segment {
     return `${this.name}${encoding.fieldSeparator}${encodedFields.join(encoding.fieldSeparator)}`;
   }
 
-  /** Encode field. */
-  private encodeField(field: Field, encoding: EncodingCharacters): string {
+  /** Encodes one field: its components and sub-components, then each further repetition. */
+  protected encodeField(field: Field, encoding: EncodingCharacters): string {
     const first = field.components
       .map((comp) => this.encodeComponent(comp, encoding))
       .join(encoding.componentSeparator);

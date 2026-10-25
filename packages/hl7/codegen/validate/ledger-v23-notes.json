@@ -1,0 +1,32 @@
+{
+  "NSC": {
+    "date": "2026-10-25",
+    "count": 9,
+    "note": "The printed v2.3 text (Appendix C, https://www.hl7.eu/HL7v2x/v23/std23/appc.htm, item 01196 New facility) has nine fields. hl7.eu's segment index page and HAPI stop at eight; Caristix has nine. The printed standard wins, so NSC-9 stays."
+  },
+  "NSC-1": {
+    "date": "2026-10-25",
+    "decide": {
+      "type": "IS"
+    },
+    "note": "The printed v2.3 text (Appendix C, item 01188, user-defined table 0333), Caristix and the v2.4 table all type it IS; hl7.eu's v2.3 index page and HAPI say ID. Kept as IS. Written as a plain code either way."
+  },
+  "OM4-13": {
+    "date": "2026-10-25",
+    "accept": [
+      "rep"
+    ],
+    "note": "Single in the v2.3 table (hl7.eu, HAPI); Caristix and the v2.4 table (hl7.eu) make it repeat. The setter keeps taking repetitions so the v2.4 and later re-exports can send them."
+  },
+  "RXG-22": {
+    "date": "2026-10-25",
+    "accept": [
+      "rep"
+    ],
+    "note": "Single in the v2.3 table (hl7.eu, HAPI); Caristix and the v2.4 table (hl7.eu) make it repeat. The setter keeps taking repetitions so the v2.4 and later re-exports can send them."
+  },
+  "AIP-5": {
+    "date": "2026-10-25",
+    "note": "Repeats in the v2.3 table (hl7.eu, HAPI unbounded); Caristix says single, and so does the v2.4 table. The setter takes repetitions."
+  }
+}

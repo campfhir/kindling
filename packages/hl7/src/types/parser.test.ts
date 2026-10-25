@@ -110,3 +110,13 @@ test("ParserUtils getFieldString includes repetitions", () => {
   };
   expect(ParserUtils.getFieldString(field, DEFAULT_ENCODING)).toBe("a^b~c");
 });
+
+test('ParserUtils parseField splits repetitions into the first repetition and the rest', () => {
+  const field = ParserUtils.parseField('A^B~C^D~E', DEFAULT_ENCODING);
+  expect(field.components.map((c) => c.subComponents[0])).toEqual(['A', 'B']);
+  expect(field.repetitions).toHaveLength(2);
+  expect(field.repetitions![0].components.map((c) => c.subComponents[0])).toEqual(['C', 'D']);
+  expect(field.repetitions![1].components[0].subComponents).toEqual(['E']);
+  expect(ParserUtils.getFieldString(field, DEFAULT_ENCODING)).toBe('A^B~C^D~E');
+  expect(ParserUtils.parseField('A', DEFAULT_ENCODING).repetitions).toBeUndefined();
+});

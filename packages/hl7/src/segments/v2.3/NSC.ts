@@ -56,7 +56,7 @@ export class NSC extends BaseSegment {
     return this;
   }
 
-  /** NSC-6 New CPU (ST, max 30, optional) (chainable). */
+  /** NSC-6 New CPU (ST, max 30, conditional) (chainable). */
   newCpu(value: string): this {
     this.fields[5] = this.createField(value);
     return this;

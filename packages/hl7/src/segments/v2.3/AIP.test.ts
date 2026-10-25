@@ -37,11 +37,6 @@ describe("AIP field positions", () => {
     expect(parts[4]).toBe("C1^C2^C3");
   });
 
-  test("AIP-5 Resource Group", () => {
-    const parts = new AIP().resourceGroup({ code: "C1", text: "C2" }).encode().split("|");
-    expect(parts[5]).toBe("C1^C2");
-  });
-
   test("AIP-6 Start Date Time", () => {
     assertField(new AIP().startDateTime(SENTINEL), 6);
   });

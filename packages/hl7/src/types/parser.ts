@@ -4,19 +4,24 @@ import type { Segment, Field, Component } from "./segment.ts";
 
 /** Parser Utils. */
 export class ParserUtils {
-  /** Parse field. */
+  /**
+   * Parses one field: repetitions split on the repetition separator (the first one becomes the
+   * field's components, the rest its `repetitions`), then components and sub-components.
+   */
   static parseField(fieldStr: string, encoding: EncodingCharacters): Field {
     if (!fieldStr) {
       return { components: [{ subComponents: [""] }] };
     }
 
-    const componentStrings = fieldStr.split(encoding.componentSeparator);
+    const [first, ...rest] = fieldStr.split(encoding.repetitionSeparator);
+    const componentStrings = first.split(encoding.componentSeparator);
     const components: Component[] = componentStrings.map((compStr) => {
       const subComponents = compStr.split(encoding.subComponentSeparator);
       return { subComponents };
     });
 
-    return { components };
+    if (rest.length === 0) return { components };
+    return { components, repetitions: rest.map((rep) => ParserUtils.parseField(rep, encoding)) };
   }
 
   /** Get field string. */
