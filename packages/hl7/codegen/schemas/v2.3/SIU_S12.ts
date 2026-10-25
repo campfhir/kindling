@@ -7,9 +7,12 @@ import { wrappers } from "../helpers";
  * S16: Discontinuation  S17: Deletion  S18–S24: Addition/Modification/Cancellation/Discontinuation/
  * Deletion of service or resource, Blocked and Opened schedule time slots  S26: Patient No-Show
  *
- * All SIU trigger events share the same message structure (checked on hl7-definition.caristix.com
- * for S12, S18 and S24 in v2.3). Caristix lists no PD1 in the v2.3 PATIENT group; it appears in
- * v2.5, where [{TQ1}] also follows SCH. Both are kept as optional here, TQ1 is not modelled yet.
+ * All SIU trigger events share the same message structure: MSH SCH [{NTE}] [{ PATIENT: PID [PV1] [PV2]
+ * [{OBX}] [{DG1}] }] { RESOURCES: RGS [{ AIS [{NTE}] }] [{ AIG [{NTE}] }] [{ AIL [{NTE}] }] [{ AIP [{NTE}] }] }
+ * (hl7.eu chapter 10 section 10.3, Caristix and HAPI v23 agree). PD1 joins the PATIENT group in
+ * 2.3.1 and [{TQ1}] follows SCH from 2.5 (see those schemas).
+ * Sources: https://www.hl7.eu/HL7v2x/v23/std23/ch10.htm (10.3),
+ * https://hl7-definition.caristix.com/v2/HL7v2.3/TriggerEvents/SIU_S12
  */
 export const SIU_S12_SCHEMA: MessageSchema = {
   messageType: "SIU",
@@ -26,7 +29,6 @@ export const SIU_S12_SCHEMA: MessageSchema = {
       exportTypeName: "ParsedSIUPatient",
       segments: [
         { name: "PID", required: true, repeating: false },
-        { name: "PD1", required: false, repeating: false },
         { name: "PV1", required: false, repeating: false },
         { name: "PV2", required: false, repeating: false },
         { name: "OBX", required: false, repeating: true },

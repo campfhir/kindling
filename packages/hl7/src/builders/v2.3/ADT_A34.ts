@@ -1,7 +1,7 @@
 /**
  * Builder for ADT^A34 messages (HL7 v2.3).
  *
- * Structure: MSH EVN PID [PD1] MRG [PV1]
+ * Structure: MSH EVN PID [PD1] MRG
  *
  * @module
  */
@@ -15,14 +15,11 @@ import type { EVN } from "../../segments/v2.3/EVN.ts";
 import type { PID } from "../../segments/v2.3/PID.ts";
 import type { PD1 } from "../../segments/v2.3/PD1.ts";
 import type { MRG } from "../../segments/v2.3/MRG.ts";
-import type { PV1 } from "../../segments/v2.3/PV1.ts";
 
 /** The optional segments and groups of an ADT^A34 (HL7 v2.3) message. */
 export interface ADT_A34Options {
   /** The PD1 segment. */
   patientDemographics?: PD1;
-  /** The PV1 segment. */
-  visit?: PV1;
 }
 
 /** Builder for HL7 ADT^A34 (HL7 v2.3) messages. */

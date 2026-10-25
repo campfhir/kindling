@@ -214,6 +214,22 @@ instance is kept when it stops at a segment that can *start* the sibling (OBX th
 and a repeating group hands a failed extra instance back when its start segment is also the next
 sibling segment (the lone PSH of SUR^P09).
 
+Done in 1.1 (v2.3.1 complete): a message structure ledger (`docs/validation/v2.3-message-ledger.md`,
+`v2.3.1-message-ledger.md`) compares every structure with the hl7.eu chapter tables (v2.3), Caristix
+and HAPI. It found the v2.3 ADT family modelled too broadly: A02, A03, A06/A07, A09–A12, A15, A16,
+A21–A23, A25–A27, A29, A32, A33 and A38 have their own shorter shapes, A18 is `[MRG] PV1`, A30/A34–A36
+and A46–A49 have no PV1, A37 lists two asymmetric patients, A39–A42 and A43/A44 are repeating
+PATIENT groups, A45 repeats `MRG PV1` and A50/A51 require PV1 (hl7.eu chapter 3, Caristix and HAPI
+v23 agree per event; `codegen/schemas/v2.3/ADT.ts` lists the 18 families). ORU^R01/W01 lose the NK1
+and SIU the PD1 that only arrive in 2.3.1, and ORR^O02/OSR^Q06 list the order detail segment, its
+notes and CTIs as siblings of ORC as the standard does. For 2.3.1 every message is generated
+against the 2.3.1 segments (`codegen/schemas/v2.3.1/version.ts`), with the structure changes
+Caristix and HAPI v231 agree on: [QAK] in the query responses, the renumbered enhanced-mode
+queries, RAS^O01, CSU's required study observations, repeating IN3 (ADT A01 family, A06/A07, BAR
+P01/P05, DFT^P03, ORM^O01, ADR^A19), the A06/A07 erratum, A16's repeating DG1, A37's second PD1,
+NK1 in ORU^R01/W01 and PD1 in SIU. The remaining differences between the sources are recorded with
+their reasons in `codegen/validate/message-notes.json`.
+
 Next: the later-version messages listed under v2.5.1 parity.
 
 ## v2.5.1 parity

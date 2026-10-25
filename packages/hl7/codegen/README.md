@@ -90,6 +90,8 @@ bases before derived versions.
   An existing wrapper file is never overwritten, so 2.5.1-specific fields can be added by hand.
   Every message is generated against these classes.
 - **Re-export version** (`reexport: true`: `v2.3.1`, `v2.4`, `v2.5`): the messages it lists are
+  generated against its own segment modules (v2.3.1 lists every message, so all 276 are generated
+  against the 2.3.1 segment classes; v2.4 and v2.5 list only the messages whose structure changed);
   generated (against its own segment modules); every other segment, structure, parser and builder
   of the base version is mirrored as `export * from "../<base>/X.ts"`. Segments first introduced
   in the version are hand-written and listed in `ownSegments`; messages the version withdrew are
@@ -115,7 +117,7 @@ codegen/
   schemas/
     helpers.ts         # req/opt/reqList/optList/group/choice, withSft, wrappers, reversion
     v2.3/              # one file per message family + version.ts + index.ts
-    v2.3.1/            # re-export version: version.ts only
+    v2.3.1/            # every message re-versioned from v2.3, plus the 2.3.1 changes (ADT.ts, changed.ts, …)
     v2.4/              # messages that changed in 2.4 (ADT A01 family, BAR, DFT, ORM, VXU)
     v2.5/              # messages that changed in 2.5 (+ SFT, TQ1/TQ2, SPM, ORU^R30 ...)
     v2.5.1/            # re-versions the v2.5 list (nothing changed between 2.5 and 2.5.1)

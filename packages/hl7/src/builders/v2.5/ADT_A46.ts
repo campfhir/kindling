@@ -1,7 +1,7 @@
 /**
  * Builder for ADT^A46 messages (HL7 v2.5).
  *
- * Structure: MSH [{SFT}] EVN PID [PD1] MRG [PV1]
+ * Structure: MSH [{SFT}] EVN PID [PD1] MRG
  * Shares the ADT^A34 structure.
  *
  * @module

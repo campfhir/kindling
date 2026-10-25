@@ -1,7 +1,7 @@
 /**
  * Parser for ADT^A36 messages (HL7 v2.3).
  *
- * Structure: MSH EVN PID [PD1] MRG [PV1]
+ * Structure: MSH EVN PID [PD1] MRG
  * Shares the ADT^A34 structure.
  *
  * @module

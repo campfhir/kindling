@@ -1,7 +1,10 @@
 /**
- * ADT_A47 structure for HL7 v2.3.1 — identical to v2.3, re-exported.
+ * Message structure for ADT^A47 messages (HL7 v2.3.1).
+ *
+ * Structure: MSH EVN PID [PD1] MRG
+ * Shares the ADT^A34 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3/ADT_A47.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+export { ADT_A34_STRUCTURE as ADT_A47_STRUCTURE } from "./ADT_A34.ts";

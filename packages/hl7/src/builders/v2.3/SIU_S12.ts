@@ -1,7 +1,7 @@
 /**
  * Builder for SIU^S12 messages (HL7 v2.3).
  *
- * Structure: MSH SCH [{NTE}] [{ PATIENT: PID [PD1] [PV1] [PV2] [{OBX}] [{DG1}] }] { RESOURCES: RGS [{ SERVICE: AIS [{NTE}] }] [{ GENERAL_RESOURCE: AIG [{NTE}] }] [{ LOCATION_RESOURCE: AIL [{NTE}] }] [{ PERSONNEL_RESOURCE: AIP [{NTE}] }] }
+ * Structure: MSH SCH [{NTE}] [{ PATIENT: PID [PV1] [PV2] [{OBX}] [{DG1}] }] { RESOURCES: RGS [{ SERVICE: AIS [{NTE}] }] [{ GENERAL_RESOURCE: AIG [{NTE}] }] [{ LOCATION_RESOURCE: AIL [{NTE}] }] [{ PERSONNEL_RESOURCE: AIP [{NTE}] }] }
  *
  * @module
  */
@@ -14,7 +14,6 @@ import type { MSH } from "../../segments/v2.3/MSH.ts";
 import type { SCH } from "../../segments/v2.3/SCH.ts";
 import type { NTE } from "../../segments/v2.3/NTE.ts";
 import type { PID } from "../../segments/v2.3/PID.ts";
-import type { PD1 } from "../../segments/v2.3/PD1.ts";
 import type { PV1 } from "../../segments/v2.3/PV1.ts";
 import type { PV2 } from "../../segments/v2.3/PV2.ts";
 import type { OBX } from "../../segments/v2.3/OBX.ts";
@@ -29,8 +28,6 @@ import type { AIP } from "../../segments/v2.3/AIP.ts";
 export interface SIUPatientGroup {
   /** The PID segment. */
   patient: PID;
-  /** The PD1 segment. */
-  patientDemographics?: PD1;
   /** The PV1 segment. */
   visit?: PV1;
   /** The PV2 segment. */

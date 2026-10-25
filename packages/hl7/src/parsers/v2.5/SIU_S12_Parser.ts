@@ -1,7 +1,7 @@
 /**
  * Parser for SIU^S12 messages (HL7 v2.5).
  *
- * Structure: MSH SCH [{TQ1}] [{NTE}] [{ PATIENT: PID [PD1] [PV1] [PV2] [{OBX}] [{DG1}] }] { RESOURCES: RGS [{ SERVICE: AIS [{NTE}] }] [{ GENERAL_RESOURCE: AIG [{NTE}] }] [{ LOCATION_RESOURCE: AIL [{NTE}] }] [{ PERSONNEL_RESOURCE: AIP [{NTE}] }] }
+ * Structure: MSH SCH [{TQ1}] [{NTE}] [{ PATIENT: PID [PV1] [PV2] [{OBX}] [{DG1}] }] { RESOURCES: RGS [{ SERVICE: AIS [{NTE}] }] [{ GENERAL_RESOURCE: AIG [{NTE}] }] [{ LOCATION_RESOURCE: AIL [{NTE}] }] [{ PERSONNEL_RESOURCE: AIP [{NTE}] }] }
  *
  * @module
  */
@@ -15,7 +15,6 @@ import { SCH } from "../../segments/v2.5/SCH.ts";
 import { TQ1 } from "../../segments/v2.5/TQ1.ts";
 import { NTE } from "../../segments/v2.5/NTE.ts";
 import { PID } from "../../segments/v2.5/PID.ts";
-import { PD1 } from "../../segments/v2.5/PD1.ts";
 import { PV1 } from "../../segments/v2.5/PV1.ts";
 import { PV2 } from "../../segments/v2.5/PV2.ts";
 import { OBX } from "../../segments/v2.5/OBX.ts";
@@ -30,8 +29,6 @@ import { AIP } from "../../segments/v2.5/AIP.ts";
 export interface ParsedSIUPatient {
   /** The PID segment. */
   patient: PID;
-  /** The PD1 segment. */
-  patientDemographics?: PD1;
   /** The PV1 segment. */
   visit?: PV1;
   /** The PV2 segment. */
@@ -111,7 +108,6 @@ const PARSERS: SegmentParsers = {
   TQ1: (s, e) => TQ1.parse(s, e),
   NTE: (s, e) => NTE.parse(s, e),
   PID: (s, e) => PID.parse(s, e),
-  PD1: (s, e) => PD1.parse(s, e),
   PV1: (s, e) => PV1.parse(s, e),
   PV2: (s, e) => PV2.parse(s, e),
   OBX: (s, e) => OBX.parse(s, e),

@@ -1,7 +1,7 @@
 /**
  * Parser for ADT^A34 messages (HL7 v2.3).
  *
- * Structure: MSH EVN PID [PD1] MRG [PV1]
+ * Structure: MSH EVN PID [PD1] MRG
  *
  * @module
  */
@@ -15,7 +15,6 @@ import { EVN } from "../../segments/v2.3/EVN.ts";
 import { PID } from "../../segments/v2.3/PID.ts";
 import { PD1 } from "../../segments/v2.3/PD1.ts";
 import { MRG } from "../../segments/v2.3/MRG.ts";
-import { PV1 } from "../../segments/v2.3/PV1.ts";
 
 /** Structured result of parsing an HL7 ADT^A34 (HL7 v2.3) message. */
 export interface ParsedADT_A34 extends ParsedMessageBase {
@@ -29,8 +28,6 @@ export interface ParsedADT_A34 extends ParsedMessageBase {
   patientDemographics?: PD1;
   /** The MRG segment. */
   merge: MRG;
-  /** The PV1 segment. */
-  visit?: PV1;
 }
 
 /** The segment parsers of ADT^A34 (HL7 v2.3). */
@@ -40,7 +37,6 @@ const PARSERS: SegmentParsers = {
   PID: (s, e) => PID.parse(s, e),
   PD1: (s, e) => PD1.parse(s, e),
   MRG: (s, e) => MRG.parse(s, e),
-  PV1: (s, e) => PV1.parse(s, e),
 };
 
 /** Parser for HL7 ADT^A34 (HL7 v2.3) messages. */

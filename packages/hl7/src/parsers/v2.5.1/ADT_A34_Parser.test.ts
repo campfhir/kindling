@@ -15,7 +15,6 @@ const fullMessage = [
   "PID|1||12345^^^MRN^MR||Doe^John^Q||19800115|M",
   "PD1|||CLINIC^MAIN",
   "MRG|OLD-12345^^^MRN^MR",
-  "PV1|1|I|WEST^101^1",
 ].join("\r");
 
 describe("parseADT_A34 — minimal message", () => {
@@ -64,12 +63,9 @@ describe("parseADT_A34 — optional segments", () => {
     expect(result.val!.patientDemographics!.name).toBe("PD1");
   });
 
-  test("extracts PV1", () => {
+  test("has no PV1 (A34 is MSH [{SFT}] EVN PID [PD1] MRG)", () => {
     const result = parseADT_A34(fullMessage);
-    expect(result.val!.visit).toBeTruthy();
-    expect(result.val!.visit!.name).toBe("PV1");
-    const patientClass = ParserUtils.getComponent(result.val!.visit!.fields[1], 0);
-    expect(patientClass).toBe("I");
+    expect("visit" in result.val!).toBe(false);
   });
 });
 

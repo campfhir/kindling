@@ -1,7 +1,10 @@
 /**
- * RRI_I13 structure for HL7 v2.3.1 — identical to v2.3, re-exported.
+ * Message structure for RRI^I13 messages (HL7 v2.3.1).
+ *
+ * Structure: MSH [MSA] [RF1] [ AUTHORIZATION: AUT [CTD] ] { PROVIDER: PRD [{CTD}] } PID [ACC] [{DG1}] [{DRG}] [{AL1}] [{ PROCEDURE: PR1 [ AUTHORIZATION: AUT [CTD] ] }] [{ OBSERVATION: OBR [{NTE}] [{ RESULTS: OBX [{NTE}] }] }] [ PATIENT_VISIT: PV1 [PV2] ] [{NTE}]
+ * Shares the RRI^I12 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3/RRI_I13.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+export { RRI_I12_STRUCTURE as RRI_I13_STRUCTURE } from "./RRI_I12.ts";

@@ -1,7 +1,7 @@
 /**
  * Message structure for ADT^A34 messages (HL7 v2.5.1).
  *
- * Structure: MSH [{SFT}] EVN PID [PD1] MRG [PV1]
+ * Structure: MSH [{SFT}] EVN PID [PD1] MRG
  *
  * @module
  */
@@ -16,5 +16,4 @@ export const ADT_A34_STRUCTURE: StructureItem[] = [
   { name: "PID", required: true, repeating: false },
   { name: "PD1", required: false, repeating: false },
   { name: "MRG", required: true, repeating: false },
-  { name: "PV1", required: false, repeating: false },
 ];

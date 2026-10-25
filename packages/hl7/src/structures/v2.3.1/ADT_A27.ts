@@ -1,7 +1,10 @@
 /**
- * ADT_A27 structure for HL7 v2.3.1 — identical to v2.3, re-exported.
+ * Message structure for ADT^A27 messages (HL7 v2.3.1).
+ *
+ * Structure: MSH EVN PID [PD1] PV1 [PV2] [{DB1}] [{OBX}]
+ * Shares the ADT^A02 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3/ADT_A27.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+export { ADT_A02_STRUCTURE as ADT_A27_STRUCTURE } from "./ADT_A02.ts";

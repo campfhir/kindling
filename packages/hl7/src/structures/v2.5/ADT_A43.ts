@@ -1,10 +1,26 @@
 /**
  * Message structure for ADT^A43 messages (HL7 v2.5).
  *
- * Structure: MSH [{SFT}] EVN PID [PD1] MRG [PV1]
- * Shares the ADT^A34 structure.
+ * Structure: MSH [{SFT}] EVN { PATIENT: PID [PD1] MRG }
  *
  * @module
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
-export { ADT_A34_STRUCTURE as ADT_A43_STRUCTURE } from "./ADT_A34.ts";
+import type { StructureItem } from "../../types/schema.ts";
+
+/** The segments, choices and groups of ADT^A43 (HL7 v2.5), in order. */
+export const ADT_A43_STRUCTURE: StructureItem[] = [
+  { name: "MSH", required: true, repeating: false },
+  { name: "SFT", required: false, repeating: true },
+  { name: "EVN", required: true, repeating: false },
+  {
+    name: "PATIENT",
+    required: true,
+    repeating: true,
+    segments: [
+      { name: "PID", required: true, repeating: false },
+      { name: "PD1", required: false, repeating: false },
+      { name: "MRG", required: true, repeating: false },
+    ],
+  },
+];

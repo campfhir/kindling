@@ -18,11 +18,13 @@ event, field tables, data types, message structures), use **only** these sources
   project is MIT, so do not copy HAPI code into this repository or generate code from it without a
   license decision.
 
-Segment field tables for v2.3 are tracked in `packages/hl7/docs/validation/v2.3-segment-ledger.md`
-(every field, every source, dated, with the contradictions). Check it before looking a field up
-again. When the sources disagree, hl7.eu decides unless Caristix and HAPI agree with each other
-against it; record the disagreement and any hand decision in
-`packages/hl7/codegen/validate/ledger-v23-notes.json` with the date.
+Segment field tables are tracked per version in `packages/hl7/docs/validation/<version>-segment-ledger.md`
+(every field, every source, dated, with the contradictions) and message structures in
+`<version>-message-ledger.md`. Check them before looking a field or a structure up again. When the
+sources disagree, hl7.eu decides unless Caristix and HAPI agree with each other against it; record
+the disagreement and any hand decision with the date in
+`packages/hl7/codegen/validate/ledger-v23-notes.json` (v2.3 segments), `ledger-v231-notes.json`
+(v2.3.1 segments) or `message-notes.json` (structures, by version and event).
 
 Do not rely on other sites (vendor guides, blogs, whitepapers, package docs) or on memory alone.
 If those sources cannot confirm a fact, say so and flag it as unverified instead of

@@ -1,8 +1,8 @@
 /**
  * Builder for ADT^A25 messages (HL7 v2.5).
  *
- * Structure: MSH [{SFT}] EVN PID [PD1] [{ROL}] [{NK1}] PV1 [PV2] [{ROL}] [{DB1}] [{OBX}] [{AL1}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] }] [{GT1}] [{ INSURANCE: IN1 [IN2] [{IN3}] [{ROL}] }] [ACC] [UB1] [UB2] [PDA]
- * Shares the ADT^A01 structure.
+ * Structure: MSH [{SFT}] EVN PID [PD1] PV1 [PV2] [{DB1}] [{OBX}]
+ * Shares the ADT^A02 structure.
  *
  * @module
  */
@@ -12,14 +12,13 @@ import type { MSH } from "../../segments/v2.5/MSH.ts";
 import type { EVN } from "../../segments/v2.5/EVN.ts";
 import type { PID } from "../../segments/v2.5/PID.ts";
 import type { PV1 } from "../../segments/v2.5/PV1.ts";
-import { ADT_A01, type ADT_A01Options, type ProcedureGroup, type InsuranceGroup } from "./ADT_A01.ts";
+import { ADT_A02, type ADT_A02Options } from "./ADT_A02.ts";
 
-export type { ProcedureGroup, InsuranceGroup };
 /** The optional segments and groups of an ADT^A25 (HL7 v2.5) message. */
-export type ADT_A25Options = ADT_A01Options;
+export type ADT_A25Options = ADT_A02Options;
 
 /** Builder for HL7 ADT^A25 (HL7 v2.5) messages. */
-export class ADT_A25<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TPV1 extends PV1 = PV1> extends ADT_A01<TMSH, TEVN, TPID, TPV1> {
+export class ADT_A25<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TPV1 extends PV1 = PV1> extends ADT_A02<TMSH, TEVN, TPID, TPV1> {
   /** The message name used in error messages. */
   protected override readonly messageName: string = "ADT_A25";
 }

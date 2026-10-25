@@ -1,0 +1,3332 @@
+{
+ "ARQ": {
+  "title": "Appointment Request",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Placer Appointment ID",
+    "length": "75",
+    "type": "EI",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Filler Appointment ID",
+    "length": "75",
+    "type": "EI",
+    "opt": "C",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Occurrence Number",
+    "length": "5",
+    "type": "NM",
+    "opt": "C",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 4,
+    "name": "Placer Group Number",
+    "length": "22",
+    "type": "EI",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 5,
+    "name": "Schedule ID",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "Request Event Reason",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 7,
+    "name": "Appointment Reason",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "0276"
+   },
+   {
+    "seq": 8,
+    "name": "Appointment Type",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "0277"
+   },
+   {
+    "seq": 9,
+    "name": "Appointment Duration",
+    "length": "20",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 10,
+    "name": "Appointment Duration Units",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 11,
+    "name": "Requested Start Date/Time Range",
+    "length": "53",
+    "type": "DR",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 12,
+    "name": "Priority",
+    "length": "5",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 13,
+    "name": "Repeating Interval",
+    "length": "100",
+    "type": "RI",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 14,
+    "name": "Repeating Interval Duration",
+    "length": "5",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 15,
+    "name": "Placer Contact Person",
+    "length": "48",
+    "type": "XCN",
+    "opt": "R",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 16,
+    "name": "Placer Contact Phone Number",
+    "length": "40",
+    "type": "XTN",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 17,
+    "name": "Placer Contact Address",
+    "length": "106",
+    "type": "XAD",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 18,
+    "name": "Placer Contact Location",
+    "length": "80",
+    "type": "PL",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 19,
+    "name": "Entered By Person",
+    "length": "48",
+    "type": "XCN",
+    "opt": "R",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 20,
+    "name": "Entered By Phone Number",
+    "length": "40",
+    "type": "XTN",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 21,
+    "name": "Entered By Location",
+    "length": "80",
+    "type": "PL",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 22,
+    "name": "Parent Placer Appointment ID",
+    "length": "75",
+    "type": "EI",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 23,
+    "name": "Parent Filler Appointment ID",
+    "length": "75",
+    "type": "EI",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   }
+  ]
+ },
+ "CDM": {
+  "title": "Charge Description Master",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Primary Key Value",
+    "length": "200",
+    "type": "CE",
+    "opt": "R",
+    "rep": "-",
+    "table": "0132"
+   },
+   {
+    "seq": 2,
+    "name": "Charge Code Alias",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Charge Description Short",
+    "length": "20",
+    "type": "ST",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 4,
+    "name": "Charge Description Long",
+    "length": "250",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 5,
+    "name": "Description Override Indicator",
+    "length": "1",
+    "type": "IS",
+    "opt": "O",
+    "rep": "-",
+    "table": "0268"
+   },
+   {
+    "seq": 6,
+    "name": "Exploding Charges",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 7,
+    "name": "Procedure Code",
+    "length": "80",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 8,
+    "name": "Active/Inactive Flag",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0183"
+   },
+   {
+    "seq": 9,
+    "name": "Inventory Number",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 10,
+    "name": "Resource Load",
+    "length": "12",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 11,
+    "name": "Contract Number",
+    "length": "200",
+    "type": "CK",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 12,
+    "name": "Contract Organization",
+    "length": "200",
+    "type": "XON",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 13,
+    "name": "Room Fee Indicator",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0136"
+   }
+  ]
+ },
+ "CM0": {
+  "title": "Clinical Study Master",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "CM0 - Set ID",
+    "length": "4",
+    "type": "SI",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Sponsor Study ID",
+    "length": "60",
+    "type": "EI",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Alternate Study ID",
+    "length": "60",
+    "type": "EI",
+    "opt": "O",
+    "rep": "3",
+    "table": ""
+   },
+   {
+    "seq": 4,
+    "name": "Title of Study",
+    "length": "300",
+    "type": "ST",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 5,
+    "name": "Chairman of Study",
+    "length": "60",
+    "type": "XCN",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "Last IRB Approval Date",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 7,
+    "name": "Total Accrual to Date",
+    "length": "8",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 8,
+    "name": "Last Accrual Date",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 9,
+    "name": "Contact for Study",
+    "length": "60",
+    "type": "XCN",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 10,
+    "name": "Contact's Tel. Number",
+    "length": "40",
+    "type": "XTN",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 11,
+    "name": "Contact's Address",
+    "length": "100",
+    "type": "XAD",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   }
+  ]
+ },
+ "CM1": {
+  "title": "Clinical Study Phase Master",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "CM1 - Set ID",
+    "length": "4",
+    "type": "SI",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Study Phase Identifier",
+    "length": "60",
+    "type": "CE",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Description of Study Phase",
+    "length": "300",
+    "type": "ST",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   }
+  ]
+ },
+ "CSP": {
+  "title": "Clinical Study Phase",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Study Phase Identifier",
+    "length": "60",
+    "type": "CE",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Date/time Study Phase Began",
+    "length": "26",
+    "type": "TS",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Date/time Study Phase Ended",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 4,
+    "name": "Study Phase Evaluability",
+    "length": "60",
+    "type": "CE",
+    "opt": "C",
+    "rep": "-",
+    "table": ""
+   }
+  ]
+ },
+ "CSR": {
+  "title": "Clinical Study Registration",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Sponsor Study ID",
+    "length": "60",
+    "type": "EI",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Alternate Study ID",
+    "length": "60",
+    "type": "EI",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Institution Registering the Patient",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 4,
+    "name": "Sponsor Patient ID",
+    "length": "30",
+    "type": "CX",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 5,
+    "name": "Alternate Patient ID",
+    "length": "30",
+    "type": "CX",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "Date/Time of Patient Study Registration",
+    "length": "26",
+    "type": "TS",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 7,
+    "name": "Person Performing Study Registration",
+    "length": "60",
+    "type": "XCN",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 8,
+    "name": "Study Authorizing Provider",
+    "length": "60",
+    "type": "XCN",
+    "opt": "R",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 9,
+    "name": "Date/time Patient Study Consent Signed",
+    "length": "26",
+    "type": "TS",
+    "opt": "C",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 10,
+    "name": "Patient Study Eligibility Status",
+    "length": "60",
+    "type": "CE",
+    "opt": "C",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 11,
+    "name": "Study Randomization Date/time",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "3",
+    "table": ""
+   },
+   {
+    "seq": 12,
+    "name": "Study Randomized Arm",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "3",
+    "table": ""
+   },
+   {
+    "seq": 13,
+    "name": "Stratum for Study Randomization",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "3",
+    "table": ""
+   },
+   {
+    "seq": 14,
+    "name": "Patient Evaluability Status",
+    "length": "60",
+    "type": "CE",
+    "opt": "C",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 15,
+    "name": "Date/time Ended Study",
+    "length": "26",
+    "type": "TS",
+    "opt": "C",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 16,
+    "name": "Reason Ended Study",
+    "length": "60",
+    "type": "CE",
+    "opt": "C",
+    "rep": "-",
+    "table": ""
+   }
+  ]
+ },
+ "CSS": {
+  "title": "Clinical Study Data Schedule",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Study Scheduled Time Point",
+    "length": "60",
+    "type": "CE",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Study Scheduled Patient Time Point",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Study Quality Control Codes",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "3",
+    "table": ""
+   }
+  ]
+ },
+ "FAC": {
+  "title": "Facility",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Facility ID",
+    "length": "20",
+    "type": "EI",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Facility Type",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0331"
+   },
+   {
+    "seq": 3,
+    "name": "Facility Address",
+    "length": "200",
+    "type": "XAD",
+    "opt": "R",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 4,
+    "name": "Facility Telecommunication",
+    "length": "44",
+    "type": "XTN",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 5,
+    "name": "Contact Person",
+    "length": "60",
+    "type": "XCN",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "Contact Title",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 7,
+    "name": "Contact Address",
+    "length": "200",
+    "type": "XAD",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 8,
+    "name": "Contact Telecommunication",
+    "length": "44",
+    "type": "XTN",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 9,
+    "name": "Signature Authority",
+    "length": "60",
+    "type": "XCN",
+    "opt": "R",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 10,
+    "name": "Signature Authority Title",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 11,
+    "name": "Signature Authority Address",
+    "length": "200",
+    "type": "XAD",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 12,
+    "name": "Signature Authority Telecommunication",
+    "length": "44",
+    "type": "XTN",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   }
+  ]
+ },
+ "LCH": {
+  "title": "Location Characteristic",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Primary Key Value",
+    "length": "200",
+    "type": "PL",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Segment Action Code",
+    "length": "3",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0206"
+   },
+   {
+    "seq": 3,
+    "name": "Segment Unique Key",
+    "length": "80",
+    "type": "EI",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 4,
+    "name": "Location Characteristic ID",
+    "length": "80",
+    "type": "CE",
+    "opt": "R",
+    "rep": "-",
+    "table": "0324"
+   },
+   {
+    "seq": 5,
+    "name": "Location Characteristic Value",
+    "length": "80",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   }
+  ]
+ },
+ "LDP": {
+  "title": "Location Department",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "LDP Primary Key Value",
+    "length": "200",
+    "type": "PL",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Location Department",
+    "length": "10",
+    "type": "IS",
+    "opt": "R",
+    "rep": "-",
+    "table": "0264"
+   },
+   {
+    "seq": 3,
+    "name": "Location Service",
+    "length": "3",
+    "type": "IS",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0069"
+   },
+   {
+    "seq": 4,
+    "name": "Speciality Type",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0265"
+   },
+   {
+    "seq": 5,
+    "name": "Valid Patient Classes",
+    "length": "1",
+    "type": "IS",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0004"
+   },
+   {
+    "seq": 6,
+    "name": "Active/Inactive Flag",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0183"
+   },
+   {
+    "seq": 7,
+    "name": "Activation Date",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 8,
+    "name": "Inactivation Date - LDP",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 9,
+    "name": "Inactivated Reason",
+    "length": "80",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 10,
+    "name": "Visiting Hours",
+    "length": "80",
+    "type": "VH",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 11,
+    "name": "Contact Phone",
+    "length": "40",
+    "type": "XTN",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   }
+  ]
+ },
+ "LOC": {
+  "title": "Location Identification",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Primary Key Value",
+    "length": "200",
+    "type": "PL",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Location Description",
+    "length": "48",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Location Type",
+    "length": "2",
+    "type": "IS",
+    "opt": "R",
+    "rep": "∞",
+    "table": "0260"
+   },
+   {
+    "seq": 4,
+    "name": "Organization Name",
+    "length": "90",
+    "type": "XON",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 5,
+    "name": "Location Address",
+    "length": "106",
+    "type": "XAD",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "Location Phone",
+    "length": "40",
+    "type": "XTN",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 7,
+    "name": "License Number",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 8,
+    "name": "Location Equipment",
+    "length": "3",
+    "type": "IS",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0261"
+   }
+  ]
+ },
+ "LRL": {
+  "title": "Location Relationship",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Primary Key Value",
+    "length": "200",
+    "type": "PL",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Segment Action Code",
+    "length": "3",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0206"
+   },
+   {
+    "seq": 3,
+    "name": "Segment Unique Key",
+    "length": "80",
+    "type": "EI",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 4,
+    "name": "Location Relationship ID",
+    "length": "80",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "0325"
+   },
+   {
+    "seq": 5,
+    "name": "Organizational Location Relationship Value",
+    "length": "80",
+    "type": "XON",
+    "opt": "C",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "Patient Location Relationship Value",
+    "length": "80",
+    "type": "PL",
+    "opt": "C",
+    "rep": "-",
+    "table": ""
+   }
+  ]
+ },
+ "MFA": {
+  "title": "Master File Acknowledgement",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Record-Level Event Code",
+    "length": "3",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0180"
+   },
+   {
+    "seq": 2,
+    "name": "MFN Control ID",
+    "length": "20",
+    "type": "ST",
+    "opt": "C",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Event Completion Date/Time",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 4,
+    "name": "Error Return Code and/or Text",
+    "length": "60",
+    "type": "CE",
+    "opt": "R",
+    "rep": "-",
+    "table": "0181"
+   },
+   {
+    "seq": 5,
+    "name": "Primary Key Value",
+    "length": "60",
+    "type": "CE",
+    "opt": "R",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "Primary Key Value Type - MFA",
+    "length": "3",
+    "type": "ID",
+    "opt": "R",
+    "rep": "∞",
+    "table": "0355"
+   }
+  ]
+ },
+ "NPU": {
+  "title": "Bed Status Update",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Bed Location",
+    "length": "80",
+    "type": "PL",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Bed Status",
+    "length": "1",
+    "type": "IS",
+    "opt": "O",
+    "rep": "-",
+    "table": "0116"
+   }
+  ]
+ },
+ "NSC": {
+  "title": "Status Change",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Network Change Type",
+    "length": "4",
+    "type": "IS",
+    "opt": "R",
+    "rep": "-",
+    "table": "0333"
+   },
+   {
+    "seq": 2,
+    "name": "Current CPU",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Current Fileserver",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 4,
+    "name": "Current Application",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 5,
+    "name": "Current Facility",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "New CPU",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 7,
+    "name": "New Fileserver",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 8,
+    "name": "New Application",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 9,
+    "name": "New Facility",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   }
+  ]
+ },
+ "NST": {
+  "title": "Statistics",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Statistics Available",
+    "length": "1",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0136"
+   },
+   {
+    "seq": 2,
+    "name": "Source Identifier",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Source Type",
+    "length": "3",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0332"
+   },
+   {
+    "seq": 4,
+    "name": "Statistics Start",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 5,
+    "name": "Statistics End",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "Receive Character Count",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 7,
+    "name": "Send Character Count",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 8,
+    "name": "Messages Received",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 9,
+    "name": "Messages Sent",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 10,
+    "name": "Checksum Errors Received",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 11,
+    "name": "Length Errors Received",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 12,
+    "name": "Other Errors Received",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 13,
+    "name": "Connect Timeouts",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 14,
+    "name": "Receive Timeouts",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 15,
+    "name": "Network Errors",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   }
+  ]
+ },
+ "OM1": {
+  "title": "General Observation Fields",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Sequence Number",
+    "length": "4",
+    "type": "NM",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Producer's Test/Observation ID",
+    "length": "200",
+    "type": "CE",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Permitted Data Types",
+    "length": "12",
+    "type": "ID",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0125"
+   },
+   {
+    "seq": 4,
+    "name": "Specimen Required",
+    "length": "1",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0136"
+   },
+   {
+    "seq": 5,
+    "name": "Producer ID",
+    "length": "200",
+    "type": "CE",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "Observation Description",
+    "length": "200",
+    "type": "TX",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 7,
+    "name": "Other Test/Observation IDs for the Observation",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 8,
+    "name": "Other Names",
+    "length": "200",
+    "type": "ST",
+    "opt": "R",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 9,
+    "name": "Preferred Report Name for the Observation",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 10,
+    "name": "Preferred Short Name or Mnemonic for Observation",
+    "length": "8",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 11,
+    "name": "Preferred Long Name for the Observation",
+    "length": "200",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 12,
+    "name": "Orderability",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0136"
+   },
+   {
+    "seq": 13,
+    "name": "Identity of Instrument Used to Perfrom this Study",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 14,
+    "name": "Coded Representation of Method",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 15,
+    "name": "Portable",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0136"
+   },
+   {
+    "seq": 16,
+    "name": "Observation Producing Department/Section",
+    "length": "1",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 17,
+    "name": "Telephone Number of Section",
+    "length": "40",
+    "type": "XTN",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 18,
+    "name": "Nature of Test/Observation",
+    "length": "1",
+    "type": "IS",
+    "opt": "R",
+    "rep": "-",
+    "table": "0174"
+   },
+   {
+    "seq": 19,
+    "name": "Report Subheader",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 20,
+    "name": "Report Display Order",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 21,
+    "name": "Date/Time Stamp for any change in Def Attri for Obs",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 22,
+    "name": "Effective Date/Time of Change in Test Proc. that make Results Non-Comparable",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 23,
+    "name": "Typical Turn-Around Time",
+    "length": "20",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 24,
+    "name": "Processing Time",
+    "length": "20",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 25,
+    "name": "Processing Priority",
+    "length": "40",
+    "type": "ID",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0168"
+   },
+   {
+    "seq": 26,
+    "name": "Reporting Priority",
+    "length": "5",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0169"
+   },
+   {
+    "seq": 27,
+    "name": "Outside Site",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 28,
+    "name": "Address of Outside Site",
+    "length": "1000",
+    "type": "XAD",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 29,
+    "name": "Phone Number of Outside Site",
+    "length": "400",
+    "type": "XTN",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 30,
+    "name": "Confidentiality Code",
+    "length": "1",
+    "type": "IS",
+    "opt": "O",
+    "rep": "-",
+    "table": "0177"
+   },
+   {
+    "seq": 31,
+    "name": "Observations Required to Interpret the Observation",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 32,
+    "name": "Interpretation of Observations",
+    "length": "65536",
+    "type": "TX",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 33,
+    "name": "Contraindications to Observations",
+    "length": "65536",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 34,
+    "name": "Reflex Tests/Observations",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 35,
+    "name": "Rules that Trigger Reflex Testing",
+    "length": "80",
+    "type": "TX",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 36,
+    "name": "Fixed Canned Message",
+    "length": "65536",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 37,
+    "name": "Patient Preparation",
+    "length": "200",
+    "type": "TX",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 38,
+    "name": "Procedure Medication",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 39,
+    "name": "Factors that may Effect the Observation",
+    "length": "200",
+    "type": "TX",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 40,
+    "name": "Test/Observation Performance Schedule",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 41,
+    "name": "Description of Test Methods",
+    "length": "65536",
+    "type": "TX",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 42,
+    "name": "Kind of Quantity Observed",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "0254"
+   },
+   {
+    "seq": 43,
+    "name": "Point versus Interval",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "0255"
+   },
+   {
+    "seq": 44,
+    "name": "Challenge information",
+    "length": "200",
+    "type": "TX",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 45,
+    "name": "Relationship modifier",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "0258"
+   },
+   {
+    "seq": 46,
+    "name": "Target anatomic site of test",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 47,
+    "name": "Modality of imaging measurement",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "0259"
+   }
+  ]
+ },
+ "OM3": {
+  "title": "Categorical Test/Observation",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Sequence Number",
+    "length": "4",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Preferred Coding System",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Valid Coded \"Answers\"",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 4,
+    "name": "Normal Text/Codes for Categorical Observations",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 5,
+    "name": "Abnormal Text/Codes for Categorical Observations",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "Critical Text Codes for Categorical Observations",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 7,
+    "name": "Value Type",
+    "length": "3",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0125"
+   }
+  ]
+ },
+ "PCR": {
+  "title": "Possible Causal Relationship",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Implicated Product",
+    "length": "60",
+    "type": "CE",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Generic Product",
+    "length": "1",
+    "type": "IS",
+    "opt": "O",
+    "rep": "-",
+    "table": "0249"
+   },
+   {
+    "seq": 3,
+    "name": "Product Class",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 4,
+    "name": "Total Duration Of Therapy",
+    "length": "8",
+    "type": "CQ",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 5,
+    "name": "Product Manufacture Date",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "Product Expiration Date",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 7,
+    "name": "Product Implantation Date",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 8,
+    "name": "Product Explantation Date",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 9,
+    "name": "Single Use Device",
+    "length": "8",
+    "type": "IS",
+    "opt": "O",
+    "rep": "-",
+    "table": "0244"
+   },
+   {
+    "seq": 10,
+    "name": "Indication For Product Use",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 11,
+    "name": "Product Problem",
+    "length": "8",
+    "type": "IS",
+    "opt": "O",
+    "rep": "-",
+    "table": "0245"
+   },
+   {
+    "seq": 12,
+    "name": "Product Serial/Lot Number",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "3",
+    "table": ""
+   },
+   {
+    "seq": 13,
+    "name": "Product Available For Inspection",
+    "length": "1",
+    "type": "IS",
+    "opt": "O",
+    "rep": "-",
+    "table": "0246"
+   },
+   {
+    "seq": 14,
+    "name": "Product Evaluation Performed",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 15,
+    "name": "Product Evaluation Status",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "0247"
+   },
+   {
+    "seq": 16,
+    "name": "Product Evaluation Results",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 17,
+    "name": "Evaluated Product Source",
+    "length": "8",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0248"
+   },
+   {
+    "seq": 18,
+    "name": "Date Product Returned To Manufacturer",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 19,
+    "name": "Device Operator Qualifications",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0242"
+   },
+   {
+    "seq": 20,
+    "name": "Relatedness Assessment",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0250"
+   },
+   {
+    "seq": 21,
+    "name": "Action Taken In Response To The Event",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "6",
+    "table": "0251"
+   },
+   {
+    "seq": 22,
+    "name": "Event Causality Observations",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "6",
+    "table": "0252"
+   },
+   {
+    "seq": 23,
+    "name": "Indirect Exposure Mechanism",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "3",
+    "table": "0253"
+   }
+  ]
+ },
+ "PDC": {
+  "title": "Product Detail Country",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Manufacturer/Distributor",
+    "length": "80",
+    "type": "XON",
+    "opt": "R",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Country",
+    "length": "60",
+    "type": "CE",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Brand Name",
+    "length": "60",
+    "type": "ST",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 4,
+    "name": "Device Family Name",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 5,
+    "name": "Generic Name",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "Model Identifier",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 7,
+    "name": "Catalogue Identifier",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 8,
+    "name": "Other Identifier",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 9,
+    "name": "Product Code",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 10,
+    "name": "Marketing Basis",
+    "length": "4",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0330"
+   },
+   {
+    "seq": 11,
+    "name": "Marketing Approval Identifier",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 12,
+    "name": "Labeled Shelf Life",
+    "length": "12",
+    "type": "CQ",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 13,
+    "name": "Expected Shelf Life",
+    "length": "12",
+    "type": "CQ",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 14,
+    "name": "Date First Marked",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 15,
+    "name": "Date Last Marked",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   }
+  ]
+ },
+ "PEO": {
+  "title": "Product Experience Observation",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Event Identifiers Used",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Event Symptom/Diagnosis Code",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Event Onset Date/Time",
+    "length": "26",
+    "type": "TS",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 4,
+    "name": "Event Exacerbation Date/Time",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 5,
+    "name": "Event Improved Date/Time",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "Event Ended Data/Time",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 7,
+    "name": "Event Location Occurred Address",
+    "length": "106",
+    "type": "XAD",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 8,
+    "name": "Event Qualification",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0237"
+   },
+   {
+    "seq": 9,
+    "name": "Event Serious",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0238"
+   },
+   {
+    "seq": 10,
+    "name": "Event Expected",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0239"
+   },
+   {
+    "seq": 11,
+    "name": "Event Outcome",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0240"
+   },
+   {
+    "seq": 12,
+    "name": "Patient Outcome",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0241"
+   },
+   {
+    "seq": 13,
+    "name": "Event Description From Others",
+    "length": "600",
+    "type": "FT",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 14,
+    "name": "Event From Original Reporter",
+    "length": "600",
+    "type": "FT",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 15,
+    "name": "Event Description From Patient",
+    "length": "600",
+    "type": "FT",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 16,
+    "name": "Event Description From Practitioner",
+    "length": "600",
+    "type": "FT",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 17,
+    "name": "Event Description From Autopsy",
+    "length": "600",
+    "type": "FT",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 18,
+    "name": "Cause Of Death",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 19,
+    "name": "Primary Observer Name",
+    "length": "46",
+    "type": "XPN",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 20,
+    "name": "Primary Observer Address",
+    "length": "106",
+    "type": "XAD",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 21,
+    "name": "Primary Observer Telephone",
+    "length": "40",
+    "type": "XTN",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 22,
+    "name": "Primary Observer s Qualification",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0242"
+   },
+   {
+    "seq": 23,
+    "name": "Confirmation Provided By",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0242"
+   },
+   {
+    "seq": 24,
+    "name": "Primary Observer Aware Date/Time",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 25,
+    "name": "Primary Observer s Identity May Be Divulged",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0243"
+   }
+  ]
+ },
+ "PES": {
+  "title": "Product Experience Sender",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Sender Organization Name",
+    "length": "80",
+    "type": "XON",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Sender Individual Name",
+    "length": "60",
+    "type": "XCN",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Sender Address",
+    "length": "200",
+    "type": "XAD",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 4,
+    "name": "Sender Telephone",
+    "length": "44",
+    "type": "XTN",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 5,
+    "name": "Sender Event Identifier",
+    "length": "75",
+    "type": "EI",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "Sender Sequence Number",
+    "length": "2",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 7,
+    "name": "Sender Event Description",
+    "length": "600",
+    "type": "FT",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 8,
+    "name": "Sender Comment",
+    "length": "600",
+    "type": "FT",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 9,
+    "name": "Sender Aware Date/Time",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 10,
+    "name": "Event Report Date",
+    "length": "26",
+    "type": "TS",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 11,
+    "name": "Event Report Timing/Type",
+    "length": "3",
+    "type": "ID",
+    "opt": "O",
+    "rep": "2",
+    "table": "0234"
+   },
+   {
+    "seq": 12,
+    "name": "Event Report Source",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0235"
+   },
+   {
+    "seq": 13,
+    "name": "Event Reported To",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0236"
+   }
+  ]
+ },
+ "PRC": {
+  "title": "Pricing",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Primary Key Value",
+    "length": "200",
+    "type": "CE",
+    "opt": "R",
+    "rep": "-",
+    "table": "0132"
+   },
+   {
+    "seq": 2,
+    "name": "Facility ID",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Department",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 4,
+    "name": "Valid Patient Classes",
+    "length": "1",
+    "type": "IS",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0004"
+   },
+   {
+    "seq": 5,
+    "name": "Price",
+    "length": "12",
+    "type": "CP",
+    "opt": "C",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "Formula",
+    "length": "200",
+    "type": "ST",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 7,
+    "name": "Minimum Quantity",
+    "length": "4",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 8,
+    "name": "Maximum Quantity",
+    "length": "4",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 9,
+    "name": "Minimum Price",
+    "length": "12",
+    "type": "MO",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 10,
+    "name": "Maximum Price",
+    "length": "12",
+    "type": "MO",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 11,
+    "name": "Effective Start Date",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 12,
+    "name": "Effective End Date",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 13,
+    "name": "Price Override Flag",
+    "length": "1",
+    "type": "IS",
+    "opt": "O",
+    "rep": "-",
+    "table": "0268"
+   },
+   {
+    "seq": 14,
+    "name": "Billing Category",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0293"
+   },
+   {
+    "seq": 15,
+    "name": "Chargeable Flag",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0136"
+   },
+   {
+    "seq": 16,
+    "name": "Active/Inactive Flag",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0183"
+   },
+   {
+    "seq": 17,
+    "name": "Cost",
+    "length": "12",
+    "type": "MO",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 18,
+    "name": "Charge On Indicator",
+    "length": "1",
+    "type": "IS",
+    "opt": "O",
+    "rep": "-",
+    "table": "0269"
+   }
+  ]
+ },
+ "PRD": {
+  "title": "Provider Data",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Role",
+    "length": "200",
+    "type": "CE",
+    "opt": "R",
+    "rep": "∞",
+    "table": "0286"
+   },
+   {
+    "seq": 2,
+    "name": "Provider Name",
+    "length": "106",
+    "type": "XPN",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Provider Address",
+    "length": "60",
+    "type": "XAD",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 4,
+    "name": "Provider Location",
+    "length": "60",
+    "type": "PL",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 5,
+    "name": "Provider Communication Information",
+    "length": "100",
+    "type": "XTN",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "Preferred Method of Contact",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "0185"
+   },
+   {
+    "seq": 7,
+    "name": "Provider Identifiers",
+    "length": "100",
+    "type": "CM_PI",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 8,
+    "name": "Effective Start Date of Role",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 9,
+    "name": "Effective End Date of Role",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   }
+  ]
+ },
+ "RXG": {
+  "title": "Pharmacy Give",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Give Sub-ID Counter",
+    "length": "4",
+    "type": "NM",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Dispense Sub-ID Counter",
+    "length": "4",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Quantity/Timing",
+    "length": "200",
+    "type": "TQ",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 4,
+    "name": "Give Code",
+    "length": "100",
+    "type": "CE",
+    "opt": "R",
+    "rep": "-",
+    "table": "0292"
+   },
+   {
+    "seq": 5,
+    "name": "Give Amount - Minimum",
+    "length": "20",
+    "type": "NM",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "Give Amount - Maximum",
+    "length": "20",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 7,
+    "name": "Give Units",
+    "length": "60",
+    "type": "CE",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 8,
+    "name": "Give Dosage Form",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 9,
+    "name": "Administration Notes",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 10,
+    "name": "Substitution Status",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0167"
+   },
+   {
+    "seq": 11,
+    "name": "Dispense-To Location",
+    "length": "200",
+    "type": "LA2",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 12,
+    "name": "Needs Human Review",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0136"
+   },
+   {
+    "seq": 13,
+    "name": "Pharmacy Special Administration Instructions",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 14,
+    "name": "Give Per",
+    "length": "20",
+    "type": "ST",
+    "opt": "C",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 15,
+    "name": "Give Rate Amount",
+    "length": "6",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 16,
+    "name": "Give Rate Units",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 17,
+    "name": "Give Strength",
+    "length": "20",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 18,
+    "name": "Give Strength Units",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 19,
+    "name": "Substance Lot Number",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 20,
+    "name": "Substance Expiration Date",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 21,
+    "name": "Substance Manufacturer Name",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 22,
+    "name": "Indication",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   }
+  ]
+ },
+ "TXA": {
+  "title": "Document Notification",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Set ID- TXA",
+    "length": "4",
+    "type": "SI",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Document Type",
+    "length": "30",
+    "type": "IS",
+    "opt": "R",
+    "rep": "-",
+    "table": "0270"
+   },
+   {
+    "seq": 3,
+    "name": "Document Content Presentation",
+    "length": "2",
+    "type": "ID",
+    "opt": "C",
+    "rep": "-",
+    "table": "0191"
+   },
+   {
+    "seq": 4,
+    "name": "Activity Date/Time",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 5,
+    "name": "Primary Activity Provider Code/Name",
+    "length": "60",
+    "type": "XCN",
+    "opt": "C",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "Origination Date/Time",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 7,
+    "name": "Transcription Date/Time",
+    "length": "26",
+    "type": "TS",
+    "opt": "C",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 8,
+    "name": "Edit Date/Time",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 9,
+    "name": "Originator Code/Name",
+    "length": "60",
+    "type": "XCN",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 10,
+    "name": "Assigned Document Authenticator",
+    "length": "60",
+    "type": "XCN",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 11,
+    "name": "Transcriptionist Code/Name",
+    "length": "48",
+    "type": "XCN",
+    "opt": "C",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 12,
+    "name": "Unique Document Number",
+    "length": "30",
+    "type": "EI",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 13,
+    "name": "Parent Document Number",
+    "length": "30",
+    "type": "EI",
+    "opt": "C",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 14,
+    "name": "Placer Order Number",
+    "length": "22",
+    "type": "EI",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 15,
+    "name": "Filler Order Number",
+    "length": "22",
+    "type": "EI",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 16,
+    "name": "Unique Document File Name",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 17,
+    "name": "Document Completion Status",
+    "length": "2",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0271"
+   },
+   {
+    "seq": 18,
+    "name": "Document Confidentiality Status",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0272"
+   },
+   {
+    "seq": 19,
+    "name": "Document Availability Status",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0273"
+   },
+   {
+    "seq": 20,
+    "name": "Document Storage Status",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0275"
+   },
+   {
+    "seq": 21,
+    "name": "Document Change Reason",
+    "length": "30",
+    "type": "ST",
+    "opt": "C",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 22,
+    "name": "Authentication Person, Time Stamp",
+    "length": "60",
+    "type": "PPN",
+    "opt": "C",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 23,
+    "name": "Distributed Copies",
+    "length": "60",
+    "type": "XCN",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   }
+  ]
+ },
+ "VAR": {
+  "title": "Variance",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "Variance Instance ID",
+    "length": "60",
+    "type": "EI",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 2,
+    "name": "Documented Date/Time",
+    "length": "26",
+    "type": "TS",
+    "opt": "R",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 3,
+    "name": "Stated Variance Date/Time",
+    "length": "26",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 4,
+    "name": "Variance Originator",
+    "length": "80",
+    "type": "XCN",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   },
+   {
+    "seq": 5,
+    "name": "Variance Classification",
+    "length": "60",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": ""
+   },
+   {
+    "seq": 6,
+    "name": "Variance Description",
+    "length": "512",
+    "type": "ST",
+    "opt": "O",
+    "rep": "∞",
+    "table": ""
+   }
+  ]
+ }
+}

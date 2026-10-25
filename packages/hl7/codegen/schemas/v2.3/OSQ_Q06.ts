@@ -25,14 +25,17 @@ export function osrResponse(order: StructureItem[]) {
   ], { inline: true });
 }
 
-/** The ORDER_DETAIL group of OSR^Q06, as `detail`: optional in v2.3 and v2.3.1, required from v2.4 on. */
-export const osrOrderDetail = (usage: Usage) =>
-  group("ORDER_DETAIL", usage, "single", [choice(ORDER_DETAIL_SEGMENTS, "required"), optList("NTE"), optList("CTI")], { as: "detail", exportTypeName: "ParsedResponseDetail" });
+/**
+ * The order detail items of an OSR^Q06 order after ORC: the detail segment (`segment`, optional in
+ * v2.3 and v2.3.1, required from v2.4 on), then `notes` and `clinicalTrials`, siblings as hl7.eu,
+ * Caristix and HAPI list them.
+ */
+export const osrOrderDetail = (usage: Usage): StructureItem[] => [choice(ORDER_DETAIL_SEGMENTS, usage), optList("NTE"), optList("CTI")];
 
 /**
  * OSR^Q06 - Order Status Response (HL7 v2.3, chapter 4 section 4.2.4).
  *
- * MSH MSA [ERR] [{NTE}] QRD [QRF] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [ ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}] ] } ] [DSC]
+ * MSH MSA [ERR] [{NTE}] QRD [QRF] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [<OBR|RQD|RQ1|RXO|ODS|ODT>] [{NTE}] [{CTI}] } ] [DSC]
  *
  * The RESPONSE and PATIENT groups are inlined as in ORR^O02. The order detail is optional in v2.3
  * (`[Order Detail Segment]` on hl7.eu, OBR optional in HAPI v23) and v2.3.1 (Caristix); from v2.4
@@ -52,7 +55,7 @@ export const OSR_Q06_SCHEMA: MessageSchema = {
     optList("NTE"),
     req("QRD"),
     opt("QRF"),
-    osrResponse([req("ORC"), osrOrderDetail("optional")]),
+    osrResponse([req("ORC"), ...osrOrderDetail("optional")]),
     opt("DSC"),
   ],
 };

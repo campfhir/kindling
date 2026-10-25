@@ -68,6 +68,42 @@ export function wrappers(base: MessageSchema, events: string[]): MessageSchema[]
   return events.map((triggerEvent) => ({ ...base, triggerEvent, baseMessage: nameOf(base) }));
 }
 
+/** Replaces the first item named `name` at any depth (segment or group) with `replacement`. */
+export function replaceDeep(schema: MessageSchema, name: string, replacement: StructureItem): MessageSchema {
+  let done = false;
+  const walk = (items: StructureItem[]): StructureItem[] =>
+    items.map((item) => {
+      if (done) return item;
+      if ("name" in item && item.name === name) {
+        done = true;
+        return replacement;
+      }
+      if ("segments" in item) return { ...item, segments: walk(item.segments) };
+      return item;
+    });
+  const structure = walk(schema.structure);
+  if (!done) throw new Error(`${nameOf(schema)}: no item named ${name}`);
+  return { ...schema, structure };
+}
+
+/** Inserts `item` right after the first item named `after`, at any depth. */
+export function insertAfter(schema: MessageSchema, after: string, item: StructureItem): MessageSchema {
+  let done = false;
+  const walk = (items: StructureItem[]): StructureItem[] =>
+    items.flatMap((current) => {
+      if (done) return [current];
+      if ("name" in current && current.name === after) {
+        done = true;
+        return [current, item];
+      }
+      if ("segments" in current) return [{ ...current, segments: walk(current.segments) }];
+      return [current];
+    });
+  const structure = walk(schema.structure);
+  if (!done) throw new Error(`${nameOf(schema)}: no item named ${after}`);
+  return { ...schema, structure };
+}
+
 /** Replaces the top-level item named `name` (first match) with `replacement`. */
 export function replaceItem(schema: MessageSchema, name: string, replacement: StructureItem): MessageSchema {
   let done = false;
