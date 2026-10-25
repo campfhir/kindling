@@ -31,7 +31,10 @@ Legend: ✅ builder + parser exist · ⬜ not started
 | BAR | P01, P02, P05, P06 (add/purge/update/end account) | ✅ | ✅ |
 | ORU | R01 | ✅ | ✅ |
 | ORU | R30, R31, R32 | n/a (2.5+) | ✅ |
-| MFN | M02 (staff/practitioner) | ✅ | ✅ |
+| MFN | M01–M11 master file notifications (M13 from 2.5; M12 and M15 need OM7/IIM) | ✅ | ✅ |
+| MFK | M01–M11 master file acknowledgments (M13 from 2.5) | ✅ | ✅ |
+| MFQ / MFR | M01–M11 master file query and response | ✅ | ✅ |
+| MFD | MFA delayed acknowledgment (withdrawn in 2.5) | ✅ | n/a |
 | ACK | general acknowledgment | ✅ | ✅ |
 | ORM | O01 | ✅ | ✅ |
 | ORR | O02 | ✅ | ✅ |
@@ -65,8 +68,6 @@ Legend: ✅ builder + parser exist · ⬜ not started
 ### Master files and scheduling
 | Message | Events | Needs |
 |---|---|---|
-| ⬜ MFN | M01 (non-specific), M03 (test/observation), M04 (charge description), M05 (location), M06 (clinical study), M07 (clinical study schedule), M08–M12 | CDM, PRC, OM1–OM7, LOC…, CM0–CM2 |
-| ⬜ MFK | Master file application acknowledgment | MFA |
 | ⬜ RQI / RPI / RPL / RPR / RQP / RQC / RQA / RPA | Referral & patient information | RF1, PRD |
 | ⬜ CRM / CSU | Clinical study registration / unsolicited data | CSR, CSS |
 | ⬜ EAC / EAN / EAR / ESR / ESU | Equipment automation | ECD, ECR, EQU, SAC |
@@ -145,7 +146,24 @@ optional in v2.3 and v2.3.1 and required from v2.4 on, following the hl7.eu chap
 not followed. An NTE after an OBR in ORF is parsed as an order note, never as an OBSERVATION group
 without OBX.
 
-Suggested order: **MFN → orders/pharmacy → the rest.**
+Done in 0.17: the master files of chapter 8 for v2.3 through v2.5.1: MFN^M01 and M03–M11, MFK^M01–M11
+(one structure, M02–M11 wrap M01), MFQ^M01–M11 (likewise), MFR^M01–M11 and MFD^MFA, structures from
+the hl7.eu chapter 8 pages (v2.3, v2.4, v2.5, v2.5.1) cross-checked on hl7-definition.caristix.com
+and HAPI. Every notification is `MSH MFI { MFE <record> }` with the records exposed as `entries`
+(`chargeDescription`, `patientLocation` with nested `departments`, `clinicalStudy` with `phases`,
+`observationDefinition` with the OM2–OM6 details, ...). MFR carries the typed record where the
+standard states the replacement (M02 staff, M04 charge descriptions, M05 locations, M06/M07 clinical
+studies) and a bare `{ MFE }` otherwise (M01, M03, M08–M11, as Caristix shows). Per version: v2.4
+adds `[QAK]` to MFR and `[ORG]` to the M02 record; v2.5 (also v2.5.1) adds `[{SFT}]` everywhere, a
+repeating `ERR` to MFK and MFR, MFN^M13 (`MSH [{SFT}] MFI {MFE}`), flattens the MFR^M05/M06 records
+(`MFE LOC [{LCH}] [{LRL}] {LDP} [{LCH}] [{LCC}]`, `MFE CM0 [{CM1}] [{CM2}]`, per hl7.eu and HAPI) and
+withdraws MFD^MFA. Not followed: Caristix's doubled MFI in the v2.3 MFK^M01 (HAPI v23 mirrors it;
+hl7.eu has `MSH MSA [ERR] MFI [{MFA}]` for every event), the MFN^M02 body it appends to the v2.4
+MFK^M02, and the M06 structure it shows for the v2.3 MFN^M07 (hl7.eu: `MFE CM0 [{CM2}]`). Caristix
+also drops MFN^M01/M03 and most MFK/MFQ/MFR events from its v2.4 and v2.5 lists although hl7.eu still
+defines them, so they are kept. MFN^M12 (OM7, 2.4) and MFN^M15 (IIM, 2.5) wait for those segments.
+
+Suggested order: **orders/pharmacy → patient care → referrals → the rest.**
 
 ## v2.5.1 parity
 After v2.3 is complete, bring v2.5.1 to parity with the same messages, then add the 2.5.1 additions:

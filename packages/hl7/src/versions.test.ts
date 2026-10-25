@@ -222,3 +222,36 @@ describe("queries", () => {
     }
   });
 });
+
+describe("master files", () => {
+  test("the master file segments exist from v2.3", () => {
+    for (const name of ["MFI", "MFE", "MFA", "CDM", "PRC", "LOC", "LCH", "LRL", "LDP", "LCC", "CM0", "CM1", "CM2", "OM1", "OM2", "OM3", "OM4", "OM5", "OM6"]) {
+      expect(name in seg23).toBe(true);
+      expect(name in seg251).toBe(true);
+    }
+  });
+
+  test("MFN, MFK, MFQ and MFD are v2.3's through v2.4; MFR gains QAK in v2.4", () => {
+    for (const fn of ["parseMFN_M01", "parseMFN_M05", "parseMFN_M11", "parseMFK_M01", "parseMFK_M11", "parseMFD_MFA", "parseMFQ_M01", "parseMFQ_M11"] as const) {
+      expect(par231[fn]).toBe(par23[fn]);
+      expect(par24[fn]).toBe(par23[fn]);
+    }
+    for (const fn of ["parseMFR_M01", "parseMFR_M02", "parseMFR_M05", "parseMFR_M11"] as const) {
+      expect(par231[fn]).toBe(par23[fn]);
+      expect(par24[fn]).not.toBe(par23[fn]);
+    }
+  });
+
+  test("v2.5 has its own master file messages, adds MFN^M13 and withdraws MFD^MFA", () => {
+    for (const fn of ["parseMFN_M01", "parseMFN_M04", "parseMFK_M01", "parseMFK_M07", "parseMFQ_M01", "parseMFQ_M11", "parseMFR_M01", "parseMFR_M05"] as const) {
+      expect(par25[fn]).not.toBe(par24[fn]);
+      expect(typeof par251[fn]).toBe("function");
+    }
+    expect("createMFN_M13" in bld24).toBe(false);
+    expect("createMFN_M13" in bld25).toBe(true);
+    expect("createMFK_M13" in bld251).toBe(true);
+    expect("createMFD_MFA" in bld24).toBe(true);
+    expect("createMFD_MFA" in bld25).toBe(false);
+    expect("createMFD_MFA" in bld251).toBe(false);
+  });
+});

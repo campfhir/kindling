@@ -15,6 +15,7 @@ import { SIU_FAMILY } from "./SIU_S12";
 import { SRR_FAMILY } from "./SRR_S01";
 import { VXU_V04_SCHEMA } from "./VXU_V04";
 import { QUERY_MESSAGES } from "./queries";
+import { MASTER_FILE_MESSAGES } from "./master-files";
 
 /** Every message whose structure changed in 2.5 (or is new in 2.5). v2.5.1 re-versions this list. */
 export const V2_5_MESSAGES = [
@@ -39,6 +40,7 @@ export const V2_5_MESSAGES = [
   ...SRR_FAMILY,
   VXU_V04_SCHEMA,
   ...QUERY_MESSAGES,
+  ...MASTER_FILE_MESSAGES,
 ];
 
 /**
@@ -46,14 +48,14 @@ export const V2_5_MESSAGES = [
  * segments) and the SFT (Software), SPM (Specimen), TQ1 (Timing/Quantity) and TQ2
  * (Timing/Quantity Relationship) and CER (Certificate Detail) segments introduced in 2.5, and the
  * EDU subclass that adds EDU-9. SRM, SQM^S25, QRY^T12 and DOC^T12 are unchanged since v2.3 (or
- * v2.3.1); QRY^P04 and DSR^P04 are withdrawn.
+ * v2.3.1); QRY^P04, DSR^P04 and MFD^MFA are withdrawn.
  */
 export const V2_5: VersionSchema = {
   version: "v2.5",
   baseVersion: "v2.4",
   reexport: true,
   ownSegments: ["SFT", "SPM", "TQ1", "TQ2", "CER", "EDU"],
-  withdrawnMessages: ["QRY_P04", "DSR_P04"],
+  withdrawnMessages: ["QRY_P04", "DSR_P04", "MFD_MFA"],
   segments: [],
   messages: V2_5_MESSAGES,
 };

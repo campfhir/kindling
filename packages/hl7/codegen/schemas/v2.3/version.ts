@@ -26,6 +26,10 @@ import { VXQ_V01_SCHEMA, VXR_V03_SCHEMA, VXX_V02_SCHEMA } from "./VXQ_V01";
 import { ORF_R04_FAMILY } from "./ORF_R04";
 import { OSQ_Q06_SCHEMA, OSR_Q06_SCHEMA } from "./OSQ_Q06";
 import { DOC_T12_SCHEMA, QRY_T12_SCHEMA } from "./QRY_T12";
+import { MFN_MESSAGES } from "./MFN_M01";
+import { MFD_MFA_SCHEMA, MFK_FAMILY } from "./MFK_M01";
+import { MFQ_FAMILY } from "./MFQ_M01";
+import { MFR_MESSAGES } from "./MFR_M01";
 
 /** The query messages of v2.3 (chapters 2, 3, 4, 6, 7, 9 and 10). */
 export const QUERY_MESSAGES = [
@@ -49,6 +53,9 @@ export const QUERY_MESSAGES = [
   QRY_T12_SCHEMA,
   DOC_T12_SCHEMA,
 ];
+
+/** The master file messages of v2.3 (chapter 8); MFN^M02 is registered separately. */
+export const MASTER_FILE_MESSAGES = [...MFN_MESSAGES, ...MFK_FAMILY, MFD_MFA_SCHEMA, ...MFQ_FAMILY, ...MFR_MESSAGES];
 
 /**
  * v2.3 is the base version: its segments are hand-written, and every message listed here gets a
@@ -79,5 +86,6 @@ export const V2_3: VersionSchema = {
     ...SRR_FAMILY,
     ...MDM_FAMILY,
     ...QUERY_MESSAGES,
+    ...MASTER_FILE_MESSAGES,
   ],
 };

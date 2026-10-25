@@ -9,6 +9,7 @@ import { ADR_A19_SCHEMA } from "./ADR_A19";
 import { ORF_R04_FAMILY } from "./ORF_R04";
 import { VXR_V03_SCHEMA } from "./VXR_V03";
 import { OSR_Q06_SCHEMA } from "./OSQ_Q06";
+import { MFR_MESSAGES } from "./MFR_M01";
 
 /**
  * v2.4 — re-exports v2.3.1, except for the messages whose structure changed in 2.4 (listed
@@ -16,7 +17,7 @@ import { OSR_Q06_SCHEMA } from "./OSQ_Q06";
  * Death and Autopsy), ABS (Abstract), BLC (Blood Code), RMI (Risk Management Incident) and the
  * staff master file segments ORG, AFF, LAN and EDU. Among the queries, ADR^A19 gains the A01
  * ROLs, ORF^R04/W02 gain [CTD], VXR^V03 gains [{GT1}] and OSR^Q06's order detail becomes
- * required; UDM^R06 is withdrawn.
+ * required; UDM^R06 is withdrawn. The master files responses (MFR) gain [QAK].
  */
 export const V2_4: VersionSchema = {
   version: "v2.4",
@@ -25,5 +26,5 @@ export const V2_4: VersionSchema = {
   ownSegments: ["PDA", "ABS", "BLC", "RMI", "ORG", "AFF", "LAN", "EDU"],
   withdrawnMessages: ["UDM_R06"],
   segments: [],
-  messages: [...ADT_A01_FAMILY, BAR_P01_SCHEMA, BAR_P05_SCHEMA, DFT_P03_SCHEMA, MFN_M02_SCHEMA, ORM_O01_SCHEMA, VXU_V04_SCHEMA, ADR_A19_SCHEMA, ...ORF_R04_FAMILY, VXR_V03_SCHEMA, OSR_Q06_SCHEMA],
+  messages: [...ADT_A01_FAMILY, BAR_P01_SCHEMA, BAR_P05_SCHEMA, DFT_P03_SCHEMA, MFN_M02_SCHEMA, ORM_O01_SCHEMA, VXU_V04_SCHEMA, ADR_A19_SCHEMA, ...ORF_R04_FAMILY, VXR_V03_SCHEMA, OSR_Q06_SCHEMA, ...MFR_MESSAGES],
 };
