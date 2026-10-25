@@ -20,10 +20,10 @@ See [ROADMAP.md](ROADMAP.md) for where each package is heading.
 
 - **A fluent, type-safe API.** Builders are chainable and typed against the standard; parsers
   return structured data that round-trips back to the wire format.
-- **Zero runtime dependencies**, dual CJS/ESM builds, and support for Node.js, Bun, browsers and
+- **Zero runtime dependencies**, ESM-only builds (loadable from CommonJS with Node 24's `require(esm)`), and support for Node.js, Bun, browsers and
   edge runtimes.
 - **Versioned subpaths** when the standard has versions (`@campfhir/hl7/segments/v2.5.1`).
-- **Tests next to the code** (`*.test.ts`, Vitest), run on Node 22 and 24 in CI.
+- **Tests next to the code** (`*.test.ts`, Vitest), run on Node 24 and 26 in CI.
 - **One toolchain.** Lint, TypeScript and build settings live at the repository root; each package
   only adds its own `package.json`, `tsconfig.json`, `tsup.config.ts` and `vitest.config.ts`.
 

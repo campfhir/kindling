@@ -134,7 +134,7 @@ describe("ORU_R30_Parser", () => {
 // Integration tests — parse validated example .hl7 files
 // ---------------------------------------------------------------------------
 
-const testDataDir = join(__dirname, "..", "testdata", "ORU_R30");
+const testDataDir = join(import.meta.dirname, "..", "testdata", "ORU_R30");
 const testFiles = readdirSync(testDataDir).filter((f) => f.endsWith(".hl7"));
 const read = (file: string) => readFileSync(join(testDataDir, file), "utf-8");
 

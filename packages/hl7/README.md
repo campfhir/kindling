@@ -97,8 +97,9 @@ Tests use [Vitest](https://vitest.dev/) and run directly against TypeScript sour
 
 ## Runtime support
 
-The package ships dual CJS/ESM builds with fully-specified import paths, so it
-runs on Node.js (CommonJS `require` and native ESM `import`), Bun, browsers, and
+The package is ESM only (`"type": "module"`, one `.js` and one `.d.ts` per module, fully
+specified import paths) and needs Node.js 24 or later; CommonJS code on Node 24 can still load it
+with `require()`, which Node resolves to the ES module. It also runs on Bun, browsers and
 Cloudflare Workers. There are no Node-only runtime dependencies. Other runtimes
 that can consume npm packages (for example Deno via the `npm:` specifier) should
 also work, but they are not an officially tested target.
@@ -121,7 +122,8 @@ PID-38). Segments are available from the version that introduced them:
 
 Version-specific differences in 2.5 and 2.5.1 are filled in as they are implemented — see the
 [roadmap](ROADMAP.md). The root `parse()` dispatches a version once it is complete: 1.0 parses
-v2.3, 1.1 adds v2.3.1, 1.2 adds v2.4, and each later version joins in its own minor release. Every segment field
+v2.3, 1.1 adds v2.3.1, 1.2 adds v2.4 (2.0 drops CommonJS and Node < 24), and each later version
+joins in its own minor release. Every segment field
 and every message structure of a dispatched version has been checked against hl7.eu, Caristix and
 HAPI: see [docs/validation](docs/validation/README.md).
 

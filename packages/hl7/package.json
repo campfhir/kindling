@@ -1,220 +1,178 @@
 {
   "name": "@campfhir/hl7",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Zero-dependency TypeScript library for building and parsing HL7v2 messages (v2.3, 2.3.1, 2.4, 2.5 & 2.5.1). Runs on Node.js, Bun, browsers, and Cloudflare Workers.",
+  "type": "module",
   "main": "dist/index.js",
-  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs"
+      "default": "./dist/index.js"
     },
     "./segments/v2.3": {
       "types": "./dist/segments/v2.3/index.d.ts",
-      "require": "./dist/segments/v2.3/index.js",
-      "import": "./dist/segments/v2.3/index.mjs"
+      "default": "./dist/segments/v2.3/index.js"
     },
     "./segments/v2.3/*": {
       "types": "./dist/segments/v2.3/*.d.ts",
-      "require": "./dist/segments/v2.3/*.js",
-      "import": "./dist/segments/v2.3/*.mjs"
+      "default": "./dist/segments/v2.3/*.js"
     },
     "./segments/v2.3.1": {
       "types": "./dist/segments/v2.3.1/index.d.ts",
-      "require": "./dist/segments/v2.3.1/index.js",
-      "import": "./dist/segments/v2.3.1/index.mjs"
+      "default": "./dist/segments/v2.3.1/index.js"
     },
     "./segments/v2.3.1/*": {
       "types": "./dist/segments/v2.3.1/*.d.ts",
-      "require": "./dist/segments/v2.3.1/*.js",
-      "import": "./dist/segments/v2.3.1/*.mjs"
+      "default": "./dist/segments/v2.3.1/*.js"
     },
     "./segments/v2.4": {
       "types": "./dist/segments/v2.4/index.d.ts",
-      "require": "./dist/segments/v2.4/index.js",
-      "import": "./dist/segments/v2.4/index.mjs"
+      "default": "./dist/segments/v2.4/index.js"
     },
     "./segments/v2.4/*": {
       "types": "./dist/segments/v2.4/*.d.ts",
-      "require": "./dist/segments/v2.4/*.js",
-      "import": "./dist/segments/v2.4/*.mjs"
+      "default": "./dist/segments/v2.4/*.js"
     },
     "./segments/v2.5": {
       "types": "./dist/segments/v2.5/index.d.ts",
-      "require": "./dist/segments/v2.5/index.js",
-      "import": "./dist/segments/v2.5/index.mjs"
+      "default": "./dist/segments/v2.5/index.js"
     },
     "./segments/v2.5/*": {
       "types": "./dist/segments/v2.5/*.d.ts",
-      "require": "./dist/segments/v2.5/*.js",
-      "import": "./dist/segments/v2.5/*.mjs"
+      "default": "./dist/segments/v2.5/*.js"
     },
     "./segments/v2.5.1": {
       "types": "./dist/segments/v2.5.1/index.d.ts",
-      "require": "./dist/segments/v2.5.1/index.js",
-      "import": "./dist/segments/v2.5.1/index.mjs"
+      "default": "./dist/segments/v2.5.1/index.js"
     },
     "./segments/v2.5.1/*": {
       "types": "./dist/segments/v2.5.1/*.d.ts",
-      "require": "./dist/segments/v2.5.1/*.js",
-      "import": "./dist/segments/v2.5.1/*.mjs"
+      "default": "./dist/segments/v2.5.1/*.js"
     },
     "./structures/v2.3": {
       "types": "./dist/structures/v2.3/index.d.ts",
-      "require": "./dist/structures/v2.3/index.js",
-      "import": "./dist/structures/v2.3/index.mjs"
+      "default": "./dist/structures/v2.3/index.js"
     },
     "./structures/v2.3/*": {
       "types": "./dist/structures/v2.3/*.d.ts",
-      "require": "./dist/structures/v2.3/*.js",
-      "import": "./dist/structures/v2.3/*.mjs"
+      "default": "./dist/structures/v2.3/*.js"
     },
     "./structures/v2.3.1": {
       "types": "./dist/structures/v2.3.1/index.d.ts",
-      "require": "./dist/structures/v2.3.1/index.js",
-      "import": "./dist/structures/v2.3.1/index.mjs"
+      "default": "./dist/structures/v2.3.1/index.js"
     },
     "./structures/v2.3.1/*": {
       "types": "./dist/structures/v2.3.1/*.d.ts",
-      "require": "./dist/structures/v2.3.1/*.js",
-      "import": "./dist/structures/v2.3.1/*.mjs"
+      "default": "./dist/structures/v2.3.1/*.js"
     },
     "./structures/v2.4": {
       "types": "./dist/structures/v2.4/index.d.ts",
-      "require": "./dist/structures/v2.4/index.js",
-      "import": "./dist/structures/v2.4/index.mjs"
+      "default": "./dist/structures/v2.4/index.js"
     },
     "./structures/v2.4/*": {
       "types": "./dist/structures/v2.4/*.d.ts",
-      "require": "./dist/structures/v2.4/*.js",
-      "import": "./dist/structures/v2.4/*.mjs"
+      "default": "./dist/structures/v2.4/*.js"
     },
     "./structures/v2.5": {
       "types": "./dist/structures/v2.5/index.d.ts",
-      "require": "./dist/structures/v2.5/index.js",
-      "import": "./dist/structures/v2.5/index.mjs"
+      "default": "./dist/structures/v2.5/index.js"
     },
     "./structures/v2.5/*": {
       "types": "./dist/structures/v2.5/*.d.ts",
-      "require": "./dist/structures/v2.5/*.js",
-      "import": "./dist/structures/v2.5/*.mjs"
+      "default": "./dist/structures/v2.5/*.js"
     },
     "./structures/v2.5.1": {
       "types": "./dist/structures/v2.5.1/index.d.ts",
-      "require": "./dist/structures/v2.5.1/index.js",
-      "import": "./dist/structures/v2.5.1/index.mjs"
+      "default": "./dist/structures/v2.5.1/index.js"
     },
     "./structures/v2.5.1/*": {
       "types": "./dist/structures/v2.5.1/*.d.ts",
-      "require": "./dist/structures/v2.5.1/*.js",
-      "import": "./dist/structures/v2.5.1/*.mjs"
+      "default": "./dist/structures/v2.5.1/*.js"
     },
     "./parsers/v2.3": {
       "types": "./dist/parsers/v2.3/index.d.ts",
-      "require": "./dist/parsers/v2.3/index.js",
-      "import": "./dist/parsers/v2.3/index.mjs"
+      "default": "./dist/parsers/v2.3/index.js"
     },
     "./parsers/v2.3/*": {
       "types": "./dist/parsers/v2.3/*.d.ts",
-      "require": "./dist/parsers/v2.3/*.js",
-      "import": "./dist/parsers/v2.3/*.mjs"
+      "default": "./dist/parsers/v2.3/*.js"
     },
     "./parsers/v2.3.1": {
       "types": "./dist/parsers/v2.3.1/index.d.ts",
-      "require": "./dist/parsers/v2.3.1/index.js",
-      "import": "./dist/parsers/v2.3.1/index.mjs"
+      "default": "./dist/parsers/v2.3.1/index.js"
     },
     "./parsers/v2.3.1/*": {
       "types": "./dist/parsers/v2.3.1/*.d.ts",
-      "require": "./dist/parsers/v2.3.1/*.js",
-      "import": "./dist/parsers/v2.3.1/*.mjs"
+      "default": "./dist/parsers/v2.3.1/*.js"
     },
     "./parsers/v2.4": {
       "types": "./dist/parsers/v2.4/index.d.ts",
-      "require": "./dist/parsers/v2.4/index.js",
-      "import": "./dist/parsers/v2.4/index.mjs"
+      "default": "./dist/parsers/v2.4/index.js"
     },
     "./parsers/v2.4/*": {
       "types": "./dist/parsers/v2.4/*.d.ts",
-      "require": "./dist/parsers/v2.4/*.js",
-      "import": "./dist/parsers/v2.4/*.mjs"
+      "default": "./dist/parsers/v2.4/*.js"
     },
     "./parsers/v2.5": {
       "types": "./dist/parsers/v2.5/index.d.ts",
-      "require": "./dist/parsers/v2.5/index.js",
-      "import": "./dist/parsers/v2.5/index.mjs"
+      "default": "./dist/parsers/v2.5/index.js"
     },
     "./parsers/v2.5/*": {
       "types": "./dist/parsers/v2.5/*.d.ts",
-      "require": "./dist/parsers/v2.5/*.js",
-      "import": "./dist/parsers/v2.5/*.mjs"
+      "default": "./dist/parsers/v2.5/*.js"
     },
     "./parsers/v2.5.1": {
       "types": "./dist/parsers/v2.5.1/index.d.ts",
-      "require": "./dist/parsers/v2.5.1/index.js",
-      "import": "./dist/parsers/v2.5.1/index.mjs"
+      "default": "./dist/parsers/v2.5.1/index.js"
     },
     "./parsers/v2.5.1/*": {
       "types": "./dist/parsers/v2.5.1/*.d.ts",
-      "require": "./dist/parsers/v2.5.1/*.js",
-      "import": "./dist/parsers/v2.5.1/*.mjs"
+      "default": "./dist/parsers/v2.5.1/*.js"
     },
     "./builders/v2.3": {
       "types": "./dist/builders/v2.3/index.d.ts",
-      "require": "./dist/builders/v2.3/index.js",
-      "import": "./dist/builders/v2.3/index.mjs"
+      "default": "./dist/builders/v2.3/index.js"
     },
     "./builders/v2.3/*": {
       "types": "./dist/builders/v2.3/*.d.ts",
-      "require": "./dist/builders/v2.3/*.js",
-      "import": "./dist/builders/v2.3/*.mjs"
+      "default": "./dist/builders/v2.3/*.js"
     },
     "./builders/v2.3.1": {
       "types": "./dist/builders/v2.3.1/index.d.ts",
-      "require": "./dist/builders/v2.3.1/index.js",
-      "import": "./dist/builders/v2.3.1/index.mjs"
+      "default": "./dist/builders/v2.3.1/index.js"
     },
     "./builders/v2.3.1/*": {
       "types": "./dist/builders/v2.3.1/*.d.ts",
-      "require": "./dist/builders/v2.3.1/*.js",
-      "import": "./dist/builders/v2.3.1/*.mjs"
+      "default": "./dist/builders/v2.3.1/*.js"
     },
     "./builders/v2.4": {
       "types": "./dist/builders/v2.4/index.d.ts",
-      "require": "./dist/builders/v2.4/index.js",
-      "import": "./dist/builders/v2.4/index.mjs"
+      "default": "./dist/builders/v2.4/index.js"
     },
     "./builders/v2.4/*": {
       "types": "./dist/builders/v2.4/*.d.ts",
-      "require": "./dist/builders/v2.4/*.js",
-      "import": "./dist/builders/v2.4/*.mjs"
+      "default": "./dist/builders/v2.4/*.js"
     },
     "./builders/v2.5": {
       "types": "./dist/builders/v2.5/index.d.ts",
-      "require": "./dist/builders/v2.5/index.js",
-      "import": "./dist/builders/v2.5/index.mjs"
+      "default": "./dist/builders/v2.5/index.js"
     },
     "./builders/v2.5/*": {
       "types": "./dist/builders/v2.5/*.d.ts",
-      "require": "./dist/builders/v2.5/*.js",
-      "import": "./dist/builders/v2.5/*.mjs"
+      "default": "./dist/builders/v2.5/*.js"
     },
     "./builders/v2.5.1": {
       "types": "./dist/builders/v2.5.1/index.d.ts",
-      "require": "./dist/builders/v2.5.1/index.js",
-      "import": "./dist/builders/v2.5.1/index.mjs"
+      "default": "./dist/builders/v2.5.1/index.js"
     },
     "./builders/v2.5.1/*": {
       "types": "./dist/builders/v2.5.1/*.d.ts",
-      "require": "./dist/builders/v2.5.1/*.js",
-      "import": "./dist/builders/v2.5.1/*.mjs"
+      "default": "./dist/builders/v2.5.1/*.js"
     },
     "./utils/dateUtils": {
       "types": "./dist/utils/dateUtils.d.ts",
-      "require": "./dist/utils/dateUtils.js",
-      "import": "./dist/utils/dateUtils.mjs"
+      "default": "./dist/utils/dateUtils.js"
     }
   },
   "files": [
@@ -223,7 +181,7 @@
   "scripts": {
     "barrels": "tsx codegen/generate-barrels.ts",
     "prebuild": "tsx codegen/generate-barrels.ts && node codegen/generate-package-exports.mjs",
-    "build": "tsup && tsc -p tsconfig.build.json && node scripts/minify-cjs.mjs",
+    "build": "tsup && tsc -p tsconfig.build.json",
     "watch": "tsup --watch",
     "clean": "rm -rf dist",
     "test": "vitest run",
@@ -249,8 +207,7 @@
   "author": "Scott Eremia-Roden",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^20.10.0",
-    "esbuild": "0.27.7",
+    "@types/node": "^24.0.0",
     "tsup": "^8.5.1",
     "tsx": "^4.21.0",
     "typescript": "^5.3.0",
@@ -266,11 +223,11 @@
   },
   "homepage": "https://github.com/campfhir/kindling/tree/main/packages/hl7#readme",
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   },
   "publishConfig": {
     "access": "public",
     "provenance": true
   },
-  "packageManager": "pnpm@10.28.0"
+  "packageManager": "pnpm@12.15.0"
 }
