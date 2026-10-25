@@ -43,10 +43,6 @@ segment is `git mv` into the introducing version directory, adding it to that ve
 
 - `AIP-4` is named "Resource Role" in the Caristix table; the setter is still `resourceType()` for API compatibility.
 - `AL1-2` is named "Allergy Type" in the Caristix table; the setter is `allergenTypeCode()`.
-- `QRD-11` (What Data Code Value Qualifier) is typed `CM_VR` on hl7.eu. It is written as
-  repeating single components until the CM composite layout is modelled.
-- `QRF-9` (When Quantity/Timing Qualifier) is typed `TQ`. It takes positional components and
-  does not yet name them.
 - `QRD` and `QRF` usage flags are not stated on hl7.eu for several fields.
 
 ## v2.3 coverage
@@ -60,9 +56,12 @@ from the Caristix reference (the same generator produces later versions' segment
 
 APR, ARQ, AUT, CDM, CM0, CM1, CM2, CSP, CSR, CSS, EQL, ERQ, FAC, GOL, LCC, LCH, LDP, LOC, LRL, MFA, NCK, NPU, NSC, NST, OM1, OM2, OM3, OM4, OM5, OM6, PCR, PDC, PEO, PES, PRB, PRC, PRD, PSH, PTH, RDF, RDT, RF1, RXC, RXG, SPR, TXA, URD, URS, VAR, VTQ
 
-Generated classes are correct on field positions, repetition and the composite datatypes that have a
-typed object in `utils/composites.ts` (CE, CX, XCN, XPN, XAD, XTN, EI, PI, PL, CP, PLN, LA2, XON, CWE);
-their other setters take raw HL7 values. `src/segments/v2.3/generated.test.ts` checks every
+Generated classes are correct on field positions and repetition; every composite field takes the
+typed object of its datatype from `utils/composites.ts` (CE, CWE, CX, XCN, XPN, XAD, XTN, EI, PI, PL,
+CP, PLN, LA2, XON, MO, CQ, TQ, DR, RI, PPN, CK, VH, SCV, QIP, QSC, RCD and the OM2 ranges CM_RANGE,
+CM_RFR, CM_ABS_RANGE, CM_DLT) or a string for its first component, every TS and DT field takes a Date
+(formatted with the HL7 layout) or a string, and the primitive fields (ST, ID, IS, NM, TX, FT, SI)
+take strings. `src/segments/v2.3/generated.test.ts` checks every
 generated setter, repetition and composite against the spec, and `roundtrip.test.ts` parses and
 re-encodes every one of the 110 classes. Replace a generated file with a hand-written class and the
 generator will leave it alone.
@@ -81,6 +80,12 @@ reason. To refresh: `codegen/validate/fetch-v23-sources.sh <dir>` then
 `codegen/spec/v2.3-segments.json`, then regenerate the classes). The ledger also records, per
 segment, which tests exist (position tests, hand-written tests, round trip, spec-driven) and which
 setters only the position tests call.
+
+Composites added on 2026-10-25 for the fields that still took raw values (MO, CQ, TQ with its OSD,
+DR, RI, PPN, CK, VH, SCV, QIP, QSC, RCD, CM_VR for QRD-11, CM_PI, CM_RANGE, CM_RFR, CM_ABS_RANGE,
+CM_DLT), with the layouts from the hl7.eu v2.3 chapter 2, 4 and 8 text and the Caristix and HAPI
+definitions agreeing; the chapter 5 types (QIP, QSC, RCD, VR) rest on Caristix and HAPI, since
+hl7.eu's v2.3 chapter 5 page is not available. QRD-11 takes value ranges and QRF-9 a TQ object.
 
 Sweep of 2026-10-25: the spec of the generated classes was corrected on 40 values (lengths and
 usages Caristix had differently from hl7.eu and HAPI, NSC-1's type, OM1-6's type); AIP-5 now takes

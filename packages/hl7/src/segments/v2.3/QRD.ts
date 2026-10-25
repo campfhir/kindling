@@ -10,6 +10,7 @@ import type { Result } from "../../types/result.ts";
 import { BaseSegment, type Repeated, repetitions } from "../../types/segment.ts";
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
+import { components, vrParts, type VR } from "../../utils/composites.ts";
 import {
   formatHL7Date,
   DateTimeLayout,
@@ -130,11 +131,12 @@ export class QRD extends BaseSegment {
 
   /**
    * QRD-11 What Data Code Value Qualifier (chainable, repeating).
-   * Each value is written as a single component; the CM composite layout is not yet modelled.
+   * Each repetition is a value range, <first data code value> ^ <last data code value> (CM_VR); a
+   * string sets the first component only.
    * @param values - One entry per repetition
    */
-  whatDataCodeValueQualifier(...values: Repeated<string>[]): this {
-    this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
+  whatDataCodeValueQualifier(...values: Repeated<string | VR>[]): this {
+    this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(vrParts(v)))));
     return this;
   }
 

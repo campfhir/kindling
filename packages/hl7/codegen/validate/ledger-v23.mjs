@@ -149,7 +149,7 @@ function readOurs(seg) {
     if (!sig) continue;
     const params = sig[1];
     const body = chunk.slice(sig[0].length);
-    const at = body.match(/this\.fields\[(\d+)\]\s*=\s*this\.(createRepeatingField|createComponentsField|createField)/);
+    const at = body.match(/this\.fields\[(\d+)\]\s*=[^;]*?this\.(createRepeatingField|createComponentsField|createField)/);
     if (!at) continue;
     const seq = Number(at[1]) + offset;
     const repeating = at[2] === "createRepeatingField" || /^\.\.\./.test(params.trim());

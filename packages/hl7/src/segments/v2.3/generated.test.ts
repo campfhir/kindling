@@ -44,6 +44,29 @@ const COMPOSITES: Record<string, { value: Record<string, unknown>; encoded: stri
   PLN: { value: { idNumber: "L1", typeOfIdNumber: "T", stateOtherQualifyingInformation: "ST", expirationDate: "20301231" }, encoded: "L1^T^ST^20301231" },
   LA2: { value: { pointOfCare: "POC", room: "R1", bed: "B1" }, encoded: "POC^R1^B1" },
   XON: { value: { organizationName: "Org", organizationNameTypeCode: "L", idNumber: "9", checkDigit: "1", checkDigitScheme: "M10", assigningAuthority: "AA", identifierTypeCode: "FI" }, encoded: "Org^L^9^1^M10^AA^FI" },
+  MO: { value: { quantity: "19.99", denomination: "USD" }, encoded: "19.99^USD" },
+  CQ: { value: { quantity: "5", units: { identifier: "mg", text: "milligram", nameOfCodingSystem: "ISO+" } }, encoded: "5^mg&milligram&ISO+" },
+  TQ: { value: { quantity: { quantity: "1", units: "TAB" }, interval: { repeatPattern: "Q6H", explicitTimeInterval: "0600,1200" }, duration: "D7", startDateTime: "20231015", endDateTime: "20231022", priority: "R", condition: "PRN", text: "as needed", conjunction: "C", orderSequencing: { sequenceResultsFlag: "S", placerOrderNumberEntityIdentifier: "P1" } }, encoded: "1&TAB^Q6H&0600,1200^D7^20231015^20231022^R^PRN^as needed^C^S&P1" },
+  DR: { value: { rangeStartDateTime: "20231015", rangeEndDateTime: "20231016" }, encoded: "20231015^20231016" },
+  RI: { value: { repeatPattern: "Q8H", explicitTimeInterval: "0800,1600,0000" }, encoded: "Q8H^0800,1600,0000" },
+  PPN: { value: { idNumber: "1", familyName: "Fam", givenName: "Giv", middleInitialOrName: "M", suffix: "Jr", prefix: "Dr", degree: "MD", sourceTable: "T", assigningAuthority: { namespaceId: "NS" }, nameTypeCode: "L", identifierCheckDigit: "7", checkDigitScheme: "M10", identifierTypeCode: "MD", assigningFacility: "FAC", dateTimeActionPerformed: "20231015120000" }, encoded: "1^Fam^Giv^M^Jr^Dr^MD^T^NS^L^7^M10^MD^FAC^20231015120000" },
+  CK: { value: { idNumber: "123", checkDigit: "4", checkDigitScheme: "M11", assigningAuthority: { namespaceId: "NS", universalId: "U", universalIdType: "ISO" } }, encoded: "123^4^M11^NS&U&ISO" },
+  VH: { value: { startDayRange: "MON", endDayRange: "FRI", startHourRange: "0900", endHourRange: "1700" }, encoded: "MON^FRI^0900^1700" },
+  SCV: { value: { parameterClass: "PRIM", parameterValue: "Y" }, encoded: "PRIM^Y" },
+  QIP: { value: { fieldName: "@PID.5.1", values: ["SMITH", "JONES"] }, encoded: "@PID.5.1^SMITH&JONES" },
+  QSC: { value: { nameOfField: "@PID.3", relationalOperator: "EQ", value: "123", relationalConjunction: "AND" }, encoded: "@PID.3^EQ^123^AND" },
+  RCD: { value: { hl7ItemNumber: "00108", hl7DataType: "ST", maximumColumnWidth: "20" }, encoded: "00108^ST^20" },
+  CM_PI: { value: { idNumber: "P1", typeOfIdNumber: "T", otherQualifyingInfo: "Q" }, encoded: "P1^T^Q" },
+  CM_RANGE: { value: { lowValue: "3.5", highValue: "5.0" }, encoded: "3.5^5.0" },
+  CM_RFR: { value: { referenceRange: { lowValue: "3.5", highValue: "5.0" }, sex: "F", ageRange: { lowValue: "18", highValue: "65" }, ageGestation: "20&40", species: "human", raceSubspecies: "any", conditions: "fasting" }, encoded: "3.5&5.0^F^18&65^20&40^human^any^fasting" },
+  CM_ABS_RANGE: { value: { range: { lowValue: "0", highValue: "100" }, numericChange: "10", percentPerChange: "5", days: "2" }, encoded: "0&100^10^5^2" },
+  CM_DLT: { value: { range: "1&9", numericThreshold: "2", change: "%", lengthOfTimeDays: "30" }, encoded: "1&9^2^%^30" },
+};
+
+/** Date and date/time fields format a Date with the HL7 layout. */
+const DATES: Record<string, { value: Date; encoded: string }> = {
+  TS: { value: new Date(2023, 9, 15, 9, 30, 5), encoded: "20231015093005" },
+  DT: { value: new Date(2023, 9, 15, 9, 30, 5), encoded: "20231015" },
 };
 
 const SENTINEL = "ZQXP0S";
@@ -94,6 +117,11 @@ describe.each(GENERATED)("%s (generated from the spec)", (code) => {
     };
     expect(call("v")).toBe("v");
     if (isRepeating(f)) expect(call(["a", "b"]), "repetitions").toBe("a~b");
+    const date = DATES[f.type];
+    if (date) {
+      expect(call(date.value), `${f.type} from a Date`).toBe(date.encoded);
+      if (isRepeating(f)) expect(call([date.value, "20000101"]), `${f.type} repetitions`).toBe(`${date.encoded}~20000101`);
+    }
     const composite = COMPOSITES[f.type];
     if (composite) {
       expect(call(composite.value), `${f.type} components`).toBe(composite.encoded);

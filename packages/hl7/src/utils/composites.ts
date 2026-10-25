@@ -490,3 +490,298 @@ export const la2Parts = (v: LA2): Part[] => [
   v.streetAddress, v.otherDesignation, v.city, v.stateOrProvince, v.zipOrPostalCode, v.country,
   v.addressType, v.otherGeographicDesignation,
 ];
+
+// ---- Composites added for the v2.3 generated segments (sweep of 2026-10-25) ----
+// Layouts from the HL7 v2.3 text on hl7.eu (chapter 2 §2.8 for the standard types, chapter 4 for TQ,
+// chapter 8 §8.7.4 for the OM2 ranges), with the Caristix and HAPI v2.3 definitions agreeing. The
+// chapter 5 types (QIP, QSC, RCD, VR) are from Caristix and HAPI, which agree; hl7.eu's v2.3
+// chapter 5 page is not available.
+
+/** Components of an MO (money): <quantity (NM)> ^ <denomination (ID)>. */
+export const moParts = (v: MO): Part[] => [v.quantity, v.denomination];
+
+/** Composite quantity with units (CQ): <quantity (NM)> ^ <units (CE)>. */
+export interface CQ {
+  readonly datatype?: "CQ";
+  /** CQ.1 Quantity */
+  quantity?: string;
+  /** CQ.2 Units */
+  units?: CE | string;
+}
+export const cqParts = (v: CQ): Part[] => [v.quantity, ceSubs(v.units)];
+/** A CQ nested in another type: its quantity and the units' identifier become sub-components. */
+export const cqSubs = (v?: CQ | string): Part =>
+  v === undefined ? undefined : typeof v === "string" ? v : [v.quantity, typeof v.units === "object" ? v.units.identifier : v.units];
+
+/** Date/time range (DR): <range start date/time (TS)> ^ <range end date/time (TS)>. */
+export interface DR {
+  readonly datatype?: "DR";
+  /** DR.1 Range Start Date/Time */
+  rangeStartDateTime?: string;
+  /** DR.2 Range End Date/Time */
+  rangeEndDateTime?: string;
+}
+export const drParts = (v: DR): Part[] => [v.rangeStartDateTime, v.rangeEndDateTime];
+
+/** Repeat interval (RI): <repeat pattern (IS)> ^ <explicit time interval (ST)>. */
+export interface RI {
+  readonly datatype?: "RI";
+  /** RI.1 Repeat Pattern */
+  repeatPattern?: string;
+  /** RI.2 Explicit Time Interval */
+  explicitTimeInterval?: string;
+}
+export const riParts = (v: RI): Part[] => [v.repeatPattern, v.explicitTimeInterval];
+const riSubs = (v?: RI | string): Part => (v === undefined ? undefined : typeof v === "string" ? v : [v.repeatPattern, v.explicitTimeInterval]);
+
+/** Order sequencing (CM_OSD), the tenth component of TQ. */
+export interface OSD {
+  readonly datatype?: "OSD";
+  /** OSD.1 Sequence/Results Flag */
+  sequenceResultsFlag?: string;
+  /** OSD.2 Placer Order Number: Entity Identifier */
+  placerOrderNumberEntityIdentifier?: string;
+  /** OSD.3 Placer Order Number: Namespace ID */
+  placerOrderNumberNamespaceId?: string;
+  /** OSD.4 Filler Order Number: Entity Identifier */
+  fillerOrderNumberEntityIdentifier?: string;
+  /** OSD.5 Filler Order Number: Namespace ID */
+  fillerOrderNumberNamespaceId?: string;
+  /** OSD.6 Sequence Condition Value */
+  sequenceConditionValue?: string;
+  /** OSD.7 Maximum Number of Repeats */
+  maximumNumberOfRepeats?: string;
+  /** OSD.8 Placer Order Number: Universal ID */
+  placerOrderNumberUniversalId?: string;
+  /** OSD.9 Placer Order Number: Universal ID Type */
+  placerOrderNumberUniversalIdType?: string;
+  /** OSD.10 Filler Order Number: Universal ID */
+  fillerOrderNumberUniversalId?: string;
+  /** OSD.11 Filler Order Number: Universal ID Type */
+  fillerOrderNumberUniversalIdType?: string;
+}
+export const osdParts = (v: OSD): Part[] => [
+  v.sequenceResultsFlag, v.placerOrderNumberEntityIdentifier, v.placerOrderNumberNamespaceId,
+  v.fillerOrderNumberEntityIdentifier, v.fillerOrderNumberNamespaceId, v.sequenceConditionValue,
+  v.maximumNumberOfRepeats, v.placerOrderNumberUniversalId, v.placerOrderNumberUniversalIdType,
+  v.fillerOrderNumberUniversalId, v.fillerOrderNumberUniversalIdType,
+];
+
+/**
+ * Timing/quantity (TQ): <quantity (CQ)> ^ <interval (RI)> ^ <duration (ST)> ^ <start date/time (TS)> ^
+ * <end date/time (TS)> ^ <priority (ST)> ^ <condition (ST)> ^ <text (TX)> ^ <conjunction (ST)> ^
+ * <order sequencing (CM_OSD)>. Nested composites become sub-components.
+ */
+export interface TQ {
+  readonly datatype?: "TQ";
+  /** TQ.1 Quantity */
+  quantity?: CQ | string;
+  /** TQ.2 Interval */
+  interval?: RI | string;
+  /** TQ.3 Duration */
+  duration?: string;
+  /** TQ.4 Start Date/Time */
+  startDateTime?: string;
+  /** TQ.5 End Date/Time */
+  endDateTime?: string;
+  /** TQ.6 Priority */
+  priority?: string;
+  /** TQ.7 Condition */
+  condition?: string;
+  /** TQ.8 Text */
+  text?: string;
+  /** TQ.9 Conjunction */
+  conjunction?: string;
+  /** TQ.10 Order Sequencing */
+  orderSequencing?: OSD | string;
+}
+export const tqParts = (v: TQ): Part[] => [
+  cqSubs(v.quantity), riSubs(v.interval), v.duration, v.startDateTime, v.endDateTime, v.priority, v.condition,
+  v.text, v.conjunction,
+  v.orderSequencing === undefined ? undefined : typeof v.orderSequencing === "string" ? v.orderSequencing : (osdParts(v.orderSequencing) as (string | undefined)[]),
+];
+
+/** Performing person time stamp (PPN): the XCN components followed by <date/time action performed (TS)>. */
+export interface PPN {
+  readonly datatype?: "PPN";
+  /** PPN.1 ID Number */
+  idNumber?: string;
+  /** PPN.2 Family Name */
+  familyName?: string;
+  /** PPN.3 Given Name */
+  givenName?: string;
+  /** PPN.4 Middle Initial or Name */
+  middleInitialOrName?: string;
+  /** PPN.5 Suffix */
+  suffix?: string;
+  /** PPN.6 Prefix */
+  prefix?: string;
+  /** PPN.7 Degree */
+  degree?: string;
+  /** PPN.8 Source Table */
+  sourceTable?: string;
+  /** PPN.9 Assigning Authority */
+  assigningAuthority?: HD | string;
+  /** PPN.10 Name Type Code */
+  nameTypeCode?: string;
+  /** PPN.11 Identifier Check Digit */
+  identifierCheckDigit?: string;
+  /** PPN.12 Code Identifying the Check Digit Scheme Employed */
+  checkDigitScheme?: string;
+  /** PPN.13 Identifier Type Code */
+  identifierTypeCode?: string;
+  /** PPN.14 Assigning Facility */
+  assigningFacility?: HD | string;
+  /** PPN.15 Date/Time Action Performed */
+  dateTimeActionPerformed?: string;
+}
+export const ppnParts = (v: PPN): Part[] => [
+  v.idNumber, v.familyName, v.givenName, v.middleInitialOrName, v.suffix, v.prefix, v.degree, v.sourceTable,
+  hd(v.assigningAuthority), v.nameTypeCode, v.identifierCheckDigit, v.checkDigitScheme, v.identifierTypeCode,
+  hd(v.assigningFacility), v.dateTimeActionPerformed,
+];
+
+/** Composite ID with check digit (CK): <ID number (NM)> ^ <check digit> ^ <check digit scheme (ID)> ^ <assigning authority (HD)>. */
+export interface CK {
+  readonly datatype?: "CK";
+  /** CK.1 ID Number */
+  idNumber?: string;
+  /** CK.2 Check Digit */
+  checkDigit?: string;
+  /** CK.3 Code Identifying the Check Digit Scheme Employed */
+  checkDigitScheme?: string;
+  /** CK.4 Assigning Authority */
+  assigningAuthority?: HD | string;
+}
+export const ckParts = (v: CK): Part[] => [v.idNumber, v.checkDigit, v.checkDigitScheme, hd(v.assigningAuthority)];
+
+/** Visiting hours (VH): <start day range (ID)> ^ <end day range (ID)> ^ <start hour range (TM)> ^ <end hour range (TM)>. */
+export interface VH {
+  readonly datatype?: "VH";
+  /** VH.1 Start Day Range */
+  startDayRange?: string;
+  /** VH.2 End Day Range */
+  endDayRange?: string;
+  /** VH.3 Start Hour Range */
+  startHourRange?: string;
+  /** VH.4 End Hour Range */
+  endHourRange?: string;
+}
+export const vhParts = (v: VH): Part[] => [v.startDayRange, v.endDayRange, v.startHourRange, v.endHourRange];
+
+/** Scheduling class value pair (SCV): <parameter class (IS)> ^ <parameter value (IS)>. */
+export interface SCV {
+  readonly datatype?: "SCV";
+  /** SCV.1 Parameter Class */
+  parameterClass?: string;
+  /** SCV.2 Parameter Value */
+  parameterValue?: string;
+}
+export const scvParts = (v: SCV): Part[] => [v.parameterClass, v.parameterValue];
+
+/** Query input parameter list (QIP): <field name (ST)> ^ <value1 & value2 & value3 ...>. */
+export interface QIP {
+  readonly datatype?: "QIP";
+  /** QIP.1 Field Name */
+  fieldName?: string;
+  /** QIP.2 Values, written as sub-components */
+  values?: readonly string[] | string;
+}
+export const qipParts = (v: QIP): Part[] => [v.fieldName, typeof v.values === "string" ? v.values : v.values];
+
+/** Query selection criteria (QSC): <name of field (ST)> ^ <relational operator (ID)> ^ <value (ST)> ^ <relational conjunction (ID)>. */
+export interface QSC {
+  readonly datatype?: "QSC";
+  /** QSC.1 Name of Field */
+  nameOfField?: string;
+  /** QSC.2 Relational Operator */
+  relationalOperator?: string;
+  /** QSC.3 Value */
+  value?: string;
+  /** QSC.4 Relational Conjunction */
+  relationalConjunction?: string;
+}
+export const qscParts = (v: QSC): Part[] => [v.nameOfField, v.relationalOperator, v.value, v.relationalConjunction];
+
+/** Row column definition (RCD): <HL7 item number (ST)> ^ <HL7 data type (ST)> ^ <maximum column width (NM)>. */
+export interface RCD {
+  readonly datatype?: "RCD";
+  /** RCD.1 HL7 Item Number */
+  hl7ItemNumber?: string;
+  /** RCD.2 HL7 Data Type */
+  hl7DataType?: string;
+  /** RCD.3 Maximum Column Width */
+  maximumColumnWidth?: string;
+}
+export const rcdParts = (v: RCD): Part[] => [v.hl7ItemNumber, v.hl7DataType, v.maximumColumnWidth];
+
+/** Value qualifier (CM_VR, QRD-11): <first data code value (ST)> ^ <last data code value (ST)>. */
+export interface VR {
+  readonly datatype?: "VR";
+  /** VR.1 First Data Code Value */
+  firstDataCodeValue?: string;
+  /** VR.2 Last Data Code Value */
+  lastDataCodeValue?: string;
+}
+export const vrParts = (v: VR): Part[] => [v.firstDataCodeValue, v.lastDataCodeValue];
+
+/** A range (CM_RANGE, OM2-7): <low value> ^ <high value>; as sub-components when nested. */
+export interface RANGE {
+  readonly datatype?: "RANGE";
+  /** RANGE.1 Low Value */
+  lowValue?: string;
+  /** RANGE.2 High Value */
+  highValue?: string;
+}
+export const rangeParts = (v: RANGE): Part[] => [v.lowValue, v.highValue];
+const rangeSubs = (v?: RANGE | string): Part => (v === undefined ? undefined : typeof v === "string" ? v : [v.lowValue, v.highValue]);
+
+/** Reference range (CM_RFR, OM2-6): <range> ^ <sex> ^ <age range> ^ <age gestation> ^ <species> ^ <race/subspecies> ^ <conditions>. */
+export interface RFR {
+  readonly datatype?: "RFR";
+  /** RFR.1 Reference Range (low & high) */
+  referenceRange?: RANGE | string;
+  /** RFR.2 Sex */
+  sex?: string;
+  /** RFR.3 Age Range (low & high) */
+  ageRange?: RANGE | string;
+  /** RFR.4 Age Gestation (low & high) */
+  ageGestation?: RANGE | string;
+  /** RFR.5 Species */
+  species?: string;
+  /** RFR.6 Race/Subspecies */
+  raceSubspecies?: string;
+  /** RFR.7 Conditions */
+  conditions?: string;
+}
+export const rfrParts = (v: RFR): Part[] => [
+  rangeSubs(v.referenceRange), v.sex, rangeSubs(v.ageRange), rangeSubs(v.ageGestation), v.species, v.raceSubspecies, v.conditions,
+];
+
+/** Absolute range (CM_ABS_RANGE, OM2-8): <range> ^ <numeric change> ^ <percent per change> ^ <days>. */
+export interface ABS_RANGE {
+  readonly datatype?: "ABS_RANGE";
+  /** ABS_RANGE.1 Range (low & high) */
+  range?: RANGE | string;
+  /** ABS_RANGE.2 Numeric Change */
+  numericChange?: string;
+  /** ABS_RANGE.3 Percent per Change */
+  percentPerChange?: string;
+  /** ABS_RANGE.4 Days */
+  days?: string;
+}
+export const absRangeParts = (v: ABS_RANGE): Part[] => [rangeSubs(v.range), v.numericChange, v.percentPerChange, v.days];
+
+/** Delta check (CM_DLT, OM2-9): <range> ^ <numeric threshold> ^ <change> ^ <length of time-days>. */
+export interface DLT {
+  readonly datatype?: "DLT";
+  /** DLT.1 Range (low & high) */
+  range?: RANGE | string;
+  /** DLT.2 Numeric Threshold */
+  numericThreshold?: string;
+  /** DLT.3 Change */
+  change?: string;
+  /** DLT.4 Length of Time (days) */
+  lengthOfTimeDays?: string;
+}
+export const dltParts = (v: DLT): Part[] => [rangeSubs(v.range), v.numericThreshold, v.change, v.lengthOfTimeDays];
