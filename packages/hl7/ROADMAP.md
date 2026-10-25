@@ -29,11 +29,18 @@ hl7.eu (`https://hl7.eu/HL7v2x/v282/std282/ch01.html`).
 
 Steps, each one checked against the sources in the repository's `CLAUDE.md` before the next starts:
 
-1. **Sources.** Confirm each version's tables are readable: the hl7.eu chapter pages and segment
-   pages, the Caristix trigger-event and segment JSON, and HAPI's generated classes. At the time of
-   writing Caristix answered HTTP 500 for `HL7v2.8.2/Segments` and `HL7v2.9.1/Segments`, and no v2.9.1
-   pages were found on hl7.eu, so v2.9.1 may have no hl7.eu table: the rule in
-   `docs/validation/README.md` then applies (Caristix and HAPI must agree).
+1. **Sources.** Pulled by `codegen/validate/fetch-sources.sh <version> <dir> --record`, whose manifests
+   are in `codegen/validate/sources/`. Status when pulled (the manifest has every URL and checksum):
+   - hl7.eu segment pages: all of 2.5.1 to 2.9.1. Chapter pages: 2.5.1 to 2.8.2 and 2.9 (2.9.1 has none
+     at any path tried: 16 absent).
+   - Caristix: 2.5.1, 2.6, 2.7, 2.7.1 and 2.8 answer. 2.8.1, 2.8.2, 2.9 and 2.9.1 answer HTTP 500 for
+     every request, retries included. Without Caristix the message ledger cannot compare structures
+     for those four versions, so they are blocked on a source, not on code.
+   - HAPI: classes for 2.5.1, 2.6, 2.7, 2.8 and 2.8.1. Master has no classes for 2.7.1 (the module
+     exists, empty) and no module at all for 2.8.2, 2.9 or 2.9.1.
+   The rule in `docs/validation/README.md` applies per version. Where HAPI is absent, hl7.eu still
+   decides segments, but nothing cross-checks it while Caristix is down; for 2.8.2 to 2.9.1 neither
+   cross-check exists right now.
 2. **Decide the version order (open question).** Either one version at a time (2.6, 2.7, 2.7.1, 2.8,
    2.8.1, 2.8.2, 2.9, 2.9.1, each with its own ledgers and its own minor release, as 2.3 to 2.5.1 were)
    or straight to 2.9.1 with 2.5.1 as the base and the differences recorded in its ledger. The first
