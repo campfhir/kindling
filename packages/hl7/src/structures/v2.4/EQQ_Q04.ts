@@ -1,7 +1,16 @@
 /**
- * EQQ_Q04 structure for HL7 v2.4 — identical to v2.3.1, re-exported.
+ * Message structure for EQQ^Q04 messages (HL7 v2.4).
+ *
+ * Structure: MSH EQL [DSC]
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3.1/EQQ_Q04.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { StructureItem } from "../../types/schema.ts";
+
+/** The segments, choices and groups of EQQ^Q04 (HL7 v2.4), in order. */
+export const EQQ_Q04_STRUCTURE: StructureItem[] = [
+  { name: "MSH", required: true, repeating: false },
+  { name: "EQL", required: true, repeating: false },
+  { name: "DSC", required: false, repeating: false },
+];

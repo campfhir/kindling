@@ -10,6 +10,8 @@ import type { Result } from "../../types/result.ts";
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { ROL as ROL_base } from "../v2.3.1/ROL.ts";
+import { repetitions, type Repeated } from "../../types/segment.ts";
+import { codedParts, components, xadParts, xtnParts, type CodedInput, type XAD, type XTN } from "../../utils/composites.ts";
 
 /**
  * ROL segment (HL7 v2.4)
@@ -17,13 +19,9 @@ import { ROL as ROL_base } from "../v2.3.1/ROL.ts";
  * Extends v2.3.1 ROL with ROL-9 to ROL-12 (Provider Type, Organization Unit Type, Office/Home Address, Phone). Source: hl7.eu v2.4 ROL table (12 fields).
  */
 export class ROL extends ROL_base {
-  /**
-   * ROL-9 Provider Type (chainable).
-   * @param code - ROL-9.1 Code
-   * @param text - ROL-9.2 Text
-   */
-  providerType({ code, text }: { code: string; text?: string }): this {
-    this.fields[8] = this.createComponentsField([code, text || ""]);
+  /** ROL-9 Provider Type (CE) (chainable). Repeats in v2.4: pass one argument per repetition, a code or the coded element's components. */
+  providerType(...values: Repeated<CodedInput | string>[]): this {
+    this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(codedParts(v)))));
     return this;
   }
 
@@ -38,26 +36,21 @@ export class ROL extends ROL_base {
   }
 
   /**
-   * ROL-11 Office/Home Address/Birthplace (chainable).
-   * @param street - ROL-11.1 Street
-   * @param city - ROL-11.3 City
-   * @param state - ROL-11.4 State
-   * @param zip - ROL-11.5 Zip
+   * ROL-11 Office/Home Address (XAD) (chainable). Repeats in v2.4: pass one argument per repetition,
+   * a string, the XAD components, or `{ street, city, state, zip }` (ROL-11.1, .3, .4, .5).
    */
-  officeAddress({ street, city, state, zip }: { street: string; city?: string; state?: string; zip?: string }): this {
-    this.fields[10] = this.createComponentsField([
-      street,
-      "",
-      city || "",
-      state || "",
-      zip || "",
-    ]);
+  officeAddress(...values: Repeated<string | XAD | { street: string; city?: string; state?: string; zip?: string }>[]): this {
+    this.fields[10] = this.createRepeatingField(
+      repetitions(values).map((v) =>
+        typeof v === "string" ? this.createField(v) : "street" in v ? this.createComponentsField([v.street, "", v.city || "", v.state || "", v.zip || ""]) : this.createField(components(xadParts(v))),
+      ),
+    );
     return this;
   }
 
-  /** ROL-12 Phone (chainable). */
-  phone(value: string): this {
-    this.fields[11] = this.createField(value);
+  /** ROL-12 Phone (XTN) (chainable). Repeats in v2.4: pass one argument per repetition, a number or the XTN components. */
+  phone(...values: Repeated<string | XTN>[]): this {
+    this.fields[11] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 

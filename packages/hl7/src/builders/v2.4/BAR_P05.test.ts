@@ -5,6 +5,8 @@ import { parseBAR_P01 } from "../../parsers/v2.4/BAR_P01_Parser.ts";
 import { parseBAR_P05 } from "../../parsers/v2.4/BAR_P05_Parser.ts";
 import { parseBAR_P02 } from "../../parsers/v2.4/BAR_P02_Parser.ts";
 import { parseBAR_P02 as parseBAR_P02_v231 } from "../../parsers/v2.3.1/BAR_P02_Parser.ts";
+import { BAR_P02_STRUCTURE } from "../../structures/v2.4/BAR_P02.ts";
+import { BAR_P02_STRUCTURE as BAR_P02_STRUCTURE_v231 } from "../../structures/v2.3.1/BAR_P02.ts";
 import { MSH } from "../../segments/v2.4/MSH.ts";
 import { EVN } from "../../segments/v2.4/EVN.ts";
 import { PID } from "../../segments/v2.4/PID.ts";
@@ -75,7 +77,8 @@ describe("BAR (v2.4): ROLs, repeating IN3, and ABS/BLC/RMI in P05", () => {
     expect(twoAbs.val!.visits[1].riskManagementIncident).toBeTruthy();
   });
 
-  test("P02 and P06 are unchanged in v2.4 (v2.3.1's modules are re-exported)", () => {
-    expect(parseBAR_P02).toBe(parseBAR_P02_v231);
+  test("P02 keeps its 2.3.1 structure in v2.4, generated against the 2.4 segments", () => {
+    expect(parseBAR_P02).not.toBe(parseBAR_P02_v231);
+    expect(BAR_P02_STRUCTURE).toEqual(BAR_P02_STRUCTURE_v231);
   });
 });

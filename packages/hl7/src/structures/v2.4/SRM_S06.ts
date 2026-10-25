@@ -1,7 +1,10 @@
 /**
- * SRM_S06 structure for HL7 v2.4 — identical to v2.3.1, re-exported.
+ * Message structure for SRM^S06 messages (HL7 v2.4).
+ *
+ * Structure: MSH ARQ [APR] [{NTE}] [{ PATIENT: PID [PV1] [PV2] [{OBX}] [{DG1}] }] { RESOURCES: RGS [{ SERVICE: AIS [APR] [{NTE}] }] [{ GENERAL_RESOURCE: AIG [APR] [{NTE}] }] [{ LOCATION_RESOURCE: AIL [APR] [{NTE}] }] [{ PERSONNEL_RESOURCE: AIP [APR] [{NTE}] }] }
+ * Shares the SRM^S01 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3.1/SRM_S06.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+export { SRM_S01_STRUCTURE as SRM_S06_STRUCTURE } from "./SRM_S01.ts";

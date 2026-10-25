@@ -148,10 +148,14 @@ function readHapi(event: string): Line[] | undefined {
 /**
  * hl7.eu chapter pages: each message table renders as "<TYPE> <title> Chapter MSH Message Header 2 …"
  * under a heading that names its events, "(event A01)", "(events PC6, PC7, PC8)", "(events C01-C08)"
- * or, with the types in front, "RDS/RRD - … (events O01/O02)". Only brackets and segment codes are
- * kept from a table. "[Order Detail Segment] OBR, etc." reads as the order detail choice.
+ * or, with the types in front, "RDS/RRD - … (events O01/O02)" (the v2.3 pages); from v2.4 on the
+ * table's caption names the event itself, "ADT^A04^ADT_A01 ADT Message Chapter MSH Message Header",
+ * and that caption is used when present. Only brackets and segment codes are kept from a table.
+ * "[Order Detail Segment] OBR, etc." reads as the order detail choice.
  */
-const SEGMENT_CODES = new Set(readdirSync(join(ROOT, "src/segments/v2.3")).filter((f) => /^[A-Z][A-Z0-9]{2}\.ts$/.test(f)).map((f) => f.slice(0, 3)));
+const SEGMENT_CODES = new Set(
+  ["v2.3", VERSION].flatMap((v) => readdirSync(join(ROOT, "src/segments", v)).filter((f) => /^[A-Z][A-Z0-9]{2}\.ts$/.test(f)).map((f) => f.slice(0, 3))),
+);
 const ORDER_DETAIL_CHOICE = "<OBR|RQD|RQ1|RXO|ODS|ODT>";
 /** "PC6, PC7, PC8" → PC6 PC7 PC8; "C01-C08" → C01 … C08; "O01/O02" → O01 O02. */
 function expandEvents(spec: string): string[] {
@@ -168,6 +172,8 @@ function expandEvents(spec: string): string[] {
   return out;
 }
 const hl7eu = new Map<string, Line[]>();
+/** Events a heading groups with a captioned table ("(events PC6, PC7, PC8)" over "PGL^PC6^PGL_PC6"): they share it unless they get a table of their own. */
+const hl7euAliases: { key: string; lines: Line[] }[] = [];
 if (hl7euDir && existsSync(hl7euDir)) {
   for (const f of readdirSync(hl7euDir).filter((f) => f.endsWith(".htm"))) {
     const raw = readFileSync(join(hl7euDir, f)).toString("latin1");
@@ -176,7 +182,10 @@ if (hl7euDir && existsSync(hl7euDir)) {
       // "[Order Detail Segment] OBR, etc.", "[ Order Detail Segment OBR, etc. 4 …" and "[OBR, etc... Order Detail Segment, etc." all mean the order detail choice.
       .replace(/OBR,?\s*etc\.{0,3}/g, " ")
       .replace(/Order Detail Segment,?\s*(?:etc\.?)?/g, " ORDER_DETAIL_CHOICE ")
-      .replace(/General Acknowledgment (?:Chapter )?MSH|Generic Acknowledgement (?:Appendix )?MSH/g, " ACK_TABLE ");
+      .replace(/General Acknowledgment (?:Chapter )?MSH|Generic Acknowledgement (?:Appendix )?MSH/g, " ACK_TABLE ")
+      // The v2.4 pages print a few codes with a space inside ("[ P DA ]", "[ PD A ]"): rejoin a split segment code.
+      .replace(/([[{]\s*)([A-Z])\s([A-Z][A-Z0-9])(\s*[\]}])/g, (m, a, x, y, b) => (SEGMENT_CODES.has(x + y) ? `${a}${x}${y}${b}` : m))
+      .replace(/([[{]\s*)([A-Z][A-Z0-9])\s([A-Z0-9])(\s*[\]}])/g, (m, a, x, y, b) => (SEGMENT_CODES.has(x + y) ? `${a}${x}${y}${b}` : m));
     const headings = [...text.matchAll(/\d+\.\d+(?:\.\d+)* ((?:[A-Z][A-Z0-9]{2}\/)*[A-Z][A-Z0-9]{2})?(?:(?!\d+\.\d+ )[^|]){0,160}?\((?:event|events|Event)s? ([^)]{2,60})\)/g)].map((m) => ({
       index: m.index!,
       types: (m[1] ?? "").split("/").filter(Boolean),
@@ -184,16 +193,33 @@ if (hl7euDir && existsSync(hl7euDir)) {
     }));
     for (const m of text.matchAll(/(?:Chapter\/? |Appendix )?MSH Message Header(?: 2)?(?= [\[{A-Z])/g)) {
       const before = text.slice(Math.max(0, m.index! - 160), m.index!);
-      const type = [...before.matchAll(/\b([A-Z][A-Z0-9]{2})\b/g)].map((t) => t[1]).filter((t) => !SEGMENT_CODES.has(t) && t !== "ACK").at(-1);
-      const heading = headings.filter((h) => h.index < m.index!).at(-1);
-      if (!type || !heading) continue;
-      const positional = heading.types.length === heading.events.length && heading.types.includes(type);
-      const events = positional ? [heading.events[heading.types.indexOf(type)]] : heading.events;
+      // A "TYPE^EVENT^STRUCTURE" caption right before the table (v2.4 and later) names the event itself.
+      const caption = [...before.slice(-120).matchAll(/\b([A-Z][A-Z0-9]{2})\^([A-Z0-9]{3})(?:\^[A-Z0-9_]+)?\b/g)].at(-1);
+      let type: string | undefined;
+      let events: string[];
+      let aliases: string[] = [];
+      if (caption) {
+        [, type] = caption;
+        events = [caption[2]];
+        // A heading that pairs its types with its events ("QRY/ORF … (events R02, R04)") gives each type its own event: no aliases.
+        const heading = headings.filter((h) => h.index < m.index!).at(-1);
+        const positional = heading !== undefined && heading.types.length === heading.events.length && heading.types.includes(type);
+        if (heading && !positional && heading.events.includes(caption[2]) && (heading.types.length === 0 || heading.types.includes(type))) aliases = heading.events.filter((e) => e !== caption[2]);
+      } else {
+        type = [...before.matchAll(/\b([A-Z][A-Z0-9]{2})\b/g)].map((t) => t[1]).filter((t) => !SEGMENT_CODES.has(t) && t !== "ACK").at(-1);
+        const heading = headings.filter((h) => h.index < m.index!).at(-1);
+        // A heading that names its types ("VQQ - Virtual Table query (event Q07)") covers only tables of those types.
+        if (!type || !heading || (heading.types.length > 0 && !heading.types.includes(type))) continue;
+        const positional = heading.types.length === heading.events.length && heading.types.includes(type);
+        events = positional ? [heading.events[heading.types.indexOf(type)]] : heading.events;
+      }
       const lines = tokenizeHl7eu(text.slice(m.index! + m[0].indexOf("MSH")));
       if (!lines || lines.length < 2) continue;
       for (const event of events) if (!hl7eu.has(`${type}_${event}`)) hl7eu.set(`${type}_${event}`, lines);
+      for (const event of aliases) hl7euAliases.push({ key: `${type}_${event}`, lines });
     }
   }
+  for (const { key, lines } of hl7euAliases) if (!hl7eu.has(key)) hl7eu.set(key, lines);
 }
 /**
  * Reads one table's abstract syntax: segment codes and brackets until the next table or heading.
@@ -203,11 +229,14 @@ if (hl7euDir && existsSync(hl7euDir)) {
 interface EuItem { body: string; required: boolean; repeating: boolean; items?: EuItem[] }
 function tokenizeHl7eu(text: string): Line[] | undefined {
   // Descriptions in parentheses ("Notes and Comments (for RXO)", "Patient (1)") may name segments: drop them.
-  const clean = text.replace(/\([^()]{0,60}\)/g, " ");
-  const matches = [...clean.matchAll(/\[|\]|\{|\}|ORDER_DETAIL_CHOICE|ACK_TABLE|\b[A-Z][A-Z0-9]{2}\b|\b\d+\.\d+(?:\.\d+)*\b|Chapter/g)];
+  // A "TYPE^EVENT^STRUCTURE" caption after the first token is the next table's; a second MSH is prose
+  // repeating the segment list ("contains the MSH, QPD, RCP, and DSC segments"). Both end the table.
+  const clean = text.replace(/\([^()]{0,60}\)/g, " ").replace(/(?<=.)\b[A-Z][A-Z0-9]{2}\^[A-Z0-9]{3}(?:\^[A-Z0-9_]+)?/g, " NEXT_CAPTION ");
+  const matches = [...clean.matchAll(/\[|\]|\{|\}|ORDER_DETAIL_CHOICE|ACK_TABLE|NEXT_CAPTION|\b[A-Z][A-Z0-9]{2}\b|\b\d+\.\d+(?:\.\d+)*\b|Chapter/g)];
   const tokens = matches.map((m) => m[0]);
   const isSegment = (t: string) => SEGMENT_CODES.has(t) || t === "ORDER_DETAIL_CHOICE";
-  const isStop = (t: string) => /^\d+\.\d+/.test(t) || t === "Chapter" || t === "ACK_TABLE";
+  let mshSeen = 0;
+  const isStop = (t: string) => /^\d+\.\d+/.test(t) || t === "Chapter" || t === "ACK_TABLE" || t === "NEXT_CAPTION" || (t === "MSH" && mshSeen > 0);
   // Table rows are short ("SEG Description 2"); a long gap between tokens at the top level is prose after the table.
   const prose = (k: number, depth: number) => depth === 0 && k > 0 && matches[k].index! - (matches[k - 1].index! + matches[k - 1][0].length) > 140;
   let i = 0;
@@ -235,6 +264,7 @@ function tokenizeHl7eu(text: string): Line[] | undefined {
       }
       if (isSegment(t)) {
         seen++;
+        if (t === "MSH") mshSeen++;
         items.push({ body: t === "ORDER_DETAIL_CHOICE" ? ORDER_DETAIL_CHOICE : t, required: true, repeating: false });
       }
     }
@@ -324,6 +354,18 @@ async function main(): Promise<void> {
   lines.push("");
   lines.push(`- ${results.length} message structures: ${counts.ok} ok, ${counts.accepted} accepted differences, ${counts.differs} unexplained differences, ${counts.undecided} undecided.`);
   lines.push(`- Sources present: hl7.eu ${results.filter((r) => r.eu).length}, Caristix ${results.filter((r) => r.cx).length}, HAPI ${results.filter((r) => r.hp).length}.`);
+  // Events the sources define for this version that we do not implement.
+  const implemented = new Set(ours.map(([event]) => event));
+  const caristixEvents = readdirSync(caristixDir!).filter((f) => /^[A-Z0-9]{3}_[A-Z0-9]{3}\.json$/.test(f)).map((f) => f.slice(0, -5));
+  const hapiEvents = [...readdirSync(hapiMessages).filter((f) => /^[A-Z0-9]{3}_[A-Z0-9]{3}\.java$/.test(f)).map((f) => f.slice(0, -5)), ...eventMap.keys()];
+  // The Caristix event index is the version's complete list; hl7.eu's headings and HAPI's modules also carry
+  // ACK tables, the Z (site-defined) conformance examples of chapter 5, typos and structures of later versions.
+  const missing = caristixEvents.filter((e) => !implemented.has(e) && !e.startsWith("ACK")).sort();
+  if (missing.length) {
+    const where = (e: string) => [hl7eu.has(e) ? "hl7.eu" : "", caristixEvents.includes(e) ? "Caristix" : "", hapiEvents.includes(e) ? "HAPI" : ""].filter(Boolean).join("/");
+    lines.push(`- **Not implemented** (${missing.length}): ${missing.map((e) => `${e} (${where(e)})`).join(", ")}.`);
+    console.log(`not implemented: ${missing.join(" ")}`);
+  }
   lines.push("");
   lines.push("| Event | hl7.eu | Caristix | HAPI | Decided by | Status | Note |");
   lines.push("|---|---|---|---|---|---|---|");

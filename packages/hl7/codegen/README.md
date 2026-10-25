@@ -90,13 +90,15 @@ bases before derived versions.
   An existing wrapper file is never overwritten, so 2.5.1-specific fields can be added by hand.
   Every message is generated against these classes.
 - **Re-export version** (`reexport: true`: `v2.3.1`, `v2.4`, `v2.5`): the messages it lists are
-  generated against its own segment modules (v2.3.1 lists every message, so all 276 are generated
-  against the 2.3.1 segment classes; v2.4 and v2.5 list only the messages whose structure changed);
-  generated (against its own segment modules); every other segment, structure, parser and builder
-  of the base version is mirrored as `export * from "../<base>/X.ts"`. Segments first introduced
-  in the version are hand-written and listed in `ownSegments`; messages the version withdrew are
-  listed in `withdrawnMessages` (`"UDM_R06"` in v2.4) and are not mirrored, so they disappear
-  from that version on.
+  generated against its own segment modules (v2.3.1 and v2.4 list every message, so all 276 and
+  334 of them are generated against the 2.3.1 and 2.4 segment classes; v2.5 lists only the messages
+  whose structure changed); every other segment, structure, parser and builder of the base version
+  is mirrored as `export * from "../<base>/X.ts"`. A segment of the version that has its own module
+  (hand-written, or generated from `codegen/spec/<version>-segments.json` by `generate-segments.ts`,
+  possibly as a subclass of the older class) is never mirrored; segments first introduced in the
+  version are also listed in `ownSegments`; messages the version withdrew are listed in
+  `withdrawnMessages` (`"UDM_R06"` in v2.4) and are not mirrored, so they disappear from that
+  version on.
 
 Events that share a structure (ADT^A02 … reuse ADT^A01) set `baseMessage`; codegen then emits
 thin wrappers (a parser subclass, a builder subclass and a structure alias) around the base
@@ -118,7 +120,7 @@ codegen/
     helpers.ts         # req/opt/reqList/optList/group/choice, withSft, wrappers, reversion
     v2.3/              # one file per message family + version.ts + index.ts
     v2.3.1/            # every message re-versioned from v2.3, plus the 2.3.1 changes (ADT.ts, changed.ts, …)
-    v2.4/              # messages that changed in 2.4 (ADT A01 family, BAR, DFT, ORM, VXU)
+    v2.4/              # every message re-versioned from v2.3.1, plus the 2.4 changes (ADT.ts, …) and the 57 new 2.4 messages
     v2.5/              # messages that changed in 2.5 (+ SFT, TQ1/TQ2, SPM, ORU^R30 ...)
     v2.5.1/            # re-versions the v2.5 list (nothing changed between 2.5 and 2.5.1)
   generators/
@@ -129,7 +131,7 @@ codegen/
   generate.ts          # entry point — registers VERSIONS and runs them
   generate-barrels.ts, generate-package-exports.mjs
   generate-segments.ts, generate-field-position-tests.ts   # segment tooling (see docs/ROADMAP-SEGMENTS.md)
-  spec/, validate/     # per-version segment field tables (<version>-segments.json) and their checks
+  spec/, validate/     # per-version segment field tables (<version>-segments.json), the ledgers and the message scaffolder
 ```
 
 ## Adding a message

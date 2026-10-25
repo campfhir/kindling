@@ -1,7 +1,25 @@
 /**
- * ADT_A10_Parser parser for HL7 v2.4 — identical to v2.3.1, re-exported.
+ * Parser for ADT^A10 messages (HL7 v2.4).
+ *
+ * Structure: MSH EVN PID [PD1] PV1 [PV2] [{DB1}] [{OBX}] [{DG1}]
+ * Shares the ADT^A09 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3.1/ADT_A10_Parser.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { Result } from "../../types/result.ts";
+import { ADT_A09_Parser, type ParsedADT_A09 } from "./ADT_A09_Parser.ts";
+
+/** Structured result of parsing an HL7 ADT^A10 (HL7 v2.4) message. */
+export type ParsedADT_A10 = ParsedADT_A09;
+
+/** Parser for HL7 ADT^A10 (HL7 v2.4) messages. */
+export class ADT_A10_Parser extends ADT_A09_Parser {
+  /** The message name used in error messages. */
+  protected override readonly messageName: string = "ADT_A10";
+}
+
+/** Parses an HL7 ADT^A10 (HL7 v2.4) message string into a structured result. */
+export function parseADT_A10(messageString: string): Result<ParsedADT_A10> {
+  return new ADT_A10_Parser().parse(messageString);
+}

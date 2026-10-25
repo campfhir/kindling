@@ -6,6 +6,9 @@ export default defineConfig({
     "!src/**/*.test.ts",
     "!src/**/*.integration.test.ts",
   ],
+  // The build script runs one format per tsup invocation (`tsup --format esm && tsup --format cjs
+  // --no-clean`): tsup writes every output file of a format at once, and with ~2,400 entry points
+  // the two formats together open more files than a 20,000-descriptor limit allows.
   format: ["cjs", "esm"],
   // Declarations come from `tsc -p tsconfig.build.json` (see the build script): tsup's per-entry
   // declaration bundling took most of a ten-minute build for the ~1,700 entry points here, while a

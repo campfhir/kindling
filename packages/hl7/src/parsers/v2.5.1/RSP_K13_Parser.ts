@@ -1,0 +1,78 @@
+/**
+ * Parser for RSP^K13 messages (HL7 v2.5.1).
+ *
+ * Structure: MSH MSA [ERR] QAK QPD [ ROW_DEFINITION: RDF [{RDT}] ] [DSC]
+ *
+ * @module
+ */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { Result } from "../../types/result.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
+import { RSP_K13_STRUCTURE } from "../../structures/v2.5.1/RSP_K13.ts";
+import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { MSA } from "../../segments/v2.5.1/MSA.ts";
+import { ERR } from "../../segments/v2.5.1/ERR.ts";
+import { QAK } from "../../segments/v2.5.1/QAK.ts";
+import { QPD } from "../../segments/v2.5.1/QPD.ts";
+import { RDF } from "../../segments/v2.5.1/RDF.ts";
+import { RDT } from "../../segments/v2.5.1/RDT.ts";
+import { DSC } from "../../segments/v2.5.1/DSC.ts";
+
+/** The ROW DEFINITION group of a parsed RSP^K13 (HL7 v2.5.1) message. */
+export interface ParsedRowDefinition {
+  /** The RDF segment. */
+  rowDefinition: RDF;
+  /** The RDT segments. */
+  rows?: RDT[];
+}
+
+/** Structured result of parsing an HL7 RSP^K13 (HL7 v2.5.1) message. */
+export interface ParsedRSP_K13 extends ParsedMessageBase {
+  /** The MSH segment. */
+  header: MSH;
+  /** The MSA segment. */
+  acknowledgment: MSA;
+  /** The ERR segment. */
+  error?: ERR;
+  /** The QAK segment. */
+  queryAcknowledgment: QAK;
+  /** The QPD segment. */
+  queryParameters: QPD;
+  /** The ROW DEFINITION group. */
+  rowDefinition?: ParsedRowDefinition;
+  /** The DSC segment. */
+  continuation?: DSC;
+}
+
+/** The segment parsers of RSP^K13 (HL7 v2.5.1). */
+const PARSERS: SegmentParsers = {
+  MSH: (s) => MSH.parse(s),
+  MSA: (s, e) => MSA.parse(s, e),
+  ERR: (s, e) => ERR.parse(s, e),
+  QAK: (s, e) => QAK.parse(s, e),
+  QPD: (s, e) => QPD.parse(s, e),
+  RDF: (s, e) => RDF.parse(s, e),
+  RDT: (s, e) => RDT.parse(s, e),
+  DSC: (s, e) => DSC.parse(s, e),
+};
+
+/** Parser for HL7 RSP^K13 (HL7 v2.5.1) messages. */
+export class RSP_K13_Parser {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "RSP_K13";
+  /** The structure the message is parsed against. */
+  protected readonly structure: StructureItem[] = RSP_K13_STRUCTURE;
+  /** The segment parsers, keyed by segment name. */
+  protected readonly parsers: SegmentParsers = PARSERS;
+
+  /** Parses the input string into a structured instance. */
+  parse(messageString: string): Result<ParsedRSP_K13> {
+    return parseStructure<ParsedRSP_K13>(this.messageName, this.structure, this.parsers, messageString);
+  }
+}
+
+/** Parses an HL7 RSP^K13 (HL7 v2.5.1) message string into a structured result. */
+export function parseRSP_K13(messageString: string): Result<ParsedRSP_K13> {
+  return new RSP_K13_Parser().parse(messageString);
+}

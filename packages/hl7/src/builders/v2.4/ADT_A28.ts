@@ -1,8 +1,8 @@
 /**
  * Builder for ADT^A28 messages (HL7 v2.4).
  *
- * Structure: MSH EVN PID [PD1] [{ROL}] [{NK1}] PV1 [PV2] [{ROL}] [{DB1}] [{OBX}] [{AL1}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] }] [{GT1}] [{ INSURANCE: IN1 [IN2] [{IN3}] [{ROL}] }] [ACC] [UB1] [UB2] [PDA]
- * Shares the ADT^A01 structure.
+ * Structure: MSH EVN PID [PD1] [{ROL}] [{NK1}] PV1 [PV2] [{ROL}] [{DB1}] [{OBX}] [{AL1}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] }] [{GT1}] [{ INSURANCE: IN1 [IN2] [{IN3}] [{ROL}] }] [ACC] [UB1] [UB2]
+ * Shares the ADT^A05 structure.
  *
  * @module
  */
@@ -12,14 +12,14 @@ import type { MSH } from "../../segments/v2.4/MSH.ts";
 import type { EVN } from "../../segments/v2.4/EVN.ts";
 import type { PID } from "../../segments/v2.4/PID.ts";
 import type { PV1 } from "../../segments/v2.4/PV1.ts";
-import { ADT_A01, type ADT_A01Options, type ProcedureGroup, type InsuranceGroup } from "./ADT_A01.ts";
+import { ADT_A05, type ADT_A05Options, type ProcedureGroup, type InsuranceGroup } from "./ADT_A05.ts";
 
 export type { ProcedureGroup, InsuranceGroup };
 /** The optional segments and groups of an ADT^A28 (HL7 v2.4) message. */
-export type ADT_A28Options = ADT_A01Options;
+export type ADT_A28Options = ADT_A05Options;
 
 /** Builder for HL7 ADT^A28 (HL7 v2.4) messages. */
-export class ADT_A28<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TPV1 extends PV1 = PV1> extends ADT_A01<TMSH, TEVN, TPID, TPV1> {
+export class ADT_A28<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TPV1 extends PV1 = PV1> extends ADT_A05<TMSH, TEVN, TPID, TPV1> {
   /** The message name used in error messages. */
   protected override readonly messageName: string = "ADT_A28";
 }

@@ -1,7 +1,56 @@
 /**
- * SPQ_Q08_Parser parser for HL7 v2.4 — identical to v2.3.1, re-exported.
+ * Parser for SPQ^Q08 messages (HL7 v2.4).
+ *
+ * Structure: MSH SPR [RDF] [DSC]
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3.1/SPQ_Q08_Parser.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { Result } from "../../types/result.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
+import { SPQ_Q08_STRUCTURE } from "../../structures/v2.4/SPQ_Q08.ts";
+import { MSH } from "../../segments/v2.4/MSH.ts";
+import { SPR } from "../../segments/v2.4/SPR.ts";
+import { RDF } from "../../segments/v2.4/RDF.ts";
+import { DSC } from "../../segments/v2.4/DSC.ts";
+
+/** Structured result of parsing an HL7 SPQ^Q08 (HL7 v2.4) message. */
+export interface ParsedSPQ_Q08 extends ParsedMessageBase {
+  /** The MSH segment. */
+  header: MSH;
+  /** The SPR segment. */
+  storedProcedureRequest: SPR;
+  /** The RDF segment. */
+  rowDefinition?: RDF;
+  /** The DSC segment. */
+  continuation?: DSC;
+}
+
+/** The segment parsers of SPQ^Q08 (HL7 v2.4). */
+const PARSERS: SegmentParsers = {
+  MSH: (s) => MSH.parse(s),
+  SPR: (s, e) => SPR.parse(s, e),
+  RDF: (s, e) => RDF.parse(s, e),
+  DSC: (s, e) => DSC.parse(s, e),
+};
+
+/** Parser for HL7 SPQ^Q08 (HL7 v2.4) messages. */
+export class SPQ_Q08_Parser {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "SPQ_Q08";
+  /** The structure the message is parsed against. */
+  protected readonly structure: StructureItem[] = SPQ_Q08_STRUCTURE;
+  /** The segment parsers, keyed by segment name. */
+  protected readonly parsers: SegmentParsers = PARSERS;
+
+  /** Parses the input string into a structured instance. */
+  parse(messageString: string): Result<ParsedSPQ_Q08> {
+    return parseStructure<ParsedSPQ_Q08>(this.messageName, this.structure, this.parsers, messageString);
+  }
+}
+
+/** Parses an HL7 SPQ^Q08 (HL7 v2.4) message string into a structured result. */
+export function parseSPQ_Q08(messageString: string): Result<ParsedSPQ_Q08> {
+  return new SPQ_Q08_Parser().parse(messageString);
+}

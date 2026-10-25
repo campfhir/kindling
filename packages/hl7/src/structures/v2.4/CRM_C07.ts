@@ -1,7 +1,10 @@
 /**
- * CRM_C07 structure for HL7 v2.4 — identical to v2.3.1, re-exported.
+ * Message structure for CRM^C07 messages (HL7 v2.4).
+ *
+ * Structure: MSH { PATIENT: PID [PV1] CSR [{CSP}] }
+ * Shares the CRM^C01 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3.1/CRM_C07.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+export { CRM_C01_STRUCTURE as CRM_C07_STRUCTURE } from "./CRM_C01.ts";

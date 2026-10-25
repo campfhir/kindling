@@ -29,8 +29,11 @@ FT1, FTS, GT1, IN1, IN2, IN3, MFE, MFI, MRG, MSA, MSH, NK1, NTE, OBR, OBX, ODS, 
 PID, PR1, PRA, PV1, PV2, QAK, QRD, QRF, RGS, ROL, RQ1, RQD, RXA, RXD, RXE, RXO, RXR, SCH, STF,
 UB1, UB2
 
-Segments are placed in the version that introduced them: `PDA`, `ABS`, `BLC`, `RMI` and the staff
-master file segments `ORG`, `AFF`, `LAN`, `EDU` and `OM7` are in `segments/v2.4`, and `SFT`, `SPM`, `TQ1`,
+Segments are placed in the version that introduced them: `PDA`, `ABS`, `BLC`, `RMI`, the staff
+master file segments `ORG`, `AFF`, `LAN`, `EDU` and `OM7`, and the 19 other segments 2.4 introduced
+(`CNS`, `ECD`, `ECR`, `EQP`, `EQU`, `GP1`, `GP2`, `IAM`, `INV`, `ISD`, `NDS`, `QID`, `QPD`, `QRI`,
+`RCP`, `SAC`, `SID`, `TCC`, `TCD`, generated from `codegen/spec/v2.4-segments.json`) are in
+`segments/v2.4`, and `SFT`, `SPM`, `TQ1`,
 `TQ2`, `CER` and `IIM` are in `segments/v2.5` (with a v2.5 `EDU` subclass for the EDU-9 added in 2.5);
 later versions re-export them. `ROL` and `DB1` both have v2.3 definitions, so
 they stay in `segments/v2.3`. (Version-specific fields are layered, not moved: `ROL` fields 9–12, `ACC` fields 7–10 and `PD1` fields 13–21 are v2.4 overrides in `segments/v2.4`; `ACC` field 11 is a v2.5 override. The v2.3 classes stop at the v2.3 field count. `DB1` has the same eight fields in v2.3, v2.4 and v2.5. Field 3 (CX) repeats in all three, and v2.3 now models that. v2.4 widens its maximum length to 250, which is not enforced, and hl7.eu names field 4 "Disability Indicator" in v2.4 and "Disabled Indicator" in v2.3 and v2.5.) Moving a
@@ -104,12 +107,31 @@ such as IS → CE and CM_* → named composites): the 27 generated ones got a 2.
 `codegen/spec/v2.3.1-segments.json`, the 26 hand-written ones a subclass in `src/segments/v2.3.1/`
 that overrides the changed setters and adds the new fields. The other 57 re-export the v2.3 class.
 
+## Validation ledger (v2.4)
+
+[`docs/validation/v2.4-segment-ledger.md`](validation/v2.4-segment-ledger.md): every field of the 138
+segments of 2.4 against hl7.eu (`v24/hl7v24segm<SEG>.htm`), Caristix 2.4 and HAPI v24, 0 open
+issues. 94 segments have their own 2.4 class: the 28 new in 2.4 (19 seeded into
+`codegen/spec/v2.4-segments.json` by `ledger.mjs --adopt` from the three sources and generated in
+1.2; PDA, ABS, BLC, RMI, ORG, AFF, LAN, EDU and OM7 from earlier releases, the generated ones
+regenerated with Date and composite setters), 41 generated classes whose 2.3/2.3.1 table changed
+(mostly the 2.4 lengths, plus new fields such as ARQ-24/25, LDP-12, LOC-9, RXC-7) adopted and
+regenerated, 15 hand-written classes with new or changed fields (DSC-2, MSH-21, OBR-46/47,
+OBX-10/18/19, ORC-7/25, PID-31–38, PR1-17/18, PV1-45, QAK-3–6, QRF-10, RXD-25–27, RXE-31, RXO-24,
+SCH-26/27, STF-27–29) given a generated subclass of the older class (`"extends"` in the spec, written
+by `--adopt` for a hand-written class), and the 10 hand-written 2.4 classes of earlier releases (ACC,
+AIS, DRG, EVN, MFE, NTE, PD1, PRA, PV2, ROL) completed by hand where the ledger found gaps (PV2-39–47,
+PRA-9–12, the repeating MFE-5, PD1-14/15, PV2-7 and ROL-9/11/12). The other 44 re-export the 2.3.1
+or 2.3 class. The 13 contradictions between the
+sources (OBX-8/9/10/16 and PID-38 repetition, the C-versus-O usages of EQU-3, QPD-2, RCP-4 and
+SID-1–4, STF-15) are decided by hl7.eu and recorded in the ledger rows.
+
 ## v2.5.1 parity
 v2.5.1 segments are generated as thin wrappers over the v2.3 base (`pnpm codegen`), so every
-v2.3 segment above must also be re-evaluated for v2.5.1 field changes. After v2.3 is complete,
-add the segments introduced after 2.3, e.g. `TQ2`, `PRT`, `QPD`, `RCP`, `QID`, `IAM`,
-`GP1`/`GP2`, `OH1`–`OH4`, `CNS` (verify against the 2.5.1 spec). Segments on the v2.3 index above
-(`ARQ`, `APR`, `CSP`) stay in the v2.3 plan.
+v2.3 segment above must also be re-evaluated for v2.5.1 field changes (the 2.4 ledger below is the
+model: a v2.5 and a v2.5.1 segment ledger each). The segments 2.4 introduced (`QPD`, `RCP`, `QID`,
+`IAM`, `GP1`/`GP2`, `CNS`, …) are done in 1.2; `TQ2`, `PRT`, `OH1`–`OH4` and the other later
+additions follow with their versions.
 
 ## Definition of done (per segment)
 1. Class + parser with all fields positioned per spec, including repeats and required flags.

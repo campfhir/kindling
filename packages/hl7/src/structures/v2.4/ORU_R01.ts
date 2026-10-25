@@ -1,7 +1,67 @@
 /**
- * ORU_R01 structure for HL7 v2.4 — identical to v2.3.1, re-exported.
+ * Message structure for ORU^R01 messages (HL7 v2.4).
+ *
+ * Structure: MSH { PATIENT_RESULT: [ PATIENT: PID [PD1] [{NK1}] [{NTE}] [ VISIT: PV1 [PV2] ] ] { ORDER_OBSERVATION: [ORC] OBR [{NTE}] [CTD] [{ OBSERVATION: OBX [{NTE}] }] [{FT1}] [{CTI}] } } [DSC]
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3.1/ORU_R01.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { StructureItem } from "../../types/schema.ts";
+
+/** The segments, choices and groups of ORU^R01 (HL7 v2.4), in order. */
+export const ORU_R01_STRUCTURE: StructureItem[] = [
+  { name: "MSH", required: true, repeating: false },
+  {
+    name: "PATIENT_RESULT",
+    required: true,
+    repeating: true,
+    segments: [
+      {
+        name: "PATIENT",
+        required: false,
+        repeating: false,
+        inline: true,
+        segments: [
+          { name: "PID", required: true, repeating: false },
+          { name: "PD1", required: false, repeating: false },
+          { name: "NK1", required: false, repeating: true },
+          { name: "NTE", required: false, repeating: true },
+          {
+            name: "VISIT",
+            required: false,
+            repeating: false,
+            inline: true,
+            segments: [
+              { name: "PV1", required: true, repeating: false },
+              { name: "PV2", required: false, repeating: false },
+            ],
+          },
+        ],
+      },
+      {
+        name: "ORDER_OBSERVATION",
+        required: true,
+        repeating: true,
+        segments: [
+          { name: "ORC", required: false, repeating: false },
+          { name: "OBR", required: true, repeating: false },
+          { name: "NTE", required: false, repeating: true },
+          { name: "CTD", required: false, repeating: false },
+          {
+            name: "OBSERVATION",
+            required: false,
+            repeating: true,
+            as: "observations",
+            segments: [
+              { name: "OBX", required: true, repeating: false },
+              { name: "NTE", required: false, repeating: true },
+            ],
+          },
+          { name: "FT1", required: false, repeating: true },
+          { name: "CTI", required: false, repeating: true },
+        ],
+      },
+    ],
+  },
+  { name: "DSC", required: false, repeating: false },
+];
