@@ -152,15 +152,34 @@ export function parseStructure<T extends ParsedMessageBase = ParsedMessageBase &
         }
         if (isSegmentGroup(item)) {
           const starts = new Set(firstSegments(item));
+          const siblings = list.slice(list.indexOf(item) + 1);
           const instances: StructureValue[] = [];
+          const min = item.required ? (item.minOccurrences ?? 1) : (item.minOccurrences ?? 0);
           while (instances.length < (item.repeating ? (item.maxOccurrences ?? Infinity) : 1)) {
             const next = peek();
             if (!next || !starts.has(next)) break;
             const instance: StructureValue = {};
+            // A segment that also opens a later sibling group (ORC opens both the diet and the tray
+            // orders of OMD^O01) is parsed speculatively once this group's minimum is met: when the
+            // instance stops at a segment only the sibling can take, it is handed over.
+            const rivals = instances.length >= min ? rivalGroups(siblings, next) : [];
+            if (rivals.length > 0) {
+              const snapshot = { pos, count: message.segments.length };
+              const ok = parseSequence(item.segments, instance);
+              const after = ok && !failure ? peek() : undefined;
+              const rivalNames = new Set(segmentNames(rivals));
+              if (!ok || failure || (after !== undefined && !starts.has(after) && rivalNames.has(after))) {
+                pos = snapshot.pos;
+                message.segments.splice(snapshot.count);
+                failure = undefined;
+                break;
+              }
+              instances.push(instance);
+              continue;
+            }
             if (!parseSequence(item.segments, instance)) return false;
             instances.push(instance);
           }
-          const min = item.required ? (item.minOccurrences ?? 1) : (item.minOccurrences ?? 0);
           if (instances.length < min && isRequired(item)) {
             failure = { ok: false, err: new Err(min > 1 ? `${messageName} message must contain at least ${min} ${item.name} groups` : describeMissing(messageName, item)) } as Result<never>;
             return false;
@@ -206,6 +225,16 @@ export function parseStructure<T extends ParsedMessageBase = ParsedMessageBase &
   } catch (error) {
     return { ok: false, err: new Err(`Failed to parse ${messageName} message: ${error}`) };
   }
+}
+
+/** The sibling groups, up to and including the first required one, that `next` can open. */
+function rivalGroups(siblings: StructureItem[], next: string): SegmentGroup[] {
+  const out: SegmentGroup[] = [];
+  for (const sibling of siblings) {
+    if (isSegmentGroup(sibling) && firstSegments(sibling).includes(next)) out.push(sibling);
+    if (isRequired(sibling)) break;
+  }
+  return out;
 }
 
 /** The fields an inline group contributes to its enclosing object (through nested inline groups too). */

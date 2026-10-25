@@ -205,7 +205,7 @@ export const SEGMENT_NAMES: Record<string, [one: string, many: string]> = {
   RXO: ["pharmacyOrder", "pharmacyOrders"],
   RQD: ["requisition", "requisitions"],
   RQ1: ["requisitionSupplier", "requisitionSuppliers"],
-  ODS: ["dietOrder", "dietOrders"],
+  ODS: ["diet", "diets"],
   ODT: ["dietTray", "dietTrays"],
   BLG: ["billing", "billings"],
   CTI: ["clinicalTrial", "clinicalTrials"],
@@ -245,6 +245,10 @@ export const SEGMENT_NAMES: Record<string, [one: string, many: string]> = {
   OM5: ["observationBattery", "observationBatteries"],
   OM6: ["calculatedObservation", "calculatedObservations"],
   OM7: ["additionalAttributes", "additionalAttributes"],
+  RXE: ["encodedOrder", "encodedOrders"],
+  RXD: ["dispense", "dispenses"],
+  RXG: ["give", "gives"],
+  RXC: ["component", "components"],
   IIM: ["inventoryItem", "inventoryItems"],
 };
 

@@ -107,6 +107,23 @@ describe("parseStructure", () => {
     ));
   });
 
+  test("a shared start segment goes to the sibling group when the next segment only fits there", () => {
+    // OMD^O01-style: { DIET: ORC [{ODS}] } [{ TRAY: ORC {RQD} }] — an ORC followed by RQD opens a tray order.
+    const structure: StructureItem[] = [
+      { name: "MSH", required: true, repeating: false },
+      { name: "DIET", required: true, repeating: true, segments: [{ name: "ORC", required: true, repeating: false }, { name: "OBX", required: false, repeating: true }] },
+      { name: "TRAY", required: false, repeating: true, segments: [{ name: "ORC", required: true, repeating: false }, { name: "RQD", required: true, repeating: true }] },
+    ];
+    const result = parseStructure("OMD", structure, PARSERS, [MSH_LINE, "ORC|NW", "OBX|1", "ORC|NW", "ORC|NW", "RQD|1", "ORC|NW", "RQD|2"].join("\r"));
+    expect(result.err?.message).toBeUndefined();
+    const val = result.val as unknown as { diets: unknown[]; trays: { requisitions: unknown[] }[] };
+    expect(val.diets).toHaveLength(2);
+    expect(val.trays).toHaveLength(2);
+    expect(val.trays[1].requisitions).toHaveLength(1);
+    // A bare ORC stays with the first group, and a lone ORC at the end too.
+    expect((parseStructure("OMD", structure, PARSERS, [MSH_LINE, "ORC|NW", "ORC|NW"].join("\r")).val as unknown as { diets: unknown[] }).diets).toHaveLength(2);
+  });
+
   test("an order without a patient is allowed, since PATIENT is optional", () => {
     const r = parseStructure("TEST", STRUCTURE, PARSERS, wire("OBR|1"));
     expect(r.ok).toBe(true);

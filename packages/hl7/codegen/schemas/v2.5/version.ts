@@ -16,6 +16,7 @@ import { SRR_FAMILY } from "./SRR_S01";
 import { VXU_V04_SCHEMA } from "./VXU_V04";
 import { QUERY_MESSAGES } from "./queries";
 import { MASTER_FILE_MESSAGES } from "./master-files";
+import { ORDER_MESSAGES } from "./orders";
 
 /** Every message whose structure changed in 2.5 (or is new in 2.5). v2.5.1 re-versions this list. */
 export const V2_5_MESSAGES = [
@@ -41,6 +42,7 @@ export const V2_5_MESSAGES = [
   VXU_V04_SCHEMA,
   ...QUERY_MESSAGES,
   ...MASTER_FILE_MESSAGES,
+  ...ORDER_MESSAGES,
 ];
 
 /**

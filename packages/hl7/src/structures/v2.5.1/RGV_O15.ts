@@ -1,0 +1,134 @@
+/**
+ * Message structure for RGV^O15 messages (HL7 v2.5.1).
+ *
+ * Structure: MSH [{SFT}] [{NTE}] [ PATIENT: PID [{NTE}] [{AL1}] [ PATIENT_VISIT: PV1 [PV2] ] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] [ ORDER_DETAIL: RXO [ ORDER_DETAIL_SUPPLEMENT: {NTE} {RXR} [{ COMPONENT: RXC [{NTE}] }] ] ] [ ENCODING: RXE { TIMING_ENCODED: TQ1 [{TQ2}] } {RXR} [{RXC}] ] { GIVE: RXG { TIMING_GIVE: TQ1 [{TQ2}] } {RXR} [{RXC}] { OBSERVATION: [OBX] [{NTE}] } } }
+ *
+ * @module
+ */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { StructureItem } from "../../types/schema.ts";
+
+/** The segments, choices and groups of RGV^O15 (HL7 v2.5.1), in order. */
+export const RGV_O15_STRUCTURE: StructureItem[] = [
+  { name: "MSH", required: true, repeating: false },
+  { name: "SFT", required: false, repeating: true },
+  { name: "NTE", required: false, repeating: true },
+  {
+    name: "PATIENT",
+    required: false,
+    repeating: false,
+    inline: true,
+    segments: [
+      { name: "PID", required: true, repeating: false },
+      { name: "NTE", required: false, repeating: true, as: "patientNotes" },
+      { name: "AL1", required: false, repeating: true },
+      {
+        name: "PATIENT_VISIT",
+        required: false,
+        repeating: false,
+        inline: true,
+        segments: [
+          { name: "PV1", required: true, repeating: false },
+          { name: "PV2", required: false, repeating: false },
+        ],
+      },
+    ],
+  },
+  {
+    name: "ORDER",
+    required: true,
+    repeating: true,
+    segments: [
+      { name: "ORC", required: true, repeating: false },
+      {
+        name: "TIMING",
+        required: false,
+        repeating: true,
+        as: "timings",
+        segments: [
+          { name: "TQ1", required: true, repeating: false },
+          { name: "TQ2", required: false, repeating: true },
+        ],
+      },
+      {
+        name: "ORDER_DETAIL",
+        required: false,
+        repeating: false,
+        as: "detail",
+        segments: [
+          { name: "RXO", required: true, repeating: false },
+          {
+            name: "ORDER_DETAIL_SUPPLEMENT",
+            required: false,
+            repeating: false,
+            inline: true,
+            segments: [
+              { name: "NTE", required: true, repeating: true },
+              { name: "RXR", required: true, repeating: true },
+              {
+                name: "COMPONENT",
+                required: false,
+                repeating: true,
+                as: "components",
+                segments: [
+                  { name: "RXC", required: true, repeating: false },
+                  { name: "NTE", required: false, repeating: true },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: "ENCODING",
+        required: false,
+        repeating: false,
+        segments: [
+          { name: "RXE", required: true, repeating: false },
+          {
+            name: "TIMING_ENCODED",
+            required: true,
+            repeating: true,
+            as: "encodedTimings",
+            segments: [
+              { name: "TQ1", required: true, repeating: false },
+              { name: "TQ2", required: false, repeating: true },
+            ],
+          },
+          { name: "RXR", required: true, repeating: true },
+          { name: "RXC", required: false, repeating: true },
+        ],
+      },
+      {
+        name: "GIVE",
+        required: true,
+        repeating: true,
+        segments: [
+          { name: "RXG", required: true, repeating: false },
+          {
+            name: "TIMING_GIVE",
+            required: true,
+            repeating: true,
+            as: "giveTimings",
+            segments: [
+              { name: "TQ1", required: true, repeating: false },
+              { name: "TQ2", required: false, repeating: true },
+            ],
+          },
+          { name: "RXR", required: true, repeating: true },
+          { name: "RXC", required: false, repeating: true },
+          {
+            name: "OBSERVATION",
+            required: true,
+            repeating: true,
+            as: "observations",
+            segments: [
+              { name: "OBX", required: false, repeating: false },
+              { name: "NTE", required: false, repeating: true },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];
