@@ -176,7 +176,10 @@ ORU R30–R32 ✅, ACK, QBP/RSP/RTB (conformance-based queries; need QPD, RCP, Q
 (S01–S26), ADT up through A62, MDM T01–T11, BAR P01–P12, DFT P03/P11.
 
 ## Definition of done (per event)
-1. Schema added under `codegen/schemas/<version>/`, then `pnpm codegen`.
-2. Builder + parser completed (remove the `const _TODO` stub marker).
-3. Tests: builder, parser, and a round-trip with a realistic sample under `src/parsers/testdata/`.
-4. Barrel regenerated (`pnpm barrels`), `pnpm lint && pnpm typecheck && pnpm test` green.
+1. Structure verified per version against the sources in `CLAUDE.md` (hl7.org, hl7.eu, the
+   Caristix reference, HAPI as a cross-check) and cited in the schema's doc comment.
+2. Schema added under `codegen/schemas/<version>/` (and the later versions whose shape differs),
+   then `pnpm codegen && pnpm barrels && pnpm exports`.
+3. Tests: builder and parser round trips and the verify() errors, plus a realistic sample under
+   `src/parsers/testdata/` where one exists.
+4. Roadmap and README updated; `pnpm lint && pnpm typecheck && pnpm test && pnpm codegen:check` green.
