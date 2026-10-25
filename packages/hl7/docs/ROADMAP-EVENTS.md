@@ -122,6 +122,11 @@ what a segment holds rather than its code (`patient`, `visit`, `notes`, `diagnos
 `observationRequest`, `header`; see `SEGMENT_NAMES` in `src/types/schema.ts`), and ORM/ORR/VXU inline
 their PATIENT and visit groups so `patient`, `visit`, `insurances` sit at the top level.
 
+Done in 0.15: the staff master file segments. MFN^M02 is `MSH MFI { MFE STF [PRA] [ORG] }` in
+v2.4 (new ORG segment) and `MSH [{SFT}] MFI { MFE STF [{PRA}] [{ORG}] [{AFF}] [{LAN}] [{EDU}] [{CER}]
+[{NTE}] }` in v2.5/v2.5.1 (new AFF, LAN, EDU in 2.4 and CER in 2.5; EDU-9 added in 2.5), structures
+and field tables from hl7-definition.caristix.com (v2.4, v2.5, v2.5.1).
+
 Suggested order: **queries (A19 QRY/ADR, SQM/SQR, …) → MFN → orders/pharmacy → the rest.**
 
 ## v2.5.1 parity

@@ -21,7 +21,7 @@ export const BAR_P01_SCHEMA: MessageSchema = {
     req("EVN"),
     req("PID"),
     opt("PD1"),
-    group("VISIT", true, true, [
+    group("VISIT", "required", "repeating", [
       opt("PV1"),
       opt("PV2"),
       optList("DB1"),
@@ -29,10 +29,10 @@ export const BAR_P01_SCHEMA: MessageSchema = {
       optList("AL1"),
       optList("DG1"),
       opt("DRG"),
-      group("PROCEDURE", false, true, [req("PR1"), optList("ROL")], { exportTypeName: "ParsedBARProcedure" }),
+      group("PROCEDURE", "optional", "repeating", [req("PR1"), optList("ROL")], { exportTypeName: "ParsedBARProcedure" }),
       optList("GT1"),
       optList("NK1"),
-      group("INSURANCE", false, true, [req("IN1"), opt("IN2"), opt("IN3")], { as: "insurances", exportTypeName: "ParsedBARInsurance" }),
+      group("INSURANCE", "optional", "repeating", [req("IN1"), opt("IN2"), opt("IN3")], { as: "insurances", exportTypeName: "ParsedBARInsurance" }),
       opt("ACC"),
       opt("UB1"),
       opt("UB2"),
@@ -51,7 +51,7 @@ export const BAR_P02_SCHEMA: MessageSchema = {
   structure: [
     req("MSH"),
     req("EVN"),
-    group("PATIENT", true, true, [req("PID"), opt("PD1"), opt("PV1"), optList("DB1")], { exportTypeName: "ParsedBARPurgePatient" }),
+    group("PATIENT", "required", "repeating", [req("PID"), opt("PD1"), opt("PV1"), optList("DB1")], { exportTypeName: "ParsedBARPurgePatient" }),
   ],
 };
 
@@ -60,5 +60,5 @@ export const BAR_P06_SCHEMA: MessageSchema = {
   messageType: "BAR",
   triggerEvent: "P06",
   version: "2.3",
-  structure: [req("MSH"), req("EVN"), group("PATIENT", true, true, [req("PID"), opt("PV1")], { exportTypeName: "ParsedBAREndPatient" })],
+  structure: [req("MSH"), req("EVN"), group("PATIENT", "required", "repeating", [req("PID"), opt("PV1")], { exportTypeName: "ParsedBAREndPatient" })],
 };

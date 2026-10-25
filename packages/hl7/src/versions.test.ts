@@ -23,6 +23,27 @@ describe("segment introduction by version", () => {
     }
   });
 
+  test("ORG, AFF, LAN and EDU are introduced in v2.4", () => {
+    for (const name of ["ORG", "AFF", "LAN", "EDU"]) {
+      expect(name in seg23).toBe(false);
+      expect(name in seg231).toBe(false);
+      expect(name in seg24).toBe(true);
+      expect(name in seg25).toBe(true);
+      expect(name in seg251).toBe(true);
+    }
+    // EDU gains EDU-9 in v2.5, so v2.5 has its own subclass; the others are re-exported.
+    expect(seg25.ORG).toBe(seg24.ORG);
+    expect(Object.getPrototypeOf(seg25.EDU)).toBe(seg24.EDU);
+  });
+
+  test("CER is introduced in v2.5", () => {
+    for (const name of ["CER"]) {
+      expect(name in seg24).toBe(false);
+      expect(name in seg25).toBe(true);
+      expect(name in seg251).toBe(true);
+    }
+  });
+
   test("SFT, SPM and TQ1 are introduced in v2.5", () => {
     for (const name of ["SFT", "SPM", "TQ1"]) {
       expect(name in seg23).toBe(false);

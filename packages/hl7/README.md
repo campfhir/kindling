@@ -43,8 +43,8 @@ src/
 ├── segments/                 # Segment definitions by version
 │   ├── v2.3/                 # hand-written base segments
 │   ├── v2.3.1/               # re-exports of v2.3 (generated)
-│   ├── v2.4/                 # re-exports of v2.3.1 + PDA, ABS, BLC, RMI
-│   ├── v2.5/                 # re-exports + SFT, SPM, TQ1, TQ2
+│   ├── v2.4/                 # re-exports of v2.3.1 + PDA, ABS, BLC, RMI, ORG, AFF, LAN, EDU
+│   ├── v2.5/                 # re-exports + SFT, SPM, TQ1, TQ2, CER (and EDU-9)
 │   └── v2.5.1/               # extends v2.5 with 2.5.1-specific fields
 ├── structures/               # Generated: each message's structure as data (<MSG>_STRUCTURE)
 ├── parsers/                  # Generated message parsers by version (v2.3 … v2.5.1)

@@ -11,10 +11,10 @@ const VISIT_ITEMS: StructureItem[] = [
   optList("AL1"),
   optList("DG1"),
   opt("DRG"),
-  group("PROCEDURE", false, true, [req("PR1"), optList("ROL")], { exportTypeName: "ParsedBARProcedure" }),
+  group("PROCEDURE", "optional", "repeating", [req("PR1"), optList("ROL")], { exportTypeName: "ParsedBARProcedure" }),
   optList("GT1"),
   optList("NK1"),
-  group("INSURANCE", false, true, [req("IN1"), opt("IN2"), optList("IN3"), optList("ROL")], { as: "insurances", exportTypeName: "ParsedBARInsurance" }),
+  group("INSURANCE", "optional", "repeating", [req("IN1"), opt("IN2"), optList("IN3"), optList("ROL")], { as: "insurances", exportTypeName: "ParsedBARInsurance" }),
   opt("ACC"),
   opt("UB1"),
   opt("UB2"),
@@ -33,7 +33,7 @@ export const BAR_P01_SCHEMA: MessageSchema = {
   messageType: "BAR",
   triggerEvent: "P01",
   version: "2.4",
-  structure: [req("MSH"), req("EVN"), req("PID"), opt("PD1"), optList("ROL"), group("VISIT", true, true, VISIT_ITEMS, { exportTypeName: "ParsedBARVisit" })],
+  structure: [req("MSH"), req("EVN"), req("PID"), opt("PD1"), optList("ROL"), group("VISIT", "required", "repeating", VISIT_ITEMS, { exportTypeName: "ParsedBARVisit" })],
 };
 
 /**
@@ -45,6 +45,6 @@ export const BAR_P05_SCHEMA: MessageSchema = {
   triggerEvent: "P05",
   structure: [
     ...BAR_P01_SCHEMA.structure.slice(0, -1),
-    group("VISIT", true, true, [...VISIT_ITEMS, opt("ABS"), optList("BLC"), opt("RMI")], { exportTypeName: "ParsedBARVisit" }),
+    group("VISIT", "required", "repeating", [...VISIT_ITEMS, opt("ABS"), optList("BLC"), opt("RMI")], { exportTypeName: "ParsedBARVisit" }),
   ],
 };

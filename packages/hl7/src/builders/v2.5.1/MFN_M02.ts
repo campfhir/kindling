@@ -1,7 +1,7 @@
 /**
  * Builder for MFN^M02 messages (HL7 v2.5.1).
  *
- * Structure: MSH [{SFT}] MFI { MF_STAFF: MFE STF [{PRA}] [{NTE}] }
+ * Structure: MSH [{SFT}] MFI { MF_STAFF: MFE STF [{PRA}] [{ORG}] [{AFF}] [{LAN}] [{EDU}] [{CER}] [{NTE}] }
  *
  * @module
  */
@@ -16,6 +16,11 @@ import type { MFI } from "../../segments/v2.5.1/MFI.ts";
 import type { MFE } from "../../segments/v2.5.1/MFE.ts";
 import type { STF } from "../../segments/v2.5.1/STF.ts";
 import type { PRA } from "../../segments/v2.5.1/PRA.ts";
+import type { ORG } from "../../segments/v2.5.1/ORG.ts";
+import type { AFF } from "../../segments/v2.5.1/AFF.ts";
+import type { LAN } from "../../segments/v2.5.1/LAN.ts";
+import type { EDU } from "../../segments/v2.5.1/EDU.ts";
+import type { CER } from "../../segments/v2.5.1/CER.ts";
 import type { NTE } from "../../segments/v2.5.1/NTE.ts";
 
 /** The MF STAFF group of an MFN^M02 (HL7 v2.5.1) message being built. */
@@ -26,6 +31,16 @@ export interface StaffEntry {
   staff: STF;
   /** The PRA segments. */
   practitioners?: PRA[];
+  /** The ORG segments. */
+  organizationUnits?: ORG[];
+  /** The AFF segments. */
+  affiliations?: AFF[];
+  /** The LAN segments. */
+  languages?: LAN[];
+  /** The EDU segments. */
+  educations?: EDU[];
+  /** The CER segments. */
+  certificates?: CER[];
   /** The NTE segments. */
   notes?: NTE[];
 }

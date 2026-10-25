@@ -375,6 +375,49 @@ export const plnParts = (v: PLN): Part[] => [
  * A coded value given either as a CE (`identifier`, `nameOfCodingSystem`, ...) or as the
  * `code`/`codingSystem` shape used by CWE and by earlier versions of this library.
  */
+/**
+ * XON - Extended Composite Name and Identification Number for Organizations (HL7 v2.5,
+ * hl7-definition.caristix.com DataTypes/XON).
+ */
+export interface XON {
+  /** Datatype tag. A value tagged with another datatype does not fit this field. */
+  readonly datatype?: "XON";
+  /** XON.1 Organization Name */
+  organizationName?: string;
+  /** XON.2 Organization Name Type Code (table 0204) */
+  organizationNameTypeCode?: string;
+  /** XON.3 ID Number */
+  idNumber?: string;
+  /** XON.4 Check Digit */
+  checkDigit?: string;
+  /** XON.5 Check Digit Scheme (table 0061) */
+  checkDigitScheme?: string;
+  /** XON.6 Assigning Authority (HD) */
+  assigningAuthority?: HD | string;
+  /** XON.7 Identifier Type Code (table 0203) */
+  identifierTypeCode?: string;
+  /** XON.8 Assigning Facility (HD) */
+  assigningFacility?: HD | string;
+  /** XON.9 Name Representation Code (table 0465) */
+  nameRepresentationCode?: string;
+  /** XON.10 Organization Identifier */
+  organizationIdentifier?: string;
+}
+
+/** The components of an XON value, in HL7 order. */
+export const xonParts = (v: XON): Part[] => [
+  v.organizationName,
+  v.organizationNameTypeCode,
+  v.idNumber,
+  v.checkDigit,
+  v.checkDigitScheme,
+  hd(v.assigningAuthority),
+  v.identifierTypeCode,
+  hd(v.assigningFacility),
+  v.nameRepresentationCode,
+  v.organizationIdentifier,
+];
+
 export type CodedInput = CE | CodedElement;
 
 /**

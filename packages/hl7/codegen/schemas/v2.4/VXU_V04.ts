@@ -19,14 +19,14 @@ export const VXU_V04_SCHEMA: MessageSchema = {
     req("PID"),
     opt("PD1"),
     optList("NK1"),
-    group("PATIENT", false, false, [req("PV1"), opt("PV2")], { inline: true }),
+    group("PATIENT", "optional", "single", [req("PV1"), opt("PV2")], { inline: true }),
     optList("GT1"),
-    group("INSURANCE", false, true, [req("IN1"), opt("IN2"), opt("IN3")], { exportTypeName: "ParsedInsurance" }),
-    group("ORDER", false, true, [
+    group("INSURANCE", "optional", "repeating", [req("IN1"), opt("IN2"), opt("IN3")], { exportTypeName: "ParsedInsurance" }),
+    group("ORDER", "optional", "repeating", [
       opt("ORC"),
       req("RXA"),
       opt("RXR"),
-      group("OBSERVATION", false, true, [req("OBX"), optList("NTE")], { exportTypeName: "ParsedObservation" }),
+      group("OBSERVATION", "optional", "repeating", [req("OBX"), optList("NTE")], { exportTypeName: "ParsedObservation" }),
     ], { exportTypeName: "ParsedVaccination" }),
   ],
 };

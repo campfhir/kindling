@@ -1,0 +1,39 @@
+{
+  "CER": {
+    "title": "Certificate Detail",
+    "source": "https://hl7-definition.caristix.com/v2/HL7v2.5/Segments/CER",
+    "fields": [
+      { "seq": 1, "name": "Set ID - CER", "length": "4", "type": "SI", "opt": "R", "rep": "-", "table": "" },
+      { "seq": 2, "name": "Serial Number", "length": "80", "type": "ST", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 3, "name": "Version", "length": "80", "type": "ST", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 4, "name": "Granting Authority", "length": "250", "type": "XON", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 5, "name": "Issuing Authority", "length": "250", "type": "XCN", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 6, "name": "Signature of Issuing Authority", "length": "65536", "type": "ED", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 7, "name": "Granting Country", "length": "3", "type": "ID", "opt": "O", "rep": "-", "table": "0399" },
+      { "seq": 8, "name": "Granting State/Province", "length": "250", "type": "CWE", "opt": "O", "rep": "-", "table": "0347" },
+      { "seq": 9, "name": "Granting County/Parish", "length": "250", "type": "CWE", "opt": "O", "rep": "-", "table": "0289" },
+      { "seq": 10, "name": "Certificate Type", "length": "250", "type": "CWE", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 11, "name": "Certificate Domain", "length": "250", "type": "CWE", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 12, "name": "Subject ID", "length": "250", "type": "ID", "opt": "C", "rep": "-", "table": "" },
+      { "seq": 13, "name": "Subject Name", "length": "250", "type": "ST", "opt": "R", "rep": "-", "table": "" },
+      { "seq": 14, "name": "Subject Directory Attribute Extension (Health Professional Data)", "length": "250", "type": "CWE", "opt": "O", "rep": "*", "table": "" },
+      { "seq": 15, "name": "Subject Public Key Info", "length": "250", "type": "CWE", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 16, "name": "Authority Key Identifier", "length": "250", "type": "CWE", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 17, "name": "Basic Constraint", "length": "250", "type": "ID", "opt": "O", "rep": "-", "table": "0136" },
+      { "seq": 18, "name": "CRL Distribution Point", "length": "250", "type": "CWE", "opt": "O", "rep": "*", "table": "" },
+      { "seq": 19, "name": "Jurisdiction Country", "length": "3", "type": "ID", "opt": "O", "rep": "-", "table": "0399" },
+      { "seq": 20, "name": "Jurisdiction State/Province", "length": "250", "type": "CWE", "opt": "O", "rep": "-", "table": "0347" },
+      { "seq": 21, "name": "Jurisdiction County/Parish", "length": "250", "type": "CWE", "opt": "O", "rep": "-", "table": "0289" },
+      { "seq": 22, "name": "Jurisdiction Breadth", "length": "250", "type": "CWE", "opt": "O", "rep": "*", "table": "0547" },
+      { "seq": 23, "name": "Granting Date", "length": "26", "type": "TS", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 24, "name": "Issuing Date", "length": "26", "type": "TS", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 25, "name": "Activation Date", "length": "26", "type": "TS", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 26, "name": "Inactivation Date", "length": "26", "type": "TS", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 27, "name": "Expiration Date", "length": "26", "type": "TS", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 28, "name": "Renewal Date", "length": "26", "type": "TS", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 29, "name": "Revocation Date", "length": "26", "type": "TS", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 30, "name": "Revocation Reason Code", "length": "250", "type": "CE", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 31, "name": "Certificate Status", "length": "250", "type": "CWE", "opt": "O", "rep": "-", "table": "0536" }
+    ]
+  }
+}

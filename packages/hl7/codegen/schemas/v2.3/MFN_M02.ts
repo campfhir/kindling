@@ -15,6 +15,6 @@ export const MFN_M02_SCHEMA: MessageSchema = {
   structure: [
     req("MSH"),
     req("MFI"),
-    group("MF_STAFF", true, true, [req("MFE"), req("STF"), opt("PRA")], { as: "staffEntries", exportTypeName: "ParsedStaffEntry", builderTypeName: "StaffEntry" }),
+    group("MF_STAFF", "required", "repeating", [req("MFE"), req("STF"), opt("PRA")], { as: "staffEntries", exportTypeName: "ParsedStaffEntry", builderTypeName: "StaffEntry" }),
   ],
 };

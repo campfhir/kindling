@@ -19,24 +19,24 @@ export const ORU_R01_SCHEMA: MessageSchema = {
   structure: [
     req("MSH"),
     SFT,
-    group("PATIENT_RESULT", true, true, [
-      group("PATIENT", false, false, [
+    group("PATIENT_RESULT", "required", "repeating", [
+      group("PATIENT", "optional", "single", [
         req("PID"),
         opt("PD1"),
         optList("NTE"),
         optList("NK1"),
-        group("VISIT", false, false, [req("PV1"), opt("PV2")], { inline: true }),
+        group("VISIT", "optional", "single", [req("PV1"), opt("PV2")], { inline: true }),
       ], { inline: true }),
-      group("ORDER_OBSERVATION", true, true, [
+      group("ORDER_OBSERVATION", "required", "repeating", [
         opt("ORC"),
         req("OBR"),
         optList("NTE"),
-        group("TIMING_QTY", false, true, [req("TQ1"), optList("TQ2")], { as: "timings", exportTypeName: "ParsedTimingQty", builderTypeName: "TimingQty" }),
+        group("TIMING_QTY", "optional", "repeating", [req("TQ1"), optList("TQ2")], { as: "timings", exportTypeName: "ParsedTimingQty", builderTypeName: "TimingQty" }),
         opt("CTD"),
-        group("OBSERVATION", false, true, [req("OBX"), optList("NTE")], { as: "observations", exportTypeName: "ParsedObservation", builderTypeName: "ObservationGroup" }),
+        group("OBSERVATION", "optional", "repeating", [req("OBX"), optList("NTE")], { as: "observations", exportTypeName: "ParsedObservation", builderTypeName: "ObservationGroup" }),
         optList("FT1"),
         optList("CTI"),
-        group("SPECIMEN", false, true, [req("SPM"), optList("OBX")], { exportTypeName: "ParsedSpecimen", builderTypeName: "Specimen" }),
+        group("SPECIMEN", "optional", "repeating", [req("SPM"), optList("OBX")], { exportTypeName: "ParsedSpecimen", builderTypeName: "Specimen" }),
       ], { builderTypeName: "OrderObservation" }),
     ], { builderTypeName: "PatientResult" }),
     opt("DSC"),

@@ -116,8 +116,8 @@ codegen/
     fieldPositionTest.ts
   generate.ts          # entry point — registers VERSIONS and runs them
   generate-barrels.ts, generate-package-exports.mjs
-  generate-v23-segments.ts, generate-field-position-tests.ts   # segment tooling (see docs/ROADMAP-SEGMENTS.md)
-  spec/, validate/     # v2.3 segment field tables and their checks
+  generate-segments.ts, generate-field-position-tests.ts   # segment tooling (see docs/ROADMAP-SEGMENTS.md)
+  spec/, validate/     # per-version segment field tables (<version>-segments.json) and their checks
 ```
 
 ## Adding a message
@@ -130,7 +130,10 @@ codegen/
      messageType: "ADT",
      triggerEvent: "A31",
      version: "2.3",
-     structure: [req("MSH"), req("EVN"), req("PID"), opt("PD1"), optList("NK1"), req("PV1")],
+     structure: [
+       req("MSH"), req("EVN"), req("PID"), opt("PD1"), optList("NK1"), req("PV1"),
+       group("INSURANCE", "optional", "repeating", [req("IN1"), opt("IN2"), opt("IN3")]),
+     ],
    };
    ```
 

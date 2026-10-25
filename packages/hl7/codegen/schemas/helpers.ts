@@ -5,8 +5,9 @@
  *   opt("PD1")            [PD1]          optional, once
  *   reqList("OBX")        {OBX}          required, repeating
  *   optList("NTE")        [{NTE}]        optional, repeating
- *   group("PROCEDURE", false, true, [req("PR1"), optList("ROL")])   [{ PROCEDURE: PR1 [{ROL}] }]
- *   choice(["OBR", "RQD"], false)                                  [<OBR|RQD>]
+ *   group("PROCEDURE", "optional", "repeating", [req("PR1"), optList("ROL")])   [{ PROCEDURE: PR1 [{ROL}] }]
+ *   group("VISIT", "optional", "single", [req("PV1"), opt("PV2")])              [ VISIT: PV1 [PV2] ]
+ *   choice(["OBR", "RQD"], "required")                                        <OBR|RQD>
  */
 import type { MessageSchema, SegmentChoice, SegmentDefinition, SegmentGroup, StructureItem } from "../../src/types/schema";
 
@@ -22,17 +23,22 @@ export const reqList = (name: string, extras: SegmentExtras = {}): SegmentDefini
 /** An optional, repeating segment. */
 export const optList = (name: string, extras: SegmentExtras = {}): SegmentDefinition => ({ name, required: false, repeating: true, ...extras });
 
-/** A group of items. */
-export const group = (name: string, required: boolean, repeating: boolean, segments: StructureItem[], extras: GroupExtras = {}): SegmentGroup => ({
+/** Whether an item must be present. */
+export type Usage = "required" | "optional";
+/** Whether an item may repeat. */
+export type Cardinality = "repeating" | "single";
+
+/** A group of items, e.g. `group("PATIENT_RESULT", "required", "repeating", [...])`. */
+export const group = (name: string, usage: Usage, cardinality: Cardinality, segments: StructureItem[], extras: GroupExtras = {}): SegmentGroup => ({
   name,
-  required,
-  repeating,
+  required: usage === "required",
+  repeating: cardinality === "repeating",
   segments,
   ...extras,
 });
 
-/** One of several segments at one position. */
-export const choice = (oneOf: string[], required: boolean, as?: string): SegmentChoice => ({ oneOf, required, ...(as ? { as } : {}) });
+/** One of several segments at one position, e.g. `choice(["OBR", "RQD"], "required")`. */
+export const choice = (oneOf: string[], usage: Usage, as?: string): SegmentChoice => ({ oneOf, required: usage === "required", ...(as ? { as } : {}) });
 
 /** The optional repeating SFT (Software) segment that follows MSH from v2.5 on. */
 export const SFT = optList("SFT");
