@@ -19,11 +19,11 @@ export const ORR_O02_SCHEMA: MessageSchema = {
     req("MSA"),
     opt("ERR"),
     optList("NTE"),
-    group("RESPONSE", false, false, [
-      group("PATIENT", false, false, [req("PID"), optList("NTE", { as: "patientNotes" })], { inline: true }),
-      group("ORDER", true, true, [
+    group("RESPONSE", "optional", "single", [
+      group("PATIENT", "optional", "single", [req("PID"), optList("NTE", { as: "patientNotes" })], { inline: true }),
+      group("ORDER", "required", "repeating", [
         req("ORC"),
-        group("ORDER_DETAIL", false, false, [choice(ORDER_DETAIL_SEGMENTS, true), optList("NTE"), optList("CTI")], { as: "detail", exportTypeName: "ParsedResponseDetail" }),
+        group("ORDER_DETAIL", "optional", "single", [choice(ORDER_DETAIL_SEGMENTS, "required"), optList("NTE"), optList("CTI")], { as: "detail", exportTypeName: "ParsedResponseDetail" }),
       ], { exportTypeName: "ParsedResponseOrder" }),
     ], { inline: true }),
   ],

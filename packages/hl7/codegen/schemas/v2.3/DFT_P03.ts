@@ -23,14 +23,14 @@ export const DFT_P03_SCHEMA: MessageSchema = {
     opt("PV2"),
     optList("DB1"),
     optList("OBX"),
-    group("FINANCIAL", true, true, [
+    group("FINANCIAL", "required", "repeating", [
       req("FT1"),
-      group("FINANCIAL_PROCEDURE", false, true, [req("PR1"), optList("ROL")], { as: "procedures", exportTypeName: "ParsedDFTProcedure" }),
+      group("FINANCIAL_PROCEDURE", "optional", "repeating", [req("PR1"), optList("ROL")], { as: "procedures", exportTypeName: "ParsedDFTProcedure" }),
     ], { exportTypeName: "ParsedDFTFinancial" }),
     optList("DG1"),
     opt("DRG"),
     optList("GT1"),
-    group("INSURANCE", false, true, [req("IN1"), opt("IN2"), opt("IN3")], { as: "insurances", exportTypeName: "ParsedDFTInsurance" }),
+    group("INSURANCE", "optional", "repeating", [req("IN1"), opt("IN2"), opt("IN3")], { as: "insurances", exportTypeName: "ParsedDFTInsurance" }),
     opt("ACC"),
   ],
 };

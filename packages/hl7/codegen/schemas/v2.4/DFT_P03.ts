@@ -27,24 +27,24 @@ export const DFT_P03_SCHEMA: MessageSchema = {
     opt("PV2"),
     optList("ROL", { as: "visitRoles" }),
     optList("DB1"),
-    group("COMMON_ORDER", false, true, [
+    group("COMMON_ORDER", "optional", "repeating", [
       opt("ORC"),
-      group("ORDER", false, false, [req("OBR"), optList("NTE")], { inline: true }),
-      group("OBSERVATION", false, true, [req("OBX"), optList("NTE")], { exportTypeName: "ParsedDFTObservation" }),
+      group("ORDER", "optional", "single", [req("OBR"), optList("NTE")], { inline: true }),
+      group("OBSERVATION", "optional", "repeating", [req("OBX"), optList("NTE")], { exportTypeName: "ParsedDFTObservation" }),
     ], { as: "orders", exportTypeName: "ParsedDFTOrder" }),
-    group("FINANCIAL", true, true, [
+    group("FINANCIAL", "required", "repeating", [
       req("FT1"),
-      group("FINANCIAL_PROCEDURE", false, true, [req("PR1"), optList("ROL")], { as: "procedures", exportTypeName: "ParsedDFTProcedure" }),
-      group("FINANCIAL_COMMON_ORDER", false, true, [
+      group("FINANCIAL_PROCEDURE", "optional", "repeating", [req("PR1"), optList("ROL")], { as: "procedures", exportTypeName: "ParsedDFTProcedure" }),
+      group("FINANCIAL_COMMON_ORDER", "optional", "repeating", [
         opt("ORC"),
-        group("FINANCIAL_ORDER", false, false, [req("OBR"), optList("NTE")], { inline: true }),
-        group("FINANCIAL_OBSERVATION", false, true, [req("OBX"), optList("NTE")], { as: "observations", exportTypeName: "ParsedDFTFinancialObservation" }),
+        group("FINANCIAL_ORDER", "optional", "single", [req("OBR"), optList("NTE")], { inline: true }),
+        group("FINANCIAL_OBSERVATION", "optional", "repeating", [req("OBX"), optList("NTE")], { as: "observations", exportTypeName: "ParsedDFTFinancialObservation" }),
       ], { as: "orders", exportTypeName: "ParsedDFTFinancialOrder" }),
     ], { exportTypeName: "ParsedDFTFinancial" }),
     optList("DG1"),
     opt("DRG"),
     optList("GT1"),
-    group("INSURANCE", false, true, [req("IN1"), opt("IN2"), optList("IN3"), optList("ROL")], { as: "insurances", exportTypeName: "ParsedDFTInsurance" }),
+    group("INSURANCE", "optional", "repeating", [req("IN1"), opt("IN2"), optList("IN3"), optList("ROL")], { as: "insurances", exportTypeName: "ParsedDFTInsurance" }),
     opt("ACC"),
   ],
 };

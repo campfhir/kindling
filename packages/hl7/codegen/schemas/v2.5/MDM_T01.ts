@@ -22,9 +22,9 @@ export const MDM_T01_SCHEMA: MessageSchema = {
     req("EVN"),
     req("PID"),
     req("PV1"),
-    group("COMMON_ORDER", false, true, [
+    group("COMMON_ORDER", "optional", "repeating", [
       req("ORC"),
-      group("TIMING", false, true, [req("TQ1"), optList("TQ2")], { as: "timings", exportTypeName: "ParsedMDMTiming" }),
+      group("TIMING", "optional", "repeating", [req("TQ1"), optList("TQ2")], { as: "timings", exportTypeName: "ParsedMDMTiming" }),
       req("OBR"),
       optList("NTE"),
     ], { as: "orders", exportTypeName: "ParsedMDMOrder" }),
@@ -37,7 +37,7 @@ export const MDM_T02_SCHEMA: MessageSchema = {
   triggerEvent: "T02",
   structure: [
     ...MDM_T01_SCHEMA.structure,
-    group("OBSERVATION", true, true, [req("OBX"), optList("NTE")], { exportTypeName: "ParsedMDMObservation" }),
+    group("OBSERVATION", "required", "repeating", [req("OBX"), optList("NTE")], { exportTypeName: "ParsedMDMObservation" }),
   ],
 };
 

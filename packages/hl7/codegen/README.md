@@ -130,7 +130,10 @@ codegen/
      messageType: "ADT",
      triggerEvent: "A31",
      version: "2.3",
-     structure: [req("MSH"), req("EVN"), req("PID"), opt("PD1"), optList("NK1"), req("PV1")],
+     structure: [
+       req("MSH"), req("EVN"), req("PID"), opt("PD1"), optList("NK1"), req("PV1"),
+       group("INSURANCE", "optional", "repeating", [req("IN1"), opt("IN2"), opt("IN3")]),
+     ],
    };
    ```
 

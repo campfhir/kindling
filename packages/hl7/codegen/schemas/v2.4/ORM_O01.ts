@@ -18,23 +18,23 @@ export const ORM_O01_SCHEMA: MessageSchema = {
   structure: [
     req("MSH"),
     optList("NTE"),
-    group("PATIENT", false, false, [
+    group("PATIENT", "optional", "single", [
       req("PID"),
       opt("PD1"),
       optList("NTE", { as: "patientNotes" }),
-      group("PATIENT_VISIT", false, false, [req("PV1"), opt("PV2")], { inline: true }),
-      group("INSURANCE", false, true, [req("IN1"), opt("IN2"), opt("IN3")], { exportTypeName: "ParsedInsurance" }),
+      group("PATIENT_VISIT", "optional", "single", [req("PV1"), opt("PV2")], { inline: true }),
+      group("INSURANCE", "optional", "repeating", [req("IN1"), opt("IN2"), opt("IN3")], { exportTypeName: "ParsedInsurance" }),
       opt("GT1"),
       optList("AL1"),
     ], { inline: true }),
-    group("ORDER", true, true, [
+    group("ORDER", "required", "repeating", [
       req("ORC"),
-      group("ORDER_DETAIL", false, false, [
-        choice(ORDER_DETAIL_SEGMENTS, true),
+      group("ORDER_DETAIL", "optional", "single", [
+        choice(ORDER_DETAIL_SEGMENTS, "required"),
         optList("NTE"),
         opt("CTD"),
         optList("DG1"),
-        group("OBSERVATION", false, true, [req("OBX"), optList("NTE")], { exportTypeName: "ParsedObservation" }),
+        group("OBSERVATION", "optional", "repeating", [req("OBX"), optList("NTE")], { exportTypeName: "ParsedObservation" }),
       ], { as: "detail" }),
       optList("FT1"),
       optList("CTI"),

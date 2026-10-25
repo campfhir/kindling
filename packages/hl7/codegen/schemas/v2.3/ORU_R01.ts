@@ -17,19 +17,19 @@ export const ORU_R01_SCHEMA: MessageSchema = {
   version: "2.3",
   structure: [
     req("MSH"),
-    group("PATIENT_RESULT", true, true, [
-      group("PATIENT", false, false, [
+    group("PATIENT_RESULT", "required", "repeating", [
+      group("PATIENT", "optional", "single", [
         req("PID"),
         opt("PD1"),
         optList("NK1"),
         optList("NTE"),
-        group("VISIT", false, false, [req("PV1"), opt("PV2")], { inline: true }),
+        group("VISIT", "optional", "single", [req("PV1"), opt("PV2")], { inline: true }),
       ], { inline: true }),
-      group("ORDER_OBSERVATION", true, true, [
+      group("ORDER_OBSERVATION", "required", "repeating", [
         opt("ORC"),
         req("OBR"),
         optList("NTE"),
-        group("OBSERVATION", false, true, [req("OBX"), optList("NTE")], { as: "observations", exportTypeName: "ParsedObservation", builderTypeName: "ObservationGroup" }),
+        group("OBSERVATION", "optional", "repeating", [req("OBX"), optList("NTE")], { as: "observations", exportTypeName: "ParsedObservation", builderTypeName: "ObservationGroup" }),
         optList("CTI"),
       ], { builderTypeName: "OrderObservation" }),
     ], { builderTypeName: "PatientResult" }),

@@ -4,9 +4,9 @@ import { SFT, group, opt, optList, req } from "../helpers";
 /** [ORC] [{ TIMING_QUANTITY: TQ1 [{TQ2}] }] [ ORDER: OBR [{NTE}] ] [{ OBSERVATION: OBX [{NTE}] }] */
 const commonOrder = (prefix: string): StructureItem[] => [
   opt("ORC"),
-  group(`${prefix}TIMING_QUANTITY`, false, true, [req("TQ1"), optList("TQ2")], { as: "timings", exportTypeName: `ParsedDFT${prefix ? "Financial" : ""}Timing` }),
-  group(`${prefix}ORDER`, false, false, [req("OBR"), optList("NTE")], { inline: true }),
-  group(`${prefix}OBSERVATION`, false, true, [req("OBX"), optList("NTE")], { as: "observations", exportTypeName: `ParsedDFT${prefix ? "Financial" : ""}Observation` }),
+  group(`${prefix}TIMING_QUANTITY`, "optional", "repeating", [req("TQ1"), optList("TQ2")], { as: "timings", exportTypeName: `ParsedDFT${prefix ? "Financial" : ""}Timing` }),
+  group(`${prefix}ORDER`, "optional", "single", [req("OBR"), optList("NTE")], { inline: true }),
+  group(`${prefix}OBSERVATION`, "optional", "repeating", [req("OBX"), optList("NTE")], { as: "observations", exportTypeName: `ParsedDFT${prefix ? "Financial" : ""}Observation` }),
 ];
 
 /**
@@ -35,17 +35,17 @@ export const DFT_P03_SCHEMA: MessageSchema = {
     opt("PV2"),
     optList("ROL", { as: "visitRoles" }),
     optList("DB1"),
-    group("COMMON_ORDER", false, true, commonOrder(""), { as: "orders", exportTypeName: "ParsedDFTOrder" }),
-    group("FINANCIAL", true, true, [
+    group("COMMON_ORDER", "optional", "repeating", commonOrder(""), { as: "orders", exportTypeName: "ParsedDFTOrder" }),
+    group("FINANCIAL", "required", "repeating", [
       req("FT1"),
       opt("NTE"),
-      group("FINANCIAL_PROCEDURE", false, true, [req("PR1"), optList("ROL")], { as: "procedures", exportTypeName: "ParsedDFTProcedure" }),
-      group("FINANCIAL_COMMON_ORDER", false, true, commonOrder("FINANCIAL_"), { as: "orders", exportTypeName: "ParsedDFTFinancialOrder" }),
+      group("FINANCIAL_PROCEDURE", "optional", "repeating", [req("PR1"), optList("ROL")], { as: "procedures", exportTypeName: "ParsedDFTProcedure" }),
+      group("FINANCIAL_COMMON_ORDER", "optional", "repeating", commonOrder("FINANCIAL_"), { as: "orders", exportTypeName: "ParsedDFTFinancialOrder" }),
     ], { exportTypeName: "ParsedDFTFinancial" }),
     optList("DG1"),
     opt("DRG"),
     optList("GT1"),
-    group("INSURANCE", false, true, [req("IN1"), opt("IN2"), optList("IN3"), optList("ROL")], { as: "insurances", exportTypeName: "ParsedDFTInsurance" }),
+    group("INSURANCE", "optional", "repeating", [req("IN1"), opt("IN2"), optList("IN3"), optList("ROL")], { as: "insurances", exportTypeName: "ParsedDFTInsurance" }),
     opt("ACC"),
   ],
 };

@@ -18,7 +18,7 @@ export const ADT_A24_SCHEMA: MessageSchema = {
   structure: [
     req("MSH"),
     req("EVN"),
-    group("PATIENT", true, true, [req("PID"), opt("PD1"), opt("PV1"), optList("DB1")], {
+    group("PATIENT", "required", "repeating", [req("PID"), opt("PD1"), opt("PV1"), optList("DB1")], {
       minOccurrences: 2,
       maxOccurrences: 2,
       exportTypeName: "ParsedLinkedPatient",
