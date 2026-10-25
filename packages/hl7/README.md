@@ -9,6 +9,7 @@ A modular TypeScript library for building and parsing HL7v2 messages, published 
 - **Fluent Interface**: Type-safe segment construction with fluent API
 - **Parser**: Parse HL7v2 message strings back into structured data; `parse()` reads MSH-9 and
   MSH-12 and picks the right message parser itself (see [Parsing any message](#parsing-any-message))
+- **Batches**: `parseBatch()` and `encodeBatch()` for the HL7 batch protocol (FHS/BHS … BTS/FTS)
 - **Round-trip Support**: Build messages and parse them back with full fidelity
 - **Modular Architecture**: Organized by HL7 version for easy extension
 - **Version Support**: HL7 v2.3, v2.3.1, v2.4, v2.5 and v2.5.1 (see [Versions](#versions))
@@ -29,6 +30,7 @@ remaining [segments](docs/ROADMAP-SEGMENTS.md) and [event types](docs/ROADMAP-EV
 src/
 ├── index.ts                  # Core type exports and the root parse()
 ├── parse.ts                  # parse(), selectParser(), identifyMessage(): MSH-9/MSH-12 dispatch
+├── batch.ts                  # parseBatch(), encodeBatch(): the batch protocol (FHS/BHS … BTS/FTS)
 ├── types/                    # Version-agnostic core types
 │   ├── encoding.ts           # HL7 encoding characters
 │   ├── segment.ts            # Base segment types and classes
@@ -216,6 +218,38 @@ In v2.3 MSH-9 has two components, message type and trigger event (`ADT^A01`); th
 structure component (`ADT^A01^ADT_A01`) arrives in v2.3.1. The dispatcher keys on
 `<type>_<event>` first, then on the type alone (`ACK`, whose event names the message it
 acknowledges), then on MSH-9.3 when a sender includes it.
+
+### Batches
+
+`parseBatch()` reads an HL7 batch file, `[FHS] { [BHS] [QRD] [QRF] { [MSH …] } [BTS] } [FTS]`
+(hl7.eu v2.3 chapter 2, §2.23.3), and hands every message to `parse()`, so a batch may mix message
+types. Every envelope segment is optional: a bare run of messages is a file of one batch, and a
+single message is a batch of one. A message that fails to parse does not fail the batch; its entry
+in `messages` carries the error, with the batch number, message number and line in `err.meta`.
+A BTS-1 or FTS-1 count that disagrees with what the file holds is listed in `warnings`.
+
+```typescript
+import { parseBatch, encodeBatch } from '@campfhir/hl7';
+
+const file = parseBatch(batchString);
+if (file.ok) {
+  for (const [i, batch] of file.val.batches.entries()) {
+    console.log(`batch ${i + 1}: ${batch.header?.encode()} … ${batch.trailer?.encode()}`);
+    for (const message of batch.messages) {
+      if (!message.ok) console.error(message.err.meta, message.err.message);
+      else if (message.val.structure === 'DFT_P03') console.log(message.val.parsed.financials.length);
+    }
+  }
+  console.warn(file.val.warnings); // ["BTS-1 of batch 1 (line 9) counts 3 messages, the batch holds 2"]
+}
+
+// The other way: FHS, BHS, QRD/QRF, messages (strings, HL7Message, builders), BTS, FTS, in structure order.
+const wire = encodeBatch({
+  fileHeader: new FHS().sendingApplication('LAB'),
+  batches: [{ header: new BHS().sendingApplication('LAB'), messages: [oru1, oru2], trailer: new BTS().messageCount('2') }],
+  fileTrailer: new FTS().fileBatchCount('1'),
+});
+```
 
 ### Building an ORU^R01 Message
 

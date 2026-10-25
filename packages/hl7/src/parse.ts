@@ -16,14 +16,15 @@
  * it acknowledges), then on MSH-9.3 when a sender includes it.
  *
  * Versions are wired one per release: this release dispatches HL7 v2.3. A message of another
- * version is an error unless `options.version` names the version to parse it as.
+ * version is an error unless `options.version` names the version to parse it as. A batch file
+ * (FHS/BHS … BTS/FTS) goes through `parseBatch()` of `./batch.ts`, which calls `parse()` per message.
  *
  * @module
  */
 import type { Result } from "./types/result.ts";
 import type { ParsedMessageBase } from "./types/structure.ts";
 import { Err } from "./utils/err.ts";
-import { readMessageHeader } from "./utils/messageParsing.ts";
+import { readMessageHeader, splitSegments } from "./utils/messageParsing.ts";
 import { MSH } from "./segments/v2.3/MSH.ts";
 import { MESSAGES as V2_3 } from "./parsers/v2.3/messages.ts";
 
@@ -109,6 +110,8 @@ const fail = (message: string): Result<never> => ({ ok: false, err: new Err(mess
  * one that does not start with MSH, or an MSH whose encoding characters cannot be read.
  */
 export function identifyMessage(messageString: string): Result<MessageType> {
+  const first = splitSegments(messageString)[0]?.substring(0, 3);
+  if (first === "FHS" || first === "BHS") return fail(`Message starts with ${first}: it is a batch file, use parseBatch()`);
   const header = readMessageHeader(messageString, (s) => MSH.parse(s));
   if (!header.ok || !header.val) return header as Result<never>;
   const { messageCode, triggerEvent, messageStructure } = header.val.msh.getMessageType();

@@ -4,7 +4,8 @@
  * browsers, and Cloudflare Workers.
  *
  * This root entrypoint exposes the root parser (`parse()`, which reads MSH-9 and MSH-12 and
- * dispatches to the generated parser of the message) and the version-agnostic core: encoding,
+ * dispatches to the generated parser of the message), the batch protocol (`parseBatch()` and
+ * `encodeBatch()` for FHS/BHS … BTS/FTS files) and the version-agnostic core: encoding,
  * segment and message primitives, schema types, the parser utilities, value extraction, date
  * formatting, custom segments, and the message editor.
  *
@@ -56,6 +57,16 @@ export {
   type SelectedParser,
   type SelectedParserOf,
 } from "./parse.ts";
+export {
+  parseBatch,
+  encodeBatch,
+  type ParsedBatch,
+  type ParsedBatchFile,
+  type BatchInput,
+  type BatchFileInput,
+  type BatchMessageInput,
+  type EncodeBatchOptions,
+} from "./batch.ts";
 
 export * from "./utils/ValueExtractor.ts";
 export { dateUtils, type LayoutName, type FormatOptions, Layout, ANSIC, UnixDate, RubyDate, RFC822, RFC822Z, RFC850, RFC1123, RFC1123Z, RFC3339, RFC3339Nano, Kitchen, Stamp, StampMilli, StampMicro, StampNano, DateTime, DateOnly, TimeOnly } from "./utils/dateUtils.ts";

@@ -1,4 +1,4 @@
-import { parse, selectParser } from "../src/index.ts";
+import { parse, selectParser, parseBatch } from "../src/index.ts";
 
 /**
  * Example: parse messages of unknown type with the root parser.
@@ -49,4 +49,22 @@ for (const raw of messages) {
     default:
       console.log(`  ${result.val.parsed.message.encode().split("\r").length} segments`);
   }
+}
+
+// A batch file: every message goes through parse(), a bad one does not fail the batch.
+const batch = parseBatch(
+  [
+    "FHS|^~\\&|ADT|Hospital|EMR|Clinic|20231115140500||nightly",
+    "BHS|^~\\&|ADT|Hospital|EMR|Clinic|20231115140500||adt",
+    ...messages.slice(0, 3),
+    "BTS|3",
+    "FTS|1",
+  ].join("\r"),
+);
+if (batch.ok) {
+  for (const [i, b] of batch.val.batches.entries()) {
+    console.log(`batch ${i + 1}: ${b.messages.filter((m) => m.ok).length} of ${b.messages.length} messages parsed, trailer ${b.trailer?.encode()}`);
+    b.messages.forEach((m) => (m.ok ? console.log(`  ${m.val.structure}`) : console.log(`  ✗ ${m.err.message}`, m.err.meta)));
+  }
+  console.log(batch.val.warnings.length ? batch.val.warnings : "  counts agree");
 }
