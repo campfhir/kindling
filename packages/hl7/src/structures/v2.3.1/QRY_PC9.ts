@@ -1,7 +1,10 @@
 /**
- * QRY_PC9 structure for HL7 v2.3.1 — identical to v2.3, re-exported.
+ * Message structure for QRY^PC9 messages (HL7 v2.3.1).
+ *
+ * Structure: MSH QRD [QRF]
+ * Shares the QRY^PC4 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3/QRY_PC9.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+export { QRY_PC4_STRUCTURE as QRY_PC9_STRUCTURE } from "./QRY_PC4.ts";

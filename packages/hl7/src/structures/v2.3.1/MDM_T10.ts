@@ -1,7 +1,10 @@
 /**
- * MDM_T10 structure for HL7 v2.3.1 — identical to v2.3, re-exported.
+ * Message structure for MDM^T10 messages (HL7 v2.3.1).
+ *
+ * Structure: MSH EVN PID PV1 TXA {OBX}
+ * Shares the MDM^T02 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3/MDM_T10.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+export { MDM_T02_STRUCTURE as MDM_T10_STRUCTURE } from "./MDM_T02.ts";

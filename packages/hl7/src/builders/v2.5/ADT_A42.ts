@@ -1,8 +1,8 @@
 /**
  * Builder for ADT^A42 messages (HL7 v2.5).
  *
- * Structure: MSH [{SFT}] EVN PID [PD1] MRG [PV1]
- * Shares the ADT^A34 structure.
+ * Structure: MSH [{SFT}] EVN { PATIENT: PID [PD1] MRG [PV1] }
+ * Shares the ADT^A39 structure.
  *
  * @module
  */
@@ -10,27 +10,25 @@
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
 import type { MSH } from "../../segments/v2.5/MSH.ts";
 import type { EVN } from "../../segments/v2.5/EVN.ts";
-import type { PID } from "../../segments/v2.5/PID.ts";
-import type { MRG } from "../../segments/v2.5/MRG.ts";
-import { ADT_A34, type ADT_A34Options } from "./ADT_A34.ts";
+import { ADT_A39, type ADT_A39Options, type MergePatient } from "./ADT_A39.ts";
 
+export type { MergePatient };
 /** The optional segments and groups of an ADT^A42 (HL7 v2.5) message. */
-export type ADT_A42Options = ADT_A34Options;
+export type ADT_A42Options = ADT_A39Options;
 
 /** Builder for HL7 ADT^A42 (HL7 v2.5) messages. */
-export class ADT_A42<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TMRG extends MRG = MRG> extends ADT_A34<TMSH, TEVN, TPID, TMRG> {
+export class ADT_A42<TMSH extends MSH = MSH, TEVN extends EVN = EVN> extends ADT_A39<TMSH, TEVN> {
   /** The message name used in error messages. */
   protected override readonly messageName: string = "ADT_A42";
 }
 
 /** Builds an HL7 ADT^A42 (HL7 v2.5) message. */
-export function createADT_A42<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TMRG extends MRG = MRG>(
+export function createADT_A42<TMSH extends MSH = MSH, TEVN extends EVN = EVN>(
   header: TMSH,
   event: TEVN,
-  patient: TPID,
-  merge: TMRG,
+  patients: MergePatient[],
   options: ADT_A42Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
-): ADT_A42<TMSH, TEVN, TPID, TMRG> {
-  return new ADT_A42(header, event, patient, merge, options, encoding);
+): ADT_A42<TMSH, TEVN> {
+  return new ADT_A42(header, event, patients, options, encoding);
 }

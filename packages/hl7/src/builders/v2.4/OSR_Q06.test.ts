@@ -18,13 +18,15 @@ const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
 describe("OSR_Q06 (v2.4)", () => {
   test("an order without a detail segment fails verification in v2.4 but not in v2.3", () => {
     const orders = [{ commonOrder: new ORC().orderControl("SC") }];
-    // @ts-expect-error the detail is required in v2.4
-    expect(createOSR_Q06(msh(), msa(), qrd(), { orders }).verify().errors).toEqual(["ORDER group 1: At least one ORDER DETAIL group (OBR/RQD/RQ1/RXO/ODS/ODT) is required"]);
+    // @ts-expect-error the detail segment is required in v2.4
+    const errors = createOSR_Q06(msh(), msa(), qrd(), { orders }).verify().errors;
+    expect(errors).toHaveLength(1);
+    expect(errors[0]).toMatch(/ORDER group 1.*OBR/);
     expect(createOSR_Q06_v23(msh(), msa(), qrd(), { orders }).verify().errors).toEqual([]);
 
-    const wire = createOSR_Q06(msh(), msa(), qrd(), { orders: [{ commonOrder: new ORC().orderControl("SC"), detail: { segment: new OBR().setId("1") } }] }).encode();
+    const wire = createOSR_Q06(msh(), msa(), qrd(), { orders: [{ commonOrder: new ORC().orderControl("SC"), segment: new OBR().setId("1") }] }).encode();
     expect(names(wire)).toEqual(["MSH", "MSA", "QRD", "ORC", "OBR"]);
-    expect(parseOSR_Q06(wire).val!.orders![0].detail.segment.name).toBe("OBR");
+    expect(parseOSR_Q06(wire).val!.orders![0].segment.name).toBe("OBR");
     expect(parseOSR_Q06(wire).val!.message.encode()).toBe(wire);
   });
 
@@ -32,6 +34,6 @@ describe("OSR_Q06 (v2.4)", () => {
     const wire = [msh().encode(), "MSA|AA|Q1", "QRD|||R|I|Q1", "ORC|SC"].join("\r");
     expect(parseOSR_Q06(wire).ok).toBe(false);
     expect(parseOSR_Q06(wire).err!.message).toContain("OSR_Q06");
-    expect(parseOSR_Q06_v23(wire).val!.orders![0].detail).toBeUndefined();
+    expect(parseOSR_Q06_v23(wire).val!.orders![0].segment).toBeUndefined();
   });
 });

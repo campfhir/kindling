@@ -94,6 +94,16 @@ to leave joined inside the first component; and MSH/BHS/FHS now encode repeating
 to drop everything after the first repetition). The earlier reports in `docs/validation/` are kept
 for their history; the ledger supersedes them.
 
+## Validation ledger (v2.3.1)
+
+[`docs/validation/v2.3.1-segment-ledger.md`](validation/v2.3.1-segment-ledger.md) does for 2.3.1 what the
+v2.3 ledger does: every field of the 110 segments against hl7.eu (`v231/hl7v231segm<SEG>.htm`),
+Caristix 2.3.1 and HAPI v231. 53 segments changed between 2.3 and 2.3.1 (new fields: FT1-26, MFA-6,
+MFE-5, MSH-20, NTE-4, OBR-44/45, ORC-20–24, PR1-16, PRA-8, RXO-23; 72 fields that now repeat; types
+such as IS → CE and CM_* → named composites): the 27 generated ones got a 2.3.1 class generated from
+`codegen/spec/v2.3.1-segments.json`, the 26 hand-written ones a subclass in `src/segments/v2.3.1/`
+that overrides the changed setters and adds the new fields. The other 57 re-export the v2.3 class.
+
 ## v2.5.1 parity
 v2.5.1 segments are generated as thin wrappers over the v2.3 base (`pnpm codegen`), so every
 v2.3 segment above must also be re-evaluated for v2.5.1 field changes. After v2.3 is complete,

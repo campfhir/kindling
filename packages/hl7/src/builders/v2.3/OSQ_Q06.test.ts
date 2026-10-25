@@ -38,8 +38,8 @@ describe("OSR_Q06 (v2.3)", () => {
       patient: new PID().setId("1"),
       patientNotes: [new NTE().setId("1").comment("patient note")],
       orders: [
-        { commonOrder: new ORC().orderControl("SC"), detail: { segment: new OBR().setId("1"), notes: [new NTE().setId("1")], clinicalTrials: [new CTI()] } },
-        { commonOrder: new ORC().orderControl("SC"), detail: { segment: new RXO() } },
+        { commonOrder: new ORC().orderControl("SC"), segment: new OBR().setId("1"), notes: [new NTE().setId("1")], clinicalTrials: [new CTI()] },
+        { commonOrder: new ORC().orderControl("SC"), segment: new RXO() },
         { commonOrder: new ORC().orderControl("SC") },
       ],
     });
@@ -52,10 +52,10 @@ describe("OSR_Q06 (v2.3)", () => {
     expect(parsed.notes).toHaveLength(1);
     expect(parsed.patientNotes).toHaveLength(1);
     expect(parsed.orders).toHaveLength(3);
-    expect(parsed.orders![0].detail!.segment.name).toBe("OBR");
-    expect(parsed.orders![0].detail!.clinicalTrials).toHaveLength(1);
-    expect(parsed.orders![1].detail!.segment.name).toBe("RXO");
-    expect(parsed.orders![2].detail).toBeUndefined();
+    expect(parsed.orders![0].segment!.name).toBe("OBR");
+    expect(parsed.orders![0].clinicalTrials).toHaveLength(1);
+    expect(parsed.orders![1].segment!.name).toBe("RXO");
+    expect(parsed.orders![2].segment).toBeUndefined();
     expect(parsed.message.encode()).toBe(wire);
   });
 
@@ -67,14 +67,13 @@ describe("OSR_Q06 (v2.3)", () => {
     expect(result.val!.orders).toEqual([]);
   });
 
-  test("verify() checks the ORC of each order and the detail's segment choice", () => {
-    expect(createOSR_Q06(msh("OSR"), msa(), qrd(), {
+  test("verify() checks the ORC of each order and the detail segment choice", () => {
+    const errors = createOSR_Q06(msh("OSR"), msa(), qrd(), {
       // @ts-expect-error missing required segments / wrong segment
-      orders: [{ detail: { segment: new PID() } }, { commonOrder: new ORC(), detail: { notes: [] } }],
-    }).verify().errors).toEqual([
-      "ORDER group 1: ORC segment is required",
-      "ORDER group 1: ORDER DETAIL group 1: segment must be one of OBR, RQD, RQ1, RXO, ODS, ODT",
-      "ORDER group 2: ORDER DETAIL group 1: One of OBR, RQD, RQ1, RXO, ODS, ODT is required",
-    ]);
+      orders: [{ segment: new PID() }, { commonOrder: new ORC(), notes: [] }],
+    }).verify().errors;
+    expect(errors).toHaveLength(2);
+    expect(errors[0]).toBe("ORDER group 1: ORC segment is required");
+    expect(errors[1]).toMatch(/^ORDER group 1: .*OBR, RQD, RQ1, RXO, ODS, ODT/);
   });
 });

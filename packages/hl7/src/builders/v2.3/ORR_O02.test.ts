@@ -23,11 +23,9 @@ const fullMessage = () =>
     orders: [
       {
         commonOrder: new ORC().orderControl("OK").placerOrderNumber("1"),
-        detail: {
-          segment: new OBR().setId("1"),
-          notes: [new NTE().setId("1").comment("detail")],
-          clinicalTrials: [new CTI().sponsorStudyId({ entityIdentifier: "S1" })],
-        },
+        segment: new OBR().setId("1"),
+        notes: [new NTE().setId("1").comment("detail")],
+        clinicalTrials: [new CTI().sponsorStudyId({ entityIdentifier: "S1" })],
       },
       { commonOrder: new ORC().orderControl("OK").placerOrderNumber("2") },
     ],
@@ -73,10 +71,11 @@ describe("ORR_O02 parser", () => {
     expect(val.patient).toBeInstanceOf(PID);
     expect(val.patientNotes).toHaveLength(1);
     expect(val.orders).toHaveLength(2);
-    expect(val.orders![0].detail?.segment).toBeInstanceOf(OBR);
-    expect(val.orders![0].detail?.notes).toHaveLength(1);
-    expect(val.orders![0].detail?.clinicalTrials).toHaveLength(1);
-    expect(val.orders![1].detail).toBeUndefined();
+    expect(val.orders![0].segment).toBeInstanceOf(OBR);
+    expect(val.orders![0].notes).toHaveLength(1);
+    expect(val.orders![0].clinicalTrials).toHaveLength(1);
+    expect(val.orders![1].segment).toBeUndefined();
+    expect(val.orders![1].notes).toEqual([]);
     expect(val.message.segments).toHaveLength(wire.split("\r").length);
   });
 
@@ -95,6 +94,14 @@ describe("ORR_O02 parser", () => {
     if (result.ok) expect(result.val.orders).toHaveLength(1);
   });
 
+  test("notes and clinical trials follow ORC with or without a detail segment (siblings, as the standard lists them)", () => {
+    const result = parseORR_O02([makeMSH().encode(), "MSA|AA|1", "ORC|OK|1", "NTE|1||no detail", "CTI|S"].join("\r"));
+    expect(result.ok).toBe(true);
+    expect(result.val!.orders![0].segment).toBeUndefined();
+    expect(result.val!.orders![0].notes).toHaveLength(1);
+    expect(result.val!.orders![0].clinicalTrials).toHaveLength(1);
+  });
+
   const msh = () => makeMSH().encode();
   test.each([
     ["empty", ""],
@@ -103,9 +110,8 @@ describe("ORR_O02 parser", () => {
     ["ERR before MSA", [msh(), "ERR|1", "MSA|AA|1"].join("\r")],
     ["detail without ORC", [msh(), "MSA|AA|1", "OBR|1"].join("\r")],
     ["two details for one ORC", [msh(), "MSA|AA|1", "ORC|OK|1", "OBR|1", "OBR|2"].join("\r")],
-    ["CTI without detail", [msh(), "MSA|AA|1", "ORC|OK|1", "CTI|S"].join("\r")],
     ["PID after ORC", [msh(), "MSA|AA|1", "ORC|OK|1", "PID|1"].join("\r")],
-    ["NTE after ORC (not allowed there)", [msh(), "MSA|AA|1", "ORC|OK|1", "NTE|1||x"].join("\r")],
+    ["CTI before the detail segment", [msh(), "MSA|AA|1", "ORC|OK|1", "CTI|S", "OBR|1"].join("\r")],
   ])("rejects: %s", (_label, wire) => {
     expect(parseORR_O02(wire).ok).toBe(false);
   });

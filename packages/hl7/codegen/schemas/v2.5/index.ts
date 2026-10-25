@@ -1,7 +1,5 @@
 export * from "./ACK";
 export * from "./ADT_A01";
-export * from "./ADT_A17";
-export * from "./ADT_A34";
 export * from "./BAR_P01";
 export * from "./DFT_P03";
 export * from "./MDM_T01";

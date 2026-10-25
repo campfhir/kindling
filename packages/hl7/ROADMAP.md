@@ -6,7 +6,7 @@ Goal: a complete, well-tested TypeScript implementation of HL7 v2, published to 
 | Phase | Scope | Status |
 |---|---|---|
 | 1 | **HL7 v2.3 complete** — every segment and event type | ✅ every event type and segment built, every field checked against hl7.eu, Caristix and HAPI (see the validation ledger), every composite and date field typed (0.19); the root `parse()` dispatches any v2.3 message on MSH-9/MSH-12 (1.0) |
-| 2 | **HL7 v2.3.1 complete** and wired into `parse()` | ⬜ 1.1 |
+| 2 | **HL7 v2.3.1 complete** and wired into `parse()` | ✅ 1.1: every segment field and message structure checked against hl7.eu, Caristix and HAPI (segment and message ledgers), 53 segments with their own 2.3.1 class, all 276 messages generated against them |
 | 3 | **HL7 v2.4 complete** and wired into `parse()` | ⬜ 1.2 |
 | 4 | **HL7 v2.5 complete** and wired into `parse()` | ⬜ 1.3 |
 | 5 | **HL7 v2.5.1 complete** and wired into `parse()` | ⬜ 1.4 |

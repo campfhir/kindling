@@ -1,7 +1,7 @@
 /**
  * Parser for OSR^Q06 messages (HL7 v2.5).
  *
- * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] QRD [QRF] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }]  ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}]  } ] [DSC]
+ * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] QRD [QRF] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}] } ] [DSC]
  *
  * @module
  */
@@ -36,8 +36,12 @@ export interface ParsedResponseOrder {
   commonOrder: ORC;
   /** The TIMING groups. */
   timings?: ParsedTiming[];
-  /** The ORDER DETAIL group. */
-  detail: ParsedResponseDetail;
+  /** One of OBR, RQD, RQ1, RXO, ODS, ODT. */
+  segment: OBR | RQD | RQ1 | RXO | ODS | ODT;
+  /** The NTE segments. */
+  notes?: NTE[];
+  /** The CTI segments. */
+  clinicalTrials?: CTI[];
 }
 
 /** The TIMING group of a parsed OSR^Q06 (HL7 v2.5) message. */
@@ -46,16 +50,6 @@ export interface ParsedTiming {
   timing: TQ1;
   /** The TQ2 segments. */
   timingRelationships?: TQ2[];
-}
-
-/** The ORDER DETAIL group of a parsed OSR^Q06 (HL7 v2.5) message. */
-export interface ParsedResponseDetail {
-  /** One of OBR, RQD, RQ1, RXO, ODS, ODT. */
-  segment: OBR | RQD | RQ1 | RXO | ODS | ODT;
-  /** The NTE segments. */
-  notes?: NTE[];
-  /** The CTI segments. */
-  clinicalTrials?: CTI[];
 }
 
 /** Structured result of parsing an HL7 OSR^Q06 (HL7 v2.5) message. */

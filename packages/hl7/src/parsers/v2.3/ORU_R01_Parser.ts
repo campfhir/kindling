@@ -1,7 +1,7 @@
 /**
  * Parser for ORU^R01 messages (HL7 v2.3).
  *
- * Structure: MSH { PATIENT_RESULT: [ PATIENT: PID [PD1] [{NK1}] [{NTE}] [ VISIT: PV1 [PV2] ] ] { ORDER_OBSERVATION: [ORC] OBR [{NTE}] [{ OBSERVATION: OBX [{NTE}] }] [{CTI}] } } [DSC]
+ * Structure: MSH { PATIENT_RESULT: [ PATIENT: PID [PD1] [{NTE}] [ VISIT: PV1 [PV2] ] ] { ORDER_OBSERVATION: [ORC] OBR [{NTE}] [{ OBSERVATION: OBX [{NTE}] }] [{CTI}] } } [DSC]
  *
  * @module
  */
@@ -13,7 +13,6 @@ import { ORU_R01_STRUCTURE } from "../../structures/v2.3/ORU_R01.ts";
 import { MSH } from "../../segments/v2.3/MSH.ts";
 import { PID } from "../../segments/v2.3/PID.ts";
 import { PD1 } from "../../segments/v2.3/PD1.ts";
-import { NK1 } from "../../segments/v2.3/NK1.ts";
 import { NTE } from "../../segments/v2.3/NTE.ts";
 import { PV1 } from "../../segments/v2.3/PV1.ts";
 import { PV2 } from "../../segments/v2.3/PV2.ts";
@@ -29,8 +28,6 @@ export interface ParsedPatientResult {
   patient?: PID;
   /** The PD1 segment. */
   patientDemographics?: PD1;
-  /** The NK1 segments. */
-  nextOfKin?: NK1[];
   /** The NTE segments. */
   notes?: NTE[];
   /** The PV1 segment. */
@@ -78,7 +75,6 @@ const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
   PID: (s, e) => PID.parse(s, e),
   PD1: (s, e) => PD1.parse(s, e),
-  NK1: (s, e) => NK1.parse(s, e),
   NTE: (s, e) => NTE.parse(s, e),
   PV1: (s, e) => PV1.parse(s, e),
   PV2: (s, e) => PV2.parse(s, e),

@@ -15,7 +15,7 @@ export const OSR_Q06_SCHEMA: MessageSchema = {
   ...reversion(OSR_Q06_V23, "2.4"),
   structure: [
     req("MSH"), req("MSA"), opt("ERR"), optList("NTE"), req("QRD"), opt("QRF"),
-    osrResponse([req("ORC"), osrOrderDetail("required")]),
+    osrResponse([req("ORC"), ...osrOrderDetail("required")]),
     opt("DSC"),
   ],
 };

@@ -1,7 +1,7 @@
 /**
  * Builder for ORU^R01 messages (HL7 v2.3).
  *
- * Structure: MSH { PATIENT_RESULT: [ PATIENT: PID [PD1] [{NK1}] [{NTE}] [ VISIT: PV1 [PV2] ] ] { ORDER_OBSERVATION: [ORC] OBR [{NTE}] [{ OBSERVATION: OBX [{NTE}] }] [{CTI}] } } [DSC]
+ * Structure: MSH { PATIENT_RESULT: [ PATIENT: PID [PD1] [{NTE}] [ VISIT: PV1 [PV2] ] ] { ORDER_OBSERVATION: [ORC] OBR [{NTE}] [{ OBSERVATION: OBX [{NTE}] }] [{CTI}] } } [DSC]
  *
  * @module
  */
@@ -13,7 +13,6 @@ import { ORU_R01_STRUCTURE } from "../../structures/v2.3/ORU_R01.ts";
 import type { MSH } from "../../segments/v2.3/MSH.ts";
 import type { PID } from "../../segments/v2.3/PID.ts";
 import type { PD1 } from "../../segments/v2.3/PD1.ts";
-import type { NK1 } from "../../segments/v2.3/NK1.ts";
 import type { NTE } from "../../segments/v2.3/NTE.ts";
 import type { PV1 } from "../../segments/v2.3/PV1.ts";
 import type { PV2 } from "../../segments/v2.3/PV2.ts";
@@ -29,8 +28,6 @@ export interface PatientResult {
   patient?: PID;
   /** The PD1 segment. */
   patientDemographics?: PD1;
-  /** The NK1 segments. */
-  nextOfKin?: NK1[];
   /** The NTE segments. */
   notes?: NTE[];
   /** The PV1 segment. */

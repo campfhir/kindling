@@ -1,7 +1,10 @@
 /**
- * UDM_R06 structure for HL7 v2.3.1 — identical to v2.3, re-exported.
+ * Message structure for UDM^R06 messages (HL7 v2.3.1).
+ *
+ * Structure: MSH URD [URS] {DSP} [DSC]
+ * Shares the UDM^Q05 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3/UDM_R06.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+export { UDM_Q05_STRUCTURE as UDM_R06_STRUCTURE } from "./UDM_Q05.ts";

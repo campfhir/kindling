@@ -1,7 +1,7 @@
 /**
  * Builder for OSR^Q06 messages (HL7 v2.4).
  *
- * Structure: MSH MSA [ERR] [{NTE}] QRD [QRF] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC  ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}]  } ] [DSC]
+ * Structure: MSH MSA [ERR] [{NTE}] QRD [QRF] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}] } ] [DSC]
  *
  * @module
  */
@@ -31,12 +31,6 @@ import type { DSC } from "../../segments/v2.4/DSC.ts";
 export interface ResponseOrderGroup {
   /** The ORC segment. */
   commonOrder: ORC;
-  /** The ORDER DETAIL group. */
-  detail: ResponseDetailGroup;
-}
-
-/** The ORDER DETAIL group of an OSR^Q06 (HL7 v2.4) message being built. */
-export interface ResponseDetailGroup {
   /** One of OBR, RQD, RQ1, RXO, ODS, ODT. */
   segment: OBR | RQD | RQ1 | RXO | ODS | ODT;
   /** The NTE segments. */

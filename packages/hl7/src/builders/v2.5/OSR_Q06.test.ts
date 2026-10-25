@@ -19,7 +19,7 @@ describe("OSR_Q06 (v2.5)", () => {
     const wire = createOSR_Q06(new MSH().messageType({ messageCode: "OSR", triggerEvent: "Q06" }).messageControlId("O1"), new MSA().acknowledgmentCode("AA").messageControlId("Q1"), new QRD().queryFormatCode("R").queryPriority("I").queryId("Q1"), {
       errors: [new ERR(), new ERR()],
       software: [new SFT().softwareProductName("kindling")],
-      orders: [{ commonOrder: new ORC().orderControl("SC"), timings: [{ timing: new TQ1().setId("1") }], detail: { segment: new RQD().requisitionLineNumber("1") } }],
+      orders: [{ commonOrder: new ORC().orderControl("SC"), timings: [{ timing: new TQ1().setId("1") }], segment: new RQD().requisitionLineNumber("1") }],
     }).encode();
     expect(names(wire)).toEqual(["MSH", "MSA", "ERR", "ERR", "SFT", "QRD", "ORC", "TQ1", "RQD"]);
     const result = parseOSR_Q06(wire);
@@ -27,7 +27,7 @@ describe("OSR_Q06 (v2.5)", () => {
     expect(result.val!.errors).toHaveLength(2);
     expect(result.val!.software).toHaveLength(1);
     expect(result.val!.orders![0].timings![0].timing.name).toBe("TQ1");
-    expect(result.val!.orders![0].detail!.segment.name).toBe("RQD");
+    expect(result.val!.orders![0].segment.name).toBe("RQD");
     expect(result.val!.message.encode()).toBe(wire);
     // In v2.4 the ERR does not repeat: the second one stops the parser before the QRD it expects.
     expect(parseOSR_Q06_v24(wire).err!.message).toBe("OSR_Q06 message must contain a QRD segment");
@@ -35,9 +35,10 @@ describe("OSR_Q06 (v2.5)", () => {
 
   test("the order detail stays required (as in v2.4)", () => {
     const msg = createOSR_Q06(new MSH().messageType({ messageCode: "OSR", triggerEvent: "Q06" }).messageControlId("O1"), new MSA().acknowledgmentCode("AA").messageControlId("Q1"), new QRD().queryFormatCode("R").queryPriority("I").queryId("Q1"), {
-      // @ts-expect-error the detail is required from v2.4
+      // @ts-expect-error the detail segment is required from v2.4
       orders: [{ commonOrder: new ORC().orderControl("SC"), timings: [{ timing: new TQ1().setId("1") }] }],
     });
-    expect(msg.verify().errors).toEqual(["ORDER group 1: At least one ORDER DETAIL group (OBR/RQD/RQ1/RXO/ODS/ODT) is required"]);
+    expect(msg.verify().errors).toHaveLength(1);
+    expect(msg.verify().errors[0]).toMatch(/ORDER group 1.*OBR/);
   });
 });

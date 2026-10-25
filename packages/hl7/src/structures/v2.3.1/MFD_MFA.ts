@@ -1,7 +1,16 @@
 /**
- * MFD_MFA structure for HL7 v2.3.1 — identical to v2.3, re-exported.
+ * Message structure for MFD^MFA messages (HL7 v2.3.1).
+ *
+ * Structure: MSH MFI [{MFA}]
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3/MFD_MFA.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { StructureItem } from "../../types/schema.ts";
+
+/** The segments, choices and groups of MFD^MFA (HL7 v2.3.1), in order. */
+export const MFD_MFA_STRUCTURE: StructureItem[] = [
+  { name: "MSH", required: true, repeating: false },
+  { name: "MFI", required: true, repeating: false },
+  { name: "MFA", required: false, repeating: true },
+];

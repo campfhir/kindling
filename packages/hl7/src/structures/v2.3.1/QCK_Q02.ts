@@ -1,7 +1,17 @@
 /**
- * QCK_Q02 structure for HL7 v2.3.1 — identical to v2.3, re-exported.
+ * Message structure for QCK^Q02 messages (HL7 v2.3.1).
+ *
+ * Structure: MSH MSA [ERR] [QAK]
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3/QCK_Q02.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { StructureItem } from "../../types/schema.ts";
+
+/** The segments, choices and groups of QCK^Q02 (HL7 v2.3.1), in order. */
+export const QCK_Q02_STRUCTURE: StructureItem[] = [
+  { name: "MSH", required: true, repeating: false },
+  { name: "MSA", required: true, repeating: false },
+  { name: "ERR", required: false, repeating: false },
+  { name: "QAK", required: false, repeating: false },
+];

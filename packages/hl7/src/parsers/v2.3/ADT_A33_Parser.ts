@@ -1,21 +1,20 @@
 /**
  * Parser for ADT^A33 messages (HL7 v2.3).
  *
- * Structure: MSH EVN PID [PD1] [{NK1}] PV1 [PV2] [{DB1}] [{OBX}] [{AL1}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] }] [{GT1}] [{ INSURANCE: IN1 [IN2] [IN3] }] [ACC] [UB1] [UB2]
- * Shares the ADT^A01 structure.
+ * Structure: MSH EVN PID [PD1] PV1 [PV2] [{DB1}] [{OBX}]
+ * Shares the ADT^A02 structure.
  *
  * @module
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../../types/result.ts";
-import { ADT_A01_Parser, type ParsedADT_A01 } from "./ADT_A01_Parser.ts";
+import { ADT_A02_Parser, type ParsedADT_A02 } from "./ADT_A02_Parser.ts";
 
-export type { ParsedProcedure, ParsedInsuranceGroup } from "./ADT_A01_Parser.ts";
 /** Structured result of parsing an HL7 ADT^A33 (HL7 v2.3) message. */
-export type ParsedADT_A33 = ParsedADT_A01;
+export type ParsedADT_A33 = ParsedADT_A02;
 
 /** Parser for HL7 ADT^A33 (HL7 v2.3) messages. */
-export class ADT_A33_Parser extends ADT_A01_Parser {
+export class ADT_A33_Parser extends ADT_A02_Parser {
   /** The message name used in error messages. */
   protected override readonly messageName: string = "ADT_A33";
 }

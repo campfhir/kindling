@@ -1,7 +1,7 @@
 /**
  * Message structure for ADT^A47 messages (HL7 v2.5.1).
  *
- * Structure: MSH [{SFT}] EVN PID [PD1] MRG [PV1]
+ * Structure: MSH [{SFT}] EVN PID [PD1] MRG
  * Shares the ADT^A34 structure.
  *
  * @module

@@ -1,7 +1,10 @@
 /**
- * MFQ_M03 structure for HL7 v2.3.1 — identical to v2.3, re-exported.
+ * Message structure for MFQ^M03 messages (HL7 v2.3.1).
+ *
+ * Structure: MSH QRD [QRF] [DSC]
+ * Shares the MFQ^M01 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3/MFQ_M03.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+export { MFQ_M01_STRUCTURE as MFQ_M03_STRUCTURE } from "./MFQ_M01.ts";

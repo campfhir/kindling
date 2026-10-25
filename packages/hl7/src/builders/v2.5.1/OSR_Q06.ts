@@ -1,7 +1,7 @@
 /**
  * Builder for OSR^Q06 messages (HL7 v2.5.1).
  *
- * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] QRD [QRF] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }]  ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}]  } ] [DSC]
+ * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] QRD [QRF] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}] } ] [DSC]
  *
  * @module
  */
@@ -36,8 +36,12 @@ export interface ResponseOrderGroup {
   commonOrder: ORC;
   /** The TIMING groups. */
   timings?: TimingGroup[];
-  /** The ORDER DETAIL group. */
-  detail: ResponseDetailGroup;
+  /** One of OBR, RQD, RQ1, RXO, ODS, ODT. */
+  segment: OBR | RQD | RQ1 | RXO | ODS | ODT;
+  /** The NTE segments. */
+  notes?: NTE[];
+  /** The CTI segments. */
+  clinicalTrials?: CTI[];
 }
 
 /** The TIMING group of an OSR^Q06 (HL7 v2.5.1) message being built. */
@@ -46,16 +50,6 @@ export interface TimingGroup {
   timing: TQ1;
   /** The TQ2 segments. */
   timingRelationships?: TQ2[];
-}
-
-/** The ORDER DETAIL group of an OSR^Q06 (HL7 v2.5.1) message being built. */
-export interface ResponseDetailGroup {
-  /** One of OBR, RQD, RQ1, RXO, ODS, ODT. */
-  segment: OBR | RQD | RQ1 | RXO | ODS | ODT;
-  /** The NTE segments. */
-  notes?: NTE[];
-  /** The CTI segments. */
-  clinicalTrials?: CTI[];
 }
 
 /** The optional segments and groups of an OSR^Q06 (HL7 v2.5.1) message. */

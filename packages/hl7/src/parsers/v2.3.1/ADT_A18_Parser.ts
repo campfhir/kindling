@@ -1,7 +1,64 @@
 /**
- * ADT_A18_Parser parser for HL7 v2.3.1 — identical to v2.3, re-exported.
+ * Parser for ADT^A18 messages (HL7 v2.3.1).
+ *
+ * Structure: MSH EVN PID [PD1] [MRG] PV1
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3/ADT_A18_Parser.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { Result } from "../../types/result.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
+import { ADT_A18_STRUCTURE } from "../../structures/v2.3.1/ADT_A18.ts";
+import { MSH } from "../../segments/v2.3.1/MSH.ts";
+import { EVN } from "../../segments/v2.3.1/EVN.ts";
+import { PID } from "../../segments/v2.3.1/PID.ts";
+import { PD1 } from "../../segments/v2.3.1/PD1.ts";
+import { MRG } from "../../segments/v2.3.1/MRG.ts";
+import { PV1 } from "../../segments/v2.3.1/PV1.ts";
+
+/** Structured result of parsing an HL7 ADT^A18 (HL7 v2.3.1) message. */
+export interface ParsedADT_A18 extends ParsedMessageBase {
+  /** The MSH segment. */
+  header: MSH;
+  /** The EVN segment. */
+  event: EVN;
+  /** The PID segment. */
+  patient: PID;
+  /** The PD1 segment. */
+  patientDemographics?: PD1;
+  /** The MRG segment. */
+  merge?: MRG;
+  /** The PV1 segment. */
+  visit: PV1;
+}
+
+/** The segment parsers of ADT^A18 (HL7 v2.3.1). */
+const PARSERS: SegmentParsers = {
+  MSH: (s) => MSH.parse(s),
+  EVN: (s, e) => EVN.parse(s, e),
+  PID: (s, e) => PID.parse(s, e),
+  PD1: (s, e) => PD1.parse(s, e),
+  MRG: (s, e) => MRG.parse(s, e),
+  PV1: (s, e) => PV1.parse(s, e),
+};
+
+/** Parser for HL7 ADT^A18 (HL7 v2.3.1) messages. */
+export class ADT_A18_Parser {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "ADT_A18";
+  /** The structure the message is parsed against. */
+  protected readonly structure: StructureItem[] = ADT_A18_STRUCTURE;
+  /** The segment parsers, keyed by segment name. */
+  protected readonly parsers: SegmentParsers = PARSERS;
+
+  /** Parses the input string into a structured instance. */
+  parse(messageString: string): Result<ParsedADT_A18> {
+    return parseStructure<ParsedADT_A18>(this.messageName, this.structure, this.parsers, messageString);
+  }
+}
+
+/** Parses an HL7 ADT^A18 (HL7 v2.3.1) message string into a structured result. */
+export function parseADT_A18(messageString: string): Result<ParsedADT_A18> {
+  return new ADT_A18_Parser().parse(messageString);
+}

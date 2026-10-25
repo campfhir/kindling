@@ -1,7 +1,10 @@
 /**
- * RPI_I04 structure for HL7 v2.3.1 — identical to v2.3, re-exported.
+ * Message structure for RPI^I04 messages (HL7 v2.3.1).
+ *
+ * Structure: MSH MSA { PROVIDER: PRD [{CTD}] } PID [{NK1}] [ GUARANTOR_INSURANCE: [{GT1}] { INSURANCE: IN1 [IN2] [IN3] } ] [{NTE}]
+ * Shares the RPI^I01 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3/RPI_I04.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+export { RPI_I01_STRUCTURE as RPI_I04_STRUCTURE } from "./RPI_I01.ts";

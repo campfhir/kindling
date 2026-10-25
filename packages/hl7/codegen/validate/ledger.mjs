@@ -1,26 +1,32 @@
 /**
- * Builds the HL7 v2.3 segment validation ledger: docs/validation/v2.3-segment-ledger.md.
+ * Builds the segment validation ledger of one HL7 version: docs/validation/<version>-segment-ledger.md.
  *
- * For every v2.3 segment class in src/segments/v2.3 it compares, field by field, three sources
+ * For every segment class in src/segments/<version> it compares, field by field, three sources
  * with what we implement:
  *
- * - hl7.eu, the per-segment pages https://www.hl7.eu/HL7v2x/v23/hl7v23segm<SEG>.htm (authoritative);
- * - the Caristix reference, https://hl7-definition.caristix.com/v2-api/1/HL7v2.3/Segments/<SEG>;
- * - HAPI's generated v2.3 segment classes (field definitions only, read from a checkout or the raw
- *   GitHub files; HAPI is MPL 1.1 / GPL and nothing of it is copied here).
+ * - hl7.eu, the per-segment pages https://www.hl7.eu/HL7v2x/v<nn>/hl7v<nn>segm<SEG>.htm (authoritative);
+ * - the Caristix reference, https://hl7-definition.caristix.com/v2-api/1/HL7v<n.n>/Segments/<SEG>;
+ * - HAPI's generated segment classes of that version (field definitions only, read from a checkout
+ *   or the raw GitHub files; HAPI is MPL 1.1 / GPL and nothing of it is copied here).
  *
  * The rule: hl7.eu decides a disputed value unless Caristix and HAPI agree with each other against
  * it, in which case the two of them win and the row is marked as a contradiction either way.
  *
- * "Ours" is the field table we implement: codegen/spec/v2.3-segments.json for generated classes and
- * the setters of the hand-written classes (field index, repeating or single, typed or raw).
+ * "Ours" is the field table we implement: codegen/spec/<version>-segments.json for generated classes
+ * and the setters of the hand-written classes (field index, repeating or single, typed or raw). A
+ * module that re-exports an older version's class (`export * from "../v2.3/PID.ts"`) is read from
+ * that class, and a subclass (`class RXA extends RXA_base`) inherits the fields of its base.
  *
  * Usage:
- *   node codegen/validate/ledger-v23.mjs <sources-dir> [--json <out.json>] [--fix-spec]
- * --fix-spec writes the decided type / repeat / usage / length of every generated class's fields into
- * codegen/spec/v2.3-segments.json (then regenerate those classes and run the script again).
- * where <sources-dir> holds hl7eu/<SEG>.htm, caristix/<SEG>.json and hapi/<SEG>.java (see
- * codegen/validate/fetch-v23-sources.sh). Reads are local only; nothing is fetched here.
+ *   node codegen/validate/ledger.mjs <version> <sources-dir> [--json <out.json>] [--fix-spec] [--adopt SEG,SEG]
+ *
+ * <version> is a directory name (v2.3, v2.3.1); <sources-dir> holds hl7eu/<SEG>.htm, caristix/<SEG>.json
+ * and hapi/<SEG>.java (see codegen/validate/fetch-sources.sh). Reads are local only; nothing is fetched here.
+ * --fix-spec writes the decided type / repeat / usage / length of every field of the classes generated
+ * from this version's spec into that spec (then regenerate those classes and run the script again).
+ * --adopt copies the named segments' tables from the base version's spec into this version's spec, with
+ * the decided values applied, so `generate-segments.ts --version <version>` can produce the version's own
+ * class (delete the re-export stub first).
  */
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
@@ -28,20 +34,39 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "../..");
 const args = process.argv.slice(2);
-const SOURCES = args[0];
-if (!SOURCES || args[0].startsWith("--")) {
-  console.error("Pass the sources directory (see the header comment).");
+const VERSION = args[0];
+const SOURCES = args[1];
+if (!/^v\d+\.\d+(\.\d+)?$/.test(VERSION ?? "") || !SOURCES || SOURCES.startsWith("--")) {
+  console.error("Usage: node codegen/validate/ledger.mjs <version> <sources-dir> [--json <out>] [--fix-spec] [--adopt SEG,SEG]");
   process.exit(1);
 }
-const jsonOut = args.includes("--json") ? args[args.indexOf("--json") + 1] : undefined;
-const SEG_DIR = join(ROOT, "src/segments/v2.3");
-const SPEC = JSON.parse(readFileSync(join(ROOT, "codegen/spec/v2.3-segments.json"), "utf8"));
+const option = (name) => (args.includes(name) ? args[args.indexOf(name) + 1] : undefined);
+const jsonOut = option("--json");
+const adopt = (option("--adopt") ?? "").split(",").filter(Boolean);
+
+/** The hl7.eu directory / HAPI module suffix (v2.3.1 → 231), the Caristix API version (2.3.1) and the base version. */
+const SHORT = VERSION.slice(1).replace(/\./g, "");
+const API = VERSION.slice(1);
+const LABEL = VERSION; // "v2.3.1" in prose
+const segDir = (version) => join(ROOT, "src/segments", version);
+const SEG_DIR = segDir(VERSION);
+const specFile = (version) => join(ROOT, "codegen/spec", `${version}-segments.json`);
+const notesFile = join(ROOT, "codegen/validate", `ledger-v${SHORT}-notes.json`);
+const docFile = join(ROOT, "docs/validation", `${VERSION}-segment-ledger.md`);
+
+const specs = new Map();
+/** The spec of a version (empty when the version has none). */
+const specOf = (version) => {
+  if (!specs.has(version)) specs.set(version, existsSync(specFile(version)) ? JSON.parse(readFileSync(specFile(version), "utf8")) : {});
+  return specs.get(version);
+};
+const SPEC = specOf(VERSION);
 /**
  * Hand-written decisions and remarks, keyed by segment ("NSC") or field ("NSC-9"):
  * { date, note, count? (segment: the field count to use), decide? ({ type | rep | opt | len: value } replaces
  * the rule's value), accept? (["rep" | "type" | "opt" | "len"]: our divergence on that attribute is deliberate) }.
  */
-const NOTES = JSON.parse(readFileSync(join(ROOT, "codegen/validate/ledger-v23-notes.json"), "utf8"));
+const NOTES = existsSync(notesFile) ? JSON.parse(readFileSync(notesFile, "utf8")) : {};
 const DATE = (() => {
   const f = join(SOURCES, "fetched.txt");
   return existsSync(f) ? readFileSync(f, "utf8").trim() : new Date().toISOString().slice(0, 10);
@@ -127,25 +152,33 @@ function readHapi(seg) {
 
 /** Segments whose first two fields (separator and encoding characters) are written by encode(), not by setters. */
 const HEADER_SEGMENTS = new Set(["MSH", "BHS", "FHS"]);
+const GENERATED_CLASS = /Generated by codegen\/generate(-v23)?-segments\.ts/;
 
-/** Our implementation: the spec table for a generated class, the setters for a hand-written one. */
-function readOurs(seg) {
-  const src = readFileSync(join(SEG_DIR, `${seg}.ts`), "utf8");
-  const generated = /Generated by codegen\/generate(-v23)?-segments\.ts/.test(src);
+/**
+ * Resolves the module of `seg` in `version` to the class that implements it: a re-export module
+ * (`export * from "../v2.3/SEG.ts"`) is followed to the version it points at.
+ */
+function resolveClass(seg, version) {
+  const file = join(segDir(version), `${seg}.ts`);
+  if (!existsSync(file)) return undefined;
+  const src = readFileSync(file, "utf8");
+  const reexport = src.match(/^export \* from "\.\.\/(v[\d.]+)\/(\w+)\.ts";/m);
+  if (reexport) return resolveClass(reexport[2], reexport[1]);
+  return { version, file, src };
+}
+
+/** The setters of one class source (not its base class): field seq → { setters, repeating, typed, raw }. */
+function readSetters(seg, src) {
   const fields = new Map();
   const offset = HEADER_SEGMENTS.has(seg) ? 2 : 1; // MSH keeps fields[0] for the separator; fields[1] is MSH-3
-  if (offset === 2) {
-    fields.set(1, { seq: 1, setters: ["(encode)"], repeating: false, typed: false, raw: false });
-    fields.set(2, { seq: 2, setters: ["(encode)"], repeating: false, typed: false, raw: false });
-  }
   // The class is split at each method declaration (two-space indent, name, "("); a chunk whose
   // signature ends in "): this {" is a setter, and the field it writes is the first
   // `this.fields[N] = this.create...` in its body. Overload signatures have no body and drop out.
-  const chunks = src.split(/^(?=  \w+\()/m).slice(1);
+  const chunks = src.split(/^(?=  (?:override )?\w+\()/m).slice(1);
   for (const chunk of chunks) {
-    const name = chunk.match(/^  (\w+)\(/)[1];
+    const name = chunk.match(/^  (?:override )?(\w+)\(/)[1];
     if (name === "constructor" || name === "setEncoding" || name === "getEncoding") continue;
-    const sig = chunk.match(/^  \w+\(([\s\S]*?)\): this \{\n/);
+    const sig = chunk.match(/^  (?:override )?\w+\(([\s\S]*?)\): this \{\n/);
     if (!sig) continue;
     const params = sig[1];
     const body = chunk.slice(sig[0].length);
@@ -153,7 +186,7 @@ function readOurs(seg) {
     if (!at) continue;
     const seq = Number(at[1]) + offset;
     const repeating = at[2] === "createRepeatingField" || /^\.\.\./.test(params.trim());
-    const typed = /\{[^}]*\}\s*:\s*\{/.test(params) || /Repeated<\{/.test(params) || /\(\{/.test(params) || /: \{/.test(params);
+    const typed = /\{[^}]*\}\s*:\s*\{/.test(params) || /Repeated<\{/.test(params) || /\(\{/.test(params) || /: \{/.test(params) || /Input\b/.test(params);
     const raw = /SegmentFieldValue/.test(params);
     const entry = fields.get(seq) ?? { seq, setters: [], repeating: false, typed: false, raw: false };
     entry.setters.push(name);
@@ -162,9 +195,27 @@ function readOurs(seg) {
     entry.raw ||= raw;
     fields.set(seq, entry);
   }
-  const spec = SPEC[seg];
+  return fields;
+}
+
+/** Our implementation: the spec table for a generated class, the setters for a hand-written one (base class included). */
+function readOurs(seg) {
+  const resolved = resolveClass(seg, VERSION);
+  if (!resolved) throw new Error(`${seg}: no module in ${SEG_DIR}`);
+  const generated = GENERATED_CLASS.test(resolved.src);
+  // A subclass (`import { RXA as RXA_base } from "../v2.3/RXA.ts"`) starts from its base's fields and overrides some.
+  const fields = new Map();
+  const base = resolved.src.match(/import \{ (\w+) as \w+_base \} from "\.\.\/(v[\d.]+)\/(\w+)\.ts"/);
+  const baseClass = base ? resolveClass(base[3], base[2]) : undefined;
+  if (baseClass) for (const [seq, f] of readSetters(seg, baseClass.src)) fields.set(seq, { ...f, setters: [...f.setters] });
+  for (const [seq, f] of readSetters(seg, resolved.src)) fields.set(seq, f);
+  if (HEADER_SEGMENTS.has(seg)) {
+    fields.set(1, { seq: 1, setters: ["(encode)"], repeating: false, typed: false, raw: false });
+    fields.set(2, { seq: 2, setters: ["(encode)"], repeating: false, typed: false, raw: false });
+  }
+  const spec = generated ? specOf(resolved.version)[seg] : undefined;
   const count = Math.max(...fields.keys(), spec ? spec.fields.length : 0);
-  return { generated, spec, count, fields };
+  return { generated, spec, count, fields, classVersion: resolved.version, baseClassVersion: baseClass?.version };
 }
 
 // ---------- tests ----------
@@ -183,14 +234,15 @@ const testFiles = (() => {
   return out;
 })();
 
-/** What the tests exercise: hand-written tests of the segment, a parse round trip, and setters that only the generated position test calls. */
+/** What the tests exercise: hand-written tests of the segment (in this version's directory and the class's), a parse round trip, and setters that only the generated position test calls. */
 function readTests(seg, ours) {
-  const own = testFiles.filter((t) => t.path.startsWith(SEG_DIR) && new RegExp(`/${seg}(\\.\\w+)?\\.test\\.ts$`).test(t.path));
-  // Two generic files cover every class: roundtrip.test.ts (parse/encode of all 110) and generated.test.ts
+  const dirs = [...new Set([SEG_DIR, segDir(ours.classVersion), ours.baseClassVersion ? segDir(ours.baseClassVersion) : undefined].filter(Boolean))];
+  const own = testFiles.filter((t) => dirs.some((d) => t.path.startsWith(d + "/")) && new RegExp(`/${seg}(\\.\\w+)?\\.test\\.ts$`).test(t.path));
+  // Two generic files cover every class of a version: roundtrip.test.ts (parse/encode of all) and generated.test.ts
   // (every setter, repetition and composite of the classes generated from the spec).
-  const genericRoundTrip = testFiles.some((t) => t.path.endsWith("/v2.3/roundtrip.test.ts"));
-  const specDriven = ours.generated && testFiles.some((t) => t.path.endsWith("/v2.3/generated.test.ts"));
-  const classSrc = readFileSync(join(SEG_DIR, `${seg}.ts`), "utf8");
+  const genericRoundTrip = testFiles.some((t) => dirs.some((d) => t.path === join(d, "roundtrip.test.ts")));
+  const specDriven = ours.generated && testFiles.some((t) => dirs.some((d) => t.path === join(d, "generated.test.ts")));
+  const classSrc = readFileSync(join(segDir(ours.classVersion), `${seg}.ts`), "utf8");
   const positions = own.some((t) => GENERATED_TEST.test(t.text) || /field positions/i.test(t.text)) || /position-tests: hand-written/.test(classSrc);
   const handWritten = own.filter((t) => !GENERATED_TEST.test(t.text));
   const handTests = handWritten.reduce((n, t) => n + (t.text.match(/^\s*(test|it)\(/gm) ?? []).length, 0);
@@ -210,7 +262,7 @@ function readTests(seg, ours) {
 
 // ---------- comparison ----------
 
-/** Legacy v2.3 datatype names that later versions renamed; the sources mix them. */
+/** Legacy datatype names that later versions renamed; the sources mix them. */
 function normType(t) {
   const x = (t || "").toUpperCase().replace(/_\d+$/, "");
   const map = { CN: "XCN", TN: "XTN", AD: "XAD", CM_LA1: "LA1", LA2: "LA1", "CM_LA2": "LA1", VARIES: "VARIES", CM: "CM" };
@@ -251,6 +303,12 @@ function decide(eu, cx, hp, norm) {
   return { value: c ?? h, status: "split", note: `no hl7.eu value; Caristix ${c ?? "-"}, HAPI ${h ?? "-"}` };
 }
 
+/** A CM-family type that a composite setter already covers under another name (the sources mix the two spellings). */
+const sameComposite = (ours, decided) => {
+  const o = normType(ours), d = normType(decided);
+  return o === d || (o === "CM" && d !== "CM") || (d === "CM" && o !== "CM");
+};
+
 const results = [];
 const segments = readdirSync(SEG_DIR).filter((f) => f.endsWith(".ts") && !f.endsWith(".test.ts") && f !== "index.ts").map((f) => f.replace(/\.ts$/, "")).sort();
 for (const seg of segments) {
@@ -271,7 +329,7 @@ for (const seg of segments) {
     const h = hp?.find((f) => f.seq === seq);
     const o = ours.fields.get(seq);
     const s = ours.spec?.fields.find((f) => f.seq === seq);
-    // hl7.eu names many v2.3 composites just "CM"; the specific CM_* / LA1 names of the others are the same type.
+    // hl7.eu names many composites just "CM"; the specific CM_* / LA1 names of the others are the same type.
     const euType = e?.type && normType(e.type) === "CM" ? (c?.type ?? h?.type) : e?.type;
     const type = decide(euType, c?.type, h?.type, normType);
     const rep = decide(e?.rep, c?.rep, h?.rep, normRep);
@@ -297,11 +355,11 @@ for (const seg of segments) {
     }
     const accepted = new Set(manual?.accept ?? []);
     if (inStandard && !o && !(ours.generated && s)) issues.push("missing in our class");
-    if (!inStandard && (o || s)) issues.push("not a v2.3 field");
+    if (!inStandard && (o || s)) issues.push(`not a ${LABEL} field`);
     if (o && rep.value === "Y" && !o.repeating && !accepted.has("rep")) issues.push("setter takes one value, field repeats");
-    if (o && rep.value === "N" && o.repeating && !accepted.has("rep")) notes.push("setter also accepts repetitions, which v2.3 does not define");
+    if (o && rep.value === "N" && o.repeating && !accepted.has("rep")) notes.push(`setter also accepts repetitions, which ${LABEL} does not define`);
     if (ours.generated && s) {
-      if (type.value && normType(s.type) !== type.value && !accepted.has("type")) issues.push(`spec type ${s.type}, sources ${type.value}`);
+      if (type.value && !sameComposite(s.type, type.value) && !accepted.has("type")) issues.push(`spec type ${s.type}, sources ${type.value}`);
       if (rep.value && normRep(s.rep) !== rep.value && !accepted.has("rep")) issues.push(`spec rep ${s.rep || "-"}, sources ${rep.value}`);
       if (opt.value && normOpt(s.opt) !== opt.value && !accepted.has("opt")) issues.push(`spec usage ${s.opt || "-"}, sources ${opt.value}`);
       if (len.value && normLen(s.length) !== len.value && !accepted.has("len")) issues.push(`spec length ${s.length}, sources ${len.value}`);
@@ -310,24 +368,24 @@ for (const seg of segments) {
     rows.push({ seq, name, type, rep, opt, len, table: e?.table || c?.table || "", item: e?.item || "", ours: o ? { setters: o.setters, repeating: o.repeating, typed: o.typed, raw: o.raw } : (s ? { spec: true } : undefined), issues, notes, contradictions });
   }
   const segNote = NOTES[seg];
-  results.push({ seg, generated: ours.generated, counts, countDecision, rows, tests, note: segNote ? `${segNote.date}: ${segNote.note}` : undefined });
+  results.push({ seg, generated: ours.generated, classVersion: ours.classVersion, counts, countDecision, rows, tests, note: segNote ? `${segNote.date}: ${segNote.note}` : undefined });
 }
 
 // ---------- rendering ----------
 
 const lines = [];
-lines.push("# HL7 v2.3 segment validation ledger");
+lines.push(`# HL7 ${LABEL} segment validation ledger`);
 lines.push("");
-lines.push(`Generated by \`codegen/validate/ledger-v23.mjs\` from source tables fetched on ${DATE}. Do not edit by hand:`);
+lines.push(`Generated by \`codegen/validate/ledger.mjs ${VERSION}\` from source tables fetched on ${DATE}. Do not edit by hand:`);
 lines.push("rerun the script (see its header) after fixing a class, the spec, or when a source changes.");
 lines.push("");
 lines.push("## Sources and rule");
 lines.push("");
 lines.push("| Source | Where | Role |");
 lines.push("|---|---|---|");
-lines.push("| hl7.eu | `https://www.hl7.eu/HL7v2x/v23/hl7v23segm<SEG>.htm` | Authoritative |");
-lines.push("| Caristix | `https://hl7-definition.caristix.com/v2-api/1/HL7v2.3/Segments/<SEG>` | Validation reference |");
-lines.push("| HAPI | `hapi-structures-v23/.../model/v23/segment/<SEG>.java` field definitions | Cross-check |");
+lines.push(`| hl7.eu | \`https://www.hl7.eu/HL7v2x/v${SHORT}/hl7v${SHORT}segm<SEG>.htm\` | Authoritative |`);
+lines.push(`| Caristix | \`https://hl7-definition.caristix.com/v2-api/1/HL7v${API}/Segments/<SEG>\` | Validation reference |`);
+lines.push(`| HAPI | \`hapi-structures-v${SHORT}/.../model/v${SHORT}/segment/<SEG>.java\` field definitions | Cross-check |`);
 lines.push("");
 lines.push("For each attribute (type, repeat, usage, length) the three values are compared. When they differ, hl7.eu");
 lines.push("decides, unless Caristix and HAPI agree with each other against it (then they decide and the row is marked");
@@ -336,9 +394,10 @@ lines.push("value each source gave. Legacy datatype names (CN/XCN, TN/XTN, AD/XA
 lines.push("");
 lines.push("Columns: **Type / Rep / Usage / Len** are the decided values. **Ours** is what the class implements:");
 lines.push("the setter names, `rep` when the setter takes repetitions, `typed` when it takes named components,");
-lines.push("`spec` when the class is generated from `codegen/spec/v2.3-segments.json`. **Status** lists open");
+lines.push(`\`spec\` when the class is generated from \`codegen/spec/<version>-segments.json\`. **Class** names the version`);
+lines.push(`whose class ${LABEL} uses (a re-export of an older version's class, or its own). **Status** lists open`);
 lines.push("issues (our class or spec differs from the decided value), remarks, and dated hand-written notes from");
-lines.push("`codegen/validate/ledger-v23-notes.json`; **Sources** lists the contradictions between the sources.");
+lines.push(`\`codegen/validate/ledger-v${SHORT}-notes.json\`; **Sources** lists the contradictions between the sources.`);
 lines.push("");
 
 // Summary
@@ -353,6 +412,7 @@ lines.push("");
 lines.push(`- ${results.length} segments, ${totalFields} field rows.`);
 lines.push(`- ${totalIssues} rows where our implementation differs from the decided value (${withIssues.length} segments).`);
 lines.push(`- ${totalContradictions} rows where the sources disagree (${withContradictions.length} segments); each is spelled out in the segment's table.`);
+lines.push(`- ${results.filter((r) => r.classVersion === VERSION).length} segments have their own ${LABEL} class; the rest re-export an older version's.`);
 if (missingSources.length) lines.push(`- Sources missing for: ${missingSources.map((r) => `${r.seg} (${["hl7eu", "caristix", "hapi"].filter((k) => !r.counts[k]).join(", ")})`).join("; ")}.`);
 lines.push("");
 lines.push("Tests: **pos** = field-position tests exist, **n tests** = hand-written tests of the segment, **rt** = a parse/encode");
@@ -368,7 +428,8 @@ for (const r of results) {
   const countNote = r.countDecision.status === "agree" || r.countDecision.status === "partial" ? "" : ` (${r.countDecision.note})`;
   const t = r.tests;
   const testCell = `${t.positions ? "pos" : "no pos"}, ${t.handTests} tests${t.roundTrip ? ", rt" : ""}${t.specDriven ? ", spec" : ""}`;
-  lines.push(`| [${r.seg}](#${r.seg.toLowerCase()}) | ${c.hl7eu ?? "-"} / ${c.caristix ?? "-"} / ${c.hapi ?? "-"} / ${c.ours}${countNote} | ${r.generated ? "generated" : "hand-written"} | ${r.rows.filter((x) => x.issues.length).length} | ${r.rows.filter((x) => x.contradictions.length).length} | ${testCell} | ${t.onlyPositions.length} |`);
+  const cls = `${r.generated ? "generated" : "hand-written"}${r.classVersion === VERSION ? "" : ` (${r.classVersion})`}`;
+  lines.push(`| [${r.seg}](#${r.seg.toLowerCase()}) | ${c.hl7eu ?? "-"} / ${c.caristix ?? "-"} / ${c.hapi ?? "-"} / ${c.ours}${countNote} | ${cls} | ${r.rows.filter((x) => x.issues.length).length} | ${r.rows.filter((x) => x.contradictions.length).length} | ${testCell} | ${t.onlyPositions.length} |`);
 }
 lines.push("");
 
@@ -376,7 +437,7 @@ for (const r of results) {
   lines.push(`## ${r.seg}`);
   lines.push("");
   const c = r.counts;
-  lines.push(`Checked ${DATE}. Fields: hl7.eu ${c.hl7eu ?? "-"}, Caristix ${c.caristix ?? "-"}, HAPI ${c.hapi ?? "-"}, ours ${c.ours}${r.countDecision.note ? ` (${r.countDecision.note})` : ""}. Class: ${r.generated ? "generated from the spec" : "hand-written"}.`);
+  lines.push(`Checked ${DATE}. Fields: hl7.eu ${c.hl7eu ?? "-"}, Caristix ${c.caristix ?? "-"}, HAPI ${c.hapi ?? "-"}, ours ${c.ours}${r.countDecision.note ? ` (${r.countDecision.note})` : ""}. Class: ${r.generated ? "generated from the spec" : "hand-written"}${r.classVersion === VERSION ? "" : `, the ${r.classVersion} class re-exported`}.`);
   if (r.note) lines.push("", `Note ${r.note}`);
   const t = r.tests;
   lines.push("", `Tests: ${t.positions ? "position tests" : "no position tests"}, ${t.handTests} hand-written test(s), ${t.roundTrip ? "parse/encode round trip" : "no parse/encode round trip"}${t.specDriven ? ", every setter, repetition and composite checked by the spec-driven test" : ""}.${t.onlyPositions.length ? ` Setters only the position tests call: ${t.onlyPositions.join(", ")}.` : ""}`);
@@ -391,33 +452,65 @@ for (const r of results) {
   lines.push("");
 }
 
+/** Writes the decided type / repeat / usage / length of a segment's rows into a spec entry; returns the number of changes. */
+function applyDecisions(seg, rows, entry) {
+  let changed = 0;
+  for (const x of rows) {
+    const f = entry.fields.find((q) => q.seq === x.seq);
+    if (!f) {
+      if (x.type.value) {
+        entry.fields.push({ seq: x.seq, name: x.name, length: x.len.value ?? "", type: x.type.value, opt: x.opt.value ?? "O", rep: x.rep.value === "Y" ? "∞" : "-", table: x.table });
+        console.log(`${seg}-${x.seq}: added (${x.type.value})`);
+        changed++;
+      }
+      continue;
+    }
+    const accepted = new Set(NOTES[`${seg}-${x.seq}`]?.accept ?? []);
+    const set = (key, value, show) => {
+      if (value === undefined || value === "" || accepted.has(key === "length" ? "len" : key)) return;
+      if (show(f[key]) === value) return;
+      if (key === "type" && sameComposite(f[key], value)) return;
+      console.log(`${seg}-${x.seq} ${key}: ${f[key]} -> ${value}`);
+      changed++;
+      if (key === "rep") f.rep = value === "Y" ? "∞" : "-";
+      else f[key] = value;
+    };
+    set("type", x.type.value, (v) => normType(v));
+    set("rep", x.rep.value, (v) => normRep(v));
+    set("opt", x.opt.value, (v) => normOpt(v));
+    set("length", x.len.value, (v) => normLen(v));
+  }
+  entry.fields.sort((a, b) => a.seq - b.seq);
+  return changed;
+}
+
 if (args.includes("--fix-spec")) {
-  // Write the decided type / repeat / usage / length into the spec of the generated classes.
+  // Write the decided values into this version's spec for the classes generated from it.
   let changed = 0;
   for (const r of results) {
-    if (!r.generated || !SPEC[r.seg]) continue;
-    for (const x of r.rows) {
-      const f = SPEC[r.seg].fields.find((q) => q.seq === x.seq);
-      if (!f) continue;
-      const accepted = new Set(NOTES[`${r.seg}-${x.seq}`]?.accept ?? []);
-      const set = (key, value, show) => {
-        if (value === undefined || value === "" || accepted.has(key === "length" ? "len" : key)) return;
-        if (show(f[key]) === value) return;
-        console.log(`${r.seg}-${x.seq} ${key}: ${f[key]} -> ${value}`);
-        changed++;
-        if (key === "rep") f.rep = value === "Y" ? "∞" : "-";
-        else f[key] = value;
-      };
-      set("type", x.type.value, (v) => normType(v));
-      set("rep", x.rep.value, (v) => normRep(v));
-      set("opt", x.opt.value, (v) => normOpt(v));
-      set("length", x.len.value, (v) => normLen(v));
-    }
+    if (!r.generated || r.classVersion !== VERSION || !SPEC[r.seg]) continue;
+    changed += applyDecisions(r.seg, r.rows, SPEC[r.seg]);
   }
-  writeFileSync(join(ROOT, "codegen/spec/v2.3-segments.json"), JSON.stringify(SPEC, null, 1) + "\n");
+  writeFileSync(specFile(VERSION), JSON.stringify(SPEC, null, 1) + "\n");
   console.log(`${changed} spec value(s) changed; rerun without --fix-spec to refresh the ledger`);
 }
 
-writeFileSync(join(ROOT, "docs/validation/v2.3-segment-ledger.md"), lines.join("\n") + "\n");
+if (adopt.length) {
+  // Seed this version's spec with the base table of each named segment, decided values applied.
+  for (const seg of adopt) {
+    const r = results.find((x) => x.seg === seg);
+    if (!r) throw new Error(`--adopt: no segment ${seg}`);
+    const baseSpec = specOf(r.classVersion)[seg] ?? [...specs.values()].map((s) => s[seg]).find(Boolean);
+    const entry = baseSpec
+      ? JSON.parse(JSON.stringify(baseSpec))
+      : { title: seg, fields: [] };
+    const changed = applyDecisions(seg, r.rows.filter((x) => x.type.value), entry);
+    SPEC[seg] = entry;
+    console.log(`${seg}: adopted into codegen/spec/${VERSION}-segments.json (${entry.fields.length} fields, ${changed} value(s) differ from ${r.classVersion})`);
+  }
+  writeFileSync(specFile(VERSION), JSON.stringify(SPEC, null, 1) + "\n");
+}
+
+writeFileSync(docFile, lines.join("\n") + "\n");
 if (jsonOut) writeFileSync(jsonOut, JSON.stringify(results, null, 1));
 console.log(`${results.length} segments, ${totalFields} rows, ${totalIssues} issues, ${totalContradictions} contradictions; missing sources: ${missingSources.length}`);

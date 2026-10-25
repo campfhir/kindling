@@ -4,7 +4,7 @@ import { createBAR_P05 } from "./BAR_P05.ts";
 import { parseBAR_P01 } from "../../parsers/v2.4/BAR_P01_Parser.ts";
 import { parseBAR_P05 } from "../../parsers/v2.4/BAR_P05_Parser.ts";
 import { parseBAR_P02 } from "../../parsers/v2.4/BAR_P02_Parser.ts";
-import { parseBAR_P02 as parseBAR_P02_v23 } from "../../parsers/v2.3/BAR_P02_Parser.ts";
+import { parseBAR_P02 as parseBAR_P02_v231 } from "../../parsers/v2.3.1/BAR_P02_Parser.ts";
 import { MSH } from "../../segments/v2.4/MSH.ts";
 import { EVN } from "../../segments/v2.4/EVN.ts";
 import { PID } from "../../segments/v2.4/PID.ts";
@@ -75,7 +75,7 @@ describe("BAR (v2.4): ROLs, repeating IN3, and ABS/BLC/RMI in P05", () => {
     expect(twoAbs.val!.visits[1].riskManagementIncident).toBeTruthy();
   });
 
-  test("P02 and P06 are unchanged in v2.4", () => {
-    expect(parseBAR_P02).toBe(parseBAR_P02_v23);
+  test("P02 and P06 are unchanged in v2.4 (v2.3.1's modules are re-exported)", () => {
+    expect(parseBAR_P02).toBe(parseBAR_P02_v231);
   });
 });

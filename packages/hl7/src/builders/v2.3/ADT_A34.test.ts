@@ -5,7 +5,6 @@ import { EVN } from "../../segments/v2.3/EVN.ts";
 import { PID } from "../../segments/v2.3/PID.ts";
 import { PD1 } from "../../segments/v2.3/PD1.ts";
 import { MRG } from "../../segments/v2.3/MRG.ts";
-import { PV1 } from "../../segments/v2.3/PV1.ts";
 import { parseADT_A34 } from "../../parsers/v2.5.1/ADT_A34_Parser.ts";
 
 function makeMSH() {
@@ -86,23 +85,27 @@ test("encode() places optional PD1 after PID and before MRG", () => {
   expect(names.indexOf("PD1")).toBeLessThan(names.indexOf("MRG"));
 });
 
-test("encode() places optional PV1 after MRG", () => {
-  const pv1 = new PV1().patientClass("I");
-  const msg = createADT_A34(makeMSH(), makeEVN(), makePID(), makeMRG(), { visit: pv1 });
-  const segments = msg.encode().split("\r");
-  const names = segments.map((s) => s.substring(0, 3));
-
-  expect(names.indexOf("PV1")).toBeGreaterThan(names.indexOf("MRG"));
+test("A34 has no PV1: a PV1 in the input is skipped as an unknown segment", () => {
+  const warn = console.warn;
+  const warnings: string[] = [];
+  console.warn = (m: string) => warnings.push(m);
+  try {
+    const parsed = parseADT_A34([makeMSH().encode(), "EVN|A34", "PID|1", "MRG|OLD", "PV1|1|I"].join("\r"));
+    expect(parsed.ok).toBe(true);
+    expect("visit" in parsed.val!).toBe(false);
+    expect(warnings.some((w) => w.includes("'PV1'"))).toBe(true);
+  } finally {
+    console.warn = warn;
+  }
 });
 
 test("encode() includes all optional segments in correct order", () => {
   const pd1 = new PD1();
-  const pv1 = new PV1().patientClass("I");
-  const msg = createADT_A34(makeMSH(), makeEVN(), makePID(), makeMRG(), { patientDemographics: pd1, visit: pv1 });
+  const msg = createADT_A34(makeMSH(), makeEVN(), makePID(), makeMRG(), { patientDemographics: pd1 });
   const segments = msg.encode().split("\r");
   const names = segments.map((s) => s.substring(0, 3));
 
-  expect(names).toEqual(["MSH", "EVN", "PID", "PD1", "MRG", "PV1"]);
+  expect(names).toEqual(["MSH", "EVN", "PID", "PD1", "MRG"]);
 });
 
 test("round-trip: build → encode → parse", () => {

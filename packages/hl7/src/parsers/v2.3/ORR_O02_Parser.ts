@@ -1,7 +1,7 @@
 /**
  * Parser for ORR^O02 messages (HL7 v2.3).
  *
- * Structure: MSH MSA [ERR] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [ ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}] ] } ]
+ * Structure: MSH MSA [ERR] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [<OBR|RQD|RQ1|RXO|ODS|ODT>] [{NTE}] [{CTI}] } ]
  *
  * @module
  */
@@ -28,14 +28,8 @@ import { CTI } from "../../segments/v2.3/CTI.ts";
 export interface ParsedResponseOrder {
   /** The ORC segment. */
   commonOrder: ORC;
-  /** The ORDER DETAIL group. */
-  detail?: ParsedResponseDetail;
-}
-
-/** The ORDER DETAIL group of a parsed ORR^O02 (HL7 v2.3) message. */
-export interface ParsedResponseDetail {
   /** One of OBR, RQD, RQ1, RXO, ODS, ODT. */
-  segment: OBR | RQD | RQ1 | RXO | ODS | ODT;
+  segment?: OBR | RQD | RQ1 | RXO | ODS | ODT;
   /** The NTE segments. */
   notes?: NTE[];
   /** The CTI segments. */

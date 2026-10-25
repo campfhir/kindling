@@ -1,7 +1,30 @@
 /**
- * ADT_A17 structure for HL7 v2.3.1 — identical to v2.3, re-exported.
+ * Message structure for ADT^A17 messages (HL7 v2.3.1).
+ *
+ * Structure: MSH EVN { PATIENT: PID [PD1] PV1 [PV2] [{DB1}] [{OBX}] }
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3/ADT_A17.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { StructureItem } from "../../types/schema.ts";
+
+/** The segments, choices and groups of ADT^A17 (HL7 v2.3.1), in order. */
+export const ADT_A17_STRUCTURE: StructureItem[] = [
+  { name: "MSH", required: true, repeating: false },
+  { name: "EVN", required: true, repeating: false },
+  {
+    name: "PATIENT",
+    required: true,
+    repeating: true,
+    minOccurrences: 2,
+    maxOccurrences: 2,
+    segments: [
+      { name: "PID", required: true, repeating: false },
+      { name: "PD1", required: false, repeating: false },
+      { name: "PV1", required: true, repeating: false },
+      { name: "PV2", required: false, repeating: false },
+      { name: "DB1", required: false, repeating: true },
+      { name: "OBX", required: false, repeating: true },
+    ],
+  },
+];

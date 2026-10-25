@@ -113,14 +113,16 @@ version that introduced them:
 | Version | Based on | Notes |
 |---|---|---|
 | `v2.3` | — | Base implementation |
-| `v2.3.1` | v2.3 | Re-export |
+| `v2.3.1` | v2.3 | Complete: every message generated against the 2.3.1 field tables (53 segments have their own class, the rest re-export v2.3's); the 2.3.1 structure changes (QAK, renumbered queries, repeating IN3, NK1 in ORU, PD1 in SIU, …) applied |
 | `v2.4` | v2.3.1 | Re-export, except `ORM^O01` (adds `CTD` and `FT1`) |
 | `v2.5` | v2.4 | Re-export + `SFT` (Software), `SPM` (Specimen), `TQ1` (Timing/Quantity); `ERR` gains ERR-2..12; own `ACK` (`[{SFT}]`, repeating `ERR`) and `ORR^O02` (repeating `ERR`) |
 | `v2.5.1` | v2.5 | Version-specific fields and messages (e.g. `ORU_R30–R32`) |
 
 Version-specific differences in 2.3.1, 2.4 and 2.5 are filled in as they are implemented — see the
 [roadmap](ROADMAP.md). The root `parse()` dispatches a version once it is complete: 1.0 parses
-v2.3, and each later version joins in its own minor release.
+v2.3, 1.1 adds v2.3.1, and each later version joins in its own minor release. Every segment field
+and every message structure of a dispatched version has been checked against hl7.eu, Caristix and
+HAPI: see [docs/validation](docs/validation/README.md).
 
 ## Imports
 
@@ -213,8 +215,8 @@ switch (result.val.structure) {
 them), and `identifyMessage(hl7String)` returns only what MSH-9 and MSH-12 say. `MESSAGES` of
 `@campfhir/hl7/parsers/v2.3` is the map they dispatch on (message structure name → parser).
 
-Versions are wired one per release (`SUPPORTED_VERSIONS`): 1.0 dispatches HL7 v2.3, and every
-MSH-12 value outside that list is an error until its release. To parse such a feed anyway, or one
+Versions are wired one per release (`SUPPORTED_VERSIONS`): 1.0 dispatches HL7 v2.3, 1.1 adds v2.3.1,
+and every MSH-12 value outside that list is an error until its release. To parse such a feed anyway, or one
 that leaves MSH-12 empty, name the version to parse as: `parse(hl7String, { version: '2.3' })`.
 The individual parsers of every version (`parseADT_A01` of `@campfhir/hl7/parsers/v2.5.1`, …)
 stay available regardless.

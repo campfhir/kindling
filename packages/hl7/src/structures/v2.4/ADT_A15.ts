@@ -1,10 +1,7 @@
 /**
- * Message structure for ADT^A15 messages (HL7 v2.4).
- *
- * Structure: MSH EVN PID [PD1] [{ROL}] [{NK1}] PV1 [PV2] [{ROL}] [{DB1}] [{OBX}] [{AL1}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] }] [{GT1}] [{ INSURANCE: IN1 [IN2] [{IN3}] [{ROL}] }] [ACC] [UB1] [UB2] [PDA]
- * Shares the ADT^A01 structure.
+ * ADT_A15 structure for HL7 v2.4 — identical to v2.3.1, re-exported.
  *
  * @module
  */
-// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
-export { ADT_A01_STRUCTURE as ADT_A15_STRUCTURE } from "./ADT_A01.ts";
+// @generated re-export — replace this file by hand to diverge from the base version
+export * from "../v2.3.1/ADT_A15.ts";

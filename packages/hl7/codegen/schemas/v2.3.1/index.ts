@@ -4,4 +4,6 @@ export * from "./ORF_R04";
 export * from "./QRY_T12";
 export * from "./RAS_O01";
 export * from "./care";
+export * from "./ADT";
+export * from "./changed";
 export { V2_3_1 } from "./version";

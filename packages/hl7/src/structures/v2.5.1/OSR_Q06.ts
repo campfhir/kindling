@@ -1,7 +1,7 @@
 /**
  * Message structure for OSR^Q06 messages (HL7 v2.5.1).
  *
- * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] QRD [QRF] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }]  ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}]  } ] [DSC]
+ * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] QRD [QRF] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}] } ] [DSC]
  *
  * @module
  */
@@ -49,17 +49,9 @@ export const OSR_Q06_STRUCTURE: StructureItem[] = [
               { name: "TQ2", required: false, repeating: true },
             ],
           },
-          {
-            name: "ORDER_DETAIL",
-            required: true,
-            repeating: false,
-            as: "detail",
-            segments: [
-              { oneOf: ["OBR", "RQD", "RQ1", "RXO", "ODS", "ODT"], required: true },
-              { name: "NTE", required: false, repeating: true },
-              { name: "CTI", required: false, repeating: true },
-            ],
-          },
+          { oneOf: ["OBR", "RQD", "RQ1", "RXO", "ODS", "ODT"], required: true },
+          { name: "NTE", required: false, repeating: true },
+          { name: "CTI", required: false, repeating: true },
         ],
       },
     ],

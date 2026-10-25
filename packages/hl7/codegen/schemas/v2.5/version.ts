@@ -1,8 +1,6 @@
 import type { VersionSchema } from "../../../src/types/schema";
 import { ACK_SCHEMA } from "./ACK";
-import { ADT_A01_FAMILY } from "./ADT_A01";
-import { ADT_A17_SCHEMA, ADT_A20_SCHEMA, ADT_A24_SCHEMA } from "./ADT_A17";
-import { ADT_A34_FAMILY } from "./ADT_A34";
+import { ADT_MESSAGES } from "./ADT_A01";
 import { BAR_P01_SCHEMA, BAR_P02_SCHEMA, BAR_P05_SCHEMA, BAR_P06_SCHEMA } from "./BAR_P01";
 import { DFT_P03_SCHEMA } from "./DFT_P03";
 import { MDM_FAMILY } from "./MDM_T01";
@@ -22,11 +20,7 @@ import { CARE_REFERRAL_MISC_MESSAGES } from "./care";
 /** Every message whose structure changed in 2.5 (or is new in 2.5). v2.5.1 re-versions this list. */
 export const V2_5_MESSAGES = [
   ACK_SCHEMA,
-  ...ADT_A01_FAMILY,
-  ADT_A17_SCHEMA,
-  ADT_A24_SCHEMA,
-  ADT_A20_SCHEMA,
-  ...ADT_A34_FAMILY,
+  ...ADT_MESSAGES,
   BAR_P01_SCHEMA,
   BAR_P02_SCHEMA,
   BAR_P05_SCHEMA,

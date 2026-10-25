@@ -141,7 +141,7 @@ export const OSR_Q06_SCHEMA: MessageSchema = {
   version: "2.5",
   structure: [
     req("MSH"), req("MSA"), optList("ERR"), SFT, optList("NTE"), req("QRD"), opt("QRF"),
-    osrResponse([req("ORC"), timing("TIMING", "ParsedTiming"), osrOrderDetail("required")]),
+    osrResponse([req("ORC"), timing("TIMING", "ParsedTiming"), ...osrOrderDetail("required")]),
     opt("DSC"),
   ],
 };
