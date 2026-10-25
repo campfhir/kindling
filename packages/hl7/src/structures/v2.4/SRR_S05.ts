@@ -1,7 +1,10 @@
 /**
- * SRR_S05 structure for HL7 v2.4 — identical to v2.3.1, re-exported.
+ * Message structure for SRR^S05 messages (HL7 v2.4).
+ *
+ * Structure: MSH MSA [ERR] [ SCHEDULE: SCH [{NTE}] [{ PATIENT: PID [PV1] [PV2] [{DG1}] }] { RESOURCES: RGS [{ SERVICE: AIS [{NTE}] }] [{ GENERAL_RESOURCE: AIG [{NTE}] }] [{ LOCATION_RESOURCE: AIL [{NTE}] }] [{ PERSONNEL_RESOURCE: AIP [{NTE}] }] } ]
+ * Shares the SRR^S01 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3.1/SRR_S05.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+export { SRR_S01_STRUCTURE as SRR_S05_STRUCTURE } from "./SRR_S01.ts";

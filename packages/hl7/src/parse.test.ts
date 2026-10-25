@@ -4,8 +4,10 @@ import { identifyMessage, isBatchInput, parseMessage, selectMessageParser, SUPPO
 import { parseBatch } from "./batch.ts";
 import { MESSAGES } from "./parsers/v2.3/messages.ts";
 import { MESSAGES as MESSAGES_231 } from "./parsers/v2.3.1/messages.ts";
+import { MESSAGES as MESSAGES_24 } from "./parsers/v2.4/messages.ts";
 import { parseADT_A01, parseACK, parseADT_A04 } from "./parsers/v2.3/index.ts";
 import * as par231 from "./parsers/v2.3.1/index.ts";
+import * as par24 from "./parsers/v2.4/index.ts";
 import type { ParsedADT_A01 } from "./parsers/v2.3/ADT_A01_Parser.ts";
 import type { ParsedORU_R01 } from "./parsers/v2.3/ORU_R01_Parser.ts";
 
@@ -84,18 +86,18 @@ describe("selectParser", () => {
   });
 
   test("rejects a version this release does not dispatch, unless the caller picks one", () => {
-    expect(SUPPORTED_VERSIONS).toEqual(["2.3", "2.3.1"]);
+    expect(SUPPORTED_VERSIONS).toEqual(["2.3", "2.3.1", "2.4"]);
     const other = selectParser(MSH("ADT^A01", "2.5.1"));
     expect(other.ok).toBe(false);
     expect(other.err?.message).toBe(
-      "HL7 version '2.5.1' (MSH-12) is not supported by this release, which parses 2.3, 2.3.1; pass { version: \"2.3.1\" } to parse the message as that version",
+      "HL7 version '2.5.1' (MSH-12) is not supported by this release, which parses 2.3, 2.3.1, 2.4; pass { version: \"2.4\" } to parse the message as that version",
     );
     const forced = select(MSH("ADT^A01", "2.5.1"), { version: "2.3" });
     expect(forced).toMatchObject({ version: "2.3", structure: "ADT_A01", messageType: { version: "2.5.1" } });
   });
 
   test("rejects an empty MSH-12, unless the caller picks a version", () => {
-    expect(selectParser(MSH("ADT^A01", "")).err?.message).toBe('MSH-12 Version ID is empty; pass { version: "2.3.1" } to choose the version to parse as');
+    expect(selectParser(MSH("ADT^A01", "")).err?.message).toBe('MSH-12 Version ID is empty; pass { version: "2.4" } to choose the version to parse as');
     expect(select(MSH("ADT^A01", ""), { version: "2.3" }).structure).toBe("ADT_A01");
   });
 
@@ -113,6 +115,30 @@ describe("selectParser", () => {
     expect(selectParser(MSH("RAS^O02", "2.3.1")).ok).toBe(false);
     // MSH-9.3 (defined from 2.3.1) is honoured when the event is missing.
     expect(select(MSH("ORU^^ORU_R01", "2.3.1")).parse).toBe(par231.parseORU_R01);
+  });
+
+  test("a 2.4 message goes to the v2.4 parsers: new, renumbered and withdrawn events follow the version", () => {
+    expect(select(MSH("ADT^A01", "2.4")).parse).toBe(par24.parseADT_A01);
+    expect(select(MSH("ADT^A01", "2.4^USA")).version).toBe("2.4"); // VID form of MSH-12
+    // OML^O21 and QBP^Q11 exist from 2.4; A05 has its own structure in 2.4 (ADT_A05, not a wrapper of A01); RDO^O01 is withdrawn.
+    expect(select(MSH("OML^O21", "2.4")).parse).toBe(par24.parseOML_O21);
+    expect(select(MSH("QBP^Q11^QBP_Q11", "2.4")).structure).toBe("QBP_Q11");
+    expect(select(MSH("ADT^A05", "2.4")).parse).toBe(par24.parseADT_A05);
+    expect(selectParser(MSH("OML^O21", "2.3.1")).err?.message).toBe("Unknown HL7 v2.3.1 message type 'OML^O21' (MSH-9)");
+    expect(selectParser(MSH("RDO^O01", "2.4")).err?.message).toBe("Unknown HL7 v2.4 message type 'RDO^O01' (MSH-9)");
+    expect(select(MSH("RDE^O11", "2.4")).structure).toBe("RDE_O11");
+  });
+
+  test("every v2.4 message structure is reached from its own MSH-9", () => {
+    const names = Object.keys(MESSAGES_24);
+    expect(names).toHaveLength(334);
+    for (const name of names) {
+      const [code, event] = name.split("_");
+      const type = event ? `${code}^${event}` : `${code}^A01`;
+      const selected = select(MSH(type, "2.4"));
+      expect(selected.structure, type).toBe(name);
+      expect(selected.parse, type).toBe(MESSAGES_24[name as keyof typeof MESSAGES_24]);
+    }
   });
 
   test("every v2.3.1 message structure is reached from its own MSH-9", () => {
@@ -180,14 +206,24 @@ describe("parse", () => {
   test("passes selection errors through", () => {
     expect(parse("").err?.message).toBe("Empty message");
     expect(parse(MSH("ZZZ^Z01")).err?.message).toBe("Unknown HL7 v2.3 message type 'ZZZ^Z01' (MSH-9)");
-    expect(parse(MSH("ADT^A01", "2.4")).err?.message).toMatch(/not supported by this release/);
+    expect(parse(MSH("ADT^A01", "2.5")).err?.message).toMatch(/not supported by this release/);
   });
 
-  test("parses a 2.4-labelled feed as 2.3.1 on request, and a 2.3.1 feed natively", () => {
+  test("parses a 2.5-labelled feed as 2.4 on request, and 2.3.1 and 2.4 feeds natively", () => {
     const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
-    const message = [MSH("ADT^A01^ADT_A01", "2.4"), "EVN|A01", "PID|1||1", "PV1|1|O", "ZPD|custom"].join("\r");
-    const result = parse(message, { version: "2.3.1" });
-    expect(result.val).toMatchObject({ kind: "message", version: "2.3.1", structure: "ADT_A01", messageType: { version: "2.4", messageStructure: "ADT_A01" } });
+    const message = [MSH("ADT^A01^ADT_A01", "2.5"), "EVN|A01", "PID|1||1", "PV1|1|O", "ZPD|custom"].join("\r");
+    const result = parse(message, { version: "2.4" });
+    expect(result.val).toMatchObject({ kind: "message", version: "2.4", structure: "ADT_A01", messageType: { version: "2.5", messageStructure: "ADT_A01" } });
+    // A 2.4 A01 ends with PDA and carries ROLs after PD1 and PV2.
+    const v24 = parse([MSH("ADT^A01^ADT_A01", "2.4"), "EVN|A01", "PID|1||1", "ROL|1|AD|AT", "PV1|1|O", "PV2|", "ROL|2|AD|CP", "PDA|"].join("\r"));
+    expect(v24.val).toMatchObject({ kind: "message", version: "2.4", structure: "ADT_A01" });
+    if (v24.val?.kind === "message" && v24.val.version === "2.4" && v24.val.structure === "ADT_A01") {
+      expect(v24.val.parsed.roles).toHaveLength(1);
+      expect(v24.val.parsed.visitRoles).toHaveLength(1);
+      expect(v24.val.parsed.deathAndAutopsy).toBeTruthy();
+    } else {
+      throw new Error("expected a 2.4 ADT_A01");
+    }
     const native = parse([MSH("ADT^A01^ADT_A01", "2.3.1"), "EVN|A01", "PID|1||1", "PV1|1|O", "IN1|1|PLAN", "IN3|1", "IN3|2"].join("\r"));
     expect(native.val).toMatchObject({ kind: "message", version: "2.3.1", structure: "ADT_A01" });
     if (native.val?.kind === "message" && native.val.version === "2.3.1" && native.val.structure === "ADT_A01") {

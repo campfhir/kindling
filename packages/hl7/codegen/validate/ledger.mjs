@@ -133,6 +133,13 @@ function readCaristix(seg) {
   }));
 }
 
+/** The Caristix long name of a segment ("Clear Notification"), for the title of a new spec entry. */
+function readCaristixTitle(seg) {
+  const file = join(SOURCES, "caristix", `${seg}.json`);
+  if (!existsSync(file)) return undefined;
+  try { return JSON.parse(readFileSync(file, "utf8")).longName || undefined; } catch { return undefined; }
+}
+
 /** HAPI segment class: this.add(Type.class, required, reps, length, new Object[]{...}, "name"). */
 const HAPI_ADD = /this\.add\((\w+)\.class,\s*(true|false),\s*(-?\d+),\s*(-?\d+),\s*new Object\[\]\{[^}]*\},\s*"((?:[^"\\]|\\.)*)"\)/g;
 function readHapi(seg) {
@@ -199,15 +206,25 @@ function readSetters(seg, src) {
 }
 
 /** Our implementation: the spec table for a generated class, the setters for a hand-written one (base class included). */
+/** The class a subclass extends (`import { RXA as RXA_base } from "../v2.3/RXA.ts"`), re-exports resolved. */
+function baseOf(resolved) {
+  const base = resolved.src.match(/import \{ (\w+) as \w+_base \} from "\.\.\/(v[\d.]+)\/(\w+)\.ts"/);
+  return base ? resolveClass(base[3], base[2]) : undefined;
+}
+
+/** A segment of the version that has no module yet (new in the version): nothing implemented. */
+const ABSENT = { generated: false, spec: undefined, count: 0, fields: new Map(), classVersion: "none", baseClassVersion: undefined, absent: true };
+
 function readOurs(seg) {
   const resolved = resolveClass(seg, VERSION);
-  if (!resolved) throw new Error(`${seg}: no module in ${SEG_DIR}`);
+  if (!resolved) return ABSENT;
   const generated = GENERATED_CLASS.test(resolved.src);
-  // A subclass (`import { RXA as RXA_base } from "../v2.3/RXA.ts"`) starts from its base's fields and overrides some.
+  // A subclass starts from the fields of its base classes (oldest first) and overrides some.
   const fields = new Map();
-  const base = resolved.src.match(/import \{ (\w+) as \w+_base \} from "\.\.\/(v[\d.]+)\/(\w+)\.ts"/);
-  const baseClass = base ? resolveClass(base[3], base[2]) : undefined;
-  if (baseClass) for (const [seq, f] of readSetters(seg, baseClass.src)) fields.set(seq, { ...f, setters: [...f.setters] });
+  const chain = [];
+  for (let b = baseOf(resolved); b; b = baseOf(b)) chain.unshift(b);
+  const baseClass = chain.at(-1);
+  for (const cls of chain) for (const [seq, f] of readSetters(seg, cls.src)) fields.set(seq, { ...f, setters: [...f.setters] });
   for (const [seq, f] of readSetters(seg, resolved.src)) fields.set(seq, f);
   if (HEADER_SEGMENTS.has(seg)) {
     fields.set(1, { seq: 1, setters: ["(encode)"], repeating: false, typed: false, raw: false });
@@ -236,6 +253,7 @@ const testFiles = (() => {
 
 /** What the tests exercise: hand-written tests of the segment (in this version's directory and the class's), a parse round trip, and setters that only the generated position test calls. */
 function readTests(seg, ours) {
+  if (ours.absent) return { positions: false, handTests: 0, roundTrip: false, onlyPositions: [], specDriven: false };
   const dirs = [...new Set([SEG_DIR, segDir(ours.classVersion), ours.baseClassVersion ? segDir(ours.baseClassVersion) : undefined].filter(Boolean))];
   const own = testFiles.filter((t) => dirs.some((d) => t.path.startsWith(d + "/")) && new RegExp(`/${seg}(\\.\\w+)?\\.test\\.ts$`).test(t.path));
   // Two generic files cover every class of a version: roundtrip.test.ts (parse/encode of all) and generated.test.ts
@@ -280,7 +298,8 @@ const normLen = (l) => {
   return nums ? String(Math.max(...nums.map(Number))) : "";
 };
 const normOpt = (o) => {
-  const x = String(o ?? "").trim().toUpperCase();
+  // hl7.eu prints "(B) R" for a field kept for backward compatibility: the letter in parentheses is the usage.
+  const x = String(o ?? "").trim().toUpperCase().replace(/^\(([A-Z])\)\s*[A-Z]?$/, "$1");
   if (x === "R" || x === "O" || x === "C" || x === "B" || x === "X") return x;
   return x ? x[0] : "";
 };
@@ -310,7 +329,10 @@ const sameComposite = (ours, decided) => {
 };
 
 const results = [];
-const segments = readdirSync(SEG_DIR).filter((f) => f.endsWith(".ts") && !f.endsWith(".test.ts") && f !== "index.ts").map((f) => f.replace(/\.ts$/, "")).sort();
+// Every module of the version, plus the segments the sources define that have no module yet (new in the version).
+const moduleSegments = readdirSync(SEG_DIR).filter((f) => f.endsWith(".ts") && !f.endsWith(".test.ts") && f !== "index.ts").map((f) => f.replace(/\.ts$/, ""));
+const sourceSegments = existsSync(join(SOURCES, "caristix")) ? readdirSync(join(SOURCES, "caristix")).filter((f) => /^[A-Z][A-Z0-9]{2}\.json$/.test(f)).map((f) => f.slice(0, 3)) : [];
+const segments = [...new Set([...moduleSegments, ...sourceSegments])].sort();
 for (const seg of segments) {
   const eu = readHl7eu(seg);
   const cx = readCaristix(seg);
@@ -412,7 +434,7 @@ lines.push("");
 lines.push(`- ${results.length} segments, ${totalFields} field rows.`);
 lines.push(`- ${totalIssues} rows where our implementation differs from the decided value (${withIssues.length} segments).`);
 lines.push(`- ${totalContradictions} rows where the sources disagree (${withContradictions.length} segments); each is spelled out in the segment's table.`);
-lines.push(`- ${results.filter((r) => r.classVersion === VERSION).length} segments have their own ${LABEL} class; the rest re-export an older version's.`);
+lines.push(`- ${results.filter((r) => r.classVersion === VERSION).length} segments have their own ${LABEL} class; the rest re-export an older version's.${results.some((r) => r.classVersion === "none") ? ` No class yet for: ${results.filter((r) => r.classVersion === "none").map((r) => r.seg).join(", ")}.` : ""}`);
 if (missingSources.length) lines.push(`- Sources missing for: ${missingSources.map((r) => `${r.seg} (${["hl7eu", "caristix", "hapi"].filter((k) => !r.counts[k]).join(", ")})`).join("; ")}.`);
 lines.push("");
 lines.push("Tests: **pos** = field-position tests exist, **n tests** = hand-written tests of the segment, **rt** = a parse/encode");
@@ -428,7 +450,7 @@ for (const r of results) {
   const countNote = r.countDecision.status === "agree" || r.countDecision.status === "partial" ? "" : ` (${r.countDecision.note})`;
   const t = r.tests;
   const testCell = `${t.positions ? "pos" : "no pos"}, ${t.handTests} tests${t.roundTrip ? ", rt" : ""}${t.specDriven ? ", spec" : ""}`;
-  const cls = `${r.generated ? "generated" : "hand-written"}${r.classVersion === VERSION ? "" : ` (${r.classVersion})`}`;
+  const cls = r.classVersion === "none" ? "**none yet**" : `${r.generated ? "generated" : "hand-written"}${r.classVersion === VERSION ? "" : ` (${r.classVersion})`}`;
   lines.push(`| [${r.seg}](#${r.seg.toLowerCase()}) | ${c.hl7eu ?? "-"} / ${c.caristix ?? "-"} / ${c.hapi ?? "-"} / ${c.ours}${countNote} | ${cls} | ${r.rows.filter((x) => x.issues.length).length} | ${r.rows.filter((x) => x.contradictions.length).length} | ${testCell} | ${t.onlyPositions.length} |`);
 }
 lines.push("");
@@ -437,7 +459,7 @@ for (const r of results) {
   lines.push(`## ${r.seg}`);
   lines.push("");
   const c = r.counts;
-  lines.push(`Checked ${DATE}. Fields: hl7.eu ${c.hl7eu ?? "-"}, Caristix ${c.caristix ?? "-"}, HAPI ${c.hapi ?? "-"}, ours ${c.ours}${r.countDecision.note ? ` (${r.countDecision.note})` : ""}. Class: ${r.generated ? "generated from the spec" : "hand-written"}${r.classVersion === VERSION ? "" : `, the ${r.classVersion} class re-exported`}.`);
+  lines.push(`Checked ${DATE}. Fields: hl7.eu ${c.hl7eu ?? "-"}, Caristix ${c.caristix ?? "-"}, HAPI ${c.hapi ?? "-"}, ours ${c.ours}${r.countDecision.note ? ` (${r.countDecision.note})` : ""}. Class: ${r.classVersion === "none" ? "none yet" : `${r.generated ? "generated from the spec" : "hand-written"}${r.classVersion === VERSION ? "" : `, the ${r.classVersion} class re-exported`}`}.`);
   if (r.note) lines.push("", `Note ${r.note}`);
   const t = r.tests;
   lines.push("", `Tests: ${t.positions ? "position tests" : "no position tests"}, ${t.handTests} hand-written test(s), ${t.roundTrip ? "parse/encode round trip" : "no parse/encode round trip"}${t.specDriven ? ", every setter, repetition and composite checked by the spec-driven test" : ""}.${t.onlyPositions.length ? ` Setters only the position tests call: ${t.onlyPositions.join(", ")}.` : ""}`);
@@ -500,11 +522,32 @@ if (adopt.length) {
   for (const seg of adopt) {
     const r = results.find((x) => x.seg === seg);
     if (!r) throw new Error(`--adopt: no segment ${seg}`);
-    const baseSpec = specOf(r.classVersion)[seg] ?? [...specs.values()].map((s) => s[seg]).find(Boolean);
+    // A generated class starts from its spec table; a hand-written class or a segment new in the version from nothing.
+    const baseSpec = r.generated ? (specOf(r.classVersion)[seg] ?? [...specs.values()].map((s) => s[seg]).find(Boolean)) : undefined;
     const entry = baseSpec
       ? JSON.parse(JSON.stringify(baseSpec))
-      : { title: seg, fields: [] };
+      : { title: readCaristixTitle(seg) ?? seg, fields: [] };
+    if (!r.generated && r.classVersion !== "none") {
+      // A hand-written class is carried into this version as a generated subclass: the fields it already
+      // implements as decided are inherited, a setter it implements differently is overridden, the rest are new.
+      entry.extends = r.classVersion;
+      for (const f of entry.fields) delete f.inherited, delete f.overrides;
+      const seen = new Set(entry.fields.map((f) => f.seq));
+      for (const x of r.rows.filter((x) => x.type.value && !seen.has(x.seq))) entry.fields.push({ seq: x.seq, name: x.name, length: "", type: x.type.value, opt: "O", rep: "-", table: x.table });
+    }
+    entry.source = `https://hl7-definition.caristix.com/v2/HL7v${API}/Segments/${seg} (decided against https://www.hl7.eu/HL7v${SHORT}segm${seg}.htm and HAPI v${SHORT}, see docs/validation/${VERSION}-segment-ledger.md)`;
     const changed = applyDecisions(seg, r.rows.filter((x) => x.type.value), entry);
+    if (entry.extends) {
+      for (const f of entry.fields) {
+        const row = r.rows.find((x) => x.seq === f.seq);
+        if (!row?.ours) continue;
+        if (!row.issues.length) f.inherited = true;
+        else {
+          const setter = row.ours.setters?.find((n) => !n.startsWith("("));
+          if (setter) f.overrides = setter;
+        }
+      }
+    }
     SPEC[seg] = entry;
     console.log(`${seg}: adopted into codegen/spec/${VERSION}-segments.json (${entry.fields.length} fields, ${changed} value(s) differ from ${r.classVersion})`);
   }

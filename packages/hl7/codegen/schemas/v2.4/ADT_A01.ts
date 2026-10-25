@@ -1,6 +1,5 @@
 import type { MessageSchema } from "../../../src/types/schema";
 import { group, opt, optList, req, wrappers } from "../helpers";
-import { ADT_A01_EVENTS } from "../v2.3/ADT_A01";
 
 /**
  * ADT^A01 - Admit/Visit Notification (HL7 v2.4, chapter 3).
@@ -42,4 +41,6 @@ export const ADT_A01_SCHEMA: MessageSchema = {
 };
 
 /** A02–A38 as wrappers around the v2.4 ADT_A01. */
-export const ADT_A01_FAMILY: MessageSchema[] = [ADT_A01_SCHEMA, ...wrappers(ADT_A01_SCHEMA, ADT_A01_EVENTS)];
+/** The events that share the A01 structure in 2.4 ("ADT^A04^ADT_A01" in the chapter 3 captions); A05, A14, A28 and A31 use ADT_A05 (./ADT.ts). */
+export const ADT_A01_EVENTS_V24 = ["A04", "A08", "A13"];
+export const ADT_A01_FAMILY: MessageSchema[] = [ADT_A01_SCHEMA, ...wrappers(ADT_A01_SCHEMA, ADT_A01_EVENTS_V24)];

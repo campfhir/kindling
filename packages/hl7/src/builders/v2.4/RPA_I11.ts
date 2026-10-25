@@ -1,7 +1,37 @@
 /**
- * RPA_I11 builder for HL7 v2.4 — identical to v2.3.1, re-exported.
+ * Builder for RPA^I11 messages (HL7 v2.4).
+ *
+ * Structure: MSH MSA [RF1] [ AUTHORIZATION: AUT [CTD] ] { PROVIDER: PRD [{CTD}] } PID [{NK1}] [{GT1}] [{ INSURANCE: IN1 [IN2] [IN3] }] [ACC] [{DG1}] [{DRG}] [{AL1}] { PROCEDURE: PR1 [ AUTHORIZATION: AUT [CTD] ] } [{ OBSERVATION: OBR [{NTE}] [{ RESULTS: OBX [{NTE}] }] }] [ PATIENT_VISIT: PV1 [PV2] ] [{NTE}]
+ * Shares the RPA^I08 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3.1/RPA_I11.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
+import type { MSH } from "../../segments/v2.4/MSH.ts";
+import type { MSA } from "../../segments/v2.4/MSA.ts";
+import type { PID } from "../../segments/v2.4/PID.ts";
+import { RPA_I08, type RPA_I08Options, type Provider, type InsuranceGroup, type ProcedureGroup, type Observation, type Result } from "./RPA_I08.ts";
+
+export type { Provider, InsuranceGroup, ProcedureGroup, Observation, Result };
+/** The optional segments and groups of an RPA^I11 (HL7 v2.4) message. */
+export type RPA_I11Options = RPA_I08Options;
+
+/** Builder for HL7 RPA^I11 (HL7 v2.4) messages. */
+export class RPA_I11<TMSH extends MSH = MSH, TMSA extends MSA = MSA, TPID extends PID = PID> extends RPA_I08<TMSH, TMSA, TPID> {
+  /** The message name used in error messages. */
+  protected override readonly messageName: string = "RPA_I11";
+}
+
+/** Builds an HL7 RPA^I11 (HL7 v2.4) message. */
+export function createRPA_I11<TMSH extends MSH = MSH, TMSA extends MSA = MSA, TPID extends PID = PID>(
+  header: TMSH,
+  acknowledgment: TMSA,
+  providers: Provider[],
+  patient: TPID,
+  procedures: ProcedureGroup[],
+  options: RPA_I11Options = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
+): RPA_I11<TMSH, TMSA, TPID> {
+  return new RPA_I11(header, acknowledgment, providers, patient, procedures, options, encoding);
+}

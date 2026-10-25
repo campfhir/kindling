@@ -1,7 +1,36 @@
 /**
- * ADT_A48 builder for HL7 v2.4 — identical to v2.3.1, re-exported.
+ * Builder for ADT^A48 messages (HL7 v2.4).
+ *
+ * Structure: MSH EVN PID [PD1] MRG
+ * Shares the ADT^A34 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3.1/ADT_A48.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
+import type { MSH } from "../../segments/v2.4/MSH.ts";
+import type { EVN } from "../../segments/v2.4/EVN.ts";
+import type { PID } from "../../segments/v2.4/PID.ts";
+import type { MRG } from "../../segments/v2.4/MRG.ts";
+import { ADT_A34, type ADT_A34Options } from "./ADT_A34.ts";
+
+/** The optional segments and groups of an ADT^A48 (HL7 v2.4) message. */
+export type ADT_A48Options = ADT_A34Options;
+
+/** Builder for HL7 ADT^A48 (HL7 v2.4) messages. */
+export class ADT_A48<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TMRG extends MRG = MRG> extends ADT_A34<TMSH, TEVN, TPID, TMRG> {
+  /** The message name used in error messages. */
+  protected override readonly messageName: string = "ADT_A48";
+}
+
+/** Builds an HL7 ADT^A48 (HL7 v2.4) message. */
+export function createADT_A48<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TMRG extends MRG = MRG>(
+  header: TMSH,
+  event: TEVN,
+  patient: TPID,
+  merge: TMRG,
+  options: ADT_A48Options = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
+): ADT_A48<TMSH, TEVN, TPID, TMRG> {
+  return new ADT_A48(header, event, patient, merge, options, encoding);
+}

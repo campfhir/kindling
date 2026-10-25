@@ -90,9 +90,9 @@ v2.5.1, structures checked per event on hl7-definition.caristix.com (v2.3, v2.4,
 HAPI v23/v251. SRM is unchanged through v2.5.1. SRR and MDM have two shapes: v2.3 (also v2.4) and
 v2.5 (also v2.5.1): SRR gains repeating `ERR` and `[{TQ1}]` after `SCH`; MDM gains `[{SFT}]`, the
 COMMON ORDER group (`ORC [{TQ1 [{TQ2}]}] OBR [{NTE}]`) and, in the content events, NTEs under each
-`OBX`. Known gaps: `segments/v2.4` re-exports v2.3 for SRR and MDM although v2.4 already matches
-v2.3 there, so nothing is missing for v2.4; the existing SIU model includes `PD1` in the v2.3
-patient group (Caristix lists it from v2.5) and does not model the v2.5 `[{TQ1}]` after `SCH`.
+`OBX`. (SRR and MDM keep the v2.3 shape in v2.4, generated against the 2.4 segments since 1.2; the
+v2.3 SIU model lost its `PD1` in 1.1, see below. Known gap: the SIU model does not yet carry the
+v2.5 `[{TQ1}]` after `SCH`.)
 
 Done in 0.13: ADT A20, DFT P03 and BAR P01/P02/P05/P06 for v2.3 and v2.5.1, structures checked per
 event on hl7-definition.caristix.com (v2.3 and v2.5.1) and HAPI v23 (DFT_P03, BAR_P01). The BAR
@@ -113,8 +113,8 @@ QTY groups, `[CTD]`, `[{FT1}]` and SPECIMEN groups; ORU^R30–R32 are one patien
 message (`pid`, `orc`, `obr`, `observations` at the top level) with `[{SFT}]`, `[PD1]`, the VISIT
 group, `[{NTE}]` and TIMING QTY; SIU gains `[{TQ1}]` after `SCH` in v2.5; MFN^M02 gains `[{SFT}]`,
 repeating `PRA` and `[{NTE}]` in v2.5 (its `ORG`/`AFF`/`LAN`/`EDU`/`CER` segments have no classes yet
-and are skipped); ORR^O02's order detail is optional in every version. Known gap: v2.4 ORU^R01
-still mirrors v2.3 (the standard adds `[CTD]` and `[{FT1}]` there). Properties are named after
+and are skipped); ORR^O02's order detail is optional in v2.3 and v2.3.1 (required from v2.4, see
+1.2 below). Properties are named after
 what a segment holds rather than its code (`patient`, `visit`, `notes`, `diagnoses`,
 `observationRequest`, `header`; see `SEGMENT_NAMES` in `src/types/schema.ts`), and ORM/ORR/VXU inline
 their PATIENT and visit groups so `patient`, `visit`, `insurances` sit at the top level.
@@ -229,6 +229,26 @@ queries, RAS^O01, CSU's required study observations, repeating IN3 (ADT A01 fami
 P01/P05, DFT^P03, ORM^O01, ADR^A19), the A06/A07 erratum, A16's repeating DG1, A37's second PD1,
 NK1 in ORU^R01/W01 and PD1 in SIU. The remaining differences between the sources are recorded with
 their reasons in `codegen/validate/message-notes.json`.
+
+Done in 1.2 (v2.4 complete): every v2.4 event. The message ledger now reads the hl7.eu v2.4 chapters
+(`std24/ch02.htm` … `ch15.htm`, whose table captions name the event, `ADT^A14^ADT_A05`) beside
+Caristix 2.4 and HAPI v24; `docs/validation/v2.4-message-ledger.md` compares all 334 structures
+(302 match the decided shape, 32 are accepted modelling equivalences with dated notes, 0 differ).
+The 57 events new in 2.4 were drafted from the Caristix tables with
+`codegen/validate/scaffold-messages.ts` and checked by the ledger: OML^O21/ORL^O22, OMG^O19/ORG^O20,
+OMP^O09/ORP^O10 and OUL^R21 (chapters 4 and 7), QBP^Q11/Q13/Q15/Q21–Q25 with RSP^K11/K13/K15/K21–K25,
+RTB^K13/Q13, RDY^K15, QSB^Q16, QSX^J02, QVR^Q17 and QCN^J01 (chapter 5, with the new QPD, RCP, QID,
+QRI and RDF usage), the chapter 13 automation messages ESU/ESR, SSU/SSR, INU/INR, EAC/EAR, EAN,
+TCU/TCR and LSU/LSR (new EQU, ISD, SAC, INV, ECD, ECR, CNS, NDS, TCC, TCD, EQP, SID segments),
+PMU^B01–B06 (chapter 15), BAR^P10 (GP1/GP2) and ADT A52–A55, A60 (IAM) and A61/A62. The 2.4
+structure changes: ROL after PD1 and PV2 (and in INSURANCE) across ADT A01–A03, A05/A14/A28/A31,
+A06/A07, A15, A16, A54/A55, A61/A62, PDA closing A01–A03, A18's required MRG, A05 as its own
+structure (A01 without PDA; A14, A28, A31 share it) and A21 as the base of the transfer-shaped
+events; ORU^R01 gains `[CTD]` and `[{FT1}]`, ORR^O02 requires the order detail (Caristix and HAPI
+against the hl7.eu text), QBP^Q15 carries no RDF (hl7.eu against Caristix). Every v2.4 message is
+generated against the v2.4 segment modules (`codegen/schemas/v2.4/version.ts`), and v2.5.1 now
+derives every message v2.5 carries (340, the 57 new ones included with their 2.4 shapes pending the
+2.5 release).
 
 Next: the later-version messages listed under v2.5.1 parity.
 

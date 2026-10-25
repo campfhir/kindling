@@ -26,11 +26,24 @@ interface SpecField {
   opt: string;
   rep: string;
   table: string;
+  /** In a subclass entry: the base class already implements this field as decided; no setter is generated. */
+  inherited?: boolean;
+  /** In a subclass entry: the base class's setter for this field, which the generated setter overrides (it changed, e.g. now repeats). */
+  overrides?: string;
 }
 interface SpecSegment {
   title: string;
   fields: SpecField[];
+  /**
+   * The version directory of the class to extend (`"v2.3.1"`): the generated class is a subclass of
+   * `src/segments/<extends>/<SEG>.ts` with setters for the fields that are not `inherited`, the way a
+   * hand-written class of an older version is carried into a newer one (see codegen/validate/ledger.mjs --adopt).
+   */
+  extends?: string;
 }
+
+/** MSH, BHS and FHS keep the field separator in fields[0], so field n is fields[n - 2]. */
+const HEADER_SEGMENTS = new Set(["MSH", "BHS", "FHS"]);
 
 const ROOT = join(fileURLToPath(import.meta.url), "../..");
 const DRY_RUN = process.argv.includes("--dry-run");
@@ -88,7 +101,7 @@ function isRepeating(f: SpecField): boolean {
  * these sets the first component; the typed object sets each component in its HL7 position.
  */
 const COMPOSITES: Record<string, { type: string; parts: string }> = {
-  CE: { type: "CE", parts: "ceParts" },
+  CE: { type: "CodedInput", parts: "codedParts" }, // CE or the { code, text, codingSystem } shape the hand-written classes take
   CWE: { type: "CodedElement", parts: "cweParts" },
   CX: { type: "CX", parts: "cxParts" },
   XCN: { type: "XCN", parts: "xcnParts" },
@@ -138,8 +151,9 @@ function valueOf(f: SpecField, arg: string): { type: string; field: string } {
   };
 }
 
-function setterFor(code: string, f: SpecField, method: string): string {
-  const index = f.seq - 1;
+function setterFor(code: string, f: SpecField, name: string): string {
+  const index = HEADER_SEGMENTS.has(code) ? f.seq - 2 : f.seq - 1;
+  const method = f.overrides ? `override ${name}` : name;
   const repeat = isRepeating(f) ? ", repeating" : "";
   const doc = `  /** ${code}-${f.seq} ${plainName(f.name)} (${f.type}, max ${f.length}, ${OPT[f.opt] ?? f.opt}${repeat}) (chainable). */`;
   const date = DATE_LAYOUTS[f.type];
@@ -173,7 +187,93 @@ function setterFor(code: string, f: SpecField, method: string): string {
   }`;
 }
 
+/** The composite and date imports the setters of these fields need. */
+function helperImports(fields: SpecField[]): string[] {
+  // Composite helpers this class uses: the part builders, their types, and components().
+  const used = [...new Set(fields.map((f) => COMPOSITES[f.type]).filter(Boolean))];
+  const compositeNames = used.length
+    ? [...new Set(["components", ...used.map((c) => c.parts), ...used.map((c) => `type ${c.type}`)])]
+    : [];
+  const compositeImport = compositeNames.length
+    ? `import { ${compositeNames.join(", ")} } from "../../utils/composites.ts";`
+    : "";
+  // The layout constants serve every date field; the layout types only the non-repeating setters' format parameter.
+  const dates = [...new Set(fields.map((f) => DATE_LAYOUTS[f.type]).filter(Boolean))];
+  const dateTypes = [...new Set(fields.filter((f) => !isRepeating(f)).map((f) => DATE_LAYOUTS[f.type]).filter(Boolean))];
+  const dateImport = dates.length
+    ? `import { formatHL7Date, ${[...dates.map((d) => d.layout), ...dateTypes.map((d) => `type ${d.type}`)].join(", ")} } from "../../utils/hl7DateUtils.ts";`
+    : "";
+  return [compositeImport, dateImport].filter(Boolean);
+}
+
+/** A subclass of an older version's class, with setters for the fields that changed or are new. */
+function subclassSource(code: string, seg: SpecSegment): string {
+  const base = seg.extends!;
+  const own = seg.fields.filter((f) => !f.inherited);
+  const names = assignSetterNames(seg.fields);
+  const setters = own.map((f) => setterFor(code, f, f.overrides ?? names.get(f.seq)!)).join("\n\n");
+  const repeats = own.some(isRepeating);
+  const header = HEADER_SEGMENTS.has(code);
+  const changed = own.map((f) => `${code}-${f.seq} ${plainName(f.name)}${f.overrides ? " (changed)" : " (new)"}`).join("; ");
+  const parse = header
+    ? `  /** Parses the input string into a structured instance. */
+  static override parse(segmentString: string): Result<${code}> {
+    const parsed = ${code}_base.parse(segmentString);
+    if (!parsed.ok || !parsed.val) return parsed as Result<never>;
+    const seg = new ${code}();
+    seg.fields = parsed.val.fields;
+    seg.setEncoding(parsed.val.getEncoding());
+    return { ok: true, val: seg };
+  }`
+    : `  /** Parses the input string into a structured instance. */
+  static override parse(segmentString: string, encoding: EncodingCharacters): Result<${code}> {
+    const parts = segmentString.split(encoding.fieldSeparator);
+    if (parts[0] !== "${code}") {
+      return { ok: false, err: new Err(\`Expected ${code} segment, got \${parts[0]}\`) };
+    }
+    const seg = new ${code}();
+    for (let i = 1; i < parts.length; i++) {
+      seg.fields[i - 1] = ParserUtils.parseField(parts[i], encoding);
+    }
+    return { ok: true, val: seg };
+  }`;
+  const imports = [
+    ...(header ? [] : [`import { Err } from "../../utils/err.ts";`]),
+    `import type { Result } from "../../types/result.ts";`,
+    ...(repeats ? [`import { repetitions, type Repeated } from "../../types/segment.ts";`] : []),
+    ...(header ? [] : [`import type { EncodingCharacters } from "../../types/encoding.ts";`, `import { ParserUtils } from "../../types/parser.ts";`]),
+    `import { ${code} as ${code}_base } from "../${base}/${code}.ts";`,
+    ...helperImports(own),
+  ];
+  return `/**
+ * ${code} segment definition for HL7 ${VERSION}.
+ *
+ * Generated by codegen/generate-segments.ts from codegen/spec/${VERSION}-segments.json: extends the
+ * ${base} class with the fields that changed in ${VERSION.slice(1)} (${changed}), as decided in
+ * docs/validation/${VERSION}-segment-ledger.md from hl7.eu, Caristix and HAPI. A composite field takes
+ * a string (sets its first component) or the typed object from utils/composites.ts; a date or
+ * date/time field takes a string as given or a Date formatted with the HL7 layout. Edit by hand to
+ * add typed helpers; the generator never overwrites an existing file.
+ *
+ * @module
+ */
+${imports.join("\n")}
+
+/**
+ * ${code} - ${seg.title} (HL7 ${VERSION})
+ *
+ * Extends the ${base} ${code}: ${changed}.
+ */
+export class ${code} extends ${code}_base {
+${setters}
+
+${parse}
+}
+`;
+}
+
 function classSource(code: string, seg: SpecSegment): string {
+  if (seg.extends) return subclassSource(code, seg);
   const names = assignSetterNames(seg.fields);
   const repeats = seg.fields.some(isRepeating);
   const importNames = ["BaseSegment", ...(repeats ? ["repetitions", "type Repeated"] : [])].slice(1).map((n) => `, ${n}`).join("");

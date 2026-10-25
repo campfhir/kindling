@@ -16,8 +16,8 @@
  * `<type>_<event>` first (`ADT_A01`), then on the type alone (`ACK`, whose event names the message
  * it acknowledges), then on MSH-9.3 when a sender includes it.
  *
- * Versions are wired one per release: 1.0 dispatched HL7 v2.3, 1.1 adds v2.3.1. A message of
- * another version is an error unless `options.version` names the version to parse it as.
+ * Versions are wired one per release: 1.0 dispatched HL7 v2.3, 1.1 added v2.3.1, 1.2 adds v2.4. A
+ * message of another version is an error unless `options.version` names the version to parse it as.
  *
  * @module
  */
@@ -28,11 +28,13 @@ import { readMessageHeader, splitSegments } from "./utils/messageParsing.ts";
 import { MSH } from "./segments/v2.3/MSH.ts";
 import { MESSAGES as V2_3 } from "./parsers/v2.3/messages.ts";
 import { MESSAGES as V2_3_1 } from "./parsers/v2.3.1/messages.ts";
+import { MESSAGES as V2_4 } from "./parsers/v2.4/messages.ts";
 
 /** The message registries the root parser dispatches on, keyed by the MSH-12 value. */
 const REGISTRIES = {
   "2.3": V2_3,
   "2.3.1": V2_3_1,
+  "2.4": V2_4,
 } as const;
 
 type Registries = typeof REGISTRIES;

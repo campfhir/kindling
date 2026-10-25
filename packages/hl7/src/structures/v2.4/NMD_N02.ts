@@ -1,7 +1,52 @@
 /**
- * NMD_N02 structure for HL7 v2.4 — identical to v2.3.1, re-exported.
+ * Message structure for NMD^N02 messages (HL7 v2.4).
+ *
+ * Structure: MSH { CLOCK_AND_STATS_WITH_NOTES: [ CLOCK: NCK [{NTE}] ] [ APP_STATS: NST [{NTE}] ] [ APP_STATUS: NSC [{NTE}] ] }
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3.1/NMD_N02.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { StructureItem } from "../../types/schema.ts";
+
+/** The segments, choices and groups of NMD^N02 (HL7 v2.4), in order. */
+export const NMD_N02_STRUCTURE: StructureItem[] = [
+  { name: "MSH", required: true, repeating: false },
+  {
+    name: "CLOCK_AND_STATS_WITH_NOTES",
+    required: true,
+    repeating: true,
+    as: "clockAndStatistics",
+    segments: [
+      {
+        name: "CLOCK",
+        required: false,
+        repeating: false,
+        inline: true,
+        segments: [
+          { name: "NCK", required: true, repeating: false },
+          { name: "NTE", required: false, repeating: true, as: "clockNotes" },
+        ],
+      },
+      {
+        name: "APP_STATS",
+        required: false,
+        repeating: false,
+        inline: true,
+        segments: [
+          { name: "NST", required: true, repeating: false },
+          { name: "NTE", required: false, repeating: true, as: "statisticsNotes" },
+        ],
+      },
+      {
+        name: "APP_STATUS",
+        required: false,
+        repeating: false,
+        inline: true,
+        segments: [
+          { name: "NSC", required: true, repeating: false },
+          { name: "NTE", required: false, repeating: true, as: "statusNotes" },
+        ],
+      },
+    ],
+  },
+];

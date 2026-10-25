@@ -47,8 +47,8 @@ src/
 │   └── structure.ts          # Structure-driven parse / verify / encode engine
 ├── segments/                 # Segment definitions by version
 │   ├── v2.3/                 # hand-written base segments
-│   ├── v2.3.1/               # re-exports of v2.3 (generated)
-│   ├── v2.4/                 # re-exports of v2.3.1 + PDA, ABS, BLC, RMI, ORG, AFF, LAN, EDU
+│   ├── v2.3.1/               # 53 segments whose table changed in 2.3.1; the rest re-export v2.3
+│   ├── v2.4/                 # 66 segments changed in 2.4 + 28 new (PDA, ABS, SAC, QPD, RCP, IAM, …); the rest re-export
 │   ├── v2.5/                 # re-exports + SFT, SPM, TQ1, TQ2, CER (and EDU-9)
 │   └── v2.5.1/               # extends v2.5 with 2.5.1-specific fields
 ├── structures/               # Generated: each message's structure as data (<MSG>_STRUCTURE)
@@ -107,20 +107,21 @@ also work, but they are not an officially tested target.
 
 Every supported version has its own subpath (`segments/<version>`, `parsers/<version>`,
 `builders/<version>`). Versions that are structurally identical to their predecessor simply
-re-export it, so `segments/v2.4` `PID` *is* the v2.3 `PID` class. Segments are available from the
-version that introduced them:
+re-export it, so `segments/v2.4` `NK1` *is* the v2.3 `NK1` class, while a segment whose field table
+changed gets a subclass in that version (`segments/v2.4` `PID` extends the 2.3.1 `PID` with PID-31 to
+PID-38). Segments are available from the version that introduced them:
 
 | Version | Based on | Notes |
 |---|---|---|
 | `v2.3` | — | Base implementation |
 | `v2.3.1` | v2.3 | Complete: every message generated against the 2.3.1 field tables (53 segments have their own class, the rest re-export v2.3's); the 2.3.1 structure changes (QAK, renumbered queries, repeating IN3, NK1 in ORU, PD1 in SIU, …) applied |
-| `v2.4` | v2.3.1 | Re-export, except `ORM^O01` (adds `CTD` and `FT1`) |
+| `v2.4` | v2.3.1 | Complete: every message (334 structures, 57 new in 2.4: OML/ORL, OMG/ORG, OMP/ORP, OUL^R21, QBP/RSP/RTB/RDY and the other chapter 5 queries, the chapter 13 automation messages, PMU^B01–B06, BAR^P10, ADT A52–A55 and A60–A62) generated against the 2.4 field tables (94 segments have their own class, 28 of them new in 2.4); the 2.4 structure changes (ROL and PDA in ADT, CTD/FT1 in ORM and ORU, required order detail in ORR/OSR, …) applied |
 | `v2.5` | v2.4 | Re-export + `SFT` (Software), `SPM` (Specimen), `TQ1` (Timing/Quantity); `ERR` gains ERR-2..12; own `ACK` (`[{SFT}]`, repeating `ERR`) and `ORR^O02` (repeating `ERR`) |
 | `v2.5.1` | v2.5 | Version-specific fields and messages (e.g. `ORU_R30–R32`) |
 
-Version-specific differences in 2.3.1, 2.4 and 2.5 are filled in as they are implemented — see the
+Version-specific differences in 2.5 and 2.5.1 are filled in as they are implemented — see the
 [roadmap](ROADMAP.md). The root `parse()` dispatches a version once it is complete: 1.0 parses
-v2.3, 1.1 adds v2.3.1, and each later version joins in its own minor release. Every segment field
+v2.3, 1.1 adds v2.3.1, 1.2 adds v2.4, and each later version joins in its own minor release. Every segment field
 and every message structure of a dispatched version has been checked against hl7.eu, Caristix and
 HAPI: see [docs/validation](docs/validation/README.md).
 
@@ -216,8 +217,8 @@ them), and `identifyMessage(hl7String)` returns only what MSH-9 and MSH-12 say. 
 `@campfhir/hl7/parsers/v2.3` is the map they dispatch on (message structure name → parser).
 
 Versions are wired one per release (`SUPPORTED_VERSIONS`): 1.0 dispatches HL7 v2.3, 1.1 adds v2.3.1,
-and every MSH-12 value outside that list is an error until its release. To parse such a feed anyway, or one
-that leaves MSH-12 empty, name the version to parse as: `parse(hl7String, { version: '2.3' })`.
+1.2 adds v2.4, and every MSH-12 value outside that list is an error until its release. To parse such a feed anyway, or one
+that leaves MSH-12 empty, name the version to parse as: `parse(hl7String, { version: '2.4' })`.
 The individual parsers of every version (`parseADT_A01` of `@campfhir/hl7/parsers/v2.5.1`, …)
 stay available regardless.
 

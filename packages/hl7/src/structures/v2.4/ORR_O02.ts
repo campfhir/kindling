@@ -1,7 +1,46 @@
 /**
- * ORR_O02 structure for HL7 v2.4 — identical to v2.3.1, re-exported.
+ * Message structure for ORR^O02 messages (HL7 v2.4).
+ *
+ * Structure: MSH MSA [ERR] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}] } ]
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3.1/ORR_O02.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { StructureItem } from "../../types/schema.ts";
+
+/** The segments, choices and groups of ORR^O02 (HL7 v2.4), in order. */
+export const ORR_O02_STRUCTURE: StructureItem[] = [
+  { name: "MSH", required: true, repeating: false },
+  { name: "MSA", required: true, repeating: false },
+  { name: "ERR", required: false, repeating: false },
+  { name: "NTE", required: false, repeating: true },
+  {
+    name: "RESPONSE",
+    required: false,
+    repeating: false,
+    inline: true,
+    segments: [
+      {
+        name: "PATIENT",
+        required: false,
+        repeating: false,
+        inline: true,
+        segments: [
+          { name: "PID", required: true, repeating: false },
+          { name: "NTE", required: false, repeating: true, as: "patientNotes" },
+        ],
+      },
+      {
+        name: "ORDER",
+        required: true,
+        repeating: true,
+        segments: [
+          { name: "ORC", required: true, repeating: false },
+          { oneOf: ["OBR", "RQD", "RQ1", "RXO", "ODS", "ODT"], required: true },
+          { name: "NTE", required: false, repeating: true },
+          { name: "CTI", required: false, repeating: true },
+        ],
+      },
+    ],
+  },
+];

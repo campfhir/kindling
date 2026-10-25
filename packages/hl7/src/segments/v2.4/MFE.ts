@@ -10,6 +10,7 @@ import type { Result } from "../../types/result.ts";
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { MFE as MFE_base } from "../v2.3.1/MFE.ts";
+import { repetitions, type Repeated } from "../../types/segment.ts";
 
 /**
  * MFE segment (HL7 v2.4)
@@ -17,9 +18,9 @@ import { MFE as MFE_base } from "../v2.3.1/MFE.ts";
  * Extends v2.3.1 MFE with MFE-5 Primary Key Value Type. Source: hl7.eu v2.4 MFE table (5 fields).
  */
 export class MFE extends MFE_base {
-  /** MFE-5 Primary Key Value Type (chainable). */
-  primaryKeyValueType(value: string): this {
-    this.fields[4] = this.createField(value);
+  /** MFE-5 Primary Key Value Type (ID, table 0355) (chainable). Repeats in v2.4, one per MFE-4 value: pass one argument per repetition. */
+  primaryKeyValueType(...values: Repeated<string>[]): this {
+    this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 

@@ -1,7 +1,10 @@
 /**
- * ADT_A44 structure for HL7 v2.4 — identical to v2.3.1, re-exported.
+ * Message structure for ADT^A44 messages (HL7 v2.4).
+ *
+ * Structure: MSH EVN { PATIENT: PID [PD1] MRG }
+ * Shares the ADT^A43 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3.1/ADT_A44.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+export { ADT_A43_STRUCTURE as ADT_A44_STRUCTURE } from "./ADT_A43.ts";

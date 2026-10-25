@@ -10,6 +10,8 @@ import type { Result } from "../../types/result.ts";
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { PD1 as PD1_base } from "../v2.3.1/PD1.ts";
+import { repetitions, type Repeated } from "../../types/segment.ts";
+import { codedParts, components, xonParts, type CodedInput, type XON } from "../../utils/composites.ts";
 
 /**
  * PD1 segment (HL7 v2.4)
@@ -23,20 +25,18 @@ export class PD1 extends PD1_base {
     return this;
   }
 
-  /** PD1-14 Place of Worship (chainable). */
-  placeOfWorship(name: string): this {
-    this.fields[13] = this.createField(name);
+  /** PD1-14 Place of Worship (XON) (chainable). Repeats in v2.4: pass one argument per repetition, a name or the XON components. */
+  placeOfWorship(...values: Repeated<string | XON>[]): this {
+    this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
   /**
    * PD1-15 Advance Directive Code (chainable).
-   * @param code - PD1-15.1 Code
-   * @param text - PD1-15.2 Text
-   * @param codingSystem - PD1-15.3 Coding System
+   * Repeats in v2.4: pass one argument per repetition, a code or the coded element's components.
    */
-  advanceDirectiveCode({ code, text, codingSystem }: { code: string; text?: string; codingSystem?: string }): this {
-    this.fields[14] = this.createComponentsField([code, text, codingSystem]);
+  advanceDirectiveCode(...values: Repeated<CodedInput | string>[]): this {
+    this.fields[14] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(codedParts(v)))));
     return this;
   }
 

@@ -1,7 +1,10 @@
 /**
- * RPA_I10 structure for HL7 v2.4 — identical to v2.3.1, re-exported.
+ * Message structure for RPA^I10 messages (HL7 v2.4).
+ *
+ * Structure: MSH MSA [RF1] [ AUTHORIZATION: AUT [CTD] ] { PROVIDER: PRD [{CTD}] } PID [{NK1}] [{GT1}] [{ INSURANCE: IN1 [IN2] [IN3] }] [ACC] [{DG1}] [{DRG}] [{AL1}] { PROCEDURE: PR1 [ AUTHORIZATION: AUT [CTD] ] } [{ OBSERVATION: OBR [{NTE}] [{ RESULTS: OBX [{NTE}] }] }] [ PATIENT_VISIT: PV1 [PV2] ] [{NTE}]
+ * Shares the RPA^I08 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3.1/RPA_I10.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+export { RPA_I08_STRUCTURE as RPA_I10_STRUCTURE } from "./RPA_I08.ts";

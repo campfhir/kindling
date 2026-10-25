@@ -1,7 +1,10 @@
 /**
- * RQA_I09 structure for HL7 v2.4 — identical to v2.3.1, re-exported.
+ * Message structure for RQA^I09 messages (HL7 v2.4).
+ *
+ * Structure: MSH [RF1] [ AUTHORIZATION: AUT [CTD] ] { PROVIDER: PRD [{CTD}] } PID [{NK1}] [ GUARANTOR_INSURANCE: [{GT1}] { INSURANCE: IN1 [IN2] [IN3] } ] [ACC] [{DG1}] [{DRG}] [{AL1}] [{ PROCEDURE: PR1 [ AUTHORIZATION: AUT [CTD] ] }] [{ OBSERVATION: OBR [{NTE}] [{ RESULTS: OBX [{NTE}] }] }] [ PATIENT_VISIT: PV1 [PV2] ] [{NTE}]
+ * Shares the RQA^I08 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3.1/RQA_I09.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+export { RQA_I08_STRUCTURE as RQA_I09_STRUCTURE } from "./RQA_I08.ts";

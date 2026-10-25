@@ -1,7 +1,10 @@
 /**
- * QRY_Q29 structure for HL7 v2.4 — identical to v2.3.1, re-exported.
+ * Message structure for QRY^Q29 messages (HL7 v2.4).
+ *
+ * Structure: MSH QRD [QRF] [DSC]
+ * Shares the QRY^Q26 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3.1/QRY_Q29.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+export { QRY_Q26_STRUCTURE as QRY_Q29_STRUCTURE } from "./QRY_Q26.ts";
