@@ -51,5 +51,35 @@
       { "seq": 7, "name": "School Type Code", "length": "250", "type": "CE", "opt": "O", "rep": "-", "table": "0402" },
       { "seq": 8, "name": "School Address", "length": "250", "type": "XAD", "opt": "O", "rep": "-", "table": "" }
     ]
+  },
+  "OM7": {
+    "title": "Additional Basic Attributes",
+    "source": "https://hl7-definition.caristix.com/v2/HL7v2.4/Segments/OM7 (cross-checked on https://www.hl7.eu/HL7v2x/v24/hl7v24segmOM7.htm; unchanged in 2.5 and 2.5.1)",
+    "fields": [
+      { "seq": 1, "name": "Sequence Number - Test/Observation Master File", "length": "4", "type": "NM", "opt": "R", "rep": "-", "table": "" },
+      { "seq": 2, "name": "Universal Service Identifier", "length": "250", "type": "CE", "opt": "R", "rep": "-", "table": "" },
+      { "seq": 3, "name": "Category Identifier", "length": "250", "type": "CE", "opt": "O", "rep": "*", "table": "0412" },
+      { "seq": 4, "name": "Category Description", "length": "200", "type": "TX", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 5, "name": "Category Synonym", "length": "200", "type": "ST", "opt": "O", "rep": "*", "table": "" },
+      { "seq": 6, "name": "Effective Test/Service Start Date/Time", "length": "26", "type": "TS", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 7, "name": "Effective Test/Service End Date/Time", "length": "26", "type": "TS", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 8, "name": "Test/Service Default Duration Quantity", "length": "5", "type": "NM", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 9, "name": "Test/Service Default Duration Units", "length": "250", "type": "CE", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 10, "name": "Test/Service Default Frequency", "length": "60", "type": "IS", "opt": "O", "rep": "-", "table": "0335" },
+      { "seq": 11, "name": "Consent Indicator", "length": "1", "type": "ID", "opt": "O", "rep": "-", "table": "0136" },
+      { "seq": 12, "name": "Consent Identifier", "length": "250", "type": "CE", "opt": "O", "rep": "-", "table": "0413" },
+      { "seq": 13, "name": "Consent Effective Start Date/Time", "length": "26", "type": "TS", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 14, "name": "Consent Effective End Date/Time", "length": "26", "type": "TS", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 15, "name": "Consent Interval Quantity", "length": "5", "type": "NM", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 16, "name": "Consent Interval Units", "length": "250", "type": "CE", "opt": "C", "rep": "-", "table": "0414" },
+      { "seq": 17, "name": "Consent Waiting Period Quantity", "length": "5", "type": "NM", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 18, "name": "Consent Waiting Period Units", "length": "250", "type": "CE", "opt": "C", "rep": "-", "table": "0414" },
+      { "seq": 19, "name": "Effective Date/Time of Change", "length": "26", "type": "TS", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 20, "name": "Entered By", "length": "250", "type": "XCN", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 21, "name": "Orderable-at Location", "length": "200", "type": "PL", "opt": "O", "rep": "*", "table": "" },
+      { "seq": 22, "name": "Formulary Status", "length": "1", "type": "IS", "opt": "O", "rep": "-", "table": "0473" },
+      { "seq": 23, "name": "Special Order Indicator", "length": "1", "type": "ID", "opt": "O", "rep": "-", "table": "0136" },
+      { "seq": 24, "name": "Primary Key Value - CDM", "length": "250", "type": "CE", "opt": "O", "rep": "*", "table": "0132" }
+    ]
   }
 }

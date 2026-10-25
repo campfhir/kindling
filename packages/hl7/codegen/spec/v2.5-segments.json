@@ -35,5 +35,26 @@
       { "seq": 30, "name": "Revocation Reason Code", "length": "250", "type": "CE", "opt": "O", "rep": "-", "table": "" },
       { "seq": 31, "name": "Certificate Status", "length": "250", "type": "CWE", "opt": "O", "rep": "-", "table": "0536" }
     ]
+  },
+  "IIM": {
+    "title": "Inventory Item Master",
+    "source": "https://hl7-definition.caristix.com/v2/HL7v2.5/Segments/IIM (cross-checked on https://www.hl7.eu/HL7v2x/v25/hl7v25segmIIM.htm; unchanged in 2.5.1)",
+    "fields": [
+      { "seq": 1, "name": "Primary Key Value - IIM", "length": "250", "type": "CWE", "opt": "R", "rep": "-", "table": "" },
+      { "seq": 2, "name": "Service Item Code", "length": "250", "type": "CWE", "opt": "R", "rep": "-", "table": "" },
+      { "seq": 3, "name": "Inventory Lot Number", "length": "250", "type": "ST", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 4, "name": "Inventory Expiration Date", "length": "26", "type": "TS", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 5, "name": "Inventory Manufacturer Name", "length": "250", "type": "CWE", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 6, "name": "Inventory Location", "length": "250", "type": "CWE", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 7, "name": "Inventory Received Date", "length": "26", "type": "TS", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 8, "name": "Inventory Received Quantity", "length": "12", "type": "NM", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 9, "name": "Inventory Received Quantity Unit", "length": "250", "type": "CWE", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 10, "name": "Inventory Received Item Cost", "length": "12", "type": "MO", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 11, "name": "Inventory On Hand Date", "length": "26", "type": "TS", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 12, "name": "Inventory On Hand Quantity", "length": "12", "type": "NM", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 13, "name": "Inventory On Hand Quantity Unit", "length": "250", "type": "CWE", "opt": "O", "rep": "-", "table": "" },
+      { "seq": 14, "name": "Procedure Code", "length": "250", "type": "CE", "opt": "O", "rep": "-", "table": "0088" },
+      { "seq": 15, "name": "Procedure Code Modifier", "length": "250", "type": "CE", "opt": "O", "rep": "*", "table": "0340" }
+    ]
   }
 }

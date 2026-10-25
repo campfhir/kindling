@@ -3,6 +3,8 @@ export * from "./ADT_A01";
 export * from "./BAR_P01";
 export * from "./DFT_P03";
 export * from "./MFN_M02";
+export * from "./MFN_M12";
+export * from "./MFR_M01";
 export * from "./ORF_R04";
 export * from "./ORM_O01";
 export * from "./OSQ_Q06";
