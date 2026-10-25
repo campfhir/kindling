@@ -29,12 +29,14 @@ import { MSH } from "./segments/v2.3/MSH.ts";
 import { MESSAGES as V2_3 } from "./parsers/v2.3/messages.ts";
 import { MESSAGES as V2_3_1 } from "./parsers/v2.3.1/messages.ts";
 import { MESSAGES as V2_4 } from "./parsers/v2.4/messages.ts";
+import { MESSAGES as V2_5 } from "./parsers/v2.5/messages.ts";
 
 /** The message registries the root parser dispatches on, keyed by the MSH-12 value. */
 const REGISTRIES = {
   "2.3": V2_3,
   "2.3.1": V2_3_1,
   "2.4": V2_4,
+  "2.5": V2_5,
 } as const;
 
 type Registries = typeof REGISTRIES;

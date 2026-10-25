@@ -1,7 +1,7 @@
 /**
  * Builder for QSB^Q16 messages (HL7 v2.5.1).
  *
- * Structure: MSH QPD RCP [DSC]
+ * Structure: MSH [{SFT}] QPD RCP [DSC]
  *
  * @module
  */
@@ -11,12 +11,15 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { QSB_Q16_STRUCTURE } from "../../structures/v2.5.1/QSB_Q16.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { QPD } from "../../segments/v2.5.1/QPD.ts";
 import type { RCP } from "../../segments/v2.5.1/RCP.ts";
 import type { DSC } from "../../segments/v2.5.1/DSC.ts";
 
 /** The optional segments and groups of an QSB^Q16 (HL7 v2.5.1) message. */
 export interface QSB_Q16Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The DSC segment. */
   continuation?: DSC;
 }

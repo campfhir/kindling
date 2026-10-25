@@ -2,9 +2,9 @@
  * Message structure for ADT^A23 messages (HL7 v2.5).
  *
  * Structure: MSH [{SFT}] EVN PID [PD1] PV1 [PV2] [{DB1}] [{OBX}]
- * Shares the ADT^A02 structure.
+ * Shares the ADT^A21 structure.
  *
  * @module
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
-export { ADT_A02_STRUCTURE as ADT_A23_STRUCTURE } from "./ADT_A02.ts";
+export { ADT_A21_STRUCTURE as ADT_A23_STRUCTURE } from "./ADT_A21.ts";

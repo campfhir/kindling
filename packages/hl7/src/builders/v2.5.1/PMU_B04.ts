@@ -1,7 +1,7 @@
 /**
  * Builder for PMU^B04 messages (HL7 v2.5.1).
  *
- * Structure: MSH EVN STF [{PRA}] [ORG]
+ * Structure: MSH [{SFT}] EVN STF [{PRA}] [{ORG}]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { PMU_B04_STRUCTURE } from "../../structures/v2.5.1/PMU_B04.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { EVN } from "../../segments/v2.5.1/EVN.ts";
 import type { STF } from "../../segments/v2.5.1/STF.ts";
 import type { PRA } from "../../segments/v2.5.1/PRA.ts";
@@ -18,10 +19,12 @@ import type { ORG } from "../../segments/v2.5.1/ORG.ts";
 
 /** The optional segments and groups of an PMU^B04 (HL7 v2.5.1) message. */
 export interface PMU_B04Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The PRA segments. */
   practitioners?: PRA[];
-  /** The ORG segment. */
-  organizationUnit?: ORG;
+  /** The ORG segments. */
+  organizationUnits?: ORG[];
 }
 
 /** Builder for HL7 PMU^B04 (HL7 v2.5.1) messages. */

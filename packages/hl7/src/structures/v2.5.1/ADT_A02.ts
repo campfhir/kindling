@@ -1,7 +1,7 @@
 /**
  * Message structure for ADT^A02 messages (HL7 v2.5.1).
  *
- * Structure: MSH [{SFT}] EVN PID [PD1] PV1 [PV2] [{DB1}] [{OBX}]
+ * Structure: MSH [{SFT}] EVN PID [PD1] [{ROL}] PV1 [PV2] [{ROL}] [{DB1}] [{OBX}] [PDA]
  *
  * @module
  */
@@ -15,8 +15,11 @@ export const ADT_A02_STRUCTURE: StructureItem[] = [
   { name: "EVN", required: true, repeating: false },
   { name: "PID", required: true, repeating: false },
   { name: "PD1", required: false, repeating: false },
+  { name: "ROL", required: false, repeating: true },
   { name: "PV1", required: true, repeating: false },
   { name: "PV2", required: false, repeating: false },
+  { name: "ROL", required: false, repeating: true, as: "visitRoles" },
   { name: "DB1", required: false, repeating: true },
   { name: "OBX", required: false, repeating: true },
+  { name: "PDA", required: false, repeating: false },
 ];

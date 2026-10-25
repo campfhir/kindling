@@ -1,7 +1,7 @@
 /**
  * Builder for BAR^P10 messages (HL7 v2.5.1).
  *
- * Structure: MSH EVN PID PV1 [{DG1}] GP1 [{ PROCEDURE: PR1 [GP2] }]
+ * Structure: MSH [{SFT}] EVN PID PV1 [{DG1}] GP1 [{ PROCEDURE: PR1 [GP2] }]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { BAR_P10_STRUCTURE } from "../../structures/v2.5.1/BAR_P10.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { EVN } from "../../segments/v2.5.1/EVN.ts";
 import type { PID } from "../../segments/v2.5.1/PID.ts";
 import type { PV1 } from "../../segments/v2.5.1/PV1.ts";
@@ -29,6 +30,8 @@ export interface ProcedureGroup {
 
 /** The optional segments and groups of an BAR^P10 (HL7 v2.5.1) message. */
 export interface BAR_P10Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The DG1 segments. */
   diagnoses?: DG1[];
   /** The PROCEDURE groups. */

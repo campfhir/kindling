@@ -1,7 +1,7 @@
 /**
  * Parser for ADT^A18 messages (HL7 v2.5).
  *
- * Structure: MSH [{SFT}] EVN PID [PD1] [MRG] PV1
+ * Structure: MSH [{SFT}] EVN PID [PD1] MRG PV1
  *
  * @module
  */
@@ -31,7 +31,7 @@ export interface ParsedADT_A18 extends ParsedMessageBase {
   /** The PD1 segment. */
   patientDemographics?: PD1;
   /** The MRG segment. */
-  merge?: MRG;
+  merge: MRG;
   /** The PV1 segment. */
   visit: PV1;
 }

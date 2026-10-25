@@ -1,7 +1,7 @@
 /**
  * Builder for OML^O21 messages (HL7 v2.5.1).
  *
- * Structure: MSH [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER_GENERAL: [ CONTAINER_1: SAC [{OBX}] ] { ORDER: ORC [ OBSERVATION_REQUEST: OBR [{ CONTAINER_2: SAC [{OBX}] }] [TCD] [{NTE}] [{DG1}] [{ OBSERVATION: OBX [TCD] [{NTE}] }] [{ PRIOR_RESULT: [ PATIENT_PRIOR: PID [PD1] ] [ PATIENT_VISIT_PRIOR: PV1 [PV2] ] [{AL1}] { ORDER_PRIOR: [ORC] OBR [{NTE}] { OBSERVATION_PRIOR: OBX [{NTE}] } } }] ] [{FT1}] [{CTI}] [BLG] } }
+ * Structure: MSH [{SFT}] [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [{NK1}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] [ OBSERVATION_REQUEST: OBR [TCD] [{NTE}] [CTD] [{DG1}] [{ OBSERVATION: OBX [TCD] [{NTE}] }] [{ SPECIMEN: SPM [{OBX}] [{ CONTAINER: SAC [{OBX}] }] }] [{ PRIOR_RESULT: [ PATIENT_PRIOR: PID [PD1] ] [ PATIENT_VISIT_PRIOR: PV1 [PV2] ] [{AL1}] { ORDER_PRIOR: [ORC] OBR [{NTE}] [{ TIMING_PRIOR: TQ1 [{TQ2}] }] { OBSERVATION_PRIOR: OBX [{NTE}] } } }] ] [{FT1}] [{CTI}] [BLG] }
  *
  * @module
  */
@@ -11,9 +11,11 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { OML_O21_STRUCTURE } from "../../structures/v2.5.1/OML_O21.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { NTE } from "../../segments/v2.5.1/NTE.ts";
 import type { PID } from "../../segments/v2.5.1/PID.ts";
 import type { PD1 } from "../../segments/v2.5.1/PD1.ts";
+import type { NK1 } from "../../segments/v2.5.1/NK1.ts";
 import type { PV1 } from "../../segments/v2.5.1/PV1.ts";
 import type { PV2 } from "../../segments/v2.5.1/PV2.ts";
 import type { IN1 } from "../../segments/v2.5.1/IN1.ts";
@@ -21,12 +23,16 @@ import type { IN2 } from "../../segments/v2.5.1/IN2.ts";
 import type { IN3 } from "../../segments/v2.5.1/IN3.ts";
 import type { GT1 } from "../../segments/v2.5.1/GT1.ts";
 import type { AL1 } from "../../segments/v2.5.1/AL1.ts";
-import type { SAC } from "../../segments/v2.5.1/SAC.ts";
-import type { OBX } from "../../segments/v2.5.1/OBX.ts";
 import type { ORC } from "../../segments/v2.5.1/ORC.ts";
+import type { TQ1 } from "../../segments/v2.5.1/TQ1.ts";
+import type { TQ2 } from "../../segments/v2.5.1/TQ2.ts";
 import type { OBR } from "../../segments/v2.5.1/OBR.ts";
 import type { TCD } from "../../segments/v2.5.1/TCD.ts";
+import type { CTD } from "../../segments/v2.5.1/CTD.ts";
 import type { DG1 } from "../../segments/v2.5.1/DG1.ts";
+import type { OBX } from "../../segments/v2.5.1/OBX.ts";
+import type { SPM } from "../../segments/v2.5.1/SPM.ts";
+import type { SAC } from "../../segments/v2.5.1/SAC.ts";
 import type { FT1 } from "../../segments/v2.5.1/FT1.ts";
 import type { CTI } from "../../segments/v2.5.1/CTI.ts";
 import type { BLG } from "../../segments/v2.5.1/BLG.ts";
@@ -39,6 +45,8 @@ export interface PatientGroup {
   patientDemographics?: PD1;
   /** The NTE segments. */
   notes?: NTE[];
+  /** The NK1 segments. */
+  nextOfKin?: NK1[];
   /** The PATIENT VISIT group. */
   patientVisit?: PatientVisitGroup;
   /** The INSURANCE groups. */
@@ -67,26 +75,12 @@ export interface InsuranceGroup {
   insuranceCertification?: IN3;
 }
 
-/** The ORDER GENERAL group of an OML^O21 (HL7 v2.5.1) message being built. */
-export interface OrderGeneralGroup {
-  /** The CONTAINER 1 group. */
-  container1?: Container1Group;
-  /** The ORDER groups. */
-  orders: OrderGroup[];
-}
-
-/** The CONTAINER 1 group of an OML^O21 (HL7 v2.5.1) message being built. */
-export interface Container1Group {
-  /** The SAC segment. */
-  specimenContainer: SAC;
-  /** The OBX segments. */
-  observations?: OBX[];
-}
-
 /** The ORDER group of an OML^O21 (HL7 v2.5.1) message being built. */
 export interface OrderGroup {
   /** The ORC segment. */
   commonOrder: ORC;
+  /** The TIMING groups. */
+  timings?: TimingGroup[];
   /** The OBSERVATION REQUEST group. */
   observationRequest?: ObservationRequestGroup;
   /** The FT1 segments. */
@@ -97,30 +91,32 @@ export interface OrderGroup {
   billing?: BLG;
 }
 
+/** The TIMING group of an OML^O21 (HL7 v2.5.1) message being built. */
+export interface TimingGroup {
+  /** The TQ1 segment. */
+  timing: TQ1;
+  /** The TQ2 segments. */
+  timingRelationships?: TQ2[];
+}
+
 /** The OBSERVATION REQUEST group of an OML^O21 (HL7 v2.5.1) message being built. */
 export interface ObservationRequestGroup {
   /** The OBR segment. */
   observationRequest: OBR;
-  /** The CONTAINER 2 groups. */
-  container2s?: Container2Group[];
   /** The TCD segment. */
   testCodeDetail?: TCD;
   /** The NTE segments. */
   notes?: NTE[];
+  /** The CTD segment. */
+  contact?: CTD;
   /** The DG1 segments. */
   diagnoses?: DG1[];
   /** The OBSERVATION groups. */
   observations?: ObservationGroup[];
+  /** The SPECIMEN groups. */
+  specimens?: SpecimenGroup[];
   /** The PRIOR RESULT groups. */
   priorResults?: PriorResultGroup[];
-}
-
-/** The CONTAINER 2 group of an OML^O21 (HL7 v2.5.1) message being built. */
-export interface Container2Group {
-  /** The SAC segment. */
-  specimenContainer: SAC;
-  /** The OBX segments. */
-  observations?: OBX[];
 }
 
 /** The OBSERVATION group of an OML^O21 (HL7 v2.5.1) message being built. */
@@ -131,6 +127,24 @@ export interface ObservationGroup {
   testCodeDetail?: TCD;
   /** The NTE segments. */
   notes?: NTE[];
+}
+
+/** The SPECIMEN group of an OML^O21 (HL7 v2.5.1) message being built. */
+export interface SpecimenGroup {
+  /** The SPM segment. */
+  specimen: SPM;
+  /** The OBX segments. */
+  observations?: OBX[];
+  /** The CONTAINER groups. */
+  containers?: ContainerGroup[];
+}
+
+/** The CONTAINER group of an OML^O21 (HL7 v2.5.1) message being built. */
+export interface ContainerGroup {
+  /** The SAC segment. */
+  specimenContainer: SAC;
+  /** The OBX segments. */
+  observations?: OBX[];
 }
 
 /** The PRIOR RESULT group of an OML^O21 (HL7 v2.5.1) message being built. */
@@ -169,8 +183,18 @@ export interface OrderPriorGroup {
   observationRequest: OBR;
   /** The NTE segments. */
   notes?: NTE[];
+  /** The TIMING PRIOR groups. */
+  timingPriors?: TimingPriorGroup[];
   /** The OBSERVATION PRIOR groups. */
   observationPriors: ObservationPriorGroup[];
+}
+
+/** The TIMING PRIOR group of an OML^O21 (HL7 v2.5.1) message being built. */
+export interface TimingPriorGroup {
+  /** The TQ1 segment. */
+  timing: TQ1;
+  /** The TQ2 segments. */
+  timingRelationships?: TQ2[];
 }
 
 /** The OBSERVATION PRIOR group of an OML^O21 (HL7 v2.5.1) message being built. */
@@ -183,6 +207,8 @@ export interface ObservationPriorGroup {
 
 /** The optional segments and groups of an OML^O21 (HL7 v2.5.1) message. */
 export interface OML_O21Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The NTE segments. */
   notes?: NTE[];
   /** The PATIENT group. */
@@ -199,14 +225,14 @@ export class OML_O21<TMSH extends MSH = MSH> {
   /** Constructor. */
   constructor(
     public header: TMSH,
-    public orderGenerals: OrderGeneralGroup[],
+    public orders: OrderGroup[],
     public options: OML_O21Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, header: this.header, orderGenerals: this.orderGenerals };
+    return { ...this.options, header: this.header, orders: this.orders };
   }
 
   /** Validates the message structure, returning a result. */
@@ -228,9 +254,9 @@ export class OML_O21<TMSH extends MSH = MSH> {
 /** Builds an HL7 OML^O21 (HL7 v2.5.1) message. */
 export function createOML_O21<TMSH extends MSH = MSH>(
   header: TMSH,
-  orderGenerals: OrderGeneralGroup[],
+  orders: OrderGroup[],
   options: OML_O21Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): OML_O21<TMSH> {
-  return new OML_O21(header, orderGenerals, options, encoding);
+  return new OML_O21(header, orders, options, encoding);
 }

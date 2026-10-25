@@ -1,7 +1,7 @@
 /**
  * Message structure for ORL^O22 messages (HL7 v2.5.1).
  *
- * Structure: MSH MSA [ERR] [{NTE}] [ RESPONSE: [ PATIENT: PID { GENERAL_ORDER: [ CONTAINER: SAC [{OBX}] ] [{ ORDER: ORC [ OBSERVATION_REQUEST: OBR [{SAC}] ] }] } ] ]
+ * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] [ RESPONSE: [ PATIENT: PID [{ ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] [ OBSERVATION_REQUEST: OBR [{ SPECIMEN: SPM [{SAC}] }] ] }] ] ]
  *
  * @module
  */
@@ -12,7 +12,8 @@ import type { StructureItem } from "../../types/schema.ts";
 export const ORL_O22_STRUCTURE: StructureItem[] = [
   { name: "MSH", required: true, repeating: false },
   { name: "MSA", required: true, repeating: false },
-  { name: "ERR", required: false, repeating: false },
+  { name: "ERR", required: false, repeating: true },
+  { name: "SFT", required: false, repeating: true },
   { name: "NTE", required: false, repeating: true },
   {
     name: "RESPONSE",
@@ -26,31 +27,32 @@ export const ORL_O22_STRUCTURE: StructureItem[] = [
         segments: [
           { name: "PID", required: true, repeating: false },
           {
-            name: "GENERAL_ORDER",
-            required: true,
+            name: "ORDER",
+            required: false,
             repeating: true,
             segments: [
+              { name: "ORC", required: true, repeating: false },
               {
-                name: "CONTAINER",
-                required: false,
-                repeating: false,
-                segments: [
-                  { name: "SAC", required: true, repeating: false },
-                  { name: "OBX", required: false, repeating: true },
-                ],
-              },
-              {
-                name: "ORDER",
+                name: "TIMING",
                 required: false,
                 repeating: true,
                 segments: [
-                  { name: "ORC", required: true, repeating: false },
+                  { name: "TQ1", required: true, repeating: false },
+                  { name: "TQ2", required: false, repeating: true },
+                ],
+              },
+              {
+                name: "OBSERVATION_REQUEST",
+                required: false,
+                repeating: false,
+                segments: [
+                  { name: "OBR", required: true, repeating: false },
                   {
-                    name: "OBSERVATION_REQUEST",
+                    name: "SPECIMEN",
                     required: false,
-                    repeating: false,
+                    repeating: true,
                     segments: [
-                      { name: "OBR", required: true, repeating: false },
+                      { name: "SPM", required: true, repeating: false },
                       { name: "SAC", required: false, repeating: true },
                     ],
                   },

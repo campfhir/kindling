@@ -1,7 +1,7 @@
 /**
  * Builder for PMU^B03 messages (HL7 v2.5.1).
  *
- * Structure: MSH EVN STF
+ * Structure: MSH [{SFT}] EVN STF
  *
  * @module
  */
@@ -11,11 +11,15 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { PMU_B03_STRUCTURE } from "../../structures/v2.5.1/PMU_B03.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { EVN } from "../../segments/v2.5.1/EVN.ts";
 import type { STF } from "../../segments/v2.5.1/STF.ts";
 
-/** The optional segments and groups of an PMU^B03 (HL7 v2.5.1) message. The message has none. */
-export type PMU_B03Options = Record<string, never>;
+/** The optional segments and groups of an PMU^B03 (HL7 v2.5.1) message. */
+export interface PMU_B03Options {
+  /** The SFT segments. */
+  software?: SFT[];
+}
 
 /** Builder for HL7 PMU^B03 (HL7 v2.5.1) messages. */
 export class PMU_B03<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TSTF extends STF = STF> {

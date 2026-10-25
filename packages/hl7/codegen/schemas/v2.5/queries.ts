@@ -126,25 +126,6 @@ export const ORF_W02_SCHEMA: MessageSchema = {
   ],
 };
 
-/**
- * OSR^Q06: MSH MSA [{ERR}] [{SFT}] [{NTE}] QRD [QRF] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }]
- *   ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}] } ] [DSC]
- *
- * Compared with v2.4: ERR repeats, SFT follows it, and each order gains the TIMING group. The
- * order detail stays required as in v2.4: the hl7.eu v2.5 and v2.5.1 tables show the choice without
- * brackets and HAPI v25/v251 add its members as required; Caristix alone marks it optional.
- * Sources: https://www.hl7.eu/HL7v2x/v25/std25/ch04.html, https://www.hl7.eu/HL7v2x/v251/std251/ch04.html (4.4.3).
- */
-export const OSR_Q06_SCHEMA: MessageSchema = {
-  messageType: "OSR",
-  triggerEvent: "Q06",
-  version: "2.5",
-  structure: [
-    req("MSH"), req("MSA"), optList("ERR"), SFT, optList("NTE"), req("QRD"), opt("QRF"),
-    osrResponse([req("ORC"), timing("TIMING", "ParsedTiming"), ...osrOrderDetail("required")]),
-    opt("DSC"),
-  ],
-};
 
 /**
  * SQR^S25: MSH MSA [{ERR}] QAK [{ SCHEDULE: SCH [{TQ1}] [{NTE}] [ PATIENT: PID [PV1] [PV2] [DG1] ] { RESOURCES: ... } }] [DSC]
@@ -185,5 +166,4 @@ export const QUERY_MESSAGES: MessageSchema[] = [
   ORF_R04_SCHEMA,
   ORF_W02_SCHEMA,
   OSQ_Q06_SCHEMA,
-  OSR_Q06_SCHEMA,
-];
+  ];

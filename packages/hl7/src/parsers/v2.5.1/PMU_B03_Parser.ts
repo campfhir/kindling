@@ -1,7 +1,7 @@
 /**
  * Parser for PMU^B03 messages (HL7 v2.5.1).
  *
- * Structure: MSH EVN STF
+ * Structure: MSH [{SFT}] EVN STF
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
 import { PMU_B03_STRUCTURE } from "../../structures/v2.5.1/PMU_B03.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { EVN } from "../../segments/v2.5.1/EVN.ts";
 import { STF } from "../../segments/v2.5.1/STF.ts";
 
@@ -18,6 +19,8 @@ import { STF } from "../../segments/v2.5.1/STF.ts";
 export interface ParsedPMU_B03 extends ParsedMessageBase {
   /** The MSH segment. */
   header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
   /** The EVN segment. */
   event: EVN;
   /** The STF segment. */
@@ -27,6 +30,7 @@ export interface ParsedPMU_B03 extends ParsedMessageBase {
 /** The segment parsers of PMU^B03 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
   EVN: (s, e) => EVN.parse(s, e),
   STF: (s, e) => STF.parse(s, e),
 };

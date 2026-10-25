@@ -1,7 +1,7 @@
 /**
  * Message structure for ADT^A54 messages (HL7 v2.5.1).
  *
- * Structure: MSH EVN PID [PD1] [{ROL}] PV1 [PV2] [{ROL}]
+ * Structure: MSH [{SFT}] EVN PID [PD1] [{ROL}] PV1 [PV2] [{ROL}]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 /** The segments, choices and groups of ADT^A54 (HL7 v2.5.1), in order. */
 export const ADT_A54_STRUCTURE: StructureItem[] = [
   { name: "MSH", required: true, repeating: false },
+  { name: "SFT", required: false, repeating: true },
   { name: "EVN", required: true, repeating: false },
   { name: "PID", required: true, repeating: false },
   { name: "PD1", required: false, repeating: false },

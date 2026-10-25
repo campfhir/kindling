@@ -1,7 +1,7 @@
 /**
  * Parser for BAR^P10 messages (HL7 v2.5.1).
  *
- * Structure: MSH EVN PID PV1 [{DG1}] GP1 [{ PROCEDURE: PR1 [GP2] }]
+ * Structure: MSH [{SFT}] EVN PID PV1 [{DG1}] GP1 [{ PROCEDURE: PR1 [GP2] }]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
 import { BAR_P10_STRUCTURE } from "../../structures/v2.5.1/BAR_P10.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { EVN } from "../../segments/v2.5.1/EVN.ts";
 import { PID } from "../../segments/v2.5.1/PID.ts";
 import { PV1 } from "../../segments/v2.5.1/PV1.ts";
@@ -31,6 +32,8 @@ export interface ParsedProcedure {
 export interface ParsedBAR_P10 extends ParsedMessageBase {
   /** The MSH segment. */
   header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
   /** The EVN segment. */
   event: EVN;
   /** The PID segment. */
@@ -48,6 +51,7 @@ export interface ParsedBAR_P10 extends ParsedMessageBase {
 /** The segment parsers of BAR^P10 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
   EVN: (s, e) => EVN.parse(s, e),
   PID: (s, e) => PID.parse(s, e),
   PV1: (s, e) => PV1.parse(s, e),

@@ -1,7 +1,7 @@
 /**
  * Builder for ORP^O10 messages (HL7 v2.5.1).
  *
- * Structure: MSH MSA [ERR] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [ ORDER_DETAIL: RXO [{NTE}] {RXR} [{RXC}] [{NTE}] ] } ]
+ * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] [ ORDER_DETAIL: RXO [{NTE}] {RXR} [{ COMPONENT: RXC [{NTE}] }] ] } ]
  *
  * @module
  */
@@ -13,9 +13,12 @@ import { ORP_O10_STRUCTURE } from "../../structures/v2.5.1/ORP_O10.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
 import type { MSA } from "../../segments/v2.5.1/MSA.ts";
 import type { ERR } from "../../segments/v2.5.1/ERR.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { NTE } from "../../segments/v2.5.1/NTE.ts";
 import type { PID } from "../../segments/v2.5.1/PID.ts";
 import type { ORC } from "../../segments/v2.5.1/ORC.ts";
+import type { TQ1 } from "../../segments/v2.5.1/TQ1.ts";
+import type { TQ2 } from "../../segments/v2.5.1/TQ2.ts";
 import type { RXO } from "../../segments/v2.5.1/RXO.ts";
 import type { RXR } from "../../segments/v2.5.1/RXR.ts";
 import type { RXC } from "../../segments/v2.5.1/RXC.ts";
@@ -40,8 +43,18 @@ export interface PatientGroup {
 export interface OrderGroup {
   /** The ORC segment. */
   commonOrder: ORC;
+  /** The TIMING groups. */
+  timings?: TimingGroup[];
   /** The ORDER DETAIL group. */
   orderDetail?: OrderDetailGroup;
+}
+
+/** The TIMING group of an ORP^O10 (HL7 v2.5.1) message being built. */
+export interface TimingGroup {
+  /** The TQ1 segment. */
+  timing: TQ1;
+  /** The TQ2 segments. */
+  timingRelationships?: TQ2[];
 }
 
 /** The ORDER DETAIL group of an ORP^O10 (HL7 v2.5.1) message being built. */
@@ -52,16 +65,24 @@ export interface OrderDetailGroup {
   notes?: NTE[];
   /** The RXR segments. */
   routes: RXR[];
-  /** The RXC segments. */
-  components?: RXC[];
+  /** The COMPONENT groups. */
+  components?: ComponentGroup[];
+}
+
+/** The COMPONENT group of an ORP^O10 (HL7 v2.5.1) message being built. */
+export interface ComponentGroup {
+  /** The RXC segment. */
+  component: RXC;
   /** The NTE segments. */
-  componentNotes?: NTE[];
+  notes?: NTE[];
 }
 
 /** The optional segments and groups of an ORP^O10 (HL7 v2.5.1) message. */
 export interface ORP_O10Options {
-  /** The ERR segment. */
-  error?: ERR;
+  /** The ERR segments. */
+  errors?: ERR[];
+  /** The SFT segments. */
+  software?: SFT[];
   /** The NTE segments. */
   notes?: NTE[];
   /** The RESPONSE group. */

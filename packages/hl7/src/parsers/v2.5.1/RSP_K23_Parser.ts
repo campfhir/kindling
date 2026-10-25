@@ -1,7 +1,7 @@
 /**
  * Parser for RSP^K23 messages (HL7 v2.5.1).
  *
- * Structure: MSH MSA [ERR] QAK QPD [PID] [DSC]
+ * Structure: MSH [{SFT}] MSA [ERR] QAK QPD [ QUERY_RESPONSE: PID ] [DSC]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
 import { RSP_K23_STRUCTURE } from "../../structures/v2.5.1/RSP_K23.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { MSA } from "../../segments/v2.5.1/MSA.ts";
 import { ERR } from "../../segments/v2.5.1/ERR.ts";
 import { QAK } from "../../segments/v2.5.1/QAK.ts";
@@ -18,10 +19,18 @@ import { QPD } from "../../segments/v2.5.1/QPD.ts";
 import { PID } from "../../segments/v2.5.1/PID.ts";
 import { DSC } from "../../segments/v2.5.1/DSC.ts";
 
+/** The QUERY RESPONSE group of a parsed RSP^K23 (HL7 v2.5.1) message. */
+export interface ParsedQueryResponse {
+  /** The PID segment. */
+  patient: PID;
+}
+
 /** Structured result of parsing an HL7 RSP^K23 (HL7 v2.5.1) message. */
 export interface ParsedRSP_K23 extends ParsedMessageBase {
   /** The MSH segment. */
   header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
   /** The MSA segment. */
   acknowledgment: MSA;
   /** The ERR segment. */
@@ -30,8 +39,8 @@ export interface ParsedRSP_K23 extends ParsedMessageBase {
   queryAcknowledgment: QAK;
   /** The QPD segment. */
   queryParameters: QPD;
-  /** The PID segment. */
-  patient?: PID;
+  /** The QUERY RESPONSE group. */
+  queryResponse?: ParsedQueryResponse;
   /** The DSC segment. */
   continuation?: DSC;
 }
@@ -39,6 +48,7 @@ export interface ParsedRSP_K23 extends ParsedMessageBase {
 /** The segment parsers of RSP^K23 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
   MSA: (s, e) => MSA.parse(s, e),
   ERR: (s, e) => ERR.parse(s, e),
   QAK: (s, e) => QAK.parse(s, e),

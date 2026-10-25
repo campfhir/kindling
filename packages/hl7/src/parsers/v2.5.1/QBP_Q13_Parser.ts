@@ -1,7 +1,7 @@
 /**
  * Parser for QBP^Q13 messages (HL7 v2.5.1).
  *
- * Structure: MSH QPD [RDF] RCP [DSC]
+ * Structure: MSH [{SFT}] QPD [RDF] RCP [DSC]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
 import { QBP_Q13_STRUCTURE } from "../../structures/v2.5.1/QBP_Q13.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { QPD } from "../../segments/v2.5.1/QPD.ts";
 import { RDF } from "../../segments/v2.5.1/RDF.ts";
 import { RCP } from "../../segments/v2.5.1/RCP.ts";
@@ -20,6 +21,8 @@ import { DSC } from "../../segments/v2.5.1/DSC.ts";
 export interface ParsedQBP_Q13 extends ParsedMessageBase {
   /** The MSH segment. */
   header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
   /** The QPD segment. */
   queryParameters: QPD;
   /** The RDF segment. */
@@ -33,6 +36,7 @@ export interface ParsedQBP_Q13 extends ParsedMessageBase {
 /** The segment parsers of QBP^Q13 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
   QPD: (s, e) => QPD.parse(s, e),
   RDF: (s, e) => RDF.parse(s, e),
   RCP: (s, e) => RCP.parse(s, e),

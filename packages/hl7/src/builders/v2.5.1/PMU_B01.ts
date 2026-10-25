@@ -1,7 +1,7 @@
 /**
  * Builder for PMU^B01 messages (HL7 v2.5.1).
  *
- * Structure: MSH EVN STF [{PRA}] [{ORG}] [{AFF}] [{LAN}] [{EDU}]
+ * Structure: MSH [{SFT}] EVN STF [{PRA}] [{ORG}] [{AFF}] [{LAN}] [{EDU}] [{CER}]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { PMU_B01_STRUCTURE } from "../../structures/v2.5.1/PMU_B01.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { EVN } from "../../segments/v2.5.1/EVN.ts";
 import type { STF } from "../../segments/v2.5.1/STF.ts";
 import type { PRA } from "../../segments/v2.5.1/PRA.ts";
@@ -18,9 +19,12 @@ import type { ORG } from "../../segments/v2.5.1/ORG.ts";
 import type { AFF } from "../../segments/v2.5.1/AFF.ts";
 import type { LAN } from "../../segments/v2.5.1/LAN.ts";
 import type { EDU } from "../../segments/v2.5.1/EDU.ts";
+import type { CER } from "../../segments/v2.5.1/CER.ts";
 
 /** The optional segments and groups of an PMU^B01 (HL7 v2.5.1) message. */
 export interface PMU_B01Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The PRA segments. */
   practitioners?: PRA[];
   /** The ORG segments. */
@@ -31,6 +35,8 @@ export interface PMU_B01Options {
   languages?: LAN[];
   /** The EDU segments. */
   educations?: EDU[];
+  /** The CER segments. */
+  certificates?: CER[];
 }
 
 /** Builder for HL7 PMU^B01 (HL7 v2.5.1) messages. */

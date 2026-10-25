@@ -1,7 +1,7 @@
 /**
  * Parser for PMU^B04 messages (HL7 v2.5.1).
  *
- * Structure: MSH EVN STF [{PRA}] [ORG]
+ * Structure: MSH [{SFT}] EVN STF [{PRA}] [{ORG}]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
 import { PMU_B04_STRUCTURE } from "../../structures/v2.5.1/PMU_B04.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { EVN } from "../../segments/v2.5.1/EVN.ts";
 import { STF } from "../../segments/v2.5.1/STF.ts";
 import { PRA } from "../../segments/v2.5.1/PRA.ts";
@@ -20,19 +21,22 @@ import { ORG } from "../../segments/v2.5.1/ORG.ts";
 export interface ParsedPMU_B04 extends ParsedMessageBase {
   /** The MSH segment. */
   header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
   /** The EVN segment. */
   event: EVN;
   /** The STF segment. */
   staff: STF;
   /** The PRA segments. */
   practitioners?: PRA[];
-  /** The ORG segment. */
-  organizationUnit?: ORG;
+  /** The ORG segments. */
+  organizationUnits?: ORG[];
 }
 
 /** The segment parsers of PMU^B04 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
   EVN: (s, e) => EVN.parse(s, e),
   STF: (s, e) => STF.parse(s, e),
   PRA: (s, e) => PRA.parse(s, e),

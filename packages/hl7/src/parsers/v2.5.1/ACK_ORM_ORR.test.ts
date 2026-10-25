@@ -44,7 +44,7 @@ describe("v2.5.1 ACK", () => {
 });
 
 describe("v2.5.1 ORM^O01", () => {
-  test("parses CTD, FT1 and repeating IN3 into v2.5.1 classes", () => {
+  test("parses CTD, FT1 and the IN3 into v2.5.1 classes", () => {
     const wire = createORM_O01(
       msh("ORM", "O01"),
       [{
@@ -52,7 +52,7 @@ describe("v2.5.1 ORM^O01", () => {
         detail: { segment: new OBR().setId("1"), contact: new CTD().contactRole({ identifier: "EP" }, { identifier: "CP" }) },
         transactions: [new FT1().setId("1").transactionReferenceKey("7")],
       }],
-      { patient: new PID().setId("1"), insurances: [{ insurance: new IN1().setId("1"), insuranceCertifications: [new IN3(), new IN3()] }] },
+      { patient: new PID().setId("1"), insurances: [{ insurance: new IN1().setId("1"), insuranceCertification: new IN3() }] },
     ).encode();
     const result = parseORM_O01(wire);
     expect(result.ok).toBe(true);
@@ -64,7 +64,7 @@ describe("v2.5.1 ORM^O01", () => {
     expect(order.transactions![0]).toBeInstanceOf(FT1);
     expect(order.transactions![0].encode().split("|")[31]).toBe("7");
     expect(result.val.patient).toBeInstanceOf(PID);
-    expect(result.val.insurances![0].insuranceCertifications).toHaveLength(2);
+    expect(result.val.insurances![0].insuranceCertification).toBeInstanceOf(IN3);
   });
 });
 
@@ -73,13 +73,13 @@ describe("v2.5.1 ORR^O02", () => {
     const wire = createORR_O02(msh("ORR", "O02"), new MSA().acknowledgmentCode("AA").messageControlId("1"), {
       errors: [new ERR().severity("W"), new ERR().severity("I")],
       patient: new PID().setId("1"),
-      orders: [{ commonOrder: new ORC().orderControl("OK"), detail: { segment: new OBR().setId("1") } }],
+      orders: [{ commonOrder: new ORC().orderControl("OK"), segment: new OBR().setId("1") }],
     }).encode();
     const result = parseORR_O02(wire);
     expect(result.ok).toBe(true);
     if (!result.ok) return;
     expect(result.val.errors).toHaveLength(2);
     expect(result.val.errors![0]).toBeInstanceOf(ERR);
-    expect(result.val.orders![0].detail?.segment).toBeInstanceOf(OBR);
+    expect(result.val.orders![0].segment).toBeInstanceOf(OBR);
   });
 });

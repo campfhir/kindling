@@ -178,6 +178,19 @@ if (hl7euDir && existsSync(hl7euDir)) {
   for (const f of readdirSync(hl7euDir).filter((f) => f.endsWith(".htm"))) {
     const raw = readFileSync(join(hl7euDir, f)).toString("latin1");
     const text = raw
+      // A table row keeps its first two cells (the code with its brackets, and the description, which
+      // names the table for the anchor below); the other columns and any segment code in the description
+      // ("… the data for the entry identified in the MFE segment", v2.5 ch8) would read as structure.
+      .replace(/<tr[^>]*>([\s\S]*?)<\/tr>/gi, (row: string, inner: string) => {
+        const cells = [...inner.matchAll(/<(td|th)[^>]*>([\s\S]*?)<\/\1>/gi)];
+        if (cells.length < 2 || cells[0][1].toLowerCase() === "th") return row;
+        // An "OBR" row described as the "Order Detail Segment" (v2.5 ch12, and ch4 with the "[Order Detail
+        // Segment] OBR, etc." remark) stands for the order detail choice; the rows that may follow it
+        // (RQD … ODT) spell the choice out, and tokenizeHl7eu folds them back into the one choice.
+        const remark = /Order Detail Segment/.test(cells[1][2]) && /^\s*(?:&lt;|<)?\s*OBR\b/.test(cells[0][2].replace(/<[^>]+>/g, ""));
+        if (remark) return "<tr><td> ORDER_DETAIL_CHOICE </td><td></td></tr>";
+        return `<tr><td>${cells[0][2]}</td><td>${cells[1][2].replace(/\b[A-Z][A-Z0-9]{2}\b/g, " ")}</td></tr>`;
+      })
       .replace(/<[^>]+>/g, " ").replace(/&nbsp;|&#160;/g, " ").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/\s+/g, " ")
       // "[Order Detail Segment] OBR, etc.", "[ Order Detail Segment OBR, etc. 4 …" and "[OBR, etc... Order Detail Segment, etc." all mean the order detail choice.
       .replace(/OBR,?\s*etc\.{0,3}/g, " ")
@@ -234,6 +247,16 @@ function tokenizeHl7eu(text: string): Line[] | undefined {
   const clean = text.replace(/\([^()]{0,60}\)/g, " ").replace(/(?<=.)\b[A-Z][A-Z0-9]{2}\^[A-Z0-9]{3}(?:\^[A-Z0-9_]+)?/g, " NEXT_CAPTION ");
   const matches = [...clean.matchAll(/\[|\]|\{|\}|ORDER_DETAIL_CHOICE|ACK_TABLE|NEXT_CAPTION|\b[A-Z][A-Z0-9]{2}\b|\b\d+\.\d+(?:\.\d+)*\b|Chapter/g)];
   const tokens = matches.map((m) => m[0]);
+  // The v2.5 pages print the order detail choice as one row per segment ("OBR", "RQD", …, "ODT >",
+  // the "[Order Detail Segment] OBR, etc." remark in a third column): the run is the choice.
+  const CHOICE_ROWS = ["RQD", "RQ1", "RXO", "ODS", "ODT"];
+  for (let k = 1; k + CHOICE_ROWS.length <= tokens.length; k++) {
+    if (!(tokens[k - 1] === "OBR" || tokens[k - 1] === "ORDER_DETAIL_CHOICE") || !CHOICE_ROWS.every((code, j) => tokens[k + j] === code)) continue;
+    const from = tokens[k - 2] === "ORDER_DETAIL_CHOICE" ? k - 2 : k - 1;
+    const count = k + CHOICE_ROWS.length - from;
+    tokens.splice(from, count, "ORDER_DETAIL_CHOICE");
+    matches.splice(from, count, matches[from]);
+  }
   const isSegment = (t: string) => SEGMENT_CODES.has(t) || t === "ORDER_DETAIL_CHOICE";
   let mshSeen = 0;
   const isStop = (t: string) => /^\d+\.\d+/.test(t) || t === "Chapter" || t === "ACK_TABLE" || t === "NEXT_CAPTION" || (t === "MSH" && mshSeen > 0);

@@ -1,7 +1,7 @@
 /**
  * Message structure for ADT^A03 messages (HL7 v2.5).
  *
- * Structure: MSH [{SFT}] EVN PID [PD1] PV1 [PV2] [{DB1}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] }] [{OBX}]
+ * Structure: MSH [{SFT}] EVN PID [PD1] [{ROL}] [{NK1}] PV1 [PV2] [{ROL}] [{DB1}] [{AL1}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] }] [{OBX}] [{GT1}] [{ INSURANCE: IN1 [IN2] [{IN3}] [{ROL}] }] [ACC] [PDA]
  *
  * @module
  */
@@ -15,9 +15,13 @@ export const ADT_A03_STRUCTURE: StructureItem[] = [
   { name: "EVN", required: true, repeating: false },
   { name: "PID", required: true, repeating: false },
   { name: "PD1", required: false, repeating: false },
+  { name: "ROL", required: false, repeating: true },
+  { name: "NK1", required: false, repeating: true },
   { name: "PV1", required: true, repeating: false },
   { name: "PV2", required: false, repeating: false },
+  { name: "ROL", required: false, repeating: true, as: "visitRoles" },
   { name: "DB1", required: false, repeating: true },
+  { name: "AL1", required: false, repeating: true },
   { name: "DG1", required: false, repeating: true },
   { name: "DRG", required: false, repeating: false },
   {
@@ -30,4 +34,19 @@ export const ADT_A03_STRUCTURE: StructureItem[] = [
     ],
   },
   { name: "OBX", required: false, repeating: true },
+  { name: "GT1", required: false, repeating: true },
+  {
+    name: "INSURANCE",
+    required: false,
+    repeating: true,
+    as: "insuranceGroups",
+    segments: [
+      { name: "IN1", required: true, repeating: false },
+      { name: "IN2", required: false, repeating: false },
+      { name: "IN3", required: false, repeating: true },
+      { name: "ROL", required: false, repeating: true },
+    ],
+  },
+  { name: "ACC", required: false, repeating: false },
+  { name: "PDA", required: false, repeating: false },
 ];

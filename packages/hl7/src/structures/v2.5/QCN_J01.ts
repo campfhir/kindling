@@ -1,7 +1,16 @@
 /**
- * QCN_J01 structure for HL7 v2.5 — identical to v2.4, re-exported.
+ * Message structure for QCN^J01 messages (HL7 v2.5).
+ *
+ * Structure: MSH [{SFT}] QID
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.4/QCN_J01.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { StructureItem } from "../../types/schema.ts";
+
+/** The segments, choices and groups of QCN^J01 (HL7 v2.5), in order. */
+export const QCN_J01_STRUCTURE: StructureItem[] = [
+  { name: "MSH", required: true, repeating: false },
+  { name: "SFT", required: false, repeating: true },
+  { name: "QID", required: true, repeating: false },
+];

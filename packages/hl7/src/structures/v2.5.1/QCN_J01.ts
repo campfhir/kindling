@@ -1,7 +1,7 @@
 /**
  * Message structure for QCN^J01 messages (HL7 v2.5.1).
  *
- * Structure: MSH QID
+ * Structure: MSH [{SFT}] QID
  *
  * @module
  */
@@ -11,5 +11,6 @@ import type { StructureItem } from "../../types/schema.ts";
 /** The segments, choices and groups of QCN^J01 (HL7 v2.5.1), in order. */
 export const QCN_J01_STRUCTURE: StructureItem[] = [
   { name: "MSH", required: true, repeating: false },
+  { name: "SFT", required: false, repeating: true },
   { name: "QID", required: true, repeating: false },
 ];

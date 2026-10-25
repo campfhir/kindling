@@ -1,7 +1,7 @@
 /**
  * Message structure for OUL^R21 messages (HL7 v2.5.1).
  *
- * Structure: MSH [NTE] [ PATIENT: PID [PD1] [{NTE}] ] [ VISIT: PV1 [PV2] ] { ORDER_OBSERVATION: [ CONTAINER: SAC [SID] [{OBX}] ] [ORC] OBR [{NTE}] { OBSERVATION: [OBX] [TCD] [{SID}] [{NTE}] } [{CTI}] } [DSC]
+ * Structure: MSH [{SFT}] [NTE] [ PATIENT: PID [PD1] [{NTE}] ] [ VISIT: PV1 [PV2] ] { ORDER_OBSERVATION: [ CONTAINER: SAC [SID] ] [ORC] OBR [{NTE}] [{ TIMING_QTY: TQ1 [{TQ2}] }] { OBSERVATION: [OBX] [TCD] [{SID}] [{NTE}] } [{CTI}] } [DSC]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 /** The segments, choices and groups of OUL^R21 (HL7 v2.5.1), in order. */
 export const OUL_R21_STRUCTURE: StructureItem[] = [
   { name: "MSH", required: true, repeating: false },
+  { name: "SFT", required: false, repeating: true },
   { name: "NTE", required: false, repeating: false },
   {
     name: "PATIENT",
@@ -43,12 +44,20 @@ export const OUL_R21_STRUCTURE: StructureItem[] = [
         segments: [
           { name: "SAC", required: true, repeating: false },
           { name: "SID", required: false, repeating: false },
-          { name: "OBX", required: false, repeating: true },
         ],
       },
       { name: "ORC", required: false, repeating: false },
       { name: "OBR", required: true, repeating: false },
       { name: "NTE", required: false, repeating: true },
+      {
+        name: "TIMING_QTY",
+        required: false,
+        repeating: true,
+        segments: [
+          { name: "TQ1", required: true, repeating: false },
+          { name: "TQ2", required: false, repeating: true },
+        ],
+      },
       {
         name: "OBSERVATION",
         required: true,

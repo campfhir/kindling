@@ -1,21 +1,10 @@
 /**
  * Message structure for PMU^B02 messages (HL7 v2.5.1).
  *
- * Structure: MSH EVN STF [{PRA}] [{ORG}] [{AFF}] [{LAN}] [{EDU}]
+ * Structure: MSH [{SFT}] EVN STF [{PRA}] [{ORG}] [{AFF}] [{LAN}] [{EDU}] [{CER}]
+ * Shares the PMU^B01 structure.
  *
  * @module
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
-import type { StructureItem } from "../../types/schema.ts";
-
-/** The segments, choices and groups of PMU^B02 (HL7 v2.5.1), in order. */
-export const PMU_B02_STRUCTURE: StructureItem[] = [
-  { name: "MSH", required: true, repeating: false },
-  { name: "EVN", required: true, repeating: false },
-  { name: "STF", required: true, repeating: false },
-  { name: "PRA", required: false, repeating: true },
-  { name: "ORG", required: false, repeating: true },
-  { name: "AFF", required: false, repeating: true },
-  { name: "LAN", required: false, repeating: true },
-  { name: "EDU", required: false, repeating: true },
-];
+export { PMU_B01_STRUCTURE as PMU_B02_STRUCTURE } from "./PMU_B01.ts";

@@ -1,7 +1,7 @@
 /**
  * Parser for LSU^U12 messages (HL7 v2.5.1).
  *
- * Structure: MSH EQU {EQP} [ROL]
+ * Structure: MSH [{SFT}] EQU {EQP} [ROL]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
 import { LSU_U12_STRUCTURE } from "../../structures/v2.5.1/LSU_U12.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { EQU } from "../../segments/v2.5.1/EQU.ts";
 import { EQP } from "../../segments/v2.5.1/EQP.ts";
 import { ROL } from "../../segments/v2.5.1/ROL.ts";
@@ -19,6 +20,8 @@ import { ROL } from "../../segments/v2.5.1/ROL.ts";
 export interface ParsedLSU_U12 extends ParsedMessageBase {
   /** The MSH segment. */
   header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
   /** The EQU segment. */
   equipmentDetail: EQU;
   /** The EQP segments. */
@@ -30,6 +33,7 @@ export interface ParsedLSU_U12 extends ParsedMessageBase {
 /** The segment parsers of LSU^U12 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
   EQU: (s, e) => EQU.parse(s, e),
   EQP: (s, e) => EQP.parse(s, e),
   ROL: (s, e) => ROL.parse(s, e),

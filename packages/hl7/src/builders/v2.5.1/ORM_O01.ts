@@ -1,7 +1,7 @@
 /**
  * Builder for ORM^O01 messages (HL7 v2.5.1).
  *
- * Structure: MSH [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [{IN3}] }] [GT1] [{AL1}] ] { ORDER: ORC [ ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [CTD] [{DG1}] [{ OBSERVATION: OBX [{NTE}] }] ] [{FT1}] [{CTI}] [BLG] }
+ * Structure: MSH [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC [ ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [CTD] [{DG1}] [{ OBSERVATION: OBX [{NTE}] }] ] [{FT1}] [{CTI}] [BLG] }
  *
  * @module
  */
@@ -41,8 +41,8 @@ export interface InsuranceGroup {
   insurance: IN1;
   /** The IN2 segment. */
   insuranceDetails?: IN2;
-  /** The IN3 segments. */
-  insuranceCertifications?: IN3[];
+  /** The IN3 segment. */
+  insuranceCertification?: IN3;
 }
 
 /** The ORDER group of an ORM^O01 (HL7 v2.5.1) message being built. */

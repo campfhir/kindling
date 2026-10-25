@@ -90,9 +90,10 @@ bases before derived versions.
   An existing wrapper file is never overwritten, so 2.5.1-specific fields can be added by hand.
   Every message is generated against these classes.
 - **Re-export version** (`reexport: true`: `v2.3.1`, `v2.4`, `v2.5`): the messages it lists are
-  generated against its own segment modules (v2.3.1 and v2.4 list every message, so all 276 and
-  334 of them are generated against the 2.3.1 and 2.4 segment classes; v2.5 lists only the messages
-  whose structure changed); every other segment, structure, parser and builder of the base version
+  generated against its own segment modules (v2.3.1, v2.4 and v2.5 list every message, so all 276,
+  334 and 387 of them are generated against the 2.3.1, 2.4 and 2.5 segment classes; v2.5 derives
+  the unchanged ones from the v2.4 list, with `[{SFT}]` after MSH unless the message kept its older
+  shape, see `codegen/schemas/v2.5/version.ts`); every other segment, structure, parser and builder of the base version
   is mirrored as `export * from "../<base>/X.ts"`. A segment of the version that has its own module
   (hand-written, or generated from `codegen/spec/<version>-segments.json` by `generate-segments.ts`,
   possibly as a subclass of the older class) is never mirrored; segments first introduced in the
@@ -121,8 +122,8 @@ codegen/
     v2.3/              # one file per message family + version.ts + index.ts
     v2.3.1/            # every message re-versioned from v2.3, plus the 2.3.1 changes (ADT.ts, changed.ts, …)
     v2.4/              # every message re-versioned from v2.3.1, plus the 2.4 changes (ADT.ts, …) and the 57 new 2.4 messages
-    v2.5/              # messages that changed in 2.5 (+ SFT, TQ1/TQ2, SPM, ORU^R30 ...)
-    v2.5.1/            # re-versions the v2.5 list (nothing changed between 2.5 and 2.5.1)
+    v2.5/              # every message derived from v2.4 (+ SFT), plus the 2.5 changes (ADT.ts, laboratory.ts, QBP.ts, …) and the 50 new 2.5 messages
+    v2.5.1/            # re-versions the v2.5 list (the 2.5.1 sweep is pending)
   generators/
     message.ts         # structure, parser and builder modules (+ baseMessage wrappers)
     segment.ts         # derived-version segment wrapper classes

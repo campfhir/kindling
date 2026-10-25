@@ -1,7 +1,7 @@
 /**
  * Builder for ESR^U02 messages (HL7 v2.5.1).
  *
- * Structure: MSH EQU [ROL]
+ * Structure: MSH [{SFT}] EQU [ROL]
  *
  * @module
  */
@@ -11,11 +11,14 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { ESR_U02_STRUCTURE } from "../../structures/v2.5.1/ESR_U02.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { EQU } from "../../segments/v2.5.1/EQU.ts";
 import type { ROL } from "../../segments/v2.5.1/ROL.ts";
 
 /** The optional segments and groups of an ESR^U02 (HL7 v2.5.1) message. */
 export interface ESR_U02Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The ROL segment. */
   role?: ROL;
 }

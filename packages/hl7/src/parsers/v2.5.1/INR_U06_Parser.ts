@@ -1,7 +1,7 @@
 /**
  * Parser for INR^U06 messages (HL7 v2.5.1).
  *
- * Structure: MSH EQU {INV} [ROL]
+ * Structure: MSH [{SFT}] EQU {INV} [ROL]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
 import { INR_U06_STRUCTURE } from "../../structures/v2.5.1/INR_U06.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { EQU } from "../../segments/v2.5.1/EQU.ts";
 import { INV } from "../../segments/v2.5.1/INV.ts";
 import { ROL } from "../../segments/v2.5.1/ROL.ts";
@@ -19,6 +20,8 @@ import { ROL } from "../../segments/v2.5.1/ROL.ts";
 export interface ParsedINR_U06 extends ParsedMessageBase {
   /** The MSH segment. */
   header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
   /** The EQU segment. */
   equipmentDetail: EQU;
   /** The INV segments. */
@@ -30,6 +33,7 @@ export interface ParsedINR_U06 extends ParsedMessageBase {
 /** The segment parsers of INR^U06 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
   EQU: (s, e) => EQU.parse(s, e),
   INV: (s, e) => INV.parse(s, e),
   ROL: (s, e) => ROL.parse(s, e),

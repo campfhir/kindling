@@ -1,7 +1,7 @@
 /**
  * Builder for OUL^R21 messages (HL7 v2.5.1).
  *
- * Structure: MSH [NTE] [ PATIENT: PID [PD1] [{NTE}] ] [ VISIT: PV1 [PV2] ] { ORDER_OBSERVATION: [ CONTAINER: SAC [SID] [{OBX}] ] [ORC] OBR [{NTE}] { OBSERVATION: [OBX] [TCD] [{SID}] [{NTE}] } [{CTI}] } [DSC]
+ * Structure: MSH [{SFT}] [NTE] [ PATIENT: PID [PD1] [{NTE}] ] [ VISIT: PV1 [PV2] ] { ORDER_OBSERVATION: [ CONTAINER: SAC [SID] ] [ORC] OBR [{NTE}] [{ TIMING_QTY: TQ1 [{TQ2}] }] { OBSERVATION: [OBX] [TCD] [{SID}] [{NTE}] } [{CTI}] } [DSC]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { OUL_R21_STRUCTURE } from "../../structures/v2.5.1/OUL_R21.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { NTE } from "../../segments/v2.5.1/NTE.ts";
 import type { PID } from "../../segments/v2.5.1/PID.ts";
 import type { PD1 } from "../../segments/v2.5.1/PD1.ts";
@@ -18,9 +19,11 @@ import type { PV1 } from "../../segments/v2.5.1/PV1.ts";
 import type { PV2 } from "../../segments/v2.5.1/PV2.ts";
 import type { SAC } from "../../segments/v2.5.1/SAC.ts";
 import type { SID } from "../../segments/v2.5.1/SID.ts";
-import type { OBX } from "../../segments/v2.5.1/OBX.ts";
 import type { ORC } from "../../segments/v2.5.1/ORC.ts";
 import type { OBR } from "../../segments/v2.5.1/OBR.ts";
+import type { TQ1 } from "../../segments/v2.5.1/TQ1.ts";
+import type { TQ2 } from "../../segments/v2.5.1/TQ2.ts";
+import type { OBX } from "../../segments/v2.5.1/OBX.ts";
 import type { TCD } from "../../segments/v2.5.1/TCD.ts";
 import type { CTI } from "../../segments/v2.5.1/CTI.ts";
 import type { DSC } from "../../segments/v2.5.1/DSC.ts";
@@ -53,6 +56,8 @@ export interface OrderObservationGroup {
   observationRequest: OBR;
   /** The NTE segments. */
   notes?: NTE[];
+  /** The TIMING QTY groups. */
+  timingQtys?: TimingQtyGroup[];
   /** The OBSERVATION groups. */
   observations: ObservationGroup[];
   /** The CTI segments. */
@@ -65,8 +70,14 @@ export interface ContainerGroup {
   specimenContainer: SAC;
   /** The SID segment. */
   substanceIdentifier?: SID;
-  /** The OBX segments. */
-  observations?: OBX[];
+}
+
+/** The TIMING QTY group of an OUL^R21 (HL7 v2.5.1) message being built. */
+export interface TimingQtyGroup {
+  /** The TQ1 segment. */
+  timing: TQ1;
+  /** The TQ2 segments. */
+  timingRelationships?: TQ2[];
 }
 
 /** The OBSERVATION group of an OUL^R21 (HL7 v2.5.1) message being built. */
@@ -83,6 +94,8 @@ export interface ObservationGroup {
 
 /** The optional segments and groups of an OUL^R21 (HL7 v2.5.1) message. */
 export interface OUL_R21Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The NTE segment. */
   note?: NTE;
   /** The PATIENT group. */

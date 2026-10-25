@@ -1,7 +1,18 @@
 /**
- * INU_U05 structure for HL7 v2.5 — identical to v2.4, re-exported.
+ * Message structure for INU^U05 messages (HL7 v2.5).
+ *
+ * Structure: MSH [{SFT}] EQU {INV} [ROL]
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.4/INU_U05.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { StructureItem } from "../../types/schema.ts";
+
+/** The segments, choices and groups of INU^U05 (HL7 v2.5), in order. */
+export const INU_U05_STRUCTURE: StructureItem[] = [
+  { name: "MSH", required: true, repeating: false },
+  { name: "SFT", required: false, repeating: true },
+  { name: "EQU", required: true, repeating: false },
+  { name: "INV", required: true, repeating: true },
+  { name: "ROL", required: false, repeating: false },
+];

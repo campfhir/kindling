@@ -1,7 +1,7 @@
 /**
  * Message structure for ADT^A37 messages (HL7 v2.5.1).
  *
- * Structure: MSH [{SFT}] EVN PID [PD1] [PV1] [{DB1}] PID [PV1] [{DB1}]
+ * Structure: MSH [{SFT}] EVN PID [PD1] [PV1] [{DB1}] PID [PD1] [PV1] [{DB1}]
  *
  * @module
  */
@@ -18,6 +18,7 @@ export const ADT_A37_STRUCTURE: StructureItem[] = [
   { name: "PV1", required: false, repeating: false },
   { name: "DB1", required: false, repeating: true },
   { name: "PID", required: true, repeating: false, as: "otherPatient" },
+  { name: "PD1", required: false, repeating: false, as: "otherPatientDemographics" },
   { name: "PV1", required: false, repeating: false, as: "otherVisit" },
   { name: "DB1", required: false, repeating: true, as: "otherDisabilities" },
 ];

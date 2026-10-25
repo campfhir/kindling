@@ -1,7 +1,7 @@
 /**
  * Builder for OMP^O09 messages (HL7 v2.5.1).
  *
- * Structure: MSH [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC RXO [{NTE}] {RXR} [ COMPONENT: {RXC} [{NTE}] ] [{ OBSERVATION: OBX [{NTE}] }] [{FT1}] [BLG] }
+ * Structure: MSH [{SFT}] [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] RXO [{NTE}] {RXR} [{ COMPONENT: RXC [{NTE}] }] [{ OBSERVATION: OBX [{NTE}] }] [{FT1}] [BLG] }
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { OMP_O09_STRUCTURE } from "../../structures/v2.5.1/OMP_O09.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { NTE } from "../../segments/v2.5.1/NTE.ts";
 import type { PID } from "../../segments/v2.5.1/PID.ts";
 import type { PD1 } from "../../segments/v2.5.1/PD1.ts";
@@ -22,6 +23,8 @@ import type { IN3 } from "../../segments/v2.5.1/IN3.ts";
 import type { GT1 } from "../../segments/v2.5.1/GT1.ts";
 import type { AL1 } from "../../segments/v2.5.1/AL1.ts";
 import type { ORC } from "../../segments/v2.5.1/ORC.ts";
+import type { TQ1 } from "../../segments/v2.5.1/TQ1.ts";
+import type { TQ2 } from "../../segments/v2.5.1/TQ2.ts";
 import type { RXO } from "../../segments/v2.5.1/RXO.ts";
 import type { RXR } from "../../segments/v2.5.1/RXR.ts";
 import type { RXC } from "../../segments/v2.5.1/RXC.ts";
@@ -69,14 +72,16 @@ export interface InsuranceGroup {
 export interface OrderGroup {
   /** The ORC segment. */
   commonOrder: ORC;
+  /** The TIMING groups. */
+  timings?: TimingGroup[];
   /** The RXO segment. */
   pharmacyOrder: RXO;
   /** The NTE segments. */
   notes?: NTE[];
   /** The RXR segments. */
   routes: RXR[];
-  /** The COMPONENT group. */
-  component?: ComponentGroup;
+  /** The COMPONENT groups. */
+  components?: ComponentGroup[];
   /** The OBSERVATION groups. */
   observations?: ObservationGroup[];
   /** The FT1 segments. */
@@ -85,10 +90,18 @@ export interface OrderGroup {
   billing?: BLG;
 }
 
+/** The TIMING group of an OMP^O09 (HL7 v2.5.1) message being built. */
+export interface TimingGroup {
+  /** The TQ1 segment. */
+  timing: TQ1;
+  /** The TQ2 segments. */
+  timingRelationships?: TQ2[];
+}
+
 /** The COMPONENT group of an OMP^O09 (HL7 v2.5.1) message being built. */
 export interface ComponentGroup {
-  /** The RXC segments. */
-  components: RXC[];
+  /** The RXC segment. */
+  component: RXC;
   /** The NTE segments. */
   notes?: NTE[];
 }
@@ -103,6 +116,8 @@ export interface ObservationGroup {
 
 /** The optional segments and groups of an OMP^O09 (HL7 v2.5.1) message. */
 export interface OMP_O09Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The NTE segments. */
   notes?: NTE[];
   /** The PATIENT group. */

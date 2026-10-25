@@ -1,7 +1,7 @@
 /**
  * Parser for RSP^K11 messages (HL7 v2.5.1).
  *
- * Structure: MSH MSA [ERR] QAK QPD [DSC]
+ * Structure: MSH [{SFT}] MSA [ERR] QAK QPD [DSC]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
 import { RSP_K11_STRUCTURE } from "../../structures/v2.5.1/RSP_K11.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { MSA } from "../../segments/v2.5.1/MSA.ts";
 import { ERR } from "../../segments/v2.5.1/ERR.ts";
 import { QAK } from "../../segments/v2.5.1/QAK.ts";
@@ -21,6 +22,8 @@ import { DSC } from "../../segments/v2.5.1/DSC.ts";
 export interface ParsedRSP_K11 extends ParsedMessageBase {
   /** The MSH segment. */
   header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
   /** The MSA segment. */
   acknowledgment: MSA;
   /** The ERR segment. */
@@ -36,6 +39,7 @@ export interface ParsedRSP_K11 extends ParsedMessageBase {
 /** The segment parsers of RSP^K11 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
   MSA: (s, e) => MSA.parse(s, e),
   ERR: (s, e) => ERR.parse(s, e),
   QAK: (s, e) => QAK.parse(s, e),

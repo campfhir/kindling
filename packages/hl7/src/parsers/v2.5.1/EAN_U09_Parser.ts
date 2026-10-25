@@ -1,7 +1,7 @@
 /**
  * Parser for EAN^U09 messages (HL7 v2.5.1).
  *
- * Structure: MSH EQU { NOTIFICATION: NDS [NTE] } [ROL]
+ * Structure: MSH [{SFT}] EQU { NOTIFICATION: NDS [NTE] } [ROL]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
 import { EAN_U09_STRUCTURE } from "../../structures/v2.5.1/EAN_U09.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { EQU } from "../../segments/v2.5.1/EQU.ts";
 import { NDS } from "../../segments/v2.5.1/NDS.ts";
 import { NTE } from "../../segments/v2.5.1/NTE.ts";
@@ -28,6 +29,8 @@ export interface ParsedNotification {
 export interface ParsedEAN_U09 extends ParsedMessageBase {
   /** The MSH segment. */
   header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
   /** The EQU segment. */
   equipmentDetail: EQU;
   /** The NOTIFICATION groups. */
@@ -39,6 +42,7 @@ export interface ParsedEAN_U09 extends ParsedMessageBase {
 /** The segment parsers of EAN^U09 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
   EQU: (s, e) => EQU.parse(s, e),
   NDS: (s, e) => NDS.parse(s, e),
   NTE: (s, e) => NTE.parse(s, e),

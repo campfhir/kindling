@@ -1,7 +1,7 @@
 /**
  * Parser for ADT^A07 messages (HL7 v2.5).
  *
- * Structure: MSH [{SFT}] EVN PID [PD1] [MRG] [{NK1}] PV1 [PV2] [{DB1}] [DRG] [{OBX}] [{AL1}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] }] [{GT1}] [{ INSURANCE: IN1 [IN2] [IN3] }] [ACC] [UB1] [UB2]
+ * Structure: MSH [{SFT}] EVN PID [PD1] [{ROL}] [MRG] [{NK1}] PV1 [PV2] [{ROL}] [{DB1}] [{OBX}] [{AL1}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] }] [{GT1}] [{ INSURANCE: IN1 [IN2] [{IN3}] [{ROL}] }] [ACC] [UB1] [UB2]
  * Shares the ADT^A06 structure.
  *
  * @module

@@ -1,7 +1,7 @@
 /**
  * Parser for ORL^O22 messages (HL7 v2.5.1).
  *
- * Structure: MSH MSA [ERR] [{NTE}] [ RESPONSE: [ PATIENT: PID { GENERAL_ORDER: [ CONTAINER: SAC [{OBX}] ] [{ ORDER: ORC [ OBSERVATION_REQUEST: OBR [{SAC}] ] }] } ] ]
+ * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] [ RESPONSE: [ PATIENT: PID [{ ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] [ OBSERVATION_REQUEST: OBR [{ SPECIMEN: SPM [{SAC}] }] ] }] ] ]
  *
  * @module
  */
@@ -13,12 +13,15 @@ import { ORL_O22_STRUCTURE } from "../../structures/v2.5.1/ORL_O22.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
 import { MSA } from "../../segments/v2.5.1/MSA.ts";
 import { ERR } from "../../segments/v2.5.1/ERR.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { NTE } from "../../segments/v2.5.1/NTE.ts";
 import { PID } from "../../segments/v2.5.1/PID.ts";
-import { SAC } from "../../segments/v2.5.1/SAC.ts";
-import { OBX } from "../../segments/v2.5.1/OBX.ts";
 import { ORC } from "../../segments/v2.5.1/ORC.ts";
+import { TQ1 } from "../../segments/v2.5.1/TQ1.ts";
+import { TQ2 } from "../../segments/v2.5.1/TQ2.ts";
 import { OBR } from "../../segments/v2.5.1/OBR.ts";
+import { SPM } from "../../segments/v2.5.1/SPM.ts";
+import { SAC } from "../../segments/v2.5.1/SAC.ts";
 
 /** The RESPONSE group of a parsed ORL^O22 (HL7 v2.5.1) message. */
 export interface ParsedResponse {
@@ -30,38 +33,40 @@ export interface ParsedResponse {
 export interface ParsedPatient {
   /** The PID segment. */
   patient: PID;
-  /** The GENERAL ORDER groups. */
-  generalOrders: ParsedGeneralOrder[];
-}
-
-/** The GENERAL ORDER group of a parsed ORL^O22 (HL7 v2.5.1) message. */
-export interface ParsedGeneralOrder {
-  /** The CONTAINER group. */
-  container?: ParsedContainer;
   /** The ORDER groups. */
   orders?: ParsedOrder[];
-}
-
-/** The CONTAINER group of a parsed ORL^O22 (HL7 v2.5.1) message. */
-export interface ParsedContainer {
-  /** The SAC segment. */
-  specimenContainer: SAC;
-  /** The OBX segments. */
-  observations?: OBX[];
 }
 
 /** The ORDER group of a parsed ORL^O22 (HL7 v2.5.1) message. */
 export interface ParsedOrder {
   /** The ORC segment. */
   commonOrder: ORC;
+  /** The TIMING groups. */
+  timings?: ParsedTiming[];
   /** The OBSERVATION REQUEST group. */
   observationRequest?: ParsedObservationRequest;
+}
+
+/** The TIMING group of a parsed ORL^O22 (HL7 v2.5.1) message. */
+export interface ParsedTiming {
+  /** The TQ1 segment. */
+  timing: TQ1;
+  /** The TQ2 segments. */
+  timingRelationships?: TQ2[];
 }
 
 /** The OBSERVATION REQUEST group of a parsed ORL^O22 (HL7 v2.5.1) message. */
 export interface ParsedObservationRequest {
   /** The OBR segment. */
   observationRequest: OBR;
+  /** The SPECIMEN groups. */
+  specimens?: ParsedSpecimen[];
+}
+
+/** The SPECIMEN group of a parsed ORL^O22 (HL7 v2.5.1) message. */
+export interface ParsedSpecimen {
+  /** The SPM segment. */
+  specimen: SPM;
   /** The SAC segments. */
   specimenContainers?: SAC[];
 }
@@ -72,8 +77,10 @@ export interface ParsedORL_O22 extends ParsedMessageBase {
   header: MSH;
   /** The MSA segment. */
   acknowledgment: MSA;
-  /** The ERR segment. */
-  error?: ERR;
+  /** The ERR segments. */
+  errors?: ERR[];
+  /** The SFT segments. */
+  software?: SFT[];
   /** The NTE segments. */
   notes?: NTE[];
   /** The RESPONSE group. */
@@ -85,12 +92,15 @@ const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
   MSA: (s, e) => MSA.parse(s, e),
   ERR: (s, e) => ERR.parse(s, e),
+  SFT: (s, e) => SFT.parse(s, e),
   NTE: (s, e) => NTE.parse(s, e),
   PID: (s, e) => PID.parse(s, e),
-  SAC: (s, e) => SAC.parse(s, e),
-  OBX: (s, e) => OBX.parse(s, e),
   ORC: (s, e) => ORC.parse(s, e),
+  TQ1: (s, e) => TQ1.parse(s, e),
+  TQ2: (s, e) => TQ2.parse(s, e),
   OBR: (s, e) => OBR.parse(s, e),
+  SPM: (s, e) => SPM.parse(s, e),
+  SAC: (s, e) => SAC.parse(s, e),
 };
 
 /** Parser for HL7 ORL^O22 (HL7 v2.5.1) messages. */

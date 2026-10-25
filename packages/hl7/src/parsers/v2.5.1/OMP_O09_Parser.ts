@@ -1,7 +1,7 @@
 /**
  * Parser for OMP^O09 messages (HL7 v2.5.1).
  *
- * Structure: MSH [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC RXO [{NTE}] {RXR} [ COMPONENT: {RXC} [{NTE}] ] [{ OBSERVATION: OBX [{NTE}] }] [{FT1}] [BLG] }
+ * Structure: MSH [{SFT}] [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] RXO [{NTE}] {RXR} [{ COMPONENT: RXC [{NTE}] }] [{ OBSERVATION: OBX [{NTE}] }] [{FT1}] [BLG] }
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
 import { OMP_O09_STRUCTURE } from "../../structures/v2.5.1/OMP_O09.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { NTE } from "../../segments/v2.5.1/NTE.ts";
 import { PID } from "../../segments/v2.5.1/PID.ts";
 import { PD1 } from "../../segments/v2.5.1/PD1.ts";
@@ -22,6 +23,8 @@ import { IN3 } from "../../segments/v2.5.1/IN3.ts";
 import { GT1 } from "../../segments/v2.5.1/GT1.ts";
 import { AL1 } from "../../segments/v2.5.1/AL1.ts";
 import { ORC } from "../../segments/v2.5.1/ORC.ts";
+import { TQ1 } from "../../segments/v2.5.1/TQ1.ts";
+import { TQ2 } from "../../segments/v2.5.1/TQ2.ts";
 import { RXO } from "../../segments/v2.5.1/RXO.ts";
 import { RXR } from "../../segments/v2.5.1/RXR.ts";
 import { RXC } from "../../segments/v2.5.1/RXC.ts";
@@ -69,14 +72,16 @@ export interface ParsedInsurance {
 export interface ParsedOrder {
   /** The ORC segment. */
   commonOrder: ORC;
+  /** The TIMING groups. */
+  timings?: ParsedTiming[];
   /** The RXO segment. */
   pharmacyOrder: RXO;
   /** The NTE segments. */
   notes?: NTE[];
   /** The RXR segments. */
   routes: RXR[];
-  /** The COMPONENT group. */
-  component?: ParsedComponent;
+  /** The COMPONENT groups. */
+  components?: ParsedComponent[];
   /** The OBSERVATION groups. */
   observations?: ParsedObservation[];
   /** The FT1 segments. */
@@ -85,10 +90,18 @@ export interface ParsedOrder {
   billing?: BLG;
 }
 
+/** The TIMING group of a parsed OMP^O09 (HL7 v2.5.1) message. */
+export interface ParsedTiming {
+  /** The TQ1 segment. */
+  timing: TQ1;
+  /** The TQ2 segments. */
+  timingRelationships?: TQ2[];
+}
+
 /** The COMPONENT group of a parsed OMP^O09 (HL7 v2.5.1) message. */
 export interface ParsedComponent {
-  /** The RXC segments. */
-  components: RXC[];
+  /** The RXC segment. */
+  component: RXC;
   /** The NTE segments. */
   notes?: NTE[];
 }
@@ -105,6 +118,8 @@ export interface ParsedObservation {
 export interface ParsedOMP_O09 extends ParsedMessageBase {
   /** The MSH segment. */
   header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
   /** The NTE segments. */
   notes?: NTE[];
   /** The PATIENT group. */
@@ -116,6 +131,7 @@ export interface ParsedOMP_O09 extends ParsedMessageBase {
 /** The segment parsers of OMP^O09 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
   NTE: (s, e) => NTE.parse(s, e),
   PID: (s, e) => PID.parse(s, e),
   PD1: (s, e) => PD1.parse(s, e),
@@ -127,6 +143,8 @@ const PARSERS: SegmentParsers = {
   GT1: (s, e) => GT1.parse(s, e),
   AL1: (s, e) => AL1.parse(s, e),
   ORC: (s, e) => ORC.parse(s, e),
+  TQ1: (s, e) => TQ1.parse(s, e),
+  TQ2: (s, e) => TQ2.parse(s, e),
   RXO: (s, e) => RXO.parse(s, e),
   RXR: (s, e) => RXR.parse(s, e),
   RXC: (s, e) => RXC.parse(s, e),

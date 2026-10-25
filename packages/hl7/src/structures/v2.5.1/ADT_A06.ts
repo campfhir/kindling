@@ -1,7 +1,7 @@
 /**
  * Message structure for ADT^A06 messages (HL7 v2.5.1).
  *
- * Structure: MSH [{SFT}] EVN PID [PD1] [MRG] [{NK1}] PV1 [PV2] [{DB1}] [DRG] [{OBX}] [{AL1}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] }] [{GT1}] [{ INSURANCE: IN1 [IN2] [IN3] }] [ACC] [UB1] [UB2]
+ * Structure: MSH [{SFT}] EVN PID [PD1] [{ROL}] [MRG] [{NK1}] PV1 [PV2] [{ROL}] [{DB1}] [{OBX}] [{AL1}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] }] [{GT1}] [{ INSURANCE: IN1 [IN2] [{IN3}] [{ROL}] }] [ACC] [UB1] [UB2]
  *
  * @module
  */
@@ -15,12 +15,13 @@ export const ADT_A06_STRUCTURE: StructureItem[] = [
   { name: "EVN", required: true, repeating: false },
   { name: "PID", required: true, repeating: false },
   { name: "PD1", required: false, repeating: false },
+  { name: "ROL", required: false, repeating: true },
   { name: "MRG", required: false, repeating: false },
   { name: "NK1", required: false, repeating: true },
   { name: "PV1", required: true, repeating: false },
   { name: "PV2", required: false, repeating: false },
+  { name: "ROL", required: false, repeating: true, as: "visitRoles" },
   { name: "DB1", required: false, repeating: true },
-  { name: "DRG", required: false, repeating: false, as: "preliminaryDiagnosisRelatedGroup" },
   { name: "OBX", required: false, repeating: true },
   { name: "AL1", required: false, repeating: true },
   { name: "DG1", required: false, repeating: true },
@@ -43,7 +44,8 @@ export const ADT_A06_STRUCTURE: StructureItem[] = [
     segments: [
       { name: "IN1", required: true, repeating: false },
       { name: "IN2", required: false, repeating: false },
-      { name: "IN3", required: false, repeating: false },
+      { name: "IN3", required: false, repeating: true },
+      { name: "ROL", required: false, repeating: true },
     ],
   },
   { name: "ACC", required: false, repeating: false },

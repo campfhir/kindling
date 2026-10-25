@@ -1,7 +1,7 @@
 /**
  * Builder for LSU^U12 messages (HL7 v2.5.1).
  *
- * Structure: MSH EQU {EQP} [ROL]
+ * Structure: MSH [{SFT}] EQU {EQP} [ROL]
  *
  * @module
  */
@@ -11,12 +11,15 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { LSU_U12_STRUCTURE } from "../../structures/v2.5.1/LSU_U12.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { EQU } from "../../segments/v2.5.1/EQU.ts";
 import type { EQP } from "../../segments/v2.5.1/EQP.ts";
 import type { ROL } from "../../segments/v2.5.1/ROL.ts";
 
 /** The optional segments and groups of an LSU^U12 (HL7 v2.5.1) message. */
 export interface LSU_U12Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The ROL segment. */
   role?: ROL;
 }

@@ -1,7 +1,7 @@
 /**
  * Builder for RSP^K11 messages (HL7 v2.5.1).
  *
- * Structure: MSH MSA [ERR] QAK QPD [DSC]
+ * Structure: MSH [{SFT}] MSA [ERR] QAK QPD [DSC]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { RSP_K11_STRUCTURE } from "../../structures/v2.5.1/RSP_K11.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { MSA } from "../../segments/v2.5.1/MSA.ts";
 import type { ERR } from "../../segments/v2.5.1/ERR.ts";
 import type { QAK } from "../../segments/v2.5.1/QAK.ts";
@@ -19,6 +20,8 @@ import type { DSC } from "../../segments/v2.5.1/DSC.ts";
 
 /** The optional segments and groups of an RSP^K11 (HL7 v2.5.1) message. */
 export interface RSP_K11Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The ERR segment. */
   error?: ERR;
   /** The DSC segment. */

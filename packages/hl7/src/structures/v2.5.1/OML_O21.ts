@@ -1,7 +1,7 @@
 /**
  * Message structure for OML^O21 messages (HL7 v2.5.1).
  *
- * Structure: MSH [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER_GENERAL: [ CONTAINER_1: SAC [{OBX}] ] { ORDER: ORC [ OBSERVATION_REQUEST: OBR [{ CONTAINER_2: SAC [{OBX}] }] [TCD] [{NTE}] [{DG1}] [{ OBSERVATION: OBX [TCD] [{NTE}] }] [{ PRIOR_RESULT: [ PATIENT_PRIOR: PID [PD1] ] [ PATIENT_VISIT_PRIOR: PV1 [PV2] ] [{AL1}] { ORDER_PRIOR: [ORC] OBR [{NTE}] { OBSERVATION_PRIOR: OBX [{NTE}] } } }] ] [{FT1}] [{CTI}] [BLG] } }
+ * Structure: MSH [{SFT}] [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [{NK1}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] [ OBSERVATION_REQUEST: OBR [TCD] [{NTE}] [CTD] [{DG1}] [{ OBSERVATION: OBX [TCD] [{NTE}] }] [{ SPECIMEN: SPM [{OBX}] [{ CONTAINER: SAC [{OBX}] }] }] [{ PRIOR_RESULT: [ PATIENT_PRIOR: PID [PD1] ] [ PATIENT_VISIT_PRIOR: PV1 [PV2] ] [{AL1}] { ORDER_PRIOR: [ORC] OBR [{NTE}] [{ TIMING_PRIOR: TQ1 [{TQ2}] }] { OBSERVATION_PRIOR: OBX [{NTE}] } } }] ] [{FT1}] [{CTI}] [BLG] }
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 /** The segments, choices and groups of OML^O21 (HL7 v2.5.1), in order. */
 export const OML_O21_STRUCTURE: StructureItem[] = [
   { name: "MSH", required: true, repeating: false },
+  { name: "SFT", required: false, repeating: true },
   { name: "NTE", required: false, repeating: true },
   {
     name: "PATIENT",
@@ -20,6 +21,7 @@ export const OML_O21_STRUCTURE: StructureItem[] = [
       { name: "PID", required: true, repeating: false },
       { name: "PD1", required: false, repeating: false },
       { name: "NTE", required: false, repeating: true },
+      { name: "NK1", required: false, repeating: true },
       {
         name: "PATIENT_VISIT",
         required: false,
@@ -44,33 +46,49 @@ export const OML_O21_STRUCTURE: StructureItem[] = [
     ],
   },
   {
-    name: "ORDER_GENERAL",
+    name: "ORDER",
     required: true,
     repeating: true,
     segments: [
+      { name: "ORC", required: true, repeating: false },
       {
-        name: "CONTAINER_1",
+        name: "TIMING",
         required: false,
-        repeating: false,
+        repeating: true,
         segments: [
-          { name: "SAC", required: true, repeating: false },
-          { name: "OBX", required: false, repeating: true },
+          { name: "TQ1", required: true, repeating: false },
+          { name: "TQ2", required: false, repeating: true },
         ],
       },
       {
-        name: "ORDER",
-        required: true,
-        repeating: true,
+        name: "OBSERVATION_REQUEST",
+        required: false,
+        repeating: false,
         segments: [
-          { name: "ORC", required: true, repeating: false },
+          { name: "OBR", required: true, repeating: false },
+          { name: "TCD", required: false, repeating: false },
+          { name: "NTE", required: false, repeating: true },
+          { name: "CTD", required: false, repeating: false },
+          { name: "DG1", required: false, repeating: true },
           {
-            name: "OBSERVATION_REQUEST",
+            name: "OBSERVATION",
             required: false,
-            repeating: false,
+            repeating: true,
             segments: [
-              { name: "OBR", required: true, repeating: false },
+              { name: "OBX", required: true, repeating: false },
+              { name: "TCD", required: false, repeating: false },
+              { name: "NTE", required: false, repeating: true },
+            ],
+          },
+          {
+            name: "SPECIMEN",
+            required: false,
+            repeating: true,
+            segments: [
+              { name: "SPM", required: true, repeating: false },
+              { name: "OBX", required: false, repeating: true },
               {
-                name: "CONTAINER_2",
+                name: "CONTAINER",
                 required: false,
                 repeating: true,
                 segments: [
@@ -78,71 +96,67 @@ export const OML_O21_STRUCTURE: StructureItem[] = [
                   { name: "OBX", required: false, repeating: true },
                 ],
               },
-              { name: "TCD", required: false, repeating: false },
-              { name: "NTE", required: false, repeating: true },
-              { name: "DG1", required: false, repeating: true },
+            ],
+          },
+          {
+            name: "PRIOR_RESULT",
+            required: false,
+            repeating: true,
+            segments: [
               {
-                name: "OBSERVATION",
+                name: "PATIENT_PRIOR",
                 required: false,
-                repeating: true,
+                repeating: false,
                 segments: [
-                  { name: "OBX", required: true, repeating: false },
-                  { name: "TCD", required: false, repeating: false },
-                  { name: "NTE", required: false, repeating: true },
+                  { name: "PID", required: true, repeating: false },
+                  { name: "PD1", required: false, repeating: false },
                 ],
               },
               {
-                name: "PRIOR_RESULT",
+                name: "PATIENT_VISIT_PRIOR",
                 required: false,
+                repeating: false,
+                segments: [
+                  { name: "PV1", required: true, repeating: false },
+                  { name: "PV2", required: false, repeating: false },
+                ],
+              },
+              { name: "AL1", required: false, repeating: true },
+              {
+                name: "ORDER_PRIOR",
+                required: true,
                 repeating: true,
                 segments: [
+                  { name: "ORC", required: false, repeating: false },
+                  { name: "OBR", required: true, repeating: false },
+                  { name: "NTE", required: false, repeating: true },
                   {
-                    name: "PATIENT_PRIOR",
+                    name: "TIMING_PRIOR",
                     required: false,
-                    repeating: false,
+                    repeating: true,
                     segments: [
-                      { name: "PID", required: true, repeating: false },
-                      { name: "PD1", required: false, repeating: false },
+                      { name: "TQ1", required: true, repeating: false },
+                      { name: "TQ2", required: false, repeating: true },
                     ],
                   },
                   {
-                    name: "PATIENT_VISIT_PRIOR",
-                    required: false,
-                    repeating: false,
-                    segments: [
-                      { name: "PV1", required: true, repeating: false },
-                      { name: "PV2", required: false, repeating: false },
-                    ],
-                  },
-                  { name: "AL1", required: false, repeating: true },
-                  {
-                    name: "ORDER_PRIOR",
+                    name: "OBSERVATION_PRIOR",
                     required: true,
                     repeating: true,
                     segments: [
-                      { name: "ORC", required: false, repeating: false },
-                      { name: "OBR", required: true, repeating: false },
+                      { name: "OBX", required: true, repeating: false },
                       { name: "NTE", required: false, repeating: true },
-                      {
-                        name: "OBSERVATION_PRIOR",
-                        required: true,
-                        repeating: true,
-                        segments: [
-                          { name: "OBX", required: true, repeating: false },
-                          { name: "NTE", required: false, repeating: true },
-                        ],
-                      },
                     ],
                   },
                 ],
               },
             ],
           },
-          { name: "FT1", required: false, repeating: true },
-          { name: "CTI", required: false, repeating: true },
-          { name: "BLG", required: false, repeating: false },
         ],
       },
+      { name: "FT1", required: false, repeating: true },
+      { name: "CTI", required: false, repeating: true },
+      { name: "BLG", required: false, repeating: false },
     ],
   },
 ];

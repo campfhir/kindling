@@ -1,7 +1,7 @@
 /**
  * Parser for PMU^B01 messages (HL7 v2.5.1).
  *
- * Structure: MSH EVN STF [{PRA}] [{ORG}] [{AFF}] [{LAN}] [{EDU}]
+ * Structure: MSH [{SFT}] EVN STF [{PRA}] [{ORG}] [{AFF}] [{LAN}] [{EDU}] [{CER}]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
 import { PMU_B01_STRUCTURE } from "../../structures/v2.5.1/PMU_B01.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { EVN } from "../../segments/v2.5.1/EVN.ts";
 import { STF } from "../../segments/v2.5.1/STF.ts";
 import { PRA } from "../../segments/v2.5.1/PRA.ts";
@@ -18,11 +19,14 @@ import { ORG } from "../../segments/v2.5.1/ORG.ts";
 import { AFF } from "../../segments/v2.5.1/AFF.ts";
 import { LAN } from "../../segments/v2.5.1/LAN.ts";
 import { EDU } from "../../segments/v2.5.1/EDU.ts";
+import { CER } from "../../segments/v2.5.1/CER.ts";
 
 /** Structured result of parsing an HL7 PMU^B01 (HL7 v2.5.1) message. */
 export interface ParsedPMU_B01 extends ParsedMessageBase {
   /** The MSH segment. */
   header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
   /** The EVN segment. */
   event: EVN;
   /** The STF segment. */
@@ -37,11 +41,14 @@ export interface ParsedPMU_B01 extends ParsedMessageBase {
   languages?: LAN[];
   /** The EDU segments. */
   educations?: EDU[];
+  /** The CER segments. */
+  certificates?: CER[];
 }
 
 /** The segment parsers of PMU^B01 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
   EVN: (s, e) => EVN.parse(s, e),
   STF: (s, e) => STF.parse(s, e),
   PRA: (s, e) => PRA.parse(s, e),
@@ -49,6 +56,7 @@ const PARSERS: SegmentParsers = {
   AFF: (s, e) => AFF.parse(s, e),
   LAN: (s, e) => LAN.parse(s, e),
   EDU: (s, e) => EDU.parse(s, e),
+  CER: (s, e) => CER.parse(s, e),
 };
 
 /** Parser for HL7 PMU^B01 (HL7 v2.5.1) messages. */

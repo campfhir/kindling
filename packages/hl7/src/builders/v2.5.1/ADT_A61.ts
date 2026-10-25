@@ -1,7 +1,7 @@
 /**
  * Builder for ADT^A61 messages (HL7 v2.5.1).
  *
- * Structure: MSH EVN PID [PD1] PV1 [{ROL}] [PV2]
+ * Structure: MSH [{SFT}] EVN PID [PD1] PV1 [{ROL}] [PV2]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { ADT_A61_STRUCTURE } from "../../structures/v2.5.1/ADT_A61.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { EVN } from "../../segments/v2.5.1/EVN.ts";
 import type { PID } from "../../segments/v2.5.1/PID.ts";
 import type { PD1 } from "../../segments/v2.5.1/PD1.ts";
@@ -20,6 +21,8 @@ import type { PV2 } from "../../segments/v2.5.1/PV2.ts";
 
 /** The optional segments and groups of an ADT^A61 (HL7 v2.5.1) message. */
 export interface ADT_A61Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The PD1 segment. */
   patientDemographics?: PD1;
   /** The ROL segments. */

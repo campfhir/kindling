@@ -1,7 +1,7 @@
 /**
  * Builder for ESU^U01 messages (HL7 v2.5.1).
  *
- * Structure: MSH EQU [{ISD}] [ROL]
+ * Structure: MSH [{SFT}] EQU [{ISD}] [ROL]
  *
  * @module
  */
@@ -11,12 +11,15 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { ESU_U01_STRUCTURE } from "../../structures/v2.5.1/ESU_U01.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { EQU } from "../../segments/v2.5.1/EQU.ts";
 import type { ISD } from "../../segments/v2.5.1/ISD.ts";
 import type { ROL } from "../../segments/v2.5.1/ROL.ts";
 
 /** The optional segments and groups of an ESU^U01 (HL7 v2.5.1) message. */
 export interface ESU_U01Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The ISD segments. */
   interactionStatuses?: ISD[];
   /** The ROL segment. */

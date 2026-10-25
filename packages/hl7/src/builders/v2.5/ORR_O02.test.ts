@@ -23,13 +23,11 @@ const fullMessage = () =>
     orders: [
       {
         commonOrder: new ORC().orderControl("OK").placerOrderNumber("1"),
-        detail: {
-          segment: new OBR().setId("1"),
-          notes: [new NTE().setId("1").comment("detail")],
-          clinicalTrials: [new CTI().sponsorStudyId({ entityIdentifier: "S1" })],
-        },
+        segment: new OBR().setId("1"),
+        notes: [new NTE().setId("1").comment("detail")],
+        clinicalTrials: [new CTI().sponsorStudyId({ entityIdentifier: "S1" })],
       },
-      { commonOrder: new ORC().orderControl("OK").placerOrderNumber("2"), detail: { segment: new OBR().setId("2") } },
+      { commonOrder: new ORC().orderControl("OK").placerOrderNumber("2"), segment: new OBR().setId("2") },
     ],
   });
 
@@ -45,9 +43,9 @@ describe("ORR_O02 builder", () => {
     ]);
   });
 
-  test("verify() requires the order detail segment once a detail group is present", () => {
-    const noDetail = createORR_O02(makeMSH(), makeMSA(), { orders: [{ commonOrder: new ORC().orderControl("OK"), detail: {} as any }] });
-    expect(noDetail.verify().errors).toEqual(["ORDER group 1: ORDER DETAIL group 1: One of OBR, RQD, RQ1, RXO, ODS, ODT is required"]);
+  test("verify() requires the order detail segment in every order (required from 2.4 on)", () => {
+    const noDetail = createORR_O02(makeMSH(), makeMSA(), { orders: [{ commonOrder: new ORC().orderControl("OK") } as any] });
+    expect(noDetail.verify().errors).toEqual(["ORDER group 1: One of OBR, RQD, RQ1, RXO, ODS, ODT is required"]);
     expect(() => noDetail.encode()).toThrow(/One of OBR/);
   });
 
@@ -80,10 +78,10 @@ describe("ORR_O02 parser", () => {
     expect(val.patient).toBeInstanceOf(PID);
     expect(val.patientNotes).toHaveLength(1);
     expect(val.orders).toHaveLength(2);
-    expect(val.orders![0].detail?.segment).toBeInstanceOf(OBR);
-    expect(val.orders![0].detail?.notes).toHaveLength(1);
-    expect(val.orders![0].detail?.clinicalTrials).toHaveLength(1);
-    expect(val.orders![1].detail?.segment).toBeInstanceOf(OBR);
+    expect(val.orders![0].segment).toBeInstanceOf(OBR);
+    expect(val.orders![0].notes).toHaveLength(1);
+    expect(val.orders![0].clinicalTrials).toHaveLength(1);
+    expect(val.orders![1].segment).toBeInstanceOf(OBR);
     expect(val.message.segments).toHaveLength(wire.split("\r").length);
   });
 
@@ -102,10 +100,8 @@ describe("ORR_O02 parser", () => {
     if (result.ok) expect(result.val.orders).toHaveLength(1);
   });
 
-  test("the order detail segment is optional (ORC-only responses)", () => {
-    const result = parseORR_O02([makeMSH().encode(), "MSA|AA|1", "ORC|OK|1", "ORC|OK|2", "OBR|1"].join("\r"));
-    expect(result.ok).toBe(true);
-    if (result.ok) expect(result.val.orders!.map((o) => o.detail?.segment.name)).toEqual([undefined, "OBR"]);
+  test("the order detail segment is required (an ORC-only order is rejected, as in v2.4)", () => {
+    expect(parseORR_O02([makeMSH().encode(), "MSA|AA|1", "ORC|OK|1", "ORC|OK|2", "OBR|1"].join("\r")).ok).toBe(false);
   });
 
   const msh = () => makeMSH().encode();
