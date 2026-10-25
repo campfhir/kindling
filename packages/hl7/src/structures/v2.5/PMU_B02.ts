@@ -1,7 +1,10 @@
 /**
- * PMU_B02 structure for HL7 v2.5 — identical to v2.4, re-exported.
+ * Message structure for PMU^B02 messages (HL7 v2.5).
+ *
+ * Structure: MSH [{SFT}] EVN STF [{PRA}] [{ORG}] [{AFF}] [{LAN}] [{EDU}] [{CER}]
+ * Shares the PMU^B01 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.4/PMU_B02.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+export { PMU_B01_STRUCTURE as PMU_B02_STRUCTURE } from "./PMU_B01.ts";

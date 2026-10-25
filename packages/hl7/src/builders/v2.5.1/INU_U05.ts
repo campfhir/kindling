@@ -1,7 +1,7 @@
 /**
  * Builder for INU^U05 messages (HL7 v2.5.1).
  *
- * Structure: MSH EQU {INV} [ROL]
+ * Structure: MSH [{SFT}] EQU {INV} [ROL]
  *
  * @module
  */
@@ -11,12 +11,15 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { INU_U05_STRUCTURE } from "../../structures/v2.5.1/INU_U05.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { EQU } from "../../segments/v2.5.1/EQU.ts";
 import type { INV } from "../../segments/v2.5.1/INV.ts";
 import type { ROL } from "../../segments/v2.5.1/ROL.ts";
 
 /** The optional segments and groups of an INU^U05 (HL7 v2.5.1) message. */
 export interface INU_U05Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The ROL segment. */
   role?: ROL;
 }

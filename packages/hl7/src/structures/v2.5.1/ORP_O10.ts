@@ -1,7 +1,7 @@
 /**
  * Message structure for ORP^O10 messages (HL7 v2.5.1).
  *
- * Structure: MSH MSA [ERR] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [ ORDER_DETAIL: RXO [{NTE}] {RXR} [{RXC}] [{NTE}] ] } ]
+ * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] [ ORDER_DETAIL: RXO [{NTE}] {RXR} [{ COMPONENT: RXC [{NTE}] }] ] } ]
  *
  * @module
  */
@@ -12,7 +12,8 @@ import type { StructureItem } from "../../types/schema.ts";
 export const ORP_O10_STRUCTURE: StructureItem[] = [
   { name: "MSH", required: true, repeating: false },
   { name: "MSA", required: true, repeating: false },
-  { name: "ERR", required: false, repeating: false },
+  { name: "ERR", required: false, repeating: true },
+  { name: "SFT", required: false, repeating: true },
   { name: "NTE", required: false, repeating: true },
   {
     name: "RESPONSE",
@@ -35,6 +36,15 @@ export const ORP_O10_STRUCTURE: StructureItem[] = [
         segments: [
           { name: "ORC", required: true, repeating: false },
           {
+            name: "TIMING",
+            required: false,
+            repeating: true,
+            segments: [
+              { name: "TQ1", required: true, repeating: false },
+              { name: "TQ2", required: false, repeating: true },
+            ],
+          },
+          {
             name: "ORDER_DETAIL",
             required: false,
             repeating: false,
@@ -42,8 +52,15 @@ export const ORP_O10_STRUCTURE: StructureItem[] = [
               { name: "RXO", required: true, repeating: false },
               { name: "NTE", required: false, repeating: true },
               { name: "RXR", required: true, repeating: true },
-              { name: "RXC", required: false, repeating: true },
-              { name: "NTE", required: false, repeating: true, as: "componentNotes" },
+              {
+                name: "COMPONENT",
+                required: false,
+                repeating: true,
+                segments: [
+                  { name: "RXC", required: true, repeating: false },
+                  { name: "NTE", required: false, repeating: true },
+                ],
+              },
             ],
           },
         ],

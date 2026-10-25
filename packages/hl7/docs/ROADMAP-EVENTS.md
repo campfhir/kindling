@@ -74,7 +74,7 @@ acknowledgment) and ORU^R03 are not in the v2.3 list, and STC, the equipment aut
 (EAC/EAN/EAR/ESR/ESU) and the inventory and laboratory automation messages (INR/INU/LSR/LSU) were
 introduced in v2.4 and belong to the later-version work below.
 
-Done in 0.9: ACK, ORM^O01, ORR^O02 for v2.3 and v2.5.1 (`ORM`/`ORR` cover the OBR, RQD, RQ1, RXO, ODS and ODT order detail choices). Where the structures differ by version (checked on hl7.eu): v2.4 adds `[CTD]` and `[{FT1}]` to `ORM^O01`; v2.5 adds `[{SFT}]` and repeating `ERR` to `ACK`, repeating `ERR` to `ORR^O02`, and repeating `IN3` to `ORM^O01`. v2.3.1 matches v2.3 for all three, and v2.5.1 matches v2.5.
+Done in 0.9: ACK, ORM^O01, ORR^O02 for v2.3 and v2.5.1 (`ORM`/`ORR` cover the OBR, RQD, RQ1, RXO, ODS and ODT order detail choices). Where the structures differ by version (checked on hl7.eu): v2.4 adds `[CTD]` and `[{FT1}]` to `ORM^O01`; v2.5 adds `[{SFT}]` and repeating `ERR` to `ACK` and repeating `ERR` to `ORR^O02` (`ORM^O01` keeps the 2.4 shape: no SFT, one IN3, see 2.1 below). v2.3.1 matches v2.3 for all three, and v2.5.1 matches v2.5.
 
 VXU^V04 is also done for every version: v2.3 and v2.3.1 are identical, v2.4 adds `[{GT1}]`, and v2.5/v2.5.1 add `[{SFT}]`, a required `ORC` and the timing group (`TQ1`, `TQ2`).
 
@@ -246,11 +246,30 @@ A06/A07, A15, A16, A54/A55, A61/A62, PDA closing A01–A03, A18's required MRG, 
 structure (A01 without PDA; A14, A28, A31 share it) and A21 as the base of the transfer-shaped
 events; ORU^R01 gains `[CTD]` and `[{FT1}]`, ORR^O02 requires the order detail (Caristix and HAPI
 against the hl7.eu text), QBP^Q15 carries no RDF (hl7.eu against Caristix). Every v2.4 message is
-generated against the v2.4 segment modules (`codegen/schemas/v2.4/version.ts`), and v2.5.1 now
-derives every message v2.5 carries (340, the 57 new ones included with their 2.4 shapes pending the
-2.5 release).
+generated against the v2.4 segment modules (`codegen/schemas/v2.4/version.ts`).
 
-Next: the later-version messages listed under v2.5.1 parity.
+Done in 2.1 (v2.5 complete): every v2.5 event. `docs/validation/v2.5-message-ledger.md` compares
+all 387 structures with the hl7.eu v2.5 chapters (`std25/ch02.html` … `ch15.html`), Caristix 2.5
+and HAPI v25 (362 match the decided shape, 25 are accepted modelling equivalences with dated notes,
+0 differ). Every v2.4 message is derived with `[{SFT}]` after MSH, except the 32 that 2.5 kept in
+their older shape (ORM^O01, ORR^O02, the SIU and SRM families, SQM^S25, QRY^T12, DOC^T12,
+QRY^PC4, SUR^P09: no SFT); the structures that changed were written by hand or drafted from the
+Caristix tables with `scaffold-messages.ts` and checked by the ledger: A03 and A16 carry the A01
+segments (NK1, AL1, GT1, INSURANCE, ACC), ERR repeats in the acknowledgments and query responses
+(MFK, MFR, ORR, OSR, ORG/ORL/ORP, the care responses, RSP^K25), `[{ TIMING: TQ1 [{TQ2}] }]` follows
+ORC in the chapter 4, 7, 9 and 12 messages (TIMING_QTY in ORU/OUL/CSU, TIMING_ENCODED after RXE,
+TIMING_GIVE after RXG), SPECIMEN groups (SPM [{OBX}] [{ CONTAINER: SAC [{OBX}] }]) join OMG/OML/
+ORG/ORL/OUL/ORU, the automation SAC gains `[{SPM}]` (EAC, EAR, SSR, SSU) and TCR/TCU a
+TEST_CONFIGURATION group, SIU gains `[{TQ1}]` after SCH, PMU^B01/B02 `[{CER}]` while B04–B06
+shrink to `EVN STF [{PRA}] [{ORG}]`, RSP^K21/K22 `[{NK1}]`, K23/K24 a QUERY_RESPONSE group,
+MFN^M13/M15 and MFK/MFQ/MFR^M13 are new. The 50 events new in 2.5: OML^O33/O35 and ORL^O34/O36,
+OUL^R22–R24, OMI^O23/ORI^O24 (IPC), OMB^O27/ORB^O28, BPS^O29/BRP^O30, BTS^O31/BRT^O32 (BPO, BPX,
+BTX), RDE^O25/RRE^O26, QBP^Q31/RSP^K31, the chapter 5 conformance examples QBP^Z73–Z99 with
+RSP/RTB/RDY and QSB^Z83, PMU^B07/B08, BAR^P12 and DFT^P11. Withdrawn in 2.5: QRY/DSR^P04,
+MFD^MFA, RSP^K13/K15 and RTB^Q13. Every v2.5 message is generated against the v2.5 segment
+modules (`codegen/schemas/v2.5/version.ts`), and v2.5.1 derives every message v2.5 carries.
+
+Next: the 2.5.1 sweep (segment and message ledgers against hl7.eu v251, Caristix 2.5.1 and HAPI v251).
 
 ## v2.5.1 parity
 After v2.3 is complete, bring v2.5.1 to parity with the same messages, then add the 2.5.1 additions:

@@ -1,7 +1,7 @@
 /**
  * Builder for SSR^U04 messages (HL7 v2.5.1).
  *
- * Structure: MSH EQU {SAC} [ROL]
+ * Structure: MSH [{SFT}] EQU { SPECIMEN_CONTAINER: SAC [{SPM}] } [ROL]
  *
  * @module
  */
@@ -11,12 +11,24 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { SSR_U04_STRUCTURE } from "../../structures/v2.5.1/SSR_U04.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { EQU } from "../../segments/v2.5.1/EQU.ts";
 import type { SAC } from "../../segments/v2.5.1/SAC.ts";
+import type { SPM } from "../../segments/v2.5.1/SPM.ts";
 import type { ROL } from "../../segments/v2.5.1/ROL.ts";
+
+/** The SPECIMEN CONTAINER group of an SSR^U04 (HL7 v2.5.1) message being built. */
+export interface SpecimenContainerGroup {
+  /** The SAC segment. */
+  specimenContainer: SAC;
+  /** The SPM segments. */
+  specimens?: SPM[];
+}
 
 /** The optional segments and groups of an SSR^U04 (HL7 v2.5.1) message. */
 export interface SSR_U04Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The ROL segment. */
   role?: ROL;
 }
@@ -32,7 +44,7 @@ export class SSR_U04<TMSH extends MSH = MSH, TEQU extends EQU = EQU> {
   constructor(
     public header: TMSH,
     public equipmentDetail: TEQU,
-    public specimenContainers: SAC[],
+    public specimenContainers: SpecimenContainerGroup[],
     public options: SSR_U04Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
@@ -62,7 +74,7 @@ export class SSR_U04<TMSH extends MSH = MSH, TEQU extends EQU = EQU> {
 export function createSSR_U04<TMSH extends MSH = MSH, TEQU extends EQU = EQU>(
   header: TMSH,
   equipmentDetail: TEQU,
-  specimenContainers: SAC[],
+  specimenContainers: SpecimenContainerGroup[],
   options: SSR_U04Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): SSR_U04<TMSH, TEQU> {

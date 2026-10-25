@@ -1,7 +1,16 @@
 /**
- * QRY_T12 structure for HL7 v2.5 — identical to v2.4, re-exported.
+ * Message structure for QRY^T12 messages (HL7 v2.5).
+ *
+ * Structure: MSH QRD [QRF]
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.4/QRY_T12.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { StructureItem } from "../../types/schema.ts";
+
+/** The segments, choices and groups of QRY^T12 (HL7 v2.5), in order. */
+export const QRY_T12_STRUCTURE: StructureItem[] = [
+  { name: "MSH", required: true, repeating: false },
+  { name: "QRD", required: true, repeating: false },
+  { name: "QRF", required: false, repeating: false },
+];

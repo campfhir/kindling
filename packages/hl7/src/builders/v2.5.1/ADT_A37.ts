@@ -1,7 +1,7 @@
 /**
  * Builder for ADT^A37 messages (HL7 v2.5.1).
  *
- * Structure: MSH [{SFT}] EVN PID [PD1] [PV1] [{DB1}] PID [PV1] [{DB1}]
+ * Structure: MSH [{SFT}] EVN PID [PD1] [PV1] [{DB1}] PID [PD1] [PV1] [{DB1}]
  *
  * @module
  */
@@ -28,6 +28,8 @@ export interface ADT_A37Options {
   visit?: PV1;
   /** The DB1 segments. */
   disabilities?: DB1[];
+  /** The PD1 segment. */
+  otherPatientDemographics?: PD1;
   /** The PV1 segment. */
   otherVisit?: PV1;
   /** The DB1 segments. */

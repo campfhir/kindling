@@ -1,7 +1,7 @@
 /**
  * Builder for SSU^U03 messages (HL7 v2.5.1).
  *
- * Structure: MSH EQU { SPECIMEN_CONTAINER: SAC [OBX] } [ROL]
+ * Structure: MSH [{SFT}] EQU { SPECIMEN_CONTAINER: SAC [{OBX}] [{ SPECIMEN: SPM [{OBX}] }] } [ROL]
  *
  * @module
  */
@@ -11,21 +11,35 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { SSU_U03_STRUCTURE } from "../../structures/v2.5.1/SSU_U03.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { EQU } from "../../segments/v2.5.1/EQU.ts";
 import type { SAC } from "../../segments/v2.5.1/SAC.ts";
 import type { OBX } from "../../segments/v2.5.1/OBX.ts";
+import type { SPM } from "../../segments/v2.5.1/SPM.ts";
 import type { ROL } from "../../segments/v2.5.1/ROL.ts";
 
 /** The SPECIMEN CONTAINER group of an SSU^U03 (HL7 v2.5.1) message being built. */
 export interface SpecimenContainerGroup {
   /** The SAC segment. */
   specimenContainer: SAC;
-  /** The OBX segment. */
-  observation?: OBX;
+  /** The OBX segments. */
+  observations?: OBX[];
+  /** The SPECIMEN groups. */
+  specimens?: SpecimenGroup[];
+}
+
+/** The SPECIMEN group of an SSU^U03 (HL7 v2.5.1) message being built. */
+export interface SpecimenGroup {
+  /** The SPM segment. */
+  specimen: SPM;
+  /** The OBX segments. */
+  observations?: OBX[];
 }
 
 /** The optional segments and groups of an SSU^U03 (HL7 v2.5.1) message. */
 export interface SSU_U03Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The ROL segment. */
   role?: ROL;
 }

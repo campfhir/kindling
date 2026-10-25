@@ -1,7 +1,17 @@
 /**
- * ESR_U02 structure for HL7 v2.5 — identical to v2.4, re-exported.
+ * Message structure for ESR^U02 messages (HL7 v2.5).
+ *
+ * Structure: MSH [{SFT}] EQU [ROL]
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.4/ESR_U02.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { StructureItem } from "../../types/schema.ts";
+
+/** The segments, choices and groups of ESR^U02 (HL7 v2.5), in order. */
+export const ESR_U02_STRUCTURE: StructureItem[] = [
+  { name: "MSH", required: true, repeating: false },
+  { name: "SFT", required: false, repeating: true },
+  { name: "EQU", required: true, repeating: false },
+  { name: "ROL", required: false, repeating: false },
+];

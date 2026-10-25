@@ -1,7 +1,7 @@
 /**
  * Builder for ADT^A60 messages (HL7 v2.5.1).
  *
- * Structure: MSH EVN PID [PV1] [PV2] [{IAM}]
+ * Structure: MSH [{SFT}] EVN PID [PV1] [PV2] [{IAM}]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { ADT_A60_STRUCTURE } from "../../structures/v2.5.1/ADT_A60.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { EVN } from "../../segments/v2.5.1/EVN.ts";
 import type { PID } from "../../segments/v2.5.1/PID.ts";
 import type { PV1 } from "../../segments/v2.5.1/PV1.ts";
@@ -19,6 +20,8 @@ import type { IAM } from "../../segments/v2.5.1/IAM.ts";
 
 /** The optional segments and groups of an ADT^A60 (HL7 v2.5.1) message. */
 export interface ADT_A60Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The PV1 segment. */
   visit?: PV1;
   /** The PV2 segment. */

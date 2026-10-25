@@ -46,8 +46,8 @@ export class SPM extends BaseSegment {
   }
 
   /** SPM-3 Specimen Parent IDs (chainable). */
-  specimenParentIds(value: string): this {
-    this.fields[2] = this.createField(value);
+  specimenParentIds(...values: string[]): this {
+    this.fields[2] = this.createRepeatingField(values.map((v) => this.createField(v)));
     return this;
   }
 
@@ -67,8 +67,10 @@ export class SPM extends BaseSegment {
    * @param code - SPM-5.1 Code
    * @param text - SPM-5.2 Text
    */
-  specimenTypeModifier({ code, text }: { code: string; text?: string }): this {
-    this.fields[4] = this.createComponentsField([code, text || ""]);
+  specimenTypeModifier(...values: { code: string; text?: string }[]): this {
+    this.fields[4] = this.createRepeatingField(
+      values.map(({ code, text }) => this.createComponentsField([code, text || ""])),
+    );
     return this;
   }
 
@@ -77,8 +79,10 @@ export class SPM extends BaseSegment {
    * @param code - SPM-6.1 Code
    * @param text - SPM-6.2 Text
    */
-  specimenAdditives({ code, text }: { code: string; text?: string }): this {
-    this.fields[5] = this.createComponentsField([code, text || ""]);
+  specimenAdditives(...values: { code: string; text?: string }[]): this {
+    this.fields[5] = this.createRepeatingField(
+      values.map(({ code, text }) => this.createComponentsField([code, text || ""])),
+    );
     return this;
   }
 
@@ -108,8 +112,10 @@ export class SPM extends BaseSegment {
    * @param code - SPM-9.1 Code
    * @param text - SPM-9.2 Text
    */
-  specimenSourceSiteModifier({ code, text }: { code: string; text?: string }): this {
-    this.fields[8] = this.createComponentsField([code, text || ""]);
+  specimenSourceSiteModifier(...values: { code: string; text?: string }[]): this {
+    this.fields[8] = this.createRepeatingField(
+      values.map(({ code, text }) => this.createComponentsField([code, text || ""])),
+    );
     return this;
   }
 
@@ -128,8 +134,10 @@ export class SPM extends BaseSegment {
    * @param code - SPM-11.1 Code
    * @param text - SPM-11.2 Text
    */
-  specimenRole({ code, text }: { code: string; text?: string }): this {
-    this.fields[10] = this.createComponentsField([code, text || ""]);
+  specimenRole(...values: { code: string; text?: string }[]): this {
+    this.fields[10] = this.createRepeatingField(
+      values.map(({ code, text }) => this.createComponentsField([code, text || ""])),
+    );
     return this;
   }
 
@@ -150,8 +158,8 @@ export class SPM extends BaseSegment {
   }
 
   /** SPM-14 Specimen Description (chainable). */
-  specimenDescription(value: string): this {
-    this.fields[13] = this.createField(value);
+  specimenDescription(...values: string[]): this {
+    this.fields[13] = this.createRepeatingField(values.map((v) => this.createField(v)));
     return this;
   }
 
@@ -200,8 +208,10 @@ export class SPM extends BaseSegment {
    * @param code - SPM-24.1 Code
    * @param text - SPM-24.2 Text
    */
-  specimenCondition({ code, text }: { code: string; text?: string }): this {
-    this.fields[23] = this.createComponentsField([code, text || ""]);
+  specimenCondition(...values: { code: string; text?: string }[]): this {
+    this.fields[23] = this.createRepeatingField(
+      values.map(({ code, text }) => this.createComponentsField([code, text || ""])),
+    );
     return this;
   }
 
@@ -210,8 +220,10 @@ export class SPM extends BaseSegment {
    * @param code - SPM-21.1 Code
    * @param text - SPM-21.2 Text
    */
-  specimenRejectReason({ code, text }: { code: string; text?: string }): this {
-    this.fields[20] = this.createComponentsField([code, text || ""]);
+  specimenRejectReason(...values: { code: string; text?: string }[]): this {
+    this.fields[20] = this.createRepeatingField(
+      values.map(({ code, text }) => this.createComponentsField([code, text || ""])),
+    );
     return this;
   }
 
@@ -221,8 +233,10 @@ export class SPM extends BaseSegment {
    * @param text - SPM-15.2 Text
    * @param codingSystem - SPM-15.3 Name of Coding System
    */
-  specimenHandlingCode({ code, text, codingSystem }: { code: string; text?: string; codingSystem?: string }): this {
-    this.fields[14] = this.createComponentsField([code, text, codingSystem]);
+  specimenHandlingCode(...values: { code: string; text?: string; codingSystem?: string }[]): this {
+    this.fields[14] = this.createRepeatingField(
+      values.map(({ code, text, codingSystem }) => this.createComponentsField([code, text, codingSystem])),
+    );
     return this;
   }
 
@@ -232,8 +246,10 @@ export class SPM extends BaseSegment {
    * @param text - SPM-16.2 Text
    * @param codingSystem - SPM-16.3 Name of Coding System
    */
-  specimenRiskCode({ code, text, codingSystem }: { code: string; text?: string; codingSystem?: string }): this {
-    this.fields[15] = this.createComponentsField([code, text, codingSystem]);
+  specimenRiskCode(...values: { code: string; text?: string; codingSystem?: string }[]): this {
+    this.fields[15] = this.createRepeatingField(
+      values.map(({ code, text, codingSystem }) => this.createComponentsField([code, text, codingSystem])),
+    );
     return this;
   }
 

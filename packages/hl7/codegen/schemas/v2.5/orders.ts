@@ -1,5 +1,8 @@
 import type { MessageSchema, SegmentGroup, StructureItem } from "../../../src/types/schema";
-import { SFT, group, opt, optList, req, reqList, reversion, withSft, wrappers } from "../helpers";
+import { SFT, group, opt, optList, replaceDeep, req, reqList, reversion, withSft, wrappers } from "../helpers";
+import { ORR_O02_SCHEMA as ORR_O02_V24 } from "../v2.4/ORR_O02";
+import { OSR_Q06_SCHEMA as OSR_Q06_V24 } from "../v2.4/OSQ_Q06";
+import { osrOrderDetail, osrResponse } from "../v2.3/OSQ_Q06";
 import { generalOrderPatient, observations, pharmacyPatient, response } from "../v2.3/orders";
 import { PHARMACY_QUERY_RESPONSES, QRY_Q26_EVENTS, QRY_Q26_SCHEMA as QRY_Q26_V23, pharmacyQueryResponse } from "../v2.3/QRY_Q26";
 import { oruW01 } from "../v2.4/orders";
@@ -114,9 +117,128 @@ export const PHARMACY_QUERY_RESPONSES_V25: MessageSchema[] = PHARMACY_QUERY_RESP
 /** ORU^W01: the v2.4 structure with [{SFT}] and the SPECIMEN groups. */
 export const ORU_W01_SCHEMA: MessageSchema = oruW01("2.5", [req("MSH"), SFT], [group("SPECIMEN", "optional", "repeating", [req("SPM"), optList("OBX")], { exportTypeName: "ParsedSpecimen", builderTypeName: "Specimen" })]);
 
+
+/**
+ * ORR^O02: MSH MSA [{ERR}] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC <order detail> [{NTE}] [{CTI}] } ].
+ * The v2.4 structure with a repeating ERR: no SFT and no TIMING (hl7.eu ch4 4.4.2, Caristix 2.5, HAPI v25);
+ * the order detail stays required (hl7.eu and HAPI; Caristix brackets it).
+ */
+export const ORR_O02_SCHEMA: MessageSchema = replaceDeep(reversion(ORR_O02_V24, "2.5"), "ERR", optList("ERR"));
+
+/**
+ * OSR^Q06: MSH MSA [{ERR}] [{SFT}] [{NTE}] QRD [QRF] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING }] <order detail> [{NTE}] [{CTI}] } ] [DSC].
+ * The order detail stays required (hl7.eu ch4 4.4.4 and HAPI v25; Caristix 2.5 brackets it).
+ */
+export const OSR_Q06_SCHEMA: MessageSchema = {
+  ...reversion(OSR_Q06_V24, "2.5"),
+  structure: [
+    req("MSH"), req("MSA"), optList("ERR"), SFT, optList("NTE"), req("QRD"), opt("QRF"),
+    osrResponse([req("ORC"), orderTiming(), ...osrOrderDetail("required")]),
+    opt("DSC"),
+  ],
+};
+
+/** RDE^O25 (pharmacy/treatment refill authorization request) and RRE^O26 (its acknowledgment), new in 2.5 (ch4 4.13.9–4.13.10). */
+export const RDE_O25_SCHEMA: MessageSchema = {
+  messageType: "RDE",
+  triggerEvent: "O25",
+  version: "2.5",
+  structure: [
+    req("MSH"),
+    optList("SFT"),
+    optList("NTE"),
+    group("PATIENT", "optional", "single", [
+      req("PID"),
+      opt("PD1"),
+      optList("NTE"),
+      group("PATIENT_VISIT", "optional", "single", [
+        req("PV1"),
+        opt("PV2"),
+      ]),
+      group("INSURANCE", "optional", "repeating", [
+        req("IN1"),
+        opt("IN2"),
+        opt("IN3"),
+      ]),
+      opt("GT1"),
+      optList("AL1"),
+    ]),
+    group("ORDER", "required", "repeating", [
+      req("ORC"),
+      group("TIMING", "optional", "repeating", [
+        req("TQ1"),
+        optList("TQ2"),
+      ]),
+      group("ORDER_DETAIL", "optional", "single", [
+        req("RXO"),
+        optList("NTE"),
+        reqList("RXR"),
+        group("COMPONENT", "optional", "repeating", [
+          req("RXC"),
+          optList("NTE"),
+        ]),
+      ]),
+      req("RXE"),
+      optList("NTE"),
+      group("TIMING_ENCODED", "required", "repeating", [
+        req("TQ1"),
+        optList("TQ2"),
+      ]),
+      reqList("RXR"),
+      optList("RXC"),
+      group("OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("NTE"),
+      ]),
+      optList("FT1"),
+      opt("BLG"),
+      optList("CTI"),
+    ]),
+  ],
+};
+
+export const RRE_O26_SCHEMA: MessageSchema = {
+  messageType: "RRE",
+  triggerEvent: "O26",
+  version: "2.5",
+  structure: [
+    req("MSH"),
+    req("MSA"),
+    optList("ERR"),
+    optList("SFT"),
+    optList("NTE"),
+    group("RESPONSE", "optional", "single", [
+      group("PATIENT", "optional", "single", [
+        req("PID"),
+        optList("NTE"),
+      ]),
+      group("ORDER", "required", "repeating", [
+        req("ORC"),
+        group("TIMING", "optional", "repeating", [
+          req("TQ1"),
+          optList("TQ2"),
+        ]),
+        group("ENCODING", "optional", "single", [
+          req("RXE"),
+          optList("NTE"),
+          group("TIMING_ENCODED", "required", "repeating", [
+            req("TQ1"),
+            optList("TQ2"),
+          ]),
+          reqList("RXR"),
+          optList("RXC"),
+        ]),
+      ]),
+    ]),
+  ],
+};
+
+/** The order structures 2.5 changes or introduces beyond the pharmacy, diet and supply messages above. */
+export const ORDERS_CHANGED_IN_2_5: MessageSchema[] = [ORR_O02_SCHEMA, OSR_Q06_SCHEMA, RDE_O25_SCHEMA, RRE_O26_SCHEMA];
+
 /** Every v2.5 order and pharmacy message. */
 export const ORDER_MESSAGES: MessageSchema[] = [
   OMD_O03_SCHEMA, ORD_O04_SCHEMA, OMS_O05_SCHEMA, ORS_O06_SCHEMA, OMN_O07_SCHEMA, ORN_O08_SCHEMA,
   RDE_O11_SCHEMA, RRE_O12_SCHEMA, RDS_O13_SCHEMA, RRD_O14_SCHEMA, RGV_O15_SCHEMA, RRG_O16_SCHEMA, RAS_O17_SCHEMA, RRA_O18_SCHEMA,
-  ...QRY_Q26_FAMILY, ...PHARMACY_QUERY_RESPONSES_V25, ORU_W01_SCHEMA,
+  ...QRY_Q26_FAMILY, ...PHARMACY_QUERY_RESPONSES_V25, ORU_W01_SCHEMA, ...ORDERS_CHANGED_IN_2_5,
 ];

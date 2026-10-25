@@ -1,7 +1,7 @@
 /**
  * Parser for QCN^J01 messages (HL7 v2.5.1).
  *
- * Structure: MSH QID
+ * Structure: MSH [{SFT}] QID
  *
  * @module
  */
@@ -11,12 +11,15 @@ import type { StructureItem } from "../../types/schema.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
 import { QCN_J01_STRUCTURE } from "../../structures/v2.5.1/QCN_J01.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { QID } from "../../segments/v2.5.1/QID.ts";
 
 /** Structured result of parsing an HL7 QCN^J01 (HL7 v2.5.1) message. */
 export interface ParsedQCN_J01 extends ParsedMessageBase {
   /** The MSH segment. */
   header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
   /** The QID segment. */
   queryIdentification: QID;
 }
@@ -24,6 +27,7 @@ export interface ParsedQCN_J01 extends ParsedMessageBase {
 /** The segment parsers of QCN^J01 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
   QID: (s, e) => QID.parse(s, e),
 };
 

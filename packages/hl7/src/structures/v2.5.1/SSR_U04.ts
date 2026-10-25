@@ -1,7 +1,7 @@
 /**
  * Message structure for SSR^U04 messages (HL7 v2.5.1).
  *
- * Structure: MSH EQU {SAC} [ROL]
+ * Structure: MSH [{SFT}] EQU { SPECIMEN_CONTAINER: SAC [{SPM}] } [ROL]
  *
  * @module
  */
@@ -11,7 +11,16 @@ import type { StructureItem } from "../../types/schema.ts";
 /** The segments, choices and groups of SSR^U04 (HL7 v2.5.1), in order. */
 export const SSR_U04_STRUCTURE: StructureItem[] = [
   { name: "MSH", required: true, repeating: false },
+  { name: "SFT", required: false, repeating: true },
   { name: "EQU", required: true, repeating: false },
-  { name: "SAC", required: true, repeating: true },
+  {
+    name: "SPECIMEN_CONTAINER",
+    required: true,
+    repeating: true,
+    segments: [
+      { name: "SAC", required: true, repeating: false },
+      { name: "SPM", required: false, repeating: true },
+    ],
+  },
   { name: "ROL", required: false, repeating: false },
 ];

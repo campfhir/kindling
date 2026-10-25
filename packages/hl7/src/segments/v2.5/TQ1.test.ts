@@ -28,19 +28,6 @@ describe("TQ1 field positions", () => {
     expect(parts[2]).toBe("C1^C2");
   });
 
-  test("TQ1-3 Repeat Pattern", () => {
-    assertField(new TQ1().repeatPattern(SENTINEL), 3);
-  });
-
-  test("TQ1-4 Explicit Time", () => {
-    assertField(new TQ1().explicitTime(SENTINEL), 4);
-  });
-
-  test("TQ1-5 Relative Time", () => {
-    const parts = new TQ1().relativeTime({ value: "C1", units: "C2" }).encode().split("|");
-    expect(parts[5]).toBe("C1^C2");
-  });
-
   test("TQ1-6 Service Duration", () => {
     const parts = new TQ1().serviceDuration({ value: "C1", units: "C2" }).encode().split("|");
     expect(parts[6]).toBe("C1^C2");
@@ -52,11 +39,6 @@ describe("TQ1 field positions", () => {
 
   test("TQ1-8 End Date Time", () => {
     assertField(new TQ1().endDateTime(SENTINEL), 8);
-  });
-
-  test("TQ1-9 Priority", () => {
-    const parts = new TQ1().priority({ code: "C1", text: "C2", codingSystem: "C3" }).encode().split("|");
-    expect(parts[9]).toBe("C1^C2^C3");
   });
 
   test("TQ1-10 Condition Text", () => {

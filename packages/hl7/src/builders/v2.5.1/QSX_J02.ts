@@ -1,7 +1,7 @@
 /**
  * Builder for QSX^J02 messages (HL7 v2.5.1).
  *
- * Structure: MSH QID
+ * Structure: MSH [{SFT}] QID
  *
  * @module
  */
@@ -11,10 +11,14 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { QSX_J02_STRUCTURE } from "../../structures/v2.5.1/QSX_J02.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { QID } from "../../segments/v2.5.1/QID.ts";
 
-/** The optional segments and groups of an QSX^J02 (HL7 v2.5.1) message. The message has none. */
-export type QSX_J02Options = Record<string, never>;
+/** The optional segments and groups of an QSX^J02 (HL7 v2.5.1) message. */
+export interface QSX_J02Options {
+  /** The SFT segments. */
+  software?: SFT[];
+}
 
 /** Builder for HL7 QSX^J02 (HL7 v2.5.1) messages. */
 export class QSX_J02<TMSH extends MSH = MSH, TQID extends QID = QID> {

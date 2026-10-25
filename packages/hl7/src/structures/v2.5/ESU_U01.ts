@@ -1,7 +1,18 @@
 /**
- * ESU_U01 structure for HL7 v2.5 — identical to v2.4, re-exported.
+ * Message structure for ESU^U01 messages (HL7 v2.5).
+ *
+ * Structure: MSH [{SFT}] EQU [{ISD}] [ROL]
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.4/ESU_U01.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { StructureItem } from "../../types/schema.ts";
+
+/** The segments, choices and groups of ESU^U01 (HL7 v2.5), in order. */
+export const ESU_U01_STRUCTURE: StructureItem[] = [
+  { name: "MSH", required: true, repeating: false },
+  { name: "SFT", required: false, repeating: true },
+  { name: "EQU", required: true, repeating: false },
+  { name: "ISD", required: false, repeating: true },
+  { name: "ROL", required: false, repeating: false },
+];

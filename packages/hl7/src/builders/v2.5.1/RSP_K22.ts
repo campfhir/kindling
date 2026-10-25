@@ -1,7 +1,7 @@
 /**
  * Builder for RSP^K22 messages (HL7 v2.5.1).
  *
- * Structure: MSH MSA [ERR] QAK QPD [{ QUERY_RESPONSE: PID [PD1] [QRI] }] [DSC]
+ * Structure: MSH [{SFT}] MSA [ERR] QAK QPD [{ QUERY_RESPONSE: PID [PD1] [{NK1}] [QRI] }] [DSC]
  *
  * @module
  */
@@ -11,12 +11,14 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { RSP_K22_STRUCTURE } from "../../structures/v2.5.1/RSP_K22.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { MSA } from "../../segments/v2.5.1/MSA.ts";
 import type { ERR } from "../../segments/v2.5.1/ERR.ts";
 import type { QAK } from "../../segments/v2.5.1/QAK.ts";
 import type { QPD } from "../../segments/v2.5.1/QPD.ts";
 import type { PID } from "../../segments/v2.5.1/PID.ts";
 import type { PD1 } from "../../segments/v2.5.1/PD1.ts";
+import type { NK1 } from "../../segments/v2.5.1/NK1.ts";
 import type { QRI } from "../../segments/v2.5.1/QRI.ts";
 import type { DSC } from "../../segments/v2.5.1/DSC.ts";
 
@@ -26,12 +28,16 @@ export interface QueryResponseGroup {
   patient: PID;
   /** The PD1 segment. */
   patientDemographics?: PD1;
+  /** The NK1 segments. */
+  nextOfKin?: NK1[];
   /** The QRI segment. */
   queryResponseInstance?: QRI;
 }
 
 /** The optional segments and groups of an RSP^K22 (HL7 v2.5.1) message. */
 export interface RSP_K22Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The ERR segment. */
   error?: ERR;
   /** The QUERY RESPONSE groups. */

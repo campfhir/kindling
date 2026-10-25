@@ -1,7 +1,7 @@
 /**
  * Parser for TCR^U11 messages (HL7 v2.5.1).
  *
- * Structure: MSH EQU {TCC} [ROL]
+ * Structure: MSH [{SFT}] EQU { TEST_CONFIGURATION: [SPM] {TCC} } [ROL]
  *
  * @module
  */
@@ -11,18 +11,30 @@ import type { StructureItem } from "../../types/schema.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
 import { TCR_U11_STRUCTURE } from "../../structures/v2.5.1/TCR_U11.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { EQU } from "../../segments/v2.5.1/EQU.ts";
+import { SPM } from "../../segments/v2.5.1/SPM.ts";
 import { TCC } from "../../segments/v2.5.1/TCC.ts";
 import { ROL } from "../../segments/v2.5.1/ROL.ts";
+
+/** The TEST CONFIGURATION group of a parsed TCR^U11 (HL7 v2.5.1) message. */
+export interface ParsedTestConfiguration {
+  /** The SPM segment. */
+  specimen?: SPM;
+  /** The TCC segments. */
+  testCodeConfigurations: TCC[];
+}
 
 /** Structured result of parsing an HL7 TCR^U11 (HL7 v2.5.1) message. */
 export interface ParsedTCR_U11 extends ParsedMessageBase {
   /** The MSH segment. */
   header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
   /** The EQU segment. */
   equipmentDetail: EQU;
-  /** The TCC segments. */
-  testCodeConfigurations: TCC[];
+  /** The TEST CONFIGURATION groups. */
+  testConfigurations: ParsedTestConfiguration[];
   /** The ROL segment. */
   role?: ROL;
 }
@@ -30,7 +42,9 @@ export interface ParsedTCR_U11 extends ParsedMessageBase {
 /** The segment parsers of TCR^U11 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
   EQU: (s, e) => EQU.parse(s, e),
+  SPM: (s, e) => SPM.parse(s, e),
   TCC: (s, e) => TCC.parse(s, e),
   ROL: (s, e) => ROL.parse(s, e),
 };

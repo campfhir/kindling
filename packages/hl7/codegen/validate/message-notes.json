@@ -1,692 +1,834 @@
 {
-  "v2.3": {
-    "ADT_A17": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "The standard lists the two patients flat (PID [PD1] PV1 [PV2] [{DB1}] [{OBX}] twice); modelled as one PATIENT group occurring exactly twice (patients[0], patients[1]), the same segments in the same order. hl7.eu ch3 3.2.17, Caristix and HAPI v23 agree on the flat form."
-    },
-    "ADT_A24": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "The standard lists the two patients flat (PID [PD1] [PV1] [{DB1}] twice); modelled as one PATIENT group occurring exactly twice. hl7.eu ch3 3.2.24, Caristix and HAPI v23 agree on the flat form."
-    },
-    "ORU_R01": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "The OBSERVATION group is written { [OBX] [{NTE}] } (a required group whose OBX is optional) by hl7.eu ch7 7.2.1, Caristix and HAPI v23; modelled as [{ OBX [{NTE}] }], which parses the same messages and keeps an observation from being built without its OBX."
-    },
-    "ORU_W01": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Wraps ORU^R01 (hl7.eu ch7 7.19.1: the ORU message under the W01 trigger event); the OBSERVATION modelling note of ORU_R01 applies. No hl7.eu table of its own; HAPI v23 has no ORU_W01 class."
-    },
-    "MFK_M01": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.3 defines MFK for every event as MSH MSA [ERR] MFI {[MFA]}. Caristix puts ERR after MFI and lists MFI and an MF group twice for M01; HAPI v23 copies that. The general definition is kept."
-    },
-    "MFK_M02": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.3: MSH MSA [ERR] MFI {[MFA]}; Caristix agrees, HAPI v23 lacks ERR."
-    },
-    "MFK_M04": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.3 general definition MSH MSA [ERR] MFI {[MFA]}; the per-file table of 8.9 abbreviates it without ERR, as Caristix and HAPI v23 do."
-    },
-    "MFK_M05": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.3 general definition MSH MSA [ERR] MFI {[MFA]}; the per-file table of 8.8 abbreviates it without ERR, as Caristix and HAPI v23 do."
-    },
-    "MFK_M06": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.3 general definition MSH MSA [ERR] MFI {[MFA]}; the per-file table of 8.10 abbreviates it without ERR, as Caristix does. HAPI v23 has no MFK_M06 class."
-    },
-    "MFK_M07": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.3 general definition MSH MSA [ERR] MFI {[MFA]}; the per-file table of 8.10 abbreviates it without ERR, as Caristix and HAPI v23 do."
-    },
-    "MFK_M08": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.3 general definition MSH MSA [ERR] MFI {[MFA]}; Caristix abbreviates it without ERR. HAPI v23 has no MFK_M08 class."
-    },
-    "MFK_M09": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.3 general definition MSH MSA [ERR] MFI {[MFA]}; Caristix abbreviates it without ERR. HAPI v23 has no MFK_M09 class."
-    },
-    "MFK_M10": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.3 general definition MSH MSA [ERR] MFI {[MFA]}; Caristix abbreviates it without ERR. HAPI v23 has no MFK_M10 class."
-    },
-    "MFK_M11": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.3 general definition MSH MSA [ERR] MFI {[MFA]}; Caristix abbreviates it without ERR. HAPI v23 has no MFK_M11 class."
-    },
-    "MFN_M03": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.7: MSH MFI { MFE OM1 [other segments] }, the detail segments depending on the kind of test (M08–M11); Caristix lists a bare, optional MFE. HAPI v23 has no MFN_M03 class."
-    },
-    "MFN_M07": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.10 case 2 (MFI-1 = CMB, a study without phases): { MFE CM0 [{CM2}] }. Caristix and HAPI v23 show the M06 structure (CM1 phases) under M07; the v2.4 Caristix table matches hl7.eu."
-    },
-    "MFN_M08": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.7 (MFI-1 = OMA, numeric observations): { MFE OM1 [OM2] [OM3] [OM4] }; Caristix nests OM2–OM4 in a group, which parses the same messages. HAPI v23 has no MFN_M08 class."
-    },
-    "MFN_M09": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.7 (MFI-1 = OMB, categorical observations): { MFE OM1 [ OM3 [{OM4}] ] }; Caristix agrees, HAPI v23 leaves out OM1."
-    },
-    "MFN_M10": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.7 (MFI-1 = OMC, batteries): { MFE OM1 [ OM5 [{OM4}] ] }; Caristix agrees, HAPI v23 leaves out OM1."
-    },
-    "MFR_M02": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.4 defines MFR as MSH MSA [ERR] QRD [QRF] MFI { MFE [Z..] } [DSC] and 8.6 replaces { MFE [Z..] } by { MFE STF [PRA] } for the staff master file; Caristix lists the bare MFE with DSC inside the group. HAPI v23 has no MFR_M02 class."
-    },
-    "MFR_M04": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.4 and 8.9: { MFE CDM [{PRC}] } replaces { MFE [Z..] } in the response; Caristix lists the bare MFE with DSC inside the group. HAPI v23 has no MFR_M04 class."
-    },
-    "MFR_M05": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.4 and 8.8: { MFE LOC [{LCH}] [{LRL}] { LDP [{LCH}] [{LCC}] } } replaces { MFE [Z..] } in the response; Caristix lists the bare MFE with DSC inside the group. HAPI v23 has no MFR_M05 class."
-    },
-    "MFR_M06": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.4 and 8.10 case 1: { MFE CM0 [{ CM1 [{CM2}] }] } replaces { MFE [Z..] } in the response; Caristix lists the bare MFE with DSC inside the group. HAPI v23 has no MFR_M06 class."
-    },
-    "MFR_M07": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch8 8.4 and 8.10 case 2: { MFE CM0 [{CM2}] } replaces { MFE [Z..] } in the response; Caristix lists the bare MFE with DSC inside the group. HAPI v23 has no MFR_M07 class."
-    },
-    "NMR_N01": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu appendix C.1.1: MSH MSA [ERR] [QRD] { [NCK] [{NTE}] [NST] [{NTE}] [NSC] [{NTE}] }; Caristix repeats ERR. HAPI v23 has no NMR_N01 class."
-    },
-    "DSR_Q03": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch2 2.19 (DSR): MSH [MSA] [ERR] [QAK] QRD [QRF] {DSP} [DSC]; Caristix agrees, HAPI v23's DSR_Q03 lacks MSA, ERR and QAK."
-    },
-    "QRY_Q02": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch2 2.18.2 (QRY): MSH QRD [QRF] [DSC]; Caristix agrees, HAPI v23's QRY_Q02 appends the QCK response segment."
-    },
-    "RDE_O01": {
-      "date": "2026-10-25",
-      "accept": true,
-      "hl7eu": "ignore",
-      "note": "hl7.eu ch4 4.8.4: the table ends in prose that names RXO and RXE, which the text reader picks up; read by hand it matches ours and Caristix. HAPI v23 lists CTI as non-repeating where hl7.eu and Caristix have [{CTI}]."
-    },
-    "RPA_I08": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "hl7.eu ch11 11.3.1 and Caristix list the trailing [{NTE}] after the visit segments; HAPI v23 nests them in its visit group."
-    },
-    "RPA_I09": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As RPA_I08 (same structure, hl7.eu ch11 11.3)."
-    },
-    "RPA_I10": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As RPA_I08 (same structure, hl7.eu ch11 11.3)."
-    },
-    "RPA_I11": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As RPA_I08 (same structure, hl7.eu ch11 11.3)."
-    },
-    "PGL_PC6": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "HAPI v23 models the order detail as OBR alone; hl7.eu ch12 12.2.1 (\"[OBR, etc... Order Detail Segment\") and Caristix allow any order detail segment, as ours does."
-    },
-    "PGL_PC7": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As PGL_PC6."
-    },
-    "PGL_PC8": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As PGL_PC6."
-    },
-    "PPR_PC1": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "HAPI v23 models the order detail as OBR alone; hl7.eu ch12 12.2.2 and Caristix allow any order detail segment, as ours does."
-    },
-    "PPR_PC2": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As PPR_PC1."
-    },
-    "PPR_PC3": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As PPR_PC1."
-    },
-    "PPP_PCB": {
-      "date": "2026-10-25",
-      "accept": true,
-      "hl7eu": "ignore",
-      "note": "hl7.eu ch12 12.2.3: the table's brackets are unbalanced in the text (\"[{OBX … [{VAR}]} Variance\"), so the reader mis-groups the order notes; read by hand it matches ours and Caristix. HAPI v23 models the order detail as OBR alone."
-    },
-    "PPP_PCC": {
-      "date": "2026-10-25",
-      "accept": true,
-      "hl7eu": "ignore",
-      "note": "As PPP_PCB."
-    },
-    "PPP_PCD": {
-      "date": "2026-10-25",
-      "accept": true,
-      "hl7eu": "ignore",
-      "note": "As PPP_PCB."
-    },
-    "PPG_PCG": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "HAPI v23 models the order detail as OBR alone; hl7.eu ch12 12.2.4 and Caristix allow any order detail segment, as ours does."
-    },
-    "PPG_PCH": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As PPG_PCG."
-    },
-    "PPG_PCJ": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As PPG_PCG."
-    },
-    "PRR_PC5": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "HAPI v23 models the order detail as OBR alone; hl7.eu ch12 12.2.6 and Caristix allow any order detail segment, as ours does."
-    },
-    "PPV_PCA": {
-      "date": "2026-10-25",
-      "accept": true,
-      "hl7eu": "ignore",
-      "note": "hl7.eu ch12 12.2.8: unbalanced brackets in the table text mis-group the order notes for the reader; read by hand it matches ours and Caristix. HAPI v23 models the order detail as OBR alone."
-    },
-    "PTR_PCF": {
-      "date": "2026-10-25",
-      "accept": true,
-      "hl7eu": "ignore",
-      "note": "hl7.eu ch12 12.2.10: unbalanced brackets in the table text mis-group a note for the reader; read by hand it matches ours and Caristix. HAPI v23 models the order detail as OBR alone."
-    },
-    "PPT_PCL": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "HAPI v23 models the order detail as OBR alone; hl7.eu ch12 12.2.12 and Caristix allow any order detail segment, as ours does."
-    }
+ "v2.3": {
+  "ADT_A17": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "The standard lists the two patients flat (PID [PD1] PV1 [PV2] [{DB1}] [{OBX}] twice); modelled as one PATIENT group occurring exactly twice (patients[0], patients[1]), the same segments in the same order. hl7.eu ch3 3.2.17, Caristix and HAPI v23 agree on the flat form."
   },
-  "v2.3.1": {
-    "ADT_A38": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "DRG is optional: the v2.3 hl7.eu table (ch3 3.2.38) and Caristix 2.3.1 have [DRG]; HAPI v231 alone makes it required."
-    },
-    "MDM_T04": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "OBX repeats: the v2.3 hl7.eu table (ch9, T02 content events) and Caristix 2.3.1 have {OBX}; HAPI v231 alone has a single OBX."
-    },
-    "ADT_A17": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Two patients listed flat by Caristix and HAPI v231 (as in v2.3); modelled as one PATIENT group occurring exactly twice."
-    },
-    "ADT_A24": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Two patients listed flat by Caristix and HAPI v231 (as in v2.3); modelled as one PATIENT group occurring exactly twice."
-    },
-    "ORU_R01": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Caristix and HAPI v231 write the OBSERVATION group { [OBX] [{NTE}] }; modelled as [{ OBX [{NTE}] }] as in v2.3 (same messages parse, no observation without its OBX). The 2.3.1 change, [{NK1}] in the PATIENT group, is applied."
-    },
-    "ORU_W01": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Wraps ORU^R01 (as in v2.3; Caristix 2.3.1 lists the same shape); the ORU_R01 modelling note applies. HAPI v231 has no ORU_W01 class."
-    },
-    "MFK_M01": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.3: MSH MSA [ERR] MFI {[MFA]}); Caristix and HAPI v231 repeat the MFI/MF oddity of their v2.3 tables."
-    },
-    "MFK_M02": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.3); HAPI v231 lacks ERR."
-    },
-    "MFK_M04": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.3 general definition); Caristix and HAPI v231 abbreviate it without ERR."
-    },
-    "MFK_M05": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.3 general definition); Caristix and HAPI v231 abbreviate it without ERR."
-    },
-    "MFK_M06": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.3 general definition); Caristix abbreviates it without ERR."
-    },
-    "MFK_M07": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.3 general definition); Caristix and HAPI v231 abbreviate it without ERR."
-    },
-    "MFK_M08": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.3 general definition); Caristix abbreviates it without ERR."
-    },
-    "MFK_M09": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.3 general definition); Caristix abbreviates it without ERR."
-    },
-    "MFK_M10": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.3 general definition); Caristix abbreviates it without ERR."
-    },
-    "MFK_M11": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.3 general definition); Caristix abbreviates it without ERR."
-    },
-    "MFN_M03": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.7: { MFE OM1 [other segments] }); Caristix lists a bare, optional MFE."
-    },
-    "MFN_M07": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.10 case 2: { MFE CM0 [{CM2}] }); Caristix shows the M06 structure under M07 in 2.3.1 as in 2.3."
-    },
-    "MFN_M08": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.7: { MFE OM1 [OM2] [OM3] [OM4] }); Caristix nests OM2–OM4 in a group, HAPI v231 makes OM1 optional."
-    },
-    "MFN_M09": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.7: { MFE OM1 [ OM3 [{OM4}] ] }); HAPI v231 leaves out OM1."
-    },
-    "MFN_M10": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.7: { MFE OM1 [ OM5 [{OM4}] ] }); HAPI v231 leaves out OM1."
-    },
-    "MFR_M02": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.4 with the 8.6 record { MFE STF [PRA] }); Caristix lists the bare MFE with DSC inside the group."
-    },
-    "MFR_M04": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.4 with the 8.9 record); Caristix lists the bare MFE with DSC inside the group."
-    },
-    "MFR_M05": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.4 with the 8.8 record); Caristix lists the bare MFE with DSC inside the group."
-    },
-    "MFR_M06": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.4 with the 8.10 case 1 record); Caristix lists the bare MFE with DSC inside the group."
-    },
-    "MFR_M07": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch8 8.4 with the 8.10 case 2 record); Caristix lists the bare MFE with DSC inside the group."
-    },
-    "NMR_N01": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Caristix and HAPI v231 repeat ERR. hl7.eu has no 2.3.1 chapter, and both the v2.3 appendix C.1.1 and the v2.4 chapter 14 (std24/ch14.htm) show a single [ERR], so the single ERR is kept; recorded as a contradiction, decided by hand."
-    },
-    "DSR_Q03": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3; Caristix agrees, HAPI v231's DSR_Q03 lacks MSA, ERR and QAK."
-    },
-    "QRY_Q02": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3; Caristix agrees, HAPI v231's QRY_Q02 appends the QCK response segment."
-    },
-    "ORM_O01": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Caristix 2.3.1 matches ours (the repeating IN3 is the only change from v2.3, hl7.eu ch4 4.2.1). HAPI v231 folds RXR and RXC into the order detail group, which the standard's ORM table does not list."
-    },
-    "ORR_O02": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch4 4.2.2: ORC [Order Detail Segment] [{NTE}] [{CTI}]); Caristix agrees, HAPI v231 makes the detail segment required."
-    },
-    "OSR_Q06": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch4 4.2.3, optional detail segment); Caristix agrees, HAPI v231 makes the detail segment required."
-    },
-    "RDE_O01": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch4 4.8.4); Caristix agrees, HAPI v231 writes the OBSERVATION group as [{ OBX [{NTE}] }] where the standard has { [OBX] [{NTE}] }."
-    },
-    "RDS_O01": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch4 4.8.9: { OBX [{NTE}] }); Caristix makes OBX optional inside the required group and HAPI v231 the group optional. The v2.3 text, which Caristix's 2.3 to 2.3.1 diff does not change, is kept."
-    },
-    "RPA_I08": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch11 11.3); HAPI v231 nests the trailing NTEs in its visit group."
-    },
-    "RPA_I09": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As RPA_I08."
-    },
-    "RPA_I10": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As RPA_I08."
-    },
-    "RPA_I11": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As RPA_I08."
-    },
-    "PGL_PC6": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch12 12.2.1); Caristix agrees, HAPI v231 models the order detail as OBR alone."
-    },
-    "PGL_PC7": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As PGL_PC6."
-    },
-    "PGL_PC8": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As PGL_PC6."
-    },
-    "PPR_PC1": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch12 12.2.2); Caristix agrees, HAPI v231 models the order detail as OBR alone."
-    },
-    "PPR_PC2": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As PPR_PC1."
-    },
-    "PPR_PC3": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As PPR_PC1."
-    },
-    "PPP_PCB": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch12 12.2.3); Caristix agrees, HAPI v231 models the order detail as OBR alone."
-    },
-    "PPP_PCC": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As PPP_PCB."
-    },
-    "PPP_PCD": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As PPP_PCB."
-    },
-    "PPG_PCG": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "Unchanged from v2.3 (hl7.eu ch12 12.2.4); Caristix agrees, HAPI v231 models the order detail as OBR alone."
-    },
-    "PPG_PCH": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As PPG_PCG."
-    },
-    "PPG_PCJ": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "As PPG_PCG."
-    },
-    "PRR_PC5": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "The 2.3.1 [QAK] is applied (Caristix and HAPI v231); HAPI v231 models the order detail as OBR alone."
-    },
-    "PPV_PCA": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "The 2.3.1 [QAK] is applied (Caristix and HAPI v231); HAPI v231 models the order detail as OBR alone."
-    },
-    "PTR_PCF": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "The 2.3.1 [QAK] is applied (Caristix and HAPI v231); HAPI v231 models the order detail as OBR alone."
-    },
-    "PPT_PCL": {
-      "date": "2026-10-25",
-      "accept": true,
-      "note": "The 2.3.1 [QAK] is applied (Caristix and HAPI v231); HAPI v231 models the order detail as OBR alone."
-    }
+  "ADT_A24": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "The standard lists the two patients flat (PID [PD1] [PV1] [{DB1}] twice); modelled as one PATIENT group occurring exactly twice. hl7.eu ch3 3.2.24, Caristix and HAPI v23 agree on the flat form."
   },
-  "v2.4": {
-    "ADT_A17": {
-      "date": "2026-10-25",
-      "note": "The standard lists the two patients flat (PID [PD1] PV1 [PV2] [{DB1}] [{OBX}] twice, no ROL or PDA in 2.4); modelled as one PATIENT group occurring exactly twice, as in v2.3. hl7.eu ch3 3.3.17 (std24/ch03.htm), Caristix 2.4 and HAPI v24 agree on the flat form.",
-      "accept": true
-    },
-    "ADT_A24": {
-      "date": "2026-10-25",
-      "note": "The standard lists the two patients flat (PID [PD1] [PV1] [{DB1}] twice); modelled as one PATIENT group occurring exactly twice, as in v2.3. hl7.eu ch3 3.3.24, Caristix 2.4 and HAPI v24 agree on the flat form.",
-      "accept": true
-    },
-    "ORU_R01": {
-      "date": "2026-10-25",
-      "note": "The 2.4 additions [CTD] and [{FT1}] are applied (Caristix 2.4 and HAPI v24; hl7.eu ch7 7.3.1 prints the same table, which the text reader cannot bracket). The OBSERVATION group is written { [OBX] [{NTE}] } and modelled as [{ OBX [{NTE}] }], as in v2.3 (same messages parse, no observation without its OBX).",
-      "accept": true
-    },
-    "DFT_P03": {
-      "date": "2026-10-25",
-      "note": "hl7.eu ch6 6.4.3 (std24/ch06.htm) matches ours and Caristix 2.4 read by hand: the reader turns the 'OBR Order Detail Segment' row into an order detail choice and the OBSERVATION group { [OBX [{NTE}]] } is modelled as [{ OBX [{NTE}] }] as in ORU. HAPI v24's DFT_P03 ends after its FINANCIAL group with a single [{DG1}], leaving out DRG, GT1, the INSURANCE group and ACC.",
-      "accept": true,
-      "hl7eu": "ignore"
-    },
-    "MFK_M01": {
-      "date": "2026-10-25",
-      "note": "hl7.eu ch8 8.4.2 defines MFK for every event as MSH MSA [ERR] MFI [{MFA}] (the MFEs the reader appends are the prose after the table); HAPI v24 agrees, Caristix 2.4 leaves out ERR.",
-      "accept": true
-    },
-    "MFK_M02": {
-      "date": "2026-10-25",
-      "note": "hl7.eu ch8 8.4.2 general definition MSH MSA [ERR] MFI [{MFA}] (the reader runs the MFK^M02 caption into the staff master file table that follows); Caristix 2.4 leaves out ERR. HAPI v24 has no MFK_M02 class.",
-      "accept": true,
-      "hl7eu": "ignore"
-    },
-    "MFK_M04": {
-      "date": "2026-10-25",
-      "note": "As MFK_M02 (hl7.eu ch8 8.4.2 general definition; Caristix 2.4 leaves out ERR; no HAPI v24 class).",
-      "accept": true,
-      "hl7eu": "ignore"
-    },
-    "MFK_M05": {
-      "date": "2026-10-25",
-      "note": "As MFK_M02 (hl7.eu ch8 8.4.2 general definition; Caristix 2.4 leaves out ERR; no HAPI v24 class).",
-      "accept": true,
-      "hl7eu": "ignore"
-    },
-    "MFK_M06": {
-      "date": "2026-10-25",
-      "note": "As MFK_M02 (hl7.eu ch8 8.4.2 general definition; Caristix 2.4 leaves out ERR; no HAPI v24 class).",
-      "accept": true,
-      "hl7eu": "ignore"
-    },
-    "MFK_M07": {
-      "date": "2026-10-25",
-      "note": "As MFK_M02 (hl7.eu ch8 8.4.2 general definition; Caristix 2.4 leaves out ERR; no HAPI v24 class).",
-      "accept": true,
-      "hl7eu": "ignore"
-    },
-    "MFK_M03": {
-      "date": "2026-10-25",
-      "note": "hl7.eu ch8 8.4.2: MFK is defined once for every master file event (MSH MSA [ERR] MFI [{MFA}]); the per-file sections print no MFK table of their own, Caristix 2.4 lists no MFK^M03 and HAPI v24 maps none, so the general definition is kept.",
-      "accept": true
-    },
-    "MFK_M08": {
-      "date": "2026-10-25",
-      "note": "As MFK_M03: hl7.eu ch8 8.4.2 general definition; no per-event table in any source.",
-      "accept": true
-    },
-    "MFK_M09": {
-      "date": "2026-10-25",
-      "note": "As MFK_M03: hl7.eu ch8 8.4.2 general definition; no per-event table in any source.",
-      "accept": true
-    },
-    "MFK_M10": {
-      "date": "2026-10-25",
-      "note": "As MFK_M03: hl7.eu ch8 8.4.2 general definition; no per-event table in any source.",
-      "accept": true
-    },
-    "MFK_M11": {
-      "date": "2026-10-25",
-      "note": "As MFK_M03: hl7.eu ch8 8.4.2 general definition; no per-event table in any source.",
-      "accept": true
-    },
-    "MFK_M12": {
-      "date": "2026-10-25",
-      "note": "As MFK_M03: hl7.eu ch8 8.4.2 general definition; no per-event table in any source (MFN^M12 is new in 2.4).",
-      "accept": true
-    },
-    "MFN_M01": {
-      "date": "2026-10-25",
-      "note": "hl7.eu ch8 8.4.1: MSH MFI { MFE [Z..] }, the entry a bare repeating MFE; modelled as a repeating MF group holding the MFE (entries[]), the same messages. Caristix 2.4 lists no MFN^M01 and HAPI v24's MFN_M01 is the 2.3 class.",
-      "accept": true
-    },
-    "MFN_M03": {
-      "date": "2026-10-25",
-      "note": "hl7.eu ch8 8.7.1: MSH MFI { MFE OM1 [other segments] }, the detail segments depending on the kind of test (M08–M11 carry them); modelled as { MFE OM1 }. Caristix 2.4 lists no MFN^M03; HAPI v24's MFN_M03 is the 2.3 class.",
-      "accept": true
-    },
-    "MFR_M01": {
-      "date": "2026-10-25",
-      "note": "hl7.eu ch8 8.4.3: MSH MSA [ERR] [QAK] QRD [QRF] MFI { MFE [Z..] } [DSC], the entry a bare repeating MFE; modelled as a repeating MF_QUERY group holding the MFE. Caristix 2.4 leaves out ERR and QAK and puts DSC inside the group. HAPI v24 has no MFR_M01 of its own.",
-      "accept": true
-    },
-    "MFR_M02": {
-      "date": "2026-10-25",
-      "note": "hl7.eu ch8 8.4.3 with the 8.6 staff record { MFE STF [PRA] [ORG] } (ORG is new in 2.4); Caristix 2.4 leaves out ERR and QAK, lists the bare MFE and puts DSC inside the group. No hl7.eu table of its own, no HAPI v24 class.",
-      "accept": true
-    },
-    "MFR_M03": {
-      "date": "2026-10-25",
-      "note": "hl7.eu ch8 8.4.3 general response with the bare MFE entry; Caristix 2.4 leaves out ERR and QAK and puts DSC inside the group. No hl7.eu table of its own, no HAPI v24 class.",
-      "accept": true
-    },
-    "MFR_M04": {
-      "date": "2026-10-25",
-      "note": "hl7.eu ch8 8.4.3 with the 8.9 charge description record { MFE CDM [{PRC}] }; Caristix 2.4 leaves out ERR and QAK, lists the bare MFE and puts DSC inside the group. No HAPI v24 class.",
-      "accept": true
-    },
-    "MFR_M05": {
-      "date": "2026-10-25",
-      "note": "hl7.eu ch8 8.4.3 with the 8.8 location record { MFE LOC [{LCH}] [{LRL}] { LDP [{LCH}] [{LCC}] } }; Caristix 2.4 leaves out ERR and QAK, lists the bare MFE and puts DSC inside the group. No HAPI v24 class.",
-      "accept": true
-    },
-    "MFR_M06": {
-      "date": "2026-10-25",
-      "note": "hl7.eu ch8 8.4.3 with the 8.10 case 1 record { MFE CM0 [{ CM1 [{CM2}] }] }; Caristix 2.4 leaves out ERR and QAK, lists the bare MFE and puts DSC inside the group. No HAPI v24 class.",
-      "accept": true
-    },
-    "MFR_M07": {
-      "date": "2026-10-25",
-      "note": "hl7.eu ch8 8.4.3 with the 8.10 case 2 record { MFE CM0 [{CM2}] }; Caristix 2.4 leaves out ERR and QAK, lists the bare MFE and puts DSC inside the group. No HAPI v24 class.",
-      "accept": true
-    },
-    "MFR_M08": {
-      "date": "2026-10-25",
-      "note": "As MFR_M03 (general response, bare MFE entry); Caristix 2.4 leaves out ERR and QAK and puts DSC inside the group.",
-      "accept": true
-    },
-    "MFR_M09": {
-      "date": "2026-10-25",
-      "note": "As MFR_M03 (general response, bare MFE entry); Caristix 2.4 leaves out ERR and QAK and puts DSC inside the group.",
-      "accept": true
-    },
-    "MFR_M10": {
-      "date": "2026-10-25",
-      "note": "As MFR_M03 (general response, bare MFE entry); Caristix 2.4 leaves out ERR and QAK and puts DSC inside the group.",
-      "accept": true
-    },
-    "MFR_M11": {
-      "date": "2026-10-25",
-      "note": "As MFR_M03 (general response, bare MFE entry); Caristix 2.4 leaves out ERR and QAK and puts DSC inside the group.",
-      "accept": true
-    },
-    "MFR_M12": {
-      "date": "2026-10-25",
-      "note": "As MFR_M03 (general response, bare MFE entry; M12 is new in 2.4); Caristix 2.4 leaves out ERR and QAK and puts DSC inside the group.",
-      "accept": true
-    },
-    "PPV_PCA": {
-      "date": "2026-10-25",
-      "note": "hl7.eu ch12 12.3.8 (std24/ch12.htm): unbalanced brackets in the table text mis-group the order notes for the reader; read by hand it matches ours and Caristix 2.4. HAPI v24 models the order detail as OBR or RXO only.",
-      "accept": true,
-      "hl7eu": "ignore"
-    },
-    "PTR_PCF": {
-      "date": "2026-10-25",
-      "note": "hl7.eu ch12 12.3.10: unbalanced brackets in the table text mis-group a note for the reader; read by hand it matches ours and Caristix 2.4. HAPI v24 models the order detail as OBR or RXO only.",
-      "accept": true,
-      "hl7eu": "ignore"
-    }
+  "ORU_R01": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "The OBSERVATION group is written { [OBX] [{NTE}] } (a required group whose OBX is optional) by hl7.eu ch7 7.2.1, Caristix and HAPI v23; modelled as [{ OBX [{NTE}] }], which parses the same messages and keeps an observation from being built without its OBX."
+  },
+  "ORU_W01": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Wraps ORU^R01 (hl7.eu ch7 7.19.1: the ORU message under the W01 trigger event); the OBSERVATION modelling note of ORU_R01 applies. No hl7.eu table of its own; HAPI v23 has no ORU_W01 class."
+  },
+  "MFK_M01": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.3 defines MFK for every event as MSH MSA [ERR] MFI {[MFA]}. Caristix puts ERR after MFI and lists MFI and an MF group twice for M01; HAPI v23 copies that. The general definition is kept."
+  },
+  "MFK_M02": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.3: MSH MSA [ERR] MFI {[MFA]}; Caristix agrees, HAPI v23 lacks ERR."
+  },
+  "MFK_M04": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.3 general definition MSH MSA [ERR] MFI {[MFA]}; the per-file table of 8.9 abbreviates it without ERR, as Caristix and HAPI v23 do."
+  },
+  "MFK_M05": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.3 general definition MSH MSA [ERR] MFI {[MFA]}; the per-file table of 8.8 abbreviates it without ERR, as Caristix and HAPI v23 do."
+  },
+  "MFK_M06": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.3 general definition MSH MSA [ERR] MFI {[MFA]}; the per-file table of 8.10 abbreviates it without ERR, as Caristix does. HAPI v23 has no MFK_M06 class."
+  },
+  "MFK_M07": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.3 general definition MSH MSA [ERR] MFI {[MFA]}; the per-file table of 8.10 abbreviates it without ERR, as Caristix and HAPI v23 do."
+  },
+  "MFK_M08": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.3 general definition MSH MSA [ERR] MFI {[MFA]}; Caristix abbreviates it without ERR. HAPI v23 has no MFK_M08 class."
+  },
+  "MFK_M09": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.3 general definition MSH MSA [ERR] MFI {[MFA]}; Caristix abbreviates it without ERR. HAPI v23 has no MFK_M09 class."
+  },
+  "MFK_M10": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.3 general definition MSH MSA [ERR] MFI {[MFA]}; Caristix abbreviates it without ERR. HAPI v23 has no MFK_M10 class."
+  },
+  "MFK_M11": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.3 general definition MSH MSA [ERR] MFI {[MFA]}; Caristix abbreviates it without ERR. HAPI v23 has no MFK_M11 class."
+  },
+  "MFN_M03": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.7: MSH MFI { MFE OM1 [other segments] }, the detail segments depending on the kind of test (M08–M11); Caristix lists a bare, optional MFE. HAPI v23 has no MFN_M03 class."
+  },
+  "MFN_M07": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.10 case 2 (MFI-1 = CMB, a study without phases): { MFE CM0 [{CM2}] }. Caristix and HAPI v23 show the M06 structure (CM1 phases) under M07; the v2.4 Caristix table matches hl7.eu."
+  },
+  "MFN_M08": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.7 (MFI-1 = OMA, numeric observations): { MFE OM1 [OM2] [OM3] [OM4] }; Caristix nests OM2–OM4 in a group, which parses the same messages. HAPI v23 has no MFN_M08 class."
+  },
+  "MFN_M09": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.7 (MFI-1 = OMB, categorical observations): { MFE OM1 [ OM3 [{OM4}] ] }; Caristix agrees, HAPI v23 leaves out OM1."
+  },
+  "MFN_M10": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.7 (MFI-1 = OMC, batteries): { MFE OM1 [ OM5 [{OM4}] ] }; Caristix agrees, HAPI v23 leaves out OM1."
+  },
+  "MFR_M02": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.4 defines MFR as MSH MSA [ERR] QRD [QRF] MFI { MFE [Z..] } [DSC] and 8.6 replaces { MFE [Z..] } by { MFE STF [PRA] } for the staff master file; Caristix lists the bare MFE with DSC inside the group. HAPI v23 has no MFR_M02 class."
+  },
+  "MFR_M04": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.4 and 8.9: { MFE CDM [{PRC}] } replaces { MFE [Z..] } in the response; Caristix lists the bare MFE with DSC inside the group. HAPI v23 has no MFR_M04 class."
+  },
+  "MFR_M05": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.4 and 8.8: { MFE LOC [{LCH}] [{LRL}] { LDP [{LCH}] [{LCC}] } } replaces { MFE [Z..] } in the response; Caristix lists the bare MFE with DSC inside the group. HAPI v23 has no MFR_M05 class."
+  },
+  "MFR_M06": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.4 and 8.10 case 1: { MFE CM0 [{ CM1 [{CM2}] }] } replaces { MFE [Z..] } in the response; Caristix lists the bare MFE with DSC inside the group. HAPI v23 has no MFR_M06 class."
+  },
+  "MFR_M07": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch8 8.4 and 8.10 case 2: { MFE CM0 [{CM2}] } replaces { MFE [Z..] } in the response; Caristix lists the bare MFE with DSC inside the group. HAPI v23 has no MFR_M07 class."
+  },
+  "NMR_N01": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu appendix C.1.1: MSH MSA [ERR] [QRD] { [NCK] [{NTE}] [NST] [{NTE}] [NSC] [{NTE}] }; Caristix repeats ERR. HAPI v23 has no NMR_N01 class."
+  },
+  "DSR_Q03": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch2 2.19 (DSR): MSH [MSA] [ERR] [QAK] QRD [QRF] {DSP} [DSC]; Caristix agrees, HAPI v23's DSR_Q03 lacks MSA, ERR and QAK."
+  },
+  "QRY_Q02": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch2 2.18.2 (QRY): MSH QRD [QRF] [DSC]; Caristix agrees, HAPI v23's QRY_Q02 appends the QCK response segment."
+  },
+  "RDE_O01": {
+   "date": "2026-10-25",
+   "accept": true,
+   "hl7eu": "ignore",
+   "note": "hl7.eu ch4 4.8.4: the table ends in prose that names RXO and RXE, which the text reader picks up; read by hand it matches ours and Caristix. HAPI v23 lists CTI as non-repeating where hl7.eu and Caristix have [{CTI}]."
+  },
+  "RPA_I08": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "hl7.eu ch11 11.3.1 and Caristix list the trailing [{NTE}] after the visit segments; HAPI v23 nests them in its visit group."
+  },
+  "RPA_I09": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As RPA_I08 (same structure, hl7.eu ch11 11.3)."
+  },
+  "RPA_I10": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As RPA_I08 (same structure, hl7.eu ch11 11.3)."
+  },
+  "RPA_I11": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As RPA_I08 (same structure, hl7.eu ch11 11.3)."
+  },
+  "PGL_PC6": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "HAPI v23 models the order detail as OBR alone; hl7.eu ch12 12.2.1 (\"[OBR, etc... Order Detail Segment\") and Caristix allow any order detail segment, as ours does."
+  },
+  "PGL_PC7": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As PGL_PC6."
+  },
+  "PGL_PC8": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As PGL_PC6."
+  },
+  "PPR_PC1": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "HAPI v23 models the order detail as OBR alone; hl7.eu ch12 12.2.2 and Caristix allow any order detail segment, as ours does."
+  },
+  "PPR_PC2": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As PPR_PC1."
+  },
+  "PPR_PC3": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As PPR_PC1."
+  },
+  "PPP_PCB": {
+   "date": "2026-10-25",
+   "accept": true,
+   "hl7eu": "ignore",
+   "note": "hl7.eu ch12 12.2.3: the table's brackets are unbalanced in the text (\"[{OBX … [{VAR}]} Variance\"), so the reader mis-groups the order notes; read by hand it matches ours and Caristix. HAPI v23 models the order detail as OBR alone."
+  },
+  "PPP_PCC": {
+   "date": "2026-10-25",
+   "accept": true,
+   "hl7eu": "ignore",
+   "note": "As PPP_PCB."
+  },
+  "PPP_PCD": {
+   "date": "2026-10-25",
+   "accept": true,
+   "hl7eu": "ignore",
+   "note": "As PPP_PCB."
+  },
+  "PPG_PCG": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "HAPI v23 models the order detail as OBR alone; hl7.eu ch12 12.2.4 and Caristix allow any order detail segment, as ours does."
+  },
+  "PPG_PCH": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As PPG_PCG."
+  },
+  "PPG_PCJ": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As PPG_PCG."
+  },
+  "PRR_PC5": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "HAPI v23 models the order detail as OBR alone; hl7.eu ch12 12.2.6 and Caristix allow any order detail segment, as ours does."
+  },
+  "PPV_PCA": {
+   "date": "2026-10-25",
+   "accept": true,
+   "hl7eu": "ignore",
+   "note": "hl7.eu ch12 12.2.8: unbalanced brackets in the table text mis-group the order notes for the reader; read by hand it matches ours and Caristix. HAPI v23 models the order detail as OBR alone."
+  },
+  "PTR_PCF": {
+   "date": "2026-10-25",
+   "accept": true,
+   "hl7eu": "ignore",
+   "note": "hl7.eu ch12 12.2.10: unbalanced brackets in the table text mis-group a note for the reader; read by hand it matches ours and Caristix. HAPI v23 models the order detail as OBR alone."
+  },
+  "PPT_PCL": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "HAPI v23 models the order detail as OBR alone; hl7.eu ch12 12.2.12 and Caristix allow any order detail segment, as ours does."
   }
+ },
+ "v2.3.1": {
+  "ADT_A38": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "DRG is optional: the v2.3 hl7.eu table (ch3 3.2.38) and Caristix 2.3.1 have [DRG]; HAPI v231 alone makes it required."
+  },
+  "MDM_T04": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "OBX repeats: the v2.3 hl7.eu table (ch9, T02 content events) and Caristix 2.3.1 have {OBX}; HAPI v231 alone has a single OBX."
+  },
+  "ADT_A17": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Two patients listed flat by Caristix and HAPI v231 (as in v2.3); modelled as one PATIENT group occurring exactly twice."
+  },
+  "ADT_A24": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Two patients listed flat by Caristix and HAPI v231 (as in v2.3); modelled as one PATIENT group occurring exactly twice."
+  },
+  "ORU_R01": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Caristix and HAPI v231 write the OBSERVATION group { [OBX] [{NTE}] }; modelled as [{ OBX [{NTE}] }] as in v2.3 (same messages parse, no observation without its OBX). The 2.3.1 change, [{NK1}] in the PATIENT group, is applied."
+  },
+  "ORU_W01": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Wraps ORU^R01 (as in v2.3; Caristix 2.3.1 lists the same shape); the ORU_R01 modelling note applies. HAPI v231 has no ORU_W01 class."
+  },
+  "MFK_M01": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.3: MSH MSA [ERR] MFI {[MFA]}); Caristix and HAPI v231 repeat the MFI/MF oddity of their v2.3 tables."
+  },
+  "MFK_M02": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.3); HAPI v231 lacks ERR."
+  },
+  "MFK_M04": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.3 general definition); Caristix and HAPI v231 abbreviate it without ERR."
+  },
+  "MFK_M05": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.3 general definition); Caristix and HAPI v231 abbreviate it without ERR."
+  },
+  "MFK_M06": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.3 general definition); Caristix abbreviates it without ERR."
+  },
+  "MFK_M07": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.3 general definition); Caristix and HAPI v231 abbreviate it without ERR."
+  },
+  "MFK_M08": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.3 general definition); Caristix abbreviates it without ERR."
+  },
+  "MFK_M09": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.3 general definition); Caristix abbreviates it without ERR."
+  },
+  "MFK_M10": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.3 general definition); Caristix abbreviates it without ERR."
+  },
+  "MFK_M11": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.3 general definition); Caristix abbreviates it without ERR."
+  },
+  "MFN_M03": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.7: { MFE OM1 [other segments] }); Caristix lists a bare, optional MFE."
+  },
+  "MFN_M07": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.10 case 2: { MFE CM0 [{CM2}] }); Caristix shows the M06 structure under M07 in 2.3.1 as in 2.3."
+  },
+  "MFN_M08": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.7: { MFE OM1 [OM2] [OM3] [OM4] }); Caristix nests OM2–OM4 in a group, HAPI v231 makes OM1 optional."
+  },
+  "MFN_M09": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.7: { MFE OM1 [ OM3 [{OM4}] ] }); HAPI v231 leaves out OM1."
+  },
+  "MFN_M10": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.7: { MFE OM1 [ OM5 [{OM4}] ] }); HAPI v231 leaves out OM1."
+  },
+  "MFR_M02": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.4 with the 8.6 record { MFE STF [PRA] }); Caristix lists the bare MFE with DSC inside the group."
+  },
+  "MFR_M04": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.4 with the 8.9 record); Caristix lists the bare MFE with DSC inside the group."
+  },
+  "MFR_M05": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.4 with the 8.8 record); Caristix lists the bare MFE with DSC inside the group."
+  },
+  "MFR_M06": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.4 with the 8.10 case 1 record); Caristix lists the bare MFE with DSC inside the group."
+  },
+  "MFR_M07": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch8 8.4 with the 8.10 case 2 record); Caristix lists the bare MFE with DSC inside the group."
+  },
+  "NMR_N01": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Caristix and HAPI v231 repeat ERR. hl7.eu has no 2.3.1 chapter, and both the v2.3 appendix C.1.1 and the v2.4 chapter 14 (std24/ch14.htm) show a single [ERR], so the single ERR is kept; recorded as a contradiction, decided by hand."
+  },
+  "DSR_Q03": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3; Caristix agrees, HAPI v231's DSR_Q03 lacks MSA, ERR and QAK."
+  },
+  "QRY_Q02": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3; Caristix agrees, HAPI v231's QRY_Q02 appends the QCK response segment."
+  },
+  "ORM_O01": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Caristix 2.3.1 matches ours (the repeating IN3 is the only change from v2.3, hl7.eu ch4 4.2.1). HAPI v231 folds RXR and RXC into the order detail group, which the standard's ORM table does not list."
+  },
+  "ORR_O02": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch4 4.2.2: ORC [Order Detail Segment] [{NTE}] [{CTI}]); Caristix agrees, HAPI v231 makes the detail segment required."
+  },
+  "OSR_Q06": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch4 4.2.3, optional detail segment); Caristix agrees, HAPI v231 makes the detail segment required."
+  },
+  "RDE_O01": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch4 4.8.4); Caristix agrees, HAPI v231 writes the OBSERVATION group as [{ OBX [{NTE}] }] where the standard has { [OBX] [{NTE}] }."
+  },
+  "RDS_O01": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch4 4.8.9: { OBX [{NTE}] }); Caristix makes OBX optional inside the required group and HAPI v231 the group optional. The v2.3 text, which Caristix's 2.3 to 2.3.1 diff does not change, is kept."
+  },
+  "RPA_I08": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch11 11.3); HAPI v231 nests the trailing NTEs in its visit group."
+  },
+  "RPA_I09": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As RPA_I08."
+  },
+  "RPA_I10": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As RPA_I08."
+  },
+  "RPA_I11": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As RPA_I08."
+  },
+  "PGL_PC6": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch12 12.2.1); Caristix agrees, HAPI v231 models the order detail as OBR alone."
+  },
+  "PGL_PC7": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As PGL_PC6."
+  },
+  "PGL_PC8": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As PGL_PC6."
+  },
+  "PPR_PC1": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch12 12.2.2); Caristix agrees, HAPI v231 models the order detail as OBR alone."
+  },
+  "PPR_PC2": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As PPR_PC1."
+  },
+  "PPR_PC3": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As PPR_PC1."
+  },
+  "PPP_PCB": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch12 12.2.3); Caristix agrees, HAPI v231 models the order detail as OBR alone."
+  },
+  "PPP_PCC": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As PPP_PCB."
+  },
+  "PPP_PCD": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As PPP_PCB."
+  },
+  "PPG_PCG": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "Unchanged from v2.3 (hl7.eu ch12 12.2.4); Caristix agrees, HAPI v231 models the order detail as OBR alone."
+  },
+  "PPG_PCH": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As PPG_PCG."
+  },
+  "PPG_PCJ": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "As PPG_PCG."
+  },
+  "PRR_PC5": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "The 2.3.1 [QAK] is applied (Caristix and HAPI v231); HAPI v231 models the order detail as OBR alone."
+  },
+  "PPV_PCA": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "The 2.3.1 [QAK] is applied (Caristix and HAPI v231); HAPI v231 models the order detail as OBR alone."
+  },
+  "PTR_PCF": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "The 2.3.1 [QAK] is applied (Caristix and HAPI v231); HAPI v231 models the order detail as OBR alone."
+  },
+  "PPT_PCL": {
+   "date": "2026-10-25",
+   "accept": true,
+   "note": "The 2.3.1 [QAK] is applied (Caristix and HAPI v231); HAPI v231 models the order detail as OBR alone."
+  }
+ },
+ "v2.4": {
+  "ADT_A17": {
+   "date": "2026-10-25",
+   "note": "The standard lists the two patients flat (PID [PD1] PV1 [PV2] [{DB1}] [{OBX}] twice, no ROL or PDA in 2.4); modelled as one PATIENT group occurring exactly twice, as in v2.3. hl7.eu ch3 3.3.17 (std24/ch03.htm), Caristix 2.4 and HAPI v24 agree on the flat form.",
+   "accept": true
+  },
+  "ADT_A24": {
+   "date": "2026-10-25",
+   "note": "The standard lists the two patients flat (PID [PD1] [PV1] [{DB1}] twice); modelled as one PATIENT group occurring exactly twice, as in v2.3. hl7.eu ch3 3.3.24, Caristix 2.4 and HAPI v24 agree on the flat form.",
+   "accept": true
+  },
+  "ORU_R01": {
+   "date": "2026-10-25",
+   "note": "The 2.4 additions [CTD] and [{FT1}] are applied (Caristix 2.4 and HAPI v24; hl7.eu ch7 7.3.1 prints the same table, which the text reader cannot bracket). The OBSERVATION group is written { [OBX] [{NTE}] } and modelled as [{ OBX [{NTE}] }], as in v2.3 (same messages parse, no observation without its OBX).",
+   "accept": true
+  },
+  "DFT_P03": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch6 6.4.3 (std24/ch06.htm) matches ours and Caristix 2.4 read by hand: the reader turns the 'OBR Order Detail Segment' row into an order detail choice and the OBSERVATION group { [OBX [{NTE}]] } is modelled as [{ OBX [{NTE}] }] as in ORU. HAPI v24's DFT_P03 ends after its FINANCIAL group with a single [{DG1}], leaving out DRG, GT1, the INSURANCE group and ACC.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M01": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2 defines MFK for every event as MSH MSA [ERR] MFI [{MFA}] (the MFEs the reader appends are the prose after the table); HAPI v24 agrees, Caristix 2.4 leaves out ERR.",
+   "accept": true
+  },
+  "MFK_M02": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2 general definition MSH MSA [ERR] MFI [{MFA}] (the reader runs the MFK^M02 caption into the staff master file table that follows); Caristix 2.4 leaves out ERR. HAPI v24 has no MFK_M02 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M04": {
+   "date": "2026-10-25",
+   "note": "As MFK_M02 (hl7.eu ch8 8.4.2 general definition; Caristix 2.4 leaves out ERR; no HAPI v24 class).",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M05": {
+   "date": "2026-10-25",
+   "note": "As MFK_M02 (hl7.eu ch8 8.4.2 general definition; Caristix 2.4 leaves out ERR; no HAPI v24 class).",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M06": {
+   "date": "2026-10-25",
+   "note": "As MFK_M02 (hl7.eu ch8 8.4.2 general definition; Caristix 2.4 leaves out ERR; no HAPI v24 class).",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M07": {
+   "date": "2026-10-25",
+   "note": "As MFK_M02 (hl7.eu ch8 8.4.2 general definition; Caristix 2.4 leaves out ERR; no HAPI v24 class).",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M03": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: MFK is defined once for every master file event (MSH MSA [ERR] MFI [{MFA}]); the per-file sections print no MFK table of their own, Caristix 2.4 lists no MFK^M03 and HAPI v24 maps none, so the general definition is kept.",
+   "accept": true
+  },
+  "MFK_M08": {
+   "date": "2026-10-25",
+   "note": "As MFK_M03: hl7.eu ch8 8.4.2 general definition; no per-event table in any source.",
+   "accept": true
+  },
+  "MFK_M09": {
+   "date": "2026-10-25",
+   "note": "As MFK_M03: hl7.eu ch8 8.4.2 general definition; no per-event table in any source.",
+   "accept": true
+  },
+  "MFK_M10": {
+   "date": "2026-10-25",
+   "note": "As MFK_M03: hl7.eu ch8 8.4.2 general definition; no per-event table in any source.",
+   "accept": true
+  },
+  "MFK_M11": {
+   "date": "2026-10-25",
+   "note": "As MFK_M03: hl7.eu ch8 8.4.2 general definition; no per-event table in any source.",
+   "accept": true
+  },
+  "MFK_M12": {
+   "date": "2026-10-25",
+   "note": "As MFK_M03: hl7.eu ch8 8.4.2 general definition; no per-event table in any source (MFN^M12 is new in 2.4).",
+   "accept": true
+  },
+  "MFN_M01": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.1: MSH MFI { MFE [Z..] }, the entry a bare repeating MFE; modelled as a repeating MF group holding the MFE (entries[]), the same messages. Caristix 2.4 lists no MFN^M01 and HAPI v24's MFN_M01 is the 2.3 class.",
+   "accept": true
+  },
+  "MFN_M03": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.7.1: MSH MFI { MFE OM1 [other segments] }, the detail segments depending on the kind of test (M08–M11 carry them); modelled as { MFE OM1 }. Caristix 2.4 lists no MFN^M03; HAPI v24's MFN_M03 is the 2.3 class.",
+   "accept": true
+  },
+  "MFR_M01": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3: MSH MSA [ERR] [QAK] QRD [QRF] MFI { MFE [Z..] } [DSC], the entry a bare repeating MFE; modelled as a repeating MF_QUERY group holding the MFE. Caristix 2.4 leaves out ERR and QAK and puts DSC inside the group. HAPI v24 has no MFR_M01 of its own.",
+   "accept": true
+  },
+  "MFR_M02": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3 with the 8.6 staff record { MFE STF [PRA] [ORG] } (ORG is new in 2.4); Caristix 2.4 leaves out ERR and QAK, lists the bare MFE and puts DSC inside the group. No hl7.eu table of its own, no HAPI v24 class.",
+   "accept": true
+  },
+  "MFR_M03": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3 general response with the bare MFE entry; Caristix 2.4 leaves out ERR and QAK and puts DSC inside the group. No hl7.eu table of its own, no HAPI v24 class.",
+   "accept": true
+  },
+  "MFR_M04": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3 with the 8.9 charge description record { MFE CDM [{PRC}] }; Caristix 2.4 leaves out ERR and QAK, lists the bare MFE and puts DSC inside the group. No HAPI v24 class.",
+   "accept": true
+  },
+  "MFR_M05": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3 with the 8.8 location record { MFE LOC [{LCH}] [{LRL}] { LDP [{LCH}] [{LCC}] } }; Caristix 2.4 leaves out ERR and QAK, lists the bare MFE and puts DSC inside the group. No HAPI v24 class.",
+   "accept": true
+  },
+  "MFR_M06": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3 with the 8.10 case 1 record { MFE CM0 [{ CM1 [{CM2}] }] }; Caristix 2.4 leaves out ERR and QAK, lists the bare MFE and puts DSC inside the group. No HAPI v24 class.",
+   "accept": true
+  },
+  "MFR_M07": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3 with the 8.10 case 2 record { MFE CM0 [{CM2}] }; Caristix 2.4 leaves out ERR and QAK, lists the bare MFE and puts DSC inside the group. No HAPI v24 class.",
+   "accept": true
+  },
+  "MFR_M08": {
+   "date": "2026-10-25",
+   "note": "As MFR_M03 (general response, bare MFE entry); Caristix 2.4 leaves out ERR and QAK and puts DSC inside the group.",
+   "accept": true
+  },
+  "MFR_M09": {
+   "date": "2026-10-25",
+   "note": "As MFR_M03 (general response, bare MFE entry); Caristix 2.4 leaves out ERR and QAK and puts DSC inside the group.",
+   "accept": true
+  },
+  "MFR_M10": {
+   "date": "2026-10-25",
+   "note": "As MFR_M03 (general response, bare MFE entry); Caristix 2.4 leaves out ERR and QAK and puts DSC inside the group.",
+   "accept": true
+  },
+  "MFR_M11": {
+   "date": "2026-10-25",
+   "note": "As MFR_M03 (general response, bare MFE entry); Caristix 2.4 leaves out ERR and QAK and puts DSC inside the group.",
+   "accept": true
+  },
+  "MFR_M12": {
+   "date": "2026-10-25",
+   "note": "As MFR_M03 (general response, bare MFE entry; M12 is new in 2.4); Caristix 2.4 leaves out ERR and QAK and puts DSC inside the group.",
+   "accept": true
+  },
+  "PPV_PCA": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch12 12.3.8 (std24/ch12.htm): unbalanced brackets in the table text mis-group the order notes for the reader; read by hand it matches ours and Caristix 2.4. HAPI v24 models the order detail as OBR or RXO only.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "PTR_PCF": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch12 12.3.10: unbalanced brackets in the table text mis-group a note for the reader; read by hand it matches ours and Caristix 2.4. HAPI v24 models the order detail as OBR or RXO only.",
+   "accept": true,
+   "hl7eu": "ignore"
+  }
+ },
+ "v2.5": {
+  "ADT_A17": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch3 (std25/ch03.html), Caristix 2.5 and HAPI v25 list the two patients flat (PID [PD1] PV1 [PV2] [{DB1}] [{OBX}] twice); modelled as one PATIENT group occurring exactly twice, as in v2.3 and v2.4.",
+   "accept": true
+  },
+  "ADT_A24": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch3 (std25/ch03.html), Caristix 2.5 and HAPI v25 list the two patients flat (PID [PD1] [PV1] [{DB1}] twice); modelled as one PATIENT group occurring exactly twice, as in v2.3 and v2.4.",
+   "accept": true
+  },
+  "MFK_M02": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M02 caption into the master file record table that follows it. Caristix 2.5 appends the M02 and M04 records to the acknowledgment; HAPI v25 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M04": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M04 caption into the master file record table that follows it. Caristix 2.5 appends the M02 and M04 records to the acknowledgment; HAPI v25 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M05": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M05 caption into the master file record table that follows it. Caristix 2.5 appends the M02 and M04 records to the acknowledgment; HAPI v25 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M06": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M06 caption into the master file record table that follows it. Caristix 2.5 appends the M02 and M04 records to the acknowledgment; HAPI v25 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M07": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M07 caption into the master file record table that follows it. Caristix 2.5 appends the M02 and M04 records to the acknowledgment; HAPI v25 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M08": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M08 caption into the master file record table that follows it. Caristix 2.5 appends the M02 and M04 records to the acknowledgment; HAPI v25 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M09": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M09 caption into the master file record table that follows it. Caristix 2.5 appends the M02 and M04 records to the acknowledgment; HAPI v25 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M10": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M10 caption into the master file record table that follows it. Caristix 2.5 appends the M02 and M04 records to the acknowledgment; HAPI v25 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M11": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M11 caption into the master file record table that follows it. Caristix 2.5 appends the M02 and M04 records to the acknowledgment; HAPI v25 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFK_M12": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.2: the master file acknowledgment is MSH [{SFT}] MSA [{ERR}] MFI [{MFA}] for every event; the reader runs the MFK^M12 caption into the master file record table that follows it. Caristix 2.5 appends the M02 and M04 records to the acknowledgment; HAPI v25 has only the MFK_M01 class.",
+   "accept": true,
+   "hl7eu": "ignore"
+  },
+  "MFN_M01": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.1: MSH [{SFT}] MFI { MFE [...] }, the entry a repeating MFE followed by the HL7 or Z segments of the record; modelled as a repeating MF group holding the MFE (entries[]), the same messages. Caristix 2.5 lists no MFN^M01 and HAPI v25 has no class for it.",
+   "accept": true
+  },
+  "MFN_M03": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.8.1: MSH [{SFT}] MFI { MF_TEST: MFE OM1 ... }, the \"...\" row standing for the other OM segments of the test record (8.8.2 to 8.8.7), which the reader prints as a second OM1; modelled as MFE OM1 as in v2.3 and v2.4. Caristix 2.5 lists no MFN^M03 and HAPI v25 has no class for it.",
+   "accept": true
+  },
+  "MFR_M01": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3: MSH [{SFT}] MSA [{ERR}] [QAK] QRD [QRF] MFI { MFE [...] } [DSC], the entry a bare repeating MFE with its record elided; modelled as a repeating MF_QUERY group holding the MFE. Caristix 2.5 and HAPI v25 have no class for this event.",
+   "accept": true
+  },
+  "MFR_M03": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3: MSH [{SFT}] MSA [{ERR}] [QAK] QRD [QRF] MFI { MFE [...] } [DSC], the entry a bare repeating MFE with its record elided; modelled as a repeating MF_QUERY group holding the MFE. Caristix 2.5 and HAPI v25 have no class for this event.",
+   "accept": true
+  },
+  "MFR_M08": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3: MSH [{SFT}] MSA [{ERR}] [QAK] QRD [QRF] MFI { MFE [...] } [DSC], the entry a bare repeating MFE with its record elided; modelled as a repeating MF_QUERY group holding the MFE. Caristix 2.5 and HAPI v25 have no class for this event.",
+   "accept": true
+  },
+  "MFR_M09": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3: MSH [{SFT}] MSA [{ERR}] [QAK] QRD [QRF] MFI { MFE [...] } [DSC], the entry a bare repeating MFE with its record elided; modelled as a repeating MF_QUERY group holding the MFE. Caristix 2.5 and HAPI v25 have no class for this event.",
+   "accept": true
+  },
+  "MFR_M10": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3: MSH [{SFT}] MSA [{ERR}] [QAK] QRD [QRF] MFI { MFE [...] } [DSC], the entry a bare repeating MFE with its record elided; modelled as a repeating MF_QUERY group holding the MFE. Caristix 2.5 and HAPI v25 have no class for this event.",
+   "accept": true
+  },
+  "MFR_M11": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3: MSH [{SFT}] MSA [{ERR}] [QAK] QRD [QRF] MFI { MFE [...] } [DSC], the entry a bare repeating MFE with its record elided; modelled as a repeating MF_QUERY group holding the MFE. Caristix 2.5 and HAPI v25 have no class for this event.",
+   "accept": true
+  },
+  "MFR_M12": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3: MSH [{SFT}] MSA [{ERR}] [QAK] QRD [QRF] MFI { MFE [...] } [DSC], the entry a bare repeating MFE with its record elided; modelled as a repeating MF_QUERY group holding the MFE. Caristix 2.5 and HAPI v25 have no class for this event.",
+   "accept": true
+  },
+  "MFR_M13": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3: MSH [{SFT}] MSA [{ERR}] [QAK] QRD [QRF] MFI { MFE [...] } [DSC], the entry a bare repeating MFE with its record elided; modelled as a repeating MF_QUERY group holding the MFE. Caristix 2.5 and HAPI v25 have no class for this event.",
+   "accept": true
+  },
+  "MFR_M02": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3: MSH [{SFT}] MSA [{ERR}] [QAK] QRD [QRF] MFI { MFE [...] } [DSC], the entry a bare repeating MFE with its record elided; modelled as a repeating MF_QUERY group holding the MFE and the 8.7 staff record (STF [{PRA}] [{ORG}] [{AFF}] [{LAN}] [{EDU}] [{CER}] [{NTE}]). Caristix 2.5 and HAPI v25 have no class for this event.",
+   "accept": true
+  },
+  "MFR_M04": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch8 8.4.3 prints the bare MFE entry; Caristix 2.5 gives MF_QUERY: MFE CDM [{PRC}] (the 8.8 charge description record, ours); HAPI v25 adds [{LCH}] between CDM and PRC, which the record does not have.",
+   "accept": true
+  },
+  "RDY_Z80": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch5 (the Z80 example): MSH [{SFT}] MSA [ERR] QAK QPD [{DSP}] [DSC]; the reader picks up the DSP lines of the example message that follows the table. Caristix 2.5 agrees with ours; HAPI v25 models the response as an RDF [{RDT}] row definition instead of DSPs.",
+   "accept": true
+  },
+  "RSP_Z82": {
+   "date": "2026-10-25",
+   "note": "hl7.eu ch5 (the Z82 example): the reader nests the PATIENT and VISIT brackets oddly and brackets the QUERY_RESPONSE; Caristix 2.5 and HAPI v25 agree on a required, repeating QUERY_RESPONSE holding [ PATIENT: PID [PD1] [{NTE}] [ VISIT: {AL1} PV1 [PV2] ] ] and the COMMON_ORDER group (ours). TIMING and TIMING_ENCODED are optional and repeating as hl7.eu and HAPI print them (Caristix: required, single).",
+   "accept": true
+  }
+ }
 }

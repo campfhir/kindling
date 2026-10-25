@@ -1,7 +1,7 @@
 /**
  * Parser for EAC^U07 messages (HL7 v2.5.1).
  *
- * Structure: MSH EQU {ECD} [SAC] [CNS] [ROL]
+ * Structure: MSH [{SFT}] EQU { COMMAND: ECD [TQ1] [ SPECIMEN_CONTAINER: SAC [{SPM}] ] [CNS] } [ROL]
  *
  * @module
  */
@@ -11,24 +11,45 @@ import type { StructureItem } from "../../types/schema.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
 import { EAC_U07_STRUCTURE } from "../../structures/v2.5.1/EAC_U07.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { EQU } from "../../segments/v2.5.1/EQU.ts";
 import { ECD } from "../../segments/v2.5.1/ECD.ts";
+import { TQ1 } from "../../segments/v2.5.1/TQ1.ts";
 import { SAC } from "../../segments/v2.5.1/SAC.ts";
+import { SPM } from "../../segments/v2.5.1/SPM.ts";
 import { CNS } from "../../segments/v2.5.1/CNS.ts";
 import { ROL } from "../../segments/v2.5.1/ROL.ts";
+
+/** The COMMAND group of a parsed EAC^U07 (HL7 v2.5.1) message. */
+export interface ParsedCommand {
+  /** The ECD segment. */
+  equipmentCommand: ECD;
+  /** The TQ1 segment. */
+  timing?: TQ1;
+  /** The SPECIMEN CONTAINER group. */
+  specimenContainer?: ParsedSpecimenContainer;
+  /** The CNS segment. */
+  clearNotification?: CNS;
+}
+
+/** The SPECIMEN CONTAINER group of a parsed EAC^U07 (HL7 v2.5.1) message. */
+export interface ParsedSpecimenContainer {
+  /** The SAC segment. */
+  specimenContainer: SAC;
+  /** The SPM segments. */
+  specimens?: SPM[];
+}
 
 /** Structured result of parsing an HL7 EAC^U07 (HL7 v2.5.1) message. */
 export interface ParsedEAC_U07 extends ParsedMessageBase {
   /** The MSH segment. */
   header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
   /** The EQU segment. */
   equipmentDetail: EQU;
-  /** The ECD segments. */
-  equipmentCommands: ECD[];
-  /** The SAC segment. */
-  specimenContainer?: SAC;
-  /** The CNS segment. */
-  clearNotification?: CNS;
+  /** The COMMAND groups. */
+  commands: ParsedCommand[];
   /** The ROL segment. */
   role?: ROL;
 }
@@ -36,9 +57,12 @@ export interface ParsedEAC_U07 extends ParsedMessageBase {
 /** The segment parsers of EAC^U07 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
   EQU: (s, e) => EQU.parse(s, e),
   ECD: (s, e) => ECD.parse(s, e),
+  TQ1: (s, e) => TQ1.parse(s, e),
   SAC: (s, e) => SAC.parse(s, e),
+  SPM: (s, e) => SPM.parse(s, e),
   CNS: (s, e) => CNS.parse(s, e),
   ROL: (s, e) => ROL.parse(s, e),
 };

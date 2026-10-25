@@ -1,7 +1,72 @@
 /**
- * RDY_K15_Parser parser for HL7 v2.5 — identical to v2.4, re-exported.
+ * Parser for RDY^K15 messages (HL7 v2.5).
+ *
+ * Structure: MSH [{SFT}] MSA [ERR] QAK QPD [{DSP}] [DSC]
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.4/RDY_K15_Parser.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { Result } from "../../types/result.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
+import { RDY_K15_STRUCTURE } from "../../structures/v2.5/RDY_K15.ts";
+import { MSH } from "../../segments/v2.5/MSH.ts";
+import { SFT } from "../../segments/v2.5/SFT.ts";
+import { MSA } from "../../segments/v2.5/MSA.ts";
+import { ERR } from "../../segments/v2.5/ERR.ts";
+import { QAK } from "../../segments/v2.5/QAK.ts";
+import { QPD } from "../../segments/v2.5/QPD.ts";
+import { DSP } from "../../segments/v2.5/DSP.ts";
+import { DSC } from "../../segments/v2.5/DSC.ts";
+
+/** Structured result of parsing an HL7 RDY^K15 (HL7 v2.5) message. */
+export interface ParsedRDY_K15 extends ParsedMessageBase {
+  /** The MSH segment. */
+  header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
+  /** The MSA segment. */
+  acknowledgment: MSA;
+  /** The ERR segment. */
+  error?: ERR;
+  /** The QAK segment. */
+  queryAcknowledgment: QAK;
+  /** The QPD segment. */
+  queryParameters: QPD;
+  /** The DSP segments. */
+  displayLines?: DSP[];
+  /** The DSC segment. */
+  continuation?: DSC;
+}
+
+/** The segment parsers of RDY^K15 (HL7 v2.5). */
+const PARSERS: SegmentParsers = {
+  MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
+  MSA: (s, e) => MSA.parse(s, e),
+  ERR: (s, e) => ERR.parse(s, e),
+  QAK: (s, e) => QAK.parse(s, e),
+  QPD: (s, e) => QPD.parse(s, e),
+  DSP: (s, e) => DSP.parse(s, e),
+  DSC: (s, e) => DSC.parse(s, e),
+};
+
+/** Parser for HL7 RDY^K15 (HL7 v2.5) messages. */
+export class RDY_K15_Parser {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "RDY_K15";
+  /** The structure the message is parsed against. */
+  protected readonly structure: StructureItem[] = RDY_K15_STRUCTURE;
+  /** The segment parsers, keyed by segment name. */
+  protected readonly parsers: SegmentParsers = PARSERS;
+
+  /** Parses the input string into a structured instance. */
+  parse(messageString: string): Result<ParsedRDY_K15> {
+    return parseStructure<ParsedRDY_K15>(this.messageName, this.structure, this.parsers, messageString);
+  }
+}
+
+/** Parses an HL7 RDY^K15 (HL7 v2.5) message string into a structured result. */
+export function parseRDY_K15(messageString: string): Result<ParsedRDY_K15> {
+  return new RDY_K15_Parser().parse(messageString);
+}

@@ -1,7 +1,7 @@
 /**
  * Message structure for ORR^O02 messages (HL7 v2.5.1).
  *
- * Structure: MSH MSA [{ERR}] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [ ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}] ] } ]
+ * Structure: MSH MSA [{ERR}] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{CTI}] } ]
  *
  * @module
  */
@@ -36,17 +36,9 @@ export const ORR_O02_STRUCTURE: StructureItem[] = [
         repeating: true,
         segments: [
           { name: "ORC", required: true, repeating: false },
-          {
-            name: "ORDER_DETAIL",
-            required: false,
-            repeating: false,
-            as: "detail",
-            segments: [
-              { oneOf: ["OBR", "RQD", "RQ1", "RXO", "ODS", "ODT"], required: true },
-              { name: "NTE", required: false, repeating: true },
-              { name: "CTI", required: false, repeating: true },
-            ],
-          },
+          { oneOf: ["OBR", "RQD", "RQ1", "RXO", "ODS", "ODT"], required: true },
+          { name: "NTE", required: false, repeating: true },
+          { name: "CTI", required: false, repeating: true },
         ],
       },
     ],

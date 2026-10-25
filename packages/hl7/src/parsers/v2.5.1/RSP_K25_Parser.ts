@@ -1,7 +1,7 @@
 /**
  * Parser for RSP^K25 messages (HL7 v2.5.1).
  *
- * Structure: MSH MSA [ERR] QAK QPD RCP { STAFF: STF [PRA] [{ORG}] [{AFF}] [{LAN}] [{EDU}] } [DSC]
+ * Structure: MSH [{SFT}] MSA [{ERR}] QAK QPD RCP { STAFF: STF [{PRA}] [{ORG}] [{AFF}] [{LAN}] [{EDU}] [{CER}] } [DSC]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
 import { RSP_K25_STRUCTURE } from "../../structures/v2.5.1/RSP_K25.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { MSA } from "../../segments/v2.5.1/MSA.ts";
 import { ERR } from "../../segments/v2.5.1/ERR.ts";
 import { QAK } from "../../segments/v2.5.1/QAK.ts";
@@ -22,14 +23,15 @@ import { ORG } from "../../segments/v2.5.1/ORG.ts";
 import { AFF } from "../../segments/v2.5.1/AFF.ts";
 import { LAN } from "../../segments/v2.5.1/LAN.ts";
 import { EDU } from "../../segments/v2.5.1/EDU.ts";
+import { CER } from "../../segments/v2.5.1/CER.ts";
 import { DSC } from "../../segments/v2.5.1/DSC.ts";
 
 /** The STAFF group of a parsed RSP^K25 (HL7 v2.5.1) message. */
 export interface ParsedStaff {
   /** The STF segment. */
   staff: STF;
-  /** The PRA segment. */
-  practitioner?: PRA;
+  /** The PRA segments. */
+  practitioners?: PRA[];
   /** The ORG segments. */
   organizationUnits?: ORG[];
   /** The AFF segments. */
@@ -38,16 +40,20 @@ export interface ParsedStaff {
   languages?: LAN[];
   /** The EDU segments. */
   educations?: EDU[];
+  /** The CER segments. */
+  certificates?: CER[];
 }
 
 /** Structured result of parsing an HL7 RSP^K25 (HL7 v2.5.1) message. */
 export interface ParsedRSP_K25 extends ParsedMessageBase {
   /** The MSH segment. */
   header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
   /** The MSA segment. */
   acknowledgment: MSA;
-  /** The ERR segment. */
-  error?: ERR;
+  /** The ERR segments. */
+  errors?: ERR[];
   /** The QAK segment. */
   queryAcknowledgment: QAK;
   /** The QPD segment. */
@@ -63,6 +69,7 @@ export interface ParsedRSP_K25 extends ParsedMessageBase {
 /** The segment parsers of RSP^K25 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
   MSA: (s, e) => MSA.parse(s, e),
   ERR: (s, e) => ERR.parse(s, e),
   QAK: (s, e) => QAK.parse(s, e),
@@ -74,6 +81,7 @@ const PARSERS: SegmentParsers = {
   AFF: (s, e) => AFF.parse(s, e),
   LAN: (s, e) => LAN.parse(s, e),
   EDU: (s, e) => EDU.parse(s, e),
+  CER: (s, e) => CER.parse(s, e),
   DSC: (s, e) => DSC.parse(s, e),
 };
 

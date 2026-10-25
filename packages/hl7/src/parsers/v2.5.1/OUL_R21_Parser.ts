@@ -1,7 +1,7 @@
 /**
  * Parser for OUL^R21 messages (HL7 v2.5.1).
  *
- * Structure: MSH [NTE] [ PATIENT: PID [PD1] [{NTE}] ] [ VISIT: PV1 [PV2] ] { ORDER_OBSERVATION: [ CONTAINER: SAC [SID] [{OBX}] ] [ORC] OBR [{NTE}] { OBSERVATION: [OBX] [TCD] [{SID}] [{NTE}] } [{CTI}] } [DSC]
+ * Structure: MSH [{SFT}] [NTE] [ PATIENT: PID [PD1] [{NTE}] ] [ VISIT: PV1 [PV2] ] { ORDER_OBSERVATION: [ CONTAINER: SAC [SID] ] [ORC] OBR [{NTE}] [{ TIMING_QTY: TQ1 [{TQ2}] }] { OBSERVATION: [OBX] [TCD] [{SID}] [{NTE}] } [{CTI}] } [DSC]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
 import { OUL_R21_STRUCTURE } from "../../structures/v2.5.1/OUL_R21.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { NTE } from "../../segments/v2.5.1/NTE.ts";
 import { PID } from "../../segments/v2.5.1/PID.ts";
 import { PD1 } from "../../segments/v2.5.1/PD1.ts";
@@ -18,9 +19,11 @@ import { PV1 } from "../../segments/v2.5.1/PV1.ts";
 import { PV2 } from "../../segments/v2.5.1/PV2.ts";
 import { SAC } from "../../segments/v2.5.1/SAC.ts";
 import { SID } from "../../segments/v2.5.1/SID.ts";
-import { OBX } from "../../segments/v2.5.1/OBX.ts";
 import { ORC } from "../../segments/v2.5.1/ORC.ts";
 import { OBR } from "../../segments/v2.5.1/OBR.ts";
+import { TQ1 } from "../../segments/v2.5.1/TQ1.ts";
+import { TQ2 } from "../../segments/v2.5.1/TQ2.ts";
+import { OBX } from "../../segments/v2.5.1/OBX.ts";
 import { TCD } from "../../segments/v2.5.1/TCD.ts";
 import { CTI } from "../../segments/v2.5.1/CTI.ts";
 import { DSC } from "../../segments/v2.5.1/DSC.ts";
@@ -53,6 +56,8 @@ export interface ParsedOrderObservation {
   observationRequest: OBR;
   /** The NTE segments. */
   notes?: NTE[];
+  /** The TIMING QTY groups. */
+  timingQtys?: ParsedTimingQty[];
   /** The OBSERVATION groups. */
   observations: ParsedObservation[];
   /** The CTI segments. */
@@ -65,8 +70,14 @@ export interface ParsedContainer {
   specimenContainer: SAC;
   /** The SID segment. */
   substanceIdentifier?: SID;
-  /** The OBX segments. */
-  observations?: OBX[];
+}
+
+/** The TIMING QTY group of a parsed OUL^R21 (HL7 v2.5.1) message. */
+export interface ParsedTimingQty {
+  /** The TQ1 segment. */
+  timing: TQ1;
+  /** The TQ2 segments. */
+  timingRelationships?: TQ2[];
 }
 
 /** The OBSERVATION group of a parsed OUL^R21 (HL7 v2.5.1) message. */
@@ -85,6 +96,8 @@ export interface ParsedObservation {
 export interface ParsedOUL_R21 extends ParsedMessageBase {
   /** The MSH segment. */
   header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
   /** The NTE segment. */
   note?: NTE;
   /** The PATIENT group. */
@@ -100,6 +113,7 @@ export interface ParsedOUL_R21 extends ParsedMessageBase {
 /** The segment parsers of OUL^R21 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
   NTE: (s, e) => NTE.parse(s, e),
   PID: (s, e) => PID.parse(s, e),
   PD1: (s, e) => PD1.parse(s, e),
@@ -107,9 +121,11 @@ const PARSERS: SegmentParsers = {
   PV2: (s, e) => PV2.parse(s, e),
   SAC: (s, e) => SAC.parse(s, e),
   SID: (s, e) => SID.parse(s, e),
-  OBX: (s, e) => OBX.parse(s, e),
   ORC: (s, e) => ORC.parse(s, e),
   OBR: (s, e) => OBR.parse(s, e),
+  TQ1: (s, e) => TQ1.parse(s, e),
+  TQ2: (s, e) => TQ2.parse(s, e),
+  OBX: (s, e) => OBX.parse(s, e),
   TCD: (s, e) => TCD.parse(s, e),
   CTI: (s, e) => CTI.parse(s, e),
   DSC: (s, e) => DSC.parse(s, e),

@@ -1,7 +1,7 @@
 /**
  * Builder for TCU^U10 messages (HL7 v2.5.1).
  *
- * Structure: MSH EQU {TCC} [ROL]
+ * Structure: MSH [{SFT}] EQU { TEST_CONFIGURATION: [SPM] {TCC} } [ROL]
  *
  * @module
  */
@@ -11,12 +11,24 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { TCU_U10_STRUCTURE } from "../../structures/v2.5.1/TCU_U10.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { EQU } from "../../segments/v2.5.1/EQU.ts";
+import type { SPM } from "../../segments/v2.5.1/SPM.ts";
 import type { TCC } from "../../segments/v2.5.1/TCC.ts";
 import type { ROL } from "../../segments/v2.5.1/ROL.ts";
 
+/** The TEST CONFIGURATION group of an TCU^U10 (HL7 v2.5.1) message being built. */
+export interface TestConfigurationGroup {
+  /** The SPM segment. */
+  specimen?: SPM;
+  /** The TCC segments. */
+  testCodeConfigurations: TCC[];
+}
+
 /** The optional segments and groups of an TCU^U10 (HL7 v2.5.1) message. */
 export interface TCU_U10Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The ROL segment. */
   role?: ROL;
 }
@@ -32,14 +44,14 @@ export class TCU_U10<TMSH extends MSH = MSH, TEQU extends EQU = EQU> {
   constructor(
     public header: TMSH,
     public equipmentDetail: TEQU,
-    public testCodeConfigurations: TCC[],
+    public testConfigurations: TestConfigurationGroup[],
     public options: TCU_U10Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, header: this.header, equipmentDetail: this.equipmentDetail, testCodeConfigurations: this.testCodeConfigurations };
+    return { ...this.options, header: this.header, equipmentDetail: this.equipmentDetail, testConfigurations: this.testConfigurations };
   }
 
   /** Validates the message structure, returning a result. */
@@ -62,9 +74,9 @@ export class TCU_U10<TMSH extends MSH = MSH, TEQU extends EQU = EQU> {
 export function createTCU_U10<TMSH extends MSH = MSH, TEQU extends EQU = EQU>(
   header: TMSH,
   equipmentDetail: TEQU,
-  testCodeConfigurations: TCC[],
+  testConfigurations: TestConfigurationGroup[],
   options: TCU_U10Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): TCU_U10<TMSH, TEQU> {
-  return new TCU_U10(header, equipmentDetail, testCodeConfigurations, options, encoding);
+  return new TCU_U10(header, equipmentDetail, testConfigurations, options, encoding);
 }

@@ -1,7 +1,7 @@
 /**
  * Builder for ADT^A18 messages (HL7 v2.5.1).
  *
- * Structure: MSH [{SFT}] EVN PID [PD1] [MRG] PV1
+ * Structure: MSH [{SFT}] EVN PID [PD1] MRG PV1
  *
  * @module
  */
@@ -24,12 +24,10 @@ export interface ADT_A18Options {
   software?: SFT[];
   /** The PD1 segment. */
   patientDemographics?: PD1;
-  /** The MRG segment. */
-  merge?: MRG;
 }
 
 /** Builder for HL7 ADT^A18 (HL7 v2.5.1) messages. */
-export class ADT_A18<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TPV1 extends PV1 = PV1> {
+export class ADT_A18<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TMRG extends MRG = MRG, TPV1 extends PV1 = PV1> {
   /** The message name used in error messages. */
   protected readonly messageName: string = "ADT_A18";
   /** The structure the message is verified against and encoded in. */
@@ -40,6 +38,7 @@ export class ADT_A18<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
     public header: TMSH,
     public event: TEVN,
     public patient: TPID,
+    public merge: TMRG,
     public visit: TPV1,
     public options: ADT_A18Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
@@ -47,7 +46,7 @@ export class ADT_A18<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, header: this.header, event: this.event, patient: this.patient, visit: this.visit };
+    return { ...this.options, header: this.header, event: this.event, patient: this.patient, merge: this.merge, visit: this.visit };
   }
 
   /** Validates the message structure, returning a result. */
@@ -67,13 +66,14 @@ export class ADT_A18<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extend
 }
 
 /** Builds an HL7 ADT^A18 (HL7 v2.5.1) message. */
-export function createADT_A18<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TPV1 extends PV1 = PV1>(
+export function createADT_A18<TMSH extends MSH = MSH, TEVN extends EVN = EVN, TPID extends PID = PID, TMRG extends MRG = MRG, TPV1 extends PV1 = PV1>(
   header: TMSH,
   event: TEVN,
   patient: TPID,
+  merge: TMRG,
   visit: TPV1,
   options: ADT_A18Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
-): ADT_A18<TMSH, TEVN, TPID, TPV1> {
-  return new ADT_A18(header, event, patient, visit, options, encoding);
+): ADT_A18<TMSH, TEVN, TPID, TMRG, TPV1> {
+  return new ADT_A18(header, event, patient, merge, visit, options, encoding);
 }

@@ -1,7 +1,7 @@
 /**
  * Builder for OMG^O19 messages (HL7 v2.5.1).
  *
- * Structure: MSH [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC OBR [{NTE}] [CTD] [{DG1}] [{ OBSERVATION: OBX [{NTE}] }] [{ PRIOR_RESULT: [ PATIENT_PRIOR: PID [PD1] ] [ PATIENT_VISIT_PRIOR: PV1 [PV2] ] [{AL1}] { ORDER_PRIOR: [ORC] OBR [{NTE}] [CTD] { OBSERVATION_PRIOR: OBX [{NTE}] } } }] [{FT1}] [{CTI}] [BLG] }
+ * Structure: MSH [{SFT}] [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [{NK1}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] OBR [{NTE}] [CTD] [{DG1}] [{ OBSERVATION: OBX [{NTE}] }] [{ SPECIMEN: SPM [{OBX}] [{ CONTAINER: SAC [{OBX}] }] }] [{ PRIOR_RESULT: [ PATIENT_PRIOR: PID [PD1] ] [ PATIENT_VISIT_PRIOR: PV1 [PV2] ] [{AL1}] { ORDER_PRIOR: [ORC] OBR [{ TIMING_PRIOR: TQ1 [{TQ2}] }] [{NTE}] [CTD] { OBSERVATION_PRIOR: OBX [{NTE}] } } }] [{FT1}] [{CTI}] [BLG] }
  *
  * @module
  */
@@ -11,9 +11,11 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { OMG_O19_STRUCTURE } from "../../structures/v2.5.1/OMG_O19.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { NTE } from "../../segments/v2.5.1/NTE.ts";
 import type { PID } from "../../segments/v2.5.1/PID.ts";
 import type { PD1 } from "../../segments/v2.5.1/PD1.ts";
+import type { NK1 } from "../../segments/v2.5.1/NK1.ts";
 import type { PV1 } from "../../segments/v2.5.1/PV1.ts";
 import type { PV2 } from "../../segments/v2.5.1/PV2.ts";
 import type { IN1 } from "../../segments/v2.5.1/IN1.ts";
@@ -22,10 +24,14 @@ import type { IN3 } from "../../segments/v2.5.1/IN3.ts";
 import type { GT1 } from "../../segments/v2.5.1/GT1.ts";
 import type { AL1 } from "../../segments/v2.5.1/AL1.ts";
 import type { ORC } from "../../segments/v2.5.1/ORC.ts";
+import type { TQ1 } from "../../segments/v2.5.1/TQ1.ts";
+import type { TQ2 } from "../../segments/v2.5.1/TQ2.ts";
 import type { OBR } from "../../segments/v2.5.1/OBR.ts";
 import type { CTD } from "../../segments/v2.5.1/CTD.ts";
 import type { DG1 } from "../../segments/v2.5.1/DG1.ts";
 import type { OBX } from "../../segments/v2.5.1/OBX.ts";
+import type { SPM } from "../../segments/v2.5.1/SPM.ts";
+import type { SAC } from "../../segments/v2.5.1/SAC.ts";
 import type { FT1 } from "../../segments/v2.5.1/FT1.ts";
 import type { CTI } from "../../segments/v2.5.1/CTI.ts";
 import type { BLG } from "../../segments/v2.5.1/BLG.ts";
@@ -38,6 +44,8 @@ export interface PatientGroup {
   patientDemographics?: PD1;
   /** The NTE segments. */
   notes?: NTE[];
+  /** The NK1 segments. */
+  nextOfKin?: NK1[];
   /** The PATIENT VISIT group. */
   patientVisit?: PatientVisitGroup;
   /** The INSURANCE groups. */
@@ -70,6 +78,8 @@ export interface InsuranceGroup {
 export interface OrderGroup {
   /** The ORC segment. */
   commonOrder: ORC;
+  /** The TIMING groups. */
+  timings?: TimingGroup[];
   /** The OBR segment. */
   observationRequest: OBR;
   /** The NTE segments. */
@@ -80,6 +90,8 @@ export interface OrderGroup {
   diagnoses?: DG1[];
   /** The OBSERVATION groups. */
   observations?: ObservationGroup[];
+  /** The SPECIMEN groups. */
+  specimens?: SpecimenGroup[];
   /** The PRIOR RESULT groups. */
   priorResults?: PriorResultGroup[];
   /** The FT1 segments. */
@@ -90,12 +102,38 @@ export interface OrderGroup {
   billing?: BLG;
 }
 
+/** The TIMING group of an OMG^O19 (HL7 v2.5.1) message being built. */
+export interface TimingGroup {
+  /** The TQ1 segment. */
+  timing: TQ1;
+  /** The TQ2 segments. */
+  timingRelationships?: TQ2[];
+}
+
 /** The OBSERVATION group of an OMG^O19 (HL7 v2.5.1) message being built. */
 export interface ObservationGroup {
   /** The OBX segment. */
   observation: OBX;
   /** The NTE segments. */
   notes?: NTE[];
+}
+
+/** The SPECIMEN group of an OMG^O19 (HL7 v2.5.1) message being built. */
+export interface SpecimenGroup {
+  /** The SPM segment. */
+  specimen: SPM;
+  /** The OBX segments. */
+  observations?: OBX[];
+  /** The CONTAINER groups. */
+  containers?: ContainerGroup[];
+}
+
+/** The CONTAINER group of an OMG^O19 (HL7 v2.5.1) message being built. */
+export interface ContainerGroup {
+  /** The SAC segment. */
+  specimenContainer: SAC;
+  /** The OBX segments. */
+  observations?: OBX[];
 }
 
 /** The PRIOR RESULT group of an OMG^O19 (HL7 v2.5.1) message being built. */
@@ -132,12 +170,22 @@ export interface OrderPriorGroup {
   commonOrder?: ORC;
   /** The OBR segment. */
   observationRequest: OBR;
+  /** The TIMING PRIOR groups. */
+  timingPriors?: TimingPriorGroup[];
   /** The NTE segments. */
   notes?: NTE[];
   /** The CTD segment. */
   contact?: CTD;
   /** The OBSERVATION PRIOR groups. */
   observationPriors: ObservationPriorGroup[];
+}
+
+/** The TIMING PRIOR group of an OMG^O19 (HL7 v2.5.1) message being built. */
+export interface TimingPriorGroup {
+  /** The TQ1 segment. */
+  timing: TQ1;
+  /** The TQ2 segments. */
+  timingRelationships?: TQ2[];
 }
 
 /** The OBSERVATION PRIOR group of an OMG^O19 (HL7 v2.5.1) message being built. */
@@ -150,6 +198,8 @@ export interface ObservationPriorGroup {
 
 /** The optional segments and groups of an OMG^O19 (HL7 v2.5.1) message. */
 export interface OMG_O19Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The NTE segments. */
   notes?: NTE[];
   /** The PATIENT group. */

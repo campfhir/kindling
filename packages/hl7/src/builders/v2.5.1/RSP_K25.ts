@@ -1,7 +1,7 @@
 /**
  * Builder for RSP^K25 messages (HL7 v2.5.1).
  *
- * Structure: MSH MSA [ERR] QAK QPD RCP { STAFF: STF [PRA] [{ORG}] [{AFF}] [{LAN}] [{EDU}] } [DSC]
+ * Structure: MSH [{SFT}] MSA [{ERR}] QAK QPD RCP { STAFF: STF [{PRA}] [{ORG}] [{AFF}] [{LAN}] [{EDU}] [{CER}] } [DSC]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { RSP_K25_STRUCTURE } from "../../structures/v2.5.1/RSP_K25.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { MSA } from "../../segments/v2.5.1/MSA.ts";
 import type { ERR } from "../../segments/v2.5.1/ERR.ts";
 import type { QAK } from "../../segments/v2.5.1/QAK.ts";
@@ -22,14 +23,15 @@ import type { ORG } from "../../segments/v2.5.1/ORG.ts";
 import type { AFF } from "../../segments/v2.5.1/AFF.ts";
 import type { LAN } from "../../segments/v2.5.1/LAN.ts";
 import type { EDU } from "../../segments/v2.5.1/EDU.ts";
+import type { CER } from "../../segments/v2.5.1/CER.ts";
 import type { DSC } from "../../segments/v2.5.1/DSC.ts";
 
 /** The STAFF group of an RSP^K25 (HL7 v2.5.1) message being built. */
 export interface StaffGroup {
   /** The STF segment. */
   staff: STF;
-  /** The PRA segment. */
-  practitioner?: PRA;
+  /** The PRA segments. */
+  practitioners?: PRA[];
   /** The ORG segments. */
   organizationUnits?: ORG[];
   /** The AFF segments. */
@@ -38,12 +40,16 @@ export interface StaffGroup {
   languages?: LAN[];
   /** The EDU segments. */
   educations?: EDU[];
+  /** The CER segments. */
+  certificates?: CER[];
 }
 
 /** The optional segments and groups of an RSP^K25 (HL7 v2.5.1) message. */
 export interface RSP_K25Options {
-  /** The ERR segment. */
-  error?: ERR;
+  /** The SFT segments. */
+  software?: SFT[];
+  /** The ERR segments. */
+  errors?: ERR[];
   /** The DSC segment. */
   continuation?: DSC;
 }

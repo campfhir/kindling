@@ -126,10 +126,29 @@ or 2.3 class. The 13 contradictions between the
 sources (OBX-8/9/10/16 and PID-38 repetition, the C-versus-O usages of EQU-3, QPD-2, RCP-4 and
 SID-1–4, STF-15) are decided by hl7.eu and recorded in the ledger rows.
 
+## Validation ledger (v2.5)
+
+[`docs/validation/v2.5-segment-ledger.md`](validation/v2.5-segment-ledger.md): every field of the 150
+segments of 2.5 against hl7.eu (`v25/hl7v25segm<SEG>.htm`), Caristix 2.5 and HAPI v25, 0 open
+issues. 55 segments have their own 2.5 class: the 6 new in 2.5 (BPO, BPX, BTX, CON, IPC, OVR,
+seeded into `codegen/spec/v2.5-segments.json` by `ledger.mjs --adopt` from the three sources; HAPI
+v25 has no field table for CON, see `codegen/validate/ledger-v25-notes.json`), the 7 of earlier
+releases (SFT, SPM, TQ1, TQ2, CER, IIM and the EDU subclass; CER and IIM regenerated with Date and
+composite setters, SPM-3/5/6/9/11/14/15/16/21/24 and TQ1-3/4/5/9 now take repetitions) and 42
+generated subclasses of the 2.4 class for the tables that changed in 2.5 (`--adopt` now extends the
+existing class whatever its kind and leaves a setter inherited when only the length or usage
+changed): new fields such as ERR-3/5/10, FT1-27–31, GT1-56/57, IN1-50–53, NK1-38/39, ORC-26–30,
+PID-39, PV2-48/49, RXC-8/9, RXD-28–33, RXE-32–44, RXG-23–26, RXO-25–28, STF-30–38, TQ2-3–5 and
+CDM-11's CX, the CE→CWE and ST→TX type changes of 2.5, the repeating OM2/OM3 units and OBX-10, and
+the 2.5 lengths (an empty subclass for IAM, OBX, ORG, PV1, RDT, SCH and TCC, whose 2.5 table
+differs in lengths only). The other 95 re-export the 2.4, 2.3.1 or 2.3 class. The 4 contradictions
+between the sources (FT1-23 length, MSA-5 type and usage, PID-38 repetition, STF-30 type) are
+decided by hl7.eu and recorded in the ledger rows.
+
 ## v2.5.1 parity
-v2.5.1 segments are generated as thin wrappers over the v2.3 base (`pnpm codegen`), so every
-v2.3 segment above must also be re-evaluated for v2.5.1 field changes (the 2.4 ledger below is the
-model: a v2.5 and a v2.5.1 segment ledger each). The segments 2.4 introduced (`QPD`, `RCP`, `QID`,
+v2.5.1 segments are generated as thin wrappers over the v2.5 classes (`pnpm codegen`), so every
+segment must still be re-evaluated for v2.5.1 field changes (the 2.4 and 2.5 ledgers are the
+model: a v2.5.1 segment ledger against hl7.eu v251, Caristix 2.5.1 and HAPI v251). The segments 2.4 introduced (`QPD`, `RCP`, `QID`,
 `IAM`, `GP1`/`GP2`, `CNS`, …) are done in 1.2; `TQ2`, `PRT`, `OH1`–`OH4` and the other later
 additions follow with their versions.
 

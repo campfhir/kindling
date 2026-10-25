@@ -49,7 +49,7 @@ src/
 │   ├── v2.3/                 # hand-written base segments
 │   ├── v2.3.1/               # 53 segments whose table changed in 2.3.1; the rest re-export v2.3
 │   ├── v2.4/                 # 66 segments changed in 2.4 + 28 new (PDA, ABS, SAC, QPD, RCP, IAM, …); the rest re-export
-│   ├── v2.5/                 # re-exports + SFT, SPM, TQ1, TQ2, CER (and EDU-9)
+│   ├── v2.5/                 # 49 segments changed in 2.5 + 6 new (BPO, BPX, BTX, CON, IPC, OVR) + SFT, SPM, TQ1, TQ2, CER, IIM; the rest re-export
 │   └── v2.5.1/               # extends v2.5 with 2.5.1-specific fields
 ├── structures/               # Generated: each message's structure as data (<MSG>_STRUCTURE)
 ├── parsers/                  # Generated message parsers by version (v2.3 … v2.5.1); messages.ts = structure name → parser
@@ -117,13 +117,13 @@ PID-38). Segments are available from the version that introduced them:
 | `v2.3` | — | Base implementation |
 | `v2.3.1` | v2.3 | Complete: every message generated against the 2.3.1 field tables (53 segments have their own class, the rest re-export v2.3's); the 2.3.1 structure changes (QAK, renumbered queries, repeating IN3, NK1 in ORU, PD1 in SIU, …) applied |
 | `v2.4` | v2.3.1 | Complete: every message (334 structures, 57 new in 2.4: OML/ORL, OMG/ORG, OMP/ORP, OUL^R21, QBP/RSP/RTB/RDY and the other chapter 5 queries, the chapter 13 automation messages, PMU^B01–B06, BAR^P10, ADT A52–A55 and A60–A62) generated against the 2.4 field tables (94 segments have their own class, 28 of them new in 2.4); the 2.4 structure changes (ROL and PDA in ADT, CTD/FT1 in ORM and ORU, required order detail in ORR/OSR, …) applied |
-| `v2.5` | v2.4 | Re-export + `SFT` (Software), `SPM` (Specimen), `TQ1` (Timing/Quantity); `ERR` gains ERR-2..12; own `ACK` (`[{SFT}]`, repeating `ERR`) and `ORR^O02` (repeating `ERR`) |
+| `v2.5` | v2.4 | Complete: every message (387 structures, 50 new in 2.5: OML^O33/O35 and ORL^O34/O36, OUL^R22–R24, OMI/ORI, OMB/ORB, the BPS/BRP/BTS/BRT blood bank messages, RDE^O25/RRE^O26, QBP^Q31/RSP^K31 and the chapter 5 Z73–Z99 conformance queries, PMU^B07/B08, BAR^P12, DFT^P11) generated against the 2.5 field tables (55 segments have their own class, 6 of them new in 2.5: BPO, BPX, BTX, CON, IPC, OVR); the 2.5 structure changes (`[{SFT}]` after MSH in every message except the ones kept from earlier releases, TIMING groups after ORC, SPECIMEN groups, repeating ERR in the acknowledgments, A03/A16 with the A01 segments, …) applied |
 | `v2.5.1` | v2.5 | Version-specific fields and messages (e.g. `ORU_R30–R32`) |
 
 Version-specific differences in 2.5 and 2.5.1 are filled in as they are implemented — see the
 [roadmap](ROADMAP.md). The root `parse()` dispatches a version once it is complete: 1.0 parses
-v2.3, 1.1 adds v2.3.1, 1.2 adds v2.4 (2.0 drops CommonJS and Node < 24), and each later version
-joins in its own minor release. Every segment field
+v2.3, 1.1 adds v2.3.1, 1.2 adds v2.4 (2.0 drops CommonJS and Node < 24), 2.1 adds v2.5, and each
+later version joins in its own minor release. Every segment field
 and every message structure of a dispatched version has been checked against hl7.eu, Caristix and
 HAPI: see [docs/validation](docs/validation/README.md).
 

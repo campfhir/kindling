@@ -1,7 +1,7 @@
 /**
  * Builder for ORG^O20 messages (HL7 v2.5.1).
  *
- * Structure: MSH MSA [ERR] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [OBR] [{NTE}] [{CTI}] } ]
+ * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] [OBR] [{NTE}] [{CTI}] [{ SPECIMEN: SPM [{SAC}] }] } ]
  *
  * @module
  */
@@ -13,11 +13,16 @@ import { ORG_O20_STRUCTURE } from "../../structures/v2.5.1/ORG_O20.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
 import type { MSA } from "../../segments/v2.5.1/MSA.ts";
 import type { ERR } from "../../segments/v2.5.1/ERR.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { NTE } from "../../segments/v2.5.1/NTE.ts";
 import type { PID } from "../../segments/v2.5.1/PID.ts";
 import type { ORC } from "../../segments/v2.5.1/ORC.ts";
+import type { TQ1 } from "../../segments/v2.5.1/TQ1.ts";
+import type { TQ2 } from "../../segments/v2.5.1/TQ2.ts";
 import type { OBR } from "../../segments/v2.5.1/OBR.ts";
 import type { CTI } from "../../segments/v2.5.1/CTI.ts";
+import type { SPM } from "../../segments/v2.5.1/SPM.ts";
+import type { SAC } from "../../segments/v2.5.1/SAC.ts";
 
 /** The RESPONSE group of an ORG^O20 (HL7 v2.5.1) message being built. */
 export interface ResponseGroup {
@@ -39,18 +44,40 @@ export interface PatientGroup {
 export interface OrderGroup {
   /** The ORC segment. */
   commonOrder: ORC;
+  /** The TIMING groups. */
+  timings?: TimingGroup[];
   /** The OBR segment. */
   observationRequest?: OBR;
   /** The NTE segments. */
   notes?: NTE[];
   /** The CTI segments. */
   clinicalTrials?: CTI[];
+  /** The SPECIMEN groups. */
+  specimens?: SpecimenGroup[];
+}
+
+/** The TIMING group of an ORG^O20 (HL7 v2.5.1) message being built. */
+export interface TimingGroup {
+  /** The TQ1 segment. */
+  timing: TQ1;
+  /** The TQ2 segments. */
+  timingRelationships?: TQ2[];
+}
+
+/** The SPECIMEN group of an ORG^O20 (HL7 v2.5.1) message being built. */
+export interface SpecimenGroup {
+  /** The SPM segment. */
+  specimen: SPM;
+  /** The SAC segments. */
+  specimenContainers?: SAC[];
 }
 
 /** The optional segments and groups of an ORG^O20 (HL7 v2.5.1) message. */
 export interface ORG_O20Options {
-  /** The ERR segment. */
-  error?: ERR;
+  /** The ERR segments. */
+  errors?: ERR[];
+  /** The SFT segments. */
+  software?: SFT[];
   /** The NTE segments. */
   notes?: NTE[];
   /** The RESPONSE group. */

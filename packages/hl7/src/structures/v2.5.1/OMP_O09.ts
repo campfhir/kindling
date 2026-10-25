@@ -1,7 +1,7 @@
 /**
  * Message structure for OMP^O09 messages (HL7 v2.5.1).
  *
- * Structure: MSH [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC RXO [{NTE}] {RXR} [ COMPONENT: {RXC} [{NTE}] ] [{ OBSERVATION: OBX [{NTE}] }] [{FT1}] [BLG] }
+ * Structure: MSH [{SFT}] [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] RXO [{NTE}] {RXR} [{ COMPONENT: RXC [{NTE}] }] [{ OBSERVATION: OBX [{NTE}] }] [{FT1}] [BLG] }
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 /** The segments, choices and groups of OMP^O09 (HL7 v2.5.1), in order. */
 export const OMP_O09_STRUCTURE: StructureItem[] = [
   { name: "MSH", required: true, repeating: false },
+  { name: "SFT", required: false, repeating: true },
   { name: "NTE", required: false, repeating: true },
   {
     name: "PATIENT",
@@ -49,15 +50,24 @@ export const OMP_O09_STRUCTURE: StructureItem[] = [
     repeating: true,
     segments: [
       { name: "ORC", required: true, repeating: false },
+      {
+        name: "TIMING",
+        required: false,
+        repeating: true,
+        segments: [
+          { name: "TQ1", required: true, repeating: false },
+          { name: "TQ2", required: false, repeating: true },
+        ],
+      },
       { name: "RXO", required: true, repeating: false },
       { name: "NTE", required: false, repeating: true },
       { name: "RXR", required: true, repeating: true },
       {
         name: "COMPONENT",
         required: false,
-        repeating: false,
+        repeating: true,
         segments: [
-          { name: "RXC", required: true, repeating: true },
+          { name: "RXC", required: true, repeating: false },
           { name: "NTE", required: false, repeating: true },
         ],
       },

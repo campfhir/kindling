@@ -1,7 +1,7 @@
 /**
  * Parser for OML^O21 messages (HL7 v2.5.1).
  *
- * Structure: MSH [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER_GENERAL: [ CONTAINER_1: SAC [{OBX}] ] { ORDER: ORC [ OBSERVATION_REQUEST: OBR [{ CONTAINER_2: SAC [{OBX}] }] [TCD] [{NTE}] [{DG1}] [{ OBSERVATION: OBX [TCD] [{NTE}] }] [{ PRIOR_RESULT: [ PATIENT_PRIOR: PID [PD1] ] [ PATIENT_VISIT_PRIOR: PV1 [PV2] ] [{AL1}] { ORDER_PRIOR: [ORC] OBR [{NTE}] { OBSERVATION_PRIOR: OBX [{NTE}] } } }] ] [{FT1}] [{CTI}] [BLG] } }
+ * Structure: MSH [{SFT}] [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [{NK1}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] [ OBSERVATION_REQUEST: OBR [TCD] [{NTE}] [CTD] [{DG1}] [{ OBSERVATION: OBX [TCD] [{NTE}] }] [{ SPECIMEN: SPM [{OBX}] [{ CONTAINER: SAC [{OBX}] }] }] [{ PRIOR_RESULT: [ PATIENT_PRIOR: PID [PD1] ] [ PATIENT_VISIT_PRIOR: PV1 [PV2] ] [{AL1}] { ORDER_PRIOR: [ORC] OBR [{NTE}] [{ TIMING_PRIOR: TQ1 [{TQ2}] }] { OBSERVATION_PRIOR: OBX [{NTE}] } } }] ] [{FT1}] [{CTI}] [BLG] }
  *
  * @module
  */
@@ -11,9 +11,11 @@ import type { StructureItem } from "../../types/schema.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
 import { OML_O21_STRUCTURE } from "../../structures/v2.5.1/OML_O21.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { NTE } from "../../segments/v2.5.1/NTE.ts";
 import { PID } from "../../segments/v2.5.1/PID.ts";
 import { PD1 } from "../../segments/v2.5.1/PD1.ts";
+import { NK1 } from "../../segments/v2.5.1/NK1.ts";
 import { PV1 } from "../../segments/v2.5.1/PV1.ts";
 import { PV2 } from "../../segments/v2.5.1/PV2.ts";
 import { IN1 } from "../../segments/v2.5.1/IN1.ts";
@@ -21,12 +23,16 @@ import { IN2 } from "../../segments/v2.5.1/IN2.ts";
 import { IN3 } from "../../segments/v2.5.1/IN3.ts";
 import { GT1 } from "../../segments/v2.5.1/GT1.ts";
 import { AL1 } from "../../segments/v2.5.1/AL1.ts";
-import { SAC } from "../../segments/v2.5.1/SAC.ts";
-import { OBX } from "../../segments/v2.5.1/OBX.ts";
 import { ORC } from "../../segments/v2.5.1/ORC.ts";
+import { TQ1 } from "../../segments/v2.5.1/TQ1.ts";
+import { TQ2 } from "../../segments/v2.5.1/TQ2.ts";
 import { OBR } from "../../segments/v2.5.1/OBR.ts";
 import { TCD } from "../../segments/v2.5.1/TCD.ts";
+import { CTD } from "../../segments/v2.5.1/CTD.ts";
 import { DG1 } from "../../segments/v2.5.1/DG1.ts";
+import { OBX } from "../../segments/v2.5.1/OBX.ts";
+import { SPM } from "../../segments/v2.5.1/SPM.ts";
+import { SAC } from "../../segments/v2.5.1/SAC.ts";
 import { FT1 } from "../../segments/v2.5.1/FT1.ts";
 import { CTI } from "../../segments/v2.5.1/CTI.ts";
 import { BLG } from "../../segments/v2.5.1/BLG.ts";
@@ -39,6 +45,8 @@ export interface ParsedPatient {
   patientDemographics?: PD1;
   /** The NTE segments. */
   notes?: NTE[];
+  /** The NK1 segments. */
+  nextOfKin?: NK1[];
   /** The PATIENT VISIT group. */
   patientVisit?: ParsedPatientVisit;
   /** The INSURANCE groups. */
@@ -67,26 +75,12 @@ export interface ParsedInsurance {
   insuranceCertification?: IN3;
 }
 
-/** The ORDER GENERAL group of a parsed OML^O21 (HL7 v2.5.1) message. */
-export interface ParsedOrderGeneral {
-  /** The CONTAINER 1 group. */
-  container1?: ParsedContainer1;
-  /** The ORDER groups. */
-  orders: ParsedOrder[];
-}
-
-/** The CONTAINER 1 group of a parsed OML^O21 (HL7 v2.5.1) message. */
-export interface ParsedContainer1 {
-  /** The SAC segment. */
-  specimenContainer: SAC;
-  /** The OBX segments. */
-  observations?: OBX[];
-}
-
 /** The ORDER group of a parsed OML^O21 (HL7 v2.5.1) message. */
 export interface ParsedOrder {
   /** The ORC segment. */
   commonOrder: ORC;
+  /** The TIMING groups. */
+  timings?: ParsedTiming[];
   /** The OBSERVATION REQUEST group. */
   observationRequest?: ParsedObservationRequest;
   /** The FT1 segments. */
@@ -97,30 +91,32 @@ export interface ParsedOrder {
   billing?: BLG;
 }
 
+/** The TIMING group of a parsed OML^O21 (HL7 v2.5.1) message. */
+export interface ParsedTiming {
+  /** The TQ1 segment. */
+  timing: TQ1;
+  /** The TQ2 segments. */
+  timingRelationships?: TQ2[];
+}
+
 /** The OBSERVATION REQUEST group of a parsed OML^O21 (HL7 v2.5.1) message. */
 export interface ParsedObservationRequest {
   /** The OBR segment. */
   observationRequest: OBR;
-  /** The CONTAINER 2 groups. */
-  container2s?: ParsedContainer2[];
   /** The TCD segment. */
   testCodeDetail?: TCD;
   /** The NTE segments. */
   notes?: NTE[];
+  /** The CTD segment. */
+  contact?: CTD;
   /** The DG1 segments. */
   diagnoses?: DG1[];
   /** The OBSERVATION groups. */
   observations?: ParsedObservation[];
+  /** The SPECIMEN groups. */
+  specimens?: ParsedSpecimen[];
   /** The PRIOR RESULT groups. */
   priorResults?: ParsedPriorResult[];
-}
-
-/** The CONTAINER 2 group of a parsed OML^O21 (HL7 v2.5.1) message. */
-export interface ParsedContainer2 {
-  /** The SAC segment. */
-  specimenContainer: SAC;
-  /** The OBX segments. */
-  observations?: OBX[];
 }
 
 /** The OBSERVATION group of a parsed OML^O21 (HL7 v2.5.1) message. */
@@ -131,6 +127,24 @@ export interface ParsedObservation {
   testCodeDetail?: TCD;
   /** The NTE segments. */
   notes?: NTE[];
+}
+
+/** The SPECIMEN group of a parsed OML^O21 (HL7 v2.5.1) message. */
+export interface ParsedSpecimen {
+  /** The SPM segment. */
+  specimen: SPM;
+  /** The OBX segments. */
+  observations?: OBX[];
+  /** The CONTAINER groups. */
+  containers?: ParsedContainer[];
+}
+
+/** The CONTAINER group of a parsed OML^O21 (HL7 v2.5.1) message. */
+export interface ParsedContainer {
+  /** The SAC segment. */
+  specimenContainer: SAC;
+  /** The OBX segments. */
+  observations?: OBX[];
 }
 
 /** The PRIOR RESULT group of a parsed OML^O21 (HL7 v2.5.1) message. */
@@ -169,8 +183,18 @@ export interface ParsedOrderPrior {
   observationRequest: OBR;
   /** The NTE segments. */
   notes?: NTE[];
+  /** The TIMING PRIOR groups. */
+  timingPriors?: ParsedTimingPrior[];
   /** The OBSERVATION PRIOR groups. */
   observationPriors: ParsedObservationPrior[];
+}
+
+/** The TIMING PRIOR group of a parsed OML^O21 (HL7 v2.5.1) message. */
+export interface ParsedTimingPrior {
+  /** The TQ1 segment. */
+  timing: TQ1;
+  /** The TQ2 segments. */
+  timingRelationships?: TQ2[];
 }
 
 /** The OBSERVATION PRIOR group of a parsed OML^O21 (HL7 v2.5.1) message. */
@@ -185,20 +209,24 @@ export interface ParsedObservationPrior {
 export interface ParsedOML_O21 extends ParsedMessageBase {
   /** The MSH segment. */
   header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
   /** The NTE segments. */
   notes?: NTE[];
   /** The PATIENT group. */
   patient?: ParsedPatient;
-  /** The ORDER GENERAL groups. */
-  orderGenerals: ParsedOrderGeneral[];
+  /** The ORDER groups. */
+  orders: ParsedOrder[];
 }
 
 /** The segment parsers of OML^O21 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
   NTE: (s, e) => NTE.parse(s, e),
   PID: (s, e) => PID.parse(s, e),
   PD1: (s, e) => PD1.parse(s, e),
+  NK1: (s, e) => NK1.parse(s, e),
   PV1: (s, e) => PV1.parse(s, e),
   PV2: (s, e) => PV2.parse(s, e),
   IN1: (s, e) => IN1.parse(s, e),
@@ -206,12 +234,16 @@ const PARSERS: SegmentParsers = {
   IN3: (s, e) => IN3.parse(s, e),
   GT1: (s, e) => GT1.parse(s, e),
   AL1: (s, e) => AL1.parse(s, e),
-  SAC: (s, e) => SAC.parse(s, e),
-  OBX: (s, e) => OBX.parse(s, e),
   ORC: (s, e) => ORC.parse(s, e),
+  TQ1: (s, e) => TQ1.parse(s, e),
+  TQ2: (s, e) => TQ2.parse(s, e),
   OBR: (s, e) => OBR.parse(s, e),
   TCD: (s, e) => TCD.parse(s, e),
+  CTD: (s, e) => CTD.parse(s, e),
   DG1: (s, e) => DG1.parse(s, e),
+  OBX: (s, e) => OBX.parse(s, e),
+  SPM: (s, e) => SPM.parse(s, e),
+  SAC: (s, e) => SAC.parse(s, e),
   FT1: (s, e) => FT1.parse(s, e),
   CTI: (s, e) => CTI.parse(s, e),
   BLG: (s, e) => BLG.parse(s, e),

@@ -1,7 +1,7 @@
 /**
  * Builder for ADT^A02 messages (HL7 v2.5).
  *
- * Structure: MSH [{SFT}] EVN PID [PD1] PV1 [PV2] [{DB1}] [{OBX}]
+ * Structure: MSH [{SFT}] EVN PID [PD1] [{ROL}] PV1 [PV2] [{ROL}] [{DB1}] [{OBX}] [PDA]
  *
  * @module
  */
@@ -15,10 +15,12 @@ import type { SFT } from "../../segments/v2.5/SFT.ts";
 import type { EVN } from "../../segments/v2.5/EVN.ts";
 import type { PID } from "../../segments/v2.5/PID.ts";
 import type { PD1 } from "../../segments/v2.5/PD1.ts";
+import type { ROL } from "../../segments/v2.5/ROL.ts";
 import type { PV1 } from "../../segments/v2.5/PV1.ts";
 import type { PV2 } from "../../segments/v2.5/PV2.ts";
 import type { DB1 } from "../../segments/v2.5/DB1.ts";
 import type { OBX } from "../../segments/v2.5/OBX.ts";
+import type { PDA } from "../../segments/v2.5/PDA.ts";
 
 /** The optional segments and groups of an ADT^A02 (HL7 v2.5) message. */
 export interface ADT_A02Options {
@@ -26,12 +28,18 @@ export interface ADT_A02Options {
   software?: SFT[];
   /** The PD1 segment. */
   patientDemographics?: PD1;
+  /** The ROL segments. */
+  roles?: ROL[];
   /** The PV2 segment. */
   visitDetails?: PV2;
+  /** The ROL segments. */
+  visitRoles?: ROL[];
   /** The DB1 segments. */
   disabilities?: DB1[];
   /** The OBX segments. */
   observations?: OBX[];
+  /** The PDA segment. */
+  deathAndAutopsy?: PDA;
 }
 
 /** Builder for HL7 ADT^A02 (HL7 v2.5) messages. */

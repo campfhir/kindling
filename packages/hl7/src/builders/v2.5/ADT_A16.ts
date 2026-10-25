@@ -1,7 +1,7 @@
 /**
  * Builder for ADT^A16 messages (HL7 v2.5).
  *
- * Structure: MSH [{SFT}] EVN PID [PD1] PV1 [PV2] [{DB1}] [{OBX}] [DG1] [DRG]
+ * Structure: MSH [{SFT}] EVN PID [PD1] [{ROL}] [{NK1}] PV1 [PV2] [{ROL}] [{DB1}] [{OBX}] [{AL1}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] }] [{GT1}] [{ INSURANCE: IN1 [IN2] [{IN3}] [{ROL}] }] [ACC]
  *
  * @module
  */
@@ -15,12 +15,41 @@ import type { SFT } from "../../segments/v2.5/SFT.ts";
 import type { EVN } from "../../segments/v2.5/EVN.ts";
 import type { PID } from "../../segments/v2.5/PID.ts";
 import type { PD1 } from "../../segments/v2.5/PD1.ts";
+import type { ROL } from "../../segments/v2.5/ROL.ts";
+import type { NK1 } from "../../segments/v2.5/NK1.ts";
 import type { PV1 } from "../../segments/v2.5/PV1.ts";
 import type { PV2 } from "../../segments/v2.5/PV2.ts";
 import type { DB1 } from "../../segments/v2.5/DB1.ts";
 import type { OBX } from "../../segments/v2.5/OBX.ts";
+import type { AL1 } from "../../segments/v2.5/AL1.ts";
 import type { DG1 } from "../../segments/v2.5/DG1.ts";
 import type { DRG } from "../../segments/v2.5/DRG.ts";
+import type { PR1 } from "../../segments/v2.5/PR1.ts";
+import type { GT1 } from "../../segments/v2.5/GT1.ts";
+import type { IN1 } from "../../segments/v2.5/IN1.ts";
+import type { IN2 } from "../../segments/v2.5/IN2.ts";
+import type { IN3 } from "../../segments/v2.5/IN3.ts";
+import type { ACC } from "../../segments/v2.5/ACC.ts";
+
+/** The PROCEDURE group of an ADT^A16 (HL7 v2.5) message being built. */
+export interface ProcedureGroup {
+  /** The PR1 segment. */
+  procedure: PR1;
+  /** The ROL segments. */
+  roles?: ROL[];
+}
+
+/** The INSURANCE group of an ADT^A16 (HL7 v2.5) message being built. */
+export interface InsuranceGroup {
+  /** The IN1 segment. */
+  insurance: IN1;
+  /** The IN2 segment. */
+  insuranceDetails?: IN2;
+  /** The IN3 segments. */
+  insuranceCertifications?: IN3[];
+  /** The ROL segments. */
+  roles?: ROL[];
+}
 
 /** The optional segments and groups of an ADT^A16 (HL7 v2.5) message. */
 export interface ADT_A16Options {
@@ -28,16 +57,32 @@ export interface ADT_A16Options {
   software?: SFT[];
   /** The PD1 segment. */
   patientDemographics?: PD1;
+  /** The ROL segments. */
+  roles?: ROL[];
+  /** The NK1 segments. */
+  nextOfKin?: NK1[];
   /** The PV2 segment. */
   visitDetails?: PV2;
+  /** The ROL segments. */
+  visitRoles?: ROL[];
   /** The DB1 segments. */
   disabilities?: DB1[];
   /** The OBX segments. */
   observations?: OBX[];
-  /** The DG1 segment. */
-  diagnosis?: DG1;
+  /** The AL1 segments. */
+  allergies?: AL1[];
+  /** The DG1 segments. */
+  diagnoses?: DG1[];
   /** The DRG segment. */
   diagnosisRelatedGroup?: DRG;
+  /** The PROCEDURE groups. */
+  procedures?: ProcedureGroup[];
+  /** The GT1 segments. */
+  guarantors?: GT1[];
+  /** The INSURANCE groups. */
+  insuranceGroups?: InsuranceGroup[];
+  /** The ACC segment. */
+  accident?: ACC;
 }
 
 /** Builder for HL7 ADT^A16 (HL7 v2.5) messages. */

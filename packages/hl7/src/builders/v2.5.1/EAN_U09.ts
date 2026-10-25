@@ -1,7 +1,7 @@
 /**
  * Builder for EAN^U09 messages (HL7 v2.5.1).
  *
- * Structure: MSH EQU { NOTIFICATION: NDS [NTE] } [ROL]
+ * Structure: MSH [{SFT}] EQU { NOTIFICATION: NDS [NTE] } [ROL]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { EAN_U09_STRUCTURE } from "../../structures/v2.5.1/EAN_U09.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { EQU } from "../../segments/v2.5.1/EQU.ts";
 import type { NDS } from "../../segments/v2.5.1/NDS.ts";
 import type { NTE } from "../../segments/v2.5.1/NTE.ts";
@@ -26,6 +27,8 @@ export interface NotificationGroup {
 
 /** The optional segments and groups of an EAN^U09 (HL7 v2.5.1) message. */
 export interface EAN_U09Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The ROL segment. */
   role?: ROL;
 }

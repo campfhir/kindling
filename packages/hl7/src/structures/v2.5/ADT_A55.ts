@@ -1,7 +1,20 @@
 /**
- * ADT_A55 structure for HL7 v2.5 — identical to v2.4, re-exported.
+ * Message structure for ADT^A55 messages (HL7 v2.5).
+ *
+ * Structure: MSH [{SFT}] EVN PID [PD1] PV1 [PV2]
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.4/ADT_A55.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { StructureItem } from "../../types/schema.ts";
+
+/** The segments, choices and groups of ADT^A55 (HL7 v2.5), in order. */
+export const ADT_A55_STRUCTURE: StructureItem[] = [
+  { name: "MSH", required: true, repeating: false },
+  { name: "SFT", required: false, repeating: true },
+  { name: "EVN", required: true, repeating: false },
+  { name: "PID", required: true, repeating: false },
+  { name: "PD1", required: false, repeating: false },
+  { name: "PV1", required: true, repeating: false },
+  { name: "PV2", required: false, repeating: false },
+];

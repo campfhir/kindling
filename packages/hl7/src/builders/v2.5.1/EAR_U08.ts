@@ -1,7 +1,7 @@
 /**
  * Builder for EAR^U08 messages (HL7 v2.5.1).
  *
- * Structure: MSH EQU { COMMAND_RESPONSE: ECD [SAC] ECR } [ROL]
+ * Structure: MSH [{SFT}] EQU { COMMAND_RESPONSE: ECD [ SPECIMEN_CONTAINER: SAC [{SPM}] ] ECR } [ROL]
  *
  * @module
  */
@@ -11,9 +11,11 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { EAR_U08_STRUCTURE } from "../../structures/v2.5.1/EAR_U08.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { EQU } from "../../segments/v2.5.1/EQU.ts";
 import type { ECD } from "../../segments/v2.5.1/ECD.ts";
 import type { SAC } from "../../segments/v2.5.1/SAC.ts";
+import type { SPM } from "../../segments/v2.5.1/SPM.ts";
 import type { ECR } from "../../segments/v2.5.1/ECR.ts";
 import type { ROL } from "../../segments/v2.5.1/ROL.ts";
 
@@ -21,14 +23,24 @@ import type { ROL } from "../../segments/v2.5.1/ROL.ts";
 export interface CommandResponseGroup {
   /** The ECD segment. */
   equipmentCommand: ECD;
-  /** The SAC segment. */
-  specimenContainer?: SAC;
+  /** The SPECIMEN CONTAINER group. */
+  specimenContainer?: SpecimenContainerGroup;
   /** The ECR segment. */
   commandResponse: ECR;
 }
 
+/** The SPECIMEN CONTAINER group of an EAR^U08 (HL7 v2.5.1) message being built. */
+export interface SpecimenContainerGroup {
+  /** The SAC segment. */
+  specimenContainer: SAC;
+  /** The SPM segments. */
+  specimens?: SPM[];
+}
+
 /** The optional segments and groups of an EAR^U08 (HL7 v2.5.1) message. */
 export interface EAR_U08Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The ROL segment. */
   role?: ROL;
 }

@@ -1,7 +1,7 @@
 /**
  * Builder for ADT^A06 messages (HL7 v2.5.1).
  *
- * Structure: MSH [{SFT}] EVN PID [PD1] [MRG] [{NK1}] PV1 [PV2] [{DB1}] [DRG] [{OBX}] [{AL1}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] }] [{GT1}] [{ INSURANCE: IN1 [IN2] [IN3] }] [ACC] [UB1] [UB2]
+ * Structure: MSH [{SFT}] EVN PID [PD1] [{ROL}] [MRG] [{NK1}] PV1 [PV2] [{ROL}] [{DB1}] [{OBX}] [{AL1}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] }] [{GT1}] [{ INSURANCE: IN1 [IN2] [{IN3}] [{ROL}] }] [ACC] [UB1] [UB2]
  *
  * @module
  */
@@ -15,17 +15,17 @@ import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { EVN } from "../../segments/v2.5.1/EVN.ts";
 import type { PID } from "../../segments/v2.5.1/PID.ts";
 import type { PD1 } from "../../segments/v2.5.1/PD1.ts";
+import type { ROL } from "../../segments/v2.5.1/ROL.ts";
 import type { MRG } from "../../segments/v2.5.1/MRG.ts";
 import type { NK1 } from "../../segments/v2.5.1/NK1.ts";
 import type { PV1 } from "../../segments/v2.5.1/PV1.ts";
 import type { PV2 } from "../../segments/v2.5.1/PV2.ts";
 import type { DB1 } from "../../segments/v2.5.1/DB1.ts";
-import type { DRG } from "../../segments/v2.5.1/DRG.ts";
 import type { OBX } from "../../segments/v2.5.1/OBX.ts";
 import type { AL1 } from "../../segments/v2.5.1/AL1.ts";
 import type { DG1 } from "../../segments/v2.5.1/DG1.ts";
+import type { DRG } from "../../segments/v2.5.1/DRG.ts";
 import type { PR1 } from "../../segments/v2.5.1/PR1.ts";
-import type { ROL } from "../../segments/v2.5.1/ROL.ts";
 import type { GT1 } from "../../segments/v2.5.1/GT1.ts";
 import type { IN1 } from "../../segments/v2.5.1/IN1.ts";
 import type { IN2 } from "../../segments/v2.5.1/IN2.ts";
@@ -48,8 +48,10 @@ export interface InsuranceGroup {
   insurance: IN1;
   /** The IN2 segment. */
   insuranceDetails?: IN2;
-  /** The IN3 segment. */
-  insuranceCertification?: IN3;
+  /** The IN3 segments. */
+  insuranceCertifications?: IN3[];
+  /** The ROL segments. */
+  roles?: ROL[];
 }
 
 /** The optional segments and groups of an ADT^A06 (HL7 v2.5.1) message. */
@@ -58,16 +60,18 @@ export interface ADT_A06Options {
   software?: SFT[];
   /** The PD1 segment. */
   patientDemographics?: PD1;
+  /** The ROL segments. */
+  roles?: ROL[];
   /** The MRG segment. */
   merge?: MRG;
   /** The NK1 segments. */
   nextOfKin?: NK1[];
   /** The PV2 segment. */
   visitDetails?: PV2;
+  /** The ROL segments. */
+  visitRoles?: ROL[];
   /** The DB1 segments. */
   disabilities?: DB1[];
-  /** The DRG segment. */
-  preliminaryDiagnosisRelatedGroup?: DRG;
   /** The OBX segments. */
   observations?: OBX[];
   /** The AL1 segments. */

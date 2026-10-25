@@ -1,7 +1,7 @@
 /**
  * Message structure for BAR^P10 messages (HL7 v2.5.1).
  *
- * Structure: MSH EVN PID PV1 [{DG1}] GP1 [{ PROCEDURE: PR1 [GP2] }]
+ * Structure: MSH [{SFT}] EVN PID PV1 [{DG1}] GP1 [{ PROCEDURE: PR1 [GP2] }]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 /** The segments, choices and groups of BAR^P10 (HL7 v2.5.1), in order. */
 export const BAR_P10_STRUCTURE: StructureItem[] = [
   { name: "MSH", required: true, repeating: false },
+  { name: "SFT", required: false, repeating: true },
   { name: "EVN", required: true, repeating: false },
   { name: "PID", required: true, repeating: false },
   { name: "PV1", required: true, repeating: false },

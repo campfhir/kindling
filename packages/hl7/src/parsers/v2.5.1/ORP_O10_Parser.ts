@@ -1,7 +1,7 @@
 /**
  * Parser for ORP^O10 messages (HL7 v2.5.1).
  *
- * Structure: MSH MSA [ERR] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [ ORDER_DETAIL: RXO [{NTE}] {RXR} [{RXC}] [{NTE}] ] } ]
+ * Structure: MSH MSA [{ERR}] [{SFT}] [{NTE}] [ RESPONSE: [ PATIENT: PID [{NTE}] ] { ORDER: ORC [{ TIMING: TQ1 [{TQ2}] }] [ ORDER_DETAIL: RXO [{NTE}] {RXR} [{ COMPONENT: RXC [{NTE}] }] ] } ]
  *
  * @module
  */
@@ -13,9 +13,12 @@ import { ORP_O10_STRUCTURE } from "../../structures/v2.5.1/ORP_O10.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
 import { MSA } from "../../segments/v2.5.1/MSA.ts";
 import { ERR } from "../../segments/v2.5.1/ERR.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { NTE } from "../../segments/v2.5.1/NTE.ts";
 import { PID } from "../../segments/v2.5.1/PID.ts";
 import { ORC } from "../../segments/v2.5.1/ORC.ts";
+import { TQ1 } from "../../segments/v2.5.1/TQ1.ts";
+import { TQ2 } from "../../segments/v2.5.1/TQ2.ts";
 import { RXO } from "../../segments/v2.5.1/RXO.ts";
 import { RXR } from "../../segments/v2.5.1/RXR.ts";
 import { RXC } from "../../segments/v2.5.1/RXC.ts";
@@ -40,8 +43,18 @@ export interface ParsedPatient {
 export interface ParsedOrder {
   /** The ORC segment. */
   commonOrder: ORC;
+  /** The TIMING groups. */
+  timings?: ParsedTiming[];
   /** The ORDER DETAIL group. */
   orderDetail?: ParsedOrderDetail;
+}
+
+/** The TIMING group of a parsed ORP^O10 (HL7 v2.5.1) message. */
+export interface ParsedTiming {
+  /** The TQ1 segment. */
+  timing: TQ1;
+  /** The TQ2 segments. */
+  timingRelationships?: TQ2[];
 }
 
 /** The ORDER DETAIL group of a parsed ORP^O10 (HL7 v2.5.1) message. */
@@ -52,10 +65,16 @@ export interface ParsedOrderDetail {
   notes?: NTE[];
   /** The RXR segments. */
   routes: RXR[];
-  /** The RXC segments. */
-  components?: RXC[];
+  /** The COMPONENT groups. */
+  components?: ParsedComponent[];
+}
+
+/** The COMPONENT group of a parsed ORP^O10 (HL7 v2.5.1) message. */
+export interface ParsedComponent {
+  /** The RXC segment. */
+  component: RXC;
   /** The NTE segments. */
-  componentNotes?: NTE[];
+  notes?: NTE[];
 }
 
 /** Structured result of parsing an HL7 ORP^O10 (HL7 v2.5.1) message. */
@@ -64,8 +83,10 @@ export interface ParsedORP_O10 extends ParsedMessageBase {
   header: MSH;
   /** The MSA segment. */
   acknowledgment: MSA;
-  /** The ERR segment. */
-  error?: ERR;
+  /** The ERR segments. */
+  errors?: ERR[];
+  /** The SFT segments. */
+  software?: SFT[];
   /** The NTE segments. */
   notes?: NTE[];
   /** The RESPONSE group. */
@@ -77,9 +98,12 @@ const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
   MSA: (s, e) => MSA.parse(s, e),
   ERR: (s, e) => ERR.parse(s, e),
+  SFT: (s, e) => SFT.parse(s, e),
   NTE: (s, e) => NTE.parse(s, e),
   PID: (s, e) => PID.parse(s, e),
   ORC: (s, e) => ORC.parse(s, e),
+  TQ1: (s, e) => TQ1.parse(s, e),
+  TQ2: (s, e) => TQ2.parse(s, e),
   RXO: (s, e) => RXO.parse(s, e),
   RXR: (s, e) => RXR.parse(s, e),
   RXC: (s, e) => RXC.parse(s, e),

@@ -1,7 +1,7 @@
 /**
  * Message structure for ORM^O01 messages (HL7 v2.5).
  *
- * Structure: MSH [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [{IN3}] }] [GT1] [{AL1}] ] { ORDER: ORC [ ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [CTD] [{DG1}] [{ OBSERVATION: OBX [{NTE}] }] ] [{FT1}] [{CTI}] [BLG] }
+ * Structure: MSH [{NTE}] [ PATIENT: PID [PD1] [{NTE}] [ PATIENT_VISIT: PV1 [PV2] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC [ ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [CTD] [{DG1}] [{ OBSERVATION: OBX [{NTE}] }] ] [{FT1}] [{CTI}] [BLG] }
  *
  * @module
  */
@@ -38,7 +38,7 @@ export const ORM_O01_STRUCTURE: StructureItem[] = [
         segments: [
           { name: "IN1", required: true, repeating: false },
           { name: "IN2", required: false, repeating: false },
-          { name: "IN3", required: false, repeating: true },
+          { name: "IN3", required: false, repeating: false },
         ],
       },
       { name: "GT1", required: false, repeating: false },

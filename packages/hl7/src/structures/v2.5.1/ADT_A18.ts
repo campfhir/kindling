@@ -1,7 +1,7 @@
 /**
  * Message structure for ADT^A18 messages (HL7 v2.5.1).
  *
- * Structure: MSH [{SFT}] EVN PID [PD1] [MRG] PV1
+ * Structure: MSH [{SFT}] EVN PID [PD1] MRG PV1
  *
  * @module
  */
@@ -15,6 +15,6 @@ export const ADT_A18_STRUCTURE: StructureItem[] = [
   { name: "EVN", required: true, repeating: false },
   { name: "PID", required: true, repeating: false },
   { name: "PD1", required: false, repeating: false },
-  { name: "MRG", required: false, repeating: false },
+  { name: "MRG", required: true, repeating: false },
   { name: "PV1", required: true, repeating: false },
 ];

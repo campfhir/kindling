@@ -1,7 +1,7 @@
 /**
  * Builder for RSP^K23 messages (HL7 v2.5.1).
  *
- * Structure: MSH MSA [ERR] QAK QPD [PID] [DSC]
+ * Structure: MSH [{SFT}] MSA [ERR] QAK QPD [ QUERY_RESPONSE: PID ] [DSC]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { RSP_K23_STRUCTURE } from "../../structures/v2.5.1/RSP_K23.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { MSA } from "../../segments/v2.5.1/MSA.ts";
 import type { ERR } from "../../segments/v2.5.1/ERR.ts";
 import type { QAK } from "../../segments/v2.5.1/QAK.ts";
@@ -18,12 +19,20 @@ import type { QPD } from "../../segments/v2.5.1/QPD.ts";
 import type { PID } from "../../segments/v2.5.1/PID.ts";
 import type { DSC } from "../../segments/v2.5.1/DSC.ts";
 
+/** The QUERY RESPONSE group of an RSP^K23 (HL7 v2.5.1) message being built. */
+export interface QueryResponseGroup {
+  /** The PID segment. */
+  patient: PID;
+}
+
 /** The optional segments and groups of an RSP^K23 (HL7 v2.5.1) message. */
 export interface RSP_K23Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The ERR segment. */
   error?: ERR;
-  /** The PID segment. */
-  patient?: PID;
+  /** The QUERY RESPONSE group. */
+  queryResponse?: QueryResponseGroup;
   /** The DSC segment. */
   continuation?: DSC;
 }

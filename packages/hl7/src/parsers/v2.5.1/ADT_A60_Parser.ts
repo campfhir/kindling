@@ -1,7 +1,7 @@
 /**
  * Parser for ADT^A60 messages (HL7 v2.5.1).
  *
- * Structure: MSH EVN PID [PV1] [PV2] [{IAM}]
+ * Structure: MSH [{SFT}] EVN PID [PV1] [PV2] [{IAM}]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";
 import { ADT_A60_STRUCTURE } from "../../structures/v2.5.1/ADT_A60.ts";
 import { MSH } from "../../segments/v2.5.1/MSH.ts";
+import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { EVN } from "../../segments/v2.5.1/EVN.ts";
 import { PID } from "../../segments/v2.5.1/PID.ts";
 import { PV1 } from "../../segments/v2.5.1/PV1.ts";
@@ -21,6 +22,8 @@ import { IAM } from "../../segments/v2.5.1/IAM.ts";
 export interface ParsedADT_A60 extends ParsedMessageBase {
   /** The MSH segment. */
   header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
   /** The EVN segment. */
   event: EVN;
   /** The PID segment. */
@@ -36,6 +39,7 @@ export interface ParsedADT_A60 extends ParsedMessageBase {
 /** The segment parsers of ADT^A60 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
   EVN: (s, e) => EVN.parse(s, e),
   PID: (s, e) => PID.parse(s, e),
   PV1: (s, e) => PV1.parse(s, e),

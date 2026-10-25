@@ -1,7 +1,7 @@
 /**
  * Builder for QBP^Q13 messages (HL7 v2.5.1).
  *
- * Structure: MSH QPD [RDF] RCP [DSC]
+ * Structure: MSH [{SFT}] QPD [RDF] RCP [DSC]
  *
  * @module
  */
@@ -11,6 +11,7 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { QBP_Q13_STRUCTURE } from "../../structures/v2.5.1/QBP_Q13.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { QPD } from "../../segments/v2.5.1/QPD.ts";
 import type { RDF } from "../../segments/v2.5.1/RDF.ts";
 import type { RCP } from "../../segments/v2.5.1/RCP.ts";
@@ -18,6 +19,8 @@ import type { DSC } from "../../segments/v2.5.1/DSC.ts";
 
 /** The optional segments and groups of an QBP^Q13 (HL7 v2.5.1) message. */
 export interface QBP_Q13Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The RDF segment. */
   rowDefinition?: RDF;
   /** The DSC segment. */

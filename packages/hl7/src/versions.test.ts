@@ -34,9 +34,11 @@ describe("segment introduction by version", () => {
       expect(name in seg25).toBe(true);
       expect(name in seg251).toBe(true);
     }
-    // EDU gains EDU-9 in v2.5, so v2.5 has its own subclass; the others are re-exported.
-    expect(seg25.ORG).toBe(seg24.ORG);
+    // EDU gains EDU-9 in v2.5 and an ORG field's length changes, so v2.5 has its own subclass of each; AFF and LAN are re-exported.
+    expect(Object.getPrototypeOf(seg25.ORG)).toBe(seg24.ORG);
     expect(Object.getPrototypeOf(seg25.EDU)).toBe(seg24.EDU);
+    expect(seg25.AFF).toBe(seg24.AFF);
+    expect(seg25.LAN).toBe(seg24.LAN);
   });
 
   test("OM7 is introduced in v2.4", () => {
@@ -79,8 +81,9 @@ describe("re-export versions", () => {
     expect(Object.getPrototypeOf(seg231.PID)).toBe(seg23.PID); // PID-6, PID-10 and PID-22 repeat in 2.3.1
     expect(Object.getPrototypeOf(seg24.PID)).toBe(seg231.PID); // PID-31 to PID-38 are new in 2.4
     expect(Object.getPrototypeOf(seg24.OBX)).toBe(seg231.OBX); // OBX-18 and OBX-19 are new in 2.4
-    expect(seg25.OBX).toBe(seg24.OBX);
+    expect(Object.getPrototypeOf(seg25.OBX)).toBe(seg24.OBX); // OBX-5's length changes in 2.5 (the table is recorded in the 2.5 spec)
     expect(seg24.NK1).toBe(seg231.NK1); // unchanged through 2.4
+    expect(seg25.AL1).toBe(seg24.AL1); // unchanged through 2.5
   });
 
   test("v2.5.1 builds on v2.5, not v2.3", () => {
@@ -88,12 +91,12 @@ describe("re-export versions", () => {
     expect(seg251.SFT.prototype).toBeInstanceOf(seg25.SFT);
   });
 
-  test("v2.3.1 and v2.4 generate every message against their own segments; v2.5 re-exports v2.4's parsers and builders where nothing changed", () => {
+  test("v2.3.1, v2.4 and v2.5 generate every message against their own segments", () => {
     expect(par231.parseADT_A01).not.toBe(par23.parseADT_A01);
     expect(par24.parseORU_R01).not.toBe(par231.parseORU_R01); // CTD and FT1 in 2.4
     expect(par25.parseORU_R01).not.toBe(par24.parseORU_R01); // v2.5 ORU^R01 gains SFT, TQ1, SPM, ...
     expect(bld24.createSIU_S12).not.toBe(bld231.createSIU_S12);
-    expect(bld25.createSIU_S12).not.toBe(bld24.createSIU_S12); // SFT
+    expect(bld25.createSIU_S12).not.toBe(bld24.createSIU_S12); // TQ1
   });
 
   test("ADT has its own shapes in v2.4 (PDA) and v2.5 (SFT), and the wrapper events follow", () => {
@@ -124,7 +127,7 @@ describe("ACK, ORM^O01 and ORR^O02", () => {
     expect(bld24.createORM_O01).not.toBe(bld23.createORM_O01);
   });
 
-  test("v2.5 has its own ACK (SFT, repeating ERR), ORR^O02 (repeating ERR) and ORM^O01 (repeating IN3)", () => {
+  test("v2.5 has its own ACK (SFT, repeating ERR), ORR^O02 (repeating ERR) and ORM^O01 (the 2.4 structure against the 2.5 segments)", () => {
     expect(par25.parseACK).not.toBe(par23.parseACK);
     expect(par25.parseORR_O02).not.toBe(par23.parseORR_O02);
     expect(par25.parseORM_O01).not.toBe(par24.parseORM_O01);
@@ -186,13 +189,14 @@ describe("queries", () => {
     expect(bld25.createEQQ_Q04).not.toBe(bld24.createEQQ_Q04); // SFT
   });
 
-  test("UDM^R06 is withdrawn in v2.4; QRY^P04 and DSR^P04 in v2.5", () => {
+  test("UDM^R06 is withdrawn in v2.4; QRY^P04, DSR^P04, RSP^K13, RSP^K15 and RTB^Q13 in v2.5", () => {
     expect("createUDM_R06" in bld231).toBe(true);
     expect("createUDM_R06" in bld24).toBe(false);
     expect("createUDM_R06" in bld25).toBe(false);
     expect("createQRY_P04" in bld24).toBe(true);
     expect("createDSR_P04" in bld24).toBe(true);
-    for (const name of ["createQRY_P04", "createDSR_P04"]) {
+    for (const name of ["createQRY_P04", "createDSR_P04", "createRSP_K13", "createRSP_K15", "createRTB_Q13"]) {
+      expect(name in bld24).toBe(true);
       expect(name in bld25).toBe(false);
       expect(name in bld251).toBe(false);
     }
@@ -205,9 +209,9 @@ describe("queries", () => {
     }
     expect(par231.parseQRY_A19).not.toBe(par23.parseQRY_A19);
     expect(par231.parseSQM_S25).not.toBe(par23.parseSQM_S25);
-    // DOC^T12 is then unchanged (v2.5 re-exports v2.4's); ADR^A19 and ORF^R04 change again in v2.4 and v2.5.
+    // DOC^T12 is then unchanged (v2.5 generates the same structure against its own segments); ADR^A19 and ORF^R04 change again in v2.4 and v2.5.
     expect(par24.parseDOC_T12).not.toBe(par231.parseDOC_T12);
-    expect(par25.parseDOC_T12).toBe(par24.parseDOC_T12);
+    expect(par25.parseDOC_T12).not.toBe(par24.parseDOC_T12);
     expect(par24.parseADR_A19).not.toBe(par231.parseADR_A19);
     expect(par25.parseADR_A19).not.toBe(par24.parseADR_A19);
     expect(par24.parseORF_R04).not.toBe(par231.parseORF_R04);
@@ -223,9 +227,9 @@ describe("queries", () => {
     for (const fn of ["parseQRY_Q01", "parseQRY_Q02", "parseDSR_Q01", "parseDSR_Q03", "parseQCK_Q02", "parseUDM_Q05", "parseEDR_R07", "parseERP_R09", "parseSQR_S25", "parseVXQ_V01", "parseVXX_V02", "parseVXR_V03", "parseOSQ_Q06", "parseOSR_Q06", "parseQRY_R02", "parseQRY_A19"] as const) {
       expect(par25[fn]).not.toBe(par24[fn]);
     }
-    // SQM^S25 and QRY^T12 never change: v2.5 re-exports v2.4's.
-    expect(par25.parseSQM_S25).toBe(par24.parseSQM_S25);
-    expect(par25.parseQRY_T12).toBe(par24.parseQRY_T12);
+    // SQM^S25 and QRY^T12 never change (no SFT in 2.5 either); v2.5 still generates them against its own segments.
+    expect(par25.parseSQM_S25).not.toBe(par24.parseSQM_S25);
+    expect(par25.parseQRY_T12).not.toBe(par24.parseQRY_T12);
   });
 
   test("v2.5.1 has every query message of v2.5 (derived, not re-exported)", () => {
@@ -360,7 +364,7 @@ describe("patient care, referrals and the rest", () => {
     for (const fn of ["parseQRY_PC4", "parseSUR_P09"] as const) {
       expect(par231[fn]).not.toBe(par23[fn]);
       expect(par24[fn]).not.toBe(par231[fn]);
-      expect(par25[fn]).toBe(par24[fn]); // v2.5 lists neither, so it re-exports v2.4's
+      expect(par25[fn]).not.toBe(par24[fn]); // the 2.4 structure, generated against the 2.5 segments
       expect(typeof par251[fn]).toBe("function");
     }
     expect("createQRY_PC9" in bld23).toBe(true);
@@ -370,7 +374,7 @@ describe("patient care, referrals and the rest", () => {
 
 describe("message registries", () => {
   test("every version maps each of its parsers under its structure name", () => {
-    for (const [par, count] of [[par23, 276], [par231, 276], [par24, 334], [par25, 340], [par251, 340]] as const) {
+    for (const [par, count] of [[par23, 276], [par231, 276], [par24, 334], [par25, 387], [par251, 387]] as const) {
       const names = Object.keys(par.MESSAGES);
       expect(names).toHaveLength(count);
       for (const name of names) {

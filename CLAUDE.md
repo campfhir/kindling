@@ -24,8 +24,8 @@ Segment field tables are tracked per version in `packages/hl7/docs/validation/<v
 sources disagree, hl7.eu decides unless Caristix and HAPI agree with each other against it; record
 the disagreement and any hand decision with the date in
 `packages/hl7/codegen/validate/ledger-v23-notes.json` (v2.3 segments), `ledger-v231-notes.json`
-(v2.3.1 segments), `ledger-v24-notes.json` (v2.4 segments) or `message-notes.json` (structures, by
-version and event). `packages/hl7/docs/validation/README.md` says how to refresh a ledger and how a
+(v2.3.1 segments), `ledger-v24-notes.json` (v2.4 segments), `ledger-v25-notes.json` (v2.5
+segments) or `message-notes.json` (structures, by version and event). `packages/hl7/docs/validation/README.md` says how to refresh a ledger and how a
 new version's segments and messages are seeded from the sources.
 
 Do not rely on other sites (vendor guides, blogs, whitepapers, package docs) or on memory alone.

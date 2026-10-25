@@ -1,7 +1,7 @@
 /**
  * Builder for QBP^Q24 messages (HL7 v2.5.1).
  *
- * Structure: MSH QPD RCP [DSC]
+ * Structure: MSH [{SFT}] QPD RCP [DSC]
  *
  * @module
  */
@@ -11,12 +11,15 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { QBP_Q24_STRUCTURE } from "../../structures/v2.5.1/QBP_Q24.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { QPD } from "../../segments/v2.5.1/QPD.ts";
 import type { RCP } from "../../segments/v2.5.1/RCP.ts";
 import type { DSC } from "../../segments/v2.5.1/DSC.ts";
 
 /** The optional segments and groups of an QBP^Q24 (HL7 v2.5.1) message. */
 export interface QBP_Q24Options {
+  /** The SFT segments. */
+  software?: SFT[];
   /** The DSC segment. */
   continuation?: DSC;
 }

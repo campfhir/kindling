@@ -1,7 +1,7 @@
 /**
  * Message structure for SIU^S12 messages (HL7 v2.5.1).
  *
- * Structure: MSH SCH [{TQ1}] [{NTE}] [{ PATIENT: PID [PV1] [PV2] [{OBX}] [{DG1}] }] { RESOURCES: RGS [{ SERVICE: AIS [{NTE}] }] [{ GENERAL_RESOURCE: AIG [{NTE}] }] [{ LOCATION_RESOURCE: AIL [{NTE}] }] [{ PERSONNEL_RESOURCE: AIP [{NTE}] }] }
+ * Structure: MSH SCH [{TQ1}] [{NTE}] [{ PATIENT: PID [PD1] [PV1] [PV2] [{OBX}] [{DG1}] }] { RESOURCES: RGS [{ SERVICE: AIS [{NTE}] }] [{ GENERAL_RESOURCE: AIG [{NTE}] }] [{ LOCATION_RESOURCE: AIL [{NTE}] }] [{ PERSONNEL_RESOURCE: AIP [{NTE}] }] }
  *
  * @module
  */
@@ -20,6 +20,7 @@ export const SIU_S12_STRUCTURE: StructureItem[] = [
     repeating: true,
     segments: [
       { name: "PID", required: true, repeating: false },
+      { name: "PD1", required: false, repeating: false },
       { name: "PV1", required: false, repeating: false },
       { name: "PV2", required: false, repeating: false },
       { name: "OBX", required: false, repeating: true },

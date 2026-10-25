@@ -70,6 +70,11 @@ import { parseBAR_P02 } from "./BAR_P02_Parser.ts";
 import { parseBAR_P05 } from "./BAR_P05_Parser.ts";
 import { parseBAR_P06 } from "./BAR_P06_Parser.ts";
 import { parseBAR_P10 } from "./BAR_P10_Parser.ts";
+import { parseBAR_P12 } from "./BAR_P12_Parser.ts";
+import { parseBPS_O29 } from "./BPS_O29_Parser.ts";
+import { parseBRP_O30 } from "./BRP_O30_Parser.ts";
+import { parseBRT_O32 } from "./BRT_O32_Parser.ts";
+import { parseBTS_O31 } from "./BTS_O31_Parser.ts";
 import { parseCRM_C01 } from "./CRM_C01_Parser.ts";
 import { parseCRM_C02 } from "./CRM_C02_Parser.ts";
 import { parseCRM_C03 } from "./CRM_C03_Parser.ts";
@@ -83,6 +88,7 @@ import { parseCSU_C10 } from "./CSU_C10_Parser.ts";
 import { parseCSU_C11 } from "./CSU_C11_Parser.ts";
 import { parseCSU_C12 } from "./CSU_C12_Parser.ts";
 import { parseDFT_P03 } from "./DFT_P03_Parser.ts";
+import { parseDFT_P11 } from "./DFT_P11_Parser.ts";
 import { parseDOC_T12 } from "./DOC_T12_Parser.ts";
 import { parseDSR_Q01 } from "./DSR_Q01_Parser.ts";
 import { parseDSR_Q03 } from "./DSR_Q03_Parser.ts";
@@ -166,17 +172,25 @@ import { parseMFR_M13 } from "./MFR_M13_Parser.ts";
 import { parseNMD_N02 } from "./NMD_N02_Parser.ts";
 import { parseNMQ_N01 } from "./NMQ_N01_Parser.ts";
 import { parseNMR_N01 } from "./NMR_N01_Parser.ts";
+import { parseOMB_O27 } from "./OMB_O27_Parser.ts";
 import { parseOMD_O03 } from "./OMD_O03_Parser.ts";
 import { parseOMG_O19 } from "./OMG_O19_Parser.ts";
+import { parseOMI_O23 } from "./OMI_O23_Parser.ts";
 import { parseOML_O21 } from "./OML_O21_Parser.ts";
+import { parseOML_O33 } from "./OML_O33_Parser.ts";
+import { parseOML_O35 } from "./OML_O35_Parser.ts";
 import { parseOMN_O07 } from "./OMN_O07_Parser.ts";
 import { parseOMP_O09 } from "./OMP_O09_Parser.ts";
 import { parseOMS_O05 } from "./OMS_O05_Parser.ts";
+import { parseORB_O28 } from "./ORB_O28_Parser.ts";
 import { parseORD_O04 } from "./ORD_O04_Parser.ts";
 import { parseORF_R04 } from "./ORF_R04_Parser.ts";
 import { parseORF_W02 } from "./ORF_W02_Parser.ts";
 import { parseORG_O20 } from "./ORG_O20_Parser.ts";
+import { parseORI_O24 } from "./ORI_O24_Parser.ts";
 import { parseORL_O22 } from "./ORL_O22_Parser.ts";
+import { parseORL_O34 } from "./ORL_O34_Parser.ts";
+import { parseORL_O36 } from "./ORL_O36_Parser.ts";
 import { parseORM_O01 } from "./ORM_O01_Parser.ts";
 import { parseORN_O08 } from "./ORN_O08_Parser.ts";
 import { parseORP_O10 } from "./ORP_O10_Parser.ts";
@@ -190,6 +204,9 @@ import { parseORU_W01 } from "./ORU_W01_Parser.ts";
 import { parseOSQ_Q06 } from "./OSQ_Q06_Parser.ts";
 import { parseOSR_Q06 } from "./OSR_Q06_Parser.ts";
 import { parseOUL_R21 } from "./OUL_R21_Parser.ts";
+import { parseOUL_R22 } from "./OUL_R22_Parser.ts";
+import { parseOUL_R23 } from "./OUL_R23_Parser.ts";
+import { parseOUL_R24 } from "./OUL_R24_Parser.ts";
 import { parsePEX_P07 } from "./PEX_P07_Parser.ts";
 import { parsePEX_P08 } from "./PEX_P08_Parser.ts";
 import { parsePGL_PC6 } from "./PGL_PC6_Parser.ts";
@@ -202,6 +219,8 @@ import { parsePMU_B03 } from "./PMU_B03_Parser.ts";
 import { parsePMU_B04 } from "./PMU_B04_Parser.ts";
 import { parsePMU_B05 } from "./PMU_B05_Parser.ts";
 import { parsePMU_B06 } from "./PMU_B06_Parser.ts";
+import { parsePMU_B07 } from "./PMU_B07_Parser.ts";
+import { parsePMU_B08 } from "./PMU_B08_Parser.ts";
 import { parsePPG_PCG } from "./PPG_PCG_Parser.ts";
 import { parsePPG_PCH } from "./PPG_PCH_Parser.ts";
 import { parsePPG_PCJ } from "./PPG_PCJ_Parser.ts";
@@ -223,6 +242,20 @@ import { parseQBP_Q22 } from "./QBP_Q22_Parser.ts";
 import { parseQBP_Q23 } from "./QBP_Q23_Parser.ts";
 import { parseQBP_Q24 } from "./QBP_Q24_Parser.ts";
 import { parseQBP_Q25 } from "./QBP_Q25_Parser.ts";
+import { parseQBP_Q31 } from "./QBP_Q31_Parser.ts";
+import { parseQBP_Z73 } from "./QBP_Z73_Parser.ts";
+import { parseQBP_Z75 } from "./QBP_Z75_Parser.ts";
+import { parseQBP_Z77 } from "./QBP_Z77_Parser.ts";
+import { parseQBP_Z79 } from "./QBP_Z79_Parser.ts";
+import { parseQBP_Z81 } from "./QBP_Z81_Parser.ts";
+import { parseQBP_Z85 } from "./QBP_Z85_Parser.ts";
+import { parseQBP_Z87 } from "./QBP_Z87_Parser.ts";
+import { parseQBP_Z89 } from "./QBP_Z89_Parser.ts";
+import { parseQBP_Z91 } from "./QBP_Z91_Parser.ts";
+import { parseQBP_Z93 } from "./QBP_Z93_Parser.ts";
+import { parseQBP_Z95 } from "./QBP_Z95_Parser.ts";
+import { parseQBP_Z97 } from "./QBP_Z97_Parser.ts";
+import { parseQBP_Z99 } from "./QBP_Z99_Parser.ts";
 import { parseQCK_Q02 } from "./QCK_Q02_Parser.ts";
 import { parseQCN_J01 } from "./QCN_J01_Parser.ts";
 import { parseQRY_A19 } from "./QRY_A19_Parser.ts";
@@ -240,6 +273,7 @@ import { parseQRY_Q30 } from "./QRY_Q30_Parser.ts";
 import { parseQRY_R02 } from "./QRY_R02_Parser.ts";
 import { parseQRY_T12 } from "./QRY_T12_Parser.ts";
 import { parseQSB_Q16 } from "./QSB_Q16_Parser.ts";
+import { parseQSB_Z83 } from "./QSB_Z83_Parser.ts";
 import { parseQSX_J02 } from "./QSX_J02_Parser.ts";
 import { parseQVR_Q17 } from "./QVR_Q17_Parser.ts";
 import { parseRAR_RAR } from "./RAR_RAR_Parser.ts";
@@ -247,9 +281,12 @@ import { parseRAS_O17 } from "./RAS_O17_Parser.ts";
 import { parseRCI_I05 } from "./RCI_I05_Parser.ts";
 import { parseRCL_I06 } from "./RCL_I06_Parser.ts";
 import { parseRDE_O11 } from "./RDE_O11_Parser.ts";
+import { parseRDE_O25 } from "./RDE_O25_Parser.ts";
 import { parseRDR_RDR } from "./RDR_RDR_Parser.ts";
 import { parseRDS_O13 } from "./RDS_O13_Parser.ts";
 import { parseRDY_K15 } from "./RDY_K15_Parser.ts";
+import { parseRDY_Z80 } from "./RDY_Z80_Parser.ts";
+import { parseRDY_Z98 } from "./RDY_Z98_Parser.ts";
 import { parseREF_I12 } from "./REF_I12_Parser.ts";
 import { parseREF_I13 } from "./REF_I13_Parser.ts";
 import { parseREF_I14 } from "./REF_I14_Parser.ts";
@@ -280,21 +317,31 @@ import { parseRQQ_Q09 } from "./RQQ_Q09_Parser.ts";
 import { parseRRA_O18 } from "./RRA_O18_Parser.ts";
 import { parseRRD_O14 } from "./RRD_O14_Parser.ts";
 import { parseRRE_O12 } from "./RRE_O12_Parser.ts";
+import { parseRRE_O26 } from "./RRE_O26_Parser.ts";
 import { parseRRG_O16 } from "./RRG_O16_Parser.ts";
 import { parseRRI_I12 } from "./RRI_I12_Parser.ts";
 import { parseRRI_I13 } from "./RRI_I13_Parser.ts";
 import { parseRRI_I14 } from "./RRI_I14_Parser.ts";
 import { parseRRI_I15 } from "./RRI_I15_Parser.ts";
 import { parseRSP_K11 } from "./RSP_K11_Parser.ts";
-import { parseRSP_K13 } from "./RSP_K13_Parser.ts";
-import { parseRSP_K15 } from "./RSP_K15_Parser.ts";
 import { parseRSP_K21 } from "./RSP_K21_Parser.ts";
 import { parseRSP_K22 } from "./RSP_K22_Parser.ts";
 import { parseRSP_K23 } from "./RSP_K23_Parser.ts";
 import { parseRSP_K24 } from "./RSP_K24_Parser.ts";
 import { parseRSP_K25 } from "./RSP_K25_Parser.ts";
+import { parseRSP_K31 } from "./RSP_K31_Parser.ts";
+import { parseRSP_Z82 } from "./RSP_Z82_Parser.ts";
+import { parseRSP_Z84 } from "./RSP_Z84_Parser.ts";
+import { parseRSP_Z86 } from "./RSP_Z86_Parser.ts";
+import { parseRSP_Z88 } from "./RSP_Z88_Parser.ts";
+import { parseRSP_Z90 } from "./RSP_Z90_Parser.ts";
 import { parseRTB_K13 } from "./RTB_K13_Parser.ts";
-import { parseRTB_Q13 } from "./RTB_Q13_Parser.ts";
+import { parseRTB_Z74 } from "./RTB_Z74_Parser.ts";
+import { parseRTB_Z76 } from "./RTB_Z76_Parser.ts";
+import { parseRTB_Z78 } from "./RTB_Z78_Parser.ts";
+import { parseRTB_Z92 } from "./RTB_Z92_Parser.ts";
+import { parseRTB_Z94 } from "./RTB_Z94_Parser.ts";
+import { parseRTB_Z96 } from "./RTB_Z96_Parser.ts";
 import { parseSIU_S12 } from "./SIU_S12_Parser.ts";
 import { parseSIU_S13 } from "./SIU_S13_Parser.ts";
 import { parseSIU_S14 } from "./SIU_S14_Parser.ts";
@@ -416,6 +463,11 @@ export const MESSAGES = {
   BAR_P05: parseBAR_P05,
   BAR_P06: parseBAR_P06,
   BAR_P10: parseBAR_P10,
+  BAR_P12: parseBAR_P12,
+  BPS_O29: parseBPS_O29,
+  BRP_O30: parseBRP_O30,
+  BRT_O32: parseBRT_O32,
+  BTS_O31: parseBTS_O31,
   CRM_C01: parseCRM_C01,
   CRM_C02: parseCRM_C02,
   CRM_C03: parseCRM_C03,
@@ -429,6 +481,7 @@ export const MESSAGES = {
   CSU_C11: parseCSU_C11,
   CSU_C12: parseCSU_C12,
   DFT_P03: parseDFT_P03,
+  DFT_P11: parseDFT_P11,
   DOC_T12: parseDOC_T12,
   DSR_Q01: parseDSR_Q01,
   DSR_Q03: parseDSR_Q03,
@@ -512,17 +565,25 @@ export const MESSAGES = {
   NMD_N02: parseNMD_N02,
   NMQ_N01: parseNMQ_N01,
   NMR_N01: parseNMR_N01,
+  OMB_O27: parseOMB_O27,
   OMD_O03: parseOMD_O03,
   OMG_O19: parseOMG_O19,
+  OMI_O23: parseOMI_O23,
   OML_O21: parseOML_O21,
+  OML_O33: parseOML_O33,
+  OML_O35: parseOML_O35,
   OMN_O07: parseOMN_O07,
   OMP_O09: parseOMP_O09,
   OMS_O05: parseOMS_O05,
+  ORB_O28: parseORB_O28,
   ORD_O04: parseORD_O04,
   ORF_R04: parseORF_R04,
   ORF_W02: parseORF_W02,
   ORG_O20: parseORG_O20,
+  ORI_O24: parseORI_O24,
   ORL_O22: parseORL_O22,
+  ORL_O34: parseORL_O34,
+  ORL_O36: parseORL_O36,
   ORM_O01: parseORM_O01,
   ORN_O08: parseORN_O08,
   ORP_O10: parseORP_O10,
@@ -536,6 +597,9 @@ export const MESSAGES = {
   OSQ_Q06: parseOSQ_Q06,
   OSR_Q06: parseOSR_Q06,
   OUL_R21: parseOUL_R21,
+  OUL_R22: parseOUL_R22,
+  OUL_R23: parseOUL_R23,
+  OUL_R24: parseOUL_R24,
   PEX_P07: parsePEX_P07,
   PEX_P08: parsePEX_P08,
   PGL_PC6: parsePGL_PC6,
@@ -548,6 +612,8 @@ export const MESSAGES = {
   PMU_B04: parsePMU_B04,
   PMU_B05: parsePMU_B05,
   PMU_B06: parsePMU_B06,
+  PMU_B07: parsePMU_B07,
+  PMU_B08: parsePMU_B08,
   PPG_PCG: parsePPG_PCG,
   PPG_PCH: parsePPG_PCH,
   PPG_PCJ: parsePPG_PCJ,
@@ -569,6 +635,20 @@ export const MESSAGES = {
   QBP_Q23: parseQBP_Q23,
   QBP_Q24: parseQBP_Q24,
   QBP_Q25: parseQBP_Q25,
+  QBP_Q31: parseQBP_Q31,
+  QBP_Z73: parseQBP_Z73,
+  QBP_Z75: parseQBP_Z75,
+  QBP_Z77: parseQBP_Z77,
+  QBP_Z79: parseQBP_Z79,
+  QBP_Z81: parseQBP_Z81,
+  QBP_Z85: parseQBP_Z85,
+  QBP_Z87: parseQBP_Z87,
+  QBP_Z89: parseQBP_Z89,
+  QBP_Z91: parseQBP_Z91,
+  QBP_Z93: parseQBP_Z93,
+  QBP_Z95: parseQBP_Z95,
+  QBP_Z97: parseQBP_Z97,
+  QBP_Z99: parseQBP_Z99,
   QCK_Q02: parseQCK_Q02,
   QCN_J01: parseQCN_J01,
   QRY_A19: parseQRY_A19,
@@ -586,6 +666,7 @@ export const MESSAGES = {
   QRY_R02: parseQRY_R02,
   QRY_T12: parseQRY_T12,
   QSB_Q16: parseQSB_Q16,
+  QSB_Z83: parseQSB_Z83,
   QSX_J02: parseQSX_J02,
   QVR_Q17: parseQVR_Q17,
   RAR_RAR: parseRAR_RAR,
@@ -593,9 +674,12 @@ export const MESSAGES = {
   RCI_I05: parseRCI_I05,
   RCL_I06: parseRCL_I06,
   RDE_O11: parseRDE_O11,
+  RDE_O25: parseRDE_O25,
   RDR_RDR: parseRDR_RDR,
   RDS_O13: parseRDS_O13,
   RDY_K15: parseRDY_K15,
+  RDY_Z80: parseRDY_Z80,
+  RDY_Z98: parseRDY_Z98,
   REF_I12: parseREF_I12,
   REF_I13: parseREF_I13,
   REF_I14: parseREF_I14,
@@ -626,21 +710,31 @@ export const MESSAGES = {
   RRA_O18: parseRRA_O18,
   RRD_O14: parseRRD_O14,
   RRE_O12: parseRRE_O12,
+  RRE_O26: parseRRE_O26,
   RRG_O16: parseRRG_O16,
   RRI_I12: parseRRI_I12,
   RRI_I13: parseRRI_I13,
   RRI_I14: parseRRI_I14,
   RRI_I15: parseRRI_I15,
   RSP_K11: parseRSP_K11,
-  RSP_K13: parseRSP_K13,
-  RSP_K15: parseRSP_K15,
   RSP_K21: parseRSP_K21,
   RSP_K22: parseRSP_K22,
   RSP_K23: parseRSP_K23,
   RSP_K24: parseRSP_K24,
   RSP_K25: parseRSP_K25,
+  RSP_K31: parseRSP_K31,
+  RSP_Z82: parseRSP_Z82,
+  RSP_Z84: parseRSP_Z84,
+  RSP_Z86: parseRSP_Z86,
+  RSP_Z88: parseRSP_Z88,
+  RSP_Z90: parseRSP_Z90,
   RTB_K13: parseRTB_K13,
-  RTB_Q13: parseRTB_Q13,
+  RTB_Z74: parseRTB_Z74,
+  RTB_Z76: parseRTB_Z76,
+  RTB_Z78: parseRTB_Z78,
+  RTB_Z92: parseRTB_Z92,
+  RTB_Z94: parseRTB_Z94,
+  RTB_Z96: parseRTB_Z96,
   SIU_S12: parseSIU_S12,
   SIU_S13: parseSIU_S13,
   SIU_S14: parseSIU_S14,

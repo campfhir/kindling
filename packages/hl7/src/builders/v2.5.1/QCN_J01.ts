@@ -1,7 +1,7 @@
 /**
  * Builder for QCN^J01 messages (HL7 v2.5.1).
  *
- * Structure: MSH QID
+ * Structure: MSH [{SFT}] QID
  *
  * @module
  */
@@ -11,10 +11,14 @@ import type { StructureItem } from "../../types/schema.ts";
 import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
 import { QCN_J01_STRUCTURE } from "../../structures/v2.5.1/QCN_J01.ts";
 import type { MSH } from "../../segments/v2.5.1/MSH.ts";
+import type { SFT } from "../../segments/v2.5.1/SFT.ts";
 import type { QID } from "../../segments/v2.5.1/QID.ts";
 
-/** The optional segments and groups of an QCN^J01 (HL7 v2.5.1) message. The message has none. */
-export type QCN_J01Options = Record<string, never>;
+/** The optional segments and groups of an QCN^J01 (HL7 v2.5.1) message. */
+export interface QCN_J01Options {
+  /** The SFT segments. */
+  software?: SFT[];
+}
 
 /** Builder for HL7 QCN^J01 (HL7 v2.5.1) messages. */
 export class QCN_J01<TMSH extends MSH = MSH, TQID extends QID = QID> {

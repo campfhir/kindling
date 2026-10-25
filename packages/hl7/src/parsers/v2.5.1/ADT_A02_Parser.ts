@@ -1,7 +1,7 @@
 /**
  * Parser for ADT^A02 messages (HL7 v2.5.1).
  *
- * Structure: MSH [{SFT}] EVN PID [PD1] PV1 [PV2] [{DB1}] [{OBX}]
+ * Structure: MSH [{SFT}] EVN PID [PD1] [{ROL}] PV1 [PV2] [{ROL}] [{DB1}] [{OBX}] [PDA]
  *
  * @module
  */
@@ -15,10 +15,12 @@ import { SFT } from "../../segments/v2.5.1/SFT.ts";
 import { EVN } from "../../segments/v2.5.1/EVN.ts";
 import { PID } from "../../segments/v2.5.1/PID.ts";
 import { PD1 } from "../../segments/v2.5.1/PD1.ts";
+import { ROL } from "../../segments/v2.5.1/ROL.ts";
 import { PV1 } from "../../segments/v2.5.1/PV1.ts";
 import { PV2 } from "../../segments/v2.5.1/PV2.ts";
 import { DB1 } from "../../segments/v2.5.1/DB1.ts";
 import { OBX } from "../../segments/v2.5.1/OBX.ts";
+import { PDA } from "../../segments/v2.5.1/PDA.ts";
 
 /** Structured result of parsing an HL7 ADT^A02 (HL7 v2.5.1) message. */
 export interface ParsedADT_A02 extends ParsedMessageBase {
@@ -32,14 +34,20 @@ export interface ParsedADT_A02 extends ParsedMessageBase {
   patient: PID;
   /** The PD1 segment. */
   patientDemographics?: PD1;
+  /** The ROL segments. */
+  roles?: ROL[];
   /** The PV1 segment. */
   visit: PV1;
   /** The PV2 segment. */
   visitDetails?: PV2;
+  /** The ROL segments. */
+  visitRoles?: ROL[];
   /** The DB1 segments. */
   disabilities?: DB1[];
   /** The OBX segments. */
   observations?: OBX[];
+  /** The PDA segment. */
+  deathAndAutopsy?: PDA;
 }
 
 /** The segment parsers of ADT^A02 (HL7 v2.5.1). */
@@ -49,10 +57,12 @@ const PARSERS: SegmentParsers = {
   EVN: (s, e) => EVN.parse(s, e),
   PID: (s, e) => PID.parse(s, e),
   PD1: (s, e) => PD1.parse(s, e),
+  ROL: (s, e) => ROL.parse(s, e),
   PV1: (s, e) => PV1.parse(s, e),
   PV2: (s, e) => PV2.parse(s, e),
   DB1: (s, e) => DB1.parse(s, e),
   OBX: (s, e) => OBX.parse(s, e),
+  PDA: (s, e) => PDA.parse(s, e),
 };
 
 /** Parser for HL7 ADT^A02 (HL7 v2.5.1) messages. */
