@@ -46,7 +46,8 @@ export const V2_5_MESSAGES = [
 /**
  * v2.5 — re-exports v2.4, except for the messages listed above (generated against the v2.5
  * segments) and the SFT (Software), SPM (Specimen), TQ1 (Timing/Quantity) and TQ2
- * (Timing/Quantity Relationship) and CER (Certificate Detail) segments introduced in 2.5, and the
+ * (Timing/Quantity Relationship), CER (Certificate Detail) and IIM (Inventory Item Master) segments
+ * introduced in 2.5, and the
  * EDU subclass that adds EDU-9. SRM, SQM^S25, QRY^T12 and DOC^T12 are unchanged since v2.3 (or
  * v2.3.1); QRY^P04, DSR^P04 and MFD^MFA are withdrawn.
  */
@@ -54,7 +55,7 @@ export const V2_5: VersionSchema = {
   version: "v2.5",
   baseVersion: "v2.4",
   reexport: true,
-  ownSegments: ["SFT", "SPM", "TQ1", "TQ2", "CER", "EDU"],
+  ownSegments: ["SFT", "SPM", "TQ1", "TQ2", "CER", "EDU", "IIM"],
   withdrawnMessages: ["QRY_P04", "DSR_P04", "MFD_MFA"],
   segments: [],
   messages: V2_5_MESSAGES,

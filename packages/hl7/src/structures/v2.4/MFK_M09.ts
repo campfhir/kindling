@@ -1,7 +1,10 @@
 /**
- * MFK_M09 structure for HL7 v2.4 — identical to v2.3.1, re-exported.
+ * Message structure for MFK^M09 messages (HL7 v2.4).
+ *
+ * Structure: MSH MSA [ERR] MFI [{MFA}]
+ * Shares the MFK^M01 structure.
  *
  * @module
  */
-// @generated re-export — replace this file by hand to diverge from the base version
-export * from "../v2.3.1/MFK_M09.ts";
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+export { MFK_M01_STRUCTURE as MFK_M09_STRUCTURE } from "./MFK_M01.ts";

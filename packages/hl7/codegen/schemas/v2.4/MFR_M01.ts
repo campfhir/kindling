@@ -3,11 +3,14 @@ import { opt, req, wrappers } from "../helpers";
 import { chargeDescriptionEntries, clinicalStudyEntries, clinicalStudyScheduleEntries, entries, genericEntries, locationEntries } from "../v2.3/MFN_M01";
 import { MFR_GENERIC_EVENTS, mfr } from "../v2.3/MFR_M01";
 
+/** The events that answer with the generic record in v2.4 (M12 is new). */
+export const MFR_GENERIC_EVENTS_V24 = [...MFR_GENERIC_EVENTS, "M12"];
+
 /**
  * MFR^Mnn (HL7 v2.4): MSH MSA [ERR] [QAK] QRD [QRF] MFI { MF_QUERY: MFE <record> } [DSC]
  *
- * Compared with v2.3: [QAK] after ERR, and the staff record (M02) gains [ORG]. The records
- * otherwise match v2.3.
+ * Compared with v2.3: [QAK] after ERR, the staff record (M02) gains [ORG] and M12 answers with the
+ * generic record. The records otherwise match v2.3.
  * Sources: https://www.hl7.eu/HL7v2x/v24/std24/ch08.htm (8.4.3, 8.7), https://hl7-definition.caristix.com/v2/HL7v2.4/TriggerEvents/MFR_M01
  */
 const head = [req("MSH"), req("MSA"), opt("ERR"), opt("QAK")];
@@ -22,6 +25,6 @@ export const MFR_M07_SCHEMA: MessageSchema = mfr24("M07", clinicalStudyScheduleE
 
 /** Every v2.4 master files response. */
 export const MFR_MESSAGES: MessageSchema[] = [
-  MFR_M01_SCHEMA, ...wrappers(MFR_M01_SCHEMA, MFR_GENERIC_EVENTS),
+  MFR_M01_SCHEMA, ...wrappers(MFR_M01_SCHEMA, MFR_GENERIC_EVENTS_V24),
   MFR_M02_SCHEMA, MFR_M04_SCHEMA, MFR_M05_SCHEMA, MFR_M06_SCHEMA, MFR_M07_SCHEMA,
 ];

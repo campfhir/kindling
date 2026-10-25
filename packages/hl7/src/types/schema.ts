@@ -244,6 +244,8 @@ export const SEGMENT_NAMES: Record<string, [one: string, many: string]> = {
   OM4: ["specimenRequirement", "specimenRequirements"],
   OM5: ["observationBattery", "observationBatteries"],
   OM6: ["calculatedObservation", "calculatedObservations"],
+  OM7: ["additionalAttributes", "additionalAttributes"],
+  IIM: ["inventoryItem", "inventoryItems"],
 };
 
 /**

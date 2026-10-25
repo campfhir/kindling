@@ -31,9 +31,9 @@ Legend: ✅ builder + parser exist · ⬜ not started
 | BAR | P01, P02, P05, P06 (add/purge/update/end account) | ✅ | ✅ |
 | ORU | R01 | ✅ | ✅ |
 | ORU | R30, R31, R32 | n/a (2.5+) | ✅ |
-| MFN | M01–M11 master file notifications (M13 from 2.5; M12 and M15 need OM7/IIM) | ✅ | ✅ |
-| MFK | M01–M11 master file acknowledgments (M13 from 2.5) | ✅ | ✅ |
-| MFQ / MFR | M01–M11 master file query and response | ✅ | ✅ |
+| MFN | M01–M11 master file notifications (M12 from 2.4, M13 and M15 from 2.5) | ✅ | ✅ |
+| MFK | M01–M11 master file acknowledgments (M12 from 2.4, M13 and M15 from 2.5) | ✅ | ✅ |
+| MFQ / MFR | M01–M11 master file query and response (M12 from 2.4, M13 from 2.5) | ✅ | ✅ |
 | MFD | MFA delayed acknowledgment (withdrawn in 2.5) | ✅ | n/a |
 | ACK | general acknowledgment | ✅ | ✅ |
 | ORM | O01 | ✅ | ✅ |
@@ -161,7 +161,11 @@ withdraws MFD^MFA. Not followed: Caristix's doubled MFI in the v2.3 MFK^M01 (HAP
 hl7.eu has `MSH MSA [ERR] MFI [{MFA}]` for every event), the MFN^M02 body it appends to the v2.4
 MFK^M02, and the M06 structure it shows for the v2.3 MFN^M07 (hl7.eu: `MFE CM0 [{CM2}]`). Caristix
 also drops MFN^M01/M03 and most MFK/MFQ/MFR events from its v2.4 and v2.5 lists although hl7.eu still
-defines them, so they are kept. MFN^M12 (OM7, 2.4) and MFN^M15 (IIM, 2.5) wait for those segments.
+defines them, so they are kept. The later events are in too: MFN^M12 (`MFE OM1 [OM7]`, with the new
+OM7 segment in `segments/v2.4`) from v2.4 and MFN^M15 (`MFE IIM`, with the new IIM segment in
+`segments/v2.5`) from v2.5, each with its MFK event, plus MFQ/MFR^M12 (v2.4) and M13 (v2.5). Field
+tables from hl7-definition.caristix.com cross-checked on hl7.eu (OM7 is unchanged through 2.5.1, IIM
+in 2.5.1).
 
 Suggested order: **orders/pharmacy → patient care → referrals → the rest.**
 

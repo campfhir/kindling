@@ -75,6 +75,7 @@ export * from "./OM3.ts";
 export * from "./OM4.ts";
 export * from "./OM5.ts";
 export * from "./OM6.ts";
+export * from "./OM7.ts";
 export * from "./ORC.ts";
 export * from "./ORG.ts";
 export * from "./PCR.ts";
