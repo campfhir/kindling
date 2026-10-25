@@ -39,4 +39,7 @@ export * from "./RGV_O01";
 export * from "./RAS_O02";
 export * from "./QRY_Q26";
 export * from "./ORU_W01";
+export * from "./PPR_PC1";
+export * from "./RQI_I01";
+export * from "./CRM_C01";
 export { V2_3, QUERY_MESSAGES, MASTER_FILE_MESSAGES, ORDER_MESSAGES } from "./version";

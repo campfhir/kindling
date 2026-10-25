@@ -12,6 +12,7 @@ import { OSR_Q06_SCHEMA } from "./OSQ_Q06";
 import { MFR_MESSAGES } from "./MFR_M01";
 import { MFK_FAMILY, MFN_M12_SCHEMA, MFQ_FAMILY } from "./MFN_M12";
 import { ORDER_MESSAGES, WITHDRAWN_ORDER_MESSAGES } from "./orders";
+import { CSU_FAMILY, NMR_N01_SCHEMA, RQC_FAMILY } from "./care";
 
 /**
  * v2.4 — re-exports v2.3.1, except for the messages whose structure changed in 2.4 (listed
@@ -22,7 +23,8 @@ import { ORDER_MESSAGES, WITHDRAWN_ORDER_MESSAGES } from "./orders";
  * required; UDM^R06 is withdrawn. The master files responses (MFR) gain [QAK], MFN^M12 (OM7) is
  * new and MFK/MFQ/MFR gain the M12 event. The order and pharmacy events are renumbered (OMD^O03,
  * OMS^O05, OMN^O07, RDE^O11, RDS^O13, RGV^O15, RAS^O17 and their acknowledgments); the v2.3 ones
- * and RDO/RRO are withdrawn, and ORU^W01 gets its own shape.
+ * and RDO/RRO are withdrawn, and ORU^W01 gets its own shape. CSU carries repeating CSPs, NMR a
+ * single ERR and RQC^I06 repeating GT1s.
  */
 export const V2_4: VersionSchema = {
   version: "v2.4",
@@ -31,5 +33,5 @@ export const V2_4: VersionSchema = {
   ownSegments: ["PDA", "ABS", "BLC", "RMI", "ORG", "AFF", "LAN", "EDU", "OM7"],
   withdrawnMessages: ["UDM_R06", ...WITHDRAWN_ORDER_MESSAGES],
   segments: [],
-  messages: [...ADT_A01_FAMILY, BAR_P01_SCHEMA, BAR_P05_SCHEMA, DFT_P03_SCHEMA, MFN_M02_SCHEMA, ORM_O01_SCHEMA, VXU_V04_SCHEMA, ADR_A19_SCHEMA, ...ORF_R04_FAMILY, VXR_V03_SCHEMA, OSR_Q06_SCHEMA, ...MFR_MESSAGES, MFN_M12_SCHEMA, ...MFK_FAMILY, ...MFQ_FAMILY, ...ORDER_MESSAGES],
+  messages: [...ADT_A01_FAMILY, BAR_P01_SCHEMA, BAR_P05_SCHEMA, DFT_P03_SCHEMA, MFN_M02_SCHEMA, ORM_O01_SCHEMA, VXU_V04_SCHEMA, ADR_A19_SCHEMA, ...ORF_R04_FAMILY, VXR_V03_SCHEMA, OSR_Q06_SCHEMA, ...MFR_MESSAGES, MFN_M12_SCHEMA, ...MFK_FAMILY, ...MFQ_FAMILY, ...ORDER_MESSAGES, ...CSU_FAMILY, NMR_N01_SCHEMA, ...RQC_FAMILY],
 };

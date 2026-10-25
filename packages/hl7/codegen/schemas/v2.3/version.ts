@@ -39,6 +39,9 @@ import { RGV_O01_SCHEMA, RRG_O02_SCHEMA } from "./RGV_O01";
 import { RAS_O02_SCHEMA, RRA_O02_SCHEMA } from "./RAS_O02";
 import { PHARMACY_QUERY_RESPONSES, QRY_Q26_FAMILY } from "./QRY_Q26";
 import { ORU_W01_SCHEMA } from "./ORU_W01";
+import { PATIENT_CARE_MESSAGES } from "./PPR_PC1";
+import { REFERRAL_MESSAGES } from "./RQI_I01";
+import { MISC_MESSAGES } from "./CRM_C01";
 
 /** The query messages of v2.3 (chapters 2, 3, 4, 6, 7, 9 and 10). */
 export const QUERY_MESSAGES = [
@@ -110,5 +113,8 @@ export const V2_3: VersionSchema = {
     ...QUERY_MESSAGES,
     ...MASTER_FILE_MESSAGES,
     ...ORDER_MESSAGES,
+    ...PATIENT_CARE_MESSAGES,
+    ...REFERRAL_MESSAGES,
+    ...MISC_MESSAGES,
   ],
 };

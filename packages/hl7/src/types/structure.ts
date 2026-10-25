@@ -159,16 +159,18 @@ export function parseStructure<T extends ParsedMessageBase = ParsedMessageBase &
             const next = peek();
             if (!next || !starts.has(next)) break;
             const instance: StructureValue = {};
-            // A segment that also opens a later sibling group (ORC opens both the diet and the tray
-            // orders of OMD^O01) is parsed speculatively once this group's minimum is met: when the
-            // instance stops at a segment only the sibling can take, it is handed over.
-            const rivals = instances.length >= min ? rivalGroups(siblings, next) : [];
+            // A segment that also opens a later sibling (ORC opens both the diet and the tray orders
+            // of OMD^O01; PSH opens the PRODUCT group of SUR^P09 and follows it) is parsed
+            // speculatively once this group's minimum is met: when the instance fails, or stops at a
+            // segment that only the inside of a sibling can take, it is handed over to the sibling.
+            const rivals = instances.length >= min ? rivalItems(siblings, next) : [];
             if (rivals.length > 0) {
               const snapshot = { pos, count: message.segments.length };
               const ok = parseSequence(item.segments, instance);
               const after = ok && !failure ? peek() : undefined;
               const rivalNames = new Set(segmentNames(rivals));
-              if (!ok || failure || (after !== undefined && !starts.has(after) && rivalNames.has(after))) {
+              const rivalStarts = new Set(rivals.flatMap(firstSegments));
+              if (!ok || failure || (after !== undefined && !starts.has(after) && rivalNames.has(after) && !rivalStarts.has(after))) {
                 pos = snapshot.pos;
                 message.segments.splice(snapshot.count);
                 failure = undefined;
@@ -227,11 +229,11 @@ export function parseStructure<T extends ParsedMessageBase = ParsedMessageBase &
   }
 }
 
-/** The sibling groups, up to and including the first required one, that `next` can open. */
-function rivalGroups(siblings: StructureItem[], next: string): SegmentGroup[] {
-  const out: SegmentGroup[] = [];
+/** The siblings (groups or segments), up to and including the first required one, that `next` can open. */
+function rivalItems(siblings: StructureItem[], next: string): StructureItem[] {
+  const out: StructureItem[] = [];
   for (const sibling of siblings) {
-    if (isSegmentGroup(sibling) && firstSegments(sibling).includes(next)) out.push(sibling);
+    if (firstSegments(sibling).includes(next)) out.push(sibling);
     if (isRequired(sibling)) break;
   }
   return out;
