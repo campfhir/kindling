@@ -1,0 +1,222 @@
+{
+  "structure": "MFN_M16",
+  "messageType": "MFN",
+  "triggerEvent": "M16",
+  "version": "2.9.1",
+  "description": "Inventory Item Master File Message – Enhanced",
+  "title": "Master File Notification – Inventory Item Enhanced",
+  "sectionHeading": "8.12.2 MFN/MFK - Inventory Item Master File Message – Enhanced (Event M16)",
+  "source": {
+    "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+    "pages": "116-117",
+    "table": "MFN^M16^MFN_M16: Master File Notification – Inventory Item Enhanced"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M16"
+      ],
+      "eventPrinted": "M16",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 116,
+      "table": "MFN^M16^MFN_M16: Master File Notification – Inventory Item Enhanced",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 116,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 116,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 116,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 116,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "group",
+      "name": "MATERIAL_ITEM_RECORD",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 116,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 116,
+          "description": "Master File Entry",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "ITM",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 116,
+          "description": "Material Item",
+          "chapterRef": "17"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 116,
+          "description": "Notes for ITM"
+        },
+        {
+          "kind": "group",
+          "name": "STERILIZATION",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 116,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "STZ",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 116,
+              "description": "Sterilization Parameters",
+              "chapterRef": "17"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 116,
+              "description": "Notes for STZ",
+              "chapterRef": "2"
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "PURCHASING_VENDOR",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 116,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "VND",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 117,
+              "description": "Purchasing Vendor",
+              "chapterRef": "17"
+            },
+            {
+              "kind": "group",
+              "name": "PACKAGING",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 117,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "PKG",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 117,
+                  "description": "Packaging",
+                  "chapterRef": "17"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PCE",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 117,
+                  "description": "Patient Charge Cost Center Exception",
+                  "chapterRef": "17"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "MATERIAL_LOCATION",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 117,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "IVT",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 117,
+              "description": "Material Location",
+              "chapterRef": "17"
+            },
+            {
+              "kind": "segment",
+              "name": "ILT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 117,
+              "description": "Material Lot/Quantity",
+              "chapterRef": "17"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 117,
+              "description": "Notes for IVT",
+              "chapterRef": "2"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2531 @@
+{
+  "structure": "ADT_A05",
+  "messageType": "ADT",
+  "triggerEvent": "A05",
+  "version": "2.9.1",
+  "description": "Pre-Admit a Patient",
+  "title": "ADT Message",
+  "sectionHeading": "3.3.5 ADT/ACK - Pre-Admit a Patient (Event A05)",
+  "source": {
+    "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+    "pages": "17-19",
+    "table": "ADT^A05^ADT_A05: ADT Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A05"
+      ],
+      "eventPrinted": "A05",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 17,
+      "table": "ADT^A05^ADT_A05: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A14"
+      ],
+      "eventPrinted": "A14",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 39,
+      "table": "ADT^A14^ADT_A05: ADT Message",
+      "identicalToPrimary": false
+    },
+    {
+      "events": [
+        "A28"
+      ],
+      "eventPrinted": "A28",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 61,
+      "table": "ADT^A28^ADT_A05: ADT Message",
+      "identicalToPrimary": false
+    },
+    {
+      "events": [
+        "A31"
+      ],
+      "eventPrinted": "A31",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 66,
+      "table": "ADT^A31^ADT_A05: ADT Message",
+      "identicalToPrimary": false
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 17,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 17,
+      "description": "Access Restrictions",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 17,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 17,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 17,
+      "description": "Event Type",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 17,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PD1",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 17,
+      "description": "Additional Demographics",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSP",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 17,
+      "description": "Person Gender and Sex",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 17,
+      "description": "Recorded Gender and Sex",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 17,
+      "description": "Sex Parameter for Clinical Use",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "OH1",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 17,
+      "description": "Employment Status",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "OH2",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 17,
+      "description": "Past or Present Job",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "OH3",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 17,
+      "description": "Usual Work",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "OH4",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 17,
+      "description": "Combat Zone Work",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 17,
+      "description": "Access Restrictions",
+      "status": "B",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "ROL",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 17,
+      "description": "Role",
+      "status": "B",
+      "chapterRef": "15"
+    },
+    {
+      "kind": "segment",
+      "name": "PRT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 17,
+      "description": "Participation",
+      "chapterRef": "7"
+    },
+    {
+      "kind": "group",
+      "name": "NEXT_OF_KIN",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 18,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "NK1",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 18,
+          "description": "Next of Kin / Associated Parties",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSP",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 18,
+          "description": "Person Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSR",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 18,
+          "description": "Recorded Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "OH2",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 18,
+          "description": "Past or Present Job",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "OH3",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 18,
+          "description": "Usual Work",
+          "chapterRef": "3"
+        }
+      ]
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 18,
+      "description": "Patient Visit",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PV2",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 18,
+      "description": "Patient Visit - Additional Info.",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 18,
+      "description": "Access Restrictions",
+      "status": "B",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "ROL",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 18,
+      "description": "Role",
+      "status": "B",
+      "chapterRef": "15"
+    },
+    {
+      "kind": "segment",
+      "name": "PRT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 18,
+      "description": "Participation",
+      "chapterRef": "7"
+    },
+    {
+      "kind": "segment",
+      "name": "DB1",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 18,
+      "description": "Disability Information",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "group",
+      "name": "OBSERVATION",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 18,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "OBX",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 18,
+          "description": "Observation/Result",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": null,
+          "maxOccurs": null,
+          "page": 18,
+          "description": "Participation",
+          "chapterRef": "7",
+          "bracketMismatch": true,
+          "notation": "[{ PRT }}"
+        }
+      ]
+    },
+    {
+      "kind": "segment",
+      "name": "AL1",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 18,
+      "description": "Allergy Information",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "IAM",
+      "usage": null,
+      "minOccurs": null,
+      "maxOccurs": null,
+      "page": 18,
+      "description": "Patient Adverse Reaction Information",
+      "chapterRef": "3",
+      "bracketMismatch": true,
+      "notation": "[{ IAM }}"
+    },
+    {
+      "kind": "segment",
+      "name": "DG1",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 18,
+      "description": "Diagnosis Information",
+      "chapterRef": "6"
+    },
+    {
+      "kind": "segment",
+      "name": "DRG",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 18,
+      "description": "Diagnosis Related Group",
+      "chapterRef": "6"
+    },
+    {
+      "kind": "group",
+      "name": "PROCEDURE",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 18,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PR1",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 18,
+          "description": "Procedures",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "ROL",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 18,
+          "description": "Role",
+          "status": "B",
+          "chapterRef": "15"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 18,
+          "description": "Participation",
+          "chapterRef": "7"
+        }
+      ]
+    },
+    {
+      "kind": "group",
+      "name": "GUARANTOR",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 18,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "GT1",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 18,
+          "description": "Guarantor",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "GSP",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 18,
+          "description": "Person Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSR",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 18,
+          "description": "Recorded Gender and Sex",
+          "chapterRef": "3"
+        }
+      ]
+    },
+    {
+      "kind": "group",
+      "name": "INSURANCE",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 18,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "IN1",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 18,
+          "description": "Insurance",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "IN2",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 18,
+          "description": "Insurance Additional Info.",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "IN3",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 18,
+          "description": "Insurance Additional Info - Cert.",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "GSP",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 18,
+          "description": "Person Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSR",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 18,
+          "description": "Recorded Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "ROL",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 18,
+          "description": "Role",
+          "status": "B",
+          "chapterRef": "15"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 18,
+          "description": "Participation",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "group",
+          "name": "AUTHORIZATION",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 18,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "AUT",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 19,
+              "description": "Authorization Record",
+              "chapterRef": "11"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 19,
+              "description": "Participation",
+              "chapterRef": "7"
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "REFERRAL",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 19,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "RF1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 19,
+              "description": "Referral Information",
+              "chapterRef": "11"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 19,
+              "description": "Participation",
+              "chapterRef": "7"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "segment",
+      "name": "ACC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 19,
+      "description": "Accident Information",
+      "chapterRef": "6"
+    },
+    {
+      "kind": "segment",
+      "name": "UB1",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 19,
+      "description": "Universal Bill Information",
+      "chapterRef": "6"
+    },
+    {
+      "kind": "segment",
+      "name": "UB2",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 19,
+      "description": "Universal Bill 92 Information",
+      "chapterRef": "6"
+    }
+  ],
+  "problems": [
+    "bracket mismatch: opener '[' closed by '}' p18 row '[{ PRT }}'",
+    "bracket mismatch: opener '[' closed by '}' p18 row '[{ IAM }}'"
+  ],
+  "variants": [
+    {
+      "eventPrinted": "A14",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "pages": "39-41",
+      "table": "ADT^A14^ADT_A05: ADT Message",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MSH",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 39,
+          "description": "Message Header",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 39,
+          "description": "Access Restrictions",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "SFT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 39,
+          "description": "Software Segment",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "UAC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 39,
+          "description": "User Authentication Credential",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "EVN",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 39,
+          "description": "Event Type",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PID",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 39,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 39,
+          "description": "Additional Demographics",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSP",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 39,
+          "description": "Person Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSR",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 39,
+          "description": "Recorded Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 39,
+          "description": "Sex Parameter for Clinical Use",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "OH1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 39,
+          "description": "Employment Status",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "OH2",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 39,
+          "description": "Past or Present Job",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "OH3",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 39,
+          "description": "Usual Work",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "OH4",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 39,
+          "description": "Combat Zone Work",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 39,
+          "description": "Access Restrictions",
+          "status": "B",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "ROL",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 39,
+          "description": "Role",
+          "status": "B",
+          "chapterRef": "15"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 39,
+          "description": "Participation",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "group",
+          "name": "NEXT_OF_KIN",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 39,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "NK1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 39,
+              "description": "Next of Kin / Associated Parties",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "GSP",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 40,
+              "description": "Person Gender and Sex",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "GSR",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 40,
+              "description": "Recorded Gender and Sex",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "OH2",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 40,
+              "description": "Past or Present Job",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "OH3",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 40,
+              "description": "Usual Work",
+              "chapterRef": "3"
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "PV1",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 40,
+          "description": "Patient Visit",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PV2",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 40,
+          "description": "Patient Visit - Additional Info.",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 40,
+          "description": "Access Restrictions",
+          "status": "B",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "ROL",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 40,
+          "description": "Role",
+          "status": "B",
+          "chapterRef": "15"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 40,
+          "description": "Participation",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "DB1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 40,
+          "description": "Disability Information",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "group",
+          "name": "OBSERVATION",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 40,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 40,
+              "description": "Observation/Result",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 40,
+              "description": "Participation",
+              "chapterRef": "7"
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "AL1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 40,
+          "description": "Allergy Information",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "IAM",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 40,
+          "description": "Patient Adverse Reaction Information",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "DG1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 40,
+          "description": "Diagnosis Information",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "DRG",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 40,
+          "description": "Diagnosis Related Group",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "group",
+          "name": "PROCEDURE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 40,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PR1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 40,
+              "description": "Procedures",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "ROL",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 40,
+              "description": "Role",
+              "status": "B",
+              "chapterRef": "15"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 40,
+              "description": "Participation",
+              "chapterRef": "7"
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "GUARANTOR",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 40,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "GT1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 40,
+              "description": "Guarantor",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "GSP",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 40,
+              "description": "Person Gender and Sex",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "GSR",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 40,
+              "description": "Recorded Gender and Sex",
+              "chapterRef": "3"
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "INSURANCE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 40,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "IN1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 40,
+              "description": "Insurance",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "IN2",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 40,
+              "description": "Insurance Additional Info.",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "IN3",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 40,
+              "description": "Insurance Additional Info - Cert.",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "GSP",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 40,
+              "description": "Person Gender and Sex",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "GSR",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 40,
+              "description": "Recorded Gender and Sex",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "ROL",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 40,
+              "description": "Role",
+              "status": "B",
+              "chapterRef": "15"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 40,
+              "description": "Participation",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "group",
+              "name": "AUTHORIZATION",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 40,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "AUT",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 40,
+                  "description": "Authorization Record",
+                  "chapterRef": "11"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 40,
+                  "description": "Participation",
+                  "chapterRef": "7"
+                }
+              ]
+            },
+            {
+              "kind": "group",
+              "name": "REFERRAL",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 41,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "RF1",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 41,
+                  "description": "Referral Information",
+                  "chapterRef": "11"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 41,
+                  "description": "Participation",
+                  "chapterRef": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "ACC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 41,
+          "description": "Accident Information",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "UB1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 41,
+          "description": "Universal Bill Information",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "UB2",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 41,
+          "description": "Universal Bill 92 Information",
+          "chapterRef": "6"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "eventPrinted": "A28",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "pages": "61-63",
+      "table": "ADT^A28^ADT_A05: ADT Message",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MSH",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 61,
+          "description": "Message Header",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 61,
+          "description": "Access Restrictions",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "SFT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 61,
+          "description": "Software Segment",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "UAC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 61,
+          "description": "User Authentication Credential",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "EVN",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 61,
+          "description": "Event Type",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PID",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 61,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 61,
+          "description": "Additional Demographics",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSP",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 61,
+          "description": "Person Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSR",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 61,
+          "description": "Recorded Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 61,
+          "description": "Sex Parameter for Clinical Use",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "OH1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 61,
+          "description": "Employment Status",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "OH2",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 61,
+          "description": "Past or Present Job",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "OH3",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 61,
+          "description": "Usual Work",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "OH4",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 62,
+          "description": "Combat Zone Work",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 62,
+          "description": "Access Restrictions",
+          "status": "B",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "ROL",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 62,
+          "description": "Role",
+          "status": "B",
+          "chapterRef": "15"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 62,
+          "description": "Participation",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "group",
+          "name": "NEXT_OF_KIN",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 62,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "NK1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 62,
+              "description": "Next of Kin / Associated Parties",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "GSP",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 62,
+              "description": "Person Gender and Sex",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "GSR",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 62,
+              "description": "Recorded Gender and Sex",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "OH2",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 62,
+              "description": "Past or Present Job",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "OH3",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 62,
+              "description": "Usual Work",
+              "chapterRef": "3"
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "PV1",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 62,
+          "description": "Patient Visit",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PV2",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 62,
+          "description": "Patient Visit - Additional Info.",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 62,
+          "description": "Access Restrictions",
+          "status": "B",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "ROL",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 62,
+          "description": "Role",
+          "status": "B",
+          "chapterRef": "15"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 62,
+          "description": "Participation",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "DB1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 62,
+          "description": "Disability Information",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "group",
+          "name": "OBSERVATION",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 62,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 62,
+              "description": "Observation/Result",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 62,
+              "description": "Participation",
+              "chapterRef": "7"
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "AL1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 62,
+          "description": "Allergy Information",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "IAM",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 62,
+          "description": "Patient Adverse Reaction Information",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "DG1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 62,
+          "description": "Diagnosis Information",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "DRG",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 62,
+          "description": "Diagnosis Related Group",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "group",
+          "name": "PROCEDURE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 62,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PR1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 62,
+              "description": "Procedures",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "ROL",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 62,
+              "description": "Role",
+              "status": "B",
+              "chapterRef": "15"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 62,
+              "description": "Participation",
+              "chapterRef": "7"
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "GUARANTOR",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 62,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "GT1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 62,
+              "description": "Guarantor",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "GSP",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 62,
+              "description": "Person Gender and Sex",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "GSR",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 62,
+              "description": "Recorded Gender and Sex",
+              "chapterRef": "3"
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "INSURANCE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 62,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "IN1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 62,
+              "description": "Insurance",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "IN2",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 62,
+              "description": "Insurance Additional Info.",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "IN3",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 62,
+              "description": "Insurance Additional Info - Cert.",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "GSP",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 62,
+              "description": "Person Gender and Sex",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "GSR",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 63,
+              "description": "Recorded Gender and Sex",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "ROL",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 63,
+              "description": "Role",
+              "status": "B",
+              "chapterRef": "15"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 63,
+              "description": "Participation",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "group",
+              "name": "AUTHORIZATION",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 63,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "AUT",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 63,
+                  "description": "Authorization Record",
+                  "chapterRef": "11"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 63,
+                  "description": "Participation",
+                  "chapterRef": "7"
+                }
+              ]
+            },
+            {
+              "kind": "group",
+              "name": "REFERRAL",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 63,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "RF1",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 63,
+                  "description": "Referral Information",
+                  "chapterRef": "11"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 63,
+                  "description": "Participation",
+                  "chapterRef": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "ACC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 63,
+          "description": "Accident Information",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "UB1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 63,
+          "description": "Universal Bill Information",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "UB2",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 63,
+          "description": "Universal Bill 92 Information",
+          "chapterRef": "6"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "eventPrinted": "A31",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "pages": "66-67",
+      "table": "ADT^A31^ADT_A05: ADT Message",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MSH",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 66,
+          "description": "Message Header",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 66,
+          "description": "Access Restrictions",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "SFT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 66,
+          "description": "Software Segment",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "UAC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 66,
+          "description": "User Authentication Credential",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "EVN",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 66,
+          "description": "Event Type",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PID",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 66,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 66,
+          "description": "Additional Demographics",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSP",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 66,
+          "description": "Person Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSR",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 66,
+          "description": "Recorded Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 66,
+          "description": "Sex Parameter for Clinical Use",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "OH1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 66,
+          "description": "Employment Status",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "OH2",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 66,
+          "description": "Past or Present Job",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "OH3",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 66,
+          "description": "Usual Work",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "OH4",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 66,
+          "description": "Combat Zone Work",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 66,
+          "description": "Access Restrictions",
+          "status": "B",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "ROL",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 66,
+          "description": "Deprecated as of V2.9",
+          "status": "B",
+          "chapterRef": "15"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 66,
+          "description": "Participation",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "group",
+          "name": "NEXT_OF_KIN",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 66,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "NK1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 66,
+              "description": "Next of Kin / Associated Parties",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "GSP",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 66,
+              "description": "Person Gender and Sex",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "GSR",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 66,
+              "description": "Recorded Gender and Sex",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "OH2",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 66,
+              "description": "Past or Present Job",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "OH3",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 66,
+              "description": "Usual Work",
+              "chapterRef": "3"
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "PV1",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 66,
+          "description": "Patient Visit",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PV2",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 66,
+          "description": "Patient Visit - Additional Info.",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 66,
+          "description": "Access Restrictions",
+          "status": "B",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "ROL",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 66,
+          "description": "Role",
+          "status": "B",
+          "chapterRef": "15"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 66,
+          "description": "Participation",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "DB1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 66,
+          "description": "Disability Information",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "group",
+          "name": "OBSERVATION",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 66,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 66,
+              "description": "Observation/Result",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 66,
+              "description": "Participation",
+              "chapterRef": "7"
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "AL1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 67,
+          "description": "Allergy Information",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "IAM",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 67,
+          "description": "Patient Adverse Reaction Information",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "DG1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 67,
+          "description": "Diagnosis Information",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "DRG",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 67,
+          "description": "Diagnosis Related Group",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "group",
+          "name": "PROCEDURE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 67,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PR1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 67,
+              "description": "Procedures",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "ROL",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 67,
+              "description": "Role",
+              "status": "B",
+              "chapterRef": "15"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 67,
+              "description": "Participation",
+              "chapterRef": "7"
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "GUARANTOR",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 67,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "GT1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 67,
+              "description": "Guarantor",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "GSP",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 67,
+              "description": "Person Gender and Sex",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "GSR",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 67,
+              "description": "Recorded Gender and Sex",
+              "chapterRef": "3"
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "INSURANCE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 67,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "IN1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 67,
+              "description": "Insurance",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "IN2",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 67,
+              "description": "Insurance Additional Info.",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "IN3",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 67,
+              "description": "Insurance Additional Info - Cert.",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "GSP",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 67,
+              "description": "Person Gender and Sex",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "GSR",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 67,
+              "description": "Recorded Gender and Sex",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "ROL",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 67,
+              "description": "Role",
+              "status": "B",
+              "chapterRef": "15"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 67,
+              "description": "Participation",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "group",
+              "name": "AUTHORIZATION",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 67,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "AUT",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 67,
+                  "description": "Authorization Record",
+                  "chapterRef": "11"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 67,
+                  "description": "Participation",
+                  "chapterRef": "7"
+                }
+              ]
+            },
+            {
+              "kind": "group",
+              "name": "REFERRAL",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 67,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "RF1",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 67,
+                  "description": "Referral Information",
+                  "chapterRef": "11"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 67,
+                  "description": "Participation",
+                  "chapterRef": "7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "ACC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 67,
+          "description": "Accident Information",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "UB1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 67,
+          "description": "Universal Bill Information",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "UB2",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 67,
+          "description": "Universal Bill 92 Information",
+          "chapterRef": "6"
+        }
+      ],
+      "problems": []
+    }
+  ]
+}

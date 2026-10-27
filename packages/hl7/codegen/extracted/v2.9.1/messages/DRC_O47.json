@@ -1,0 +1,244 @@
+{
+  "structure": "DRC_O47",
+  "messageType": "DRC",
+  "triggerEvent": "O47",
+  "version": "2.9.1",
+  "description": "Donor Request to Collect",
+  "title": "Donor Request to Collect Message",
+  "sectionHeading": "4.16.14 DRC - Donor Request to Collect (Event O47)",
+  "source": {
+    "pdf": "V291_CH04_Orders_2024SEP.pdf",
+    "pages": "173",
+    "table": "DRC^O47^DRC_O47: Donor Request to Collect Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "O47"
+      ],
+      "eventPrinted": "O47",
+      "pdf": "V291_CH04_Orders_2024SEP.pdf",
+      "page": 173,
+      "table": "DRC^O47^DRC_O47: Donor Request to Collect Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 173,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 173,
+      "description": "Access Restrictions",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 173,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 173,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "DONOR",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 173,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 173,
+          "description": "Patient Identification Segment",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 173,
+          "description": "Additional Demographics",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 173,
+          "description": "Participation",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "group",
+          "name": "DONOR_OBSERVATIONS",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 173,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 173,
+              "description": "Donor Observations",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 173,
+              "description": "Participation",
+              "chapterRef": "7"
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 173,
+          "description": "Notes and Comments (for Donor)",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "AL1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 173,
+          "description": "Allergy Information"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 173,
+          "description": "For backwards compatbility only as of V2.9.",
+          "status": "B",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "group",
+          "name": "DONOR_REGISTRATION",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 173,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PV1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 173,
+              "description": "Patient Visit (Donor Registration)",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 173,
+              "description": "Participation",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 173,
+              "description": "Notes and Comments (for Donor Registration)",
+              "chapterRef": "2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "group",
+      "name": "DONATION_ORDER",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 173,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "OBR",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 173,
+          "description": "Observation",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 173,
+          "description": "Participation",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 173,
+          "description": "Notes and Comments (for Detail)",
+          "chapterRef": "2"
+        }
+      ]
+    }
+  ]
+}

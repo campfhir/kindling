@@ -1,0 +1,559 @@
+{
+  "structure": "RAS_O17",
+  "messageType": "RAS",
+  "triggerEvent": "O17",
+  "version": "2.9.1",
+  "description": "Pharmacy/Treatment Administration Message",
+  "title": "Pharmacy/Treatment Administration",
+  "sectionHeading": "4A.3.14 RAS - Pharmacy/Treatment Administration Message (Event O17)",
+  "source": {
+    "pdf": "V291_CH04A_Orders_2024SEP.pdf",
+    "pages": "21-23",
+    "table": "RAS^O17^RAS_O17: Pharmacy/Treatment Administration"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "O17"
+      ],
+      "eventPrinted": "O17",
+      "pdf": "V291_CH04A_Orders_2024SEP.pdf",
+      "page": 21,
+      "table": "RAS^O17^RAS_O17: Pharmacy/Treatment Administration",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 21,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 21,
+      "description": "Access Restrictions",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 21,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 21,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "NTE",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 21,
+      "description": "Notes and Comments (for Header)",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "PATIENT",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 21,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 21,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 22,
+          "description": "Additional Demographics",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSP",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 22,
+          "description": "Person Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSR",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 22,
+          "description": "Recorded Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 22,
+          "description": "Sex Parameter for Clinical Use",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 22,
+          "description": "Participation (for Additional Demographics)",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 22,
+          "description": "Notes and Comments (for PID)",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 22,
+          "description": "For backwards compatibility only as of V2.9.",
+          "status": "B",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "AL1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 22,
+          "description": "Allergy Information",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "group",
+          "name": "PATIENT_VISIT",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 22,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PV1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 22,
+              "description": "Patient Visit",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "PV2",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 22,
+              "description": "Patient Visit – Additional Info",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 22,
+              "description": "Participation (for Patient Visit)",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "ARV",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 22,
+              "description": "For access compatibiliy only as of V2.9.",
+              "status": "B",
+              "chapterRef": "3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "group",
+      "name": "ORDER",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 22,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "ORC",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 22,
+          "description": "Common Order",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 22,
+          "description": "Participation (for ORC)",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "group",
+          "name": "TIMING",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 22,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "TQ1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 22,
+              "description": "Timing/Quantity",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "segment",
+              "name": "TQ2",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 22,
+              "description": "Timing/Quantity Order Sequence",
+              "chapterRef": "4"
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "ORDER_DETAIL",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 22,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "RXO",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 22,
+              "description": "Pharmacy /Treatment Order",
+              "chapterRef": "4A"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 22,
+              "description": "Participation",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "group",
+              "name": "ORDER_DETAIL_SUPPLEMENT",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 22,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "NTE",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": "*",
+                  "page": 22,
+                  "description": "Notes and Comments (for RXO)",
+                  "chapterRef": "2"
+                },
+                {
+                  "kind": "segment",
+                  "name": "RXR",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": "*",
+                  "page": 22,
+                  "description": "Pharmacy/Treatment Route",
+                  "chapterRef": "4A"
+                },
+                {
+                  "kind": "group",
+                  "name": "COMPONENTS",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 22,
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "RXC",
+                      "usage": null,
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "page": 22,
+                      "description": "Pharmacy/Treatment Component",
+                      "chapterRef": "4A"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "NTE",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 22,
+                      "description": "Notes and Comments (for each RXC)",
+                      "chapterRef": "2"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "ENCODING",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 22,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "RXE",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 22,
+              "description": "Pharmacy/Treatment Encoded Order",
+              "chapterRef": "4A"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 22,
+              "description": "Participation (for Encoded Order)",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 22,
+              "description": "Notes and Comments (for RXE)",
+              "chapterRef": "2"
+            },
+            {
+              "kind": "group",
+              "name": "TIMING_ENCODED",
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "page": 22,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "TQ1",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 23,
+                  "description": "Timing/Quantity",
+                  "chapterRef": "4"
+                },
+                {
+                  "kind": "segment",
+                  "name": "TQ2",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 23,
+                  "description": "Timing/Quantity Order Sequence",
+                  "chapterRef": "4"
+                }
+              ]
+            },
+            {
+              "kind": "segment",
+              "name": "RXR",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "page": 23,
+              "description": "Pharmacy/Treatment Route",
+              "chapterRef": "4A"
+            },
+            {
+              "kind": "segment",
+              "name": "RXC",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 23,
+              "description": "Pharmacy/Treatment Component",
+              "chapterRef": "4A"
+            },
+            {
+              "kind": "segment",
+              "name": "CDO",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 23,
+              "description": "Cumulative Dosage Segment",
+              "chapterRef": "4A"
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "ADMINISTRATION",
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "page": 23,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "RXA",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "page": 23,
+              "description": "Pharmacy/Treatment Administration",
+              "chapterRef": "4A"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 23,
+              "description": "Participation (for Administration)",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "RXR",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 23,
+              "description": "Pharmacy/Treatment Route",
+              "chapterRef": "4A"
+            },
+            {
+              "kind": "group",
+              "name": "OBSERVATION",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 23,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "OBX",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 23,
+                  "description": "Observation/Result",
+                  "chapterRef": "7"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 23,
+                  "description": "Participation (for Observation)",
+                  "chapterRef": "7"
+                },
+                {
+                  "kind": "segment",
+                  "name": "NTE",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 23,
+                  "description": "Notes and Comments (for OBX)",
+                  "chapterRef": "2"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "CTI",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 23,
+          "description": "Clinical Trial Identification",
+          "chapterRef": "7"
+        }
+      ]
+    }
+  ]
+}

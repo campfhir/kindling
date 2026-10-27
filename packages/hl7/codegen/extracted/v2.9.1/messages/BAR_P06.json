@@ -1,0 +1,107 @@
+{
+  "structure": "BAR_P06",
+  "messageType": "BAR",
+  "triggerEvent": "P06",
+  "version": "2.9.1",
+  "description": "End Billing Account",
+  "title": "End Billing Account",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH06_FinancialMngmt_2024SEP.pdf",
+    "pages": "14-15",
+    "table": "BAR^P06^BAR_P06: End Billing Account"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "P06"
+      ],
+      "eventPrinted": "P06",
+      "pdf": "V291_CH06_FinancialMngmt_2024SEP.pdf",
+      "page": 14,
+      "table": "BAR^P06^BAR_P06: End Billing Account",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 14,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 14,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 14,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 14,
+      "description": "Event Type",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "group",
+      "name": "PATIENT",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 14,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 14,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 14,
+          "description": "Participation",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "segment",
+          "name": "PV1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 15,
+          "description": "Patient Visit",
+          "chapterRef": "3"
+        }
+      ]
+    }
+  ]
+}

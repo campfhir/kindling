@@ -1,0 +1,381 @@
+{
+  "structure": "SRM_S01",
+  "messageType": "SRM",
+  "triggerEvent": "S01",
+  "version": "2.9.1",
+  "description": "Request New Appointment Booking",
+  "title": "Schedule Request Message",
+  "sectionHeading": "10.3.1 Request New Appointment Booking (Event S01)",
+  "source": {
+    "pdf": "V291_CH10_Scheduling_2024SEP.pdf",
+    "pages": "14-15",
+    "table": "SRM^S01 -S11^SRM_S01: Schedule Request Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11"
+      ],
+      "eventPrinted": "S01-S11",
+      "pdf": "V291_CH10_Scheduling_2024SEP.pdf",
+      "page": 14,
+      "table": "SRM^S01 -S11^SRM_S01: Schedule Request Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 14,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARQ",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 14,
+      "description": "Appointment Request Information",
+      "chapterRef": "10"
+    },
+    {
+      "kind": "segment",
+      "name": "APR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 14,
+      "description": "Appointment Preferences",
+      "chapterRef": "10"
+    },
+    {
+      "kind": "segment",
+      "name": "NTE",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 14,
+      "description": "Notes and Comments for the ARQ",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "PATIENT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 14,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 14,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSP",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 14,
+          "description": "Person Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSR",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 14,
+          "description": "Recorded Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 14,
+          "description": "Sex Parameter for Clinical Use",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 14,
+          "description": "Participation",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "PV1",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 14,
+          "description": "Patient Visit",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PV2",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 14,
+          "description": "Patient Visit - Additional Info",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 14,
+          "description": "Participation",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "group",
+          "name": "OBSERVATION",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 14,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 14,
+              "description": "Observation/Result",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 14,
+              "description": "Participation Information",
+              "chapterRef": "7"
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "DG1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 14,
+          "description": "Diagnosis",
+          "chapterRef": "6"
+        }
+      ]
+    },
+    {
+      "kind": "group",
+      "name": "RESOURCES",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 15,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "RGS",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 15,
+          "description": "Resource Group Segment",
+          "chapterRef": "10"
+        },
+        {
+          "kind": "group",
+          "name": "SERVICE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 15,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "AIS",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 15,
+              "description": "Appointment Information - Service",
+              "chapterRef": "10"
+            },
+            {
+              "kind": "segment",
+              "name": "APR",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 15,
+              "description": "Appointment Preferences",
+              "chapterRef": "10"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 15,
+              "description": "Notes and Comments for the AIS",
+              "chapterRef": "2"
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "GENERAL_RESOURCE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 15,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "AIG",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 15,
+              "description": "Appointment Information - General Resource",
+              "chapterRef": "10"
+            },
+            {
+              "kind": "segment",
+              "name": "APR",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 15,
+              "description": "Appointment Preferences",
+              "chapterRef": "10"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 15,
+              "description": "Notes and Comments for the AIG",
+              "chapterRef": "2"
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "LOCATION_RESOURCE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 15,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "AIL",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 15,
+              "description": "Appointment Information - Location Resource",
+              "chapterRef": "10"
+            },
+            {
+              "kind": "segment",
+              "name": "APR",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 15,
+              "description": "Appointment Preferences",
+              "chapterRef": "10"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 15,
+              "description": "Notes and Comments for the AIL",
+              "chapterRef": "2"
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "PERSONNEL_RESOURCE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 15,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "AIP",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 15,
+              "description": "Appointment Information - Personnel Resource",
+              "chapterRef": "10"
+            },
+            {
+              "kind": "segment",
+              "name": "APR",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 15,
+              "description": "Appointment Preferences",
+              "chapterRef": "10"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 15,
+              "description": "Notes and Comments for the AIP",
+              "chapterRef": "2"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

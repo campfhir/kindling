@@ -1,0 +1,146 @@
+{
+  "structure": "MFN_M10",
+  "messageType": "MFN",
+  "triggerEvent": "M10",
+  "version": "2.9.1",
+  "description": "Master File Notification - Test/Observation Batteries",
+  "title": "Master File Notification - Test/Observation Batteries",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+    "pages": "24",
+    "table": "MFN^M10^MFN_M10: Master File Notification - Test/Observation Batteries"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M10"
+      ],
+      "eventPrinted": "M10",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 24,
+      "table": "MFN^M10^MFN_M10: Master File Notification - Test/Observation Batteries",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 24,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 24,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 24,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 24,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "group",
+      "name": "MF_TEST_BATTERIES",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 24,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 24,
+          "description": "Master File Entry",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "OM1",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 24,
+          "description": "General Segment (Fields That Apply to Most Observations)",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "OMC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 24,
+          "description": "Supporting Clinical Information",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 24,
+          "description": "Participation",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "group",
+          "name": "MF_TEST_BATT_DETAIL",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 24,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OM5",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 24,
+              "description": "Observation Batteries",
+              "chapterRef": "8"
+            },
+            {
+              "kind": "segment",
+              "name": "OM4",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 24,
+              "description": "Observations that Require Specimens",
+              "chapterRef": "8"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "structure": "EAC_U07",
+  "messageType": "EAC",
+  "triggerEvent": "U07",
+  "version": "2.9.1",
+  "description": "Automated Equipment Command",
+  "title": "Equipment Command Message",
+  "sectionHeading": "13.2.7 EAC/ACK – Automated Equipment Command (Event U07)",
+  "source": {
+    "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+    "pages": "23",
+    "table": "EAC^U07^EAC_U07: Equipment Command Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "U07"
+      ],
+      "eventPrinted": "U07",
+      "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": 23,
+      "table": "EAC^U07^EAC_U07: Equipment Command Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 23,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 23,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 23,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EQU",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 23,
+      "description": "Equipment Detail",
+      "chapterRef": "13"
+    },
+    {
+      "kind": "group",
+      "name": "COMMAND",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 23,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "ECD",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 23,
+          "description": "Equipment Command Detail",
+          "chapterRef": "13"
+        },
+        {
+          "kind": "segment",
+          "name": "TQ1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 23,
+          "description": "Timing/quantity",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "group",
+          "name": "SPECIMEN_CONTAINER",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 23,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "SAC",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 23,
+              "description": "Specimen Container Detail",
+              "chapterRef": "13"
+            },
+            {
+              "kind": "group",
+              "name": "ORDER_FOR_SPECIMEN_CONTAINER",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 23,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "OBR",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 23,
+                  "description": "Specimen container info. on requested test",
+                  "chapterRef": "4"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 23,
+                  "description": "Participation (for requested test)",
+                  "chapterRef": "7"
+                }
+              ]
+            },
+            {
+              "kind": "segment",
+              "name": "SPM",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 23,
+              "description": "Specimen",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "DST",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 23,
+              "description": "Transport destination",
+              "chapterRef": "13"
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "CNS",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 23,
+          "description": "Clear Notification",
+          "chapterRef": "13"
+        }
+      ]
+    },
+    {
+      "kind": "segment",
+      "name": "ROL",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 23,
+      "description": "Role Detail",
+      "status": "B",
+      "chapterRef": "12"
+    }
+  ]
+}

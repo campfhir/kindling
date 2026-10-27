@@ -1,0 +1,159 @@
+{
+  "structure": "EHC_E02",
+  "messageType": "EHC",
+  "triggerEvent": "E02",
+  "version": "2.9.1",
+  "description": "Cancel HealthCare Services Invoice",
+  "title": "Cancel HealthCare Services Invoice",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+    "pages": "10",
+    "table": "EHC^E02^EHC_E02: Cancel HealthCare Services Invoice"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E02"
+      ],
+      "eventPrinted": "E02",
+      "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+      "page": 10,
+      "table": "EHC^E02^EHC_E02: Cancel HealthCare Services Invoice",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 10,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 10,
+      "description": "Secondary Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 10,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "choice",
+      "name": "INVOICE_INFORMATION_CANCEL",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 10,
+      "alternatives": [
+        {
+          "kind": "group",
+          "name": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 10,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "IVC",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 10,
+              "description": "Invoice",
+              "chapterRef": "16"
+            },
+            {
+              "kind": "segment",
+              "name": "PYE",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 10,
+              "description": "Payee Information",
+              "chapterRef": "16"
+            },
+            {
+              "kind": "segment",
+              "name": "CTD",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 10,
+              "description": "Contact Data"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 10,
+              "description": "Notes and Comments"
+            },
+            {
+              "kind": "group",
+              "name": "PRODUCT_SERVICE_SECTION",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 10,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "PSS",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 10,
+                  "description": ""
+                },
+                {
+                  "kind": "group",
+                  "name": "PSG",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 10,
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "PSG",
+                      "usage": null,
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "page": 10,
+                      "description": "Product/Service Group"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PSL",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 10,
+                      "description": "Product/Service Line Item"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

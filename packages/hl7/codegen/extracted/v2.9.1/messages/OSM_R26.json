@@ -1,0 +1,493 @@
+{
+  "structure": "OSM_R26",
+  "messageType": "OSM",
+  "triggerEvent": "R26",
+  "version": "2.9.1",
+  "description": "Unsolicited Specimen Shipment Manifest Message",
+  "title": "Specimen Shipment Message",
+  "sectionHeading": "7.16.1 OSM - Unsolicited Specimen Shipment Manifest Message (Event R26)",
+  "source": {
+    "pdf": "V291_CH07_Observations_2024SEP.pdf",
+    "pages": "171-173",
+    "table": "OSM^R26^OSM_R26: Specimen Shipment Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "R26"
+      ],
+      "eventPrinted": "R26",
+      "pdf": "V291_CH07_Observations_2024SEP.pdf",
+      "page": 171,
+      "table": "OSM^R26^OSM_R26: Specimen Shipment Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 171,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "usage": null,
+      "minOccurs": null,
+      "maxOccurs": null,
+      "page": 171,
+      "description": "Access Restrictions",
+      "chapterRef": "3",
+      "bracketMismatch": true,
+      "notation": "{[ARV}]"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 171,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 171,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "SHIPMENT",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 171,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "SHP",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 171,
+          "description": "Shipment Segment",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "page": 171,
+          "description": "Participation (for Shipment)",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "group",
+          "name": "SHIPPING_OBSERVATION",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 171,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 171,
+              "description": "Observation/Result Segment (Additional Shipping Information)",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 171,
+              "description": "Participation (for Shipping Observation)",
+              "chapterRef": "7"
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "PACKAGE",
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "page": 171,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PAC",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 171,
+              "description": "Shipping Package Segment",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 171,
+              "description": "Participation (for Shipping Package)",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "group",
+              "name": "SPECIMEN",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 171,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "SPM",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 171,
+                  "description": "Specimen Information",
+                  "chapterRef": "7"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 171,
+                  "description": "Participation (for Specimen)",
+                  "chapterRef": "7"
+                },
+                {
+                  "kind": "group",
+                  "name": "SPECIMEN_OBSERVATION",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 171,
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "OBX",
+                      "usage": null,
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "page": 171,
+                      "description": "Observation/Result Segment (For Specimen)",
+                      "chapterRef": "7"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PRT",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 171,
+                      "description": "Participation (for Specimen Observation)",
+                      "chapterRef": "7"
+                    }
+                  ]
+                },
+                {
+                  "kind": "group",
+                  "name": "CONTAINER",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 171,
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "SAC",
+                      "usage": null,
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "page": 171,
+                      "description": "Container Information",
+                      "chapterRef": "13"
+                    },
+                    {
+                      "kind": "group",
+                      "name": "CONTAINER_OBSERVATION",
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 172,
+                      "items": [
+                        {
+                          "kind": "segment",
+                          "name": "OBX",
+                          "usage": null,
+                          "minOccurs": 1,
+                          "maxOccurs": 1,
+                          "page": 172,
+                          "description": "Observation/Result Segment (For Container)",
+                          "chapterRef": "7"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "PRT",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 172,
+                          "description": "Participation (for Container Observation Result)",
+                          "chapterRef": "7"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "kind": "group",
+                  "name": "SUBJECT_PERSON_OR_ANIMAL_IDENTIFICATION",
+                  "minOccurs": 0,
+                  "maxOccurs": 1,
+                  "page": 172,
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "PID",
+                      "usage": null,
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "page": 172,
+                      "description": "Patient Identification (For Person/Animal)",
+                      "chapterRef": "3"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PRT",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 172,
+                      "description": "Participation (for Patient)",
+                      "chapterRef": "7"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "ARV",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 172,
+                      "description": "For backwards compability only as of V2.9.",
+                      "status": "B",
+                      "chapterRef": "3"
+                    },
+                    {
+                      "kind": "group",
+                      "name": "PATIENT_OBSERVATION",
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 172,
+                      "items": [
+                        {
+                          "kind": "segment",
+                          "name": "OBX",
+                          "usage": null,
+                          "minOccurs": 1,
+                          "maxOccurs": 1,
+                          "page": 172,
+                          "description": "Observation/Result Segment (For Patient)",
+                          "chapterRef": "7"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "PRT",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 172,
+                          "description": "Participation (for Observation)",
+                          "chapterRef": "7"
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "group",
+                      "name": "NEXT_OF_KIN",
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 172,
+                      "items": [
+                        {
+                          "kind": "segment",
+                          "name": "NK1",
+                          "usage": null,
+                          "minOccurs": 1,
+                          "maxOccurs": 1,
+                          "page": 172,
+                          "description": "Next of Kin/Associated Parties (For Person/Animal)"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "GSP",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 172,
+                          "description": "Person Gender and Sex",
+                          "chapterRef": "3"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "GSR",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 172,
+                          "description": "Recorded Gender and Sex",
+                          "chapterRef": "3"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "kind": "group",
+                  "name": "SUBJECT_POPULATION_OR_LOCATION_IDENTIFICATION",
+                  "minOccurs": 0,
+                  "maxOccurs": 1,
+                  "page": 172,
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "PV1",
+                      "usage": null,
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "page": 172,
+                      "description": "Patient Visit (For Population/Location)",
+                      "chapterRef": "3"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PRT",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 172,
+                      "description": "Participation (for Patient Visit)",
+                      "chapterRef": "7"
+                    },
+                    {
+                      "kind": "group",
+                      "name": "PATIENT_VISIT_OBSERVATION",
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 172,
+                      "items": [
+                        {
+                          "kind": "segment",
+                          "name": "OBX",
+                          "usage": null,
+                          "minOccurs": 1,
+                          "maxOccurs": 1,
+                          "page": 172,
+                          "description": "Observation/Result Segment (For Visit)",
+                          "chapterRef": "7"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "PRT",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 172,
+                          "description": "Participation (for Patient Visit Observation)",
+                          "chapterRef": "7"
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PID",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": 1,
+                      "page": 172,
+                      "description": "Patient Identification (For Population)",
+                      "chapterRef": "3"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PRT",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 172,
+                      "description": "Participation (for Patient)",
+                      "chapterRef": "7"
+                    },
+                    {
+                      "kind": "group",
+                      "name": "NEXT_OF_KIN",
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 173,
+                      "items": [
+                        {
+                          "kind": "segment",
+                          "name": "NK1",
+                          "usage": null,
+                          "minOccurs": 1,
+                          "maxOccurs": 1,
+                          "page": 173,
+                          "description": "Next of Kin/Associated Parties (For Population/Location)",
+                          "chapterRef": "3"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "GSP",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 173,
+                          "description": "Person Gender and Sex",
+                          "chapterRef": "3"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "GSR",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 173,
+                          "description": "Recorded Gender and Sex",
+                          "chapterRef": "3"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "problems": [
+    "bracket mismatch: opener '[' closed by '}' p171 row '{[ARV}]'",
+    "bracket mismatch: opener '{' closed by ']' p171 row '{[ARV}]'",
+    "group name printed with internal space 'SUBJECT_POPULATION_OR_LOCATION_IDENTIFICAT ION' p172 (recorded as 'SUBJECT_POPULATION_OR_LOCATION_IDENTIFICATION')",
+    "group name printed with internal space 'SUBJECT_POPULATION_OR_LOCATION_IDENTIFICAT ION' p173 (recorded as 'SUBJECT_POPULATION_OR_LOCATION_IDENTIFICATION')"
+  ]
+}

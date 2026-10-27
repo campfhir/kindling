@@ -1,0 +1,98 @@
+{
+  "structure": "CCF_I22",
+  "messageType": "CCF",
+  "triggerEvent": "I22",
+  "version": "2.9.1",
+  "description": "Collaborative Care Fetch",
+  "title": "Collaborative Care Fetch",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH11_PatientReferral_2024SEP.pdf",
+    "pages": "48",
+    "table": "CCF^I22^CCF_I22: Collaborative Care Fetch"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "I22"
+      ],
+      "eventPrinted": "I22",
+      "pdf": "V291_CH11_PatientReferral_2024SEP.pdf",
+      "page": 48,
+      "table": "CCF^I22^CCF_I22: Collaborative Care Fetch",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 48,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 48,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 48,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 48,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSP",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 48,
+      "description": "Person Gender and Sex",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 48,
+      "description": "Recorded Gender and Sex",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 48,
+      "description": "Sex Parameter for Clinical Use",
+      "chapterRef": "3"
+    }
+  ]
+}

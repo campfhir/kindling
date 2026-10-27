@@ -1,0 +1,177 @@
+{
+  "structure": "ADT_A39",
+  "messageType": "ADT",
+  "triggerEvent": "A40",
+  "version": "2.9.1",
+  "description": "Merge Patient - Patient Identifier List",
+  "title": "ADT Message",
+  "sectionHeading": "3.3.40 ADT/ACK - Merge Patient - Patient Identifier List (Event A40)",
+  "source": {
+    "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+    "pages": "75",
+    "table": "ADT^A40^ADT_A39: ADT Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A40"
+      ],
+      "eventPrinted": "A40",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 75,
+      "table": "ADT^A40^ADT_A39: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A41"
+      ],
+      "eventPrinted": "A41",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 77,
+      "table": "ADT^A41^ADT_A39: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A42"
+      ],
+      "eventPrinted": "A42",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 78,
+      "table": "ADT^A42^ADT_A39: ADT Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 75,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 75,
+      "description": "Access Restrictions",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 75,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 75,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 75,
+      "description": "Event Type",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "group",
+      "name": "PATIENT",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 75,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 75,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 75,
+          "description": "Additional Demographics",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSP",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 75,
+          "description": "Person Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSR",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 75,
+          "description": "Recorded Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 75,
+          "description": "Sex Parameter for Clinical Use",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "MRG",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 75,
+          "description": "Merge Information",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PV1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 75,
+          "description": "Patient Visit",
+          "chapterRef": "3"
+        }
+      ]
+    }
+  ]
+}

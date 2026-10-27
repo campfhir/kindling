@@ -1,0 +1,483 @@
+{
+  "structure": "RQI_I01",
+  "messageType": "RQI",
+  "triggerEvent": "I01",
+  "version": "2.9.1",
+  "description": "Request for Insurance Information",
+  "title": "Request Patient Information",
+  "sectionHeading": "11.3.1 RQI/RPI - Request for Insurance Information (Event I01)",
+  "source": {
+    "pdf": "V291_CH11_PatientReferral_2024SEP.pdf",
+    "pages": "10-11",
+    "table": "RQI^I01^RQI_I01: Request Patient Information"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "I01"
+      ],
+      "eventPrinted": "I01",
+      "pdf": "V291_CH11_PatientReferral_2024SEP.pdf",
+      "page": 10,
+      "table": "RQI^I01^RQI_I01: Request Patient Information",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "I02"
+      ],
+      "eventPrinted": "I02",
+      "pdf": "V291_CH11_PatientReferral_2024SEP.pdf",
+      "page": 12,
+      "table": "RQI^I02^RQI_I01: Request Patient Information",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "I03"
+      ],
+      "eventPrinted": "I03",
+      "pdf": "V291_CH11_PatientReferral_2024SEP.pdf",
+      "page": 14,
+      "table": "RQI^I03^RQI_I01: Request Patient Information",
+      "identicalToPrimary": false
+    },
+    {
+      "events": [
+        "I07"
+      ],
+      "eventPrinted": "I07",
+      "pdf": "V291_CH11_PatientReferral_2024SEP.pdf",
+      "page": 18,
+      "table": "PIN^I07^RQI_I01: Patient Insurance Information",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 10,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 10,
+      "description": "Software segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 10,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "PROVIDER",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 10,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PRD",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 10,
+          "description": "Provider Data",
+          "chapterRef": "11"
+        },
+        {
+          "kind": "segment",
+          "name": "CTD",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 10,
+          "description": "Contact Data",
+          "chapterRef": "11"
+        }
+      ]
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 10,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSP",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 10,
+      "description": "Person Gender and Sex",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 10,
+      "description": "Recorded Gender and Sex",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 10,
+      "description": "Sex Parameter for Clinical Use",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "group",
+      "name": "NEXT_OF_KIN",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 10,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "NK1",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 10,
+          "description": "Next of Kin / Associated Parties",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSP",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 10,
+          "description": "Person Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSR",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 10,
+          "description": "Recorded Gender and Sex",
+          "chapterRef": "3"
+        }
+      ]
+    },
+    {
+      "kind": "group",
+      "name": "GUARANTOR_INSURANCE",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 10,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "GT1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 10,
+          "description": "Guarantor",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "group",
+          "name": "INSURANCE",
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "page": 10,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "IN1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 10,
+              "description": "Insurance",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "IN2",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 10,
+              "description": "Insurance Additional Info",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "IN3",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 10,
+              "description": "Insurance Add'l Info - Cert",
+              "chapterRef": "6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "segment",
+      "name": "NTE",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 11,
+      "description": "Notes and Comments",
+      "chapterRef": "2"
+    }
+  ],
+  "variants": [
+    {
+      "eventPrinted": "I03",
+      "pdf": "V291_CH11_PatientReferral_2024SEP.pdf",
+      "pages": "14-14",
+      "table": "RQI^I03^RQI_I01: Request Patient Information",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MSH",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 14,
+          "description": "Message Header",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "SFT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 14,
+          "description": "Software segment",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "UAC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 14,
+          "description": "User Authentication Credential",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "group",
+          "name": "PROVIDER",
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "page": 14,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PRD",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 14,
+              "description": "Provider Data",
+              "chapterRef": "11"
+            },
+            {
+              "kind": "segment",
+              "name": "CTD",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 14,
+              "description": "Contact Data",
+              "chapterRef": "11"
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "PID",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 14,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSP",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 14,
+          "description": "Person Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSR",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 14,
+          "description": "Recorded Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 14,
+          "description": "Sex Parameter for Clinical Use",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "group",
+          "name": "NEXT_OF_KIN",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 14,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "NK1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 14,
+              "description": "Next of Kin / Associated Parties",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "GSP",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 14,
+              "description": "Person Gender and Sex",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "GSR",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 14,
+              "description": "Recorded Gender and Sex",
+              "chapterRef": "3"
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "GUARANTOR+INSURANCE",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 14,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "GT1",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 14,
+              "description": "Guarantor",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "group",
+              "name": "INSURANCE",
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "page": 14,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "IN1",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 14,
+                  "description": "Insurance",
+                  "chapterRef": "6"
+                },
+                {
+                  "kind": "segment",
+                  "name": "IN2",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": 1,
+                  "page": 14,
+                  "description": "Insurance Additional Info",
+                  "chapterRef": "6"
+                },
+                {
+                  "kind": "segment",
+                  "name": "IN3",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": 1,
+                  "page": 14,
+                  "description": "Insurance Add'l Info - Cert",
+                  "chapterRef": "6"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 14,
+          "description": "Notes and Comments",
+          "chapterRef": "2"
+        }
+      ],
+      "problems": [
+        "group end name GUARANTOR_INSURANCE != begin name GUARANTOR+INSURANCE p14"
+      ]
+    }
+  ]
+}

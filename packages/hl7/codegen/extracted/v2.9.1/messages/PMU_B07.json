@@ -1,0 +1,127 @@
+{
+  "structure": "PMU_B07",
+  "messageType": "PMU",
+  "triggerEvent": "B07",
+  "version": "2.9.1",
+  "description": "Grant Certificate/Permission",
+  "title": "Grant Certificate Message",
+  "sectionHeading": "15.3.8 PMU/ACK – Grant Certificate/Permission (Event B07)",
+  "source": {
+    "pdf": "V291_CH15_PersMngmt_2024SEP.pdf",
+    "pages": "14",
+    "table": "PMU^B07^PMU_B07: Grant Certificate Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "B07"
+      ],
+      "eventPrinted": "B07",
+      "pdf": "V291_CH15_PersMngmt_2024SEP.pdf",
+      "page": 14,
+      "table": "PMU^B07^PMU_B07: Grant Certificate Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 14,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 14,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 14,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 14,
+      "description": "Event Type",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "STF",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 14,
+      "description": "Staff",
+      "chapterRef": "15.4.8"
+    },
+    {
+      "kind": "segment",
+      "name": "PRA",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 14,
+      "description": "Practitioner",
+      "chapterRef": "15.4.6"
+    },
+    {
+      "kind": "group",
+      "name": "CERTIFICATE",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 14,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "CER",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 14,
+          "description": "Certificate",
+          "chapterRef": "15.4.2"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 14,
+          "description": "Participation"
+        },
+        {
+          "kind": "segment",
+          "name": "ROL",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 14,
+          "description": "deprecated as of v2.9",
+          "status": "deprecated",
+          "chapterRef": "15.4.7"
+        }
+      ]
+    }
+  ]
+}

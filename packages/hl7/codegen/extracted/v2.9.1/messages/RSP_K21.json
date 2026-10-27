@@ -1,0 +1,236 @@
+{
+  "structure": "RSP_K21",
+  "messageType": "RSP",
+  "triggerEvent": "K21",
+  "version": "2.9.1",
+  "description": "Segment Pattern Response",
+  "title": "Segment Pattern Response",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+    "pages": "97-98",
+    "table": "RSP^K21^RSP_K21: Segment Pattern Response"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "K21"
+      ],
+      "eventPrinted": "K21",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 97,
+      "table": "RSP^K21^RSP_K21: Segment Pattern Response",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 97,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 97,
+      "description": "Access Restrictions"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 97,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 97,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 97,
+      "description": "Message Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 97,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QAK",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 97,
+      "description": "Query Acknowledgment",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 97,
+      "description": "Query Parameter Definition Segment",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "group",
+      "name": "QUERY_RESPONSE",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 97,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 97,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 97,
+          "description": "Additional Demographics",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSP",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 97,
+          "description": "Person Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSR",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 97,
+          "description": "Recorded Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 97,
+          "description": "Sex Parameter for Clinical Use",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 97,
+          "description": "Access Restrictions",
+          "status": "B",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "group",
+          "name": "NEXT_OF_KIN",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 97,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "NK1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 97,
+              "description": "Next of Kin",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "GSP",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 97,
+              "description": "Person Gender and Sex",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "GSR",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 97,
+              "description": "Recorded Gender and Sex",
+              "chapterRef": "3"
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "QRI",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 98,
+          "description": "Query Response Instances",
+          "chapterRef": "5"
+        }
+      ]
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 98,
+      "description": "Continuation Pointer",
+      "chapterRef": "2"
+    }
+  ]
+}

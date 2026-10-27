@@ -1,0 +1,78 @@
+{
+  "structure": "QBP_O33",
+  "messageType": "QBP",
+  "triggerEvent": "Q33",
+  "version": "2.9.1",
+  "description": "Get Donor Record Candidates",
+  "title": "Get Donor Record Candidates Message",
+  "sectionHeading": "4.16.6 QBP - Get Donor Record Candidates (Event Q33)",
+  "source": {
+    "pdf": "V291_CH04_Orders_2024SEP.pdf",
+    "pages": "165",
+    "table": "QBP^Q33^QBP_O33: Get Donor Record Candidates Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Q33"
+      ],
+      "eventPrinted": "Q33",
+      "pdf": "V291_CH04_Orders_2024SEP.pdf",
+      "page": 165,
+      "table": "QBP^Q33^QBP_O33: Get Donor Record Candidates Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 165,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 165,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 165,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 165,
+      "description": "Query Parameter Definition Segment",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "RCP",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 165,
+      "description": "Response Control Parameters",
+      "chapterRef": "5"
+    }
+  ]
+}

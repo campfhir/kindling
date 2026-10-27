@@ -1,0 +1,200 @@
+{
+  "structure": "ADT_A61",
+  "messageType": "ADT",
+  "triggerEvent": "A61",
+  "version": "2.9.1",
+  "description": "Change Consulting Doctor",
+  "title": "ADT Message",
+  "sectionHeading": "3.3.61 ADT/ACK - Change Consulting Doctor (Event A61)",
+  "source": {
+    "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+    "pages": "109-110",
+    "table": "ADT^A61^ADT_A61: ADT Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A61"
+      ],
+      "eventPrinted": "A61",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 109,
+      "table": "ADT^A61^ADT_A61: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A62"
+      ],
+      "eventPrinted": "A62",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 111,
+      "table": "ADT^A62^ADT_A61: ADT Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 109,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 109,
+      "description": "Access Restrictions",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 109,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 109,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 109,
+      "description": "Event Type",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 109,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PD1",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 109,
+      "description": "Additional Demographics",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSP",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 109,
+      "description": "Person Gender and Sex",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 109,
+      "description": "Recorded Gender and Sex",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 110,
+      "description": "Sex Parameter for Clinical Use",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "ROL",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 110,
+      "description": "Role",
+      "status": "B",
+      "chapterRef": "15"
+    },
+    {
+      "kind": "segment",
+      "name": "PRT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 110,
+      "description": "Participation",
+      "chapterRef": "7"
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 110,
+      "description": "Patient Visit",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "ROL",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 110,
+      "description": "Role",
+      "status": "B",
+      "chapterRef": "15"
+    },
+    {
+      "kind": "segment",
+      "name": "PRT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 110,
+      "description": "Participation",
+      "chapterRef": "7"
+    },
+    {
+      "kind": "segment",
+      "name": "PV2",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 110,
+      "description": "Patient Visit - Additional Info.",
+      "chapterRef": "3"
+    }
+  ]
+}

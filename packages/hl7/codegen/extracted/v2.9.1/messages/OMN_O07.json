@@ -1,0 +1,373 @@
+{
+  "structure": "OMN_O07",
+  "messageType": "OMN",
+  "triggerEvent": "O07",
+  "version": "2.9.1",
+  "description": "Nonstock Requisition Order Message",
+  "title": "Nonstock Requisition Order Message",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH04_Orders_2024SEP.pdf",
+    "pages": "120-121",
+    "table": "OMN^O07^OMN_O07: Nonstock Requisition Order Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "O07"
+      ],
+      "eventPrinted": "O07",
+      "pdf": "V291_CH04_Orders_2024SEP.pdf",
+      "page": 120,
+      "table": "OMN^O07^OMN_O07: Nonstock Requisition Order Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 120,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 120,
+      "description": "Access Restrictions",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 120,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 120,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "NTE",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 120,
+      "description": "Notes and Comments (for Header)",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "PATIENT",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 120,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 120,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 120,
+          "description": "Additional Demographics",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 120,
+          "description": "Participation (for Patient)",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 120,
+          "description": "For backwards compatibility only as of V2.9.",
+          "status": "B",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 120,
+          "description": "Notes and Comments (for Patient ID)",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "group",
+          "name": "PATIENT_VISIT",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 120,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PV1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 120,
+              "description": "Patient Visit",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "PV2",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 120,
+              "description": "Patient Visit – Additional Info",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 120,
+              "description": "Participation (for Patient Visit)",
+              "chapterRef": "7"
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "INSURANCE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 120,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "IN1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 120,
+              "description": "Insurance",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "IN2",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 120,
+              "description": "Insurance Additional Information",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "IN3",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 120,
+              "description": "Insurance Additional Information, Certification",
+              "chapterRef": "6"
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "GT1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 121,
+          "description": "Guarantor",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "AL1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 121,
+          "description": "Allergy Information",
+          "chapterRef": "3"
+        }
+      ]
+    },
+    {
+      "kind": "group",
+      "name": "ORDER",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 121,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "ORC",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 121,
+          "description": "Common Order",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 121,
+          "description": "Participation",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "group",
+          "name": "TIMING",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 121,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "TQ1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 121,
+              "description": "Timing/Quantity",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "segment",
+              "name": "TQ2",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 121,
+              "description": "Timing/Quantity Order Sequence",
+              "chapterRef": "4"
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "RQD",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 121,
+          "description": "Requisition Detail",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "segment",
+          "name": "RQ1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 121,
+          "description": "Requisition Detail-1",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 121,
+          "description": "Notes and Comments (for RQD)",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "group",
+          "name": "OBSERVATION",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 121,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 121,
+              "description": "Observation/Result",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 121,
+              "description": "Participation",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 121,
+              "description": "Notes and Comments (for OBX)",
+              "chapterRef": "2"
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "BLG",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 121,
+          "description": "Billing Segment",
+          "chapterRef": "4"
+        }
+      ]
+    }
+  ]
+}

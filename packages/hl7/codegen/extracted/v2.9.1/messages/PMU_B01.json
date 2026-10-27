@@ -1,0 +1,227 @@
+{
+  "structure": "PMU_B01",
+  "messageType": "PMU",
+  "triggerEvent": "B01",
+  "version": "2.9.1",
+  "description": "Personnel Record Message",
+  "title": "Personnel Record Message",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH15_PersMngmt_2024SEP.pdf",
+    "pages": "4-5",
+    "table": "PMU^B01^PMU_B01: Personnel Record Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "B01"
+      ],
+      "eventPrinted": "B01",
+      "pdf": "V291_CH15_PersMngmt_2024SEP.pdf",
+      "page": 4,
+      "table": "PMU^B01^PMU_B01: Personnel Record Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "B02"
+      ],
+      "eventPrinted": "B02",
+      "pdf": "V291_CH15_PersMngmt_2024SEP.pdf",
+      "page": 5,
+      "table": "PMU^B02^PMU_B01: Personnel Record Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 4,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 4,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 4,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 4,
+      "description": "Event Type",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "STF",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 4,
+      "description": "Staff",
+      "chapterRef": "15.4.8"
+    },
+    {
+      "kind": "segment",
+      "name": "GSP",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 4,
+      "description": "Person Gender and Sex",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 4,
+      "description": "Recorded Gender and Sex",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PRA",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 4,
+      "description": "Practitioner",
+      "chapterRef": "15.4.6"
+    },
+    {
+      "kind": "segment",
+      "name": "ORG",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 4,
+      "description": "Organization",
+      "chapterRef": "15.4.5"
+    },
+    {
+      "kind": "segment",
+      "name": "AFF",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 4,
+      "description": "Affiliation",
+      "chapterRef": "15.4.1"
+    },
+    {
+      "kind": "segment",
+      "name": "LAN",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 4,
+      "description": "Language",
+      "chapterRef": "15.4.4"
+    },
+    {
+      "kind": "segment",
+      "name": "EDU",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 4,
+      "description": "Education",
+      "chapterRef": "15.4.3"
+    },
+    {
+      "kind": "segment",
+      "name": "CER",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 4,
+      "description": "Certificate",
+      "chapterRef": "15.4.2"
+    },
+    {
+      "kind": "group",
+      "name": "NEXT_OF_KIN",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 4,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "NK1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 4,
+          "description": "Next of Kin",
+          "chapterRef": "13"
+        },
+        {
+          "kind": "segment",
+          "name": "GSP",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 4,
+          "description": "Person Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSR",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 4,
+          "description": "Recorded Gender and Sex",
+          "chapterRef": "3"
+        }
+      ]
+    },
+    {
+      "kind": "segment",
+      "name": "PRT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 4,
+      "description": "Participation"
+    },
+    {
+      "kind": "segment",
+      "name": "ROL",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 4,
+      "description": "deprecated as of v2.9",
+      "status": "depreca ted",
+      "chapterRef": "15.4.7"
+    }
+  ]
+}

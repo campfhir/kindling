@@ -1,0 +1,96 @@
+{
+  "structure": "QBP_E03",
+  "messageType": "QBP",
+  "triggerEvent": "E03",
+  "version": "2.9.1",
+  "description": "Query HealthCare Services Invoice",
+  "title": "Query HealthCare Services Invoice",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+    "pages": "12",
+    "table": "QBP^E03^QBP_E03: Query HealthCare Services Invoice"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E03"
+      ],
+      "eventPrinted": "E03",
+      "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+      "page": 12,
+      "table": "QBP^E03^QBP_E03: Query HealthCare Services Invoice",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 12,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 12,
+      "description": "Secondary Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 12,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "choice",
+      "name": "QUERY_INFORMATION",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 12,
+      "alternatives": [
+        {
+          "kind": "group",
+          "name": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 12,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "QPD",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 12,
+              "description": "Query Parameter Definition",
+              "chapterRef": "5"
+            },
+            {
+              "kind": "segment",
+              "name": "RCP",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 12,
+              "description": "Response Control Parameter",
+              "chapterRef": "5"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

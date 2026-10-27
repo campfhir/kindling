@@ -1,0 +1,1247 @@
+{
+  "structure": "ACK",
+  "messageType": "ACK",
+  "triggerEvent": null,
+  "version": "2.9.1",
+  "description": "General Acknowledgment",
+  "title": "General Acknowledgment",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH02_Control_2024SEP.pdf",
+    "pages": "53",
+    "table": "ACK^varies^ACK: General Acknowledgment"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "varies"
+      ],
+      "eventPrinted": "varies",
+      "pdf": "V291_CH02_Control_2024SEP.pdf",
+      "page": 53,
+      "table": "ACK^varies^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A01"
+      ],
+      "eventPrinted": "A01",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 8,
+      "table": "ACK^A01^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A02"
+      ],
+      "eventPrinted": "A02",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 10,
+      "table": "ACK^A02^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A03"
+      ],
+      "eventPrinted": "A03",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 13,
+      "table": "ACK^A03^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A04"
+      ],
+      "eventPrinted": "A04",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 16,
+      "table": "ACK^A04^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A05"
+      ],
+      "eventPrinted": "A05",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 19,
+      "table": "ACK^A05^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A06"
+      ],
+      "eventPrinted": "A06",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 22,
+      "table": "ACK^A06^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A07"
+      ],
+      "eventPrinted": "A07",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 25,
+      "table": "ACK^A07^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A08"
+      ],
+      "eventPrinted": "A08",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 28,
+      "table": "ACK^A08^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A09"
+      ],
+      "eventPrinted": "A09",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 30,
+      "table": "ACK^A09^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A10"
+      ],
+      "eventPrinted": "A10",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 32,
+      "table": "ACK^A10^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A11"
+      ],
+      "eventPrinted": "A11",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 34,
+      "table": "ACK^A11^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A12"
+      ],
+      "eventPrinted": "A12",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 35,
+      "table": "ACK^A12^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A13"
+      ],
+      "eventPrinted": "A13",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 38,
+      "table": "ACK^A13^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A14"
+      ],
+      "eventPrinted": "A14",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 41,
+      "table": "ACK^A14^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A15"
+      ],
+      "eventPrinted": "A15",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 43,
+      "table": "ACK^A15^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A16"
+      ],
+      "eventPrinted": "A16",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 46,
+      "table": "ACK^A16^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A17"
+      ],
+      "eventPrinted": "A17",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 48,
+      "table": "ACK^A17^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A20"
+      ],
+      "eventPrinted": "A20",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 49,
+      "table": "ACK^A20^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A21"
+      ],
+      "eventPrinted": "A21",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 51,
+      "table": "ACK^A21^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A22"
+      ],
+      "eventPrinted": "A22",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 52,
+      "table": "ACK^A22^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A23"
+      ],
+      "eventPrinted": "A23",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 54,
+      "table": "ACK^A23^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A24"
+      ],
+      "eventPrinted": "A24",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 55,
+      "table": "ACK^A24^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A25"
+      ],
+      "eventPrinted": "A25",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 57,
+      "table": "ACK^A25^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A26"
+      ],
+      "eventPrinted": "A26",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 58,
+      "table": "ACK^A26^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A27"
+      ],
+      "eventPrinted": "A27",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 60,
+      "table": "ACK^A27^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A28"
+      ],
+      "eventPrinted": "A28",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 63,
+      "table": "ACK^A28^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A29"
+      ],
+      "eventPrinted": "A29",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 65,
+      "table": "ACK^A29^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A31"
+      ],
+      "eventPrinted": "A31",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 68,
+      "table": "ACK^A31^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A32"
+      ],
+      "eventPrinted": "A32",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 69,
+      "table": "ACK^A32^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A33"
+      ],
+      "eventPrinted": "A33",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 71,
+      "table": "ACK^A33^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A37"
+      ],
+      "eventPrinted": "A37",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 72,
+      "table": "ACK^A37^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A38"
+      ],
+      "eventPrinted": "A38",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 74,
+      "table": "ACK^A38^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A40"
+      ],
+      "eventPrinted": "A40",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 76,
+      "table": "ACK^A40^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A41"
+      ],
+      "eventPrinted": "A41",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 77,
+      "table": "ACK^A41^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A42"
+      ],
+      "eventPrinted": "A42",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 79,
+      "table": "ACK^A42^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A43"
+      ],
+      "eventPrinted": "A43",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 80,
+      "table": "ACK^A43^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A44"
+      ],
+      "eventPrinted": "A44",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 82,
+      "table": "ACK^A44^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A45"
+      ],
+      "eventPrinted": "A45",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 84,
+      "table": "ACK^A45^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A47"
+      ],
+      "eventPrinted": "A47",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 85,
+      "table": "ACK^A47^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A49"
+      ],
+      "eventPrinted": "A49",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 87,
+      "table": "ACK^A49^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A50"
+      ],
+      "eventPrinted": "A50",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 88,
+      "table": "ACK^A50^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A51"
+      ],
+      "eventPrinted": "A51",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 90,
+      "table": "ACK^A51^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A52"
+      ],
+      "eventPrinted": "A52",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 91,
+      "table": "ACK^A52^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A53"
+      ],
+      "eventPrinted": "A53",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 93,
+      "table": "ACK^A53^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A54"
+      ],
+      "eventPrinted": "A54",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 94,
+      "table": "ACK^A54^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A55"
+      ],
+      "eventPrinted": "A55",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 96,
+      "table": "ACK^A55^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A60"
+      ],
+      "eventPrinted": "A60",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 108,
+      "table": "ACK^A60^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A61"
+      ],
+      "eventPrinted": "A61",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 110,
+      "table": "ACK^A61^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A62"
+      ],
+      "eventPrinted": "A62",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 111,
+      "table": "ACK^A62^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Q16"
+      ],
+      "eventPrinted": "Q16",
+      "pdf": "V291_CH05_Queries_2024SEP.pdf",
+      "page": 44,
+      "table": "ACK^Q16^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Q17"
+      ],
+      "eventPrinted": "Q17",
+      "pdf": "V291_CH05_Queries_2024SEP.pdf",
+      "page": 45,
+      "table": "ACK^Q17^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "J01"
+      ],
+      "eventPrinted": "J01",
+      "pdf": "V291_CH05_Queries_2024SEP.pdf",
+      "page": 47,
+      "table": "ACK^J01^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "J02"
+      ],
+      "eventPrinted": "J02",
+      "pdf": "V291_CH05_Queries_2024SEP.pdf",
+      "page": 48,
+      "table": "ACK^J02^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "P01"
+      ],
+      "eventPrinted": "P01",
+      "pdf": "V291_CH06_FinancialMngmt_2024SEP.pdf",
+      "page": 6,
+      "table": "ACK^P01^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "P02"
+      ],
+      "eventPrinted": "P02",
+      "pdf": "V291_CH06_FinancialMngmt_2024SEP.pdf",
+      "page": 7,
+      "table": "ACK^P02^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "P03"
+      ],
+      "eventPrinted": "P03",
+      "pdf": "V291_CH06_FinancialMngmt_2024SEP.pdf",
+      "page": 11,
+      "table": "ACK^P03^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "P05"
+      ],
+      "eventPrinted": "P05",
+      "pdf": "V291_CH06_FinancialMngmt_2024SEP.pdf",
+      "page": 14,
+      "table": "ACK^P05^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "P06"
+      ],
+      "eventPrinted": "P06",
+      "pdf": "V291_CH06_FinancialMngmt_2024SEP.pdf",
+      "page": 15,
+      "table": "ACK^P06^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "P10"
+      ],
+      "eventPrinted": "P10",
+      "pdf": "V291_CH06_FinancialMngmt_2024SEP.pdf",
+      "page": 16,
+      "table": "ACK^P10^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "P11"
+      ],
+      "eventPrinted": "P11",
+      "pdf": "V291_CH06_FinancialMngmt_2024SEP.pdf",
+      "page": 21,
+      "table": "ACK^P11^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "P12"
+      ],
+      "eventPrinted": "P12",
+      "pdf": "V291_CH06_FinancialMngmt_2024SEP.pdf",
+      "page": 22,
+      "table": "ACK^P12^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "R01"
+      ],
+      "eventPrinted": "R01",
+      "pdf": "V291_CH07_Observations_2024SEP.pdf",
+      "page": 12,
+      "table": "ACK^R01^ACK: Observation Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "R30"
+      ],
+      "eventPrinted": "R30",
+      "pdf": "V291_CH07_Observations_2024SEP.pdf",
+      "page": 15,
+      "table": "ACK^R30^ACK: Observation Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "R31"
+      ],
+      "eventPrinted": "R31",
+      "pdf": "V291_CH07_Observations_2024SEP.pdf",
+      "page": 18,
+      "table": "ACK^R31^ACK: Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "R32"
+      ],
+      "eventPrinted": "R32",
+      "pdf": "V291_CH07_Observations_2024SEP.pdf",
+      "page": 20,
+      "table": "ACK^R32^ACK: Observation Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "T01"
+      ],
+      "eventPrinted": "T01",
+      "pdf": "V291_CH09_MedRecords_2024SEP.pdf",
+      "page": 10,
+      "table": "ACK^T01^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "T02"
+      ],
+      "eventPrinted": "T02",
+      "pdf": "V291_CH09_MedRecords_2024SEP.pdf",
+      "page": 12,
+      "table": "ACK^T02^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "T03"
+      ],
+      "eventPrinted": "T03",
+      "pdf": "V291_CH09_MedRecords_2024SEP.pdf",
+      "page": 14,
+      "table": "ACK^T03^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "T04"
+      ],
+      "eventPrinted": "T04",
+      "pdf": "V291_CH09_MedRecords_2024SEP.pdf",
+      "page": 15,
+      "table": "ACK^T04^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "T05"
+      ],
+      "eventPrinted": "T05",
+      "pdf": "V291_CH09_MedRecords_2024SEP.pdf",
+      "page": 17,
+      "table": "ACK^T05^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "T06"
+      ],
+      "eventPrinted": "T06",
+      "pdf": "V291_CH09_MedRecords_2024SEP.pdf",
+      "page": 18,
+      "table": "ACK^T06^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "T07"
+      ],
+      "eventPrinted": "T07",
+      "pdf": "V291_CH09_MedRecords_2024SEP.pdf",
+      "page": 19,
+      "table": "ACK^T07^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "T08"
+      ],
+      "eventPrinted": "T08",
+      "pdf": "V291_CH09_MedRecords_2024SEP.pdf",
+      "page": 21,
+      "table": "ACK^T08^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "T09"
+      ],
+      "eventPrinted": "T09",
+      "pdf": "V291_CH09_MedRecords_2024SEP.pdf",
+      "page": 23,
+      "table": "ACK^T09^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "T10"
+      ],
+      "eventPrinted": "T10",
+      "pdf": "V291_CH09_MedRecords_2024SEP.pdf",
+      "page": 24,
+      "table": "ACK^T10^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "T11"
+      ],
+      "eventPrinted": "T11",
+      "pdf": "V291_CH09_MedRecords_2024SEP.pdf",
+      "page": 26,
+      "table": "ACK^T11^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "S12",
+        "S13",
+        "S14",
+        "S15",
+        "S16",
+        "S17",
+        "S18",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23",
+        "S24",
+        "S26",
+        "S27"
+      ],
+      "eventPrinted": "S12-S24,S26,S27",
+      "pdf": "V291_CH10_Scheduling_2024SEP.pdf",
+      "page": 23,
+      "table": "ACK^S12-S24,S26,S27^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "I07"
+      ],
+      "eventPrinted": "I07",
+      "pdf": "V291_CH11_PatientReferral_2024SEP.pdf",
+      "page": 19,
+      "table": "ACK^I07^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "PC6-PC8"
+      ],
+      "eventPrinted": "PC6-PC8",
+      "pdf": "V291_CH12_PatientCare_2024SEP.pdf",
+      "page": 11,
+      "table": "ACK^PC6-PC8^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "PC1-PC3"
+      ],
+      "eventPrinted": "PC1-PC3",
+      "pdf": "V291_CH12_PatientCare_2024SEP.pdf",
+      "page": 13,
+      "table": "ACK^PC1-PC3^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "PCB",
+        "PCC",
+        "PCD"
+      ],
+      "eventPrinted": "PCB-PCD",
+      "pdf": "V291_CH12_PatientCare_2024SEP.pdf",
+      "page": 16,
+      "table": "ACK^PCB-PCD^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "PCG",
+        "PCH",
+        "PCJ"
+      ],
+      "eventPrinted": "PCG,PCH,PCJ",
+      "pdf": "V291_CH12_PatientCare_2024SEP.pdf",
+      "page": 19,
+      "table": "ACK^PCG,PCH,PCJ^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "U01"
+      ],
+      "eventPrinted": "U01",
+      "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": 16,
+      "table": "ACK^U01^ACK: General Acknowledgement",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "U02"
+      ],
+      "eventPrinted": "U02",
+      "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": 17,
+      "table": "ACK^U02^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "U03"
+      ],
+      "eventPrinted": "U03",
+      "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": 19,
+      "table": "ACK^U03^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "U04"
+      ],
+      "eventPrinted": "U04",
+      "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": 20,
+      "table": "ACK^U04^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "U05"
+      ],
+      "eventPrinted": "U05",
+      "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": 21,
+      "table": "ACK^U05^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "U06"
+      ],
+      "eventPrinted": "U06",
+      "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": 22,
+      "table": "ACK^U06^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "U07"
+      ],
+      "eventPrinted": "U07",
+      "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": 23,
+      "table": "ACK^U07^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "U08"
+      ],
+      "eventPrinted": "U08",
+      "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": 25,
+      "table": "ACK^U08^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "U09"
+      ],
+      "eventPrinted": "U09",
+      "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": 26,
+      "table": "ACK^U09^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "U10"
+      ],
+      "eventPrinted": "U10",
+      "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": 27,
+      "table": "ACK^U10^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "U11"
+      ],
+      "eventPrinted": "U11",
+      "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": 28,
+      "table": "ACK^U11^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "U12"
+      ],
+      "eventPrinted": "U12",
+      "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": 29,
+      "table": "ACK^U12^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "U13"
+      ],
+      "eventPrinted": "U13",
+      "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": 30,
+      "table": "ACK^U13^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "U14"
+      ],
+      "eventPrinted": "U14",
+      "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": 31,
+      "table": "ACK^U14^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "N02"
+      ],
+      "eventPrinted": "N02",
+      "pdf": "V291_CH14_AppMngmt_2024SEP.pdf",
+      "page": 4,
+      "table": "ACK^N02^ACK: Generic Acknowledgement",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "B01"
+      ],
+      "eventPrinted": "B01",
+      "pdf": "V291_CH15_PersMngmt_2024SEP.pdf",
+      "page": 5,
+      "table": "ACK^B01^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "B02"
+      ],
+      "eventPrinted": "B02",
+      "pdf": "V291_CH15_PersMngmt_2024SEP.pdf",
+      "page": 6,
+      "table": "ACK^B02^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "B03"
+      ],
+      "eventPrinted": "B03",
+      "pdf": "V291_CH15_PersMngmt_2024SEP.pdf",
+      "page": 7,
+      "table": "ACK^B03^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "B04"
+      ],
+      "eventPrinted": "B04",
+      "pdf": "V291_CH15_PersMngmt_2024SEP.pdf",
+      "page": 8,
+      "table": "ACK^B04^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "B05"
+      ],
+      "eventPrinted": "B05",
+      "pdf": "V291_CH15_PersMngmt_2024SEP.pdf",
+      "page": 10,
+      "table": "ACK^B05^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "B06"
+      ],
+      "eventPrinted": "B06",
+      "pdf": "V291_CH15_PersMngmt_2024SEP.pdf",
+      "page": 11,
+      "table": "ACK^B06^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "B07"
+      ],
+      "eventPrinted": "B07",
+      "pdf": "V291_CH15_PersMngmt_2024SEP.pdf",
+      "page": 15,
+      "table": "ACK^B07^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "B08"
+      ],
+      "eventPrinted": "B08",
+      "pdf": "V291_CH15_PersMngmt_2024SEP.pdf",
+      "page": 16,
+      "table": "ACK^B08^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "S28"
+      ],
+      "eventPrinted": "S28",
+      "pdf": "V291_CH17_MaterialsMngmt_2024SEP.pdf",
+      "page": 38,
+      "table": "ACK^S28^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "S29"
+      ],
+      "eventPrinted": "S29",
+      "pdf": "V291_CH17_MaterialsMngmt_2024SEP.pdf",
+      "page": 40,
+      "table": "ACK^S29^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "S30"
+      ],
+      "eventPrinted": "S30",
+      "pdf": "V291_CH17_MaterialsMngmt_2024SEP.pdf",
+      "page": 41,
+      "table": "ACK^S30^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "S31"
+      ],
+      "eventPrinted": "S31",
+      "pdf": "V291_CH17_MaterialsMngmt_2024SEP.pdf",
+      "page": 43,
+      "table": "ACK^S31^ACK: Anti-Microbial Device Data Request Response",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "S32"
+      ],
+      "eventPrinted": "S32",
+      "pdf": "V291_CH17_MaterialsMngmt_2024SEP.pdf",
+      "page": 44,
+      "table": "ACK^S32^ACK: Anti -Microbial Device Cycle Data Request Response",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "S33"
+      ],
+      "eventPrinted": "S33",
+      "pdf": "V291_CH17_MaterialsMngmt_2024SEP.pdf",
+      "page": 46,
+      "table": "ACK^S33^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "S34"
+      ],
+      "eventPrinted": "S34",
+      "pdf": "V291_CH17_MaterialsMngmt_2024SEP.pdf",
+      "page": 48,
+      "table": "ACK^S34^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "S35"
+      ],
+      "eventPrinted": "S35",
+      "pdf": "V291_CH17_MaterialsMngmt_2024SEP.pdf",
+      "page": 49,
+      "table": "ACK^S35^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "S36"
+      ],
+      "eventPrinted": "S36",
+      "pdf": "V291_CH17_MaterialsMngmt_2024SEP.pdf",
+      "page": 50,
+      "table": "ACK^S36^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "S37"
+      ],
+      "eventPrinted": "S37",
+      "pdf": "V291_CH17_MaterialsMngmt_2024SEP.pdf",
+      "page": 51,
+      "table": "ACK^S37^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 53,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 53,
+      "description": "Software segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 53,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 53,
+      "description": "Message Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 53,
+      "description": "Error",
+      "chapterRef": "2"
+    }
+  ],
+  "ackTablesInOtherChapters": 115
+}

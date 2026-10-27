@@ -1,0 +1,97 @@
+{
+  "structure": "MFN_M17",
+  "messageType": "MFN",
+  "triggerEvent": "M17",
+  "version": "2.9.1",
+  "description": "Master Files Query [WITHDRAWN]",
+  "title": "Master File Notification - DRG",
+  "sectionHeading": "8.4.4 MFQ/MFR - Master Files Query [WITHDRAWN] (Event M01 -M17)",
+  "source": {
+    "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+    "pages": "118",
+    "table": "MFN^M17^MFN_M17: Master File Notification - DRG"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M17"
+      ],
+      "eventPrinted": "M17",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 118,
+      "table": "MFN^M17^MFN_M17: Master File Notification - DRG",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 118,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 118,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 118,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 118,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "group",
+      "name": "MF_DRG",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 118,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 118,
+          "description": "Master File Entry",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "DMI",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 118,
+          "description": "DRG Master",
+          "chapterRef": "8"
+        }
+      ]
+    }
+  ]
+}

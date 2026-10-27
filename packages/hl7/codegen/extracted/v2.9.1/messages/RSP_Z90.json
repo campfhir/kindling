@@ -1,0 +1,341 @@
+{
+  "structure": "RSP_Z90",
+  "messageType": "RSP",
+  "triggerEvent": "Z90",
+  "version": "2.9.1",
+  "description": "Response Grammar: Pharmacy Information Comprehensive",
+  "title": "Response Grammar: Pharmacy Information Comprehensive",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH05_Queries_2024SEP.pdf",
+    "pages": "83-84",
+    "table": "RSP^Z90^RSP_Z90: Response Grammar: Pharmacy Information Comprehensive"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Z90"
+      ],
+      "eventPrinted": "Z90",
+      "pdf": "V291_CH05_Queries_2024SEP.pdf",
+      "page": 83,
+      "table": "RSP^Z90^RSP_Z90: Response Grammar: Pharmacy Information Comprehensive",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 83,
+      "description": "Message Header",
+      "chapterRef": "2.15.9"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 83,
+      "description": "Software Segment",
+      "chapterRef": "2.15.12"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 83,
+      "description": "User Authentication Credential",
+      "chapterRef": "2.14.13"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 83,
+      "description": "Message Acknowledgement",
+      "chapterRef": "2.15.8"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 83,
+      "description": "Error",
+      "chapterRef": "2.15.5"
+    },
+    {
+      "kind": "segment",
+      "name": "QAK",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 83,
+      "description": "Query Acknowledgement",
+      "chapterRef": "5.4.2"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 83,
+      "description": "Query Parameter Definition",
+      "chapterRef": "5.4.4"
+    },
+    {
+      "kind": "segment",
+      "name": "RCP",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 83,
+      "description": "Response Control Parameter",
+      "chapterRef": "5.4.6"
+    },
+    {
+      "kind": "group",
+      "name": "QUERY_RESPONSE",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 83,
+      "items": [
+        {
+          "kind": "group",
+          "name": "PATIENT",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 83,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PID",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 83,
+              "description": "Patient Identification",
+              "chapterRef": "3.4.2 ."
+            },
+            {
+              "kind": "segment",
+              "name": "PD1",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 84,
+              "description": "Additional Demographics",
+              "chapterRef": "3.4.10"
+            },
+            {
+              "kind": "segment",
+              "name": "NK1",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 84,
+              "description": "Next of Kin/Associated Parties",
+              "chapterRef": "3.4.5"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 84,
+              "description": "Notes and Comments (for PID)",
+              "chapterRef": "2.15.10"
+            },
+            {
+              "kind": "group",
+              "name": "VISIT",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 84,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "PV1",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 84,
+                  "description": "Patient Visit",
+                  "chapterRef": "3.4.3"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PV2",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": 1,
+                  "page": 84,
+                  "description": "Patient Visit – Additional Info",
+                  "chapterRef": "3.4.4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "COMMON_ORDER",
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "page": 84,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "ORC",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 84,
+              "description": "Common Order",
+              "chapterRef": "4.5.1"
+            },
+            {
+              "kind": "group",
+              "name": "TIMING",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 84,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "TQ1",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 84,
+                  "description": "Timing/Quantity",
+                  "chapterRef": "4.5.4"
+                },
+                {
+                  "kind": "segment",
+                  "name": "TQ2",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 84,
+                  "description": "Timing/Quantity Order Sequence",
+                  "chapterRef": "4.5.5"
+                }
+              ]
+            },
+            {
+              "kind": "segment",
+              "name": "OBR",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 84,
+              "description": "Observations Report ID",
+              "chapterRef": "4.5.3"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 84,
+              "description": "Notes and Comments (for ORC/OBR)",
+              "chapterRef": "2.15.10"
+            },
+            {
+              "kind": "segment",
+              "name": "CTD",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 84,
+              "description": "Contact Data",
+              "chapterRef": "11.6.4"
+            },
+            {
+              "kind": "group",
+              "name": "OBSERVATION",
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "page": 84,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "OBX",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": 1,
+                  "page": 84,
+                  "description": "Observation/Result",
+                  "chapterRef": "7.4.2"
+                },
+                {
+                  "kind": "segment",
+                  "name": "NTE",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 84,
+                  "description": "Notes and Comments (for OBX)",
+                  "chapterRef": "2.15.10"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "SPECIMEN",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 84,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "SPM",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 84,
+              "description": "Specimen",
+              "chapterRef": "7.4.3"
+            },
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 84,
+              "description": "Observation Related to Specimen",
+              "chapterRef": "7.4.2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 84,
+      "description": "Continuation Pointer",
+      "chapterRef": "2.15.4"
+    }
+  ]
+}

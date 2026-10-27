@@ -1,0 +1,293 @@
+{
+  "structure": "ORG_O20",
+  "messageType": "ORG",
+  "triggerEvent": "O20",
+  "version": "2.9.1",
+  "description": "General Clinical Order Acknowledgment Message",
+  "title": "General Clinical Order Acknowledgment Message",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH04_Orders_2024SEP.pdf",
+    "pages": "11-12",
+    "table": "ORG^O20^ORG_O20: General Clinical Order Acknowledgment Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "O20"
+      ],
+      "eventPrinted": "O20",
+      "pdf": "V291_CH04_Orders_2024SEP.pdf",
+      "page": 11,
+      "table": "ORG^O20^ORG_O20: General Clinical Order Acknowledgment Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 11,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 11,
+      "description": "Message Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 11,
+      "description": "Access Restrictions",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 11,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 11,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 11,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "NTE",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 11,
+      "description": "Notes and Comments (for Header)",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "RESPONSE",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 11,
+      "items": [
+        {
+          "kind": "group",
+          "name": "PATIENT",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 11,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PID",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 11,
+              "description": "Patient Identification",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 11,
+              "description": "Notes and Comments (for Patient ID)",
+              "chapterRef": "2"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 11,
+              "description": "Participation (for Patient)",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "ARV",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 11,
+              "description": "For backwards compatibility only as of V2.9.",
+              "status": "B",
+              "chapterRef": "3"
+            }
+          ]
+        },
+        {
+          "kind": "group",
+          "name": "ORDER",
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "page": 11,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "ORC",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 11,
+              "description": "Common Order",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 11,
+              "description": "Participation",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "group",
+              "name": "TIMING",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 11,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "TQ1",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 12,
+                  "description": "Timing/Quantity",
+                  "chapterRef": "4"
+                },
+                {
+                  "kind": "segment",
+                  "name": "TQ2",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 12,
+                  "description": "Timing/Quantity Order Sequence",
+                  "chapterRef": "4"
+                }
+              ]
+            },
+            {
+              "kind": "group",
+              "name": "OBSERVATION_GROUP",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 12,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "OBR",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 12,
+                  "description": "Observation",
+                  "chapterRef": "4"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 12,
+                  "description": "Participation (for Order)",
+                  "chapterRef": "7"
+                },
+                {
+                  "kind": "segment",
+                  "name": "NTE",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 12,
+                  "description": "Notes and Comments (for Detail)",
+                  "chapterRef": "2"
+                }
+              ]
+            },
+            {
+              "kind": "segment",
+              "name": "CTI",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 12,
+              "description": "Clinical Trial Identification",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "group",
+              "name": "SPECIMEN",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 12,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "SPM",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 12,
+                  "description": "Specimen",
+                  "chapterRef": "7"
+                },
+                {
+                  "kind": "segment",
+                  "name": "SAC",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 12,
+                  "description": "Specimen Container Details",
+                  "chapterRef": "13"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

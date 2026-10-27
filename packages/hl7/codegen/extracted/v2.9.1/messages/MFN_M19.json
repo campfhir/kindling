@@ -1,0 +1,163 @@
+{
+  "structure": "MFN_M19",
+  "messageType": "MFN",
+  "triggerEvent": "M19",
+  "version": "2.9.1",
+  "description": "Master File Supply Item Contract",
+  "title": "Master File Supply Item Contract",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+    "pages": "121-122",
+    "table": "MFN^M19^MFN_M19: Master File Supply Item Contract"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M19"
+      ],
+      "eventPrinted": "M19",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 121,
+      "table": "MFN^M19^MFN_M19: Master File Supply Item Contract",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 121,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 121,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 121,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 121,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "group",
+      "name": "CONTRACT_RECORD",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 121,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 121,
+          "description": "Master File Entry",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "CTR",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 122,
+          "description": "Supply Item Contract",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 122,
+          "description": "Notes for CTR"
+        },
+        {
+          "kind": "group",
+          "name": "MATERIAL_ITEM_RECORD",
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "page": 122,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "ITM",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 122,
+              "description": "Material Item",
+              "chapterRef": "17"
+            },
+            {
+              "kind": "group",
+              "name": "PURCHASING_VENDOR",
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "page": 122,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "VND",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 122,
+                  "description": "Purchasing Vendor",
+                  "chapterRef": "17"
+                },
+                {
+                  "kind": "group",
+                  "name": "PACKAGING",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 122,
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "PKG",
+                      "usage": null,
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "page": 122,
+                      "description": "Packaging",
+                      "chapterRef": "17"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

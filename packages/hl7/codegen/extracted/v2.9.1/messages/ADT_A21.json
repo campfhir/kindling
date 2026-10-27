@@ -1,0 +1,441 @@
+{
+  "structure": "ADT_A21",
+  "messageType": "ADT",
+  "triggerEvent": "A21",
+  "version": "2.9.1",
+  "description": "Patient Goes on a Leave of Absence",
+  "title": "ADT Message",
+  "sectionHeading": "3.3.21 ADT/ACK - Patient Goes on a Leave of Absence (Event A21)",
+  "source": {
+    "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+    "pages": "50",
+    "table": "ADT^A21^ADT_A21: ADT Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A21"
+      ],
+      "eventPrinted": "A21",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 50,
+      "table": "ADT^A21^ADT_A21: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A22"
+      ],
+      "eventPrinted": "A22",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 51,
+      "table": "ADT^A22^ADT_A21: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A23"
+      ],
+      "eventPrinted": "A23",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 53,
+      "table": "ADT^A23^ADT_A21: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A25"
+      ],
+      "eventPrinted": "A25",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 56,
+      "table": "ADT^A25^ADT_A21: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A26"
+      ],
+      "eventPrinted": "A26",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 57,
+      "table": "ADT^A26^ADT_A21: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A27"
+      ],
+      "eventPrinted": "A27",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 59,
+      "table": "ADT^A27^ADT_A21: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A29"
+      ],
+      "eventPrinted": "A29",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 64,
+      "table": "ADT^A29^ADT_A21: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A32"
+      ],
+      "eventPrinted": "A32",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 68,
+      "table": "ADT^A32^ADT_A21: ADT Message",
+      "identicalToPrimary": false
+    },
+    {
+      "events": [
+        "A33"
+      ],
+      "eventPrinted": "A33",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 70,
+      "table": "ADT^A33^ADT_A21: ADT Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 50,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 50,
+      "description": "Access Restrictions",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 50,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 50,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 50,
+      "description": "Event Type",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 50,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PD1",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 50,
+      "description": "Additional Demographics",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSP",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 50,
+      "description": "Person Gender and Sex",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 50,
+      "description": "Recorded Gender and Sex",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 50,
+      "description": "Sex Parameter for Clinical Use",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 50,
+      "description": "Patient Visit",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PV2",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 50,
+      "description": "Patient Visit - Additional Info.",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "DB1",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 50,
+      "description": "Disability Information",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "group",
+      "name": "OBSERVATION",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 50,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "OBX",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 50,
+          "description": "Observation/Result",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 50,
+          "description": "Participation",
+          "chapterRef": "7"
+        }
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "eventPrinted": "A32",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "pages": "68-69",
+      "table": "ADT^A32^ADT_A21: ADT Message",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MSH",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 68,
+          "description": "Message Header",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 68,
+          "description": "Access Restrictions",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "SFT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 68,
+          "description": "Software Segment",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "UAC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 69,
+          "description": "User Authentication Credential",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "EVN",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 69,
+          "description": "Event Type",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PID",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 69,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 69,
+          "description": "Additional Demographics",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSP",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 69,
+          "description": "Person Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSR",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 69,
+          "description": "Recorded Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 69,
+          "description": "Sex Parameter for Clinical Use",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PV1",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 69,
+          "description": "Patient Visit",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PV2",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 69,
+          "description": "Patient Visit - Additional Info.",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "DB1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 69,
+          "description": "Disability Information",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "group",
+          "name": "OBSERVATION",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 69,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 69,
+              "description": "Observation/Result",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": null,
+              "maxOccurs": null,
+              "page": 69,
+              "description": "Participation",
+              "chapterRef": "7",
+              "bracketMismatch": true,
+              "notation": "[{ PRT }}"
+            }
+          ]
+        }
+      ],
+      "problems": [
+        "bracket mismatch: opener '[' closed by '}' p69 row '[{ PRT }}'"
+      ]
+    }
+  ]
+}

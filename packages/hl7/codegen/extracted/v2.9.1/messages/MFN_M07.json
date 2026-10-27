@@ -1,0 +1,107 @@
+{
+  "structure": "MFN_M07",
+  "messageType": "MFN",
+  "triggerEvent": "M07",
+  "version": "2.9.1",
+  "description": "Clinical Trials Master File Message",
+  "title": "Master File Notification – Clinical Study without Phases but with Schedules",
+  "sectionHeading": "8.11.1 MFN/MFK - Clinical Trials Master File Message (Event M06 -M07)",
+  "source": {
+    "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+    "pages": "106-107",
+    "table": "MFN^M07^MFN_M07: Master File Notification – Clinical Study without Phases but with Schedules"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M07"
+      ],
+      "eventPrinted": "M07",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 106,
+      "table": "MFN^M07^MFN_M07: Master File Notification – Clinical Study without Phases but with Schedules",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 106,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 106,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 106,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 106,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "group",
+      "name": "MF_CLIN_STUDY_SCHED",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 107,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 107,
+          "description": "Master File Entry",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "CM0",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 107,
+          "description": "Clinical Study Master",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "CM2",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 107,
+          "description": "Clinical Study Schedule",
+          "chapterRef": "8"
+        }
+      ]
+    }
+  ]
+}

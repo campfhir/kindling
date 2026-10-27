@@ -1,0 +1,98 @@
+{
+  "structure": "QSB_Q16",
+  "messageType": "QSB",
+  "triggerEvent": "Q16",
+  "version": "2.9.1",
+  "description": "Create subscription",
+  "title": "Create Subscription",
+  "sectionHeading": "5.3.4 QSB – Create subscription (Event Q16)",
+  "source": {
+    "pdf": "V291_CH05_Queries_2024SEP.pdf",
+    "pages": "43",
+    "table": "QSB^Q16^QSB_Q16: Create Subscription"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Q16"
+      ],
+      "eventPrinted": "Q16",
+      "pdf": "V291_CH05_Queries_2024SEP.pdf",
+      "page": 43,
+      "table": "QSB^Q16^QSB_Q16: Create Subscription",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Z83"
+      ],
+      "eventPrinted": "Z83",
+      "pdf": "V291_CH05_Queries_2024SEP.pdf",
+      "page": 65,
+      "table": "QSB^Z83^QSB_Q16: Query Grammar: QSB Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 43,
+      "description": "Message Header",
+      "chapterRef": "2.15.9"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 43,
+      "description": "Software Segment",
+      "chapterRef": "2.15.12"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 43,
+      "description": "User Authentication Credential",
+      "chapterRef": "2.14.13"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 43,
+      "description": "Query Parameter Definition",
+      "chapterRef": "5.5.4"
+    },
+    {
+      "kind": "segment",
+      "name": "RCP",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 43,
+      "description": "Response Control Parameters",
+      "chapterRef": "5.5.6"
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 43,
+      "description": "Continuation Pointer",
+      "chapterRef": "2.15.4 ."
+    }
+  ]
+}

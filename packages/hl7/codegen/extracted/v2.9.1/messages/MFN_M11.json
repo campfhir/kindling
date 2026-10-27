@@ -1,0 +1,146 @@
+{
+  "structure": "MFN_M11",
+  "messageType": "MFN",
+  "triggerEvent": "M11",
+  "version": "2.9.1",
+  "description": "Master File Notification - Test/Calculated Observations",
+  "title": "Master File Notification - Test/Calculated Observations",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+    "pages": "25",
+    "table": "MFN^M11^MFN_M11: Master File Notification - Test/Calculated Observations"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M11"
+      ],
+      "eventPrinted": "M11",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 25,
+      "table": "MFN^M11^MFN_M11: Master File Notification - Test/Calculated Observations",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 25,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 25,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 25,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 25,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "group",
+      "name": "MF_TEST_CALCULATED",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 25,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 25,
+          "description": "Master File Entry",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "OM1",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 25,
+          "description": "General Segment (Fields That Apply to Most Observations)",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "OMC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 25,
+          "description": "Supporting Clinical Information",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 25,
+          "description": "Participation",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "group",
+          "name": "MF_TEST_CALC_DETAIL",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 25,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OM6",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 25,
+              "description": "Observations Calculated from Other Observations",
+              "chapterRef": "8"
+            },
+            {
+              "kind": "segment",
+              "name": "OM2",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 25,
+              "description": "Numeric Observation Segment",
+              "chapterRef": "8"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

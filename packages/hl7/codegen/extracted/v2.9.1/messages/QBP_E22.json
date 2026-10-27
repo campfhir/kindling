@@ -1,0 +1,96 @@
+{
+  "structure": "QBP_E22",
+  "messageType": "QBP",
+  "triggerEvent": "E22",
+  "version": "2.9.1",
+  "description": "Query Authorization Request",
+  "title": "Query Authorization Request",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+    "pages": "28",
+    "table": "QBP^E22^QBP_E22: Query Authorization Request"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E22"
+      ],
+      "eventPrinted": "E22",
+      "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+      "page": 28,
+      "table": "QBP^E22^QBP_E22: Query Authorization Request",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 28,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 28,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 28,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "choice",
+      "name": "QUERY",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 28,
+      "alternatives": [
+        {
+          "kind": "group",
+          "name": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 28,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "QPD",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 28,
+              "description": "Query Parameter Definition",
+              "chapterRef": "5"
+            },
+            {
+              "kind": "segment",
+              "name": "RCP",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 28,
+              "description": "Response Control Parameter",
+              "chapterRef": "5"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

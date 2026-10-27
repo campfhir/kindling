@@ -1,0 +1,78 @@
+{
+  "structure": "INR_U14",
+  "messageType": "INR",
+  "triggerEvent": "U14",
+  "version": "2.9.1",
+  "description": "Automated Equipment Inventory Request",
+  "title": "Inventory Request Message",
+  "sectionHeading": "13.2.14 INR/ACK – Automated Equipment Inventory Request (Event U14)",
+  "source": {
+    "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+    "pages": "31",
+    "table": "INR^U14^INR_U14: Inventory Request Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "U14"
+      ],
+      "eventPrinted": "U14",
+      "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": 31,
+      "table": "INR^U14^INR_U14: Inventory Request Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 31,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 31,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 31,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EQU",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 31,
+      "description": "Equipment Detail",
+      "chapterRef": "13"
+    },
+    {
+      "kind": "segment",
+      "name": "INV",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 31,
+      "description": "Inventory Detail",
+      "chapterRef": "13"
+    }
+  ]
+}

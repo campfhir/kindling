@@ -1,0 +1,205 @@
+{
+  "structure": "MFN_M18",
+  "messageType": "MFN",
+  "triggerEvent": "M18",
+  "version": "2.9.1",
+  "description": "Master File Notification – Test/Observation (Payer)",
+  "title": "Master File Notification – Test/Observation (Payer)",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+    "pages": "28-29",
+    "table": "MFN^M18^MFN_M18: Master File Notification – Test/Observation (Payer)"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M18"
+      ],
+      "eventPrinted": "M18",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 28,
+      "table": "MFN^M18^MFN_M18: Master File Notification – Test/Observation (Payer)",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 28,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 29,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 29,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 29,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "group",
+      "name": "MF_PAYER",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 29,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 29,
+          "description": "Master File Entry",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "group",
+          "name": "PAYER_MF_ENTRY",
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "page": 29,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PM1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 29,
+              "description": "Payer Master File",
+              "chapterRef": "8"
+            },
+            {
+              "kind": "group",
+              "name": "PAYER_MF_COVERAGE",
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "page": 29,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "MCP",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 29,
+                  "description": "Master File Coverage Policy",
+                  "chapterRef": "8"
+                },
+                {
+                  "kind": "segment",
+                  "name": "DPS",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 29,
+                  "description": "Diagnosis and Procedure",
+                  "chapterRef": "8"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 29,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 29,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 29,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 29,
+      "description": "Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 29,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 29,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "segment",
+      "name": "MFA",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 29,
+      "description": "Master File ACK segment",
+      "chapterRef": "8"
+    }
+  ]
+}

@@ -1,0 +1,317 @@
+{
+  "structure": "RTB_K13",
+  "messageType": "RTB",
+  "triggerEvent": "K13",
+  "version": "2.9.1",
+  "description": "Table Based Response",
+  "title": "Table Based Response",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH05_Queries_2024SEP.pdf",
+    "pages": "41",
+    "table": "RTB^K13^RTB_K13: Table Based Response"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Znn"
+      ],
+      "eventPrinted": "Znn",
+      "pdf": "V291_CH05_Queries_2024SEP.pdf",
+      "page": 28,
+      "table": "RTB^Znn^RTB_K13: Response Grammar: RTB Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "K13"
+      ],
+      "eventPrinted": "K13",
+      "pdf": "V291_CH05_Queries_2024SEP.pdf",
+      "page": 41,
+      "table": "RTB^K13^RTB_K13: Table Based Response",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Z92"
+      ],
+      "eventPrinted": "Z92",
+      "pdf": "V291_CH05_Queries_2024SEP.pdf",
+      "page": 87,
+      "table": "RTB^Z92^RTB_K13: Response Grammar: Who Am I",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Z94"
+      ],
+      "eventPrinted": "Z94",
+      "pdf": "V291_CH05_Queries_2024SEP.pdf",
+      "page": 90,
+      "table": "RTB^Z94^RTB_K13: Response Grammar: Who Am I",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Z96"
+      ],
+      "eventPrinted": "Z96",
+      "pdf": "V291_CH05_Queries_2024SEP.pdf",
+      "page": 94,
+      "table": "RTB^Z96^RTB_K13: Response Grammar: Who Am I",
+      "identicalToPrimary": false
+    },
+    {
+      "events": [
+        "Z78"
+      ],
+      "eventPrinted": "Z78",
+      "pdf": "V291_CH05_Queries_2024SEP.pdf",
+      "page": 104,
+      "table": "RTB^Z78^RTB_K13: Response Grammar: Who Am I",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Z76"
+      ],
+      "eventPrinted": "Z76",
+      "pdf": "V291_CH05_Queries_2024SEP.pdf",
+      "page": 107,
+      "table": "RTB^Z76^RTB_K13: Response Grammar: Who Am I",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 41,
+      "description": "Message Header",
+      "chapterRef": "2.15.9"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 41,
+      "description": "Software Segment",
+      "chapterRef": "2.15.12"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 41,
+      "description": "User Authentication Credential",
+      "chapterRef": "2.14.13"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 41,
+      "description": "Message Acknowledgement",
+      "chapterRef": "2.15.8"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 41,
+      "description": "Error",
+      "chapterRef": "2.15.5"
+    },
+    {
+      "kind": "segment",
+      "name": "QAK",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 41,
+      "description": "Query Acknowledgement",
+      "chapterRef": "5.4.2"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 41,
+      "description": "Query Definition Segment",
+      "chapterRef": "5.5.4"
+    },
+    {
+      "kind": "group",
+      "name": "ROW_DEFINITION",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 41,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "RDF",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 41,
+          "description": "Table Row Definition Segment",
+          "chapterRef": "5.5.5.6"
+        },
+        {
+          "kind": "segment",
+          "name": "RDT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 41,
+          "description": "Table Row Data Segment",
+          "chapterRef": "5.5.6"
+        }
+      ]
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 41,
+      "description": "Continuation Pointer",
+      "chapterRef": "2.15.4"
+    }
+  ],
+  "variants": [
+    {
+      "eventPrinted": "Z96",
+      "pdf": "V291_CH05_Queries_2024SEP.pdf",
+      "pages": "94-94",
+      "table": "RTB^Z96^RTB_K13: Response Grammar: Who Am I",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MSH",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 94,
+          "description": "Message Header",
+          "chapterRef": "2.15.9"
+        },
+        {
+          "kind": "segment",
+          "name": "SFT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 94,
+          "description": "Software Segment",
+          "chapterRef": "2.15.12"
+        },
+        {
+          "kind": "segment",
+          "name": "UAC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 94,
+          "description": "User Authentication Credential",
+          "chapterRef": "2.14.13"
+        },
+        {
+          "kind": "segment",
+          "name": "MSA",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 94,
+          "description": "Message Acknowledgement",
+          "chapterRef": "2.15.8"
+        },
+        {
+          "kind": "segment",
+          "name": "ERR",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 94,
+          "description": "Error",
+          "chapterRef": "2.15.5"
+        },
+        {
+          "kind": "segment",
+          "name": "QAK",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 94,
+          "description": "Query Acknowledgement",
+          "chapterRef": "5.4.2"
+        },
+        {
+          "kind": "segment",
+          "name": "QPD",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 94,
+          "description": "Query Parameter Definition",
+          "chapterRef": "5.4.4"
+        },
+        {
+          "kind": "group",
+          "name": "ROW_DEFINITION",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 94,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "RDF",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 94,
+              "description": "Table Row Definition Segment",
+              "chapterRef": "5.4.7"
+            },
+            {
+              "kind": "segment",
+              "name": "RDT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 94,
+              "description": "Table Row Data Segment",
+              "chapterRef": "5.4.8"
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "DSC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 94,
+          "description": "Continuation Pointer",
+          "chapterRef": "2.15.4"
+        }
+      ],
+      "problems": []
+    }
+  ]
+}

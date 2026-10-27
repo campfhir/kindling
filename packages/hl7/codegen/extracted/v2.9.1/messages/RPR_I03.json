@@ -1,0 +1,176 @@
+{
+  "structure": "RPR_I03",
+  "messageType": "RPR",
+  "triggerEvent": "I03",
+  "version": "2.9.1",
+  "description": "Request/Receipt of Patient Selection List",
+  "title": "Return Patient List",
+  "sectionHeading": "11.3.3 RQI/RPR - Request/Receipt of Patient Selection List (Event I03 )",
+  "source": {
+    "pdf": "V291_CH11_PatientReferral_2024SEP.pdf",
+    "pages": "15",
+    "table": "RPR^I03^RPR_I03: Return Patient List"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "I03"
+      ],
+      "eventPrinted": "I03",
+      "pdf": "V291_CH11_PatientReferral_2024SEP.pdf",
+      "page": 15,
+      "table": "RPR^I03^RPR_I03: Return Patient List",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 15,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 15,
+      "description": "Software segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 15,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 15,
+      "description": "Message Acknowledgment",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "group",
+      "name": "PROVIDER",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 15,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PRD",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 15,
+          "description": "Provider Data",
+          "chapterRef": "11"
+        },
+        {
+          "kind": "segment",
+          "name": "CTD",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 15,
+          "description": "Contact Data",
+          "chapterRef": "11"
+        }
+      ]
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 15,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSP",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 15,
+      "description": "Person Gender and Sex",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 15,
+      "description": "Recorded Gender and Sex",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 15,
+      "description": "Sex Parameter for Clinical Use",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "group",
+      "name": "NEXT_OF_KIN",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 15,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "NK1",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 15,
+          "description": "Next of Kin / Associated Parties",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSP",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 15,
+          "description": "Person Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSR",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 15,
+          "description": "Recorded Gender and Sex",
+          "chapterRef": "3"
+        }
+      ]
+    }
+  ]
+}

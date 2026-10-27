@@ -1,0 +1,88 @@
+{
+  "structure": "ORA_R41",
+  "messageType": "ORA",
+  "triggerEvent": "R41",
+  "version": "2.9.1",
+  "description": "Observation Report Alert Acknowledgement",
+  "title": "Observation Report Alert Acknowledgement",
+  "sectionHeading": "7.3.13 ORA – Observation Report Alert Acknowledgement (Event R41)",
+  "source": {
+    "pdf": "V291_CH07_Observations_2024SEP.pdf",
+    "pages": "38",
+    "table": "ORA^R41^ORA_R41: Observation Report Alert Acknowledgement"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "R41"
+      ],
+      "eventPrinted": "R41",
+      "pdf": "V291_CH07_Observations_2024SEP.pdf",
+      "page": 38,
+      "table": "ORA^R41^ORA_R41: Observation Report Alert Acknowledgement",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 38,
+      "description": "Message Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 38,
+      "description": "Software segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 38,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 38,
+      "description": "Message Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 38,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "PRT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 38,
+      "description": "Participation (Acknowledging User)",
+      "chapterRef": "7"
+    }
+  ]
+}

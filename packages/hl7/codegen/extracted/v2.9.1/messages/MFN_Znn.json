@@ -1,0 +1,96 @@
+{
+  "structure": "MFN_Znn",
+  "messageType": "MFN",
+  "triggerEvent": "M14",
+  "version": "2.9.1",
+  "description": "Master File Notification - Site Defined",
+  "title": "Master File Notification - Site Defined",
+  "sectionHeading": "8.4.3 MFN/MFK - Master File Notification - Site Defined (Event M14)",
+  "source": {
+    "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+    "pages": "8-9",
+    "table": "MFN^M14^MFN_Znn: Master File Notification - Site Defined"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M14"
+      ],
+      "eventPrinted": "M14",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 8,
+      "table": "MFN^M14^MFN_Znn: Master File Notification - Site Defined",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 8,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 8,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 8,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 8,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "group",
+      "name": "MF_SITE_DEFINED",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 8,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 9,
+          "description": "Master File Entry",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "placeholder",
+          "text": "...",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 9,
+          "description": "One or more HL7 and/or Z -segments carrying the data for the entry identified in the MFE segment",
+          "notation": "..."
+        }
+      ]
+    }
+  ]
+}

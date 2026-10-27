@@ -1,0 +1,137 @@
+{
+  "structure": "MFN_M04",
+  "messageType": "MFN",
+  "triggerEvent": "M04",
+  "version": "2.9.1",
+  "description": "Charge Description Master File Message",
+  "title": "Master File Notification – Charge Description",
+  "sectionHeading": "8.10.1 MFN/MFK - Charge Description Master File Message (Event M04)",
+  "source": {
+    "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+    "pages": "95",
+    "table": "MFN^M04^MFN_M04: Master File Notification – Charge Description"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M04"
+      ],
+      "eventPrinted": "M04",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 95,
+      "table": "MFN^M04^MFN_M04: Master File Notification – Charge Description",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 95,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 95,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 95,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 95,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "segment",
+      "name": "NTE",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 95,
+      "description": "Notes and Comments Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "MF_CDM",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 95,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 95,
+          "description": "Master File Entry",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 95,
+          "description": "Notes and Comments Segment",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "CDM",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 95,
+          "description": "Charge Description Master",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 95,
+          "description": "Notes and Comments Segment",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "PRC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 95,
+          "description": "Price Segment",
+          "chapterRef": "8"
+        }
+      ]
+    }
+  ]
+}

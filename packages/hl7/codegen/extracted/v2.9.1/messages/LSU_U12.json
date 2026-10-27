@@ -1,0 +1,99 @@
+{
+  "structure": "LSU_U12",
+  "messageType": "LSU",
+  "triggerEvent": "U12",
+  "version": "2.9.1",
+  "description": "Automated Equipment Log/Service Update",
+  "title": "Equipment Log/Service Message",
+  "sectionHeading": "13.2.12 LSU/ACK - Automated Equipment Log/Service Update (Event U12)",
+  "source": {
+    "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+    "pages": "29",
+    "table": "LSU^U12^LSU_U12: Equipment Log/Service Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "U12"
+      ],
+      "eventPrinted": "U12",
+      "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": 29,
+      "table": "LSU^U12^LSU_U12: Equipment Log/Service Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "U13"
+      ],
+      "eventPrinted": "U13",
+      "pdf": "V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": 30,
+      "table": "LSR^U13^LSU_U12: Equipment Log/Service Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 29,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 29,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 29,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EQU",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 29,
+      "description": "Equipment Detail",
+      "chapterRef": "13"
+    },
+    {
+      "kind": "segment",
+      "name": "EQP",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 29,
+      "description": "Equipment Log/Service",
+      "chapterRef": "13"
+    },
+    {
+      "kind": "segment",
+      "name": "ROL",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 29,
+      "description": "Role Detail",
+      "status": "B",
+      "chapterRef": "12"
+    }
+  ]
+}

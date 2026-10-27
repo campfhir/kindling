@@ -1,0 +1,269 @@
+{
+  "structure": "EHC_E13",
+  "messageType": "EHC",
+  "triggerEvent": "E13",
+  "version": "2.9.1",
+  "description": "Additional Information Response",
+  "title": "Additional Information Response",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+    "pages": "20-21",
+    "table": "EHC^E13^EHC_E13: Additional Information Response"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E13"
+      ],
+      "eventPrinted": "E13",
+      "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+      "page": 20,
+      "table": "EHC^E13^EHC_E13: Additional Information Response",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 20,
+      "description": "Message Header"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 20,
+      "description": "Software"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 20,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 21,
+      "description": "Message Acknowledgement"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 21,
+      "description": "Error"
+    },
+    {
+      "kind": "segment",
+      "name": "RFI",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 21,
+      "description": "Request for Information"
+    },
+    {
+      "kind": "segment",
+      "name": "CTD",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 21,
+      "description": "Contact Data"
+    },
+    {
+      "kind": "segment",
+      "name": "IVC",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 21,
+      "description": "Invoice"
+    },
+    {
+      "kind": "segment",
+      "name": "PSS",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 21,
+      "description": "Product/Service Section"
+    },
+    {
+      "kind": "segment",
+      "name": "PSG",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 21,
+      "description": "Product/Service Group"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 21,
+      "description": "Person Identification"
+    },
+    {
+      "kind": "segment",
+      "name": "GSP",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 21,
+      "description": "Person Gender and Sex",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 21,
+      "description": "Recorded Gender and Sex",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "GSC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 21,
+      "description": "Sex Parameter for Clinical Use",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PRT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 21,
+      "description": "Participation",
+      "chapterRef": "4"
+    },
+    {
+      "kind": "segment",
+      "name": "PSL",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 21,
+      "description": "Product/Service Line Item"
+    },
+    {
+      "kind": "group",
+      "name": "REQUEST",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 21,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "CTD",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 21,
+          "description": "Contact Data"
+        },
+        {
+          "kind": "segment",
+          "name": "OBR",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 21,
+          "description": "Observation Request"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 21,
+          "description": "Participation",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 21,
+          "description": "Notes and Comments"
+        },
+        {
+          "kind": "group",
+          "name": "RESPONSE",
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "page": 21,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 21,
+              "description": "Observation Result"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 21,
+              "description": "Participation",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 21,
+              "description": "Notes and Comments"
+            },
+            {
+              "kind": "segment",
+              "name": "TXA",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 21,
+              "description": "Transcription Document Header"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

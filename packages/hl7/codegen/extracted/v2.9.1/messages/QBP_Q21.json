@@ -1,0 +1,128 @@
+{
+  "structure": "QBP_Q21",
+  "messageType": "QBP",
+  "triggerEvent": "Q21",
+  "version": "2.9.1",
+  "description": "Query By Parameter",
+  "title": "Query By Parameter",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+    "pages": "97",
+    "table": "QBP^Q21^QBP_Q21: Query By Parameter"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Q21"
+      ],
+      "eventPrinted": "Q21",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 97,
+      "table": "QBP^Q21^QBP_Q21: Query By Parameter",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Q22"
+      ],
+      "eventPrinted": "Q22",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 99,
+      "table": "QBP^Q22^QBP_Q21: Query By Parameter",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Q23"
+      ],
+      "eventPrinted": "Q23",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 103,
+      "table": "QBP^Q23^QBP_Q21: Query By Parameter",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Q24"
+      ],
+      "eventPrinted": "Q24",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 105,
+      "table": "QBP^Q24^QBP_Q21: Query By Parameter",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Q32"
+      ],
+      "eventPrinted": "Q32",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 112,
+      "table": "QBP^Q32^QBP_Q21: Query By Parameter",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 97,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 97,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 97,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 97,
+      "description": "Query Parameter Definition Segment",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "RCP",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 97,
+      "description": "Response Control Parameters",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 97,
+      "description": "Continuation Pointer",
+      "chapterRef": "2"
+    }
+  ]
+}

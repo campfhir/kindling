@@ -1,0 +1,159 @@
+{
+  "structure": "RSP_E22",
+  "messageType": "RSP",
+  "triggerEvent": "E22",
+  "version": "2.9.1",
+  "description": "Authorization Request Query Response",
+  "title": "Authorization Request Query Response",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+    "pages": "29-30",
+    "table": "RSP^E22^RSP_E22: Authorization Request Query Response"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E22"
+      ],
+      "eventPrinted": "E22",
+      "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+      "page": 29,
+      "table": "RSP^E22^RSP_E22: Authorization Request Query Response",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 29,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 29,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 29,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 29,
+      "description": "Message Acknowledgement",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 29,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "choice",
+      "name": "QUERY_ACK",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 29,
+      "alternatives": [
+        {
+          "kind": "group",
+          "name": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 29,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "QAK",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 29,
+              "description": "Query Acknowledgement"
+            },
+            {
+              "kind": "segment",
+              "name": "QPD",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 29,
+              "description": "Query Parameter Definition"
+            },
+            {
+              "kind": "group",
+              "name": "AUTHORIZATION_INFO",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 29,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "IVC",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 29,
+                  "description": "Invoice"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PSG",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 29,
+                  "description": "Product/Service Group"
+                },
+                {
+                  "kind": "group",
+                  "name": "PSL_ITEM_INFO",
+                  "minOccurs": 1,
+                  "maxOccurs": "*",
+                  "page": 29,
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "PSL",
+                      "usage": null,
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "page": 30,
+                      "description": "Product/Service Line Item"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "structure": "EHC_E15",
+  "messageType": "EHC",
+  "triggerEvent": "E15",
+  "version": "2.9.1",
+  "description": "Payment/Remittance Advice",
+  "title": "Payment/Remittance Advice",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+    "pages": "22-23",
+    "table": "EHC^E15^EHC_E15: Payment/Remittance Advice"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E15"
+      ],
+      "eventPrinted": "E15",
+      "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+      "page": 22,
+      "table": "EHC^E15^EHC_E15: Payment/Remittance Advice",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 22,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 22,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 22,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "choice",
+      "name": "PAYMENT_REMITTANCE_HEADER_INFO",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 22,
+      "alternatives": [
+        {
+          "kind": "group",
+          "name": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 22,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PMT",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 22,
+              "description": "Payment Information",
+              "chapterRef": "16"
+            },
+            {
+              "kind": "segment",
+              "name": "PYE",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 23,
+              "description": "Payee Information",
+              "chapterRef": "16"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "group",
+      "name": "PAYMENT_REMITTANCE_DETAIL_INFO",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 23,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "IPR",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 23,
+          "description": "Invoice Processing Results"
+        },
+        {
+          "kind": "segment",
+          "name": "IVC",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 23,
+          "description": "Invoice"
+        },
+        {
+          "kind": "group",
+          "name": "PRODUCT_SERVICE_SECTION",
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "page": 23,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PSS",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 23,
+              "description": "Product/Service Section"
+            },
+            {
+              "kind": "group",
+              "name": "PRODUCT_SERVICE_GROUP",
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "page": 23,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "PSG",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 23,
+                  "description": "Product/Service Group"
+                },
+                {
+                  "kind": "group",
+                  "name": "PSL_ITEM_INFO",
+                  "minOccurs": 1,
+                  "maxOccurs": "*",
+                  "page": 23,
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "PSL",
+                      "usage": null,
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "page": 23,
+                      "description": "Product/Service Line Item"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "ADJ",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 23,
+                      "description": "Adjustment"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "group",
+      "name": "ADJUSTMENT_PAYEE",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 23,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "ADJ",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 23,
+          "description": "Adjustment"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 23,
+          "description": "Participation"
+        },
+        {
+          "kind": "segment",
+          "name": "ROL",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 23,
+          "description": "Role",
+          "status": "B"
+        }
+      ]
+    }
+  ]
+}

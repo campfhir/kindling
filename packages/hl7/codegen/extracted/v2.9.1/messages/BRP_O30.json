@@ -1,0 +1,224 @@
+{
+  "structure": "BRP_O30",
+  "messageType": "BRP",
+  "triggerEvent": "O30",
+  "version": "2.9.1",
+  "description": "Blood Product Dispense Status Acknowledgment",
+  "title": "Description",
+  "sectionHeading": "4.13.5 BRP – Blood Product Dispense Status Acknowledgment (Event O30)",
+  "source": {
+    "pdf": "V291_CH04_Orders_2024SEP.pdf",
+    "pages": "133",
+    "table": "BRP^O30^BRP_O30: Description"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "O30"
+      ],
+      "eventPrinted": "O30",
+      "pdf": "V291_CH04_Orders_2024SEP.pdf",
+      "page": 133,
+      "table": "BRP^O30^BRP_O30: Description",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 133,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 133,
+      "description": "Message Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 133,
+      "description": "Access Restriction",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 133,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 133,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 133,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "NTE",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 133,
+      "description": "Notes and Comments (for Response Header)",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "RESPONSE",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 133,
+      "items": [
+        {
+          "kind": "group",
+          "name": "PATIENT",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 133,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PID",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 133,
+              "description": "Patient Identification",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 133,
+              "description": "Participation",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "ARV",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 133,
+              "description": "For backwards compatibility only as of V2.9.",
+              "status": "B",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "group",
+              "name": "ORDER",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 133,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "ORC",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 133,
+                  "description": "Common Order",
+                  "chapterRef": "4"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 133,
+                  "description": "Participation",
+                  "chapterRef": "7"
+                },
+                {
+                  "kind": "group",
+                  "name": "TIMING",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 133,
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "TQ1",
+                      "usage": null,
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "page": 133,
+                      "description": "Timing/Quantity",
+                      "chapterRef": "4"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "TQ2",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 133,
+                      "description": "Timing/Quantity Order Sequence",
+                      "chapterRef": "4"
+                    }
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "name": "BPO",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": 1,
+                  "page": 133,
+                  "description": "Blood Product Order",
+                  "chapterRef": "4"
+                },
+                {
+                  "kind": "segment",
+                  "name": "BPX",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 133,
+                  "description": "Blood Product dispense status"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

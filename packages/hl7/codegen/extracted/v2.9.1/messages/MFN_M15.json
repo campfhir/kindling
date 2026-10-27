@@ -1,0 +1,97 @@
+{
+  "structure": "MFN_M15",
+  "messageType": "MFN",
+  "triggerEvent": "M15",
+  "version": "2.9.1",
+  "description": "Inventory Item Master File Message",
+  "title": "Master File Notification – Inventory Item",
+  "sectionHeading": "8.12.1 MFN/MFK - Inventory Item Master File Message (Event M15)",
+  "source": {
+    "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+    "pages": "114-115",
+    "table": "MFN^M15^MFN_M15: Master File Notification – Inventory Item"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M15"
+      ],
+      "eventPrinted": "M15",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 114,
+      "table": "MFN^M15^MFN_M15: Master File Notification – Inventory Item",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 114,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 114,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 114,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 114,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "group",
+      "name": "MF_INV_ITEM",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 114,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 114,
+          "description": "Master File Entry",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "IIM",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 114,
+          "description": "Inventory Item Master",
+          "chapterRef": "17"
+        }
+      ]
+    }
+  ]
+}

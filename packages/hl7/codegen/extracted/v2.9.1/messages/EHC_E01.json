@@ -1,0 +1,523 @@
+{
+  "structure": "EHC_E01",
+  "messageType": "EHC",
+  "triggerEvent": "E01",
+  "version": "2.9.1",
+  "description": "Submit HealthCare Services Invoice",
+  "title": "Submit HealthCare Services Invoice",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+    "pages": "6-8",
+    "table": "EHC^E01^EHC_E01: Submit HealthCare Services Invoice"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E01"
+      ],
+      "eventPrinted": "E01",
+      "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+      "page": 6,
+      "table": "EHC^E01^EHC_E01: Submit HealthCare Services Invoice",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 6,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 6,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 6,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "choice",
+      "name": "INVOICE_INFORMATION_SUBMIT",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 6,
+      "alternatives": [
+        {
+          "kind": "group",
+          "name": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 6,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "IVC",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 6,
+              "description": "Invoice",
+              "chapterRef": "16"
+            },
+            {
+              "kind": "segment",
+              "name": "PYE",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 6,
+              "description": "Payee Information",
+              "chapterRef": "16"
+            },
+            {
+              "kind": "segment",
+              "name": "CTD",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 6,
+              "description": "Contact Data"
+            },
+            {
+              "kind": "segment",
+              "name": "AUT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "page": 6,
+              "description": "Authorization Information"
+            },
+            {
+              "kind": "segment",
+              "name": "LOC",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 6,
+              "description": "Location Identification",
+              "chapterRef": "8"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 6,
+              "description": "Participation"
+            },
+            {
+              "kind": "segment",
+              "name": "ROL",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 6,
+              "description": "Role",
+              "status": "B",
+              "chapterRef": "15"
+            },
+            {
+              "kind": "group",
+              "name": "PRODUCT_SERVICE_SECTION",
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "page": 6,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "PSS",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 6,
+                  "description": "Product/Service Section",
+                  "chapterRef": "16"
+                },
+                {
+                  "kind": "group",
+                  "name": "PRODUCT_SERVICE_GROUP",
+                  "minOccurs": 1,
+                  "maxOccurs": "*",
+                  "page": 6,
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "PSG",
+                      "usage": null,
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "page": 6,
+                      "description": "Product/Service Group",
+                      "chapterRef": "16"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "LOC",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 7,
+                      "description": "Location Identification"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PRT",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 7,
+                      "description": "Participation"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "ROL",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 7,
+                      "description": "Role",
+                      "status": "B",
+                      "chapterRef": "15"
+                    },
+                    {
+                      "kind": "group",
+                      "name": "PATIENT_INFO",
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 7,
+                      "items": [
+                        {
+                          "kind": "segment",
+                          "name": "PID",
+                          "usage": null,
+                          "minOccurs": 1,
+                          "maxOccurs": 1,
+                          "page": 7,
+                          "description": "Person Identification",
+                          "chapterRef": "3"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "GSP",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 7,
+                          "description": "Person Gender and Sex",
+                          "chapterRef": "3"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "GSR",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 7,
+                          "description": "Recorded Gender and Sex",
+                          "chapterRef": "3"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "GSC",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 7,
+                          "description": "Sex Parameter for Clinical Use",
+                          "chapterRef": "3"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "PRT",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 7,
+                          "description": "Participation",
+                          "chapterRef": "4"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "PV1",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": 1,
+                          "page": 7,
+                          "description": "Patient Visit",
+                          "chapterRef": "3"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "PV2",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": 1,
+                          "page": 7,
+                          "description": "Patient Visit – Additional Info",
+                          "chapterRef": "3"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "ACC",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 7,
+                          "description": "Accident"
+                        },
+                        {
+                          "kind": "group",
+                          "name": "INSURANCE",
+                          "minOccurs": 1,
+                          "maxOccurs": "*",
+                          "page": 7,
+                          "items": [
+                            {
+                              "kind": "segment",
+                              "name": "IN1",
+                              "usage": null,
+                              "minOccurs": 1,
+                              "maxOccurs": 1,
+                              "page": 7,
+                              "description": "Insurance"
+                            },
+                            {
+                              "kind": "segment",
+                              "name": "GSP",
+                              "usage": null,
+                              "minOccurs": 0,
+                              "maxOccurs": "*",
+                              "page": 7,
+                              "description": "Person Gender and Sex",
+                              "chapterRef": "3"
+                            },
+                            {
+                              "kind": "segment",
+                              "name": "GSR",
+                              "usage": null,
+                              "minOccurs": 0,
+                              "maxOccurs": "*",
+                              "page": 7,
+                              "description": "Recorded Gender and Sex",
+                              "chapterRef": "3"
+                            },
+                            {
+                              "kind": "segment",
+                              "name": "IN2",
+                              "usage": null,
+                              "minOccurs": 0,
+                              "maxOccurs": 1,
+                              "page": 7,
+                              "description": "Insurance Additional Info"
+                            }
+                          ]
+                        },
+                        {
+                          "kind": "group",
+                          "name": "DIAGNOSIS",
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 7,
+                          "items": [
+                            {
+                              "kind": "segment",
+                              "name": "DG1",
+                              "usage": null,
+                              "minOccurs": 1,
+                              "maxOccurs": 1,
+                              "page": 7,
+                              "description": "Diagnosis"
+                            },
+                            {
+                              "kind": "segment",
+                              "name": "NTE",
+                              "usage": null,
+                              "minOccurs": 0,
+                              "maxOccurs": "*",
+                              "page": 7,
+                              "description": "Notes and Comments"
+                            }
+                          ]
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "OBX",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 7,
+                          "description": "Observation"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "PRT",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 7,
+                          "description": "Participation",
+                          "chapterRef": "4"
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "group",
+                      "name": "PRODUCT_SERVICE_LINE_ITEM",
+                      "minOccurs": 1,
+                      "maxOccurs": "*",
+                      "page": 7,
+                      "items": [
+                        {
+                          "kind": "segment",
+                          "name": "PSL",
+                          "usage": null,
+                          "minOccurs": 1,
+                          "maxOccurs": 1,
+                          "page": 7,
+                          "description": "Product/Service Line Item",
+                          "chapterRef": "16"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "NTE",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 7,
+                          "description": "Notes and Comments"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "ADJ",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 7,
+                          "description": "Adjustment",
+                          "chapterRef": "16"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "AUT",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": 1,
+                          "page": 7,
+                          "description": "Authorization Information"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "LOC",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 7,
+                          "description": "Location Identification"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "PRT",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 7,
+                          "description": "Participation"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "ROL",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 7,
+                          "description": "Role",
+                          "status": "B",
+                          "chapterRef": "15"
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "group",
+                      "name": "PROCEDURE",
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 8,
+                      "items": [
+                        {
+                          "kind": "segment",
+                          "name": "PR1",
+                          "usage": null,
+                          "minOccurs": 1,
+                          "maxOccurs": 1,
+                          "page": 8,
+                          "description": "Procedures"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "NTE",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 8,
+                          "description": "Notes and Comments"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "PRT",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 8,
+                          "description": "Participation"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "ROL",
+                          "usage": null,
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "page": 8,
+                          "description": "Role",
+                          "status": "B"
+                        }
+                      ]
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "IPR",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 8,
+                      "description": "Invoice Processing Results"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

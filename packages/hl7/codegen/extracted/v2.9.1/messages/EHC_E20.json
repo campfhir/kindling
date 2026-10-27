@@ -1,0 +1,343 @@
+{
+  "structure": "EHC_E20",
+  "messageType": "EHC",
+  "triggerEvent": "E20",
+  "version": "2.9.1",
+  "description": "Submit Authorization Request",
+  "title": "Submit Authorization Request",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+    "pages": "25-26",
+    "table": "EHC^E20^EHC_E20: Submit Authorization Request"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E20"
+      ],
+      "eventPrinted": "E20",
+      "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+      "page": 25,
+      "table": "EHC^E20^EHC_E20: Submit Authorization Request",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 25,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 25,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 25,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "choice",
+      "name": "AUTHORIZATION_REQUEST",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 25,
+      "alternatives": [
+        {
+          "kind": "group",
+          "name": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 25,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "IVC",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 25,
+              "description": "Invoice Header",
+              "chapterRef": "16"
+            },
+            {
+              "kind": "segment",
+              "name": "CTD",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "page": 25,
+              "description": "Contact Data"
+            },
+            {
+              "kind": "segment",
+              "name": "LOC",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 25,
+              "description": "Location Identification"
+            },
+            {
+              "kind": "segment",
+              "name": "ROL",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 25,
+              "description": "Provider Identification"
+            },
+            {
+              "kind": "group",
+              "name": "PAT_INFO",
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "page": 25,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "PID",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 25,
+                  "description": "Person Identification"
+                },
+                {
+                  "kind": "segment",
+                  "name": "GSP",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 25,
+                  "description": "Person Gender and Sex",
+                  "chapterRef": "3"
+                },
+                {
+                  "kind": "segment",
+                  "name": "GSR",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 25,
+                  "description": "Recorded Gender and Sex",
+                  "chapterRef": "3"
+                },
+                {
+                  "kind": "segment",
+                  "name": "GSC",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 25,
+                  "description": "Sex Parameter for Clinical Use",
+                  "chapterRef": "3"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 25,
+                  "description": "Participation",
+                  "chapterRef": "4"
+                },
+                {
+                  "kind": "segment",
+                  "name": "ACC",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 25,
+                  "description": "Accident"
+                },
+                {
+                  "kind": "group",
+                  "name": "INSURANCE",
+                  "minOccurs": 1,
+                  "maxOccurs": "*",
+                  "page": 25,
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "IN1",
+                      "usage": null,
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "page": 25,
+                      "description": "Insurance"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "GSP",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 25,
+                      "description": "Person Gender and Sex",
+                      "chapterRef": "3"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "GSR",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 25,
+                      "description": "Recorded Gender and Sex",
+                      "chapterRef": "3"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "IN2",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": 1,
+                      "page": 25,
+                      "description": "Insurance Additional Info"
+                    }
+                  ]
+                },
+                {
+                  "kind": "group",
+                  "name": "DIAGNOSIS",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 25,
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "DG1",
+                      "usage": null,
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "page": 25,
+                      "description": "Diagnosis"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "NTE",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 25,
+                      "description": "Notes and Comments"
+                    }
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "name": "OBX",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 25,
+                  "description": "Observation"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "usage": null,
+                  "minOccurs": null,
+                  "maxOccurs": null,
+                  "page": 25,
+                  "description": "Participation",
+                  "chapterRef": "4",
+                  "bracketMismatch": true,
+                  "notation": "[ { PRT ] }"
+                }
+              ]
+            },
+            {
+              "kind": "group",
+              "name": "PSL_ITEM_INFO",
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "page": 25,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "PSL",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 25,
+                  "description": "Product/Service Line Item"
+                },
+                {
+                  "kind": "segment",
+                  "name": "NTE",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 26,
+                  "description": "Notes and Comments"
+                },
+                {
+                  "kind": "segment",
+                  "name": "ADJ",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 26,
+                  "description": "Adjustment"
+                },
+                {
+                  "kind": "segment",
+                  "name": "LOC",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 26,
+                  "description": "Location Identification"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 26,
+                  "description": "Participation"
+                },
+                {
+                  "kind": "segment",
+                  "name": "ROL",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 26,
+                  "description": "Role",
+                  "status": "B"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "problems": [
+    "bracket mismatch: opener '{' closed by ']' p25 row '[ { PRT ] }'",
+    "bracket mismatch: opener '[' closed by '}' p25 row '[ { PRT ] }'"
+  ]
+}

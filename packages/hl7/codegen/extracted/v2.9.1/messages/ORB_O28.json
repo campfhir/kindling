@@ -1,0 +1,215 @@
+{
+  "structure": "ORB_O28",
+  "messageType": "ORB",
+  "triggerEvent": "O28",
+  "version": "2.9.1",
+  "description": "Blood Product Order Acknowledgment",
+  "title": "Description",
+  "sectionHeading": "4.13.3 ORB – Blood Product Order Acknowledgment (Event O28)",
+  "source": {
+    "pdf": "V291_CH04_Orders_2024SEP.pdf",
+    "pages": "130-131",
+    "table": "ORB^O28^ORB_O28: Description"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "O28"
+      ],
+      "eventPrinted": "O28",
+      "pdf": "V291_CH04_Orders_2024SEP.pdf",
+      "page": 130,
+      "table": "ORB^O28^ORB_O28: Description",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 130,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 130,
+      "description": "Message Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 130,
+      "description": "Access Restrictions",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 130,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 130,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 130,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "NTE",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 131,
+      "description": "Notes and Comments (for Response Header)",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "RESPONSE",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 131,
+      "items": [
+        {
+          "kind": "group",
+          "name": "PATIENT",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 131,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PID",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 131,
+              "description": "Patient Identification",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 131,
+              "description": "Participation",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "ARV",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 131,
+              "description": "For backwards compatibil ity only as of V2.9.",
+              "status": "B",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "group",
+              "name": "ORDER",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 131,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "ORC",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 131,
+                  "description": "Common Order",
+                  "chapterRef": "4"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 131,
+                  "description": "Participation",
+                  "chapterRef": "7"
+                },
+                {
+                  "kind": "group",
+                  "name": "TIMING",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "page": 131,
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "TQ1",
+                      "usage": null,
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "page": 131,
+                      "description": "Timing/Quantity",
+                      "chapterRef": "4"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "TQ2",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 131,
+                      "description": "Timing/Quantity Order Sequence",
+                      "chapterRef": "4"
+                    }
+                  ]
+                },
+                {
+                  "kind": "segment",
+                  "name": "BPO",
+                  "usage": null,
+                  "minOccurs": 0,
+                  "maxOccurs": 1,
+                  "page": 131,
+                  "description": "Blood Product Order",
+                  "chapterRef": "4"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

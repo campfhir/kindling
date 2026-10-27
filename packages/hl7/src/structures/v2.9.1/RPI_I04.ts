@@ -1,0 +1,59 @@
+/**
+ * Message structure for RPI^I04 messages (HL7 v2.9.1).
+ *
+ * Structure: MSH [{SFT}] [UAC] MSA { PROVIDER: PRD [{CTD}] } PID [{GSP}] [{GSR}] [{GSC}] [{ NEXT_OF_KIN: NK1 [{GSP}] [{GSR}] }] [ GUARANTOR_INSURANCE: [{GT1}] { INSURANCE: IN1 [IN2] [IN3] } ] [{NTE}]
+ *
+ * @module
+ */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { StructureItem } from "../../types/schema.ts";
+
+/** The segments, choices and groups of RPI^I04 (HL7 v2.9.1), in order. */
+export const RPI_I04_STRUCTURE: StructureItem[] = [
+  { name: "MSH", required: true, repeating: false },
+  { name: "SFT", required: false, repeating: true },
+  { name: "UAC", required: false, repeating: false },
+  { name: "MSA", required: true, repeating: false },
+  {
+    name: "PROVIDER",
+    required: true,
+    repeating: true,
+    segments: [
+      { name: "PRD", required: true, repeating: false },
+      { name: "CTD", required: false, repeating: true },
+    ],
+  },
+  { name: "PID", required: true, repeating: false },
+  { name: "GSP", required: false, repeating: true },
+  { name: "GSR", required: false, repeating: true },
+  { name: "GSC", required: false, repeating: true },
+  {
+    name: "NEXT_OF_KIN",
+    required: false,
+    repeating: true,
+    segments: [
+      { name: "NK1", required: true, repeating: false },
+      { name: "GSP", required: false, repeating: true },
+      { name: "GSR", required: false, repeating: true },
+    ],
+  },
+  {
+    name: "GUARANTOR_INSURANCE",
+    required: false,
+    repeating: false,
+    segments: [
+      { name: "GT1", required: false, repeating: true },
+      {
+        name: "INSURANCE",
+        required: true,
+        repeating: true,
+        segments: [
+          { name: "IN1", required: true, repeating: false },
+          { name: "IN2", required: false, repeating: false },
+          { name: "IN3", required: false, repeating: false },
+        ],
+      },
+    ],
+  },
+  { name: "NTE", required: false, repeating: true },
+];

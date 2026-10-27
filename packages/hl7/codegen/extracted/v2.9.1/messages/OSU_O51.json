@@ -1,0 +1,138 @@
+{
+  "structure": "OSU_O51",
+  "messageType": "OSU",
+  "triggerEvent": "O51",
+  "version": "2.9.1",
+  "description": "Order Status Update",
+  "title": "Order Status Update Message",
+  "sectionHeading": "4.4.18 Order Status Update (Event O51)",
+  "source": {
+    "pdf": "V291_CH04_Orders_2024SEP.pdf",
+    "pages": "47-48",
+    "table": "OSU^O51^OSU_O51: Order Status Update Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "O51"
+      ],
+      "eventPrinted": "O51",
+      "pdf": "V291_CH04_Orders_2024SEP.pdf",
+      "page": 47,
+      "table": "OSU^O51^OSU_O51: Order Status Update Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 47,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 47,
+      "description": "Access Restrictions",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 47,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 47,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "NTE",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 48,
+      "description": "Notes and Comments (for Header)",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 48,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PRT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 48,
+      "description": "Participation",
+      "chapterRef": "7"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 48,
+      "description": "For backwards compatibility only as of V2.9.",
+      "status": "B",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "group",
+      "name": "ORDER_STATUS",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 48,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "ORC",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 48,
+          "description": "Common Order",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 48,
+          "description": "Participation",
+          "chapterRef": "7"
+        }
+      ]
+    }
+  ]
+}

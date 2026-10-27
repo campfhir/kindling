@@ -1,0 +1,124 @@
+{
+  "structure": "RSP_E03",
+  "messageType": "RSP",
+  "triggerEvent": "E03",
+  "version": "2.9.1",
+  "description": "HealthCare Services Invoice Query Response",
+  "title": "HealthCare Services Invoice Query Response",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+    "pages": "13",
+    "table": "RSP^E03^RSP_E03: HealthCare Services Invoice Query Response"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E03"
+      ],
+      "eventPrinted": "E03",
+      "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+      "page": 13,
+      "table": "RSP^E03^RSP_E03: HealthCare Services Invoice Query Response",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 13,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 13,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 13,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 13,
+      "description": "Message Acknowledgement",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 13,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "choice",
+      "name": "QUERY_ACK_IPR",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 13,
+      "alternatives": [
+        {
+          "kind": "group",
+          "name": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 13,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "QAK",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 13,
+              "description": "Query Acknowledgement"
+            },
+            {
+              "kind": "segment",
+              "name": "QPD",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 13,
+              "description": "Query Parameter Definition"
+            },
+            {
+              "kind": "segment",
+              "name": "IPR",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 13,
+              "description": "Invoice Processing Results",
+              "chapterRef": "16"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

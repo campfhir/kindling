@@ -1,0 +1,248 @@
+{
+  "structure": "MFK_M01",
+  "messageType": "MFK",
+  "triggerEvent": "M13",
+  "version": "2.9.1",
+  "description": "Master File Notification - General",
+  "title": "Master File Application Acknowledgment",
+  "sectionHeading": "8.4.2 MFN/MFK - Master File Notification - General (Event M13)",
+  "source": {
+    "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+    "pages": "8",
+    "table": "MFK^M13^MFK_M01: Master File Application Acknowledgment"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M13"
+      ],
+      "eventPrinted": "M13",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 8,
+      "table": "MFK^M13^MFK_M01: Master File Application Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "M14"
+      ],
+      "eventPrinted": "M14",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 9,
+      "table": "MFK^M14^MFK_M01: Master File Application Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "M02"
+      ],
+      "eventPrinted": "M02",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 18,
+      "table": "MFK^M02^MFK_M01: Master File Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "M08"
+      ],
+      "eventPrinted": "M08",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 21,
+      "table": "MFK^M08^MFK_M01: Master File Application Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "M09"
+      ],
+      "eventPrinted": "M09",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 23,
+      "table": "MFK^M09^MFK_M01: Master File Application Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "M10"
+      ],
+      "eventPrinted": "M10",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 24,
+      "table": "MFK^M10^MFK_M01: Master File Application Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "M11"
+      ],
+      "eventPrinted": "M11",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 26,
+      "table": "MFK^M11^MFK_M01: Master File Application Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "M12"
+      ],
+      "eventPrinted": "M12",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 28,
+      "table": "MFK^M12^MFK_M01: Master File Application Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "M05"
+      ],
+      "eventPrinted": "M05",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 79,
+      "table": "MFK^M05^MFK_M01: Master File Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "M04"
+      ],
+      "eventPrinted": "M04",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 96,
+      "table": "MFK^M04^MFK_M01: Master File Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "M06"
+      ],
+      "eventPrinted": "M06",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 106,
+      "table": "MFK^M06^MFK_M01: Master File Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "M07"
+      ],
+      "eventPrinted": "M07",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 107,
+      "table": "MFK^M07^MFK_M01: Master File Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "M15"
+      ],
+      "eventPrinted": "M15",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 115,
+      "table": "MFK^M15^MFK_M01: Master File Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "M16"
+      ],
+      "eventPrinted": "M16",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 117,
+      "table": "MFK^M16^MFK_M01: Master File Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "M17"
+      ],
+      "eventPrinted": "M17",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 119,
+      "table": "MFK^M17^MFK_M01: Master File Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "M19"
+      ],
+      "eventPrinted": "M19",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 122,
+      "table": "MFK^M19^MFK_M01: Master File Acknowledgment",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 8,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 8,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 8,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 8,
+      "description": "Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 8,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 8,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "segment",
+      "name": "MFA",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 8,
+      "description": "Master File ACK segment",
+      "chapterRef": "8"
+    }
+  ]
+}

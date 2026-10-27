@@ -1,0 +1,78 @@
+{
+  "structure": "ADT_A20",
+  "messageType": "ADT",
+  "triggerEvent": "A20",
+  "version": "2.9.1",
+  "description": "Bed Status Update",
+  "title": "ADT Message",
+  "sectionHeading": "3.3.20 ADT/ACK - Bed Status Update (Event A20)",
+  "source": {
+    "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+    "pages": "49",
+    "table": "ADT^A20^ADT_A20: ADT Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A20"
+      ],
+      "eventPrinted": "A20",
+      "pdf": "V291_CH03_PatientAdmin_2024SEP.pdf",
+      "page": 49,
+      "table": "ADT^A20^ADT_A20: ADT Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 49,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 49,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 49,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 49,
+      "description": "Event Type",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "NPU",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 49,
+      "description": "Non-Patient Update",
+      "chapterRef": "3"
+    }
+  ]
+}

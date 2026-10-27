@@ -1,0 +1,147 @@
+{
+  "structure": "MFN_M08",
+  "messageType": "MFN",
+  "triggerEvent": "M08",
+  "version": "2.9.1",
+  "description": "Master File Notification - Test/Observation (Numeric)",
+  "title": "Master File Notification - Test/Observation (Numeric)",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+    "pages": "20-21",
+    "table": "MFN^M08^MFN_M08: Master File Notification - Test/Observation (Numeric)"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M08"
+      ],
+      "eventPrinted": "M08",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 20,
+      "table": "MFN^M08^MFN_M08: Master File Notification - Test/Observation (Numeric)",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 20,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 20,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 20,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 20,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "group",
+      "name": "MF_TEST_NUMERIC",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 20,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 20,
+          "description": "Master File Entry",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "OM1",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 20,
+          "description": "General Segment (Fields That Apply to Most Observations)",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "OMC",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 20,
+          "description": "Supporting Clinical Information",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 20,
+          "description": "Participation",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "segment",
+          "name": "OM2",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 20,
+          "description": "Numeric Observation Segment",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "OM3",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 20,
+          "description": "Categorical Service/Test/Observation Segment",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "OM4",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 21,
+          "description": "Observations that Require Specimens",
+          "chapterRef": "8"
+        }
+      ]
+    }
+  ]
+}

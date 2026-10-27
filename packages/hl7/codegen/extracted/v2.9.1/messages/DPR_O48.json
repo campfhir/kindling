@@ -1,0 +1,330 @@
+{
+  "structure": "DPR_O48",
+  "messageType": "DPR",
+  "triggerEvent": "O48",
+  "version": "2.9.1",
+  "description": "Donation Procedure",
+  "title": "Donation Procedure Message",
+  "sectionHeading": "4.16.15 DPR - Donation Procedure (Event O48)",
+  "source": {
+    "pdf": "V291_CH04_Orders_2024SEP.pdf",
+    "pages": "174-175",
+    "table": "DPR^O48^DPR_O48: Donation Procedure Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "O48"
+      ],
+      "eventPrinted": "O48",
+      "pdf": "V291_CH04_Orders_2024SEP.pdf",
+      "page": 174,
+      "table": "DPR^O48^DPR_O48: Donation Procedure Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 174,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 174,
+      "description": "Access Restrictions",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 174,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 174,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "DONOR",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 174,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 174,
+          "description": "Patient Identification Segment",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 174,
+          "description": "Additional Demographics",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 174,
+          "description": "Participation",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "group",
+          "name": "DONOR_OBSERVATIONS",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 174,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 174,
+              "description": "Donor Observations",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 174,
+              "description": "Participation",
+              "chapterRef": "7"
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 174,
+          "description": "Notes and Comments (for Donor)",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "AL1",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 174,
+          "description": "Allergy Information"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 174,
+          "description": "For backwards compatibility only as of V2.9.",
+          "status": "B",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "group",
+          "name": "DONOR_REGISTRATION",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 174,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PV1",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 174,
+              "description": "Patient Visit (Donor Registration)",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 174,
+              "description": "Participation",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 174,
+              "description": "Notes and Comments (for Donor Registration)",
+              "chapterRef": "2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "group",
+      "name": "DONATION_ORDER",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 174,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "OBR",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 174,
+          "description": "Observation",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 174,
+          "description": "Participation",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 175,
+          "description": "Notes and Comments",
+          "chapterRef": "2"
+        }
+      ]
+    },
+    {
+      "kind": "group",
+      "name": "DONATION",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 175,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "DON",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 175,
+          "description": "Donation",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "group",
+          "name": "DONATION_OBSERVATIONS",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 175,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 175,
+              "description": "Donation Observation (Adverse Reactions, Associations, etc.)"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 175,
+              "description": "Participation",
+              "chapterRef": "7"
+            }
+          ]
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 175,
+          "description": "Notes and Comments (for Donation)",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "group",
+          "name": "BLOOD_UNIT",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 175,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "BUI",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 175,
+              "description": "Blood Unit Information",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 175,
+              "description": "Notes and Comments (for Blood Unit)",
+              "chapterRef": "2"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

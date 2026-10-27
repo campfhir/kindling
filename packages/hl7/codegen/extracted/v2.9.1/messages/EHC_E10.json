@@ -1,0 +1,230 @@
+{
+  "structure": "EHC_E10",
+  "messageType": "EHC",
+  "triggerEvent": "E10",
+  "version": "2.9.1",
+  "description": "Edit/Adjudication Results",
+  "title": "Edit/Adjudication Results",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+    "pages": "15-16",
+    "table": "EHC^E10^EHC_E10: Edit/Adjudication Results"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E10"
+      ],
+      "eventPrinted": "E10",
+      "pdf": "V291_CH16_eClaims_2024SEP.pdf",
+      "page": 15,
+      "table": "EHC^E10^EHC_E10: Edit/Adjudication Results",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 15,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 15,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 15,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 15,
+      "description": "Message Acknowledgement",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 15,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "INVOICE_PROCESSING_RESULTS_INFO",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 15,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "IPR",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 15,
+          "description": "Invoice Processing Results",
+          "chapterRef": "16"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 15,
+          "description": "Notes and Comments"
+        },
+        {
+          "kind": "segment",
+          "name": "PYE",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 16,
+          "description": "Payee",
+          "chapterRef": "16"
+        },
+        {
+          "kind": "segment",
+          "name": "IN1",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 16,
+          "description": "Insurance",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSP",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 16,
+          "description": "Person Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSR",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 16,
+          "description": "Recorded Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "IN2",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "page": 16,
+          "description": "Insurance Additional Info"
+        },
+        {
+          "kind": "segment",
+          "name": "IVC",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 16,
+          "description": "Invoice"
+        },
+        {
+          "kind": "group",
+          "name": null,
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "page": 16,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PSS",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 16,
+              "description": "Product/Service Section",
+              "chapterRef": "16"
+            },
+            {
+              "kind": "group",
+              "name": null,
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "page": 16,
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "PSG",
+                  "usage": null,
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "page": 16,
+                  "description": "Product/Service Group",
+                  "chapterRef": "16"
+                },
+                {
+                  "kind": "group",
+                  "name": "PRODUCT_SERVICE_LINE_INFO",
+                  "minOccurs": 1,
+                  "maxOccurs": "*",
+                  "page": 16,
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "PSL",
+                      "usage": null,
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "page": 16,
+                      "description": "Product/Service Line Item",
+                      "chapterRef": "16"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "ADJ",
+                      "usage": null,
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "page": 16,
+                      "description": "Adjustment"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

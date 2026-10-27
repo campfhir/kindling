@@ -1,0 +1,173 @@
+{
+  "structure": "OSU_O52",
+  "messageType": "OSU",
+  "triggerEvent": "O52",
+  "version": "2.9.1",
+  "description": "Order Status Update Acknowledgement",
+  "title": "Order Status Update Acknowledgement Message",
+  "sectionHeading": "4.4.19 OSU – Order Status Update Acknowledgement (Event O52)",
+  "source": {
+    "pdf": "V291_CH04_Orders_2024SEP.pdf",
+    "pages": "48-49",
+    "table": "OSU^O52^OSU_O52: Order Status Update Acknowledgement Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "O52"
+      ],
+      "eventPrinted": "O52",
+      "pdf": "V291_CH04_Orders_2024SEP.pdf",
+      "page": 48,
+      "table": "OSU^O52^OSU_O52: Order Status Update Acknowledgement Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 48,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 48,
+      "description": "Message Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "usage": null,
+      "minOccurs": null,
+      "maxOccurs": null,
+      "page": 48,
+      "description": "Access Restrictions",
+      "chapterRef": "3",
+      "bracketMismatch": true,
+      "notation": "[{ARV]}"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 48,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 48,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 48,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "NTE",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 48,
+      "description": "Notes and Comments (for Header)",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "PATIENT",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 48,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 48,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 48,
+          "description": "Participation",
+          "chapterRef": "7"
+        }
+      ]
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 48,
+      "description": "For backwards compatibilitty only as of V2.9.",
+      "status": "B",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "group",
+      "name": "ORDER_STATUS",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 48,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "ORC",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 49,
+          "description": "Common Order",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 49,
+          "description": "Participation",
+          "chapterRef": "7"
+        }
+      ]
+    }
+  ],
+  "problems": [
+    "bracket mismatch: opener '{' closed by ']' p48 row '[{ARV]}'",
+    "bracket mismatch: opener '[' closed by '}' p48 row '[{ARV]}'"
+  ]
+}

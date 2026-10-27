@@ -1,0 +1,156 @@
+{
+  "structure": "MFN_M05",
+  "messageType": "MFN",
+  "triggerEvent": "M05",
+  "version": "2.9.1",
+  "description": "Master File Notification - Patient Location",
+  "title": "Master File Notification - Patient Location",
+  "sectionHeading": null,
+  "source": {
+    "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+    "pages": "79",
+    "table": "MFN^M05^MFN_M05: Master File Notification - Patient Location"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M05"
+      ],
+      "eventPrinted": "M05",
+      "pdf": "V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": 79,
+      "table": "MFN^M05^MFN_M05: Master File Notification - Patient Location",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 79,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "page": 79,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "usage": null,
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "page": 79,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "usage": null,
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "page": 79,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "group",
+      "name": "MF_LOCATION",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "page": 79,
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 79,
+          "description": "Master File Entry",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "LOC",
+          "usage": null,
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "page": 79,
+          "description": "Patient Location Master",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "LCH",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 79,
+          "description": "Location Characteristic",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "LRL",
+          "usage": null,
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "page": 79,
+          "description": "Location Relationship",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "group",
+          "name": "MF_LOC_DEPT",
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "page": 79,
+          "items": [
+            {
+              "kind": "segment",
+              "name": "LDP",
+              "usage": null,
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "page": 79,
+              "description": "Location Department",
+              "chapterRef": "8"
+            },
+            {
+              "kind": "segment",
+              "name": "LCH",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 79,
+              "description": "Location Characteristic",
+              "chapterRef": "8"
+            },
+            {
+              "kind": "segment",
+              "name": "LCC",
+              "usage": null,
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "page": 79,
+              "description": "Location Charge Code",
+              "chapterRef": "8"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
