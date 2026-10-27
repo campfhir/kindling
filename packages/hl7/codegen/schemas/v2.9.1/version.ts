@@ -73,6 +73,11 @@ export const V2_9_1: VersionSchema = {
     "SUR_P09",
     "VXQ_V01",
     "VXR_V03",
+    // Withdrawn as printed in the chapter text, not in the index.
+    "ORM_O01",
+    "ORR_O02",
+    "OSQ_Q06",
+    "OSR_Q06",
     // Not generated: the schema type cannot express their structure yet (choice of groups, unnamed group); see IMPORT.md.
     "CCI_I22",
     "CCM_I21",
@@ -131,11 +136,7 @@ export const V2_9_1: VersionSchema = {
     "NMQ_N01",
     "NMR_N01",
     "ORF_W02",
-    "ORM_O01",
-    "ORR_O02",
     "ORU_W01",
-    "OSQ_Q06",
-    "OSR_Q06",
     "PGL_PC6",
     "PGL_PC7",
     "PGL_PC8",

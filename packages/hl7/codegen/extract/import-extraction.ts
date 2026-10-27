@@ -277,10 +277,19 @@ for (const e of index.filter((x) => x.status === "withdrawn")) {
 const baseNames = new Set(V2_5_1.messages.map((m) => nameOf(m)));
 const withdrawnByIndex = [...baseNames].filter((n) => indexWithdrawn.has(n) && !generatedNames.has(n));
 const skippedNames = [...skipped.keys()];
-const missing = [...baseNames].filter((n) => !generatedNames.has(n) && !indexWithdrawn.has(n) && !skipped.has(n));
+// Withdrawn as printed in the chapter text (checked against the chapter 4 PDF by hand; the index does not list them).
+const PDF_WITHDRAWN: Record<string, string> = {
+  ORM_O01: "V291_CH04_Orders p.6: 'withdrawn as of v2.7'",
+  ORR_O02: "V291_CH04_Orders p.6: 'withdrawn as of v2.7'",
+  OSQ_Q06: "V291_CH04_Orders p.7: 'withdrawn as of v2.7', refer to chapter 5",
+  OSR_Q06: "V291_CH04_Orders p.7: 'withdrawn as of v2.7', refer to chapter 5",
+};
+const withdrawnByText = Object.keys(PDF_WITHDRAWN).filter((n) => baseNames.has(n) && !generatedNames.has(n) && !indexWithdrawn.has(n));
+const missing = [...baseNames].filter((n) => !generatedNames.has(n) && !indexWithdrawn.has(n) && !skipped.has(n) && !(n in PDF_WITHDRAWN));
 const constName = `V${schemaVersion.replace(/\./g, "_")}`;
 const list = (names: string[]) => names.sort().map((n) => `    ${JSON.stringify(n)},`).join("\n");
-const withdrawnList = [...withdrawnByIndex, ...skippedNames, ...missing];
+const withdrawnList = [...withdrawnByIndex, ...withdrawnByText, ...skippedNames, ...missing];
+for (const n of withdrawnByText) notes.skipped.push(`${n}: withdrawn, ${PDF_WITHDRAWN[n]}`);
 notes.skipped.push(`withdrawn in the index: ${withdrawnByIndex.sort().join(" ")}`);
 notes.events.push(`absent from the extraction (not in the index, not generated): ${missing.sort().join(" ")}`);
 writeFileSync(join(SCHEMA_DIR, "version.ts"), `import type { VersionSchema } from "../../../src/types/schema";
@@ -301,6 +310,8 @@ export const ${constName}: VersionSchema = {
   withdrawnMessages: [
     // Withdrawn in the 2.9.1 index.
 ${list(withdrawnByIndex)}
+    // Withdrawn as printed in the chapter text, not in the index.
+${list(withdrawnByText)}
     // Not generated: the schema type cannot express their structure yet (choice of groups, unnamed group); see IMPORT.md.
 ${list(skippedNames)}
     // Absent from the extraction: not in the 2.9.1 index and not generated. They may be withdrawn earlier or missed by the extraction; check the PDFs before relying on them.
