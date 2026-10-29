@@ -24,5 +24,43 @@
       "max": "*",
       "reason": "2026-10-29: hl7.eu std28/ch04a.html prints the TIMING_ENCODED group inside the RXV group of RDE^O25 as \"{\" ... \"}]\" (its end row unlabelled, the brackets do not pair); Caristix 2.8 and HAPI v28 agree on a required, repeating group ({TIMING_ENCODED}) and the rule takes their shape against hl7.eu. The ORDER-level TIMING_ENCODED of the same name is already required and repeating."
     }
-  ]
+  ],
+  "sharedStructure": {
+    "QBP_Z75": {
+      "structure": "QBP_Q13",
+      "reason": "2026-10-29: official HL7 v2.8 chapter 5 (V28_CH05_Queries.pdf), 5.9.7.2 MPI Query Profile \u2013 Non query by example version, p. 100: \"The message structure for QBP^Z75^QPB_Q13 can be found in 5.3.1.2. Use the QBP^Q13^QPB_Q13 Message structure.\" hl7.eu std28/ch05.html prints no table for it."
+    },
+    "QBP_Z77": {
+      "structure": "QBP_Q13",
+      "reason": "2026-10-29: official HL7 v2.8 chapter 5 (V28_CH05_Queries.pdf), 5.9.7.1 MPI Query Profile using QBE variant, p. 97: \"The message structure for QBP^Z77^QPB_Q13 can be found in 5.3.1.2. Use the QBP^Q13^QPB_Q13 Message structure.\" hl7.eu std28/ch05.html prints no table for it."
+    },
+    "QBP_Z79": {
+      "structure": "QBP_Q15",
+      "reason": "2026-10-29: official HL7 v2.8 chapter 5 (V28_CH05_Queries.pdf), 5.9.6.1 Dispense history display Query Profile using QSC variant, p. 93: \"The message structure for QBP^Z79^QPB_Q15 can be found in 5.4.3. Use the QBP^Q15^QPB_Q15 Message structure.\" hl7.eu std28/ch05.html prints no table for it."
+    },
+    "QBP_Z81": {
+      "structure": "QBP_Q11",
+      "reason": "2026-10-29: official HL7 v2.8 chapter 5 (V28_CH05_Queries.pdf), 5.9.1.1.1 Associated dispense history Query Profile, p. 61: \"The message structure for QBP^Z81^QPB_Q11 can be found in 5.4.1. Use the QBP^Q11^QPB_Q11 Message structure.\" hl7.eu std28/ch05.html prints no table for it."
+    },
+    "QBP_Z85": {
+      "structure": "QBP_Q11",
+      "reason": "2026-10-29: official HL7 v2.8 chapter 5 (V28_CH05_Queries.pdf), 5.9.1.2.1 Comprehensive pharmacy information Query Profile, p. 66: \"The message structure for QBP^Z85^QPB_Q11 can be found in 5.4.1. Use the QBP^Q11^QPB_Q11 Message structure.\" hl7.eu std28/ch05.html prints no table for it."
+    },
+    "QBP_Z91": {
+      "structure": "QBP_Q13",
+      "reason": "2026-10-29: official HL7 v2.8 chapter 5 (V28_CH05_Queries.pdf), 5.9.3.1.1 MPI Query Profile, p. 80: \"The message structure for QBP^Z91^QPB_Q13 can be found in 5.3.1.2. Use the QBP^Q13^QPB_Q13 Message structure.\" hl7.eu std28/ch05.html prints no table for it."
+    },
+    "QBP_Z93": {
+      "structure": "QBP_Q13",
+      "reason": "2026-10-29: official HL7 v2.8 chapter 5 (V28_CH05_Queries.pdf), 5.9.3.2.1 QBP/RTB dispense history Query Profile, p. 83: \"The message structure for QBP^Z93^QPB_Q13 can be found in 5.3.1.2. Use the QBP^Q13^QPB_Q13 Message structure.\" hl7.eu std28/ch05.html prints no table for it."
+    },
+    "QBP_Z95": {
+      "structure": "QBP_Q13",
+      "reason": "2026-10-29: official HL7 v2.8 chapter 5 (V28_CH05_Queries.pdf), 5.9.4.1.1 QBP/RTB dispense history Query Profile using QSC variant, p. 86: \"The message structure for QBP^Z95^QPB_Q13 can be found in 5.3.1.2. Use the QBP^Q13^QPB_Q13 Message structure.\" hl7.eu std28/ch05.html prints no table for it."
+    },
+    "QBP_Z97": {
+      "structure": "QBP_Q15",
+      "reason": "2026-10-29: official HL7 v2.8 chapter 5 (V28_CH05_Queries.pdf), 5.9.5.1 Dispense history display Query Profile, p. 90: \"The message structure for QBP^Z97^QPB_Q15 can be found in 5.4.3. Use the QBP^Q15^QPB_Q15 Message structure.\" hl7.eu std28/ch05.html prints no table for it."
+    }
+  }
 }

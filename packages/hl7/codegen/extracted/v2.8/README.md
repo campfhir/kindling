@@ -5,8 +5,10 @@ Built by `codegen/extract/from-hl7eu.ts v2.8` from the hl7.eu pages that `codege
 by hand. hl7.eu republishes the standard, so this is not the official PDF. The independent check is the segment and
 message ledgers against Caristix and HAPI.
 
+Chapters read from the official PDF instead of the hl7.eu page (`codegen/extract/pdf-chapter.ts`; name and SHA-256 in `codegen/validate/sources/v2.8-hl7org.tsv`): ch16.htm (hl7.org V28_CH16_eClaims.pdf).
+
 - Segments: 181, fields: 2654.
-- Message tables: 273 (plus 126 per-event ACK tables, the general acknowledgment, not extracted), structures: 189, events in the index: 364, event tables that differ from their primary: 4.
+- Message tables: 287 (plus 116 per-event ACK tables, the general acknowledgment, not extracted), structures: 203, events in the index: 378, event tables that differ from their primary: 4.
 - Withdrawn sections (a heading followed by an "Attention ... withdrawn" note): 3.3.30 ADT/ACK - Merge Person Information (Event A30) (ch03.htm); 3.3.34 ADT/ACK - Merge Patient Information - Patient ID Only (Event A34) (ch03.htm); 3.3.35 ADT/ACK - Merge Patient Information - Account Number Only (Event A35) (ch03.htm); 3.3.36 ADT/ACK - Merge Patient Information - Patient ID & Account Number (Event A36) (ch03.htm); 3.3.39 ADT/ACK - Merge Person - Patient ID (Event A39) (ch03.htm); 3.3.46 ADT/ACK - Change Patient ID (Event A46) (ch03.htm); 3.3.48 ADT/ACK - Change Alternate Patient ID (Event A48) (ch03.htm); 4.4.1 ORM - general order message (ch04.htm); 4.4.2 ORR - general order response message response to any ORM (ch04.htm); 4.4.3 OSQ/OSR- query response for order (ch04.htm); 7.3.2 OUL - Unsolicited Laboratory Observation Message (Event R21) (ch07.htm); 7.3.3 QRY/ORF - Query for Results of Observation (Events R02, R04) (ch07.htm).
 - Withdrawn segments: 6.5.10 UB1 - Uniform Billing 1 Segment (ch06.htm).
 - Tables with no rows (cross-references): QBP^Q25.
@@ -46,21 +48,23 @@ message ledgers against Caristix and HAPI.
 - MF_SITE_DEFINED: a group of MFE and a placeholder row is read as MFE alone
 - PGL^PC6-PC8^PGL_PC6: the choice "OBR | etc." is read as <OBR|RQD|RQ1|RXO|ODS|ODT>
 - QBP^Q25^QBP_Q21: rows printed without a table element after the caption, read as the table
+- INVOICE_INFORMATION_SUBMIT: a choice of one group ("<" ... ">" with no "|") is read as that group
+- INVOICE_INFORMATION_CANCEL: a choice of one group ("<" ... ">" with no "|") is read as that group
+- QUERY_INFORMATION: a choice of one group ("<" ... ">" with no "|") is read as that group
+- QUERY_ACK_IPR: a choice of one group ("<" ... ">" with no "|") is read as that group
+- REASSESSMENT_REQUEST_INFO: a choice of one group ("<" ... ">" with no "|") is read as that group
+- PAYMENT_REMITTANCE_HEADER_INFO: a choice of one group ("<" ... ">" with no "|") is read as that group
+- AUTHORIZATION_REQUEST: a choice of one group ("<" ... ">" with no "|") is read as that group
+- QUERY: a choice of one group ("<" ... ">" with no "|") is read as that group
+- QUERY_ACK: a choice of one group ("<" ... ">" with no "|") is read as that group
+- AUTHORIZATION_RESPONSE_INFO: a choice of one group ("<" ... ">" with no "|") is read as that group
+- ANTI-MICROBIAL_DEVICE_DATA: a choice of one group ("<" ... ">" with no "|") is read as that group
+- ANTI-MICROBIAL_DEVICE_CYCLE_DATA: a choice of one group ("<" ... ">" with no "|") is read as that group
 
 ## Tables printed twice
 - QBP^Znn: printed in ch05.htm and ch05.htm; kept ch05.htm; the prints DIFFER
 - RTB^Znn: printed in ch05.htm and ch05.htm; kept ch05.htm; the prints DIFFER
 - RDY^Znn: printed in ch05.htm and ch05.htm; kept ch05.htm; the prints are identical
-- SLR^S28: printed in ch16.htm and ch17.htm; kept ch16.htm; the prints are identical
-- SLR^S29: printed in ch16.htm and ch17.htm; kept ch16.htm; the prints are identical
-- STI^S30: printed in ch16.htm and ch17.htm; kept ch16.htm; the prints are identical
-- SDR^S31: printed in ch16.htm and ch17.htm; kept ch16.htm; the prints are identical
-- SMD^S32: printed in ch16.htm and ch17.htm; kept ch16.htm; the prints are identical
-- STC^S33: printed in ch16.htm and ch17.htm; kept ch16.htm; the prints are identical
-- SLN^S34: printed in ch16.htm and ch17.htm; kept ch16.htm; the prints are identical
-- SLN^S35: printed in ch16.htm and ch17.htm; kept ch16.htm; the prints are identical
-- SDN^S36: printed in ch16.htm and ch17.htm; kept ch16.htm; the prints are identical
-- SCN^S37: printed in ch16.htm and ch17.htm; kept ch16.htm; the prints are identical
 
 ## Placeholder rows
 - DBC_O42: Segment

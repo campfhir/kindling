@@ -39,8 +39,10 @@ How the HL7 facts in `@campfhir/hl7` were checked, and against what.
 - [`v2.8-segment-ledger.md`](v2.8-segment-ledger.md) and [`v2.8-message-ledger.md`](v2.8-message-ledger.md):
   the same for 2.8, against all three sources. Segment notes are in `codegen/validate/ledger-v28-notes.json`
   (ZL7, the "proposed example only" Z-segment, has no fields). RDE^O11/O25 take the `{TIMING_ENCODED}` Caristix and
-  HAPI agree on inside the RXV group (`codegen/extracted/v2.8/overrides.json`). The events hl7.eu v2.8 prints no
-  table for (chapter 16, QBP^Z75–Z97) are not in 2.8; see the roadmap.
+  HAPI agree on inside the RXV group (`codegen/extracted/v2.8/overrides.json`). hl7.eu v2.8 has no chapter 16, so
+  that chapter is read from the official PDF (`codegen/extract/pdf-chapter.ts`); in the message ledger it takes
+  the place of the hl7.eu page (the "hl7.org" row of its sources table). QBP^Z75–Z97 use the structure chapter 5
+  names for each (`sharedStructure` in the overrides).
 - [`v2.3-hl7eu-sweep.md`](v2.3-hl7eu-sweep.md) and
   [`v2.3-hapi-crosscheck.md`](v2.3-hapi-crosscheck.md): the first sweeps (2026-10-19), superseded
   by the ledger and kept for the history of the decisions.

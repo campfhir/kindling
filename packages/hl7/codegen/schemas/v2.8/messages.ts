@@ -5077,11 +5077,336 @@ const v2_8_PMU_B08_STRUCTURE: StructureItem[] = [
   optList("CER"),
 ];
 
+const v2_8_EHC_E01_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  optList("UAC"),
+  group("INVOICE_INFORMATION_SUBMIT", "required", "single", [
+    req("IVC"),
+    opt("PYE"),
+    optList("CTD"),
+    opt("AUT"),
+    optList("LOC"),
+    optList("PRT"),
+    optList("ROL"),
+    group("PRODUCT_SERVICE_SECTION", "required", "repeating", [
+      req("PSS"),
+      group("PRODUCT_SERVICE_GROUP", "required", "repeating", [
+        req("PSG"),
+        optList("LOC"),
+        optList("PRT"),
+        optList("ROL"),
+        group("PATIENT_INFO", "optional", "repeating", [
+          req("PID"),
+          opt("PV1"),
+          opt("PV2"),
+          optList("ACC"),
+          group("INSURANCE", "required", "repeating", [
+            req("IN1"),
+            opt("IN2"),
+          ]),
+          group("DIAGNOSIS", "optional", "repeating", [
+            req("DG1"),
+            optList("NTE"),
+          ]),
+          optList("OBX"),
+        ]),
+        group("PRODUCT_SERVICE_LINE_ITEM", "required", "repeating", [
+          req("PSL"),
+          optList("NTE"),
+          optList("ADJ"),
+          opt("AUT"),
+          optList("LOC"),
+          optList("PRT"),
+          optList("ROL"),
+        ]),
+        group("PROCEDURE", "optional", "repeating", [
+          req("PR1"),
+          optList("NTE"),
+          optList("PRT"),
+          optList("ROL"),
+        ]),
+        optList("IPR"),
+      ]),
+    ]),
+  ]),
+];
+
+const v2_8_EHC_E02_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  optList("UAC"),
+  group("INVOICE_INFORMATION_CANCEL", "required", "single", [
+    req("IVC"),
+    req("PYE"),
+    optList("CTD"),
+    optList("NTE"),
+    group("PRODUCT_SERVICE_SECTION", "optional", "repeating", [
+      req("PSS"),
+      group("PSG", "optional", "repeating", [
+        req("PSG"),
+        optList("PSL"),
+      ]),
+    ]),
+  ]),
+];
+
+const v2_8_QBP_E03_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  optList("UAC"),
+  group("QUERY_INFORMATION", "required", "single", [
+    req("QPD"),
+    req("RCP"),
+  ]),
+];
+
+const v2_8_RSP_E03_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  optList("UAC"),
+  req("MSA"),
+  optList("ERR"),
+  group("QUERY_ACK_IPR", "required", "single", [
+    req("QAK"),
+    req("QPD"),
+    optList("IPR"),
+  ]),
+];
+
+const v2_8_EHC_E04_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  optList("UAC"),
+  group("REASSESSMENT_REQUEST_INFO", "required", "single", [
+    req("IVC"),
+    optList("NTE"),
+    group("PRODUCT_SERVICE_SECTION", "optional", "repeating", [
+      req("PSS"),
+      group("PRODUCT_SERVICE_GROUP", "optional", "repeating", [
+        req("PSG"),
+        optList("PSL"),
+      ]),
+    ]),
+  ]),
+];
+
+const v2_8_EHC_E10_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  optList("UAC"),
+  req("MSA"),
+  optList("ERR"),
+  group("INVOICE_PROCESSING_RESULTS_INFO", "required", "repeating", [
+    req("IPR"),
+    optList("NTE"),
+    req("PYE"),
+    req("IN1"),
+    opt("IN2"),
+    req("IVC"),
+    group("PSS_GROUP", "required", "repeating", [
+      req("PSS"),
+      group("PSG_GROUP", "required", "repeating", [
+        req("PSG"),
+        group("PRODUCT_SERVICE_LINE_INFO", "required", "repeating", [
+          req("PSL"),
+          optList("ADJ"),
+        ]),
+      ]),
+    ]),
+  ]),
+];
+
+const v2_8_EHC_E12_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  optList("UAC"),
+  req("RFI"),
+  optList("CTD"),
+  req("IVC"),
+  req("PSS"),
+  req("PSG"),
+  opt("PID"),
+  optList("PSL"),
+  group("REQUEST", "required", "repeating", [
+    opt("CTD"),
+    req("OBR"),
+    opt("NTE"),
+    optList("OBX"),
+  ]),
+];
+
+const v2_8_EHC_E13_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  optList("UAC"),
+  req("MSA"),
+  optList("ERR"),
+  req("RFI"),
+  optList("CTD"),
+  req("IVC"),
+  req("PSS"),
+  req("PSG"),
+  opt("PID"),
+  opt("PSL"),
+  group("REQUEST", "required", "repeating", [
+    opt("CTD"),
+    req("OBR"),
+    opt("NTE"),
+    group("RESPONSE", "required", "repeating", [
+      req("OBX"),
+      opt("NTE"),
+      opt("TXA"),
+    ]),
+  ]),
+];
+
+const v2_8_EHC_E15_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  optList("UAC"),
+  group("PAYMENT_REMITTANCE_HEADER_INFO", "required", "single", [
+    req("PMT"),
+    req("PYE"),
+  ]),
+  group("PAYMENT_REMITTANCE_DETAIL_INFO", "optional", "repeating", [
+    req("IPR"),
+    req("IVC"),
+    group("PRODUCT_SERVICE_SECTION", "required", "repeating", [
+      req("PSS"),
+      group("PRODUCT_SERVICE_GROUP", "required", "repeating", [
+        req("PSG"),
+        group("PSL_ITEM_INFO", "required", "repeating", [
+          req("PSL"),
+          optList("ADJ"),
+        ]),
+      ]),
+    ]),
+  ]),
+  group("ADJUSTMENT_PAYEE", "optional", "repeating", [
+    req("ADJ"),
+    opt("PRT"),
+    opt("ROL"),
+  ]),
+];
+
+const v2_8_EHC_E20_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  optList("UAC"),
+  group("AUTHORIZATION_REQUEST", "required", "single", [
+    req("IVC"),
+    reqList("CTD"),
+    optList("LOC"),
+    optList("ROL"),
+    group("PAT_INFO", "required", "repeating", [
+      req("PID"),
+      optList("ACC"),
+      group("INSURANCE", "required", "repeating", [
+        req("IN1"),
+        opt("IN2"),
+      ]),
+      group("DIAGNOSIS", "optional", "repeating", [
+        req("DG1"),
+        optList("NTE"),
+      ]),
+      optList("OBX"),
+    ]),
+    group("PSL_ITEM_INFO", "required", "repeating", [
+      req("PSL"),
+      optList("NTE"),
+      optList("ADJ"),
+      optList("LOC"),
+      optList("PRT"),
+      optList("ROL"),
+    ]),
+  ]),
+];
+
+const v2_8_EHC_E21_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  optList("UAC"),
+  group("AUTHORIZATION_REQUEST", "required", "single", [
+    req("IVC"),
+    group("PSL_ITEM_INFO", "required", "repeating", [
+      req("PSL"),
+      optList("NTE"),
+      opt("AUT"),
+    ]),
+  ]),
+];
+
+const v2_8_QBP_E22_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  optList("UAC"),
+  group("QUERY", "required", "single", [
+    req("QPD"),
+    req("RCP"),
+  ]),
+];
+
+const v2_8_RSP_E22_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  optList("UAC"),
+  req("MSA"),
+  optList("ERR"),
+  group("QUERY_ACK", "required", "single", [
+    req("QAK"),
+    req("QPD"),
+    group("AUTHORIZATION_INFO", "optional", "single", [
+      req("IVC"),
+      req("PSG"),
+      group("PSL_ITEM_INFO", "required", "repeating", [
+        req("PSL"),
+      ]),
+    ]),
+  ]),
+];
+
+const v2_8_EHC_E24_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  optList("UAC"),
+  req("MSA"),
+  optList("ERR"),
+  group("AUTHORIZATION_RESPONSE_INFO", "required", "single", [
+    req("IVC"),
+    group("PSL_ITEM_INFO", "required", "repeating", [
+      req("PSL"),
+      opt("AUT"),
+      optList("ADJ"),
+    ]),
+  ]),
+];
+
 const v2_8_SLR_S28_STRUCTURE: StructureItem[] = [
   req("MSH"),
   optList("SFT"),
   opt("UAC"),
   reqList("SLT"),
+];
+
+const v2_8_SDR_S31_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  group("ANTI_MICROBIAL_DEVICE_DATA", "required", "single", [
+    req("SDD"),
+    optList("SCD"),
+  ]),
+];
+
+const v2_8_SMD_S32_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  group("ANTI_MICROBIAL_DEVICE_CYCLE_DATA", "required", "single", [
+    req("SDD"),
+    optList("SCD"),
+  ]),
 ];
 
 const v2_8_STC_S33_STRUCTURE: StructureItem[] = [
@@ -5396,10 +5721,35 @@ export const V2_8_MESSAGES: MessageSchema[] = [
   { messageType: "RSP", triggerEvent: "K25", version: "2.8", structure: v2_8_RSP_K25_STRUCTURE },
   { messageType: "PMU", triggerEvent: "B07", version: "2.8", structure: v2_8_PMU_B07_STRUCTURE },
   { messageType: "PMU", triggerEvent: "B08", version: "2.8", structure: v2_8_PMU_B08_STRUCTURE },
+  { messageType: "EHC", triggerEvent: "E01", version: "2.8", structure: v2_8_EHC_E01_STRUCTURE },
+  { messageType: "EHC", triggerEvent: "E02", version: "2.8", structure: v2_8_EHC_E02_STRUCTURE },
+  { messageType: "QBP", triggerEvent: "E03", version: "2.8", structure: v2_8_QBP_E03_STRUCTURE },
+  { messageType: "RSP", triggerEvent: "E03", version: "2.8", structure: v2_8_RSP_E03_STRUCTURE },
+  { messageType: "EHC", triggerEvent: "E04", version: "2.8", structure: v2_8_EHC_E04_STRUCTURE },
+  { messageType: "EHC", triggerEvent: "E10", version: "2.8", structure: v2_8_EHC_E10_STRUCTURE },
+  { messageType: "EHC", triggerEvent: "E12", version: "2.8", structure: v2_8_EHC_E12_STRUCTURE },
+  { messageType: "EHC", triggerEvent: "E13", version: "2.8", structure: v2_8_EHC_E13_STRUCTURE },
+  { messageType: "EHC", triggerEvent: "E15", version: "2.8", structure: v2_8_EHC_E15_STRUCTURE },
+  { messageType: "EHC", triggerEvent: "E20", version: "2.8", structure: v2_8_EHC_E20_STRUCTURE },
+  { messageType: "EHC", triggerEvent: "E21", version: "2.8", structure: v2_8_EHC_E21_STRUCTURE },
+  { messageType: "QBP", triggerEvent: "E22", version: "2.8", structure: v2_8_QBP_E22_STRUCTURE },
+  { messageType: "RSP", triggerEvent: "E22", version: "2.8", structure: v2_8_RSP_E22_STRUCTURE },
+  { messageType: "EHC", triggerEvent: "E24", version: "2.8", structure: v2_8_EHC_E24_STRUCTURE },
   { messageType: "SLR", triggerEvent: "S28", version: "2.8", structure: v2_8_SLR_S28_STRUCTURE },
   { messageType: "SLR", triggerEvent: "S29", version: "2.8", structure: v2_8_SLR_S28_STRUCTURE, baseMessage: "SLR_S28" },
   { messageType: "STI", triggerEvent: "S30", version: "2.8", structure: v2_8_SLR_S28_STRUCTURE, baseMessage: "SLR_S28" },
   { messageType: "SLN", triggerEvent: "S34", version: "2.8", structure: v2_8_SLR_S28_STRUCTURE, baseMessage: "SLR_S28" },
   { messageType: "SLN", triggerEvent: "S35", version: "2.8", structure: v2_8_SLR_S28_STRUCTURE, baseMessage: "SLR_S28" },
+  { messageType: "SDR", triggerEvent: "S31", version: "2.8", structure: v2_8_SDR_S31_STRUCTURE },
+  { messageType: "SDN", triggerEvent: "S36", version: "2.8", structure: v2_8_SDR_S31_STRUCTURE, baseMessage: "SDR_S31" },
+  { messageType: "SMD", triggerEvent: "S32", version: "2.8", structure: v2_8_SMD_S32_STRUCTURE },
+  { messageType: "SCN", triggerEvent: "S37", version: "2.8", structure: v2_8_SMD_S32_STRUCTURE, baseMessage: "SMD_S32" },
   { messageType: "STC", triggerEvent: "S33", version: "2.8", structure: v2_8_STC_S33_STRUCTURE },
+  { messageType: "QBP", triggerEvent: "Z75", version: "2.8", structure: v2_8_QBP_Z99_STRUCTURE, baseMessage: "QBP_Z99" },
+  { messageType: "QBP", triggerEvent: "Z77", version: "2.8", structure: v2_8_QBP_Z99_STRUCTURE, baseMessage: "QBP_Z99" },
+  { messageType: "QBP", triggerEvent: "Z79", version: "2.8", structure: v2_8_QBP_Q15_STRUCTURE, baseMessage: "QBP_Q15" },
+  { messageType: "QBP", triggerEvent: "Z91", version: "2.8", structure: v2_8_QBP_Z99_STRUCTURE, baseMessage: "QBP_Z99" },
+  { messageType: "QBP", triggerEvent: "Z93", version: "2.8", structure: v2_8_QBP_Z99_STRUCTURE, baseMessage: "QBP_Z99" },
+  { messageType: "QBP", triggerEvent: "Z95", version: "2.8", structure: v2_8_QBP_Z99_STRUCTURE, baseMessage: "QBP_Z99" },
+  { messageType: "QBP", triggerEvent: "Z97", version: "2.8", structure: v2_8_QBP_Q15_STRUCTURE, baseMessage: "QBP_Q15" },
 ];

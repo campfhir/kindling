@@ -1,0 +1,262 @@
+{
+  "structure": "EHC_E20",
+  "messageType": "EHC",
+  "triggerEvent": "E20",
+  "version": "2.8",
+  "description": "Submit Authorization Request",
+  "title": "Submit Authorization Request",
+  "source": {
+    "pdf": "hl7.org V28_CH16_eClaims.pdf",
+    "pages": null,
+    "table": "EHC^E20^EHC_E20: Submit Authorization Request"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E20"
+      ],
+      "eventPrinted": "E20",
+      "pdf": "hl7.org V28_CH16_eClaims.pdf",
+      "page": null,
+      "table": "EHC^E20^EHC_E20: Submit Authorization Request",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "AUTHORIZATION_REQUEST",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "IVC",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Invoice Header",
+          "chapterRef": "16"
+        },
+        {
+          "kind": "segment",
+          "name": "CTD",
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Contact Data"
+        },
+        {
+          "kind": "segment",
+          "name": "LOC",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Location Identification"
+        },
+        {
+          "kind": "segment",
+          "name": "ROL",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Provider Identification"
+        },
+        {
+          "kind": "group",
+          "name": "PAT_INFO",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PID",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Person Identification"
+            },
+            {
+              "kind": "segment",
+              "name": "ACC",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Accident"
+            },
+            {
+              "kind": "group",
+              "name": "INSURANCE",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "IN1",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Insurance"
+                },
+                {
+                  "kind": "segment",
+                  "name": "IN2",
+                  "minOccurs": 0,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Insurance Additional Info"
+                }
+              ],
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "group",
+              "name": "DIAGNOSIS",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "DG1",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Diagnosis"
+                },
+                {
+                  "kind": "segment",
+                  "name": "NTE",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Notes and Comments"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Observation"
+            }
+          ],
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "PSL_ITEM_INFO",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PSL",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Product/Service Line Item"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes and Comments"
+            },
+            {
+              "kind": "segment",
+              "name": "ADJ",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Adjustment"
+            },
+            {
+              "kind": "segment",
+              "name": "LOC",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Location Identification"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Participation"
+            },
+            {
+              "kind": "segment",
+              "name": "ROL",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Kept for backwards compatibility only. PRT and ROL should not both be used."
+            }
+          ],
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

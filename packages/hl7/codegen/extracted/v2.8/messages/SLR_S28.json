@@ -5,9 +5,9 @@
   "version": "2.8",
   "description": "Request New Sterilization",
   "title": "Request New Sterilization",
-  "sectionHeading": "16.5.1 SLR/ACK - Request New Sterilization Lot (Event S28)",
+  "sectionHeading": "17.5.1 SLR/ACK - Request New Sterilization Lot (Event S28)",
   "source": {
-    "pdf": "hl7.eu std28/ch16.html",
+    "pdf": "hl7.eu std28/ch17.html",
     "pages": null,
     "table": "SLR^S28^SLR_S28: Request New Sterilization"
   },
@@ -17,7 +17,7 @@
         "S28"
       ],
       "eventPrinted": "S28",
-      "pdf": "hl7.eu std28/ch16.html",
+      "pdf": "hl7.eu std28/ch17.html",
       "page": null,
       "table": "SLR^S28^SLR_S28: Request New Sterilization",
       "identicalToPrimary": true
@@ -27,7 +27,7 @@
         "S29"
       ],
       "eventPrinted": "S29",
-      "pdf": "hl7.eu std28/ch16.html",
+      "pdf": "hl7.eu std28/ch17.html",
       "page": null,
       "table": "SLR^S29^SLR_S28: Request Sterilization Lot Deletion",
       "identicalToPrimary": true
@@ -37,7 +37,7 @@
         "S30"
       ],
       "eventPrinted": "S30",
-      "pdf": "hl7.eu std28/ch16.html",
+      "pdf": "hl7.eu std28/ch17.html",
       "page": null,
       "table": "STI^S30^SLR_S28: Sterilization Item Request",
       "identicalToPrimary": true
@@ -47,7 +47,7 @@
         "S34"
       ],
       "eventPrinted": "S34",
-      "pdf": "hl7.eu std28/ch16.html",
+      "pdf": "hl7.eu std28/ch17.html",
       "page": null,
       "table": "SLN^S34^SLR_S28: Notification of New Sterilization Lot",
       "identicalToPrimary": true
@@ -57,7 +57,7 @@
         "S35"
       ],
       "eventPrinted": "S35",
-      "pdf": "hl7.eu std28/ch16.html",
+      "pdf": "hl7.eu std28/ch17.html",
       "page": null,
       "table": "SLN^S35^SLR_S28: Notification of Sterilization Lot Deletion",
       "identicalToPrimary": true

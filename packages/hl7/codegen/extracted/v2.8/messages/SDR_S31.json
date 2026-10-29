@@ -5,9 +5,9 @@
   "version": "2.8",
   "description": "Anti-Microbial Device Data Request",
   "title": "Anti-Microbial Device Data Request",
-  "sectionHeading": "16.5.4 SDR/ACK - Request Anti-Microbial Device Data (Event S31)",
+  "sectionHeading": "17.5.4 SDR/ACK - Request Anti-Microbial Device Data (Event S31)",
   "source": {
-    "pdf": "hl7.eu std28/ch16.html",
+    "pdf": "hl7.eu std28/ch17.html",
     "pages": null,
     "table": "SDR^S31^SDR_S31: Anti-Microbial Device Data Request"
   },
@@ -17,7 +17,7 @@
         "S31"
       ],
       "eventPrinted": "S31",
-      "pdf": "hl7.eu std28/ch16.html",
+      "pdf": "hl7.eu std28/ch17.html",
       "page": null,
       "table": "SDR^S31^SDR_S31: Anti-Microbial Device Data Request",
       "identicalToPrimary": true
@@ -27,7 +27,7 @@
         "S36"
       ],
       "eventPrinted": "S36",
-      "pdf": "hl7.eu std28/ch16.html",
+      "pdf": "hl7.eu std28/ch17.html",
       "page": null,
       "table": "SDN^S36^SDR_S31: Anti-Microbial Device Data Notification",
       "identicalToPrimary": true
@@ -65,37 +65,28 @@
       "chapterRef": "2"
     },
     {
-      "kind": "choice",
+      "kind": "group",
       "name": "ANTI-MICROBIAL_DEVICE_DATA",
-      "alternatives": [
+      "items": [
         {
-          "kind": "group",
-          "items": [
-            {
-              "kind": "segment",
-              "name": "SDD",
-              "minOccurs": 1,
-              "maxOccurs": 1,
-              "usage": null,
-              "page": null,
-              "description": "Sterilization Device",
-              "chapterRef": "17"
-            },
-            {
-              "kind": "segment",
-              "name": "SCD",
-              "minOccurs": 0,
-              "maxOccurs": "*",
-              "usage": null,
-              "page": null,
-              "description": "Sterilization Cycle",
-              "chapterRef": "17"
-            }
-          ],
+          "kind": "segment",
+          "name": "SDD",
           "minOccurs": 1,
           "maxOccurs": 1,
           "usage": null,
-          "page": null
+          "page": null,
+          "description": "Sterilization Device",
+          "chapterRef": "17"
+        },
+        {
+          "kind": "segment",
+          "name": "SCD",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Sterilization Cycle",
+          "chapterRef": "17"
         }
       ],
       "minOccurs": 1,

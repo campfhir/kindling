@@ -3081,22 +3081,134 @@
     "sectionHeading": "15.3.9 PMU/ACK - Revoke Certificate/Permission (Event B08)"
   },
   {
+    "structure": "EHC_E01",
+    "messageType": "EHC",
+    "triggerEvent": "E01",
+    "description": "Submit HealthCare Services Invoice",
+    "pdf": "hl7.org V28_CH16_eClaims.pdf",
+    "page": null
+  },
+  {
+    "structure": "EHC_E02",
+    "messageType": "EHC",
+    "triggerEvent": "E02",
+    "description": "Cancel HealthCare Services Invoice",
+    "pdf": "hl7.org V28_CH16_eClaims.pdf",
+    "page": null
+  },
+  {
+    "structure": "QBP_E03",
+    "messageType": "QBP",
+    "triggerEvent": "E03",
+    "description": "Query HealthCare Services Invoice",
+    "pdf": "hl7.org V28_CH16_eClaims.pdf",
+    "page": null
+  },
+  {
+    "structure": "RSP_E03",
+    "messageType": "RSP",
+    "triggerEvent": "E03",
+    "description": "HealthCare Services Invoice Query Response",
+    "pdf": "hl7.org V28_CH16_eClaims.pdf",
+    "page": null
+  },
+  {
+    "structure": "EHC_E04",
+    "messageType": "EHC",
+    "triggerEvent": "E04",
+    "description": "Re-Assess HealthCare Services Invoice Request",
+    "pdf": "hl7.org V28_CH16_eClaims.pdf",
+    "page": null
+  },
+  {
+    "structure": "EHC_E10",
+    "messageType": "EHC",
+    "triggerEvent": "E10",
+    "description": "Edit/Adjudication Results",
+    "pdf": "hl7.org V28_CH16_eClaims.pdf",
+    "page": null
+  },
+  {
+    "structure": "EHC_E12",
+    "messageType": "EHC",
+    "triggerEvent": "E12",
+    "description": "Request Additional Information",
+    "pdf": "hl7.org V28_CH16_eClaims.pdf",
+    "page": null
+  },
+  {
+    "structure": "EHC_E13",
+    "messageType": "EHC",
+    "triggerEvent": "E13",
+    "description": "Additional Information Response",
+    "pdf": "hl7.org V28_CH16_eClaims.pdf",
+    "page": null
+  },
+  {
+    "structure": "EHC_E15",
+    "messageType": "EHC",
+    "triggerEvent": "E15",
+    "description": "Payment/Remittance Advice",
+    "pdf": "hl7.org V28_CH16_eClaims.pdf",
+    "page": null
+  },
+  {
+    "structure": "EHC_E20",
+    "messageType": "EHC",
+    "triggerEvent": "E20",
+    "description": "Submit Authorization Request",
+    "pdf": "hl7.org V28_CH16_eClaims.pdf",
+    "page": null
+  },
+  {
+    "structure": "EHC_E21",
+    "messageType": "EHC",
+    "triggerEvent": "E21",
+    "description": "Cancel Authorization Request",
+    "pdf": "hl7.org V28_CH16_eClaims.pdf",
+    "page": null
+  },
+  {
+    "structure": "QBP_E22",
+    "messageType": "QBP",
+    "triggerEvent": "E22",
+    "description": "Query Authorization Request",
+    "pdf": "hl7.org V28_CH16_eClaims.pdf",
+    "page": null
+  },
+  {
+    "structure": "RSP_E22",
+    "messageType": "RSP",
+    "triggerEvent": "E22",
+    "description": "Authorization Request Query Response",
+    "pdf": "hl7.org V28_CH16_eClaims.pdf",
+    "page": null
+  },
+  {
+    "structure": "EHC_E24",
+    "messageType": "EHC",
+    "triggerEvent": "E24",
+    "description": "Authorization Response",
+    "pdf": "hl7.org V28_CH16_eClaims.pdf",
+    "page": null
+  },
+  {
     "structure": "SLR_S28",
     "messageType": "SLR",
     "triggerEvent": "S28",
     "description": "Request New Sterilization",
-    "pdf": "hl7.eu std28/ch16.html",
+    "pdf": "hl7.eu std28/ch17.html",
     "page": null,
-    "sectionHeading": "16.5.1 SLR/ACK - Request New Sterilization Lot (Event S28)"
+    "sectionHeading": "17.5.1 SLR/ACK - Request New Sterilization Lot (Event S28)"
   },
   {
     "structure": "SLR_S28",
     "messageType": "SLR",
     "triggerEvent": "S29",
     "description": "Request Sterilization Lot Deletion",
-    "pdf": "hl7.eu std28/ch16.html",
+    "pdf": "hl7.eu std28/ch17.html",
     "page": null,
-    "sectionHeading": "16.5.2 SLR/ACK - Request Sterilization Lot Deletion (Event S29)",
+    "sectionHeading": "17.5.2 SLR/ACK - Request Sterilization Lot Deletion (Event S29)",
     "sameAs": "S28"
   },
   {
@@ -3104,9 +3216,9 @@
     "messageType": "STI",
     "triggerEvent": "S30",
     "description": "Sterilization Item Request",
-    "pdf": "hl7.eu std28/ch16.html",
+    "pdf": "hl7.eu std28/ch17.html",
     "page": null,
-    "sectionHeading": "16.5.3 STI/ACK - Request Item (Event S30)",
+    "sectionHeading": "17.5.3 STI/ACK - Request Item (Event S30)",
     "sameAs": "S28"
   },
   {
@@ -3114,9 +3226,9 @@
     "messageType": "SLN",
     "triggerEvent": "S34",
     "description": "Notification of New Sterilization Lot",
-    "pdf": "hl7.eu std28/ch16.html",
+    "pdf": "hl7.eu std28/ch17.html",
     "page": null,
-    "sectionHeading": "16.6.2 SLN/ACK - Notification of New Sterilization Lot (Event S34)",
+    "sectionHeading": "17.6.2 SLN/ACK - Notification of New Sterilization Lot (Event S34)",
     "sameAs": "S28"
   },
   {
@@ -3124,9 +3236,9 @@
     "messageType": "SLN",
     "triggerEvent": "S35",
     "description": "Notification of Sterilization Lot Deletion",
-    "pdf": "hl7.eu std28/ch16.html",
+    "pdf": "hl7.eu std28/ch17.html",
     "page": null,
-    "sectionHeading": "16.6.3 SLN/ACK - Notification of Sterilization Lot Deletion (Event S35)",
+    "sectionHeading": "17.6.3 SLN/ACK - Notification of Sterilization Lot Deletion (Event S35)",
     "sameAs": "S28"
   },
   {
@@ -3134,18 +3246,18 @@
     "messageType": "SDR",
     "triggerEvent": "S31",
     "description": "Anti-Microbial Device Data Request",
-    "pdf": "hl7.eu std28/ch16.html",
+    "pdf": "hl7.eu std28/ch17.html",
     "page": null,
-    "sectionHeading": "16.5.4 SDR/ACK - Request Anti-Microbial Device Data (Event S31)"
+    "sectionHeading": "17.5.4 SDR/ACK - Request Anti-Microbial Device Data (Event S31)"
   },
   {
     "structure": "SDR_S31",
     "messageType": "SDN",
     "triggerEvent": "S36",
     "description": "Anti-Microbial Device Data Notification",
-    "pdf": "hl7.eu std28/ch16.html",
+    "pdf": "hl7.eu std28/ch17.html",
     "page": null,
-    "sectionHeading": "16.6.4 SDN/ACK - Notification of Anti-Microbial Device Data (Event S36)",
+    "sectionHeading": "17.6.4 SDN/ACK - Notification of Anti-Microbial Device Data (Event S36)",
     "sameAs": "S31"
   },
   {
@@ -3153,18 +3265,18 @@
     "messageType": "SMD",
     "triggerEvent": "S32",
     "description": "Anti-Microbial Device Cycle Data Request",
-    "pdf": "hl7.eu std28/ch16.html",
+    "pdf": "hl7.eu std28/ch17.html",
     "page": null,
-    "sectionHeading": "16.5.5 SMD/ACK - Request Anti-Microbial Device Cycle Data (Event S32)"
+    "sectionHeading": "17.5.5 SMD/ACK - Request Anti-Microbial Device Cycle Data (Event S32)"
   },
   {
     "structure": "SDR_S32",
     "messageType": "SCN",
     "triggerEvent": "S37",
     "description": "Anti-Microbial Device Cycle Data Notification",
-    "pdf": "hl7.eu std28/ch16.html",
+    "pdf": "hl7.eu std28/ch17.html",
     "page": null,
-    "sectionHeading": "16.6.5 SCN/ACK - Notification of Anti-Microbial Device Cycle Data (Event S37)",
+    "sectionHeading": "17.6.5 SCN/ACK - Notification of Anti-Microbial Device Cycle Data (Event S37)",
     "sameAs": "S32"
   },
   {
@@ -3172,9 +3284,9 @@
     "messageType": "STC",
     "triggerEvent": "S33",
     "description": "Sterilization Configuration Notification",
-    "pdf": "hl7.eu std28/ch16.html",
+    "pdf": "hl7.eu std28/ch17.html",
     "page": null,
-    "sectionHeading": "16.6.1 STC/ACK - Notification of Sterilization Configuration (Event S33)"
+    "sectionHeading": "17.6.1 STC/ACK - Notification of Sterilization Configuration (Event S33)"
   },
   {
     "structure": null,

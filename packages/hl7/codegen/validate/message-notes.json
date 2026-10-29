@@ -1395,6 +1395,41 @@
   }
 ,
   "v2.8": {
+    "EHC_E01": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single). Caristix makes the AUT of the product/service line repeat ([{AUT}]); the PDF prints [AUT]."
+    },
+    "EHC_E02": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single)."
+    },
+    "EHC_E04": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single). Caristix makes IVC optional and repeating ([{IVC}]); the PDF prints IVC."
+    },
+    "EHC_E15": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single). Caristix makes PMT optional and repeating ([{PMT}]); the PDF prints PMT."
+    },
+    "EHC_E20": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single). Caristix makes IVC repeat and PID and IN1 optional, and DIAGNOSIS single; the PDF prints IVC, PID, IN1 and \"[ --- DIAGNOSIS begin\" around \"{ DG1 [{NTE}] }\" ([{DIAGNOSIS}])."
+    },
+    "EHC_E21": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single)."
+    },
+    "EHC_E24": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single)."
+    },
     "MFK_M02": {
       "date": "2026-10-29",
       "accept": true,
@@ -1450,6 +1485,51 @@
       "accept": true,
       "note": "hl7.eu std28/ch12.html prints the order detail as \"OBR | etc.\"; Caristix 2.8 and HAPI v28 render the \"etc.\" as an unnamed placeholder (<OBR|Hxx>). The structure reads it, as in every earlier version, as the order detail choice <OBR|RQD|RQ1|RXO|ODS|ODT>; the sources agree on everything else."
     },
+    "QBP_E03": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single)."
+    },
+    "QBP_E22": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single)."
+    },
+    "QBP_Z75": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "No table of its own: the official HL7 v2.8 chapter 5 names the QBP_Q13 structure, printed in 5.3.1.2 as QBP^Z99^QBP_Q13 (codegen/extracted/v2.8/overrides.json sharedStructure); the structure equals that table. Caristix 2.8 has the generic query by parameter shape instead (a QBP placeholder group where 5.3.1.2 prints [PID], and no first [RDF]); hl7.eu prints no table and HAPI v28 has no QBP_Z75."
+    },
+    "QBP_Z77": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "No table of its own: the official HL7 v2.8 chapter 5 names the QBP_Q13 structure, printed in 5.3.1.2 as QBP^Z99^QBP_Q13 (codegen/extracted/v2.8/overrides.json sharedStructure); the structure equals that table. Caristix 2.8 has the generic query by parameter shape instead (a QBP placeholder group where 5.3.1.2 prints [PID], and no first [RDF]); hl7.eu prints no table and HAPI v28 has no QBP_Z77."
+    },
+    "QBP_Z79": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "No table of its own: the official HL7 v2.8 chapter 5 names the QBP_Q15 structure (5.4.3) (codegen/extracted/v2.8/overrides.json sharedStructure); the structure is QBP_Q15's, whose site-defined placeholder row ([ Hxx ]) is dropped as in every version. Caristix 2.8 keeps the placeholder; hl7.eu prints no table and HAPI v28 has no QBP_Z79."
+    },
+    "QBP_Z91": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "No table of its own: the official HL7 v2.8 chapter 5 names the QBP_Q13 structure, printed in 5.3.1.2 as QBP^Z99^QBP_Q13 (codegen/extracted/v2.8/overrides.json sharedStructure); the structure equals that table. Caristix 2.8 has the generic query by parameter shape instead (a QBP placeholder group where 5.3.1.2 prints [PID], and no first [RDF]); hl7.eu prints no table and HAPI v28 has no QBP_Z91."
+    },
+    "QBP_Z93": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "No table of its own: the official HL7 v2.8 chapter 5 names the QBP_Q13 structure, printed in 5.3.1.2 as QBP^Z99^QBP_Q13 (codegen/extracted/v2.8/overrides.json sharedStructure); the structure equals that table. Caristix 2.8 has the generic query by parameter shape instead (a QBP placeholder group where 5.3.1.2 prints [PID], and no first [RDF]); hl7.eu prints no table and HAPI v28 has no QBP_Z93."
+    },
+    "QBP_Z95": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "No table of its own: the official HL7 v2.8 chapter 5 names the QBP_Q13 structure, printed in 5.3.1.2 as QBP^Z99^QBP_Q13 (codegen/extracted/v2.8/overrides.json sharedStructure); the structure equals that table. Caristix 2.8 has the generic query by parameter shape instead (a QBP placeholder group where 5.3.1.2 prints [PID], and no first [RDF]); hl7.eu prints no table and HAPI v28 has no QBP_Z95."
+    },
+    "QBP_Z97": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "No table of its own: the official HL7 v2.8 chapter 5 names the QBP_Q15 structure (5.4.3) (codegen/extracted/v2.8/overrides.json sharedStructure); the structure is QBP_Q15's, whose site-defined placeholder row ([ Hxx ]) is dropped as in every version. Caristix 2.8 keeps the placeholder; hl7.eu prints no table and HAPI v28 has no QBP_Z97."
+    },
     "RDE_O11": {
       "date": "2026-10-29",
       "accept": true,
@@ -1499,6 +1579,36 @@
       "date": "2026-10-29",
       "accept": true,
       "note": "hl7.eu std28/ch11.html prints one table for RRI^I12-I15 (structure RRI_I12), so this event shares the RRI_I12 structure and has no hl7.eu table of its own; HAPI v28 has an RRI_I12 class and no event map entry for this event. Caristix 2.8 leaves out the [{PRT}] after OBX, as for RRI_I12, where hl7.eu and HAPI agree."
+    },
+    "RSP_E03": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single). Caristix makes QUERY_ACK_IPR optional; the PDF prints it required."
+    },
+    "RSP_E22": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single)."
+    },
+    "SCN_S37": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std28/ch17.html prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single)."
+    },
+    "SDN_S36": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std28/ch17.html prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single)."
+    },
+    "SDR_S31": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std28/ch17.html prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single)."
+    },
+    "SMD_S32": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std28/ch17.html prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single)."
     }
   }
 }

@@ -93,6 +93,16 @@ import { parseDRG_O43 } from "./DRG_O43.ts";
 import { parseEAC_U07 } from "./EAC_U07.ts";
 import { parseEAN_U09 } from "./EAN_U09.ts";
 import { parseEAR_U08 } from "./EAR_U08.ts";
+import { parseEHC_E01 } from "./EHC_E01.ts";
+import { parseEHC_E02 } from "./EHC_E02.ts";
+import { parseEHC_E04 } from "./EHC_E04.ts";
+import { parseEHC_E10 } from "./EHC_E10.ts";
+import { parseEHC_E12 } from "./EHC_E12.ts";
+import { parseEHC_E13 } from "./EHC_E13.ts";
+import { parseEHC_E15 } from "./EHC_E15.ts";
+import { parseEHC_E20 } from "./EHC_E20.ts";
+import { parseEHC_E21 } from "./EHC_E21.ts";
+import { parseEHC_E24 } from "./EHC_E24.ts";
 import { parseESR_U02 } from "./ESR_U02.ts";
 import { parseESU_U01 } from "./ESU_U01.ts";
 import { parseINR_U06 } from "./INR_U06.ts";
@@ -194,6 +204,8 @@ import { parsePMU_B05 } from "./PMU_B05.ts";
 import { parsePMU_B06 } from "./PMU_B06.ts";
 import { parsePMU_B07 } from "./PMU_B07.ts";
 import { parsePMU_B08 } from "./PMU_B08.ts";
+import { parseQBP_E03 } from "./QBP_E03.ts";
+import { parseQBP_E22 } from "./QBP_E22.ts";
 import { parseQBP_Q15 } from "./QBP_Q15.ts";
 import { parseQBP_Q21 } from "./QBP_Q21.ts";
 import { parseQBP_Q22 } from "./QBP_Q22.ts";
@@ -203,6 +215,13 @@ import { parseQBP_Q32 } from "./QBP_Q32.ts";
 import { parseQBP_Q33 } from "./QBP_Q33.ts";
 import { parseQBP_Q34 } from "./QBP_Q34.ts";
 import { parseQBP_Z73 } from "./QBP_Z73.ts";
+import { parseQBP_Z75 } from "./QBP_Z75.ts";
+import { parseQBP_Z77 } from "./QBP_Z77.ts";
+import { parseQBP_Z79 } from "./QBP_Z79.ts";
+import { parseQBP_Z91 } from "./QBP_Z91.ts";
+import { parseQBP_Z93 } from "./QBP_Z93.ts";
+import { parseQBP_Z95 } from "./QBP_Z95.ts";
+import { parseQBP_Z97 } from "./QBP_Z97.ts";
 import { parseQBP_Z99 } from "./QBP_Z99.ts";
 import { parseQCN_J01 } from "./QCN_J01.ts";
 import { parseQSB_Q16 } from "./QSB_Q16.ts";
@@ -246,6 +265,8 @@ import { parseRRI_I12 } from "./RRI_I12.ts";
 import { parseRRI_I13 } from "./RRI_I13.ts";
 import { parseRRI_I14 } from "./RRI_I14.ts";
 import { parseRRI_I15 } from "./RRI_I15.ts";
+import { parseRSP_E03 } from "./RSP_E03.ts";
+import { parseRSP_E22 } from "./RSP_E22.ts";
 import { parseRSP_K21 } from "./RSP_K21.ts";
 import { parseRSP_K22 } from "./RSP_K22.ts";
 import { parseRSP_K23 } from "./RSP_K23.ts";
@@ -267,6 +288,9 @@ import { parseRTB_Z78 } from "./RTB_Z78.ts";
 import { parseRTB_Z92 } from "./RTB_Z92.ts";
 import { parseRTB_Z94 } from "./RTB_Z94.ts";
 import { parseRTB_Z96 } from "./RTB_Z96.ts";
+import { parseSCN_S37 } from "./SCN_S37.ts";
+import { parseSDN_S36 } from "./SDN_S36.ts";
+import { parseSDR_S31 } from "./SDR_S31.ts";
 import { parseSIU_S12 } from "./SIU_S12.ts";
 import { parseSIU_S13 } from "./SIU_S13.ts";
 import { parseSIU_S14 } from "./SIU_S14.ts";
@@ -286,6 +310,7 @@ import { parseSLN_S34 } from "./SLN_S34.ts";
 import { parseSLN_S35 } from "./SLN_S35.ts";
 import { parseSLR_S28 } from "./SLR_S28.ts";
 import { parseSLR_S29 } from "./SLR_S29.ts";
+import { parseSMD_S32 } from "./SMD_S32.ts";
 import { parseSRM_S01 } from "./SRM_S01.ts";
 import { parseSRM_S02 } from "./SRM_S02.ts";
 import { parseSRM_S03 } from "./SRM_S03.ts";
@@ -409,6 +434,16 @@ export const MESSAGES = {
   EAC_U07: parseEAC_U07,
   EAN_U09: parseEAN_U09,
   EAR_U08: parseEAR_U08,
+  EHC_E01: parseEHC_E01,
+  EHC_E02: parseEHC_E02,
+  EHC_E04: parseEHC_E04,
+  EHC_E10: parseEHC_E10,
+  EHC_E12: parseEHC_E12,
+  EHC_E13: parseEHC_E13,
+  EHC_E15: parseEHC_E15,
+  EHC_E20: parseEHC_E20,
+  EHC_E21: parseEHC_E21,
+  EHC_E24: parseEHC_E24,
   ESR_U02: parseESR_U02,
   ESU_U01: parseESU_U01,
   INR_U06: parseINR_U06,
@@ -510,6 +545,8 @@ export const MESSAGES = {
   PMU_B06: parsePMU_B06,
   PMU_B07: parsePMU_B07,
   PMU_B08: parsePMU_B08,
+  QBP_E03: parseQBP_E03,
+  QBP_E22: parseQBP_E22,
   QBP_Q15: parseQBP_Q15,
   QBP_Q21: parseQBP_Q21,
   QBP_Q22: parseQBP_Q22,
@@ -519,6 +556,13 @@ export const MESSAGES = {
   QBP_Q33: parseQBP_Q33,
   QBP_Q34: parseQBP_Q34,
   QBP_Z73: parseQBP_Z73,
+  QBP_Z75: parseQBP_Z75,
+  QBP_Z77: parseQBP_Z77,
+  QBP_Z79: parseQBP_Z79,
+  QBP_Z91: parseQBP_Z91,
+  QBP_Z93: parseQBP_Z93,
+  QBP_Z95: parseQBP_Z95,
+  QBP_Z97: parseQBP_Z97,
   QBP_Z99: parseQBP_Z99,
   QCN_J01: parseQCN_J01,
   QSB_Q16: parseQSB_Q16,
@@ -562,6 +606,8 @@ export const MESSAGES = {
   RRI_I13: parseRRI_I13,
   RRI_I14: parseRRI_I14,
   RRI_I15: parseRRI_I15,
+  RSP_E03: parseRSP_E03,
+  RSP_E22: parseRSP_E22,
   RSP_K21: parseRSP_K21,
   RSP_K22: parseRSP_K22,
   RSP_K23: parseRSP_K23,
@@ -583,6 +629,9 @@ export const MESSAGES = {
   RTB_Z92: parseRTB_Z92,
   RTB_Z94: parseRTB_Z94,
   RTB_Z96: parseRTB_Z96,
+  SCN_S37: parseSCN_S37,
+  SDN_S36: parseSDN_S36,
+  SDR_S31: parseSDR_S31,
   SIU_S12: parseSIU_S12,
   SIU_S13: parseSIU_S13,
   SIU_S14: parseSIU_S14,
@@ -602,6 +651,7 @@ export const MESSAGES = {
   SLN_S35: parseSLN_S35,
   SLR_S28: parseSLR_S28,
   SLR_S29: parseSLR_S29,
+  SMD_S32: parseSMD_S32,
   SRM_S01: parseSRM_S01,
   SRM_S02: parseSRM_S02,
   SRM_S03: parseSRM_S03,
