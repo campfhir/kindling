@@ -15,7 +15,9 @@ import { findPackage, listPackages } from "./packages.mjs";
 
 const selected = process.argv.slice(2);
 const packages = selected.length ? selected.map(findPackage) : listPackages();
-const MAX_DIST_MB = 20;
+// Each HL7 version adds about 2 MB (v2.7: 21.3 MB in all); 40 leaves room for every release up to
+// v2.9.1 (about 32 MB), while a build change that doubles the output still fails.
+const MAX_DIST_MB = 40;
 
 /** Every file under dir, recursively, with its size. */
 function filesUnder(dir) {
