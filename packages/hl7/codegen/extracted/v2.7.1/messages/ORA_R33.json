@@ -1,0 +1,89 @@
+{
+  "structure": "ORA_R33",
+  "messageType": "ORA",
+  "triggerEvent": "R33",
+  "version": "2.7.1",
+  "description": "Observation Report Acknowledgement",
+  "title": "Observation Report Acknowledgement",
+  "sectionHeading": "7.3.7 ORA - Observation Report Acknowledgement (Event R33)",
+  "source": {
+    "pdf": "hl7.eu std271/ch07.html",
+    "pages": null,
+    "table": "ORA^R33^ORA_R33: Observation Report Acknowledgement"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "R33"
+      ],
+      "eventPrinted": "R33",
+      "pdf": "hl7.eu std271/ch07.html",
+      "page": null,
+      "table": "ORA^R33^ORA_R33: Observation Report Acknowledgement",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ORC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Common Order Information",
+      "chapterRef": "4"
+    }
+  ],
+  "variants": []
+}

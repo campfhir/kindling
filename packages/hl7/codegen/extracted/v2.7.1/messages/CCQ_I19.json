@@ -1,0 +1,109 @@
+{
+  "structure": "CCQ_I19",
+  "messageType": "CCQ",
+  "triggerEvent": "I19",
+  "version": "2.7.1",
+  "description": "Collaborative Care Referral",
+  "title": "Collaborative Care Referral",
+  "sectionHeading": "11.6.1 CCQ/CQU - Collaborative Care Query/Collaborative Care Query Update (Event I19)",
+  "source": {
+    "pdf": "hl7.eu std271/ch11.html",
+    "pages": null,
+    "table": "CCQ^I19^CCQ_I19: Collaborative Care Referral"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "I19"
+      ],
+      "eventPrinted": "I19",
+      "pdf": "hl7.eu std271/ch11.html",
+      "page": null,
+      "table": "CCQ^I19^CCQ_I19: Collaborative Care Referral",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "RF1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Referral Information",
+      "chapterRef": "11"
+    },
+    {
+      "kind": "group",
+      "name": "PROVIDER_CONTACT",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PRD",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Provider Data",
+          "chapterRef": "11"
+        },
+        {
+          "kind": "segment",
+          "name": "CTD",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Contact Data",
+          "chapterRef": "11"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "REL",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Relationship",
+      "chapterRef": "11"
+    }
+  ],
+  "variants": []
+}

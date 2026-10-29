@@ -1,0 +1,447 @@
+{
+  "structure": "RSP_Z82",
+  "messageType": "RSP",
+  "triggerEvent": "Z82",
+  "version": "2.7.1",
+  "description": "Response Grammar: Pharmacy Dispense Message",
+  "title": "Response Grammar: Pharmacy Dispense Message",
+  "source": {
+    "pdf": "hl7.eu std271/ch05.html",
+    "pages": null,
+    "table": "RSP^Z82^RSP_Z82: Response Grammar: Pharmacy Dispense Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Z82"
+      ],
+      "eventPrinted": "Z82",
+      "pdf": "hl7.eu std271/ch05.html",
+      "page": null,
+      "table": "RSP^Z82^RSP_Z82: Response Grammar: Pharmacy Dispense Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2.15.9"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2.15.12"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2.14.13"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgement",
+      "chapterRef": "2.15.8"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Error",
+      "chapterRef": "2.15.5"
+    },
+    {
+      "kind": "segment",
+      "name": "QAK",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Acknowledgement",
+      "chapterRef": "5.5.2"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Parameter Definition",
+      "chapterRef": "5.5.4"
+    },
+    {
+      "kind": "segment",
+      "name": "RCP",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Response Control Parameter",
+      "chapterRef": "5.5.6"
+    },
+    {
+      "kind": "group",
+      "name": "QUERY_RESPONSE",
+      "items": [
+        {
+          "kind": "group",
+          "name": "PATIENT",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PID",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Patient Identification",
+              "chapterRef": "3.4.2"
+            },
+            {
+              "kind": "segment",
+              "name": "PD1",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Additional Demographics",
+              "chapterRef": "3.4.9"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes and Comments (for PID)",
+              "chapterRef": "2.15.10"
+            },
+            {
+              "kind": "group",
+              "name": "VISIT",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "AL1",
+                  "minOccurs": 1,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Allergy Information",
+                  "chapterRef": "3.4.6"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PV1",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Patient Visit",
+                  "chapterRef": "3.4.3"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PV2",
+                  "minOccurs": 0,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Patient Visit - Additional Info",
+                  "chapterRef": "3.4.4"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "COMMON_ORDER",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "ORC",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Common Order"
+            },
+            {
+              "kind": "group",
+              "name": "TIMING",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "TQ1",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Timing/Quantity",
+                  "chapterRef": "4.5.4"
+                },
+                {
+                  "kind": "segment",
+                  "name": "TQ2",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Timing/Quantity Order Sequence",
+                  "chapterRef": "4.5.5"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "group",
+              "name": "ORDER_DETAIL",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "RXO",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Pharmacy/Treatment Order"
+                },
+                {
+                  "kind": "segment",
+                  "name": "NTE",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Notes and Comments (for RXO)",
+                  "chapterRef": "2.15.10"
+                },
+                {
+                  "kind": "segment",
+                  "name": "RXR",
+                  "minOccurs": 1,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Pharmacy/Treatment Route"
+                },
+                {
+                  "kind": "group",
+                  "name": "TREATMENT",
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "RXC",
+                      "minOccurs": 1,
+                      "maxOccurs": "*",
+                      "usage": null,
+                      "page": null,
+                      "description": "Pharmacy/Treatment Component"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "NTE",
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "usage": null,
+                      "page": null,
+                      "description": "Notes and Comments (for RXC)",
+                      "chapterRef": "2.15.10"
+                    }
+                  ],
+                  "minOccurs": 0,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "group",
+              "name": "ENCODED_ORDER",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "RXE",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Pharmacy/Treatment Encoded Order"
+                },
+                {
+                  "kind": "group",
+                  "name": "TIMING_ENCODED",
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "TQ1",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Timing/Quantity",
+                      "chapterRef": "4.5.4"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "TQ2",
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "usage": null,
+                      "page": null,
+                      "description": "Timing/Quantity Order Sequence",
+                      "chapterRef": "4.5.5"
+                    }
+                  ],
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null
+                },
+                {
+                  "kind": "segment",
+                  "name": "RXR",
+                  "minOccurs": 1,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Pharmacy/Treatment Route"
+                },
+                {
+                  "kind": "segment",
+                  "name": "RXC",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Pharmacy/Treatment Component"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "segment",
+              "name": "RXD",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Pharmacy/Treatment Dispense"
+            },
+            {
+              "kind": "segment",
+              "name": "RXR",
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Pharmacy/Treatment Route"
+            },
+            {
+              "kind": "segment",
+              "name": "RXC",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Pharmacy/Treatment Component"
+            },
+            {
+              "kind": "group",
+              "name": "OBSERVATION",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "OBX",
+                  "minOccurs": 0,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Results"
+                },
+                {
+                  "kind": "segment",
+                  "name": "NTE",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Notes and Comments (for OBX)",
+                  "chapterRef": "2.15.10"
+                }
+              ],
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Continuation Pointer",
+      "chapterRef": "2.15.4"
+    }
+  ],
+  "variants": []
+}

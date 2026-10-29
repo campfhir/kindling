@@ -30,6 +30,10 @@ How the HL7 facts in `@campfhir/hl7` were checked, and against what.
   the same for 2.7 (`codegen/extracted/v2.7`, run with `codegen/extract/add-version.sh`). 20 structures
   are accepted with a dated note; RQC^I06 takes the `[{GT1}]` Caristix and HAPI agree on, through a
   `structureFixes` entry in `codegen/extracted/v2.7/overrides.json`.
+- [`v2.7.1-segment-ledger.md`](v2.7.1-segment-ledger.md) and [`v2.7.1-message-ledger.md`](v2.7.1-message-ledger.md):
+  the same for 2.7.1. HAPI has no 2.7.1 classes, so Caristix is the only check on hl7.eu and hl7.eu decides
+  every disagreement. The 39 accepted structures are where the ledger's own hl7.eu reader misreads a table
+  (Caristix agrees with the structure); the structures are 2.7's, except RQC^I06 (see its note).
 - [`v2.3-hl7eu-sweep.md`](v2.3-hl7eu-sweep.md) and
   [`v2.3-hapi-crosscheck.md`](v2.3-hapi-crosscheck.md): the first sweeps (2026-10-19), superseded
   by the ledger and kept for the history of the decisions.
