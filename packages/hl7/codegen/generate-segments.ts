@@ -139,6 +139,8 @@ const COMPOSITES: Record<string, { type: string; parts: string }> = {
 /** Date and date/time fields take a Date (formatted with the layout) or a string (written as given). */
 const DATE_LAYOUTS: Record<string, { layout: string; type: string }> = {
   TS: { layout: "DateTimeLayout", type: "HL7DateTimeLayout" },
+  /** DTM is the date/time type from v2.6 on (TS in earlier versions); the layouts are the same. */
+  DTM: { layout: "DateTimeLayout", type: "HL7DateTimeLayout" },
   DT: { layout: "DateLayout", type: "HL7DateLayout" },
 };
 
@@ -223,7 +225,7 @@ function subclassSource(code: string, seg: SpecSegment): string {
     if (!parsed.ok || !parsed.val) return parsed as Result<never>;
     const seg = new ${code}();
     seg.fields = parsed.val.fields;
-    seg.setEncoding(parsed.val.getEncoding());
+    seg.setEncoding(parsed.val.${code === "MSH" ? "getEncoding()" : "encoding"});
     return { ok: true, val: seg };
   }`
     : `  /** Parses the input string into a structured instance. */

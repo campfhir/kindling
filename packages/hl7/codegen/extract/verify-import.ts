@@ -5,7 +5,7 @@
  *
  * Usage:  npx tsx codegen/extract/verify-import.ts v2.9.1
  */
-import { readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { MessageSchema, StructureItem } from "../../src/types/schema.ts";
@@ -18,17 +18,16 @@ const MESSAGES = messagesModule[`V${version.slice(1).replace(/\./g, "_")}_MESSAG
 const DIR = join(ROOT, "codegen/extracted", version, "messages");
 const readJson = (p: string) => JSON.parse(readFileSync(p, "utf8"));
 
-const normalize = (name: string) => name.replace(/[+\s]+/g, "_").toUpperCase();
 const card = (min: number, max: number | "*") => `${min}..${max}`;
 
-/** Canonical lines of the schema (`as` names and type names are not compared). */
+/** Canonical lines of the schema (`as` names, type names and group names are not compared: unnamed groups get theirs from the importer). */
 function fromSchema(items: StructureItem[], depth = 0): string[] {
   return items.flatMap((item) => {
     const pad = "  ".repeat(depth);
     if (isSegmentChoice(item)) return [`${pad}choice ${item.oneOf.join("|")} ${item.required ? "1..1" : "0..1"}`];
     if (isSegmentGroup(item)) {
       const range = card(item.required ? 1 : 0, item.repeating ? "*" : 1);
-      return [`${pad}group ${item.name} ${range}`, ...fromSchema(item.segments, depth + 1)];
+      return [`${pad}group ${range}`, ...fromSchema(item.segments, depth + 1)];
     }
     const min = item.required ? 1 : 0;
     const max = item.repeating ? "*" : 1;
@@ -50,9 +49,18 @@ function fromJson(items: any[], depth = 0): string[] {
       min = /[[\]]/.test(item.notation) ? 0 : 1;
       max = /[{}]/.test(item.notation) ? "*" : 1;
     }
-    if (item.kind === "group") return [`${pad}group ${normalize(item.name)} ${card(min, max)}`, ...fromJson(item.items, depth + 1)];
+    if (item.kind === "group") return [`${pad}group ${card(min, max)}`, ...fromJson(item.items, depth + 1)];
     return [`${pad}${item.name} ${card(min, max)}`];
   });
+}
+
+/** The structure fixes recorded in overrides.json are applied to the extraction before it is compared (see import-extraction.ts). */
+const overridesFile = join(ROOT, "codegen/extracted", version, "overrides.json");
+const fixes: { message: string; insertAfter: string; items: { name: string; min: number; max: number | string }[] }[] = existsSync(overridesFile) ? (readJson(overridesFile).structureFixes ?? []) : [];
+function applyFix(items: any[], after: string, add: any[]): boolean {
+  const at = items.findIndex((i) => i.kind === "segment" && i.name === after);
+  if (at >= 0) { items.splice(at + 1, 0, ...add); return true; }
+  return items.some((i) => i.items && applyFix(i.items, after, add));
 }
 
 const schemaByName = new Map(MESSAGES.map((m) => [m.triggerEvent ? `${m.messageType}_${m.triggerEvent}` : m.messageType, m]));
@@ -69,8 +77,11 @@ for (const e of index) {
   const table = file.triggerEvent === e.triggerEvent || sameAsPrimary ? file.items : file.variants?.find((v: any) => v.eventPrinted === e.triggerEvent)?.items;
   if (!table) { mismatched.push(`${name}: no table`); continue; }
   checked++;
+  const fix = fixes.find((f) => f.message === name);
+  const working = fix ? structuredClone(table) : table;
+  if (fix) applyFix(working, fix.insertAfter, fix.items.map((i) => ({ kind: "segment", name: i.name, minOccurs: i.min, maxOccurs: i.max })));
   const a = fromSchema(schema.structure).join("\n");
-  const b = fromJson(table).join("\n");
+  const b = fromJson(working).join("\n");
   if (a !== b && !b.includes("choice ALT")) mismatched.push(name);
 }
 console.log(`checked ${checked} events; mismatched ${mismatched.length}`, mismatched.slice(0, 20));

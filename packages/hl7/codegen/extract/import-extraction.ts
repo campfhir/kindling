@@ -10,7 +10,7 @@
  * Usage:  npx tsx codegen/extract/import-extraction.ts v2.9.1
  *
  * Decisions (each one is also written to IMPORT.md):
- *  - Segment usage: W (withdrawn field) becomes X (not supported); C(R/X) and C(RE/X) become C;
+ *  - Segment usage: W (withdrawn field) stays W, as the sources print it; C(R/X) and C(RE/X) become C;
  *    "-" (no usage printed, ROL in 2.9.1) becomes O. Fixed repeat counts (RP/# "Y/10") become "∞"
  *    with the number kept in `repeats`. Length is the printed LEN maximum, or the C.LEN number when
  *    LEN is blank. MSH, BHS and FHS are not generated: their header numbering differs from the
@@ -28,7 +28,8 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import type { VersionSchema } from "../../src/types/schema.ts";
+import type { StructureItem, VersionSchema } from "../../src/types/schema.ts";
+import { isSegmentChoice, isSegmentGroup, itemField } from "../../src/types/schema.ts";
 import { nameOf } from "../schemas/helpers.ts";
 
 const ROOT = join(fileURLToPath(import.meta.url), "../../..");
@@ -59,7 +60,7 @@ const notes: { segments: Notes; brackets: Notes; events: Notes; skipped: Notes; 
 // ── Segments ─────────────────────────────────────────────────────────────────
 
 const NOT_GENERATED = new Set(["MSH", "BHS", "FHS"]);
-const OPT: Record<string, string> = { W: "X", "C(R/X)": "C", "C(RE/X)": "C", "-": "O" };
+const OPT: Record<string, string> = { "C(R/X)": "C", "C(RE/X)": "C", "-": "O" };
 
 interface Printed {
   seq: number; name: string; length: string; type: string; opt: string; rep: string; table: string; clen: string;
@@ -71,7 +72,7 @@ for (const [code, seg] of Object.entries(extracted)) {
   if (NOT_GENERATED.has(code)) { notes.segments.push(`${code}: not generated (header numbering), mirrored from the base version`); continue; }
   const fields = seg.fields.map((f) => {
     const opt = OPT[f.opt] ?? f.opt;
-    if (!(f.opt in OPT) && !["R", "O", "C", "B", "X"].includes(f.opt)) throw new Error(`${code}-${f.seq}: unknown usage ${f.opt}`);
+    if (!(f.opt in OPT) && !["R", "O", "C", "B", "X", "W"].includes(f.opt)) throw new Error(`${code}-${f.seq}: unknown usage ${f.opt}`);
     if (OPT[f.opt]) notes.fields.push(`${code}-${f.seq} ${f.name}: usage ${f.opt} -> ${opt}`);
     let length = f.length.includes("..") ? f.length.split("..")[1] : f.length;
     if (length === "" && f.clen) { length = f.clen.match(/\d+/)?.[0] ?? ""; }
@@ -98,8 +99,8 @@ interface IndexEntry { structure: string; messageType: string; triggerEvent: str
 const messagesDir = join(DIR, "messages");
 const index = readJson(join(messagesDir, "index.json")) as IndexEntry[];
 const files = new Map<string, MessageFile>();
-/** Group names are identifiers: footnote markers and spaces become "_", and the name is upper case as the standard prints the others. */
-const normalizeGroupName = (name: string) => name.replace(/[+\s]+/g, "_").toUpperCase();
+/** Group names are identifiers: any run of characters other than letters and digits (footnote marker, space, hyphen, slash) becomes one "_", and the name is upper case as the standard prints the others. */
+const normalizeGroupName = (name: string) => name.replace(/[^A-Za-z0-9]+/g, "_").replace(/^_+|_+$/g, "").toUpperCase();
 function normalizeGroups(items: Item[] | undefined, structure: string): void {
   for (const item of items ?? []) {
     if (item.kind === "group" && item.name) {
@@ -150,7 +151,17 @@ function countGroups(items: Item[], into: Map<string, number>): void {
   }
 }
 function render(items: Item[], where: string, depth: number): Code[] {
-  const seen = new Map<string, number>();
+  // Property names at one level must be unique. An item whose default name (itemField) is already taken gets an `as`:
+  // a numbered name for a repeated segment (rol2), "...Group" for a group that clashes with a segment (patientGroup).
+  const taken = new Map<string, number>();
+  const claim = (field: string, alternative: (n: number) => string): string | undefined => {
+    const n = (taken.get(field) ?? 0) + 1;
+    taken.set(field, n);
+    if (n === 1) return undefined;
+    const as = alternative(n);
+    taken.set(as, (taken.get(as) ?? 0) + 1);
+    return as;
+  };
   const out: Code[] = [];
   const pad = "  ".repeat(depth);
   for (const item of items) {
@@ -158,29 +169,34 @@ function render(items: Item[], where: string, depth: number): Code[] {
     if (item.kind === "segment") {
       const name = item.name!;
       const { min, max } = cardinality(item, where);
-      const count = (seen.get(name) ?? 0) + 1;
-      seen.set(name, count);
-      const as = count > 1 ? `, { as: ${JSON.stringify(`${name.toLowerCase()}${count}`)} }` : "";
+      const field = itemField({ name, required: min === 1, repeating: max === "*" });
+      const asName = claim(field, (n) => `${name.toLowerCase()}${n}`);
+      const as = asName ? `, { as: ${JSON.stringify(asName)} }` : "";
       const fn = min === 1 ? (max === "*" ? "reqList" : "req") : (max === "*" ? "optList" : "opt");
       out.push(`${pad}${fn}(${JSON.stringify(name)}${as ? as : ""}),`);
     } else if (item.kind === "choice") {
       if (!item.oneOf) throw new Unrepresentable(`${where}: choice with alternatives (${(item.alternatives ?? []).map((a) => a.kind).join(",")})`);
       const { min } = cardinality(item, where);
       const oneOf = item.oneOf.map((s) => JSON.stringify(s)).join(", ");
-      out.push(`${pad}choice([${oneOf}], ${min === 1 ? '"required"' : '"optional"'}),`);
+      const choiceAs = claim("segment", (n) => `segment${n}`);
+      out.push(`${pad}choice([${oneOf}], ${min === 1 ? '"required"' : '"optional"'}${choiceAs ? `, ${JSON.stringify(choiceAs)}` : ""}),`);
     } else if (item.kind === "group") {
       if (!item.name) throw new Unrepresentable(`${where}: unnamed group`);
       const { min, max } = cardinality(item, where);
       const children = render(item.items ?? [], where, depth + 1);
       if (children.length === 0) throw new Unrepresentable(`${where}: group ${item.name} holds only placeholder rows`);
       // The generator names group types from the group name; a name used twice in one message gets numbered type names.
-      let extras = "";
+      const parts: string[] = [];
+      const groupField = itemField({ name: item.name, required: min === 1, repeating: max === "*", segments: [] });
+      const groupAs = claim(groupField, (n) => `${groupField}Group${n > 2 ? n : ""}`);
+      if (groupAs) parts.push(`as: ${JSON.stringify(groupAs)}`);
       if ((groupCounts.get(item.name) ?? 0) > 1) {
         const k = (groupSeen.get(item.name) ?? 0) + 1;
         groupSeen.set(item.name, k);
         const pascal = pascalOf(item.name);
-        extras = `, { exportTypeName: ${JSON.stringify(`Parsed${pascal}${k}`)}, builderTypeName: ${JSON.stringify(`${pascal}${k}Group`)} }`;
+        parts.push(`exportTypeName: ${JSON.stringify(`Parsed${pascal}${k}`)}`, `builderTypeName: ${JSON.stringify(`${pascal}${k}Group`)}`);
       }
+      const extras = parts.length ? `, { ${parts.join(", ")} }` : "";
       out.push(`${pad}group(${JSON.stringify(item.name)}, ${min === 1 ? '"required"' : '"optional"'}, ${max === "*" ? '"repeating"' : '"single"'}, [`);
       out.push(...children);
       out.push(`${pad}]${extras}),`);
@@ -213,6 +229,52 @@ for (const e of index.filter((x) => x.status !== "withdrawn")) {
   const variant = file.variants?.find((v) => v.eventPrinted === e.triggerEvent);
   if (!variant) { notes.events.push(`${name}: no table found in ${e.structure}`); continue; }
   eventsOut.push({ ...common, items: variant.items, where: `${e.structure} (variant ${variant.eventPrinted})` });
+}
+
+// Structure fixes the rule calls for (Caristix and HAPI agree against hl7.eu), recorded with their reason in overrides.json:
+//   { "structureFixes": [{ "message": "ADT_A13", "insertAfter": "PD1", "items": [{ "name": "ARV", "min": 0, "max": "*" }], "reason": "..." }] }
+const overridesPath = join(DIR, "overrides.json");
+const structureFixes: { message: string; insertAfter: string; items: { name: string; min: 0 | 1; max: 1 | "*" }[]; reason: string }[] = existsSync(overridesPath) ? (readJson(overridesPath).structureFixes ?? []) : [];
+const appliedFixes: string[] = [];
+function insertAfter(items: Item[], after: string, add: Item[]): boolean {
+  const at = items.findIndex((i) => i.kind === "segment" && i.name === after);
+  if (at >= 0) { items.splice(at + 1, 0, ...add); return true; }
+  return items.some((i) => i.items && insertAfter(i.items, after, add));
+}
+for (const fix of structureFixes) {
+  const target = eventsOut.find((e) => e.name === fix.message && e.items);
+  if (!target) { notes.skipped.push(`structure fix for ${fix.message} not applied: no table of its own`); continue; }
+  const add: Item[] = fix.items.map((i) => ({ kind: "segment", name: i.name, minOccurs: i.min, maxOccurs: i.max, usage: null, page: null }));
+  if (!insertAfter(target.items!, fix.insertAfter, add)) throw new Error(`structure fix: ${fix.message} has no ${fix.insertAfter}`);
+  appliedFixes.push(`${fix.message}: ${fix.items.map((i) => i.name).join(", ")} inserted after ${fix.insertAfter}. ${fix.reason}`);
+}
+
+// A group the table does not name still needs a name: the base version's group with the same segments gives it
+// (so a message keeps its property names from one version to the next), else the group is named after its first segment.
+const baseStructure = new Map(baseSchema.messages.map((m) => [nameOf(m), m.structure]));
+const segmentsOfBase = (items: StructureItem[]): string[] => items.flatMap((i) => (isSegmentChoice(i) ? [i.oneOf.join("|")] : isSegmentGroup(i) ? segmentsOfBase(i.segments) : [i.name]));
+const groupsOfBase = (items: StructureItem[]): { name: string; sig: string }[] =>
+  items.flatMap((i) => (isSegmentGroup(i) ? [{ name: i.name, sig: segmentsOfBase(i.segments).join(" ") }, ...groupsOfBase(i.segments)] : []));
+const segmentsOf = (items: Item[]): string[] => items.flatMap((i) => (i.kind === "choice" ? [(i.oneOf ?? []).join("|")] : i.kind === "group" ? segmentsOf(i.items ?? []) : i.kind === "segment" ? [i.name!] : []));
+function nameUnnamedGroups(items: Item[], message: string, available: { name: string; sig: string }[], used: Set<string>): void {
+  for (const item of items) {
+    if (item.kind !== "group") continue;
+    nameUnnamedGroups(item.items ?? [], message, available, used);
+    if (item.name) continue;
+    const sig = segmentsOf(item.items ?? []).join(" ");
+    const match = available.find((g) => g.sig === sig && !used.has(g.name));
+    if (match) {
+      item.name = match.name;
+      used.add(match.name);
+      notes.names.push(`${message}: unnamed group (${sig}) named ${match.name}, as in ${base}`);
+    } else {
+      item.name = `${(segmentsOf(item.items ?? [])[0] ?? "GROUP").split("|")[0]}_GROUP`;
+      notes.names.push(`${message}: unnamed group (${sig}) named ${item.name} after its first segment`);
+    }
+  }
+}
+for (const e of eventsOut) {
+  if (e.items) nameUnnamedGroups(e.items, e.name, groupsOfBase(baseStructure.get(e.name) ?? []), new Set());
 }
 
 // Render each generated structure; the ones the generator cannot express are recorded as skipped.
@@ -347,6 +409,9 @@ ${notes.fields.map((n) => `- ${n}`).join("\n")}
 
 ## Group names normalised (footnote markers, spacing and case)
 ${notes.names.map((n) => `- ${n}`).join("\n") || "- none"}
+
+## Structure fixes (applied by rule, from overrides.json)
+${appliedFixes.map((f) => `- ${f}`).join("\n") || "- none"}
 
 ## Bracket mismatches (intent from the printed brackets, see the rule in the importer)
 ${notes.brackets.map((n) => `- ${n}`).join("\n")}
