@@ -271,7 +271,8 @@ for (const file of chapterFiles) {
   const usedCaptions = new Set<number>();
   // Each table runs from its own <TABLE> to the next </TABLE> or <TABLE>, whichever comes first: hl7.eu leaves some
   // tables unclosed, and a plain non-greedy match from such a table would swallow the message table after it.
-  const starts = [...html.matchAll(/<TABLE[^>]*>/gi)];
+  // <TABLE ...> or <TABLE>, not hl7.eu's stray <TABLECELL> tags (v2.8), which are no tables
+  const starts = [...html.matchAll(/<TABLE(?=[\s>])[^>]*>/gi)];
   for (const [n, start] of starts.entries()) {
     const from = start.index! + start[0].length;
     const close = html.toLowerCase().indexOf("</table>", from);
@@ -293,7 +294,7 @@ for (const file of chapterFiles) {
       const split = label.match(/^(\S+?)\s*:\s*(.*)$/); // "ORA^R33^ORA_R33 : Observation Report Acknowledgement"
       const between = closeAt !== -1 ? before.slice(closeAt + 4) : "";
       // only a caption that directly precedes the table (no other paragraph or table in between)
-      if (split && CAPTION.test(split[1]) && !/<p[\s>]|<table/i.test(between) && head.length === 0) {
+      if (split && CAPTION.test(split[1]) && !/<p[\s>]|<table[\s>]/i.test(between) && head.length === 0) {
         caption = split[1].match(CAPTION);
         head = [split[1], split[2]];
         body = rows;
@@ -301,6 +302,16 @@ for (const file of chapterFiles) {
       }
     }
     if (!caption) continue;
+    // A table that holds only the header row ("Segments"), its rows printed in the next <TABLE> (v2.8 DBC^O41):
+    // the next table's rows are this table's.
+    if (body.length > 0 && body.every((r) => /^segments?$/i.test(cells(r, "TD")[0] ?? "")) && n + 1 < starts.length) {
+      const from2 = starts[n + 1].index! + starts[n + 1][0].length;
+      const close2 = html.toLowerCase().indexOf("</table>", from2);
+      const next2 = n + 2 < starts.length ? starts[n + 2].index! : html.length;
+      const rows2 = [...html.slice(from2, close2 === -1 ? next2 : Math.min(close2, next2)).matchAll(/<TR[^>]*>([\s\S]*?)<\/TR>/gi)].map((r) => r[1]);
+      readings.push(`${caption[0]}: the table holds only its header row; the rows of the next table are read as its rows`);
+      body = rows2;
+    }
     addTable(caption, head[1] ?? "", body, file);
   }
   // Rows printed after a caption with no <TABLE> around them (a malformed page: v2.7 QBP^Q21 follows a query profile
@@ -312,7 +323,7 @@ for (const file of chapterFiles) {
     const caption = split?.[1].match(CAPTION);
     if (!split || !caption) continue;
     const after = html.slice(p.index! + p[0].length);
-    const stop = Math.min(...[after.search(/<p[\s>]/i), after.search(/<table/i)].map((i) => (i === -1 ? after.length : i)));
+    const stop = Math.min(...[after.search(/<p[\s>]/i), after.search(/<table[\s>]/i)].map((i) => (i === -1 ? after.length : i)));
     const rows = [...after.slice(0, stop).matchAll(/<TR[^>]*>([\s\S]*?)<\/TR>/gi)].map((r) => r[1]);
     const hasSegments = rows.some((r) => cells(r, "TD").some((c) => /\b[A-Z][A-Z0-9]{2}\b/.test(c) && SEGMENT.test(c.replace(/[[\]{}<>|\s]/g, ""))));
     const crossReference = rows.some((r) => SEE.test(cells(r, "TD").filter(Boolean).join(" "))); // "see" and "3.3.56" can sit in separate cells

@@ -58,9 +58,12 @@ function fromJson(items: any[], depth = 0): string[] {
 const overridesFile = join(ROOT, "codegen/extracted", version, "overrides.json");
 const fixes: { message: string; insertAfter?: string; items?: { name: string; min: number; max: number | string }[]; set?: string; min?: number; max?: number | string }[] = existsSync(overridesFile) ? (readJson(overridesFile).structureFixes ?? []) : [];
 function setOccurs(items: any[], name: string, min: number, max: number | string): boolean {
-  const seg = items.find((i) => i.kind === "segment" && i.name === name);
-  if (seg) { seg.minOccurs = min; seg.maxOccurs = max; return true; }
-  return items.some((i) => i.items && setOccurs(i.items, name, min, max));
+  let found = false;
+  for (const i of items) {
+    if ((i.kind === "segment" || i.kind === "group") && i.name === name) { i.minOccurs = min; i.maxOccurs = max; found = true; }
+    if (i.items && setOccurs(i.items, name, min, max)) found = true;
+  }
+  return found;
 }
 function applyFix(items: any[], after: string, add: any[]): boolean {
   const at = items.findIndex((i) => i.kind === "segment" && i.name === after);
