@@ -8,6 +8,7 @@ There are two ways to make one, and everything after it is the same.
 |---|---|---|
 | The official hl7.org chapter PDFs, read by an agent that has them | [BRIEF.md](BRIEF.md), checked with `check-completeness.ts` | 2.9.1 (its own PR) |
 | The hl7.eu pages `fetch-sources.sh` pulled | `from-hl7eu.ts` (deterministic parser) | 2.6 onward |
+| An official chapter PDF where hl7.eu lacks the chapter, converted to an hl7.eu-shaped page | `pdf-chapter.ts`, then `from-hl7eu.ts` | 2.8 chapter 16 |
 
 ## The steps, in order
 
@@ -19,7 +20,9 @@ ledgers); pass `--keep-extraction` when the extraction came from the PDFs. The s
 # 1. Pull hl7.eu, Caristix and HAPI (curl, git, jq; nothing chosen by hand). --record keeps the manifest.
 codegen/validate/fetch-sources.sh vX <dir> --record
 
-# 2. The extraction, either from hl7.eu ...
+# 2. The extraction, either from hl7.eu (an official chapter PDF first converted into <dir>/hl7org/chapters replaces
+#    hl7.eu's page of that chapter, for a chapter hl7.eu lacks; --record keeps its checksum) ...
+npx tsx codegen/extract/pdf-chapter.ts vX <V28_CH16_Name.pdf> <dir> --record   # only where hl7.eu lacks the chapter
 npx tsx codegen/extract/from-hl7eu.ts vX <dir> codegen/extracted/vX
 #    ... or from the PDFs (BRIEF.md), then check it against them:
 npx tsx codegen/extract/check-completeness.ts <pdf-dir> codegen/extracted/vX

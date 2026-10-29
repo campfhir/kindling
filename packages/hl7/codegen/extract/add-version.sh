@@ -54,5 +54,5 @@ node codegen/validate/ledger.mjs "$v" "$dir" | tail -1
 if [ -n "$(ls "$dir/caristix/events" 2>/dev/null | grep -v _index)" ]; then
   hapi="$dir/hapi"; mkdir -p "$hapi/message" "$hapi/group"
   npx tsx codegen/validate/message-ledger.ts "$v" --caristix "$dir/caristix/events" \
-    --hapi "$hapi/message" "$hapi/group" "$hapi/eventmap.properties" --hl7eu "$dir/hl7eu/chapters" | grep -v '^  differs'
+    --hapi "$hapi/message" "$hapi/group" "$hapi/eventmap.properties" --hl7eu "$dir/hl7eu/chapters" --hl7org "$dir/hl7org/chapters" | grep -v '^  differs'
 fi
