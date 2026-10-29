@@ -34,6 +34,7 @@ regenerate() {
   # a test, the barrel or the registry) so the generator writes them again from the spec
   mkdir -p "src/$v"
   for f in "src/$v"/*.ts; do
+    [ -e "$f" ] || continue   # a new version's folder is empty
     case "$f" in *.test.ts|*/index.ts|*/registry.ts) continue ;; esac
     grep -q -e "@generated message" -e "^ \* [A-Z0-9_]* message for HL7 " "$f" || rm -f "$f"
   done
