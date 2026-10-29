@@ -332,7 +332,9 @@ const sameComposite = (ours, decided) => {
 
 const results = [];
 // Every module of the version, plus the segments the sources define that have no module yet (new in the version).
-const moduleSegments = readdirSync(SEG_DIR).filter((f) => f.endsWith(".ts") && !f.endsWith(".test.ts") && f !== "index.ts").map((f) => f.replace(/\.ts$/, ""));
+// src/<version> also holds the messages (ORU_R01.ts, and ACK.ts): a segment module has a three-character name and is not a message.
+const isMessageModule = (f) => /@generated message|^ \* \w+ message for HL7 /m.test(readFileSync(join(SEG_DIR, f), "utf8"));
+const moduleSegments = readdirSync(SEG_DIR).filter((f) => /^[A-Z][A-Z0-9]{2}\.ts$/.test(f) && !isMessageModule(f)).map((f) => f.replace(/\.ts$/, ""));
 const sourceSegments = existsSync(join(SOURCES, "caristix")) ? readdirSync(join(SOURCES, "caristix")).filter((f) => /^[A-Z][A-Z0-9]{2}\.json$/.test(f)).map((f) => f.slice(0, 3)) : [];
 const segments = [...new Set([...moduleSegments, ...sourceSegments])].sort();
 for (const seg of segments) {

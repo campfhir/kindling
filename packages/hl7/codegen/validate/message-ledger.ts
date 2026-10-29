@@ -154,7 +154,12 @@ function readHapi(event: string): Line[] | undefined {
  * "[Order Detail Segment] OBR, etc." reads as the order detail choice.
  */
 const SEGMENT_CODES = new Set(
-  ["v2.3", VERSION].flatMap((v) => readdirSync(join(ROOT, "src", v)).filter((f) => /^[A-Z][A-Z0-9]{2}\.ts$/.test(f)).map((f) => f.slice(0, 3))),
+  // src/<version> also holds the messages; ACK.ts is the one with a three-character name
+  ["v2.3", VERSION].flatMap((v) =>
+    readdirSync(join(ROOT, "src", v))
+      .filter((f) => /^[A-Z][A-Z0-9]{2}\.ts$/.test(f) && !/@generated message|^ \* \w+ message for HL7 /m.test(readFileSync(join(ROOT, "src", v, f), "utf8")))
+      .map((f) => f.slice(0, 3)),
+  ),
 );
 const ORDER_DETAIL_CHOICE = "<OBR|RQD|RQ1|RXO|ODS|ODT>";
 /** "PC6, PC7, PC8" → PC6 PC7 PC8; "C01-C08" → C01 … C08; "O01/O02" → O01 O02. */
