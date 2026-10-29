@@ -1,5 +1,5 @@
-import { parseORU_R01 } from "../src/parsers/v2.5.1/ORU_R01_Parser.ts";
-import { createORU_R01 } from "../src/builders/v2.5.1/ORU_R01.ts";
+import { parseORU_R01 } from "../src/messages/v2.5.1/ORU_R01.ts";
+import { createORU_R01 } from "../src/messages/v2.5.1/ORU_R01.ts";
 import { OBX, OBR, MSH, PID } from "../src/segments/v2.5.1/index.ts";
 
 /**

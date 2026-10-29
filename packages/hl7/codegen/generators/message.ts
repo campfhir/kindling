@@ -2,16 +2,17 @@
  * Structure-driven message generators.
  *
  * A `MessageSchema` describes a message as the standard's message table does: an ordered list of
- * segments, choices and groups. From it, three modules are generated per version:
+ * segments, choices and groups. From it, one module is generated per message and version,
+ * `src/messages/<v>/<MSG>.ts`, holding three parts:
  *
- * - `src/structures/<v>/<MSG>.ts` — the structure as data (`<MSG>_STRUCTURE`)
- * - `src/parsers/<v>/<MSG>_Parser.ts` — typed `Parsed*` interfaces and a parser class that hands
- *   the structure and this version's segment classes to the engine in `src/types/structure.ts`
- * - `src/builders/<v>/<MSG>.ts` — typed group interfaces, an options interface and a builder
- *   class whose `verify()` and `encode()` walk the same structure
+ * - the structure as data (`<MSG>_STRUCTURE`)
+ * - typed `Parsed*` interfaces and a parser class that hands the structure and this version's
+ *   segment classes to the engine in `src/types/structure.ts`
+ * - typed group interfaces, an options interface and a builder class whose `verify()` and
+ *   `encode()` walk the same structure
  *
  * A schema with `baseMessage` (ADT^A02 reusing ADT^A01, ...) generates thin wrappers around the
- * base message's modules of the same version instead.
+ * base message's module of the same version instead.
  */
 import {
   type MessageSchema,
@@ -508,5 +509,63 @@ ${fnParams}
 ): ${name}${genericArgs(params)} {
   return new ${name}(${args});
 }
+`;
+}
+
+// ── Message module ────────────────────────────────────────────────────────────
+
+/** `import [type] { a, type b } from "m";` lines merged by module: a name imported as a value anywhere stays a value. */
+function mergeImports(lines: string[]): string[] {
+  const byModule = new Map<string, Map<string, boolean>>();
+  for (const line of lines) {
+    const m = line.match(/^import (type )?\{ (.*) \} from "(.*)";$/);
+    if (!m) throw new Error(`unexpected import line in a generated part: ${line}`);
+    const names = byModule.get(m[3]) ?? new Map<string, boolean>();
+    byModule.set(m[3], names);
+    for (const spec of m[2].split(", ")) {
+      const typeOnly = Boolean(m[1]) || spec.startsWith("type ");
+      const name = spec.replace(/^type /, "");
+      names.set(name, (names.get(name) ?? true) && typeOnly);
+    }
+  }
+  return [...byModule].map(([from, names]) => {
+    const all = [...names];
+    if (all.every(([, t]) => t)) return `import type { ${all.map(([n]) => n).join(", ")} } from "${from}";`;
+    return `import { ${all.map(([n, t]) => (t ? `type ${n}` : n)).join(", ")} } from "${from}";`;
+  });
+}
+
+/** Splits a generated part into its import lines and its body, dropping the module doc it starts with. */
+function splitPart(source: string, name: string, version: string): { imports: string[]; body: string } {
+  const lines = source.slice(source.indexOf(MESSAGE_MARKER) + MESSAGE_MARKER.length + 1).split("\n");
+  let i = 0;
+  while (lines[i]?.startsWith("import ")) i++;
+  const imports = lines
+    .slice(0, i)
+    // the parts live in one module now: the structure is local, a base message's parser is in its module
+    .filter((l) => !l.endsWith(`from "../../structures/${version}/${name}.ts";`))
+    .map((l) => l.replace(/_Parser\.ts";$/, `.ts";`));
+  return { imports, body: lines.slice(i).join("\n").replace(/^\n+/, "").replace(/_Parser\.ts";/g, `.ts";`) };
+}
+
+/** Generates `src/messages/<version>/<MSG>.ts`: the structure, the parser and the builder of one message. */
+export function generateMessageModule(schema: MessageSchema, version: string): string {
+  const name = messageName(schema);
+  const base = schema.baseMessage;
+  const parts = (base
+    ? [generateStructureWrapper(schema, version), generateParserWrapper(schema, version), generateBuilderWrapper(schema, version)]
+    : [generateStructureModule(schema, version), generateMessageParser(schema, version), generateMessageBuilder(schema, version)]
+  ).map((source) => splitPart(source, name, version));
+  // A RESULT group's builder interface (declared, or imported by a wrapper) is named Result, like the
+  // parse result type: alias the latter.
+  const [, parser, builder] = parts;
+  if (/^export (interface|type) Result\b/m.test(builder.body) || builder.imports.some((l) => /[{,] (type )?Result[ ,]/.test(l))) {
+    parser.imports = parser.imports.map((l) => l.replace("import type { Result }", "import type { Result as ParseResult }"));
+    parser.body = parser.body.replace(/\bResult</g, "ParseResult<");
+  }
+  const extra = base ? [`Shares the ${base.replace("_", "^")} structure.`] : [];
+  return `${moduleDoc("Builder, parser and structure", schema, version, extra)}${mergeImports(parts.flatMap((p) => p.imports)).join("\n")}
+
+${parts.map((p) => p.body.trimEnd()).join("\n\n")}
 `;
 }

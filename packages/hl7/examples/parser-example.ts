@@ -1,6 +1,6 @@
 import { MSH, PID, PV1, OBR, OBX } from "../src/segments/v2.5.1/index.ts";
-import { createORU_R01, type PatientResult } from "../src/builders/v2.5.1/ORU_R01.ts";
-import { parseORU_R01 } from "../src/parsers/v2.5.1/index.ts";
+import { createORU_R01, type PatientResult } from "../src/messages/v2.5.1/ORU_R01.ts";
+import { parseORU_R01 } from "../src/messages/v2.5.1/index.ts";
 import { ParserUtils } from "../src/index.ts";
 
 function formatDateTime(date: Date): string {

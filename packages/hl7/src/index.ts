@@ -11,7 +11,7 @@
  *
  * Versioned segments, parsers, and builders are imported from their own
  * subpaths, e.g. `@campfhir/hl7/segments/v2.5.1` or
- * `@campfhir/hl7/parsers/v2.5.1`.
+ * `@campfhir/hl7/messages/v2.5.1`.
  *
  * @module
  */
@@ -78,5 +78,5 @@ export { MessageEditor, InsertionBuilder, PositionedInsertionBuilder } from "./u
 
 // Versioned segments, structures, parsers, and builders must be imported directly:
 //   import { OBX } from "@campfhir/hl7/segments/v2.5.1"
-//   import { parseORU_R01 } from "@campfhir/hl7/parsers/v2.5.1"
-//   import { parseMFN_M02 } from "@campfhir/hl7/parsers/v2.3"
+//   import { parseORU_R01 } from "@campfhir/hl7/messages/v2.5.1"
+//   import { parseMFN_M02 } from "@campfhir/hl7/messages/v2.3"

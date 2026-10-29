@@ -4,16 +4,16 @@ import * as seg231 from "./segments/v2.3.1/index.ts";
 import * as seg24 from "./segments/v2.4/index.ts";
 import * as seg25 from "./segments/v2.5/index.ts";
 import * as seg251 from "./segments/v2.5.1/index.ts";
-import * as par23 from "./parsers/v2.3/index.ts";
-import * as par231 from "./parsers/v2.3.1/index.ts";
-import * as par24 from "./parsers/v2.4/index.ts";
-import * as par25 from "./parsers/v2.5/index.ts";
-import * as par251 from "./parsers/v2.5.1/index.ts";
-import * as bld23 from "./builders/v2.3/index.ts";
-import * as bld24 from "./builders/v2.4/index.ts";
-import * as bld231 from "./builders/v2.3.1/index.ts";
-import * as bld25 from "./builders/v2.5/index.ts";
-import * as bld251 from "./builders/v2.5.1/index.ts";
+import * as par23 from "./messages/v2.3/index.ts";
+import * as par231 from "./messages/v2.3.1/index.ts";
+import * as par24 from "./messages/v2.4/index.ts";
+import * as par25 from "./messages/v2.5/index.ts";
+import * as par251 from "./messages/v2.5.1/index.ts";
+import * as bld23 from "./messages/v2.3/index.ts";
+import * as bld24 from "./messages/v2.4/index.ts";
+import * as bld231 from "./messages/v2.3.1/index.ts";
+import * as bld25 from "./messages/v2.5/index.ts";
+import * as bld251 from "./messages/v2.5.1/index.ts";
 
 describe("segment introduction by version", () => {
   test("PDA, ABS, BLC and RMI are introduced in v2.4", () => {

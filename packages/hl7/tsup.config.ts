@@ -5,7 +5,7 @@ type EsbuildPlugin = NonNullable<Options["esbuildPlugins"]>[number];
 /**
  * One ESM output file per source module, with the module's relative imports kept as imports
  * (rewritten from `.ts` to `.js`) instead of bundled. The package exposes every module as a subpath
- * (`@campfhir/hl7/parsers/v2.4/ADT_A01_Parser`), so with ~5,400 modules a bundled build made one
+ * (`@campfhir/hl7/messages/v2.4/ADT_A01`), so with ~5,400 modules a bundled build made one
  * entry per module *and* one chunk per shared module: 26,000 files and 30 MB. This way dist mirrors
  * src and Node's ESM loader gets fully specified relative paths. The package is ESM only
  * (`"type": "module"`); the declarations come from tsc (tsconfig.build.json).

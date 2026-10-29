@@ -7,7 +7,12 @@ import { resolve } from "node:path";
 const ROOT = resolve(process.cwd());
 const pkgPath = resolve(ROOT, "package.json");
 const pkg = JSON.parse(readFileSync(pkgPath, "utf8"));
-const KINDS = ["segments", "structures", "parsers", "builders"];
+const KINDS = ["segments", "messages"];
+// The paths before one module per message (1.x/2.x): each now resolves to the message's module, which
+// exports everything the old file did. Kept so existing imports work; deprecated, removed in the next major.
+const LEGACY = ["structures", "parsers", "builders"];
+// The versions published under those paths; later versions only have messages/<v>.
+const LEGACY_VERSIONS = ["v2.3", "v2.3.1", "v2.4", "v2.5", "v2.5.1"];
 
 // The package is ESM only ("type": "module"): one .js and one .d.ts per entry. "types" comes
 // first because TypeScript takes the first matching condition; "default" (rather than "import")
@@ -44,8 +49,18 @@ for (const kind of KINDS) {
     versioned[`./${kind}/${v}/*`] = entry(`${kind}/${v}/*`);
   }
 }
+for (const kind of LEGACY) {
+  for (const v of LEGACY_VERSIONS) {
+    versioned[`./${kind}/${v}`] = entry(`messages/${v}/index`);
+    // parsers/<v>/ADT_A01_Parser and the old registry parsers/<v>/messages
+    if (kind === "parsers") {
+      versioned[`./parsers/${v}/messages`] = entry(`messages/${v}/registry`);
+      versioned[`./parsers/${v}/*_Parser`] = entry(`messages/${v}/*`);
+    } else versioned[`./${kind}/${v}/*`] = entry(`messages/${v}/*`);
+  }
+}
 
-const isVersioned = (k) => KINDS.some((kind) => k.startsWith(`./${kind}/`));
+const isVersioned = (k) => [...KINDS, ...LEGACY].some((kind) => k.startsWith(`./${kind}/`));
 const kept = Object.entries(pkg.exports).filter(([k]) => !isVersioned(k)).map(([k, v]) => [k, normalized(v)]);
 const root = kept.filter(([k]) => k === ".");
 const rest = kept.filter(([k]) => k !== ".");

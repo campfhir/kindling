@@ -20,13 +20,18 @@ if the committed output drifts (`pnpm codegen:check`).
 A message is described once, as the standard's message table reads, by a `MessageSchema`
 (`src/types/schema.ts`): an ordered list of segments, choices (`<OBR|RQD|...>`) and groups, each
 required or optional, repeating or not. From every message of every registered version codegen
-writes three modules:
+writes one module, `src/messages/<v>/<MSG>.ts`, in three parts:
 
-| Module | Contents |
+| Part | Contents |
 | --- | --- |
-| `src/structures/<v>/<MSG>.ts` | `<MSG>_STRUCTURE: StructureItem[]` — the structure as data |
-| `src/parsers/<v>/<MSG>_Parser.ts` | `Parsed<MSG>` and one `Parsed*` interface per group, `<MSG>_Parser`, `parse<MSG>()` |
-| `src/builders/<v>/<MSG>.ts` | one `*Group` interface per group, `<MSG>Options`, the `<MSG>` builder class, `create<MSG>()` |
+| structure | `<MSG>_STRUCTURE: StructureItem[]` — the structure as data |
+| parser | `Parsed<MSG>` and one `Parsed*` interface per group, `<MSG>_Parser`, `parse<MSG>()` |
+| builder | one `*Group` interface per group, `<MSG>Options`, the `<MSG>` builder class, `create<MSG>()` |
+
+The parts are written by separate generators and merged into the module (one module doc, the imports
+merged). Up to 2.2 they were three files under `src/structures`, `src/parsers` and `src/builders`;
+those package paths of the versions published then (2.3 to 2.5.1) still resolve to the message module
+(`generate-package-exports.mjs`), are deprecated and go in the next major.
 
 Parsers and builders contain no message-specific logic. They hand the structure and the segment
 classes of their version to the engine in `src/types/structure.ts`:
@@ -108,7 +113,7 @@ message of the same version. The `wrappers()` helper builds such a family from a
 
 ### Message registries
 
-`pnpm barrels` also writes `src/parsers/<version>/messages.ts`: the `MESSAGES` map from message
+`pnpm barrels` also writes `src/messages/<version>/registry.ts`: the `MESSAGES` map from message
 structure name (`ADT_A01`, `ACK`) to that version's `parse<MSG>()`, with the `MessageStructure`
 and `ParsedMessage<S>` types derived from it. The root `parse()` (`src/parse.ts`) reads MSH-9 and
 MSH-12 and dispatches on the registry of the version; a version is wired into it by adding its

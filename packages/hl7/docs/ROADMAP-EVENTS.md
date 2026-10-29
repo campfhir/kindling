@@ -1,7 +1,7 @@
 # Roadmap: Event / Message Types
 
-Tracks message structures (builders in `src/builders/<version>/`, parsers in
-`src/parsers/<version>/`, schemas in `codegen/schemas/<version>/`).
+Tracks message structures (builder, parser and structure of each message in
+`src/messages/<version>/<MSG>.ts`, schemas in `codegen/schemas/<version>/`).
 Every event of v2.3 through v2.5.1 is built; the next version is the latest, v2.9.1 (see [ROADMAP.md](../ROADMAP.md)).
 
 > The event list is the HL7 v2.3 trigger event list of the Caristix reference, cross-checked on the
@@ -102,7 +102,7 @@ PD1/PV2 and in INSURANCE, repeating `IN3`, the trailing `PDA` in the A01 family 
 segment), the COMMON ORDER groups in DFT^P03 and `ABS`/`BLC`/`RMI` closing the BAR^P05 visit (new
 segments); v2.5 (also v2.5.1) adds `[{SFT}]` everywhere plus, in DFT^P03, the TQ1/TQ2 timing and
 the `NTE` after `FT1`. Wrapper events (A02…, SRR S02…, MDM T03…) wrap the base message of their
-own version, so `parsers/v2.5/ADT_A02` wraps the v2.5 `ADT_A01`.
+own version, so `messages/v2.5/ADT_A02` wraps the v2.5 `ADT_A01`.
 
 Done in 0.14: every parser and builder is generated from its message structure
 (`codegen/schemas/`, see `codegen/README.md`), for every version. Structures were made faithful to
@@ -288,5 +288,5 @@ changed structures written by hand or drafted from the Caristix tables.
 2. Schema added under `codegen/schemas/<version>/` (and the later versions whose shape differs),
    then `pnpm codegen && pnpm barrels && pnpm exports`.
 3. Tests: builder and parser round trips and the verify() errors, plus a realistic sample under
-   `src/parsers/testdata/` where one exists.
+   `src/messages/testdata/` where one exists.
 4. Roadmap and README updated; `pnpm lint && pnpm typecheck && pnpm test && pnpm codegen:check` green.

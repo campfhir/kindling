@@ -9,7 +9,7 @@ import { readFileSync, writeFileSync, readdirSync, statSync } from "node:fs";
 import { resolve, join } from "node:path";
 
 const ROOT = resolve(process.cwd());
-const AREAS = ["src/parsers", "src/builders", "src/utils", "src/types"];
+const AREAS = ["src/messages", "src/utils", "src/types"];
 const DECL = /^export\s+(?:default\s+)?(?:abstract\s+)?(class|interface|function|const|let|var|type|enum)\s+([A-Za-z0-9_$]+)/;
 
 function walk(d) {

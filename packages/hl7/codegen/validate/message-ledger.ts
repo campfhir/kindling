@@ -2,7 +2,7 @@
  * Builds the message structure validation ledger of one HL7 version:
  * docs/validation/<version>-message-ledger.md.
  *
- * For every message structure we implement (src/structures/<version>) it renders the standard's
+ * For every message structure we implement (src/messages/<version>) it renders the standard's
  * abstract message syntax from up to three sources and compares them with ours:
  *
  * - hl7.eu, the chapter pages of the printed standard (https://www.hl7.eu/HL7v2x/v23/std23/ch3.htm …),
@@ -334,7 +334,7 @@ function sideBySide(columns: { title: string; lines: Line[] | undefined }[]): st
 }
 
 async function main(): Promise<void> {
-  const mod = (await import(`../../src/structures/${VERSION}/index.ts`)) as Record<string, StructureItem[]>;
+  const mod = (await import(`../../src/messages/${VERSION}/index.ts`)) as Record<string, StructureItem[]>;
   const ours = Object.entries(mod)
     .filter(([k]) => k.endsWith("_STRUCTURE"))
     .map(([k, v]) => [k.replace(/_STRUCTURE$/, ""), v] as const)

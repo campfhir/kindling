@@ -2,14 +2,14 @@ import { describe, test, expect, vi } from "vitest";
 import { parse, selectParser, type ParsedHL7, type SelectedParser } from "./parse.ts";
 import { identifyMessage, isBatchInput, parseMessage, selectMessageParser, SUPPORTED_VERSIONS } from "./dispatch.ts";
 import { parseBatch } from "./batch.ts";
-import { MESSAGES } from "./parsers/v2.3/messages.ts";
-import { MESSAGES as MESSAGES_231 } from "./parsers/v2.3.1/messages.ts";
-import { MESSAGES as MESSAGES_24 } from "./parsers/v2.4/messages.ts";
-import { parseADT_A01, parseACK, parseADT_A04 } from "./parsers/v2.3/index.ts";
-import * as par231 from "./parsers/v2.3.1/index.ts";
-import * as par24 from "./parsers/v2.4/index.ts";
-import type { ParsedADT_A01 } from "./parsers/v2.3/ADT_A01_Parser.ts";
-import type { ParsedORU_R01 } from "./parsers/v2.3/ORU_R01_Parser.ts";
+import { MESSAGES } from "./messages/v2.3/registry.ts";
+import { MESSAGES as MESSAGES_231 } from "./messages/v2.3.1/registry.ts";
+import { MESSAGES as MESSAGES_24 } from "./messages/v2.4/registry.ts";
+import { parseADT_A01, parseACK, parseADT_A04 } from "./messages/v2.3/index.ts";
+import * as par231 from "./messages/v2.3.1/index.ts";
+import * as par24 from "./messages/v2.4/index.ts";
+import type { ParsedADT_A01 } from "./messages/v2.3/ADT_A01.ts";
+import type { ParsedORU_R01 } from "./messages/v2.3/ORU_R01.ts";
 
 const MSH = (type: string, version = "2.3") => `MSH|^~\\&|APP|FAC|EMR|HOSP|20231015120000||${type}|MSG001|P|${version}`;
 

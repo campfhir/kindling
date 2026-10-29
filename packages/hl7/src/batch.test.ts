@@ -2,7 +2,7 @@ import { describe, test, expect } from "vitest";
 import { parseBatch, encodeBatch } from "./batch.ts";
 import { parse } from "./parse.ts";
 import { BHS, BTS, FHS, FTS, MSH, MSA, QRD } from "./segments/v2.3/index.ts";
-import { createACK } from "./builders/v2.3/index.ts";
+import { createACK } from "./messages/v2.3/index.ts";
 
 const MSH_ = (type: string, id: string, version = "2.3") => `MSH|^~\\&|APP|FAC|EMR|HOSP|20231015120000||${type}|${id}|P|${version}`;
 const A01 = (id: string) => [MSH_("ADT^A01", id), "EVN|A01|20231015120000", "PID|1||12345^^^HOSP^MR||Doe^John", "PV1|1|I|ICU^1^A"].join("\r");

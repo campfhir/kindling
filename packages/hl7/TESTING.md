@@ -27,9 +27,9 @@ src/
 │   ├── encoding.ts
 │   └── encoding.test.ts
 ├── segments/<version>/        # one test file per segment (field positions, encoding, fluent API)
-├── parsers/<version>/         # one test file per message parser (+ integration tests)
-├── parsers/testdata/          # sample .hl7 messages read by the integration tests
-├── builders/<version>/        # one test file per message builder
+├── messages/<version>/        # message tests next to the generated modules: <MSG>.test.ts (builder),
+│                              # <MSG>_Parser.test.ts (parser, + integration tests)
+├── messages/testdata/         # sample .hl7 messages read by the integration tests
 ├── utils/                     # ValueExtractor, MessageEditor, date utilities, CustomSegment
 └── fixtures.test.ts           # every message of ../fixtures through parse() (see ../fixtures/README.md)
 ```
@@ -65,7 +65,7 @@ Patterns used throughout the suite:
   error returned for invalid input.
 - **Round-trip tests** parse a message, re-encode it and compare with the original (and the other
   direction: build, encode, parse).
-- **Integration tests** read the sample messages in `src/parsers/testdata/` and parse every one.
+- **Integration tests** read the sample messages in `src/messages/testdata/` and parse every one.
 
 Guidelines: keep each test about one behaviour, name it after that behaviour, cover error cases
 and edge cases alongside the happy path, and add the test file in the same commit as the code.

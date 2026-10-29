@@ -1,5 +1,5 @@
 import { MSH, PID, PV1, OBR, OBX } from "../src/segments/v2.5.1/index.ts";
-import { createORU_R01, type PatientResult } from "../src/builders/v2.5.1/ORU_R01.ts";
+import { createORU_R01, type PatientResult } from "../src/messages/v2.5.1/ORU_R01.ts";
 
 function formatDateTime(date: Date): string {
   const year = date.getFullYear();

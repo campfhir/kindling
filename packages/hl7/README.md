@@ -52,10 +52,9 @@ src/
 │   ├── v2.4/                 # 66 segments changed in 2.4 + 28 new (PDA, ABS, SAC, QPD, RCP, IAM, …); the rest re-export
 │   ├── v2.5/                 # 49 segments changed in 2.5 + 6 new (BPO, BPX, BTX, CON, IPC, OVR) + SFT, SPM, TQ1, TQ2, CER, IIM; the rest re-export
 │   └── v2.5.1/               # OBR, OBX, ORC changed in 2.5.1 (OBR-50, OBX-20–25, ORC-31); the rest re-export v2.5
-├── structures/               # Generated: each message's structure as data (<MSG>_STRUCTURE)
-├── parsers/                  # Generated message parsers by version (v2.3 … v2.5.1); messages.ts = structure name → parser
-│   └── testdata/             # 30 sample HL7 messages for integration tests
-└── builders/                 # Generated message builders by version (v2.3 … v2.5.1)
+└── messages/                 # Generated: one module per message and version (v2.3 … v2.7) with its builder, parser
+    │                         # and structure (<MSG>_STRUCTURE); registry.ts = structure name → parser
+    └── testdata/             # 30 sample HL7 messages for integration tests
 fixtures/
 ├── generated/                # One message per structure and version, from hl7apy's structures (fixture tests)
 ├── external/                 # Real-world sample collections, fetched by `pnpm fixtures:fetch` (not committed)
@@ -116,8 +115,7 @@ also work, but they are not an officially tested target.
 
 ## Versions
 
-Every supported version has its own subpath (`segments/<version>`, `parsers/<version>`,
-`builders/<version>`). Versions that are structurally identical to their predecessor simply
+Every supported version has its own subpath (`segments/<version>`, `messages/<version>`). Versions that are structurally identical to their predecessor simply
 re-export it, so `segments/v2.4` `NK1` *is* the v2.3 `NK1` class, while a segment whose field table
 changed gets a subclass in that version (`segments/v2.4` `PID` extends the 2.3.1 `PID` with PID-31 to
 PID-38). Segments are available from the version that introduced them:
@@ -163,20 +161,24 @@ import { MSH, PID, OBX } from '@campfhir/hl7/segments/v2.5.1';
 import { MSH } from '@campfhir/hl7/segments/v2.5.1/MSH';
 ```
 
-Builders and parsers are imported individually or via the barrel (create*/parse* functions only):
+Each message has one module with its builder, parser, structure and types, per version:
 
 ```typescript
-// Barrel — create*/parse* functions only
-import { createORU_R01 } from '@campfhir/hl7/builders/v2.5.1';
-import { parseORU_R01 } from '@campfhir/hl7/parsers/v2.5.1';
+// One message: everything about ORU^R01 in HL7 v2.5.1
+import {
+  createORU_R01, type PatientResult, type OrderObservation,  // builder
+  parseORU_R01, type ParsedORU_R01,                          // parser
+  ORU_R01_STRUCTURE,                                         // the structure, as data
+} from '@campfhir/hl7/messages/v2.5.1/ORU_R01';
 
-// Per-file — includes types like PatientResult, OrderObservation, ParsedORU_R01
-import { createORU_R01, PatientResult } from '@campfhir/hl7/builders/v2.5.1/ORU_R01';
-import { parseORU_R01, type ParsedORU_R01 } from '@campfhir/hl7/parsers/v2.5.1/ORU_R01_Parser';
-
-// The message structure itself, as data
-import { ORU_R01_STRUCTURE } from '@campfhir/hl7/structures/v2.5.1';
+// Or the version barrel: create*, parse*, *_STRUCTURE and Parsed* of every message,
+// plus the MESSAGES registry (group types such as PatientResult come from the message module)
+import { createORU_R01, parseORU_R01, type ParsedORU_R01 } from '@campfhir/hl7/messages/v2.5.1';
 ```
+
+The paths of earlier releases, `@campfhir/hl7/builders/<v>/<MSG>`, `@campfhir/hl7/parsers/<v>/<MSG>_Parser`
+and `@campfhir/hl7/structures/<v>`, still resolve (to the same message module) for v2.3 to v2.5.1. They are
+deprecated and will be removed in the next major version.
 
 Every builder takes the message's required segments and groups as positional arguments, in the
 order of the standard's message table, then an `options` object for the optional ones:
@@ -225,12 +227,12 @@ switch (result.val.structure) {
 `{ kind: 'message', version, structure, messageType, parse }`, for a batch `{ kind: 'batch', parse }`.
 `parseMessage()` and `selectMessageParser()` are the single-message halves (a batch is an error to
 them), and `identifyMessage(hl7String)` returns only what MSH-9 and MSH-12 say. `MESSAGES` of
-`@campfhir/hl7/parsers/v2.3` is the map they dispatch on (message structure name → parser).
+`@campfhir/hl7/messages/v2.3` is the map they dispatch on (message structure name → parser).
 
 Versions are wired one per release (`SUPPORTED_VERSIONS`): 1.0 dispatches HL7 v2.3, 1.1 adds v2.3.1,
 1.2 adds v2.4, and every MSH-12 value outside that list is an error until its release. To parse such a feed anyway, or one
 that leaves MSH-12 empty, name the version to parse as: `parse(hl7String, { version: '2.4' })`.
-The individual parsers of every version (`parseADT_A01` of `@campfhir/hl7/parsers/v2.5.1`, …)
+The individual parsers of every version (`parseADT_A01` of `@campfhir/hl7/messages/v2.5.1`, …)
 stay available regardless.
 
 In v2.3 MSH-9 has two components, message type and trigger event (`ADT^A01`); the message
@@ -280,7 +282,7 @@ import { PID } from '@campfhir/hl7/segments/v2.5.1/PID';
 import { PV1 } from '@campfhir/hl7/segments/v2.5.1/PV1';
 import { OBR } from '@campfhir/hl7/segments/v2.5.1/OBR';
 import { OBX } from '@campfhir/hl7/segments/v2.5.1/OBX';
-import { createORU_R01, PatientResult } from '@campfhir/hl7/builders/v2.5.1/ORU_R01';
+import { createORU_R01, PatientResult } from '@campfhir/hl7/messages/v2.5.1/ORU_R01';
 
 const msh = new MSH()
   .sendingApplication('LAB')
@@ -337,7 +339,7 @@ console.log(message.encode());
 ### Parsing an ORU^R01 Message
 
 ```typescript
-import { parseORU_R01 } from '@campfhir/hl7/parsers/v2.5.1/ORU_R01_Parser';
+import { parseORU_R01 } from '@campfhir/hl7/messages/v2.5.1/ORU_R01';
 import { ParserUtils } from '@campfhir/hl7';
 
 const hl7String = `MSH|^~\\&|LAB|General Hospital|EMR|Main Campus|20250119120000||ORU^R01^ORU_R01|MSG00001|P|2.5.1
@@ -443,7 +445,7 @@ zpd.encode(); // ZPD|extra-patient-data|comp1^comp2|sub1a&sub1b^sub2
 ```typescript
 import { MessageEditor, CustomSegment } from '@campfhir/hl7';
 import { NTE } from '@campfhir/hl7/segments/v2.5.1';
-import { createORU_R01 } from '@campfhir/hl7/builders/v2.5.1/ORU_R01';
+import { createORU_R01 } from '@campfhir/hl7/messages/v2.5.1/ORU_R01';
 
 const message = createORU_R01(msh, patientResults);
 
@@ -526,7 +528,7 @@ const msh = new MSH()
 ### Structure-driven messages
 
 A message's structure — the ordered segments, choices and groups of the standard's message table —
-is data (`src/structures/<version>/<MSG>.ts`, generated from `codegen/schemas/`). The parser and
+is data (`<MSG>_STRUCTURE` in `src/messages/<version>/<MSG>.ts`, generated from `codegen/schemas/`). The parser and
 builder of a message are generated too and contain no message-specific logic: they hand the
 structure and the segment classes of their version to the engine in `src/types/structure.ts`.
 `parseStructure` walks the raw segments against the structure (a repeating group starts a new
@@ -539,7 +541,7 @@ warning),
 
 ```typescript
 import { parseStructure } from '@campfhir/hl7';
-import { ORU_R01_STRUCTURE } from '@campfhir/hl7/structures/v2.5.1';
+import { ORU_R01_STRUCTURE } from '@campfhir/hl7/messages/v2.5.1';
 
 // what parseORU_R01 does, given the v2.5.1 segment parsers
 const result = parseStructure('ORU_R01', ORU_R01_STRUCTURE, parsers, hl7String);
