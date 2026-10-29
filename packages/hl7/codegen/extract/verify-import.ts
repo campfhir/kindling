@@ -56,7 +56,12 @@ function fromJson(items: any[], depth = 0): string[] {
 
 /** The structure fixes recorded in overrides.json are applied to the extraction before it is compared (see import-extraction.ts). */
 const overridesFile = join(ROOT, "codegen/extracted", version, "overrides.json");
-const fixes: { message: string; insertAfter: string; items: { name: string; min: number; max: number | string }[] }[] = existsSync(overridesFile) ? (readJson(overridesFile).structureFixes ?? []) : [];
+const fixes: { message: string; insertAfter?: string; items?: { name: string; min: number; max: number | string }[]; set?: string; min?: number; max?: number | string }[] = existsSync(overridesFile) ? (readJson(overridesFile).structureFixes ?? []) : [];
+function setOccurs(items: any[], name: string, min: number, max: number | string): boolean {
+  const seg = items.find((i) => i.kind === "segment" && i.name === name);
+  if (seg) { seg.minOccurs = min; seg.maxOccurs = max; return true; }
+  return items.some((i) => i.items && setOccurs(i.items, name, min, max));
+}
 function applyFix(items: any[], after: string, add: any[]): boolean {
   const at = items.findIndex((i) => i.kind === "segment" && i.name === after);
   if (at >= 0) { items.splice(at + 1, 0, ...add); return true; }
@@ -79,7 +84,8 @@ for (const e of index) {
   checked++;
   const fix = fixes.find((f) => f.message === name);
   const working = fix ? structuredClone(table) : table;
-  if (fix) applyFix(working, fix.insertAfter, fix.items.map((i) => ({ kind: "segment", name: i.name, minOccurs: i.min, maxOccurs: i.max })));
+  if (fix?.set) setOccurs(working, fix.set, fix.min!, fix.max!);
+  else if (fix) applyFix(working, fix.insertAfter!, fix.items!.map((i) => ({ kind: "segment", name: i.name, minOccurs: i.min, maxOccurs: i.max })));
   const a = fromSchema(schema.structure).join("\n");
   const b = fromJson(working).join("\n");
   if (a !== b && !b.includes("choice ALT")) mismatched.push(name);

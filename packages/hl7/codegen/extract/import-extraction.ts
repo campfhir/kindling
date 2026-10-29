@@ -233,17 +233,31 @@ for (const e of index.filter((x) => x.status !== "withdrawn")) {
 
 // Structure fixes the rule calls for (Caristix and HAPI agree against hl7.eu), recorded with their reason in overrides.json:
 //   { "structureFixes": [{ "message": "ADT_A13", "insertAfter": "PD1", "items": [{ "name": "ARV", "min": 0, "max": "*" }], "reason": "..." }] }
+// or, to change how often a segment occurs: { "message": "RQC_I06", "set": "GT1", "min": 0, "max": "*", "reason": "..." }
 const overridesPath = join(DIR, "overrides.json");
-const structureFixes: { message: string; insertAfter: string; items: { name: string; min: 0 | 1; max: 1 | "*" }[]; reason: string }[] = existsSync(overridesPath) ? (readJson(overridesPath).structureFixes ?? []) : [];
+type StructureFix = { message: string; reason: string } & (
+  | { insertAfter: string; items: { name: string; min: 0 | 1; max: 1 | "*" }[] }
+  | { set: string; min: 0 | 1; max: 1 | "*" });
+const structureFixes: StructureFix[] = existsSync(overridesPath) ? (readJson(overridesPath).structureFixes ?? []) : [];
 const appliedFixes: string[] = [];
 function insertAfter(items: Item[], after: string, add: Item[]): boolean {
   const at = items.findIndex((i) => i.kind === "segment" && i.name === after);
   if (at >= 0) { items.splice(at + 1, 0, ...add); return true; }
   return items.some((i) => i.items && insertAfter(i.items, after, add));
 }
+function setOccurs(items: Item[], name: string, min: 0 | 1, max: 1 | "*"): boolean {
+  const seg = items.find((i) => i.kind === "segment" && i.name === name);
+  if (seg) { seg.minOccurs = min; seg.maxOccurs = max; return true; }
+  return items.some((i) => i.items && setOccurs(i.items, name, min, max));
+}
 for (const fix of structureFixes) {
   const target = eventsOut.find((e) => e.name === fix.message && e.items);
   if (!target) { notes.skipped.push(`structure fix for ${fix.message} not applied: no table of its own`); continue; }
+  if ("set" in fix) {
+    if (!setOccurs(target.items!, fix.set, fix.min, fix.max)) throw new Error(`structure fix: ${fix.message} has no ${fix.set}`);
+    appliedFixes.push(`${fix.message}: ${fix.set} occurs ${fix.min}..${fix.max}. ${fix.reason}`);
+    continue;
+  }
   const add: Item[] = fix.items.map((i) => ({ kind: "segment", name: i.name, minOccurs: i.min, maxOccurs: i.max, usage: null, page: null }));
   if (!insertAfter(target.items!, fix.insertAfter, add)) throw new Error(`structure fix: ${fix.message} has no ${fix.insertAfter}`);
   appliedFixes.push(`${fix.message}: ${fix.items.map((i) => i.name).join(", ")} inserted after ${fix.insertAfter}. ${fix.reason}`);
