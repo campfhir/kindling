@@ -8,7 +8,7 @@ import type { Result } from "../types/result.ts";
 import type { ErrResult } from "../types/err.ts";
 import type { EncodingCharacters } from "../types/encoding.ts";
 import { HL7Message } from "../types/message.ts";
-import type { MSH } from "../segments/v2.3/MSH.ts";
+import type { MSH } from "../v2.3/MSH.ts";
 
 /** Splits a message into non-empty segment strings (CR, LF or CRLF delimited). */
 export function splitSegments(messageString: string): string[] {

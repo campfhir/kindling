@@ -27,7 +27,7 @@ npx tsx codegen/extract/check-completeness.ts <pdf-dir> codegen/extracted/vX
 # 3. Import: the segment spec, the message schemas, version.ts and IMPORT.md (every decision).
 #    Hand-checked facts the importer needs go in codegen/extracted/vX/overrides.json (see import-extraction.ts).
 npx tsx codegen/extract/import-extraction.ts vX
-mkdir -p src/segments/vX
+mkdir -p src/vX
 # 4. Register the version in codegen/generate.ts (after its base), then make the classes and messages.
 npx tsx codegen/generate-segments.ts --version vX     # a class for every spec segment
 pnpm codegen && pnpm barrels && pnpm exports          # messages, and re-exports of everything else
@@ -36,9 +36,10 @@ pnpm codegen && pnpm barrels && pnpm exports          # messages, and re-exports
 node codegen/validate/ledger.mjs vX <dir> --adopt MSH,BHS,FHS
 
 # 6. Write the decided values (rule: hl7.eu, unless Caristix and HAPI agree against it) into the spec,
-#    then rebuild the classes from it. Deleting them first is what makes the generator rewrite them.
+#    then rebuild the classes from it. Deleting them first is what makes the generator rewrite them
+#    (src/vX also holds the messages: delete the segment classes only, as add-version.sh does).
 node codegen/validate/ledger.mjs vX <dir> --fix-spec
-rm src/segments/vX/*.ts && npx tsx codegen/generate-segments.ts --version vX
+npx tsx codegen/generate-segments.ts --version vX
 pnpm codegen && pnpm barrels && pnpm exports
 
 # 7. Check. verify-import compares the schemas with the extraction; the ledgers compare the version with the three sources.

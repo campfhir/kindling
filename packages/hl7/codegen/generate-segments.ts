@@ -3,7 +3,7 @@
  *
  * The field lists come from codegen/spec/<version>-segments.json (the Caristix segment tables
  * for that version, e.g. https://hl7-definition.caristix.com/v2/HL7v2.4/Segments/ORG). Every
- * file that already exists in src/segments/<version>/ is left alone, so a segment can be replaced
+ * file that already exists in src/<version>/ is left alone, so a segment can be replaced
  * by a hand-written class at any time and the generator will not touch it again.
  *
  * Generated setters take raw HL7 values (SegmentFieldValue). Repeating fields take one argument
@@ -36,7 +36,7 @@ interface SpecSegment {
   fields: SpecField[];
   /**
    * The version directory of the class to extend (`"v2.3.1"`): the generated class is a subclass of
-   * `src/segments/<extends>/<SEG>.ts` with setters for the fields that are not `inherited`, the way a
+   * `src/<extends>/<SEG>.ts` with setters for the fields that are not `inherited`, the way a
    * hand-written class of an older version is carried into a newer one (see codegen/validate/ledger.mjs --adopt).
    */
   extends?: string;
@@ -50,7 +50,7 @@ const DRY_RUN = process.argv.includes("--dry-run");
 const versionArg = process.argv.indexOf("--version");
 const VERSION = versionArg === -1 ? "v2.3" : process.argv[versionArg + 1];
 if (!/^v\d+\.\d+(\.\d+)?$/.test(VERSION ?? "")) throw new Error(`--version expects a directory name like v2.4, got ${VERSION}`);
-const SEG_DIR = join(ROOT, "src/segments", VERSION);
+const SEG_DIR = join(ROOT, "src", VERSION);
 const SPEC_FILE = join(ROOT, "codegen/spec", `${VERSION}-segments.json`);
 
 const spec: Record<string, SpecSegment> = JSON.parse(readFileSync(SPEC_FILE, "utf8"));
@@ -198,13 +198,13 @@ function helperImports(fields: SpecField[]): string[] {
     ? [...new Set(["components", ...used.map((c) => c.parts), ...used.map((c) => `type ${c.type}`)])]
     : [];
   const compositeImport = compositeNames.length
-    ? `import { ${compositeNames.join(", ")} } from "../../utils/composites.ts";`
+    ? `import { ${compositeNames.join(", ")} } from "../utils/composites.ts";`
     : "";
   // The layout constants serve every date field; the layout types only the non-repeating setters' format parameter.
   const dates = [...new Set(fields.map((f) => DATE_LAYOUTS[f.type]).filter(Boolean))];
   const dateTypes = [...new Set(fields.filter((f) => !isRepeating(f)).map((f) => DATE_LAYOUTS[f.type]).filter(Boolean))];
   const dateImport = dates.length
-    ? `import { formatHL7Date, ${[...dates.map((d) => d.layout), ...dateTypes.map((d) => `type ${d.type}`)].join(", ")} } from "../../utils/hl7DateUtils.ts";`
+    ? `import { formatHL7Date, ${[...dates.map((d) => d.layout), ...dateTypes.map((d) => `type ${d.type}`)].join(", ")} } from "../utils/hl7DateUtils.ts";`
     : "";
   return [compositeImport, dateImport].filter(Boolean);
 }
@@ -241,10 +241,10 @@ function subclassSource(code: string, seg: SpecSegment): string {
     return { ok: true, val: seg };
   }`;
   const imports = [
-    ...(header ? [] : [`import { Err } from "../../utils/err.ts";`]),
-    `import type { Result } from "../../types/result.ts";`,
-    ...(repeats ? [`import { repetitions, type Repeated } from "../../types/segment.ts";`] : []),
-    ...(header ? [] : [`import type { EncodingCharacters } from "../../types/encoding.ts";`, `import { ParserUtils } from "../../types/parser.ts";`]),
+    ...(header ? [] : [`import { Err } from "../utils/err.ts";`]),
+    `import type { Result } from "../types/result.ts";`,
+    ...(repeats ? [`import { repetitions, type Repeated } from "../types/segment.ts";`] : []),
+    ...(header ? [] : [`import type { EncodingCharacters } from "../types/encoding.ts";`, `import { ParserUtils } from "../types/parser.ts";`]),
     `import { ${code} as ${code}_base } from "../${base}/${code}.ts";`,
     ...helperImports(own),
   ];
@@ -287,13 +287,13 @@ function classSource(code: string, seg: SpecSegment): string {
     ? [...new Set(["components", ...used.map((c) => c.parts), ...used.map((c) => `type ${c.type}`)])]
     : [];
   const compositeImport = compositeNames.length
-    ? `import { ${compositeNames.join(", ")} } from "../../utils/composites.ts";`
+    ? `import { ${compositeNames.join(", ")} } from "../utils/composites.ts";`
     : "";
   // The layout constants serve every date field; the layout types only the non-repeating setters' format parameter.
   const dates = [...new Set(seg.fields.map((f) => DATE_LAYOUTS[f.type]).filter(Boolean))];
   const dateTypes = [...new Set(seg.fields.filter((f) => !isRepeating(f)).map((f) => DATE_LAYOUTS[f.type]).filter(Boolean))];
   const dateImport = dates.length
-    ? `import { formatHL7Date, ${[...dates.map((d) => d.layout), ...dateTypes.map((d) => `type ${d.type}`)].join(", ")} } from "../../utils/hl7DateUtils.ts";`
+    ? `import { formatHL7Date, ${[...dates.map((d) => d.layout), ...dateTypes.map((d) => `type ${d.type}`)].join(", ")} } from "../utils/hl7DateUtils.ts";`
     : "";
   return `/**
  * ${code} segment definition for HL7 ${VERSION}.
@@ -305,11 +305,11 @@ function classSource(code: string, seg: SpecSegment): string {
  *
  * @module
  */
-import { Err } from "../../utils/err.ts";
-import type { Result } from "../../types/result.ts";
-import { BaseSegment${importNames} } from "../../types/segment.ts";
-import type { EncodingCharacters } from "../../types/encoding.ts";
-import { ParserUtils } from "../../types/parser.ts";
+import { Err } from "../utils/err.ts";
+import type { Result } from "../types/result.ts";
+import { BaseSegment${importNames} } from "../types/segment.ts";
+import type { EncodingCharacters } from "../types/encoding.ts";
+import { ParserUtils } from "../types/parser.ts";
 ${[compositeImport, dateImport].filter(Boolean).join("\n")}
 
 /**
@@ -345,7 +345,7 @@ ${setters}
 `;
 }
 
-// The segments the generator must create are the spec segments with no file in src/segments/<version>.
+// The segments the generator must create are the spec segments with no file in src/<version>.
 const created: string[] = [];
 for (const [code, seg] of Object.entries(spec)) {
   const file = join(SEG_DIR, `${code}.ts`);
@@ -356,6 +356,6 @@ for (const [code, seg] of Object.entries(spec)) {
     continue;
   }
   writeFileSync(file, classSource(code, seg));
-  console.log(`wrote   src/segments/${VERSION}/${code}.ts`);
+  console.log(`wrote   src/${VERSION}/${code}.ts`);
 }
 console.log(`\n${DRY_RUN ? "Would create" : "Created"} ${created.length} segment(s).`);

@@ -20,7 +20,7 @@ if the committed output drifts (`pnpm codegen:check`).
 A message is described once, as the standard's message table reads, by a `MessageSchema`
 (`src/types/schema.ts`): an ordered list of segments, choices (`<OBR|RQD|...>`) and groups, each
 required or optional, repeating or not. From every message of every registered version codegen
-writes one module, `src/messages/<v>/<MSG>.ts`, in three parts:
+writes one module, `src/<v>/<MSG>.ts` (next to the version's segments), in three parts:
 
 | Part | Contents |
 | --- | --- |
@@ -29,9 +29,9 @@ writes one module, `src/messages/<v>/<MSG>.ts`, in three parts:
 | builder | one `*Group` interface per group, `<MSG>Options`, the `<MSG>` builder class, `create<MSG>()` |
 
 The parts are written by separate generators and merged into the module (one module doc, the imports
-merged). Up to 2.2 they were three files under `src/structures`, `src/parsers` and `src/builders`;
-those package paths of the versions published then (2.3 to 2.5.1) still resolve to the message module
-(`generate-package-exports.mjs`), are deprecated and go in the next major.
+merged). Up to 2.2 they were three files under `src/structures`, `src/parsers` and `src/builders`, and the
+segments were in `src/segments`; those package paths of the versions published then (2.3 to 2.5.1) still
+resolve to the same modules (`generate-package-exports.mjs`), are deprecated and go in the next major.
 
 Parsers and builders contain no message-specific logic. They hand the structure and the segment
 classes of their version to the engine in `src/types/structure.ts`:
@@ -113,7 +113,7 @@ message of the same version. The `wrappers()` helper builds such a family from a
 
 ### Message registries
 
-`pnpm barrels` also writes `src/messages/<version>/registry.ts`: the `MESSAGES` map from message
+`pnpm barrels` also writes `src/<version>/registry.ts`: the `MESSAGES` map from message
 structure name (`ADT_A01`, `ACK`) to that version's `parse<MSG>()`, with the `MessageStructure`
 and `ParsedMessage<S>` types derived from it. The root `parse()` (`src/parse.ts`) reads MSH-9 and
 MSH-12 and dispatches on the registry of the version; a version is wired into it by adding its
@@ -158,7 +158,7 @@ codegen/
    };
    ```
 
-   Every segment the structure names must have a class in `src/segments/<base version>/`.
+   Every segment the structure names must have a class in `src/<base version>/`.
 
 2. Add it to that version's `messages` in `version.ts` (and re-version it in the later versions
    whose structure is the same; a version that differs gets its own schema file).
@@ -175,7 +175,7 @@ export const V2_6: VersionSchema = {
   version: "v2.6",
   baseVersion: "v2.5.1",
   reexport: true,            // omit (and list `segments`) for a version with its own segment classes
-  ownSegments: [],           // segments first introduced in 2.6, hand-written in src/segments/v2.6/
+  ownSegments: [],           // segments first introduced in 2.6, hand-written in src/v2.6/
   withdrawnMessages: [],     // messages of v2.5.1 that 2.6 no longer defines ("UDM_R06" style names)
   segments: [],
   messages: [...],           // only the messages whose structure changed

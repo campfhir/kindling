@@ -30,7 +30,13 @@ if ! grep -q "schemas/$v/version.ts" codegen/generate.ts; then
 fi
 
 regenerate() {
-  rm -rf "src/segments/$v" && mkdir -p "src/segments/$v"
+  # src/<v> holds the segments and the messages: clear the segments (every module that is not a message,
+  # a test, the barrel or the registry) so the generator writes them again from the spec
+  mkdir -p "src/$v"
+  for f in "src/$v"/*.ts; do
+    case "$f" in *.test.ts|*/index.ts|*/registry.ts) continue ;; esac
+    grep -q -e "@generated message" -e "^ \* [A-Z0-9_]* message for HL7 " "$f" || rm -f "$f"
+  done
   npx tsx codegen/generate-segments.ts --version "$v" | tail -1
   # one command per line: under set -e a failure inside an && chain would not stop the script
   pnpm -s codegen >/dev/null

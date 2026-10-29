@@ -1,5 +1,5 @@
 // Inserts a JSDoc comment before each undocumented top-level exported symbol
-// in parsers, builders, utils, and core types — so JSR's "documented symbols"
+// in utils and core types (generated segments and messages document themselves) — so JSR's "documented symbols"
 // score clears 80%. Doc text is derived from the symbol's kind, name, and file
 // context (message type + HL7 version). Idempotent: symbols already preceded by
 // a block comment are skipped.
@@ -9,7 +9,7 @@ import { readFileSync, writeFileSync, readdirSync, statSync } from "node:fs";
 import { resolve, join } from "node:path";
 
 const ROOT = resolve(process.cwd());
-const AREAS = ["src/messages", "src/utils", "src/types"];
+const AREAS = ["src/utils", "src/types"];
 const DECL = /^export\s+(?:default\s+)?(?:abstract\s+)?(class|interface|function|const|let|var|type|enum)\s+([A-Za-z0-9_$]+)/;
 
 function walk(d) {

@@ -2,7 +2,7 @@
 // native ESM import() and, for a "default" or "require" condition, with CommonJS require() too
 // (Node 24 loads an ES module from require()), and checks that each "types" file exists, so a
 // broken "exports" map, an extensionless ESM import or a missing declaration fails CI instead of
-// a consumer. A wildcard entry ("./messages/v2.4/*") is checked on the first file it matches. The
+// a consumer. A wildcard entry ("./v2.4/*") is checked on the first file it matches. The
 // built package must also stay under MAX_DIST_MB (what npm unpacks), so a build change that
 // multiplies the output is caught here rather than on npm.
 //
@@ -30,7 +30,7 @@ function filesUnder(dir) {
   return out;
 }
 
-/** The first file a wildcard target ("./dist/messages/v2.4/*.js") matches, as the concrete target. */
+/** The first file a wildcard target ("./dist/v2.4/*.js") matches, as the concrete target. */
 function firstMatch(pkgDir, pattern) {
   const [before, after] = pattern.split("*");
   const relDir = before.slice(0, before.lastIndexOf("/"));

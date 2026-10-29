@@ -25,12 +25,12 @@ import type { Result } from "./types/result.ts";
 import type { ParsedMessageBase } from "./types/structure.ts";
 import { Err } from "./utils/err.ts";
 import { readMessageHeader, splitSegments } from "./utils/messageParsing.ts";
-import { MSH } from "./segments/v2.3/MSH.ts";
-import { MESSAGES as V2_3 } from "./messages/v2.3/registry.ts";
-import { MESSAGES as V2_3_1 } from "./messages/v2.3.1/registry.ts";
-import { MESSAGES as V2_4 } from "./messages/v2.4/registry.ts";
-import { MESSAGES as V2_5 } from "./messages/v2.5/registry.ts";
-import { MESSAGES as V2_5_1 } from "./messages/v2.5.1/registry.ts";
+import { MSH } from "./v2.3/MSH.ts";
+import { MESSAGES as V2_3 } from "./v2.3/registry.ts";
+import { MESSAGES as V2_3_1 } from "./v2.3.1/registry.ts";
+import { MESSAGES as V2_4 } from "./v2.4/registry.ts";
+import { MESSAGES as V2_5 } from "./v2.5/registry.ts";
+import { MESSAGES as V2_5_1 } from "./v2.5.1/registry.ts";
 
 /** The message registries the root parser dispatches on, keyed by the MSH-12 value. */
 const REGISTRIES = {
@@ -87,7 +87,7 @@ export interface SelectedMessageParserOf<V extends HL7Version, S extends Message
   structure: S;
   /** What MSH-9 and MSH-12 said. */
   messageType: MessageType;
-  /** The generated parser of that message (`parseADT_A01` of `@campfhir/hl7/messages/v2.3`). */
+  /** The generated parser of that message (`parseADT_A01` of `@campfhir/hl7/v2.3`). */
   parse: (messageString: string) => Result<ParsedMessageOf<V, S>>;
 }
 

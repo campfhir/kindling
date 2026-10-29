@@ -1,7 +1,7 @@
 # Roadmap: Event / Message Types
 
 Tracks message structures (builder, parser and structure of each message in
-`src/messages/<version>/<MSG>.ts`, schemas in `codegen/schemas/<version>/`).
+`src/<version>/<MSG>.ts`, schemas in `codegen/schemas/<version>/`).
 Every event of v2.3 through v2.5.1 is built; the next version is the latest, v2.9.1 (see [ROADMAP.md](../ROADMAP.md)).
 
 > The event list is the HL7 v2.3 trigger event list of the Caristix reference, cross-checked on the
@@ -102,7 +102,7 @@ PD1/PV2 and in INSURANCE, repeating `IN3`, the trailing `PDA` in the A01 family 
 segment), the COMMON ORDER groups in DFT^P03 and `ABS`/`BLC`/`RMI` closing the BAR^P05 visit (new
 segments); v2.5 (also v2.5.1) adds `[{SFT}]` everywhere plus, in DFT^P03, the TQ1/TQ2 timing and
 the `NTE` after `FT1`. Wrapper events (A02…, SRR S02…, MDM T03…) wrap the base message of their
-own version, so `messages/v2.5/ADT_A02` wraps the v2.5 `ADT_A01`.
+own version, so `src/v2.5/ADT_A02` wraps the v2.5 `ADT_A01`.
 
 Done in 0.14: every parser and builder is generated from its message structure
 (`codegen/schemas/`, see `codegen/README.md`), for every version. Structures were made faithful to
@@ -161,8 +161,8 @@ hl7.eu has `MSH MSA [ERR] MFI [{MFA}]` for every event), the MFN^M02 body it app
 MFK^M02, and the M06 structure it shows for the v2.3 MFN^M07 (hl7.eu: `MFE CM0 [{CM2}]`). Caristix
 also drops MFN^M01/M03 and most MFK/MFQ/MFR events from its v2.4 and v2.5 lists although hl7.eu still
 defines them, so they are kept. The later events are in too: MFN^M12 (`MFE OM1 [OM7]`, with the new
-OM7 segment in `segments/v2.4`) from v2.4 and MFN^M15 (`MFE IIM`, with the new IIM segment in
-`segments/v2.5`) from v2.5, each with its MFK event, plus MFQ/MFR^M12 (v2.4) and M13 (v2.5). Field
+OM7 segment in `src/v2.4`) from v2.4 and MFN^M15 (`MFE IIM`, with the new IIM segment in
+`src/v2.5`) from v2.5, each with its MFK event, plus MFQ/MFR^M12 (v2.4) and M13 (v2.5). Field
 tables from hl7-definition.caristix.com cross-checked on hl7.eu (OM7 is unchanged through 2.5.1, IIM
 in 2.5.1).
 
@@ -288,5 +288,5 @@ changed structures written by hand or drafted from the Caristix tables.
 2. Schema added under `codegen/schemas/<version>/` (and the later versions whose shape differs),
    then `pnpm codegen && pnpm barrels && pnpm exports`.
 3. Tests: builder and parser round trips and the verify() errors, plus a realistic sample under
-   `src/messages/testdata/` where one exists.
+   `src/testdata/` where one exists.
 4. Roadmap and README updated; `pnpm lint && pnpm typecheck && pnpm test && pnpm codegen:check` green.

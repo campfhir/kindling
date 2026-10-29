@@ -1,6 +1,6 @@
-import { parseORU_R01 } from "../src/messages/v2.5.1/ORU_R01.ts";
-import { createORU_R01 } from "../src/messages/v2.5.1/ORU_R01.ts";
-import { OBX, OBR, MSH, PID } from "../src/segments/v2.5.1/index.ts";
+import { parseORU_R01 } from "../src/v2.5.1/ORU_R01.ts";
+import { createORU_R01 } from "../src/v2.5.1/ORU_R01.ts";
+import { OBX, OBR, MSH, PID } from "../src/v2.5.1/index.ts";
 
 /**
  * Example: Parse an HL7 message, modify it, and re-encode

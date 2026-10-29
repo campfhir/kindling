@@ -10,8 +10,8 @@
  * formatting, custom segments, and the message editor.
  *
  * Versioned segments, parsers, and builders are imported from their own
- * subpaths, e.g. `@campfhir/hl7/segments/v2.5.1` or
- * `@campfhir/hl7/messages/v2.5.1`.
+ * subpaths, e.g. `@campfhir/hl7/v2.5.1` or
+ * `@campfhir/hl7/v2.5.1`.
  *
  * @module
  */
@@ -77,6 +77,6 @@ export { CustomSegment } from "./utils/CustomSegment.ts";
 export { MessageEditor, InsertionBuilder, PositionedInsertionBuilder } from "./utils/MessageEditor.ts";
 
 // Versioned segments, structures, parsers, and builders must be imported directly:
-//   import { OBX } from "@campfhir/hl7/segments/v2.5.1"
-//   import { parseORU_R01 } from "@campfhir/hl7/messages/v2.5.1"
-//   import { parseMFN_M02 } from "@campfhir/hl7/messages/v2.3"
+//   import { OBX } from "@campfhir/hl7/v2.5.1"
+//   import { parseORU_R01 } from "@campfhir/hl7/v2.5.1"
+//   import { parseMFN_M02 } from "@campfhir/hl7/v2.3"

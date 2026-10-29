@@ -2,7 +2,7 @@
  * Builds the message structure validation ledger of one HL7 version:
  * docs/validation/<version>-message-ledger.md.
  *
- * For every message structure we implement (src/messages/<version>) it renders the standard's
+ * For every message structure we implement (src/<version>) it renders the standard's
  * abstract message syntax from up to three sources and compares them with ours:
  *
  * - hl7.eu, the chapter pages of the printed standard (https://www.hl7.eu/HL7v2x/v23/std23/ch3.htm …),
@@ -154,7 +154,7 @@ function readHapi(event: string): Line[] | undefined {
  * "[Order Detail Segment] OBR, etc." reads as the order detail choice.
  */
 const SEGMENT_CODES = new Set(
-  ["v2.3", VERSION].flatMap((v) => readdirSync(join(ROOT, "src/segments", v)).filter((f) => /^[A-Z][A-Z0-9]{2}\.ts$/.test(f)).map((f) => f.slice(0, 3))),
+  ["v2.3", VERSION].flatMap((v) => readdirSync(join(ROOT, "src", v)).filter((f) => /^[A-Z][A-Z0-9]{2}\.ts$/.test(f)).map((f) => f.slice(0, 3))),
 );
 const ORDER_DETAIL_CHOICE = "<OBR|RQD|RQ1|RXO|ODS|ODT>";
 /** "PC6, PC7, PC8" → PC6 PC7 PC8; "C01-C08" → C01 … C08; "O01/O02" → O01 O02. */
@@ -334,7 +334,7 @@ function sideBySide(columns: { title: string; lines: Line[] | undefined }[]): st
 }
 
 async function main(): Promise<void> {
-  const mod = (await import(`../../src/messages/${VERSION}/index.ts`)) as Record<string, StructureItem[]>;
+  const mod = (await import(`../../src/${VERSION}/index.ts`)) as Record<string, StructureItem[]>;
   const ours = Object.entries(mod)
     .filter(([k]) => k.endsWith("_STRUCTURE"))
     .map(([k, v]) => [k.replace(/_STRUCTURE$/, ""), v] as const)

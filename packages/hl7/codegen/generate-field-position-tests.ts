@@ -1,7 +1,7 @@
 /**
  * Field-position test generator.
  *
- * Reads each hand-written segment source under src/segments/<version>/, extracts
+ * Reads each hand-written segment source under src/<version>/, extracts
  * every setter, the `this.fields[N]` index it writes, and (for composite fields)
  * the component layout of the array it builds, then emits a PV1.test.ts-style
  * test asserting each value encodes into the correct field/component.
@@ -201,7 +201,7 @@ function extractSetters(src: string, isMSH: boolean): FieldPositionSetter[] {
 let written = 0;
 let skipped = 0;
 for (const version of VERSIONS) {
-  const dir = join(ROOT, "src/segments", version);
+  const dir = join(ROOT, "src", version);
   const files = readdirSync(dir)
     .filter((f) => f.endsWith(".ts") && !f.endsWith(".test.ts") && f !== "index.ts")
     .sort();

@@ -3,7 +3,7 @@
  *
  * A `MessageSchema` describes a message as the standard's message table does: an ordered list of
  * segments, choices and groups. From it, one module is generated per message and version,
- * `src/messages/<v>/<MSG>.ts`, holding three parts:
+ * `src/<v>/<MSG>.ts` (next to the version's segments), holding three parts:
  *
  * - the structure as data (`<MSG>_STRUCTURE`)
  * - typed `Parsed*` interfaces and a parser class that hands the structure and this version's
@@ -266,7 +266,7 @@ function renderItem(item: StructureItem, depth: number): string {
 export function generateStructureModule(schema: MessageSchema, version: string): string {
   const name = messageName(schema);
   const items = schema.structure.map((item) => renderItem(item, 1)).join(",\n");
-  return `${moduleDoc("Message structure", schema, version)}import type { StructureItem } from "../../types/schema.ts";
+  return `${moduleDoc("Message structure", schema, version)}import type { StructureItem } from "../types/schema.ts";
 
 /** The segments, choices and groups of ${messageLabel(schema)} (${versionLabel(version)}), in order. */
 export const ${name}_STRUCTURE: StructureItem[] = [
@@ -293,11 +293,11 @@ export function generateMessageParser(schema: MessageSchema, version: string): s
   const groups = collectGroups(schema.structure);
 
   const imports = [
-    `import type { Result } from "../../types/result.ts";`,
-    `import type { StructureItem } from "../../types/schema.ts";`,
-    `import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../../types/structure.ts";`,
-    `import { ${name}_STRUCTURE } from "../../structures/${version}/${name}.ts";`,
-    ...segments.map((s) => `import { ${s} } from "../../segments/${version}/${s}.ts";`),
+    `import type { Result } from "../types/result.ts";`,
+    `import type { StructureItem } from "../types/schema.ts";`,
+    `import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../types/structure.ts";`,
+    `import { ${name}_STRUCTURE } from "./${name}.ts";`,
+    ...segments.map((s) => `import { ${s} } from "./${s}.ts";`),
   ].join("\n");
 
   const groupInterfaces = groups
@@ -359,7 +359,7 @@ export function generateParserWrapper(schema: MessageSchema, version: string): s
   const label = messageLabel(schema);
   const groupTypes = collectGroups(schema.structure).map(parsedTypeName);
   const reexport = groupTypes.length ? `export type { ${groupTypes.join(", ")} } from "./${base}_Parser.ts";\n` : "";
-  return `${moduleDoc("Parser", schema, version, [`Shares the ${base.replace("_", "^")} structure.`])}import type { Result } from "../../types/result.ts";
+  return `${moduleDoc("Parser", schema, version, [`Shares the ${base.replace("_", "^")} structure.`])}import type { Result } from "../types/result.ts";
 import { ${base}_Parser, type Parsed${base} } from "./${base}_Parser.ts";
 
 ${reexport}/** Structured result of parsing an HL7 ${label} (${versionLabel(version)}) message. */
@@ -391,11 +391,11 @@ export function generateMessageBuilder(schema: MessageSchema, version: string): 
   const { optional } = splitTopLevel(schema);
 
   const imports = [
-    `import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";`,
-    `import type { StructureItem } from "../../types/schema.ts";`,
-    `import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";`,
-    `import { ${name}_STRUCTURE } from "../../structures/${version}/${name}.ts";`,
-    ...segments.map((s) => `import type { ${s} } from "../../segments/${version}/${s}.ts";`),
+    `import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";`,
+    `import type { StructureItem } from "../types/schema.ts";`,
+    `import { encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";`,
+    `import { ${name}_STRUCTURE } from "./${name}.ts";`,
+    ...segments.map((s) => `import type { ${s} } from "./${s}.ts";`),
   ].join("\n");
 
   const groupInterfaces = groups
@@ -482,7 +482,7 @@ export function generateBuilderWrapper(schema: MessageSchema, version: string): 
   // Segment classes the positional parameters mention (generic bounds, repeating segments, choices).
   const positional = splitTopLevel(schema).positional;
   const paramSegments = [...new Set(positional.flatMap((item) => (isSegmentGroup(item) ? [] : isSegmentChoice(item) ? item.oneOf : [item.name])))];
-  const segImports = paramSegments.map((s) => `import type { ${s} } from "../../segments/${version}/${s}.ts";`);
+  const segImports = paramSegments.map((s) => `import type { ${s} } from "./${s}.ts";`);
   const baseImports = [base, `type ${base}Options`, ...groupTypes.map((t) => `type ${t}`)].join(", ");
   const reexport = groupTypes.length ? `export type { ${groupTypes.join(", ")} };\n` : "";
   const fnParams = [
@@ -491,7 +491,7 @@ export function generateBuilderWrapper(schema: MessageSchema, version: string): 
     `  encoding: EncodingCharacters = DEFAULT_ENCODING,`,
   ].join("\n");
   const args = [...params.map((p) => p.name), "options", "encoding"].join(", ");
-  return `${moduleDoc("Builder", schema, version, [`Shares the ${base.replace("_", "^")} structure.`])}import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
+  return `${moduleDoc("Builder", schema, version, [`Shares the ${base.replace("_", "^")} structure.`])}import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 ${segImports.join("\n")}${segImports.length ? "\n" : ""}import { ${baseImports} } from "./${base}.ts";
 
 ${reexport}/** The optional segments and groups of an ${label} (${versionLabel(version)}) message. */
@@ -543,12 +543,12 @@ function splitPart(source: string, name: string, version: string): { imports: st
   const imports = lines
     .slice(0, i)
     // the parts live in one module now: the structure is local, a base message's parser is in its module
-    .filter((l) => !l.endsWith(`from "../../structures/${version}/${name}.ts";`))
+    .filter((l) => !l.endsWith(`from "./${name}.ts";`))
     .map((l) => l.replace(/_Parser\.ts";$/, `.ts";`));
   return { imports, body: lines.slice(i).join("\n").replace(/^\n+/, "").replace(/_Parser\.ts";/g, `.ts";`) };
 }
 
-/** Generates `src/messages/<version>/<MSG>.ts`: the structure, the parser and the builder of one message. */
+/** Generates `src/<version>/<MSG>.ts`: the structure, the parser and the builder of one message. */
 export function generateMessageModule(schema: MessageSchema, version: string): string {
   const name = messageName(schema);
   const base = schema.baseMessage;

@@ -91,5 +91,5 @@ After `--fix-spec`, regenerate the generated classes (delete them and run
 ledger again. A version whose segment re-exports an older class is checked against that class; when
 the version's table differs, `--adopt` copies the table into the version's spec with the decided
 values, the re-export stub is deleted and the class generated (a hand-written base class gets a
-generated subclass, as `src/segments/v2.4/PID.ts`, or a hand-written one, as
-`src/segments/v2.3.1/RXA.ts`).
+generated subclass, as `src/v2.4/PID.ts`, or a hand-written one, as
+`src/v2.3.1/RXA.ts`).

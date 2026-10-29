@@ -116,7 +116,7 @@ if (args[0] === "--caristix") {
 } else {
   const [version, dir] = args;
   if (!version || !dir) throw new Error("usage: compare-structures.ts <version> <caristix-dir> | --caristix <dir-a> <dir-b>");
-  const mod = (await import(`../../src/messages/${version}/index.ts`)) as Record<string, StructureItem[]>;
+  const mod = (await import(`../../src/${version}/index.ts`)) as Record<string, StructureItem[]>;
   const ours = Object.entries(mod)
     .filter(([k]) => k.endsWith("_STRUCTURE"))
     .map(([k, v]) => [k.replace(/_STRUCTURE$/, ""), v] as const)

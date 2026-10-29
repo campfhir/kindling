@@ -3,17 +3,17 @@ import { parseStructure, verifyStructure, encodeStructure, type SegmentParsers }
 import type { StructureItem } from "./schema.ts";
 import { itemField, firstSegments, isRequired } from "./schema.ts";
 import { DEFAULT_ENCODING } from "./encoding.ts";
-import { MSH } from "../segments/v2.3/MSH.ts";
-import { EVN } from "../segments/v2.3/EVN.ts";
-import { PID } from "../segments/v2.3/PID.ts";
-import { PV1 } from "../segments/v2.3/PV1.ts";
-import { PV2 } from "../segments/v2.3/PV2.ts";
-import { NTE } from "../segments/v2.3/NTE.ts";
-import { OBR } from "../segments/v2.3/OBR.ts";
-import { OBX } from "../segments/v2.3/OBX.ts";
-import { ORC } from "../segments/v2.3/ORC.ts";
-import { RQD } from "../segments/v2.3/RQD.ts";
-import { DG1 } from "../segments/v2.3/DG1.ts";
+import { MSH } from "../v2.3/MSH.ts";
+import { EVN } from "../v2.3/EVN.ts";
+import { PID } from "../v2.3/PID.ts";
+import { PV1 } from "../v2.3/PV1.ts";
+import { PV2 } from "../v2.3/PV2.ts";
+import { NTE } from "../v2.3/NTE.ts";
+import { OBR } from "../v2.3/OBR.ts";
+import { OBX } from "../v2.3/OBX.ts";
+import { ORC } from "../v2.3/ORC.ts";
+import { RQD } from "../v2.3/RQD.ts";
+import { DG1 } from "../v2.3/DG1.ts";
 
 const PARSERS: SegmentParsers = {
   MSH: (s) => MSH.parse(s),
