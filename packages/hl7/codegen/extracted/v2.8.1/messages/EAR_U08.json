@@ -1,0 +1,129 @@
+{
+  "structure": "EAR_U08",
+  "messageType": "EAR",
+  "triggerEvent": "U08",
+  "version": "2.8.1",
+  "description": "Equipment Command Message",
+  "title": "Equipment Command Message",
+  "sectionHeading": "13.3.8 EAR/ACK - Automated Equipment Response (Event U08)",
+  "source": {
+    "pdf": "hl7.eu std281/ch13.html",
+    "pages": null,
+    "table": "EAR^U08^EAR_U08: Equipment Command Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "U08"
+      ],
+      "eventPrinted": "U08",
+      "pdf": "hl7.eu std281/ch13.html",
+      "page": null,
+      "table": "EAR^U08^EAR_U08: Equipment Command Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EQU",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Equipment Detail",
+      "chapterRef": "13"
+    },
+    {
+      "kind": "group",
+      "name": "COMMAND_RESPONSE",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "ECD",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Equipment Command Detail",
+          "chapterRef": "13"
+        },
+        {
+          "kind": "group",
+          "name": "SPECIMEN_CONTAINER",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "SAC",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Specimen Container Detail",
+              "chapterRef": "13"
+            },
+            {
+              "kind": "segment",
+              "name": "SPM",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Specimen",
+              "chapterRef": "7"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "ECR",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Equipment Command Response",
+          "chapterRef": "13"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

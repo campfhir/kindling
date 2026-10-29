@@ -1,0 +1,152 @@
+{
+  "structure": "EHC_E02",
+  "messageType": "EHC",
+  "triggerEvent": "E02",
+  "version": "2.8.1",
+  "description": "Cancel HealthCare Services Invoice",
+  "title": "Cancel HealthCare Services Invoice",
+  "source": {
+    "pdf": "hl7.eu std281/ch16.html",
+    "pages": null,
+    "table": "EHC^E02^EHC_E02: Cancel HealthCare Services Invoice"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E02"
+      ],
+      "eventPrinted": "E02",
+      "pdf": "hl7.eu std281/ch16.html",
+      "page": null,
+      "table": "EHC^E02^EHC_E02: Cancel HealthCare Services Invoice",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Secondary Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "INVOICE_INFORMATION_CANCEL",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "IVC",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Invoice",
+          "chapterRef": "16"
+        },
+        {
+          "kind": "segment",
+          "name": "PYE",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Payee Information",
+          "chapterRef": "16"
+        },
+        {
+          "kind": "segment",
+          "name": "CTD",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Contact Data"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Notes and Comments"
+        },
+        {
+          "kind": "group",
+          "name": "PRODUCT_SERVICE_SECTION",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PSS",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "group",
+              "name": "PSG",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "PSG",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Product/Service Group"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PSL",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Product/Service Line Item"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

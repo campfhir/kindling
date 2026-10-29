@@ -1,0 +1,212 @@
+{
+  "structure": "EHC_E10",
+  "messageType": "EHC",
+  "triggerEvent": "E10",
+  "version": "2.8.1",
+  "description": "Edit/Adjudication Results",
+  "title": "Edit/Adjudication Results",
+  "source": {
+    "pdf": "hl7.eu std281/ch16.html",
+    "pages": null,
+    "table": "EHC^E10^EHC_E10: Edit/Adjudication Results"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E10"
+      ],
+      "eventPrinted": "E10",
+      "pdf": "hl7.eu std281/ch16.html",
+      "page": null,
+      "table": "EHC^E10^EHC_E10: Edit/Adjudication Results",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgement",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "INVOICE_PROCESSING_RESULTS_INFO",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "IPR",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Invoice Processing Results",
+          "chapterRef": "16"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Notes and Comments"
+        },
+        {
+          "kind": "segment",
+          "name": "PYE",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Payee",
+          "chapterRef": "16"
+        },
+        {
+          "kind": "segment",
+          "name": "IN1",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Insurance",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "IN2",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Insurance Additional Info"
+        },
+        {
+          "kind": "segment",
+          "name": "IVC",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Invoice"
+        },
+        {
+          "kind": "group",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PSS",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Product/Service Section",
+              "chapterRef": "16"
+            },
+            {
+              "kind": "group",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "PSG",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Product/Service Group",
+                  "chapterRef": "16"
+                },
+                {
+                  "kind": "group",
+                  "name": "PRODUCT/SERVICE LINE_INFO",
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "PSL",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Product/Service Line Item",
+                      "chapterRef": "16"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "ADJ",
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "usage": null,
+                      "page": null,
+                      "description": "Adjustment"
+                    }
+                  ],
+                  "minOccurs": 1,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null
+                }
+              ],
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

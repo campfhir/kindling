@@ -1,0 +1,88 @@
+{
+  "structure": "QBP_O33",
+  "messageType": "QBP",
+  "triggerEvent": "Q33",
+  "version": "2.8.1",
+  "description": "Get Donor Record Candidates Message",
+  "title": "Get Donor Record Candidates Message",
+  "sectionHeading": "4.16.6 QBP - Get Donor Record Candidates (Event Q33)",
+  "source": {
+    "pdf": "hl7.eu std281/ch04.html",
+    "pages": null,
+    "table": "QBP^Q33^QBP_O33: Get Donor Record Candidates Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Q33"
+      ],
+      "eventPrinted": "Q33",
+      "pdf": "hl7.eu std281/ch04.html",
+      "page": null,
+      "table": "QBP^Q33^QBP_O33: Get Donor Record Candidates Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "placeholder",
+      "text": "Segment",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "notation": "Segment",
+      "description": "Descriptions",
+      "status": "Status",
+      "chapterRef": "Chapter"
+    },
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Parameter Definition Segment",
+      "status": "DB"
+    },
+    {
+      "kind": "segment",
+      "name": "RCP",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Response Control Parameters",
+      "status": "DB"
+    }
+  ],
+  "variants": []
+}

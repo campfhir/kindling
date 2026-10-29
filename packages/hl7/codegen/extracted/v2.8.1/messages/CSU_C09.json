@@ -1,0 +1,401 @@
+{
+  "structure": "CSU_C09",
+  "messageType": "CSU",
+  "triggerEvent": "C09",
+  "version": "2.8.1",
+  "description": "Clinical Trial Message",
+  "title": "Clinical Trial Message",
+  "sectionHeading": "7.7.2 CSU - Unsolicited Study Data Message (Events C09-C12)",
+  "source": {
+    "pdf": "hl7.eu std281/ch07.html",
+    "pages": null,
+    "table": "CSU^C09-C12^CSU_C09: Clinical Trial Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "C09",
+        "C10",
+        "C11",
+        "C12"
+      ],
+      "eventPrinted": "C09-C12",
+      "pdf": "hl7.eu std281/ch07.html",
+      "page": null,
+      "table": "CSU^C09-C12^CSU_C09: Clinical Trial Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "PATIENT",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Additional Demographics",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Participation (for Patient)",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Access Restrictions",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Notes and comments",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "group",
+          "name": "VISIT",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PV1",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Patient Visit",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "PV2",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Patient Visit - Additional Info",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Participation (for Patient Visit)",
+              "chapterRef": "7"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "CSR",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Clinical Study Registration",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "group",
+          "name": "STUDY_PHASE",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "CSP",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Clinical Study Phase",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "group",
+              "name": "STUDY_SCHEDULE",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "CSS",
+                  "minOccurs": 0,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Clinical Study Data Schedule",
+                  "chapterRef": "7"
+                },
+                {
+                  "kind": "group",
+                  "name": "STUDY_OBSERVATION",
+                  "items": [
+                    {
+                      "kind": "group",
+                      "items": [
+                        {
+                          "kind": "segment",
+                          "name": "ORC",
+                          "minOccurs": 1,
+                          "maxOccurs": 1,
+                          "usage": null,
+                          "page": null,
+                          "description": "Common Order",
+                          "chapterRef": "4"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "PRT",
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "usage": null,
+                          "page": null,
+                          "description": "Participation (for common order)",
+                          "chapterRef": "7"
+                        }
+                      ],
+                      "minOccurs": 0,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "OBR",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Observation Battery",
+                      "chapterRef": "7"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PRT",
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "usage": null,
+                      "page": null,
+                      "description": "Participation (for observation)",
+                      "chapterRef": "7"
+                    },
+                    {
+                      "kind": "group",
+                      "name": "TIMING_QTY",
+                      "items": [
+                        {
+                          "kind": "segment",
+                          "name": "TQ1",
+                          "minOccurs": 1,
+                          "maxOccurs": 1,
+                          "usage": null,
+                          "page": null,
+                          "description": "Timing/Quantity",
+                          "chapterRef": "4"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "TQ2",
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "usage": null,
+                          "page": null,
+                          "description": "Timing/Quantity Order Sequence",
+                          "chapterRef": "4"
+                        }
+                      ],
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "usage": null,
+                      "page": null
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "OBX",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Observation Results",
+                      "chapterRef": "7"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PRT",
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "usage": null,
+                      "page": null,
+                      "description": "Participaton (for Observation Results)",
+                      "chapterRef": "7"
+                    }
+                  ],
+                  "minOccurs": 1,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null
+                },
+                {
+                  "kind": "group",
+                  "name": "STUDY_PHARM",
+                  "items": [
+                    {
+                      "kind": "group",
+                      "name": "COMMON_ORDER",
+                      "items": [
+                        {
+                          "kind": "segment",
+                          "name": "ORC",
+                          "minOccurs": 1,
+                          "maxOccurs": 1,
+                          "usage": null,
+                          "page": null,
+                          "description": "Common Order",
+                          "chapterRef": "4"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "PRT",
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "usage": null,
+                          "page": null,
+                          "description": "Participation (for Common Order)",
+                          "chapterRef": "7"
+                        }
+                      ],
+                      "minOccurs": 0,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null
+                    },
+                    {
+                      "kind": "group",
+                      "name": "RX_ADMIN",
+                      "items": [
+                        {
+                          "kind": "segment",
+                          "name": "RXA",
+                          "minOccurs": 1,
+                          "maxOccurs": 1,
+                          "usage": null,
+                          "page": null,
+                          "description": "Pharmacy Administration",
+                          "chapterRef": "4"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "RXR",
+                          "minOccurs": 1,
+                          "maxOccurs": 1,
+                          "usage": null,
+                          "page": null,
+                          "description": "Pharmacy Route",
+                          "chapterRef": "4"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "PRT",
+                          "minOccurs": 0,
+                          "maxOccurs": "*",
+                          "usage": null,
+                          "page": null,
+                          "description": "Participation (for Pharmacy Administration)",
+                          "chapterRef": "7"
+                        }
+                      ],
+                      "minOccurs": 1,
+                      "maxOccurs": "*",
+                      "usage": null,
+                      "page": null
+                    }
+                  ],
+                  "minOccurs": 1,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null
+                }
+              ],
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

@@ -43,6 +43,10 @@ How the HL7 facts in `@campfhir/hl7` were checked, and against what.
   that chapter is read from the official PDF (`codegen/extract/pdf-chapter.ts`); in the message ledger it takes
   the place of the hl7.eu page (the "hl7.org" row of its sources table). QBP^Z75–Z97 use the structure chapter 5
   names for each (`sharedStructure` in the overrides).
+- [`v2.8.1-segment-ledger.md`](v2.8.1-segment-ledger.md) and [`v2.8.1-message-ledger.md`](v2.8.1-message-ledger.md):
+  2.8.1 against hl7.eu and HAPI only (Caristix answers HTTP 500). A source's field count is its highest field
+  number, so a removed field (RF1-18) is a gap, not a renumbering (`ledger-v281-notes.json`). The 67 accepted
+  structures are all v2.8's, resolved there; each note says so and what HAPI v281 shows.
 - [`v2.3-hl7eu-sweep.md`](v2.3-hl7eu-sweep.md) and
   [`v2.3-hapi-crosscheck.md`](v2.3-hapi-crosscheck.md): the first sweeps (2026-10-19), superseded
   by the ledger and kept for the history of the decisions.

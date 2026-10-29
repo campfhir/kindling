@@ -1,0 +1,69 @@
+{
+  "structure": "CCF_I22",
+  "messageType": "CCF",
+  "triggerEvent": "I22",
+  "version": "2.8.1",
+  "description": "Collaborative Care Fetch",
+  "title": "Collaborative Care Fetch",
+  "sectionHeading": "11.7.2 CCF/CCI - Collaborative Care Fetch / Collaborative Care Information (Event I22)",
+  "source": {
+    "pdf": "hl7.eu std281/ch11.html",
+    "pages": null,
+    "table": "CCF^I22^CCF_I22: Collaborative Care Fetch"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "I22"
+      ],
+      "eventPrinted": "I22",
+      "pdf": "hl7.eu std281/ch11.html",
+      "page": null,
+      "table": "CCF^I22^CCF_I22: Collaborative Care Fetch",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    }
+  ],
+  "variants": []
+}

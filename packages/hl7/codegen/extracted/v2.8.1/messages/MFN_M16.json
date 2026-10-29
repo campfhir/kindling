@@ -1,0 +1,228 @@
+{
+  "structure": "MFN_M16",
+  "messageType": "MFN",
+  "triggerEvent": "M16",
+  "version": "2.8.1",
+  "description": "Master File Notification - Inventory Item Enhanced",
+  "title": "Master File Notification - Inventory Item Enhanced",
+  "sectionHeading": "8.12.2 MFN/MFK - Inventory Item Master File Message - Enhanced (Event M16)",
+  "source": {
+    "pdf": "hl7.eu std281/ch08.html",
+    "pages": null,
+    "table": "MFN^M16^MFN_M16: Master File Notification - Inventory Item Enhanced"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M16"
+      ],
+      "eventPrinted": "M16",
+      "pdf": "hl7.eu std281/ch08.html",
+      "page": null,
+      "table": "MFN^M16^MFN_M16: Master File Notification - Inventory Item Enhanced",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "group",
+      "name": "MATERIAL_ITEM_RECORD",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Master File Entry",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "ITM",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Material Item",
+          "chapterRef": "17"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Notes for ITM"
+        },
+        {
+          "kind": "group",
+          "name": "STERILIZATION",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "STZ",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Sterilization Parameters",
+              "chapterRef": "17"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes for STZ",
+              "chapterRef": "2"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "PURCHASING_VENDOR",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "VND",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Purchasing Vendor",
+              "chapterRef": "17"
+            },
+            {
+              "kind": "group",
+              "name": "PACKAGING",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "PKG",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Packaging",
+                  "chapterRef": "17"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PCE",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Patient Charge Cost Center Exception",
+                  "chapterRef": "17"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "MATERIAL_LOCATION",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "IVT",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Material Location",
+              "chapterRef": "17"
+            },
+            {
+              "kind": "segment",
+              "name": "ILT",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Material Lot/Quantity",
+              "chapterRef": "17"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes for IVT",
+              "chapterRef": "2"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

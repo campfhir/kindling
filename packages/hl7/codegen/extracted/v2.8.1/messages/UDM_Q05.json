@@ -1,0 +1,98 @@
+{
+  "structure": "UDM_Q05",
+  "messageType": "UDM",
+  "triggerEvent": "Q05",
+  "version": "2.8.1",
+  "description": "Unsolicited Display Message",
+  "title": "Unsolicited Display Message",
+  "source": {
+    "pdf": "hl7.eu std281/ch05.html",
+    "pages": null,
+    "table": "UDM^Q05^UDM_Q05: Unsolicited Display Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Q05"
+      ],
+      "eventPrinted": "Q05",
+      "pdf": "hl7.eu std281/ch05.html",
+      "page": null,
+      "table": "UDM^Q05^UDM_Q05: Unsolicited Display Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "URD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Results/Update Definition",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "URS",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Results/Update Selection Criteria",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "DSP",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Display Data",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Continuation Pointer",
+      "chapterRef": "2"
+    }
+  ],
+  "variants": []
+}

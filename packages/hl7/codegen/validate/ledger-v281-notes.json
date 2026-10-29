@@ -1,0 +1,13 @@
+{
+  "RF1-18": {
+    "date": "2026-10-29",
+    "name": "Remaining Benefit Amount",
+    "decide": {
+      "type": "-",
+      "opt": "W",
+      "rep": "N",
+      "len": "0"
+    },
+    "note": "hl7.eu hl7v281segmRF1.htm prints no row for RF1-18 (field 17 is followed by 19; the table ends at 25, Action Code). In v2.8 RF1-18 is Remaining Benefit Amount (MO). HAPI v281 instead renumbers RF1 to 24 fields, shifting 19-25 down by one; HL7 field numbers are not reused, so hl7.eu's numbering stands and RF1-18 is kept as a withdrawn position (no type) under its v2.8 name. Caristix 2.8.1 answers HTTP 500."
+  }
+}
