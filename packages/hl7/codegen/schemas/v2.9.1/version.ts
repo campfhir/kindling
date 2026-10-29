@@ -2,11 +2,11 @@ import type { VersionSchema } from "../../../src/types/schema";
 import { V2_9_1_MESSAGES } from "./messages";
 
 /**
- * v2.9.1: the latest HL7 v2 release (ANSI/HL7 V2.9.1-2024). Segments are generated from
+ * v2.9.1: HL7 v2 release 2.9.1. Segments are generated from
  * codegen/spec/v2.9.1-segments.json (MSH, BHS and FHS are mirrored from v2.5.1, see IMPORT.md).
  * Messages are imported from the official PDFs (codegen/extracted/v2.9.1, IMPORT.md).
  * Messages the 2.9.1 table defines but the schema type cannot express yet are listed in withdrawnMessages
- * with the reason; they are not mirrored from 2.5.1, whose structure differs.
+ * with the reason; they are not mirrored from v2.5.1, whose structure differs.
  */
 export const V2_9_1: VersionSchema = {
   version: "v2.9.1",

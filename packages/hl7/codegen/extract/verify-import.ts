@@ -1,5 +1,5 @@
 /**
- * Checks the generated v2.9.1 schemas against the extraction they were imported from: every event's
+ * Checks the generated schemas of a version against the extraction they were imported from: every event's
  * structure, flattened to segment, choice and group items with their cardinality, must equal the
  * extraction's table (placeholders dropped, bracket mismatches read as the importer reads them).
  *
@@ -8,12 +8,13 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { V2_9_1_MESSAGES } from "../schemas/v2.9.1/messages.ts";
-import type { StructureItem } from "../../src/types/schema.ts";
+import type { MessageSchema, StructureItem } from "../../src/types/schema.ts";
 import { isSegmentChoice, isSegmentGroup } from "../../src/types/schema.ts";
 
 const ROOT = join(fileURLToPath(import.meta.url), "../../..");
 const version = process.argv[2] ?? "v2.9.1";
+const messagesModule = (await import(`../schemas/${version}/messages.ts`)) as Record<string, MessageSchema[]>;
+const MESSAGES = messagesModule[`V${version.slice(1).replace(/\./g, "_")}_MESSAGES`];
 const DIR = join(ROOT, "codegen/extracted", version, "messages");
 const readJson = (p: string) => JSON.parse(readFileSync(p, "utf8"));
 
@@ -54,7 +55,7 @@ function fromJson(items: any[], depth = 0): string[] {
   });
 }
 
-const schemaByName = new Map(V2_9_1_MESSAGES.map((m) => [m.triggerEvent ? `${m.messageType}_${m.triggerEvent}` : m.messageType, m]));
+const schemaByName = new Map(MESSAGES.map((m) => [m.triggerEvent ? `${m.messageType}_${m.triggerEvent}` : m.messageType, m]));
 const index = readJson(join(DIR, "index.json")) as any[];
 let checked = 0, mismatched: string[] = [];
 for (const e of index) {

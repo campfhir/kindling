@@ -41,18 +41,20 @@ Steps, each one checked against the sources in the repository's `CLAUDE.md` befo
    The rule in `docs/validation/README.md` applies per version. Where HAPI is absent, hl7.eu still
    decides segments, but nothing cross-checks it while Caristix is down; for 2.8.2 to 2.9.1 neither
    cross-check exists right now.
-2. **Decide the version order (open question).** Either one version at a time (2.6, 2.7, 2.7.1, 2.8,
-   2.8.1, 2.8.2, 2.9, 2.9.1, each with its own ledgers and its own minor release, as 2.3 to 2.5.1 were)
-   or straight to 2.9.1 with 2.5.1 as the base and the differences recorded in its ledger. The first
-   matches how every version so far was added and keeps each `parse()` dispatch step checked; the
-   second is faster but leaves 2.6 to 2.8.2 without a dispatch. Recommendation: the first.
-3. **Segments per version.** Run `fetch-sources.sh` for the version, then `ledger.mjs <version>`. New
-   segments are seeded with `--adopt` from the three sources (as the 2.4 and 2.5 ones were), changed
-   tables become generated subclasses of the older class, and the segment ledger shows zero open issues
-   before the version is merged.
-4. **Messages per version.** New events are drafted from the Caristix tables with
-   `scaffold-messages.ts`, changed structures are written by hand, and `message-ledger.ts <version>`
-   reports ✓ or a dated reason for every structure.
+2. **Version order (decided).** One version at a time, in release order: 2.6, 2.7, 2.7.1, 2.8, 2.8.1, 2.8.2,
+   2.9, 2.9.1 (already generated; it is re-based on 2.9 once 2.9 exists). Each version re-exports the latest
+   earlier version imported, and gets its own ledgers and minor release, as 2.3 to 2.5.1 did.
+3. **Extraction from the official PDFs.** The hl7.org PDFs are not public, so an agent with the PDFs follows
+   the extraction brief and writes `out/<version>/` (segments, message structures, index). Before it is
+   handed over, `codegen/extract/check-completeness.ts <pdf-dir> out/<version>` must run clean: it compares the
+   PDFs' message-table captions, attribute-table headings and "withdrawn" notes with the extraction. The
+   extraction goes to `codegen/extracted/<version>/`.
+4. **Import and independent check.** `codegen/extract/import-extraction.ts <version>` writes the segment spec,
+   the message schemas and `IMPORT.md` (every decision); `verify-import.ts` checks the schemas against the
+   extraction. Then `fetch-sources.sh <version>` pulls hl7.eu, Caristix and HAPI, and the segment and message
+   ledgers compare the import with them, wherever those sources exist (2.6, 2.7, 2.8: all three or two of
+   three; 2.8.1 on: Caristix returns HTTP 500, so fewer). Differences are fixed in the extraction or
+   recorded in the notes files with a date.
 5. **Build, test, wire.** Generate with `pnpm codegen && pnpm barrels && pnpm exports`, add the
    version's round-trip and position tests, and add its entry to `REGISTRIES` in `src/parse.ts`.
 6. **Document and release.** Update the README version table, the roadmaps (this file and the two

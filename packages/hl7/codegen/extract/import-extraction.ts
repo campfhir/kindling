@@ -25,15 +25,26 @@
  *  - Placeholder rows ("[...]", "Optional query by example segments") are dropped.
  *  - Repeated segments at one level get an `as` name (rol2, rol3, ...) so the generated names are unique.
  */
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { V2_5_1 } from "../schemas/v2.5.1/version.ts";
+import type { VersionSchema } from "../../src/types/schema.ts";
 import { nameOf } from "../schemas/helpers.ts";
 
 const ROOT = join(fileURLToPath(import.meta.url), "../../..");
 const version = process.argv[2];
-if (!/^v\d+\.\d+\.\d+$/.test(version ?? "")) throw new Error("usage: import-extraction.ts v2.9.1");
+if (!/^v\d+\.\d+(\.\d+)?$/.test(version ?? "")) throw new Error("usage: import-extraction.ts <version> [--base <version>]   e.g. v2.6");
+
+/** The versions in release order. A version re-exports the latest earlier one already imported (or --base). */
+const CHAIN = ["v2.5.1", "v2.6", "v2.7", "v2.7.1", "v2.8", "v2.8.1", "v2.8.2", "v2.9", "v2.9.1"];
+if (!CHAIN.includes(version)) throw new Error(`${version} is not in the version chain`);
+const baseFlag = process.argv.indexOf("--base");
+const base = baseFlag !== -1
+  ? process.argv[baseFlag + 1]
+  : CHAIN.slice(0, CHAIN.indexOf(version)).reverse().find((v) => existsSync(join(ROOT, "codegen/schemas", v, "version.ts")));
+if (!base) throw new Error(`no earlier version of ${version} has a schema directory`);
+const baseSchema = ((await import(`../schemas/${base}/version.ts`)) as Record<string, VersionSchema>)[`V${base.slice(1).replace(/\./g, "_")}`];
+if (!baseSchema) throw new Error(`schemas/${base}/version.ts does not export V${base.slice(1).replace(/\./g, "_")}`);
 const schemaVersion = version.slice(1);
 const DIR = join(ROOT, "codegen/extracted", version);
 const SCHEMA_DIR = join(ROOT, "codegen/schemas", version);
@@ -274,16 +285,13 @@ for (const e of index.filter((x) => x.status === "withdrawn")) {
   for (const type of e.messageType.split("/"))
     for (const trigger of e.triggerEvent ? triggersOf(e.triggerEvent) : [null]) indexWithdrawn.add(trigger ? `${type}_${trigger}` : type);
 }
-const baseNames = new Set(V2_5_1.messages.map((m) => nameOf(m)));
+const baseNames = new Set(baseSchema.messages.map((m) => nameOf(m)));
 const withdrawnByIndex = [...baseNames].filter((n) => indexWithdrawn.has(n) && !generatedNames.has(n));
 const skippedNames = [...skipped.keys()];
-// Withdrawn as printed in the chapter text (checked against the chapter 4 PDF by hand; the index does not list them).
-const PDF_WITHDRAWN: Record<string, string> = {
-  ORM_O01: "V291_CH04_Orders p.6: 'withdrawn as of v2.7'",
-  ORR_O02: "V291_CH04_Orders p.6: 'withdrawn as of v2.7'",
-  OSQ_Q06: "V291_CH04_Orders p.7: 'withdrawn as of v2.7', refer to chapter 5",
-  OSR_Q06: "V291_CH04_Orders p.7: 'withdrawn as of v2.7', refer to chapter 5",
-};
+// Withdrawn as printed in the chapter text but not in the index: checked by hand against the PDF and recorded,
+// with the page, in codegen/extracted/<version>/overrides.json ({ "withdrawnMessages": { "ORM_O01": "citation" } }).
+const overridesFile = join(DIR, "overrides.json");
+const PDF_WITHDRAWN: Record<string, string> = existsSync(overridesFile) ? (readJson(overridesFile).withdrawnMessages ?? {}) : {};
 const withdrawnByText = Object.keys(PDF_WITHDRAWN).filter((n) => baseNames.has(n) && !generatedNames.has(n) && !indexWithdrawn.has(n));
 const missing = [...baseNames].filter((n) => !generatedNames.has(n) && !indexWithdrawn.has(n) && !skipped.has(n) && !(n in PDF_WITHDRAWN));
 const constName = `V${schemaVersion.replace(/\./g, "_")}`;
@@ -296,25 +304,25 @@ writeFileSync(join(SCHEMA_DIR, "version.ts"), `import type { VersionSchema } fro
 import { V${schemaVersion.replace(/\./g, "_")}_MESSAGES } from "./messages";
 
 /**
- * v${schemaVersion}: the latest HL7 v2 release (ANSI/HL7 V2.9.1-2024). Segments are generated from
- * codegen/spec/v${schemaVersion}-segments.json (MSH, BHS and FHS are mirrored from v2.5.1, see IMPORT.md).
+ * v${schemaVersion}: HL7 v2 release ${schemaVersion}. Segments are generated from
+ * codegen/spec/v${schemaVersion}-segments.json (MSH, BHS and FHS are mirrored from ${base}, see IMPORT.md).
  * Messages are imported from the official PDFs (codegen/extracted/v${schemaVersion}, IMPORT.md).
- * Messages the 2.9.1 table defines but the schema type cannot express yet are listed in withdrawnMessages
- * with the reason; they are not mirrored from 2.5.1, whose structure differs.
+ * Messages the ${schemaVersion} table defines but the schema type cannot express yet are listed in withdrawnMessages
+ * with the reason; they are not mirrored from ${base}, whose structure differs.
  */
 export const ${constName}: VersionSchema = {
   version: "v${schemaVersion}",
-  baseVersion: "v2.5.1",
+  baseVersion: "${base}",
   reexport: true,
   ownSegments: [],
   withdrawnMessages: [
-    // Withdrawn in the 2.9.1 index.
+    // Withdrawn in the ${schemaVersion} index.
 ${list(withdrawnByIndex)}
     // Withdrawn as printed in the chapter text, not in the index.
 ${list(withdrawnByText)}
     // Not generated: the schema type cannot express their structure yet (choice of groups, unnamed group); see IMPORT.md.
 ${list(skippedNames)}
-    // Absent from the extraction: not in the 2.9.1 index and not generated. They may be withdrawn earlier or missed by the extraction; check the PDFs before relying on them.
+    // Absent from the extraction: not in the ${schemaVersion} index and not generated. They may be withdrawn earlier or missed by the extraction; check the PDFs before relying on them.
 ${list(missing)}
   ],
   segments: [],

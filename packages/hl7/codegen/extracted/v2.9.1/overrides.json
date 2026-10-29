@@ -1,0 +1,8 @@
+{
+  "withdrawnMessages": {
+    "ORM_O01": "V291_CH04_Orders p.6, section 4.4.1: 'withdrawn as of v2.7'",
+    "ORR_O02": "V291_CH04_Orders p.6, section 4.4.2: 'withdrawn as of v2.7'",
+    "OSQ_Q06": "V291_CH04_Orders p.7, section 4.4.3: 'withdrawn as of v2.7', refer to chapter 5",
+    "OSR_Q06": "V291_CH04_Orders p.7, section 4.4.3: 'withdrawn as of v2.7', refer to chapter 5"
+  }
+}
