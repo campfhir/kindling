@@ -26,6 +26,10 @@ How the HL7 facts in `@campfhir/hl7` were checked, and against what.
   `codegen/extract/README.md`). hl7.eu is then both the extraction's source and the authoritative column, so
   the independent checks are Caristix and HAPI. The 22 accepted structures each carry a dated note in
   `codegen/validate/message-notes.json` that names the source they agree with.
+- [`v2.7-segment-ledger.md`](v2.7-segment-ledger.md) and [`v2.7-message-ledger.md`](v2.7-message-ledger.md):
+  the same for 2.7 (`codegen/extracted/v2.7`, run with `codegen/extract/add-version.sh`). 20 structures
+  are accepted with a dated note; RQC^I06 takes the `[{GT1}]` Caristix and HAPI agree on, through a
+  `structureFixes` entry in `codegen/extracted/v2.7/overrides.json`.
 - [`v2.3-hl7eu-sweep.md`](v2.3-hl7eu-sweep.md) and
   [`v2.3-hapi-crosscheck.md`](v2.3-hapi-crosscheck.md): the first sweeps (2026-10-19), superseded
   by the ledger and kept for the history of the decisions.

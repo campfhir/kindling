@@ -1,0 +1,149 @@
+{
+  "structure": "ADT_A09",
+  "messageType": "ADT",
+  "triggerEvent": "A09",
+  "version": "2.7",
+  "description": "ADT Message",
+  "title": "ADT Message",
+  "sectionHeading": "3.3.9 ADT/ACK - Patient Departing - Tracking (Event A09)",
+  "source": {
+    "pdf": "hl7.eu std27/ch03.html",
+    "pages": null,
+    "table": "ADT^A09^ADT_A09: ADT Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A09"
+      ],
+      "eventPrinted": "A09",
+      "pdf": "hl7.eu std27/ch03.html",
+      "page": null,
+      "table": "ADT^A09^ADT_A09: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A10"
+      ],
+      "eventPrinted": "A10",
+      "pdf": "hl7.eu std27/ch03.html",
+      "page": null,
+      "table": "ADT^A10^ADT_A09: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A11"
+      ],
+      "eventPrinted": "A11",
+      "pdf": "hl7.eu std27/ch03.html",
+      "page": null,
+      "table": "ADT^A11^ADT_A09: ADT Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Event Type",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PD1",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Additional Demographics",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Visit",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PV2",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Visit - Additional Info.",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "DB1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Disability Information",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "OBX",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Observation/Result",
+      "chapterRef": "7"
+    }
+  ],
+  "variants": []
+}

@@ -1,0 +1,88 @@
+{
+  "structure": "QBP_E22",
+  "messageType": "QBP",
+  "triggerEvent": "E22",
+  "version": "2.7",
+  "description": "Query Authorization Request",
+  "title": "Query Authorization Request",
+  "source": {
+    "pdf": "hl7.eu std27/ch16.html",
+    "pages": null,
+    "table": "QBP^E22^QBP_E22: Query Authorization Request"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E22"
+      ],
+      "eventPrinted": "E22",
+      "pdf": "hl7.eu std27/ch16.html",
+      "page": null,
+      "table": "QBP^E22^QBP_E22: Query Authorization Request",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "QUERY",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "QPD",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Query Parameter Definition",
+          "chapterRef": "5"
+        },
+        {
+          "kind": "segment",
+          "name": "RCP",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Response Control Parameter",
+          "chapterRef": "5"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

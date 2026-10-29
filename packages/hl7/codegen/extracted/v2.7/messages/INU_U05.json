@@ -1,0 +1,89 @@
+{
+  "structure": "INU_U05",
+  "messageType": "INU",
+  "triggerEvent": "U05",
+  "version": "2.7",
+  "description": "Inventory Update Message",
+  "title": "Inventory Update Message",
+  "sectionHeading": "13.3.5 INU/ACK - Automated Equipment Inventory Update (Event U05)",
+  "source": {
+    "pdf": "hl7.eu std27/ch13.html",
+    "pages": null,
+    "table": "INU^U05^INU_U05: Inventory Update Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "U05"
+      ],
+      "eventPrinted": "U05",
+      "pdf": "hl7.eu std27/ch13.html",
+      "page": null,
+      "table": "INU^U05^INU_U05: Inventory Update Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EQU",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Equipment Detail",
+      "chapterRef": "13"
+    },
+    {
+      "kind": "segment",
+      "name": "INV",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Inventory Detail",
+      "chapterRef": "13"
+    },
+    {
+      "kind": "segment",
+      "name": "ROL",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Role Detail",
+      "chapterRef": "12"
+    }
+  ],
+  "variants": []
+}

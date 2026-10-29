@@ -1,0 +1,25 @@
+/**
+ * Parser for MFK^M16 messages (HL7 v2.7).
+ *
+ * Structure: MSH [{SFT}] [UAC] MSA [{ERR}] MFI [{MFA}]
+ * Shares the MFK^M13 structure.
+ *
+ * @module
+ */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { Result } from "../../types/result.ts";
+import { MFK_M13_Parser, type ParsedMFK_M13 } from "./MFK_M13_Parser.ts";
+
+/** Structured result of parsing an HL7 MFK^M16 (HL7 v2.7) message. */
+export type ParsedMFK_M16 = ParsedMFK_M13;
+
+/** Parser for HL7 MFK^M16 (HL7 v2.7) messages. */
+export class MFK_M16_Parser extends MFK_M13_Parser {
+  /** The message name used in error messages. */
+  protected override readonly messageName: string = "MFK_M16";
+}
+
+/** Parses an HL7 MFK^M16 (HL7 v2.7) message string into a structured result. */
+export function parseMFK_M16(messageString: string): Result<ParsedMFK_M16> {
+  return new MFK_M16_Parser().parse(messageString);
+}

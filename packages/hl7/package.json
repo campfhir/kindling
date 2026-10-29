@@ -58,6 +58,14 @@
       "types": "./dist/segments/v2.6/*.d.ts",
       "default": "./dist/segments/v2.6/*.js"
     },
+    "./segments/v2.7": {
+      "types": "./dist/segments/v2.7/index.d.ts",
+      "default": "./dist/segments/v2.7/index.js"
+    },
+    "./segments/v2.7/*": {
+      "types": "./dist/segments/v2.7/*.d.ts",
+      "default": "./dist/segments/v2.7/*.js"
+    },
     "./structures/v2.3": {
       "types": "./dist/structures/v2.3/index.d.ts",
       "default": "./dist/structures/v2.3/index.js"
@@ -105,6 +113,14 @@
     "./structures/v2.6/*": {
       "types": "./dist/structures/v2.6/*.d.ts",
       "default": "./dist/structures/v2.6/*.js"
+    },
+    "./structures/v2.7": {
+      "types": "./dist/structures/v2.7/index.d.ts",
+      "default": "./dist/structures/v2.7/index.js"
+    },
+    "./structures/v2.7/*": {
+      "types": "./dist/structures/v2.7/*.d.ts",
+      "default": "./dist/structures/v2.7/*.js"
     },
     "./parsers/v2.3": {
       "types": "./dist/parsers/v2.3/index.d.ts",
@@ -154,6 +170,14 @@
       "types": "./dist/parsers/v2.6/*.d.ts",
       "default": "./dist/parsers/v2.6/*.js"
     },
+    "./parsers/v2.7": {
+      "types": "./dist/parsers/v2.7/index.d.ts",
+      "default": "./dist/parsers/v2.7/index.js"
+    },
+    "./parsers/v2.7/*": {
+      "types": "./dist/parsers/v2.7/*.d.ts",
+      "default": "./dist/parsers/v2.7/*.js"
+    },
     "./builders/v2.3": {
       "types": "./dist/builders/v2.3/index.d.ts",
       "default": "./dist/builders/v2.3/index.js"
@@ -201,6 +225,14 @@
     "./builders/v2.6/*": {
       "types": "./dist/builders/v2.6/*.d.ts",
       "default": "./dist/builders/v2.6/*.js"
+    },
+    "./builders/v2.7": {
+      "types": "./dist/builders/v2.7/index.d.ts",
+      "default": "./dist/builders/v2.7/index.js"
+    },
+    "./builders/v2.7/*": {
+      "types": "./dist/builders/v2.7/*.d.ts",
+      "default": "./dist/builders/v2.7/*.js"
     },
     "./utils/dateUtils": {
       "types": "./dist/utils/dateUtils.d.ts",

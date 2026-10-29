@@ -1,0 +1,11 @@
+{
+  "structureFixes": [
+    {
+      "message": "RQC_I06",
+      "set": "GT1",
+      "min": 0,
+      "max": "*",
+      "reason": "2026-10-29: hl7.eu ch11 (std27/ch11.html) prints [GT1] in RQC^I06; Caristix 2.7 (TriggerEvents/RQC_I06) and HAPI v27 (RQC_I06 maps to the RQC_I05 structure) agree on [{GT1}] and the rule takes their shape against hl7.eu."
+    }
+  ]
+}

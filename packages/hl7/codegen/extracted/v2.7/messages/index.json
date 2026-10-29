@@ -1,0 +1,3537 @@
+[
+  {
+    "structure": "ACK",
+    "messageType": "ACK",
+    "triggerEvent": null,
+    "description": "General Acknowledgment",
+    "pdf": "hl7.eu std27/ch02.html",
+    "page": null
+  },
+  {
+    "structure": "ADT_A01",
+    "messageType": "ADT",
+    "triggerEvent": "A01",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.1 ADT/ACK - Admit/Visit Notification (Event A01)"
+  },
+  {
+    "structure": "ADT_A01",
+    "messageType": "ADT",
+    "triggerEvent": "A04",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.4 ADT/ACK - Register a Patient (Event A04)",
+    "sameAs": "A01"
+  },
+  {
+    "structure": "ADT_A01",
+    "messageType": "ADT",
+    "triggerEvent": "A08",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.8 ADT/ACK - Update Patient Information (Event A08)",
+    "sameAs": "A01"
+  },
+  {
+    "structure": "ADT_A01",
+    "messageType": "ADT",
+    "triggerEvent": "A13",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.13 ADT/ACK - Cancel Discharge / End Visit (Event A13)",
+    "sameAs": "A01"
+  },
+  {
+    "structure": "ADT_A02",
+    "messageType": "ADT",
+    "triggerEvent": "A02",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.2 ADT/ACK - Transfer a Patient (Event A02)"
+  },
+  {
+    "structure": "ADT_A03",
+    "messageType": "ADT",
+    "triggerEvent": "A03",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.3 ADT/ACK - Discharge/End Visit (Event A03)"
+  },
+  {
+    "structure": "ADT_A05",
+    "messageType": "ADT",
+    "triggerEvent": "A05",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.5 ADT/ACK - Pre-Admit a Patient (Event A05)"
+  },
+  {
+    "structure": "ADT_A05",
+    "messageType": "ADT",
+    "triggerEvent": "A14",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.14 ADT/ACK - Pending Admit (Event A14)",
+    "sameAs": "A05"
+  },
+  {
+    "structure": "ADT_A05",
+    "messageType": "ADT",
+    "triggerEvent": "A28",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.28 ADT/ACK - Add Person or Patient Information (Event A28)",
+    "sameAs": "A05"
+  },
+  {
+    "structure": "ADT_A05",
+    "messageType": "ADT",
+    "triggerEvent": "A31",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.31 ADT/ACK - Update Person Information (Event A31)"
+  },
+  {
+    "structure": "ADT_A06",
+    "messageType": "ADT",
+    "triggerEvent": "A06",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.6 ADT/ACK - Change an Outpatient to an Inpatient (Event A06)"
+  },
+  {
+    "structure": "ADT_A06",
+    "messageType": "ADT",
+    "triggerEvent": "A07",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.7 ADT/ACK - Change an Inpatient to an Outpatient (Event A07)",
+    "sameAs": "A06"
+  },
+  {
+    "structure": "ADT_A09",
+    "messageType": "ADT",
+    "triggerEvent": "A09",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.9 ADT/ACK - Patient Departing - Tracking (Event A09)"
+  },
+  {
+    "structure": "ADT_A09",
+    "messageType": "ADT",
+    "triggerEvent": "A10",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.10 ADT/ACK - Patient Arriving - Tracking (Event A10)",
+    "sameAs": "A09"
+  },
+  {
+    "structure": "ADT_A09",
+    "messageType": "ADT",
+    "triggerEvent": "A11",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.11 ADT/ACK - Cancel Admit / Visit Notification (Event A11)",
+    "sameAs": "A09"
+  },
+  {
+    "structure": "ADT_A12",
+    "messageType": "ADT",
+    "triggerEvent": "A12",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.12 ADT/ACK - Cancel Transfer (Event A12)"
+  },
+  {
+    "structure": "ADT_A15",
+    "messageType": "ADT",
+    "triggerEvent": "A15",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.15 ADT/ACK - Pending Transfer (Event A15)"
+  },
+  {
+    "structure": "ADT_A16",
+    "messageType": "ADT",
+    "triggerEvent": "A16",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.16 ADT/ACK - Pending Discharge (Event A16)"
+  },
+  {
+    "structure": "ADT_A17",
+    "messageType": "ADT",
+    "triggerEvent": "A17",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.17 ADT/ACK - Swap Patients (Event A17)"
+  },
+  {
+    "structure": "ADT_A20",
+    "messageType": "ADT",
+    "triggerEvent": "A20",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.20 ADT/ACK - Bed Status Update (Event A20)"
+  },
+  {
+    "structure": "ADT_A21",
+    "messageType": "ADT",
+    "triggerEvent": "A21",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.21 ADT/ACK - Patient Goes on a Leave of Absence (Event A21)"
+  },
+  {
+    "structure": "ADT_A21",
+    "messageType": "ADT",
+    "triggerEvent": "A22",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.22 ADT/ACK - Patient Returns From a Leave of Absence (Event A22)",
+    "sameAs": "A21"
+  },
+  {
+    "structure": "ADT_A21",
+    "messageType": "ADT",
+    "triggerEvent": "A23",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.23 ADT/ACK - Delete a Patient Record (Event A23)",
+    "sameAs": "A21"
+  },
+  {
+    "structure": "ADT_A21",
+    "messageType": "ADT",
+    "triggerEvent": "A25",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.25 ADT/ACK - Cancel Pending Discharge (Event A25)",
+    "sameAs": "A21"
+  },
+  {
+    "structure": "ADT_A21",
+    "messageType": "ADT",
+    "triggerEvent": "A26",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.26 ADT/ACK - Cancel Pending Transfer (Event A26)",
+    "sameAs": "A21"
+  },
+  {
+    "structure": "ADT_A21",
+    "messageType": "ADT",
+    "triggerEvent": "A27",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.27 ADT/ACK - Cancel Pending Admit (Event A27)",
+    "sameAs": "A21"
+  },
+  {
+    "structure": "ADT_A21",
+    "messageType": "ADT",
+    "triggerEvent": "A29",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.29 ADT/ACK - Delete Person Information (Event A29)",
+    "sameAs": "A21"
+  },
+  {
+    "structure": "ADT_A21",
+    "messageType": "ADT",
+    "triggerEvent": "A32",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.32 ADT/ACK - Cancel Patient Arriving - Tracking (Event A32)",
+    "sameAs": "A21"
+  },
+  {
+    "structure": "ADT_A21",
+    "messageType": "ADT",
+    "triggerEvent": "A33",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.33 ADT/ACK - Cancel Patient Departing - Tracking (Event A33)",
+    "sameAs": "A21"
+  },
+  {
+    "structure": "ADT_A24",
+    "messageType": "ADT",
+    "triggerEvent": "A24",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.24 ADT/ACK - Link Patient Information (Event A24)"
+  },
+  {
+    "structure": "ADT_A37",
+    "messageType": "ADT",
+    "triggerEvent": "A37",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.37 ADT/ACK - Unlink Patient Information (Event A37)"
+  },
+  {
+    "structure": "ADT_A38",
+    "messageType": "ADT",
+    "triggerEvent": "A38",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.38 ADT/ACK - Cancel Pre-Admit (Event A38)"
+  },
+  {
+    "structure": "ADT_A39",
+    "messageType": "ADT",
+    "triggerEvent": "A40",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.40 ADT/ACK - Merge Patient - Patient Identifier List (Event A40)"
+  },
+  {
+    "structure": "ADT_A39",
+    "messageType": "ADT",
+    "triggerEvent": "A41",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.41 ADT/ACK - Merge Account - Patient Account Number (Event A41)",
+    "sameAs": "A40"
+  },
+  {
+    "structure": "ADT_A39",
+    "messageType": "ADT",
+    "triggerEvent": "A42",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.42 ADT/ACK - Merge Visit - Visit Number (Event A42)",
+    "sameAs": "A40"
+  },
+  {
+    "structure": "ADT_A43",
+    "messageType": "ADT",
+    "triggerEvent": "A43",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.43 ADT/ACK - Move Patient Information - Patient Identifier List (Event A43)"
+  },
+  {
+    "structure": "ADT_A43",
+    "messageType": "ADT",
+    "triggerEvent": "A49",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.49 ADT/ACK - Change Patient Account Number (Event A49)",
+    "sameAs": "A43"
+  },
+  {
+    "structure": "ADT_A44",
+    "messageType": "ADT",
+    "triggerEvent": "A44",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.44 ADT/ACK - Move Account Information - Patient Account Number (Event A44)"
+  },
+  {
+    "structure": "ADT_A44",
+    "messageType": "ADT",
+    "triggerEvent": "A47",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.47 ADT/ACK - Change Patient Identifier List (Event A47)",
+    "sameAs": "A44"
+  },
+  {
+    "structure": "ADT_A45",
+    "messageType": "ADT",
+    "triggerEvent": "A45",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.45 ADT/ACK - Move Visit Information - Visit Number (Event A45)"
+  },
+  {
+    "structure": "ADT_A50",
+    "messageType": "ADT",
+    "triggerEvent": "A50",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.50 ADT/ACK - Change Visit Number (Event A50)"
+  },
+  {
+    "structure": "ADT_A50",
+    "messageType": "ADT",
+    "triggerEvent": "A51",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.51 ADT/ACK - Change Alternate Visit ID (Event A51)",
+    "sameAs": "A50"
+  },
+  {
+    "structure": "ADT_A52",
+    "messageType": "ADT",
+    "triggerEvent": "A52",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.52 ADT/ACK- Cancel Leave of Absence for a Patient (Event A52)"
+  },
+  {
+    "structure": "ADT_A52",
+    "messageType": "ADT",
+    "triggerEvent": "A53",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.53 ADT/ACK - Cancel Patient Returns from a Leave of Absence (Event A53)",
+    "sameAs": "A52"
+  },
+  {
+    "structure": "ADT_A54",
+    "messageType": "ADT",
+    "triggerEvent": "A54",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.54 ADT/ACK - Change Attending Doctor (Event A54)"
+  },
+  {
+    "structure": "ADT_A54",
+    "messageType": "ADT",
+    "triggerEvent": "A55",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.55 ADT/ACK - Cancel Change Attending Doctor (Event A55)",
+    "sameAs": "A54"
+  },
+  {
+    "structure": "RSP_K21",
+    "messageType": "RSP",
+    "triggerEvent": "K21",
+    "description": "Segment Pattern Response",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null
+  },
+  {
+    "structure": "RSP_K22",
+    "messageType": "RSP",
+    "triggerEvent": "K22",
+    "description": "Segment Pattern Response",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null
+  },
+  {
+    "structure": "RSP_K23",
+    "messageType": "RSP",
+    "triggerEvent": "K23",
+    "description": "Segment Pattern Response",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null
+  },
+  {
+    "structure": "RSP_K23",
+    "messageType": "RSP",
+    "triggerEvent": "K24",
+    "description": "Segment Pattern Response",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sameAs": "K23"
+  },
+  {
+    "structure": "ADT_A60",
+    "messageType": "ADT",
+    "triggerEvent": "A60",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.60 ADT/ACK - Update Adverse Reaction Information (Event A60)"
+  },
+  {
+    "structure": "ADT_A61",
+    "messageType": "ADT",
+    "triggerEvent": "A61",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.61 ADT/ACK - Change Consulting Doctor (Event A61)"
+  },
+  {
+    "structure": "ADT_A61",
+    "messageType": "ADT",
+    "triggerEvent": "A62",
+    "description": "ADT Message",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sectionHeading": "3.3.62 ADT/ACK - Cancel Change Consulting Doctor (Event A62)",
+    "sameAs": "A61"
+  },
+  {
+    "structure": "RSP_K32",
+    "messageType": "RSP",
+    "triggerEvent": "K32",
+    "description": "Segment Pattern Response",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null
+  },
+  {
+    "structure": "QBP_Q21",
+    "messageType": "QBP",
+    "triggerEvent": "Q21",
+    "description": "Query By Parameter",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null
+  },
+  {
+    "structure": "QBP_Q21",
+    "messageType": "QBP",
+    "triggerEvent": "Q22",
+    "description": "Query By Parameter",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sameAs": "Q21"
+  },
+  {
+    "structure": "QBP_Q21",
+    "messageType": "QBP",
+    "triggerEvent": "Q23",
+    "description": "Query By Parameter",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sameAs": "Q21"
+  },
+  {
+    "structure": "QBP_Q21",
+    "messageType": "QBP",
+    "triggerEvent": "Q24",
+    "description": "Query By Parameter",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sameAs": "Q21"
+  },
+  {
+    "structure": "QBP_Q21",
+    "messageType": "QBP",
+    "triggerEvent": "Q32",
+    "description": "Query By Parameter",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "sameAs": "Q21"
+  },
+  {
+    "structure": "OMG_O19",
+    "messageType": "OMG",
+    "triggerEvent": "O19",
+    "description": "General Clinical Order Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null
+  },
+  {
+    "structure": "ORG_O20",
+    "messageType": "ORG",
+    "triggerEvent": "O20",
+    "description": "General Clinical Order Acknowledgment Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null
+  },
+  {
+    "structure": "OML_O21",
+    "messageType": "OML",
+    "triggerEvent": "O21",
+    "description": "Laboratory Order Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null
+  },
+  {
+    "structure": "ORL_O22",
+    "messageType": "ORL",
+    "triggerEvent": "O22",
+    "description": "General Laboratory Order Acknowledgment Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null
+  },
+  {
+    "structure": "OML_O33",
+    "messageType": "OML",
+    "triggerEvent": "O33",
+    "description": "Laboratory Order - Multiple Order Per Specimen Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null
+  },
+  {
+    "structure": "ORL_O34",
+    "messageType": "ORL",
+    "triggerEvent": "O34",
+    "description": "Laboratory Order Acknowledgment Message - Multiple Order Per Specimen",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null
+  },
+  {
+    "structure": "OML_O35",
+    "messageType": "OML",
+    "triggerEvent": "O35",
+    "description": "Laboratory Order - Multiple Order Per Container of Specimen Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null
+  },
+  {
+    "structure": "ORL_O36",
+    "messageType": "ORL",
+    "triggerEvent": "O36",
+    "description": "Laboratory Order Acknowledgment Message - Multiple Order Per Container of Specimen",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null
+  },
+  {
+    "structure": "OML_O39",
+    "messageType": "OML",
+    "triggerEvent": "O39",
+    "description": "Specimen Shipment Centric Laboratory Order Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null
+  },
+  {
+    "structure": "ORL_O40",
+    "messageType": "ORL",
+    "triggerEvent": "O40",
+    "description": "Specimen Shipment Centric Laboratory Order Acknowledgment Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null
+  },
+  {
+    "structure": "OMI_O23",
+    "messageType": "OMI",
+    "triggerEvent": "O23",
+    "description": "Imaging Order Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null,
+    "sectionHeading": "4.4.14 OMI - Imaging Order Message (Event O23)"
+  },
+  {
+    "structure": "ORI_O24",
+    "messageType": "ORI",
+    "triggerEvent": "O24",
+    "description": "Imaging Order Acknowledgment Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null,
+    "sectionHeading": "4.4.15 ORI - Imaging Order Response Message to Any OMI (Event O24)"
+  },
+  {
+    "structure": "OPL_O37",
+    "messageType": "OPL",
+    "triggerEvent": "O37",
+    "description": "Population/Location-Based Laboratory Order Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null,
+    "sectionHeading": "4.4.16 OPL - Population/Location-Based Laboratory Order Message (Event O37)"
+  },
+  {
+    "structure": "OPR_O38",
+    "messageType": "OPR",
+    "triggerEvent": "O38",
+    "description": "Population/Location-Based Laboratory Order Acknowledgment Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null,
+    "sectionHeading": "4.4.17 OPR - Population/Location-Based Laboratory Order Acknowledgment Message (Event O38)"
+  },
+  {
+    "structure": "RTB_Z74",
+    "messageType": "RTB",
+    "triggerEvent": "Z74",
+    "description": "Personnel Information Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null
+  },
+  {
+    "structure": "OMD_O03",
+    "messageType": "OMD",
+    "triggerEvent": "O03",
+    "description": "Dietary Order",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null,
+    "sectionHeading": "4.7.1 OMD - Dietary Order (Event O03)"
+  },
+  {
+    "structure": "ORD_O04",
+    "messageType": "ORD",
+    "triggerEvent": "O04",
+    "description": "Dietary Order Acknowledgment Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null,
+    "sectionHeading": "4.7.2 ORD - dietary order acknowledgment (Event O04)"
+  },
+  {
+    "structure": "OMS_O05",
+    "messageType": "OMS",
+    "triggerEvent": "O05",
+    "description": "Stock Requisition Order Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null
+  },
+  {
+    "structure": "ORS_O06",
+    "messageType": "ORS",
+    "triggerEvent": "O06",
+    "description": "Stock Order Acknowledgment Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null
+  },
+  {
+    "structure": "OMN_O07",
+    "messageType": "OMN",
+    "triggerEvent": "O07",
+    "description": "Nonstock Requisition Order Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null
+  },
+  {
+    "structure": "ORN_O08",
+    "messageType": "ORN",
+    "triggerEvent": "O08",
+    "description": "General Order Acknowledgment Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null
+  },
+  {
+    "structure": "OMB_O27",
+    "messageType": "OMB",
+    "triggerEvent": "O27",
+    "description": "Blood Product Order Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null
+  },
+  {
+    "structure": "ORB_O28",
+    "messageType": "ORB",
+    "triggerEvent": "O28",
+    "description": "Description",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null,
+    "sectionHeading": "4.13.2 ORB - Blood Product Order Acknowledgment (Event O28)"
+  },
+  {
+    "structure": "BPS_O29",
+    "messageType": "BPS",
+    "triggerEvent": "O29",
+    "description": "Blood Product dispense status Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null,
+    "sectionHeading": "4.13.3 BPS - Blood Product Dispense Status Message (Event O29)"
+  },
+  {
+    "structure": "BRP_O30",
+    "messageType": "BRP",
+    "triggerEvent": "O30",
+    "description": "Description",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null,
+    "sectionHeading": "4.13.4 BRP - Blood Product Dispense Status Acknowledgment (Event O30)"
+  },
+  {
+    "structure": "BTS_O31",
+    "messageType": "BTS",
+    "triggerEvent": "O31",
+    "description": "Blood Product Transfusion/Disposition Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null,
+    "sectionHeading": "4.13.5 BTS - Blood Product Transfusion/Disposition Message (Event O31)"
+  },
+  {
+    "structure": "BRT_O32",
+    "messageType": "BRT",
+    "triggerEvent": "O32",
+    "description": "Description",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null,
+    "sectionHeading": "4.13.6 BRT - Blood Product Transfusion/Disposition Acknowledgment (Event O32)"
+  },
+  {
+    "structure": "QBP_Z73",
+    "messageType": "QBP",
+    "triggerEvent": "Z73",
+    "description": "QBP Message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null
+  },
+  {
+    "structure": "OMP_O09",
+    "messageType": "OMP",
+    "triggerEvent": "O09",
+    "description": "Pharmacy/treatment Order Message",
+    "pdf": "hl7.eu std27/ch04a.html",
+    "page": null
+  },
+  {
+    "structure": "ORP_O10",
+    "messageType": "ORP",
+    "triggerEvent": "O10",
+    "description": "Description",
+    "pdf": "hl7.eu std27/ch04a.html",
+    "page": null
+  },
+  {
+    "structure": "RDE_O11",
+    "messageType": "RDE",
+    "triggerEvent": "O11",
+    "description": "Pharmacy/Treatment Encoded Order Message",
+    "pdf": "hl7.eu std27/ch04a.html",
+    "page": null
+  },
+  {
+    "structure": "RDE_O11",
+    "messageType": "RDE",
+    "triggerEvent": "O25",
+    "description": "Pharmacy/Treatment Refill Authorization Request",
+    "pdf": "hl7.eu std27/ch04a.html",
+    "page": null
+  },
+  {
+    "structure": "RRE_O12",
+    "messageType": "RRE",
+    "triggerEvent": "O12",
+    "description": "Pharmacy/Treatment Encoded Order Acknowledgment Message",
+    "pdf": "hl7.eu std27/ch04a.html",
+    "page": null
+  },
+  {
+    "structure": "RRE_O12",
+    "messageType": "RRE",
+    "triggerEvent": "O26",
+    "description": "Pharmacy/Treatment Refill Authorization Request Acknowledgment Message",
+    "pdf": "hl7.eu std27/ch04a.html",
+    "page": null,
+    "sameAs": "O12"
+  },
+  {
+    "structure": "RDS_O13",
+    "messageType": "RDS",
+    "triggerEvent": "O13",
+    "description": "Pharmacy/Treatment Dispense Message",
+    "pdf": "hl7.eu std27/ch04a.html",
+    "page": null
+  },
+  {
+    "structure": "RRD_O14",
+    "messageType": "RRD",
+    "triggerEvent": "O14",
+    "description": "Pharmacy/Treatment Dispense Acknowledgment Message",
+    "pdf": "hl7.eu std27/ch04a.html",
+    "page": null
+  },
+  {
+    "structure": "RGV_O15",
+    "messageType": "RGV",
+    "triggerEvent": "O15",
+    "description": "Pharmacy/Treatment Give",
+    "pdf": "hl7.eu std27/ch04a.html",
+    "page": null
+  },
+  {
+    "structure": "RRG_O16",
+    "messageType": "RRG",
+    "triggerEvent": "O16",
+    "description": "Pharmacy/Treatment Give Acknowledgment Message",
+    "pdf": "hl7.eu std27/ch04a.html",
+    "page": null
+  },
+  {
+    "structure": "RAS_O17",
+    "messageType": "RAS",
+    "triggerEvent": "O17",
+    "description": "Pharmacy/Treatment Administration",
+    "pdf": "hl7.eu std27/ch04a.html",
+    "page": null
+  },
+  {
+    "structure": "RRA_O18",
+    "messageType": "RRA",
+    "triggerEvent": "O18",
+    "description": "Pharmacy/Treatment Administration Acknowledgment Message",
+    "pdf": "hl7.eu std27/ch04a.html",
+    "page": null
+  },
+  {
+    "structure": "QBP_Q11",
+    "messageType": "QBP",
+    "triggerEvent": "Q31",
+    "description": "Query Grammar: QBP Message",
+    "pdf": "hl7.eu std27/ch04a.html",
+    "page": null
+  },
+  {
+    "structure": "QBP_Q11",
+    "messageType": "QBP",
+    "triggerEvent": "Q11",
+    "description": "Query By Parameter",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "QBP_Q11",
+    "messageType": "QBP",
+    "triggerEvent": "Z81",
+    "description": "Query Grammar: QBP Message",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "QBP_Q11",
+    "messageType": "QBP",
+    "triggerEvent": "Z85",
+    "description": "Query Grammar: QBP Message",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "QBP_Q11",
+    "messageType": "QBP",
+    "triggerEvent": "Z87",
+    "description": "Query Grammar: QBS Message",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "QBP_Q11",
+    "messageType": "QBP",
+    "triggerEvent": "Z89",
+    "description": "Query Grammar: QBS Message",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "RSP_K31",
+    "messageType": "RSP",
+    "triggerEvent": "K31",
+    "description": "Response Grammar: Pharmacy Dispense Message",
+    "pdf": "hl7.eu std27/ch04a.html",
+    "page": null
+  },
+  {
+    "structure": "VXU_V04",
+    "messageType": "VXU",
+    "triggerEvent": "V04",
+    "description": "Unsolicited Vaccination Update",
+    "pdf": "hl7.eu std27/ch04a.html",
+    "page": null
+  },
+  {
+    "structure": "RSP_K11",
+    "messageType": "RSP",
+    "triggerEvent": "Z84",
+    "description": "Response Grammar: RTB Message",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "RSP_K11",
+    "messageType": "RSP",
+    "triggerEvent": "Znn",
+    "description": "Response Grammar: RSP Message",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "RSP_K11",
+    "messageType": "RSP",
+    "triggerEvent": "K11",
+    "description": "Segment Pattern Response",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "RSP_K11",
+    "messageType": "RDY",
+    "triggerEvent": "Z80",
+    "description": "Response Grammar: Dispense History",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "QBP_Qnn",
+    "messageType": "QBP",
+    "triggerEvent": "Znn",
+    "description": "Query Grammar: QBP Message",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "RTB_Knn",
+    "messageType": "RTB",
+    "triggerEvent": "Znn",
+    "description": "Response Grammar: Widget Dispense Message",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "RDY_K15",
+    "messageType": "RDY",
+    "triggerEvent": "Znn",
+    "description": "Response Grammar: Dispense History",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null,
+    "sameAs": "K15"
+  },
+  {
+    "structure": "RDY_K15",
+    "messageType": "RDY",
+    "triggerEvent": "K15",
+    "description": "Display Based Response",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "RDY_K15",
+    "messageType": "RDY",
+    "triggerEvent": "Z98",
+    "description": "Response Grammar: Dispense History",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null,
+    "sameAs": "K15"
+  },
+  {
+    "structure": "QBP_Q13",
+    "messageType": "QBP",
+    "triggerEvent": "Q13",
+    "description": "Query By Parameter",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "QBP_Q13",
+    "messageType": "QBP",
+    "triggerEvent": "Z91",
+    "description": "Query Grammar: QBP Message",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "QBP_Q13",
+    "messageType": "QBP",
+    "triggerEvent": "Z77",
+    "description": "Query Grammar: QBP Message",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "QBP_Q13",
+    "messageType": "QBP",
+    "triggerEvent": "Z99",
+    "description": "Query Grammar: QBP Message",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "QBP_Q13",
+    "messageType": "QBP",
+    "triggerEvent": "Z93",
+    "description": "Query Grammar: QBP Message",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "QBP_Q13",
+    "messageType": "QBP",
+    "triggerEvent": "Z95",
+    "description": "Query Grammar: QBP Message",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "QBP_Q13",
+    "messageType": "QBP",
+    "triggerEvent": "Z75",
+    "description": "Query Grammar: QBP Message",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "RTB_K13",
+    "messageType": "RTB",
+    "triggerEvent": "K13",
+    "description": "Table Based Response",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "RTB_K13",
+    "messageType": "RTB",
+    "triggerEvent": "Z92",
+    "description": "Response Grammar: Who Am I",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null,
+    "sameAs": "K13"
+  },
+  {
+    "structure": "RTB_K13",
+    "messageType": "RTB",
+    "triggerEvent": "Z94",
+    "description": "Response Grammar: Who Am I",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null,
+    "sameAs": "K13"
+  },
+  {
+    "structure": "RTB_K13",
+    "messageType": "RTB",
+    "triggerEvent": "Z96",
+    "description": "Response Grammar: Who Am I",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null,
+    "sameAs": "K13"
+  },
+  {
+    "structure": "RTB_K13",
+    "messageType": "RTB",
+    "triggerEvent": "Z78",
+    "description": "Response Grammar: Who Am I",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null,
+    "sameAs": "K13"
+  },
+  {
+    "structure": "RTB_K13",
+    "messageType": "RTB",
+    "triggerEvent": "Z76",
+    "description": "Response Grammar: Who Am I",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null,
+    "sameAs": "K13"
+  },
+  {
+    "structure": "QBP_Q15",
+    "messageType": "QBP",
+    "triggerEvent": "Q15",
+    "description": "Query By Parameter",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "QBP_Q15",
+    "messageType": "QBP",
+    "triggerEvent": "Z97",
+    "description": "Query Grammar: QBP Message",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "QBP_Q15",
+    "messageType": "QBP",
+    "triggerEvent": "Z79",
+    "description": "Query Grammar: QBS Message",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "QSB_Q16",
+    "messageType": "QSB",
+    "triggerEvent": "Q16",
+    "description": "Create Subscription",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null,
+    "sectionHeading": "5.4.4 QSB - Create subscription (Event Q16)"
+  },
+  {
+    "structure": "QSB_Q16",
+    "messageType": "QSB",
+    "triggerEvent": "Z83",
+    "description": "Query Grammar: QSB Message",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null,
+    "sameAs": "Q16"
+  },
+  {
+    "structure": "QVR_Q17",
+    "messageType": "QVR",
+    "triggerEvent": "Q17",
+    "description": "Query for Previous Events",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null,
+    "sectionHeading": "5.4.5 QVR - query for previous events (Event Q17)"
+  },
+  {
+    "structure": "QCN_J01",
+    "messageType": "QCN",
+    "triggerEvent": "J01",
+    "description": "Cancel Query",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null,
+    "sectionHeading": "5.4.6 QCN/ACK - cancel query/acknowledge message (Event J01)"
+  },
+  {
+    "structure": "QCN_J01",
+    "messageType": "QSX",
+    "triggerEvent": "J02",
+    "description": "Cancel Subscription",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null,
+    "sectionHeading": "5.4.7 QSX /ACK - cancel subscription/acknowledge message (Event J02)",
+    "sameAs": "J01"
+  },
+  {
+    "structure": "RDR_RDR",
+    "messageType": "RDR",
+    "triggerEvent": "RDR",
+    "description": "Pharmacy/treatment Dispense Information",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "RSP_Z82",
+    "messageType": "RSP",
+    "triggerEvent": "Z82",
+    "description": "Response Grammar: Pharmacy Dispense Message",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "RSP_Z86",
+    "messageType": "RSP",
+    "triggerEvent": "Z86",
+    "description": "Response Grammar: Pharmacy Information Comprehensive",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "RSP_Z88",
+    "messageType": "RSP",
+    "triggerEvent": "Z88",
+    "description": "Response Grammar: Pharmacy Information Comprehensive",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "RSP_Z90",
+    "messageType": "RSP",
+    "triggerEvent": "Z90",
+    "description": "Response Grammar: Pharmacy Information Comprehensive",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "UDM_Q05",
+    "messageType": "UDM",
+    "triggerEvent": "Q05",
+    "description": "Unsolicited Display Message",
+    "pdf": "hl7.eu std27/ch05.html",
+    "page": null
+  },
+  {
+    "structure": "BAR_P01",
+    "messageType": "BAR",
+    "triggerEvent": "P01",
+    "description": "Add Billing Account",
+    "pdf": "hl7.eu std27/ch06.html",
+    "page": null,
+    "sectionHeading": "6.4.1 BAR/ACK - Add Patient Account (Event P01)"
+  },
+  {
+    "structure": "BAR_P02",
+    "messageType": "BAR",
+    "triggerEvent": "P02",
+    "description": "Purge Billing Account",
+    "pdf": "hl7.eu std27/ch06.html",
+    "page": null,
+    "sectionHeading": "6.4.2 BAR/ACK - Purge Patient Accounts (Event P02)"
+  },
+  {
+    "structure": "DFT_P03",
+    "messageType": "DFT",
+    "triggerEvent": "P03",
+    "description": "Detail Financial Transaction",
+    "pdf": "hl7.eu std27/ch06.html",
+    "page": null,
+    "sectionHeading": "6.4.3 DFT/ACK - Post Detail Financial Transactions (Event P03)"
+  },
+  {
+    "structure": "BAR_P05",
+    "messageType": "BAR",
+    "triggerEvent": "P05",
+    "description": "Update Billing Account",
+    "pdf": "hl7.eu std27/ch06.html",
+    "page": null,
+    "sectionHeading": "6.4.5 BAR/ACK - Update Account (Event P05)"
+  },
+  {
+    "structure": "BAR_P06",
+    "messageType": "BAR",
+    "triggerEvent": "P06",
+    "description": "End Billing Account",
+    "pdf": "hl7.eu std27/ch06.html",
+    "page": null
+  },
+  {
+    "structure": "BAR_P10",
+    "messageType": "BAR",
+    "triggerEvent": "P10",
+    "description": "Transmit Ambulatory Payment Classification (APC) groups",
+    "pdf": "hl7.eu std27/ch06.html",
+    "page": null,
+    "sectionHeading": "6.4.7 BAR/ACK - Transmit Ambulatory Payment Classification (APC) Groups (Event P10)"
+  },
+  {
+    "structure": "DFT_P11",
+    "messageType": "DFT",
+    "triggerEvent": "P11",
+    "description": "Detail Financial Transaction - Expanded",
+    "pdf": "hl7.eu std27/ch06.html",
+    "page": null,
+    "sectionHeading": "6.4.8 DFT/ACK - Post Detail Financial Transactions - Expanded (Event P11)"
+  },
+  {
+    "structure": "BAR_P12",
+    "messageType": "BAR",
+    "triggerEvent": "P12",
+    "description": "Update Diagnosis/Procedures",
+    "pdf": "hl7.eu std27/ch06.html",
+    "page": null,
+    "sectionHeading": "6.4.9 BAR/ACK - Update Diagnosis/Procedure (Event P12)"
+  },
+  {
+    "structure": "ORU_R01",
+    "messageType": "ORU",
+    "triggerEvent": "R01",
+    "description": "Observation Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.3.1 ORU - Unsolicited Observation Message (Event R01)"
+  },
+  {
+    "structure": "ORU_R30",
+    "messageType": "ORU",
+    "triggerEvent": "R30",
+    "description": "Observation Message:",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.3.4 ORU - Unsolicited Point-Of-Care Observation Message without Existing Order - Place an Order (Event R30)"
+  },
+  {
+    "structure": "ORU_R30",
+    "messageType": "ORU",
+    "triggerEvent": "R31",
+    "description": "Observation Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.3.5 ORU - Unsolicited New Point-Of-Care Observation Message - Search for an Order (Event R31)",
+    "sameAs": "R30"
+  },
+  {
+    "structure": "ORU_R30",
+    "messageType": "ORU",
+    "triggerEvent": "R32",
+    "description": "Observation Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.3.6 ORU - Unsolicited Pre-Ordered Point-Of-Care Observation (Event R32)",
+    "sameAs": "R30"
+  },
+  {
+    "structure": "ORA_R33",
+    "messageType": "ORA",
+    "triggerEvent": "R33",
+    "description": "Observation Report Acknowledgement",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.3.7 ORA - Observation Report Acknowledgement (Event R33)"
+  },
+  {
+    "structure": "OUL_R22",
+    "messageType": "OUL",
+    "triggerEvent": "R22",
+    "description": "Observation Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.3.8 OUL - Unsolicited Specimen Oriented Observation Message (Event R22 )"
+  },
+  {
+    "structure": "OUL_R23",
+    "messageType": "OUL",
+    "triggerEvent": "R23",
+    "description": "Observation Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.3.9 OUL - Unsolicited Specimen Container Oriented Observation Message (Event R23)"
+  },
+  {
+    "structure": "OUL_R24",
+    "messageType": "OUL",
+    "triggerEvent": "R24",
+    "description": "Observation Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.3.10 OUL - Unsolicited Order Oriented Observation Message (Event R24)"
+  },
+  {
+    "structure": "OPU_R25",
+    "messageType": "OPU",
+    "triggerEvent": "R25",
+    "description": "Observation Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.3.11 OPU - Unsolicited Population/Location-Based Laboratory Observation Message (Event R25 )"
+  },
+  {
+    "structure": "CRM_C01",
+    "messageType": "CRM",
+    "triggerEvent": "C01",
+    "description": "Clinical Trial Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.7.1 CRM - Clinical Study Registration Message (Events C01-C08)",
+    "eventPrinted": "C01-C08"
+  },
+  {
+    "structure": "CRM_C01",
+    "messageType": "CRM",
+    "triggerEvent": "C02",
+    "description": "Clinical Trial Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.7.1 CRM - Clinical Study Registration Message (Events C01-C08)",
+    "eventPrinted": "C01-C08",
+    "sameAs": "C01"
+  },
+  {
+    "structure": "CRM_C01",
+    "messageType": "CRM",
+    "triggerEvent": "C03",
+    "description": "Clinical Trial Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.7.1 CRM - Clinical Study Registration Message (Events C01-C08)",
+    "eventPrinted": "C01-C08",
+    "sameAs": "C01"
+  },
+  {
+    "structure": "CRM_C01",
+    "messageType": "CRM",
+    "triggerEvent": "C04",
+    "description": "Clinical Trial Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.7.1 CRM - Clinical Study Registration Message (Events C01-C08)",
+    "eventPrinted": "C01-C08",
+    "sameAs": "C01"
+  },
+  {
+    "structure": "CRM_C01",
+    "messageType": "CRM",
+    "triggerEvent": "C05",
+    "description": "Clinical Trial Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.7.1 CRM - Clinical Study Registration Message (Events C01-C08)",
+    "eventPrinted": "C01-C08",
+    "sameAs": "C01"
+  },
+  {
+    "structure": "CRM_C01",
+    "messageType": "CRM",
+    "triggerEvent": "C06",
+    "description": "Clinical Trial Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.7.1 CRM - Clinical Study Registration Message (Events C01-C08)",
+    "eventPrinted": "C01-C08",
+    "sameAs": "C01"
+  },
+  {
+    "structure": "CRM_C01",
+    "messageType": "CRM",
+    "triggerEvent": "C07",
+    "description": "Clinical Trial Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.7.1 CRM - Clinical Study Registration Message (Events C01-C08)",
+    "eventPrinted": "C01-C08",
+    "sameAs": "C01"
+  },
+  {
+    "structure": "CRM_C01",
+    "messageType": "CRM",
+    "triggerEvent": "C08",
+    "description": "Clinical Trial Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.7.1 CRM - Clinical Study Registration Message (Events C01-C08)",
+    "eventPrinted": "C01-C08",
+    "sameAs": "C01"
+  },
+  {
+    "structure": "CSU_C09",
+    "messageType": "CSU",
+    "triggerEvent": "C09",
+    "description": "Clinical Trial Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.7.2 CSU - Unsolicited Study Data Message (Events C09-C12)",
+    "eventPrinted": "C09-C12"
+  },
+  {
+    "structure": "CSU_C09",
+    "messageType": "CSU",
+    "triggerEvent": "C10",
+    "description": "Clinical Trial Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.7.2 CSU - Unsolicited Study Data Message (Events C09-C12)",
+    "eventPrinted": "C09-C12",
+    "sameAs": "C09"
+  },
+  {
+    "structure": "CSU_C09",
+    "messageType": "CSU",
+    "triggerEvent": "C11",
+    "description": "Clinical Trial Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.7.2 CSU - Unsolicited Study Data Message (Events C09-C12)",
+    "eventPrinted": "C09-C12",
+    "sameAs": "C09"
+  },
+  {
+    "structure": "CSU_C09",
+    "messageType": "CSU",
+    "triggerEvent": "C12",
+    "description": "Clinical Trial Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.7.2 CSU - Unsolicited Study Data Message (Events C09-C12)",
+    "eventPrinted": "C09-C12",
+    "sameAs": "C09"
+  },
+  {
+    "structure": "PEX_P07",
+    "messageType": "PEX",
+    "triggerEvent": "P07",
+    "description": "Product Experience Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.11.1 PEX - Product Experience Message (Events P07, P08)",
+    "eventPrinted": "P07-P08"
+  },
+  {
+    "structure": "PEX_P07",
+    "messageType": "PEX",
+    "triggerEvent": "P08",
+    "description": "Product Experience Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.11.1 PEX - Product Experience Message (Events P07, P08)",
+    "eventPrinted": "P07-P08",
+    "sameAs": "P07"
+  },
+  {
+    "structure": "OSM_R26",
+    "messageType": "OSM",
+    "triggerEvent": "R26",
+    "description": "Specimen Shipment Message",
+    "pdf": "hl7.eu std27/ch07.html",
+    "page": null,
+    "sectionHeading": "7.18.1 OSM - Unsolicited Specimen Shipment Manifest Message (Event R26)"
+  },
+  {
+    "structure": "MFN_M13",
+    "messageType": "MFN",
+    "triggerEvent": "M13",
+    "description": "Master File Notification - General",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.4.2 MFN/MFK - Master File Notification - General (Event M13)"
+  },
+  {
+    "structure": "MFK_M01",
+    "messageType": "MFK",
+    "triggerEvent": "M13",
+    "description": "Master File Application Acknowledgment",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.4.2 MFN/MFK - Master File Notification - General (Event M13)"
+  },
+  {
+    "structure": "MFK_M01",
+    "messageType": "MFK",
+    "triggerEvent": "M14",
+    "description": "Master File Application Acknowledgment",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.4.3 MFN/MFK - Master File Notification - Site Defined (Event M14)",
+    "sameAs": "M13"
+  },
+  {
+    "structure": "MFK_M01",
+    "messageType": "MFK",
+    "triggerEvent": "M02",
+    "description": "Master File Acknowledgment",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.7.1 MFN/MFK - Staff/Practitioner Master File Message (Event M02)",
+    "sameAs": "M13"
+  },
+  {
+    "structure": "MFK_M01",
+    "messageType": "MFK",
+    "triggerEvent": "M08",
+    "description": "Master File Application Acknowledgment",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.8.3 MFN/MFK - Master File Notification - Test/Observation (Numeric) (Event M08)",
+    "sameAs": "M13"
+  },
+  {
+    "structure": "MFK_M01",
+    "messageType": "MFK",
+    "triggerEvent": "M09",
+    "description": "Master File Application Acknowledgment",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.8.4 MFN/MFK - Master File Notification - Test/Observation (Categorical) (Event M09)",
+    "sameAs": "M13"
+  },
+  {
+    "structure": "MFK_M01",
+    "messageType": "MFK",
+    "triggerEvent": "M10",
+    "description": "Master File Application Acknowledgment",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.8.5 MFN/MFK - Master File Notification - Test/Observation Batteries (Event M10)",
+    "sameAs": "M13"
+  },
+  {
+    "structure": "MFK_M01",
+    "messageType": "MFK",
+    "triggerEvent": "M11",
+    "description": "Master File Application Acknowledgment",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.8.6 MFN/MFK - Master File Notification - Test/Calculated Observations (Event M11)",
+    "sameAs": "M13"
+  },
+  {
+    "structure": "MFK_M01",
+    "messageType": "MFK",
+    "triggerEvent": "M12",
+    "description": "Master File Application Acknowledgment",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.8.7 MFN/MFK - Master File Notification - Additional Basic Observation/Service Attributes (Event M12)",
+    "sameAs": "M13"
+  },
+  {
+    "structure": "MFK_M01",
+    "messageType": "MFK",
+    "triggerEvent": "M05",
+    "description": "Master File Acknowledgment",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sameAs": "M13"
+  },
+  {
+    "structure": "MFK_M01",
+    "messageType": "MFK",
+    "triggerEvent": "M04",
+    "description": "Master File Acknowledgment",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.10.1 MFN/MFK - Charge Description Master File Message (Event M04)",
+    "sameAs": "M13"
+  },
+  {
+    "structure": "MFK_M01",
+    "messageType": "MFK",
+    "triggerEvent": "M06",
+    "description": "Master File Acknowledgment",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.11.1 MFN/MFK - Clinical Trials Master File Message (Event M06-M07)",
+    "sameAs": "M13"
+  },
+  {
+    "structure": "MFK_M01",
+    "messageType": "MFK",
+    "triggerEvent": "M07",
+    "description": "Master File Acknowledgment",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.11.1 MFN/MFK - Clinical Trials Master File Message (Event M06-M07)",
+    "sameAs": "M13"
+  },
+  {
+    "structure": "MFK_M01",
+    "messageType": "MFK",
+    "triggerEvent": "M15",
+    "description": "Master File Acknowledgment",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.12.1 MFN/MFK - Inventory Item Master File Message (Event M15)",
+    "sameAs": "M13"
+  },
+  {
+    "structure": "MFK_M01",
+    "messageType": "MFK",
+    "triggerEvent": "M16",
+    "description": "Master File Acknowledgment",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.12.2 MFN/MFK - Inventory Item Master File Message - Enhanced (Event M16)",
+    "sameAs": "M13"
+  },
+  {
+    "structure": "MFK_M01",
+    "messageType": "MFK",
+    "triggerEvent": "M17",
+    "description": "Master File Acknowledgment",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.13.1 MFN/MFK - DRG Master File Message (Event M17)",
+    "sameAs": "M13"
+  },
+  {
+    "structure": "MFN_Znn",
+    "messageType": "MFN",
+    "triggerEvent": "M14",
+    "description": "Master File Notification - Site Defined",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.4.3 MFN/MFK - Master File Notification - Site Defined (Event M14)"
+  },
+  {
+    "structure": "MFN_M02",
+    "messageType": "MFN",
+    "triggerEvent": "M02",
+    "description": "Master File Notification for Staff/Practitioner",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.7.1 MFN/MFK - Staff/Practitioner Master File Message (Event M02)"
+  },
+  {
+    "structure": "MFN_M08",
+    "messageType": "MFN",
+    "triggerEvent": "M08",
+    "description": "Master File Notification - Test/Observation (Numeric)",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.8.3 MFN/MFK - Master File Notification - Test/Observation (Numeric) (Event M08)"
+  },
+  {
+    "structure": "MFN_M09",
+    "messageType": "MFN",
+    "triggerEvent": "M09",
+    "description": "Master File Notification - Test/Observation (Categorical)",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.8.4 MFN/MFK - Master File Notification - Test/Observation (Categorical) (Event M09)"
+  },
+  {
+    "structure": "MFN_M10",
+    "messageType": "MFN",
+    "triggerEvent": "M10",
+    "description": "Master File Notification - Test/Observation Batteries",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.8.5 MFN/MFK - Master File Notification - Test/Observation Batteries (Event M10)"
+  },
+  {
+    "structure": "MFN_M11",
+    "messageType": "MFN",
+    "triggerEvent": "M11",
+    "description": "Master File Notification - Test/Calculated Observations",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.8.6 MFN/MFK - Master File Notification - Test/Calculated Observations (Event M11)"
+  },
+  {
+    "structure": "MFN_M12",
+    "messageType": "MFN",
+    "triggerEvent": "M12",
+    "description": "Master File Notification - Additional Basic Observation/Service Attributes",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.8.7 MFN/MFK - Master File Notification - Additional Basic Observation/Service Attributes (Event M12)"
+  },
+  {
+    "structure": "MFN_M05",
+    "messageType": "MFN",
+    "triggerEvent": "M05",
+    "description": "Master File Notification - Patient Location",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null
+  },
+  {
+    "structure": "MFN_M04",
+    "messageType": "MFN",
+    "triggerEvent": "M04",
+    "description": "Master File Notification - Charge Description",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.10.1 MFN/MFK - Charge Description Master File Message (Event M04)"
+  },
+  {
+    "structure": "MFN_M06",
+    "messageType": "MFN",
+    "triggerEvent": "M06",
+    "description": "Master File Notification - Clinical Study with Phases and Schedules",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.11.1 MFN/MFK - Clinical Trials Master File Message (Event M06-M07)"
+  },
+  {
+    "structure": "MFN_M07",
+    "messageType": "MFN",
+    "triggerEvent": "M07",
+    "description": "Master File Notification - Clinical Study without Phases but with Schedules",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.11.1 MFN/MFK - Clinical Trials Master File Message (Event M06-M07)"
+  },
+  {
+    "structure": "MFN_M15",
+    "messageType": "MFN",
+    "triggerEvent": "M15",
+    "description": "Master File Notification - Inventory Item",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.12.1 MFN/MFK - Inventory Item Master File Message (Event M15)"
+  },
+  {
+    "structure": "MFN_M16",
+    "messageType": "MFN",
+    "triggerEvent": "M16",
+    "description": "Master File Notification - Inventory Item Enhanced",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.12.2 MFN/MFK - Inventory Item Master File Message - Enhanced (Event M16)"
+  },
+  {
+    "structure": "MFN_M17",
+    "messageType": "MFN",
+    "triggerEvent": "M17",
+    "description": "Master File Notification - DRG",
+    "pdf": "hl7.eu std27/ch08.html",
+    "page": null,
+    "sectionHeading": "8.13.1 MFN/MFK - DRG Master File Message (Event M17)"
+  },
+  {
+    "structure": "MDM_T01",
+    "messageType": "MDM",
+    "triggerEvent": "T01",
+    "description": "Original Document Notification",
+    "pdf": "hl7.eu std27/ch09.html",
+    "page": null,
+    "sectionHeading": "9.6.1 MDM/ACK - Original Document Notification (Event T01)"
+  },
+  {
+    "structure": "MDM_T01",
+    "messageType": "MDM",
+    "triggerEvent": "T03",
+    "description": "Document Status Change Notification",
+    "pdf": "hl7.eu std27/ch09.html",
+    "page": null,
+    "sectionHeading": "9.6.3 MDM/ACK - Document Status Change Notification (Event T03)",
+    "sameAs": "T01"
+  },
+  {
+    "structure": "MDM_T01",
+    "messageType": "MDM",
+    "triggerEvent": "T05",
+    "description": "Document Addendum Notification",
+    "pdf": "hl7.eu std27/ch09.html",
+    "page": null,
+    "sectionHeading": "9.6.5 MDM/ACK - Document Addendum Notification (Event T05)",
+    "sameAs": "T01"
+  },
+  {
+    "structure": "MDM_T01",
+    "messageType": "MDM",
+    "triggerEvent": "T07",
+    "description": "Document Edit Notification",
+    "pdf": "hl7.eu std27/ch09.html",
+    "page": null,
+    "sectionHeading": "9.6.7 MDM/ACK - Document Edit Notification (Event T07)",
+    "sameAs": "T01"
+  },
+  {
+    "structure": "MDM_T01",
+    "messageType": "MDM",
+    "triggerEvent": "T09",
+    "description": "Document Replacement Notification",
+    "pdf": "hl7.eu std27/ch09.html",
+    "page": null,
+    "sectionHeading": "9.6.9 MDM/ACK - Document Replacement Notification (Event T09)",
+    "sameAs": "T01"
+  },
+  {
+    "structure": "MDM_T01",
+    "messageType": "MDM",
+    "triggerEvent": "T11",
+    "description": "Document Cancel Notification",
+    "pdf": "hl7.eu std27/ch09.html",
+    "page": null,
+    "sectionHeading": "9.6.11 MDM/ACK - Document Cancel Notification (Event T11)",
+    "sameAs": "T01"
+  },
+  {
+    "structure": "MDM_T02",
+    "messageType": "MDM",
+    "triggerEvent": "T02",
+    "description": "Original Document Notification & Content",
+    "pdf": "hl7.eu std27/ch09.html",
+    "page": null,
+    "sectionHeading": "9.6.2 MDM/ACK - Original Document Notification and Content (Event T02)"
+  },
+  {
+    "structure": "MDM_T02",
+    "messageType": "MDM",
+    "triggerEvent": "T04",
+    "description": "Document Status Change Notification & Content",
+    "pdf": "hl7.eu std27/ch09.html",
+    "page": null,
+    "sectionHeading": "9.6.4 MDM/ACK - Document Status Change Notification and Content (Event T04)",
+    "sameAs": "T02"
+  },
+  {
+    "structure": "MDM_T02",
+    "messageType": "MDM",
+    "triggerEvent": "T06",
+    "description": "Document Addendum Notification & Content",
+    "pdf": "hl7.eu std27/ch09.html",
+    "page": null,
+    "sectionHeading": "9.6.6 MDM/ACK - Document Addendum Notification and Content (Event T06)",
+    "sameAs": "T02"
+  },
+  {
+    "structure": "MDM_T02",
+    "messageType": "MDM",
+    "triggerEvent": "T08",
+    "description": "Document Edit Notification & Content",
+    "pdf": "hl7.eu std27/ch09.html",
+    "page": null,
+    "sectionHeading": "9.6.8 MDM/ACK - Document Edit Notification and Content (Event T08)",
+    "sameAs": "T02"
+  },
+  {
+    "structure": "MDM_T02",
+    "messageType": "MDM",
+    "triggerEvent": "T10",
+    "description": "Document Replacement Notification & Content",
+    "pdf": "hl7.eu std27/ch09.html",
+    "page": null,
+    "sectionHeading": "9.6.10 MDM/ACK - Document Replacement Notification and Content (Event T10)",
+    "sameAs": "T02"
+  },
+  {
+    "structure": "SRM_S01",
+    "messageType": "SRM",
+    "triggerEvent": "S01",
+    "description": "Schedule Request Message",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11"
+  },
+  {
+    "structure": "SRM_S01",
+    "messageType": "SRM",
+    "triggerEvent": "S02",
+    "description": "Schedule Request Message",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SRM_S01",
+    "messageType": "SRM",
+    "triggerEvent": "S03",
+    "description": "Schedule Request Message",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SRM_S01",
+    "messageType": "SRM",
+    "triggerEvent": "S04",
+    "description": "Schedule Request Message",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SRM_S01",
+    "messageType": "SRM",
+    "triggerEvent": "S05",
+    "description": "Schedule Request Message",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SRM_S01",
+    "messageType": "SRM",
+    "triggerEvent": "S06",
+    "description": "Schedule Request Message",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SRM_S01",
+    "messageType": "SRM",
+    "triggerEvent": "S07",
+    "description": "Schedule Request Message",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SRM_S01",
+    "messageType": "SRM",
+    "triggerEvent": "S08",
+    "description": "Schedule Request Message",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SRM_S01",
+    "messageType": "SRM",
+    "triggerEvent": "S09",
+    "description": "Schedule Request Message",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SRM_S01",
+    "messageType": "SRM",
+    "triggerEvent": "S10",
+    "description": "Schedule Request Message",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SRM_S01",
+    "messageType": "SRM",
+    "triggerEvent": "S11",
+    "description": "Schedule Request Message",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SRR_S01",
+    "messageType": "SRR",
+    "triggerEvent": "S01",
+    "description": "Scheduled Request Response",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11"
+  },
+  {
+    "structure": "SRR_S01",
+    "messageType": "SRR",
+    "triggerEvent": "S02",
+    "description": "Scheduled Request Response",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SRR_S01",
+    "messageType": "SRR",
+    "triggerEvent": "S03",
+    "description": "Scheduled Request Response",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SRR_S01",
+    "messageType": "SRR",
+    "triggerEvent": "S04",
+    "description": "Scheduled Request Response",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SRR_S01",
+    "messageType": "SRR",
+    "triggerEvent": "S05",
+    "description": "Scheduled Request Response",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SRR_S01",
+    "messageType": "SRR",
+    "triggerEvent": "S06",
+    "description": "Scheduled Request Response",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SRR_S01",
+    "messageType": "SRR",
+    "triggerEvent": "S07",
+    "description": "Scheduled Request Response",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SRR_S01",
+    "messageType": "SRR",
+    "triggerEvent": "S08",
+    "description": "Scheduled Request Response",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SRR_S01",
+    "messageType": "SRR",
+    "triggerEvent": "S09",
+    "description": "Scheduled Request Response",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SRR_S01",
+    "messageType": "SRR",
+    "triggerEvent": "S10",
+    "description": "Scheduled Request Response",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SRR_S01",
+    "messageType": "SRR",
+    "triggerEvent": "S11",
+    "description": "Scheduled Request Response",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S01-S11",
+    "sameAs": "S01"
+  },
+  {
+    "structure": "SIU_S12",
+    "messageType": "SIU",
+    "triggerEvent": "S12",
+    "description": "Schedule Information Unsolicited",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S12-S24,S26,S27"
+  },
+  {
+    "structure": "SIU_S12",
+    "messageType": "SIU",
+    "triggerEvent": "S13",
+    "description": "Schedule Information Unsolicited",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S12-S24,S26,S27",
+    "sameAs": "S12"
+  },
+  {
+    "structure": "SIU_S12",
+    "messageType": "SIU",
+    "triggerEvent": "S14",
+    "description": "Schedule Information Unsolicited",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S12-S24,S26,S27",
+    "sameAs": "S12"
+  },
+  {
+    "structure": "SIU_S12",
+    "messageType": "SIU",
+    "triggerEvent": "S15",
+    "description": "Schedule Information Unsolicited",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S12-S24,S26,S27",
+    "sameAs": "S12"
+  },
+  {
+    "structure": "SIU_S12",
+    "messageType": "SIU",
+    "triggerEvent": "S16",
+    "description": "Schedule Information Unsolicited",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S12-S24,S26,S27",
+    "sameAs": "S12"
+  },
+  {
+    "structure": "SIU_S12",
+    "messageType": "SIU",
+    "triggerEvent": "S17",
+    "description": "Schedule Information Unsolicited",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S12-S24,S26,S27",
+    "sameAs": "S12"
+  },
+  {
+    "structure": "SIU_S12",
+    "messageType": "SIU",
+    "triggerEvent": "S18",
+    "description": "Schedule Information Unsolicited",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S12-S24,S26,S27",
+    "sameAs": "S12"
+  },
+  {
+    "structure": "SIU_S12",
+    "messageType": "SIU",
+    "triggerEvent": "S19",
+    "description": "Schedule Information Unsolicited",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S12-S24,S26,S27",
+    "sameAs": "S12"
+  },
+  {
+    "structure": "SIU_S12",
+    "messageType": "SIU",
+    "triggerEvent": "S20",
+    "description": "Schedule Information Unsolicited",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S12-S24,S26,S27",
+    "sameAs": "S12"
+  },
+  {
+    "structure": "SIU_S12",
+    "messageType": "SIU",
+    "triggerEvent": "S21",
+    "description": "Schedule Information Unsolicited",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S12-S24,S26,S27",
+    "sameAs": "S12"
+  },
+  {
+    "structure": "SIU_S12",
+    "messageType": "SIU",
+    "triggerEvent": "S22",
+    "description": "Schedule Information Unsolicited",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S12-S24,S26,S27",
+    "sameAs": "S12"
+  },
+  {
+    "structure": "SIU_S12",
+    "messageType": "SIU",
+    "triggerEvent": "S23",
+    "description": "Schedule Information Unsolicited",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S12-S24,S26,S27",
+    "sameAs": "S12"
+  },
+  {
+    "structure": "SIU_S12",
+    "messageType": "SIU",
+    "triggerEvent": "S24",
+    "description": "Schedule Information Unsolicited",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S12-S24,S26,S27",
+    "sameAs": "S12"
+  },
+  {
+    "structure": "SIU_S12",
+    "messageType": "SIU",
+    "triggerEvent": "S26",
+    "description": "Schedule Information Unsolicited",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S12-S24,S26,S27",
+    "sameAs": "S12"
+  },
+  {
+    "structure": "SIU_S12",
+    "messageType": "SIU",
+    "triggerEvent": "S27",
+    "description": "Schedule Information Unsolicited",
+    "pdf": "hl7.eu std27/ch10.html",
+    "page": null,
+    "eventPrinted": "S12-S24,S26,S27",
+    "sameAs": "S12"
+  },
+  {
+    "structure": "RQI_I01",
+    "messageType": "RQI",
+    "triggerEvent": "I01",
+    "description": "Request Patient Information",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.3.1 RQI/RPI - Request for Insurance Information (Event I01)"
+  },
+  {
+    "structure": "RQI_I01",
+    "messageType": "RQI",
+    "triggerEvent": "I02",
+    "description": "Request Patient Information",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.3.2 RQI/RPL - Request/Receipt of Patient Selection Display List (Event I02)",
+    "sameAs": "I01"
+  },
+  {
+    "structure": "RQI_I01",
+    "messageType": "RQI",
+    "triggerEvent": "I03",
+    "description": "Request Patient Information",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.3.3 RQI/RPR - Request/Receipt of Patient Selection List (Event I03)"
+  },
+  {
+    "structure": "RQI_I01",
+    "messageType": "PIN",
+    "triggerEvent": "I07",
+    "description": "Patient Insurance Information",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.3.7 PIN/ACK - Unsolicited Insurance Information (Event I07)",
+    "sameAs": "I01"
+  },
+  {
+    "structure": "RPI_I01",
+    "messageType": "RPI",
+    "triggerEvent": "I01",
+    "description": "Return Patient Information",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.3.1 RQI/RPI - Request for Insurance Information (Event I01)"
+  },
+  {
+    "structure": "RPL_I02",
+    "messageType": "RPL",
+    "triggerEvent": "I02",
+    "description": "Return Patient Display List",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.3.2 RQI/RPL - Request/Receipt of Patient Selection Display List (Event I02)"
+  },
+  {
+    "structure": "RPR_I03",
+    "messageType": "RPR",
+    "triggerEvent": "I03",
+    "description": "Return Patient List",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.3.3 RQI/RPR - Request/Receipt of Patient Selection List (Event I03)"
+  },
+  {
+    "structure": "RQP_I04",
+    "messageType": "RQP",
+    "triggerEvent": "I04",
+    "description": "Request Patient Demographics",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.3.4 RQP/RPI - request for patient demographic data (Event I04)"
+  },
+  {
+    "structure": "RPI_I04",
+    "messageType": "RPI",
+    "triggerEvent": "I04",
+    "description": "Return Patient Information",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.3.4 RQP/RPI - request for patient demographic data (Event I04)"
+  },
+  {
+    "structure": "RQC_I05",
+    "messageType": "RQC",
+    "triggerEvent": "I05",
+    "description": "Request Clinical Information",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.3.5 RQC/RCI - Request for Patient Clinical Information (Event I05)"
+  },
+  {
+    "structure": "RQC_I05",
+    "messageType": "RQC",
+    "triggerEvent": "I06",
+    "description": "Request Clinical Information",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.3.6 RQC/RCL - Request/Receipt of Clinical Data Listing (Event I06)"
+  },
+  {
+    "structure": "RCI_I05",
+    "messageType": "RCI",
+    "triggerEvent": "I05",
+    "description": "Return Clinical Information",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.3.5 RQC/RCI - Request for Patient Clinical Information (Event I05)"
+  },
+  {
+    "structure": "RCL_I06",
+    "messageType": "RCL",
+    "triggerEvent": "I06",
+    "description": "Return Clinical List",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.3.6 RQC/RCL - Request/Receipt of Clinical Data Listing (Event I06)"
+  },
+  {
+    "structure": "RQA_I08",
+    "messageType": "RQA",
+    "triggerEvent": "I08",
+    "description": "Request Patient Authorization",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.4.1 RQA/RPA - Request Patient Authorization Message (Event I08)",
+    "eventPrinted": "I08-I11"
+  },
+  {
+    "structure": "RQA_I08",
+    "messageType": "RQA",
+    "triggerEvent": "I09",
+    "description": "Request Patient Authorization",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.4.3 RQA/RPA - Request for Modification to an Authorization (Event I09)",
+    "eventPrinted": "I08-I11",
+    "sameAs": "I08"
+  },
+  {
+    "structure": "RQA_I08",
+    "messageType": "RQA",
+    "triggerEvent": "I10",
+    "description": "Request Patient Authorization",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.4.4 RQA/RPA - Request for Resubmission of an Authorization (Event I10)",
+    "eventPrinted": "I08-I11",
+    "sameAs": "I08"
+  },
+  {
+    "structure": "RQA_I08",
+    "messageType": "RQA",
+    "triggerEvent": "I11",
+    "description": "Request Patient Authorization",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.4.5 RQA/RPA - Request for Cancellation of an Authorization (Event I11)",
+    "eventPrinted": "I08-I11",
+    "sameAs": "I08"
+  },
+  {
+    "structure": "RPA_I08",
+    "messageType": "RPA",
+    "triggerEvent": "I08",
+    "description": "Return Patient Authorization",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.4.1 RQA/RPA - Request Patient Authorization Message (Event I08)",
+    "eventPrinted": "I08-I11"
+  },
+  {
+    "structure": "RPA_I08",
+    "messageType": "RPA",
+    "triggerEvent": "I09",
+    "description": "Return Patient Authorization",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.4.3 RQA/RPA - Request for Modification to an Authorization (Event I09)",
+    "eventPrinted": "I08-I11",
+    "sameAs": "I08"
+  },
+  {
+    "structure": "RPA_I08",
+    "messageType": "RPA",
+    "triggerEvent": "I10",
+    "description": "Return Patient Authorization",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.4.4 RQA/RPA - Request for Resubmission of an Authorization (Event I10)",
+    "eventPrinted": "I08-I11",
+    "sameAs": "I08"
+  },
+  {
+    "structure": "RPA_I08",
+    "messageType": "RPA",
+    "triggerEvent": "I11",
+    "description": "Return Patient Authorization",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.4.5 RQA/RPA - Request for Cancellation of an Authorization (Event I11)",
+    "eventPrinted": "I08-I11",
+    "sameAs": "I08"
+  },
+  {
+    "structure": "REF_I12",
+    "messageType": "REF",
+    "triggerEvent": "I12",
+    "description": "Patient Referral",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.5.2 REF/RRI - Patient Referral (Event I12)",
+    "eventPrinted": "I12-I15"
+  },
+  {
+    "structure": "REF_I12",
+    "messageType": "REF",
+    "triggerEvent": "I13",
+    "description": "Patient Referral",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.5.3 REF/RRI - Modify Patient Referral (Event I13)",
+    "eventPrinted": "I12-I15",
+    "sameAs": "I12"
+  },
+  {
+    "structure": "REF_I12",
+    "messageType": "REF",
+    "triggerEvent": "I14",
+    "description": "Patient Referral",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.5.4 REF/RRI - Cancel Patient Referral (Event I14)",
+    "eventPrinted": "I12-I15",
+    "sameAs": "I12"
+  },
+  {
+    "structure": "REF_I12",
+    "messageType": "REF",
+    "triggerEvent": "I15",
+    "description": "Patient Referral",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.5.5 REF/RRI - Request Patient Referral Status (Event I15)",
+    "eventPrinted": "I12-I15",
+    "sameAs": "I12"
+  },
+  {
+    "structure": "RRI_I12",
+    "messageType": "RRI",
+    "triggerEvent": "I12",
+    "description": "Return Referral Information",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.5.2 REF/RRI - Patient Referral (Event I12)",
+    "eventPrinted": "I12-I15"
+  },
+  {
+    "structure": "RRI_I12",
+    "messageType": "RRI",
+    "triggerEvent": "I13",
+    "description": "Return Referral Information",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.5.3 REF/RRI - Modify Patient Referral (Event I13)",
+    "eventPrinted": "I12-I15",
+    "sameAs": "I12"
+  },
+  {
+    "structure": "RRI_I12",
+    "messageType": "RRI",
+    "triggerEvent": "I14",
+    "description": "Return Referral Information",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.5.4 REF/RRI - Cancel Patient Referral (Event I14)",
+    "eventPrinted": "I12-I15",
+    "sameAs": "I12"
+  },
+  {
+    "structure": "RRI_I12",
+    "messageType": "RRI",
+    "triggerEvent": "I15",
+    "description": "Return Referral Information",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.5.5 REF/RRI - Request Patient Referral Status (Event I15)",
+    "eventPrinted": "I12-I15",
+    "sameAs": "I12"
+  },
+  {
+    "structure": "CCM_I21",
+    "messageType": "CCM",
+    "triggerEvent": "I21",
+    "description": "Collaborative Care Message",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.6.1 CCM/ACK - Collaborative Care Message (Event I21)"
+  },
+  {
+    "structure": "CCR_I16",
+    "messageType": "CCR",
+    "triggerEvent": "I16",
+    "description": "Collaborative Care Referral",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.6.2 CCR/ACK - Collaborative Care Referral (Events I16, I17 and I18)",
+    "eventPrinted": "I16-I18"
+  },
+  {
+    "structure": "CCR_I16",
+    "messageType": "CCR",
+    "triggerEvent": "I17",
+    "description": "Collaborative Care Referral",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.6.4 CCR/ACK - Modify Collaborative Care Referral (Event I17)",
+    "eventPrinted": "I16-I18",
+    "sameAs": "I16"
+  },
+  {
+    "structure": "CCR_I16",
+    "messageType": "CCR",
+    "triggerEvent": "I18",
+    "description": "Collaborative Care Referral",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.6.5 CCR/ACK - Cancel Collaborative Care Referral (Event I18)",
+    "eventPrinted": "I16-I18",
+    "sameAs": "I16"
+  },
+  {
+    "structure": "CCU_I20",
+    "messageType": "CCU",
+    "triggerEvent": "I20",
+    "description": "Collaborative Care Referral",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.6.6 CCU/ACK - Asynchronous Collaborative Care Update (Event I20)"
+  },
+  {
+    "structure": "CCQ_I19",
+    "messageType": "CCQ",
+    "triggerEvent": "I19",
+    "description": "Collaborative Care Referral",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.7.1 CCQ/CQU - Collaborative Care Query/Collaborative Care Query Update (Event I19)"
+  },
+  {
+    "structure": "CQU_I19",
+    "messageType": "CQU",
+    "triggerEvent": "I19",
+    "description": "Collaborative Care Referral",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.7.1 CCQ/CQU - Collaborative Care Query/Collaborative Care Query Update (Event I19)"
+  },
+  {
+    "structure": "CCF_I22",
+    "messageType": "CCF",
+    "triggerEvent": "I22",
+    "description": "Collaborative Care Fetch",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.7.2 CCF/CCI - Collaborative Care Fetch / Collaborative Care Information (Event I22)"
+  },
+  {
+    "structure": "CCI_I22",
+    "messageType": "CCI",
+    "triggerEvent": "I22",
+    "description": "Collaborative Care Information",
+    "pdf": "hl7.eu std27/ch11.html",
+    "page": null,
+    "sectionHeading": "11.7.2 CCF/CCI - Collaborative Care Fetch / Collaborative Care Information (Event I22)"
+  },
+  {
+    "structure": "PGL_PC6",
+    "messageType": "PGL",
+    "triggerEvent": "PC6",
+    "description": "Patient Goal Message",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.1 PGL/ACK - Patient Goal Message (Events PC6, PC7, PC8)",
+    "eventPrinted": "PC6-PC8"
+  },
+  {
+    "structure": "PGL_PC6",
+    "messageType": "PGL",
+    "triggerEvent": "PC7",
+    "description": "Patient Goal Message",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.1 PGL/ACK - Patient Goal Message (Events PC6, PC7, PC8)",
+    "eventPrinted": "PC6-PC8",
+    "sameAs": "PC6"
+  },
+  {
+    "structure": "PGL_PC6",
+    "messageType": "PGL",
+    "triggerEvent": "PC8",
+    "description": "Patient Goal Message",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.1 PGL/ACK - Patient Goal Message (Events PC6, PC7, PC8)",
+    "eventPrinted": "PC6-PC8",
+    "sameAs": "PC6"
+  },
+  {
+    "structure": "PPR_PC1",
+    "messageType": "PPR",
+    "triggerEvent": "PC1",
+    "description": "Patient Problem Message",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.2 PPR/ACK - Patient Problem Message (Events PC1, PC2, PC3)",
+    "eventPrinted": "PC1-PC3"
+  },
+  {
+    "structure": "PPR_PC1",
+    "messageType": "PPR",
+    "triggerEvent": "PC2",
+    "description": "Patient Problem Message",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.2 PPR/ACK - Patient Problem Message (Events PC1, PC2, PC3)",
+    "eventPrinted": "PC1-PC3",
+    "sameAs": "PC1"
+  },
+  {
+    "structure": "PPR_PC1",
+    "messageType": "PPR",
+    "triggerEvent": "PC3",
+    "description": "Patient Problem Message",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.2 PPR/ACK - Patient Problem Message (Events PC1, PC2, PC3)",
+    "eventPrinted": "PC1-PC3",
+    "sameAs": "PC1"
+  },
+  {
+    "structure": "PPP_PCB",
+    "messageType": "PPP",
+    "triggerEvent": "PCB",
+    "description": "Patient Pathway Problem-Oriented Message",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.3 PPP/ACK - Patient Pathway Message (Problem-Oriented) (Events PCB, PCC, PCD)",
+    "eventPrinted": "PCB-PCD"
+  },
+  {
+    "structure": "PPP_PCB",
+    "messageType": "PPP",
+    "triggerEvent": "PCC",
+    "description": "Patient Pathway Problem-Oriented Message",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.3 PPP/ACK - Patient Pathway Message (Problem-Oriented) (Events PCB, PCC, PCD)",
+    "eventPrinted": "PCB-PCD",
+    "sameAs": "PCB"
+  },
+  {
+    "structure": "PPP_PCB",
+    "messageType": "PPP",
+    "triggerEvent": "PCD",
+    "description": "Patient Pathway Problem-Oriented Message",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.3 PPP/ACK - Patient Pathway Message (Problem-Oriented) (Events PCB, PCC, PCD)",
+    "eventPrinted": "PCB-PCD",
+    "sameAs": "PCB"
+  },
+  {
+    "structure": "PPG_PCG",
+    "messageType": "PPG",
+    "triggerEvent": "PCG",
+    "description": "Patient Pathway Goal-Oriented Message",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.4 PPG/ACK - Patient Pathway Message (Goal-Oriented) (Events PCG, PCH, PCJ)",
+    "eventPrinted": "PCG,PCH,PCJ"
+  },
+  {
+    "structure": "PPG_PCG",
+    "messageType": "PPG",
+    "triggerEvent": "PCH",
+    "description": "Patient Pathway Goal-Oriented Message",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.4 PPG/ACK - Patient Pathway Message (Goal-Oriented) (Events PCG, PCH, PCJ)",
+    "eventPrinted": "PCG,PCH,PCJ",
+    "sameAs": "PCG"
+  },
+  {
+    "structure": "PPG_PCG",
+    "messageType": "PPG",
+    "triggerEvent": "PCJ",
+    "description": "Patient Pathway Goal-Oriented Message",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.4 PPG/ACK - Patient Pathway Message (Goal-Oriented) (Events PCG, PCH, PCJ)",
+    "eventPrinted": "PCG,PCH,PCJ",
+    "sameAs": "PCG"
+  },
+  {
+    "structure": "QRY_PC4",
+    "messageType": "QRY",
+    "triggerEvent": "PC4",
+    "description": "Query",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.5 QRY - Patient Care Problem Query (Event PC4)"
+  },
+  {
+    "structure": "QRY_PC4",
+    "messageType": "QRY",
+    "triggerEvent": "PC9",
+    "description": "Query",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.7 QRY - Patient Goal Query (Event PC9)",
+    "sameAs": "PC4"
+  },
+  {
+    "structure": "QRY_PC4",
+    "messageType": "QRY",
+    "triggerEvent": "PCE",
+    "description": "Query",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.9 QRY - Patient Pathway (Problem-Oriented) Query (Event PCE)",
+    "sameAs": "PC4"
+  },
+  {
+    "structure": "QRY_PC4",
+    "messageType": "QRY",
+    "triggerEvent": "PCK",
+    "description": "Query",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.11 QRY - Patient Pathway (Goal-Oriented) Query (Event PCK)",
+    "sameAs": "PC4"
+  },
+  {
+    "structure": "PRR_PC5",
+    "messageType": "PRR",
+    "triggerEvent": "PC5",
+    "description": "Problem Query Response",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.6 PRR - Patient Problem Response (Event PC5)"
+  },
+  {
+    "structure": "PPV_PCA",
+    "messageType": "PPV",
+    "triggerEvent": "PCA",
+    "description": "Goal Query Response",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.8 PPV - Patient Goal Response (Event PCA)"
+  },
+  {
+    "structure": "PTR_PCF",
+    "messageType": "PTR",
+    "triggerEvent": "PCF",
+    "description": "Patient Pathway Problem-Oriented Response",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.10 PTR - Patient Pathway (Problem-Oriented) Response (Event PCF)"
+  },
+  {
+    "structure": "PPT_PCL",
+    "messageType": "PPT",
+    "triggerEvent": "PCL",
+    "description": "Patient Pathway Goal-Oriented Response",
+    "pdf": "hl7.eu std27/ch12.html",
+    "page": null,
+    "sectionHeading": "12.3.12 PPT - Patient Pathway (Goal-Oriented) Response (Event PCL)"
+  },
+  {
+    "structure": "ESU_U01",
+    "messageType": "ESU",
+    "triggerEvent": "U01",
+    "description": "Equipment Status Message",
+    "pdf": "hl7.eu std27/ch13.html",
+    "page": null,
+    "sectionHeading": "13.3.1 ESU/ACK - Automated Equipment Status Update (Event U01)"
+  },
+  {
+    "structure": "ESR_U02",
+    "messageType": "ESR",
+    "triggerEvent": "U02",
+    "description": "Equipment Status Message",
+    "pdf": "hl7.eu std27/ch13.html",
+    "page": null,
+    "sectionHeading": "13.3.2 ESR/ACK - Automated Equipment Status Request (Event U02)"
+  },
+  {
+    "structure": "SSU_U03",
+    "messageType": "SSU",
+    "triggerEvent": "U03",
+    "description": "Specimen Status Message",
+    "pdf": "hl7.eu std27/ch13.html",
+    "page": null,
+    "sectionHeading": "13.3.3 SSU/ACK - Specimen Status Update (Event U03)"
+  },
+  {
+    "structure": "SSR_U04",
+    "messageType": "SSR",
+    "triggerEvent": "U04",
+    "description": "Specimen Status Message",
+    "pdf": "hl7.eu std27/ch13.html",
+    "page": null,
+    "sectionHeading": "13.3.4 SSR/ACK - Specimen Status Request (Event U04)"
+  },
+  {
+    "structure": "INU_U05",
+    "messageType": "INU",
+    "triggerEvent": "U05",
+    "description": "Inventory Update Message",
+    "pdf": "hl7.eu std27/ch13.html",
+    "page": null,
+    "sectionHeading": "13.3.5 INU/ACK - Automated Equipment Inventory Update (Event U05)"
+  },
+  {
+    "structure": "INR_U06",
+    "messageType": "INR",
+    "triggerEvent": "U06",
+    "description": "Inventory Request Message",
+    "pdf": "hl7.eu std27/ch13.html",
+    "page": null,
+    "sectionHeading": "13.3.6 INR/ACK - Automated Equipment Inventory Request (Event U06)"
+  },
+  {
+    "structure": "EAC_U07",
+    "messageType": "EAC",
+    "triggerEvent": "U07",
+    "description": "Equipment Command Message",
+    "pdf": "hl7.eu std27/ch13.html",
+    "page": null,
+    "sectionHeading": "13.3.7 EAC/ACK - Automated Equipment Command (Event U07)"
+  },
+  {
+    "structure": "EAR_U08",
+    "messageType": "EAR",
+    "triggerEvent": "U08",
+    "description": "Equipment Command Message",
+    "pdf": "hl7.eu std27/ch13.html",
+    "page": null,
+    "sectionHeading": "13.3.8 EAR/ACK - Automated Equipment Response (Event U08)"
+  },
+  {
+    "structure": "EAN_U09",
+    "messageType": "EAN",
+    "triggerEvent": "U09",
+    "description": "Equipment Status Message",
+    "pdf": "hl7.eu std27/ch13.html",
+    "page": null,
+    "sectionHeading": "13.3.9 EAN/ACK - Automated Equipment Notification (Event U09)"
+  },
+  {
+    "structure": "TCU_U10",
+    "messageType": "TCU",
+    "triggerEvent": "U10",
+    "description": "Test Code Settings Update",
+    "pdf": "hl7.eu std27/ch13.html",
+    "page": null,
+    "sectionHeading": "13.3.10 TCU/ACK - Automated Equipment Test Code Settings Update (Event U10)"
+  },
+  {
+    "structure": "TCU_U10",
+    "messageType": "TCR",
+    "triggerEvent": "U11",
+    "description": "Test Code Settings Request",
+    "pdf": "hl7.eu std27/ch13.html",
+    "page": null,
+    "sectionHeading": "13.3.11 TCR/ACK - Automated Equipment Test Code Settings Request (Event U11)",
+    "sameAs": "U10"
+  },
+  {
+    "structure": "LSU_U12",
+    "messageType": "LSU",
+    "triggerEvent": "U12",
+    "description": "Equipment Log/Service Message",
+    "pdf": "hl7.eu std27/ch13.html",
+    "page": null,
+    "sectionHeading": "13.3.12 LSU/ACK - Automated Equipment Log/Service Update (Event U12)"
+  },
+  {
+    "structure": "LSU_U12",
+    "messageType": "LSR",
+    "triggerEvent": "U13",
+    "description": "Equipment Log/Service Message",
+    "pdf": "hl7.eu std27/ch13.html",
+    "page": null,
+    "sectionHeading": "13.3.13 LSR/ACK - Automated Equipment Log/Service Request (Event U13)",
+    "sameAs": "U12"
+  },
+  {
+    "structure": "NMD_N02",
+    "messageType": "NMD",
+    "triggerEvent": "N02",
+    "description": "Application Management Data",
+    "pdf": "hl7.eu std27/ch14.html",
+    "page": null,
+    "sectionHeading": "14.3.2 NMD - Application Management Data Message (Event N02)"
+  },
+  {
+    "structure": "PMU_B01",
+    "messageType": "PMU",
+    "triggerEvent": "B01",
+    "description": "Personnel Record Message",
+    "pdf": "hl7.eu std27/ch15.html",
+    "page": null,
+    "sectionHeading": "15.3.1 PMU/ACK - Add Personnel Record (Event B01)"
+  },
+  {
+    "structure": "PMU_B01",
+    "messageType": "PMU",
+    "triggerEvent": "B02",
+    "description": "Personnel Record Message",
+    "pdf": "hl7.eu std27/ch15.html",
+    "page": null,
+    "sectionHeading": "15.3.2 PMU/ACK - Update Personnel Record (Event B02)",
+    "sameAs": "B01"
+  },
+  {
+    "structure": "PMU_B03",
+    "messageType": "PMU",
+    "triggerEvent": "B03",
+    "description": "Delete Personnel Record Message",
+    "pdf": "hl7.eu std27/ch15.html",
+    "page": null,
+    "sectionHeading": "15.3.3 PMU/ACK - Delete Personnel Record (Event B03)"
+  },
+  {
+    "structure": "PMU_B04",
+    "messageType": "PMU",
+    "triggerEvent": "B04",
+    "description": "Activate Practicing Person Message",
+    "pdf": "hl7.eu std27/ch15.html",
+    "page": null,
+    "sectionHeading": "15.3.4 PMU/ACK - Activate Practicing Person (Event B04)"
+  },
+  {
+    "structure": "PMU_B04",
+    "messageType": "PMU",
+    "triggerEvent": "B05",
+    "description": "Deactivate Practicing Person Message",
+    "pdf": "hl7.eu std27/ch15.html",
+    "page": null,
+    "sectionHeading": "15.3.5 PMU/ACK - Deactivate Practicing Person (Event B05)",
+    "sameAs": "B04"
+  },
+  {
+    "structure": "PMU_B04",
+    "messageType": "PMU",
+    "triggerEvent": "B06",
+    "description": "Terminate Practicing Person Message",
+    "pdf": "hl7.eu std27/ch15.html",
+    "page": null,
+    "sectionHeading": "15.3.6 PMU/ACK - Terminate Practicing Person (Event B06)",
+    "sameAs": "B04"
+  },
+  {
+    "structure": "RSP_K25",
+    "messageType": "RSP",
+    "triggerEvent": "K25",
+    "description": "Personnel Information Response Message",
+    "pdf": "hl7.eu std27/ch15.html",
+    "page": null,
+    "sectionHeading": "15.3.7 QBP/RSP - Query Information (Event Q25/K25)"
+  },
+  {
+    "structure": "PMU_B07",
+    "messageType": "PMU",
+    "triggerEvent": "B07",
+    "description": "Grant Certificate Message",
+    "pdf": "hl7.eu std27/ch15.html",
+    "page": null,
+    "sectionHeading": "15.3.8 PMU/ACK - Grant Certificate/Permission (Event B07)"
+  },
+  {
+    "structure": "PMU_B08",
+    "messageType": "PMU",
+    "triggerEvent": "B08",
+    "description": "Revoke Certificate Message",
+    "pdf": "hl7.eu std27/ch15.html",
+    "page": null,
+    "sectionHeading": "15.3.9 PMU/ACK - Revoke Certificate/Permission (Event B08)"
+  },
+  {
+    "structure": "EHC_E01",
+    "messageType": "EHC",
+    "triggerEvent": "E01",
+    "description": "Submit HealthCare Services Invoice",
+    "pdf": "hl7.eu std27/ch16.html",
+    "page": null
+  },
+  {
+    "structure": "EHC_E02",
+    "messageType": "EHC",
+    "triggerEvent": "E02",
+    "description": "Cancel HealthCare Services Invoice",
+    "pdf": "hl7.eu std27/ch16.html",
+    "page": null
+  },
+  {
+    "structure": "QBP_E03",
+    "messageType": "QBP",
+    "triggerEvent": "E03",
+    "description": "Query HealthCare Services Invoice",
+    "pdf": "hl7.eu std27/ch16.html",
+    "page": null
+  },
+  {
+    "structure": "RSP_E03",
+    "messageType": "RSP",
+    "triggerEvent": "E03",
+    "description": "HealthCare Services Invoice Query Response",
+    "pdf": "hl7.eu std27/ch16.html",
+    "page": null
+  },
+  {
+    "structure": "EHC_E04",
+    "messageType": "EHC",
+    "triggerEvent": "E04",
+    "description": "Re-Assess HealthCare Services Invoice Request",
+    "pdf": "hl7.eu std27/ch16.html",
+    "page": null
+  },
+  {
+    "structure": "EHC_E10",
+    "messageType": "EHC",
+    "triggerEvent": "E10",
+    "description": "Edit/Adjudication Results",
+    "pdf": "hl7.eu std27/ch16.html",
+    "page": null
+  },
+  {
+    "structure": "EHC_E12",
+    "messageType": "EHC",
+    "triggerEvent": "E12",
+    "description": "Request Additional Information",
+    "pdf": "hl7.eu std27/ch16.html",
+    "page": null
+  },
+  {
+    "structure": "EHC_E13",
+    "messageType": "EHC",
+    "triggerEvent": "E13",
+    "description": "Additional Information Response",
+    "pdf": "hl7.eu std27/ch16.html",
+    "page": null
+  },
+  {
+    "structure": "EHC_E15",
+    "messageType": "EHC",
+    "triggerEvent": "E15",
+    "description": "Payment/Remittance Advice",
+    "pdf": "hl7.eu std27/ch16.html",
+    "page": null
+  },
+  {
+    "structure": "EHC_E20",
+    "messageType": "EHC",
+    "triggerEvent": "E20",
+    "description": "Submit Authorization Request",
+    "pdf": "hl7.eu std27/ch16.html",
+    "page": null
+  },
+  {
+    "structure": "EHC_E21",
+    "messageType": "EHC",
+    "triggerEvent": "E21",
+    "description": "Cancel Authorization Request",
+    "pdf": "hl7.eu std27/ch16.html",
+    "page": null
+  },
+  {
+    "structure": "QBP_E22",
+    "messageType": "QBP",
+    "triggerEvent": "E22",
+    "description": "Query Authorization Request",
+    "pdf": "hl7.eu std27/ch16.html",
+    "page": null
+  },
+  {
+    "structure": "RSP_E22",
+    "messageType": "RSP",
+    "triggerEvent": "E22",
+    "description": "Authorization Request Query Response",
+    "pdf": "hl7.eu std27/ch16.html",
+    "page": null
+  },
+  {
+    "structure": "EHC_E24",
+    "messageType": "EHC",
+    "triggerEvent": "E24",
+    "description": "Authorization Response",
+    "pdf": "hl7.eu std27/ch16.html",
+    "page": null
+  },
+  {
+    "structure": "SLR_S28",
+    "messageType": "SLR",
+    "triggerEvent": "S28",
+    "description": "Request New Sterilization",
+    "pdf": "hl7.eu std27/ch17.html",
+    "page": null,
+    "sectionHeading": "17.5.1 SLR/ACK - Request New Sterilization Lot (Event S28)"
+  },
+  {
+    "structure": "SLR_S28",
+    "messageType": "SLR",
+    "triggerEvent": "S29",
+    "description": "Request Sterilization Lot Deletion",
+    "pdf": "hl7.eu std27/ch17.html",
+    "page": null,
+    "sectionHeading": "17.5.2 SLR/ACK - Request Sterilization Lot Deletion (Event S29)",
+    "sameAs": "S28"
+  },
+  {
+    "structure": "SLR_S28",
+    "messageType": "STI",
+    "triggerEvent": "S30",
+    "description": "Sterilization Item Request",
+    "pdf": "hl7.eu std27/ch17.html",
+    "page": null,
+    "sectionHeading": "17.5.3 STI/ACK - Request Item (Event S30)",
+    "sameAs": "S28"
+  },
+  {
+    "structure": "SLR_S28",
+    "messageType": "SLN",
+    "triggerEvent": "S34",
+    "description": "Notification of New Sterilization Lot",
+    "pdf": "hl7.eu std27/ch17.html",
+    "page": null,
+    "sectionHeading": "17.6.2 SLN/ACK - Notification of New Sterilization Lot (Event S34)",
+    "sameAs": "S28"
+  },
+  {
+    "structure": "SLR_S28",
+    "messageType": "SLN",
+    "triggerEvent": "S35",
+    "description": "Notification of Sterilization Lot Deletion",
+    "pdf": "hl7.eu std27/ch17.html",
+    "page": null,
+    "sectionHeading": "17.6.3 SLN/ACK - Notification of Sterilization Lot Deletion (Event S35)",
+    "sameAs": "S28"
+  },
+  {
+    "structure": "SDR_S31",
+    "messageType": "SDR",
+    "triggerEvent": "S31",
+    "description": "Anti-Microbial Device Data Request",
+    "pdf": "hl7.eu std27/ch17.html",
+    "page": null,
+    "sectionHeading": "17.5.4 SDR/ACK - Request Anti-Microbial Device Data (Event S31)"
+  },
+  {
+    "structure": "SDR_S31",
+    "messageType": "SDN",
+    "triggerEvent": "S36",
+    "description": "Anti-Microbial Device Data Notification",
+    "pdf": "hl7.eu std27/ch17.html",
+    "page": null,
+    "sectionHeading": "17.6.4 SDN/ACK - Notification of Anti-Microbial Device Data (Event S36)",
+    "sameAs": "S31"
+  },
+  {
+    "structure": "SDR_S32",
+    "messageType": "SMD",
+    "triggerEvent": "S32",
+    "description": "Anti-Microbial Device Cycle Data Request",
+    "pdf": "hl7.eu std27/ch17.html",
+    "page": null,
+    "sectionHeading": "17.5.5 SMD/ACK - Request Anti-Microbial Device Cycle Data (Event S32)"
+  },
+  {
+    "structure": "SDR_S32",
+    "messageType": "SCN",
+    "triggerEvent": "S37",
+    "description": "Anti-Microbial Device Cycle Data Notification",
+    "pdf": "hl7.eu std27/ch17.html",
+    "page": null,
+    "sectionHeading": "17.6.5 SCN/ACK - Notification of Anti-Microbial Device Cycle Data (Event S37)",
+    "sameAs": "S32"
+  },
+  {
+    "structure": "STC_S33",
+    "messageType": "STC",
+    "triggerEvent": "S33",
+    "description": "Sterilization Configuration Notification",
+    "pdf": "hl7.eu std27/ch17.html",
+    "page": null,
+    "sectionHeading": "17.6.1 STC/ACK - Notification of Sterilization Configuration (Event S33)"
+  },
+  {
+    "structure": null,
+    "messageType": "ADT",
+    "triggerEvent": "A30",
+    "description": "ADT/ACK - Merge Person Information (Event A30)",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "3.3.30 ADT/ACK - Merge Person Information (Event A30)",
+    "note": "Attention: The Merge Person Information event was maintained for backward compatibility only as of v2.3.1 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "ACK",
+    "triggerEvent": "A30",
+    "description": "ADT/ACK - Merge Person Information (Event A30)",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "3.3.30 ADT/ACK - Merge Person Information (Event A30)",
+    "note": "Attention: The Merge Person Information event was maintained for backward compatibility only as of v2.3.1 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "ADT",
+    "triggerEvent": "A34",
+    "description": "ADT/ACK - Merge Patient Information - Patient ID Only (Event A34)",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "3.3.34 ADT/ACK - Merge Patient Information - Patient ID Only (Event A34)",
+    "note": "Attention: The Merge Patient Information - Patient ID Only (A34) event was maintained for backward compatibility only as of v2.3.1 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "ACK",
+    "triggerEvent": "A34",
+    "description": "ADT/ACK - Merge Patient Information - Patient ID Only (Event A34)",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "3.3.34 ADT/ACK - Merge Patient Information - Patient ID Only (Event A34)",
+    "note": "Attention: The Merge Patient Information - Patient ID Only (A34) event was maintained for backward compatibility only as of v2.3.1 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "ADT",
+    "triggerEvent": "A35",
+    "description": "ADT/ACK - Merge Patient Information - Account Number Only (Event A35)",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "3.3.35 ADT/ACK - Merge Patient Information - Account Number Only (Event A35)",
+    "note": "Attention: The Merge Patient Information - Account Number Only (A35) event was maintained for backward compatibility only as of v2.3.1 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "ACK",
+    "triggerEvent": "A35",
+    "description": "ADT/ACK - Merge Patient Information - Account Number Only (Event A35)",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "3.3.35 ADT/ACK - Merge Patient Information - Account Number Only (Event A35)",
+    "note": "Attention: The Merge Patient Information - Account Number Only (A35) event was maintained for backward compatibility only as of v2.3.1 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "ADT",
+    "triggerEvent": "A36",
+    "description": "ADT/ACK - Merge Patient Information - Patient ID & Account Number (Event A36)",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "3.3.36 ADT/ACK - Merge Patient Information - Patient ID & Account Number (Event A36)",
+    "note": "Attention: The Merge Patient Information - Patient ID & Account Number (A36) event was maintained for backward compatibility only as of v2.3.1 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "ACK",
+    "triggerEvent": "A36",
+    "description": "ADT/ACK - Merge Patient Information - Patient ID & Account Number (Event A36)",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "3.3.36 ADT/ACK - Merge Patient Information - Patient ID & Account Number (Event A36)",
+    "note": "Attention: The Merge Patient Information - Patient ID & Account Number (A36) event was maintained for backward compatibility only as of v2.3.1 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "ADT",
+    "triggerEvent": "A39",
+    "description": "ADT/ACK - Merge Person - Patient ID (Event A39)",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "3.3.39 ADT/ACK - Merge Person - Patient ID (Event A39)",
+    "note": "Attention: The Merge Person - Patient ID (A39) event was maintained for backward compatibility only as of v2.3.1 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "ACK",
+    "triggerEvent": "A39",
+    "description": "ADT/ACK - Merge Person - Patient ID (Event A39)",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "3.3.39 ADT/ACK - Merge Person - Patient ID (Event A39)",
+    "note": "Attention: The Merge Person - Patient ID (A39) event was maintained for backward compatibility only as of v2.3.1 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "ADT",
+    "triggerEvent": "A46",
+    "description": "ADT/ACK - Change Patient ID (Event A46)",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "3.3.46 ADT/ACK - Change Patient ID (Event A46)",
+    "note": "Attention: The Change Patient ID(A46) event was maintained for backward compatibility only as of v2.3.1 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "ACK",
+    "triggerEvent": "A46",
+    "description": "ADT/ACK - Change Patient ID (Event A46)",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "3.3.46 ADT/ACK - Change Patient ID (Event A46)",
+    "note": "Attention: The Change Patient ID(A46) event was maintained for backward compatibility only as of v2.3.1 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "ADT",
+    "triggerEvent": "A48",
+    "description": "ADT/ACK - Change Alternate Patient ID (Event A48)",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "3.3.48 ADT/ACK - Change Alternate Patient ID (Event A48)",
+    "note": "Attention: The Change Alternate Patient ID (A48) event was maintained for backward compatibility only as of v2.3.1 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "ACK",
+    "triggerEvent": "A48",
+    "description": "ADT/ACK - Change Alternate Patient ID (Event A48)",
+    "pdf": "hl7.eu std27/ch03.html",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "3.3.48 ADT/ACK - Change Alternate Patient ID (Event A48)",
+    "note": "Attention: The Change Alternate Patient ID (A48) event was maintained for backward compatibility only as of v2.3.1 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "ORM",
+    "triggerEvent": null,
+    "description": "ORM - general order message",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "4.4.1 ORM - general order message",
+    "note": "Attention: Retained for backwards compatibility only as of v2.4.and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "ORR",
+    "triggerEvent": null,
+    "description": "ORR - general order response message response to any ORM",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "4.4.2 ORR - general order response message response to any ORM",
+    "note": "Attention: Retained for backwards compatibility only as of v2.5 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "OSQ",
+    "triggerEvent": null,
+    "description": "OSQ/OSR- query response for order",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "4.4.3 OSQ/OSR- query response for order",
+    "note": "Attention: Retained for backwards compatibility only as of v2.4.and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "OSR",
+    "triggerEvent": null,
+    "description": "OSQ/OSR- query response for order",
+    "pdf": "hl7.eu std27/ch04.html",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "4.4.3 OSQ/OSR- query response for order",
+    "note": "Attention: Retained for backwards compatibility only as of v2.4.and withdrawn as of v2.7"
+  },
+  {
+    "structure": "QBP_Q21",
+    "messageType": "QBP",
+    "triggerEvent": "Q25",
+    "description": "Query Personnel Information Message",
+    "pdf": "hl7.eu std27/ch15.html",
+    "page": null,
+    "sectionHeading": "15.3.7 QBP/RSP - Query Information (Event Q25/K25)",
+    "definedBy": "see 3.3.56 DB",
+    "note": "the table body is empty or a cross-reference; no structure of its own"
+  }
+]

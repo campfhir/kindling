@@ -1,0 +1,26 @@
+/**
+ * Parser for ADT^A41 messages (HL7 v2.7).
+ *
+ * Structure: MSH [{SFT}] [UAC] EVN { PATIENT: PID [PD1] MRG [PV1] }
+ * Shares the ADT^A40 structure.
+ *
+ * @module
+ */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { Result } from "../../types/result.ts";
+import { ADT_A40_Parser, type ParsedADT_A40 } from "./ADT_A40_Parser.ts";
+
+export type { ParsedPatient } from "./ADT_A40_Parser.ts";
+/** Structured result of parsing an HL7 ADT^A41 (HL7 v2.7) message. */
+export type ParsedADT_A41 = ParsedADT_A40;
+
+/** Parser for HL7 ADT^A41 (HL7 v2.7) messages. */
+export class ADT_A41_Parser extends ADT_A40_Parser {
+  /** The message name used in error messages. */
+  protected override readonly messageName: string = "ADT_A41";
+}
+
+/** Parses an HL7 ADT^A41 (HL7 v2.7) message string into a structured result. */
+export function parseADT_A41(messageString: string): Result<ParsedADT_A41> {
+  return new ADT_A41_Parser().parse(messageString);
+}
