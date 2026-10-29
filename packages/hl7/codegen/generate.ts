@@ -22,6 +22,7 @@ import { V2_3_1 } from "./schemas/v2.3.1/version.ts";
 import { V2_4 } from "./schemas/v2.4/version.ts";
 import { V2_5 } from "./schemas/v2.5/version.ts";
 import { V2_5_1 } from "./schemas/v2.5.1/version.ts";
+import { V2_6 } from "./schemas/v2.6/version.ts";
 import { generateSegment } from "./generators/segment.ts";
 import { generateReexport, LOCAL_WRAPPER_MARKER, REEXPORT_MARKER } from "./generators/reexport.ts";
 import {
@@ -41,7 +42,7 @@ const DRY_RUN = process.argv.includes("--dry-run");
 
 // ── Registered versions — order matters (bases before derived) ────────────────
 
-const VERSIONS: VersionSchema[] = [V2_3, V2_3_1, V2_4, V2_5, V2_5_1];
+const VERSIONS: VersionSchema[] = [V2_3, V2_3_1, V2_4, V2_5, V2_5_1, V2_6];
 
 /** The module kinds generated per message. */
 const MESSAGE_KINDS = ["structures", "parsers", "builders"] as const;

@@ -1,0 +1,239 @@
+{
+  "structure": "ORU_R30",
+  "messageType": "ORU",
+  "triggerEvent": "R30",
+  "version": "2.6",
+  "description": "Unsolicited Point-Of-Care observation message without existing order",
+  "title": "Unsolicited Point-Of-Care observation message without existing order",
+  "sectionHeading": "7.3.4 ORU - Unsolicited Point-Of-Care Observation Message without Existing Order - Place an Order (Event R30)",
+  "source": {
+    "pdf": "hl7.eu std26/ch07.html",
+    "pages": null,
+    "table": "ORU^R30^ORU_R30: Unsolicited Point-Of-Care observation message without existing order"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "R30"
+      ],
+      "eventPrinted": "R30",
+      "pdf": "hl7.eu std26/ch07.html",
+      "page": null,
+      "table": "ORU^R30^ORU_R30: Unsolicited Point-Of-Care observation message without existing order",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "R31"
+      ],
+      "eventPrinted": "R31",
+      "pdf": "hl7.eu std26/ch07.html",
+      "page": null,
+      "table": "ORU^R31^ORU_R30: Unsolicited new Point-Of-Care observation message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "R32"
+      ],
+      "eventPrinted": "R32",
+      "pdf": "hl7.eu std26/ch07.html",
+      "page": null,
+      "table": "ORU^R32^ORU_R30: Unsolicited Pre-ordered Point-Of-Care observation message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PD1",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Additional Demographics",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "OBX",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Observation (for Patient ID)",
+      "chapterRef": "7"
+    },
+    {
+      "kind": "group",
+      "name": "VISIT",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PV1",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Visit",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PV2",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Visit - Additional",
+          "chapterRef": "3"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "ORC",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Common Order information",
+      "chapterRef": "4"
+    },
+    {
+      "kind": "segment",
+      "name": "OBR",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Observation Request",
+      "chapterRef": "7"
+    },
+    {
+      "kind": "segment",
+      "name": "NTE",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Notes or Comments for order/result",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ROL",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Role (for observation)",
+      "chapterRef": "15"
+    },
+    {
+      "kind": "group",
+      "name": "TIMING_QTY",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "TQ1",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Timing/Quantity",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "segment",
+          "name": "TQ2",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Timing/Quantity Order Sequence",
+          "chapterRef": "4"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "OBSERVATION",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "OBX",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Observation Results, one per reported value",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Notes or Comments for individual result",
+          "chapterRef": "2"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

@@ -1,0 +1,116 @@
+{
+  "structure": "CRM_C01",
+  "messageType": "CRM",
+  "triggerEvent": "C01",
+  "version": "2.6",
+  "description": "Clinical Study Registration Message",
+  "title": "Clinical Study Registration Message",
+  "sectionHeading": "7.7.1 CRM - Clinical Study Registration Message (Events C01-C08)",
+  "source": {
+    "pdf": "hl7.eu std26/ch07.html",
+    "pages": null,
+    "table": "CRM^C01-C08^CRM_C01: Clinical Study Registration Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "C01",
+        "C02",
+        "C03",
+        "C04",
+        "C05",
+        "C06",
+        "C07",
+        "C08"
+      ],
+      "eventPrinted": "C01-C08",
+      "pdf": "hl7.eu std26/ch07.html",
+      "page": null,
+      "table": "CRM^C01-C08^CRM_C01: Clinical Study Registration Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "PATIENT",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PV1",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Visit",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "CSR",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Clinical Study Registration",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "CSP",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Clinical Study Phase",
+          "chapterRef": "7"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

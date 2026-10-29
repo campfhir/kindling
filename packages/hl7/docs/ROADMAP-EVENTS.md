@@ -2,7 +2,7 @@
 
 Tracks message structures (builders in `src/builders/<version>/`, parsers in
 `src/parsers/<version>/`, schemas in `codegen/schemas/<version>/`).
-HL7 v2.3 completeness comes first, then v2.5.1 parity (see [ROADMAP.md](../ROADMAP.md)).
+Every event of v2.3 through v2.5.1 is built; the next version is the latest, v2.9.1 (see [ROADMAP.md](../ROADMAP.md)).
 
 > The event list is the HL7 v2.3 trigger event list of the Caristix reference, cross-checked on the
 > hl7.eu chapter pages. **Verify structures against the official spec before implementing** and fix
@@ -65,7 +65,7 @@ Legend: ✅ builder + parser exist · ⬜ not started
 | SUR | P09 summary product experience report | ✅ | ✅ |
 | NMQ / NMR / NMD | N01 application management query and response, N02 application management data | ✅ | ✅ |
 
-## Remaining for v2.3
+## Coverage of the v2.3 event list (nothing remaining)
 
 Every trigger event of the HL7 v2.3 event list (276 events on the Caristix reference, checked
 against the hl7.eu chapter pages) has a builder and a parser. Messages the earlier draft of this
@@ -279,8 +279,8 @@ like the others: every message generated against the v2.5.1 segment modules
 
 ## v2.5.1 parity
 Done in 2.2: every version from 2.3 to 2.5.1 has every event of its release implemented, checked
-against hl7.eu, Caristix and HAPI (see the ledgers above). Later versions (2.6, 2.7, 2.8, …) would
-follow the same path: a segment ledger and a message ledger against the three sources, the
+against hl7.eu, Caristix and HAPI (see the ledgers above). The versions from 2.6 to 2.9.1 would
+follow the same path, in the order the [plan](../ROADMAP.md#plan-to-v291) sets: a segment ledger and a message ledger against the three sources, the
 changed structures written by hand or drafted from the Caristix tables.
 ## Definition of done (per event)
 1. Structure verified per version against the sources in `CLAUDE.md` (hl7.org, hl7.eu, the

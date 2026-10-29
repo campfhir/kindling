@@ -1,0 +1,150 @@
+{
+  "structure": "SUR_P09",
+  "messageType": "SUR",
+  "triggerEvent": "P09",
+  "version": "2.6",
+  "description": "Summary Product Experience Report",
+  "title": "Summary Product Experience Report",
+  "sectionHeading": "7.11.2 SUR - Summary Product Experience Report (Event P09)",
+  "source": {
+    "pdf": "hl7.eu std26/ch07.html",
+    "pages": null,
+    "table": "SUR^P09^SUR_P09: Summary Product Experience Report"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "P09"
+      ],
+      "eventPrinted": "P09",
+      "pdf": "hl7.eu std26/ch07.html",
+      "page": null,
+      "table": "SUR^P09^SUR_P09: Summary Product Experience Report",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "FACILITY",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "FAC",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Facility",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "group",
+          "name": "PRODUCT",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PSH",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Product Summary Header",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "PDC",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Product Detail Country",
+              "chapterRef": "7"
+            }
+          ],
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "PSH",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Product Summary Header",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "group",
+          "name": "FACILITY_DETAIL",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "FAC",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Facility",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "PDC",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Product Detail Country",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Notes (for PCR)",
+              "chapterRef": "2"
+            }
+          ],
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "placeholder",
+          "text": "ED",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "notation": "ED",
+          "description": "Encapsulated Data",
+          "chapterRef": "2"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

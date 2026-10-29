@@ -1,0 +1,129 @@
+{
+  "structure": "NMQ_N01",
+  "messageType": "NMQ",
+  "triggerEvent": "N01",
+  "version": "2.6",
+  "description": "Application Management Query",
+  "title": "Application Management Query",
+  "sectionHeading": "14.3.1 NMQ - Application Management Query Message (Event N01)",
+  "source": {
+    "pdf": "hl7.eu std26/ch14.html",
+    "pages": null,
+    "table": "NMQ^N01^NMQ_N01: Application Management Query"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "N01"
+      ],
+      "eventPrinted": "N01",
+      "pdf": "hl7.eu std26/ch14.html",
+      "page": null,
+      "table": "NMQ^N01^NMQ_N01: Application Management Query",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "QRY_WITH_DETAIL",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "QRD",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Query Definition",
+          "chapterRef": "5"
+        },
+        {
+          "kind": "segment",
+          "name": "QRF",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Query Filter",
+          "chapterRef": "5"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "CLOCK_AND_STATISTICS",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "NCK",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "System Clock",
+          "chapterRef": "14"
+        },
+        {
+          "kind": "segment",
+          "name": "NST",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Application control-level Statistics",
+          "chapterRef": "14"
+        },
+        {
+          "kind": "segment",
+          "name": "NSC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Application Status Change",
+          "chapterRef": "14"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

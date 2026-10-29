@@ -1,0 +1,249 @@
+{
+  "structure": "SQM_S25",
+  "messageType": "SQM",
+  "triggerEvent": "S25",
+  "version": "2.6",
+  "description": "Schedule Query",
+  "title": "Schedule Query",
+  "sectionHeading": "10.5.3 SQM/SQR - Schedule Query Message and Response (Event S25)",
+  "source": {
+    "pdf": "hl7.eu std26/ch10.html",
+    "pages": null,
+    "table": "SQM^S25^SQM_S25: Schedule Query"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "S25"
+      ],
+      "eventPrinted": "S25",
+      "pdf": "hl7.eu std26/ch10.html",
+      "page": null,
+      "table": "SQM^S25^SQM_S25: Schedule Query",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Definition",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "QRF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Filter",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "group",
+      "name": "REQUEST",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "ARQ",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Appointment Request",
+          "chapterRef": "10"
+        },
+        {
+          "kind": "segment",
+          "name": "APR",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Appointment Preferences",
+          "chapterRef": "10"
+        },
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "group",
+          "name": "RESOURCES",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "RGS",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Resource Group Segment",
+              "chapterRef": "10"
+            },
+            {
+              "kind": "group",
+              "name": "SERVICE",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "AIS",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Appointment Information - Service",
+                  "chapterRef": "10"
+                },
+                {
+                  "kind": "segment",
+                  "name": "APR",
+                  "minOccurs": 0,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Appointment Preferences",
+                  "chapterRef": "10"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "group",
+              "name": "GENERAL_RESOURCE",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "AIG",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Appointment Information - General Resource",
+                  "chapterRef": "10"
+                },
+                {
+                  "kind": "segment",
+                  "name": "APR",
+                  "minOccurs": 0,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Appointment Preferences",
+                  "chapterRef": "10"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "group",
+              "name": "PERSONNEL_RESOURCE",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "AIP",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Appointment Information - Personnel Resource",
+                  "chapterRef": "10"
+                },
+                {
+                  "kind": "segment",
+                  "name": "APR",
+                  "minOccurs": 0,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Appointment Preferences",
+                  "chapterRef": "10"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "group",
+              "name": "LOCATION_RESOURCE",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "AIL",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Appointment Information - Location Resource",
+                  "chapterRef": "10"
+                },
+                {
+                  "kind": "segment",
+                  "name": "APR",
+                  "minOccurs": 0,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Appointment Preferences",
+                  "chapterRef": "10"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Continuation Pointer",
+      "chapterRef": "2"
+    }
+  ],
+  "variants": []
+}

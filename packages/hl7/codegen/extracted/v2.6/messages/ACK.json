@@ -1,0 +1,78 @@
+{
+  "structure": "ACK",
+  "messageType": "ACK",
+  "triggerEvent": null,
+  "version": "2.6",
+  "description": "General Acknowledgment",
+  "title": "General Acknowledgment",
+  "source": {
+    "pdf": "hl7.eu std26/ch02.html",
+    "pages": null,
+    "table": "ACK^varies^ACK: General Acknowledgment"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "varies"
+      ],
+      "eventPrinted": "varies",
+      "pdf": "hl7.eu std26/ch02.html",
+      "page": null,
+      "table": "ACK^varies^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Error",
+      "chapterRef": "2"
+    }
+  ],
+  "variants": []
+}

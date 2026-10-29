@@ -1,8 +1,8 @@
 # Roadmap: Segments
 
 Tracks which HL7 v2 segments have a hand-written class in `src/segments/<version>/`.
-The goal is **complete HL7 v2.3 coverage first**, then v2.5.1 parity, then later versions
-(see [ROADMAP.md](../ROADMAP.md)).
+v2.3 through v2.5.1 are complete, with every segment checked against the sources. The next goal is
+the latest version, **v2.9.1** (see [ROADMAP.md](../ROADMAP.md)).
 
 ## Source of truth
 
@@ -156,7 +156,8 @@ a generated subclass of the 2.5 class (`codegen/spec/v2.5.1-segments.json`) and 
 re-export the 2.5 class (v2.5.1 is a re-export version since 2.2; the hand-extended wrapper classes
 it had before are gone). The 7 contradictions between the sources (FT1-23 length, MSA-5 type and
 usage, OBX-20/21/22 type and usage, PID-38 repetition, STF-30 type) are decided by hl7.eu and
-recorded in the ledger rows. Later versions (2.6, 2.7, …) would follow the same path.
+recorded in the ledger rows. The versions from 2.6 to 2.9.1 would follow the same path, as the
+[plan](../ROADMAP.md#plan-to-v291) sets out.
 ## Definition of done (per segment)
 1. Class + parser with all fields positioned per spec, including repeats and required flags.
 2. Field-position tests (hand-written with the marker, or generated with `pnpm test:positions`).

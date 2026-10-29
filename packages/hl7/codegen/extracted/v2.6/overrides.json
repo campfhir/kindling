@@ -1,0 +1,33 @@
+{
+  "structureFixes": [
+    {
+      "message": "ADT_A13",
+      "insertAfter": "PD1",
+      "items": [
+        {
+          "name": "ARV",
+          "min": 0,
+          "max": "*"
+        }
+      ],
+      "reason": "2026-10-29: hl7.eu ch3 (std26/ch03.html, 3.3.13) omits [{ARV}] after PD1 in ADT^A13; Caristix 2.6 and HAPI v26 agree on it and the rule takes their shape against hl7.eu."
+    },
+    {
+      "message": "QRY_PC4",
+      "insertAfter": "MSH",
+      "items": [
+        {
+          "name": "SFT",
+          "min": 0,
+          "max": "*"
+        },
+        {
+          "name": "UAC",
+          "min": 0,
+          "max": 1
+        }
+      ],
+      "reason": "2026-10-29: hl7.eu ch12 prints QRY^PC4 without [{SFT}] and [UAC]; Caristix 2.6 and HAPI v26 agree on both and the rule takes their shape against hl7.eu."
+    }
+  ]
+}

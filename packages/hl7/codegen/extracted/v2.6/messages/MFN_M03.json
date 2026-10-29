@@ -1,0 +1,99 @@
+{
+  "structure": "MFN_M03",
+  "messageType": "MFN",
+  "triggerEvent": "M03",
+  "version": "2.6",
+  "description": "Master File Notification - Test/Observation",
+  "title": "Master File Notification - Test/Observation",
+  "sectionHeading": "8.8.2 MFN/MFK - Master File Notification - Test/Observation (Event M03)",
+  "source": {
+    "pdf": "hl7.eu std26/ch08.html",
+    "pages": null,
+    "table": "MFN^M03^MFN_M03: Master File Notification - Test/Observation"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M03"
+      ],
+      "eventPrinted": "M03",
+      "pdf": "hl7.eu std26/ch08.html",
+      "page": null,
+      "table": "MFN^M03^MFN_M03: Master File Notification - Test/Observation",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "group",
+      "name": "MF_TEST",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Master File Entry",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "OM1",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "General Segment (Fields That Apply to Most Observations)",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "placeholder",
+          "text": "...",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "notation": "...",
+          "description": "[other segment(s)]"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}
