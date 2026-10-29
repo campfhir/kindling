@@ -14,6 +14,7 @@ import { BaseSegment } from "../../types/segment.ts";
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, cpParts, moParts, eiParts, type CodedElement, type CP, type MO, type EI } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * PKG - Item Packaging (HL7 v2.9.1)
@@ -64,8 +65,8 @@ export class PKG extends BaseSegment {
   }
 
   /** PKG-7 Future Item Price Effective Date (DTM, max , optional) (chainable). */
-  futureItemPriceEffectiveDate(value: string): this {
-    this.fields[6] = this.createField(value);
+  futureItemPriceEffectiveDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

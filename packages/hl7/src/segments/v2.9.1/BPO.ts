@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, plParts, xadParts, type CodedElement, type PL, type XAD } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * BPO - Blood product order (HL7 v2.9.1)
@@ -64,8 +65,8 @@ export class BPO extends BaseSegment {
   }
 
   /** BPO-7 BP Intended Use Date/Time (DTM, max , optional) (chainable). */
-  bpIntendedUseDateTime(value: string): this {
-    this.fields[6] = this.createField(value);
+  bpIntendedUseDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -82,8 +83,8 @@ export class BPO extends BaseSegment {
   }
 
   /** BPO-10 BP Requested Dispense Date/Time (DTM, max , optional) (chainable). */
-  bpRequestedDispenseDateTime(value: string): this {
-    this.fields[9] = this.createField(value);
+  bpRequestedDispenseDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[9] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

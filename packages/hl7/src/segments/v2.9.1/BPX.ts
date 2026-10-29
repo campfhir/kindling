@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, eiParts, xonParts, plParts, xadParts, xcnParts, type CodedElement, type EI, type XON, type PL, type XAD, type XCN } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * BPX - Blood product dispense status (HL7 v2.9.1)
@@ -46,8 +47,8 @@ export class BPX extends BaseSegment {
   }
 
   /** BPX-4 BP Date/Time of Status (DTM, max , required) (chainable). */
-  bpDateTimeOfStatus(value: string): this {
-    this.fields[3] = this.createField(value);
+  bpDateTimeOfStatus(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -100,8 +101,8 @@ export class BPX extends BaseSegment {
   }
 
   /** BPX-13 BP Expiration Date/Time (DTM, max , optional) (chainable). */
-  bpExpirationDateTime(value: string): this {
-    this.fields[12] = this.createField(value);
+  bpExpirationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

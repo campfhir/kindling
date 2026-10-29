@@ -27,139 +27,139 @@ export class UB1 extends BaseSegment {
     this.fields = [];
   }
 
-  /** UB1-1 Set ID (SI, max , X) (chainable). */
+  /** UB1-1 Set ID (SI, max , W) (chainable). */
   setId(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** UB1-2 Blood Deductible (, max , X) (chainable). */
+  /** UB1-2 Blood Deductible (, max , W) (chainable). */
   bloodDeductible(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** UB1-3 Blood Furnished-Pints (, max , X) (chainable). */
+  /** UB1-3 Blood Furnished-Pints (, max , W) (chainable). */
   bloodFurnishedPints(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** UB1-4 Blood Replaced-Pints (, max , X) (chainable). */
+  /** UB1-4 Blood Replaced-Pints (, max , W) (chainable). */
   bloodReplacedPints(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** UB1-5 Blood Not Replaced-Pints (, max , X) (chainable). */
+  /** UB1-5 Blood Not Replaced-Pints (, max , W) (chainable). */
   bloodNotReplacedPints(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** UB1-6 Co-Insurance Days (, max , X) (chainable). */
+  /** UB1-6 Co-Insurance Days (, max , W) (chainable). */
   coInsuranceDays(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
   }
 
-  /** UB1-7 Condition Code (, max , X, repeating) (chainable). */
+  /** UB1-7 Condition Code (, max , W, repeating) (chainable). */
   conditionCode(...values: Repeated<string>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** UB1-8 Covered Days (, max , X) (chainable). */
+  /** UB1-8 Covered Days (, max , W) (chainable). */
   coveredDays(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** UB1-9 Non Covered Days (, max , X) (chainable). */
+  /** UB1-9 Non Covered Days (, max , W) (chainable). */
   nonCoveredDays(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** UB1-10 Value Amount & Code (, max , X, repeating) (chainable). */
+  /** UB1-10 Value Amount & Code (, max , W, repeating) (chainable). */
   valueAmountCode(...values: Repeated<string>[]): this {
     this.fields[9] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** UB1-11 Number Of Grace Days (, max , X) (chainable). */
+  /** UB1-11 Number Of Grace Days (, max , W) (chainable). */
   numberOfGraceDays(value: string): this {
     this.fields[10] = this.createField(value);
     return this;
   }
 
-  /** UB1-12 Special Program Indicator (, max , X) (chainable). */
+  /** UB1-12 Special Program Indicator (, max , W) (chainable). */
   specialProgramIndicator(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
   }
 
-  /** UB1-13 PSRO/UR Approval Indicator (, max , X) (chainable). */
+  /** UB1-13 PSRO/UR Approval Indicator (, max , W) (chainable). */
   psroUrApprovalIndicator(value: string): this {
     this.fields[12] = this.createField(value);
     return this;
   }
 
-  /** UB1-14 PSRO/UR Approved Stay-Fm (, max , X) (chainable). */
+  /** UB1-14 PSRO/UR Approved Stay-Fm (, max , W) (chainable). */
   psroUrApprovedStayFm(value: string): this {
     this.fields[13] = this.createField(value);
     return this;
   }
 
-  /** UB1-15 PSRO/UR Approved Stay-To (, max , X) (chainable). */
+  /** UB1-15 PSRO/UR Approved Stay-To (, max , W) (chainable). */
   psroUrApprovedStayTo(value: string): this {
     this.fields[14] = this.createField(value);
     return this;
   }
 
-  /** UB1-16 Occurrence (, max , X, repeating) (chainable). */
+  /** UB1-16 Occurrence (, max , W, repeating) (chainable). */
   occurrence(...values: Repeated<string>[]): this {
     this.fields[15] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** UB1-17 Occurrence Span (, max , X) (chainable). */
+  /** UB1-17 Occurrence Span (, max , W) (chainable). */
   occurrenceSpan(value: string): this {
     this.fields[16] = this.createField(value);
     return this;
   }
 
-  /** UB1-18 Occur Span Start Date (, max , X) (chainable). */
+  /** UB1-18 Occur Span Start Date (, max , W) (chainable). */
   occurSpanStartDate(value: string): this {
     this.fields[17] = this.createField(value);
     return this;
   }
 
-  /** UB1-19 Occur Span End Date (, max , X) (chainable). */
+  /** UB1-19 Occur Span End Date (, max , W) (chainable). */
   occurSpanEndDate(value: string): this {
     this.fields[18] = this.createField(value);
     return this;
   }
 
-  /** UB1-20 82 Locator 2 (, max , X) (chainable). */
+  /** UB1-20 82 Locator 2 (, max , W) (chainable). */
   f82Locator2(value: string): this {
     this.fields[19] = this.createField(value);
     return this;
   }
 
-  /** UB1-21 82 Locator 9 (, max , X) (chainable). */
+  /** UB1-21 82 Locator 9 (, max , W) (chainable). */
   f82Locator9(value: string): this {
     this.fields[20] = this.createField(value);
     return this;
   }
 
-  /** UB1-22 82 Locator 27 (, max , X) (chainable). */
+  /** UB1-22 82 Locator 27 (, max , W) (chainable). */
   f82Locator27(value: string): this {
     this.fields[21] = this.createField(value);
     return this;
   }
 
-  /** UB1-23 82 Locator 45 (, max , X) (chainable). */
+  /** UB1-23 82 Locator 45 (, max , W) (chainable). */
   f82Locator45(value: string): this {
     this.fields[22] = this.createField(value);
     return this;

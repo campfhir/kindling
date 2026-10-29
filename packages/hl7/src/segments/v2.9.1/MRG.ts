@@ -33,7 +33,7 @@ export class MRG extends BaseSegment {
     return this;
   }
 
-  /** MRG-2 Prior Alternate Patient ID (, max , X) (chainable). */
+  /** MRG-2 Prior Alternate Patient ID (, max , W) (chainable). */
   priorAlternatePatientId(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
@@ -45,7 +45,7 @@ export class MRG extends BaseSegment {
     return this;
   }
 
-  /** MRG-4 Prior Patient ID (, max , X) (chainable). */
+  /** MRG-4 Prior Patient ID (, max , W) (chainable). */
   priorPatientId(value: string): this {
     this.fields[3] = this.createField(value);
     return this;

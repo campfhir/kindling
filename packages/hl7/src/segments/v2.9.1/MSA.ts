@@ -39,7 +39,7 @@ export class MSA extends BaseSegment {
     return this;
   }
 
-  /** MSA-3 Text Message (, max , X) (chainable). */
+  /** MSA-3 Text Message (, max , W) (chainable). */
   textMessage(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
@@ -51,13 +51,13 @@ export class MSA extends BaseSegment {
     return this;
   }
 
-  /** MSA-5 Delayed Acknowledgment Type (, max , X) (chainable). */
+  /** MSA-5 Delayed Acknowledgment Type (, max , W) (chainable). */
   delayedAcknowledgmentType(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** MSA-6 Error Condition (, max , X) (chainable). */
+  /** MSA-6 Error Condition (, max , W) (chainable). */
   errorCondition(value: string): this {
     this.fields[5] = this.createField(value);
     return this;

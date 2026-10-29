@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, xonParts, xcnParts, cweParts, eiParts, type XON, type XCN, type CodedElement, type EI } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * CER - Certificate Detail (HL7 v2.9.1)
@@ -160,44 +161,44 @@ export class CER extends BaseSegment {
   }
 
   /** CER-23 Granting Date (DTM, max , optional) (chainable). */
-  grantingDate(value: string): this {
-    this.fields[22] = this.createField(value);
+  grantingDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[22] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** CER-24 Issuing Date (DTM, max , optional) (chainable). */
-  issuingDate(value: string): this {
-    this.fields[23] = this.createField(value);
+  issuingDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[23] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** CER-25 Activation Date (DTM, max , optional) (chainable). */
-  activationDate(value: string): this {
-    this.fields[24] = this.createField(value);
+  activationDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[24] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** CER-26 Inactivation Date (DTM, max , optional) (chainable). */
-  inactivationDate(value: string): this {
-    this.fields[25] = this.createField(value);
+  inactivationDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[25] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** CER-27 Expiration Date (DTM, max , optional) (chainable). */
-  expirationDate(value: string): this {
-    this.fields[26] = this.createField(value);
+  expirationDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[26] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** CER-28 Renewal Date (DTM, max , optional) (chainable). */
-  renewalDate(value: string): this {
-    this.fields[27] = this.createField(value);
+  renewalDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[27] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** CER-29 Revocation Date (DTM, max , optional) (chainable). */
-  revocationDate(value: string): this {
-    this.fields[28] = this.createField(value);
+  revocationDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[28] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

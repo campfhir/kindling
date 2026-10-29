@@ -14,6 +14,7 @@ import { BaseSegment } from "../../types/segment.ts";
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, eiParts, cweParts, cpParts, type EI, type CodedElement, type CP } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * IPR - Invoice Processing Results (HL7 v2.9.1)
@@ -52,8 +53,8 @@ export class IPR extends BaseSegment {
   }
 
   /** IPR-5 IPR Date/Time (DTM, max , required) (chainable). */
-  iprDateTime(value: string): this {
-    this.fields[4] = this.createField(value);
+  iprDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -64,8 +65,8 @@ export class IPR extends BaseSegment {
   }
 
   /** IPR-7 Expected Payment Date/Time (DTM, max , optional) (chainable). */
-  expectedPaymentDateTime(value: string): this {
-    this.fields[6] = this.createField(value);
+  expectedPaymentDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

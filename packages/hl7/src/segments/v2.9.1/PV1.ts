@@ -14,7 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, plParts, cxParts, xcnParts, type CodedElement, type PL, type CX, type XCN } from "../../utils/composites.ts";
-import { formatHL7Date, DateLayout, type HL7DateLayout } from "../../utils/hl7DateUtils.ts";
+import { formatHL7Date, DateLayout, DateTimeLayout, type HL7DateLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * PV1 - Patient Visit (HL7 v2.9.1)
@@ -262,7 +262,7 @@ export class PV1 extends BaseSegment {
     return this;
   }
 
-  /** PV1-40 Bed Status (, max , X) (chainable). */
+  /** PV1-40 Bed Status (, max , W) (chainable). */
   bedStatus(value: string): this {
     this.fields[39] = this.createField(value);
     return this;
@@ -287,14 +287,14 @@ export class PV1 extends BaseSegment {
   }
 
   /** PV1-44 Admit Date/Time (DTM, max , optional) (chainable). */
-  admitDateTime(value: string): this {
-    this.fields[43] = this.createField(value);
+  admitDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[43] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PV1-45 Discharge Date/Time (DTM, max , optional) (chainable). */
-  dischargeDateTime(value: string): this {
-    this.fields[44] = this.createField(value);
+  dischargeDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[44] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -334,7 +334,7 @@ export class PV1 extends BaseSegment {
     return this;
   }
 
-  /** PV1-52 Other Healthcare Provider (, max , X) (chainable). */
+  /** PV1-52 Other Healthcare Provider (, max , W) (chainable). */
   otherHealthcareProvider(value: string): this {
     this.fields[51] = this.createField(value);
     return this;

@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, cqParts, type CodedElement, type CQ } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * PCR - Possible Causal Relationship (HL7 v2.9.1)
@@ -52,26 +53,26 @@ export class PCR extends BaseSegment {
   }
 
   /** PCR-5 Product Manufacture Date (DTM, max , optional) (chainable). */
-  productManufactureDate(value: string): this {
-    this.fields[4] = this.createField(value);
+  productManufactureDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PCR-6 Product Expiration Date (DTM, max , optional) (chainable). */
-  productExpirationDate(value: string): this {
-    this.fields[5] = this.createField(value);
+  productExpirationDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PCR-7 Product Implantation Date (DTM, max , optional) (chainable). */
-  productImplantationDate(value: string): this {
-    this.fields[6] = this.createField(value);
+  productImplantationDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PCR-8 Product Explantation Date (DTM, max , optional) (chainable). */
-  productExplantationDate(value: string): this {
-    this.fields[7] = this.createField(value);
+  productExplantationDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -130,8 +131,8 @@ export class PCR extends BaseSegment {
   }
 
   /** PCR-18 Date Product Returned To Manufacturer (DTM, max , optional) (chainable). */
-  dateProductReturnedToManufacturer(value: string): this {
-    this.fields[17] = this.createField(value);
+  dateProductReturnedToManufacturer(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[17] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

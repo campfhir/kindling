@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, type CodedElement } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * CSS - Clinical Study Data Schedule Segment (HL7 v2.9.1)
@@ -34,8 +35,8 @@ export class CSS extends BaseSegment {
   }
 
   /** CSS-2 Study Scheduled Patient Time Point (DTM, max , optional) (chainable). */
-  studyScheduledPatientTimePoint(value: string): this {
-    this.fields[1] = this.createField(value);
+  studyScheduledPatientTimePoint(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, eiParts, cweParts, cpParts, xonParts, xcnParts, cxParts, type EI, type CodedElement, type CP, type XON, type XCN, type CX } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * IVC - Invoice Segment (HL7 v2.9.1)
@@ -64,8 +65,8 @@ export class IVC extends BaseSegment {
   }
 
   /** IVC-7 Invoice Date/Time (DTM, max , required) (chainable). */
-  invoiceDateTime(value: string): this {
-    this.fields[6] = this.createField(value);
+  invoiceDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -106,8 +107,8 @@ export class IVC extends BaseSegment {
   }
 
   /** IVC-14 Invoice Booking Period (DTM, max , optional) (chainable). */
-  invoiceBookingPeriod(value: string): this {
-    this.fields[13] = this.createField(value);
+  invoiceBookingPeriod(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[13] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

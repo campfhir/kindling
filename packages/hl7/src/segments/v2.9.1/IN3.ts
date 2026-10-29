@@ -14,7 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cxParts, xcnParts, cweParts, xtnParts, type CX, type XCN, type CodedElement, type XTN } from "../../utils/composites.ts";
-import { formatHL7Date, DateLayout, type HL7DateLayout } from "../../utils/hl7DateUtils.ts";
+import { formatHL7Date, DateTimeLayout, DateLayout, type HL7DateTimeLayout, type HL7DateLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * IN3 - Insurance Additional Information, Certification (HL7 v2.9.1)
@@ -59,14 +59,14 @@ export class IN3 extends BaseSegment {
   }
 
   /** IN3-6 Certification Date/Time (DTM, max , optional) (chainable). */
-  certificationDateTime(value: string): this {
-    this.fields[5] = this.createField(value);
+  certificationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** IN3-7 Certification Modify Date/Time (DTM, max , optional) (chainable). */
-  certificationModifyDateTime(value: string): this {
-    this.fields[6] = this.createField(value);
+  certificationModifyDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -101,8 +101,8 @@ export class IN3 extends BaseSegment {
   }
 
   /** IN3-13 Non-Concur Effective Date/Time (DTM, max , optional) (chainable). */
-  nonConcurEffectiveDateTime(value: string): this {
-    this.fields[12] = this.createField(value);
+  nonConcurEffectiveDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -191,8 +191,8 @@ export class IN3 extends BaseSegment {
   }
 
   /** IN3-28 Online Verification Date/Time (DTM, max , optional) (chainable). */
-  onlineVerificationDateTime(value: string): this {
-    this.fields[27] = this.createField(value);
+  onlineVerificationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[27] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

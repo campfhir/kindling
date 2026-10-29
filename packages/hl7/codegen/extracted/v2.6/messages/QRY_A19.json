@@ -1,0 +1,79 @@
+{
+  "structure": "QRY_A19",
+  "messageType": "QRY",
+  "triggerEvent": "A19",
+  "version": "2.6",
+  "description": "Patient Query",
+  "title": "Patient Query",
+  "sectionHeading": "3.3.19 QRY/ADR - Patient Query (Event A19)",
+  "source": {
+    "pdf": "hl7.eu std26/ch03.html",
+    "pages": null,
+    "table": "QRY^A19^QRY_A19: Patient Query"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A19"
+      ],
+      "eventPrinted": "A19",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "QRY^A19^QRY_A19: Patient Query",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Definition",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "QRF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Filter",
+      "chapterRef": "5"
+    }
+  ],
+  "variants": []
+}

@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cqParts, cweParts, xcnParts, cxParts, type CQ, type CodedElement, type XCN, type CX } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * SCD - Anti-Microbial Cycle Data (HL7 v2.9.1)
@@ -88,8 +89,8 @@ export class SCD extends BaseSegment {
   }
 
   /** SCD-11 Cycle Start Date/Time (DTM, max , optional) (chainable). */
-  cycleStartDateTime(value: string): this {
-    this.fields[10] = this.createField(value);
+  cycleStartDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[10] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

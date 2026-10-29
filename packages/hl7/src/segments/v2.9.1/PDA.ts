@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, plParts, xcnParts, drParts, type CodedElement, type PL, type XCN, type DR } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * PDA - Patient Death and Autopsy (HL7 v2.9.1)
@@ -46,8 +47,8 @@ export class PDA extends BaseSegment {
   }
 
   /** PDA-4 Death Certificate Signed Date/Time (DTM, max , optional) (chainable). */
-  deathCertificateSignedDateTime(value: string): this {
-    this.fields[3] = this.createField(value);
+  deathCertificateSignedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

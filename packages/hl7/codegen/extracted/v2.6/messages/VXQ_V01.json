@@ -1,0 +1,79 @@
+{
+  "structure": "VXQ_V01",
+  "messageType": "VXQ",
+  "triggerEvent": "V01",
+  "version": "2.6",
+  "description": "Vaccination Query",
+  "title": "Vaccination Query",
+  "sectionHeading": "4.17.3 VXQ - Query for Vaccination Record (Event V01)",
+  "source": {
+    "pdf": "hl7.eu std26/ch04.html",
+    "pages": null,
+    "table": "VXQ^V01^VXQ_V01: Vaccination Query"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "V01"
+      ],
+      "eventPrinted": "V01",
+      "pdf": "hl7.eu std26/ch04.html",
+      "page": null,
+      "table": "VXQ^V01^VXQ_V01: Vaccination Query",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Definition Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QRF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Filter Segment",
+      "chapterRef": "2"
+    }
+  ],
+  "variants": []
+}

@@ -1,0 +1,267 @@
+{
+  "structure": "QRY_PC4",
+  "messageType": "QRY",
+  "triggerEvent": "PC4",
+  "version": "2.6",
+  "description": "Query",
+  "title": "Query",
+  "sectionHeading": "12.3.5 QRY - Patient Care Problem Query (Event PC4)",
+  "source": {
+    "pdf": "hl7.eu std26/ch12.html",
+    "pages": null,
+    "table": "QRY^PC4^QRY_PC4: Query"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "PC4"
+      ],
+      "eventPrinted": "PC4",
+      "pdf": "hl7.eu std26/ch12.html",
+      "page": null,
+      "table": "QRY^PC4^QRY_PC4: Query",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "PC9"
+      ],
+      "eventPrinted": "PC9",
+      "pdf": "hl7.eu std26/ch12.html",
+      "page": null,
+      "table": "QRY^PC9^QRY_PC4: Query",
+      "identicalToPrimary": false
+    },
+    {
+      "events": [
+        "PCE"
+      ],
+      "eventPrinted": "PCE",
+      "pdf": "hl7.eu std26/ch12.html",
+      "page": null,
+      "table": "QRY^PCE^QRY_PC4: Query",
+      "identicalToPrimary": false
+    },
+    {
+      "events": [
+        "PCK"
+      ],
+      "eventPrinted": "PCK",
+      "pdf": "hl7.eu std26/ch12.html",
+      "page": null,
+      "table": "QRY^PCK^QRY_PC4: Query",
+      "identicalToPrimary": false
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Definition",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QRF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Filter",
+      "chapterRef": "2"
+    }
+  ],
+  "variants": [
+    {
+      "eventPrinted": "PC9",
+      "pdf": "hl7.eu std26/ch12.html",
+      "pages": null,
+      "table": "QRY^PC9^QRY_PC4: Query",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MSH",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Message Header",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "SFT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Software",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "UAC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "User Authentication Credential",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "QRD",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Query Definition",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "QRF",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Query Filter",
+          "chapterRef": "2"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "eventPrinted": "PCE",
+      "pdf": "hl7.eu std26/ch12.html",
+      "pages": null,
+      "table": "QRY^PCE^QRY_PC4: Query",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MSH",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Message Header",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "SFT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Software",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "UAC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "User Authentication Credential",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "QRD",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Query Definition",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "QRF",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Query Filter",
+          "chapterRef": "2"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "eventPrinted": "PCK",
+      "pdf": "hl7.eu std26/ch12.html",
+      "pages": null,
+      "table": "QRY^PCK^QRY_PC4: Query",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MSH",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Message Header",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "SFT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Software",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "UAC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "User Authentication Credential",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "QRD",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Query Definition",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "QRF",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Query Filter",
+          "chapterRef": "2"
+        }
+      ],
+      "problems": []
+    }
+  ]
+}

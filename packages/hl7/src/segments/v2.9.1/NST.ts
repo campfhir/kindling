@@ -13,7 +13,7 @@ import type { Result } from "../../types/result.ts";
 import { BaseSegment } from "../../types/segment.ts";
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
-
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * NST - Application control level statistics (HL7 v2.9.1)
@@ -46,14 +46,14 @@ export class NST extends BaseSegment {
   }
 
   /** NST-4 Statistics Start (DTM, max , optional) (chainable). */
-  statisticsStart(value: string): this {
-    this.fields[3] = this.createField(value);
+  statisticsStart(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** NST-5 Statistics End (DTM, max , optional) (chainable). */
-  statisticsEnd(value: string): this {
-    this.fields[4] = this.createField(value);
+  statisticsEnd(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

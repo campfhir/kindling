@@ -1,0 +1,149 @@
+{
+  "structure": "ADT_A38",
+  "messageType": "ADT",
+  "triggerEvent": "A38",
+  "version": "2.6",
+  "description": "ADT Message",
+  "title": "ADT Message",
+  "sectionHeading": "3.3.38 ADT/ACK - Cancel Pre-Admit (Event A38)",
+  "source": {
+    "pdf": "hl7.eu std26/ch03.html",
+    "pages": null,
+    "table": "ADT^A38^ADT_A38: ADT Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A38"
+      ],
+      "eventPrinted": "A38",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "ADT^A38^ADT_A38: ADT Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Event Type",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PD1",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Additional Demographics",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Visit",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PV2",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Visit - Additional Info.",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "DB1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Disability Information",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "OBX",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Observation/Result",
+      "chapterRef": "7"
+    },
+    {
+      "kind": "segment",
+      "name": "DG1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Diagnosis Information",
+      "chapterRef": "6"
+    },
+    {
+      "kind": "segment",
+      "name": "DRG",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Diagnosis Related Group",
+      "chapterRef": "6"
+    }
+  ],
+  "variants": []
+}

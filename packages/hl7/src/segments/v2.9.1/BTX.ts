@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, eiParts, cweParts, xonParts, xcnParts, type EI, type CodedElement, type XON, type XCN } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * BTX - Blood Product Transfusion/Disposition (HL7 v2.9.1)
@@ -100,8 +101,8 @@ export class BTX extends BaseSegment {
   }
 
   /** BTX-13 BP Date/Time of Status (DTM, max , required) (chainable). */
-  bpDateTimeOfStatus(value: string): this {
-    this.fields[12] = this.createField(value);
+  bpDateTimeOfStatus(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -118,14 +119,14 @@ export class BTX extends BaseSegment {
   }
 
   /** BTX-16 BP Transfusion Start Date/Time of Status (DTM, max , optional) (chainable). */
-  bpTransfusionStartDateTimeOfStatus(value: string): this {
-    this.fields[15] = this.createField(value);
+  bpTransfusionStartDateTimeOfStatus(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[15] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** BTX-17 BP Transfusion End Date/Time of Status (DTM, max , optional) (chainable). */
-  bpTransfusionEndDateTimeOfStatus(value: string): this {
-    this.fields[16] = this.createField(value);
+  bpTransfusionEndDateTimeOfStatus(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[16] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

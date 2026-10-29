@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, plParts, xadParts, eiParts, type CodedElement, type PL, type XAD, type EI } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * RXG - Pharmacy/Treatment Give (HL7 v2.9.1)
@@ -39,7 +40,7 @@ export class RXG extends BaseSegment {
     return this;
   }
 
-  /** RXG-3 Quantity/Timing (, max , X) (chainable). */
+  /** RXG-3 Quantity/Timing (, max , W) (chainable). */
   quantityTiming(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
@@ -87,7 +88,7 @@ export class RXG extends BaseSegment {
     return this;
   }
 
-  /** RXG-11 Dispense -To Location (, max , X) (chainable). */
+  /** RXG-11 Dispense -To Location (, max , W) (chainable). */
   dispenseToLocation(value: string): this {
     this.fields[10] = this.createField(value);
     return this;
@@ -142,8 +143,8 @@ export class RXG extends BaseSegment {
   }
 
   /** RXG-20 Substance Expiration Date (DTM, max , optional, repeating) (chainable). */
-  substanceExpirationDate(...values: Repeated<string>[]): this {
-    this.fields[19] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
+  substanceExpirationDate(...values: Repeated<string | Date>[]): this {
+    this.fields[19] = this.createRepeatingField(repetitions(values).map((v) => this.createField(formatHL7Date(v, DateTimeLayout))));
     return this;
   }
 
@@ -183,13 +184,13 @@ export class RXG extends BaseSegment {
     return this;
   }
 
-  /** RXG-27 Dispense to Pharmacy (, max , X) (chainable). */
+  /** RXG-27 Dispense to Pharmacy (, max , W) (chainable). */
   dispenseToPharmacy(value: string): this {
     this.fields[26] = this.createField(value);
     return this;
   }
 
-  /** RXG-28 Dispense to Pharmacy Address (, max , X) (chainable). */
+  /** RXG-28 Dispense to Pharmacy Address (, max , W) (chainable). */
   dispenseToPharmacyAddress(value: string): this {
     this.fields[27] = this.createField(value);
     return this;

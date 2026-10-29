@@ -14,6 +14,7 @@ import { BaseSegment } from "../../types/segment.ts";
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, eiParts, type CodedElement, type EI } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * PTH - Pathway (HL7 v2.9.1)
@@ -46,8 +47,8 @@ export class PTH extends BaseSegment {
   }
 
   /** PTH-4 Pathway Established Date/Time (DTM, max , required) (chainable). */
-  pathwayEstablishedDateTime(value: string): this {
-    this.fields[3] = this.createField(value);
+  pathwayEstablishedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -58,8 +59,8 @@ export class PTH extends BaseSegment {
   }
 
   /** PTH-6 Change Pathway Life Cycle Status Date/Time (DTM, max , conditional) (chainable). */
-  changePathwayLifeCycleStatusDateTime(value: string): this {
-    this.fields[5] = this.createField(value);
+  changePathwayLifeCycleStatusDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

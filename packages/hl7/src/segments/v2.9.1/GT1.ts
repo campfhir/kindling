@@ -14,7 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cxParts, xpnParts, xadParts, xtnParts, cweParts, xonParts, cpParts, type CX, type XPN, type XAD, type XTN, type CodedElement, type XON, type CP } from "../../utils/composites.ts";
-import { formatHL7Date, DateLayout, type HL7DateLayout } from "../../utils/hl7DateUtils.ts";
+import { formatHL7Date, DateTimeLayout, DateLayout, type HL7DateTimeLayout, type HL7DateLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * GT1 - Guarantor (HL7 v2.9.1)
@@ -71,8 +71,8 @@ export class GT1 extends BaseSegment {
   }
 
   /** GT1-8 Guarantor Date/Time Of Birth (DTM, max , optional) (chainable). */
-  guarantorDateTimeOfBirth(value: string): this {
-    this.fields[7] = this.createField(value);
+  guarantorDateTimeOfBirth(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -167,8 +167,8 @@ export class GT1 extends BaseSegment {
   }
 
   /** GT1-24 Guarantor Death Date And Time (DTM, max , optional) (chainable). */
-  guarantorDeathDateAndTime(value: string): this {
-    this.fields[23] = this.createField(value);
+  guarantorDeathDateAndTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[23] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

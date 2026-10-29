@@ -1,0 +1,128 @@
+{
+  "structure": "DSR_Q01",
+  "messageType": "DSR",
+  "triggerEvent": "Q01",
+  "version": "2.6",
+  "description": "Display Response Message",
+  "title": "Display Response Message",
+  "source": {
+    "pdf": "hl7.eu std26/ch05.html",
+    "pages": null,
+    "table": "DSR^Q01^DSR_Q01: Display Response Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Q01"
+      ],
+      "eventPrinted": "Q01",
+      "pdf": "hl7.eu std26/ch05.html",
+      "page": null,
+      "table": "DSR^Q01^DSR_Q01: Display Response Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QAK",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Acknowledgment",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Definition",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "QRF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Filter",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "DSP",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Display Data",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Continuation Pointer",
+      "chapterRef": "2"
+    }
+  ],
+  "variants": []
+}

@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, eiParts, cqParts, moParts, xonParts, xcnParts, xtnParts, type CodedElement, type EI, type CQ, type MO, type XON, type XCN, type XTN } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * RF1 - Referral Information (HL7 v2.9.1)
@@ -64,20 +65,20 @@ export class RF1 extends BaseSegment {
   }
 
   /** RF1-7 Effective Date (DTM, max , optional) (chainable). */
-  effectiveDate(value: string): this {
-    this.fields[6] = this.createField(value);
+  effectiveDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** RF1-8 Expiration Date (DTM, max , optional) (chainable). */
-  expirationDate(value: string): this {
-    this.fields[7] = this.createField(value);
+  expirationDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** RF1-9 Process Date (DTM, max , optional) (chainable). */
-  processDate(value: string): this {
-    this.fields[8] = this.createField(value);
+  processDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[8] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -100,8 +101,8 @@ export class RF1 extends BaseSegment {
   }
 
   /** RF1-13 Planned Treatment Stop Date (DTM, max 24, optional) (chainable). */
-  plannedTreatmentStopDate(value: string): this {
-    this.fields[12] = this.createField(value);
+  plannedTreatmentStopDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -154,8 +155,8 @@ export class RF1 extends BaseSegment {
   }
 
   /** RF1-22 Source Date (DTM, max 24, optional) (chainable). */
-  sourceDate(value: string): this {
-    this.fields[21] = this.createField(value);
+  sourceDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[21] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

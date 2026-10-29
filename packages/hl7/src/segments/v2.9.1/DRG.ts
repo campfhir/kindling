@@ -14,6 +14,7 @@ import { BaseSegment } from "../../types/segment.ts";
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, cpParts, xpnParts, moParts, type CodedElement, type CP, type XPN, type MO } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * DRG - Diagnosis Related Group (HL7 v2.9.1)
@@ -34,8 +35,8 @@ export class DRG extends BaseSegment {
   }
 
   /** DRG-2 DRG Assigned Date/Time (DTM, max , optional) (chainable). */
-  drgAssignedDateTime(value: string): this {
-    this.fields[1] = this.createField(value);
+  drgAssignedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

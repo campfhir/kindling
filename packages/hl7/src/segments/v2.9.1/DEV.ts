@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, eiParts, cweParts, xonParts, type EI, type CodedElement, type XON } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * DEV - Device (HL7 v2.9.1)
@@ -94,14 +95,14 @@ export class DEV extends BaseSegment {
   }
 
   /** DEV-12 Device Manufacture Date (DTM, max , optional) (chainable). */
-  deviceManufactureDate(value: string): this {
-    this.fields[11] = this.createField(value);
+  deviceManufactureDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[11] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** DEV-13 Device Expiry Date (DTM, max , optional) (chainable). */
-  deviceExpiryDate(value: string): this {
-    this.fields[12] = this.createField(value);
+  deviceExpiryDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

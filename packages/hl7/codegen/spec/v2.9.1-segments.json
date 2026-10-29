@@ -86,7 +86,7 @@
         "name": "Error Code and Location",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -259,7 +259,7 @@
         "name": "Text Message",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -279,7 +279,7 @@
         "name": "Delayed Acknowledgment Type",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -289,7 +289,7 @@
         "name": "Error Condition",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -621,7 +621,7 @@
         "name": "Event Type Code",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -707,7 +707,7 @@
         "name": "Patient ID",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -727,7 +727,7 @@
         "name": "Alternate Patient ID - PID",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -777,7 +777,7 @@
         "name": "Patient Alias",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -807,7 +807,7 @@
         "name": "County Code",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -817,7 +817,7 @@
         "name": "Phone Number - Home",
         "length": "",
         "type": "XTN",
-        "opt": "X",
+        "opt": "W",
         "rep": "∞",
         "table": "",
         "inherited": false
@@ -827,7 +827,7 @@
         "name": "Phone Number - Business",
         "length": "",
         "type": "XTN",
-        "opt": "X",
+        "opt": "W",
         "rep": "∞",
         "table": "",
         "inherited": false
@@ -877,7 +877,7 @@
         "name": "SSN Number - Patient",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -887,7 +887,7 @@
         "name": "Driver's License Number - Patient",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -967,7 +967,7 @@
         "name": "Nationality",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -1494,7 +1494,7 @@
         "name": "Bed Status",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -1614,7 +1614,7 @@
         "name": "Other Healthcare Provider",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -2196,7 +2196,7 @@
         "name": "Phone Number",
         "length": "",
         "type": "XTN",
-        "opt": "X",
+        "opt": "W",
         "rep": "∞",
         "table": "",
         "inherited": false
@@ -2206,7 +2206,7 @@
         "name": "Business Phone Number",
         "length": "",
         "type": "XTN",
-        "opt": "X",
+        "opt": "W",
         "rep": "∞",
         "table": "",
         "inherited": false
@@ -2456,7 +2456,7 @@
         "name": "Contact Person's Telephone Number",
         "length": "",
         "type": "XTN",
-        "opt": "X",
+        "opt": "W",
         "rep": "∞",
         "table": "",
         "inherited": false
@@ -2622,7 +2622,7 @@
         "name": "Identification Date",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -3026,7 +3026,7 @@
         "name": "Prior Alternate Patient ID",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -3046,7 +3046,7 @@
         "name": "Prior Patient ID",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -3122,7 +3122,7 @@
         "name": "Patient Primary Care Provider Name & ID No.",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -4358,7 +4358,7 @@
         "name": "Quantity/Timing",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "∞",
         "table": "",
         "inherited": false
@@ -4388,7 +4388,7 @@
         "name": "Entered By",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -4398,7 +4398,7 @@
         "name": "Verified By",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -4408,7 +4408,7 @@
         "name": "Ordering Provider",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -4459,7 +4459,7 @@
         "name": "Entering Organization",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "0666",
         "inherited": false
@@ -4469,7 +4469,7 @@
         "name": "Entering Device",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "0668",
         "inherited": false
@@ -4479,7 +4479,7 @@
         "name": "Action By",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -4499,7 +4499,7 @@
         "name": "Ordering Facility Name",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -4509,7 +4509,7 @@
         "name": "Ordering Facility Address",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -4519,7 +4519,7 @@
         "name": "Ordering Facility Phone Number",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -4529,7 +4529,7 @@
         "name": "Ordering Provider Address",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -4599,7 +4599,7 @@
         "name": "Parent Universal Service Identifier",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -4771,7 +4771,7 @@
         "name": "Priority",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -4781,7 +4781,7 @@
         "name": "Requested Date/Time",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -4861,7 +4861,7 @@
         "name": "Specimen Received Date/Time *",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -4871,7 +4871,7 @@
         "name": "Specimen Source",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -4881,7 +4881,7 @@
         "name": "Ordering Provider",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -4992,7 +4992,7 @@
         "name": "Quantity/Timing",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "∞",
         "table": "",
         "inherited": false
@@ -5002,7 +5002,7 @@
         "name": "Result Copies To",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -5042,7 +5042,7 @@
         "name": "Principal Result Interpreter +",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -5052,7 +5052,7 @@
         "name": "Assistant Result Interpreter +",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -5062,7 +5062,7 @@
         "name": "Technician +",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -5072,7 +5072,7 @@
         "name": "Transcriptionist +",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -5222,7 +5222,7 @@
         "name": "Parent Universal Service Identifier",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -7054,7 +7054,7 @@
         "name": "Deliver-To Location",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -7114,7 +7114,7 @@
         "name": "Ordering Provider's DEA Number",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -7532,7 +7532,7 @@
         "name": "Quantity/Timing",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -7602,7 +7602,7 @@
         "name": "Deliver-to Location",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -8108,7 +8108,7 @@
         "name": "Dispense-to Location",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -8364,7 +8364,7 @@
         "name": "Quantity/Timing",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -8444,7 +8444,7 @@
         "name": "Dispense -To Location",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -8604,7 +8604,7 @@
         "name": "Dispense to Pharmacy",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -8614,7 +8614,7 @@
         "name": "Dispense to Pharmacy Address",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -8770,7 +8770,7 @@
         "name": "Administering Provider",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -8780,7 +8780,7 @@
         "name": "Administered -at Location",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -9656,7 +9656,7 @@
         "name": "Transaction Description",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -9666,7 +9666,7 @@
         "name": "Transaction Description - Alt",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -10163,7 +10163,7 @@
         "name": "Diagnosis Coding Method",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -10183,7 +10183,7 @@
         "name": "Diagnosis Description",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -10213,7 +10213,7 @@
         "name": "Major Diagnostic Category",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "0118",
         "inherited": false
@@ -10223,7 +10223,7 @@
         "name": "Diagnostic Related Group",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -10233,7 +10233,7 @@
         "name": "DRG Approval Indicator",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -10243,7 +10243,7 @@
         "name": "DRG Grouper Review Code",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -10253,7 +10253,7 @@
         "name": "Outlier Type",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -10263,7 +10263,7 @@
         "name": "Outlier Days",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -10273,7 +10273,7 @@
         "name": "Outlier Cost",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -10283,7 +10283,7 @@
         "name": "Grouper Version And Type",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -10765,7 +10765,7 @@
         "name": "Procedure Coding Method",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -10785,7 +10785,7 @@
         "name": "Procedure Description",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -10825,7 +10825,7 @@
         "name": "Anesthesiologist",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -10855,7 +10855,7 @@
         "name": "Surgeon",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -10865,7 +10865,7 @@
         "name": "Procedure Practitioner",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -11957,7 +11957,7 @@
         "name": "Policy Limit - Amount",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -11977,7 +11977,7 @@
         "name": "Room Rate - Semi-Private",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -11987,7 +11987,7 @@
         "name": "Room Rate - Private",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13341,7 +13341,7 @@
         "name": "Set ID - UB1",
         "length": "",
         "type": "SI",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13351,7 +13351,7 @@
         "name": "Blood Deductible",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13361,7 +13361,7 @@
         "name": "Blood Furnished-Pints",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13371,7 +13371,7 @@
         "name": "Blood Replaced-Pints",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13381,7 +13381,7 @@
         "name": "Blood Not Replaced-Pints",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13391,7 +13391,7 @@
         "name": "Co-Insurance Days",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13401,7 +13401,7 @@
         "name": "Condition Code",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "∞",
         "table": "",
         "inherited": false,
@@ -13412,7 +13412,7 @@
         "name": "Covered Days",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13422,7 +13422,7 @@
         "name": "Non Covered Days",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13432,7 +13432,7 @@
         "name": "Value Amount & Code",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "∞",
         "table": "",
         "inherited": false,
@@ -13443,7 +13443,7 @@
         "name": "Number Of Grace Days",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13453,7 +13453,7 @@
         "name": "Special Program Indicator",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13463,7 +13463,7 @@
         "name": "PSRO/UR Approval Indicator",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13473,7 +13473,7 @@
         "name": "PSRO/UR Approved Stay-Fm",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13483,7 +13483,7 @@
         "name": "PSRO/UR Approved Stay-To",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13493,7 +13493,7 @@
         "name": "Occurrence",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "∞",
         "table": "",
         "inherited": false,
@@ -13504,7 +13504,7 @@
         "name": "Occurrence Span",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13514,7 +13514,7 @@
         "name": "Occur Span Start Date",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13524,7 +13524,7 @@
         "name": "Occur Span End Date",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13534,7 +13534,7 @@
         "name": "UB-82 Locator 2",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13544,7 +13544,7 @@
         "name": "UB-82 Locator 9",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13554,7 +13554,7 @@
         "name": "UB-82 Locator 27",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -13564,7 +13564,7 @@
         "name": "UB-82 Locator 45",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -20783,7 +20783,7 @@
         "name": "Appointment Duration",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -20803,7 +20803,7 @@
         "name": "Appointment Timing Quantity",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -22519,7 +22519,7 @@
         "name": "Goal Review Interval",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -23371,7 +23371,7 @@
         "name": "Specimen Source",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -23947,7 +23947,7 @@
         "name": "On Board Stability Duration",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -24073,7 +24073,7 @@
         "name": "Requested Completion Time",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false
@@ -24267,7 +24267,7 @@
         "name": "Specimen Source",
         "length": "",
         "type": "",
-        "opt": "X",
+        "opt": "W",
         "rep": "-",
         "table": "",
         "inherited": false

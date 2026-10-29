@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, plParts, cweParts, vhParts, xtnParts, type PL, type CodedElement, type VH, type XTN } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * LDP - Location Department (HL7 v2.9.1)
@@ -64,14 +65,14 @@ export class LDP extends BaseSegment {
   }
 
   /** LDP-7 Activation Date (DTM, max , optional) (chainable). */
-  activationDate(value: string): this {
-    this.fields[6] = this.createField(value);
+  activationDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** LDP-8 Inactivation Date (DTM, max , optional) (chainable). */
-  inactivationDate(value: string): this {
-    this.fields[7] = this.createField(value);
+  inactivationDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

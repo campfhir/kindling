@@ -69,7 +69,7 @@ export class RXO extends BaseSegment {
     return this;
   }
 
-  /** RXO-8 Deliver-To Location (, max , X) (chainable). */
+  /** RXO-8 Deliver-To Location (, max , W) (chainable). */
   deliverToLocation(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
@@ -105,7 +105,7 @@ export class RXO extends BaseSegment {
     return this;
   }
 
-  /** RXO-14 Ordering Provider's DEA Number (, max , X) (chainable). */
+  /** RXO-14 Ordering Provider's DEA Number (, max , W) (chainable). */
   orderingProviderSDeaNumber(value: string): this {
     this.fields[13] = this.createField(value);
     return this;

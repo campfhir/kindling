@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, eiParts, cweParts, cqParts, cpParts, cxParts, drParts, xcnParts, type EI, type CodedElement, type CQ, type CP, type CX, type DR, type XCN } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * PSL - Product/Service Line Item (HL7 v2.9.1)
@@ -82,14 +83,14 @@ export class PSL extends BaseSegment {
   }
 
   /** PSL-10 Product/Service Effective Date (DTM, max , conditional) (chainable). */
-  productServiceEffectiveDate(value: string): this {
-    this.fields[9] = this.createField(value);
+  productServiceEffectiveDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[9] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PSL-11 Product/Service Expiration Date (DTM, max , optional) (chainable). */
-  productServiceExpirationDate(value: string): this {
-    this.fields[10] = this.createField(value);
+  productServiceExpirationDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[10] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

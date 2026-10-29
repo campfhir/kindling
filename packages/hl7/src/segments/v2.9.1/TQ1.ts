@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cqParts, cweParts, type CQ, type CodedElement } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * TQ1 - Timing/Quantity (HL7 v2.9.1)
@@ -64,14 +65,14 @@ export class TQ1 extends BaseSegment {
   }
 
   /** TQ1-7 Start date/time (DTM, max , optional) (chainable). */
-  startDateTime(value: string): this {
-    this.fields[6] = this.createField(value);
+  startDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** TQ1-8 End date/time (DTM, max , optional) (chainable). */
-  endDateTime(value: string): this {
-    this.fields[7] = this.createField(value);
+  endDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

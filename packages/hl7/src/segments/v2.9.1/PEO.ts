@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, xadParts, xpnParts, xtnParts, type CodedElement, type XAD, type XPN, type XTN } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * PEO - Product Experience Observation (HL7 v2.9.1)
@@ -40,26 +41,26 @@ export class PEO extends BaseSegment {
   }
 
   /** PEO-3 Event Onset Date/Time (DTM, max , required) (chainable). */
-  eventOnsetDateTime(value: string): this {
-    this.fields[2] = this.createField(value);
+  eventOnsetDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PEO-4 Event Exacerbation Date/Time (DTM, max , optional) (chainable). */
-  eventExacerbationDateTime(value: string): this {
-    this.fields[3] = this.createField(value);
+  eventExacerbationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PEO-5 Event Improved Date/Time (DTM, max , optional) (chainable). */
-  eventImprovedDateTime(value: string): this {
-    this.fields[4] = this.createField(value);
+  eventImprovedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PEO-6 Event Ended Data/Time (DTM, max , optional) (chainable). */
-  eventEndedDataTime(value: string): this {
-    this.fields[5] = this.createField(value);
+  eventEndedDataTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -166,8 +167,8 @@ export class PEO extends BaseSegment {
   }
 
   /** PEO-24 Primary Observer Aware Date/Time (DTM, max , optional) (chainable). */
-  primaryObserverAwareDateTime(value: string): this {
-    this.fields[23] = this.createField(value);
+  primaryObserverAwareDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[23] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

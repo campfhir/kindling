@@ -57,7 +57,7 @@ export class AL1 extends BaseSegment {
     return this;
   }
 
-  /** AL1-6 Identification Date (, max , X) (chainable). */
+  /** AL1-6 Identification Date (, max , W) (chainable). */
   identificationDate(value: string): this {
     this.fields[5] = this.createField(value);
     return this;

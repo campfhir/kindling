@@ -14,6 +14,7 @@ import { BaseSegment } from "../../types/segment.ts";
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, eiParts, cweParts, drParts, type EI, type CodedElement, type DR } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * GSR - Recorded Gender and Sex (HL7 v2.9.1)
@@ -70,8 +71,8 @@ export class GSR extends BaseSegment {
   }
 
   /** GSR-8 Acquisition Date (DTM, max , optional) (chainable). */
-  acquisitionDate(value: string): this {
-    this.fields[7] = this.createField(value);
+  acquisitionDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

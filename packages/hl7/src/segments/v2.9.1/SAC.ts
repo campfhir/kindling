@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, eiParts, cweParts, cqParts, type EI, type CodedElement, type CQ } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * SAC - Specimen Container detail (HL7 v2.9.1)
@@ -57,15 +58,15 @@ export class SAC extends BaseSegment {
     return this;
   }
 
-  /** SAC-6 Specimen Source (, max , X) (chainable). */
+  /** SAC-6 Specimen Source (, max , W) (chainable). */
   specimenSource(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
   }
 
   /** SAC-7 Registration Date/Time (DTM, max , optional) (chainable). */
-  registrationDateTime(value: string): this {
-    this.fields[6] = this.createField(value);
+  registrationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

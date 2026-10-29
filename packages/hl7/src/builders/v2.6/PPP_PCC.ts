@@ -1,0 +1,34 @@
+/**
+ * Builder for PPP^PCC messages (HL7 v2.6).
+ *
+ * Structure: MSH [{SFT}] [UAC] PID [ PATIENT_VISIT: PV1 [PV2] ] { PATHWAY: PTH [{NTE}] [{VAR}] [{ PATHWAY_ROLE: ROL [{VAR}] }] [{ PROBLEM: PRB [{NTE}] [{VAR}] [{ PROBLEM_ROLE: ROL [{VAR}] }] [{ PROBLEM_OBSERVATION: OBX [{NTE}] }] [{ GOAL: GOL [{NTE}] [{VAR}] [{ GOAL_ROLE: ROL [{VAR}] }] [{ GOAL_OBSERVATION: OBX [{NTE}] }] }] [{ ORDER: ORC [ ORDER_DETAIL: <OBR|RQD|RQ1|RXO|ODS|ODT> [{NTE}] [{VAR}] [{ ORDER_OBSERVATION: OBX [{NTE}] [{VAR}] }] ] }] }] }
+ * Shares the PPP^PCB structure.
+ *
+ * @module
+ */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
+import type { MSH } from "../../segments/v2.6/MSH.ts";
+import type { PID } from "../../segments/v2.6/PID.ts";
+import { PPP_PCB, type PPP_PCBOptions, type PatientVisitGroup, type PathwayGroup, type PathwayRoleGroup, type ProblemGroup, type ProblemRoleGroup, type ProblemObservationGroup, type GoalGroup, type GoalRoleGroup, type GoalObservationGroup, type OrderGroup, type OrderDetailGroup, type OrderObservationGroup } from "./PPP_PCB.ts";
+
+export type { PatientVisitGroup, PathwayGroup, PathwayRoleGroup, ProblemGroup, ProblemRoleGroup, ProblemObservationGroup, GoalGroup, GoalRoleGroup, GoalObservationGroup, OrderGroup, OrderDetailGroup, OrderObservationGroup };
+/** The optional segments and groups of an PPP^PCC (HL7 v2.6) message. */
+export type PPP_PCCOptions = PPP_PCBOptions;
+
+/** Builder for HL7 PPP^PCC (HL7 v2.6) messages. */
+export class PPP_PCC<TMSH extends MSH = MSH, TPID extends PID = PID> extends PPP_PCB<TMSH, TPID> {
+  /** The message name used in error messages. */
+  protected override readonly messageName: string = "PPP_PCC";
+}
+
+/** Builds an HL7 PPP^PCC (HL7 v2.6) message. */
+export function createPPP_PCC<TMSH extends MSH = MSH, TPID extends PID = PID>(
+  header: TMSH,
+  patient: TPID,
+  pathways: PathwayGroup[],
+  options: PPP_PCCOptions = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
+): PPP_PCC<TMSH, TPID> {
+  return new PPP_PCC(header, patient, pathways, options, encoding);
+}

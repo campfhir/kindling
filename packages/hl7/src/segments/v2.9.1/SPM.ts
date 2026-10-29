@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, cqParts, drParts, cxParts, eiParts, type CodedElement, type CQ, type DR, type CX, type EI } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * SPM - Specimen (HL7 v2.9.1)
@@ -130,14 +131,14 @@ export class SPM extends BaseSegment {
   }
 
   /** SPM-18 Specimen Received Date/Time (DTM, max , optional) (chainable). */
-  specimenReceivedDateTime(value: string): this {
-    this.fields[17] = this.createField(value);
+  specimenReceivedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[17] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** SPM-19 Specimen Expiration Date/Time (DTM, max , optional) (chainable). */
-  specimenExpirationDateTime(value: string): this {
-    this.fields[18] = this.createField(value);
+  specimenExpirationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[18] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -220,14 +221,14 @@ export class SPM extends BaseSegment {
   }
 
   /** SPM-33 Culture Start Date/Time (DTM, max , optional) (chainable). */
-  cultureStartDateTime(value: string): this {
-    this.fields[32] = this.createField(value);
+  cultureStartDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[32] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** SPM-34 Culture Final Date/Time (DTM, max , optional) (chainable). */
-  cultureFinalDateTime(value: string): this {
-    this.fields[33] = this.createField(value);
+  cultureFinalDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[33] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

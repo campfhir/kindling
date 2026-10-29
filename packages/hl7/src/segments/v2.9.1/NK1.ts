@@ -14,7 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, xpnParts, cweParts, xadParts, xtnParts, cxParts, xonParts, type XPN, type CodedElement, type XAD, type XTN, type CX, type XON } from "../../utils/composites.ts";
-import { formatHL7Date, DateLayout, type HL7DateLayout } from "../../utils/hl7DateUtils.ts";
+import { formatHL7Date, DateLayout, DateTimeLayout, type HL7DateLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * NK1 - Next of Kin / Associated Parties (HL7 v2.9.1)
@@ -52,13 +52,13 @@ export class NK1 extends BaseSegment {
     return this;
   }
 
-  /** NK1-5 Phone Number (XTN, max , X, repeating) (chainable). */
+  /** NK1-5 Phone Number (XTN, max , W, repeating) (chainable). */
   phoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** NK1-6 Business Phone Number (XTN, max , X, repeating) (chainable). */
+  /** NK1-6 Business Phone Number (XTN, max , W, repeating) (chainable). */
   businessPhoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
@@ -119,8 +119,8 @@ export class NK1 extends BaseSegment {
   }
 
   /** NK1-16 Date/Time of Birth (DTM, max , optional) (chainable). */
-  dateTimeOfBirth(value: string): this {
-    this.fields[15] = this.createField(value);
+  dateTimeOfBirth(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[15] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -208,7 +208,7 @@ export class NK1 extends BaseSegment {
     return this;
   }
 
-  /** NK1-31 Contact Person's Telephone Number (XTN, max , X, repeating) (chainable). */
+  /** NK1-31 Contact Person's Telephone Number (XTN, max , W, repeating) (chainable). */
   contactPersonSTelephoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[30] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;

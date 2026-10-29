@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, xcnParts, cqParts, xadParts, plParts, xtnParts, type CodedElement, type XCN, type CQ, type XAD, type PL, type XTN } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * RXE - Pharmacy/Treatment Encoded Order (HL7 v2.9.1)
@@ -27,7 +28,7 @@ export class RXE extends BaseSegment {
     this.fields = [];
   }
 
-  /** RXE-1 Quantity/Timing (, max , X) (chainable). */
+  /** RXE-1 Quantity/Timing (, max , W) (chainable). */
   quantityTiming(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
@@ -69,7 +70,7 @@ export class RXE extends BaseSegment {
     return this;
   }
 
-  /** RXE-8 Deliver-to Location (, max , X) (chainable). */
+  /** RXE-8 Deliver-to Location (, max , W) (chainable). */
   deliverToLocation(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
@@ -130,8 +131,8 @@ export class RXE extends BaseSegment {
   }
 
   /** RXE-18 D/T of Most Recent Refill or Dose Dispensed (DTM, max , conditional) (chainable). */
-  dTOfMostRecentRefillOrDoseDispensed(value: string): this {
-    this.fields[17] = this.createField(value);
+  dTOfMostRecentRefillOrDoseDispensed(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[17] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -214,8 +215,8 @@ export class RXE extends BaseSegment {
   }
 
   /** RXE-32 Original Order Date/Time (DTM, max , optional) (chainable). */
-  originalOrderDateTime(value: string): this {
-    this.fields[31] = this.createField(value);
+  originalOrderDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[31] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

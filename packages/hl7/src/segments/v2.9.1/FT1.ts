@@ -14,7 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cxParts, drParts, cweParts, cpParts, plParts, xcnParts, eiParts, xonParts, cqParts, moParts, type CX, type DR, type CodedElement, type CP, type PL, type XCN, type EI, type XON, type CQ, type MO } from "../../utils/composites.ts";
-import { formatHL7Date, DateLayout, type HL7DateLayout } from "../../utils/hl7DateUtils.ts";
+import { formatHL7Date, DateTimeLayout, DateLayout, type HL7DateTimeLayout, type HL7DateLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * FT1 - Financial Transaction (HL7 v2.9.1)
@@ -53,8 +53,8 @@ export class FT1 extends BaseSegment {
   }
 
   /** FT1-5 Transaction Posting Date (DTM, max , optional) (chainable). */
-  transactionPostingDate(value: string): this {
-    this.fields[4] = this.createField(value);
+  transactionPostingDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -70,13 +70,13 @@ export class FT1 extends BaseSegment {
     return this;
   }
 
-  /** FT1-8 Transaction Description (, max , X) (chainable). */
+  /** FT1-8 Transaction Description (, max , W) (chainable). */
   transactionDescription(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** FT1-9 Transaction Description - Alt (, max , X) (chainable). */
+  /** FT1-9 Transaction Description - Alt (, max , W) (chainable). */
   transactionDescriptionAlt(value: string): this {
     this.fields[8] = this.createField(value);
     return this;

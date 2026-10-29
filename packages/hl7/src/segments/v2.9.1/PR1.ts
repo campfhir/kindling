@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, eiParts, plParts, type CodedElement, type EI, type PL } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * PR1 - Procedures (HL7 v2.9.1)
@@ -33,7 +34,7 @@ export class PR1 extends BaseSegment {
     return this;
   }
 
-  /** PR1-2 Procedure Coding Method (, max , X) (chainable). */
+  /** PR1-2 Procedure Coding Method (, max , W) (chainable). */
   procedureCodingMethod(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
@@ -45,15 +46,15 @@ export class PR1 extends BaseSegment {
     return this;
   }
 
-  /** PR1-4 Procedure Description (, max , X) (chainable). */
+  /** PR1-4 Procedure Description (, max , W) (chainable). */
   procedureDescription(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
   /** PR1-5 Procedure Date/Time (DTM, max , required) (chainable). */
-  procedureDateTime(value: string): this {
-    this.fields[4] = this.createField(value);
+  procedureDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -69,7 +70,7 @@ export class PR1 extends BaseSegment {
     return this;
   }
 
-  /** PR1-8 Anesthesiologist (, max , X) (chainable). */
+  /** PR1-8 Anesthesiologist (, max , W) (chainable). */
   anesthesiologist(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
@@ -87,13 +88,13 @@ export class PR1 extends BaseSegment {
     return this;
   }
 
-  /** PR1-11 Surgeon (, max , X) (chainable). */
+  /** PR1-11 Surgeon (, max , W) (chainable). */
   surgeon(value: string): this {
     this.fields[10] = this.createField(value);
     return this;
   }
 
-  /** PR1-12 Procedure Practitioner (, max , X) (chainable). */
+  /** PR1-12 Procedure Practitioner (, max , W) (chainable). */
   procedurePractitioner(value: string): this {
     this.fields[11] = this.createField(value);
     return this;

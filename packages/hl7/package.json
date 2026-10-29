@@ -50,6 +50,14 @@
       "types": "./dist/segments/v2.5.1/*.d.ts",
       "default": "./dist/segments/v2.5.1/*.js"
     },
+    "./segments/v2.6": {
+      "types": "./dist/segments/v2.6/index.d.ts",
+      "default": "./dist/segments/v2.6/index.js"
+    },
+    "./segments/v2.6/*": {
+      "types": "./dist/segments/v2.6/*.d.ts",
+      "default": "./dist/segments/v2.6/*.js"
+    },
     "./segments/v2.9.1": {
       "types": "./dist/segments/v2.9.1/index.d.ts",
       "default": "./dist/segments/v2.9.1/index.js"
@@ -97,6 +105,14 @@
     "./structures/v2.5.1/*": {
       "types": "./dist/structures/v2.5.1/*.d.ts",
       "default": "./dist/structures/v2.5.1/*.js"
+    },
+    "./structures/v2.6": {
+      "types": "./dist/structures/v2.6/index.d.ts",
+      "default": "./dist/structures/v2.6/index.js"
+    },
+    "./structures/v2.6/*": {
+      "types": "./dist/structures/v2.6/*.d.ts",
+      "default": "./dist/structures/v2.6/*.js"
     },
     "./structures/v2.9.1": {
       "types": "./dist/structures/v2.9.1/index.d.ts",
@@ -146,6 +162,14 @@
       "types": "./dist/parsers/v2.5.1/*.d.ts",
       "default": "./dist/parsers/v2.5.1/*.js"
     },
+    "./parsers/v2.6": {
+      "types": "./dist/parsers/v2.6/index.d.ts",
+      "default": "./dist/parsers/v2.6/index.js"
+    },
+    "./parsers/v2.6/*": {
+      "types": "./dist/parsers/v2.6/*.d.ts",
+      "default": "./dist/parsers/v2.6/*.js"
+    },
     "./parsers/v2.9.1": {
       "types": "./dist/parsers/v2.9.1/index.d.ts",
       "default": "./dist/parsers/v2.9.1/index.js"
@@ -193,6 +217,14 @@
     "./builders/v2.5.1/*": {
       "types": "./dist/builders/v2.5.1/*.d.ts",
       "default": "./dist/builders/v2.5.1/*.js"
+    },
+    "./builders/v2.6": {
+      "types": "./dist/builders/v2.6/index.d.ts",
+      "default": "./dist/builders/v2.6/index.js"
+    },
+    "./builders/v2.6/*": {
+      "types": "./dist/builders/v2.6/*.d.ts",
+      "default": "./dist/builders/v2.6/*.js"
     },
     "./builders/v2.9.1": {
       "types": "./dist/builders/v2.9.1/index.d.ts",

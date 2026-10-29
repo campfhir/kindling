@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, xpnParts, xadParts, plParts, xtnParts, plnParts, xonParts, type CodedElement, type XPN, type XAD, type PL, type XTN, type PLN, type XON } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * PRD - Provider Data (HL7 v2.9.1)
@@ -70,14 +71,14 @@ export class PRD extends BaseSegment {
   }
 
   /** PRD-8 Effective Start Date of Provider Role (DTM, max , optional) (chainable). */
-  effectiveStartDateOfProviderRole(value: string): this {
-    this.fields[7] = this.createField(value);
+  effectiveStartDateOfProviderRole(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PRD-9 Effective End Date of Provider Role (DTM, max , optional, repeating) (chainable). */
-  effectiveEndDateOfProviderRole(...values: Repeated<string>[]): this {
-    this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
+  effectiveEndDateOfProviderRole(...values: Repeated<string | Date>[]): this {
+    this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(formatHL7Date(v, DateTimeLayout))));
     return this;
   }
 

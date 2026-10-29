@@ -14,6 +14,7 @@ import { BaseSegment } from "../../types/segment.ts";
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, type CodedElement } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * RMI - Risk Management Incident (HL7 v2.9.1)
@@ -34,8 +35,8 @@ export class RMI extends BaseSegment {
   }
 
   /** RMI-2 Date/Time Incident (DTM, max , optional) (chainable). */
-  dateTimeIncident(value: string): this {
-    this.fields[1] = this.createField(value);
+  dateTimeIncident(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

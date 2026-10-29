@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, eiParts, cweParts, xpnParts, xonParts, type EI, type CodedElement, type XPN, type XON } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * CTR - Contract Master Outbound (HL7 v2.9.1)
@@ -46,14 +47,14 @@ export class CTR extends BaseSegment {
   }
 
   /** CTR-4 Effective Date (DTM, max , required) (chainable). */
-  effectiveDate(value: string): this {
-    this.fields[3] = this.createField(value);
+  effectiveDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** CTR-5 Expiration Date (DTM, max , required) (chainable). */
-  expirationDate(value: string): this {
-    this.fields[4] = this.createField(value);
+  expirationDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -88,8 +89,8 @@ export class CTR extends BaseSegment {
   }
 
   /** CTR-11 Price Protection Date (DTM, max , optional) (chainable). */
-  priceProtectionDate(value: string): this {
-    this.fields[10] = this.createField(value);
+  priceProtectionDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[10] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

@@ -76,6 +76,10 @@ import { parseCRM_C05 } from "./CRM_C05_Parser.ts";
 import { parseCRM_C06 } from "./CRM_C06_Parser.ts";
 import { parseCRM_C07 } from "./CRM_C07_Parser.ts";
 import { parseCRM_C08 } from "./CRM_C08_Parser.ts";
+import { parseCSU_C09 } from "./CSU_C09_Parser.ts";
+import { parseCSU_C10 } from "./CSU_C10_Parser.ts";
+import { parseCSU_C11 } from "./CSU_C11_Parser.ts";
+import { parseCSU_C12 } from "./CSU_C12_Parser.ts";
 import { parseDBC_O41 } from "./DBC_O41_Parser.ts";
 import { parseDBU_O42 } from "./DBU_O42_Parser.ts";
 import { parseDEL_O46 } from "./DEL_O46_Parser.ts";
@@ -89,6 +93,7 @@ import { parseDRG_O43 } from "./DRG_O43_Parser.ts";
 import { parseEAC_U07 } from "./EAC_U07_Parser.ts";
 import { parseEAN_U09 } from "./EAN_U09_Parser.ts";
 import { parseEAR_U08 } from "./EAR_U08_Parser.ts";
+import { parseEHC_E10 } from "./EHC_E10_Parser.ts";
 import { parseEHC_E12 } from "./EHC_E12_Parser.ts";
 import { parseEHC_E13 } from "./EHC_E13_Parser.ts";
 import { parseESR_U02 } from "./ESR_U02_Parser.ts";
@@ -103,6 +108,7 @@ import { parseMDM_T02 } from "./MDM_T02_Parser.ts";
 import { parseMDM_T03 } from "./MDM_T03_Parser.ts";
 import { parseMDM_T04 } from "./MDM_T04_Parser.ts";
 import { parseMDM_T05 } from "./MDM_T05_Parser.ts";
+import { parseMDM_T06 } from "./MDM_T06_Parser.ts";
 import { parseMDM_T07 } from "./MDM_T07_Parser.ts";
 import { parseMDM_T08 } from "./MDM_T08_Parser.ts";
 import { parseMDM_T09 } from "./MDM_T09_Parser.ts";
@@ -401,6 +407,10 @@ export const MESSAGES = {
   CRM_C06: parseCRM_C06,
   CRM_C07: parseCRM_C07,
   CRM_C08: parseCRM_C08,
+  CSU_C09: parseCSU_C09,
+  CSU_C10: parseCSU_C10,
+  CSU_C11: parseCSU_C11,
+  CSU_C12: parseCSU_C12,
   DBC_O41: parseDBC_O41,
   DBU_O42: parseDBU_O42,
   DEL_O46: parseDEL_O46,
@@ -414,6 +424,7 @@ export const MESSAGES = {
   EAC_U07: parseEAC_U07,
   EAN_U09: parseEAN_U09,
   EAR_U08: parseEAR_U08,
+  EHC_E10: parseEHC_E10,
   EHC_E12: parseEHC_E12,
   EHC_E13: parseEHC_E13,
   ESR_U02: parseESR_U02,
@@ -428,6 +439,7 @@ export const MESSAGES = {
   MDM_T03: parseMDM_T03,
   MDM_T04: parseMDM_T04,
   MDM_T05: parseMDM_T05,
+  MDM_T06: parseMDM_T06,
   MDM_T07: parseMDM_T07,
   MDM_T08: parseMDM_T08,
   MDM_T09: parseMDM_T09,

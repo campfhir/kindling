@@ -45,7 +45,7 @@ export class ECD extends BaseSegment {
     return this;
   }
 
-  /** ECD-4 Requested Completion Time (, max , X) (chainable). */
+  /** ECD-4 Requested Completion Time (, max , W) (chainable). */
   requestedCompletionTime(value: string): this {
     this.fields[3] = this.createField(value);
     return this;

@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, xonParts, xcnParts, xadParts, xtnParts, eiParts, type XON, type XCN, type XAD, type XTN, type EI } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * PES - Product Experience Sender (HL7 v2.9.1)
@@ -76,14 +77,14 @@ export class PES extends BaseSegment {
   }
 
   /** PES-9 Sender Aware Date/Time (DTM, max , optional) (chainable). */
-  senderAwareDateTime(value: string): this {
-    this.fields[8] = this.createField(value);
+  senderAwareDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[8] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PES-10 Event Report Date (DTM, max , required) (chainable). */
-  eventReportDate(value: string): this {
-    this.fields[9] = this.createField(value);
+  eventReportDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[9] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

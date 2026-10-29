@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, eiParts, cweParts, cpParts, cqParts, xonParts, type EI, type CodedElement, type CP, type CQ, type XON } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * ADJ - Adjustment (HL7 v2.9.1)
@@ -106,8 +107,8 @@ export class ADJ extends BaseSegment {
   }
 
   /** ADJ-14 Adjustment Date (DTM, max , required) (chainable). */
-  adjustmentDate(value: string): this {
-    this.fields[13] = this.createField(value);
+  adjustmentDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[13] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

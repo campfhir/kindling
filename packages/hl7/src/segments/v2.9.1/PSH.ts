@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cqParts, type CQ } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * PSH - Product Summary Header (HL7 v2.9.1)
@@ -40,20 +41,20 @@ export class PSH extends BaseSegment {
   }
 
   /** PSH-3 Report Date (DTM, max , required) (chainable). */
-  reportDate(value: string): this {
-    this.fields[2] = this.createField(value);
+  reportDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PSH-4 Report Interval Start Date (DTM, max , optional) (chainable). */
-  reportIntervalStartDate(value: string): this {
-    this.fields[3] = this.createField(value);
+  reportIntervalStartDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PSH-5 Report Interval End Date (DTM, max , optional) (chainable). */
-  reportIntervalEndDate(value: string): this {
-    this.fields[4] = this.createField(value);
+  reportIntervalEndDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

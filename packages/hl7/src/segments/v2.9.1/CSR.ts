@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, eiParts, cweParts, cxParts, xcnParts, type EI, type CodedElement, type CX, type XCN } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * CSR - Clinical Study Registration (HL7 v2.9.1)
@@ -58,8 +59,8 @@ export class CSR extends BaseSegment {
   }
 
   /** CSR-6 Date/Time of Patient Study Registration (DTM, max , required) (chainable). */
-  dateTimeOfPatientStudyRegistration(value: string): this {
-    this.fields[5] = this.createField(value);
+  dateTimeOfPatientStudyRegistration(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -76,8 +77,8 @@ export class CSR extends BaseSegment {
   }
 
   /** CSR-9 Date/Time Patient Study Consent Signed (DTM, max , conditional) (chainable). */
-  dateTimePatientStudyConsentSigned(value: string): this {
-    this.fields[8] = this.createField(value);
+  dateTimePatientStudyConsentSigned(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[8] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -88,8 +89,8 @@ export class CSR extends BaseSegment {
   }
 
   /** CSR-11 Study Randomization Date/time (DTM, max , optional, repeating) (chainable). */
-  studyRandomizationDateTime(...values: Repeated<string>[]): this {
-    this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
+  studyRandomizationDateTime(...values: Repeated<string | Date>[]): this {
+    this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(formatHL7Date(v, DateTimeLayout))));
     return this;
   }
 
@@ -112,8 +113,8 @@ export class CSR extends BaseSegment {
   }
 
   /** CSR-15 Date/Time Ended Study (DTM, max , conditional) (chainable). */
-  dateTimeEndedStudy(value: string): this {
-    this.fields[14] = this.createField(value);
+  dateTimeEndedStudy(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[14] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

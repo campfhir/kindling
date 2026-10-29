@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, xcnParts, plParts, type CodedElement, type XCN, type PL } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * OM7 - Additional Basic Attributes (HL7 v2.9.1)
@@ -58,14 +59,14 @@ export class OM7 extends BaseSegment {
   }
 
   /** OM7-6 Effective Test/Service Start Date/Time (DTM, max , optional) (chainable). */
-  effectiveTestServiceStartDateTime(value: string): this {
-    this.fields[5] = this.createField(value);
+  effectiveTestServiceStartDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** OM7-7 Effective Test/Service End Date/Time (DTM, max , optional) (chainable). */
-  effectiveTestServiceEndDateTime(value: string): this {
-    this.fields[6] = this.createField(value);
+  effectiveTestServiceEndDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -100,14 +101,14 @@ export class OM7 extends BaseSegment {
   }
 
   /** OM7-13 Consent Effective Start Date/Time (DTM, max , optional) (chainable). */
-  consentEffectiveStartDateTime(value: string): this {
-    this.fields[12] = this.createField(value);
+  consentEffectiveStartDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** OM7-14 Consent Effective End Date/Time (DTM, max , optional) (chainable). */
-  consentEffectiveEndDateTime(value: string): this {
-    this.fields[13] = this.createField(value);
+  consentEffectiveEndDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[13] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -136,8 +137,8 @@ export class OM7 extends BaseSegment {
   }
 
   /** OM7-19 Effective Date/Time of Change (DTM, max , optional) (chainable). */
-  effectiveDateTimeOfChange(value: string): this {
-    this.fields[18] = this.createField(value);
+  effectiveDateTimeOfChange(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[18] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

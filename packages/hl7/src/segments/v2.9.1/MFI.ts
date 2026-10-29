@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, type CodedElement } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * MFI - Master File Identification (HL7 v2.9.1)
@@ -46,14 +47,14 @@ export class MFI extends BaseSegment {
   }
 
   /** MFI-4 Entered Date/Time (DTM, max , optional) (chainable). */
-  enteredDateTime(value: string): this {
-    this.fields[3] = this.createField(value);
+  enteredDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** MFI-5 Effective Date/Time (DTM, max , optional) (chainable). */
-  effectiveDateTime(value: string): this {
-    this.fields[4] = this.createField(value);
+  effectiveDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

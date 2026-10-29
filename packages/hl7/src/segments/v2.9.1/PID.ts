@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cxParts, xpnParts, cweParts, xadParts, xtnParts, type CX, type XPN, type CodedElement, type XAD, type XTN } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * PID - Patient Identification (HL7 v2.9.1)
@@ -33,7 +34,7 @@ export class PID extends BaseSegment {
     return this;
   }
 
-  /** PID-2 Patient ID (, max , X) (chainable). */
+  /** PID-2 Patient ID (, max , W) (chainable). */
   patientId(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
@@ -45,7 +46,7 @@ export class PID extends BaseSegment {
     return this;
   }
 
-  /** PID-4 Alternate Patient ID (, max , X) (chainable). */
+  /** PID-4 Alternate Patient ID (, max , W) (chainable). */
   alternatePatientId(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
@@ -64,8 +65,8 @@ export class PID extends BaseSegment {
   }
 
   /** PID-7 Date/Time of Birth (DTM, max , optional) (chainable). */
-  dateTimeOfBirth(value: string): this {
-    this.fields[6] = this.createField(value);
+  dateTimeOfBirth(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -75,7 +76,7 @@ export class PID extends BaseSegment {
     return this;
   }
 
-  /** PID-9 Patient Alias (, max , X) (chainable). */
+  /** PID-9 Patient Alias (, max , W) (chainable). */
   patientAlias(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
@@ -93,19 +94,19 @@ export class PID extends BaseSegment {
     return this;
   }
 
-  /** PID-12 County Code (, max , X) (chainable). */
+  /** PID-12 County Code (, max , W) (chainable). */
   countyCode(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
   }
 
-  /** PID-13 Phone Number - Home (XTN, max , X, repeating) (chainable). */
+  /** PID-13 Phone Number - Home (XTN, max , W, repeating) (chainable). */
   phoneNumberHome(...values: Repeated<string | XTN>[]): this {
     this.fields[12] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** PID-14 Phone Number - Business (XTN, max , X, repeating) (chainable). */
+  /** PID-14 Phone Number - Business (XTN, max , W, repeating) (chainable). */
   phoneNumberBusiness(...values: Repeated<string | XTN>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
@@ -135,13 +136,13 @@ export class PID extends BaseSegment {
     return this;
   }
 
-  /** PID-19 SSN Number - Patient (, max , X) (chainable). */
+  /** PID-19 SSN Number - Patient (, max , W) (chainable). */
   ssnNumberPatient(value: string): this {
     this.fields[18] = this.createField(value);
     return this;
   }
 
-  /** PID-20 Driver's License Number - Patient (, max , X) (chainable). */
+  /** PID-20 Driver's License Number - Patient (, max , W) (chainable). */
   driverSLicenseNumberPatient(value: string): this {
     this.fields[19] = this.createField(value);
     return this;
@@ -189,15 +190,15 @@ export class PID extends BaseSegment {
     return this;
   }
 
-  /** PID-28 Nationality (, max , X) (chainable). */
+  /** PID-28 Nationality (, max , W) (chainable). */
   nationality(value: string): this {
     this.fields[27] = this.createField(value);
     return this;
   }
 
   /** PID-29 Patient Death Date and Time (DTM, max , optional) (chainable). */
-  patientDeathDateAndTime(value: string): this {
-    this.fields[28] = this.createField(value);
+  patientDeathDateAndTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[28] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -220,8 +221,8 @@ export class PID extends BaseSegment {
   }
 
   /** PID-33 Last Update Date/Time (DTM, max , optional) (chainable). */
-  lastUpdateDateTime(value: string): this {
-    this.fields[32] = this.createField(value);
+  lastUpdateDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[32] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

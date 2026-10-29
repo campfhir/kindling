@@ -1,0 +1,209 @@
+{
+  "structure": "ADT_A21",
+  "messageType": "ADT",
+  "triggerEvent": "A21",
+  "version": "2.6",
+  "description": "ADT Message",
+  "title": "ADT Message",
+  "sectionHeading": "3.3.21 ADT/ACK - Patient Goes on a Leave of Absence (Event A21)",
+  "source": {
+    "pdf": "hl7.eu std26/ch03.html",
+    "pages": null,
+    "table": "ADT^A21^ADT_A21: ADT Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A21"
+      ],
+      "eventPrinted": "A21",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "ADT^A21^ADT_A21: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A22"
+      ],
+      "eventPrinted": "A22",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "ADT^A22^ADT_A21: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A23"
+      ],
+      "eventPrinted": "A23",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "ADT^A23^ADT_A21: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A25"
+      ],
+      "eventPrinted": "A25",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "ADT^A25^ADT_A21: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A26"
+      ],
+      "eventPrinted": "A26",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "ADT^A26^ADT_A21: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A27"
+      ],
+      "eventPrinted": "A27",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "ADT^A27^ADT_A21: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A29"
+      ],
+      "eventPrinted": "A29",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "ADT^A29^ADT_A21: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A32"
+      ],
+      "eventPrinted": "A32",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "ADT^A32^ADT_A21: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A33"
+      ],
+      "eventPrinted": "A33",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "ADT^A33^ADT_A21: ADT Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Event Type",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PD1",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Additional Demographics",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Visit",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PV2",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Visit - Additional Info.",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "DB1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Disability Information",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "OBX",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Observation/Result",
+      "chapterRef": "7"
+    }
+  ],
+  "variants": []
+}

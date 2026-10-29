@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, xcnParts, eiParts, xonParts, xadParts, type CodedElement, type XCN, type EI, type XON, type XAD } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * OBX - Observation/Result (HL7 v2.9.1)
@@ -94,8 +95,8 @@ export class OBX extends BaseSegment {
   }
 
   /** OBX-12 Effective Date of Reference Range (DTM, max , optional) (chainable). */
-  effectiveDateOfReferenceRange(value: string): this {
-    this.fields[11] = this.createField(value);
+  effectiveDateOfReferenceRange(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[11] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -106,8 +107,8 @@ export class OBX extends BaseSegment {
   }
 
   /** OBX-14 Date/Time of the Observation (DTM, max , optional) (chainable). */
-  dateTimeOfTheObservation(value: string): this {
-    this.fields[13] = this.createField(value);
+  dateTimeOfTheObservation(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[13] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -136,8 +137,8 @@ export class OBX extends BaseSegment {
   }
 
   /** OBX-19 Date/Time of the Analysis (DTM, max , optional) (chainable). */
-  dateTimeOfTheAnalysis(value: string): this {
-    this.fields[18] = this.createField(value);
+  dateTimeOfTheAnalysis(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[18] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

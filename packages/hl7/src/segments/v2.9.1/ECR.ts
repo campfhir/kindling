@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, type CodedElement } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * ECR - Equipment Command Response (HL7 v2.9.1)
@@ -34,8 +35,8 @@ export class ECR extends BaseSegment {
   }
 
   /** ECR-2 Date/Time Completed (DTM, max , required) (chainable). */
-  dateTimeCompleted(value: string): this {
-    this.fields[1] = this.createField(value);
+  dateTimeCompleted(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

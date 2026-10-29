@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, eiParts, cweParts, xpnParts, xonParts, xcnParts, type EI, type CodedElement, type XPN, type XON, type XCN } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * DON - Donation (HL7 v2.9.1)
@@ -40,14 +41,14 @@ export class DON extends BaseSegment {
   }
 
   /** DON-3 Phlebotomy Start Date/Time (DTM, max , required) (chainable). */
-  phlebotomyStartDateTime(value: string): this {
-    this.fields[2] = this.createField(value);
+  phlebotomyStartDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** DON-4 Phlebotomy End Date/Time (DTM, max , required) (chainable). */
-  phlebotomyEndDateTime(value: string): this {
-    this.fields[3] = this.createField(value);
+  phlebotomyEndDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -88,8 +89,8 @@ export class DON extends BaseSegment {
   }
 
   /** DON-11 Donor Eligibility Date (DTM, max , required) (chainable). */
-  donorEligibilityDate(value: string): this {
-    this.fields[10] = this.createField(value);
+  donorEligibilityDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[10] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -124,8 +125,8 @@ export class DON extends BaseSegment {
   }
 
   /** DON-17 Intended Recipient DOB (DTM, max , required) (chainable). */
-  intendedRecipientDob(value: string): this {
-    this.fields[16] = this.createField(value);
+  intendedRecipientDob(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[16] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -136,8 +137,8 @@ export class DON extends BaseSegment {
   }
 
   /** DON-19 Intended Recipient Procedure Date (DTM, max , required) (chainable). */
-  intendedRecipientProcedureDate(value: string): this {
-    this.fields[18] = this.createField(value);
+  intendedRecipientProcedureDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[18] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -196,8 +197,8 @@ export class DON extends BaseSegment {
   }
 
   /** DON-29 Final Review Date/Time (DTM, max , required) (chainable). */
-  finalReviewDateTime(value: string): this {
-    this.fields[28] = this.createField(value);
+  finalReviewDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[28] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

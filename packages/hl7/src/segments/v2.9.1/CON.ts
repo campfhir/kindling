@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, eiParts, xpnParts, type CodedElement, type EI, type XPN } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * CON - Consent Segment (HL7 v2.9.1)
@@ -94,26 +95,26 @@ export class CON extends BaseSegment {
   }
 
   /** CON-12 Consent Discussion Date/Time (DTM, max , optional) (chainable). */
-  consentDiscussionDateTime(value: string): this {
-    this.fields[11] = this.createField(value);
+  consentDiscussionDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[11] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** CON-13 Consent Decision Date/Time (DTM, max , optional) (chainable). */
-  consentDecisionDateTime(value: string): this {
-    this.fields[12] = this.createField(value);
+  consentDecisionDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** CON-14 Consent Effective Date/Time (DTM, max , optional) (chainable). */
-  consentEffectiveDateTime(value: string): this {
-    this.fields[13] = this.createField(value);
+  consentEffectiveDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[13] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** CON-15 Consent End Date/Time (DTM, max , optional) (chainable). */
-  consentEndDateTime(value: string): this {
-    this.fields[14] = this.createField(value);
+  consentEndDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[14] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

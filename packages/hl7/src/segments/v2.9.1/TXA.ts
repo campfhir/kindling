@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, xcnParts, eiParts, ppnParts, type CodedElement, type XCN, type EI, type PPN } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * TXA - Transcription Document Header (HL7 v2.9.1)
@@ -46,8 +47,8 @@ export class TXA extends BaseSegment {
   }
 
   /** TXA-4 Activity Date/Time (DTM, max , optional) (chainable). */
-  activityDateTime(value: string): this {
-    this.fields[3] = this.createField(value);
+  activityDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -58,20 +59,20 @@ export class TXA extends BaseSegment {
   }
 
   /** TXA-6 Origination Date/Time (DTM, max , optional) (chainable). */
-  originationDateTime(value: string): this {
-    this.fields[5] = this.createField(value);
+  originationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** TXA-7 Transcription Date/Time (DTM, max , conditional) (chainable). */
-  transcriptionDateTime(value: string): this {
-    this.fields[6] = this.createField(value);
+  transcriptionDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** TXA-8 Edit Date/Time (DTM, max , optional, repeating) (chainable). */
-  editDateTime(...values: Repeated<string>[]): this {
-    this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
+  editDateTime(...values: Repeated<string | Date>[]): this {
+    this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(formatHL7Date(v, DateTimeLayout))));
     return this;
   }
 
@@ -178,8 +179,8 @@ export class TXA extends BaseSegment {
   }
 
   /** TXA-26 Agreed Due Date/Time (DTM, max , optional) (chainable). */
-  agreedDueDateTime(value: string): this {
-    this.fields[25] = this.createField(value);
+  agreedDueDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[25] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

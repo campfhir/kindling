@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, xcnParts, xadParts, eiParts, type CodedElement, type XCN, type XAD, type EI } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * ACC - Accident (HL7 v2.9.1)
@@ -28,8 +29,8 @@ export class ACC extends BaseSegment {
   }
 
   /** ACC-1 Accident Date/Time (DTM, max , optional) (chainable). */
-  accidentDateTime(value: string): this {
-    this.fields[0] = this.createField(value);
+  accidentDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[0] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

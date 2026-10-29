@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, cqParts, type CodedElement, type CQ } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * INV - Inventory Detail (HL7 v2.9.1)
@@ -94,18 +95,18 @@ export class INV extends BaseSegment {
   }
 
   /** INV-12 Expiration Date/Time (DTM, max , optional) (chainable). */
-  expirationDateTime(value: string): this {
-    this.fields[11] = this.createField(value);
+  expirationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[11] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** INV-13 First Used Date/Time (DTM, max , optional) (chainable). */
-  firstUsedDateTime(value: string): this {
-    this.fields[12] = this.createField(value);
+  firstUsedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** INV-14 On Board Stability Duration (, max , X) (chainable). */
+  /** INV-14 On Board Stability Duration (, max , W) (chainable). */
   onBoardStabilityDuration(value: string): this {
     this.fields[13] = this.createField(value);
     return this;

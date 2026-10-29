@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, xtnParts, xadParts, cqParts, type CodedElement, type XTN, type XAD, type CQ } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * OM1 - General Segment (HL7 v2.9.1)
@@ -148,14 +149,14 @@ export class OM1 extends BaseSegment {
   }
 
   /** OM1-21 Date/Time Stamp for Any Change in Definition for the Observation (DTM, max , optional) (chainable). */
-  dateTimeStampForAnyChangeInDefinitionForTheObservation(value: string): this {
-    this.fields[20] = this.createField(value);
+  dateTimeStampForAnyChangeInDefinitionForTheObservation(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[20] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** OM1-22 Effective Date/Time of Change (DTM, max , optional) (chainable). */
-  effectiveDateTimeOfChange(value: string): this {
-    this.fields[21] = this.createField(value);
+  effectiveDateTimeOfChange(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[21] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

@@ -14,6 +14,7 @@ import { BaseSegment } from "../../types/segment.ts";
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, eiParts, cweParts, cpParts, xonParts, cxParts, type EI, type CodedElement, type CP, type XON, type CX } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * PMT - Payment Information (HL7 v2.9.1)
@@ -34,14 +35,14 @@ export class PMT extends BaseSegment {
   }
 
   /** PMT-2 Payment/Remittance Effective Date/Time (DTM, max , required) (chainable). */
-  paymentRemittanceEffectiveDateTime(value: string): this {
-    this.fields[1] = this.createField(value);
+  paymentRemittanceEffectiveDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PMT-3 Payment/Remittance Expiration Date/Time (DTM, max , required) (chainable). */
-  paymentRemittanceExpirationDateTime(value: string): this {
-    this.fields[2] = this.createField(value);
+  paymentRemittanceExpirationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -52,8 +53,8 @@ export class PMT extends BaseSegment {
   }
 
   /** PMT-5 Payment/Remittance Date/Time (DTM, max , required) (chainable). */
-  paymentRemittanceDateTime(value: string): this {
-    this.fields[4] = this.createField(value);
+  paymentRemittanceDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

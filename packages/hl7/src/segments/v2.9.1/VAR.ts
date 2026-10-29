@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, eiParts, xcnParts, cweParts, type EI, type XCN, type CodedElement } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * VAR - Variance (HL7 v2.9.1)
@@ -34,14 +35,14 @@ export class VAR extends BaseSegment {
   }
 
   /** VAR-2 Documented Date/Time (DTM, max , required) (chainable). */
-  documentedDateTime(value: string): this {
-    this.fields[1] = this.createField(value);
+  documentedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** VAR-3 Stated Variance Date/Time (DTM, max , optional) (chainable). */
-  statedVarianceDateTime(value: string): this {
-    this.fields[2] = this.createField(value);
+  statedVarianceDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

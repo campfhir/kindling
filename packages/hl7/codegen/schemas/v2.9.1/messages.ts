@@ -5556,6 +5556,60 @@ const v2_9_1_CRM_C01_STRUCTURE: StructureItem[] = [
   ]),
 ];
 
+const v2_9_1_CSU_C09_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("ARV"),
+  optList("SFT"),
+  opt("UAC"),
+  group("PATIENT", "required", "repeating", [
+    req("PID"),
+    opt("PD1"),
+    optList("GSP"),
+    optList("GSR"),
+    optList("GSC"),
+    optList("PRT"),
+    optList("ARV"),
+    optList("NTE"),
+    group("VISIT", "optional", "single", [
+      req("PV1"),
+      opt("PV2"),
+      optList("PRT"),
+    ]),
+    req("CSR"),
+    group("STUDY_PHASE", "required", "repeating", [
+      opt("CSP"),
+      group("STUDY_SCHEDULE", "required", "repeating", [
+        opt("CSS"),
+        group("STUDY_OBSERVATION", "required", "repeating", [
+          group("ORC_GROUP", "optional", "single", [
+            req("ORC"),
+            optList("PRT"),
+          ]),
+          req("OBR"),
+          optList("PRT"),
+          group("TIMING_QTY", "optional", "repeating", [
+            req("TQ1"),
+            optList("TQ2"),
+          ]),
+          req("OBX"),
+          optList("PRT", { as: "prt2" }),
+        ]),
+        group("STUDY_PHARM", "required", "repeating", [
+          group("COMMON_ORDER", "optional", "single", [
+            req("ORC"),
+            optList("PRT"),
+          ]),
+          group("RX_ADMIN", "required", "repeating", [
+            req("RXA"),
+            req("RXR"),
+            optList("PRT"),
+          ]),
+        ]),
+      ]),
+    ]),
+  ]),
+];
+
 const v2_9_1_PEX_P07_STRUCTURE: StructureItem[] = [
   req("MSH"),
   optList("ARV"),
@@ -6036,6 +6090,38 @@ const v2_9_1_MDM_T02_STRUCTURE: StructureItem[] = [
   req("TXA"),
   optList("CON"),
   group("OBSERVATION", "required", "repeating", [
+    req("OBX"),
+    optList("PRT"),
+    optList("NTE"),
+  ]),
+];
+
+const v2_9_1_MDM_T06_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  req("EVN"),
+  req("PID"),
+  optList("GSP"),
+  optList("GSR"),
+  optList("GSC"),
+  optList("PRT"),
+  req("PV1"),
+  optList("PRT", { as: "prt2" }),
+  group("COMMON_ORDER", "optional", "repeating", [
+    req("ORC"),
+    optList("PRT"),
+    group("TIMING", "optional", "repeating", [
+      req("TQ1"),
+      optList("TQ2"),
+    ]),
+    req("OBR"),
+    optList("PRT", { as: "prt2" }),
+    optList("NTE"),
+  ]),
+  req("TXA"),
+  optList("CON"),
+  group("OBX_GROUP", "required", "repeating", [
     req("OBX"),
     optList("PRT"),
     optList("NTE"),
@@ -6838,6 +6924,34 @@ const v2_9_1_PMU_B08_STRUCTURE: StructureItem[] = [
   optList("CER"),
 ];
 
+const v2_9_1_EHC_E10_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  optList("UAC"),
+  req("MSA"),
+  optList("ERR"),
+  group("INVOICE_PROCESSING_RESULTS_INFO", "required", "repeating", [
+    req("IPR"),
+    optList("NTE"),
+    req("PYE"),
+    req("IN1"),
+    optList("GSP"),
+    optList("GSR"),
+    opt("IN2"),
+    req("IVC"),
+    group("PSS_GROUP", "required", "repeating", [
+      req("PSS"),
+      group("PSG_GROUP", "required", "repeating", [
+        req("PSG"),
+        group("PRODUCT_SERVICE_LINE_INFO", "required", "repeating", [
+          req("PSL"),
+          optList("ADJ"),
+        ]),
+      ]),
+    ]),
+  ]),
+];
+
 const v2_9_1_EHC_E12_STRUCTURE: StructureItem[] = [
   req("MSH"),
   optList("SFT"),
@@ -7090,6 +7204,10 @@ export const V2_9_1_MESSAGES: MessageSchema[] = [
   { messageType: "CRM", triggerEvent: "C06", version: "2.9.1", structure: v2_9_1_CRM_C01_STRUCTURE, baseMessage: "CRM_C01" },
   { messageType: "CRM", triggerEvent: "C07", version: "2.9.1", structure: v2_9_1_CRM_C01_STRUCTURE, baseMessage: "CRM_C01" },
   { messageType: "CRM", triggerEvent: "C08", version: "2.9.1", structure: v2_9_1_CRM_C01_STRUCTURE, baseMessage: "CRM_C01" },
+  { messageType: "CSU", triggerEvent: "C09", version: "2.9.1", structure: v2_9_1_CSU_C09_STRUCTURE },
+  { messageType: "CSU", triggerEvent: "C10", version: "2.9.1", structure: v2_9_1_CSU_C09_STRUCTURE, baseMessage: "CSU_C09" },
+  { messageType: "CSU", triggerEvent: "C11", version: "2.9.1", structure: v2_9_1_CSU_C09_STRUCTURE, baseMessage: "CSU_C09" },
+  { messageType: "CSU", triggerEvent: "C12", version: "2.9.1", structure: v2_9_1_CSU_C09_STRUCTURE, baseMessage: "CSU_C09" },
   { messageType: "PEX", triggerEvent: "P07", version: "2.9.1", structure: v2_9_1_PEX_P07_STRUCTURE },
   { messageType: "PEX", triggerEvent: "P08", version: "2.9.1", structure: v2_9_1_PEX_P07_STRUCTURE, baseMessage: "PEX_P07" },
   { messageType: "OSM", triggerEvent: "R26", version: "2.9.1", structure: v2_9_1_OSM_R26_STRUCTURE },
@@ -7131,6 +7249,7 @@ export const V2_9_1_MESSAGES: MessageSchema[] = [
   { messageType: "MDM", triggerEvent: "T03", version: "2.9.1", structure: v2_9_1_MDM_T01_STRUCTURE, baseMessage: "MDM_T01" },
   { messageType: "MDM", triggerEvent: "T04", version: "2.9.1", structure: v2_9_1_MDM_T02_STRUCTURE, baseMessage: "MDM_T02" },
   { messageType: "MDM", triggerEvent: "T05", version: "2.9.1", structure: v2_9_1_MDM_T01_STRUCTURE, baseMessage: "MDM_T01" },
+  { messageType: "MDM", triggerEvent: "T06", version: "2.9.1", structure: v2_9_1_MDM_T06_STRUCTURE },
   { messageType: "MDM", triggerEvent: "T07", version: "2.9.1", structure: v2_9_1_MDM_T01_STRUCTURE, baseMessage: "MDM_T01" },
   { messageType: "MDM", triggerEvent: "T08", version: "2.9.1", structure: v2_9_1_MDM_T02_STRUCTURE, baseMessage: "MDM_T02" },
   { messageType: "MDM", triggerEvent: "T09", version: "2.9.1", structure: v2_9_1_MDM_T01_STRUCTURE, baseMessage: "MDM_T01" },
@@ -7224,6 +7343,7 @@ export const V2_9_1_MESSAGES: MessageSchema[] = [
   { messageType: "RSP", triggerEvent: "K25", version: "2.9.1", structure: v2_9_1_RSP_K25_STRUCTURE },
   { messageType: "PMU", triggerEvent: "B07", version: "2.9.1", structure: v2_9_1_PMU_B07_STRUCTURE },
   { messageType: "PMU", triggerEvent: "B08", version: "2.9.1", structure: v2_9_1_PMU_B08_STRUCTURE },
+  { messageType: "EHC", triggerEvent: "E10", version: "2.9.1", structure: v2_9_1_EHC_E10_STRUCTURE },
   { messageType: "EHC", triggerEvent: "E12", version: "2.9.1", structure: v2_9_1_EHC_E12_STRUCTURE },
   { messageType: "EHC", triggerEvent: "E13", version: "2.9.1", structure: v2_9_1_EHC_E13_STRUCTURE },
   { messageType: "SLR", triggerEvent: "S28", version: "2.9.1", structure: v2_9_1_SLR_S28_STRUCTURE },

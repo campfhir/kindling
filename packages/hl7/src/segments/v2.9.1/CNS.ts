@@ -14,6 +14,7 @@ import { BaseSegment } from "../../types/segment.ts";
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, type CodedElement } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * CNS - Clear Notification (HL7 v2.9.1)
@@ -40,14 +41,14 @@ export class CNS extends BaseSegment {
   }
 
   /** CNS-3 Starting Notification Date/Time (DTM, max , optional) (chainable). */
-  startingNotificationDateTime(value: string): this {
-    this.fields[2] = this.createField(value);
+  startingNotificationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** CNS-4 Ending Notification Date/Time (DTM, max , optional) (chainable). */
-  endingNotificationDateTime(value: string): this {
-    this.fields[3] = this.createField(value);
+  endingNotificationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, xonParts, cweParts, cqParts, type XON, type CodedElement, type CQ } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * PDC - Product Detail Country (HL7 v2.9.1)
@@ -106,14 +107,14 @@ export class PDC extends BaseSegment {
   }
 
   /** PDC-14 Date First Marketed (DTM, max , optional) (chainable). */
-  dateFirstMarketed(value: string): this {
-    this.fields[13] = this.createField(value);
+  dateFirstMarketed(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[13] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PDC-15 Date Last Marketed (DTM, max , optional) (chainable). */
-  dateLastMarketed(value: string): this {
-    this.fields[14] = this.createField(value);
+  dateLastMarketed(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[14] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

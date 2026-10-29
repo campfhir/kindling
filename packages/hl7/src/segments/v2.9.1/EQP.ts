@@ -14,6 +14,7 @@ import { BaseSegment } from "../../types/segment.ts";
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, type CodedElement } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * EQP - Equipment/log Service (HL7 v2.9.1)
@@ -40,14 +41,14 @@ export class EQP extends BaseSegment {
   }
 
   /** EQP-3 Start Date/Time (DTM, max , required) (chainable). */
-  startDateTime(value: string): this {
-    this.fields[2] = this.createField(value);
+  startDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** EQP-4 End Date/Time (DTM, max , optional) (chainable). */
-  endDateTime(value: string): this {
-    this.fields[3] = this.createField(value);
+  endDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, cpParts, moParts, type CodedElement, type CP, type MO } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * PRC - Pricing (HL7 v2.9.1)
@@ -88,14 +89,14 @@ export class PRC extends BaseSegment {
   }
 
   /** PRC-11 Effective Start Date (DTM, max , optional) (chainable). */
-  effectiveStartDate(value: string): this {
-    this.fields[10] = this.createField(value);
+  effectiveStartDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[10] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PRC-12 Effective End Date (DTM, max , optional) (chainable). */
-  effectiveEndDate(value: string): this {
-    this.fields[11] = this.createField(value);
+  effectiveEndDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[11] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

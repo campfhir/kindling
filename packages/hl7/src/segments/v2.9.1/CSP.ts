@@ -14,6 +14,7 @@ import { BaseSegment } from "../../types/segment.ts";
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, type CodedElement } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * CSP - Clinical Study Phase (HL7 v2.9.1)
@@ -34,14 +35,14 @@ export class CSP extends BaseSegment {
   }
 
   /** CSP-2 Date/time Study Phase Began (DTM, max , required) (chainable). */
-  dateTimeStudyPhaseBegan(value: string): this {
-    this.fields[1] = this.createField(value);
+  dateTimeStudyPhaseBegan(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** CSP-3 Date/time Study Phase Ended (DTM, max , optional) (chainable). */
-  dateTimeStudyPhaseEnded(value: string): this {
-    this.fields[2] = this.createField(value);
+  dateTimeStudyPhaseEnded(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, plParts, xadParts, eiParts, type CodedElement, type PL, type XAD, type EI } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * RXA - Pharmacy/Treatment Administration (HL7 v2.9.1)
@@ -40,14 +41,14 @@ export class RXA extends BaseSegment {
   }
 
   /** RXA-3 Date/Time Start of Administration (DTM, max , required) (chainable). */
-  dateTimeStartOfAdministration(value: string): this {
-    this.fields[2] = this.createField(value);
+  dateTimeStartOfAdministration(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** RXA-4 Date/Time End of Administration (DTM, max , required) (chainable). */
-  dateTimeEndOfAdministration(value: string): this {
-    this.fields[3] = this.createField(value);
+  dateTimeEndOfAdministration(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -81,13 +82,13 @@ export class RXA extends BaseSegment {
     return this;
   }
 
-  /** RXA-10 Administering Provider (, max , X) (chainable). */
+  /** RXA-10 Administering Provider (, max , W) (chainable). */
   administeringProvider(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
   }
 
-  /** RXA-11 Administered -at Location (, max , X) (chainable). */
+  /** RXA-11 Administered -at Location (, max , W) (chainable). */
   administeredAtLocation(value: string): this {
     this.fields[10] = this.createField(value);
     return this;
@@ -118,8 +119,8 @@ export class RXA extends BaseSegment {
   }
 
   /** RXA-16 Substance Expiration Date (DTM, max , optional, repeating) (chainable). */
-  substanceExpirationDate(...values: Repeated<string>[]): this {
-    this.fields[15] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
+  substanceExpirationDate(...values: Repeated<string | Date>[]): this {
+    this.fields[15] = this.createRepeatingField(repetitions(values).map((v) => this.createField(formatHL7Date(v, DateTimeLayout))));
     return this;
   }
 
@@ -154,8 +155,8 @@ export class RXA extends BaseSegment {
   }
 
   /** RXA-22 System Entry Date/Time (DTM, max , optional) (chainable). */
-  systemEntryDateTime(value: string): this {
-    this.fields[21] = this.createField(value);
+  systemEntryDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[21] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

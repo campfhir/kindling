@@ -1,0 +1,59 @@
+{
+  "structure": "QRY_T12",
+  "messageType": "QRY",
+  "triggerEvent": "T12",
+  "version": "2.6",
+  "description": "Document Query",
+  "title": "Document Query",
+  "sectionHeading": "9.8.1 QRY/DOC - Document Query (Event T12)",
+  "source": {
+    "pdf": "hl7.eu std26/ch09.html",
+    "pages": null,
+    "table": "QRY^T12^QRY_T12: Document Query"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "T12"
+      ],
+      "eventPrinted": "T12",
+      "pdf": "hl7.eu std26/ch09.html",
+      "page": null,
+      "table": "QRY^T12^QRY_T12: Document Query",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Definition",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QRF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Filter",
+      "chapterRef": "2"
+    }
+  ],
+  "variants": []
+}

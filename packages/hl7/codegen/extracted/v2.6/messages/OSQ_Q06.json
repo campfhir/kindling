@@ -1,0 +1,88 @@
+{
+  "structure": "OSQ_Q06",
+  "messageType": "OSQ",
+  "triggerEvent": "Q06",
+  "version": "2.6",
+  "description": "Order Status Query",
+  "title": "Order Status Query",
+  "source": {
+    "pdf": "hl7.eu std26/ch04.html",
+    "pages": null,
+    "table": "OSQ^Q06^OSQ_Q06: Order Status Query"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Q06"
+      ],
+      "eventPrinted": "Q06",
+      "pdf": "hl7.eu std26/ch04.html",
+      "page": null,
+      "table": "OSQ^Q06^OSQ_Q06: Order Status Query",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Definition",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QRF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Filter",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Continuation Pointer",
+      "chapterRef": "2"
+    }
+  ],
+  "variants": []
+}

@@ -75,7 +75,7 @@ export class SCH extends BaseSegment {
     return this;
   }
 
-  /** SCH-9 Appointment Duration (, max , X) (chainable). */
+  /** SCH-9 Appointment Duration (, max , W) (chainable). */
   appointmentDuration(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
@@ -87,7 +87,7 @@ export class SCH extends BaseSegment {
     return this;
   }
 
-  /** SCH-11 Appointment Timing Quantity (, max , X) (chainable). */
+  /** SCH-11 Appointment Timing Quantity (, max , W) (chainable). */
   appointmentTimingQuantity(value: string): this {
     this.fields[10] = this.createField(value);
     return this;

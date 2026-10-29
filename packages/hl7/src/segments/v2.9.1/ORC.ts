@@ -14,7 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, eiParts, plParts, xtnParts, cweParts, cxParts, drParts, type EI, type PL, type XTN, type CodedElement, type CX, type DR } from "../../utils/composites.ts";
-import { formatHL7Date, DateLayout, type HL7DateLayout } from "../../utils/hl7DateUtils.ts";
+import { formatHL7Date, DateTimeLayout, DateLayout, type HL7DateTimeLayout, type HL7DateLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * ORC - Common Order (HL7 v2.9.1)
@@ -64,7 +64,7 @@ export class ORC extends BaseSegment {
     return this;
   }
 
-  /** ORC-7 Quantity/Timing (, max , X, repeating) (chainable). */
+  /** ORC-7 Quantity/Timing (, max , W, repeating) (chainable). */
   quantityTiming(...values: Repeated<string>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
@@ -77,24 +77,24 @@ export class ORC extends BaseSegment {
   }
 
   /** ORC-9 Date/Time of Order Event (DTM, max , optional) (chainable). */
-  dateTimeOfOrderEvent(value: string): this {
-    this.fields[8] = this.createField(value);
+  dateTimeOfOrderEvent(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[8] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** ORC-10 Entered By (, max , X) (chainable). */
+  /** ORC-10 Entered By (, max , W) (chainable). */
   enteredBy(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
   }
 
-  /** ORC-11 Verified By (, max , X) (chainable). */
+  /** ORC-11 Verified By (, max , W) (chainable). */
   verifiedBy(value: string): this {
     this.fields[10] = this.createField(value);
     return this;
   }
 
-  /** ORC-12 Ordering Provider (, max , X) (chainable). */
+  /** ORC-12 Ordering Provider (, max , W) (chainable). */
   orderingProvider(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
@@ -113,8 +113,8 @@ export class ORC extends BaseSegment {
   }
 
   /** ORC-15 Order Effective Date/Time (DTM, max , optional) (chainable). */
-  orderEffectiveDateTime(value: string): this {
-    this.fields[14] = this.createField(value);
+  orderEffectiveDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[14] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -124,19 +124,19 @@ export class ORC extends BaseSegment {
     return this;
   }
 
-  /** ORC-17 Entering Organization (, max , X) (chainable). */
+  /** ORC-17 Entering Organization (, max , W) (chainable). */
   enteringOrganization(value: string): this {
     this.fields[16] = this.createField(value);
     return this;
   }
 
-  /** ORC-18 Entering Device (, max , X) (chainable). */
+  /** ORC-18 Entering Device (, max , W) (chainable). */
   enteringDevice(value: string): this {
     this.fields[17] = this.createField(value);
     return this;
   }
 
-  /** ORC-19 Action By (, max , X) (chainable). */
+  /** ORC-19 Action By (, max , W) (chainable). */
   actionBy(value: string): this {
     this.fields[18] = this.createField(value);
     return this;
@@ -148,25 +148,25 @@ export class ORC extends BaseSegment {
     return this;
   }
 
-  /** ORC-21 Ordering Facility Name (, max , X) (chainable). */
+  /** ORC-21 Ordering Facility Name (, max , W) (chainable). */
   orderingFacilityName(value: string): this {
     this.fields[20] = this.createField(value);
     return this;
   }
 
-  /** ORC-22 Ordering Facility Address (, max , X) (chainable). */
+  /** ORC-22 Ordering Facility Address (, max , W) (chainable). */
   orderingFacilityAddress(value: string): this {
     this.fields[21] = this.createField(value);
     return this;
   }
 
-  /** ORC-23 Ordering Facility Phone Number (, max , X) (chainable). */
+  /** ORC-23 Ordering Facility Phone Number (, max , W) (chainable). */
   orderingFacilityPhoneNumber(value: string): this {
     this.fields[22] = this.createField(value);
     return this;
   }
 
-  /** ORC-24 Ordering Provider Address (, max , X) (chainable). */
+  /** ORC-24 Ordering Provider Address (, max , W) (chainable). */
   orderingProviderAddress(value: string): this {
     this.fields[23] = this.createField(value);
     return this;
@@ -185,8 +185,8 @@ export class ORC extends BaseSegment {
   }
 
   /** ORC-27 Filler's Expected Availability Date/Time (DTM, max , optional) (chainable). */
-  fillerSExpectedAvailabilityDateTime(value: string): this {
-    this.fields[26] = this.createField(value);
+  fillerSExpectedAvailabilityDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[26] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -208,7 +208,7 @@ export class ORC extends BaseSegment {
     return this;
   }
 
-  /** ORC-31 Parent Universal Service Identifier (, max , X) (chainable). */
+  /** ORC-31 Parent Universal Service Identifier (, max , W) (chainable). */
   parentUniversalServiceIdentifier(value: string): this {
     this.fields[30] = this.createField(value);
     return this;
@@ -245,8 +245,8 @@ export class ORC extends BaseSegment {
   }
 
   /** ORC-37 Order Creation Date/Time (DTM, max , optional) (chainable). */
-  orderCreationDateTime(value: string): this {
-    this.fields[36] = this.createField(value);
+  orderCreationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[36] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

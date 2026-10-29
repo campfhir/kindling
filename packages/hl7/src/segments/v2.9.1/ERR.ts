@@ -27,7 +27,7 @@ export class ERR extends BaseSegment {
     this.fields = [];
   }
 
-  /** ERR-1 Error Code and Location (, max , X) (chainable). */
+  /** ERR-1 Error Code and Location (, max , W) (chainable). */
   errorCodeAndLocation(value: string): this {
     this.fields[0] = this.createField(value);
     return this;

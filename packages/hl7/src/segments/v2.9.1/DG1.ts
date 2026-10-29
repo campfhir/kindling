@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, xcnParts, eiParts, type CodedElement, type XCN, type EI } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * DG1 - Diagnosis (HL7 v2.9.1)
@@ -33,7 +34,7 @@ export class DG1 extends BaseSegment {
     return this;
   }
 
-  /** DG1-2 Diagnosis Coding Method (, max , X) (chainable). */
+  /** DG1-2 Diagnosis Coding Method (, max , W) (chainable). */
   diagnosisCodingMethod(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
@@ -45,15 +46,15 @@ export class DG1 extends BaseSegment {
     return this;
   }
 
-  /** DG1-4 Diagnosis Description (, max , X) (chainable). */
+  /** DG1-4 Diagnosis Description (, max , W) (chainable). */
   diagnosisDescription(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
   /** DG1-5 Diagnosis Date/Time (DTM, max , optional) (chainable). */
-  diagnosisDateTime(value: string): this {
-    this.fields[4] = this.createField(value);
+  diagnosisDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -63,49 +64,49 @@ export class DG1 extends BaseSegment {
     return this;
   }
 
-  /** DG1-7 Major Diagnostic Category (, max , X) (chainable). */
+  /** DG1-7 Major Diagnostic Category (, max , W) (chainable). */
   majorDiagnosticCategory(value: string): this {
     this.fields[6] = this.createField(value);
     return this;
   }
 
-  /** DG1-8 Diagnostic Related Group (, max , X) (chainable). */
+  /** DG1-8 Diagnostic Related Group (, max , W) (chainable). */
   diagnosticRelatedGroup(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** DG1-9 DRG Approval Indicator (, max , X) (chainable). */
+  /** DG1-9 DRG Approval Indicator (, max , W) (chainable). */
   drgApprovalIndicator(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** DG1-10 DRG Grouper Review Code (, max , X) (chainable). */
+  /** DG1-10 DRG Grouper Review Code (, max , W) (chainable). */
   drgGrouperReviewCode(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
   }
 
-  /** DG1-11 Outlier Type (, max , X) (chainable). */
+  /** DG1-11 Outlier Type (, max , W) (chainable). */
   outlierType(value: string): this {
     this.fields[10] = this.createField(value);
     return this;
   }
 
-  /** DG1-12 Outlier Days (, max , X) (chainable). */
+  /** DG1-12 Outlier Days (, max , W) (chainable). */
   outlierDays(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
   }
 
-  /** DG1-13 Outlier Cost (, max , X) (chainable). */
+  /** DG1-13 Outlier Cost (, max , W) (chainable). */
   outlierCost(value: string): this {
     this.fields[12] = this.createField(value);
     return this;
   }
 
-  /** DG1-14 Grouper Version And Type (, max , X) (chainable). */
+  /** DG1-14 Grouper Version And Type (, max , W) (chainable). */
   grouperVersionAndType(value: string): this {
     this.fields[13] = this.createField(value);
     return this;
@@ -136,8 +137,8 @@ export class DG1 extends BaseSegment {
   }
 
   /** DG1-19 Attestation Date/Time (DTM, max , optional) (chainable). */
-  attestationDateTime(value: string): this {
-    this.fields[18] = this.createField(value);
+  attestationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[18] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

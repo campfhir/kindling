@@ -14,7 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, eiParts, xpnParts, xcnParts, xonParts, type CodedElement, type EI, type XPN, type XCN, type XON } from "../../utils/composites.ts";
-import { formatHL7Date, DateLayout, type HL7DateLayout } from "../../utils/hl7DateUtils.ts";
+import { formatHL7Date, DateLayout, DateTimeLayout, type HL7DateLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * IAM - Patient Adverse Reaction Information (HL7 v2.9.1)
@@ -101,8 +101,8 @@ export class IAM extends BaseSegment {
   }
 
   /** IAM-13 Reported Date/Time (DTM, max , optional) (chainable). */
-  reportedDateTime(value: string): this {
-    this.fields[12] = this.createField(value);
+  reportedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -143,8 +143,8 @@ export class IAM extends BaseSegment {
   }
 
   /** IAM-20 Statused at Date/Time (DTM, max , optional) (chainable). */
-  statusedAtDateTime(value: string): this {
-    this.fields[19] = this.createField(value);
+  statusedAtDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[19] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -155,8 +155,8 @@ export class IAM extends BaseSegment {
   }
 
   /** IAM-22 Inactivated Date/Time (DTM, max , optional) (chainable). */
-  inactivatedDateTime(value: string): this {
-    this.fields[21] = this.createField(value);
+  inactivatedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[21] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -167,8 +167,8 @@ export class IAM extends BaseSegment {
   }
 
   /** IAM-24 Initially Recorded Date/Time (DTM, max , optional) (chainable). */
-  initiallyRecordedDateTime(value: string): this {
-    this.fields[23] = this.createField(value);
+  initiallyRecordedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[23] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -179,8 +179,8 @@ export class IAM extends BaseSegment {
   }
 
   /** IAM-26 Modified Date/Time (DTM, max , optional) (chainable). */
-  modifiedDateTime(value: string): this {
-    this.fields[25] = this.createField(value);
+  modifiedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[25] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

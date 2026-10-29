@@ -1,0 +1,136 @@
+/**
+ * Builder for OPR^O38 messages (HL7 v2.6).
+ *
+ * Structure: MSH MSA [{ERR}] [{SFT}] [UAC] [{NTE}] [ RESPONSE: { ORDER: {NK1} [PID] [{ SPECIMEN: SPM [{OBX}] [{SAC}] [{ OBSERVATION_REQUEST: ORC OBR [{ROL}] }] [{ TIMING: TQ1 [{TQ2}] }] }] } ]
+ *
+ * @module
+ */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
+import type { StructureItem } from "../../types/schema.ts";
+import { encodeStructure, verifyStructure, type StructureInput } from "../../types/structure.ts";
+import { OPR_O38_STRUCTURE } from "../../structures/v2.6/OPR_O38.ts";
+import type { MSH } from "../../segments/v2.6/MSH.ts";
+import type { MSA } from "../../segments/v2.6/MSA.ts";
+import type { ERR } from "../../segments/v2.6/ERR.ts";
+import type { SFT } from "../../segments/v2.6/SFT.ts";
+import type { UAC } from "../../segments/v2.6/UAC.ts";
+import type { NTE } from "../../segments/v2.6/NTE.ts";
+import type { NK1 } from "../../segments/v2.6/NK1.ts";
+import type { PID } from "../../segments/v2.6/PID.ts";
+import type { SPM } from "../../segments/v2.6/SPM.ts";
+import type { OBX } from "../../segments/v2.6/OBX.ts";
+import type { SAC } from "../../segments/v2.6/SAC.ts";
+import type { ORC } from "../../segments/v2.6/ORC.ts";
+import type { OBR } from "../../segments/v2.6/OBR.ts";
+import type { ROL } from "../../segments/v2.6/ROL.ts";
+import type { TQ1 } from "../../segments/v2.6/TQ1.ts";
+import type { TQ2 } from "../../segments/v2.6/TQ2.ts";
+
+/** The RESPONSE group of an OPR^O38 (HL7 v2.6) message being built. */
+export interface ResponseGroup {
+  /** The ORDER groups. */
+  orders: OrderGroup[];
+}
+
+/** The ORDER group of an OPR^O38 (HL7 v2.6) message being built. */
+export interface OrderGroup {
+  /** The NK1 segments. */
+  nextOfKin: NK1[];
+  /** The PID segment. */
+  patient?: PID;
+  /** The SPECIMEN groups. */
+  specimens?: SpecimenGroup[];
+}
+
+/** The SPECIMEN group of an OPR^O38 (HL7 v2.6) message being built. */
+export interface SpecimenGroup {
+  /** The SPM segment. */
+  specimen: SPM;
+  /** The OBX segments. */
+  observations?: OBX[];
+  /** The SAC segments. */
+  specimenContainers?: SAC[];
+  /** The OBSERVATION REQUEST groups. */
+  observationRequests?: ObservationRequestGroup[];
+  /** The TIMING groups. */
+  timings?: TimingGroup[];
+}
+
+/** The OBSERVATION REQUEST group of an OPR^O38 (HL7 v2.6) message being built. */
+export interface ObservationRequestGroup {
+  /** The ORC segment. */
+  commonOrder: ORC;
+  /** The OBR segment. */
+  observationRequest: OBR;
+  /** The ROL segments. */
+  roles?: ROL[];
+}
+
+/** The TIMING group of an OPR^O38 (HL7 v2.6) message being built. */
+export interface TimingGroup {
+  /** The TQ1 segment. */
+  timing: TQ1;
+  /** The TQ2 segments. */
+  timingRelationships?: TQ2[];
+}
+
+/** The optional segments and groups of an OPR^O38 (HL7 v2.6) message. */
+export interface OPR_O38Options {
+  /** The ERR segments. */
+  errors?: ERR[];
+  /** The SFT segments. */
+  software?: SFT[];
+  /** The UAC segment. */
+  uac?: UAC;
+  /** The NTE segments. */
+  notes?: NTE[];
+  /** The RESPONSE group. */
+  response?: ResponseGroup;
+}
+
+/** Builder for HL7 OPR^O38 (HL7 v2.6) messages. */
+export class OPR_O38<TMSH extends MSH = MSH, TMSA extends MSA = MSA> {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "OPR_O38";
+  /** The structure the message is verified against and encoded in. */
+  protected readonly structure: StructureItem[] = OPR_O38_STRUCTURE;
+
+  /** Constructor. */
+  constructor(
+    public header: TMSH,
+    public acknowledgment: TMSA,
+    public options: OPR_O38Options = {},
+    protected encoding: EncodingCharacters = DEFAULT_ENCODING,
+  ) {}
+
+  /** The message as one object keyed by structure property name (what verify() and encode() work on). */
+  toInput(): StructureInput {
+    return { ...this.options, header: this.header, acknowledgment: this.acknowledgment };
+  }
+
+  /** Validates the message structure, returning a result. */
+  verify(): { valid: boolean; errors: string[] } {
+    const errors = verifyStructure(this.structure, this.toInput());
+    return { valid: errors.length === 0, errors };
+  }
+
+  /** Encodes this message to its HL7 wire string. */
+  encode(): string {
+    const verification = this.verify();
+    if (!verification.valid) {
+      throw new Error(`Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`);
+    }
+    return encodeStructure(this.structure, this.toInput(), this.encoding);
+  }
+}
+
+/** Builds an HL7 OPR^O38 (HL7 v2.6) message. */
+export function createOPR_O38<TMSH extends MSH = MSH, TMSA extends MSA = MSA>(
+  header: TMSH,
+  acknowledgment: TMSA,
+  options: OPR_O38Options = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
+): OPR_O38<TMSH, TMSA> {
+  return new OPR_O38(header, acknowledgment, options, encoding);
+}

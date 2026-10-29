@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, eiParts, cpParts, cqParts, moParts, xonParts, xcnParts, xtnParts, type CodedElement, type EI, type CP, type CQ, type MO, type XON, type XCN, type XTN } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * AUT - Authorization Information (HL7 v2.9.1)
@@ -46,14 +47,14 @@ export class AUT extends BaseSegment {
   }
 
   /** AUT-4 Authorization Effective Date (DTM, max , optional) (chainable). */
-  authorizationEffectiveDate(value: string): this {
-    this.fields[3] = this.createField(value);
+  authorizationEffectiveDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** AUT-5 Authorization Expiration Date (DTM, max , optional) (chainable). */
-  authorizationExpirationDate(value: string): this {
-    this.fields[4] = this.createField(value);
+  authorizationExpirationDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -82,8 +83,8 @@ export class AUT extends BaseSegment {
   }
 
   /** AUT-10 Process Date (DTM, max , optional) (chainable). */
-  processDate(value: string): this {
-    this.fields[9] = this.createField(value);
+  processDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[9] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -112,8 +113,8 @@ export class AUT extends BaseSegment {
   }
 
   /** AUT-15 Planned Treatment Stop Date (DTM, max 24, optional) (chainable). */
-  plannedTreatmentStopDate(value: string): this {
-    this.fields[14] = this.createField(value);
+  plannedTreatmentStopDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[14] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -178,8 +179,8 @@ export class AUT extends BaseSegment {
   }
 
   /** AUT-26 Source Date (DTM, max 24, optional) (chainable). */
-  sourceDate(value: string): this {
-    this.fields[25] = this.createField(value);
+  sourceDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[25] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

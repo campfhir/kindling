@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, eiParts, type CodedElement, type EI } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * PRB - Problem Details (HL7 v2.9.1)
@@ -34,8 +35,8 @@ export class PRB extends BaseSegment {
   }
 
   /** PRB-2 Action Date/Time (DTM, max , required) (chainable). */
-  actionDateTime(value: string): this {
-    this.fields[1] = this.createField(value);
+  actionDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -64,20 +65,20 @@ export class PRB extends BaseSegment {
   }
 
   /** PRB-7 Problem Established Date/Time (DTM, max , optional) (chainable). */
-  problemEstablishedDateTime(value: string): this {
-    this.fields[6] = this.createField(value);
+  problemEstablishedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PRB-8 Anticipated Problem Resolution Date/Time (DTM, max , optional) (chainable). */
-  anticipatedProblemResolutionDateTime(value: string): this {
-    this.fields[7] = this.createField(value);
+  anticipatedProblemResolutionDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PRB-9 Actual Problem Resolution Date/Time (DTM, max , optional) (chainable). */
-  actualProblemResolutionDateTime(value: string): this {
-    this.fields[8] = this.createField(value);
+  actualProblemResolutionDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[8] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -112,14 +113,14 @@ export class PRB extends BaseSegment {
   }
 
   /** PRB-15 Problem Life Cycle Status Date/Time (DTM, max , optional) (chainable). */
-  problemLifeCycleStatusDateTime(value: string): this {
-    this.fields[14] = this.createField(value);
+  problemLifeCycleStatusDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[14] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PRB-16 Problem Date of Onset (DTM, max , optional) (chainable). */
-  problemDateOfOnset(value: string): this {
-    this.fields[15] = this.createField(value);
+  problemDateOfOnset(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[15] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

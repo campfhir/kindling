@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, xcnParts, type CodedElement, type XCN } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * NTE - Notes and Comments (HL7 v2.9.1)
@@ -58,20 +59,20 @@ export class NTE extends BaseSegment {
   }
 
   /** NTE-6 Entered Date/Time (DTM, max , optional) (chainable). */
-  enteredDateTime(value: string): this {
-    this.fields[5] = this.createField(value);
+  enteredDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** NTE-7 Effective Start Date (DTM, max , optional) (chainable). */
-  effectiveStartDate(value: string): this {
-    this.fields[6] = this.createField(value);
+  effectiveStartDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** NTE-8 Expiration Date (DTM, max , optional) (chainable). */
-  expirationDate(value: string): this {
-    this.fields[7] = this.createField(value);
+  expirationDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

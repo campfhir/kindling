@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, moParts, type CodedElement, type MO } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * IIM - Inventory Item Master (HL7 v2.9.1)
@@ -46,8 +47,8 @@ export class IIM extends BaseSegment {
   }
 
   /** IIM-4 Inventory Expiration Date (DTM, max , optional) (chainable). */
-  inventoryExpirationDate(value: string): this {
-    this.fields[3] = this.createField(value);
+  inventoryExpirationDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -64,8 +65,8 @@ export class IIM extends BaseSegment {
   }
 
   /** IIM-7 Inventory Received Date (DTM, max , optional) (chainable). */
-  inventoryReceivedDate(value: string): this {
-    this.fields[6] = this.createField(value);
+  inventoryReceivedDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -88,8 +89,8 @@ export class IIM extends BaseSegment {
   }
 
   /** IIM-11 Inventory On Hand Date (DTM, max , optional) (chainable). */
-  inventoryOnHandDate(value: string): this {
-    this.fields[10] = this.createField(value);
+  inventoryOnHandDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[10] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

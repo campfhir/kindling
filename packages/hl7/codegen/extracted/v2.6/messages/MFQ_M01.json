@@ -1,0 +1,105 @@
+{
+  "structure": "MFQ_M01",
+  "messageType": "MFQ",
+  "triggerEvent": "M01",
+  "version": "2.6",
+  "description": "Query for Master File Record",
+  "title": "Query for Master File Record",
+  "sectionHeading": "8.4.4 MFQ/MFR - Master Files Query (Event M01-M17)",
+  "source": {
+    "pdf": "hl7.eu std26/ch08.html",
+    "pages": null,
+    "table": "MFQ^M01-M17^MFQ_M01: Query for Master File Record"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "M11",
+        "M12",
+        "M13",
+        "M14",
+        "M15",
+        "M16",
+        "M17"
+      ],
+      "eventPrinted": "M01-M17",
+      "pdf": "hl7.eu std26/ch08.html",
+      "page": null,
+      "table": "MFQ^M01-M17^MFQ_M01: Query for Master File Record",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Definition",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "QRF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Filter",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Continuation",
+      "chapterRef": "2"
+    }
+  ],
+  "variants": []
+}

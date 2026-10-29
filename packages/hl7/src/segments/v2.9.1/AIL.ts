@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, plParts, cweParts, type PL, type CodedElement } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * AIL - Appointment Information – Location Resource (HL7 v2.9.1)
@@ -58,8 +59,8 @@ export class AIL extends BaseSegment {
   }
 
   /** AIL-6 Start Date/Time (DTM, max , conditional) (chainable). */
-  startDateTime(value: string): this {
-    this.fields[5] = this.createField(value);
+  startDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

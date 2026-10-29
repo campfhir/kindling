@@ -14,7 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, cxParts, xpnParts, xtnParts, xadParts, drParts, type CodedElement, type CX, type XPN, type XTN, type XAD, type DR } from "../../utils/composites.ts";
-import { formatHL7Date, DateLayout, type HL7DateLayout } from "../../utils/hl7DateUtils.ts";
+import { formatHL7Date, DateTimeLayout, DateLayout, type HL7DateTimeLayout, type HL7DateLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * STF - Staff Identification (HL7 v2.9.1)
@@ -59,8 +59,8 @@ export class STF extends BaseSegment {
   }
 
   /** STF-6 Date/Time of Birth (DTM, max , optional) (chainable). */
-  dateTimeOfBirth(value: string): this {
-    this.fields[5] = this.createField(value);
+  dateTimeOfBirth(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -209,8 +209,8 @@ export class STF extends BaseSegment {
   }
 
   /** STF-31 Date/Time of Death (DTM, max , optional) (chainable). */
-  dateTimeOfDeath(value: string): this {
-    this.fields[30] = this.createField(value);
+  dateTimeOfDeath(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[30] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

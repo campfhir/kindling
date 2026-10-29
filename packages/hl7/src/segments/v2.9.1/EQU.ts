@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, eiParts, cweParts, type EI, type CodedElement } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * EQU - Equipment Detail (HL7 v2.9.1)
@@ -34,8 +35,8 @@ export class EQU extends BaseSegment {
   }
 
   /** EQU-2 Event Date/Time (DTM, max , required) (chainable). */
-  eventDateTime(value: string): this {
-    this.fields[1] = this.createField(value);
+  eventDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -58,8 +59,8 @@ export class EQU extends BaseSegment {
   }
 
   /** EQU-6 Expected date/time of the next status change (DTM, max , optional) (chainable). */
-  expectedDateTimeOfTheNextStatusChange(value: string): this {
-    this.fields[5] = this.createField(value);
+  expectedDateTimeOfTheNextStatusChange(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

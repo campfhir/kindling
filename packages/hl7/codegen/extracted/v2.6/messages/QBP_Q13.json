@@ -1,0 +1,673 @@
+{
+  "structure": "QBP_Q13",
+  "messageType": "QBP",
+  "triggerEvent": "Q13",
+  "version": "2.6",
+  "description": "Query By Parameter",
+  "title": "Query By Parameter",
+  "source": {
+    "pdf": "hl7.eu std26/ch05.html",
+    "pages": null,
+    "table": "QBP^Q13^QBP_Q13: Query By Parameter"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Z99"
+      ],
+      "eventPrinted": "Z99",
+      "pdf": "hl7.eu std26/ch05.html",
+      "page": null,
+      "table": "QBP^Z99^QBP_Q13: Query Grammar: QBP Message",
+      "identicalToPrimary": false
+    },
+    {
+      "events": [
+        "Q13"
+      ],
+      "eventPrinted": "Q13",
+      "pdf": "hl7.eu std26/ch05.html",
+      "page": null,
+      "table": "QBP^Q13^QBP_Q13: Query By Parameter",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Z91"
+      ],
+      "eventPrinted": "Z91",
+      "pdf": "hl7.eu std26/ch05.html",
+      "page": null,
+      "table": "QBP^Z91^QBP_Q13: Query Grammar: QBP Message",
+      "identicalToPrimary": false
+    },
+    {
+      "events": [
+        "Z93"
+      ],
+      "eventPrinted": "Z93",
+      "pdf": "hl7.eu std26/ch05.html",
+      "page": null,
+      "table": "QBP^Z93^QBP_Q13: Query Grammar: QBP Message",
+      "identicalToPrimary": false
+    },
+    {
+      "events": [
+        "Z95"
+      ],
+      "eventPrinted": "Z95",
+      "pdf": "hl7.eu std26/ch05.html",
+      "page": null,
+      "table": "QBP^Z95^QBP_Q13: Query Grammar: QBP Message",
+      "identicalToPrimary": false
+    },
+    {
+      "events": [
+        "Z77"
+      ],
+      "eventPrinted": "Z77",
+      "pdf": "hl7.eu std26/ch05.html",
+      "page": null,
+      "table": "QBP^Z77^QBP_Q13: Query Grammar: QBP Message",
+      "identicalToPrimary": false
+    },
+    {
+      "events": [
+        "Z75"
+      ],
+      "eventPrinted": "Z75",
+      "pdf": "hl7.eu std26/ch05.html",
+      "page": null,
+      "table": "QBP^Z75^QBP_Q13: Query Grammar: QBP Message",
+      "identicalToPrimary": false
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Event Type",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Parameter Definition Segment",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "group",
+      "name": "QBP",
+      "items": [
+        {
+          "kind": "placeholder",
+          "text": "[ ... ]",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "notation": "[ ... ]",
+          "description": "Optional query by example segments"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "RDF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Table Row Definition Segment",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "RCP",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Response Control Parameters",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Continuation Pointer",
+      "chapterRef": "2"
+    }
+  ],
+  "variants": [
+    {
+      "eventPrinted": "Z99",
+      "pdf": "hl7.eu std26/ch05.html",
+      "pages": null,
+      "table": "QBP^Z99^QBP_Q13: Query Grammar: QBP Message",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MSH",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Message Header Segment",
+          "chapterRef": "2.15.9"
+        },
+        {
+          "kind": "segment",
+          "name": "SFT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Software Segment",
+          "chapterRef": "2.15.12"
+        },
+        {
+          "kind": "segment",
+          "name": "UAC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "User Authentication Credential",
+          "chapterRef": "2.14.13"
+        },
+        {
+          "kind": "segment",
+          "name": "QPD",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Query Parameter Definition",
+          "chapterRef": "5.5.4"
+        },
+        {
+          "kind": "segment",
+          "name": "RDF",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Table Row Definition Segment",
+          "chapterRef": "5.5.6.6"
+        },
+        {
+          "kind": "segment",
+          "name": "RCP",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Response Control Parameter",
+          "chapterRef": "5.5.6"
+        },
+        {
+          "kind": "segment",
+          "name": "DSC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Continuation Pointer",
+          "chapterRef": "2.15.4"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "eventPrinted": "Z91",
+      "pdf": "hl7.eu std26/ch05.html",
+      "pages": null,
+      "table": "QBP^Z91^QBP_Q13: Query Grammar: QBP Message",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MSH",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Message Header Segment",
+          "chapterRef": "2.15.9"
+        },
+        {
+          "kind": "segment",
+          "name": "SFT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Software Segment",
+          "chapterRef": "2.15.12"
+        },
+        {
+          "kind": "segment",
+          "name": "UAC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "User Authentication Credential",
+          "chapterRef": "2.14.13"
+        },
+        {
+          "kind": "segment",
+          "name": "QPD",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Query Parameter Definition",
+          "chapterRef": "5.5.4"
+        },
+        {
+          "kind": "segment",
+          "name": "RDF",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Table Row Definition Segment",
+          "chapterRef": "0"
+        },
+        {
+          "kind": "segment",
+          "name": "RCP",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Response Control Parameter",
+          "chapterRef": "5.5.6"
+        },
+        {
+          "kind": "segment",
+          "name": "DSC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Continuation Pointer",
+          "chapterRef": "2.15.4"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "eventPrinted": "Z93",
+      "pdf": "hl7.eu std26/ch05.html",
+      "pages": null,
+      "table": "QBP^Z93^QBP_Q13: Query Grammar: QBP Message",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MSH",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Message Header Segment",
+          "chapterRef": "2.15.9"
+        },
+        {
+          "kind": "segment",
+          "name": "SFT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Software Segment",
+          "chapterRef": "2.15.12"
+        },
+        {
+          "kind": "segment",
+          "name": "UAC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "User Authentication Credential",
+          "chapterRef": "2.14.13"
+        },
+        {
+          "kind": "segment",
+          "name": "QPD",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Query Parameter Definition",
+          "chapterRef": "5.5.4"
+        },
+        {
+          "kind": "segment",
+          "name": "RDF",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Table Row Definition Segment",
+          "chapterRef": "0"
+        },
+        {
+          "kind": "segment",
+          "name": "RCP",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Response Control Parameter",
+          "chapterRef": "5.5.6"
+        },
+        {
+          "kind": "segment",
+          "name": "DSC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Continuation Pointer",
+          "chapterRef": "2.15.4"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "eventPrinted": "Z95",
+      "pdf": "hl7.eu std26/ch05.html",
+      "pages": null,
+      "table": "QBP^Z95^QBP_Q13: Query Grammar: QBP Message",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MSH",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Message Header Segment",
+          "chapterRef": "2.15.9"
+        },
+        {
+          "kind": "segment",
+          "name": "SFT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Software Segment",
+          "chapterRef": "2.15.12"
+        },
+        {
+          "kind": "segment",
+          "name": "UAC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "User Authentication Credential",
+          "chapterRef": "2.14.13"
+        },
+        {
+          "kind": "segment",
+          "name": "QPD",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Query Parameter Definition",
+          "chapterRef": "5.5.4"
+        },
+        {
+          "kind": "segment",
+          "name": "RDF",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Table Row Definition Segment",
+          "chapterRef": "0"
+        },
+        {
+          "kind": "segment",
+          "name": "RCP",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Response Control Parameter",
+          "chapterRef": "5.5.6"
+        },
+        {
+          "kind": "segment",
+          "name": "DSC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Continuation Pointer",
+          "chapterRef": "2.15.4"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "eventPrinted": "Z77",
+      "pdf": "hl7.eu std26/ch05.html",
+      "pages": null,
+      "table": "QBP^Z77^QBP_Q13: Query Grammar: QBP Message",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MSH",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Message Header Segment",
+          "chapterRef": "2.15.9"
+        },
+        {
+          "kind": "segment",
+          "name": "SFT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Software Segment",
+          "chapterRef": "2.15.12"
+        },
+        {
+          "kind": "segment",
+          "name": "UAC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "User Authentication Credential",
+          "chapterRef": "2.14.13"
+        },
+        {
+          "kind": "segment",
+          "name": "QPD",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Query Parameter Definition",
+          "chapterRef": "5.5.4"
+        },
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Identification Segment",
+          "chapterRef": "3.4.2"
+        },
+        {
+          "kind": "segment",
+          "name": "RCP",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Response Control Parameter",
+          "chapterRef": "5.5.6"
+        },
+        {
+          "kind": "segment",
+          "name": "RDF",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Table Row Definition Segment",
+          "chapterRef": "0"
+        },
+        {
+          "kind": "segment",
+          "name": "DSC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Continuation Pointer",
+          "chapterRef": "2.15.4"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "eventPrinted": "Z75",
+      "pdf": "hl7.eu std26/ch05.html",
+      "pages": null,
+      "table": "QBP^Z75^QBP_Q13: Query Grammar: QBP Message",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MSH",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Message Header Segment",
+          "chapterRef": "2.15.9"
+        },
+        {
+          "kind": "segment",
+          "name": "SFT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Software Segment",
+          "chapterRef": "2.15.12"
+        },
+        {
+          "kind": "segment",
+          "name": "UAC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "User Authentication Credential",
+          "chapterRef": "2.14.13"
+        },
+        {
+          "kind": "segment",
+          "name": "QPD",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Query Parameter Definition",
+          "chapterRef": "5.5.4"
+        },
+        {
+          "kind": "segment",
+          "name": "RCP",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Response Control Parameter",
+          "chapterRef": "5.5.6"
+        },
+        {
+          "kind": "segment",
+          "name": "RDF",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Table Row Definition Segment",
+          "chapterRef": "0"
+        },
+        {
+          "kind": "segment",
+          "name": "DSC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Continuation Pointer",
+          "chapterRef": "2.15.4"
+        }
+      ],
+      "problems": []
+    }
+  ]
+}

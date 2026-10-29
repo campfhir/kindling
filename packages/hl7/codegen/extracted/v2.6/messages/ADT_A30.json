@@ -1,0 +1,526 @@
+{
+  "structure": "ADT_A30",
+  "messageType": "ADT",
+  "triggerEvent": "A30",
+  "version": "2.6",
+  "description": "ADT Message",
+  "title": "ADT Message",
+  "sectionHeading": "3.3.30 ADT/ACK - Merge Person Information (Event A30)",
+  "source": {
+    "pdf": "hl7.eu std26/ch03.html",
+    "pages": null,
+    "table": "ADT^A30^ADT_A30: ADT Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A30"
+      ],
+      "eventPrinted": "A30",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "ADT^A30^ADT_A30: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A34"
+      ],
+      "eventPrinted": "A34",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "ADT^A34^ADT_A30: ADT Message",
+      "identicalToPrimary": false
+    },
+    {
+      "events": [
+        "A35"
+      ],
+      "eventPrinted": "A35",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "ADT^A35^ADT_A30: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A36"
+      ],
+      "eventPrinted": "A36",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "ADT^A36^ADT_A30: ADT Message",
+      "identicalToPrimary": false
+    },
+    {
+      "events": [
+        "A46"
+      ],
+      "eventPrinted": "A46",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "ADT^A46^ADT_A30: ADT Message",
+      "identicalToPrimary": false
+    },
+    {
+      "events": [
+        "A47"
+      ],
+      "eventPrinted": "A47",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "ADT^A47^ADT_A30: ADT Message",
+      "identicalToPrimary": false
+    },
+    {
+      "events": [
+        "A48"
+      ],
+      "eventPrinted": "A48",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "ADT^A48^ADT_A30: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A49"
+      ],
+      "eventPrinted": "A49",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "ADT^A49^ADT_A30: ADT Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Event Type",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PD1",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Additional Demographics",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "MRG",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Merge Information",
+      "chapterRef": "3"
+    }
+  ],
+  "variants": [
+    {
+      "eventPrinted": "A34",
+      "pdf": "hl7.eu std26/ch03.html",
+      "pages": null,
+      "table": "ADT^A34^ADT_A30: ADT Message",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MSH",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Message Header",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "SFT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Software Segment",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "UAC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "User Authentication Credential",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "EVN",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Event Type",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Additional Demographics",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Access Restrictions",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "MRG",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Merge Information",
+          "chapterRef": "3"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "eventPrinted": "A36",
+      "pdf": "hl7.eu std26/ch03.html",
+      "pages": null,
+      "table": "ADT^A36^ADT_A30: ADT Message",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MSH",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Message Header",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "SFT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Software Segment",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "UAC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "User Authentication Credential",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "EVN",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Event Type",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Additional Demographics",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Access Restrictions",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "MRG",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Merge Information",
+          "chapterRef": "3"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "eventPrinted": "A46",
+      "pdf": "hl7.eu std26/ch03.html",
+      "pages": null,
+      "table": "ADT^A46^ADT_A30: ADT Message",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MSH",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Message Header",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "SFT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Software Segment",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "UAC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "User Authentication Credential",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "EVN",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Event Type",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Additional Demographics",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Access Restrictions",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "MRG",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Merge Information",
+          "chapterRef": "3"
+        }
+      ],
+      "problems": []
+    },
+    {
+      "eventPrinted": "A47",
+      "pdf": "hl7.eu std26/ch03.html",
+      "pages": null,
+      "table": "ADT^A47^ADT_A30: ADT Message",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MSH",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Message Header",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "SFT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Software Segment",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "UAC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "User Authentication Credential",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "EVN",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Event Type",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Additional Demographics",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Access Restrictions",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "MRG",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Merge Information",
+          "chapterRef": "3"
+        }
+      ],
+      "problems": []
+    }
+  ]
+}

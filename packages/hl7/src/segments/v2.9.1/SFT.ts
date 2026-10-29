@@ -14,6 +14,7 @@ import { BaseSegment } from "../../types/segment.ts";
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, xonParts, type XON } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * SFT - Software Segment (HL7 v2.9.1)
@@ -58,8 +59,8 @@ export class SFT extends BaseSegment {
   }
 
   /** SFT-6 Software Install Date (DTM, max , optional) (chainable). */
-  softwareInstallDate(value: string): this {
-    this.fields[5] = this.createField(value);
+  softwareInstallDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

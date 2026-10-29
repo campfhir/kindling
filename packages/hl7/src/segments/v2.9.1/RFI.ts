@@ -13,7 +13,7 @@ import type { Result } from "../../types/result.ts";
 import { BaseSegment } from "../../types/segment.ts";
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
-
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * RFI - Request for Information (HL7 v2.9.1)
@@ -28,14 +28,14 @@ export class RFI extends BaseSegment {
   }
 
   /** RFI-1 Request Date (DTM, max , required) (chainable). */
-  requestDate(value: string): this {
-    this.fields[0] = this.createField(value);
+  requestDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[0] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** RFI-2 Response Due Date (DTM, max , required) (chainable). */
-  responseDueDate(value: string): this {
-    this.fields[1] = this.createField(value);
+  responseDueDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -46,8 +46,8 @@ export class RFI extends BaseSegment {
   }
 
   /** RFI-4 Date Additional Information Was Submitted (DTM, max , optional) (chainable). */
-  dateAdditionalInformationWasSubmitted(value: string): this {
-    this.fields[3] = this.createField(value);
+  dateAdditionalInformationWasSubmitted(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

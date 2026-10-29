@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, eiParts, xpnParts, type CodedElement, type EI, type XPN } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * GOL - Goal Detail (HL7 v2.9.1)
@@ -34,8 +35,8 @@ export class GOL extends BaseSegment {
   }
 
   /** GOL-2 Action Date/Time (DTM, max , required) (chainable). */
-  actionDateTime(value: string): this {
-    this.fields[1] = this.createField(value);
+  actionDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -64,14 +65,14 @@ export class GOL extends BaseSegment {
   }
 
   /** GOL-7 Goal Established Date/Time (DTM, max , optional) (chainable). */
-  goalEstablishedDateTime(value: string): this {
-    this.fields[6] = this.createField(value);
+  goalEstablishedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** GOL-8 Expected Goal Achieve Date/Time (DTM, max , optional) (chainable). */
-  expectedGoalAchieveDateTime(value: string): this {
-    this.fields[7] = this.createField(value);
+  expectedGoalAchieveDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -94,24 +95,24 @@ export class GOL extends BaseSegment {
   }
 
   /** GOL-12 Current Goal Review Date/Time (DTM, max , optional) (chainable). */
-  currentGoalReviewDateTime(value: string): this {
-    this.fields[11] = this.createField(value);
+  currentGoalReviewDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[11] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** GOL-13 Next Goal Review Date/Time (DTM, max , optional) (chainable). */
-  nextGoalReviewDateTime(value: string): this {
-    this.fields[12] = this.createField(value);
+  nextGoalReviewDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** GOL-14 Previous Goal Review Date/Time (DTM, max , optional) (chainable). */
-  previousGoalReviewDateTime(value: string): this {
-    this.fields[13] = this.createField(value);
+  previousGoalReviewDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[13] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** GOL-15 Goal Review Interval (, max , X) (chainable). */
+  /** GOL-15 Goal Review Interval (, max , W) (chainable). */
   goalReviewInterval(value: string): this {
     this.fields[14] = this.createField(value);
     return this;
@@ -136,8 +137,8 @@ export class GOL extends BaseSegment {
   }
 
   /** GOL-19 Goal Life Cycle Status Date/Time (DTM, max , optional) (chainable). */
-  goalLifeCycleStatusDateTime(value: string): this {
-    this.fields[18] = this.createField(value);
+  goalLifeCycleStatusDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[18] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

@@ -1,0 +1,32 @@
+/**
+ * Builder for CSU^C11 messages (HL7 v2.9.1).
+ *
+ * Structure: MSH [{ARV}] [{SFT}] [UAC] { PATIENT: PID [PD1] [{GSP}] [{GSR}] [{GSC}] [{PRT}] [{ARV}] [{NTE}] [ VISIT: PV1 [PV2] [{PRT}] ] CSR { STUDY_PHASE: [CSP] { STUDY_SCHEDULE: [CSS] { STUDY_OBSERVATION: [ ORC_GROUP: ORC [{PRT}] ] OBR [{PRT}] [{ TIMING_QTY: TQ1 [{TQ2}] }] OBX [{PRT}] } { STUDY_PHARM: [ COMMON_ORDER: ORC [{PRT}] ] { RX_ADMIN: RXA RXR [{PRT}] } } } } }
+ * Shares the CSU^C09 structure.
+ *
+ * @module
+ */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../../types/encoding.ts";
+import type { MSH } from "../../segments/v2.9.1/MSH.ts";
+import { CSU_C09, type CSU_C09Options, type PatientGroup, type VisitGroup, type StudyPhaseGroup, type StudyScheduleGroup, type StudyObservationGroup, type OrcGroup, type TimingQtyGroup, type StudyPharmGroup, type CommonOrderGroup, type RxAdminGroup } from "./CSU_C09.ts";
+
+export type { PatientGroup, VisitGroup, StudyPhaseGroup, StudyScheduleGroup, StudyObservationGroup, OrcGroup, TimingQtyGroup, StudyPharmGroup, CommonOrderGroup, RxAdminGroup };
+/** The optional segments and groups of an CSU^C11 (HL7 v2.9.1) message. */
+export type CSU_C11Options = CSU_C09Options;
+
+/** Builder for HL7 CSU^C11 (HL7 v2.9.1) messages. */
+export class CSU_C11<TMSH extends MSH = MSH> extends CSU_C09<TMSH> {
+  /** The message name used in error messages. */
+  protected override readonly messageName: string = "CSU_C11";
+}
+
+/** Builds an HL7 CSU^C11 (HL7 v2.9.1) message. */
+export function createCSU_C11<TMSH extends MSH = MSH>(
+  header: TMSH,
+  patients: PatientGroup[],
+  options: CSU_C11Options = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
+): CSU_C11<TMSH> {
+  return new CSU_C11(header, patients, options, encoding);
+}

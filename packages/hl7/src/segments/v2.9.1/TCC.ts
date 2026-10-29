@@ -39,7 +39,7 @@ export class TCC extends BaseSegment {
     return this;
   }
 
-  /** TCC-3 Specimen Source (, max , X) (chainable). */
+  /** TCC-3 Specimen Source (, max , W) (chainable). */
   specimenSource(value: string): this {
     this.fields[2] = this.createField(value);
     return this;

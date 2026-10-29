@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, eiParts, cweParts, xcnParts, xadParts, xtnParts, plParts, xonParts, type EI, type CodedElement, type XCN, type XAD, type XTN, type PL, type XON } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * ROL - Role (HL7 v2.9.1)
@@ -52,14 +53,14 @@ export class ROL extends BaseSegment {
   }
 
   /** ROL-5 Role Begin Date/Time (DTM, max , optional) (chainable). */
-  roleBeginDateTime(value: string): this {
-    this.fields[4] = this.createField(value);
+  roleBeginDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** ROL-6 Role End Date/Time (DTM, max , optional) (chainable). */
-  roleEndDateTime(value: string): this {
-    this.fields[5] = this.createField(value);
+  roleEndDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

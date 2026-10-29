@@ -14,7 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, plParts, cweParts, xcnParts, xonParts, type PL, type CodedElement, type XCN, type XON } from "../../utils/composites.ts";
-import { formatHL7Date, DateLayout, type HL7DateLayout } from "../../utils/hl7DateUtils.ts";
+import { formatHL7Date, DateTimeLayout, DateLayout, type HL7DateTimeLayout, type HL7DateLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * PV2 - Patient Visit - Additional Information (HL7 v2.9.1)
@@ -71,14 +71,14 @@ export class PV2 extends BaseSegment {
   }
 
   /** PV2-8 Expected Admit Date/Time (DTM, max , optional) (chainable). */
-  expectedAdmitDateTime(value: string): this {
-    this.fields[7] = this.createField(value);
+  expectedAdmitDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PV2-9 Expected Discharge Date/Time (DTM, max , optional) (chainable). */
-  expectedDischargeDateTime(value: string): this {
-    this.fields[8] = this.createField(value);
+  expectedDischargeDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[8] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -221,8 +221,8 @@ export class PV2 extends BaseSegment {
   }
 
   /** PV2-33 Expected Surgery Date and Time (DTM, max , optional) (chainable). */
-  expectedSurgeryDateAndTime(value: string): this {
-    this.fields[32] = this.createField(value);
+  expectedSurgeryDateAndTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[32] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -305,14 +305,14 @@ export class PV2 extends BaseSegment {
   }
 
   /** PV2-47 Expected LOA Return Date/Time (DTM, max , conditional) (chainable). */
-  expectedLoaReturnDateTime(value: string): this {
-    this.fields[46] = this.createField(value);
+  expectedLoaReturnDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[46] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PV2-48 Expected Pre-admission Testing Date/Time (DTM, max , optional) (chainable). */
-  expectedPreAdmissionTestingDateTime(value: string): this {
-    this.fields[47] = this.createField(value);
+  expectedPreAdmissionTestingDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[47] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

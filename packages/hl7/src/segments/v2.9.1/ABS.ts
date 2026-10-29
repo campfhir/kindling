@@ -14,6 +14,7 @@ import { BaseSegment } from "../../types/segment.ts";
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, xcnParts, cweParts, type XCN, type CodedElement } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * ABS - Abstract (HL7 v2.9.1)
@@ -46,8 +47,8 @@ export class ABS extends BaseSegment {
   }
 
   /** ABS-4 Date/Time of Attestation (DTM, max , optional) (chainable). */
-  dateTimeOfAttestation(value: string): this {
-    this.fields[3] = this.createField(value);
+  dateTimeOfAttestation(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -64,8 +65,8 @@ export class ABS extends BaseSegment {
   }
 
   /** ABS-7 Abstract Completion Date/Time (DTM, max , optional) (chainable). */
-  abstractCompletionDateTime(value: string): this {
-    this.fields[6] = this.createField(value);
+  abstractCompletionDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

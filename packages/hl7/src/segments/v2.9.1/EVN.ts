@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, xcnParts, type CodedElement, type XCN } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * EVN - Event Type (HL7 v2.9.1)
@@ -27,21 +28,21 @@ export class EVN extends BaseSegment {
     this.fields = [];
   }
 
-  /** EVN-1 Event Type Code (, max , X) (chainable). */
+  /** EVN-1 Event Type Code (, max , W) (chainable). */
   eventTypeCode(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
   /** EVN-2 Recorded Date/Time (DTM, max , required) (chainable). */
-  recordedDateTime(value: string): this {
-    this.fields[1] = this.createField(value);
+  recordedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** EVN-3 Date/Time Planned Event (DTM, max , optional) (chainable). */
-  dateTimePlannedEvent(value: string): this {
-    this.fields[2] = this.createField(value);
+  dateTimePlannedEvent(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -58,8 +59,8 @@ export class EVN extends BaseSegment {
   }
 
   /** EVN-6 Event Occurred (DTM, max , optional) (chainable). */
-  eventOccurred(value: string): this {
-    this.fields[5] = this.createField(value);
+  eventOccurred(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

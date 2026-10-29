@@ -14,7 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, cxParts, xonParts, xadParts, xpnParts, xtnParts, xcnParts, cpParts, type CodedElement, type CX, type XON, type XAD, type XPN, type XTN, type XCN, type CP } from "../../utils/composites.ts";
-import { formatHL7Date, DateLayout, type HL7DateLayout } from "../../utils/hl7DateUtils.ts";
+import { formatHL7Date, DateLayout, DateTimeLayout, type HL7DateLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * IN1 - Insurance (HL7 v2.9.1)
@@ -131,8 +131,8 @@ export class IN1 extends BaseSegment {
   }
 
   /** IN1-18 Insured's Date Of Birth (DTM, max , optional) (chainable). */
-  insuredSDateOfBirth(value: string): this {
-    this.fields[17] = this.createField(value);
+  insuredSDateOfBirth(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[17] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -197,8 +197,8 @@ export class IN1 extends BaseSegment {
   }
 
   /** IN1-29 Verification Date/Time (DTM, max , optional) (chainable). */
-  verificationDateTime(value: string): this {
-    this.fields[28] = this.createField(value);
+  verificationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[28] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -250,7 +250,7 @@ export class IN1 extends BaseSegment {
     return this;
   }
 
-  /** IN1-38 Policy Limit - Amount (, max , X) (chainable). */
+  /** IN1-38 Policy Limit - Amount (, max , W) (chainable). */
   policyLimitAmount(value: string): this {
     this.fields[37] = this.createField(value);
     return this;
@@ -262,13 +262,13 @@ export class IN1 extends BaseSegment {
     return this;
   }
 
-  /** IN1-40 Room Rate - Semi-Private (, max , X) (chainable). */
+  /** IN1-40 Room Rate - Semi-Private (, max , W) (chainable). */
   roomRateSemiPrivate(value: string): this {
     this.fields[39] = this.createField(value);
     return this;
   }
 
-  /** IN1-41 Room Rate - Private (, max , X) (chainable). */
+  /** IN1-41 Room Rate - Private (, max , W) (chainable). */
   roomRatePrivate(value: string): this {
     this.fields[40] = this.createField(value);
     return this;

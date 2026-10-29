@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, eiParts, cweParts, xcnParts, xonParts, plParts, xadParts, xtnParts, plnParts, type EI, type CodedElement, type XCN, type XON, type PL, type XAD, type XTN, type PLN } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * PRT - Participation Information (HL7 v2.9.1)
@@ -88,14 +89,14 @@ export class PRT extends BaseSegment {
   }
 
   /** PRT-11 Begin Date/Time (arrival time) (DTM, max , optional) (chainable). */
-  beginDateTimeArrivalTime(value: string): this {
-    this.fields[10] = this.createField(value);
+  beginDateTimeArrivalTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[10] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PRT-12 End Date/Time (departure time) (DTM, max , optional) (chainable). */
-  endDateTimeDepartureTime(value: string): this {
-    this.fields[11] = this.createField(value);
+  endDateTimeDepartureTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[11] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -124,14 +125,14 @@ export class PRT extends BaseSegment {
   }
 
   /** PRT-17 Device Manufacture Date (DTM, max , optional) (chainable). */
-  deviceManufactureDate(value: string): this {
-    this.fields[16] = this.createField(value);
+  deviceManufactureDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[16] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** PRT-18 Device Expiry Date (DTM, max , optional) (chainable). */
-  deviceExpiryDate(value: string): this {
-    this.fields[17] = this.createField(value);
+  deviceExpiryDate(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[17] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 

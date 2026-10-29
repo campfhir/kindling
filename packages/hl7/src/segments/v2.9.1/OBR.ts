@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, eiParts, cweParts, cqParts, xcnParts, xtnParts, cxParts, type EI, type CodedElement, type CQ, type XCN, type XTN, type CX } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * OBR - Observation Request (HL7 v2.9.1)
@@ -51,27 +52,27 @@ export class OBR extends BaseSegment {
     return this;
   }
 
-  /** OBR-5 Priority (, max , X) (chainable). */
+  /** OBR-5 Priority (, max , W) (chainable). */
   priority(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** OBR-6 Requested Date/Time (, max , X) (chainable). */
+  /** OBR-6 Requested Date/Time (, max , W) (chainable). */
   requestedDateTime(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
   }
 
   /** OBR-7 Observation Date/Time # (DTM, max , conditional) (chainable). */
-  observationDateTime(value: string): this {
-    this.fields[6] = this.createField(value);
+  observationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
   /** OBR-8 Observation End Date/Time # (DTM, max , optional) (chainable). */
-  observationEndDateTime(value: string): this {
-    this.fields[7] = this.createField(value);
+  observationEndDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -105,19 +106,19 @@ export class OBR extends BaseSegment {
     return this;
   }
 
-  /** OBR-14 Specimen Received Date/Time * (, max , X) (chainable). */
+  /** OBR-14 Specimen Received Date/Time * (, max , W) (chainable). */
   specimenReceivedDateTime(value: string): this {
     this.fields[13] = this.createField(value);
     return this;
   }
 
-  /** OBR-15 Specimen Source (, max , X) (chainable). */
+  /** OBR-15 Specimen Source (, max , W) (chainable). */
   specimenSource(value: string): this {
     this.fields[14] = this.createField(value);
     return this;
   }
 
-  /** OBR-16 Ordering Provider (, max , X) (chainable). */
+  /** OBR-16 Ordering Provider (, max , W) (chainable). */
   orderingProvider(value: string): this {
     this.fields[15] = this.createField(value);
     return this;
@@ -154,8 +155,8 @@ export class OBR extends BaseSegment {
   }
 
   /** OBR-22 Results Rpt/Status Chng – Date/Time + (DTM, max , conditional) (chainable). */
-  resultsRptStatusChngDateTime(value: string): this {
-    this.fields[21] = this.createField(value);
+  resultsRptStatusChngDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[21] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -183,13 +184,13 @@ export class OBR extends BaseSegment {
     return this;
   }
 
-  /** OBR-27 Quantity/Timing (, max , X, repeating) (chainable). */
+  /** OBR-27 Quantity/Timing (, max , W, repeating) (chainable). */
   quantityTiming(...values: Repeated<string>[]): this {
     this.fields[26] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** OBR-28 Result Copies To (, max , X) (chainable). */
+  /** OBR-28 Result Copies To (, max , W) (chainable). */
   resultCopiesTo(value: string): this {
     this.fields[27] = this.createField(value);
     return this;
@@ -213,33 +214,33 @@ export class OBR extends BaseSegment {
     return this;
   }
 
-  /** OBR-32 Principal Result Interpreter + (, max , X) (chainable). */
+  /** OBR-32 Principal Result Interpreter + (, max , W) (chainable). */
   principalResultInterpreter(value: string): this {
     this.fields[31] = this.createField(value);
     return this;
   }
 
-  /** OBR-33 Assistant Result Interpreter + (, max , X) (chainable). */
+  /** OBR-33 Assistant Result Interpreter + (, max , W) (chainable). */
   assistantResultInterpreter(value: string): this {
     this.fields[32] = this.createField(value);
     return this;
   }
 
-  /** OBR-34 Technician + (, max , X) (chainable). */
+  /** OBR-34 Technician + (, max , W) (chainable). */
   technician(value: string): this {
     this.fields[33] = this.createField(value);
     return this;
   }
 
-  /** OBR-35 Transcriptionist + (, max , X) (chainable). */
+  /** OBR-35 Transcriptionist + (, max , W) (chainable). */
   transcriptionist(value: string): this {
     this.fields[34] = this.createField(value);
     return this;
   }
 
   /** OBR-36 Scheduled Date/Time + (DTM, max , optional) (chainable). */
-  scheduledDateTime(value: string): this {
-    this.fields[35] = this.createField(value);
+  scheduledDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[35] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -321,7 +322,7 @@ export class OBR extends BaseSegment {
     return this;
   }
 
-  /** OBR-50 Parent Universal Service Identifier (, max , X) (chainable). */
+  /** OBR-50 Parent Universal Service Identifier (, max , W) (chainable). */
   parentUniversalServiceIdentifier(value: string): this {
     this.fields[49] = this.createField(value);
     return this;

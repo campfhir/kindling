@@ -14,6 +14,7 @@ import { BaseSegment, repetitions, type Repeated } from "../../types/segment.ts"
 import type { EncodingCharacters } from "../../types/encoding.ts";
 import { ParserUtils } from "../../types/parser.ts";
 import { components, cweParts, xcnParts, cqParts, xadParts, xtnParts, eiParts, type CodedElement, type XCN, type CQ, type XAD, type XTN, type EI } from "../../utils/composites.ts";
+import { formatHL7Date, DateTimeLayout, type HL7DateTimeLayout } from "../../utils/hl7DateUtils.ts";
 
 /**
  * RXD - Pharmacy/Treatment Dispense (HL7 v2.9.1)
@@ -40,8 +41,8 @@ export class RXD extends BaseSegment {
   }
 
   /** RXD-3 Date/Time Dispensed (DTM, max , required) (chainable). */
-  dateTimeDispensed(value: string): this {
-    this.fields[2] = this.createField(value);
+  dateTimeDispensed(value: string | Date, format?: HL7DateTimeLayout): this {
+    this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
@@ -99,7 +100,7 @@ export class RXD extends BaseSegment {
     return this;
   }
 
-  /** RXD-13 Dispense-to Location (, max , X) (chainable). */
+  /** RXD-13 Dispense-to Location (, max , W) (chainable). */
   dispenseToLocation(value: string): this {
     this.fields[12] = this.createField(value);
     return this;
@@ -136,8 +137,8 @@ export class RXD extends BaseSegment {
   }
 
   /** RXD-19 Substance Expiration Date (DTM, max , optional, repeating) (chainable). */
-  substanceExpirationDate(...values: Repeated<string>[]): this {
-    this.fields[18] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
+  substanceExpirationDate(...values: Repeated<string | Date>[]): this {
+    this.fields[18] = this.createRepeatingField(repetitions(values).map((v) => this.createField(formatHL7Date(v, DateTimeLayout))));
     return this;
   }
 

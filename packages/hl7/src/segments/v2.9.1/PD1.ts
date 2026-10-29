@@ -46,7 +46,7 @@ export class PD1 extends BaseSegment {
     return this;
   }
 
-  /** PD1-4 Patient Primary Care Provider Name & ID No. (, max , X) (chainable). */
+  /** PD1-4 Patient Primary Care Provider Name & ID No. (, max , W) (chainable). */
   patientPrimaryCareProviderNameIdNo(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
