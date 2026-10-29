@@ -23,7 +23,6 @@ export const V2_6: VersionSchema = {
     "QBP_Q13",
     "QVR_Q17",
     "RSP_K11",
-    "RSP_Z88",
     "SCN_S37",
     "SDN_S36",
     "SDR_S31",

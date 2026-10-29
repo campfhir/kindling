@@ -350,6 +350,7 @@ export { parseRSP_K31 } from "./RSP_K31_Parser.ts";
 export { parseRSP_Z82 } from "./RSP_Z82_Parser.ts";
 export { parseRSP_Z84 } from "./RSP_Z84_Parser.ts";
 export { parseRSP_Z86 } from "./RSP_Z86_Parser.ts";
+export { parseRSP_Z88 } from "./RSP_Z88_Parser.ts";
 export { parseRSP_Z90 } from "./RSP_Z90_Parser.ts";
 export { parseRTB_K13 } from "./RTB_K13_Parser.ts";
 export { parseRTB_Z74 } from "./RTB_Z74_Parser.ts";

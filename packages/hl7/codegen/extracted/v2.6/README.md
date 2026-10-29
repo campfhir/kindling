@@ -7,17 +7,16 @@ message ledgers against Caristix and HAPI.
 
 - Segments: 171, fields: 2466.
 - Message tables: 330 (plus 124 per-event ACK tables, the general acknowledgment, not extracted), structures: 215, events in the index: 423, event tables that differ from their primary: 47.
-- Withdrawn sections: none recorded (the pages carry no "withdrawn" notes). Tables with no rows (cross-references): QBP^Q25.
+- Withdrawn sections (a heading followed by an "Attention ... withdrawn" note): none.
+- Withdrawn segments: none.
+- Tables with no rows (cross-references): QBP^Q25.
 
 ## Problems found while parsing
 - BRP^O30^BRP_O30: group RESPONSE is not closed (opened with "[")
 - RTB^Znn^RTB_K13: group ROW_DEFINITION: brackets "[" / "["
-- RSP^Z88^RSP_Z88: group VISIT: brackets "]" / "]"
-- RSP^Z88^RSP_Z88: group ALLERGY: brackets "[" / "}"
-- RSP^Z88^RSP_Z88: group PATIENT is not closed (opened with "[")
-- RSP^Z88^RSP_Z88: group QUERY_RESPONSE is not closed (opened with "{")
 
 ## Readings applied by the parser
+- RSP^Z88^RSP_Z88: "] --- VISIT begin" closes the open group VISIT; read as its end
 - MF: a group of MFE and a placeholder row is read as MFE alone
 - MF_SITE_DEFINED: a group of MFE and a placeholder row is read as MFE alone
 - MF_QUERY: a group of MFE and a placeholder row is read as MFE alone

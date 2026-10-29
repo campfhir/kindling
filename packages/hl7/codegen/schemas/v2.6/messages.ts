@@ -2870,6 +2870,64 @@ const v2_6_RSP_Z86_STRUCTURE: StructureItem[] = [
   opt("DSC"),
 ];
 
+const v2_6_RSP_Z88_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  req("MSA"),
+  opt("ERR"),
+  req("QAK"),
+  req("QPD"),
+  req("RCP"),
+  group("QUERY_RESPONSE", "required", "repeating", [
+    group("PATIENT", "optional", "single", [
+      req("PID"),
+      opt("PD1"),
+      optList("NTE"),
+      group("ALLERGY", "optional", "single", [
+        reqList("AL1"),
+        group("VISIT", "optional", "single", [
+          req("PV1"),
+          opt("PV2"),
+        ]),
+      ]),
+    ]),
+    group("COMMON_ORDER", "required", "repeating", [
+      req("ORC"),
+      group("TIMING", "optional", "repeating", [
+        req("TQ1"),
+        optList("TQ2"),
+      ]),
+      group("ORDER_DETAIL", "optional", "single", [
+        req("RXO"),
+        optList("NTE"),
+        reqList("RXR"),
+        group("COMPONENT", "optional", "single", [
+          reqList("RXC"),
+          optList("NTE"),
+        ]),
+      ]),
+      group("ORDER_ENCODED", "optional", "single", [
+        req("RXE"),
+        group("TIMING_ENCODED", "optional", "repeating", [
+          req("TQ1"),
+          optList("TQ2"),
+        ]),
+        reqList("RXR"),
+        optList("RXC"),
+      ]),
+      req("RXD"),
+      reqList("RXR"),
+      optList("RXC"),
+      group("OBSERVATION", "required", "repeating", [
+        opt("OBX"),
+        optList("NTE"),
+      ]),
+    ]),
+  ]),
+  req("DSC"),
+];
+
 const v2_6_RSP_Z90_STRUCTURE: StructureItem[] = [
   req("MSH"),
   optList("SFT"),
@@ -6038,6 +6096,7 @@ export const V2_6_MESSAGES: MessageSchema[] = [
   { messageType: "QSX", triggerEvent: "J02", version: "2.6", structure: v2_6_QCN_J01_STRUCTURE, baseMessage: "QCN_J01" },
   { messageType: "RSP", triggerEvent: "Z82", version: "2.6", structure: v2_6_RSP_Z82_STRUCTURE },
   { messageType: "RSP", triggerEvent: "Z86", version: "2.6", structure: v2_6_RSP_Z86_STRUCTURE },
+  { messageType: "RSP", triggerEvent: "Z88", version: "2.6", structure: v2_6_RSP_Z88_STRUCTURE },
   { messageType: "RSP", triggerEvent: "Z90", version: "2.6", structure: v2_6_RSP_Z90_STRUCTURE },
   { messageType: "UDM", triggerEvent: "Q05", version: "2.6", structure: v2_6_UDM_Q05_STRUCTURE },
   { messageType: "DSR", triggerEvent: "Q01", version: "2.6", structure: v2_6_DSR_Q01_STRUCTURE },

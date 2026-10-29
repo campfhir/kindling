@@ -353,6 +353,7 @@ import { parseRSP_K31 } from "./RSP_K31_Parser.ts";
 import { parseRSP_Z82 } from "./RSP_Z82_Parser.ts";
 import { parseRSP_Z84 } from "./RSP_Z84_Parser.ts";
 import { parseRSP_Z86 } from "./RSP_Z86_Parser.ts";
+import { parseRSP_Z88 } from "./RSP_Z88_Parser.ts";
 import { parseRSP_Z90 } from "./RSP_Z90_Parser.ts";
 import { parseRTB_K13 } from "./RTB_K13_Parser.ts";
 import { parseRTB_Z74 } from "./RTB_Z74_Parser.ts";
@@ -768,6 +769,7 @@ export const MESSAGES = {
   RSP_Z82: parseRSP_Z82,
   RSP_Z84: parseRSP_Z84,
   RSP_Z86: parseRSP_Z86,
+  RSP_Z88: parseRSP_Z88,
   RSP_Z90: parseRSP_Z90,
   RTB_K13: parseRTB_K13,
   RTB_Z74: parseRTB_Z74,

@@ -350,6 +350,7 @@ export { createRSP_K31 } from "./RSP_K31.ts";
 export { createRSP_Z82 } from "./RSP_Z82.ts";
 export { createRSP_Z84 } from "./RSP_Z84.ts";
 export { createRSP_Z86 } from "./RSP_Z86.ts";
+export { createRSP_Z88 } from "./RSP_Z88.ts";
 export { createRSP_Z90 } from "./RSP_Z90.ts";
 export { createRTB_K13 } from "./RTB_K13.ts";
 export { createRTB_Z74 } from "./RTB_Z74.ts";
