@@ -6,6 +6,8 @@
  *   hl7eu/<SEG>.htm            one attribute table per segment (Seq, Description, Length, Table, r/o/c, Rep#,
  *                              Item, Data Structure) -> segments.json
  *   hl7eu/chapters/chNN.htm    every message table, captioned `TYPE^EVENT^STRUCTURE` -> messages/
+ *   hl7org/chapters/chNN.htm   a chapter converted from the official PDF (pdf-chapter.ts), used in place of the
+ *                              hl7.eu page of that chapter; its tables name the PDF as their source
  *
  * The message table notation is the standard's own: `[ ]` optional, `{ }` repeating, `< A | B >` a choice
  * across rows, and `--- NAME begin` / `--- NAME end` rows for groups. A row whose brackets do not pair is
@@ -14,7 +16,7 @@
  * Usage:  npx tsx codegen/extract/from-hl7eu.ts <version> <sources-dir> <out-dir>
  *   <sources-dir> is the folder fetch-sources.sh wrote for the version; <out-dir> is codegen/extracted/<version>.
  */
-import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const [version, sourcesDir, outDir] = process.argv.slice(2);
@@ -109,12 +111,19 @@ function cardinality(open: string[], close: string[], notation: string): { min: 
   return { min: optionalOpen ? 0 : 1, max: repeatingOpen ? "*" : 1 };
 }
 
-type Frame = { item: Item; open: string[]; notation: string; alt?: Item };
+type Frame = { item: Item; open: string[]; notation: string; alt?: Item; pipes?: boolean };
 /** Readings the parser applied to a table, reported in the README (not problems: the page is unambiguous to a reader). */
 const readings: string[] = [];
 const ORDER_DETAIL = ["OBR", "RQD", "RQ1", "RXO", "ODS", "ODT"];
 /** Closes a group: cardinality from its opening and closing brackets, flagged when they do not pair. */
 function closeGroup(frame: Frame, closers: string[], closerRow: string, into: Item[], problemsOut: string[]): void {
+  // "<" ... ">" around one group and no "|" (v2.8 chapter 16: < --- INVOICE_INFORMATION_SUBMIT begin ... >) is a
+  // choice of one alternative: that group, which the earlier versions print as a plain group.
+  if (frame.item.kind === "choice" && frame.item.alternatives?.length === 1 && !frame.pipes) {
+    readings.push(`${frame.item.name ?? "(unnamed)"}: a choice of one group ("<" ... ">" with no "|") is read as that group`);
+    frame.item = { kind: "group", ...(frame.item.name ? { name: frame.item.name } : {}), items: frame.item.alternatives[0].items, minOccurs: 1, maxOccurs: 1, usage: null, page: null };
+    frame.alt = undefined;
+  }
   const c = cardinality(frame.open, closers, frame.notation);
   Object.assign(frame.item, { minOccurs: c.min, maxOccurs: c.max });
   if (c.mismatch) {
@@ -150,7 +159,7 @@ const kind = (item: Item) => item.kind;
 
 function parseTable(rows: string[][], file: string, problemsOut: string[]): Item[] {
   const root: Item[] = [];
-  const stack: { item: Item; open: string[]; notation: string }[] = [];
+  const stack: Frame[] = [];
   const current = () => (stack.length ? (stack[stack.length - 1].alt?.items ?? stack[stack.length - 1].item.items!) : root);
   let choice: { open: string[]; oneOf: string[]; notation: string; description?: string; chapterRef?: string; etc?: boolean } | undefined;
   const extras = (description: string, chapterRef: string, status: string) => ({
@@ -175,6 +184,8 @@ function parseTable(rows: string[][], file: string, problemsOut: string[]): Item
       isBegin = false;
       isEnd = true;
     }
+    // a "|" anywhere inside a choice of groups (also on a segment row) means it has alternatives: never read as one group
+    if (tokens.includes("|")) for (const f of stack) if (f.alt) f.pipes = true;
     // A "|" row inside a choice of groups starts its next alternative.
     const top = stack[stack.length - 1];
     if (top?.alt && tokens.length === 1 && tokens[0] === "|") {
@@ -249,9 +260,20 @@ const tables: Table[] = [];
 const crossReferences: { type: string; events: string[]; eventPrinted: string; structure: string; title: string; file: string; text: string }[] = [];
 let perEventAck = 0;
 const chapterFiles = readdirSync(join(sourcesDir, "hl7eu/chapters")).filter((f) => /^ch\d+[A-Za-z]?\.htm$/.test(f)).sort();
+// A chapter converted from the official PDF by pdf-chapter.ts (hl7org/chapters/chNN.htm) replaces the hl7.eu page of
+// that chapter, where hl7.eu lacks it or prints another chapter there (v2.8 ch16).
+const hl7orgDir = join(sourcesDir, "hl7org/chapters");
+const fromPdf = new Map<string, string>(); // file -> "hl7.org V28_CH16_eClaims.pdf"
+if (existsSync(hl7orgDir)) {
+  for (const f of readdirSync(hl7orgDir).filter((f) => /^ch\d+[A-Za-z]?\.htm$/.test(f))) {
+    fromPdf.set(f, read(join(hl7orgDir, f)).match(/<!-- source: (hl7\.org \S+)/)?.[1] ?? `hl7.org ${f}`);
+    if (!chapterFiles.includes(f)) chapterFiles.push(f);
+  }
+  chapterFiles.sort();
+}
 const tocHeadings: { number: string; text: string }[] = [];
 for (const file of chapterFiles) {
-  const html = read(join(sourcesDir, "hl7eu/chapters", file));
+  const html = read(join(fromPdf.has(file) ? hl7orgDir : join(sourcesDir, "hl7eu/chapters"), file));
   // A section heading followed by an "Attention ... withdrawn" note: a withdrawn message (its type is the heading's first
   // code) or, when the heading names a segment, a withdrawn segment. Field headings ("OBR-5 ...") are not sections.
   const headingTags = [...html.matchAll(/<H[2-5][^>]*>([\s\S]*?)<\/H[2-5]>/gi)];
@@ -271,7 +293,8 @@ for (const file of chapterFiles) {
   const usedCaptions = new Set<number>();
   // Each table runs from its own <TABLE> to the next </TABLE> or <TABLE>, whichever comes first: hl7.eu leaves some
   // tables unclosed, and a plain non-greedy match from such a table would swallow the message table after it.
-  const starts = [...html.matchAll(/<TABLE[^>]*>/gi)];
+  // <TABLE ...> or <TABLE>, not hl7.eu's stray <TABLECELL> tags (v2.8), which are no tables
+  const starts = [...html.matchAll(/<TABLE(?=[\s>])[^>]*>/gi)];
   for (const [n, start] of starts.entries()) {
     const from = start.index! + start[0].length;
     const close = html.toLowerCase().indexOf("</table>", from);
@@ -293,7 +316,7 @@ for (const file of chapterFiles) {
       const split = label.match(/^(\S+?)\s*:\s*(.*)$/); // "ORA^R33^ORA_R33 : Observation Report Acknowledgement"
       const between = closeAt !== -1 ? before.slice(closeAt + 4) : "";
       // only a caption that directly precedes the table (no other paragraph or table in between)
-      if (split && CAPTION.test(split[1]) && !/<p[\s>]|<table/i.test(between) && head.length === 0) {
+      if (split && CAPTION.test(split[1]) && !/<p[\s>]|<table[\s>]/i.test(between) && head.length === 0) {
         caption = split[1].match(CAPTION);
         head = [split[1], split[2]];
         body = rows;
@@ -301,6 +324,16 @@ for (const file of chapterFiles) {
       }
     }
     if (!caption) continue;
+    // A table that holds only the header row ("Segments"), its rows printed in the next <TABLE> (v2.8 DBC^O41):
+    // the next table's rows are this table's.
+    if (body.length > 0 && body.every((r) => /^segments?$/i.test(cells(r, "TD")[0] ?? "")) && n + 1 < starts.length) {
+      const from2 = starts[n + 1].index! + starts[n + 1][0].length;
+      const close2 = html.toLowerCase().indexOf("</table>", from2);
+      const next2 = n + 2 < starts.length ? starts[n + 2].index! : html.length;
+      const rows2 = [...html.slice(from2, close2 === -1 ? next2 : Math.min(close2, next2)).matchAll(/<TR[^>]*>([\s\S]*?)<\/TR>/gi)].map((r) => r[1]);
+      readings.push(`${caption[0]}: the table holds only its header row; the rows of the next table are read as its rows`);
+      body = rows2;
+    }
     addTable(caption, head[1] ?? "", body, file);
   }
   // Rows printed after a caption with no <TABLE> around them (a malformed page: v2.7 QBP^Q21 follows a query profile
@@ -312,7 +345,7 @@ for (const file of chapterFiles) {
     const caption = split?.[1].match(CAPTION);
     if (!split || !caption) continue;
     const after = html.slice(p.index! + p[0].length);
-    const stop = Math.min(...[after.search(/<p[\s>]/i), after.search(/<table/i)].map((i) => (i === -1 ? after.length : i)));
+    const stop = Math.min(...[after.search(/<p[\s>]/i), after.search(/<table[\s>]/i)].map((i) => (i === -1 ? after.length : i)));
     const rows = [...after.slice(0, stop).matchAll(/<TR[^>]*>([\s\S]*?)<\/TR>/gi)].map((r) => r[1]);
     const hasSegments = rows.some((r) => cells(r, "TD").some((c) => /\b[A-Z][A-Z0-9]{2}\b/.test(c) && SEGMENT.test(c.replace(/[[\]{}<>|\s]/g, ""))));
     const crossReference = rows.some((r) => SEE.test(cells(r, "TD").filter(Boolean).join(" "))); // "see" and "3.3.56" can sit in separate cells
@@ -377,7 +410,7 @@ interface Occurrence { table: Table; event: string }
 const byStructure = new Map<string, Occurrence[]>();
 for (const t of tables) for (const event of t.events) byStructure.set(t.structure, [...(byStructure.get(t.structure) ?? []), { table: t, event }]);
 const eventLabel = (t: Table) => `${t.type}^${t.eventPrinted}^${t.structure}: ${t.title}`;
-const pdf = (t: Table) => `hl7.eu std${short}/${t.file.replace(".htm", ".html")}`;
+const pdf = (t: Table) => fromPdf.get(t.file) ?? `hl7.eu std${short}/${t.file.replace(".htm", ".html")}`;
 
 /** "3.3.1 ADT/ACK - Admit/Visit Notification (Event A01)": the contents entry that names this event. */
 function sectionFor(type: string, event: string): string | undefined {
@@ -445,7 +478,7 @@ Built by \`codegen/extract/from-hl7eu.ts ${version}\` from the hl7.eu pages that
 (the manifest is \`codegen/validate/sources/${version}.tsv\`). It is a deterministic parse of the pages; no value was chosen
 by hand. hl7.eu republishes the standard, so this is not the official PDF. The independent check is the segment and
 message ledgers against Caristix and HAPI.
-
+${fromPdf.size ? `\nChapters read from the official PDF instead of the hl7.eu page (\`codegen/extract/pdf-chapter.ts\`; name and SHA-256 in \`codegen/validate/sources/${version}-hl7org.tsv\`): ${[...fromPdf].map(([f, src]) => `${f} (${src})`).join(", ")}.\n` : ""}
 - Segments: ${Object.keys(segments).length}, fields: ${fieldCount}.
 - Message tables: ${tables.length} (plus ${perEventAck} per-event ACK tables, the general acknowledgment, not extracted), structures: ${structureFiles}, events in the index: ${index.length}, event tables that differ from their primary: ${variants}.
 - Withdrawn sections (a heading followed by an "Attention ... withdrawn" note): ${withdrawnSections.map((w) => `${w.heading} (${w.file})`).join("; ") || "none"}.

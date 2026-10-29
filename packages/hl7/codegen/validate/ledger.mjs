@@ -344,7 +344,7 @@ for (const seg of segments) {
   const ours = readOurs(seg);
   const tests = readTests(seg, ours);
   const counts = { hl7eu: eu?.length, caristix: cx?.length, hapi: hp?.length, ours: ours.count };
-  const countDecision = NOTES[seg]?.count
+  const countDecision = NOTES[seg]?.count !== undefined
     ? { value: String(NOTES[seg].count), status: "manual", note: `decided by hand, see the note below` }
     : decide(eu?.length, cx?.length, hp?.length, (n) => String(n));
   const max = Math.max(eu?.length ?? 0, cx?.length ?? 0, hp?.length ?? 0, ours.count);

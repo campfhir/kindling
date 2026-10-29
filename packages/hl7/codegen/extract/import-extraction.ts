@@ -238,9 +238,23 @@ for (const e of index.filter((x) => x.status !== "withdrawn")) {
   eventsOut.push({ ...common, items: variant.items, where: `${e.structure} (variant ${variant.eventPrinted})` });
 }
 
+// Events the standard defines without a table of their own, by naming the structure they use in the text ("The message
+// structure for QBP^Z75^QPB_Q13 can be found in 5.3.1.2"): they wrap that structure's event. Recorded with the citation:
+//   { "sharedStructure": { "QBP_Z75": { "structure": "QBP_Q13", "reason": "citation" } } }
+const SHARED_STRUCTURE: Record<string, { structure: string; reason: string }> = existsSync(join(DIR, "overrides.json")) ? (readJson(join(DIR, "overrides.json")).sharedStructure ?? {}) : {};
+for (const [name, { structure, reason }] of Object.entries(SHARED_STRUCTURE)) {
+  if (eventsOut.some((e) => e.name === name)) throw new Error(`sharedStructure: ${name} already has a table`);
+  const [messageType, triggerEvent] = name.split("_");
+  // the structure's primary event is the one generated with its table (QBP_Q13 is printed only as QBP^Z99^QBP_Q13)
+  const file = loadFile(structure);
+  const primary = file.triggerEvent ? `${file.messageType}_${file.triggerEvent}` : file.messageType;
+  eventsOut.push({ name, messageType, triggerEvent, baseMessage: primary });
+  notes.events.push(`${name}: no table of its own; uses the ${structure} structure the text names (wraps ${primary}). ${reason}`);
+}
+
 // Structure fixes the rule calls for (Caristix and HAPI agree against hl7.eu), recorded with their reason in overrides.json:
 //   { "structureFixes": [{ "message": "ADT_A13", "insertAfter": "PD1", "items": [{ "name": "ARV", "min": 0, "max": "*" }], "reason": "..." }] }
-// or, to change how often a segment occurs: { "message": "<MSG>", "set": "<SEG>", "min": 0, "max": "*", "reason": "..." }
+// or, to change how often a segment or group occurs (every one of that name): { "message": "<MSG>", "set": "<SEG or GROUP>", "min": 0, "max": "*", "reason": "..." }
 const overridesPath = join(DIR, "overrides.json");
 type StructureFix = { message: string; reason: string } & (
   | { insertAfter: string; items: { name: string; min: 0 | 1; max: 1 | "*" }[] }
@@ -252,10 +266,14 @@ function insertAfter(items: Item[], after: string, add: Item[]): boolean {
   if (at >= 0) { items.splice(at + 1, 0, ...add); return true; }
   return items.some((i) => i.items && insertAfter(i.items, after, add));
 }
+/** Sets how often every segment or group of that name occurs (a group name can repeat at two levels: all are set). */
 function setOccurs(items: Item[], name: string, min: 0 | 1, max: 1 | "*"): boolean {
-  const seg = items.find((i) => i.kind === "segment" && i.name === name);
-  if (seg) { seg.minOccurs = min; seg.maxOccurs = max; return true; }
-  return items.some((i) => i.items && setOccurs(i.items, name, min, max));
+  let found = false;
+  for (const i of items) {
+    if ((i.kind === "segment" || i.kind === "group") && i.name === name) { i.minOccurs = min; i.maxOccurs = max; found = true; }
+    if (i.items && setOccurs(i.items, name, min, max)) found = true;
+  }
+  return found;
 }
 for (const fix of structureFixes) {
   const target = eventsOut.find((e) => e.name === fix.message && e.items);

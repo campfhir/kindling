@@ -1,0 +1,109 @@
+{
+  "structure": "SLR_S28",
+  "messageType": "SLR",
+  "triggerEvent": "S28",
+  "version": "2.8",
+  "description": "Request New Sterilization",
+  "title": "Request New Sterilization",
+  "sectionHeading": "17.5.1 SLR/ACK - Request New Sterilization Lot (Event S28)",
+  "source": {
+    "pdf": "hl7.eu std28/ch17.html",
+    "pages": null,
+    "table": "SLR^S28^SLR_S28: Request New Sterilization"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "S28"
+      ],
+      "eventPrinted": "S28",
+      "pdf": "hl7.eu std28/ch17.html",
+      "page": null,
+      "table": "SLR^S28^SLR_S28: Request New Sterilization",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "S29"
+      ],
+      "eventPrinted": "S29",
+      "pdf": "hl7.eu std28/ch17.html",
+      "page": null,
+      "table": "SLR^S29^SLR_S28: Request Sterilization Lot Deletion",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "S30"
+      ],
+      "eventPrinted": "S30",
+      "pdf": "hl7.eu std28/ch17.html",
+      "page": null,
+      "table": "STI^S30^SLR_S28: Sterilization Item Request",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "S34"
+      ],
+      "eventPrinted": "S34",
+      "pdf": "hl7.eu std28/ch17.html",
+      "page": null,
+      "table": "SLN^S34^SLR_S28: Notification of New Sterilization Lot",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "S35"
+      ],
+      "eventPrinted": "S35",
+      "pdf": "hl7.eu std28/ch17.html",
+      "page": null,
+      "table": "SLN^S35^SLR_S28: Notification of Sterilization Lot Deletion",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SLT",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Sterilization Lot",
+      "chapterRef": "17"
+    }
+  ],
+  "variants": []
+}

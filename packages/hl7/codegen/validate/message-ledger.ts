@@ -19,7 +19,9 @@
  * reason, in codegen/validate/message-notes.json under the version and event.
  *
  * Usage:
- *   npx tsx codegen/validate/message-ledger.ts <version> --caristix <dir> --hapi <messages-dir> <groups-dir> <eventmap.properties> [--hl7eu <chapters-dir>]
+ *   npx tsx codegen/validate/message-ledger.ts <version> --caristix <dir> --hapi <messages-dir> <groups-dir> <eventmap.properties> [--hl7eu <chapters-dir>] [--hl7org <chapters-dir>]
+ *   --hl7org: chapters converted from the official PDFs (codegen/extract/pdf-chapter.ts); each replaces the hl7.eu page of
+ *   that chapter in the hl7.eu column (v2.8 ch16, which hl7.eu lacks).
  *
  * Reads are local only; nothing is fetched here.
  */
@@ -39,6 +41,8 @@ const option = (name: string, count = 1): string[] | undefined => {
 const caristixDir = option("--caristix")?.[0];
 const hapi = option("--hapi", 3);
 const hl7euDir = option("--hl7eu")?.[0];
+const hl7orgDir = option("--hl7org")?.[0];
+const hl7orgFiles = hl7orgDir && existsSync(hl7orgDir) ? readdirSync(hl7orgDir).filter((f) => f.endsWith(".htm")) : [];
 if (!/^v\d+\.\d+(\.\d+)?$/.test(VERSION ?? "") || !caristixDir || !hapi) {
   console.error("Usage: message-ledger.ts <version> --caristix <dir> --hapi <messages-dir> <groups-dir> <eventmap.properties> [--hl7eu <chapters-dir>]");
   process.exit(1);
@@ -180,8 +184,8 @@ const hl7eu = new Map<string, Line[]>();
 /** Events a heading groups with a captioned table ("(events PC6, PC7, PC8)" over "PGL^PC6^PGL_PC6"): they share it unless they get a table of their own. */
 const hl7euAliases: { key: string; lines: Line[] }[] = [];
 if (hl7euDir && existsSync(hl7euDir)) {
-  for (const f of readdirSync(hl7euDir).filter((f) => f.endsWith(".htm"))) {
-    const raw = readFileSync(join(hl7euDir, f)).toString("latin1");
+  for (const f of [...new Set([...readdirSync(hl7euDir).filter((f) => f.endsWith(".htm")), ...hl7orgFiles])].sort()) {
+    const raw = readFileSync(join(hl7orgFiles.includes(f) ? hl7orgDir! : hl7euDir, f)).toString("latin1");
     const text = raw
       // A table row keeps its first two cells (the code with its brackets, and the description, which
       // names the table for the anchor below); the other columns and any segment code in the description
@@ -366,6 +370,7 @@ async function main(): Promise<void> {
   lines.push("| Source | Where | Role |");
   lines.push("|---|---|---|");
   lines.push(hl7euDir ? `| hl7.eu | the printed chapters, \`https://www.hl7.eu/HL7v2x/v${SHORT}/std${SHORT}/ch<n>.htm\`, message tables read as text | Authoritative |` : `| hl7.eu | no chapter pages for ${VERSION} | — |`);
+  if (hl7orgFiles.length) lines.push(`| hl7.org | the official chapter PDFs for ${hl7orgFiles.map((f) => f.replace(".htm", "")).join(", ")} (name and SHA-256 in \`codegen/validate/sources/${VERSION}-hl7org.tsv\`), converted by \`codegen/extract/pdf-chapter.ts\`; in the hl7.eu column they replace the hl7.eu page of that chapter | Authoritative |`);
   lines.push(`| Caristix | \`https://hl7-definition.caristix.com/v2-api/1/HL7v${API}/TriggerEvents/<EVENT>\` | Validation reference |`);
   lines.push(`| HAPI | \`hapi-structures-v${SHORT}/.../model/v${SHORT}/message/<EVENT>.java\` and its group classes, with the event map | Cross-check |`);
   lines.push("");
