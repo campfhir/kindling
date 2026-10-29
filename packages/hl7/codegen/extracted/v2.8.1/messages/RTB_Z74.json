@@ -6,7 +6,7 @@
   "description": "Personnel Information Message",
   "title": "Personnel Information Message",
   "source": {
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "pages": null,
     "table": "RTB^Z74^RTB_Z74: Personnel Information Message"
   },
@@ -16,7 +16,7 @@
         "Z74"
       ],
       "eventPrinted": "Z74",
-      "pdf": "hl7.eu std281/ch04.html",
+      "pdf": "hl7.org V281_CH04_Orders.pdf",
       "page": null,
       "table": "RTB^Z74^RTB_Z74: Personnel Information Message",
       "identicalToPrimary": true

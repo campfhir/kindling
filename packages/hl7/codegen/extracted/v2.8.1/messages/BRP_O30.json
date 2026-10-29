@@ -5,9 +5,8 @@
   "version": "2.8.1",
   "description": "Description",
   "title": "Description",
-  "sectionHeading": "4.13.4 BRP - Blood Product Dispense Status Acknowledgment (Event O30)",
   "source": {
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "pages": null,
     "table": "BRP^O30^BRP_O30: Description"
   },
@@ -17,7 +16,7 @@
         "O30"
       ],
       "eventPrinted": "O30",
-      "pdf": "hl7.eu std281/ch04.html",
+      "pdf": "hl7.org V281_CH04_Orders.pdf",
       "page": null,
       "table": "BRP^O30^BRP_O30: Description",
       "identicalToPrimary": true

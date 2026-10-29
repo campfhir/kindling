@@ -5,9 +5,8 @@
   "version": "2.8.1",
   "description": "Test Code Settings Update",
   "title": "Test Code Settings Update",
-  "sectionHeading": "13.3.10 TCU/ACK - Automated Equipment Test Code Settings Update (Event U10)",
   "source": {
-    "pdf": "hl7.eu std281/ch13.html",
+    "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
     "pages": null,
     "table": "TCU^U10^TCU_U10: Test Code Settings Update"
   },
@@ -17,7 +16,7 @@
         "U10"
       ],
       "eventPrinted": "U10",
-      "pdf": "hl7.eu std281/ch13.html",
+      "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
       "page": null,
       "table": "TCU^U10^TCU_U10: Test Code Settings Update",
       "identicalToPrimary": true
@@ -27,7 +26,7 @@
         "U11"
       ],
       "eventPrinted": "U11",
-      "pdf": "hl7.eu std281/ch13.html",
+      "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
       "page": null,
       "table": "TCR^U11^TCU_U10: Test Code Settings Request",
       "identicalToPrimary": true

@@ -6,7 +6,7 @@
   "description": "Re-Assess HealthCare Services Invoice Request",
   "title": "Re-Assess HealthCare Services Invoice Request",
   "source": {
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "pages": null,
     "table": "EHC^E04^EHC_E04: Re-Assess HealthCare Services Invoice Request"
   },
@@ -16,7 +16,7 @@
         "E04"
       ],
       "eventPrinted": "E04",
-      "pdf": "hl7.eu std281/ch16.html",
+      "pdf": "hl7.org V281_CH16_eClaims.pdf",
       "page": null,
       "table": "EHC^E04^EHC_E04: Re-Assess HealthCare Services Invoice Request",
       "identicalToPrimary": true

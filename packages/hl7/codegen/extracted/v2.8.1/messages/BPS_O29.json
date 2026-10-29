@@ -5,9 +5,8 @@
   "version": "2.8.1",
   "description": "Blood Product dispense status Message",
   "title": "Blood Product dispense status Message",
-  "sectionHeading": "4.13.3 BPS - Blood Product Dispense Status Message (Event O29)",
   "source": {
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "pages": null,
     "table": "BPS^O29^BPS_O29: Blood Product dispense status Message"
   },
@@ -17,7 +16,7 @@
         "O29"
       ],
       "eventPrinted": "O29",
-      "pdf": "hl7.eu std281/ch04.html",
+      "pdf": "hl7.org V281_CH04_Orders.pdf",
       "page": null,
       "table": "BPS^O29^BPS_O29: Blood Product dispense status Message",
       "identicalToPrimary": true
@@ -139,7 +138,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Patient Visit - Additional Info",
+              "description": "Patient Visit â Additional Info",
               "chapterRef": "3"
             },
             {

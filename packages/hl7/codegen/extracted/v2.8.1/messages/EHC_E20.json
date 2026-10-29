@@ -6,7 +6,7 @@
   "description": "Submit Authorization Request",
   "title": "Submit Authorization Request",
   "source": {
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "pages": null,
     "table": "EHC^E20^EHC_E20: Submit Authorization Request"
   },
@@ -16,7 +16,7 @@
         "E20"
       ],
       "eventPrinted": "E20",
-      "pdf": "hl7.eu std281/ch16.html",
+      "pdf": "hl7.org V281_CH16_eClaims.pdf",
       "page": null,
       "table": "EHC^E20^EHC_E20: Submit Authorization Request",
       "identicalToPrimary": true

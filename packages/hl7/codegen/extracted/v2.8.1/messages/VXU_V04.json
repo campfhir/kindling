@@ -6,7 +6,7 @@
   "description": "Unsolicited Vaccination Update",
   "title": "Unsolicited Vaccination Update",
   "source": {
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "pages": null,
     "table": "VXU^V04^VXU_V04: Unsolicited Vaccination Update"
   },
@@ -16,7 +16,7 @@
         "V04"
       ],
       "eventPrinted": "V04",
-      "pdf": "hl7.eu std281/ch04a.html",
+      "pdf": "hl7.org V281_CH04A_Orders.pdf",
       "page": null,
       "table": "VXU^V04^VXU_V04: Unsolicited Vaccination Update",
       "identicalToPrimary": true
@@ -114,7 +114,7 @@
           "maxOccurs": 1,
           "usage": null,
           "page": null,
-          "description": "Patient Visit - Additional Info",
+          "description": "Patient Visit â Additional Info",
           "chapterRef": "3"
         },
         {

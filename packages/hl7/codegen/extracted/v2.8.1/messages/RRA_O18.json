@@ -6,7 +6,7 @@
   "description": "Pharmacy/Treatment Administration Acknowledgment Message",
   "title": "Pharmacy/Treatment Administration Acknowledgment Message",
   "source": {
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "pages": null,
     "table": "RRA^O18^RRA_O18: Pharmacy/Treatment Administration Acknowledgment Message"
   },
@@ -16,7 +16,7 @@
         "O18"
       ],
       "eventPrinted": "O18",
-      "pdf": "hl7.eu std281/ch04a.html",
+      "pdf": "hl7.org V281_CH04A_Orders.pdf",
       "page": null,
       "table": "RRA^O18^RRA_O18: Pharmacy/Treatment Administration Acknowledgment Message",
       "identicalToPrimary": true

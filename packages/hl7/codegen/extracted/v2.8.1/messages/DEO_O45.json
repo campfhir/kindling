@@ -5,9 +5,8 @@
   "version": "2.8.1",
   "description": "Donor Eligibility Observations Message",
   "title": "Donor Eligibility Observations Message",
-  "sectionHeading": "4.16.12 DEO - Donor Eligibility Observations (Event O45)",
   "source": {
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "pages": null,
     "table": "DEO^O45^DEO_O45: Donor Eligibility Observations Message"
   },
@@ -17,25 +16,13 @@
         "O45"
       ],
       "eventPrinted": "O45",
-      "pdf": "hl7.eu std281/ch04.html",
+      "pdf": "hl7.org V281_CH04_Orders.pdf",
       "page": null,
       "table": "DEO^O45^DEO_O45: Donor Eligibility Observations Message",
       "identicalToPrimary": true
     }
   ],
   "items": [
-    {
-      "kind": "placeholder",
-      "text": "Segment",
-      "minOccurs": 1,
-      "maxOccurs": 1,
-      "usage": null,
-      "page": null,
-      "notation": "Segment",
-      "description": "Description",
-      "status": "Satus",
-      "chapterRef": "Chapter"
-    },
     {
       "kind": "segment",
       "name": "MSH",
@@ -83,8 +70,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Donor Observations",
-          "status": "DB"
+          "description": "Donor Observations"
         },
         {
           "kind": "segment",
@@ -93,8 +79,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Access Restrictions",
-          "status": "DB"
+          "description": "Access Restrictions 3"
         },
         {
           "kind": "segment",
@@ -103,8 +88,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Notes and Comments (for Donor)",
-          "status": "DB"
+          "description": "Notes and Comments (for Donor)"
         },
         {
           "kind": "group",
@@ -126,8 +110,7 @@
               "maxOccurs": "*",
               "usage": null,
               "page": null,
-              "description": "Notes and Comments (for Donor Registration)",
-              "status": "DB"
+              "description": "Notes and Comments (for Donor Registration)"
             }
           ],
           "minOccurs": 0,
@@ -152,8 +135,7 @@
           "maxOccurs": 1,
           "usage": null,
           "page": null,
-          "description": "Observations Request",
-          "status": "DB"
+          "description": "Observations Request"
         },
         {
           "kind": "segment",
@@ -162,8 +144,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Notes and comments",
-          "status": "DB"
+          "description": "Notes and comments"
         },
         {
           "kind": "group",
@@ -176,8 +157,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Observation related to OBR",
-              "status": "DB"
+              "description": "Observation related to OBR"
             },
             {
               "kind": "segment",
@@ -186,8 +166,7 @@
               "maxOccurs": "*",
               "usage": null,
               "page": null,
-              "description": "Notes and comments",
-              "status": "DB"
+              "description": "Notes and comments"
             }
           ],
           "minOccurs": 0,

@@ -6,7 +6,7 @@
   "description": "Description",
   "title": "Description",
   "source": {
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "pages": null,
     "table": "ORP^O10^ORP_O10: Description"
   },
@@ -16,7 +16,7 @@
         "O10"
       ],
       "eventPrinted": "O10",
-      "pdf": "hl7.eu std281/ch04a.html",
+      "pdf": "hl7.org V281_CH04A_Orders.pdf",
       "page": null,
       "table": "ORP^O10^ORP_O10: Description",
       "identicalToPrimary": true

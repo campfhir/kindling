@@ -1514,6 +1514,14 @@ const v2_8_1_ORX_O43_STRUCTURE: StructureItem[] = [
   ]),
 ];
 
+const v2_8_1_QBP_Z73_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  req("QPD"),
+  req("RCP"),
+];
+
 const v2_8_1_RTB_Z74_STRUCTURE: StructureItem[] = [
   req("MSH"),
   req("MSA"),
@@ -1972,6 +1980,14 @@ const v2_8_1_DBU_O42_STRUCTURE: StructureItem[] = [
   ]),
 ];
 
+const v2_8_1_QBP_Q33_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  req("QPD"),
+  req("RCP"),
+];
+
 const v2_8_1_RSP_K33_STRUCTURE: StructureItem[] = [
   req("MSH"),
   optList("SFT"),
@@ -1984,6 +2000,14 @@ const v2_8_1_RSP_K33_STRUCTURE: StructureItem[] = [
     req("PID"),
     optList("ARV"),
   ]),
+];
+
+const v2_8_1_QBP_Q34_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  req("QPD"),
+  req("RCP"),
 ];
 
 const v2_8_1_RSP_K34_STRUCTURE: StructureItem[] = [
@@ -2113,7 +2137,7 @@ const v2_8_1_DRC_O47_STRUCTURE: StructureItem[] = [
       optList("NTE"),
     ]),
   ]),
-  group("OBR_GROUP", "required", "repeating", [
+  group("DONATION_ORDER", "required", "repeating", [
     req("OBR"),
     optList("NTE"),
   ]),
@@ -2135,7 +2159,7 @@ const v2_8_1_DPR_O48_STRUCTURE: StructureItem[] = [
       optList("NTE"),
     ]),
   ]),
-  group("OBR_GROUP", "required", "repeating", [
+  group("DONATION_ORDER", "required", "repeating", [
     req("OBR"),
     optList("NTE"),
   ]),
@@ -2148,30 +2172,6 @@ const v2_8_1_DPR_O48_STRUCTURE: StructureItem[] = [
       optList("NTE"),
     ]),
   ]),
-];
-
-const v2_8_1_QBP_Z73_STRUCTURE: StructureItem[] = [
-  req("MSH"),
-  optList("SFT"),
-  opt("UAC"),
-  req("QPD"),
-  req("RCP"),
-];
-
-const v2_8_1_QBP_Q33_STRUCTURE: StructureItem[] = [
-  req("MSH"),
-  optList("SFT"),
-  opt("UAC"),
-  req("QPD"),
-  req("RCP"),
-];
-
-const v2_8_1_QBP_Q34_STRUCTURE: StructureItem[] = [
-  req("MSH"),
-  optList("SFT"),
-  opt("UAC"),
-  req("QPD"),
-  req("RCP"),
 ];
 
 const v2_8_1_OMP_O09_STRUCTURE: StructureItem[] = [
@@ -5497,6 +5497,7 @@ export const V2_8_1_MESSAGES: MessageSchema[] = [
   { messageType: "OSU", triggerEvent: "O41", version: "2.8.1", structure: v2_8_1_OSU_O41_STRUCTURE },
   { messageType: "OMQ", triggerEvent: "O42", version: "2.8.1", structure: v2_8_1_OMQ_O42_STRUCTURE },
   { messageType: "ORX", triggerEvent: "O43", version: "2.8.1", structure: v2_8_1_ORX_O43_STRUCTURE },
+  { messageType: "QBP", triggerEvent: "Z73", version: "2.8.1", structure: v2_8_1_QBP_Z73_STRUCTURE },
   { messageType: "RTB", triggerEvent: "Z74", version: "2.8.1", structure: v2_8_1_RTB_Z74_STRUCTURE },
   { messageType: "OMD", triggerEvent: "O03", version: "2.8.1", structure: v2_8_1_OMD_O03_STRUCTURE },
   { messageType: "ORD", triggerEvent: "O04", version: "2.8.1", structure: v2_8_1_ORD_O04_STRUCTURE },
@@ -5512,7 +5513,9 @@ export const V2_8_1_MESSAGES: MessageSchema[] = [
   { messageType: "BRT", triggerEvent: "O32", version: "2.8.1", structure: v2_8_1_BRT_O32_STRUCTURE },
   { messageType: "DBC", triggerEvent: "O41", version: "2.8.1", structure: v2_8_1_DBC_O41_STRUCTURE },
   { messageType: "DBU", triggerEvent: "O42", version: "2.8.1", structure: v2_8_1_DBU_O42_STRUCTURE },
+  { messageType: "QBP", triggerEvent: "Q33", version: "2.8.1", structure: v2_8_1_QBP_Q33_STRUCTURE },
   { messageType: "RSP", triggerEvent: "K33", version: "2.8.1", structure: v2_8_1_RSP_K33_STRUCTURE },
+  { messageType: "QBP", triggerEvent: "Q34", version: "2.8.1", structure: v2_8_1_QBP_Q34_STRUCTURE },
   { messageType: "RSP", triggerEvent: "K34", version: "2.8.1", structure: v2_8_1_RSP_K34_STRUCTURE },
   { messageType: "DRG", triggerEvent: "O43", version: "2.8.1", structure: v2_8_1_DRG_O43_STRUCTURE },
   { messageType: "DER", triggerEvent: "O44", version: "2.8.1", structure: v2_8_1_DER_O44_STRUCTURE },
@@ -5520,9 +5523,6 @@ export const V2_8_1_MESSAGES: MessageSchema[] = [
   { messageType: "DEL", triggerEvent: "O46", version: "2.8.1", structure: v2_8_1_DEL_O46_STRUCTURE },
   { messageType: "DRC", triggerEvent: "O47", version: "2.8.1", structure: v2_8_1_DRC_O47_STRUCTURE },
   { messageType: "DPR", triggerEvent: "O48", version: "2.8.1", structure: v2_8_1_DPR_O48_STRUCTURE },
-  { messageType: "QBP", triggerEvent: "Z73", version: "2.8.1", structure: v2_8_1_QBP_Z73_STRUCTURE },
-  { messageType: "QBP", triggerEvent: "Q33", version: "2.8.1", structure: v2_8_1_QBP_Q33_STRUCTURE },
-  { messageType: "QBP", triggerEvent: "Q34", version: "2.8.1", structure: v2_8_1_QBP_Q34_STRUCTURE },
   { messageType: "OMP", triggerEvent: "O09", version: "2.8.1", structure: v2_8_1_OMP_O09_STRUCTURE },
   { messageType: "ORP", triggerEvent: "O10", version: "2.8.1", structure: v2_8_1_ORP_O10_STRUCTURE },
   { messageType: "RDE", triggerEvent: "O11", version: "2.8.1", structure: v2_8_1_RDE_O11_STRUCTURE },

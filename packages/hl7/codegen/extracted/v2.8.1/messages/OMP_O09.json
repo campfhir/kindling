@@ -6,7 +6,7 @@
   "description": "Pharmacy/treatment Order Message",
   "title": "Pharmacy/treatment Order Message",
   "source": {
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "pages": null,
     "table": "OMP^O09^OMP_O09: Pharmacy/treatment Order Message"
   },
@@ -16,7 +16,7 @@
         "O09"
       ],
       "eventPrinted": "O09",
-      "pdf": "hl7.eu std281/ch04a.html",
+      "pdf": "hl7.org V281_CH04A_Orders.pdf",
       "page": null,
       "table": "OMP^O09^OMP_O09: Pharmacy/treatment Order Message",
       "identicalToPrimary": true
@@ -148,7 +148,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Patient Visit - Additional Info",
+              "description": "Patient Visit â Additional Info",
               "chapterRef": "3"
             },
             {

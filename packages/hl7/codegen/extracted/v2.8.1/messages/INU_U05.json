@@ -5,9 +5,8 @@
   "version": "2.8.1",
   "description": "Inventory Update Message",
   "title": "Inventory Update Message",
-  "sectionHeading": "13.3.5 INU/ACK - Automated Equipment Inventory Update (Event U05)",
   "source": {
-    "pdf": "hl7.eu std281/ch13.html",
+    "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
     "pages": null,
     "table": "INU^U05^INU_U05: Inventory Update Message"
   },
@@ -17,7 +16,7 @@
         "U05"
       ],
       "eventPrinted": "U05",
-      "pdf": "hl7.eu std281/ch13.html",
+      "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
       "page": null,
       "table": "INU^U05^INU_U05: Inventory Update Message",
       "identicalToPrimary": true

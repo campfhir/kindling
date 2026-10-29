@@ -5,9 +5,8 @@
   "version": "2.8.1",
   "description": "Create Donor Record Message",
   "title": "Create Donor Record Message",
-  "sectionHeading": "4.16.4 DBC - Create Donor Record Message (Event O41 )",
   "source": {
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "pages": null,
     "table": "DBC^O41^DBC_O41: Create Donor Record Message"
   },
@@ -17,7 +16,7 @@
         "O41"
       ],
       "eventPrinted": "O41",
-      "pdf": "hl7.eu std281/ch04.html",
+      "pdf": "hl7.org V281_CH04_Orders.pdf",
       "page": null,
       "table": "DBC^O41^DBC_O41: Create Donor Record Message",
       "identicalToPrimary": true
@@ -71,8 +70,7 @@
           "maxOccurs": 1,
           "usage": null,
           "page": null,
-          "description": "Additional Demographics",
-          "status": "DB"
+          "description": "Additional Demographics"
         },
         {
           "kind": "segment",
@@ -81,8 +79,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Donor Observations",
-          "status": "DB"
+          "description": "Donor Observations"
         },
         {
           "kind": "segment",
@@ -101,7 +98,7 @@
           "usage": null,
           "page": null,
           "description": "Access Restrictions",
-          "status": "DB"
+          "chapterRef": "3"
         },
         {
           "kind": "segment",
@@ -110,8 +107,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Allergy Information",
-          "status": "DB"
+          "description": "Allergy Information"
         }
       ],
       "minOccurs": 0,

@@ -3,12 +3,12 @@
   "messageType": "OML",
   "triggerEvent": "O35",
   "version": "2.8.1",
-  "description": "Laboratory Order - Multiple Order Per Container of Specimen Message",
-  "title": "Laboratory Order - Multiple Order Per Container of Specimen Message",
+  "description": "Laboratory Order â Multiple Order Per Container of Specimen Message",
+  "title": "Laboratory Order â Multiple Order Per Container of Specimen Message",
   "source": {
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "pages": null,
-    "table": "OML^O35^OML_O35: Laboratory Order - Multiple Order Per Container of Specimen Message"
+    "table": "OML^O35^OML_O35: Laboratory Order â Multiple Order Per Container of Specimen Message"
   },
   "triggerEvents": [
     {
@@ -16,9 +16,9 @@
         "O35"
       ],
       "eventPrinted": "O35",
-      "pdf": "hl7.eu std281/ch04.html",
+      "pdf": "hl7.org V281_CH04_Orders.pdf",
       "page": null,
-      "table": "OML^O35^OML_O35: Laboratory Order - Multiple Order Per Container of Specimen Message",
+      "table": "OML^O35^OML_O35: Laboratory Order â Multiple Order Per Container of Specimen Message",
       "identicalToPrimary": true
     }
   ],
@@ -464,7 +464,7 @@
                               "maxOccurs": 1,
                               "usage": null,
                               "page": null,
-                              "description": "Patient Identification - previous result",
+                              "description": "Patient Identification â previous result",
                               "chapterRef": "3"
                             },
                             {
@@ -474,7 +474,7 @@
                               "maxOccurs": 1,
                               "usage": null,
                               "page": null,
-                              "description": "Additional Demographics - previous result",
+                              "description": "Additional Demographics â previous result",
                               "chapterRef": "3"
                             },
                             {
@@ -514,7 +514,7 @@
                               "maxOccurs": 1,
                               "usage": null,
                               "page": null,
-                              "description": "Patient Visit - previous result",
+                              "description": "Patient Visit â previous result",
                               "chapterRef": "3"
                             },
                             {
@@ -524,7 +524,7 @@
                               "maxOccurs": 1,
                               "usage": null,
                               "page": null,
-                              "description": "Patient Visit Add. Info - previous result",
+                              "description": "Patient Visit Add. Info â previous result",
                               "chapterRef": "3"
                             },
                             {

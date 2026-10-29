@@ -562,7 +562,7 @@
     "messageType": "OMG",
     "triggerEvent": "O19",
     "description": "General Clinical Order Message",
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null
   },
   {
@@ -570,7 +570,7 @@
     "messageType": "ORG",
     "triggerEvent": "O20",
     "description": "General Clinical Order Acknowledgment Message",
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null
   },
   {
@@ -578,7 +578,7 @@
     "messageType": "OML",
     "triggerEvent": "O21",
     "description": "Laboratory Order Message",
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null
   },
   {
@@ -586,39 +586,39 @@
     "messageType": "ORL",
     "triggerEvent": "O22",
     "description": "General Laboratory Order Acknowledgment Message (Patient Required)",
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null
   },
   {
     "structure": "OML_O33",
     "messageType": "OML",
     "triggerEvent": "O33",
-    "description": "Laboratory Order - Multiple Order Per Specimen Message",
-    "pdf": "hl7.eu std281/ch04.html",
+    "description": "Laboratory Order â Multiple Order Per Specimen Message",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null
   },
   {
     "structure": "ORL_O34",
     "messageType": "ORL",
     "triggerEvent": "O34",
-    "description": "Laboratory Order Acknowledgment Message - Multiple Order Per Specimen (Patient Required)",
-    "pdf": "hl7.eu std281/ch04.html",
+    "description": "Laboratory Order Acknowledgment Message â Multiple Order Per Specimen (Patient Required)",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null
   },
   {
     "structure": "OML_O35",
     "messageType": "OML",
     "triggerEvent": "O35",
-    "description": "Laboratory Order - Multiple Order Per Container of Specimen Message",
-    "pdf": "hl7.eu std281/ch04.html",
+    "description": "Laboratory Order â Multiple Order Per Container of Specimen Message",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null
   },
   {
     "structure": "ORL_O36",
     "messageType": "ORL",
     "triggerEvent": "O36",
-    "description": "Laboratory Order Acknowledgment Message - Multiple Order Per Container of Specimen (Patient Required)",
-    "pdf": "hl7.eu std281/ch04.html",
+    "description": "Laboratory Order Acknowledgment Message â Multiple Order Per Container of Specimen (Patient Required)",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null
   },
   {
@@ -626,7 +626,7 @@
     "messageType": "OML",
     "triggerEvent": "O39",
     "description": "Specimen Shipment Centric Laboratory Order Message",
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null
   },
   {
@@ -634,7 +634,7 @@
     "messageType": "ORL",
     "triggerEvent": "O40",
     "description": "Specimen Shipment Centric Laboratory Order Acknowledgment Message (Patient Required)",
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null
   },
   {
@@ -642,70 +642,71 @@
     "messageType": "OMI",
     "triggerEvent": "O23",
     "description": "Imaging Order Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.4.14 OMI - Imaging Order Message (Event O23)"
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
   },
   {
     "structure": "ORI_O24",
     "messageType": "ORI",
     "triggerEvent": "O24",
     "description": "Imaging Order Acknowledgment Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.4.15 ORI - Imaging Order Response Message to Any OMI (Event O24)"
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
   },
   {
     "structure": "OPL_O37",
     "messageType": "OPL",
     "triggerEvent": "O37",
     "description": "Population/Location-Based Laboratory Order Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.4.16 OPL - Population/Location-Based Laboratory Order Message (Event O37)"
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
   },
   {
     "structure": "OPR_O38",
     "messageType": "OPR",
     "triggerEvent": "O38",
     "description": "Population/Location-Based Laboratory Order Acknowledgment Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.4.17 OPR - Population/Location-Based Laboratory Order Acknowledgment Message (Event O38)"
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
   },
   {
     "structure": "OSU_O41",
     "messageType": "OSU",
     "triggerEvent": "O41",
     "description": "Order Status Update Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.4.18 OSU - Order Status Update (Event O41)"
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
   },
   {
     "structure": "OMQ_O42",
     "messageType": "OMQ",
     "triggerEvent": "O42",
     "description": "General Order Message with Document Payload",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.4.19 OMQ - General Order Message with Document Payload (Event O42)"
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
   },
   {
     "structure": "ORX_O43",
     "messageType": "ORX",
     "triggerEvent": "O43",
     "description": "General Order Message with Document Payload Acknowledgement Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.4.20 ORX - General Order Message with Document Payload Acknowledgement Message (Event O43)"
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
+  },
+  {
+    "structure": "QBP_Z73",
+    "messageType": "QBP",
+    "triggerEvent": "Z73",
+    "description": "QBP Message",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
   },
   {
     "structure": "RTB_Z74",
     "messageType": "RTB",
     "triggerEvent": "Z74",
     "description": "Personnel Information Message",
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null
   },
   {
@@ -713,25 +714,23 @@
     "messageType": "OMD",
     "triggerEvent": "O03",
     "description": "Dietary Order",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.7.1 OMD - Dietary Order (Event O03)"
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
   },
   {
     "structure": "ORD_O04",
     "messageType": "ORD",
     "triggerEvent": "O04",
     "description": "Dietary Order Acknowledgment Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.7.2 ORD - dietary order acknowledgment (Event O04)"
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
   },
   {
     "structure": "OMS_O05",
     "messageType": "OMS",
     "triggerEvent": "O05",
     "description": "Stock Requisition Order Message",
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null
   },
   {
@@ -739,7 +738,7 @@
     "messageType": "ORS",
     "triggerEvent": "O06",
     "description": "Stock Order Acknowledgment Message",
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null
   },
   {
@@ -747,7 +746,7 @@
     "messageType": "OMN",
     "triggerEvent": "O07",
     "description": "Nonstock Requisition Order Message",
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null
   },
   {
@@ -755,7 +754,7 @@
     "messageType": "ORN",
     "triggerEvent": "O08",
     "description": "General Order Acknowledgment Message",
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null
   },
   {
@@ -763,7 +762,7 @@
     "messageType": "OMB",
     "triggerEvent": "O27",
     "description": "Blood Product Order Message",
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null
   },
   {
@@ -771,140 +770,55 @@
     "messageType": "ORB",
     "triggerEvent": "O28",
     "description": "Description",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.13.2 ORB - Blood Product Order Acknowledgment (Event O28)"
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
   },
   {
     "structure": "BPS_O29",
     "messageType": "BPS",
     "triggerEvent": "O29",
     "description": "Blood Product dispense status Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.13.3 BPS - Blood Product Dispense Status Message (Event O29)"
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
   },
   {
     "structure": "BRP_O30",
     "messageType": "BRP",
     "triggerEvent": "O30",
     "description": "Description",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.13.4 BRP - Blood Product Dispense Status Acknowledgment (Event O30)"
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
   },
   {
     "structure": "BTS_O31",
     "messageType": "BTS",
     "triggerEvent": "O31",
     "description": "Blood Product Transfusion/Disposition Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.13.5 BTS - Blood Product Transfusion/Disposition Message (Event O31)"
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
   },
   {
     "structure": "BRT_O32",
     "messageType": "BRT",
     "triggerEvent": "O32",
     "description": "Description",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.13.6 BRT - Blood Product Transfusion/Disposition Acknowledgment (Event O32)"
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
   },
   {
     "structure": "DBC_O41",
     "messageType": "DBC",
     "triggerEvent": "O41",
     "description": "Create Donor Record Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.16.4 DBC - Create Donor Record Message (Event O41 )"
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
   },
   {
     "structure": "DBC_O42",
     "messageType": "DBU",
     "triggerEvent": "O42",
     "description": "Update Donor Record Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.16.5 DBU - Update Donor Record Message (Event O42)"
-  },
-  {
-    "structure": "RSP_O33",
-    "messageType": "RSP",
-    "triggerEvent": "K33",
-    "description": "Get Donor Record Candidates Response Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null
-  },
-  {
-    "structure": "RSP_O34",
-    "messageType": "RSP",
-    "triggerEvent": "K34",
-    "description": "Segment Pattern Response Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null
-  },
-  {
-    "structure": "DRG_O43",
-    "messageType": "DRG",
-    "triggerEvent": "O43",
-    "description": "Donor Registration Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.16.10 DRG - Donor Registration (Event O43)"
-  },
-  {
-    "structure": "DER_O44",
-    "messageType": "DER",
-    "triggerEvent": "O44",
-    "description": "Donor Registration - Minimal Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.16.11 DER - Donor Eligibility Request (Event O44)"
-  },
-  {
-    "structure": "DEO_O45",
-    "messageType": "DEO",
-    "triggerEvent": "O45",
-    "description": "Donor Eligibility Observations Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.16.12 DEO - Donor Eligibility Observations (Event O45)"
-  },
-  {
-    "structure": "DEL_O46",
-    "messageType": "DEL",
-    "triggerEvent": "O46",
-    "description": "Donor Eligibility Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.16.13 DEL - Donor Eligibility (Event O46)"
-  },
-  {
-    "structure": "DRC_O47",
-    "messageType": "DRC",
-    "triggerEvent": "O47",
-    "description": "Donor Request to Collect Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.16.14 DRC - Donor Request to Collect (Event O47)"
-  },
-  {
-    "structure": "DPR_O48",
-    "messageType": "DPR",
-    "triggerEvent": "O48",
-    "description": "Donation Procedure Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.16.15 DPR - Donation Procedure (Event O48)"
-  },
-  {
-    "structure": "QBP_Z73",
-    "messageType": "QBP",
-    "triggerEvent": "Z73",
-    "description": "QBP Message",
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null
   },
   {
@@ -912,25 +826,87 @@
     "messageType": "QBP",
     "triggerEvent": "Q33",
     "description": "Get Donor Record Candidates Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.16.6 QBP - Get Donor Record Candidates (Event Q33)"
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
+  },
+  {
+    "structure": "RSP_O33",
+    "messageType": "RSP",
+    "triggerEvent": "K33",
+    "description": "Get Donor Record Candidates Response Message",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
   },
   {
     "structure": "QBP_O34",
     "messageType": "QBP",
     "triggerEvent": "Q34",
     "description": "Get Donor Record Message",
-    "pdf": "hl7.eu std281/ch04.html",
-    "page": null,
-    "sectionHeading": "4.16.8 QBP - Get Donor Record (Event Q34)"
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
+  },
+  {
+    "structure": "RSP_O34",
+    "messageType": "RSP",
+    "triggerEvent": "K34",
+    "description": "Segment Pattern Response Message",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
+  },
+  {
+    "structure": "DRG_O43",
+    "messageType": "DRG",
+    "triggerEvent": "O43",
+    "description": "Donor Registration Message",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
+  },
+  {
+    "structure": "DER_O44",
+    "messageType": "DER",
+    "triggerEvent": "O44",
+    "description": "Donor Registration - Minimal Message",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
+  },
+  {
+    "structure": "DEO_O45",
+    "messageType": "DEO",
+    "triggerEvent": "O45",
+    "description": "Donor Eligibility Observations Message",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
+  },
+  {
+    "structure": "DEL_O46",
+    "messageType": "DEL",
+    "triggerEvent": "O46",
+    "description": "Donor Eligibility Message",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
+  },
+  {
+    "structure": "DRC_O47",
+    "messageType": "DRC",
+    "triggerEvent": "O47",
+    "description": "Donor Request to Collect Message",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
+  },
+  {
+    "structure": "DPR_O48",
+    "messageType": "DPR",
+    "triggerEvent": "O48",
+    "description": "Donation Procedure Message",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "page": null
   },
   {
     "structure": "OMP_O09",
     "messageType": "OMP",
     "triggerEvent": "O09",
     "description": "Pharmacy/treatment Order Message",
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "page": null
   },
   {
@@ -938,7 +914,7 @@
     "messageType": "ORP",
     "triggerEvent": "O10",
     "description": "Description",
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "page": null
   },
   {
@@ -946,7 +922,7 @@
     "messageType": "RDE",
     "triggerEvent": "O11",
     "description": "Pharmacy/Treatment Encoded Order Message",
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "page": null
   },
   {
@@ -954,7 +930,7 @@
     "messageType": "RDE",
     "triggerEvent": "O25",
     "description": "Pharmacy/Treatment Refill Authorization Request",
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "page": null
   },
   {
@@ -962,7 +938,7 @@
     "messageType": "RRE",
     "triggerEvent": "O12",
     "description": "Pharmacy/Treatment Encoded Order Acknowledgment Message",
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "page": null
   },
   {
@@ -970,7 +946,7 @@
     "messageType": "RRE",
     "triggerEvent": "O26",
     "description": "Pharmacy/Treatment Refill Authorization Request Acknowledgment Message",
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "page": null,
     "sameAs": "O12"
   },
@@ -979,7 +955,7 @@
     "messageType": "RDS",
     "triggerEvent": "O13",
     "description": "Pharmacy/Treatment Dispense Message",
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "page": null
   },
   {
@@ -987,7 +963,7 @@
     "messageType": "RRD",
     "triggerEvent": "O14",
     "description": "Pharmacy/Treatment Dispense Acknowledgment Message",
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "page": null
   },
   {
@@ -995,7 +971,7 @@
     "messageType": "RGV",
     "triggerEvent": "O15",
     "description": "Pharmacy/Treatment Give",
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "page": null
   },
   {
@@ -1003,7 +979,7 @@
     "messageType": "RRG",
     "triggerEvent": "O16",
     "description": "Pharmacy/Treatment Give Acknowledgment Message",
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "page": null
   },
   {
@@ -1011,7 +987,7 @@
     "messageType": "RAS",
     "triggerEvent": "O17",
     "description": "Pharmacy/Treatment Administration",
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "page": null
   },
   {
@@ -1019,7 +995,7 @@
     "messageType": "RRA",
     "triggerEvent": "O18",
     "description": "Pharmacy/Treatment Administration Acknowledgment Message",
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "page": null
   },
   {
@@ -1027,7 +1003,7 @@
     "messageType": "QBP",
     "triggerEvent": "Q31",
     "description": "Query Grammar: QBP Message",
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "page": null,
     "sameAs": "Q11"
   },
@@ -1062,7 +1038,7 @@
     "messageType": "RSP",
     "triggerEvent": "K31",
     "description": "Response Grammar: Pharmacy Dispense Message",
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "page": null
   },
   {
@@ -1070,7 +1046,7 @@
     "messageType": "VXU",
     "triggerEvent": "V04",
     "description": "Unsolicited Vaccination Update",
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "page": null
   },
   {
@@ -1929,18 +1905,16 @@
     "messageType": "MDM",
     "triggerEvent": "T01",
     "description": "Original Document Notification",
-    "pdf": "hl7.eu std281/ch09.html",
-    "page": null,
-    "sectionHeading": "9.6.1 MDM/ACK - Original Document Notification (Event T01)"
+    "pdf": "hl7.org V281_CH09_MedRecords.pdf",
+    "page": null
   },
   {
     "structure": "MDM_T01",
     "messageType": "MDM",
     "triggerEvent": "T03",
     "description": "Document Status Change Notification",
-    "pdf": "hl7.eu std281/ch09.html",
+    "pdf": "hl7.org V281_CH09_MedRecords.pdf",
     "page": null,
-    "sectionHeading": "9.6.3 MDM/ACK - Document Status Change Notification (Event T03)",
     "sameAs": "T01"
   },
   {
@@ -1948,9 +1922,8 @@
     "messageType": "MDM",
     "triggerEvent": "T05",
     "description": "Document Addendum Notification",
-    "pdf": "hl7.eu std281/ch09.html",
+    "pdf": "hl7.org V281_CH09_MedRecords.pdf",
     "page": null,
-    "sectionHeading": "9.6.5 MDM/ACK - Document Addendum Notification (Event T05)",
     "sameAs": "T01"
   },
   {
@@ -1958,9 +1931,8 @@
     "messageType": "MDM",
     "triggerEvent": "T07",
     "description": "Document Edit Notification",
-    "pdf": "hl7.eu std281/ch09.html",
+    "pdf": "hl7.org V281_CH09_MedRecords.pdf",
     "page": null,
-    "sectionHeading": "9.6.7 MDM/ACK - Document Edit Notification (Event T07)",
     "sameAs": "T01"
   },
   {
@@ -1968,9 +1940,8 @@
     "messageType": "MDM",
     "triggerEvent": "T09",
     "description": "Document Replacement Notification",
-    "pdf": "hl7.eu std281/ch09.html",
+    "pdf": "hl7.org V281_CH09_MedRecords.pdf",
     "page": null,
-    "sectionHeading": "9.6.9 MDM/ACK - Document Replacement Notification (Event T09)",
     "sameAs": "T01"
   },
   {
@@ -1978,9 +1949,8 @@
     "messageType": "MDM",
     "triggerEvent": "T11",
     "description": "Document Cancel Notification",
-    "pdf": "hl7.eu std281/ch09.html",
+    "pdf": "hl7.org V281_CH09_MedRecords.pdf",
     "page": null,
-    "sectionHeading": "9.6.11 MDM/ACK - Document Cancel Notification (Event T11)",
     "sameAs": "T01"
   },
   {
@@ -1988,18 +1958,16 @@
     "messageType": "MDM",
     "triggerEvent": "T02",
     "description": "Original Document Notification & Content",
-    "pdf": "hl7.eu std281/ch09.html",
-    "page": null,
-    "sectionHeading": "9.6.2 MDM/ACK - Original Document Notification and Content (Event T02)"
+    "pdf": "hl7.org V281_CH09_MedRecords.pdf",
+    "page": null
   },
   {
     "structure": "MDM_T02",
     "messageType": "MDM",
     "triggerEvent": "T04",
     "description": "Document Status Change Notification & Content",
-    "pdf": "hl7.eu std281/ch09.html",
+    "pdf": "hl7.org V281_CH09_MedRecords.pdf",
     "page": null,
-    "sectionHeading": "9.6.4 MDM/ACK - Document Status Change Notification and Content (Event T04)",
     "sameAs": "T02"
   },
   {
@@ -2007,9 +1975,8 @@
     "messageType": "MDM",
     "triggerEvent": "T06",
     "description": "Document Addendum Notification & Content",
-    "pdf": "hl7.eu std281/ch09.html",
+    "pdf": "hl7.org V281_CH09_MedRecords.pdf",
     "page": null,
-    "sectionHeading": "9.6.6 MDM/ACK - Document Addendum Notification and Content (Event T06)",
     "sameAs": "T02"
   },
   {
@@ -2017,9 +1984,8 @@
     "messageType": "MDM",
     "triggerEvent": "T08",
     "description": "Document Edit Notification & Content",
-    "pdf": "hl7.eu std281/ch09.html",
+    "pdf": "hl7.org V281_CH09_MedRecords.pdf",
     "page": null,
-    "sectionHeading": "9.6.8 MDM/ACK - Document Edit Notification and Content (Event T08)",
     "sameAs": "T02"
   },
   {
@@ -2027,9 +1993,8 @@
     "messageType": "MDM",
     "triggerEvent": "T10",
     "description": "Document Replacement Notification & Content",
-    "pdf": "hl7.eu std281/ch09.html",
+    "pdf": "hl7.org V281_CH09_MedRecords.pdf",
     "page": null,
-    "sectionHeading": "9.6.10 MDM/ACK - Document Replacement Notification and Content (Event T10)",
     "sameAs": "T02"
   },
   {
@@ -2404,18 +2369,16 @@
     "messageType": "RQI",
     "triggerEvent": "I01",
     "description": "Request Patient Information",
-    "pdf": "hl7.eu std281/ch11.html",
-    "page": null,
-    "sectionHeading": "11.3.1 RQI/RPI - Request for Insurance Information (Event I01)"
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
+    "page": null
   },
   {
     "structure": "RQI_I01",
     "messageType": "RQI",
     "triggerEvent": "I02",
     "description": "Request Patient Information",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.3.2 RQI/RPL - Request/Receipt of Patient Selection Display List (Event I02)",
     "sameAs": "I01"
   },
   {
@@ -2423,18 +2386,16 @@
     "messageType": "RQI",
     "triggerEvent": "I03",
     "description": "Request Patient Information",
-    "pdf": "hl7.eu std281/ch11.html",
-    "page": null,
-    "sectionHeading": "11.3.3 RQI/RPR - Request/Receipt of Patient Selection List (Event I03)"
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
+    "page": null
   },
   {
     "structure": "RQI_I01",
     "messageType": "PIN",
     "triggerEvent": "I07",
     "description": "Patient Insurance Information",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.3.7 PIN/ACK - Unsolicited Insurance Information (Event I07)",
     "sameAs": "I01"
   },
   {
@@ -2442,54 +2403,48 @@
     "messageType": "RPI",
     "triggerEvent": "I01",
     "description": "Return Patient Information",
-    "pdf": "hl7.eu std281/ch11.html",
-    "page": null,
-    "sectionHeading": "11.3.1 RQI/RPI - Request for Insurance Information (Event I01)"
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
+    "page": null
   },
   {
     "structure": "RPL_I02",
     "messageType": "RPL",
     "triggerEvent": "I02",
     "description": "Return Patient Display List",
-    "pdf": "hl7.eu std281/ch11.html",
-    "page": null,
-    "sectionHeading": "11.3.2 RQI/RPL - Request/Receipt of Patient Selection Display List (Event I02)"
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
+    "page": null
   },
   {
     "structure": "RPR_I03",
     "messageType": "RPR",
     "triggerEvent": "I03",
     "description": "Return Patient List",
-    "pdf": "hl7.eu std281/ch11.html",
-    "page": null,
-    "sectionHeading": "11.3.3 RQI/RPR - Request/Receipt of Patient Selection List (Event I03)"
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
+    "page": null
   },
   {
     "structure": "RQP_I04",
     "messageType": "RQP",
     "triggerEvent": "I04",
     "description": "Request Patient Demographics",
-    "pdf": "hl7.eu std281/ch11.html",
-    "page": null,
-    "sectionHeading": "11.3.4 RQP/RPI - request for patient demographic data (Event I04)"
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
+    "page": null
   },
   {
     "structure": "RPI_I04",
     "messageType": "RPI",
     "triggerEvent": "I04",
     "description": "Return Patient Information",
-    "pdf": "hl7.eu std281/ch11.html",
-    "page": null,
-    "sectionHeading": "11.3.4 RQP/RPI - request for patient demographic data (Event I04)"
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
+    "page": null
   },
   {
     "structure": "RQA_I08",
     "messageType": "RQA",
     "triggerEvent": "I08",
     "description": "Request Patient Authorization",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.4.1 RQA/RPA - Request Patient Authorization Message (Event I08)",
     "eventPrinted": "I08-I11"
   },
   {
@@ -2497,9 +2452,8 @@
     "messageType": "RQA",
     "triggerEvent": "I09",
     "description": "Request Patient Authorization",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.4.3 RQA/RPA - Request for Modification to an Authorization (Event I09)",
     "eventPrinted": "I08-I11",
     "sameAs": "I08"
   },
@@ -2508,9 +2462,8 @@
     "messageType": "RQA",
     "triggerEvent": "I10",
     "description": "Request Patient Authorization",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.4.4 RQA/RPA - Request for Resubmission of an Authorization (Event I10)",
     "eventPrinted": "I08-I11",
     "sameAs": "I08"
   },
@@ -2519,9 +2472,8 @@
     "messageType": "RQA",
     "triggerEvent": "I11",
     "description": "Request Patient Authorization",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.4.5 RQA/RPA - Request for Cancellation of an Authorization (Event I11)",
     "eventPrinted": "I08-I11",
     "sameAs": "I08"
   },
@@ -2530,9 +2482,8 @@
     "messageType": "RPA",
     "triggerEvent": "I08",
     "description": "Return Patient Authorization",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.4.1 RQA/RPA - Request Patient Authorization Message (Event I08)",
     "eventPrinted": "I08-I11"
   },
   {
@@ -2540,9 +2491,8 @@
     "messageType": "RPA",
     "triggerEvent": "I09",
     "description": "Return Patient Authorization",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.4.3 RQA/RPA - Request for Modification to an Authorization (Event I09)",
     "eventPrinted": "I08-I11",
     "sameAs": "I08"
   },
@@ -2551,9 +2501,8 @@
     "messageType": "RPA",
     "triggerEvent": "I10",
     "description": "Return Patient Authorization",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.4.4 RQA/RPA - Request for Resubmission of an Authorization (Event I10)",
     "eventPrinted": "I08-I11",
     "sameAs": "I08"
   },
@@ -2562,9 +2511,8 @@
     "messageType": "RPA",
     "triggerEvent": "I11",
     "description": "Return Patient Authorization",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.4.5 RQA/RPA - Request for Cancellation of an Authorization (Event I11)",
     "eventPrinted": "I08-I11",
     "sameAs": "I08"
   },
@@ -2573,9 +2521,8 @@
     "messageType": "REF",
     "triggerEvent": "I12",
     "description": "Patient Referral",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.5.2 REF/RRI - Patient Referral (Event I12)",
     "eventPrinted": "I12-I15"
   },
   {
@@ -2583,9 +2530,8 @@
     "messageType": "REF",
     "triggerEvent": "I13",
     "description": "Patient Referral",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.5.3 REF/RRI - Modify Patient Referral (Event I13)",
     "eventPrinted": "I12-I15",
     "sameAs": "I12"
   },
@@ -2594,9 +2540,8 @@
     "messageType": "REF",
     "triggerEvent": "I14",
     "description": "Patient Referral",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.5.4 REF/RRI - Cancel Patient Referral (Event I14)",
     "eventPrinted": "I12-I15",
     "sameAs": "I12"
   },
@@ -2605,9 +2550,8 @@
     "messageType": "REF",
     "triggerEvent": "I15",
     "description": "Patient Referral",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.5.5 REF/RRI - Request Patient Referral Status (Event I15)",
     "eventPrinted": "I12-I15",
     "sameAs": "I12"
   },
@@ -2616,9 +2560,8 @@
     "messageType": "RRI",
     "triggerEvent": "I12",
     "description": "Return Referral Information",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.5.2 REF/RRI - Patient Referral (Event I12)",
     "eventPrinted": "I12-I15"
   },
   {
@@ -2626,9 +2569,8 @@
     "messageType": "RRI",
     "triggerEvent": "I13",
     "description": "Return Referral Information",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.5.3 REF/RRI - Modify Patient Referral (Event I13)",
     "eventPrinted": "I12-I15",
     "sameAs": "I12"
   },
@@ -2637,9 +2579,8 @@
     "messageType": "RRI",
     "triggerEvent": "I14",
     "description": "Return Referral Information",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.5.4 REF/RRI - Cancel Patient Referral (Event I14)",
     "eventPrinted": "I12-I15",
     "sameAs": "I12"
   },
@@ -2648,9 +2589,8 @@
     "messageType": "RRI",
     "triggerEvent": "I15",
     "description": "Return Referral Information",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.5.5 REF/RRI - Request Patient Referral Status (Event I15)",
     "eventPrinted": "I12-I15",
     "sameAs": "I12"
   },
@@ -2659,18 +2599,16 @@
     "messageType": "CCM",
     "triggerEvent": "I21",
     "description": "Collaborative Care Message",
-    "pdf": "hl7.eu std281/ch11.html",
-    "page": null,
-    "sectionHeading": "11.6.1 CCM/ACK - Collaborative Care Message (Event I21)"
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
+    "page": null
   },
   {
     "structure": "CCR_I16",
     "messageType": "CCR",
     "triggerEvent": "I16",
     "description": "Collaborative Care Referral",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.6.2 CCR/ACK - Collaborative Care Referral (Events I16, I17 and I18)",
     "eventPrinted": "I16-I18"
   },
   {
@@ -2678,9 +2616,8 @@
     "messageType": "CCR",
     "triggerEvent": "I17",
     "description": "Collaborative Care Referral",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.6.4 CCR/ACK - Modify Collaborative Care Referral (Event I17)",
     "eventPrinted": "I16-I18",
     "sameAs": "I16"
   },
@@ -2689,9 +2626,8 @@
     "messageType": "CCR",
     "triggerEvent": "I18",
     "description": "Collaborative Care Referral",
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "page": null,
-    "sectionHeading": "11.6.5 CCR/ACK - Cancel Collaborative Care Referral (Event I18)",
     "eventPrinted": "I16-I18",
     "sameAs": "I16"
   },
@@ -2700,45 +2636,40 @@
     "messageType": "CCU",
     "triggerEvent": "I20",
     "description": "Collaborative Care Referral",
-    "pdf": "hl7.eu std281/ch11.html",
-    "page": null,
-    "sectionHeading": "11.6.6 CCU/ACK - Asynchronous Collaborative Care Update (Event I20)"
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
+    "page": null
   },
   {
     "structure": "CCQ_I19",
     "messageType": "CCQ",
     "triggerEvent": "I19",
     "description": "Collaborative Care Referral",
-    "pdf": "hl7.eu std281/ch11.html",
-    "page": null,
-    "sectionHeading": "11.7.1 CCQ/CQU - Collaborative Care Query/Collaborative Care Query Update (Event I19)"
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
+    "page": null
   },
   {
     "structure": "CQU_I19",
     "messageType": "CQU",
     "triggerEvent": "I19",
     "description": "Collaborative Care Referral",
-    "pdf": "hl7.eu std281/ch11.html",
-    "page": null,
-    "sectionHeading": "11.7.1 CCQ/CQU - Collaborative Care Query/Collaborative Care Query Update (Event I19)"
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
+    "page": null
   },
   {
     "structure": "CCF_I22",
     "messageType": "CCF",
     "triggerEvent": "I22",
     "description": "Collaborative Care Fetch",
-    "pdf": "hl7.eu std281/ch11.html",
-    "page": null,
-    "sectionHeading": "11.7.2 CCF/CCI - Collaborative Care Fetch / Collaborative Care Information (Event I22)"
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
+    "page": null
   },
   {
     "structure": "CCI_I22",
     "messageType": "CCI",
     "triggerEvent": "I22",
     "description": "Collaborative Care Information",
-    "pdf": "hl7.eu std281/ch11.html",
-    "page": null,
-    "sectionHeading": "11.7.2 CCF/CCI - Collaborative Care Fetch / Collaborative Care Information (Event I22)"
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
+    "page": null
   },
   {
     "structure": "PGL_PC6",
@@ -2873,99 +2804,88 @@
     "messageType": "ESU",
     "triggerEvent": "U01",
     "description": "Equipment Status Message",
-    "pdf": "hl7.eu std281/ch13.html",
-    "page": null,
-    "sectionHeading": "13.3.1 ESU/ACK - Automated Equipment Status Update (Event U01)"
+    "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
+    "page": null
   },
   {
     "structure": "ESR_U02",
     "messageType": "ESR",
     "triggerEvent": "U02",
     "description": "Equipment Status Message",
-    "pdf": "hl7.eu std281/ch13.html",
-    "page": null,
-    "sectionHeading": "13.3.2 ESR/ACK - Automated Equipment Status Request (Event U02)"
+    "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
+    "page": null
   },
   {
     "structure": "SSU_U03",
     "messageType": "SSU",
     "triggerEvent": "U03",
     "description": "Specimen Status Message",
-    "pdf": "hl7.eu std281/ch13.html",
-    "page": null,
-    "sectionHeading": "13.3.3 SSU/ACK - Specimen Status Update (Event U03)"
+    "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
+    "page": null
   },
   {
     "structure": "SSR_U04",
     "messageType": "SSR",
     "triggerEvent": "U04",
     "description": "Specimen Status Message",
-    "pdf": "hl7.eu std281/ch13.html",
-    "page": null,
-    "sectionHeading": "13.3.4 SSR/ACK - Specimen Status Request (Event U04)"
+    "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
+    "page": null
   },
   {
     "structure": "INU_U05",
     "messageType": "INU",
     "triggerEvent": "U05",
     "description": "Inventory Update Message",
-    "pdf": "hl7.eu std281/ch13.html",
-    "page": null,
-    "sectionHeading": "13.3.5 INU/ACK - Automated Equipment Inventory Update (Event U05)"
+    "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
+    "page": null
   },
   {
     "structure": "INR_U06",
     "messageType": "INR",
     "triggerEvent": "U06",
     "description": "Inventory Request Message",
-    "pdf": "hl7.eu std281/ch13.html",
-    "page": null,
-    "sectionHeading": "13.3.6 INR/ACK - Automated Equipment Inventory Request (Event U06)"
+    "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
+    "page": null
   },
   {
     "structure": "EAC_U07",
     "messageType": "EAC",
     "triggerEvent": "U07",
     "description": "Equipment Command Message",
-    "pdf": "hl7.eu std281/ch13.html",
-    "page": null,
-    "sectionHeading": "13.3.7 EAC/ACK - Automated Equipment Command (Event U07)"
+    "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
+    "page": null
   },
   {
     "structure": "EAR_U08",
     "messageType": "EAR",
     "triggerEvent": "U08",
     "description": "Equipment Command Message",
-    "pdf": "hl7.eu std281/ch13.html",
-    "page": null,
-    "sectionHeading": "13.3.8 EAR/ACK - Automated Equipment Response (Event U08)"
+    "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
+    "page": null
   },
   {
     "structure": "EAN_U09",
     "messageType": "EAN",
     "triggerEvent": "U09",
     "description": "Equipment Status Message",
-    "pdf": "hl7.eu std281/ch13.html",
-    "page": null,
-    "sectionHeading": "13.3.9 EAN/ACK - Automated Equipment Notification (Event U09)"
+    "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
+    "page": null
   },
   {
     "structure": "TCU_U10",
     "messageType": "TCU",
     "triggerEvent": "U10",
     "description": "Test Code Settings Update",
-    "pdf": "hl7.eu std281/ch13.html",
-    "page": null,
-    "sectionHeading": "13.3.10 TCU/ACK - Automated Equipment Test Code Settings Update (Event U10)"
+    "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
+    "page": null
   },
   {
     "structure": "TCU_U10",
     "messageType": "TCR",
     "triggerEvent": "U11",
     "description": "Test Code Settings Request",
-    "pdf": "hl7.eu std281/ch13.html",
+    "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
     "page": null,
-    "sectionHeading": "13.3.11 TCR/ACK - Automated Equipment Test Code Settings Request (Event U11)",
     "sameAs": "U10"
   },
   {
@@ -2973,18 +2893,16 @@
     "messageType": "LSU",
     "triggerEvent": "U12",
     "description": "Equipment Log/Service Message",
-    "pdf": "hl7.eu std281/ch13.html",
-    "page": null,
-    "sectionHeading": "13.3.12 LSU/ACK - Automated Equipment Log/Service Update (Event U12)"
+    "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
+    "page": null
   },
   {
     "structure": "LSU_U12",
     "messageType": "LSR",
     "triggerEvent": "U13",
     "description": "Equipment Log/Service Message",
-    "pdf": "hl7.eu std281/ch13.html",
+    "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
     "page": null,
-    "sectionHeading": "13.3.13 LSR/ACK - Automated Equipment Log/Service Request (Event U13)",
     "sameAs": "U12"
   },
   {
@@ -2992,9 +2910,8 @@
     "messageType": "NMD",
     "triggerEvent": "N02",
     "description": "Application Management Data",
-    "pdf": "hl7.eu std281/ch14.html",
-    "page": null,
-    "sectionHeading": "14.3.2 NMD - Application Management Data Message (Event N02)"
+    "pdf": "hl7.org V281_CH14_AppMngmt.pdf",
+    "page": null
   },
   {
     "structure": "PMU_B01",
@@ -3085,7 +3002,7 @@
     "messageType": "EHC",
     "triggerEvent": "E01",
     "description": "Submit HealthCare Services Invoice",
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "page": null
   },
   {
@@ -3093,7 +3010,7 @@
     "messageType": "EHC",
     "triggerEvent": "E02",
     "description": "Cancel HealthCare Services Invoice",
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "page": null
   },
   {
@@ -3101,7 +3018,7 @@
     "messageType": "QBP",
     "triggerEvent": "E03",
     "description": "Query HealthCare Services Invoice",
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "page": null
   },
   {
@@ -3109,7 +3026,7 @@
     "messageType": "RSP",
     "triggerEvent": "E03",
     "description": "HealthCare Services Invoice Query Response",
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "page": null
   },
   {
@@ -3117,7 +3034,7 @@
     "messageType": "EHC",
     "triggerEvent": "E04",
     "description": "Re-Assess HealthCare Services Invoice Request",
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "page": null
   },
   {
@@ -3125,7 +3042,7 @@
     "messageType": "EHC",
     "triggerEvent": "E10",
     "description": "Edit/Adjudication Results",
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "page": null
   },
   {
@@ -3133,7 +3050,7 @@
     "messageType": "EHC",
     "triggerEvent": "E12",
     "description": "Request Additional Information",
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "page": null
   },
   {
@@ -3141,7 +3058,7 @@
     "messageType": "EHC",
     "triggerEvent": "E13",
     "description": "Additional Information Response",
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "page": null
   },
   {
@@ -3149,7 +3066,7 @@
     "messageType": "EHC",
     "triggerEvent": "E15",
     "description": "Payment/Remittance Advice",
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "page": null
   },
   {
@@ -3157,7 +3074,7 @@
     "messageType": "EHC",
     "triggerEvent": "E20",
     "description": "Submit Authorization Request",
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "page": null
   },
   {
@@ -3165,7 +3082,7 @@
     "messageType": "EHC",
     "triggerEvent": "E21",
     "description": "Cancel Authorization Request",
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "page": null
   },
   {
@@ -3173,7 +3090,7 @@
     "messageType": "QBP",
     "triggerEvent": "E22",
     "description": "Query Authorization Request",
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "page": null
   },
   {
@@ -3181,7 +3098,7 @@
     "messageType": "RSP",
     "triggerEvent": "E22",
     "description": "Authorization Request Query Response",
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "page": null
   },
   {
@@ -3189,7 +3106,7 @@
     "messageType": "EHC",
     "triggerEvent": "E24",
     "description": "Authorization Response",
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "page": null
   },
   {
@@ -3446,22 +3363,22 @@
     "structure": null,
     "messageType": "ORM",
     "triggerEvent": null,
-    "description": "ORM - general order message",
-    "pdf": "hl7.eu std281/ch04.html",
+    "description": "ORM â general order message",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null,
     "status": "withdrawn",
-    "sectionHeading": "4.4.1 ORM - general order message",
+    "sectionHeading": "4.4.1 ORM â general order message",
     "note": "Attention: Retained for backwards compatibility only as of v2.4.and withdrawn as of v2.7"
   },
   {
     "structure": null,
     "messageType": "ORR",
     "triggerEvent": null,
-    "description": "ORR - general order response message response to any ORM",
-    "pdf": "hl7.eu std281/ch04.html",
+    "description": "ORR â general order response message response to any ORM",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null,
     "status": "withdrawn",
-    "sectionHeading": "4.4.2 ORR - general order response message response to any ORM",
+    "sectionHeading": "4.4.2 ORR â general order response message response to any ORM",
     "note": "Attention: Retained for backwards compatibility only as of v2.5 and withdrawn as of v2.7"
   },
   {
@@ -3469,7 +3386,7 @@
     "messageType": "OSQ",
     "triggerEvent": null,
     "description": "OSQ/OSR- query response for order",
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null,
     "status": "withdrawn",
     "sectionHeading": "4.4.3 OSQ/OSR- query response for order",
@@ -3480,11 +3397,121 @@
     "messageType": "OSR",
     "triggerEvent": null,
     "description": "OSQ/OSR- query response for order",
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "page": null,
     "status": "withdrawn",
     "sectionHeading": "4.4.3 OSQ/OSR- query response for order",
     "note": "Attention: Retained for backwards compatibility only as of v2.4.and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "ROR",
+    "triggerEvent": null,
+    "description": "ROR - Pharmacy/Treatment Order Response",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "4A.3.15 ROR - Pharmacy/Treatment Order Response",
+    "note": "Attention: This query/response pair was retained for backward compatibility only as of v2.4 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "RAR",
+    "triggerEvent": null,
+    "description": "RAR - Pharmacy/Treatment Administration Information",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "4A.3.16 RAR - Pharmacy/Treatment Administration Information",
+    "note": "Attention:This query/response pair was retained for backward compatibility only as of v2.4 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "RDR",
+    "triggerEvent": null,
+    "description": "RDR - Pharmacy/Treatment Dispense Information",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "4A.3.17 RDR - Pharmacy/Treatment Dispense Information",
+    "note": "Attention: This query/response pair was retained for backward compatibility only as of v2.4 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "RER",
+    "triggerEvent": null,
+    "description": "RER - Pharmacy/Treatment Encoded Order",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "4A.3.18 RER - Pharmacy/Treatment Encoded Order",
+    "note": "Attention: This query/response pair was retained for backward compatibility only as of v2.4 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "RGR",
+    "triggerEvent": null,
+    "description": "RGR - Pharmacy/Treatment Dose Information",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "4A.3.19 RGR - Pharmacy/Treatment Dose Information",
+    "note": "Attention: This query/response pair was retained for backward compatibility only as of v2.4 and withdrawn as of v2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "VXX",
+    "triggerEvent": null,
+    "description": "VXX - RESPONSE TO VACCINATION QUERY RETURNING MULTIPLE",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "4A.7.4 VXX - RESPONSE TO VACCINATION QUERY RETURNING MULTIPLE",
+    "note": "Attention: Retained for backwards compatibility only as of v 2.4.and withdrawn as of v 2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "VXR",
+    "triggerEvent": "V03",
+    "description": "VXR - Vaccination Record Response (Event V03)",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "4A.7.5 VXR - Vaccination Record Response (Event V03)",
+    "note": "Attention: Retained for backwards compatibility only as of v 2.4.and withdrawn as of v 2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "VXQ",
+    "triggerEvent": null,
+    "description": "VXQ - query for vaccination record",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "4A.9.1 VXQ - query for vaccination record",
+    "note": "Attention: The original mode query, including QRD and QRF segments were retained for backward compatibility only as of v 2.4 and withdrawn as of v 2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "VXX",
+    "triggerEvent": null,
+    "description": "VXX - response to vaccination query with multiple PID matches",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "4A.9.2 VXX - response to vaccination query with multiple PID matches",
+    "note": "Attention: The original mode query, including QRD and QRF segments were retained for backward compatibility only as of v 2.4 and withdrawn as of v 2.7"
+  },
+  {
+    "structure": null,
+    "messageType": "VXR",
+    "triggerEvent": null,
+    "description": "VXR - vaccination record response",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
+    "page": null,
+    "status": "withdrawn",
+    "sectionHeading": "4A.9.3 VXR - vaccination record response",
+    "note": "Attention: The original mode query, including QRD and QRF segments were retained for backward compatibility only as of v 2.4 and withdrawn as of v 2.7"
   },
   {
     "structure": null,

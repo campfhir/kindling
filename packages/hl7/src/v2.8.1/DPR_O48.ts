@@ -1,7 +1,7 @@
 /**
  * Builder, parser and structure for DPR^O48 messages (HL7 v2.8.1).
  *
- * Structure: MSH [{SFT}] [UAC] [ DONOR: PID [PD1] [{OBX}] [{NTE}] [{AL1}] [{ARV}] [ DONOR_REGISTRATION: [PV1] [{NTE}] ] ] { OBR_GROUP: OBR [{NTE}] } [ DONATION: DON [{OBX}] [{NTE}] [ BLOOD_UNIT: [{BUI}] [{NTE}] ] ]
+ * Structure: MSH [{SFT}] [UAC] [ DONOR: PID [PD1] [{OBX}] [{NTE}] [{AL1}] [{ARV}] [ DONOR_REGISTRATION: [PV1] [{NTE}] ] ] { DONATION_ORDER: OBR [{NTE}] } [ DONATION: DON [{OBX}] [{NTE}] [ BLOOD_UNIT: [{BUI}] [{NTE}] ] ]
  *
  * @module
  */
@@ -52,7 +52,7 @@ export const DPR_O48_STRUCTURE: StructureItem[] = [
     ],
   },
   {
-    name: "OBR_GROUP",
+    name: "DONATION_ORDER",
     required: true,
     repeating: true,
     segments: [
@@ -107,8 +107,8 @@ export interface ParsedDonorRegistration {
   notes?: NTE[];
 }
 
-/** The OBR GROUP group of a parsed DPR^O48 (HL7 v2.8.1) message. */
-export interface ParsedObrGroup {
+/** The DONATION ORDER group of a parsed DPR^O48 (HL7 v2.8.1) message. */
+export interface ParsedDonationOrder {
   /** The OBR segment. */
   observationRequest: OBR;
   /** The NTE segments. */
@@ -145,8 +145,8 @@ export interface ParsedDPR_O48 extends ParsedMessageBase {
   uac?: UAC;
   /** The DONOR group. */
   donor?: ParsedDonor;
-  /** The OBR GROUP groups. */
-  obrGroups: ParsedObrGroup[];
+  /** The DONATION ORDER groups. */
+  donationOrders: ParsedDonationOrder[];
   /** The DONATION group. */
   donation?: ParsedDonation;
 }
@@ -214,8 +214,8 @@ export interface DonorRegistrationGroup {
   notes?: NTE[];
 }
 
-/** The OBR GROUP group of an DPR^O48 (HL7 v2.8.1) message being built. */
-export interface ObrGroup {
+/** The DONATION ORDER group of an DPR^O48 (HL7 v2.8.1) message being built. */
+export interface DonationOrderGroup {
   /** The OBR segment. */
   observationRequest: OBR;
   /** The NTE segments. */
@@ -264,14 +264,14 @@ export class DPR_O48<TMSH extends MSH = MSH> {
   /** Constructor. */
   constructor(
     public header: TMSH,
-    public obrGroups: ObrGroup[],
+    public donationOrders: DonationOrderGroup[],
     public options: DPR_O48Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, header: this.header, obrGroups: this.obrGroups };
+    return { ...this.options, header: this.header, donationOrders: this.donationOrders };
   }
 
   /** Validates the message structure, returning a result. */
@@ -293,9 +293,9 @@ export class DPR_O48<TMSH extends MSH = MSH> {
 /** Builds an HL7 DPR^O48 (HL7 v2.8.1) message. */
 export function createDPR_O48<TMSH extends MSH = MSH>(
   header: TMSH,
-  obrGroups: ObrGroup[],
+  donationOrders: DonationOrderGroup[],
   options: DPR_O48Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): DPR_O48<TMSH> {
-  return new DPR_O48(header, obrGroups, options, encoding);
+  return new DPR_O48(header, donationOrders, options, encoding);
 }

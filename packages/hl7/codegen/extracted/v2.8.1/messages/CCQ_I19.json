@@ -5,9 +5,8 @@
   "version": "2.8.1",
   "description": "Collaborative Care Referral",
   "title": "Collaborative Care Referral",
-  "sectionHeading": "11.7.1 CCQ/CQU - Collaborative Care Query/Collaborative Care Query Update (Event I19)",
   "source": {
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "pages": null,
     "table": "CCQ^I19^CCQ_I19: Collaborative Care Referral"
   },
@@ -17,7 +16,7 @@
         "I19"
       ],
       "eventPrinted": "I19",
-      "pdf": "hl7.eu std281/ch11.html",
+      "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
       "page": null,
       "table": "CCQ^I19^CCQ_I19: Collaborative Care Referral",
       "identicalToPrimary": true

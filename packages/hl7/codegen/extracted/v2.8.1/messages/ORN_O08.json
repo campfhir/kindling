@@ -6,7 +6,7 @@
   "description": "General Order Acknowledgment Message",
   "title": "General Order Acknowledgment Message",
   "source": {
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "pages": null,
     "table": "ORN^O08^ORN_O08: General Order Acknowledgment Message"
   },
@@ -16,7 +16,7 @@
         "O08"
       ],
       "eventPrinted": "O08",
-      "pdf": "hl7.eu std281/ch04.html",
+      "pdf": "hl7.org V281_CH04_Orders.pdf",
       "page": null,
       "table": "ORN^O08^ORN_O08: General Order Acknowledgment Message",
       "identicalToPrimary": true

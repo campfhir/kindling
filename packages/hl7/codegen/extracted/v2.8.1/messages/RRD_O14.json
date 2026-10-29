@@ -6,7 +6,7 @@
   "description": "Pharmacy/Treatment Dispense Acknowledgment Message",
   "title": "Pharmacy/Treatment Dispense Acknowledgment Message",
   "source": {
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "pages": null,
     "table": "RRD^O14^RRD_O14: Pharmacy/Treatment Dispense Acknowledgment Message"
   },
@@ -16,7 +16,7 @@
         "O14"
       ],
       "eventPrinted": "O14",
-      "pdf": "hl7.eu std281/ch04a.html",
+      "pdf": "hl7.org V281_CH04A_Orders.pdf",
       "page": null,
       "table": "RRD^O14^RRD_O14: Pharmacy/Treatment Dispense Acknowledgment Message",
       "identicalToPrimary": true

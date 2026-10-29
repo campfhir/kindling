@@ -6,7 +6,7 @@
   "description": "Specimen Shipment Centric Laboratory Order Acknowledgment Message (Patient Required)",
   "title": "Specimen Shipment Centric Laboratory Order Acknowledgment Message (Patient Required)",
   "source": {
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "pages": null,
     "table": "ORL^O40^ORL_O40: Specimen Shipment Centric Laboratory Order Acknowledgment Message (Patient Required)"
   },
@@ -16,7 +16,7 @@
         "O40"
       ],
       "eventPrinted": "O40",
-      "pdf": "hl7.eu std281/ch04.html",
+      "pdf": "hl7.org V281_CH04_Orders.pdf",
       "page": null,
       "table": "ORL^O40^ORL_O40: Specimen Shipment Centric Laboratory Order Acknowledgment Message (Patient Required)",
       "identicalToPrimary": true

@@ -5,9 +5,8 @@
   "version": "2.8.1",
   "description": "Request Patient Information",
   "title": "Request Patient Information",
-  "sectionHeading": "11.3.1 RQI/RPI - Request for Insurance Information (Event I01)",
   "source": {
-    "pdf": "hl7.eu std281/ch11.html",
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
     "pages": null,
     "table": "RQI^I01^RQI_I01: Request Patient Information"
   },
@@ -17,7 +16,7 @@
         "I01"
       ],
       "eventPrinted": "I01",
-      "pdf": "hl7.eu std281/ch11.html",
+      "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
       "page": null,
       "table": "RQI^I01^RQI_I01: Request Patient Information",
       "identicalToPrimary": true
@@ -27,7 +26,7 @@
         "I02"
       ],
       "eventPrinted": "I02",
-      "pdf": "hl7.eu std281/ch11.html",
+      "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
       "page": null,
       "table": "RQI^I02^RQI_I01: Request Patient Information",
       "identicalToPrimary": true
@@ -37,7 +36,7 @@
         "I03"
       ],
       "eventPrinted": "I03",
-      "pdf": "hl7.eu std281/ch11.html",
+      "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
       "page": null,
       "table": "RQI^I03^RQI_I01: Request Patient Information",
       "identicalToPrimary": false
@@ -47,7 +46,7 @@
         "I07"
       ],
       "eventPrinted": "I07",
-      "pdf": "hl7.eu std281/ch11.html",
+      "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
       "page": null,
       "table": "PIN^I07^RQI_I01: Patient Insurance Information",
       "identicalToPrimary": true
@@ -208,7 +207,7 @@
   "variants": [
     {
       "eventPrinted": "I03",
-      "pdf": "hl7.eu std281/ch11.html",
+      "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
       "pages": null,
       "table": "RQI^I03^RQI_I01: Request Patient Information",
       "items": [

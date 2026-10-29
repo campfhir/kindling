@@ -1,7 +1,7 @@
 /**
  * Builder, parser and structure for DRC^O47 messages (HL7 v2.8.1).
  *
- * Structure: MSH [{SFT}] [UAC] [ DONOR: PID [PD1] [{OBX}] [{NTE}] [{AL1}] [{ARV}] [ DONOR_REGISTRATION: [PV1] [{NTE}] ] ] { OBR_GROUP: OBR [{NTE}] }
+ * Structure: MSH [{SFT}] [UAC] [ DONOR: PID [PD1] [{OBX}] [{NTE}] [{AL1}] [{ARV}] [ DONOR_REGISTRATION: [PV1] [{NTE}] ] ] { DONATION_ORDER: OBR [{NTE}] }
  *
  * @module
  */
@@ -50,7 +50,7 @@ export const DRC_O47_STRUCTURE: StructureItem[] = [
     ],
   },
   {
-    name: "OBR_GROUP",
+    name: "DONATION_ORDER",
     required: true,
     repeating: true,
     segments: [
@@ -86,8 +86,8 @@ export interface ParsedDonorRegistration {
   notes?: NTE[];
 }
 
-/** The OBR GROUP group of a parsed DRC^O47 (HL7 v2.8.1) message. */
-export interface ParsedObrGroup {
+/** The DONATION ORDER group of a parsed DRC^O47 (HL7 v2.8.1) message. */
+export interface ParsedDonationOrder {
   /** The OBR segment. */
   observationRequest: OBR;
   /** The NTE segments. */
@@ -104,8 +104,8 @@ export interface ParsedDRC_O47 extends ParsedMessageBase {
   uac?: UAC;
   /** The DONOR group. */
   donor?: ParsedDonor;
-  /** The OBR GROUP groups. */
-  obrGroups: ParsedObrGroup[];
+  /** The DONATION ORDER groups. */
+  donationOrders: ParsedDonationOrder[];
 }
 
 /** The segment parsers of DRC^O47 (HL7 v2.8.1). */
@@ -169,8 +169,8 @@ export interface DonorRegistrationGroup {
   notes?: NTE[];
 }
 
-/** The OBR GROUP group of an DRC^O47 (HL7 v2.8.1) message being built. */
-export interface ObrGroup {
+/** The DONATION ORDER group of an DRC^O47 (HL7 v2.8.1) message being built. */
+export interface DonationOrderGroup {
   /** The OBR segment. */
   observationRequest: OBR;
   /** The NTE segments. */
@@ -197,14 +197,14 @@ export class DRC_O47<TMSH extends MSH = MSH> {
   /** Constructor. */
   constructor(
     public header: TMSH,
-    public obrGroups: ObrGroup[],
+    public donationOrders: DonationOrderGroup[],
     public options: DRC_O47Options = {},
     protected encoding: EncodingCharacters = DEFAULT_ENCODING,
   ) {}
 
   /** The message as one object keyed by structure property name (what verify() and encode() work on). */
   toInput(): StructureInput {
-    return { ...this.options, header: this.header, obrGroups: this.obrGroups };
+    return { ...this.options, header: this.header, donationOrders: this.donationOrders };
   }
 
   /** Validates the message structure, returning a result. */
@@ -226,9 +226,9 @@ export class DRC_O47<TMSH extends MSH = MSH> {
 /** Builds an HL7 DRC^O47 (HL7 v2.8.1) message. */
 export function createDRC_O47<TMSH extends MSH = MSH>(
   header: TMSH,
-  obrGroups: ObrGroup[],
+  donationOrders: DonationOrderGroup[],
   options: DRC_O47Options = {},
   encoding: EncodingCharacters = DEFAULT_ENCODING,
 ): DRC_O47<TMSH> {
-  return new DRC_O47(header, obrGroups, options, encoding);
+  return new DRC_O47(header, donationOrders, options, encoding);
 }

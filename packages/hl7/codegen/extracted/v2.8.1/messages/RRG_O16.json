@@ -6,7 +6,7 @@
   "description": "Pharmacy/Treatment Give Acknowledgment Message",
   "title": "Pharmacy/Treatment Give Acknowledgment Message",
   "source": {
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "pages": null,
     "table": "RRG^O16^RRG_O16: Pharmacy/Treatment Give Acknowledgment Message"
   },
@@ -16,7 +16,7 @@
         "O16"
       ],
       "eventPrinted": "O16",
-      "pdf": "hl7.eu std281/ch04a.html",
+      "pdf": "hl7.org V281_CH04A_Orders.pdf",
       "page": null,
       "table": "RRG^O16^RRG_O16: Pharmacy/Treatment Give Acknowledgment Message",
       "identicalToPrimary": true
@@ -222,7 +222,7 @@
                   "maxOccurs": "*",
                   "usage": null,
                   "page": null,
-                  "description": "Pharmacy/Treatment Route",
+                  "description": "Pharmacy / Treatment Route",
                   "chapterRef": "4A"
                 },
                 {

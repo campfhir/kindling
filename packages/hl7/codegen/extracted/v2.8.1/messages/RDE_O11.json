@@ -6,7 +6,7 @@
   "description": "Pharmacy/Treatment Encoded Order Message",
   "title": "Pharmacy/Treatment Encoded Order Message",
   "source": {
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "pages": null,
     "table": "RDE^O11^RDE_O11: Pharmacy/Treatment Encoded Order Message"
   },
@@ -16,7 +16,7 @@
         "O11"
       ],
       "eventPrinted": "O11",
-      "pdf": "hl7.eu std281/ch04a.html",
+      "pdf": "hl7.org V281_CH04A_Orders.pdf",
       "page": null,
       "table": "RDE^O11^RDE_O11: Pharmacy/Treatment Encoded Order Message",
       "identicalToPrimary": true
@@ -26,7 +26,7 @@
         "O25"
       ],
       "eventPrinted": "O25",
-      "pdf": "hl7.eu std281/ch04a.html",
+      "pdf": "hl7.org V281_CH04A_Orders.pdf",
       "page": null,
       "table": "RDE^O25^RDE_O11: Pharmacy/Treatment Refill Authorization Request",
       "identicalToPrimary": false
@@ -148,7 +148,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Patient Visit - Additional Info",
+              "description": "Patient Visit â Additional Info",
               "chapterRef": "3"
             },
             {
@@ -621,7 +621,7 @@
   "variants": [
     {
       "eventPrinted": "O25",
-      "pdf": "hl7.eu std281/ch04a.html",
+      "pdf": "hl7.org V281_CH04A_Orders.pdf",
       "pages": null,
       "table": "RDE^O25^RDE_O11: Pharmacy/Treatment Refill Authorization Request",
       "items": [
@@ -740,7 +740,7 @@
                   "maxOccurs": 1,
                   "usage": null,
                   "page": null,
-                  "description": "Patient Visit - Additional Info",
+                  "description": "Patient Visit â Additional Info",
                   "chapterRef": "3"
                 },
                 {

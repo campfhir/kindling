@@ -6,7 +6,7 @@
   "description": "Pharmacy/Treatment Encoded Order Acknowledgment Message",
   "title": "Pharmacy/Treatment Encoded Order Acknowledgment Message",
   "source": {
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "pages": null,
     "table": "RRE^O12^RRE_O12: Pharmacy/Treatment Encoded Order Acknowledgment Message"
   },
@@ -16,7 +16,7 @@
         "O12"
       ],
       "eventPrinted": "O12",
-      "pdf": "hl7.eu std281/ch04a.html",
+      "pdf": "hl7.org V281_CH04A_Orders.pdf",
       "page": null,
       "table": "RRE^O12^RRE_O12: Pharmacy/Treatment Encoded Order Acknowledgment Message",
       "identicalToPrimary": true
@@ -26,7 +26,7 @@
         "O26"
       ],
       "eventPrinted": "O26",
-      "pdf": "hl7.eu std281/ch04a.html",
+      "pdf": "hl7.org V281_CH04A_Orders.pdf",
       "page": null,
       "table": "RRE^O26^RRE_O12: Pharmacy/Treatment Refill Authorization Request Acknowledgment Message",
       "identicalToPrimary": true

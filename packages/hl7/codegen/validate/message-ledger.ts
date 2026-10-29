@@ -185,8 +185,11 @@ const hl7eu = new Map<string, Line[]>();
 const hl7euAliases: { key: string; lines: Line[] }[] = [];
 if (hl7euDir && existsSync(hl7euDir)) {
   for (const f of [...new Set([...readdirSync(hl7euDir).filter((f) => f.endsWith(".htm")), ...hl7orgFiles])].sort()) {
-    const raw = readFileSync(join(hl7orgFiles.includes(f) ? hl7orgDir! : hl7euDir, f)).toString("latin1");
-    const text = raw
+    const fromPdf = hl7orgFiles.includes(f);
+    const raw = readFileSync(join(fromPdf ? hl7orgDir! : hl7euDir, f)).toString("latin1");
+    // A converted PDF chapter holds each message table whole, so its end is the table's end; the prose after it
+    // ("The NTE segment(s) can be included …") would otherwise read on as structure.
+    const text = (fromPdf ? raw.replace(/<\/TABLE>/g, " TABLE_END ") : raw)
       // A table row keeps its first two cells (the code with its brackets, and the description, which
       // names the table for the anchor below); the other columns and any segment code in the description
       // ("… the data for the entry identified in the MFE segment", v2.5 ch8) would read as structure.
@@ -214,9 +217,10 @@ if (hl7euDir && existsSync(hl7euDir)) {
       events: expandEvents(m[2]),
     }));
     for (const m of text.matchAll(/(?:Chapter\/? |Appendix )?MSH Message Header(?: 2)?(?= [\[{A-Z])/g)) {
-      const before = text.slice(Math.max(0, m.index! - 160), m.index!);
-      // A "TYPE^EVENT^STRUCTURE" caption right before the table (v2.4 and later) names the event itself.
-      const caption = [...before.slice(-120).matchAll(/\b([A-Z][A-Z0-9]{2})\^([A-Z0-9]{3})(?:\^[A-Z0-9_]+)?\b/g)].at(-1);
+      const before = text.slice(Math.max(0, m.index! - 240), m.index!);
+      // A "TYPE^EVENT^STRUCTURE" caption right before the table (v2.4 and later) names the event itself. A PDF
+      // caption keeps its whole title ("… Multiple Order Per Container of Specimen (Patient Required)"), so it reaches further back.
+      const caption = [...before.slice(fromPdf ? -220 : -120).matchAll(/\b([A-Z][A-Z0-9]{2})\^([A-Z0-9]{3})(?:\^[A-Z0-9_]+)?\b/g)].at(-1);
       let type: string | undefined;
       let events: string[];
       let aliases: string[] = [];
@@ -254,7 +258,7 @@ function tokenizeHl7eu(text: string): Line[] | undefined {
   // A "TYPE^EVENT^STRUCTURE" caption after the first token is the next table's; a second MSH is prose
   // repeating the segment list ("contains the MSH, QPD, RCP, and DSC segments"). Both end the table.
   const clean = text.replace(/\([^()]{0,60}\)/g, " ").replace(/(?<=.)\b[A-Z][A-Z0-9]{2}\^[A-Z0-9]{3}(?:\^[A-Z0-9_]+)?/g, " NEXT_CAPTION ");
-  const matches = [...clean.matchAll(/\[|\]|\{|\}|ORDER_DETAIL_CHOICE|ACK_TABLE|NEXT_CAPTION|\b[A-Z][A-Z0-9]{2}\b|\b\d+\.\d+(?:\.\d+)*\b|Chapter/g)];
+  const matches = [...clean.matchAll(/\[|\]|\{|\}|ORDER_DETAIL_CHOICE|ACK_TABLE|NEXT_CAPTION|TABLE_END|\b[A-Z][A-Z0-9]{2}\b|\b\d+\.\d+(?:\.\d+)*\b|Chapter/g)];
   const tokens = matches.map((m) => m[0]);
   // The v2.5 pages print the order detail choice as one row per segment ("OBR", "RQD", …, "ODT >",
   // the "[Order Detail Segment] OBR, etc." remark in a third column): the run is the choice.
@@ -268,7 +272,7 @@ function tokenizeHl7eu(text: string): Line[] | undefined {
   }
   const isSegment = (t: string) => SEGMENT_CODES.has(t) || t === "ORDER_DETAIL_CHOICE";
   let mshSeen = 0;
-  const isStop = (t: string) => /^\d+\.\d+/.test(t) || t === "Chapter" || t === "ACK_TABLE" || t === "NEXT_CAPTION" || (t === "MSH" && mshSeen > 0);
+  const isStop = (t: string) => /^\d+\.\d+/.test(t) || t === "Chapter" || t === "ACK_TABLE" || t === "NEXT_CAPTION" || t === "TABLE_END" || (t === "MSH" && mshSeen > 0);
   // Table rows are short ("SEG Description 2"); a long gap between tokens at the top level is prose after the table.
   const prose = (k: number, depth: number) => depth === 0 && k > 0 && matches[k].index! - (matches[k - 1].index! + matches[k - 1][0].length) > 140;
   let i = 0;

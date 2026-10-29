@@ -6,7 +6,7 @@
   "description": "General Clinical Order Acknowledgment Message",
   "title": "General Clinical Order Acknowledgment Message",
   "source": {
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "pages": null,
     "table": "ORG^O20^ORG_O20: General Clinical Order Acknowledgment Message"
   },
@@ -16,7 +16,7 @@
         "O20"
       ],
       "eventPrinted": "O20",
-      "pdf": "hl7.eu std281/ch04.html",
+      "pdf": "hl7.org V281_CH04_Orders.pdf",
       "page": null,
       "table": "ORG^O20^ORG_O20: General Clinical Order Acknowledgment Message",
       "identicalToPrimary": true

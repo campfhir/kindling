@@ -5,9 +5,8 @@
   "version": "2.8.1",
   "description": "Dietary Order",
   "title": "Dietary Order",
-  "sectionHeading": "4.7.1 OMD - Dietary Order (Event O03)",
   "source": {
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "pages": null,
     "table": "OMD^O03^OMD_O03: Dietary Order"
   },
@@ -17,7 +16,7 @@
         "O03"
       ],
       "eventPrinted": "O03",
-      "pdf": "hl7.eu std281/ch04.html",
+      "pdf": "hl7.org V281_CH04_Orders.pdf",
       "page": null,
       "table": "OMD^O03^OMD_O03: Dietary Order",
       "identicalToPrimary": true
@@ -139,7 +138,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Patient Visit - Additional Info",
+              "description": "Patient Visit â Additional Info",
               "chapterRef": "3"
             },
             {

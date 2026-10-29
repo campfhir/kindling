@@ -6,7 +6,7 @@
   "description": "Request Additional Information",
   "title": "Request Additional Information",
   "source": {
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "pages": null,
     "table": "EHC^E12^EHC_E12: Request Additional Information"
   },
@@ -16,7 +16,7 @@
         "E12"
       ],
       "eventPrinted": "E12",
-      "pdf": "hl7.eu std281/ch16.html",
+      "pdf": "hl7.org V281_CH16_eClaims.pdf",
       "page": null,
       "table": "EHC^E12^EHC_E12: Request Additional Information",
       "identicalToPrimary": true
@@ -79,7 +79,7 @@
       "usage": null,
       "page": null,
       "description": "Invoice",
-      "status": "Identifier."
+      "status": "Identi fier."
     },
     {
       "kind": "segment",

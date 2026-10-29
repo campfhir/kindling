@@ -6,7 +6,7 @@
   "description": "Blood Product Order Message",
   "title": "Blood Product Order Message",
   "source": {
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "pages": null,
     "table": "OMB^O27^OMB_O27: Blood Product Order Message"
   },
@@ -16,7 +16,7 @@
         "O27"
       ],
       "eventPrinted": "O27",
-      "pdf": "hl7.eu std281/ch04.html",
+      "pdf": "hl7.org V281_CH04_Orders.pdf",
       "page": null,
       "table": "OMB^O27^OMB_O27: Blood Product Order Message",
       "identicalToPrimary": true
@@ -138,7 +138,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Patient Visit - Additional Info",
+              "description": "Patient Visit â Additional Info",
               "chapterRef": "3"
             },
             {

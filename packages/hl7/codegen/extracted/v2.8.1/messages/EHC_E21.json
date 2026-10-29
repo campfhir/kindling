@@ -6,7 +6,7 @@
   "description": "Cancel Authorization Request",
   "title": "Cancel Authorization Request",
   "source": {
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "pages": null,
     "table": "EHC^E21^EHC_E21: Cancel Authorization Request"
   },
@@ -16,7 +16,7 @@
         "E21"
       ],
       "eventPrinted": "E21",
-      "pdf": "hl7.eu std281/ch16.html",
+      "pdf": "hl7.org V281_CH16_eClaims.pdf",
       "page": null,
       "table": "EHC^E21^EHC_E21: Cancel Authorization Request",
       "identicalToPrimary": true

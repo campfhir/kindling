@@ -5,9 +5,8 @@
   "version": "2.8.1",
   "description": "Donation Procedure Message",
   "title": "Donation Procedure Message",
-  "sectionHeading": "4.16.15 DPR - Donation Procedure (Event O48)",
   "source": {
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "pages": null,
     "table": "DPR^O48^DPR_O48: Donation Procedure Message"
   },
@@ -17,25 +16,13 @@
         "O48"
       ],
       "eventPrinted": "O48",
-      "pdf": "hl7.eu std281/ch04.html",
+      "pdf": "hl7.org V281_CH04_Orders.pdf",
       "page": null,
       "table": "DPR^O48^DPR_O48: Donation Procedure Message",
       "identicalToPrimary": true
     }
   ],
   "items": [
-    {
-      "kind": "placeholder",
-      "text": "Segment",
-      "minOccurs": 1,
-      "maxOccurs": 1,
-      "usage": null,
-      "page": null,
-      "notation": "Segment",
-      "description": "Description",
-      "status": "Status",
-      "chapterRef": "Chapter"
-    },
     {
       "kind": "segment",
       "name": "MSH",
@@ -83,8 +70,7 @@
           "maxOccurs": 1,
           "usage": null,
           "page": null,
-          "description": "Additional Demographics",
-          "status": "DB"
+          "description": "Additional Demographics"
         },
         {
           "kind": "segment",
@@ -93,8 +79,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Donor Observations",
-          "status": "DB"
+          "description": "Donor Observations"
         },
         {
           "kind": "segment",
@@ -103,8 +88,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Notes and Comments (for Donor)",
-          "status": "DB"
+          "description": "Notes and Comments (for Donor)"
         },
         {
           "kind": "segment",
@@ -113,8 +97,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Allergy Information",
-          "status": "DB"
+          "description": "Allergy Information"
         },
         {
           "kind": "segment",
@@ -124,7 +107,7 @@
           "usage": null,
           "page": null,
           "description": "Access Restrictions",
-          "status": "DB"
+          "chapterRef": "3"
         },
         {
           "kind": "group",
@@ -146,8 +129,7 @@
               "maxOccurs": "*",
               "usage": null,
               "page": null,
-              "description": "Notes and Comments (for Donor Registration)",
-              "status": "DB"
+              "description": "Notes and Comments (for Donor Registration)"
             }
           ],
           "minOccurs": 0,
@@ -163,6 +145,7 @@
     },
     {
       "kind": "group",
+      "name": "DONATION_ORDER",
       "items": [
         {
           "kind": "segment",
@@ -170,7 +153,8 @@
           "minOccurs": 1,
           "maxOccurs": 1,
           "usage": null,
-          "page": null
+          "page": null,
+          "description": "Observation"
         },
         {
           "kind": "segment",
@@ -178,7 +162,8 @@
           "minOccurs": 0,
           "maxOccurs": "*",
           "usage": null,
-          "page": null
+          "page": null,
+          "description": "Notes and Comments"
         }
       ],
       "minOccurs": 1,
@@ -196,7 +181,8 @@
           "minOccurs": 1,
           "maxOccurs": 1,
           "usage": null,
-          "page": null
+          "page": null,
+          "description": "Donation"
         },
         {
           "kind": "segment",
@@ -204,7 +190,8 @@
           "minOccurs": 0,
           "maxOccurs": "*",
           "usage": null,
-          "page": null
+          "page": null,
+          "description": "Donation Observation (Adverse Reactions, Associations, etc.)"
         },
         {
           "kind": "segment",
@@ -213,8 +200,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Notes and Comments (for Donation)",
-          "status": "DB"
+          "description": "Notes and Comments (for Donation)"
         },
         {
           "kind": "group",
@@ -226,7 +212,8 @@
               "minOccurs": 0,
               "maxOccurs": "*",
               "usage": null,
-              "page": null
+              "page": null,
+              "description": "Blood Unit Information"
             },
             {
               "kind": "segment",
@@ -235,8 +222,7 @@
               "maxOccurs": "*",
               "usage": null,
               "page": null,
-              "description": "Notes and Comments (for Blood Unit)",
-              "status": "DB"
+              "description": "Notes and Comments (for Blood Unit)"
             }
           ],
           "minOccurs": 0,

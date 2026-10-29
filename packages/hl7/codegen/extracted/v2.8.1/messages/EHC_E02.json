@@ -6,7 +6,7 @@
   "description": "Cancel HealthCare Services Invoice",
   "title": "Cancel HealthCare Services Invoice",
   "source": {
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "pages": null,
     "table": "EHC^E02^EHC_E02: Cancel HealthCare Services Invoice"
   },
@@ -16,7 +16,7 @@
         "E02"
       ],
       "eventPrinted": "E02",
-      "pdf": "hl7.eu std281/ch16.html",
+      "pdf": "hl7.org V281_CH16_eClaims.pdf",
       "page": null,
       "table": "EHC^E02^EHC_E02: Cancel HealthCare Services Invoice",
       "identicalToPrimary": true

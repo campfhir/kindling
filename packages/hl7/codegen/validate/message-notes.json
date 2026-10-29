@@ -1613,6 +1613,18 @@
   }
 ,
   "v2.8.1": {
+    "CQU_I19": {
+      "date": "2026-10-29",
+      "note": "Read from the official v2.8.1 chapter 11 (V281_CH11_PatientReferral.pdf), which names the repeating group around ROLE_PATHWAY_OBJECT ROLE_PATHWAY (\"[{ --- ROLE_PATHWAY begin\"). hl7.eu std281/ch11.html leaves it unnamed; the official chapter decides. Caristix 2.8.1 answers HTTP 500."
+    },
+    "DPR_O48": {
+      "date": "2026-10-29",
+      "note": "Read from the official v2.8.1 chapter 4 (V281_CH04_Orders.pdf), which names the repeating order group DONATION_ORDER (\"{ --- DONATION_ORDER begin\"). hl7.eu std281/ch04.html leaves it unnamed and adds a \"Segment\" placeholder row above MSH; the official chapter decides. HAPI v281 calls the group OBRNTE, the name it gives an unnamed group; Caristix 2.8.1 answers HTTP 500."
+    },
+    "DRC_O47": {
+      "date": "2026-10-29",
+      "note": "Read from the official v2.8.1 chapter 4 (V281_CH04_Orders.pdf), which names the repeating order group DONATION_ORDER (\"{ --- DONATION_ORDER begin\"). hl7.eu std281/ch04.html leaves it unnamed and adds a \"Segment\" placeholder row above MSH; the official chapter decides. HAPI v281 calls the group OBRNTE, the name it gives an unnamed group; Caristix 2.8.1 answers HTTP 500."
+    },
     "BRP_O30": {
       "date": "2026-10-29",
       "accept": true,
@@ -1743,11 +1755,6 @@
       "accept": true,
       "note": "The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single).\" Caristix 2.8.1 answers HTTP 500; HAPI v281 differs, as HAPI v28 did."
     },
-    "QBP_Z73": {
-      "date": "2026-10-29",
-      "accept": true,
-      "note": "The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure."
-    },
     "QBP_Z75": {
       "date": "2026-10-29",
       "accept": true,
@@ -1785,15 +1792,9 @@
     },
     "RDE_O11": {
       "date": "2026-10-29",
-      "accept": true,
-      "note": "The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"hl7.eu std28/ch04a.html prints the RXV group as \"[{\" with an unlabelled end row; the ledger's hl7.eu reader flattens it. The structure keeps the printed optional, repeating group, as HAPI v28 has it; Caristix 2.8 makes it optional and single. The inner TIMING_ENCODED takes the {} Caristix and HAPI agree on (codegen/extracted/v2.8/overrides.json).\" Caristix 2.8.1 answers HTTP 500; HAPI v281 differs, as HAPI v28 did. The inner TIMING_ENCODED keeps v2.8's {TIMING_ENCODED} by hand decision (codegen/extracted/v2.8.1/overrides.json)."
+      "note": "Read from the official v2.8.1 chapter 4A (V281_CH04A_Orders.pdf), which the ledger's reader matches. It prints the TIMING_ENCODED group inside the RXV group as \"{\" ... \"}]\" (the same misprint as hl7.eu std28 and std281); the inner TIMING_ENCODED keeps v2.8's {TIMING_ENCODED} by hand decision (codegen/extracted/v2.8.1/overrides.json). HAPI v281 differs, as HAPI v28 did; Caristix 2.8.1 answers HTTP 500."
     },
     "RDR_RDR": {
-      "date": "2026-10-29",
-      "accept": true,
-      "note": "The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure."
-    },
-    "RDS_O13": {
       "date": "2026-10-29",
       "accept": true,
       "note": "The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure."
@@ -1807,11 +1808,6 @@
       "date": "2026-10-29",
       "accept": true,
       "note": "The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure."
-    },
-    "RPA_I08": {
-      "date": "2026-10-29",
-      "accept": true,
-      "note": "The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"The ledger's hl7.eu reader runs past the end of this table in std28/ch11.html and appends the segments that follow it. The printed table (RPA^I08-I11) is the structure and equals HAPI v28; Caristix 2.8 leaves out the [{PRT}] after OBX and makes MSA optional, so hl7.eu decides.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 agrees with the structure."
     },
     "RPA_I09": {
       "date": "2026-10-29",
@@ -1827,16 +1823,6 @@
       "date": "2026-10-29",
       "accept": true,
       "note": "The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"hl7.eu std28/ch11.html prints one table for RPA^I08-I11 (structure RPA_I08), so this event shares the RPA_I08 structure and has no hl7.eu table of its own; HAPI v28 has an RPA_I08 class and no event map entry for this event. Caristix 2.8 leaves out the [{PRT}] after OBX, as for RPA_I08, where hl7.eu and HAPI agree.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it."
-    },
-    "RRD_O14": {
-      "date": "2026-10-29",
-      "accept": true,
-      "note": "The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure."
-    },
-    "RRI_I12": {
-      "date": "2026-10-29",
-      "accept": true,
-      "note": "The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"The ledger's hl7.eu reader runs past the end of this table in std28/ch11.html and appends the segments that follow it. The printed table (RRI^I12-I15) is the structure and equals HAPI v28; Caristix 2.8 leaves out the [{PRT}] after OBX, so hl7.eu decides.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 agrees with the structure."
     },
     "RRI_I13": {
       "date": "2026-10-29",
@@ -1942,11 +1928,6 @@
       "date": "2026-10-29",
       "accept": true,
       "note": "The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 hl7.eu prints no table of its own for it (it shares a structure printed for another event) and Caristix 2.8 agreed. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 has no class for it."
-    },
-    "VXU_V04": {
-      "date": "2026-10-29",
-      "accept": true,
-      "note": "The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure."
     }
   }
 }

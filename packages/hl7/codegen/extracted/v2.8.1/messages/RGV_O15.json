@@ -6,7 +6,7 @@
   "description": "Pharmacy/Treatment Give",
   "title": "Pharmacy/Treatment Give",
   "source": {
-    "pdf": "hl7.eu std281/ch04a.html",
+    "pdf": "hl7.org V281_CH04A_Orders.pdf",
     "pages": null,
     "table": "RGV^O15^RGV_O15: Pharmacy/Treatment Give"
   },
@@ -16,7 +16,7 @@
         "O15"
       ],
       "eventPrinted": "O15",
-      "pdf": "hl7.eu std281/ch04a.html",
+      "pdf": "hl7.org V281_CH04A_Orders.pdf",
       "page": null,
       "table": "RGV^O15^RGV_O15: Pharmacy/Treatment Give",
       "identicalToPrimary": true
@@ -128,7 +128,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Patient Visit - Additional Info",
+              "description": "Patient Visit â Additional Info",
               "chapterRef": "3"
             },
             {

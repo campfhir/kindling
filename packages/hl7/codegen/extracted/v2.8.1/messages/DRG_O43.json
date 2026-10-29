@@ -5,9 +5,8 @@
   "version": "2.8.1",
   "description": "Donor Registration Message",
   "title": "Donor Registration Message",
-  "sectionHeading": "4.16.10 DRG - Donor Registration (Event O43)",
   "source": {
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "pages": null,
     "table": "DRG^O43^DRG_O43: Donor Registration Message"
   },
@@ -17,25 +16,13 @@
         "O43"
       ],
       "eventPrinted": "O43",
-      "pdf": "hl7.eu std281/ch04.html",
+      "pdf": "hl7.org V281_CH04_Orders.pdf",
       "page": null,
       "table": "DRG^O43^DRG_O43: Donor Registration Message",
       "identicalToPrimary": true
     }
   ],
   "items": [
-    {
-      "kind": "placeholder",
-      "text": "Segment",
-      "minOccurs": 1,
-      "maxOccurs": 1,
-      "usage": null,
-      "page": null,
-      "notation": "Segment",
-      "description": "Description",
-      "status": "Status",
-      "chapterRef": "Chapter"
-    },
     {
       "kind": "segment",
       "name": "MSH",
@@ -83,8 +70,7 @@
           "maxOccurs": 1,
           "usage": null,
           "page": null,
-          "description": "Additional Demographics",
-          "status": "DB"
+          "description": "Additional Demographics"
         },
         {
           "kind": "segment",
@@ -93,8 +79,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Donor Observations",
-          "status": "DB"
+          "description": "Donor Observations"
         },
         {
           "kind": "segment",
@@ -103,8 +88,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Notes and Comments (for Donor)",
-          "status": "DB"
+          "description": "Notes and Comments (for Donor)"
         },
         {
           "kind": "segment",
@@ -113,8 +97,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Allergy Information",
-          "status": "DB"
+          "description": "Allergy Information"
         },
         {
           "kind": "segment",
@@ -124,7 +107,7 @@
           "usage": null,
           "page": null,
           "description": "Access Restrictions",
-          "status": "DB"
+          "chapterRef": "3"
         },
         {
           "kind": "group",
@@ -146,8 +129,7 @@
               "maxOccurs": "*",
               "usage": null,
               "page": null,
-              "description": "Notes and Comments (for Donor Registration)",
-              "status": "DB"
+              "description": "Notes and Comments (for Donor Registration)"
             }
           ],
           "minOccurs": 0,

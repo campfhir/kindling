@@ -5,9 +5,8 @@
   "version": "2.8.1",
   "description": "Equipment Status Message",
   "title": "Equipment Status Message",
-  "sectionHeading": "13.3.1 ESU/ACK - Automated Equipment Status Update (Event U01)",
   "source": {
-    "pdf": "hl7.eu std281/ch13.html",
+    "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
     "pages": null,
     "table": "ESU^U01^ESU_U01: Equipment Status Message"
   },
@@ -17,7 +16,7 @@
         "U01"
       ],
       "eventPrinted": "U01",
-      "pdf": "hl7.eu std281/ch13.html",
+      "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
       "page": null,
       "table": "ESU^U01^ESU_U01: Equipment Status Message",
       "identicalToPrimary": true

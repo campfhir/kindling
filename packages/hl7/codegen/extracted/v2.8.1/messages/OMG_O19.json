@@ -6,7 +6,7 @@
   "description": "General Clinical Order Message",
   "title": "General Clinical Order Message",
   "source": {
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "pages": null,
     "table": "OMG^O19^OMG_O19: General Clinical Order Message"
   },
@@ -16,7 +16,7 @@
         "O19"
       ],
       "eventPrinted": "O19",
-      "pdf": "hl7.eu std281/ch04.html",
+      "pdf": "hl7.org V281_CH04_Orders.pdf",
       "page": null,
       "table": "OMG^O19^OMG_O19: General Clinical Order Message",
       "identicalToPrimary": true
@@ -139,7 +139,7 @@
               "usage": null,
               "page": null,
               "description": "Patient Visit",
-              "chapterRef": "3"
+              "chapterRef": "3 r"
             },
             {
               "kind": "segment",
@@ -492,7 +492,7 @@
                   "maxOccurs": 1,
                   "usage": null,
                   "page": null,
-                  "description": "Patient Identification - previous result",
+                  "description": "Patient Identification â previous result",
                   "chapterRef": "3"
                 },
                 {
@@ -502,7 +502,7 @@
                   "maxOccurs": 1,
                   "usage": null,
                   "page": null,
-                  "description": "Additional Demographics - previous result",
+                  "description": "Additional Demographics â previous result",
                   "chapterRef": "3"
                 },
                 {
@@ -542,7 +542,7 @@
                   "maxOccurs": 1,
                   "usage": null,
                   "page": null,
-                  "description": "Patient Visit - previous result",
+                  "description": "Patient Visit â previous result",
                   "chapterRef": "3"
                 },
                 {
@@ -552,7 +552,7 @@
                   "maxOccurs": 1,
                   "usage": null,
                   "page": null,
-                  "description": "Patient Visit Add. Info - previous result",
+                  "description": "Patient Visit Add. Info â previous result",
                   "chapterRef": "3"
                 },
                 {
@@ -563,7 +563,7 @@
                   "usage": null,
                   "page": null,
                   "description": "Participation (for Patient Visit Prior)",
-                  "chapterRef": "7"
+                  "chapterRef": "7 r"
                 }
               ],
               "minOccurs": 0,

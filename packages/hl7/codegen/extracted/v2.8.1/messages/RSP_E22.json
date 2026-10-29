@@ -6,7 +6,7 @@
   "description": "Authorization Request Query Response",
   "title": "Authorization Request Query Response",
   "source": {
-    "pdf": "hl7.eu std281/ch16.html",
+    "pdf": "hl7.org V281_CH16_eClaims.pdf",
     "pages": null,
     "table": "RSP^E22^RSP_E22: Authorization Request Query Response"
   },
@@ -16,7 +16,7 @@
         "E22"
       ],
       "eventPrinted": "E22",
-      "pdf": "hl7.eu std281/ch16.html",
+      "pdf": "hl7.org V281_CH16_eClaims.pdf",
       "page": null,
       "table": "RSP^E22^RSP_E22: Authorization Request Query Response",
       "identicalToPrimary": true

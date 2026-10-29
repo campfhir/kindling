@@ -5,9 +5,8 @@
   "version": "2.8.1",
   "description": "Population/Location-Based Laboratory Order Acknowledgment Message",
   "title": "Population/Location-Based Laboratory Order Acknowledgment Message",
-  "sectionHeading": "4.4.17 OPR - Population/Location-Based Laboratory Order Acknowledgment Message (Event O38)",
   "source": {
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "pages": null,
     "table": "OPR^O38^OPR_O38: Population/Location-Based Laboratory Order Acknowledgment Message"
   },
@@ -17,7 +16,7 @@
         "O38"
       ],
       "eventPrinted": "O38",
-      "pdf": "hl7.eu std281/ch04.html",
+      "pdf": "hl7.org V281_CH04_Orders.pdf",
       "page": null,
       "table": "OPR^O38^OPR_O38: Population/Location-Based Laboratory Order Acknowledgment Message",
       "identicalToPrimary": true

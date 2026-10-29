@@ -6,7 +6,7 @@
   "description": "Get Donor Record Candidates Response Message",
   "title": "Get Donor Record Candidates Response Message",
   "source": {
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "pages": null,
     "table": "RSP^K33^RSP_O33: Get Donor Record Candidates Response Message"
   },
@@ -16,25 +16,13 @@
         "K33"
       ],
       "eventPrinted": "K33",
-      "pdf": "hl7.eu std281/ch04.html",
+      "pdf": "hl7.org V281_CH04_Orders.pdf",
       "page": null,
       "table": "RSP^K33^RSP_O33: Get Donor Record Candidates Response Message",
       "identicalToPrimary": true
     }
   ],
   "items": [
-    {
-      "kind": "placeholder",
-      "text": "Segment",
-      "minOccurs": 1,
-      "maxOccurs": 1,
-      "usage": null,
-      "page": null,
-      "notation": "Segment",
-      "description": "Descriptions",
-      "status": "Status",
-      "chapterRef": "Chapter"
-    },
     {
       "kind": "segment",
       "name": "MSH",

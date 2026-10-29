@@ -6,7 +6,7 @@
   "description": "Specimen Shipment Centric Laboratory Order Message",
   "title": "Specimen Shipment Centric Laboratory Order Message",
   "source": {
-    "pdf": "hl7.eu std281/ch04.html",
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
     "pages": null,
     "table": "OML^O39^OML_O39: Specimen Shipment Centric Laboratory Order Message"
   },
@@ -16,7 +16,7 @@
         "O39"
       ],
       "eventPrinted": "O39",
-      "pdf": "hl7.eu std281/ch04.html",
+      "pdf": "hl7.org V281_CH04_Orders.pdf",
       "page": null,
       "table": "OML^O39^OML_O39: Specimen Shipment Centric Laboratory Order Message",
       "identicalToPrimary": true
