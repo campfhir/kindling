@@ -1,0 +1,437 @@
+{
+  "structure": "PGL_PC6",
+  "messageType": "PGL",
+  "triggerEvent": "PC6",
+  "version": "2.7.1",
+  "description": "Patient Goal Message",
+  "title": "Patient Goal Message",
+  "sectionHeading": "12.3.1 PGL/ACK - Patient Goal Message (Events PC6, PC7, PC8)",
+  "source": {
+    "pdf": "hl7.eu std271/ch12.html",
+    "pages": null,
+    "table": "PGL^PC6-PC8^PGL_PC6: Patient Goal Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "PC6",
+        "PC7",
+        "PC8"
+      ],
+      "eventPrinted": "PC6-PC8",
+      "pdf": "hl7.eu std271/ch12.html",
+      "page": null,
+      "table": "PGL^PC6-PC8^PGL_PC6: Patient Goal Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "group",
+      "name": "PATIENT_VISIT",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PV1",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Visit",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PV2",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Visit - Additional Info",
+          "chapterRef": "3"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "GOAL",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "GOL",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Detail Goal",
+          "chapterRef": "12"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Notes & Comments & Comments (Goal Comments)",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "VAR",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Variance (Goal)",
+          "chapterRef": "12"
+        },
+        {
+          "kind": "group",
+          "name": "GOAL_ROLE",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "ROL",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Role (Goal)",
+              "chapterRef": "15"
+            },
+            {
+              "kind": "segment",
+              "name": "VAR",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Variance (Role)",
+              "chapterRef": "12"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "PATHWAY",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PTH",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Detail Pathway",
+              "chapterRef": "12"
+            },
+            {
+              "kind": "segment",
+              "name": "VAR",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Variance (Pathway)",
+              "chapterRef": "12"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "OBSERVATION",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Observation/Result",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes & Comments (Observation/Result Comments)",
+              "chapterRef": "2"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "PROBLEM",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PRB",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Detail Problem",
+              "chapterRef": "12"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes & Comments (Problem Comments)",
+              "chapterRef": "2"
+            },
+            {
+              "kind": "segment",
+              "name": "VAR",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Variance (Problem)",
+              "chapterRef": "12"
+            },
+            {
+              "kind": "group",
+              "name": "PROBLEM_ROLE",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "ROL",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Role (Problem)",
+                  "chapterRef": "15"
+                },
+                {
+                  "kind": "segment",
+                  "name": "VAR",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Variance (Role)",
+                  "chapterRef": "12"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "group",
+              "name": "PROBLEM_OBSERVATION",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "OBX",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Observation/Result",
+                  "chapterRef": "7"
+                },
+                {
+                  "kind": "segment",
+                  "name": "NTE",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Notes & Comments (Observation/Result Comments)"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "ORDER",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "ORC",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Common Order",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "group",
+              "name": "ORDER_DETAIL",
+              "items": [
+                {
+                  "kind": "choice",
+                  "oneOf": [
+                    "OBR",
+                    "RQD",
+                    "RQ1",
+                    "RXO",
+                    "ODS",
+                    "ODT"
+                  ],
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "--- CHOICE",
+                  "chapterRef": "4"
+                },
+                {
+                  "kind": "segment",
+                  "name": "NTE",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Notes (Order Detail Comments)",
+                  "chapterRef": "2"
+                },
+                {
+                  "kind": "segment",
+                  "name": "VAR",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Variance (Order)",
+                  "chapterRef": "12"
+                },
+                {
+                  "kind": "group",
+                  "name": "ORDER_OBSERVATION",
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "OBX",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Observation/Result",
+                      "chapterRef": "7"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "NTE",
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "usage": null,
+                      "page": null,
+                      "description": "Notes & Comments (Observation Comments)",
+                      "chapterRef": "2"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "VAR",
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "usage": null,
+                      "page": null,
+                      "description": "Variance (Observation/Result)",
+                      "chapterRef": "12"
+                    }
+                  ],
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

@@ -1,0 +1,117 @@
+{
+  "structure": "EHC_E21",
+  "messageType": "EHC",
+  "triggerEvent": "E21",
+  "version": "2.7.1",
+  "description": "Cancel Authorization Request",
+  "title": "Cancel Authorization Request",
+  "source": {
+    "pdf": "hl7.eu std271/ch16.html",
+    "pages": null,
+    "table": "EHC^E21^EHC_E21: Cancel Authorization Request"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E21"
+      ],
+      "eventPrinted": "E21",
+      "pdf": "hl7.eu std271/ch16.html",
+      "page": null,
+      "table": "EHC^E21^EHC_E21: Cancel Authorization Request",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "AUTHORIZATION_REQUEST",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "IVC",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Invoice Header",
+          "chapterRef": "16"
+        },
+        {
+          "kind": "group",
+          "name": "PSL_ITEM_INFO",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PSL",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Product/Service Line Item",
+              "chapterRef": "16"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes and Comments"
+            },
+            {
+              "kind": "segment",
+              "name": "AUT",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Authorization",
+              "chapterRef": "16"
+            }
+          ],
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

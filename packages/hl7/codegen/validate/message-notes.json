@@ -1029,6 +1029,11 @@
       "accept": true,
       "note": "hl7.eu std26/ch05.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.6."
     },
+    "RQC_I06": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "Shares the RQC_I05 structure ([{GT1}]): hl7.eu std26/ch11.html captions the event RQC^I06^RQC_I05 but prints [GT1] in its own table, as does Caristix 2.6; HAPI v26 maps RQC_I06 to RQC_I05. The standard is inconsistent here (the official HL7 v2.7 chapter 11 (sections 11.3.5, p. 13, and 11.3.6, pp. 14-15) has the same two tables); decided to follow the structure ID, as v2.4 to v2.5.1 do (codegen/extracted/v2.6/overrides.json sharePrimary)."
+    },
     "RSP_E03": {
       "date": "2026-10-29",
       "accept": true,
@@ -1171,6 +1176,10 @@
       "accept": true,
       "note": "The ledger's hl7.eu reader runs on into the table that follows in std27/ch11.html and appends PV1/PV2. The printed table is the structure and equals HAPI v27 (its inner group is named AUTHORIZATION2); Caristix 2.7 has [MSA], a required INSURANCE group and an optional PROCEDURE group, which hl7.eu and HAPI do not, so hl7.eu decides."
     },
+    "RQC_I06": {
+      "date": "2026-10-29",
+      "note": "Shares the RQC_I05 structure ([{GT1}]), which Caristix 2.7 and HAPI v27 have; hl7.eu std27/ch11.html and the official HL7 v2.7 chapter 11 (sections 11.3.5, p. 13, and 11.3.6, pp. 14-15) caption the event RQC^I06^RQC_I05 but print [GT1] in its own table. Decided to follow the structure ID (codegen/extracted/v2.7/overrides.json sharePrimary)."
+    },
     "RSP_E03": {
       "date": "2026-10-29",
       "accept": true,
@@ -1180,6 +1189,208 @@
       "date": "2026-10-29",
       "accept": true,
       "note": "hl7.eu std27/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7."
+    }
+  },
+  "v2.7.1": {
+    "BRP_O30": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch04.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "DFT_P03": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch06.html prints a plain OBR (\"Order Detail Segment\") in the ORDER group; the ledger's hl7.eu reader takes that description for the order detail choice <OBR|RQD|RQ1|RXO|ODS|ODT>. The printed table is the structure and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "DFT_P11": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch06.html prints a plain OBR (\"Order Detail Segment\") in the ORDER group; the ledger's hl7.eu reader takes that description for the order detail choice <OBR|RQD|RQ1|RXO|ODS|ODT>. The printed table is the structure and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "EHC_E01": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "EHC_E02": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "EHC_E04": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "EHC_E15": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "EHC_E20": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "EHC_E21": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "MFK_M02": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs past the end of this table in std271/ch08.html and appends the segments that follow it. The printed table is the structure and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "MFK_M06": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs past the end of this table in std271/ch08.html and appends the segments that follow it. The printed table is the structure and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "MFK_M08": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs past the end of this table in std271/ch08.html and appends the segments that follow it. The printed table is the structure and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "MFK_M09": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs past the end of this table in std271/ch08.html and appends the segments that follow it. The printed table is the structure and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "MFK_M10": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs past the end of this table in std271/ch08.html and appends the segments that follow it. The printed table is the structure and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "MFK_M11": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs on into the table that follows this one in std271/ch08.html. The printed table (ending [{MFA}]) is the structure; Caristix 2.7.1 leaves out [{MFA}] and HAPI has no 2.7.1 classes, so hl7.eu decides. Same as v2.7."
+    },
+    "MFK_M12": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs past the end of this table in std271/ch08.html and appends the segments that follow it. The printed table is the structure and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "MFN_M05": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs past the end of this table in std271/ch08.html and appends the segments that follow it. The printed table is the structure and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "OPR_O38": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch04.html prints RESPONSE as [ ... ] (--- RESPONSE begin/end rows). The ledger's hl7.eu reader reads it as [{ }]; the structure keeps the printed [RESPONSE] and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "ORB_O28": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch04.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "ORG_O20": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch04.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "ORL_O40": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch04.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "PEX_P07": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs past the end of this table in std271/ch07.html and appends the segments that follow it. The printed table is the structure and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "PEX_P08": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs past the end of this table in std271/ch07.html and appends the segments that follow it. The printed table is the structure and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "QBP_E03": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "QBP_E22": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "QBP_Z73": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs past the end of this table in std271/ch04.html and appends the segments that follow it. The printed table is the structure and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "RDE_O11": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs past the end of this table in std271/ch04a.html and appends the segments that follow it. The printed table is the structure and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "RDR_RDR": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs past the end of this table in std271/ch05.html and appends the segments that follow it. The printed table is the structure and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "RDS_O13": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs past the end of this table in std271/ch04a.html and appends the segments that follow it. The printed table is the structure and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "RDY_Z80": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch05.html prints [{DSP}] in the response table; the ledger's hl7.eu reader also takes the DSP lines of the example display that follows. Caristix 2.7.1 has a SEGMENT_PATTERN placeholder (Hxx) where hl7.eu has [{DSP}] and HAPI has no 2.7.1 classes, so hl7.eu decides. Same as v2.7."
+    },
+    "RDY_Z98": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs past the end of this table in std271/ch05.html and appends the segments that follow it. The printed table is the structure and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "RPA_I08": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs past the end of this table in std271/ch11.html and appends PV1/PV2. The printed table is the structure (the same as v2.7's, where HAPI v27 agreed); Caristix 2.7.1 has [MSA], a required INSURANCE group and an optional PROCEDURE group, which hl7.eu does not, and HAPI has no 2.7.1 classes, so hl7.eu decides."
+    },
+    "RQC_I06": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "Shares the RQC_I05 structure ([{GT1}]), which Caristix 2.7.1 has; hl7.eu std271/ch11.html captions the event RQC^I06^RQC_I05 but prints [GT1] in its own table, the inconsistency the official HL7 v2.7 chapter 11 (sections 11.3.5, p. 13, and 11.3.6, pp. 14-15) also has. Decided to follow the structure ID, as in v2.4 to v2.7 (codegen/extracted/v2.7.1/overrides.json sharePrimary)."
+    },
+    "RRD_O14": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs past the end of this table in std271/ch04a.html and appends the segments that follow it. The printed table is the structure and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "RRI_I12": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs past the end of this table in std271/ch11.html and appends the segments that follow it. The printed table is the structure and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "RSP_E03": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "RSP_E22": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "RSP_K23": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch03.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "RSP_K24": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std271/ch03.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
+    },
+    "VXU_V04": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs past the end of this table in std271/ch04a.html and appends the segments that follow it. The printed table is the structure and equals Caristix 2.7.1. The structure is the same as v2.7's. HAPI has no 2.7.1 classes."
     }
   }
 }

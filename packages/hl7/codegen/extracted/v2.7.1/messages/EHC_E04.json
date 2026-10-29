@@ -1,0 +1,136 @@
+{
+  "structure": "EHC_E04",
+  "messageType": "EHC",
+  "triggerEvent": "E04",
+  "version": "2.7.1",
+  "description": "Re-Assess HealthCare Services Invoice Request",
+  "title": "Re-Assess HealthCare Services Invoice Request",
+  "source": {
+    "pdf": "hl7.eu std271/ch16.html",
+    "pages": null,
+    "table": "EHC^E04^EHC_E04: Re-Assess HealthCare Services Invoice Request"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E04"
+      ],
+      "eventPrinted": "E04",
+      "pdf": "hl7.eu std271/ch16.html",
+      "page": null,
+      "table": "EHC^E04^EHC_E04: Re-Assess HealthCare Services Invoice Request",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "REASSESSMENT_REQUEST_INFO",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "IVC",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Invoice",
+          "chapterRef": "16"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Notes and Comments"
+        },
+        {
+          "kind": "group",
+          "name": "PRODUCT_SERVICE_SECTION",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PSS",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Product/Service Section",
+              "chapterRef": "16"
+            },
+            {
+              "kind": "group",
+              "name": "PRODUCT_SERVICE_GROUP",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "PSG",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Product/Service Group"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PSL",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Product/Service Line Item",
+                  "chapterRef": "16"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

@@ -1,0 +1,169 @@
+{
+  "structure": "MFN_M02",
+  "messageType": "MFN",
+  "triggerEvent": "M02",
+  "version": "2.7.1",
+  "description": "Master File Notification for Staff/Practitioner",
+  "title": "Master File Notification for Staff/Practitioner",
+  "sectionHeading": "8.7.1 MFN/MFK - Staff/Practitioner Master File Message (Event M02)",
+  "source": {
+    "pdf": "hl7.eu std271/ch08.html",
+    "pages": null,
+    "table": "MFN^M02^MFN_M02: Master File Notification for Staff/Practitioner"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M02"
+      ],
+      "eventPrinted": "M02",
+      "pdf": "hl7.eu std271/ch08.html",
+      "page": null,
+      "table": "MFN^M02^MFN_M02: Master File Notification for Staff/Practitioner",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "group",
+      "name": "MF_STAFF",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Master File Entry",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "STF",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Staff Identification",
+          "chapterRef": "15"
+        },
+        {
+          "kind": "segment",
+          "name": "PRA",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Practitioner Detail",
+          "chapterRef": "15"
+        },
+        {
+          "kind": "segment",
+          "name": "ORG",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Practitioner Organization Unit Segment",
+          "chapterRef": "15"
+        },
+        {
+          "kind": "segment",
+          "name": "AFF",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Professional Affiliation",
+          "chapterRef": "15"
+        },
+        {
+          "kind": "segment",
+          "name": "LAN",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Language Detail",
+          "chapterRef": "15"
+        },
+        {
+          "kind": "segment",
+          "name": "EDU",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Educational Detail",
+          "chapterRef": "15"
+        },
+        {
+          "kind": "segment",
+          "name": "CER",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Certificate Detail",
+          "chapterRef": "15"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Notes and Comments for the STF",
+          "chapterRef": "2"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

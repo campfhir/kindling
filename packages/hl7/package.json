@@ -66,6 +66,14 @@
       "types": "./dist/v2.7/*.d.ts",
       "default": "./dist/v2.7/*.js"
     },
+    "./v2.7.1": {
+      "types": "./dist/v2.7.1/index.d.ts",
+      "default": "./dist/v2.7.1/index.js"
+    },
+    "./v2.7.1/*": {
+      "types": "./dist/v2.7.1/*.d.ts",
+      "default": "./dist/v2.7.1/*.js"
+    },
     "./segments/v2.3": {
       "types": "./dist/v2.3/index.d.ts",
       "default": "./dist/v2.3/index.js"

@@ -29,5 +29,8 @@
       ],
       "reason": "2026-10-29: hl7.eu ch12 prints QRY^PC4 without [{SFT}] and [UAC]; Caristix 2.6 and HAPI v26 agree on both and the rule takes their shape against hl7.eu."
     }
-  ]
+  ],
+  "sharePrimary": {
+    "RQC_I06": "2026-10-29: hl7.eu std26/ch11.html captions RQC^I06 as RQC^I06^RQC_I05 (the RQC_I05 table prints [{GT1}], the I06 table [GT1]); the same inconsistency is in the official HL7 v2.7 chapter 11 (V27_CH11_PatientReferral.pdf, January 2011), section 11.3.5 (RQC^I05 table, p. 13) and section 11.3.6 (RQC^I06 table, pp. 14-15). Decided to follow the structure ID (MSH-9.3 RQC_I05), as Caristix and HAPI do and as v2.4 to v2.5.1 already did."
+  }
 }

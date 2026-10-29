@@ -6,6 +6,10 @@
  * file that already exists in src/<version>/ is left alone, so a segment can be replaced
  * by a hand-written class at any time and the generator will not touch it again.
  *
+ * A segment whose spec entry (its field table and title) is the same as the base version's gets a
+ * re-export of the base version's class instead of a class of its own, so the class is shared across
+ * versions, as in a re-export version (the base version comes from codegen/schemas/<version>/version.ts).
+ *
  * Generated setters take raw HL7 values (SegmentFieldValue). Repeating fields take one argument
  * per repetition (or an array of them). Composite datatypes with a typed object in
  * utils/composites.ts accept that object too; other composites are not modelled beyond a string
@@ -17,6 +21,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { generateReexport } from "./generators/reexport.ts";
 
 interface SpecField {
   seq: number;
@@ -54,6 +59,16 @@ const SEG_DIR = join(ROOT, "src", VERSION);
 const SPEC_FILE = join(ROOT, "codegen/spec", `${VERSION}-segments.json`);
 
 const spec: Record<string, SpecSegment> = JSON.parse(readFileSync(SPEC_FILE, "utf8"));
+
+// The base version's spec, when it has one: a segment whose entry is unchanged re-exports the base class.
+const VERSION_FILE = join(ROOT, "codegen/schemas", VERSION, "version.ts");
+const BASE = existsSync(VERSION_FILE) ? readFileSync(VERSION_FILE, "utf8").match(/baseVersion: "(v[\d.]+)"/)?.[1] : undefined;
+const BASE_SPEC_FILE = BASE ? join(ROOT, "codegen/spec", `${BASE}-segments.json`) : undefined;
+const baseSpec: Record<string, SpecSegment> = BASE_SPEC_FILE && existsSync(BASE_SPEC_FILE) ? JSON.parse(readFileSync(BASE_SPEC_FILE, "utf8")) : {};
+/** The entry without `source` (the page it was read from, which names the version). */
+const table = (seg: SpecSegment) => JSON.stringify({ ...seg, source: undefined });
+const unchanged = (code: string) =>
+  BASE !== undefined && baseSpec[code] !== undefined && table(baseSpec[code]) === table(spec[code]) && existsSync(join(ROOT, "src", BASE, `${code}.ts`));
 
 /** Names a class already uses for its own members. A field with one of these names gets `field<seq>`. */
 const RESERVED = new Set(["name", "fields", "encode", "parse", "constructor", "encoding"]);
@@ -353,6 +368,11 @@ for (const [code, seg] of Object.entries(spec)) {
   created.push(code);
   if (DRY_RUN) {
     console.log(`would write ${code}.ts`);
+    continue;
+  }
+  if (unchanged(code)) {
+    writeFileSync(file, generateReexport("segments", code, VERSION, BASE!));
+    console.log(`wrote   src/${VERSION}/${code}.ts  (re-exports ${BASE})`);
     continue;
   }
   writeFileSync(file, classSource(code, seg));

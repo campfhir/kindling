@@ -4,7 +4,7 @@ import { V2_7_MESSAGES } from "./messages";
 /**
  * v2.7: HL7 v2 release 2.7. Segments are generated from
  * codegen/spec/v2.7-segments.json (MSH, BHS and FHS are mirrored from v2.6, see IMPORT.md).
- * Messages are imported from the official PDFs (codegen/extracted/v2.7, IMPORT.md).
+ * Messages are imported from the hl7.eu pages (codegen/extracted/v2.7, IMPORT.md).
  * Messages the 2.7 table defines but the schema type cannot express yet are listed in withdrawnMessages
  * with the reason; they are not mirrored from v2.6, whose structure differs.
  */
@@ -26,8 +26,6 @@ export const V2_7: VersionSchema = {
     "ORR_O02",
     "OSQ_Q06",
     "OSR_Q06",
-    // Withdrawn as printed in the chapter text, not in the index.
-
     // Not generated: the schema type cannot express their structure yet (choice of groups, unnamed group); see IMPORT.md.
     "CCI_I22",
     "CCM_I21",
@@ -58,7 +56,7 @@ export const V2_7: VersionSchema = {
     "SDN_S36",
     "SDR_S31",
     "SMD_S32",
-    // Absent from the extraction: not in the 2.7 index and not generated. They may be withdrawn earlier or missed by the extraction; check the PDFs before relying on them.
+    // Absent from the extraction: not in the 2.7 index and not generated. They may be withdrawn earlier or missed by the extraction; check the pages before relying on them.
     "ADR_A19",
     "ADT_A18",
     "DOC_T12",
