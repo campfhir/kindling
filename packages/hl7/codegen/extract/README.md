@@ -7,11 +7,13 @@ There are two ways to make one, and everything after it is the same.
 | Source of the extraction | Tool | Used for |
 |---|---|---|
 | The official hl7.org chapter PDFs, read by an agent that has them | [BRIEF.md](BRIEF.md), checked with `check-completeness.ts` | 2.9.1 (its own PR) |
-| The hl7.eu pages `fetch-sources.sh` pulled | `from-hl7eu.ts` (deterministic parser) | 2.6 |
+| The hl7.eu pages `fetch-sources.sh` pulled | `from-hl7eu.ts` (deterministic parser) | 2.6 onward |
 
 ## The steps, in order
 
 Run from `packages/hl7`; `<dir>` is any folder for the pulled sources, `vX` the version.
+After step 1, `codegen/extract/add-version.sh vX <dir>` runs steps 2 (from hl7.eu) to 7 (the two
+ledgers); pass `--keep-extraction` when the extraction came from the PDFs. The steps are:
 
 ```sh
 # 1. Pull hl7.eu, Caristix and HAPI (curl, git, jq; nothing chosen by hand). --record keeps the manifest.

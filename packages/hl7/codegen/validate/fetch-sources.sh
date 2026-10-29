@@ -73,7 +73,7 @@ if [ -s "$index" ]; then
     fetch hl7eu "segment $seg" "https://www.hl7.eu/HL7v2x/v$short/hl7v${short}segm$seg.htm" "$OUT/hl7eu/$seg.htm"
   done
   # chapter pages are named in the index (ch02.html …); they sit in std<n>/ and are saved as .htm
-  for ch in $(grep -oE "ch[0-9]{1,2}\.html?" "$index" | sort -u); do
+  for ch in $(grep -oE "ch[0-9]{1,2}[A-Za-z]?\.html?" "$index" | sort -u); do   # ch04a.html: chapter 4A from v2.7 on
     name=${ch%.*}
     fetch hl7eu "chapter $name" "https://www.hl7.eu/HL7v2x/v$short/std$short/$ch" "$OUT/hl7eu/chapters/$name.htm"
   done

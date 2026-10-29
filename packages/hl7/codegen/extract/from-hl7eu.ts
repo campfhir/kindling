@@ -99,6 +99,8 @@ function expandEvents(spec: string): string[] {
   return out;
 }
 const SEGMENT = /^[A-Z][A-Z0-9]{2}$/;
+/** A row that only refers to another section: "see 3.3.56". */
+const SEE = /^see\s+\d+(\.\d+)+/i;
 
 function cardinality(open: string[], close: string[], notation: string): { min: number | null; max: number | "*" | null; mismatch?: true } {
   const optionalOpen = open.includes("["), repeatingOpen = open.includes("{");
@@ -163,8 +165,16 @@ function parseTable(rows: string[][], file: string, problemsOut: string[]): Item
     const onlyBrackets = tokens.length > 0 && tokens.length === brackets.length;
     const opens = onlyBrackets && brackets.every((t) => t === "[" || t === "{");
     const closes = onlyBrackets && brackets.every((t) => t === "]" || t === "}");
-    const isBegin = marked ? marked[2].toLowerCase() === "begin" : opens;
-    const isEnd = marked ? marked[2].toLowerCase() === "end" : closes;
+    let isBegin = marked ? marked[2].toLowerCase() === "begin" : opens;
+    let isEnd = marked ? marked[2].toLowerCase() === "end" : closes;
+    // A "begin" row of closing brackets alone that names the open group is that group's end, misprinted
+    // (v2.7 OML^O39: "}] --- SPECIMEN OBSERVATION begin").
+    const open = stack[stack.length - 1];
+    if (marked && isBegin && closes && open && !open.alt && open.item.name === marked[1]) {
+      readings.push(`${file}: "${cell0} ${description}" closes the open group ${marked[1]}; read as its end`);
+      isBegin = false;
+      isEnd = true;
+    }
     // A "|" row inside a choice of groups starts its next alternative.
     const top = stack[stack.length - 1];
     if (top?.alt && tokens.length === 1 && tokens[0] === "|") {
@@ -232,32 +242,99 @@ function parseTable(rows: string[][], file: string, problemsOut: string[]): Item
   return root;
 }
 
+interface Withdrawn { heading: string; types: string[]; events: string[]; note: string; file: string }
+const withdrawnSections: Withdrawn[] = [];
+const withdrawnSegments: Withdrawn[] = [];
 const tables: Table[] = [];
 const crossReferences: { type: string; events: string[]; eventPrinted: string; structure: string; title: string; file: string; text: string }[] = [];
 let perEventAck = 0;
-const chapterFiles = readdirSync(join(sourcesDir, "hl7eu/chapters")).filter((f) => /^ch\d+\.htm$/.test(f)).sort();
+const chapterFiles = readdirSync(join(sourcesDir, "hl7eu/chapters")).filter((f) => /^ch\d+[A-Za-z]?\.htm$/.test(f)).sort();
 const tocHeadings: { number: string; text: string }[] = [];
 for (const file of chapterFiles) {
   const html = read(join(sourcesDir, "hl7eu/chapters", file));
-  for (const m of html.matchAll(/<a href="ch\d+\.html#Heading\d+">(\d+(?:\.\d+)+) ([^<]+)<\/a>/g)) tocHeadings.push({ number: m[1], text: m[2].trim() });
-  for (const m of html.matchAll(/<TABLE[^>]*>([\s\S]*?)<\/TABLE>/gi)) {
-    const rows = [...m[1].matchAll(/<TR[^>]*>([\s\S]*?)<\/TR>/gi)].map((r) => r[1]);
-    const head = cells(rows[0] ?? "", "TH");
-    const caption = head[0]?.match(CAPTION);
-    if (!caption) continue;
-    const [, type, eventPrinted, named] = caption;
-    // The ACK table printed after each event is the general acknowledgment: counted, not extracted.
-    if (type === "ACK" && eventPrinted !== "varies") { perEventAck++; continue; }
-    const own: string[] = [];
-    const items = parseTable(rows.slice(1).map((r) => cells(r, "TD")), `${caption[0]}`, own);
-    const events = expandEvents(eventPrinted);
-    // A table with no rows only points elsewhere ("see 3.3.58", or nothing): an index entry, no structure.
-    if (items.length === 0) {
-      crossReferences.push({ type, events, eventPrinted, structure: named ?? `${type}_${events[0]}`, title: head[1] ?? "", file, text: text(rows.slice(1).join(" ")) });
-      continue;
-    }
-    tables.push({ type, events, eventPrinted, structure: named ?? `${type}_${events[0]}`, title: head[1] ?? "", file, items, problems: own });
+  // A section heading followed by an "Attention ... withdrawn" note: a withdrawn message (its type is the heading's first
+  // code) or, when the heading names a segment, a withdrawn segment. Field headings ("OBR-5 ...") are not sections.
+  const headingTags = [...html.matchAll(/<H[2-5][^>]*>([\s\S]*?)<\/H[2-5]>/gi)];
+  for (const [n, h] of headingTags.entries()) {
+    const heading = text(h[1]);
+    const parts = heading.match(/^(\d+[A-Za-z]?(?:\.[A-Za-z]?\d+)+)\s+((?:[A-Z][A-Z0-9]{2}\/)*[A-Z][A-Z0-9]{2})(?!\w|-\d)/);
+    if (!parts) continue;
+    const end = n + 1 < headingTags.length ? headingTags[n + 1].index! : html.length;
+    const after = text(html.slice(h.index! + h[0].length, Math.min(end, h.index! + h[0].length + 1500)));
+    // "Attention: Retained for backwards compatibility only as of v2.4.and withdrawn as of v2.7." (versions contain dots)
+    const note = after.match(/Attention\b[\s\S]{0,200}?\bwithdrawn\b(?: as of v ?[\d.]*\d)?/i);
+    if (!note || after.indexOf(note[0]) > 300) continue;
+    const entry = { heading, types: parts[2].split("/"), events: expandEvents(heading.match(/\(Events?\s+([^)]+)\)/i)?.[1] ?? ""), note: note[0], file };
+    if (/\bsegment\b/i.test(heading)) withdrawnSegments.push(entry); else withdrawnSections.push(entry);
   }
+  for (const m of html.matchAll(/<a href="ch\d+[A-Za-z]?\.html#Heading\d+">(\d+[A-Za-z]?(?:\.\d+)+) ([^<]+)<\/a>/gi)) tocHeadings.push({ number: m[1], text: m[2].trim() });
+  const usedCaptions = new Set<number>();
+  // Each table runs from its own <TABLE> to the next </TABLE> or <TABLE>, whichever comes first: hl7.eu leaves some
+  // tables unclosed, and a plain non-greedy match from such a table would swallow the message table after it.
+  const starts = [...html.matchAll(/<TABLE[^>]*>/gi)];
+  for (const [n, start] of starts.entries()) {
+    const from = start.index! + start[0].length;
+    const close = html.toLowerCase().indexOf("</table>", from);
+    const next = n + 1 < starts.length ? starts[n + 1].index! : html.length;
+    const m = { index: start.index!, 1: html.slice(from, close === -1 ? next : Math.min(close, next)) };
+    const rows = [...m[1].matchAll(/<TR[^>]*>([\s\S]*?)<\/TR>/gi)].map((r) => r[1]);
+    // The caption is the table's first header cell (v2.6), or, from v2.7 on, a paragraph right before the table
+    // ("ADT^A01^ADT_A01: ADT Message") with no header row in the table.
+    let head = cells(rows[0] ?? "", "TH");
+    let body = rows.slice(1);
+    let caption = head[0]?.match(CAPTION);
+    if (!caption) {
+      const before = html.slice(Math.max(0, m.index! - 4000), m.index!);
+      // the last paragraph opened before the table (hl7.eu leaves some <p> unclosed, so match from the last opening)
+      const lastOpen = Math.max(before.toLowerCase().lastIndexOf("<p>"), before.toLowerCase().lastIndexOf("<p "));
+      const closeAt = lastOpen === -1 ? -1 : before.toLowerCase().indexOf("</p>", lastOpen);
+      const para = lastOpen !== -1 && closeAt !== -1 ? before.slice(before.indexOf(">", lastOpen) + 1, closeAt) : undefined;
+      const label = para !== undefined ? text(para) : "";
+      const split = label.match(/^(\S+?)\s*:\s*(.*)$/); // "ORA^R33^ORA_R33 : Observation Report Acknowledgement"
+      const between = closeAt !== -1 ? before.slice(closeAt + 4) : "";
+      // only a caption that directly precedes the table (no other paragraph or table in between)
+      if (split && CAPTION.test(split[1]) && !/<p[\s>]|<table/i.test(between) && head.length === 0) {
+        caption = split[1].match(CAPTION);
+        head = [split[1], split[2]];
+        body = rows;
+        usedCaptions.add(Math.max(0, m.index! - 4000) + closeAt);
+      }
+    }
+    if (!caption) continue;
+    addTable(caption, head[1] ?? "", body, file);
+  }
+  // Rows printed after a caption with no <TABLE> around them (a malformed page: v2.7 QBP^Q21 follows a query profile
+  // table that is never closed): the rows up to the next paragraph or table are the message table.
+  for (const p of html.matchAll(/<p[^>]*>([^<]*)<\/p>/gi)) {
+    const end = p.index! + p[0].length - "</p>".length;
+    if (usedCaptions.has(end)) continue;
+    const split = text(p[1]).match(/^(\S+?)\s*:\s*(.*)$/);
+    const caption = split?.[1].match(CAPTION);
+    if (!split || !caption) continue;
+    const after = html.slice(p.index! + p[0].length);
+    const stop = Math.min(...[after.search(/<p[\s>]/i), after.search(/<table/i)].map((i) => (i === -1 ? after.length : i)));
+    const rows = [...after.slice(0, stop).matchAll(/<TR[^>]*>([\s\S]*?)<\/TR>/gi)].map((r) => r[1]);
+    const hasSegments = rows.some((r) => cells(r, "TD").some((c) => /\b[A-Z][A-Z0-9]{2}\b/.test(c) && SEGMENT.test(c.replace(/[[\]{}<>|\s]/g, ""))));
+    const crossReference = rows.some((r) => SEE.test(cells(r, "TD").filter(Boolean).join(" "))); // "see" and "3.3.56" can sit in separate cells
+    if (!hasSegments && !crossReference) continue;
+    readings.push(`${caption[0]}: rows printed without a table element after the caption, read as the table`);
+    addTable(caption, split[2], rows, file);
+  }
+}
+
+function addTable(caption: RegExpMatchArray, title: string, body: string[], file: string): void {
+  const [, type, eventPrinted, named] = caption;
+  // The ACK table printed after each event is the general acknowledgment: counted, not extracted.
+  if (type === "ACK" && eventPrinted !== "varies") { perEventAck++; return; }
+  const own: string[] = [];
+  const items = parseTable(body.map((r) => cells(r, "TD")), `${caption[0]}`, own);
+  const events = expandEvents(eventPrinted);
+  // A table with no rows, or whose only row says "see 3.3.56", points elsewhere: an index entry, no structure.
+  if (items.length === 0 || items.every((i) => i.kind === "placeholder" && SEE.test(i.text ?? ""))) {
+    crossReferences.push({ type, events, eventPrinted, structure: named ?? `${type}_${events[0]}`, title, file, text: text(body.join(" ")) });
+    return;
+  }
+  tables.push({ type, events, eventPrinted, structure: named ?? `${type}_${events[0]}`, title, file, items, problems: own });
 }
 
 // ── Group tables by structure and write the files ────────────────────────────
@@ -271,12 +348,13 @@ const shape = (items: Item[]): unknown => items.map((i) => [i.kind, i.name ?? i.
  * a table that names the event alone over one that names a range, then the earliest. Every duplicate is
  * reported, with whether the prints are identical.
  */
-const chapterOf = (file: string) => Number(file.match(/ch(\d+)/)![1]);
+/** "ch04a.htm" -> "4A", "ch03.htm" -> "3": compared with the first part of a section number ("4A.3.1"). */
+const chapterOf = (file: string) => file.match(/ch0*(\d+[A-Za-z]?)/)![1].toUpperCase();
 const candidates = new Map<string, Table[]>();
 for (const t of tables) for (const event of t.events) candidates.set(`${t.type}^${event}`, [...(candidates.get(`${t.type}^${event}`) ?? []), t]);
 const score = (t: Table, event: string) => {
   const heading = sectionFor(t.type, event);
-  return (heading && Number(heading.split(".")[0]) === chapterOf(t.file) ? 4 : 0) + (t.events.length === 1 ? 2 : 0);
+  return (heading && heading.split(".")[0].toUpperCase() === chapterOf(t.file) ? 4 : 0) + (t.events.length === 1 ? 2 : 0);
 };
 const winner = new Map<string, Table>();
 const duplicates: string[] = [];
@@ -344,6 +422,13 @@ for (const [structure, group] of byStructure) {
     });
   }
 }
+for (const w of withdrawnSections) {
+  for (const type of w.types) {
+    for (const event of w.events.length ? w.events : [null]) {
+      index.push({ structure: null, messageType: type, triggerEvent: event, description: w.heading.replace(/^\S+\s+/, ""), pdf: pdf({ file: w.file } as Table), page: null, status: "withdrawn", sectionHeading: w.heading, note: w.note });
+    }
+  }
+}
 for (const x of crossReferences) {
   for (const event of x.events) {
     index.push({ structure: x.structure, messageType: x.type, triggerEvent: event, description: x.title, pdf: pdf({ file: x.file } as Table), page: null, sectionHeading: sectionFor(x.type, event), definedBy: x.text || "the table has no rows", note: "the table body is empty or a cross-reference; no structure of its own" });
@@ -363,7 +448,9 @@ message ledgers against Caristix and HAPI.
 
 - Segments: ${Object.keys(segments).length}, fields: ${fieldCount}.
 - Message tables: ${tables.length} (plus ${perEventAck} per-event ACK tables, the general acknowledgment, not extracted), structures: ${structureFiles}, events in the index: ${index.length}, event tables that differ from their primary: ${variants}.
-- Withdrawn sections: none recorded (the pages carry no "withdrawn" notes). Tables with no rows (cross-references): ${crossReferences.map((x) => `${x.type}^${x.eventPrinted}`).join(", ") || "none"}.
+- Withdrawn sections (a heading followed by an "Attention ... withdrawn" note): ${withdrawnSections.map((w) => `${w.heading} (${w.file})`).join("; ") || "none"}.
+- Withdrawn segments: ${withdrawnSegments.map((w) => `${w.heading} (${w.file})`).join("; ") || "none"}.
+- Tables with no rows (cross-references): ${crossReferences.map((x) => `${x.type}^${x.eventPrinted}`).join(", ") || "none"}.
 
 ## Problems found while parsing
 ${[...problems, ...bracketRows].map((p) => `- ${p}`).join("\n") || "- none"}

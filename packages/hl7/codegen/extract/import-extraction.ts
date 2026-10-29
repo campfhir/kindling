@@ -348,6 +348,11 @@ for (const e of index.filter((x) => x.status === "withdrawn")) {
     for (const trigger of e.triggerEvent ? triggersOf(e.triggerEvent) : [null]) indexWithdrawn.add(trigger ? `${type}_${trigger}` : type);
 }
 const baseNames = new Set(baseSchema.messages.map((m) => nameOf(m)));
+// A withdrawn entry without a trigger event ("4.4.1 ORM - general order message", withdrawn as of v2.7) withdraws every
+// event of that message type that the version does not define again.
+const withdrawnTypes = new Set(index.filter((x) => x.status === "withdrawn" && !x.triggerEvent).flatMap((x) => x.messageType.split("/")));
+const typeOf = (name: string) => name.split("_")[0];
+for (const n of baseNames) if (withdrawnTypes.has(typeOf(n)) && !generatedNames.has(n)) indexWithdrawn.add(n);
 const withdrawnByIndex = [...baseNames].filter((n) => indexWithdrawn.has(n) && !generatedNames.has(n));
 const skippedNames = [...skipped.keys()];
 // Withdrawn as printed in the chapter text but not in the index: checked by hand against the PDF and recorded,
