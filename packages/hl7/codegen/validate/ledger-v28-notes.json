@@ -1,0 +1,7 @@
+{
+  "ZL7": {
+    "date": "2026-10-29",
+    "count": 0,
+    "note": "ZL7 is the standard's \"(proposed example only)\" Z-segment: hl7.eu hl7v28segmZL7.htm prints it with an empty field table, as hl7.eu prints it for 2.7 and 2.7.1 (where Caristix has no ZL7). Caristix 2.8 gives it one placeholder field (ZL7.1, ST); HAPI v28's ZL7 class declares no fields. hl7.eu decides: no fields."
+  }
+}

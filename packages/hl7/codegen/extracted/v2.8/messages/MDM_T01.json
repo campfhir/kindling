@@ -1,0 +1,230 @@
+{
+  "structure": "MDM_T01",
+  "messageType": "MDM",
+  "triggerEvent": "T01",
+  "version": "2.8",
+  "description": "Original Document Notification",
+  "title": "Original Document Notification",
+  "sectionHeading": "9.6.1 MDM/ACK - Original Document Notification (Event T01)",
+  "source": {
+    "pdf": "hl7.eu std28/ch09.html",
+    "pages": null,
+    "table": "MDM^T01^MDM_T01: Original Document Notification"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "T01"
+      ],
+      "eventPrinted": "T01",
+      "pdf": "hl7.eu std28/ch09.html",
+      "page": null,
+      "table": "MDM^T01^MDM_T01: Original Document Notification",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "T03"
+      ],
+      "eventPrinted": "T03",
+      "pdf": "hl7.eu std28/ch09.html",
+      "page": null,
+      "table": "MDM^T03^MDM_T01: Document Status Change Notification",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "T05"
+      ],
+      "eventPrinted": "T05",
+      "pdf": "hl7.eu std28/ch09.html",
+      "page": null,
+      "table": "MDM^T05^MDM_T01: Document Addendum Notification",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "T07"
+      ],
+      "eventPrinted": "T07",
+      "pdf": "hl7.eu std28/ch09.html",
+      "page": null,
+      "table": "MDM^T07^MDM_T01: Document Edit Notification",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "T09"
+      ],
+      "eventPrinted": "T09",
+      "pdf": "hl7.eu std28/ch09.html",
+      "page": null,
+      "table": "MDM^T09^MDM_T01: Document Replacement Notification",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "T11"
+      ],
+      "eventPrinted": "T11",
+      "pdf": "hl7.eu std28/ch09.html",
+      "page": null,
+      "table": "MDM^T11^MDM_T01: Document Cancel Notification",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Event Type",
+      "status": "B, v2.5",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Visit",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "group",
+      "name": "COMMON_ORDER",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "ORC",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Common order segment",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "group",
+          "name": "TIMING",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "TQ1",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Timing/Quantity",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "segment",
+              "name": "TQ2",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Timing/Quantity Order Sequence",
+              "chapterRef": "4"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "OBR",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Observation request segment",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Notes and comments about the observation request (OBR)",
+          "chapterRef": "2"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "TXA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Document Notification",
+      "chapterRef": "9"
+    },
+    {
+      "kind": "segment",
+      "name": "CON",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Consent Segment",
+      "chapterRef": "9"
+    }
+  ],
+  "variants": []
+}

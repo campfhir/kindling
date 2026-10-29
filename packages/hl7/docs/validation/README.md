@@ -11,7 +11,8 @@ How the HL7 facts in `@campfhir/hl7` were checked, and against what.
   re-exported, or none yet for a segment new in the version), and which tests cover it. Generated
   by `codegen/validate/ledger.mjs <version>`; hand-written decisions are in
   `codegen/validate/ledger-v23-notes.json`, `ledger-v231-notes.json`, `ledger-v24-notes.json`,
-  `ledger-v25-notes.json` and `ledger-v251-notes.json`.
+  `ledger-v25-notes.json`, `ledger-v251-notes.json` and, for later versions, `ledger-v28-notes.json` (named
+  after the version without dots).
 - [`v2.3-message-ledger.md`](v2.3-message-ledger.md), [`v2.3.1-message-ledger.md`](v2.3.1-message-ledger.md),
   [`v2.4-message-ledger.md`](v2.4-message-ledger.md), [`v2.5-message-ledger.md`](v2.5-message-ledger.md)
   and [`v2.5.1-message-ledger.md`](v2.5.1-message-ledger.md): every message structure of the version
@@ -35,6 +36,11 @@ How the HL7 facts in `@campfhir/hl7` were checked, and against what.
   the same for 2.7.1. HAPI has no 2.7.1 classes, so Caristix is the only check on hl7.eu and hl7.eu decides
   every disagreement. The 39 accepted structures are where the ledger's own hl7.eu reader misreads a table
   (Caristix agrees with the structure), and RQC^I06 (see its note); the structures are 2.7's.
+- [`v2.8-segment-ledger.md`](v2.8-segment-ledger.md) and [`v2.8-message-ledger.md`](v2.8-message-ledger.md):
+  the same for 2.8, against all three sources. Segment notes are in `codegen/validate/ledger-v28-notes.json`
+  (ZL7, the "proposed example only" Z-segment, has no fields). RDE^O11/O25 take the `{TIMING_ENCODED}` Caristix and
+  HAPI agree on inside the RXV group (`codegen/extracted/v2.8/overrides.json`). The events hl7.eu v2.8 prints no
+  table for (chapter 16, QBP^Z75–Z97) are not in 2.8; see the roadmap.
 - [`v2.3-hl7eu-sweep.md`](v2.3-hl7eu-sweep.md) and
   [`v2.3-hapi-crosscheck.md`](v2.3-hapi-crosscheck.md): the first sweeps (2026-10-19), superseded
   by the ledger and kept for the history of the decisions.

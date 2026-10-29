@@ -1,0 +1,28 @@
+{
+  "withdrawnMessages": {
+    "QRY_PC4": "hl7.eu std28/ch12.html 12.3.5: \"Retained for backwards compatibility only ... and removed from the standard as of v2.8\" (2026-10-29)",
+    "QRY_PC9": "hl7.eu std28/ch12.html 12.3.7: \"Retained for backwards compatibility only ... and removed from the standard as of v2.8\" (2026-10-29)",
+    "QRY_PCE": "hl7.eu std28/ch12.html 12.3.9: \"Retained for backwards compatibility only ... and removed from the standard as of v2.8\" (2026-10-29)",
+    "QRY_PCK": "hl7.eu std28/ch12.html 12.3.11: \"Retained for backwards compatibility only ... and removed from the standard as of v2.8\" (2026-10-29)",
+    "RQC_I05": "hl7.eu std28/ch05.html section 5.2.6 (Summary chart of query/response pairs): \"Request clinical information (withdrawn) RQC^I05 Original mode (withdrawn)\" (2026-10-29)",
+    "RQC_I06": "hl7.eu std28/ch05.html section 5.2.6 (Summary chart of query/response pairs): \"Request clinical information (withdrawn) RQC^I05 Original mode (withdrawn)\" (2026-10-29); RQC^I06 shares the RQC_I05 structure",
+    "RCI_I05": "hl7.eu std28/ch05.html section 5.2.6 (Summary chart of query/response pairs): \"Return Clinical Information (withdrawn) RCI^I05 Original mode (withdrawn)\" (2026-10-29)",
+    "RCL_I06": "hl7.eu std28/ch05.html section 5.2.6 (Summary chart of query/response pairs): \"Return Clinical List (withdrawn) RCL^I06 Original mode (withdrawn)\" (2026-10-29)"
+  },
+  "structureFixes": [
+    {
+      "message": "RDE_O11",
+      "set": "TIMING_ENCODED",
+      "min": 1,
+      "max": "*",
+      "reason": "2026-10-29: hl7.eu std28/ch04a.html prints the TIMING_ENCODED group inside the RXV group of RDE^O11 as \"{\" ... \"}]\" (its end row unlabelled, the brackets do not pair); Caristix 2.8 and HAPI v28 agree on a required, repeating group ({TIMING_ENCODED}) and the rule takes their shape against hl7.eu. The ORDER-level TIMING_ENCODED of the same name is already required and repeating."
+    },
+    {
+      "message": "RDE_O25",
+      "set": "TIMING_ENCODED",
+      "min": 1,
+      "max": "*",
+      "reason": "2026-10-29: hl7.eu std28/ch04a.html prints the TIMING_ENCODED group inside the RXV group of RDE^O25 as \"{\" ... \"}]\" (its end row unlabelled, the brackets do not pair); Caristix 2.8 and HAPI v28 agree on a required, repeating group ({TIMING_ENCODED}) and the rule takes their shape against hl7.eu. The ORDER-level TIMING_ENCODED of the same name is already required and repeating."
+    }
+  ]
+}

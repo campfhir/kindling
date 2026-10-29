@@ -1,0 +1,139 @@
+{
+  "structure": "SSU_U03",
+  "messageType": "SSU",
+  "triggerEvent": "U03",
+  "version": "2.8",
+  "description": "Specimen Status Message",
+  "title": "Specimen Status Message",
+  "sectionHeading": "13.3.3 SSU/ACK - Specimen Status Update (Event U03)",
+  "source": {
+    "pdf": "hl7.eu std28/ch13.html",
+    "pages": null,
+    "table": "SSU^U03^SSU_U03: Specimen Status Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "U03"
+      ],
+      "eventPrinted": "U03",
+      "pdf": "hl7.eu std28/ch13.html",
+      "page": null,
+      "table": "SSU^U03^SSU_U03: Specimen Status Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EQU",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Equipment Detail",
+      "chapterRef": "13"
+    },
+    {
+      "kind": "group",
+      "name": "SPECIMEN_CONTAINER",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "SAC",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Specimen Container Detail",
+          "chapterRef": "13"
+        },
+        {
+          "kind": "segment",
+          "name": "OBX",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Additional specimen container characteristics",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Additional specimen container information",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "group",
+          "name": "SPECIMEN",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "SPM",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Specimen",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Specimen related observation",
+              "chapterRef": "7"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

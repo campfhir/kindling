@@ -1,0 +1,98 @@
+{
+  "structure": "QBP_Q15",
+  "messageType": "QBP",
+  "triggerEvent": "Q15",
+  "version": "2.8",
+  "description": "Query By Parameter",
+  "title": "Query By Parameter",
+  "source": {
+    "pdf": "hl7.eu std28/ch05.html",
+    "pages": null,
+    "table": "QBP^Q15^QBP_Q15: Query By Parameter"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Q15"
+      ],
+      "eventPrinted": "Q15",
+      "pdf": "hl7.eu std28/ch05.html",
+      "page": null,
+      "table": "QBP^Q15^QBP_Q15: Query By Parameter",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2.15.9"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2.15.12"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2.14.13"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Parameter Definition Segment",
+      "chapterRef": "5.5.4"
+    },
+    {
+      "kind": "placeholder",
+      "text": "[ ... ]",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "notation": "[ ... ]",
+      "description": "Optional query by example segments"
+    },
+    {
+      "kind": "segment",
+      "name": "RCP",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Response Control Parameters",
+      "chapterRef": "5.5.6"
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Continuation Pointer",
+      "chapterRef": "2.15.14"
+    }
+  ],
+  "variants": []
+}
