@@ -1,11 +1,5 @@
 {
-  "structureFixes": [
-    {
-      "message": "RQC_I06",
-      "set": "GT1",
-      "min": 0,
-      "max": "*",
-      "reason": "2026-10-29: hl7.eu ch11 (std27/ch11.html) prints [GT1] in RQC^I06; Caristix 2.7 (TriggerEvents/RQC_I06) and HAPI v27 (RQC_I06 maps to the RQC_I05 structure) agree on [{GT1}] and the rule takes their shape against hl7.eu."
-    }
-  ]
+  "sharePrimary": {
+    "RQC_I06": "2026-10-29: the official HL7 v2.7 chapter 11 (V27_CH11_PatientReferral.pdf, January 2011), section 11.3.5 (RQC^I05 table, p. 13) and section 11.3.6 (RQC^I06 table, pp. 14-15): the RQC^I06 caption names the RQC_I05 structure, whose table prints [{GT1}], while the I06 table prints [GT1]. Decided to follow the structure ID (MSH-9.3 RQC_I05), as Caristix and HAPI do and as v2.4 to v2.5.1 already did."
+  }
 }

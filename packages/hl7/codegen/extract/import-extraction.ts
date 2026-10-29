@@ -210,6 +210,12 @@ const skipped = new Map<string, string>();        // schema name -> reason
 interface EventEntry { name: string; messageType: string; triggerEvent: string; items?: Item[]; where?: string; baseMessage?: string }
 const eventsOut: EventEntry[] = [];
 
+// Events whose printed table differs from the primary table of the structure their caption names
+// (RQC^I06^RQC_I05 prints [GT1], RQC^I05^RQC_I05 [{GT1}]), decided by hand to follow the structure ID:
+// they wrap the primary event. Recorded with the citation in overrides.json:
+//   { "sharePrimary": { "RQC_I06": "citation and reason" } }
+const SHARE_PRIMARY: Record<string, string> = existsSync(join(DIR, "overrides.json")) ? (readJson(join(DIR, "overrides.json")).sharePrimary ?? {}) : {};
+
 for (const e of index.filter((x) => x.status !== "withdrawn")) {
   const name = e.triggerEvent ? `${e.messageType}_${e.triggerEvent}` : e.messageType;
   if (e.definedBy) { notes.events.push(`${name}: cross-reference only (${e.definedBy}), not generated`); continue; }
@@ -221,8 +227,9 @@ for (const e of index.filter((x) => x.status !== "withdrawn")) {
     eventsOut.push({ ...common, items: file.items, where: e.structure });
     continue;
   }
-  if (file.triggerEvents?.some((t) => t.events.includes(triggerEvent) && t.identicalToPrimary)) {
+  if (file.triggerEvents?.some((t) => t.events.includes(triggerEvent) && t.identicalToPrimary) || name in SHARE_PRIMARY) {
     const primary = file.triggerEvent ? `${file.messageType}_${file.triggerEvent}` : file.messageType;
+    if (name in SHARE_PRIMARY) notes.events.push(`${name}: shares the ${primary} structure its caption names (its own table differs). ${SHARE_PRIMARY[name]}`);
     eventsOut.push({ ...common, baseMessage: primary });
     continue;
   }
@@ -233,7 +240,7 @@ for (const e of index.filter((x) => x.status !== "withdrawn")) {
 
 // Structure fixes the rule calls for (Caristix and HAPI agree against hl7.eu), recorded with their reason in overrides.json:
 //   { "structureFixes": [{ "message": "ADT_A13", "insertAfter": "PD1", "items": [{ "name": "ARV", "min": 0, "max": "*" }], "reason": "..." }] }
-// or, to change how often a segment occurs: { "message": "RQC_I06", "set": "GT1", "min": 0, "max": "*", "reason": "..." }
+// or, to change how often a segment occurs: { "message": "<MSG>", "set": "<SEG>", "min": 0, "max": "*", "reason": "..." }
 const overridesPath = join(DIR, "overrides.json");
 type StructureFix = { message: string; reason: string } & (
   | { insertAfter: string; items: { name: string; min: 0 | 1; max: 1 | "*" }[] }

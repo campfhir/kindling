@@ -4608,22 +4608,6 @@ const v2_6_RQC_I05_STRUCTURE: StructureItem[] = [
   optList("NTE"),
 ];
 
-const v2_6_RQC_I06_STRUCTURE: StructureItem[] = [
-  req("MSH"),
-  optList("SFT"),
-  opt("UAC"),
-  req("QRD"),
-  opt("QRF"),
-  group("PROVIDER", "required", "repeating", [
-    req("PRD"),
-    optList("CTD"),
-  ]),
-  req("PID"),
-  optList("NK1"),
-  opt("GT1"),
-  optList("NTE"),
-];
-
 const v2_6_RCI_I05_STRUCTURE: StructureItem[] = [
   req("MSH"),
   optList("SFT"),
@@ -6266,7 +6250,7 @@ export const V2_6_MESSAGES: MessageSchema[] = [
   { messageType: "RQP", triggerEvent: "I04", version: "2.6", structure: v2_6_RQP_I04_STRUCTURE },
   { messageType: "RPI", triggerEvent: "I04", version: "2.6", structure: v2_6_RPI_I04_STRUCTURE },
   { messageType: "RQC", triggerEvent: "I05", version: "2.6", structure: v2_6_RQC_I05_STRUCTURE },
-  { messageType: "RQC", triggerEvent: "I06", version: "2.6", structure: v2_6_RQC_I06_STRUCTURE },
+  { messageType: "RQC", triggerEvent: "I06", version: "2.6", structure: v2_6_RQC_I05_STRUCTURE, baseMessage: "RQC_I05" },
   { messageType: "RCI", triggerEvent: "I05", version: "2.6", structure: v2_6_RCI_I05_STRUCTURE },
   { messageType: "RCL", triggerEvent: "I06", version: "2.6", structure: v2_6_RCL_I06_STRUCTURE },
   { messageType: "RQA", triggerEvent: "I08", version: "2.6", structure: v2_6_RQA_I08_STRUCTURE },

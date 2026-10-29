@@ -50,7 +50,8 @@ pnpm typecheck && pnpm lint && pnpm test && pnpm codegen:check   # codegen:check
 ```
 
 A difference the message ledger reports is either fixed (in the extraction, or by a `structureFixes` entry in
-`overrides.json` when the rule says Caristix and HAPI win) or accepted with a dated note in
+`overrides.json` when the rule says Caristix and HAPI win; a `sharePrimary` entry when an event's caption names
+another event's structure but prints a different table, and the structure ID is followed) or accepted with a dated note in
 `codegen/validate/message-notes.json`. Never accept a difference without saying which source agrees with the
 structure and why the others differ.
 

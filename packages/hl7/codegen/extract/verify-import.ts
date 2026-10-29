@@ -78,7 +78,9 @@ for (const e of index) {
   const schema = schemaByName.get(name);
   if (!schema) continue; // not generated: listed in IMPORT.md
   const file = readJson(join(DIR, `${e.structure}.json`));
-  const sameAsPrimary = file.triggerEvents?.some((t: any) => t.events.includes(e.triggerEvent) && t.identicalToPrimary);
+  // an event overrides.json makes share its structure's primary table (sharePrimary) is compared with that table
+  const sharePrimary = existsSync(overridesFile) && name in (readJson(overridesFile).sharePrimary ?? {});
+  const sameAsPrimary = sharePrimary || file.triggerEvents?.some((t: any) => t.events.includes(e.triggerEvent) && t.identicalToPrimary);
   const table = file.triggerEvent === e.triggerEvent || sameAsPrimary ? file.items : file.variants?.find((v: any) => v.eventPrinted === e.triggerEvent)?.items;
   if (!table) { mismatched.push(`${name}: no table`); continue; }
   checked++;
