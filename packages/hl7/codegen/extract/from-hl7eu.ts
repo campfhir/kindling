@@ -14,7 +14,7 @@
  * Usage:  npx tsx codegen/extract/from-hl7eu.ts <version> <sources-dir> <out-dir>
  *   <sources-dir> is the folder fetch-sources.sh wrote for the version; <out-dir> is codegen/extracted/<version>.
  */
-import { mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const [version, sourcesDir, outDir] = process.argv.slice(2);
@@ -311,6 +311,8 @@ function sectionFor(type: string, event: string): string | undefined {
   return entry && `${entry.number} ${entry.text}`;
 }
 
+// Start from an empty messages folder so a structure an earlier run wrote cannot linger.
+rmSync(join(outDir, "messages"), { recursive: true, force: true });
 mkdirSync(join(outDir, "messages"), { recursive: true });
 const index: Record<string, unknown>[] = [];
 let structureFiles = 0, variants = 0;
