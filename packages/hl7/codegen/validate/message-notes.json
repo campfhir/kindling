@@ -1792,7 +1792,7 @@
     },
     "RDE_O11": {
       "date": "2026-10-29",
-      "note": "Read from the official v2.8.1 chapter 4A (V281_CH04A_Orders.pdf), which the ledger's reader matches. It prints the TIMING_ENCODED group inside the RXV group as \"{\" ... \"}]\" (the same misprint as hl7.eu std28 and std281); the inner TIMING_ENCODED keeps v2.8's {TIMING_ENCODED} by hand decision (codegen/extracted/v2.8.1/overrides.json). HAPI v281 differs, as HAPI v28 did; Caristix 2.8.1 answers HTTP 500."
+      "note": "Read from the official v2.8.1 chapter 4A (V281_CH04A_Orders.pdf), which the ledger's reader matches. It prints the TIMING_ENCODED group inside the RXV group as \"{\" ... \"}]\" (the same misprint as hl7.eu std28 and std281); the inner TIMING_ENCODED keeps v2.8's {TIMING_ENCODED} (required, repeating) by hand decision, confirmed by the maintainer on 2026-10-29 (codegen/extracted/v2.8.1/overrides.json). HAPI v281 differs, as HAPI v28 did; Caristix 2.8.1 answers HTTP 500."
     },
     "RDR_RDR": {
       "date": "2026-10-29",

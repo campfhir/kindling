@@ -5,14 +5,14 @@
       "set": "TIMING_ENCODED",
       "min": 1,
       "max": "*",
-      "reason": "2026-10-29: hl7.eu std281/ch04a.html prints the TIMING_ENCODED group inside the RXV group of RDE^O11 as \"{\" ... \"}]\", the same unpaired brackets as std28, and so does the official v2.8.1 chapter 4A (V281_CH04A_Orders.pdf, the RDE^O11 table: \"{  --- TIMING_ENCODED begin\" closed by \"}]\" with no end label); HAPI v281 has a required, repeating group ({TIMING_ENCODED}), and in v2.8 Caristix and HAPI agreed on it. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; decided by hand to keep v2.8's reading of the misprint rather than read \"}]\" as optional."
+      "reason": "2026-10-29: hl7.eu std281/ch04a.html prints the TIMING_ENCODED group inside the RXV group of RDE^O11 as \"{\" ... \"}]\", the same unpaired brackets as std28, and so does the official v2.8.1 chapter 4A (V281_CH04A_Orders.pdf, the RDE^O11 table: \"{  --- TIMING_ENCODED begin\" closed by \"}]\" with no end label); HAPI v281 has a required, repeating group ({TIMING_ENCODED}), and in v2.8 Caristix and HAPI agreed on it. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; decided by hand to keep v2.8's reading of the misprint (required, repeating) rather than read \"}]\" as optional; confirmed by the maintainer on 2026-10-29."
     },
     {
       "message": "RDE_O25",
       "set": "TIMING_ENCODED",
       "min": 1,
       "max": "*",
-      "reason": "2026-10-29: hl7.eu std281/ch04a.html prints the TIMING_ENCODED group inside the RXV group of RDE^O25 as \"{\" ... \"}]\", the same unpaired brackets as std28, and so does the official v2.8.1 chapter 4A (V281_CH04A_Orders.pdf, the RDE^O25 table: \"{  --- TIMING_ENCODED begin\" closed by \"}]\" with no end label); HAPI v281 has a required, repeating group ({TIMING_ENCODED}), and in v2.8 Caristix and HAPI agreed on it. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; decided by hand to keep v2.8's reading of the misprint rather than read \"}]\" as optional."
+      "reason": "2026-10-29: hl7.eu std281/ch04a.html prints the TIMING_ENCODED group inside the RXV group of RDE^O25 as \"{\" ... \"}]\", the same unpaired brackets as std28, and so does the official v2.8.1 chapter 4A (V281_CH04A_Orders.pdf, the RDE^O25 table: \"{  --- TIMING_ENCODED begin\" closed by \"}]\" with no end label); HAPI v281 has a required, repeating group ({TIMING_ENCODED}), and in v2.8 Caristix and HAPI agreed on it. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; decided by hand to keep v2.8's reading of the misprint (required, repeating) rather than read \"}]\" as optional; confirmed by the maintainer on 2026-10-29."
     }
   ],
   "sharedStructure": {
