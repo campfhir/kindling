@@ -1,6 +1,6 @@
 /**
  * Generates a field-position test for a segment, in the style of the
- * hand-written src/segments/v2.3/PV1.test.ts.
+ * hand-written src/v2.3/PV1.test.ts.
  *
  * For each setter we assert where its value(s) encode:
  *  - simple setters: the value lands at the correct field (and nowhere else).

@@ -1,0 +1,138 @@
+{
+  "structure": "QRY_Q01",
+  "messageType": "QRY",
+  "triggerEvent": "Q01",
+  "version": "2.6",
+  "description": "Query Message",
+  "title": "Query Message",
+  "source": {
+    "pdf": "hl7.eu std26/ch05.html",
+    "pages": null,
+    "table": "QRY^Q01^QRY_Q01: Query Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Q26"
+      ],
+      "eventPrinted": "Q26",
+      "pdf": "hl7.eu std26/ch04.html",
+      "page": null,
+      "table": "QRY^Q26^QRY_Q01: Query Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Q27"
+      ],
+      "eventPrinted": "Q27",
+      "pdf": "hl7.eu std26/ch04.html",
+      "page": null,
+      "table": "QRY^Q27^QRY_Q01: Query Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Q28"
+      ],
+      "eventPrinted": "Q28",
+      "pdf": "hl7.eu std26/ch04.html",
+      "page": null,
+      "table": "QRY^Q28^QRY_Q01: Query Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Q29"
+      ],
+      "eventPrinted": "Q29",
+      "pdf": "hl7.eu std26/ch04.html",
+      "page": null,
+      "table": "QRY^Q29^QRY_Q01: Query Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Q30"
+      ],
+      "eventPrinted": "Q30",
+      "pdf": "hl7.eu std26/ch04.html",
+      "page": null,
+      "table": "QRY^Q30^QRY_Q01: Query Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Q01"
+      ],
+      "eventPrinted": "Q01",
+      "pdf": "hl7.eu std26/ch05.html",
+      "page": null,
+      "table": "QRY^Q01^QRY_Q01: Query Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Definition",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "QRF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Filter",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Continuation Pointer",
+      "chapterRef": "2"
+    }
+  ],
+  "variants": []
+}

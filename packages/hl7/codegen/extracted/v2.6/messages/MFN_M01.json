@@ -1,0 +1,69 @@
+{
+  "structure": "MFN_M01",
+  "messageType": "MFN",
+  "triggerEvent": "M01",
+  "version": "2.6",
+  "description": "Master File Notification",
+  "title": "Master File Notification",
+  "sectionHeading": "8.4.1 MFN/MFK - Master File Notification (Event M01)",
+  "source": {
+    "pdf": "hl7.eu std26/ch08.html",
+    "pages": null,
+    "table": "MFN^M01^MFN_M01: Master File Notification"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M01"
+      ],
+      "eventPrinted": "M01",
+      "pdf": "hl7.eu std26/ch08.html",
+      "page": null,
+      "table": "MFN^M01^MFN_M01: Master File Notification",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "segment",
+      "name": "MFE",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Master File Entry",
+      "chapterRef": "8"
+    }
+  ],
+  "variants": []
+}

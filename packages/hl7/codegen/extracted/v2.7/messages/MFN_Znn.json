@@ -1,0 +1,79 @@
+{
+  "structure": "MFN_Znn",
+  "messageType": "MFN",
+  "triggerEvent": "M14",
+  "version": "2.7",
+  "description": "Master File Notification - Site Defined",
+  "title": "Master File Notification - Site Defined",
+  "sectionHeading": "8.4.3 MFN/MFK - Master File Notification - Site Defined (Event M14)",
+  "source": {
+    "pdf": "hl7.eu std27/ch08.html",
+    "pages": null,
+    "table": "MFN^M14^MFN_Znn: Master File Notification - Site Defined"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M14"
+      ],
+      "eventPrinted": "M14",
+      "pdf": "hl7.eu std27/ch08.html",
+      "page": null,
+      "table": "MFN^M14^MFN_Znn: Master File Notification - Site Defined",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "segment",
+      "name": "MFE",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Master File Entry",
+      "chapterRef": "8"
+    }
+  ],
+  "variants": []
+}

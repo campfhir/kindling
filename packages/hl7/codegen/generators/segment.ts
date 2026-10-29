@@ -16,7 +16,7 @@ export function generateSegment(
  *
  * @module
  */
-import type { Result } from "../../types/result.ts";
+import type { Result } from "../types/result.ts";
 import { MSH as MSH_base } from "../${baseVersion}/MSH.ts";
 
 /**
@@ -37,10 +37,10 @@ export class MSH extends MSH_base {
  *
  * @module
  */
-import { Err } from "../../utils/err.ts";
-import type { Result } from "../../types/result.ts";
-import type { EncodingCharacters } from "../../types/encoding.ts";
-import { ParserUtils } from "../../types/parser.ts";
+import { Err } from "../utils/err.ts";
+import type { Result } from "../types/result.ts";
+import type { EncodingCharacters } from "../types/encoding.ts";
+import { ParserUtils } from "../types/parser.ts";
 import { ${segName} as ${segName}_base } from "../${baseVersion}/${segName}.ts";
 
 /**

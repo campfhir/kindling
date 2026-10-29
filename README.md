@@ -22,7 +22,7 @@ See [ROADMAP.md](ROADMAP.md) for where each package is heading.
   return structured data that round-trips back to the wire format.
 - **Zero runtime dependencies**, ESM-only builds (loadable from CommonJS with Node 24's `require(esm)`), and support for Node.js, Bun, browsers and
   edge runtimes.
-- **Versioned subpaths** when the standard has versions (`@campfhir/hl7/segments/v2.5.1`).
+- **Versioned subpaths** when the standard has versions (`@campfhir/hl7/v2.5.1`).
 - **Tests next to the code** (`*.test.ts`, Vitest), run on Node 24 and 26 in CI.
 - **One toolchain.** Lint, TypeScript and build settings live at the repository root; each package
   only adds its own `package.json`, `tsconfig.json`, `tsup.config.ts` and `vitest.config.ts`.

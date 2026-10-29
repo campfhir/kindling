@@ -28,12 +28,12 @@ import { Err } from "./utils/err.ts";
 import { splitSegments } from "./utils/messageParsing.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "./types/encoding.ts";
 import { ParserUtils } from "./types/parser.ts";
-import { FHS } from "./segments/v2.3/FHS.ts";
-import { FTS } from "./segments/v2.3/FTS.ts";
-import { BHS } from "./segments/v2.3/BHS.ts";
-import { BTS } from "./segments/v2.3/BTS.ts";
-import { QRD } from "./segments/v2.3/QRD.ts";
-import { QRF } from "./segments/v2.3/QRF.ts";
+import { FHS } from "./v2.3/FHS.ts";
+import { FTS } from "./v2.3/FTS.ts";
+import { BHS } from "./v2.3/BHS.ts";
+import { BTS } from "./v2.3/BTS.ts";
+import { QRD } from "./v2.3/QRD.ts";
+import { QRF } from "./v2.3/QRF.ts";
 import { parseMessage, type ParseOptions, type ParsedHL7Message } from "./dispatch.ts";
 
 /** One batch of a parsed file. */

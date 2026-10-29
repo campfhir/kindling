@@ -1,0 +1,148 @@
+{
+  "structure": "DOC_T12",
+  "messageType": "DOC",
+  "triggerEvent": "T12",
+  "version": "2.6",
+  "description": "Document Response",
+  "title": "Document Response",
+  "sectionHeading": "9.8.1 QRY/DOC - Document Query (Event T12)",
+  "source": {
+    "pdf": "hl7.eu std26/ch09.html",
+    "pages": null,
+    "table": "DOC^T12^DOC_T12: Document Response"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "T12"
+      ],
+      "eventPrinted": "T12",
+      "pdf": "hl7.eu std26/ch09.html",
+      "page": null,
+      "table": "DOC^T12^DOC_T12: Document Response",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgement",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QAK",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Acknowledgement",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Definition",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "EVN",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Event Type",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PV1",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Visit",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "TXA",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Document Notification",
+          "chapterRef": "9"
+        },
+        {
+          "kind": "segment",
+          "name": "OBX",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Observation",
+          "chapterRef": "7"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Continuation Pointer",
+      "chapterRef": "2"
+    }
+  ],
+  "variants": []
+}

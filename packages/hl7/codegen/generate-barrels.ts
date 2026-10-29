@@ -1,71 +1,66 @@
 /**
- * Generates barrel index.ts files for all versioned src directories.
+ * Generates the barrel `index.ts` of every version directory (`src/<version>/`).
  * Run automatically as the prebuild step.
  *
  * Usage:
  *   pnpm barrels           # generate all index.ts barrel files
  *   pnpm barrels --dry-run # print without writing
  *
- * Segments:   export * (all exports — class names are globally unique)
- * Structures: export * (one <MSG>_STRUCTURE constant per module)
- * Builders:   export { create* } only (avoids structural type name conflicts)
- * Parsers:    export { parse* } only (same reason), plus the message registry
+ * A version directory holds the version's segments and messages side by side. Its barrel exports:
  *
- * Every parsers directory also gets a `messages.ts`: the `MESSAGES` map from message structure
+ * Segments: export * (all exports — class names are globally unique)
+ * Messages: per message create<MSG>, parse<MSG>, <MSG>_STRUCTURE and the Parsed<MSG> type, the
+ *           names unique across a version (group interfaces such as `InsuranceGroup` are not,
+ *           so they come from the message's own module), plus the message registry
+ *
+ * Every version directory also gets a `registry.ts`: the `MESSAGES` map from message structure
  * name (`ADT_A01`) to parser, which the root `parse()` dispatches on, with the
  * `MessageStructure` and `ParsedMessage` types derived from it.
  */
 
-import { readdirSync, writeFileSync } from "node:fs";
+import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, basename } from "node:path";
 import { fileURLToPath } from "node:url";
+import { MESSAGE_MARKER } from "./generators/message.ts";
+import { REEXPORT_MARKER } from "./generators/reexport.ts";
 
 const ROOT = join(fileURLToPath(import.meta.url), "../..");
 const DRY_RUN = process.argv.includes("--dry-run");
 
 function sourceFiles(absDir: string): string[] {
   return readdirSync(absDir)
-    .filter(
-      (f) =>
-        f.endsWith(".ts") &&
-        !f.endsWith(".test.ts") &&
-        !f.endsWith(".integration.test.ts") &&
-        !f.endsWith(".d.ts") &&
-        f !== "index.ts" &&
-        f !== "messages.ts",
-    )
+    .filter((f) => f.endsWith(".ts") && !f.endsWith(".test.ts") && !f.endsWith(".d.ts") && f !== "index.ts" && f !== "registry.ts")
     .map((f) => basename(f, ".ts"))
     .sort();
 }
 
+/** A message module: generated from a schema, or a re-export of a base version's message (see codegen/generate.ts). */
+function isMessage(absDir: string, name: string): boolean {
+  const source = readFileSync(join(absDir, `${name}.ts`), "utf8");
+  return source.includes(MESSAGE_MARKER) || (source.includes(REEXPORT_MARKER) && /^ \* \w+ message for HL7 /m.test(source));
+}
+
 // Relative specifiers carry explicit `.ts` extensions so the barrels resolve
 // under Node's native ESM loader, not just bundlers.
-function segmentBarrel(absDir: string): string {
-  return sourceFiles(absDir)
-    .map((name) => `export * from "./${name}.ts";`)
-    .join("\n") + "\n";
+function versionBarrel(absDir: string, version: string): string {
+  const names = sourceFiles(absDir);
+  const messages = names.filter((name) => isMessage(absDir, name));
+  const segments = names.filter((name) => !messages.includes(name));
+  return `/**
+ * Barrel re-exporting all HL7 ${version} segment classes and message builders, parsers and structures.
+ *
+ * @module
+ */
+${segments.map((name) => `export * from "./${name}.ts";`).join("\n")}
+${messages.map((name) => `export { create${name}, parse${name}, ${name}_STRUCTURE, type Parsed${name} } from "./${name}.ts";`).join("\n")}
+export { MESSAGES, type MessageStructure, type ParsedMessage } from "./registry.ts";
+`;
 }
 
-function builderBarrel(absDir: string): string {
-  return sourceFiles(absDir)
-    .map((name) => `export { create${name} } from "./${name}.ts";`)
-    .join("\n") + "\n";
-}
-
-function parserBarrel(absDir: string): string {
-  return sourceFiles(absDir)
-    .map((name) => {
-      // ADT_A01_Parser → parseADT_A01
-      const fnName = "parse" + name.replace(/_Parser$/, "");
-      return `export { ${fnName} } from "./${name}.ts";`;
-    })
-    .join("\n") + `\nexport { MESSAGES, type MessageStructure, type ParsedMessage } from "./messages.ts";\n`;
-}
-
-/** The message registry of one parsers directory (`src/parsers/<version>/messages.ts`). */
-function parserRegistry(absDir: string, version: string): string {
-  const names = sourceFiles(absDir).map((name) => name.replace(/_Parser$/, ""));
-  const imports = names.map((name) => `import { parse${name} } from "./${name}_Parser.ts";`).join("\n");
+/** The message registry of one version directory (`src/<version>/registry.ts`). */
+function messageRegistry(absDir: string, version: string): string {
+  const names = sourceFiles(absDir).filter((name) => isMessage(absDir, name));
+  const imports = names.map((name) => `import { parse${name} } from "./${name}.ts";`).join("\n");
   const entries = names.map((name) => `  ${name}: parse${name},`).join("\n");
   return `/**
  * The HL7 ${version} messages, keyed by message structure name, each mapped to its parser.
@@ -73,8 +68,8 @@ function parserRegistry(absDir: string, version: string): string {
  *
  * @module
  */
-import type { Result } from "../../types/result.ts";
-import type { ParsedMessageBase } from "../../types/structure.ts";
+import type { Result } from "../types/result.ts";
+import type { ParsedMessageBase } from "../types/structure.ts";
 ${imports}
 
 /** Parses one message string into its structured form. */
@@ -94,32 +89,6 @@ export type ParsedMessage<S extends MessageStructure = MessageStructure> =
 `;
 }
 
-const BARRELS = [
-  { kind: "segments", barrel: segmentBarrel },
-  { kind: "structures", barrel: segmentBarrel },
-  { kind: "builders", barrel: builderBarrel },
-  { kind: "parsers", barrel: parserBarrel },
-];
-
-// Every src/<kind>/v* directory gets a barrel, so new versions are picked up automatically.
-const DIRS: { dir: string; barrel: (absDir: string) => string }[] = BARRELS.flatMap(
-  ({ kind, barrel }) =>
-    readdirSync(join(ROOT, "src", kind), { withFileTypes: true })
-      .filter((e) => e.isDirectory() && /^v\d/.test(e.name))
-      .map((e) => e.name)
-      .sort()
-      .map((v) => ({ dir: `src/${kind}/${v}`, barrel })),
-);
-
-// Module doc for a barrel, derived from its directory (kind + version).
-function barrelModuleDoc(dir: string): string {
-  const [, kind, ver] = dir.match(/src\/(segments|structures|builders|parsers)\/(v[\d.]+)/)!;
-  const noun = { segments: "segment classes", structures: "message structures", builders: "message builders", parsers: "message parsers" }[
-    kind as "segments" | "structures" | "builders" | "parsers"
-  ];
-  return `/**\n * Barrel re-exporting all HL7 ${ver} ${noun}.\n *\n * @module\n */\n`;
-}
-
 function emit(dir: string, file: string, content: string): void {
   if (DRY_RUN) {
     console.log(`[dry-run] ${dir}/${file}`);
@@ -129,8 +98,14 @@ function emit(dir: string, file: string, content: string): void {
   }
 }
 
-for (const { dir, barrel } of DIRS) {
+// Every src/v* directory gets a barrel and a registry, so new versions are picked up automatically.
+const versions = readdirSync(join(ROOT, "src"), { withFileTypes: true })
+  .filter((e) => e.isDirectory() && /^v\d/.test(e.name))
+  .map((e) => e.name)
+  .sort();
+for (const version of versions) {
+  const dir = `src/${version}`;
   const absDir = join(ROOT, dir);
-  if (dir.startsWith("src/parsers/")) emit(dir, "messages.ts", parserRegistry(absDir, basename(dir)));
-  emit(dir, "index.ts", barrelModuleDoc(dir) + barrel(absDir));
+  emit(dir, "registry.ts", messageRegistry(absDir, version));
+  emit(dir, "index.ts", versionBarrel(absDir, version));
 }

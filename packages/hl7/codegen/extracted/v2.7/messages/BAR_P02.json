@@ -1,0 +1,119 @@
+{
+  "structure": "BAR_P02",
+  "messageType": "BAR",
+  "triggerEvent": "P02",
+  "version": "2.7",
+  "description": "Purge Billing Account",
+  "title": "Purge Billing Account",
+  "sectionHeading": "6.4.2 BAR/ACK - Purge Patient Accounts (Event P02)",
+  "source": {
+    "pdf": "hl7.eu std27/ch06.html",
+    "pages": null,
+    "table": "BAR^P02^BAR_P02: Purge Billing Account"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "P02"
+      ],
+      "eventPrinted": "P02",
+      "pdf": "hl7.eu std27/ch06.html",
+      "page": null,
+      "table": "BAR^P02^BAR_P02: Purge Billing Account",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Event Type",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "group",
+      "name": "PATIENT",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Additional Demographics",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PV1",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Visit",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "DB1",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Disability Information",
+          "chapterRef": "3"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

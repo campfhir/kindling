@@ -1,0 +1,99 @@
+{
+  "structure": "MFN_M17",
+  "messageType": "MFN",
+  "triggerEvent": "M17",
+  "version": "2.7",
+  "description": "Master File Notification - DRG",
+  "title": "Master File Notification - DRG",
+  "sectionHeading": "8.13.1 MFN/MFK - DRG Master File Message (Event M17)",
+  "source": {
+    "pdf": "hl7.eu std27/ch08.html",
+    "pages": null,
+    "table": "MFN^M17^MFN_M17: Master File Notification - DRG"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M17"
+      ],
+      "eventPrinted": "M17",
+      "pdf": "hl7.eu std27/ch08.html",
+      "page": null,
+      "table": "MFN^M17^MFN_M17: Master File Notification - DRG",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "group",
+      "name": "MF_DRG",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Master File Entry",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "DMI",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "DRG Master",
+          "chapterRef": "8"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

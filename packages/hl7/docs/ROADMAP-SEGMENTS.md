@@ -1,8 +1,8 @@
 # Roadmap: Segments
 
-Tracks which HL7 v2 segments have a hand-written class in `src/segments/<version>/`.
-The goal is **complete HL7 v2.3 coverage first**, then v2.5.1 parity, then later versions
-(see [ROADMAP.md](../ROADMAP.md)).
+Tracks which HL7 v2 segments have a hand-written class in `src/<version>/`.
+v2.3 through v2.5.1 are complete, with every segment checked against the sources. The next goal is
+the latest version, **v2.9.1** (see [ROADMAP.md](../ROADMAP.md)).
 
 ## Source of truth
 
@@ -33,10 +33,10 @@ Segments are placed in the version that introduced them: `PDA`, `ABS`, `BLC`, `R
 master file segments `ORG`, `AFF`, `LAN`, `EDU` and `OM7`, and the 19 other segments 2.4 introduced
 (`CNS`, `ECD`, `ECR`, `EQP`, `EQU`, `GP1`, `GP2`, `IAM`, `INV`, `ISD`, `NDS`, `QID`, `QPD`, `QRI`,
 `RCP`, `SAC`, `SID`, `TCC`, `TCD`, generated from `codegen/spec/v2.4-segments.json`) are in
-`segments/v2.4`, and `SFT`, `SPM`, `TQ1`,
-`TQ2`, `CER` and `IIM` are in `segments/v2.5` (with a v2.5 `EDU` subclass for the EDU-9 added in 2.5);
+`src/v2.4`, and `SFT`, `SPM`, `TQ1`,
+`TQ2`, `CER` and `IIM` are in `src/v2.5` (with a v2.5 `EDU` subclass for the EDU-9 added in 2.5);
 later versions re-export them. `ROL` and `DB1` both have v2.3 definitions, so
-they stay in `segments/v2.3`. (Version-specific fields are layered, not moved: `ROL` fields 9–12, `ACC` fields 7–10 and `PD1` fields 13–21 are v2.4 overrides in `segments/v2.4`; `ACC` field 11 is a v2.5 override. The v2.3 classes stop at the v2.3 field count. `DB1` has the same eight fields in v2.3, v2.4 and v2.5. Field 3 (CX) repeats in all three, and v2.3 now models that. v2.4 widens its maximum length to 250, which is not enforced, and hl7.eu names field 4 "Disability Indicator" in v2.4 and "Disabled Indicator" in v2.3 and v2.5.) Moving a
+they stay in `src/v2.3`. (Version-specific fields are layered, not moved: `ROL` fields 9–12, `ACC` fields 7–10 and `PD1` fields 13–21 are v2.4 overrides in `src/v2.4`; `ACC` field 11 is a v2.5 override. The v2.3 classes stop at the v2.3 field count. `DB1` has the same eight fields in v2.3, v2.4 and v2.5. Field 3 (CX) repeats in all three, and v2.3 now models that. v2.4 widens its maximum length to 250, which is not enforced, and hl7.eu names field 4 "Disability Indicator" in v2.4 and "Disabled Indicator" in v2.3 and v2.5.) Moving a
 segment is `git mv` into the introducing version directory, adding it to that version's
 `ownSegments` in `codegen/schemas/`, and running `pnpm codegen && pnpm barrels`.
 
@@ -64,7 +64,7 @@ typed object of its datatype from `utils/composites.ts` (CE, CWE, CX, XCN, XPN, 
 CP, PLN, LA2, XON, MO, CQ, TQ, DR, RI, PPN, CK, VH, SCV, QIP, QSC, RCD and the OM2 ranges CM_RANGE,
 CM_RFR, CM_ABS_RANGE, CM_DLT) or a string for its first component, every TS and DT field takes a Date
 (formatted with the HL7 layout) or a string, and the primitive fields (ST, ID, IS, NM, TX, FT, SI)
-take strings. `src/segments/v2.3/generated.test.ts` checks every
+take strings. `src/v2.3/generated.test.ts` checks every
 generated setter, repetition and composite against the spec, and `roundtrip.test.ts` parses and
 re-encodes every one of the 110 classes. Replace a generated file with a hand-written class and the
 generator will leave it alone.
@@ -104,7 +104,7 @@ v2.3 ledger does: every field of the 110 segments against hl7.eu (`v231/hl7v231s
 Caristix 2.3.1 and HAPI v231. 53 segments changed between 2.3 and 2.3.1 (new fields: FT1-26, MFA-6,
 MFE-5, MSH-20, NTE-4, OBR-44/45, ORC-20–24, PR1-16, PRA-8, RXO-23; 72 fields that now repeat; types
 such as IS → CE and CM_* → named composites): the 27 generated ones got a 2.3.1 class generated from
-`codegen/spec/v2.3.1-segments.json`, the 26 hand-written ones a subclass in `src/segments/v2.3.1/`
+`codegen/spec/v2.3.1-segments.json`, the 26 hand-written ones a subclass in `src/v2.3.1/`
 that overrides the changed setters and adds the new fields. The other 57 re-export the v2.3 class.
 
 ## Validation ledger (v2.4)
@@ -156,7 +156,8 @@ a generated subclass of the 2.5 class (`codegen/spec/v2.5.1-segments.json`) and 
 re-export the 2.5 class (v2.5.1 is a re-export version since 2.2; the hand-extended wrapper classes
 it had before are gone). The 7 contradictions between the sources (FT1-23 length, MSA-5 type and
 usage, OBX-20/21/22 type and usage, PID-38 repetition, STF-30 type) are decided by hl7.eu and
-recorded in the ledger rows. Later versions (2.6, 2.7, …) would follow the same path.
+recorded in the ledger rows. The versions from 2.6 to 2.9.1 would follow the same path, as the
+[plan](../ROADMAP.md#plan-to-v291) sets out.
 ## Definition of done (per segment)
 1. Class + parser with all fields positioned per spec, including repeats and required flags.
 2. Field-position tests (hand-written with the marker, or generated with `pnpm test:positions`).

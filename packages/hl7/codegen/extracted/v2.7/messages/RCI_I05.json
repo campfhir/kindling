@@ -1,0 +1,229 @@
+{
+  "structure": "RCI_I05",
+  "messageType": "RCI",
+  "triggerEvent": "I05",
+  "version": "2.7",
+  "description": "Return Clinical Information",
+  "title": "Return Clinical Information",
+  "sectionHeading": "11.3.5 RQC/RCI - Request for Patient Clinical Information (Event I05)",
+  "source": {
+    "pdf": "hl7.eu std27/ch11.html",
+    "pages": null,
+    "table": "RCI^I05^RCI_I05: Return Clinical Information"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "I05"
+      ],
+      "eventPrinted": "I05",
+      "pdf": "hl7.eu std27/ch11.html",
+      "page": null,
+      "table": "RCI^I05^RCI_I05: Return Clinical Information",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgment",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Definition",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "QRF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Filter",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "group",
+      "name": "PROVIDER",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PRD",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Provider Data",
+          "chapterRef": "11"
+        },
+        {
+          "kind": "segment",
+          "name": "CTD",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Contact Data",
+          "chapterRef": "11"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "DG1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Diagnosis",
+      "chapterRef": "6"
+    },
+    {
+      "kind": "segment",
+      "name": "DRG",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Diagnosis Related Group",
+      "chapterRef": "6"
+    },
+    {
+      "kind": "segment",
+      "name": "AL1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Allergy Information",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "group",
+      "name": "OBSERVATION",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "OBR",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Observation Request",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Notes and Comments",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "group",
+          "name": "RESULTS",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Observation/Result",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes and Comments",
+              "chapterRef": "2"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "NTE",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Notes and Comments",
+      "chapterRef": "2"
+    }
+  ],
+  "variants": []
+}

@@ -967,5 +967,219 @@
    "note": "hl7.eu ch5 (the Z80 example): MSH [{SFT}] MSA [ERR] QAK QPD [{DSP}] [DSC]; the reader picks up the DSP lines of the example message that follows the table. Caristix 2.5.1 agrees with ours; HAPI v251 models the response as an RDF [{RDT}] row definition instead of DSPs.",
    "accept": true
   }
- }
+ },
+  "v2.6": {
+    "BRP_O30": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std26/ch04.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.6."
+    },
+    "EHC_E01": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std26/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.6."
+    },
+    "EHC_E02": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std26/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.6."
+    },
+    "EHC_E04": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std26/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.6."
+    },
+    "EHC_E15": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std26/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.6."
+    },
+    "EHC_E20": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std26/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.6."
+    },
+    "EHC_E21": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std26/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.6."
+    },
+    "EHC_E24": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std26/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.6."
+    },
+    "OPR_O38": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std26/ch04.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.6."
+    },
+    "QBP_E03": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std26/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.6."
+    },
+    "QBP_E22": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std26/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.6."
+    },
+    "RDY_Z80": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std26/ch05.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.6."
+    },
+    "RSP_E03": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std26/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.6."
+    },
+    "RSP_E22": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std26/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.6."
+    },
+    "ORB_O28": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std26/ch04.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals HAPI v26 (Caristix 2.6 differs)."
+    },
+    "MFK_M02": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs on into the table that follows this one in std26/ch08.html and appends its segments (MFI, PRA, ORG, OM1 ...). The printed table is the structure here and equals Caristix 2.6."
+    },
+    "MFK_M08": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs on into the table that follows this one in std26/ch08.html and appends its segments (MFI, PRA, ORG, OM1 ...). The printed table is the structure here and equals Caristix 2.6."
+    },
+    "MFK_M09": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs on into the table that follows this one in std26/ch08.html and appends its segments (MFI, PRA, ORG, OM1 ...). The printed table is the structure here and equals Caristix 2.6."
+    },
+    "MFK_M10": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs on into the table that follows this one in std26/ch08.html and appends its segments (MFI, PRA, ORG, OM1 ...). The printed table is the structure here and equals Caristix 2.6."
+    },
+    "MFK_M11": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs on into the table that follows this one in std26/ch08.html and appends its segments (MFI, PRA, ORG, OM1 ...). The printed table is the structure here and equals the printed hl7.eu table alone (no Caristix table to compare)."
+    },
+    "MFK_M12": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs on into the table that follows this one in std26/ch08.html and appends its segments (MFI, PRA, ORG, OM1 ...). The printed table is the structure here and equals Caristix 2.6."
+    },
+    "MFN_M03": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs on into the table that follows this one in std26/ch08.html and appends its segments (MFI, PRA, ORG, OM1 ...). The printed table is the structure here and equals Caristix 2.6."
+    }
+  },
+  "v2.7": {
+    "EHC_E01": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std27/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7."
+    },
+    "EHC_E02": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std27/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7."
+    },
+    "EHC_E04": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std27/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7."
+    },
+    "EHC_E15": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std27/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7."
+    },
+    "EHC_E20": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std27/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7."
+    },
+    "EHC_E21": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std27/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7."
+    },
+    "MFK_M02": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs on into the table that follows this one in std27/ch08.html and appends its segments (MFI, PRA, OM1 ...). The printed table is the structure here and equals Caristix 2.7."
+    },
+    "MFK_M06": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs on into the table that follows this one in std27/ch08.html and appends its segments (MFI, PRA, OM1 ...). The printed table is the structure here and equals Caristix 2.7."
+    },
+    "MFK_M08": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs on into the table that follows this one in std27/ch08.html and appends its segments (MFI, PRA, OM1 ...). The printed table is the structure here and equals Caristix 2.7."
+    },
+    "MFK_M09": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs on into the table that follows this one in std27/ch08.html and appends its segments (MFI, PRA, OM1 ...). The printed table is the structure here and equals Caristix 2.7."
+    },
+    "MFK_M10": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs on into the table that follows this one in std27/ch08.html and appends its segments (MFI, PRA, OM1 ...). The printed table is the structure here and equals Caristix 2.7."
+    },
+    "MFK_M11": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs on into the table that follows this one in std27/ch08.html and appends its segments. The printed table (ending [{MFA}]) is the structure; Caristix 2.7 leaves out [{MFA}] and HAPI v27 has no MFK_M11, so hl7.eu decides."
+    },
+    "MFK_M12": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs on into the table that follows this one in std27/ch08.html and appends its segments (MFI, PRA, OM1 ...). The printed table is the structure here and equals Caristix 2.7."
+    },
+    "OPR_O38": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std27/ch04.html prints RESPONSE as [ ... ] (--- RESPONSE begin/end rows). The ledger's hl7.eu reader reads it as [{ }]; the structure keeps the printed [RESPONSE] and equals Caristix 2.7 (HAPI v27 makes RESPONSE repeat)."
+    },
+    "QBP_E03": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std27/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7."
+    },
+    "QBP_E22": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std27/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7."
+    },
+    "RDY_Z80": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std27/ch05.html prints [{DSP}] in the response table; the ledger's hl7.eu reader also takes the DSP lines of the example display that follows. Caristix 2.7 has a SEGMENT_PATTERN placeholder (Hxx) where hl7.eu has [{DSP}] and HAPI v27 has no RDY_Z80, so hl7.eu decides."
+    },
+    "RPA_I08": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "The ledger's hl7.eu reader runs on into the table that follows in std27/ch11.html and appends PV1/PV2. The printed table is the structure and equals HAPI v27 (its inner group is named AUTHORIZATION2); Caristix 2.7 has [MSA], a required INSURANCE group and an optional PROCEDURE group, which hl7.eu and HAPI do not, so hl7.eu decides."
+    },
+    "RSP_E03": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std27/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7."
+    },
+    "RSP_E22": {
+      "date": "2026-10-29",
+      "accept": true,
+      "note": "hl7.eu std27/ch16.html prints this table with named groups (--- NAME begin/end rows). The ledger's hl7.eu reader flattens a group written with bare or no brackets, or one that holds a single child group; the structure keeps the groups as printed and equals Caristix 2.7."
+    }
+  }
 }

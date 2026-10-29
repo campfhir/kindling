@@ -1,5 +1,5 @@
-import { MSH, PID, PV1, ORC, OBR, OBX } from "../src/segments/v2.5.1/index.ts";
-import { createORU_R30 } from "../src/builders/v2.5.1/ORU_R30.ts";
+import { MSH, PID, PV1, ORC, OBR, OBX } from "../src/v2.5.1/index.ts";
+import { createORU_R30 } from "../src/v2.5.1/ORU_R30.ts";
 
 function formatDateTime(date: Date): string {
   const year = date.getFullYear();

@@ -10,165 +10,241 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./v2.3": {
+      "types": "./dist/v2.3/index.d.ts",
+      "default": "./dist/v2.3/index.js"
+    },
+    "./v2.3/*": {
+      "types": "./dist/v2.3/*.d.ts",
+      "default": "./dist/v2.3/*.js"
+    },
+    "./v2.3.1": {
+      "types": "./dist/v2.3.1/index.d.ts",
+      "default": "./dist/v2.3.1/index.js"
+    },
+    "./v2.3.1/*": {
+      "types": "./dist/v2.3.1/*.d.ts",
+      "default": "./dist/v2.3.1/*.js"
+    },
+    "./v2.4": {
+      "types": "./dist/v2.4/index.d.ts",
+      "default": "./dist/v2.4/index.js"
+    },
+    "./v2.4/*": {
+      "types": "./dist/v2.4/*.d.ts",
+      "default": "./dist/v2.4/*.js"
+    },
+    "./v2.5": {
+      "types": "./dist/v2.5/index.d.ts",
+      "default": "./dist/v2.5/index.js"
+    },
+    "./v2.5/*": {
+      "types": "./dist/v2.5/*.d.ts",
+      "default": "./dist/v2.5/*.js"
+    },
+    "./v2.5.1": {
+      "types": "./dist/v2.5.1/index.d.ts",
+      "default": "./dist/v2.5.1/index.js"
+    },
+    "./v2.5.1/*": {
+      "types": "./dist/v2.5.1/*.d.ts",
+      "default": "./dist/v2.5.1/*.js"
+    },
+    "./v2.6": {
+      "types": "./dist/v2.6/index.d.ts",
+      "default": "./dist/v2.6/index.js"
+    },
+    "./v2.6/*": {
+      "types": "./dist/v2.6/*.d.ts",
+      "default": "./dist/v2.6/*.js"
+    },
+    "./v2.7": {
+      "types": "./dist/v2.7/index.d.ts",
+      "default": "./dist/v2.7/index.js"
+    },
+    "./v2.7/*": {
+      "types": "./dist/v2.7/*.d.ts",
+      "default": "./dist/v2.7/*.js"
+    },
     "./segments/v2.3": {
-      "types": "./dist/segments/v2.3/index.d.ts",
-      "default": "./dist/segments/v2.3/index.js"
+      "types": "./dist/v2.3/index.d.ts",
+      "default": "./dist/v2.3/index.js"
     },
     "./segments/v2.3/*": {
-      "types": "./dist/segments/v2.3/*.d.ts",
-      "default": "./dist/segments/v2.3/*.js"
+      "types": "./dist/v2.3/*.d.ts",
+      "default": "./dist/v2.3/*.js"
     },
     "./segments/v2.3.1": {
-      "types": "./dist/segments/v2.3.1/index.d.ts",
-      "default": "./dist/segments/v2.3.1/index.js"
+      "types": "./dist/v2.3.1/index.d.ts",
+      "default": "./dist/v2.3.1/index.js"
     },
     "./segments/v2.3.1/*": {
-      "types": "./dist/segments/v2.3.1/*.d.ts",
-      "default": "./dist/segments/v2.3.1/*.js"
+      "types": "./dist/v2.3.1/*.d.ts",
+      "default": "./dist/v2.3.1/*.js"
     },
     "./segments/v2.4": {
-      "types": "./dist/segments/v2.4/index.d.ts",
-      "default": "./dist/segments/v2.4/index.js"
+      "types": "./dist/v2.4/index.d.ts",
+      "default": "./dist/v2.4/index.js"
     },
     "./segments/v2.4/*": {
-      "types": "./dist/segments/v2.4/*.d.ts",
-      "default": "./dist/segments/v2.4/*.js"
+      "types": "./dist/v2.4/*.d.ts",
+      "default": "./dist/v2.4/*.js"
     },
     "./segments/v2.5": {
-      "types": "./dist/segments/v2.5/index.d.ts",
-      "default": "./dist/segments/v2.5/index.js"
+      "types": "./dist/v2.5/index.d.ts",
+      "default": "./dist/v2.5/index.js"
     },
     "./segments/v2.5/*": {
-      "types": "./dist/segments/v2.5/*.d.ts",
-      "default": "./dist/segments/v2.5/*.js"
+      "types": "./dist/v2.5/*.d.ts",
+      "default": "./dist/v2.5/*.js"
     },
     "./segments/v2.5.1": {
-      "types": "./dist/segments/v2.5.1/index.d.ts",
-      "default": "./dist/segments/v2.5.1/index.js"
+      "types": "./dist/v2.5.1/index.d.ts",
+      "default": "./dist/v2.5.1/index.js"
     },
     "./segments/v2.5.1/*": {
-      "types": "./dist/segments/v2.5.1/*.d.ts",
-      "default": "./dist/segments/v2.5.1/*.js"
+      "types": "./dist/v2.5.1/*.d.ts",
+      "default": "./dist/v2.5.1/*.js"
     },
     "./structures/v2.3": {
-      "types": "./dist/structures/v2.3/index.d.ts",
-      "default": "./dist/structures/v2.3/index.js"
+      "types": "./dist/v2.3/index.d.ts",
+      "default": "./dist/v2.3/index.js"
     },
     "./structures/v2.3/*": {
-      "types": "./dist/structures/v2.3/*.d.ts",
-      "default": "./dist/structures/v2.3/*.js"
+      "types": "./dist/v2.3/*.d.ts",
+      "default": "./dist/v2.3/*.js"
     },
     "./structures/v2.3.1": {
-      "types": "./dist/structures/v2.3.1/index.d.ts",
-      "default": "./dist/structures/v2.3.1/index.js"
+      "types": "./dist/v2.3.1/index.d.ts",
+      "default": "./dist/v2.3.1/index.js"
     },
     "./structures/v2.3.1/*": {
-      "types": "./dist/structures/v2.3.1/*.d.ts",
-      "default": "./dist/structures/v2.3.1/*.js"
+      "types": "./dist/v2.3.1/*.d.ts",
+      "default": "./dist/v2.3.1/*.js"
     },
     "./structures/v2.4": {
-      "types": "./dist/structures/v2.4/index.d.ts",
-      "default": "./dist/structures/v2.4/index.js"
+      "types": "./dist/v2.4/index.d.ts",
+      "default": "./dist/v2.4/index.js"
     },
     "./structures/v2.4/*": {
-      "types": "./dist/structures/v2.4/*.d.ts",
-      "default": "./dist/structures/v2.4/*.js"
+      "types": "./dist/v2.4/*.d.ts",
+      "default": "./dist/v2.4/*.js"
     },
     "./structures/v2.5": {
-      "types": "./dist/structures/v2.5/index.d.ts",
-      "default": "./dist/structures/v2.5/index.js"
+      "types": "./dist/v2.5/index.d.ts",
+      "default": "./dist/v2.5/index.js"
     },
     "./structures/v2.5/*": {
-      "types": "./dist/structures/v2.5/*.d.ts",
-      "default": "./dist/structures/v2.5/*.js"
+      "types": "./dist/v2.5/*.d.ts",
+      "default": "./dist/v2.5/*.js"
     },
     "./structures/v2.5.1": {
-      "types": "./dist/structures/v2.5.1/index.d.ts",
-      "default": "./dist/structures/v2.5.1/index.js"
+      "types": "./dist/v2.5.1/index.d.ts",
+      "default": "./dist/v2.5.1/index.js"
     },
     "./structures/v2.5.1/*": {
-      "types": "./dist/structures/v2.5.1/*.d.ts",
-      "default": "./dist/structures/v2.5.1/*.js"
+      "types": "./dist/v2.5.1/*.d.ts",
+      "default": "./dist/v2.5.1/*.js"
     },
     "./parsers/v2.3": {
-      "types": "./dist/parsers/v2.3/index.d.ts",
-      "default": "./dist/parsers/v2.3/index.js"
+      "types": "./dist/v2.3/index.d.ts",
+      "default": "./dist/v2.3/index.js"
     },
-    "./parsers/v2.3/*": {
-      "types": "./dist/parsers/v2.3/*.d.ts",
-      "default": "./dist/parsers/v2.3/*.js"
+    "./parsers/v2.3/messages": {
+      "types": "./dist/v2.3/registry.d.ts",
+      "default": "./dist/v2.3/registry.js"
+    },
+    "./parsers/v2.3/*_Parser": {
+      "types": "./dist/v2.3/*.d.ts",
+      "default": "./dist/v2.3/*.js"
     },
     "./parsers/v2.3.1": {
-      "types": "./dist/parsers/v2.3.1/index.d.ts",
-      "default": "./dist/parsers/v2.3.1/index.js"
+      "types": "./dist/v2.3.1/index.d.ts",
+      "default": "./dist/v2.3.1/index.js"
     },
-    "./parsers/v2.3.1/*": {
-      "types": "./dist/parsers/v2.3.1/*.d.ts",
-      "default": "./dist/parsers/v2.3.1/*.js"
+    "./parsers/v2.3.1/messages": {
+      "types": "./dist/v2.3.1/registry.d.ts",
+      "default": "./dist/v2.3.1/registry.js"
+    },
+    "./parsers/v2.3.1/*_Parser": {
+      "types": "./dist/v2.3.1/*.d.ts",
+      "default": "./dist/v2.3.1/*.js"
     },
     "./parsers/v2.4": {
-      "types": "./dist/parsers/v2.4/index.d.ts",
-      "default": "./dist/parsers/v2.4/index.js"
+      "types": "./dist/v2.4/index.d.ts",
+      "default": "./dist/v2.4/index.js"
     },
-    "./parsers/v2.4/*": {
-      "types": "./dist/parsers/v2.4/*.d.ts",
-      "default": "./dist/parsers/v2.4/*.js"
+    "./parsers/v2.4/messages": {
+      "types": "./dist/v2.4/registry.d.ts",
+      "default": "./dist/v2.4/registry.js"
+    },
+    "./parsers/v2.4/*_Parser": {
+      "types": "./dist/v2.4/*.d.ts",
+      "default": "./dist/v2.4/*.js"
     },
     "./parsers/v2.5": {
-      "types": "./dist/parsers/v2.5/index.d.ts",
-      "default": "./dist/parsers/v2.5/index.js"
+      "types": "./dist/v2.5/index.d.ts",
+      "default": "./dist/v2.5/index.js"
     },
-    "./parsers/v2.5/*": {
-      "types": "./dist/parsers/v2.5/*.d.ts",
-      "default": "./dist/parsers/v2.5/*.js"
+    "./parsers/v2.5/messages": {
+      "types": "./dist/v2.5/registry.d.ts",
+      "default": "./dist/v2.5/registry.js"
+    },
+    "./parsers/v2.5/*_Parser": {
+      "types": "./dist/v2.5/*.d.ts",
+      "default": "./dist/v2.5/*.js"
     },
     "./parsers/v2.5.1": {
-      "types": "./dist/parsers/v2.5.1/index.d.ts",
-      "default": "./dist/parsers/v2.5.1/index.js"
+      "types": "./dist/v2.5.1/index.d.ts",
+      "default": "./dist/v2.5.1/index.js"
     },
-    "./parsers/v2.5.1/*": {
-      "types": "./dist/parsers/v2.5.1/*.d.ts",
-      "default": "./dist/parsers/v2.5.1/*.js"
+    "./parsers/v2.5.1/messages": {
+      "types": "./dist/v2.5.1/registry.d.ts",
+      "default": "./dist/v2.5.1/registry.js"
+    },
+    "./parsers/v2.5.1/*_Parser": {
+      "types": "./dist/v2.5.1/*.d.ts",
+      "default": "./dist/v2.5.1/*.js"
     },
     "./builders/v2.3": {
-      "types": "./dist/builders/v2.3/index.d.ts",
-      "default": "./dist/builders/v2.3/index.js"
+      "types": "./dist/v2.3/index.d.ts",
+      "default": "./dist/v2.3/index.js"
     },
     "./builders/v2.3/*": {
-      "types": "./dist/builders/v2.3/*.d.ts",
-      "default": "./dist/builders/v2.3/*.js"
+      "types": "./dist/v2.3/*.d.ts",
+      "default": "./dist/v2.3/*.js"
     },
     "./builders/v2.3.1": {
-      "types": "./dist/builders/v2.3.1/index.d.ts",
-      "default": "./dist/builders/v2.3.1/index.js"
+      "types": "./dist/v2.3.1/index.d.ts",
+      "default": "./dist/v2.3.1/index.js"
     },
     "./builders/v2.3.1/*": {
-      "types": "./dist/builders/v2.3.1/*.d.ts",
-      "default": "./dist/builders/v2.3.1/*.js"
+      "types": "./dist/v2.3.1/*.d.ts",
+      "default": "./dist/v2.3.1/*.js"
     },
     "./builders/v2.4": {
-      "types": "./dist/builders/v2.4/index.d.ts",
-      "default": "./dist/builders/v2.4/index.js"
+      "types": "./dist/v2.4/index.d.ts",
+      "default": "./dist/v2.4/index.js"
     },
     "./builders/v2.4/*": {
-      "types": "./dist/builders/v2.4/*.d.ts",
-      "default": "./dist/builders/v2.4/*.js"
+      "types": "./dist/v2.4/*.d.ts",
+      "default": "./dist/v2.4/*.js"
     },
     "./builders/v2.5": {
-      "types": "./dist/builders/v2.5/index.d.ts",
-      "default": "./dist/builders/v2.5/index.js"
+      "types": "./dist/v2.5/index.d.ts",
+      "default": "./dist/v2.5/index.js"
     },
     "./builders/v2.5/*": {
-      "types": "./dist/builders/v2.5/*.d.ts",
-      "default": "./dist/builders/v2.5/*.js"
+      "types": "./dist/v2.5/*.d.ts",
+      "default": "./dist/v2.5/*.js"
     },
     "./builders/v2.5.1": {
-      "types": "./dist/builders/v2.5.1/index.d.ts",
-      "default": "./dist/builders/v2.5.1/index.js"
+      "types": "./dist/v2.5.1/index.d.ts",
+      "default": "./dist/v2.5.1/index.js"
     },
     "./builders/v2.5.1/*": {
-      "types": "./dist/builders/v2.5.1/*.d.ts",
-      "default": "./dist/builders/v2.5.1/*.js"
+      "types": "./dist/v2.5.1/*.d.ts",
+      "default": "./dist/v2.5.1/*.js"
     },
     "./utils/dateUtils": {
       "types": "./dist/utils/dateUtils.d.ts",

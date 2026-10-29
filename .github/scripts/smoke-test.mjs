@@ -2,7 +2,7 @@
 // native ESM import() and, for a "default" or "require" condition, with CommonJS require() too
 // (Node 24 loads an ES module from require()), and checks that each "types" file exists, so a
 // broken "exports" map, an extensionless ESM import or a missing declaration fails CI instead of
-// a consumer. A wildcard entry ("./parsers/v2.4/*") is checked on the first file it matches. The
+// a consumer. A wildcard entry ("./v2.4/*") is checked on the first file it matches. The
 // built package must also stay under MAX_DIST_MB (what npm unpacks), so a build change that
 // multiplies the output is caught here rather than on npm.
 //
@@ -15,7 +15,9 @@ import { findPackage, listPackages } from "./packages.mjs";
 
 const selected = process.argv.slice(2);
 const packages = selected.length ? selected.map(findPackage) : listPackages();
-const MAX_DIST_MB = 20;
+// Each HL7 version adds about 3.5 MB (v2.6: 17.8 MB in all, v2.7: 21.3 MB); 50 leaves room for every
+// release up to v2.9.1 (about 43 MB), while a build change that multiplies the output still fails.
+const MAX_DIST_MB = 50;
 
 /** Every file under dir, recursively, with its size. */
 function filesUnder(dir) {
@@ -28,7 +30,7 @@ function filesUnder(dir) {
   return out;
 }
 
-/** The first file a wildcard target ("./dist/parsers/v2.4/*.mjs") matches, as the concrete target. */
+/** The first file a wildcard target ("./dist/v2.4/*.js") matches, as the concrete target. */
 function firstMatch(pkgDir, pattern) {
   const [before, after] = pattern.split("*");
   const relDir = before.slice(0, before.lastIndexOf("/"));

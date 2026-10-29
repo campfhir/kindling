@@ -12,8 +12,8 @@ From this folder (`packages/hl7`), or from the repository root with
 ```bash
 pnpm test                               # run everything once
 pnpm test:watch                         # watch mode
-pnpm vitest run src/segments/v2.3       # one folder
-pnpm vitest run src/segments/v2.3/PID   # files matching a pattern
+pnpm vitest run src/v2.3       # one folder
+pnpm vitest run src/v2.3/PID   # files matching a pattern
 pnpm vitest run -t "round-trip"         # tests whose name matches
 ```
 
@@ -26,10 +26,10 @@ src/
 ├── types/                     # core: encoding, segment, message, parser utilities
 │   ├── encoding.ts
 │   └── encoding.test.ts
-├── segments/<version>/        # one test file per segment (field positions, encoding, fluent API)
-├── parsers/<version>/         # one test file per message parser (+ integration tests)
-├── parsers/testdata/          # sample .hl7 messages read by the integration tests
-├── builders/<version>/        # one test file per message builder
+├── <version>/                 # tests next to the segments and messages of the version:
+│                              # <SEG>.test.ts (field positions, encoding, fluent API), generated.test.ts (spec-driven),
+│                              # <MSG>.test.ts (builder), <MSG>_Parser.test.ts (parser, + integration tests)
+├── testdata/                  # sample .hl7 messages read by the integration tests
 ├── utils/                     # ValueExtractor, MessageEditor, date utilities, CustomSegment
 └── fixtures.test.ts           # every message of ../fixtures through parse() (see ../fixtures/README.md)
 ```
@@ -65,7 +65,7 @@ Patterns used throughout the suite:
   error returned for invalid input.
 - **Round-trip tests** parse a message, re-encode it and compare with the original (and the other
   direction: build, encode, parse).
-- **Integration tests** read the sample messages in `src/parsers/testdata/` and parse every one.
+- **Integration tests** read the sample messages in `src/testdata/` and parse every one.
 
 Guidelines: keep each test about one behaviour, name it after that behaviour, cover error cases
 and edge cases alongside the happy path, and add the test file in the same commit as the code.
@@ -73,8 +73,8 @@ and edge cases alongside the happy path, and add the test file in the same commi
 ## Debugging
 
 ```bash
-pnpm vitest run src/segments/v2.3/PID.test.ts --reporter verbose
-node --inspect-brk ./node_modules/vitest/vitest.mjs run src/segments/v2.3/PID.test.ts
+pnpm vitest run src/v2.3/PID.test.ts --reporter verbose
+node --inspect-brk ./node_modules/vitest/vitest.mjs run src/v2.3/PID.test.ts
 ```
 
 In VS Code the [Vitest extension](https://marketplace.visualstudio.com/items?itemName=vitest.explorer)

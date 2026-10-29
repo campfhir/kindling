@@ -1,0 +1,169 @@
+{
+  "structure": "MFR_M04",
+  "messageType": "MFR",
+  "triggerEvent": "M04",
+  "version": "2.6",
+  "description": "Master Files Response",
+  "title": "Master Files Response",
+  "sectionHeading": "8.4.4 MFQ/MFR - Master Files Query (Event M01-M17)",
+  "source": {
+    "pdf": "hl7.eu std26/ch08.html",
+    "pages": null,
+    "table": "MFR^M04^MFR_M04: Master Files Response"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M04"
+      ],
+      "eventPrinted": "M04",
+      "pdf": "hl7.eu std26/ch08.html",
+      "page": null,
+      "table": "MFR^M04^MFR_M04: Master Files Response",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QAK",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Acknowledgment",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Definition",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "QRF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Filter",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Master File Name",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "group",
+      "name": "MF_QUERY",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Master File Entry",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "CDM",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Charge Description Master",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "PRC",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Pricing",
+          "chapterRef": "8"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Continuation",
+      "chapterRef": "2"
+    }
+  ],
+  "variants": []
+}

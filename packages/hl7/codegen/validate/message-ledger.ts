@@ -2,7 +2,7 @@
  * Builds the message structure validation ledger of one HL7 version:
  * docs/validation/<version>-message-ledger.md.
  *
- * For every message structure we implement (src/structures/<version>) it renders the standard's
+ * For every message structure we implement (src/<version>) it renders the standard's
  * abstract message syntax from up to three sources and compares them with ours:
  *
  * - hl7.eu, the chapter pages of the printed standard (https://www.hl7.eu/HL7v2x/v23/std23/ch3.htm …),
@@ -154,7 +154,12 @@ function readHapi(event: string): Line[] | undefined {
  * "[Order Detail Segment] OBR, etc." reads as the order detail choice.
  */
 const SEGMENT_CODES = new Set(
-  ["v2.3", VERSION].flatMap((v) => readdirSync(join(ROOT, "src/segments", v)).filter((f) => /^[A-Z][A-Z0-9]{2}\.ts$/.test(f)).map((f) => f.slice(0, 3))),
+  // src/<version> also holds the messages; ACK.ts is the one with a three-character name
+  ["v2.3", VERSION].flatMap((v) =>
+    readdirSync(join(ROOT, "src", v))
+      .filter((f) => /^[A-Z][A-Z0-9]{2}\.ts$/.test(f) && !/@generated message|^ \* \w+ message for HL7 /m.test(readFileSync(join(ROOT, "src", v, f), "utf8")))
+      .map((f) => f.slice(0, 3)),
+  ),
 );
 const ORDER_DETAIL_CHOICE = "<OBR|RQD|RQ1|RXO|ODS|ODT>";
 /** "PC6, PC7, PC8" → PC6 PC7 PC8; "C01-C08" → C01 … C08; "O01/O02" → O01 O02. */
@@ -334,7 +339,7 @@ function sideBySide(columns: { title: string; lines: Line[] | undefined }[]): st
 }
 
 async function main(): Promise<void> {
-  const mod = (await import(`../../src/structures/${VERSION}/index.ts`)) as Record<string, StructureItem[]>;
+  const mod = (await import(`../../src/${VERSION}/index.ts`)) as Record<string, StructureItem[]>;
   const ours = Object.entries(mod)
     .filter(([k]) => k.endsWith("_STRUCTURE"))
     .map(([k, v]) => [k.replace(/_STRUCTURE$/, ""), v] as const)
@@ -371,6 +376,8 @@ async function main(): Promise<void> {
   lines.push("when it differs by a recorded, dated decision (`codegen/validate/message-notes.json`), `differs` when it");
   lines.push("differs and nothing records why, and `undecided` when the sources disagree and hl7.eu has no table.");
   lines.push("");
+  lines.push("In the event table each source cell says whether that source's shape matches ours: ✓ when it does, `differs` when it does not, and — when the source has no table for the event. Every structure with a `differs` cell is drawn side by side below, with the status and the dated reason where one is recorded.");
+  lines.push("");
   const counts = { ok: 0, accepted: 0, differs: 0, undecided: 0 } as Record<string, number>;
   for (const r of results) counts[r.status]++;
   lines.push("## Summary");
@@ -392,7 +399,7 @@ async function main(): Promise<void> {
   lines.push("");
   lines.push("| Event | hl7.eu | Caristix | HAPI | Decided by | Status | Note |");
   lines.push("|---|---|---|---|---|---|---|");
-  const cell = (r: (typeof results)[number], src?: Line[]) => (src === undefined ? "—" : shape(src) === shape(r.ours) ? "= ours" : "differs");
+  const cell = (r: (typeof results)[number], src?: Line[]) => (src === undefined ? "—" : shape(src) === shape(r.ours) ? "✓" : "differs");
   for (const r of results) {
     lines.push(`| [${r.event}](#${r.event.toLowerCase()}) | ${cell(r, r.eu)} | ${cell(r, r.cx)} | ${cell(r, r.hp)} | ${r.basis} | ${r.status} | ${r.note ? `${r.note.date}: ${r.note.note}` : ""} |`);
   }

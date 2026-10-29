@@ -1,0 +1,99 @@
+{
+  "structure": "ADT_A18",
+  "messageType": "ADT",
+  "triggerEvent": "A18",
+  "version": "2.6",
+  "description": "ADT Message",
+  "title": "ADT Message",
+  "sectionHeading": "3.3.18 ADT/ACK - Merge Patient Information (Event A18)",
+  "source": {
+    "pdf": "hl7.eu std26/ch03.html",
+    "pages": null,
+    "table": "ADT^A18^ADT_A18: ADT Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A18"
+      ],
+      "eventPrinted": "A18",
+      "pdf": "hl7.eu std26/ch03.html",
+      "page": null,
+      "table": "ADT^A18^ADT_A18: ADT Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Event Type",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PD1",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Additional Demographics",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "MRG",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Merge Information",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Visit",
+      "chapterRef": "3"
+    }
+  ],
+  "variants": []
+}

@@ -1,7 +1,7 @@
 /**
  * Builds the segment validation ledger of one HL7 version: docs/validation/<version>-segment-ledger.md.
  *
- * For every segment class in src/segments/<version> it compares, field by field, three sources
+ * For every segment class in src/<version> it compares, field by field, three sources
  * with what we implement:
  *
  * - hl7.eu, the per-segment pages https://www.hl7.eu/HL7v2x/v<nn>/hl7v<nn>segm<SEG>.htm (authoritative);
@@ -48,7 +48,7 @@ const adopt = (option("--adopt") ?? "").split(",").filter(Boolean);
 const SHORT = VERSION.slice(1).replace(/\./g, "");
 const API = VERSION.slice(1);
 const LABEL = VERSION; // "v2.3.1" in prose
-const segDir = (version) => join(ROOT, "src/segments", version);
+const segDir = (version) => join(ROOT, "src", version);
 const SEG_DIR = segDir(VERSION);
 const specFile = (version) => join(ROOT, "codegen/spec", `${version}-segments.json`);
 const notesFile = join(ROOT, "codegen/validate", `ledger-v${SHORT}-notes.json`);
@@ -332,7 +332,9 @@ const sameComposite = (ours, decided) => {
 
 const results = [];
 // Every module of the version, plus the segments the sources define that have no module yet (new in the version).
-const moduleSegments = readdirSync(SEG_DIR).filter((f) => f.endsWith(".ts") && !f.endsWith(".test.ts") && f !== "index.ts").map((f) => f.replace(/\.ts$/, ""));
+// src/<version> also holds the messages (ORU_R01.ts, and ACK.ts): a segment module has a three-character name and is not a message.
+const isMessageModule = (f) => /@generated message|^ \* \w+ message for HL7 /m.test(readFileSync(join(SEG_DIR, f), "utf8"));
+const moduleSegments = readdirSync(SEG_DIR).filter((f) => /^[A-Z][A-Z0-9]{2}\.ts$/.test(f) && !isMessageModule(f)).map((f) => f.replace(/\.ts$/, ""));
 const sourceSegments = existsSync(join(SOURCES, "caristix")) ? readdirSync(join(SOURCES, "caristix")).filter((f) => /^[A-Z][A-Z0-9]{2}\.json$/.test(f)).map((f) => f.slice(0, 3)) : [];
 const segments = [...new Set([...moduleSegments, ...sourceSegments])].sort();
 for (const seg of segments) {

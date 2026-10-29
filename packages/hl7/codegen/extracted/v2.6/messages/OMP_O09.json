@@ -1,0 +1,359 @@
+{
+  "structure": "OMP_O09",
+  "messageType": "OMP",
+  "triggerEvent": "O09",
+  "version": "2.6",
+  "description": "Pharmacy/treatment Order Message",
+  "title": "Pharmacy/treatment Order Message",
+  "sectionHeading": "4.13.3 OMP - Pharmacy/Treatment Order Message (Event O09)",
+  "source": {
+    "pdf": "hl7.eu std26/ch04.html",
+    "pages": null,
+    "table": "OMP^O09^OMP_O09: Pharmacy/treatment Order Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "O09"
+      ],
+      "eventPrinted": "O09",
+      "pdf": "hl7.eu std26/ch04.html",
+      "page": null,
+      "table": "OMP^O09^OMP_O09: Pharmacy/treatment Order Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "NTE",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Notes and Comments (for Header)",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "PATIENT",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Additional Demographics",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Notes and Comments (for Patient ID)",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "group",
+          "name": "PATIENT_VISIT",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PV1",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Patient Visit",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "PV2",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Patient Visit - Additional Info",
+              "chapterRef": "3"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "INSURANCE",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "IN1",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Insurance",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "IN2",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Insurance Additional Information",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "IN3",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Insurance Additional Information, Certification",
+              "chapterRef": "6"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "GT1",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Guarantor",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "AL1",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Allergy Information",
+          "chapterRef": "3"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "ORDER",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "ORC",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Common Order",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "group",
+          "name": "TIMING",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "TQ1",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Timing/Quantity",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "segment",
+              "name": "TQ2",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Timing/Quantity Order Sequence",
+              "chapterRef": "4"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "RXO",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Pharmacy/Treatment Order",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Notes and Comments (for RXO)",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "segment",
+          "name": "RXR",
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Pharmacy/Treatment Route",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "group",
+          "name": "COMPONENT",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "RXC",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Pharmacy/Treatment Component",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes and Comments (for each RXC)",
+              "chapterRef": "2"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "OBSERVATION",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Observation/Result",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes and Comments (for OBX)",
+              "chapterRef": "2"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "FT1",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Financial Transaction",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "BLG",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Billing Segment",
+          "chapterRef": "6"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

@@ -1,0 +1,579 @@
+{
+  "structure": "DFT_P11",
+  "messageType": "DFT",
+  "triggerEvent": "P11",
+  "version": "2.6",
+  "description": "Detail Financial Transaction - Expanded",
+  "title": "Detail Financial Transaction - Expanded",
+  "sectionHeading": "6.4.8 DFT/ACK - Post Detail Financial Transactions - Expanded (Event P11)",
+  "source": {
+    "pdf": "hl7.eu std26/ch06.html",
+    "pages": null,
+    "table": "DFT^P11^DFT_P11: Detail Financial Transaction - Expanded"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "P11"
+      ],
+      "eventPrinted": "P11",
+      "pdf": "hl7.eu std26/ch06.html",
+      "page": null,
+      "table": "DFT^P11^DFT_P11: Detail Financial Transaction - Expanded",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Event Type",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PD1",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Additional Demographics",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "ROL",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Role",
+      "chapterRef": "15"
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Visit",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PV2",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Visit - Additional Info",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "ROL",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Role",
+      "chapterRef": "15"
+    },
+    {
+      "kind": "segment",
+      "name": "DB1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Disability Information",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "group",
+      "name": "COMMON_ORDER",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "ORC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Common Order (global across all FT1s)",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "group",
+          "name": "TIMING_QUANTITY",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "TQ1",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Timing/Quantity",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "segment",
+              "name": "TQ2",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Timing/Quantity Order Sequence",
+              "chapterRef": "4"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "ORDER",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBR",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Order Detail Segment",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes and Comments (on Order Detail)",
+              "chapterRef": "2"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "OBSERVATION",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Observations / Result",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes and Comments (on Result)",
+              "chapterRef": "2"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DG1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Diagnosis (global across all FT1s)",
+      "chapterRef": "6"
+    },
+    {
+      "kind": "segment",
+      "name": "DRG",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Diagnosis Related Group (global across all FT1s)",
+      "chapterRef": "6"
+    },
+    {
+      "kind": "segment",
+      "name": "GT1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Guarantor (global across all FT1s)",
+      "chapterRef": "6"
+    },
+    {
+      "kind": "group",
+      "name": "INSURANCE",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "IN1",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Insurance (global across all FT1s)",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "IN2",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Insurance - Additional Info.",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "IN3",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Insurance - Add'l Info. - Cert.",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "ROL",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Role",
+          "chapterRef": "15"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "ACC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Accident Information",
+      "chapterRef": "6"
+    },
+    {
+      "kind": "group",
+      "name": "FINANCIAL",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "FT1",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Financial Transaction",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "group",
+          "name": "FINANCIAL_PROCEDURE",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PR1",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Procedure",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "ROL",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Role",
+              "chapterRef": "15"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "FINANCIAL_COMMON ORDER",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "ORC",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Common Order (specific to above FT1)",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "group",
+              "name": "FINANCIAL_TIMING QUANTITY",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "TQ1",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Timing/Quantity",
+                  "chapterRef": "4"
+                },
+                {
+                  "kind": "segment",
+                  "name": "TQ2",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Timing/Quantity Order Sequence",
+                  "chapterRef": "4"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "group",
+              "name": "FINANCIAL_ORDER",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "OBR",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Order Detail Segment",
+                  "chapterRef": "4"
+                },
+                {
+                  "kind": "segment",
+                  "name": "NTE",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Notes and Comments (on Order Detail)",
+                  "chapterRef": "2"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "group",
+              "name": "FINANCIAL_OBSERVATION",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "OBX",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Observations / Result",
+                  "chapterRef": "7"
+                },
+                {
+                  "kind": "segment",
+                  "name": "NTE",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Notes and Comments (on Result)",
+                  "chapterRef": "2"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "DG1",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Diagnosis (specific to above FT1)",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "DRG",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Diagnosis Related Group (specific to above FT1)",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "GT1",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Guarantor (specific to above FT1)",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "group",
+          "name": "FINANCIAL_INSURANCE",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "IN1",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Insurance (specific to above FT1)",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "IN2",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Insurance - Additional Info.",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "IN3",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Insurance - Add'l Info. - Cert.",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "ROL",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Role",
+              "chapterRef": "15"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

@@ -31,7 +31,7 @@ import {
   segmentNames,
 } from "./schema.ts";
 import { readMessageHeader, segmentParseFailure } from "../utils/messageParsing.ts";
-import type { MSH } from "../segments/v2.3/MSH.ts";
+import type { MSH } from "../v2.3/MSH.ts";
 
 /** Parses one raw segment string (not MSH) into a segment of the right class. */
 export type SegmentParser = (segmentString: string, encoding: EncodingCharacters) => Result<Segment>;

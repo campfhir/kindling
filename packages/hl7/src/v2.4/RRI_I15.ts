@@ -1,0 +1,52 @@
+/**
+ * Builder, parser and structure for RRI^I15 messages (HL7 v2.4).
+ *
+ * Structure: MSH [MSA] [RF1] [ AUTHORIZATION: AUT [CTD] ] { PROVIDER: PRD [{CTD}] } PID [ACC] [{DG1}] [{DRG}] [{AL1}] [{ PROCEDURE: PR1 [ AUTHORIZATION: AUT [CTD] ] }] [{ OBSERVATION: OBR [{NTE}] [{ RESULTS: OBX [{NTE}] }] }] [ PATIENT_VISIT: PV1 [PV2] ] [{NTE}]
+ * Shares the RRI^I12 structure.
+ *
+ * @module
+ */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { Result as ParseResult } from "../types/result.ts";
+import { RRI_I12_Parser, type ParsedRRI_I12, RRI_I12, type RRI_I12Options, type Provider, type ProcedureGroup, type Observation, type Result } from "./RRI_I12.ts";
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
+import type { MSH } from "./MSH.ts";
+import type { PID } from "./PID.ts";
+
+export { RRI_I12_STRUCTURE as RRI_I15_STRUCTURE } from "./RRI_I12.ts";
+
+export type { ParsedProvider, ParsedProcedure, ParsedObservation, ParsedResult } from "./RRI_I12.ts";
+/** Structured result of parsing an HL7 RRI^I15 (HL7 v2.4) message. */
+export type ParsedRRI_I15 = ParsedRRI_I12;
+
+/** Parser for HL7 RRI^I15 (HL7 v2.4) messages. */
+export class RRI_I15_Parser extends RRI_I12_Parser {
+  /** The message name used in error messages. */
+  protected override readonly messageName: string = "RRI_I15";
+}
+
+/** Parses an HL7 RRI^I15 (HL7 v2.4) message string into a structured result. */
+export function parseRRI_I15(messageString: string): ParseResult<ParsedRRI_I15> {
+  return new RRI_I15_Parser().parse(messageString);
+}
+
+export type { Provider, ProcedureGroup, Observation, Result };
+/** The optional segments and groups of an RRI^I15 (HL7 v2.4) message. */
+export type RRI_I15Options = RRI_I12Options;
+
+/** Builder for HL7 RRI^I15 (HL7 v2.4) messages. */
+export class RRI_I15<TMSH extends MSH = MSH, TPID extends PID = PID> extends RRI_I12<TMSH, TPID> {
+  /** The message name used in error messages. */
+  protected override readonly messageName: string = "RRI_I15";
+}
+
+/** Builds an HL7 RRI^I15 (HL7 v2.4) message. */
+export function createRRI_I15<TMSH extends MSH = MSH, TPID extends PID = PID>(
+  header: TMSH,
+  providers: Provider[],
+  patient: TPID,
+  options: RRI_I15Options = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
+): RRI_I15<TMSH, TPID> {
+  return new RRI_I15(header, providers, patient, options, encoding);
+}

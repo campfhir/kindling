@@ -8,14 +8,14 @@ export const REEXPORT_MARKER = "// @generated re-export — replace this file by
 export const LOCAL_WRAPPER_MARKER = "// @generated wrapper — copied from the base version so it wraps this version's base module";
 
 /** The module kinds that re-export versions mirror. */
-export type ModuleKind = "segments" | "parsers" | "builders" | "structures";
+export type ModuleKind = "segments" | "messages";
 
 /**
  * Generates a module that re-exports everything from the same-named module of
  * another version. Used for versions that are identical to their predecessor.
  */
 export function generateReexport(kind: ModuleKind, name: string, version: string, baseVersion: string): string {
-  const noun = { segments: "segment", parsers: "parser", builders: "builder", structures: "structure" }[kind];
+  const noun = { segments: "segment", messages: "message" }[kind];
   return `/**
  * ${name} ${noun} for HL7 ${version} — identical to ${baseVersion}, re-exported.
  *

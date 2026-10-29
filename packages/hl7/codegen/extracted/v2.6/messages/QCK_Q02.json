@@ -1,0 +1,88 @@
+{
+  "structure": "QCK_Q02",
+  "messageType": "QCK",
+  "triggerEvent": "Q02",
+  "version": "2.6",
+  "description": "Query General Acknowledgment",
+  "title": "Query General Acknowledgment",
+  "source": {
+    "pdf": "hl7.eu std26/ch05.html",
+    "pages": null,
+    "table": "QCK^Q02^QCK_Q02: Query General Acknowledgment"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Q02"
+      ],
+      "eventPrinted": "Q02",
+      "pdf": "hl7.eu std26/ch05.html",
+      "page": null,
+      "table": "QCK^Q02^QCK_Q02: Query General Acknowledgment",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QAK",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Acknowledgment",
+      "chapterRef": "5"
+    }
+  ],
+  "variants": []
+}
