@@ -11,7 +11,7 @@ Goal: a complete, well-tested TypeScript implementation of HL7 v2, published to 
 | 4 | **HL7 v2.5 complete** and wired into `parse()` | ✅ 2.1: every segment field and message structure checked against the hl7.eu v2.5 chapters, Caristix and HAPI (segment and message ledgers), 55 segments with their own 2.5 class (6 of them new in 2.5), all 387 messages (50 new in 2.5) generated against them |
 | 5 | **HL7 v2.5.1 complete** and wired into `parse()` | ✅ 2.2: every segment field and message structure checked against the hl7.eu v2.5.1 chapters, Caristix and HAPI (segment and message ledgers); 2.5.1 changes three segment tables (OBR, OBX, ORC) and two structures (QRY^PC4, RRE^O26), all 387 messages generated against the 2.5.1 segments |
 | 6 | **HL7 v2.6** — imported from the hl7.eu pages and checked against Caristix and HAPI | 🚧 segment ledger: 0 open issues (112 source disagreements recorded); message ledger: 387 of 409 structures match, 22 accepted with a dated reason, 0 unexplained. Not wired into `parse()`: 9 events the 2.5.1 list has are not in the hl7.eu 2.6 tables (EDR^R07, EQQ^Q04, ERP^R09, ORF^W02, ORU^W01, RQQ^Q09, SPQ^Q08, TBR^R08, VQQ^Q07), 9 messages the schema type cannot express yet, and BHS, FHS, MSH are subclasses of the 2.3 and 2.5 classes |
-| 7 | **HL7 v2.9.1 (the latest version) complete and wired into `parse()`** — the intermediate releases 2.6 to 2.8.2 are planned in the steps below | 🚧 schemas and segment classes generated from the PDF extraction (`codegen/extracted/v2.9.1`, see `IMPORT.md`); not yet checked against an independent source, not wired into `parse()`, and 44 events and the segments MSH, BHS, FHS are still open. See [Plan to v2.9.1](#plan-to-v291) |
+| 7 | **HL7 v2.7 to v2.9.1**, one PR per version in release order (2.7, 2.7.1, 2.8, 2.8.1, 2.8.2, 2.9), then v2.9.1, the latest, from the official PDFs | ⬜ next, see [Plan to v2.9.1](#plan-to-v291) |
 
 2.0 made the package ESM only (Node 24 or later). Each version joins the root parser in its own minor release once every one of its event types and
 segments is built and checked: `parse()` reads MSH-12 and refuses a version it does not dispatch
@@ -31,7 +31,7 @@ hl7.eu (`https://hl7.eu/HL7v2x/v282/std282/ch01.html`).
 Steps, each one checked against the sources in the repository's `CLAUDE.md` before the next starts:
 
 1. **Sources.** Pulled by `codegen/validate/fetch-sources.sh <version> <dir> --record`, whose manifests
-   are in `codegen/validate/sources/`. Status when pulled (the manifest has every URL and checksum):
+   are in `codegen/validate/sources/` (each version's manifest lands with that version's PR). Status when pulled (the manifest has every URL and checksum):
    - hl7.eu segment pages: all of 2.5.1 to 2.9.1. Chapter pages: 2.5.1 to 2.8.2 and 2.9 (2.9.1 has none
      at any path tried: 16 absent).
    - Caristix: 2.5.1, 2.6, 2.7, 2.7.1 and 2.8 answer. 2.8.1, 2.8.2, 2.9 and 2.9.1 answer HTTP 500 for
@@ -43,7 +43,7 @@ Steps, each one checked against the sources in the repository's `CLAUDE.md` befo
    decides segments, but nothing cross-checks it while Caristix is down; for 2.8.2 to 2.9.1 neither
    cross-check exists right now.
 2. **Version order (decided).** One version at a time, in release order: 2.6, 2.7, 2.7.1, 2.8, 2.8.1, 2.8.2,
-   2.9, 2.9.1 (already generated; it is re-based on 2.9 once 2.9 exists). Each version re-exports the latest
+   2.9, 2.9.1 (extracted from the official PDFs), each in its own PR. Each version re-exports the latest
    earlier version imported, and gets its own ledgers and minor release, as 2.3 to 2.5.1 did.
 3. **Extraction from the official PDFs.** The hl7.org PDFs are not public, so an agent with the PDFs follows
    the extraction brief and writes `out/<version>/` (segments, message structures, index). Before it is

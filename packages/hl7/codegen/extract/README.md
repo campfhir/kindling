@@ -6,7 +6,7 @@ There are two ways to make one, and everything after it is the same.
 
 | Source of the extraction | Tool | Used for |
 |---|---|---|
-| The official hl7.org chapter PDFs, read by an agent that has them | [BRIEF.md](BRIEF.md), checked with `check-completeness.ts` | 2.9.1 |
+| The official hl7.org chapter PDFs, read by an agent that has them | [BRIEF.md](BRIEF.md), checked with `check-completeness.ts` | 2.9.1 (its own PR) |
 | The hl7.eu pages `fetch-sources.sh` pulled | `from-hl7eu.ts` (deterministic parser) | 2.6 |
 
 ## The steps, in order
