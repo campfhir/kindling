@@ -29,6 +29,17 @@ export const EXAMPLES = {
     "005010x279/example-2b-response-generic-request-physician-patients-dependent-eligibility",
   ],
   "005010X231A1": ["005010x231/example-01-response-functional-group-containing-three-837s"],
+  "005010X221A1": [
+    "005010x221/example-01-dollars-and-data-sent-separately",
+    "005010x221/example-02-multiple-claims-single-check",
+    "005010x221/example-03-claim-specific-negotiated-discount",
+    "005010x221/example-04-claim-adjustment-reason-code-45",
+    "005010x221/example-5a",
+    "005010x221/example-5b",
+    "005010x221/example-5c",
+    "005010x221/example-06-not-coverednot-authorized-inpatient-facility-claim-days",
+    // Examples 07 (coordination of benefits) and 08 (correcting the subscriber) are prose, without a transmission.
+  ],
 };
 
 const ENTITIES = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " " };

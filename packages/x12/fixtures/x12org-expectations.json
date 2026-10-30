@@ -1,0 +1,23 @@
+{
+  "_comment": "X12's published examples (https://x12.org/examples) that do not parse as the public sources give their implementation guide, with what src/examples.test.ts expects instead and why. Only file names and reasons: the examples themselves are not reproduced. See docs/validation/<guide>-ledger.md.",
+  "005010X221A1": {
+    "example-01-dollars-and-data-sent-separately.x12": {
+      "error": "835 loop 1000B must contain N4 (Payee City, State, ZIP Code)",
+      "reason": "The example's 1000B has no N4. The CMS 835 crosswalk marks 1000B N4 Required in 5010A1 (\"Usage changed to Required\"), as do the CMS MTF and Indiana guides, and X12's examples 04 to 06 send it."
+    },
+    "example-02-multiple-claims-single-check.x12": {
+      "error": "835 loop 1000B must contain N4 (Payee City, State, ZIP Code)",
+      "warnings": [
+        "SE01 of transaction set 35681 (at segment 185) counts 182, the interchange holds 183"
+      ],
+      "reason": "No 1000B N4, as in example 01; and its SE01 counts one segment fewer than the transaction set holds."
+    },
+    "example-03-claim-specific-negotiated-discount.x12": {
+      "error": "835 loop 1000B must contain N4 (Payee City, State, ZIP Code)",
+      "warnings": [
+        "SE01 of transaction set 35681 (at segment 37) counts 34, the interchange holds 35"
+      ],
+      "reason": "No 1000B N4, as in example 01; and its SE01 counts one segment fewer than the transaction set holds."
+    }
+  }
+}
