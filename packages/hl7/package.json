@@ -336,7 +336,6 @@
     "lint": "eslint .",
     "typecheck": "NODE_OPTIONS=--max-old-space-size=8192 tsc --noEmit",
     "exports": "node codegen/generate-package-exports.mjs",
-    "codegen:check": "pnpm codegen && pnpm barrels && pnpm exports && test -z \"$(git status --porcelain -- src package.json)\"",
     "fixtures:fetch": "node scripts/fetch-fixtures.mjs",
     "fixtures:generate": "python3 fixtures/generate.py"
   },

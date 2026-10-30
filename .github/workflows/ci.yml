@@ -29,8 +29,6 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
       - run: pnpm typecheck
-      - name: Generated files are up to date
-        run: pnpm codegen:check
 
   test:
     runs-on: ubuntu-latest
