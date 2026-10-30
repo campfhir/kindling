@@ -1,0 +1,37 @@
+{
+  "_comment": "X12's published examples (https://x12.org/examples) that do not parse as the public sources give their implementation guide, with what src/examples.test.ts expects instead and why. Only file names and reasons: the examples themselves are not reproduced. See docs/validation/<guide>-ledger.md.",
+  "005010X221A1": {
+    "example-01-dollars-and-data-sent-separately.x12": {
+      "error": "835 loop 1000B must contain N4 (Payee City, State, ZIP Code)",
+      "reason": "The example's 1000B has no N4. The CMS 835 crosswalk marks 1000B N4 Required in 5010A1 (\"Usage changed to Required\"), as do the CMS MTF and Indiana guides, and X12's examples 04 to 06 send it."
+    },
+    "example-02-multiple-claims-single-check.x12": {
+      "error": "835 loop 1000B must contain N4 (Payee City, State, ZIP Code)",
+      "warnings": [
+        "SE01 of transaction set 35681 (at segment 185) counts 182, the interchange holds 183"
+      ],
+      "reason": "No 1000B N4, as in example 01; and its SE01 counts one segment fewer than the transaction set holds."
+    },
+    "example-03-claim-specific-negotiated-discount.x12": {
+      "error": "835 loop 1000B must contain N4 (Payee City, State, ZIP Code)",
+      "warnings": [
+        "SE01 of transaction set 35681 (at segment 37) counts 34, the interchange holds 35"
+      ],
+      "reason": "No 1000B N4, as in example 01; and its SE01 counts one segment fewer than the transaction set holds."
+    }
+  },
+  "005010X222A1": {
+    "example-04-medicare-secondary-payer-cob.x12": {
+      "error": "837 loop 2300 must contain loop 2400 (Service Line Number, opened by LX)",
+      "warnings": [
+        "SE01 of transaction set 0002 (at segment 43) counts 43, the interchange holds 41",
+        "SE02 at segment 43 is '000000002', its header's is '0002'"
+      ],
+      "reason": "After the claim's HI the example sends a REF with REF01 1G and a rendering provider PRV without the 2310B NM1 (NM101 82) that opens their loop; 1G is not a 2300 REF use (CMS 837P edits spreadsheet). Its SE01 and SE02 do not match the transaction set."
+    },
+    "example-07-oxygen.x12": {
+      "error": "CR3 segment at position 47 of the 837 transaction set is not allowed there",
+      "reason": "In its second service line the CR3 comes after the DTP Service Date. The CMS 837P edits spreadsheet's TR3 page order (matched by the CGS and Ohio Medicaid guides) puts CR3 before the 2400 DTP uses."
+    }
+  }
+}

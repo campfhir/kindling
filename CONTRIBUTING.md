@@ -70,6 +70,10 @@ published.
   typecheck, tests, build and the smoke test for that package and **stages** it with
   `npm stage publish`. A maintainer approves the staged version with 2FA
   (`npm stage approve <stage-id>` or the *Staged Packages* tab on npmjs.com) to make it live.
+  A version already staged by an earlier run and still waiting for approval is not staged again:
+  each job first lists the package's stages (`.github/scripts/staged.mjs`, through the same
+  trusted-publishing token exchange npm uses) and, when the version is there, skips with a notice.
+  If the stages cannot be listed, the job stages as before.
 - Staging uses npm [trusted publishing](https://docs.npmjs.com/trusted-publishers) (OIDC) from
   `publish.yml`: no long-lived token. Each package needs its own trusted-publisher entry pointing
   at `campfhir/kindling` and `publish.yml`.

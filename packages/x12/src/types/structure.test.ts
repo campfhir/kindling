@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, it } from "vitest";
-import { loop, segment, type InputOf, type ParsedOf } from "./schema.ts";
+import { loop, segment, unordered, type InputOf, type ParsedOf } from "./schema.ts";
 import { encodeStructure, parseStructure, verifyStructure } from "./structure.ts";
 import { parseSegment } from "../tokenize.ts";
 import { DEFAULT_DELIMITERS } from "./delimiters.ts";
@@ -126,5 +126,67 @@ describe("encodeStructure and verifyStructure", () => {
     };
     expect(verifyStructure("TEST", STRUCTURE, input)).toEqual(["TEST sources[0].subscribers is required (loop 2000)"]);
     expect(encodeStructure(STRUCTURE, input).map((s) => s.encode())).toEqual(["BHT*0022", "HL*1**20", "NM1*PR"]);
+  });
+});
+
+// Uses of one position the guide names separately, in any order.
+const CLAIM = [
+  segment("CLM", "claim", "Claim", { required: true }),
+  unordered(
+    segment("REF", "priorAuthorization", "Prior Authorization", { qualifier: [1, "G1"] }),
+    segment("REF", "referralNumber", "Referral Number", { qualifier: [1, "9F"] }),
+    segment("REF", "medicalRecordNumber", "Medical Record Number", { required: true, qualifier: [1, "EA"] }),
+  ),
+  unordered(
+    loop("2310A", "referringProviders", "Referring Provider", [segment("NM1", "name", "Referring Provider Name", { required: true, qualifier: [1, "DN", "P3"] })], { repeating: true, max: 2 }),
+    loop("2310B", "renderingProvider", "Rendering Provider", [
+      segment("NM1", "name", "Rendering Provider Name", { required: true, qualifier: [1, "82"] }),
+      segment("PRV", "specialty", "Rendering Provider Specialty"),
+    ]),
+  ),
+  segment("LX", "line", "Service Line", { required: true }),
+] as const;
+
+const parseClaim = (lines: string[]) =>
+  parseStructure<ParsedOf<typeof CLAIM>>("TEST", CLAIM, lines.map((l) => parseSegment(l, DEFAULT_DELIMITERS)));
+
+describe("unordered", () => {
+  it("takes the uses of one position in any order, each to its own property", () => {
+    const r = parseClaim(["CLM*1", "REF*EA*MR1", "REF*G1*PA1", "NM1*82*1*KIM", "PRV*PE", "NM1*DN*1*LEE", "LX*1"]);
+    expect(r.err?.message).toBeUndefined();
+    const value = r.val!.value;
+    expect(value.medicalRecordNumber.get(2)).toBe("MR1");
+    expect(value.priorAuthorization?.get(2)).toBe("PA1");
+    expect(value.referralNumber).toBeUndefined();
+    expect(value.renderingProvider?.specialty?.get(1)).toBe("PE");
+    expect(value.referringProviders.map((p) => p.name.get(3))).toEqual(["LEE"]);
+    expectTypeOf(value.medicalRecordNumber).toEqualTypeOf<GenericSegment>();
+    expectTypeOf(value.referringProviders[0].name).toEqualTypeOf<GenericSegment>();
+  });
+
+  it("encodes the uses in the order the structure lists them", () => {
+    const value = parseClaim(["CLM*1", "REF*EA*MR1", "REF*G1*PA1", "NM1*82*1*KIM", "NM1*DN*1*LEE", "LX*1"]).val!.value;
+    expect(encodeStructure(CLAIM, value).map((s) => s.encode())).toEqual(["CLM*1", "REF*G1*PA1", "REF*EA*MR1", "NM1*DN*1*LEE", "NM1*82*1*KIM", "LX*1"]);
+  });
+
+  it("fails for a missing required use", () => {
+    const r = parseClaim(["CLM*1", "REF*G1*PA1", "LX*1"]);
+    expect(r.err?.message).toBe("TEST transaction set must contain REF (REF01 EA) (Medical Record Number)");
+  });
+
+  it("does not take a second instance of a use that does not repeat", () => {
+    const r = parseClaim(["CLM*1", "REF*EA*MR1", "REF*EA*MR2", "LX*1"]);
+    expect(r.err?.message).toContain("must contain LX");
+  });
+
+  it("warns past a use's maximum", () => {
+    const r = parseClaim(["CLM*1", "REF*EA*MR1", "NM1*DN*1*A", "NM1*P3*1*B", "NM1*DN*1*C", "LX*1"]);
+    expect(r.val!.warnings).toEqual(["Loop 2310A occurs 3 times, the guide allows 2"]);
+  });
+
+  it("verifies the uses of a builder input", () => {
+    expect(verifyStructure("TEST", CLAIM, { claim: new GenericSegment("CLM"), line: new GenericSegment("LX") })).toEqual([
+      "TEST medicalRecordNumber is required (REF (REF01 EA))",
+    ]);
   });
 });

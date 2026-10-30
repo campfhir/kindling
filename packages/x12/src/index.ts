@@ -8,8 +8,8 @@
  *
  * The parser lives in `@campfhir/x12/parse`: `parse()` (asynchronous, like `@campfhir/hl7/parse`)
  * and `parseInterchange()`. Each implementation guide has its own subpath with its transaction sets
- * and segment classes: `@campfhir/x12/005010X279A1` (270, 271) and `@campfhir/x12/005010X231A1`
- * (999 and `acknowledge()`).
+ * and segment classes: `@campfhir/x12/005010X279A1` (270, 271), `@campfhir/x12/005010X222A1` (837P),
+ * `@campfhir/x12/005010X221A1` (835) and `@campfhir/x12/005010X231A1` (999 and `acknowledge()`).
  *
  * @module
  */
@@ -45,9 +45,12 @@ export { identifyInterchange, isX12Input, type InterchangeType, type Transaction
 export {
   segment,
   loop,
+  unordered,
+  flatten,
   type Qualifier,
   type SegmentItem,
   type LoopItem,
+  type UnorderedItem,
   type StructureItem,
   type SegmentClass,
   type TransactionSetSchema,

@@ -2,7 +2,8 @@ name: Publish
 
 # Stages every workspace package whose package.json version is not on npm yet. Each package is
 # verified (lint, typecheck, test, build, smoke test) and staged in its own job, so one package's
-# failure never blocks another. A maintainer then approves the staged version with 2FA.
+# failure never blocks another. A maintainer then approves the staged version with 2FA. A version
+# that is already staged and waiting for approval is skipped (.github/scripts/staged.mjs).
 on:
   push:
     branches: [main]
@@ -53,7 +54,19 @@ jobs:
       - run: npm install -g npm@latest
       - run: pnpm install --frozen-lockfile
 
+      # unpublished.mjs only sees live versions; a version staged by an earlier run and still
+      # waiting for approval would be staged again, which npm refuses (E409). "unknown" (the stages
+      # could not be listed) stages as before.
+      - name: Is ${{ matrix.name }}@${{ matrix.version }} already staged?
+        id: staged
+        run: node .github/scripts/staged.mjs "${{ matrix.name }}" "${{ matrix.version }}" >> "$GITHUB_OUTPUT"
+
+      - name: Already staged
+        if: steps.staged.outputs.staged == 'true'
+        run: echo "::notice title=${{ matrix.name }}@${{ matrix.version }}::Already staged on npm and waiting for approval (npm stage approve <stage-id>, or the Staged Packages tab on npmjs.com); not staged again."
+
       - name: Verify ${{ matrix.name }}
+        if: steps.staged.outputs.staged != 'true'
         run: |
           pnpm exec eslint "packages/${{ matrix.folder }}"
           pnpm --filter "${{ matrix.name }}" typecheck
@@ -63,6 +76,7 @@ jobs:
           node .github/scripts/smoke-test.mjs "${{ matrix.folder }}"
 
       - name: Stage ${{ matrix.name }}@${{ matrix.version }} on npm
+        if: steps.staged.outputs.staged != 'true'
         working-directory: packages/${{ matrix.folder }}
         # Authenticates via OIDC: the package's npm trusted publisher must point at this
         # repository (campfhir/kindling) and workflow file (publish.yml). The version only goes

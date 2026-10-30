@@ -24,7 +24,7 @@
  *
  * @module
  */
-import { loop, segment, type InputOf, type ParsedOf } from "../types/schema.ts";
+import { loop, segment, unordered, type InputOf, type ParsedOf } from "../types/schema.ts";
 import { defineTransactionSet } from "../types/transaction.ts";
 import { BHT, HL, TRN } from "../segments/hierarchy.ts";
 import { NM1 } from "../segments/NM1.ts";
@@ -36,8 +36,10 @@ const SUBSCRIBER_INQUIRY = loop(
   "Subscriber Eligibility/Benefit Inquiry",
   [
     segment("EQ", "inquiry", "Subscriber Eligibility/Benefit Inquiry Information", { required: true, segmentClass: EQ }),
-    segment("AMT", "spendDownAmount", "Subscriber Spend Down Amount", { qualifier: [1, "R"] }),
-    segment("AMT", "spendDownTotalBilledAmount", "Subscriber Spend Down Total Billed Amount", { qualifier: [1, "PB"] }),
+    unordered(
+      segment("AMT", "spendDownAmount", "Subscriber Spend Down Amount", { qualifier: [1, "R"] }),
+      segment("AMT", "spendDownTotalBilledAmount", "Subscriber Spend Down Total Billed Amount", { qualifier: [1, "PB"] }),
+    ),
     segment("III", "additionalInquiryInformation", "Subscriber Eligibility/Benefit Additional Inquiry Information", { repeating: true, max: 10 }),
     segment("REF", "additionalInformation", "Subscriber Additional Information"),
     segment("DTP", "date", "Subscriber Eligibility/Benefit Date"),

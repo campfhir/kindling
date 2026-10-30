@@ -9,7 +9,7 @@ as its own bundle with its own version.
 | Package | Folder | What it does | Status |
 |---|---|---|---|
 | [`@campfhir/hl7`](https://www.npmjs.com/package/@campfhir/hl7) | [`packages/hl7`](packages/hl7) | Build and parse HL7 v2 messages (every release from v2.1 to v2.9.1) | published |
-| `@campfhir/x12` | [`packages/x12`](packages/x12) | Build and parse X12 EDI interchanges; typed 270/271 eligibility and 999 acknowledgments | 0.1 (not yet published) |
+| `@campfhir/x12` | [`packages/x12`](packages/x12) | Build and parse X12 EDI interchanges; typed 270/271 eligibility, 837P claims, 835 remittances and 999 acknowledgments | 0.1 (not yet published) |
 | `@campfhir/pdmp` | [`packages/pdmp`](packages/pdmp) | Build and parse ASAP PDMP (prescription drug monitoring) reports: the envelope and loops now, typed 4.2A/4.2B segments next | 0.1 (not yet published) |
 | `@campfhir/fhir-r4` | `packages/fhir-r4` | FHIR R4 resources | planned |
 | `@campfhir/fhir-r5` | `packages/fhir-r5` | FHIR R5 resources | planned |

@@ -70,8 +70,19 @@ export interface LoopItem<
   segments: S;
 }
 
-/** An item of a structure: a segment or a loop. */
-export type StructureItem = SegmentItem | LoopItem;
+/**
+ * Uses of one base-standard position that the guide names separately (the 837's REF and DTP uses
+ * told apart by their qualifiers, its 2310A to 2310F provider loops): they may arrive in any order.
+ * Each member still has its own property, and is encoded in the order listed.
+ */
+export interface UnorderedItem<M extends readonly (SegmentItem | LoopItem)[] = readonly (SegmentItem | LoopItem)[]> {
+  kind: "unordered";
+  /** The uses, each a segment or a loop with its qualifier. */
+  members: M;
+}
+
+/** An item of a structure: a segment, a loop, or uses of one position in any order. */
+export type StructureItem = SegmentItem | LoopItem | UnorderedItem;
 
 /** A transaction set's schema: the body between ST and SE. */
 export interface TransactionSetSchema<S extends readonly StructureItem[] = readonly StructureItem[]> {
@@ -137,12 +148,22 @@ export function loop<const A extends string, const S extends readonly StructureI
   };
 }
 
-/** The first segment item of an item: the item itself, or the one that opens the loop. */
-export function opener(item: StructureItem): SegmentItem {
+/** Segment or loop uses of one position that may arrive in any order. */
+export function unordered<const M extends readonly (SegmentItem | LoopItem)[]>(...members: M): UnorderedItem<M> {
+  return { kind: "unordered", members };
+}
+
+/** The first segment item of a segment or loop: the item itself, or the one that opens the loop. */
+export function opener(item: SegmentItem | LoopItem): SegmentItem {
   if (item.kind === "segment") return item;
   const [first] = item.segments;
-  if (!first) throw new Error(`Loop ${item.loop} has no items`);
+  if (!first || first.kind === "unordered") throw new Error(`Loop ${item.loop} must open with a segment or a loop`);
   return opener(first);
+}
+
+/** The segment and loop items of a list, with the members of unordered items in their place. */
+export function flatten(items: readonly StructureItem[]): (SegmentItem | LoopItem)[] {
+  return items.flatMap((item) => (item.kind === "unordered" ? [...item.members] : [item]));
 }
 
 /** "NM1 (NM101 PR)": a segment item as error messages name it. */
@@ -160,22 +181,25 @@ type Value<I, Seg> = I extends LoopItem<string, infer S>
       : C
     : Seg;
 
+/** The items of a list, with the members of unordered items in their place. */
+type Flat<I> = I extends UnorderedItem<infer M> ? M[number] : I;
+
 /** Repeating items are always arrays, required ones always present, situational ones optional. */
 type Shape<S extends readonly StructureItem[], Seg> = {
-  [I in S[number] as I extends { repeating: true } | { required: true } ? I["as"] : never]: I extends { repeating: true }
+  [I in Flat<S[number]> as I extends { repeating: true } | { required: true } ? I["as"] : never]: I extends { repeating: true }
     ? Value<I, Seg>[]
     : Value<I, Seg>;
 } & {
-  [I in S[number] as I extends { repeating: true } | { required: true } ? never : I["as"]]?: Value<I, Seg>;
+  [I in Flat<S[number]> as I extends { repeating: true } | { required: true } ? never : I["as"]]?: Value<I, Seg>;
 };
 
 /** Like {@link Shape}, but a situational repeating item may be left out. */
 type InputShape<S extends readonly StructureItem[]> = {
-  [I in S[number] as I extends { required: true } ? I["as"] : never]: I extends { repeating: true }
+  [I in Flat<S[number]> as I extends { required: true } ? I["as"] : never]: I extends { repeating: true }
     ? readonly InputValue<I>[]
     : InputValue<I>;
 } & {
-  [I in S[number] as I extends { required: true } ? never : I["as"]]?: I extends { repeating: true }
+  [I in Flat<S[number]> as I extends { required: true } ? never : I["as"]]?: I extends { repeating: true }
     ? readonly InputValue<I>[]
     : InputValue<I>;
 };
