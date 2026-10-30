@@ -45,9 +45,12 @@ export { identifyInterchange, isX12Input, type InterchangeType, type Transaction
 export {
   segment,
   loop,
+  unordered,
+  flatten,
   type Qualifier,
   type SegmentItem,
   type LoopItem,
+  type UnorderedItem,
   type StructureItem,
   type SegmentClass,
   type TransactionSetSchema,

@@ -14,7 +14,7 @@
 import type { Result } from "./result.ts";
 import { Err } from "../utils/err.ts";
 import type { GenericSegment, Segment } from "./segment.ts";
-import { describe, opener, type SegmentItem, type StructureItem } from "./schema.ts";
+import { describe, flatten, opener, type LoopItem, type SegmentItem, type StructureItem } from "./schema.ts";
 
 type Value = Record<string, unknown>;
 
@@ -46,7 +46,7 @@ export interface StructureResult<T> {
 
 /** Every segment ID a structure mentions. */
 function segmentIds(structure: readonly StructureItem[], out = new Set<string>()): Set<string> {
-  for (const item of structure) {
+  for (const item of flatten(structure)) {
     if (item.kind === "segment") out.add(item.id);
     else segmentIds(item.segments, out);
   }
@@ -80,42 +80,68 @@ export function parseStructure<T>(name: string, structure: readonly StructureIte
 
   const walk = (items: readonly StructureItem[], out: Value, loopId?: string): Result<never> | undefined => {
     const where = loopId ? `loop ${loopId}` : "transaction set";
-    for (const item of items) {
-      const first = opener(item);
-      const count = () => {
-        let n = 0;
-        while (pos < segments.length && matches(first, segments[pos])) {
-          if (n > 0 && !item.repeating) break;
-          if (item.kind === "segment") {
-            const parsed = item.segmentClass ? new item.segmentClass(segments[pos].elements) : segments[pos];
-            if (item.repeating) ((out[item.as] ??= []) as Segment[]).push(parsed);
-            else out[item.as] = parsed;
-            pos++;
-          } else {
-            const instance: Value = {};
-            const failure = walk(item.segments, instance, item.loop);
-            if (failure) return failure;
-            if (item.repeating) ((out[item.as] ??= []) as Value[]).push(instance);
-            else out[item.as] = instance;
-          }
-          n++;
-        }
-        if (item.repeating) out[item.as] ??= [];
-        if (item.max !== undefined && n > item.max) {
-          const what = item.kind === "loop" ? `Loop ${item.loop}` : `${describe(item)} in ${where}`;
-          warnings.push(`${what} occurs ${n} times, the guide allows ${item.max}`);
-        }
-        if (n === 0 && item.required) {
-          // A segment the guide never mentions standing where the required item belongs is the error.
-          if (pos < segments.length && !known.has(segments[pos].id)) {
-            return failAt(`${segments[pos].id} segment at position ${position(pos)} of the ${name} transaction set is not in the guide`, "unexpected", pos, segments[pos].id, loopId);
-          }
-          const what = item.kind === "loop" ? `loop ${item.loop} (${item.name}, opened by ${describe(first)})` : `${describe(item)} (${item.name})`;
-          return failAt(`${name} ${where} must contain ${what}`, "missing", pos, first.id, item.kind === "loop" ? item.loop : loopId);
-        }
+
+    // Consumes one instance of a segment or loop at pos.
+    const take = (item: SegmentItem | LoopItem): Result<never> | undefined => {
+      if (item.kind === "segment") {
+        const parsed = item.segmentClass ? new item.segmentClass(segments[pos].elements) : segments[pos];
+        if (item.repeating) ((out[item.as] ??= []) as Segment[]).push(parsed);
+        else out[item.as] = parsed;
+        pos++;
         return undefined;
-      };
-      const failure = count();
+      }
+      const instance: Value = {};
+      const failure = walk(item.segments, instance, item.loop);
+      if (failure) return failure;
+      if (item.repeating) ((out[item.as] ??= []) as Value[]).push(instance);
+      else out[item.as] = instance;
+      return undefined;
+    };
+
+    // Checks an item once it has taken all it can: repeats past the maximum, a missing required item.
+    const finish = (item: SegmentItem | LoopItem, n: number): Result<never> | undefined => {
+      if (item.repeating) out[item.as] ??= [];
+      if (item.max !== undefined && n > item.max) {
+        const what = item.kind === "loop" ? `Loop ${item.loop}` : `${describe(item)} in ${where}`;
+        warnings.push(`${what} occurs ${n} times, the guide allows ${item.max}`);
+      }
+      if (n === 0 && item.required) {
+        // A segment the guide never mentions standing where the required item belongs is the error.
+        if (pos < segments.length && !known.has(segments[pos].id)) {
+          return failAt(`${segments[pos].id} segment at position ${position(pos)} of the ${name} transaction set is not in the guide`, "unexpected", pos, segments[pos].id, loopId);
+        }
+        const first = opener(item);
+        const what = item.kind === "loop" ? `loop ${item.loop} (${item.name}, opened by ${describe(first)})` : `${describe(item)} (${item.name})`;
+        return failAt(`${name} ${where} must contain ${what}`, "missing", pos, first.id, item.kind === "loop" ? item.loop : loopId);
+      }
+      return undefined;
+    };
+
+    for (const item of items) {
+      if (item.kind === "unordered") {
+        const counts = new Map<SegmentItem | LoopItem, number>();
+        while (pos < segments.length) {
+          const member = item.members.find((m) => matches(opener(m), segments[pos]) && (m.repeating || !counts.get(m)));
+          if (!member) break;
+          const failure = take(member);
+          if (failure) return failure;
+          counts.set(member, (counts.get(member) ?? 0) + 1);
+        }
+        for (const member of item.members) {
+          const failure = finish(member, counts.get(member) ?? 0);
+          if (failure) return failure;
+        }
+        continue;
+      }
+      const first = opener(item);
+      let n = 0;
+      while (pos < segments.length && matches(first, segments[pos])) {
+        if (n > 0 && !item.repeating) break;
+        const failure = take(item);
+        if (failure) return failure;
+        n++;
+      }
+      const failure = finish(item, n);
       if (failure) return failure;
     }
     return undefined;
@@ -134,7 +160,7 @@ export function parseStructure<T>(name: string, structure: readonly StructureIte
 export function verifyStructure(name: string, structure: readonly StructureItem[], input: unknown): string[] {
   const problems: string[] = [];
   const visit = (items: readonly StructureItem[], value: Value, path: string) => {
-    for (const item of items) {
+    for (const item of flatten(items)) {
       const v = value[item.as];
       const present = Array.isArray(v) ? v.length > 0 : v !== undefined;
       if (!present) {
@@ -155,7 +181,7 @@ export function verifyStructure(name: string, structure: readonly StructureItem[
 export function encodeStructure(structure: readonly StructureItem[], input: unknown): Segment[] {
   const out: Segment[] = [];
   const visit = (items: readonly StructureItem[], value: Value) => {
-    for (const item of items) {
+    for (const item of flatten(items)) {
       const v = value[item.as];
       if (v === undefined) continue;
       for (const entry of Array.isArray(v) ? v : [v]) {
