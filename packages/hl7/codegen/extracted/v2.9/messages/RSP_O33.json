@@ -1,0 +1,149 @@
+{
+  "structure": "RSP_O33",
+  "messageType": "RSP",
+  "triggerEvent": "K33",
+  "version": "2.9",
+  "description": "Get Donor Record Candidates Response Message",
+  "title": "Get Donor Record Candidates Response Message",
+  "source": {
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
+    "pages": null,
+    "table": "RSP^K33^RSP_O33: Get Donor Record Candidates Response Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "K33"
+      ],
+      "eventPrinted": "K33",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
+      "page": null,
+      "table": "RSP^K33^RSP_O33: Get Donor Record Candidates Response Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Access Restrictions",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgement",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QAK",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Acknowledgement",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Parameter Definition",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "group",
+      "name": "DONOR",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Identification Segment",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Participation",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "For backwards compatibility only as of V2.9.",
+          "status": "B",
+          "chapterRef": "3"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

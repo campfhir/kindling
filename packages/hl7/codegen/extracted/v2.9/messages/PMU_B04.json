@@ -1,0 +1,118 @@
+{
+  "structure": "PMU_B04",
+  "messageType": "PMU",
+  "triggerEvent": "B04",
+  "version": "2.9",
+  "description": "Activate Practicing Person Message",
+  "title": "Activate Practicing Person Message",
+  "source": {
+    "pdf": "hl7.org V29_CH15_PersMngmt_tc.pdf",
+    "pages": null,
+    "table": "PMU^B04^PMU_B04: Activate Practicing Person Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "B04"
+      ],
+      "eventPrinted": "B04",
+      "pdf": "hl7.org V29_CH15_PersMngmt_tc.pdf",
+      "page": null,
+      "table": "PMU^B04^PMU_B04: Activate Practicing Person Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "B05"
+      ],
+      "eventPrinted": "B05",
+      "pdf": "hl7.org V29_CH15_PersMngmt_tc.pdf",
+      "page": null,
+      "table": "PMU^B05^PMU_B04: Deactivate Practicing Person Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "B06"
+      ],
+      "eventPrinted": "B06",
+      "pdf": "hl7.org V29_CH15_PersMngmt_tc.pdf",
+      "page": null,
+      "table": "PMU^B06^PMU_B04: Terminate Practicing Person Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Event Type",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "STF",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Staff",
+      "chapterRef": "15.4.8"
+    },
+    {
+      "kind": "segment",
+      "name": "PRA",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Practitioner",
+      "chapterRef": "15.4.6"
+    },
+    {
+      "kind": "segment",
+      "name": "ORG",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Organization",
+      "chapterRef": "15.4.5"
+    }
+  ],
+  "variants": []
+}

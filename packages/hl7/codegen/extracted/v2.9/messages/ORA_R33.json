@@ -1,0 +1,108 @@
+{
+  "structure": "ORA_R33",
+  "messageType": "ORA",
+  "triggerEvent": "R33",
+  "version": "2.9",
+  "description": "Observation Report Acknowledgement",
+  "title": "Observation Report Acknowledgement",
+  "source": {
+    "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
+    "pages": null,
+    "table": "ORA^R33^ORA_R33: Observation Report Acknowledgement"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "R33"
+      ],
+      "eventPrinted": "R33",
+      "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
+      "page": null,
+      "table": "ORA^R33^ORA_R33: Observation Report Acknowledgement",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "ORDER",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "ORC",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Common Order Information",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Participation",
+          "chapterRef": "7"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

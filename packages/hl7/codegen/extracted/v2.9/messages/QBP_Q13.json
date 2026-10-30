@@ -1,0 +1,118 @@
+{
+  "structure": "QBP_Q13",
+  "messageType": "QBP",
+  "triggerEvent": "Z99",
+  "version": "2.9",
+  "description": "Query Grammar: QBP Message",
+  "title": "Query Grammar: QBP Message",
+  "source": {
+    "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
+    "pages": null,
+    "table": "QBP^Z99^QBP_Q13: Query Grammar: QBP Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Z99"
+      ],
+      "eventPrinted": "Z99",
+      "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
+      "page": null,
+      "table": "QBP^Z99^QBP_Q13: Query Grammar: QBP Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header Segment",
+      "chapterRef": "2.15.9"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2.15.12"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2.14.13"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Parameter Definition",
+      "chapterRef": "5.5.4"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Identification Segment",
+      "chapterRef": "3.4.2"
+    },
+    {
+      "kind": "segment",
+      "name": "RDF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Table Row Definition Segment",
+      "chapterRef": "5.5.6.6"
+    },
+    {
+      "kind": "segment",
+      "name": "RCP",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Response Control Parameter",
+      "chapterRef": "5.5.6"
+    },
+    {
+      "kind": "segment",
+      "name": "RDF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Table Row Definition Segment",
+      "chapterRef": "5.5.6.6"
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Continuation Pointer",
+      "chapterRef": "2.15.4"
+    }
+  ],
+  "variants": []
+}

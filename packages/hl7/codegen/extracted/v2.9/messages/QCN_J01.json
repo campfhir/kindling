@@ -1,0 +1,78 @@
+{
+  "structure": "QCN_J01",
+  "messageType": "QCN",
+  "triggerEvent": "J01",
+  "version": "2.9",
+  "description": "Cancel Query",
+  "title": "Cancel Query",
+  "source": {
+    "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
+    "pages": null,
+    "table": "QCN^J01^QCN_J01: Cancel Query"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "J01"
+      ],
+      "eventPrinted": "J01",
+      "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
+      "page": null,
+      "table": "QCN^J01^QCN_J01: Cancel Query",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "J02"
+      ],
+      "eventPrinted": "J02",
+      "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
+      "page": null,
+      "table": "QSX^J02^QCN_J01: Cancel Subscription",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2.15.9"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2.15.12"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2.14.13"
+    },
+    {
+      "kind": "segment",
+      "name": "QID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query identification Segment",
+      "chapterRef": "5.5.3"
+    }
+  ],
+  "variants": []
+}

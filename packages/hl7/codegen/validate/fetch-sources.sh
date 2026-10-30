@@ -17,6 +17,8 @@
 # Layout of <target-dir>:
 #   hl7eu/<SEG>.htm            segment pages        -> ledger.mjs (segment ledger)
 #   hl7eu/chapters/chNN.htm    chapter pages        -> message-ledger.ts --hl7eu
+#   hl7eu/msgstruct.htm        message structure list (every structure, its syntax and its events)
+#                                                   -> from-msgstruct.ts (v2.9, whose chapter tables have no captions)
 #   caristix/<SEG>.json        segment tables       -> ledger.mjs
 #   caristix/events/<EVENT>.json                    -> message-ledger.ts --caristix
 #   hapi/<SEG>.java, hapi/message/, hapi/group/, hapi/eventmap.properties
@@ -78,6 +80,7 @@ if [ -s "$index" ]; then
     fetch hl7eu "chapter $name" "https://www.hl7.eu/HL7v2x/v$short/std$short/$ch" "$OUT/hl7eu/chapters/$name.htm"
   done
 fi
+fetch hl7eu msgstruct "https://www.hl7.eu/HL7v2x/v$short/hl7v${short}msgstruct.htm" "$OUT/hl7eu/msgstruct.htm"
 
 # ---- Caristix: the event index, each event and each segment ---------------------------------------
 # Events live in caristix/events/ so a message named like a segment (ACK) is not read as a segment.

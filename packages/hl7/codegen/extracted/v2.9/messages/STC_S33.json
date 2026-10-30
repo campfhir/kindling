@@ -1,0 +1,68 @@
+{
+  "structure": "STC_S33",
+  "messageType": "STC",
+  "triggerEvent": "S33",
+  "version": "2.9",
+  "description": "Sterilization Configuration Notification",
+  "title": "Sterilization Configuration Notification",
+  "source": {
+    "pdf": "hl7.org V29_CH17_MaterialsMngmt_tc.pdf",
+    "pages": null,
+    "table": "STC^S33^STC_S33: Sterilization Configuration Notification"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "S33"
+      ],
+      "eventPrinted": "S33",
+      "pdf": "hl7.org V29_CH17_MaterialsMngmt_tc.pdf",
+      "page": null,
+      "table": "STC^S33^STC_S33: Sterilization Configuration Notification",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SCP",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Sterilization Configuration",
+      "chapterRef": "17"
+    }
+  ],
+  "variants": []
+}

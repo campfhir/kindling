@@ -1,0 +1,118 @@
+{
+  "structure": "RPR_I03",
+  "messageType": "RPR",
+  "triggerEvent": "I03",
+  "version": "2.9",
+  "description": "Return Patient List",
+  "title": "Return Patient List",
+  "source": {
+    "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
+    "pages": null,
+    "table": "RPR^I03^RPR_I03: Return Patient List"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "I03"
+      ],
+      "eventPrinted": "I03",
+      "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
+      "page": null,
+      "table": "RPR^I03^RPR_I03: Return Patient List",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgment",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "group",
+      "name": "PROVIDER",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PRD",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Provider Data",
+          "chapterRef": "11"
+        },
+        {
+          "kind": "segment",
+          "name": "CTD",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Contact Data",
+          "chapterRef": "11"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "NTE",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Notes and Comments",
+      "chapterRef": "2"
+    }
+  ],
+  "variants": []
+}

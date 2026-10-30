@@ -19,9 +19,13 @@
  * reason, in codegen/validate/message-notes.json under the version and event.
  *
  * Usage:
- *   npx tsx codegen/validate/message-ledger.ts <version> --caristix <dir> --hapi <messages-dir> <groups-dir> <eventmap.properties> [--hl7eu <chapters-dir>] [--hl7org <chapters-dir>]
+ *   npx tsx codegen/validate/message-ledger.ts <version> --caristix <dir> --hapi <messages-dir> <groups-dir> <eventmap.properties> [--hl7eu <chapters-dir>] [--hl7org <chapters-dir>] [--hl7eu-list <msgstruct.htm>]
  *   --hl7org: chapters converted from the official PDFs (codegen/extract/pdf-chapter.ts); each replaces the hl7.eu page of
  *   that chapter in the hl7.eu column (v2.8 ch16, which hl7.eu lacks).
+ *   --hl7eu-list: hl7.eu's message structure list (hl7v<n>msgstruct.htm, fetched by fetch-sources.sh), printed from the HL7
+ *   database: every structure's syntax with its group names, and its events. A second hl7.eu reading beside the chapter
+ *   tables (v2.9, which has no Caristix or HAPI); where the two disagree the list decides, since the chapter tables are
+ *   read as text and carry typos ("[{ PRT }}"), unless the chapters are the official ones (--hl7org), which decide.
  *
  * Reads are local only; nothing is fetched here.
  */
@@ -42,6 +46,7 @@ const caristixDir = option("--caristix")?.[0];
 const hapi = option("--hapi", 3);
 const hl7euDir = option("--hl7eu")?.[0];
 const hl7orgDir = option("--hl7org")?.[0];
+const listFile = option("--hl7eu-list")?.[0];
 const hl7orgFiles = hl7orgDir && existsSync(hl7orgDir) ? readdirSync(hl7orgDir).filter((f) => f.endsWith(".htm")) : [];
 if (!/^v\d+\.\d+(\.\d+)?$/.test(VERSION ?? "") || !caristixDir || !hapi) {
   console.error("Usage: message-ledger.ts <version> --caristix <dir> --hapi <messages-dir> <groups-dir> <eventmap.properties> [--hl7eu <chapters-dir>]");
@@ -184,7 +189,9 @@ const hl7eu = new Map<string, Line[]>();
 /** Events a heading groups with a captioned table ("(events PC6, PC7, PC8)" over "PGL^PC6^PGL_PC6"): they share it unless they get a table of their own. */
 const hl7euAliases: { key: string; lines: Line[] }[] = [];
 if (hl7euDir && existsSync(hl7euDir)) {
-  for (const f of [...new Set([...readdirSync(hl7euDir).filter((f) => f.endsWith(".htm")), ...hl7orgFiles])].sort()) {
+  // a chapter converted from the PDF replaces hl7.eu's page of it whatever the case of its name (hl7.eu v2.9 has ch04A.htm)
+  const pdfChapters = new Set(hl7orgFiles.map((f) => f.toLowerCase()));
+  for (const f of [...new Set([...readdirSync(hl7euDir).filter((f) => f.endsWith(".htm") && !pdfChapters.has(f.toLowerCase())), ...hl7orgFiles])].sort()) {
     const fromPdf = hl7orgFiles.includes(f);
     const raw = readFileSync(join(fromPdf ? hl7orgDir! : hl7euDir, f)).toString("latin1");
     // A converted PDF chapter holds each message table whole, so its end is the table's end; the prose after it
@@ -316,14 +323,107 @@ function tokenizeHl7eu(text: string): Line[] | undefined {
   return out.length ? out : undefined;
 }
 
+/**
+ * hl7.eu's message structure list: "<A NAME = "ADT_A01"> <H2>ADT_A01: …</H2> … <PRE>MSH [ { ARV } ] … [{ NEXT_OF_KIN NK1 … }]
+ * NEXT_OF_KIN …</PRE> … as Sender: A01 A04 …". A bracket names its group after the opening bracket and again after the
+ * closing one; "< CHOICE OBR | Hxx > CHOICE" is the order detail choice (Hxx stands for any segment, as "OBR, etc." does
+ * in the chapters), and Hxx elsewhere is a placeholder, dropped as the importer drops placeholder rows.
+ */
+interface ListEntry { lines: Line[]; senders: string[]; recipients: string[] }
+const hl7euList = new Map<string, ListEntry>();
+if (listFile && existsSync(listFile)) {
+  const html = readFileSync(listFile).toString("latin1");
+  for (const m of html.matchAll(/<A NAME = "([^"]+)">\s*<H2>[\s\S]*?<\/H2>([\s\S]*?)(?=<A NAME = "|<\/BODY>)/gi)) {
+    const pre = m[2].match(/<PRE>([\s\S]*?)<\/PRE>/i)?.[1];
+    if (!pre) continue;
+    const events = (label: string) => {
+      const at = m[2].search(new RegExp(`${label}:`, "i"));
+      if (at === -1) return [];
+      const rest = m[2].slice(at).replace(/^[^:]*:/, "");
+      const end = rest.search(/as [A-Z][a-z]+:|<P>/i);
+      return [...(end === -1 ? rest : rest.slice(0, end)).matchAll(/>([A-Z0-9]{3})<\/A>/g)].map((e) => e[1]);
+    };
+    // segments are links; everything else (brackets, bars, group names) is plain text between them
+    const tokens = pre.replace(/<A HREF[^>]*>([^<]*)<\/A>/gi, " SEG:$1 ").replace(/&lt;/g, "<").replace(/&gt;/g, ">").split(/\s+/).filter(Boolean);
+    const lines = renderList(tokens);
+    if (lines) hl7euList.set(m[1], { lines, senders: events("as Sender"), recipients: events("as Recipient") });
+  }
+}
+function renderList(tokens: string[]): Line[] | undefined {
+  let i = 0;
+  interface It { body: string; required: boolean; repeating: boolean; items?: It[] }
+  const OPEN: Record<string, { close: string; required: boolean; repeating: boolean }> = {
+    "[": { close: "]", required: false, repeating: false }, "{": { close: "}", required: true, repeating: true },
+    "[{": { close: "}]", required: false, repeating: true }, "<": { close: ">", required: true, repeating: false },
+  };
+  const seq = (close?: string): It[] | undefined => {
+    const out: It[] = [];
+    while (i < tokens.length && tokens[i] !== close) {
+      const t = tokens[i++];
+      if (t.startsWith("SEG:")) { if (t !== "SEG:Hxx") out.push({ body: t.slice(4), required: true, repeating: false }); continue; }
+      const open = OPEN[t];
+      if (!open) return undefined;
+      const name = i < tokens.length && !tokens[i].startsWith("SEG:") && !(tokens[i] in OPEN) && tokens[i] !== open.close && tokens[i] !== "|" ? tokens[i++] : undefined;
+      if (t === "<") {
+        const alternatives: string[][] = [[]];
+        while (i < tokens.length && tokens[i] !== ">") {
+          const x = tokens[i++];
+          if (x === "|") alternatives.push([]);
+          else alternatives[alternatives.length - 1].push(x.replace(/^SEG:/, ""));
+        }
+        i++;
+        if (name && tokens[i] === name) i++;
+        const alts = alternatives.length === 1 ? alternatives[0].map((a) => [a]) : alternatives; // "< RESOURCE_OBJECT AIS AIG AIL AIP >"
+        const body = alts.some((a) => a.includes("Hxx")) && alts.some((a) => a[0] === "OBR") ? ORDER_DETAIL_CHOICE : `<${alts.map((a) => a.join(" ")).join("|")}>`;
+        out.push({ body, required: true, repeating: false });
+        continue;
+      }
+      const inner = seq(open.close);
+      if (!inner) return undefined;
+      i++;
+      if (name && tokens[i] === name) i++;
+      // a bracket around one item marks that item; around several (or named) it is a group
+      if (!name && inner.length === 1) out.push({ ...inner[0], required: inner[0].required && open.required, repeating: inner[0].repeating || open.repeating });
+      else out.push({ body: `${name ?? "GROUP"}:`, required: open.required, repeating: open.repeating, items: inner });
+    }
+    return out;
+  };
+  const items = seq();
+  if (!items) return undefined;
+  const render = (list: It[], depth: number): Line[] =>
+    list.flatMap((it) => ["  ".repeat(depth) + mark(it.required, it.repeating, it.body), ...(it.items ? render(it.items, depth + 1) : [])]);
+  return render(items, 0);
+}
+/** The list's structure for an event: the one named TYPE_EVENT, else one of the type naming the event, else any naming it. */
+function readList(event: string): Line[] | undefined {
+  if (!hl7euList.size) return undefined;
+  if (hl7euList.has(event)) return hl7euList.get(event)!.lines;
+  const [type, trigger] = event.split("_");
+  const entries = [...hl7euList.entries()];
+  const found =
+    entries.find(([k, v]) => k.startsWith(`${type}_`) && v.senders.includes(trigger)) ??
+    entries.find(([k, v]) => k.startsWith(`${type}_`) && v.recipients.includes(trigger)) ??
+    entries.find(([, v]) => v.senders.includes(trigger)) ??
+    entries.find(([, v]) => v.recipients.includes(trigger));
+  return found?.[1].lines;
+}
+
 // ---------- comparison ----------
 
 const shape = (lines: Line[]) => lines.map((l) => l.replace(/[A-Z0-9_]+:/, "GROUP:")).join("\n");
-function decide(ours: Line[], eu?: Line[], cx?: Line[], hp?: Line[]) {
-  const e = eu && shape(eu), c = cx && shape(cx), h = hp && shape(hp), o = shape(ours);
+function decide(ours: Line[], eu?: Line[], cx?: Line[], hp?: Line[], ls?: Line[]) {
+  const e = eu && shape(eu), c = cx && shape(cx), h = hp && shape(hp), o = shape(ours), l = ls && shape(ls);
   let decided: string | undefined;
   let basis: string;
-  if (e !== undefined) {
+  if (l !== undefined && e !== undefined && hl7orgFiles.length) {
+    // the official chapters (hl7.org) decide; hl7.eu's structure list cross-checks them
+    decided = e;
+    basis = e === l ? "hl7.org chapter and hl7.eu list agree" : "hl7.org chapter (hl7.eu list differs)";
+  } else if (l !== undefined) {
+    // hl7.eu's structure list beside its chapter tables: the list decides, the chapter reading cross-checks it
+    decided = l;
+    basis = e === undefined ? "hl7.eu list (no chapter table read)" : e === l ? "hl7.eu list and chapter agree" : "hl7.eu list (chapter reading differs)";
+  } else if (e !== undefined) {
     if (c !== undefined && h !== undefined && c === h && c !== e) { decided = c; basis = "Caristix and HAPI agree against hl7.eu"; }
     else { decided = e; basis = c === e && h === e ? "all three agree" : `hl7.eu${c !== undefined && c !== e ? " (Caristix differs)" : ""}${h !== undefined && h !== e ? " (HAPI differs)" : ""}`; }
   } else if (c !== undefined && h !== undefined) {
@@ -352,15 +452,26 @@ async function main(): Promise<void> {
     .filter(([k]) => k.endsWith("_STRUCTURE"))
     .map(([k, v]) => [k.replace(/_STRUCTURE$/, ""), v] as const)
     .sort(([a], [b]) => a.localeCompare(b));
+  // With the structure list (v2.9), an event the chapters print no table for (SIU^S13, which uses SIU_S12) is checked
+  // against the chapter table of an event whose structure is ours too: the one it shares.
+  const sharedTable = new Map<string, { event: string; lines: Line[] }>();
+  if (hl7euList.size) for (const [event, items] of ours) {
+    const key = JSON.stringify(items);
+    const lines = hl7eu.get(event);
+    if (lines && !sharedTable.has(key)) sharedTable.set(key, { event, lines });
+  }
   const results = ours.map(([event, items]) => {
     const o = renderOurs(items);
     const note = versionNotes[event];
-    const eu = note?.hl7eu === "ignore" ? undefined : hl7eu.get(event);
+    const shared = hl7eu.has(event) ? undefined : sharedTable.get(JSON.stringify(items));
+    const eu = note?.hl7eu === "ignore" ? undefined : hl7eu.get(event) ?? shared?.lines;
     const cx = readCaristix(event);
     const hp = readHapi(event);
-    const d = decide(o, eu, cx, hp);
+    const ls = readList(event);
+    const d = decide(o, eu, cx, hp, ls);
+    if (shared && eu) d.basis += ` (the table of ${shared.event}, whose structure it uses)`;
     const status = d.matches ? "ok" : note?.accept ? "accepted" : d.undecided ? "undecided" : "differs";
-    return { event, ours: o, eu, cx, hp, ...d, note, status };
+    return { event, ours: o, eu, cx, hp, ls, ...d, note, status };
   });
 
   const lines: string[] = [];
@@ -375,6 +486,7 @@ async function main(): Promise<void> {
   lines.push("|---|---|---|");
   lines.push(hl7euDir ? `| hl7.eu | the printed chapters, \`https://www.hl7.eu/HL7v2x/v${SHORT}/std${SHORT}/ch<n>.htm\`, message tables read as text | Authoritative |` : `| hl7.eu | no chapter pages for ${VERSION} | — |`);
   if (hl7orgFiles.length) lines.push(`| hl7.org | the official chapter PDFs for ${hl7orgFiles.map((f) => f.replace(".htm", "")).join(", ")} (name and SHA-256 in \`codegen/validate/sources/${VERSION}-hl7org.tsv\`), converted by \`codegen/extract/pdf-chapter.ts\`; in the hl7.eu column they replace the hl7.eu page of that chapter | Authoritative |`);
+  if (hl7euList.size) lines.push(`| hl7.eu list | the message structure list, \`https://www.hl7.eu/HL7v2x/v${SHORT}/hl7v${SHORT}msgstruct.htm\`, printed from the HL7 database: each structure's syntax and its events | ${hl7orgFiles.length ? "Cross-check of the official chapters" : "Authoritative where it and the chapter table disagree"} |`);
   lines.push(`| Caristix | \`https://hl7-definition.caristix.com/v2-api/1/HL7v${API}/TriggerEvents/<EVENT>\` | Validation reference |`);
   lines.push(`| HAPI | \`hapi-structures-v${SHORT}/.../model/v${SHORT}/message/<EVENT>.java\` and its group classes, with the event map | Cross-check |`);
   lines.push("");
@@ -392,7 +504,10 @@ async function main(): Promise<void> {
   lines.push("## Summary");
   lines.push("");
   lines.push(`- ${results.length} message structures: ${counts.ok} ok, ${counts.accepted} accepted differences, ${counts.differs} unexplained differences, ${counts.undecided} undecided.`);
-  lines.push(`- Sources present: hl7.eu ${results.filter((r) => r.eu).length}, Caristix ${results.filter((r) => r.cx).length}, HAPI ${results.filter((r) => r.hp).length}.`);
+  if (hl7euList.size) lines.push(hl7orgFiles.length
+    ? "- hl7.eu's structure list is read too, as a cross-check of the official chapters (the hl7.eu column), which decide."
+    : "- hl7.eu's structure list is read too: it decides, and the chapter reading (the hl7.eu column) cross-checks it; a `differs` in the hl7.eu column with the list matching ours is the chapter table or its reading, not our structure.");
+  lines.push(`- Sources present: hl7.eu ${results.filter((r) => r.eu).length}, Caristix ${results.filter((r) => r.cx).length}, HAPI ${results.filter((r) => r.hp).length}${hl7euList.size ? `, hl7.eu list ${results.filter((r) => r.ls).length}` : ""}.`);
   // Events the sources define for this version that we do not implement.
   const implemented = new Set(ours.map(([event]) => event));
   const caristixEvents = readdirSync(caristixDir!).filter((f) => /^[A-Z0-9]{3}_[A-Z0-9]{3}\.json$/.test(f)).map((f) => f.slice(0, -5));
@@ -406,23 +521,24 @@ async function main(): Promise<void> {
     console.log(`not implemented: ${missing.join(" ")}`);
   }
   lines.push("");
-  lines.push("| Event | hl7.eu | Caristix | HAPI | Decided by | Status | Note |");
-  lines.push("|---|---|---|---|---|---|---|");
+  const withList = hl7euList.size > 0;
+  lines.push(`| Event | hl7.eu |${withList ? " hl7.eu list |" : ""} Caristix | HAPI | Decided by | Status | Note |`);
+  lines.push(`|---|---|${withList ? "---|" : ""}---|---|---|---|---|`);
   const cell = (r: (typeof results)[number], src?: Line[]) => (src === undefined ? "—" : shape(src) === shape(r.ours) ? "✓" : "differs");
   for (const r of results) {
-    lines.push(`| [${r.event}](#${r.event.toLowerCase()}) | ${cell(r, r.eu)} | ${cell(r, r.cx)} | ${cell(r, r.hp)} | ${r.basis} | ${r.status} | ${r.note ? `${r.note.date}: ${r.note.note}` : ""} |`);
+    lines.push(`| [${r.event}](#${r.event.toLowerCase()}) | ${cell(r, r.eu)} |${withList ? ` ${cell(r, r.ls)} |` : ""} ${cell(r, r.cx)} | ${cell(r, r.hp)} | ${r.basis} | ${r.status} | ${r.note ? `${r.note.date}: ${r.note.note}` : ""} |`);
   }
   lines.push("");
   lines.push("## Structures that differ from a source");
   lines.push("");
   for (const r of results) {
-    const allSame = [r.eu, r.cx, r.hp].every((s) => s === undefined || shape(s) === shape(r.ours));
+    const allSame = [r.eu, r.cx, r.hp, r.ls].every((s) => s === undefined || shape(s) === shape(r.ours));
     if (allSame) continue;
     lines.push(`### ${r.event}`);
     lines.push("");
     lines.push(`Status: **${r.status}** (${r.basis}).${r.note ? ` ${r.note.date}: ${r.note.note}` : ""}`);
     lines.push("");
-    lines.push(sideBySide([{ title: `ours (${VERSION})`, lines: r.ours }, { title: "hl7.eu", lines: r.eu }, { title: "Caristix", lines: r.cx }, { title: "HAPI", lines: r.hp }]));
+    lines.push(sideBySide([{ title: `ours (${VERSION})`, lines: r.ours }, { title: "hl7.eu", lines: r.eu }, { title: "hl7.eu list", lines: r.ls }, { title: "Caristix", lines: r.cx }, { title: "HAPI", lines: r.hp }]));
     lines.push("");
   }
   writeFileSync(join(ROOT, "docs/validation", `${VERSION}-message-ledger.md`), lines.join("\n") + "\n");

@@ -1,0 +1,158 @@
+{
+  "structure": "NMD_N02",
+  "messageType": "NMD",
+  "triggerEvent": "N02",
+  "version": "2.9",
+  "description": "Application Management Data",
+  "title": "Application Management Data",
+  "source": {
+    "pdf": "hl7.org V29_CH14_AppMngmt_tc.pdf",
+    "pages": null,
+    "table": "NMD^N02^NMD_N02: Application Management Data"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "N02"
+      ],
+      "eventPrinted": "N02",
+      "pdf": "hl7.org V29_CH14_AppMngmt_tc.pdf",
+      "page": null,
+      "table": "NMD^N02^NMD_N02: Application Management Data",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "CLOCK_AND_STATS_WITH_NOTES",
+      "items": [
+        {
+          "kind": "group",
+          "name": "CLOCK",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "NCK",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "System Clock",
+              "chapterRef": "14"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes and Comments for NCK",
+              "chapterRef": "2"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "APP_STATS",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "NST",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Application control-level Statistics",
+              "chapterRef": "14"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes and Comments for NST",
+              "chapterRef": "2"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "APP_STATUS",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "NSC",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Application Status Change",
+              "chapterRef": "14"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes and Comments for NSC",
+              "chapterRef": "2"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

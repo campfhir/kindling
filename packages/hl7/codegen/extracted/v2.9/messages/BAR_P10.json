@@ -1,0 +1,158 @@
+{
+  "structure": "BAR_P10",
+  "messageType": "BAR",
+  "triggerEvent": "P10",
+  "version": "2.9",
+  "description": "Transmit Ambulatory Payment Classification (APC) groups",
+  "title": "Transmit Ambulatory Payment Classification (APC) groups",
+  "source": {
+    "pdf": "hl7.org V29_CH06_FinancialMngmt_tc.pdf",
+    "pages": null,
+    "table": "BAR^P10^BAR_P10: Transmit Ambulatory Payment Classification (APC) groups"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "P10"
+      ],
+      "eventPrinted": "P10",
+      "pdf": "hl7.org V29_CH06_FinancialMngmt_tc.pdf",
+      "page": null,
+      "table": "BAR^P10^BAR_P10: Transmit Ambulatory Payment Classification (APC) groups",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Event Type",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PRT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Participation",
+      "chapterRef": "4"
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Visit",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "group",
+      "name": "DIAGNOSIS",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "DG1",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Diagnosis",
+          "chapterRef": "6"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "GP1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Grouping/Reimbursement - Visit",
+      "chapterRef": "6"
+    },
+    {
+      "kind": "group",
+      "name": "PROCEDURE",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PR1",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Procedures",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "GP2",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Grouping/reimbursement - Procedure",
+          "chapterRef": "6"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

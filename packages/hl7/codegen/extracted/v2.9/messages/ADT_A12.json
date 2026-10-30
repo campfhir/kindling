@@ -1,0 +1,157 @@
+{
+  "structure": "ADT_A12",
+  "messageType": "ADT",
+  "triggerEvent": "A12",
+  "version": "2.9",
+  "description": "ADT Message",
+  "title": "ADT Message",
+  "source": {
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
+    "pages": null,
+    "table": "ADT^A12^ADT_A12: ADT Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A12"
+      ],
+      "eventPrinted": "A12",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
+      "page": null,
+      "table": "ADT^A12^ADT_A12: ADT Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Access Restrictions",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Event Type",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PD1",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Additional Demographics",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Visit",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PV2",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Visit - Additional Info.",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "DB1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Disability Information",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "group",
+      "name": "OBSERVATION",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "OBX",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Observation/Result",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Participation"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}
