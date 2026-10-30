@@ -1,0 +1,7 @@
+{
+  "TQ2-6": {
+    "date": "2026-10-30",
+    "accept": ["len"],
+    "note": "The official v2.9.1 chapter 4 (V291_CH04_Orders_2024SEP.pdf, HL7 Attribute Table – TQ2) and hl7.eu hl7v291segmTQ2.htm print the Length of TQ2-6 Sequence Condition Code as \"2..\" (a minimum of 2, no maximum). The ledger reads the largest number in the column, 2; the length is the maximum, and with none printed the spec keeps 0 (no maximum), as v2.9. Caristix answers HTTP 500 for 2.9.1 and HAPI has no v2.9.1 module."
+  }
+}

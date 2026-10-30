@@ -62,6 +62,10 @@ How the HL7 facts in `@campfhir/hl7` were checked, and against what.
   reading (`--hl7eu-list`): it puts [{ARV}] after MSH where the official chapters 6 and 9–17 do not. Bracket typos the
   official text prints are decided in `codegen/extracted/v2.9/overrides.json`; the 47 accepted structures are the
   ledger's own text reader, each note says how.
+- [`v2.9.1-segment-ledger.md`](v2.9.1-segment-ledger.md) and [`v2.9.1-message-ledger.md`](v2.9.1-message-ledger.md):
+  2.9.1 from the official chapter PDFs (chapters 2–17, `codegen/validate/sources/v2.9.1-hl7org.tsv`), as 2.9; hl7.eu
+  has segment pages and its message structure list for 2.9.1 but no chapter pages. The 47 accepted structures are
+  2.9's, each note adapted to what the v2.9.1 list shows.
 - [`v2.3-hl7eu-sweep.md`](v2.3-hl7eu-sweep.md) and
   [`v2.3-hapi-crosscheck.md`](v2.3-hapi-crosscheck.md): the first sweeps (2026-10-19), superseded
   by the ledger and kept for the history of the decisions.

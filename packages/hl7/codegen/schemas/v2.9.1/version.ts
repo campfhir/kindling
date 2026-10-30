@@ -1,0 +1,48 @@
+import type { VersionSchema } from "../../../src/types/schema";
+import { V2_9_1_MESSAGES } from "./messages";
+
+/**
+ * v2.9.1: HL7 v2 release 2.9.1. Segments are generated from
+ * codegen/spec/v2.9.1-segments.json (MSH, BHS and FHS are mirrored from v2.9, see IMPORT.md).
+ * Messages are imported from the official PDFs (codegen/extracted/v2.9.1, IMPORT.md).
+ * Messages the 2.9.1 table defines but the schema type cannot express yet are listed in withdrawnMessages
+ * with the reason; they are not mirrored from v2.9, whose structure differs.
+ */
+export const V2_9_1: VersionSchema = {
+  version: "v2.9.1",
+  baseVersion: "v2.9",
+  reexport: true,
+  ownSegments: [],
+  withdrawnMessages: [
+    // Not generated: the schema type cannot express their structure yet (choice of groups, unnamed group); see IMPORT.md.
+    "CCI_I22",
+    "CCM_I21",
+    "CCR_I16",
+    "CCR_I17",
+    "CCR_I18",
+    "CCU_I20",
+    "CQU_I19",
+    "PGL_PC6",
+    "PGL_PC7",
+    "PGL_PC8",
+    "PPG_PCG",
+    "PPG_PCH",
+    "PPG_PCJ",
+    "PPP_PCB",
+    "PPP_PCC",
+    "PPP_PCD",
+    "PPR_PC1",
+    "PPR_PC2",
+    "PPR_PC3",
+    "QBP_Q11",
+    "QBP_Q31",
+    "QBP_Z81",
+    "QBP_Z85",
+    "QBP_Z87",
+    "QBP_Z89",
+    "QVR_Q17",
+    "RSP_K11",
+  ],
+  segments: [],
+  messages: V2_9_1_MESSAGES,
+};

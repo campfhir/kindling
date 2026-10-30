@@ -1,0 +1,167 @@
+{
+  "structure": "MFN_M19",
+  "messageType": "MFN",
+  "triggerEvent": "M19",
+  "version": "2.9.1",
+  "description": "Master File Supply Item Contract",
+  "title": "Master File Supply Item Contract",
+  "source": {
+    "pdf": "hl7.org V291_CH08_MasterFiles_2024SEP.pdf",
+    "pages": null,
+    "table": "MFN^M19^MFN_M19: Master File Supply Item Contract"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M19"
+      ],
+      "eventPrinted": "M19",
+      "pdf": "hl7.org V291_CH08_MasterFiles_2024SEP.pdf",
+      "page": null,
+      "table": "MFN^M19^MFN_M19: Master File Supply Item Contract",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "status": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "status": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "status": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Master File Identification",
+      "status": "8"
+    },
+    {
+      "kind": "group",
+      "name": "CONTRACT_RECORD",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Master File Entry",
+          "status": "8 Chapter"
+        },
+        {
+          "kind": "segment",
+          "name": "CTR",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Supply Item Contract",
+          "status": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Notes for CTR"
+        },
+        {
+          "kind": "group",
+          "name": "MATERIAL_ITEM_RECORD",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "ITM",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Material Item",
+              "status": "17"
+            },
+            {
+              "kind": "group",
+              "name": "PURCHASING_VENDOR",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "VND",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Purchasing Vendor",
+                  "status": "17"
+                },
+                {
+                  "kind": "group",
+                  "name": "PACKAGING",
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "PKG",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Packaging",
+                      "status": "17"
+                    }
+                  ],
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null
+                }
+              ],
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

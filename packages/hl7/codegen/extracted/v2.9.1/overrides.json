@@ -1,0 +1,87 @@
+{
+  "notMessages": {
+    "WRP_Z02": "2026-10-30: the official v2.9.1 chapter 2 (V291_CH02_Control_2024SEP.pdf) introduces it as an example of the abstract message syntax (\"Consider the hypothetical triggering event a widget report is requested. It might be served by the Widget Request (WRQ) and Widget Report (WRP) messages\") and prints its table captioned \"WRP^Z02^WRQ_Z02: Widget Reports\", with segments (WDN, WPN, ...) that no chapter defines. Not a message of the standard. As in v2.9."
+  },
+  "sharedStructure": {
+    "QBP_Z75": {
+      "structure": "QBP_Q13",
+      "reason": "2026-10-30: the official v2.9.1 chapter 5 (V291_CH05_Queries_2024SEP.pdf), the query profile of Z75: \"Query Trigger (= MSH-9): QBP^Z75^QBP_Q13\"; it prints no table for it. As in v2.9."
+    },
+    "QBP_Z77": {
+      "structure": "QBP_Q13",
+      "reason": "2026-10-30: the official v2.9.1 chapter 5 (V291_CH05_Queries_2024SEP.pdf), the query profile of Z77: \"Query Trigger (= MSH-9): QBP^Z77^QBP_Q13\"; it prints no table for it. As in v2.9."
+    },
+    "QBP_Z79": {
+      "structure": "QBP_Q15",
+      "reason": "2026-10-30: the official v2.9.1 chapter 5 (V291_CH05_Queries_2024SEP.pdf), the query profile of Z79: \"Query Trigger (= MSH-9): QBP^Z79^QBP_Q15\"; it prints no table for it. As in v2.9."
+    },
+    "QBP_Z81": {
+      "structure": "QBP_Q11",
+      "reason": "2026-10-30: the official v2.9.1 chapter 5 (V291_CH05_Queries_2024SEP.pdf), the query profile of Z81: \"Query Trigger (= MSH-9): QBP^Z81^QBP_Q11\"; it prints no table for it. As in v2.9."
+    },
+    "QBP_Z85": {
+      "structure": "QBP_Q11",
+      "reason": "2026-10-30: the official v2.9.1 chapter 5 (V291_CH05_Queries_2024SEP.pdf), the query profile of Z85: \"Query Trigger (= MSH-9): QBP^Z85^QBP_Q11\"; it prints no table for it. As in v2.9."
+    },
+    "QBP_Z91": {
+      "structure": "QBP_Q13",
+      "reason": "2026-10-30: the official v2.9.1 chapter 5 (V291_CH05_Queries_2024SEP.pdf), the query profile of Z91: \"Query Trigger (= MSH-9): QBP^Z91^QBP_Q13\"; it prints no table for it. As in v2.9."
+    },
+    "QBP_Z93": {
+      "structure": "QBP_Q13",
+      "reason": "2026-10-30: the official v2.9.1 chapter 5 (V291_CH05_Queries_2024SEP.pdf), the query profile of Z93: \"Query Trigger (= MSH-9): QBP^Z93^QBP_Q13\"; it prints no table for it. As in v2.9."
+    },
+    "QBP_Z95": {
+      "structure": "QBP_Q13",
+      "reason": "2026-10-30: the official v2.9.1 chapter 5 (V291_CH05_Queries_2024SEP.pdf), the query profile of Z95: \"Query Trigger (= MSH-9): QBP^Z95^QBP_Q13\"; it prints no table for it. As in v2.9."
+    },
+    "QBP_Z97": {
+      "structure": "QBP_Q15",
+      "reason": "2026-10-30: the official v2.9.1 chapter 5 (V291_CH05_Queries_2024SEP.pdf), the query profile of Z97: \"Query Trigger (= MSH-9): QBP^Z97^QBP_Q15\"; it prints no table for it. As in v2.9."
+    }
+  },
+  "structureFixes": [
+    {
+      "message": "ADT_A06",
+      "set": "OH3",
+      "min": 0,
+      "max": 1,
+      "reason": "2026-10-30: the official v2.9.1 chapter 3 (V291_CH03_PatientAdmin_2024SEP.pdf) prints OH3 in the ADT^A06 table as \"[ OH3 }\", unpaired brackets; it prints \"[ OH3 ]\" in the ADT^A01 table, and hl7.eu's message structure list (hl7v291msgstruct.htm) has [ OH3 ] here. As in v2.9, decided by hand: optional, single."
+    },
+    {
+      "message": "ADT_A07",
+      "set": "OH3",
+      "min": 0,
+      "max": 1,
+      "reason": "2026-10-30: the official v2.9.1 chapter 3 (V291_CH03_PatientAdmin_2024SEP.pdf) prints OH3 in the ADT^A07 table as \"[ OH3 }\", unpaired brackets; it prints \"[ OH3 ]\" in the ADT^A01 table, and hl7.eu's message structure list (hl7v291msgstruct.htm) has [ OH3 ] here. As in v2.9, decided by hand: optional, single."
+    },
+    {
+      "message": "ADT_A08",
+      "set": "OH3",
+      "min": 0,
+      "max": 1,
+      "reason": "2026-10-30: the official v2.9.1 chapter 3 (V291_CH03_PatientAdmin_2024SEP.pdf) prints OH3 in the ADT^A08 table as \"[ OH3 }\", unpaired brackets; it prints \"[ OH3 ]\" in the ADT^A01 table, and hl7.eu's message structure list (hl7v291msgstruct.htm) has [ OH3 ] here. As in v2.9, decided by hand: optional, single."
+    },
+    {
+      "message": "OMI_O23",
+      "set": "REL",
+      "min": 0,
+      "max": 1,
+      "reason": "2026-10-30: the official v2.9.1 chapter 4 (V291_CH04_Orders_2024SEP.pdf) prints REL in the OMI^O23 table as \"[REL}\", unpaired brackets; hl7.eu's message structure list (hl7v291msgstruct.htm) has [ REL ]. As in v2.9, decided by hand: optional, single."
+    },
+    {
+      "message": "OML_O35",
+      "set": "REL",
+      "min": 0,
+      "max": 1,
+      "reason": "2026-10-30: the official v2.9.1 chapter 4 (V291_CH04_Orders_2024SEP.pdf) prints REL in the OML^O35 table as \"[REL}\", unpaired brackets; hl7.eu's message structure list (hl7v291msgstruct.htm) has [ REL ]. As in v2.9, decided by hand: optional, single."
+    },
+    {
+      "message": "OML_O39",
+      "set": "REL",
+      "min": 0,
+      "max": 1,
+      "reason": "2026-10-30: the official v2.9.1 chapter 4 (V291_CH04_Orders_2024SEP.pdf) prints REL in the OML^O39 table as \"[REL}\", unpaired brackets; hl7.eu's message structure list (hl7v291msgstruct.htm) has [ REL ]. As in v2.9, decided by hand: optional, single."
+    }
+  ]
+}

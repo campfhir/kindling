@@ -1,0 +1,153 @@
+{
+  "structure": "RSP_E22",
+  "messageType": "RSP",
+  "triggerEvent": "E22",
+  "version": "2.9.1",
+  "description": "Authorization Request Query Response",
+  "title": "Authorization Request Query Response",
+  "source": {
+    "pdf": "hl7.org V291_CH16_eClaims_2024SEP.pdf",
+    "pages": null,
+    "table": "RSP^E22^RSP_E22: Authorization Request Query Response"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E22"
+      ],
+      "eventPrinted": "E22",
+      "pdf": "hl7.org V291_CH16_eClaims_2024SEP.pdf",
+      "page": null,
+      "table": "RSP^E22^RSP_E22: Authorization Request Query Response",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgement",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "QUERY_ACK",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "QAK",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Query Acknowledgement"
+        },
+        {
+          "kind": "segment",
+          "name": "QPD",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Query Parameter Definition"
+        },
+        {
+          "kind": "group",
+          "name": "AUTHORIZATION_INFO",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "IVC",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Invoice"
+            },
+            {
+              "kind": "segment",
+              "name": "PSG",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Product/Service Group"
+            },
+            {
+              "kind": "group",
+              "name": "PSL_ITEM_INFO",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "PSL",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Product/Service Line Item"
+                }
+              ],
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

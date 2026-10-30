@@ -38,7 +38,8 @@ const CAPTION = /^\s*([A-Z][A-Z0-9]{2}\^\S+?\^[A-Z][A-Za-z0-9_]*)\s*:\s*(.*\S)\s
 const HEADING = /^\s*(\d+[A-Za-z]?(?:\.\d+)+)\s+(\S.*\S)\s*$/;
 const HEADER = /^\s*Segments?\s{2,}Descriptions?\b/;
 const COLUMN4 = /Chapte|Sec(?:tion)?\b/; // "Chapter" (wrapped as "Chapte"/"r"), "Sec Ref", "Section Reference"
-const FURNITURE = /Health Level Seven|©|^\s*Page \d+\s*$|Final Standard|Normative (?:Standard|Publication)|^\s*Chapter \d+[A-Za-z]?:/;
+// v2.9.1 pages end "Version 2.9.1   Page 69" (or "Page 2   Version 2.9.1") and a line holding only "."
+const FURNITURE = /Health Level Seven|©|^\s*Page \d+\s*$|^\s*(?:Page \d+\s+)?Version \d+(?:\.\d+)+(?:\s+Page \d+)?\s*$|^\s*\.\s*$|Final Standard|Normative (?:Standard|Publication)|^\s*Chapter \d+[A-Za-z]?:/;
 const NOTATION = /^(?:[[\]{}<>|]|\.\.\.|[A-Z][A-Z0-9]{2}|Hxx|\s)+$/; // Hxx: "any segment" in the order detail choice (v2.9 ch12)
 const escape = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 

@@ -1,0 +1,138 @@
+{
+  "structure": "RDY_K15",
+  "messageType": "RDY",
+  "triggerEvent": "K15",
+  "version": "2.9.1",
+  "description": "Display Based Response",
+  "title": "Display Based Response",
+  "source": {
+    "pdf": "hl7.org V291_CH05_Queries_2024SEP.pdf",
+    "pages": null,
+    "table": "RDY^K15^RDY_K15: Display Based Response"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Znn"
+      ],
+      "eventPrinted": "Znn",
+      "pdf": "hl7.org V291_CH05_Queries_2024SEP.pdf",
+      "page": null,
+      "table": "RDY^Znn^RDY_K15: Response Grammar: Dispense History",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "K15"
+      ],
+      "eventPrinted": "K15",
+      "pdf": "hl7.org V291_CH05_Queries_2024SEP.pdf",
+      "page": null,
+      "table": "RDY^K15^RDY_K15: Display Based Response",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Z98"
+      ],
+      "eventPrinted": "Z98",
+      "pdf": "hl7.org V291_CH05_Queries_2024SEP.pdf",
+      "page": null,
+      "table": "RDY^Z98^RDY_K15: Response Grammar: Dispense History",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2.15.9"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2.15.12"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2.14.13"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgement",
+      "chapterRef": "2.15.8"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Error",
+      "chapterRef": "2.15.5"
+    },
+    {
+      "kind": "segment",
+      "name": "QAK",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Acknowledgement",
+      "chapterRef": "5.4.2"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Parameter Definition Segment",
+      "chapterRef": "5.5.4"
+    },
+    {
+      "kind": "segment",
+      "name": "DSP",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Display Data",
+      "chapterRef": "5.5.1"
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Continuation Pointer",
+      "chapterRef": "2.15.14"
+    }
+  ],
+  "variants": []
+}
