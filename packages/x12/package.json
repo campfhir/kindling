@@ -1,7 +1,7 @@
 {
   "name": "@campfhir/x12",
   "version": "0.1.0",
-  "description": "Zero-dependency TypeScript library for building and parsing X12 EDI interchanges and HIPAA transaction sets (270/271, 835, 999). Runs on Node.js, Bun, browsers, and Cloudflare Workers.",
+  "description": "Zero-dependency TypeScript library for building and parsing X12 EDI interchanges and HIPAA transaction sets (270/271, 835, 837P, 999). Runs on Node.js, Bun, browsers, and Cloudflare Workers.",
   "type": "module",
   "sideEffects": false,
   "main": "dist/index.js",
@@ -30,6 +30,14 @@
     "./005010X221A1/*": {
       "types": "./dist/005010X221A1/*.d.ts",
       "default": "./dist/005010X221A1/*.js"
+    },
+    "./005010X222A1": {
+      "types": "./dist/005010X222A1/index.d.ts",
+      "default": "./dist/005010X222A1/index.js"
+    },
+    "./005010X222A1/*": {
+      "types": "./dist/005010X222A1/*.d.ts",
+      "default": "./dist/005010X222A1/*.js"
     },
     "./005010X279A1": {
       "types": "./dist/005010X279A1/index.d.ts",
@@ -64,7 +72,9 @@
     "999",
     "eligibility",
     "835",
-    "remittance"
+    "remittance",
+    "837",
+    "claims"
   ],
   "author": "Scott Eremia-Roden",
   "license": "MIT",

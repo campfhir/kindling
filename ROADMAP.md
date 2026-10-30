@@ -7,7 +7,7 @@ fluent builder/parser style.
 | Package | Scope | Status |
 |---|---|---|
 | `@campfhir/hl7` | HL7 v2 messages. Every release from v2.1 to v2.9.1, the latest, is complete and dispatched by `parse()` — see the [package roadmap](packages/hl7/ROADMAP.md) | ✅ v2.1 to v2.9.1 |
-| `@campfhir/x12` | X12 EDI transaction sets used in healthcare (eligibility, claims, remittance, …) — see the [package roadmap](packages/x12/ROADMAP.md) | 🟡 0.1: envelopes, 270/271, 999 |
+| `@campfhir/x12` | X12 EDI transaction sets used in healthcare (eligibility, claims, remittance, …) — see the [package roadmap](packages/x12/ROADMAP.md) | 🟡 0.1: envelopes, 270/271, 837P, 835, 999 |
 | `@campfhir/pdmp` | Prescription drug monitoring program (PDMP) reports in the ASAP format — see the [package roadmap](packages/pdmp/ROADMAP.md) | 🟡 0.1: syntax, envelope and loops |
 | `@campfhir/fhir-r4` | FHIR R4 resources: typed builders, parsing and validation | ⬜ not started |
 | `@campfhir/fhir-r5` | FHIR R5 resources | ⬜ not started |

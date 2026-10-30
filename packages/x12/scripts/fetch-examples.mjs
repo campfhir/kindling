@@ -40,6 +40,22 @@ export const EXAMPLES = {
     "005010x221/example-06-not-coverednot-authorized-inpatient-facility-claim-days",
     // Examples 07 (coordination of benefits) and 08 (correcting the subscriber) are prose, without a transmission.
   ],
+  "005010X222A1": [
+    "005010x222/example-01-commercial-health-insurance",
+    "005010x222/example-02-encounter",
+    "005010x222/example-3a-claim-billing-provider-payer",
+    "005010x222/example-3b-claim-billing-provider-payer-b",
+    "005010x222/example-3c-claim-payer-payer-b-payer-payer",
+    "005010x222/example-04-medicare-secondary-payer-cob",
+    "005010x222/example-05-ambulance",
+    "005010x222/example-06-chiropractic",
+    "005010x222/example-07-oxygen",
+    "005010x222/example-08-wheelchair",
+    "005010x222/example-09-anesthesia",
+    // Example 10 (drugs) prints no transmission.
+    "005010x222/example-11-ppo-repriced-claim",
+    "005010x222/example-12-out-network-repriced-claim",
+  ],
 };
 
 const ENTITIES = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " " };

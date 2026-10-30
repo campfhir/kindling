@@ -3,12 +3,13 @@
  * fixtures/external/x12org by `pnpm fixtures:fetch` and not committed: X12's terms do not allow
  * reproducing them (scripts/fetch-examples.mjs). Without them the tests are skipped.
  *
- * Every example must parse, read typed against its implementation guide without a structure error
+ * Examples that print the transaction sets alone are wrapped in an envelope whose GS08 repeats their
+ * ST03. Every example must parse, read typed against its implementation guide without a structure error
  * or a warning, and encode back to what was read; fixtures/x12org-expectations.json lists the ones
  * that depart from the guide as the public sources give it, with the error and warnings each must
- * produce instead and why. The 270/271 examples print the transaction set
- * alone; they are wrapped in an envelope with the delimiters of X12's 999 example (`>` repetition,
- * `:` component), which their repeating elements use.
+ * produce instead and why. The envelope given to the examples that print transaction sets alone uses
+ * the delimiters of X12's 999 example (`>` repetition, `:` component), which their repeating
+ * elements use.
  */
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -36,11 +37,14 @@ const FUNCTIONAL_GROUP: Record<string, string> = { "270": "HS", "271": "HB", "99
 function envelope(text: string, guide: string): string {
   if (text.startsWith("ISA")) return text;
   const st01 = text.substring(3, 6);
+  // GS08 repeats the example's own ST03 (several carry the guide before its errata, 005010X222).
+  const version = /^ST\*\d{3}\*[^*~]*\*([^*~]+)~/m.exec(text)?.[1] ?? guide;
+  const sets = text.match(/^ST\*/gm)?.length ?? 1;
   return [
     "ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *060501*1319*>*00501*000000001*0*T*:~",
-    `GS*${FUNCTIONAL_GROUP[st01]}*SENDER*RECEIVER*20060501*1319*1*X*${guide}~`,
+    `GS*${FUNCTIONAL_GROUP[st01]}*SENDER*RECEIVER*20060501*1319*1*X*${version}~`,
     text.trimEnd(),
-    "GE*1*1~",
+    `GE*${sets}*1~`,
     "IEA*1*000000001~",
   ].join("\n");
 }

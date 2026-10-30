@@ -7,10 +7,11 @@ fluent segment classes, `Result` values instead of exceptions, an asynchronous `
 entry point, and output that round-trips.
 
 **Status: 0.1.** The syntax and the envelopes (ISA, GS, ST, SE, GE, IEA) are typed and checked, and
-three transaction sets are typed against their implementation guides: the 270 and 271 eligibility
-inquiry and response (005010X279A1) and the 999 implementation acknowledgment (005010X231A1), with
-`acknowledge()` to answer an interchange with a 999. Other transaction sets parse as lists of
-segments. See [ROADMAP.md](ROADMAP.md).
+five transaction sets are typed against their implementation guides: the 270 and 271 eligibility
+inquiry and response (005010X279A1), the 837 professional claim (005010X222A1, which also reads
+005010X222), the 835 claim payment/advice (005010X221A1) and the 999 implementation acknowledgment
+(005010X231A1), with `acknowledge()` to answer an interchange with a 999. Other transaction sets
+parse as lists of segments. See [ROADMAP.md](ROADMAP.md).
 
 ## Parsing
 
@@ -95,8 +96,15 @@ parsed types are derived from each guide's structure, so they cannot drift from 
 
 The segments whose element tables are public have classes with named setters and getters: BHT,
 HL, TRN, NM1, EQ, EB, AAA, LS, LE (`@campfhir/x12/005010X279A1`) and AK1, AK2, IK3, CTX, IK4, IK5,
-AK9 with their code lists (`@campfhir/x12/005010X231A1`). The others (REF, DTP, DMG, N3, N4, PER, …)
-are generic segments, read with `get(n)`.
+AK9 with their code lists (`@campfhir/x12/005010X231A1`), SBR, PAT, CLM, SV1, SVD, LIN, CTP
+(`@campfhir/x12/005010X222A1`) and BPR, N1, LX, CLP, CAS, SVC, PLB (`@campfhir/x12/005010X221A1`).
+The others (REF, DTP, DMG, N3, N4, PER, …) are generic segments, read with `get(n)`.
+
+The guides split one position of the base standard into named uses told apart by their qualifiers:
+the 837's fourteen REF and sixteen DTP uses of the claim, its 2310A–F provider loops, the 835's NM1
+uses of the claim. Senders may send such uses in any order, so the parser takes them in any order,
+each into its own property (`claim.priorAuthorization`, `claim.renderingProvider`), and writes them
+back in the guide's order. `unordered()` in a schema says so.
 
 A transaction set that departs from its guide does not fail the interchange: its `parsed` carries
 the error, with the position of the segment in the transaction set (ST is 1), the loop and whether
@@ -193,7 +201,9 @@ pnpm fixtures:fetch   # download X12's published examples (https://x12.org/examp
 
 `src/examples.test.ts` parses every example X12 publishes for the guides this package types, and
 checks that each reads typed without a structure error or a warning and encodes back to what was
-read. X12's terms do not allow reproducing or recreating its examples
+read. Five of them depart from their guide as the public sources give it (an 835 1000B without its
+required N4, short SE01 counts, an 837P CR3 out of order); `fixtures/x12org-expectations.json`
+names each with the error it must produce and why. X12's terms do not allow reproducing or recreating its examples
 (https://x12.org/examples/disclaimers), so they are downloaded into the uncommitted
 `fixtures/external/` and the test is skipped without them; the repository holds only the links, in
 `scripts/fetch-examples.mjs`. The other tests use fixtures written for this package.
@@ -205,6 +215,8 @@ and Medicare contractor companion guides (above all the CMS 270/271 4010A1 → 5
 Medicaid companion guides, X12's published examples and requests for interpretation. Every element,
 loop, usage, repeat and the disagreements between the sources are in
 [docs/validation](docs/validation): [the envelope](docs/validation/005010-envelope-ledger.md),
-[270/271](docs/validation/005010X279A1-ledger.md) and [999](docs/validation/005010X231A1-ledger.md).
+[270/271](docs/validation/005010X279A1-ledger.md), [837P](docs/validation/005010X222A1-ledger.md),
+[835](docs/validation/005010X221A1-ledger.md) and [999](docs/validation/005010X231A1-ledger.md).
 What no public source confirms is left out rather than guessed: the 999's maximum uses and loop
-repeats, most code meanings, and the element tables of the segments that stay generic.
+repeats, most code meanings, and the element tables of the segments that stay generic. Where the
+sources disagree on a usage, the less strict reading is kept and the choice recorded in the ledger.
