@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Return Patient Information",
   "title": "Return Patient Information",
-  "sectionHeading": "11.3.1 RQI/RPI - Request for Insurance Information (Event I01)",
   "source": {
-    "pdf": "hl7.eu std29/ch11.html",
+    "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
     "pages": null,
     "table": "RPI^I01^RPI_I01: Return Patient Information"
   },
@@ -17,7 +16,7 @@
         "I01"
       ],
       "eventPrinted": "I01",
-      "pdf": "hl7.eu std29/ch11.html",
+      "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
       "page": null,
       "table": "RPI^I01^RPI_I01: Return Patient Information",
       "identicalToPrimary": true
@@ -159,7 +158,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Insurance Add''l Info - Cert",
+              "description": "Insurance Add'l Info - Cert",
               "chapterRef": "6"
             }
           ],

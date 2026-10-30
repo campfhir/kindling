@@ -3,13 +3,12 @@
   "messageType": "MDM",
   "triggerEvent": "T01",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "9.6.1 MDM/ACK - Original Document Notification (Event T01)",
+  "description": "Original Document Notification",
+  "title": "Original Document Notification",
   "source": {
-    "pdf": "hl7.eu std29/ch09.html",
+    "pdf": "hl7.org V29_CH09_MedRecords.pdf",
     "pages": null,
-    "table": "MDM^T01^MDM_T01: "
+    "table": "MDM^T01^MDM_T01: Original Document Notification"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "T01"
       ],
       "eventPrinted": "T01",
-      "pdf": "hl7.eu std29/ch09.html",
+      "pdf": "hl7.org V29_CH09_MedRecords.pdf",
       "page": null,
-      "table": "MDM^T01^MDM_T01: ",
+      "table": "MDM^T01^MDM_T01: Original Document Notification",
       "identicalToPrimary": true
     },
     {
@@ -27,9 +26,9 @@
         "T03"
       ],
       "eventPrinted": "T03",
-      "pdf": "hl7.eu std29/ch09.html",
+      "pdf": "hl7.org V29_CH09_MedRecords.pdf",
       "page": null,
-      "table": "MDM^T03^MDM_T01: ",
+      "table": "MDM^T03^MDM_T01: Document Status Change Notification",
       "identicalToPrimary": true
     },
     {
@@ -37,9 +36,9 @@
         "T05"
       ],
       "eventPrinted": "T05",
-      "pdf": "hl7.eu std29/ch09.html",
+      "pdf": "hl7.org V29_CH09_MedRecords.pdf",
       "page": null,
-      "table": "MDM^T05^MDM_T01: ",
+      "table": "MDM^T05^MDM_T01: Document Addendum Notification",
       "identicalToPrimary": true
     },
     {
@@ -47,9 +46,9 @@
         "T07"
       ],
       "eventPrinted": "T07",
-      "pdf": "hl7.eu std29/ch09.html",
+      "pdf": "hl7.org V29_CH09_MedRecords.pdf",
       "page": null,
-      "table": "MDM^T07^MDM_T01: ",
+      "table": "MDM^T07^MDM_T01: Document Edit Notification",
       "identicalToPrimary": true
     },
     {
@@ -57,9 +56,9 @@
         "T09"
       ],
       "eventPrinted": "T09",
-      "pdf": "hl7.eu std29/ch09.html",
+      "pdf": "hl7.org V29_CH09_MedRecords.pdf",
       "page": null,
-      "table": "MDM^T09^MDM_T01: ",
+      "table": "MDM^T09^MDM_T01: Document Replacement Notification",
       "identicalToPrimary": true
     },
     {
@@ -67,9 +66,9 @@
         "T11"
       ],
       "eventPrinted": "T11",
-      "pdf": "hl7.eu std29/ch09.html",
+      "pdf": "hl7.org V29_CH09_MedRecords.pdf",
       "page": null,
-      "table": "MDM^T11^MDM_T01: ",
+      "table": "MDM^T11^MDM_T01: Document Cancel Notification",
       "identicalToPrimary": true
     }
   ],

@@ -3,13 +3,12 @@
   "messageType": "ADT",
   "triggerEvent": "A20",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "3.3.20 ADT/ACK - Bed Status Update (Event A20)",
+  "description": "ADT Message",
+  "title": "ADT Message",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
-    "table": "ADT^A20^ADT_A20: "
+    "table": "ADT^A20^ADT_A20: ADT Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "A20"
       ],
       "eventPrinted": "A20",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A20^ADT_A20: ",
+      "table": "ADT^A20^ADT_A20: ADT Message",
       "identicalToPrimary": true
     }
   ],

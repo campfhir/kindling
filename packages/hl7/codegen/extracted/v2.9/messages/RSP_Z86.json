@@ -3,12 +3,12 @@
   "messageType": "RSP",
   "triggerEvent": "Z86",
   "version": "2.9",
-  "description": "Response Grammar: Pharmacy Information Comprehens",
-  "title": "Response Grammar: Pharmacy Information Comprehens",
+  "description": "Response Grammar: Pharmacy Information Comprehensive",
+  "title": "Response Grammar: Pharmacy Information Comprehensive",
   "source": {
-    "pdf": "hl7.eu std29/ch05.html",
+    "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
     "pages": null,
-    "table": "RSP^Z86^RSP_Z86: Response Grammar: Pharmacy Information Comprehens"
+    "table": "RSP^Z86^RSP_Z86: Response Grammar: Pharmacy Information Comprehensive"
   },
   "triggerEvents": [
     {
@@ -16,9 +16,9 @@
         "Z86"
       ],
       "eventPrinted": "Z86",
-      "pdf": "hl7.eu std29/ch05.html",
+      "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
       "page": null,
-      "table": "RSP^Z86^RSP_Z86: Response Grammar: Pharmacy Information Comprehens",
+      "table": "RSP^Z86^RSP_Z86: Response Grammar: Pharmacy Information Comprehensive",
       "identicalToPrimary": true
     }
   ],

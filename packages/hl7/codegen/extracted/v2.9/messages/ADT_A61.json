@@ -3,13 +3,12 @@
   "messageType": "ADT",
   "triggerEvent": "A61",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "3.3.61 ADT/ACK - Change Consulting Doctor (Event A61)",
+  "description": "ADT Message",
+  "title": "ADT Message",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
-    "table": "ADT^A61^ADT_A61: "
+    "table": "ADT^A61^ADT_A61: ADT Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "A61"
       ],
       "eventPrinted": "A61",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A61^ADT_A61: ",
+      "table": "ADT^A61^ADT_A61: ADT Message",
       "identicalToPrimary": true
     },
     {
@@ -27,9 +26,9 @@
         "A62"
       ],
       "eventPrinted": "A62",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A62^ADT_A61: ",
+      "table": "ADT^A62^ADT_A61: ADT Message",
       "identicalToPrimary": true
     }
   ],

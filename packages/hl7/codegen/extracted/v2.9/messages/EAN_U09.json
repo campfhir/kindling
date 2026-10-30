@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Equipment Status Message",
   "title": "Equipment Status Message",
-  "sectionHeading": "13.3.9 EAN/ACK - Automated Equipment Notification (Event U09)",
   "source": {
-    "pdf": "hl7.eu std29/ch13.html",
+    "pdf": "hl7.org V29_CH13_ClinicalLabAuto_tc.pdf",
     "pages": null,
     "table": "EAN^U09^EAN_U09: Equipment Status Message"
   },
@@ -17,7 +16,7 @@
         "U09"
       ],
       "eventPrinted": "U09",
-      "pdf": "hl7.eu std29/ch13.html",
+      "pdf": "hl7.org V29_CH13_ClinicalLabAuto_tc.pdf",
       "page": null,
       "table": "EAN^U09^EAN_U09: Equipment Status Message",
       "identicalToPrimary": true

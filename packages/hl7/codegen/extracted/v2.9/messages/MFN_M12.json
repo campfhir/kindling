@@ -3,13 +3,12 @@
   "messageType": "MFN",
   "triggerEvent": "M12",
   "version": "2.9",
-  "description": "Master File Notification - Additional Basic Observ",
-  "title": "Master File Notification - Additional Basic Observ",
-  "sectionHeading": "8.8.7 MFN/MFK - Master File Notification - Additional Basic Observation/Service Attributes (Event M12)",
+  "description": "Master File Notification - Additional Basic Observation/Service Attributes",
+  "title": "Master File Notification - Additional Basic Observation/Service Attributes",
   "source": {
-    "pdf": "hl7.eu std29/ch08.html",
+    "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
     "pages": null,
-    "table": "MFN^M12^MFN_M12: Master File Notification - Additional Basic Observ"
+    "table": "MFN^M12^MFN_M12: Master File Notification - Additional Basic Observation/Service Attributes"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "M12"
       ],
       "eventPrinted": "M12",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
-      "table": "MFN^M12^MFN_M12: Master File Notification - Additional Basic Observ",
+      "table": "MFN^M12^MFN_M12: Master File Notification - Additional Basic Observation/Service Attributes",
       "identicalToPrimary": true
     }
   ],

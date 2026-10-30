@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Pharmacy/Treatment Dispense Message",
   "title": "Pharmacy/Treatment Dispense Message",
-  "sectionHeading": "4A.3.8 RDS - Pharmacy/Treatment Dispense Message (Event O13)",
   "source": {
-    "pdf": "hl7.eu std29/ch04A.html",
+    "pdf": "hl7.org V29_CH04A_Orders.pdf",
     "pages": null,
     "table": "RDS^O13^RDS_O13: Pharmacy/Treatment Dispense Message"
   },
@@ -17,7 +16,7 @@
         "O13"
       ],
       "eventPrinted": "O13",
-      "pdf": "hl7.eu std29/ch04A.html",
+      "pdf": "hl7.org V29_CH04A_Orders.pdf",
       "page": null,
       "table": "RDS^O13^RDS_O13: Pharmacy/Treatment Dispense Message",
       "identicalToPrimary": true
@@ -160,7 +159,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Patient Visit \u0013 Additional Info",
+              "description": "Patient Visit â Additional Info",
               "chapterRef": "3"
             },
             {

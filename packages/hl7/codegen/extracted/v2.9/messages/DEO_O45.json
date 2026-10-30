@@ -3,13 +3,12 @@
   "messageType": "DEO",
   "triggerEvent": "O45",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "4.16.12 DEO - Donor Eligibility Observations (Event O45)",
+  "description": "Donor Eligibility Observations Message",
+  "title": "Donor Eligibility Observations Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "DEO^O45^DEO_O45: "
+    "table": "DEO^O45^DEO_O45: Donor Eligibility Observations Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "O45"
       ],
       "eventPrinted": "O45",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "DEO^O45^DEO_O45: ",
+      "table": "DEO^O45^DEO_O45: Donor Eligibility Observations Message",
       "identicalToPrimary": true
     }
   ],
@@ -31,8 +30,7 @@
       "maxOccurs": 1,
       "usage": null,
       "page": null,
-      "description": "Message Header",
-      "chapterRef": "2"
+      "description": "Message Header 2"
     },
     {
       "kind": "segment",
@@ -41,8 +39,7 @@
       "maxOccurs": "*",
       "usage": null,
       "page": null,
-      "description": "Access Restrictions",
-      "chapterRef": "3"
+      "description": "Access Restrictions 3"
     },
     {
       "kind": "segment",
@@ -51,8 +48,7 @@
       "maxOccurs": "*",
       "usage": null,
       "page": null,
-      "description": "Software Segment",
-      "chapterRef": "2"
+      "description": "Software Segment 2"
     },
     {
       "kind": "segment",
@@ -61,8 +57,7 @@
       "maxOccurs": 1,
       "usage": null,
       "page": null,
-      "description": "User Authentication Credential",
-      "chapterRef": "2"
+      "description": "User Authentication Credential 2"
     },
     {
       "kind": "group",
@@ -84,8 +79,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Participation",
-          "chapterRef": "7"
+          "description": "Participation 7"
         },
         {
           "kind": "group",
@@ -98,8 +92,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Donor Observations",
-              "chapterRef": "7"
+              "description": "Donor Observations 7"
             },
             {
               "kind": "segment",
@@ -108,8 +101,7 @@
               "maxOccurs": "*",
               "usage": null,
               "page": null,
-              "description": "Participation",
-              "chapterRef": "7"
+              "description": "Participation 7"
             }
           ],
           "minOccurs": 0,
@@ -124,9 +116,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "For backwards compatibility only as of V2.9.",
-          "status": "B",
-          "chapterRef": "3"
+          "description": "For backwards compatibility only as of B 3 V2.9."
         },
         {
           "kind": "segment",
@@ -135,8 +125,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Notes and Comments (for Donor)",
-          "chapterRef": "2"
+          "description": "Notes and Comments (for Donor) 2"
         },
         {
           "kind": "group",
@@ -158,8 +147,7 @@
               "maxOccurs": "*",
               "usage": null,
               "page": null,
-              "description": "Participation",
-              "chapterRef": "7"
+              "description": "Participation 7"
             },
             {
               "kind": "segment",
@@ -168,8 +156,7 @@
               "maxOccurs": "*",
               "usage": null,
               "page": null,
-              "description": "Notes and Comments (for Donor Registration)",
-              "chapterRef": "2"
+              "description": "Notes and Comments (for Donor Registration) 2"
             }
           ],
           "minOccurs": 0,
@@ -203,8 +190,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Participation",
-          "chapterRef": "7"
+          "description": "Participation 7"
         },
         {
           "kind": "segment",
@@ -226,8 +212,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Observation related to OBR",
-              "chapterRef": "7"
+              "description": "Observation related to OBR 7"
             },
             {
               "kind": "segment",
@@ -236,8 +221,7 @@
               "maxOccurs": "*",
               "usage": null,
               "page": null,
-              "description": "Participation",
-              "chapterRef": "7"
+              "description": "Participation 7"
             },
             {
               "kind": "segment",
@@ -246,8 +230,7 @@
               "maxOccurs": "*",
               "usage": null,
               "page": null,
-              "description": "Notes and comments",
-              "chapterRef": "2"
+              "description": "Notes and comments 2"
             }
           ],
           "minOccurs": 0,

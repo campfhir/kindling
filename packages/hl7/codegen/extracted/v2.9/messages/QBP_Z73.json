@@ -3,12 +3,12 @@
   "messageType": "QBP",
   "triggerEvent": "Z73",
   "version": "2.9",
-  "description": "",
-  "title": "",
+  "description": "QBP Message",
+  "title": "QBP Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "QBP^Z73^QBP_Z73: "
+    "table": "QBP^Z73^QBP_Z73: QBP Message"
   },
   "triggerEvents": [
     {
@@ -16,9 +16,9 @@
         "Z73"
       ],
       "eventPrinted": "Z73",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "QBP^Z73^QBP_Z73: ",
+      "table": "QBP^Z73^QBP_Z73: QBP Message",
       "identicalToPrimary": true
     }
   ],

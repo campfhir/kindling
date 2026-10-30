@@ -3,13 +3,12 @@
   "messageType": "ORA",
   "triggerEvent": "R41",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "7.3.13 ORA  Observation Report Alert Acknowledgement (Event R41)",
+  "description": "Observation Report Alert Acknowledgement",
+  "title": "Observation Report Alert Acknowledgement",
   "source": {
-    "pdf": "hl7.eu std29/ch07.html",
+    "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
     "pages": null,
-    "table": "ORA^R41^ORA_R41: "
+    "table": "ORA^R41^ORA_R41: Observation Report Alert Acknowledgement"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "R41"
       ],
       "eventPrinted": "R41",
-      "pdf": "hl7.eu std29/ch07.html",
+      "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
       "page": null,
-      "table": "ORA^R41^ORA_R41: ",
+      "table": "ORA^R41^ORA_R41: Observation Report Alert Acknowledgement",
       "identicalToPrimary": true
     }
   ],

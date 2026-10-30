@@ -3,13 +3,12 @@
   "messageType": "ADT",
   "triggerEvent": "A44",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "3.3.44 ADT/ACK - Move Account Information - Patient Account Number (Event A44)",
+  "description": "ADT Message",
+  "title": "ADT Message",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
-    "table": "ADT^A44^ADT_A44: "
+    "table": "ADT^A44^ADT_A44: ADT Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "A44"
       ],
       "eventPrinted": "A44",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A44^ADT_A44: ",
+      "table": "ADT^A44^ADT_A44: ADT Message",
       "identicalToPrimary": true
     },
     {
@@ -27,9 +26,9 @@
         "A47"
       ],
       "eventPrinted": "A47",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A47^ADT_A44: ",
+      "table": "ADT^A47^ADT_A44: ADT Message",
       "identicalToPrimary": true
     }
   ],

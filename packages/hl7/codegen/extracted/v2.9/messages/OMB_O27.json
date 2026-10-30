@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Blood Product Order Message",
   "title": "Blood Product Order Message",
-  "sectionHeading": "4.13.2 OMB  Blood Product Order Message (Event O27)",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
     "table": "OMB^O27^OMB_O27: Blood Product Order Message"
   },
@@ -17,7 +16,7 @@
         "O27"
       ],
       "eventPrinted": "O27",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
       "table": "OMB^O27^OMB_O27: Blood Product Order Message",
       "identicalToPrimary": true
@@ -150,7 +149,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Patient Visit - Additional Info",
+              "description": "Patient Visit â Additional Info",
               "chapterRef": "3"
             },
             {
@@ -270,7 +269,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Timing/Quantit?",
+              "description": "Timing/QuantitÃ",
               "chapterRef": "4"
             },
             {

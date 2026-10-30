@@ -3,13 +3,12 @@
   "messageType": "QBP",
   "triggerEvent": "Q33",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "4.16.6 QBP - Get Donor Record Candidates (Event Q33)",
+  "description": "Get Donor Record Candidates Message",
+  "title": "Get Donor Record Candidates Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "QBP^Q33^QBP_O33: "
+    "table": "QBP^Q33^QBP_O33: Get Donor Record Candidates Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "Q33"
       ],
       "eventPrinted": "Q33",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "QBP^Q33^QBP_O33: ",
+      "table": "QBP^Q33^QBP_O33: Get Donor Record Candidates Message",
       "identicalToPrimary": true
     }
   ],

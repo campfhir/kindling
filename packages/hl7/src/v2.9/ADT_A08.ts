@@ -1,7 +1,7 @@
 /**
  * Builder, parser and structure for ADT^A08 messages (HL7 v2.9).
  *
- * Structure: MSH [{ARV}] [{SFT}] [UAC] EVN PID [PD1] [{OH1}] [{OH2}] [OH3] [{OH4}] [{ARV}] [{ROL}] [{PRT}] [{ NEXT_OF_KIN: NK1 [{OH2}] [{OH3}] }] PV1 [PV2] [{ARV}] [{ROL}] [{PRT}] [{DB1}] [{ OBSERVATION: OBX [{PRT}] }] [{AL1}] [{IAM}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] [{PRT}] }] [{GT1}] [{ INSURANCE: IN1 [IN2] [{IN3}] [{ROL}] [{PRT}] [{ AUTHORIZATION: AUT [{PRT}] }] [{ REFERRAL: RF1 [{PRT}] }] }] [ACC] [UB1] [UB2] [PDA]
+ * Structure: MSH [{ARV}] [{SFT}] [UAC] EVN PID [PD1] [{OH1}] [{OH2}] [OH3] [{OH4}] [{ARV}] [{ROL}] [{PRT}] [{ NEXT_OF_KIN: NK1 [{OH2}] [OH3] }] PV1 [PV2] [{ARV}] [{ROL}] [{PRT}] [{DB1}] [{ OBSERVATION: OBX [{PRT}] }] [{AL1}] [{IAM}] [{DG1}] [DRG] [{ PROCEDURE: PR1 [{ROL}] [{PRT}] }] [{GT1}] [{ INSURANCE: IN1 [IN2] [{IN3}] [{ROL}] [{PRT}] [{ AUTHORIZATION: AUT [{PRT}] }] [{ REFERRAL: RF1 [{PRT}] }] }] [ACC] [UB1] [UB2] [PDA]
  *
  * @module
  */
@@ -67,7 +67,7 @@ export const ADT_A08_STRUCTURE: StructureItem[] = [
     segments: [
       { name: "NK1", required: true, repeating: false },
       { name: "OH2", required: false, repeating: true },
-      { name: "OH3", required: false, repeating: true },
+      { name: "OH3", required: false, repeating: false },
     ],
   },
   { name: "PV1", required: true, repeating: false },
@@ -142,8 +142,8 @@ export interface ParsedNextOfKin {
   nextOfKin: NK1;
   /** The OH2 segments. */
   oh2List?: OH2[];
-  /** The OH3 segments. */
-  oh3List?: OH3[];
+  /** The OH3 segment. */
+  oh3?: OH3;
 }
 
 /** The OBSERVATION group of a parsed ADT^A08 (HL7 v2.9) message. */
@@ -331,8 +331,8 @@ export interface NextOfKinGroup {
   nextOfKin: NK1;
   /** The OH2 segments. */
   oh2List?: OH2[];
-  /** The OH3 segments. */
-  oh3List?: OH3[];
+  /** The OH3 segment. */
+  oh3?: OH3;
 }
 
 /** The OBSERVATION group of an ADT^A08 (HL7 v2.9) message being built. */

@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Equipment Command Message",
   "title": "Equipment Command Message",
-  "sectionHeading": "13.3.8 EAR/ACK  Automated Equipment Response (Event U08)",
   "source": {
-    "pdf": "hl7.eu std29/ch13.html",
+    "pdf": "hl7.org V29_CH13_ClinicalLabAuto_tc.pdf",
     "pages": null,
     "table": "EAR^U08^EAR_U08: Equipment Command Message"
   },
@@ -17,7 +16,7 @@
         "U08"
       ],
       "eventPrinted": "U08",
-      "pdf": "hl7.eu std29/ch13.html",
+      "pdf": "hl7.org V29_CH13_ClinicalLabAuto_tc.pdf",
       "page": null,
       "table": "EAR^U08^EAR_U08: Equipment Command Message",
       "identicalToPrimary": true

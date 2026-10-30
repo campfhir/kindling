@@ -3,13 +3,12 @@
   "messageType": "PMU",
   "triggerEvent": "B04",
   "version": "2.9",
-  "description": "Terminate Practicing Person Message",
-  "title": "Terminate Practicing Person Message",
-  "sectionHeading": "15.3.4 PMU/ACK  Activate Practicing Person (Event B04)",
+  "description": "Activate Practicing Person Message",
+  "title": "Activate Practicing Person Message",
   "source": {
-    "pdf": "hl7.eu std29/ch15.html",
+    "pdf": "hl7.org V29_CH15_PersMngmt_tc.pdf",
     "pages": null,
-    "table": "PMU^B04^PMU_B04: Terminate Practicing Person Message"
+    "table": "PMU^B04^PMU_B04: Activate Practicing Person Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "B04"
       ],
       "eventPrinted": "B04",
-      "pdf": "hl7.eu std29/ch15.html",
+      "pdf": "hl7.org V29_CH15_PersMngmt_tc.pdf",
       "page": null,
-      "table": "PMU^B04^PMU_B04: Terminate Practicing Person Message",
+      "table": "PMU^B04^PMU_B04: Activate Practicing Person Message",
       "identicalToPrimary": true
     },
     {
@@ -27,9 +26,9 @@
         "B05"
       ],
       "eventPrinted": "B05",
-      "pdf": "hl7.eu std29/ch15.html",
+      "pdf": "hl7.org V29_CH15_PersMngmt_tc.pdf",
       "page": null,
-      "table": "PMU^B05^PMU_B04: Terminate Practicing Person Message",
+      "table": "PMU^B05^PMU_B04: Deactivate Practicing Person Message",
       "identicalToPrimary": true
     },
     {
@@ -37,7 +36,7 @@
         "B06"
       ],
       "eventPrinted": "B06",
-      "pdf": "hl7.eu std29/ch15.html",
+      "pdf": "hl7.org V29_CH15_PersMngmt_tc.pdf",
       "page": null,
       "table": "PMU^B06^PMU_B04: Terminate Practicing Person Message",
       "identicalToPrimary": true

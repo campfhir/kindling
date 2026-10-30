@@ -3,12 +3,12 @@
   "messageType": "MFN",
   "triggerEvent": "M19",
   "version": "2.9",
-  "description": "",
-  "title": "",
+  "description": "Master File Supply Item Contract",
+  "title": "Master File Supply Item Contract",
   "source": {
-    "pdf": "hl7.eu std29/ch08.html",
+    "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
     "pages": null,
-    "table": "MFN^M19^MFN_M19: "
+    "table": "MFN^M19^MFN_M19: Master File Supply Item Contract"
   },
   "triggerEvents": [
     {
@@ -16,9 +16,9 @@
         "M19"
       ],
       "eventPrinted": "M19",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
-      "table": "MFN^M19^MFN_M19: ",
+      "table": "MFN^M19^MFN_M19: Master File Supply Item Contract",
       "identicalToPrimary": true
     }
   ],
@@ -31,7 +31,7 @@
       "usage": null,
       "page": null,
       "description": "Message Header",
-      "chapterRef": "2"
+      "status": "2"
     },
     {
       "kind": "segment",
@@ -41,7 +41,7 @@
       "usage": null,
       "page": null,
       "description": "Software",
-      "chapterRef": "2"
+      "status": "2"
     },
     {
       "kind": "segment",
@@ -51,7 +51,7 @@
       "usage": null,
       "page": null,
       "description": "User Authentication Credential",
-      "chapterRef": "2"
+      "status": "2"
     },
     {
       "kind": "segment",
@@ -61,7 +61,7 @@
       "usage": null,
       "page": null,
       "description": "Master File Identification",
-      "chapterRef": "8"
+      "status": "8"
     },
     {
       "kind": "group",
@@ -75,7 +75,7 @@
           "usage": null,
           "page": null,
           "description": "Master File Entry",
-          "chapterRef": "8"
+          "status": "8 Chapter"
         },
         {
           "kind": "segment",
@@ -85,7 +85,7 @@
           "usage": null,
           "page": null,
           "description": "Supply Item Contract",
-          "chapterRef": "8"
+          "status": "8"
         },
         {
           "kind": "segment",
@@ -108,7 +108,7 @@
               "usage": null,
               "page": null,
               "description": "Material Item",
-              "chapterRef": "17"
+              "status": "17"
             },
             {
               "kind": "group",
@@ -122,7 +122,7 @@
                   "usage": null,
                   "page": null,
                   "description": "Purchasing Vendor",
-                  "chapterRef": "17"
+                  "status": "17"
                 },
                 {
                   "kind": "group",
@@ -136,7 +136,7 @@
                       "usage": null,
                       "page": null,
                       "description": "Packaging",
-                      "chapterRef": "17"
+                      "status": "17"
                     }
                   ],
                   "minOccurs": 0,

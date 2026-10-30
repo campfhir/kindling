@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Detail Financial Transaction",
   "title": "Detail Financial Transaction",
-  "sectionHeading": "6.4.3 DFT/ACK - Post Detail Financial Transactions (Event P03)",
   "source": {
-    "pdf": "hl7.eu std29/ch06.html",
+    "pdf": "hl7.org V29_CH06_FinancialMngmt_tc.pdf",
     "pages": null,
     "table": "DFT^P03^DFT_P03: Detail Financial Transaction"
   },
@@ -17,7 +16,7 @@
         "P03"
       ],
       "eventPrinted": "P03",
-      "pdf": "hl7.eu std29/ch06.html",
+      "pdf": "hl7.org V29_CH06_FinancialMngmt_tc.pdf",
       "page": null,
       "table": "DFT^P03^DFT_P03: Detail Financial Transaction",
       "identicalToPrimary": true
@@ -389,6 +388,117 @@
         },
         {
           "kind": "group",
+          "name": "FINANCIAL_OBSERVATION_STANDALONE",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Observation"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Participation"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes and Comment (on Result)"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "FINANCIAL_ORDER_STANDALONE",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBR",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Order Detail Segment"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Participation"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes and Comment (on Result)"
+            },
+            {
+              "kind": "group",
+              "name": "FINANCIAL_OBSERVATION",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "OBX",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Observation"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Participation"
+                },
+                {
+                  "kind": "segment",
+                  "name": "NTE",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Notes and Comment (on Result)"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
           "name": "FINANCIAL_COMMON_ORDER",
           "items": [
             {
@@ -604,7 +714,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Insurance - Add''l Info. - Cert.",
+          "description": "Insurance - Add'l Info. - Cert.",
           "chapterRef": "6"
         },
         {

@@ -23,6 +23,11 @@ codegen/validate/fetch-sources.sh vX <dir> --record
 # 2. The extraction, either from hl7.eu (an official chapter PDF first converted into <dir>/hl7org/chapters replaces
 #    hl7.eu's page of that chapter, as the authoritative text or where hl7.eu lacks it; --record keeps its checksum) ...
 npx tsx codegen/extract/pdf-chapter.ts vX <V281_CH04_Name.pdf> <dir> --record  # each official chapter PDF on hand
+#    hl7.eu's v2.9 chapter pages print their message tables without "TYPE^EVENT^STRUCTURE" captions: caption-chapters.ts
+#    adds them from the section headings and hl7.eu's message structure list (<dir>/hl7eu/msgstruct.htm) into
+#    <dir>/hl7eu-captioned/chapters, which from-hl7eu.ts reads in place of the pages (it does nothing for pages that
+#    caption their own tables, v2.4 to v2.8.2)
+npx tsx codegen/extract/caption-chapters.ts vX <dir>
 npx tsx codegen/extract/from-hl7eu.ts vX <dir> codegen/extracted/vX
 #    ... or from the PDFs (BRIEF.md), then check it against them:
 npx tsx codegen/extract/check-completeness.ts <pdf-dir> codegen/extracted/vX

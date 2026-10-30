@@ -3,13 +3,12 @@
   "messageType": "MFN",
   "triggerEvent": "M06",
   "version": "2.9",
-  "description": "Master File Notification - Clinical Study with Pha",
-  "title": "Master File Notification - Clinical Study with Pha",
-  "sectionHeading": "8.11.1 MFN/MFK - Clinical Trials Master File Message (Event M06-M07)",
+  "description": "Master File Notification â Clinical Study with Phases and Schedules",
+  "title": "Master File Notification â Clinical Study with Phases and Schedules",
   "source": {
-    "pdf": "hl7.eu std29/ch08.html",
+    "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
     "pages": null,
-    "table": "MFN^M06^MFN_M06: Master File Notification - Clinical Study with Pha"
+    "table": "MFN^M06^MFN_M06: Master File Notification â Clinical Study with Phases and Schedules"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "M06"
       ],
       "eventPrinted": "M06",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
-      "table": "MFN^M06^MFN_M06: Master File Notification - Clinical Study with Pha",
+      "table": "MFN^M06^MFN_M06: Master File Notification â Clinical Study with Phases and Schedules",
       "identicalToPrimary": true
     }
   ],

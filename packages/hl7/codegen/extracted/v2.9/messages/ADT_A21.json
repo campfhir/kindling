@@ -3,13 +3,12 @@
   "messageType": "ADT",
   "triggerEvent": "A21",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "3.3.21 ADT/ACK - Patient Goes on a Leave of Absence (Event A21)",
+  "description": "ADT Message",
+  "title": "ADT Message",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
-    "table": "ADT^A21^ADT_A21: "
+    "table": "ADT^A21^ADT_A21: ADT Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "A21"
       ],
       "eventPrinted": "A21",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A21^ADT_A21: ",
+      "table": "ADT^A21^ADT_A21: ADT Message",
       "identicalToPrimary": true
     },
     {
@@ -27,9 +26,9 @@
         "A22"
       ],
       "eventPrinted": "A22",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A22^ADT_A21: ",
+      "table": "ADT^A22^ADT_A21: ADT Message",
       "identicalToPrimary": true
     },
     {
@@ -37,9 +36,9 @@
         "A23"
       ],
       "eventPrinted": "A23",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A23^ADT_A21: ",
+      "table": "ADT^A23^ADT_A21: ADT Message",
       "identicalToPrimary": true
     },
     {
@@ -47,9 +46,9 @@
         "A25"
       ],
       "eventPrinted": "A25",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A25^ADT_A21: ",
+      "table": "ADT^A25^ADT_A21: ADT Message",
       "identicalToPrimary": true
     },
     {
@@ -57,9 +56,9 @@
         "A26"
       ],
       "eventPrinted": "A26",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A26^ADT_A21: ",
+      "table": "ADT^A26^ADT_A21: ADT Message",
       "identicalToPrimary": true
     },
     {
@@ -67,9 +66,9 @@
         "A27"
       ],
       "eventPrinted": "A27",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A27^ADT_A21: ",
+      "table": "ADT^A27^ADT_A21: ADT Message",
       "identicalToPrimary": true
     },
     {
@@ -77,9 +76,9 @@
         "A29"
       ],
       "eventPrinted": "A29",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A29^ADT_A21: ",
+      "table": "ADT^A29^ADT_A21: ADT Message",
       "identicalToPrimary": true
     },
     {
@@ -87,9 +86,9 @@
         "A32"
       ],
       "eventPrinted": "A32",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A32^ADT_A21: ",
+      "table": "ADT^A32^ADT_A21: ADT Message",
       "identicalToPrimary": false
     },
     {
@@ -97,9 +96,9 @@
         "A33"
       ],
       "eventPrinted": "A33",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A33^ADT_A21: ",
+      "table": "ADT^A33^ADT_A21: ADT Message",
       "identicalToPrimary": true
     }
   ],
@@ -238,9 +237,9 @@
   "variants": [
     {
       "eventPrinted": "A32",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "pages": null,
-      "table": "ADT^A32^ADT_A21: ",
+      "table": "ADT^A32^ADT_A21: ADT Message",
       "items": [
         {
           "kind": "segment",

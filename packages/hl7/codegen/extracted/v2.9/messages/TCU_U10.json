@@ -3,13 +3,12 @@
   "messageType": "TCU",
   "triggerEvent": "U10",
   "version": "2.9",
-  "description": "Test Code Settings Request",
-  "title": "Test Code Settings Request",
-  "sectionHeading": "13.3.10 TCU/ACK - Automated Equipment Test Code Settings Update (Event U10)",
+  "description": "Test Code Settings Update",
+  "title": "Test Code Settings Update",
   "source": {
-    "pdf": "hl7.eu std29/ch13.html",
+    "pdf": "hl7.org V29_CH13_ClinicalLabAuto_tc.pdf",
     "pages": null,
-    "table": "TCU^U10^TCU_U10: Test Code Settings Request"
+    "table": "TCU^U10^TCU_U10: Test Code Settings Update"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "U10"
       ],
       "eventPrinted": "U10",
-      "pdf": "hl7.eu std29/ch13.html",
+      "pdf": "hl7.org V29_CH13_ClinicalLabAuto_tc.pdf",
       "page": null,
-      "table": "TCU^U10^TCU_U10: Test Code Settings Request",
+      "table": "TCU^U10^TCU_U10: Test Code Settings Update",
       "identicalToPrimary": true
     },
     {
@@ -27,7 +26,7 @@
         "U11"
       ],
       "eventPrinted": "U11",
-      "pdf": "hl7.eu std29/ch13.html",
+      "pdf": "hl7.org V29_CH13_ClinicalLabAuto_tc.pdf",
       "page": null,
       "table": "TCR^U11^TCU_U10: Test Code Settings Request",
       "identicalToPrimary": true

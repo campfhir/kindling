@@ -1,24 +1,24 @@
 {
-  "structure": "UDM_Q05",
-  "messageType": "UDM",
-  "triggerEvent": "Q05",
+  "structure": "QBP_Qnn",
+  "messageType": "QBP",
+  "triggerEvent": "Znn",
   "version": "2.9",
-  "description": "Unsolicited Display Message",
-  "title": "Unsolicited Display Message",
+  "description": "Query Grammar: QBP Message",
+  "title": "Query Grammar: QBP Message",
   "source": {
-    "pdf": "hl7.eu std29/ch05.html",
+    "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
     "pages": null,
-    "table": "UDM^Q05^UDM_Q05: Unsolicited Display Message"
+    "table": "QBP^Znn^QBP_Qnn: Query Grammar: QBP Message"
   },
   "triggerEvents": [
     {
       "events": [
-        "Q05"
+        "Znn"
       ],
-      "eventPrinted": "Q05",
-      "pdf": "hl7.eu std29/ch05.html",
+      "eventPrinted": "Znn",
+      "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
       "page": null,
-      "table": "UDM^Q05^UDM_Q05: Unsolicited Display Message",
+      "table": "QBP^Znn^QBP_Qnn: Query Grammar: QBP Message",
       "identicalToPrimary": true
     }
   ],
@@ -30,8 +30,8 @@
       "maxOccurs": 1,
       "usage": null,
       "page": null,
-      "description": "Message Header",
-      "chapterRef": "2"
+      "description": "Message Header Segment",
+      "chapterRef": "2.15.9"
     },
     {
       "kind": "segment",
@@ -41,7 +41,7 @@
       "usage": null,
       "page": null,
       "description": "Software Segment",
-      "chapterRef": "2"
+      "chapterRef": "2.15.12"
     },
     {
       "kind": "segment",
@@ -51,37 +51,37 @@
       "usage": null,
       "page": null,
       "description": "User Authentication Credential",
-      "chapterRef": "2"
+      "chapterRef": "2.14.13"
     },
     {
       "kind": "segment",
-      "name": "URD",
+      "name": "QPD",
       "minOccurs": 1,
       "maxOccurs": 1,
       "usage": null,
       "page": null,
-      "description": "Results/Update Definition",
-      "chapterRef": "5"
+      "description": "Query Parameter Definition",
+      "chapterRef": "5.5.4"
     },
     {
       "kind": "segment",
-      "name": "URS",
+      "name": "RDF",
       "minOccurs": 0,
       "maxOccurs": 1,
       "usage": null,
       "page": null,
-      "description": "Results/Update Selection Criteria",
+      "description": "Table Row Definition Segment",
       "chapterRef": "5"
     },
     {
       "kind": "segment",
-      "name": "DSP",
+      "name": "RCP",
       "minOccurs": 1,
-      "maxOccurs": "*",
+      "maxOccurs": 1,
       "usage": null,
       "page": null,
-      "description": "Display Data",
-      "chapterRef": "5"
+      "description": "Response Control Parameter",
+      "chapterRef": "5.5.6"
     },
     {
       "kind": "segment",
@@ -91,7 +91,7 @@
       "usage": null,
       "page": null,
       "description": "Continuation Pointer",
-      "chapterRef": "2"
+      "chapterRef": "2.15.4"
     }
   ],
   "variants": []

@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Personnel Record Message",
   "title": "Personnel Record Message",
-  "sectionHeading": "15.3.1 PMU/ACK  Add Personnel Record (Event B01)",
   "source": {
-    "pdf": "hl7.eu std29/ch15.html",
+    "pdf": "hl7.org V29_CH15_PersMngmt_tc.pdf",
     "pages": null,
     "table": "PMU^B01^PMU_B01: Personnel Record Message"
   },
@@ -17,7 +16,7 @@
         "B01"
       ],
       "eventPrinted": "B01",
-      "pdf": "hl7.eu std29/ch15.html",
+      "pdf": "hl7.org V29_CH15_PersMngmt_tc.pdf",
       "page": null,
       "table": "PMU^B01^PMU_B01: Personnel Record Message",
       "identicalToPrimary": true
@@ -27,7 +26,7 @@
         "B02"
       ],
       "eventPrinted": "B02",
-      "pdf": "hl7.eu std29/ch15.html",
+      "pdf": "hl7.org V29_CH15_PersMngmt_tc.pdf",
       "page": null,
       "table": "PMU^B02^PMU_B01: Personnel Record Message",
       "identicalToPrimary": true
@@ -171,7 +170,7 @@
       "usage": null,
       "page": null,
       "description": "deprecated as of v2.9",
-      "status": "deprecated",
+      "status": "depreca ted",
       "chapterRef": "15.4.7"
     }
   ],

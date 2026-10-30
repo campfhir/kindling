@@ -6,7 +6,7 @@
   "description": "General Acknowledgment",
   "title": "General Acknowledgment",
   "source": {
-    "pdf": "hl7.eu std29/ch02.html",
+    "pdf": "hl7.org V29_CH02_Control_tc.pdf",
     "pages": null,
     "table": "ACK^varies^ACK: General Acknowledgment"
   },
@@ -16,7 +16,7 @@
         "varies"
       ],
       "eventPrinted": "varies",
-      "pdf": "hl7.eu std29/ch02.html",
+      "pdf": "hl7.org V29_CH02_Control_tc.pdf",
       "page": null,
       "table": "ACK^varies^ACK: General Acknowledgment",
       "identicalToPrimary": true

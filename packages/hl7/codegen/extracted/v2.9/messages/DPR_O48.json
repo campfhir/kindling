@@ -3,13 +3,12 @@
   "messageType": "DPR",
   "triggerEvent": "O48",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "4.16.15 DPR - Donation Procedure (Event O48)",
+  "description": "Donation Procedure Message",
+  "title": "Donation Procedure Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "DPR^O48^DPR_O48: "
+    "table": "DPR^O48^DPR_O48: Donation Procedure Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "O48"
       ],
       "eventPrinted": "O48",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "DPR^O48^DPR_O48: ",
+      "table": "DPR^O48^DPR_O48: Donation Procedure Message",
       "identicalToPrimary": true
     }
   ],

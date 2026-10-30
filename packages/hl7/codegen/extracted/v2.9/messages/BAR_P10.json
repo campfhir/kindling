@@ -3,13 +3,12 @@
   "messageType": "BAR",
   "triggerEvent": "P10",
   "version": "2.9",
-  "description": "Transmit Ambulatory Payment Classification (APC) g",
-  "title": "Transmit Ambulatory Payment Classification (APC) g",
-  "sectionHeading": "6.4.7 BAR/ACK - Transmit Ambulatory Payment Classification (APC) Groups (Event P10)",
+  "description": "Transmit Ambulatory Payment Classification (APC) groups",
+  "title": "Transmit Ambulatory Payment Classification (APC) groups",
   "source": {
-    "pdf": "hl7.eu std29/ch06.html",
+    "pdf": "hl7.org V29_CH06_FinancialMngmt_tc.pdf",
     "pages": null,
-    "table": "BAR^P10^BAR_P10: Transmit Ambulatory Payment Classification (APC) g"
+    "table": "BAR^P10^BAR_P10: Transmit Ambulatory Payment Classification (APC) groups"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "P10"
       ],
       "eventPrinted": "P10",
-      "pdf": "hl7.eu std29/ch06.html",
+      "pdf": "hl7.org V29_CH06_FinancialMngmt_tc.pdf",
       "page": null,
-      "table": "BAR^P10^BAR_P10: Transmit Ambulatory Payment Classification (APC) g",
+      "table": "BAR^P10^BAR_P10: Transmit Ambulatory Payment Classification (APC) groups",
       "identicalToPrimary": true
     }
   ],

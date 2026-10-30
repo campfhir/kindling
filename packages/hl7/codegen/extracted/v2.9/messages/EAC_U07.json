@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Equipment Command Message",
   "title": "Equipment Command Message",
-  "sectionHeading": "13.3.7 EAC/ACK  Automated Equipment Command (Event U07)",
   "source": {
-    "pdf": "hl7.eu std29/ch13.html",
+    "pdf": "hl7.org V29_CH13_ClinicalLabAuto_tc.pdf",
     "pages": null,
     "table": "EAC^U07^EAC_U07: Equipment Command Message"
   },
@@ -17,7 +16,7 @@
         "U07"
       ],
       "eventPrinted": "U07",
-      "pdf": "hl7.eu std29/ch13.html",
+      "pdf": "hl7.org V29_CH13_ClinicalLabAuto_tc.pdf",
       "page": null,
       "table": "EAC^U07^EAC_U07: Equipment Command Message",
       "identicalToPrimary": true

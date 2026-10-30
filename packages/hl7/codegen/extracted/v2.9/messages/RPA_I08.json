@@ -5,21 +5,23 @@
   "version": "2.9",
   "description": "Return Patient Authorization",
   "title": "Return Patient Authorization",
-  "sectionHeading": "11.4.1 RQA/RPA - Request Patient Authorization Message (Event I08)",
   "source": {
-    "pdf": "hl7.eu std29/ch11.html",
+    "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
     "pages": null,
-    "table": "RPA^I08^RPA_I08: Return Patient Authorization"
+    "table": "RPA^I08-I11^RPA_I08: Return Patient Authorization"
   },
   "triggerEvents": [
     {
       "events": [
-        "I08"
+        "I08",
+        "I09",
+        "I10",
+        "I11"
       ],
-      "eventPrinted": "I08",
-      "pdf": "hl7.eu std29/ch11.html",
+      "eventPrinted": "I08-I11",
+      "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
       "page": null,
-      "table": "RPA^I08^RPA_I08: Return Patient Authorization",
+      "table": "RPA^I08-I11^RPA_I08: Return Patient Authorization",
       "identicalToPrimary": true
     }
   ],
@@ -195,7 +197,7 @@
           "maxOccurs": 1,
           "usage": null,
           "page": null,
-          "description": "Insurance Add''l Info - Cert",
+          "description": "Insurance Add'l Info - Cert",
           "chapterRef": "6"
         }
       ],

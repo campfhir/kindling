@@ -3,13 +3,12 @@
   "messageType": "QSB",
   "triggerEvent": "Q16",
   "version": "2.9",
-  "description": "Query Grammar: QSB Message",
-  "title": "Query Grammar: QSB Message",
-  "sectionHeading": "5.4.4 QSB  Create subscription (Event Q16)",
+  "description": "Create Subscription",
+  "title": "Create Subscription",
   "source": {
-    "pdf": "hl7.eu std29/ch05.html",
+    "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
     "pages": null,
-    "table": "QSB^Q16^QSB_Q16: Query Grammar: QSB Message"
+    "table": "QSB^Q16^QSB_Q16: Create Subscription"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,19 @@
         "Q16"
       ],
       "eventPrinted": "Q16",
-      "pdf": "hl7.eu std29/ch05.html",
+      "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
       "page": null,
-      "table": "QSB^Q16^QSB_Q16: Query Grammar: QSB Message",
+      "table": "QSB^Q16^QSB_Q16: Create Subscription",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Z83"
+      ],
+      "eventPrinted": "Z83",
+      "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
+      "page": null,
+      "table": "QSB^Z83^QSB_Q16: Query Grammar: QSB Message",
       "identicalToPrimary": true
     }
   ],

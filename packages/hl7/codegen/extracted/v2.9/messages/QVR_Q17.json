@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Query for Previous Events",
   "title": "Query for Previous Events",
-  "sectionHeading": "5.4.5 QVR  query for previous events (Event Q17)",
   "source": {
-    "pdf": "hl7.eu std29/ch05.html",
+    "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
     "pages": null,
     "table": "QVR^Q17^QVR_Q17: Query for Previous Events"
   },
@@ -17,7 +16,7 @@
         "Q17"
       ],
       "eventPrinted": "Q17",
-      "pdf": "hl7.eu std29/ch05.html",
+      "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
       "page": null,
       "table": "QVR^Q17^QVR_Q17: Query for Previous Events",
       "identicalToPrimary": true

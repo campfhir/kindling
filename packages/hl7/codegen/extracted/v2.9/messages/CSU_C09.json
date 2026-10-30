@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Clinical Trial Message",
   "title": "Clinical Trial Message",
-  "sectionHeading": "7.7.2 CSU - Unsolicited Study Data Message (Events C09-C12)",
   "source": {
-    "pdf": "hl7.eu std29/ch07.html",
+    "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
     "pages": null,
     "table": "CSU^C09-C12^CSU_C09: Clinical Trial Message"
   },
@@ -20,7 +19,7 @@
         "C12"
       ],
       "eventPrinted": "C09-C12",
-      "pdf": "hl7.eu std29/ch07.html",
+      "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
       "page": null,
       "table": "CSU^C09-C12^CSU_C09: Clinical Trial Message",
       "identicalToPrimary": true

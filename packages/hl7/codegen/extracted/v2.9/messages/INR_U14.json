@@ -3,13 +3,12 @@
   "messageType": "INR",
   "triggerEvent": "U14",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "13.3.14 INR/ACK  Automated Equipment Inventory Request (Event U14)",
+  "description": "Inventory Request Message",
+  "title": "Inventory Request Message",
   "source": {
-    "pdf": "hl7.eu std29/ch13.html",
+    "pdf": "hl7.org V29_CH13_ClinicalLabAuto_tc.pdf",
     "pages": null,
-    "table": "INR^U14^INR_U14: "
+    "table": "INR^U14^INR_U14: Inventory Request Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "U14"
       ],
       "eventPrinted": "U14",
-      "pdf": "hl7.eu std29/ch13.html",
+      "pdf": "hl7.org V29_CH13_ClinicalLabAuto_tc.pdf",
       "page": null,
-      "table": "INR^U14^INR_U14: ",
+      "table": "INR^U14^INR_U14: Inventory Request Message",
       "identicalToPrimary": true
     }
   ],

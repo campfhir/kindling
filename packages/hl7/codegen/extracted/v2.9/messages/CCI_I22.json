@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Collaborative Care Information",
   "title": "Collaborative Care Information",
-  "sectionHeading": "11.7.2 CCF/CCI  Collaborative Care Fetch / Collaborative Care Information (Event I22)",
   "source": {
-    "pdf": "hl7.eu std29/ch11.html",
+    "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
     "pages": null,
     "table": "CCI^I22^CCI_I22: Collaborative Care Information"
   },
@@ -17,7 +16,7 @@
         "I22"
       ],
       "eventPrinted": "I22",
-      "pdf": "hl7.eu std29/ch11.html",
+      "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
       "page": null,
       "table": "CCI^I22^CCI_I22: Collaborative Care Information",
       "identicalToPrimary": true
@@ -135,7 +134,7 @@
           "maxOccurs": 1,
           "usage": null,
           "page": null,
-          "description": "Insurance Additional Info \u0013 Cert.",
+          "description": "Insurance Additional Info â Cert.",
           "chapterRef": "6"
         }
       ],
@@ -200,7 +199,7 @@
                           "maxOccurs": 1,
                           "usage": null,
                           "page": null,
-                          "description": "Appointment Information \u0013 General Resource",
+                          "description": "Appointment Information â General Resource",
                           "chapterRef": "10"
                         },
                         {
@@ -210,7 +209,7 @@
                           "maxOccurs": 1,
                           "usage": null,
                           "page": null,
-                          "description": "Appointment Information \u0013 Location",
+                          "description": "Appointment Information â Location",
                           "chapterRef": "10"
                         },
                         {
@@ -220,7 +219,7 @@
                           "maxOccurs": 1,
                           "usage": null,
                           "page": null,
-                          "description": "Appointment Information \u0013 Personnel",
+                          "description": "Appointment Information â Personnel",
                           "chapterRef": "10"
                         }
                       ],
@@ -593,7 +592,7 @@
           "maxOccurs": 1,
           "usage": null,
           "page": null,
-          "description": "Patient Visit \u0013 Additional Info.",
+          "description": "Patient Visit â Additional Info.",
           "chapterRef": "3"
         }
       ],

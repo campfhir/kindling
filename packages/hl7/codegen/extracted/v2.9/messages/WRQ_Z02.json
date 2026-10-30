@@ -6,7 +6,7 @@
   "description": "Widget Reports",
   "title": "Widget Reports",
   "source": {
-    "pdf": "hl7.eu std29/ch02.html",
+    "pdf": "hl7.org V29_CH02_Control_tc.pdf",
     "pages": null,
     "table": "WRP^Z02^WRQ_Z02: Widget Reports"
   },
@@ -16,25 +16,13 @@
         "Z02"
       ],
       "eventPrinted": "Z02",
-      "pdf": "hl7.eu std29/ch02.html",
+      "pdf": "hl7.org V29_CH02_Control_tc.pdf",
       "page": null,
       "table": "WRP^Z02^WRQ_Z02: Widget Reports",
       "identicalToPrimary": true
     }
   ],
   "items": [
-    {
-      "kind": "placeholder",
-      "text": "Segments",
-      "minOccurs": 1,
-      "maxOccurs": 1,
-      "usage": null,
-      "page": null,
-      "notation": "Segments",
-      "description": "Description",
-      "status": "Status",
-      "chapterRef": "Chapter"
-    },
     {
       "kind": "segment",
       "name": "MSH",
@@ -43,7 +31,7 @@
       "usage": null,
       "page": null,
       "description": "Message Header",
-      "chapterRef": "2"
+      "status": "2"
     },
     {
       "kind": "segment",
@@ -53,7 +41,7 @@
       "usage": null,
       "page": null,
       "description": "Software Segment",
-      "chapterRef": "2"
+      "status": "2"
     },
     {
       "kind": "segment",
@@ -63,7 +51,7 @@
       "usage": null,
       "page": null,
       "description": "User Authentication Credential",
-      "chapterRef": "2"
+      "status": "2"
     },
     {
       "kind": "segment",
@@ -73,7 +61,7 @@
       "usage": null,
       "page": null,
       "description": "Message Acknowledgment",
-      "chapterRef": "2"
+      "status": "2"
     },
     {
       "kind": "segment",
@@ -83,7 +71,7 @@
       "usage": null,
       "page": null,
       "description": "Error Segment",
-      "chapterRef": "2"
+      "status": "2"
     },
     {
       "kind": "group",
@@ -97,7 +85,7 @@
           "usage": null,
           "page": null,
           "description": "Widget Description",
-          "chapterRef": "XX"
+          "status": "XX"
         },
         {
           "kind": "segment",
@@ -107,7 +95,7 @@
           "usage": null,
           "page": null,
           "description": "Widget Portion",
-          "chapterRef": "XX"
+          "status": "XX"
         },
         {
           "kind": "group",
@@ -126,8 +114,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "A better concept group ABC, etc.",
-              "chapterRef": "XX XX XX XX"
+              "description": "A better concept group ABC, etc."
             }
           ],
           "minOccurs": 0,

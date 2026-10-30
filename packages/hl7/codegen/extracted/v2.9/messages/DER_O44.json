@@ -3,13 +3,12 @@
   "messageType": "DER",
   "triggerEvent": "O44",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "4.16.11 DER - Donor Eligibility Request (Event O44)",
+  "description": "Donor Registration - Minimal Message",
+  "title": "Donor Registration - Minimal Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "DER^O44^DER_O44: "
+    "table": "DER^O44^DER_O44: Donor Registration - Minimal Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "O44"
       ],
       "eventPrinted": "O44",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "DER^O44^DER_O44: ",
+      "table": "DER^O44^DER_O44: Donor Registration - Minimal Message",
       "identicalToPrimary": true
     }
   ],
@@ -31,8 +30,7 @@
       "maxOccurs": 1,
       "usage": null,
       "page": null,
-      "description": "Message Header",
-      "chapterRef": "2"
+      "description": "Message Header 2"
     },
     {
       "kind": "segment",
@@ -41,8 +39,7 @@
       "maxOccurs": "*",
       "usage": null,
       "page": null,
-      "description": "Access Restrictions",
-      "chapterRef": "3"
+      "description": "Access Restrictions 3"
     },
     {
       "kind": "segment",
@@ -51,8 +48,7 @@
       "maxOccurs": "*",
       "usage": null,
       "page": null,
-      "description": "Software Segment",
-      "chapterRef": "2"
+      "description": "Software Segment 2"
     },
     {
       "kind": "segment",
@@ -61,8 +57,7 @@
       "maxOccurs": 1,
       "usage": null,
       "page": null,
-      "description": "User Authentication Credential",
-      "chapterRef": "2"
+      "description": "User Authentication Credential 2"
     },
     {
       "kind": "group",
@@ -75,8 +70,7 @@
           "maxOccurs": 1,
           "usage": null,
           "page": null,
-          "description": "Patient Identification Segment",
-          "chapterRef": "3"
+          "description": "Patient Identification Segment 3"
         },
         {
           "kind": "segment",
@@ -85,8 +79,7 @@
           "maxOccurs": 1,
           "usage": null,
           "page": null,
-          "description": "Additional Demographics",
-          "chapterRef": "3"
+          "description": "Additional Demographics 3"
         },
         {
           "kind": "segment",
@@ -95,8 +88,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Participation",
-          "chapterRef": "7"
+          "description": "Participation 7"
         },
         {
           "kind": "group",
@@ -109,8 +101,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Donor Observations",
-              "chapterRef": "7"
+              "description": "Donor Observations 7"
             },
             {
               "kind": "segment",
@@ -119,8 +110,7 @@
               "maxOccurs": "*",
               "usage": null,
               "page": null,
-              "description": "Participation",
-              "chapterRef": "7"
+              "description": "Participation 7"
             }
           ],
           "minOccurs": 0,
@@ -135,8 +125,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Notes and Comments (for Donor)",
-          "chapterRef": "2"
+          "description": "Notes and Comments (for Donor) 2"
         },
         {
           "kind": "segment",
@@ -145,8 +134,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Allergy Information",
-          "chapterRef": "3"
+          "description": "Allergy Information 3"
         },
         {
           "kind": "segment",
@@ -155,9 +143,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "For backwards compatbility only as of V2.9.",
-          "status": "B",
-          "chapterRef": "3"
+          "description": "For backwards compatbility only as of V2.9. B 3"
         },
         {
           "kind": "group",
@@ -170,8 +156,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Patient Visit (Donor Registration)",
-              "chapterRef": "3"
+              "description": "Patient Visit (Donor Registration) 3"
             },
             {
               "kind": "segment",
@@ -180,8 +165,7 @@
               "maxOccurs": "*",
               "usage": null,
               "page": null,
-              "description": "Participation",
-              "chapterRef": "7"
+              "description": "Participation 7"
             },
             {
               "kind": "segment",
@@ -190,8 +174,7 @@
               "maxOccurs": "*",
               "usage": null,
               "page": null,
-              "description": "Notes and Comments (for Donor Registration)",
-              "chapterRef": "2"
+              "description": "Notes and Comments (for Donor Registration) 2"
             }
           ],
           "minOccurs": 0,
@@ -216,8 +199,7 @@
           "maxOccurs": 1,
           "usage": null,
           "page": null,
-          "description": "Observation",
-          "chapterRef": "4"
+          "description": "Observation 4"
         },
         {
           "kind": "segment",
@@ -226,8 +208,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Participation",
-          "chapterRef": "7"
+          "description": "Participation 7"
         },
         {
           "kind": "segment",
@@ -236,8 +217,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Notes and Comments (for Detail)",
-          "chapterRef": "2"
+          "description": "Notes and Comments (for Detail) 2"
         }
       ],
       "minOccurs": 1,

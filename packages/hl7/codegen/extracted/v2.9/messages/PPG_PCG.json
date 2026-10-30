@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Patient Pathway Goal-Oriented Message",
   "title": "Patient Pathway Goal-Oriented Message",
-  "sectionHeading": "12.3.4 PPG/ACK - Patient Pathway Message (Goal-Oriented) (Events PCG, PCH, PCJ)",
   "source": {
-    "pdf": "hl7.eu std29/ch12.html",
+    "pdf": "hl7.org V29_CH12_PatientCare.pdf",
     "pages": null,
     "table": "PPG^PCG,PCH,PCJ^PPG_PCG: Patient Pathway Goal-Oriented Message"
   },
@@ -19,7 +18,7 @@
         "PCJ"
       ],
       "eventPrinted": "PCG,PCH,PCJ",
-      "pdf": "hl7.eu std29/ch12.html",
+      "pdf": "hl7.org V29_CH12_PatientCare.pdf",
       "page": null,
       "table": "PPG^PCG,PCH,PCJ^PPG_PCG: Patient Pathway Goal-Oriented Message",
       "identicalToPrimary": true

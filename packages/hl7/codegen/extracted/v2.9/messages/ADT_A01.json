@@ -3,13 +3,12 @@
   "messageType": "ADT",
   "triggerEvent": "A01",
   "version": "2.9",
-  "description": "ADT Admission Message",
-  "title": "ADT Admission Message",
-  "sectionHeading": "3.3.1 ADT/ACK - Admit/Visit Notification (Event A01)",
+  "description": "ADT Message",
+  "title": "ADT Message",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
-    "table": "ADT^A01^ADT_A01: ADT Admission Message"
+    "table": "ADT^A01^ADT_A01: ADT Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "A01"
       ],
       "eventPrinted": "A01",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A01^ADT_A01: ADT Admission Message",
+      "table": "ADT^A01^ADT_A01: ADT Message",
       "identicalToPrimary": true
     },
     {
@@ -27,9 +26,9 @@
         "A04"
       ],
       "eventPrinted": "A04",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A04^ADT_A01: ADT Admission Message",
+      "table": "ADT^A04^ADT_A01: ADT Message",
       "identicalToPrimary": true
     },
     {
@@ -37,9 +36,9 @@
         "A08"
       ],
       "eventPrinted": "A08",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A08^ADT_A01: ADT Admission Message",
+      "table": "ADT^A08^ADT_A01: ADT Message",
       "identicalToPrimary": false
     },
     {
@@ -47,9 +46,9 @@
         "A13"
       ],
       "eventPrinted": "A13",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A13^ADT_A01: ADT Admission Message",
+      "table": "ADT^A13^ADT_A01: ADT Message",
       "identicalToPrimary": false
     }
   ],
@@ -584,9 +583,9 @@
   "variants": [
     {
       "eventPrinted": "A08",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "pages": null,
-      "table": "ADT^A08^ADT_A01: ADT Admission Message",
+      "table": "ADT^A08^ADT_A01: ADT Message",
       "items": [
         {
           "kind": "segment",
@@ -1129,9 +1128,9 @@
     },
     {
       "eventPrinted": "A13",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "pages": null,
-      "table": "ADT^A13^ADT_A01: ADT Admission Message",
+      "table": "ADT^A13^ADT_A01: ADT Message",
       "items": [
         {
           "kind": "segment",

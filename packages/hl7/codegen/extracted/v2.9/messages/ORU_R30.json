@@ -3,13 +3,12 @@
   "messageType": "ORU",
   "triggerEvent": "R30",
   "version": "2.9",
-  "description": "Observation Message",
-  "title": "Observation Message",
-  "sectionHeading": "7.3.4 ORU  Unsolicited Point-Of-Care Observation Message without Existing Order  Place an Order (Event R30)",
+  "description": "Observation Message:",
+  "title": "Observation Message:",
   "source": {
-    "pdf": "hl7.eu std29/ch07.html",
+    "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
     "pages": null,
-    "table": "ORU^R30^ORU_R30: Observation Message"
+    "table": "ORU^R30^ORU_R30: Observation Message:"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "R30"
       ],
       "eventPrinted": "R30",
-      "pdf": "hl7.eu std29/ch07.html",
+      "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
       "page": null,
-      "table": "ORU^R30^ORU_R30: Observation Message",
+      "table": "ORU^R30^ORU_R30: Observation Message:",
       "identicalToPrimary": true
     },
     {
@@ -27,7 +26,7 @@
         "R31"
       ],
       "eventPrinted": "R31",
-      "pdf": "hl7.eu std29/ch07.html",
+      "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
       "page": null,
       "table": "ORU^R31^ORU_R30: Observation Message",
       "identicalToPrimary": false
@@ -37,7 +36,7 @@
         "R32"
       ],
       "eventPrinted": "R32",
-      "pdf": "hl7.eu std29/ch07.html",
+      "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
       "page": null,
       "table": "ORU^R32^ORU_R30: Observation Message",
       "identicalToPrimary": false
@@ -216,7 +215,7 @@
           "maxOccurs": 1,
           "usage": null,
           "page": null,
-          "description": "Patient Visit \u0013 Additional",
+          "description": "Patient Visit â Additional",
           "chapterRef": "3"
         },
         {
@@ -391,7 +390,7 @@
   "variants": [
     {
       "eventPrinted": "R31",
-      "pdf": "hl7.eu std29/ch07.html",
+      "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
       "pages": null,
       "table": "ORU^R31^ORU_R30: Observation Message",
       "items": [
@@ -567,7 +566,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Patient Visit \u0013 Additional"
+              "description": "Patient Visit â Additional"
             },
             {
               "kind": "segment",
@@ -740,7 +739,7 @@
     },
     {
       "eventPrinted": "R32",
-      "pdf": "hl7.eu std29/ch07.html",
+      "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
       "pages": null,
       "table": "ORU^R32^ORU_R30: Observation Message",
       "items": [
@@ -916,7 +915,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Patient Visit \u0013 Additional"
+              "description": "Patient Visit â Additional"
             },
             {
               "kind": "segment",

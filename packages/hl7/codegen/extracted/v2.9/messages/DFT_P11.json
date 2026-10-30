@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Detail Financial Transaction - Expanded",
   "title": "Detail Financial Transaction - Expanded",
-  "sectionHeading": "6.4.8 DFT/ACK - Post Detail Financial Transactions - Expanded (Event P11)",
   "source": {
-    "pdf": "hl7.eu std29/ch06.html",
+    "pdf": "hl7.org V29_CH06_FinancialMngmt_tc.pdf",
     "pages": null,
     "table": "DFT^P11^DFT_P11: Detail Financial Transaction - Expanded"
   },
@@ -17,7 +16,7 @@
         "P11"
       ],
       "eventPrinted": "P11",
-      "pdf": "hl7.eu std29/ch06.html",
+      "pdf": "hl7.org V29_CH06_FinancialMngmt_tc.pdf",
       "page": null,
       "table": "DFT^P11^DFT_P11: Detail Financial Transaction - Expanded",
       "identicalToPrimary": true
@@ -325,8 +324,7 @@
           "maxOccurs": 1,
           "usage": null,
           "page": null,
-          "description": "Diagnosis (global across all FT1s)",
-          "chapterRef": "6"
+          "description": "Diagnosis (global across all FT1s)"
         }
       ],
       "minOccurs": 0,
@@ -385,7 +383,7 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Insurance - Add''l Info. - Cert.",
+          "description": "Insurance - Add'l Info. - Cert.",
           "chapterRef": "6"
         },
         {
@@ -490,6 +488,117 @@
               "description": "Role",
               "status": "B",
               "chapterRef": "15"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "FINANCIAL_OBSERVATION_STANDALONE",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Observation"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Participation"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes and Comment (on Result)"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "FINANCIAL_ORDER_STANDALONE",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBR",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Order Detail Segment"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Participation"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes and Comment (on Result)"
+            },
+            {
+              "kind": "group",
+              "name": "FINANCIAL_OBSERVATION",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "OBX",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Observation"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Participation"
+                },
+                {
+                  "kind": "segment",
+                  "name": "NTE",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Notes and Comment (on Result)"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
             }
           ],
           "minOccurs": 0,
@@ -648,8 +757,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Diagnosis (specific to above FT1)",
-              "chapterRef": "6"
+              "description": "Diagnosis (specific to above FT1)"
             }
           ],
           "minOccurs": 0,
@@ -708,7 +816,7 @@
               "maxOccurs": "*",
               "usage": null,
               "page": null,
-              "description": "Insurance - Add''l Info. - Cert.",
+              "description": "Insurance - Add'l Info. - Cert.",
               "chapterRef": "6"
             },
             {

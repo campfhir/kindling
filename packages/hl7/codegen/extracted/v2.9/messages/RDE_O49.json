@@ -3,13 +3,12 @@
   "messageType": "RDE",
   "triggerEvent": "O49",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "4A.3.24 RDE - Pharmacy/Treatment Dispense Request Message (Event O49)",
+  "description": "Pharmacy/Treatment Dispense Request Message",
+  "title": "Pharmacy/Treatment Dispense Request Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04A.html",
+    "pdf": "hl7.org V29_CH04A_Orders.pdf",
     "pages": null,
-    "table": "RDE^O49^RDE_O49: "
+    "table": "RDE^O49^RDE_O49: Pharmacy/Treatment Dispense Request Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "O49"
       ],
       "eventPrinted": "O49",
-      "pdf": "hl7.eu std29/ch04A.html",
+      "pdf": "hl7.org V29_CH04A_Orders.pdf",
       "page": null,
-      "table": "RDE^O49^RDE_O49: ",
+      "table": "RDE^O49^RDE_O49: Pharmacy/Treatment Dispense Request Message",
       "identicalToPrimary": true
     }
   ],
@@ -129,7 +128,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Patient Visit \u0013 Additional Info",
+              "description": "Patient Visit â Additional Info",
               "chapterRef": "3"
             },
             {
@@ -355,7 +354,7 @@
           "usage": null,
           "page": null,
           "description": "Participation (for Order)",
-          "status": "Deprecated",
+          "status": "Deprec ated",
           "chapterRef": "7"
         },
         {

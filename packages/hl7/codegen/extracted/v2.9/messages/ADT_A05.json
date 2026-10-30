@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "ADT Message",
   "title": "ADT Message",
-  "sectionHeading": "3.3.5 ADT/ACK - Pre-Admit a Patient (Event A05)",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
     "table": "ADT^A05^ADT_A05: ADT Message"
   },
@@ -17,7 +16,7 @@
         "A05"
       ],
       "eventPrinted": "A05",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
       "table": "ADT^A05^ADT_A05: ADT Message",
       "identicalToPrimary": true
@@ -27,7 +26,7 @@
         "A14"
       ],
       "eventPrinted": "A14",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
       "table": "ADT^A14^ADT_A05: ADT Message",
       "identicalToPrimary": false
@@ -37,7 +36,7 @@
         "A28"
       ],
       "eventPrinted": "A28",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
       "table": "ADT^A28^ADT_A05: ADT Message",
       "identicalToPrimary": false
@@ -47,7 +46,7 @@
         "A31"
       ],
       "eventPrinted": "A31",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
       "table": "ADT^A31^ADT_A05: ADT Message",
       "identicalToPrimary": false
@@ -578,7 +577,7 @@
   "variants": [
     {
       "eventPrinted": "A14",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "pages": null,
       "table": "ADT^A14^ADT_A05: ADT Message",
       "items": [
@@ -1103,7 +1102,7 @@
     },
     {
       "eventPrinted": "A28",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "pages": null,
       "table": "ADT^A28^ADT_A05: ADT Message",
       "items": [
@@ -1628,7 +1627,7 @@
     },
     {
       "eventPrinted": "A31",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "pages": null,
       "table": "ADT^A31^ADT_A05: ADT Message",
       "items": [

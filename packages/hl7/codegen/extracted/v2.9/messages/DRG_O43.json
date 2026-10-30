@@ -3,13 +3,12 @@
   "messageType": "DRG",
   "triggerEvent": "O43",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "4.16.10 DRG - Donor Registration (Event O43)",
+  "description": "Donor Registration Message",
+  "title": "Donor Registration Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "DRG^O43^DRG_O43: "
+    "table": "DRG^O43^DRG_O43: Donor Registration Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "O43"
       ],
       "eventPrinted": "O43",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "DRG^O43^DRG_O43: ",
+      "table": "DRG^O43^DRG_O43: Donor Registration Message",
       "identicalToPrimary": true
     }
   ],

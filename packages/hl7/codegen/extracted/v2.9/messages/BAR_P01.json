@@ -3,13 +3,12 @@
   "messageType": "BAR",
   "triggerEvent": "P01",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "6.4.1 BAR/ACK - Add Patient Account (Event P01)",
+  "description": "Add Billing Account",
+  "title": "Add Billing Account",
   "source": {
-    "pdf": "hl7.eu std29/ch06.html",
+    "pdf": "hl7.org V29_CH06_FinancialMngmt_tc.pdf",
     "pages": null,
-    "table": "BAR^P01^BAR_P01: "
+    "table": "BAR^P01^BAR_P01: Add Billing Account"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "P01"
       ],
       "eventPrinted": "P01",
-      "pdf": "hl7.eu std29/ch06.html",
+      "pdf": "hl7.org V29_CH06_FinancialMngmt_tc.pdf",
       "page": null,
-      "table": "BAR^P01^BAR_P01: ",
+      "table": "BAR^P01^BAR_P01: Add Billing Account",
       "identicalToPrimary": true
     }
   ],
@@ -310,7 +309,7 @@
               "maxOccurs": "*",
               "usage": null,
               "page": null,
-              "description": "Insurance - Add''l Info. - Cert.",
+              "description": "Insurance - Add'l Info. - Cert.",
               "chapterRef": "6"
             },
             {

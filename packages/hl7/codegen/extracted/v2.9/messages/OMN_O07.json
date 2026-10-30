@@ -6,7 +6,7 @@
   "description": "Nonstock Requisition Order Message",
   "title": "Nonstock Requisition Order Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
     "table": "OMN^O07^OMN_O07: Nonstock Requisition Order Message"
   },
@@ -16,7 +16,7 @@
         "O07"
       ],
       "eventPrinted": "O07",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
       "table": "OMN^O07^OMN_O07: Nonstock Requisition Order Message",
       "identicalToPrimary": true
@@ -149,7 +149,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Patient Visit - Additional Info",
+              "description": "Patient Visit â Additional Info",
               "chapterRef": "3"
             },
             {

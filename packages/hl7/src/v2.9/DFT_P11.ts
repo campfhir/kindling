@@ -1,7 +1,7 @@
 /**
  * Builder, parser and structure for DFT^P11 messages (HL7 v2.9).
  *
- * Structure: MSH [{SFT}] [UAC] EVN PID [{PRT}] [PD1] [{PRT}] [{ROL}] [ VISIT: [PV1] [PV2] [{PRT}] [{ROL}] ] [{DB1}] [{ COMMON_ORDER: ORC [{PRT}] [{ TIMING_QUANTITY: TQ1 [{TQ2}] }] [ ORDER: OBR [{PRT}] [{NTE}] ] [{ OBSERVATION: OBX [{PRT}] [{NTE}] }] }] [{ DIAGNOSIS: DG1 }] [DRG] [{GT1}] [{ INSURANCE: IN1 [IN2] [{IN3}] [{PRT}] [{ROL}] }] [ACC] { FINANCIAL: FT1 [{NTE}] [{PRT}] [{ FINANCIAL_PROCEDURE: PR1 [{PRT}] [{ROL}] }] [{ FINANCIAL_COMMON_ORDER: ORC [{PRT}] [{ FINANCIAL_TIMING_QUANTITY: TQ1 [{TQ2}] }] [ FINANCIAL_ORDER: OBR [{PRT}] [{NTE}] ] [{ FINANCIAL_OBSERVATION: OBX [{PRT}] [{NTE}] }] }] [{ DIAGNOSIS_FT1: DG1 }] [DRG] [{GT1}] [{ FINANCIAL_INSURANCE: IN1 [IN2] [{IN3}] [{PRT}] [{ROL}] }] }
+ * Structure: MSH [{SFT}] [UAC] EVN PID [{PRT}] [PD1] [{PRT}] [{ROL}] [ VISIT: [PV1] [PV2] [{PRT}] [{ROL}] ] [{DB1}] [{ COMMON_ORDER: ORC [{PRT}] [{ TIMING_QUANTITY: TQ1 [{TQ2}] }] [ ORDER: OBR [{PRT}] [{NTE}] ] [{ OBSERVATION: OBX [{PRT}] [{NTE}] }] }] [{ DIAGNOSIS: DG1 }] [DRG] [{GT1}] [{ INSURANCE: IN1 [IN2] [{IN3}] [{PRT}] [{ROL}] }] [ACC] { FINANCIAL: FT1 [{NTE}] [{PRT}] [{ FINANCIAL_PROCEDURE: PR1 [{PRT}] [{ROL}] }] [{ FINANCIAL_OBSERVATION_STANDALONE: OBX [{PRT}] [{NTE}] }] [{ FINANCIAL_ORDER_STANDALONE: OBR [{PRT}] [{NTE}] [{ FINANCIAL_OBSERVATION: OBX [{PRT}] [{NTE}] }] }] [{ FINANCIAL_COMMON_ORDER: ORC [{PRT}] [{ FINANCIAL_TIMING_QUANTITY: TQ1 [{TQ2}] }] [ FINANCIAL_ORDER: OBR [{PRT}] [{NTE}] ] [{ FINANCIAL_OBSERVATION: OBX [{PRT}] [{NTE}] }] }] [{ DIAGNOSIS_FT1: DG1 }] [DRG] [{GT1}] [{ FINANCIAL_INSURANCE: IN1 [IN2] [{IN3}] [{PRT}] [{ROL}] }] }
  *
  * @module
  */
@@ -137,6 +137,36 @@ export const DFT_P11_STRUCTURE: StructureItem[] = [
           { name: "PR1", required: true, repeating: false },
           { name: "PRT", required: false, repeating: true },
           { name: "ROL", required: false, repeating: true },
+        ],
+      },
+      {
+        name: "FINANCIAL_OBSERVATION_STANDALONE",
+        required: false,
+        repeating: true,
+        segments: [
+          { name: "OBX", required: true, repeating: false },
+          { name: "PRT", required: false, repeating: true },
+          { name: "NTE", required: false, repeating: true },
+        ],
+      },
+      {
+        name: "FINANCIAL_ORDER_STANDALONE",
+        required: false,
+        repeating: true,
+        segments: [
+          { name: "OBR", required: true, repeating: false },
+          { name: "PRT", required: false, repeating: true },
+          { name: "NTE", required: false, repeating: true },
+          {
+            name: "FINANCIAL_OBSERVATION",
+            required: false,
+            repeating: true,
+            segments: [
+              { name: "OBX", required: true, repeating: false },
+              { name: "PRT", required: false, repeating: true },
+              { name: "NTE", required: false, repeating: true },
+            ],
+          },
         ],
       },
       {
@@ -287,6 +317,10 @@ export interface ParsedFinancial {
   prtList?: PRT[];
   /** The FINANCIAL PROCEDURE groups. */
   financialProcedures?: ParsedFinancialProcedure[];
+  /** The FINANCIAL OBSERVATION STANDALONE groups. */
+  financialObservationStandalones?: ParsedFinancialObservationStandalone[];
+  /** The FINANCIAL ORDER STANDALONE groups. */
+  financialOrderStandalones?: ParsedFinancialOrderStandalone[];
   /** The FINANCIAL COMMON ORDER groups. */
   financialCommonOrders?: ParsedFinancialCommonOrder[];
   /** The DIAGNOSIS FT1 groups. */
@@ -309,6 +343,38 @@ export interface ParsedFinancialProcedure {
   roles?: ROL[];
 }
 
+/** The FINANCIAL OBSERVATION STANDALONE group of a parsed DFT^P11 (HL7 v2.9) message. */
+export interface ParsedFinancialObservationStandalone {
+  /** The OBX segment. */
+  observation: OBX;
+  /** The PRT segments. */
+  prtList?: PRT[];
+  /** The NTE segments. */
+  notes?: NTE[];
+}
+
+/** The FINANCIAL ORDER STANDALONE group of a parsed DFT^P11 (HL7 v2.9) message. */
+export interface ParsedFinancialOrderStandalone {
+  /** The OBR segment. */
+  observationRequest: OBR;
+  /** The PRT segments. */
+  prtList?: PRT[];
+  /** The NTE segments. */
+  notes?: NTE[];
+  /** The FINANCIAL OBSERVATION groups. */
+  financialObservations?: ParsedFinancialObservation1[];
+}
+
+/** The FINANCIAL OBSERVATION group of a parsed DFT^P11 (HL7 v2.9) message. */
+export interface ParsedFinancialObservation1 {
+  /** The OBX segment. */
+  observation: OBX;
+  /** The PRT segments. */
+  prtList?: PRT[];
+  /** The NTE segments. */
+  notes?: NTE[];
+}
+
 /** The FINANCIAL COMMON ORDER group of a parsed DFT^P11 (HL7 v2.9) message. */
 export interface ParsedFinancialCommonOrder {
   /** The ORC segment. */
@@ -320,7 +386,7 @@ export interface ParsedFinancialCommonOrder {
   /** The FINANCIAL ORDER group. */
   financialOrder?: ParsedFinancialOrder;
   /** The FINANCIAL OBSERVATION groups. */
-  financialObservations?: ParsedFinancialObservation[];
+  financialObservations?: ParsedFinancialObservation2[];
 }
 
 /** The FINANCIAL TIMING QUANTITY group of a parsed DFT^P11 (HL7 v2.9) message. */
@@ -342,7 +408,7 @@ export interface ParsedFinancialOrder {
 }
 
 /** The FINANCIAL OBSERVATION group of a parsed DFT^P11 (HL7 v2.9) message. */
-export interface ParsedFinancialObservation {
+export interface ParsedFinancialObservation2 {
   /** The OBX segment. */
   observation: OBX;
   /** The PRT segments. */
@@ -545,6 +611,10 @@ export interface FinancialGroup {
   prtList?: PRT[];
   /** The FINANCIAL PROCEDURE groups. */
   financialProcedures?: FinancialProcedureGroup[];
+  /** The FINANCIAL OBSERVATION STANDALONE groups. */
+  financialObservationStandalones?: FinancialObservationStandaloneGroup[];
+  /** The FINANCIAL ORDER STANDALONE groups. */
+  financialOrderStandalones?: FinancialOrderStandaloneGroup[];
   /** The FINANCIAL COMMON ORDER groups. */
   financialCommonOrders?: FinancialCommonOrderGroup[];
   /** The DIAGNOSIS FT1 groups. */
@@ -567,6 +637,38 @@ export interface FinancialProcedureGroup {
   roles?: ROL[];
 }
 
+/** The FINANCIAL OBSERVATION STANDALONE group of an DFT^P11 (HL7 v2.9) message being built. */
+export interface FinancialObservationStandaloneGroup {
+  /** The OBX segment. */
+  observation: OBX;
+  /** The PRT segments. */
+  prtList?: PRT[];
+  /** The NTE segments. */
+  notes?: NTE[];
+}
+
+/** The FINANCIAL ORDER STANDALONE group of an DFT^P11 (HL7 v2.9) message being built. */
+export interface FinancialOrderStandaloneGroup {
+  /** The OBR segment. */
+  observationRequest: OBR;
+  /** The PRT segments. */
+  prtList?: PRT[];
+  /** The NTE segments. */
+  notes?: NTE[];
+  /** The FINANCIAL OBSERVATION groups. */
+  financialObservations?: FinancialObservation1Group[];
+}
+
+/** The FINANCIAL OBSERVATION group of an DFT^P11 (HL7 v2.9) message being built. */
+export interface FinancialObservation1Group {
+  /** The OBX segment. */
+  observation: OBX;
+  /** The PRT segments. */
+  prtList?: PRT[];
+  /** The NTE segments. */
+  notes?: NTE[];
+}
+
 /** The FINANCIAL COMMON ORDER group of an DFT^P11 (HL7 v2.9) message being built. */
 export interface FinancialCommonOrderGroup {
   /** The ORC segment. */
@@ -578,7 +680,7 @@ export interface FinancialCommonOrderGroup {
   /** The FINANCIAL ORDER group. */
   financialOrder?: FinancialOrderGroup;
   /** The FINANCIAL OBSERVATION groups. */
-  financialObservations?: FinancialObservationGroup[];
+  financialObservations?: FinancialObservation2Group[];
 }
 
 /** The FINANCIAL TIMING QUANTITY group of an DFT^P11 (HL7 v2.9) message being built. */
@@ -600,7 +702,7 @@ export interface FinancialOrderGroup {
 }
 
 /** The FINANCIAL OBSERVATION group of an DFT^P11 (HL7 v2.9) message being built. */
-export interface FinancialObservationGroup {
+export interface FinancialObservation2Group {
   /** The OBX segment. */
   observation: OBX;
   /** The PRT segments. */

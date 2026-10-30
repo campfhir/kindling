@@ -3,13 +3,12 @@
   "messageType": "QBP",
   "triggerEvent": "Q34",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "4.16.8 QBP - Get Donor Record (Event Q34)",
+  "description": "Get Donor Record Message",
+  "title": "Get Donor Record Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "QBP^Q34^QBP_O34: "
+    "table": "QBP^Q34^QBP_O34: Get Donor Record Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "Q34"
       ],
       "eventPrinted": "Q34",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "QBP^Q34^QBP_O34: ",
+      "table": "QBP^Q34^QBP_O34: Get Donor Record Message",
       "identicalToPrimary": true
     }
   ],

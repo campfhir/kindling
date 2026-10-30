@@ -2,29 +2,103 @@
  * Builder, parser and structure for RTB^Z94 messages (HL7 v2.9).
  *
  * Structure: MSH [{SFT}] [UAC] MSA [ERR] QAK QPD [ ROW_DEFINITION: RDF [{RDT}] ] [DSC]
- * Shares the RTB^K13 structure.
  *
  * @module
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
-import { RTB_K13_Parser, type ParsedRTB_K13, RTB_K13, type RTB_K13Options, type RowDefinitionGroup } from "./RTB_K13.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import { MSH } from "./MSH.ts";
+import { SFT } from "./SFT.ts";
+import { UAC } from "./UAC.ts";
+import { MSA } from "./MSA.ts";
+import { ERR } from "./ERR.ts";
+import { QAK } from "./QAK.ts";
+import { QPD } from "./QPD.ts";
+import { RDF } from "./RDF.ts";
+import { RDT } from "./RDT.ts";
+import { DSC } from "./DSC.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
-import type { MSH } from "./MSH.ts";
-import type { MSA } from "./MSA.ts";
-import type { QAK } from "./QAK.ts";
-import type { QPD } from "./QPD.ts";
 
-export { RTB_K13_STRUCTURE as RTB_Z94_STRUCTURE } from "./RTB_K13.ts";
+/** The segments, choices and groups of RTB^Z94 (HL7 v2.9), in order. */
+export const RTB_Z94_STRUCTURE: StructureItem[] = [
+  { name: "MSH", required: true, repeating: false },
+  { name: "SFT", required: false, repeating: true },
+  { name: "UAC", required: false, repeating: false },
+  { name: "MSA", required: true, repeating: false },
+  { name: "ERR", required: false, repeating: false },
+  { name: "QAK", required: true, repeating: false },
+  { name: "QPD", required: true, repeating: false },
+  {
+    name: "ROW_DEFINITION",
+    required: false,
+    repeating: false,
+    segments: [
+      { name: "RDF", required: true, repeating: false },
+      { name: "RDT", required: false, repeating: true },
+    ],
+  },
+  { name: "DSC", required: false, repeating: false },
+];
 
-export type { ParsedRowDefinition } from "./RTB_K13.ts";
+/** The ROW DEFINITION group of a parsed RTB^Z94 (HL7 v2.9) message. */
+export interface ParsedRowDefinition {
+  /** The RDF segment. */
+  rowDefinition: RDF;
+  /** The RDT segments. */
+  rows?: RDT[];
+}
+
 /** Structured result of parsing an HL7 RTB^Z94 (HL7 v2.9) message. */
-export type ParsedRTB_Z94 = ParsedRTB_K13;
+export interface ParsedRTB_Z94 extends ParsedMessageBase {
+  /** The MSH segment. */
+  header: MSH;
+  /** The SFT segments. */
+  software?: SFT[];
+  /** The UAC segment. */
+  uac?: UAC;
+  /** The MSA segment. */
+  acknowledgment: MSA;
+  /** The ERR segment. */
+  error?: ERR;
+  /** The QAK segment. */
+  queryAcknowledgment: QAK;
+  /** The QPD segment. */
+  queryParameters: QPD;
+  /** The ROW DEFINITION group. */
+  rowDefinition?: ParsedRowDefinition;
+  /** The DSC segment. */
+  continuation?: DSC;
+}
+
+/** The segment parsers of RTB^Z94 (HL7 v2.9). */
+const PARSERS: SegmentParsers = {
+  MSH: (s) => MSH.parse(s),
+  SFT: (s, e) => SFT.parse(s, e),
+  UAC: (s, e) => UAC.parse(s, e),
+  MSA: (s, e) => MSA.parse(s, e),
+  ERR: (s, e) => ERR.parse(s, e),
+  QAK: (s, e) => QAK.parse(s, e),
+  QPD: (s, e) => QPD.parse(s, e),
+  RDF: (s, e) => RDF.parse(s, e),
+  RDT: (s, e) => RDT.parse(s, e),
+  DSC: (s, e) => DSC.parse(s, e),
+};
 
 /** Parser for HL7 RTB^Z94 (HL7 v2.9) messages. */
-export class RTB_Z94_Parser extends RTB_K13_Parser {
+export class RTB_Z94_Parser {
   /** The message name used in error messages. */
-  protected override readonly messageName: string = "RTB_Z94";
+  protected readonly messageName: string = "RTB_Z94";
+  /** The structure the message is parsed against. */
+  protected readonly structure: StructureItem[] = RTB_Z94_STRUCTURE;
+  /** The segment parsers, keyed by segment name. */
+  protected readonly parsers: SegmentParsers = PARSERS;
+
+  /** Parses the input string into a structured instance. */
+  parse(messageString: string): Result<ParsedRTB_Z94> {
+    return parseStructure<ParsedRTB_Z94>(this.messageName, this.structure, this.parsers, messageString);
+  }
 }
 
 /** Parses an HL7 RTB^Z94 (HL7 v2.9) message string into a structured result. */
@@ -32,14 +106,64 @@ export function parseRTB_Z94(messageString: string): Result<ParsedRTB_Z94> {
   return new RTB_Z94_Parser().parse(messageString);
 }
 
-export type { RowDefinitionGroup };
+/** The ROW DEFINITION group of an RTB^Z94 (HL7 v2.9) message being built. */
+export interface RowDefinitionGroup {
+  /** The RDF segment. */
+  rowDefinition: RDF;
+  /** The RDT segments. */
+  rows?: RDT[];
+}
+
 /** The optional segments and groups of an RTB^Z94 (HL7 v2.9) message. */
-export type RTB_Z94Options = RTB_K13Options;
+export interface RTB_Z94Options {
+  /** The SFT segments. */
+  software?: SFT[];
+  /** The UAC segment. */
+  uac?: UAC;
+  /** The ERR segment. */
+  error?: ERR;
+  /** The ROW DEFINITION group. */
+  rowDefinition?: RowDefinitionGroup;
+  /** The DSC segment. */
+  continuation?: DSC;
+}
 
 /** Builder for HL7 RTB^Z94 (HL7 v2.9) messages. */
-export class RTB_Z94<TMSH extends MSH = MSH, TMSA extends MSA = MSA, TQAK extends QAK = QAK, TQPD extends QPD = QPD> extends RTB_K13<TMSH, TMSA, TQAK, TQPD> {
+export class RTB_Z94<TMSH extends MSH = MSH, TMSA extends MSA = MSA, TQAK extends QAK = QAK, TQPD extends QPD = QPD> {
   /** The message name used in error messages. */
-  protected override readonly messageName: string = "RTB_Z94";
+  protected readonly messageName: string = "RTB_Z94";
+  /** The structure the message is verified against and encoded in. */
+  protected readonly structure: StructureItem[] = RTB_Z94_STRUCTURE;
+
+  /** Constructor. */
+  constructor(
+    public header: TMSH,
+    public acknowledgment: TMSA,
+    public queryAcknowledgment: TQAK,
+    public queryParameters: TQPD,
+    public options: RTB_Z94Options = {},
+    protected encoding: EncodingCharacters = DEFAULT_ENCODING,
+  ) {}
+
+  /** The message as one object keyed by structure property name (what verify() and encode() work on). */
+  toInput(): StructureInput {
+    return { ...this.options, header: this.header, acknowledgment: this.acknowledgment, queryAcknowledgment: this.queryAcknowledgment, queryParameters: this.queryParameters };
+  }
+
+  /** Validates the message structure, returning a result. */
+  verify(): { valid: boolean; errors: string[] } {
+    const errors = verifyStructure(this.structure, this.toInput());
+    return { valid: errors.length === 0, errors };
+  }
+
+  /** Encodes this message to its HL7 wire string. */
+  encode(): string {
+    const verification = this.verify();
+    if (!verification.valid) {
+      throw new Error(`Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`);
+    }
+    return encodeStructure(this.structure, this.toInput(), this.encoding);
+  }
 }
 
 /** Builds an HL7 RTB^Z94 (HL7 v2.9) message. */

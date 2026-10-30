@@ -3,13 +3,12 @@
   "messageType": "ADT",
   "triggerEvent": "A38",
   "version": "2.9",
-  "description": "Swap (2)",
-  "title": "Swap (2)",
-  "sectionHeading": "3.3.38 ADT/ACK - Cancel Pre-Admit (Event A38)",
+  "description": "ADT Message",
+  "title": "ADT Message",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
-    "table": "ADT^A38^ADT_A38: Swap (2)"
+    "table": "ADT^A38^ADT_A38: ADT Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "A38"
       ],
       "eventPrinted": "A38",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A38^ADT_A38: Swap (2)",
+      "table": "ADT^A38^ADT_A38: ADT Message",
       "identicalToPrimary": true
     }
   ],

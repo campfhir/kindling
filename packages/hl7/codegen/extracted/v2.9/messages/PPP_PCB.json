@@ -5,11 +5,10 @@
   "version": "2.9",
   "description": "Patient Pathway Problem-Oriented Message",
   "title": "Patient Pathway Problem-Oriented Message",
-  "sectionHeading": "12.3.3 PPP/ACK - Patient Pathway Message (Problem-Oriented) (Events PCB, PCC, PCD)",
   "source": {
-    "pdf": "hl7.eu std29/ch12.html",
+    "pdf": "hl7.org V29_CH12_PatientCare.pdf",
     "pages": null,
-    "table": "PPP^PCB,PCC,PCD^PPP_PCB: Patient Pathway Problem-Oriented Message"
+    "table": "PPP^PCB-PCD^PPP_PCB: Patient Pathway Problem-Oriented Message"
   },
   "triggerEvents": [
     {
@@ -18,10 +17,10 @@
         "PCC",
         "PCD"
       ],
-      "eventPrinted": "PCB,PCC,PCD",
-      "pdf": "hl7.eu std29/ch12.html",
+      "eventPrinted": "PCB-PCD",
+      "pdf": "hl7.org V29_CH12_PatientCare.pdf",
       "page": null,
-      "table": "PPP^PCB,PCC,PCD^PPP_PCB: Patient Pathway Problem-Oriented Message",
+      "table": "PPP^PCB-PCD^PPP_PCB: Patient Pathway Problem-Oriented Message",
       "identicalToPrimary": true
     }
   ],

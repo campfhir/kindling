@@ -6,7 +6,7 @@
   "description": "Submit HealthCare Services Invoice",
   "title": "Submit HealthCare Services Invoice",
   "source": {
-    "pdf": "hl7.eu std29/ch16.html",
+    "pdf": "hl7.org V29_CH16_eClaims_tc.pdf",
     "pages": null,
     "table": "EHC^E01^EHC_E01: Submit HealthCare Services Invoice"
   },
@@ -16,7 +16,7 @@
         "E01"
       ],
       "eventPrinted": "E01",
-      "pdf": "hl7.eu std29/ch16.html",
+      "pdf": "hl7.org V29_CH16_eClaims_tc.pdf",
       "page": null,
       "table": "EHC^E01^EHC_E01: Submit HealthCare Services Invoice",
       "identicalToPrimary": true
@@ -121,8 +121,8 @@
           "maxOccurs": "*",
           "usage": null,
           "page": null,
-          "description": "Role",
-          "status": "B",
+          "description": "Deprecated as of V2.9Role",
+          "status": "Deprec atedB",
           "chapterRef": "15"
         },
         {
@@ -178,8 +178,8 @@
                   "maxOccurs": "*",
                   "usage": null,
                   "page": null,
-                  "description": "Role",
-                  "status": "B",
+                  "description": "Deprecated as of V2.9Role",
+                  "status": "Deprec atedB",
                   "chapterRef": "15"
                 },
                 {
@@ -223,7 +223,7 @@
                       "maxOccurs": 1,
                       "usage": null,
                       "page": null,
-                      "description": "Patient Visit \u0013 Additional Info",
+                      "description": "Patient Visit â Additional Info",
                       "chapterRef": "3"
                     },
                     {
@@ -383,8 +383,8 @@
                       "maxOccurs": "*",
                       "usage": null,
                       "page": null,
-                      "description": "Role",
-                      "status": "B",
+                      "description": "Deprecated as of V2.9Role",
+                      "status": "Deprec atedB",
                       "chapterRef": "15"
                     }
                   ],
@@ -431,8 +431,8 @@
                       "maxOccurs": "*",
                       "usage": null,
                       "page": null,
-                      "description": "Role",
-                      "status": "B"
+                      "description": "Deprecated as of V2.9Role",
+                      "status": "Deprec atedB"
                     }
                   ],
                   "minOccurs": 0,

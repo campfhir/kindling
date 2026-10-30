@@ -3,13 +3,12 @@
   "messageType": "OPR",
   "triggerEvent": "O38",
   "version": "2.9",
-  "description": "Population/Location-Based Laboratory Order Acknowl",
-  "title": "Population/Location-Based Laboratory Order Acknowl",
-  "sectionHeading": "4.4.17 OPR  Population/Location-Based Laboratory Order Acknowledgment Message (Event O38)",
+  "description": "Population/Location-Based Laboratory Order Acknowledgment Message",
+  "title": "Population/Location-Based Laboratory Order Acknowledgment Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "OPR^O38^OPR_O38: Population/Location-Based Laboratory Order Acknowl"
+    "table": "OPR^O38^OPR_O38: Population/Location-Based Laboratory Order Acknowledgment Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "O38"
       ],
       "eventPrinted": "O38",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "OPR^O38^OPR_O38: Population/Location-Based Laboratory Order Acknowl",
+      "table": "OPR^O38^OPR_O38: Population/Location-Based Laboratory Order Acknowledgment Message",
       "identicalToPrimary": true
     }
   ],

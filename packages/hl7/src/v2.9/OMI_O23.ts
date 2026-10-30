@@ -1,7 +1,7 @@
 /**
  * Builder, parser and structure for OMI^O23 messages (HL7 v2.9).
  *
- * Structure: MSH [{ARV}] [{SFT}] [UAC] [{NTE}] [ PATIENT: PID [PD1] [{PRT}] [ OCCUPATIONAL_DATA_FOR_HEALTH: [{OH1}] [{OH2}] [OH3] [{OH4}] ] [{ARV}] [{NTE}] [ PATIENT_VISIT: PV1 [PV2] [{PRT}] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC [{PRT}] [{ TIMING: TQ1 [{TQ2}] }] OBR [{NTE}] [{PRT}] [CTD] [{DG1}] [{REL}] [{ OBSERVATION: OBX [{PRT}] [{NTE}] }] {IPC} } [{ DEVICE: DEV [{OBX}] }]
+ * Structure: MSH [{ARV}] [{SFT}] [UAC] [{NTE}] [ PATIENT: PID [PD1] [{PRT}] [ OCCUPATIONAL_DATA_FOR_HEALTH: [{OH1}] [{OH2}] [OH3] [{OH4}] ] [{ARV}] [{NTE}] [ PATIENT_VISIT: PV1 [PV2] [{PRT}] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC [{PRT}] [{ TIMING: TQ1 [{TQ2}] }] OBR [{NTE}] [{PRT}] [CTD] [{DG1}] [REL] [{ OBSERVATION: OBX [{PRT}] [{NTE}] }] {IPC} } [{ DEVICE: DEV [{OBX}] }]
  *
  * @module
  */
@@ -113,7 +113,7 @@ export const OMI_O23_STRUCTURE: StructureItem[] = [
       { name: "PRT", required: false, repeating: true, as: "prt2" },
       { name: "CTD", required: false, repeating: false },
       { name: "DG1", required: false, repeating: true },
-      { name: "REL", required: false, repeating: true },
+      { name: "REL", required: false, repeating: false },
       {
         name: "OBSERVATION",
         required: false,
@@ -212,8 +212,8 @@ export interface ParsedOrder {
   contact?: CTD;
   /** The DG1 segments. */
   diagnoses?: DG1[];
-  /** The REL segments. */
-  relList?: REL[];
+  /** The REL segment. */
+  rel?: REL;
   /** The OBSERVATION groups. */
   observations?: ParsedObservation[];
   /** The IPC segments. */
@@ -393,8 +393,8 @@ export interface OrderGroup {
   contact?: CTD;
   /** The DG1 segments. */
   diagnoses?: DG1[];
-  /** The REL segments. */
-  relList?: REL[];
+  /** The REL segment. */
+  rel?: REL;
   /** The OBSERVATION groups. */
   observations?: ObservationGroup[];
   /** The IPC segments. */

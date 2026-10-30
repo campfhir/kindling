@@ -3,13 +3,12 @@
   "messageType": "BAR",
   "triggerEvent": "P12",
   "version": "2.9",
-  "description": "Update Diagnosis/Procedure",
-  "title": "Update Diagnosis/Procedure",
-  "sectionHeading": "6.4.9 BAR/ACK - Update Diagnosis/Procedure (Event P12)",
+  "description": "Update Diagnosis/Procedures",
+  "title": "Update Diagnosis/Procedures",
   "source": {
-    "pdf": "hl7.eu std29/ch06.html",
+    "pdf": "hl7.org V29_CH06_FinancialMngmt_tc.pdf",
     "pages": null,
-    "table": "BAR^P12^BAR_P12: Update Diagnosis/Procedure"
+    "table": "BAR^P12^BAR_P12: Update Diagnosis/Procedures"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "P12"
       ],
       "eventPrinted": "P12",
-      "pdf": "hl7.eu std29/ch06.html",
+      "pdf": "hl7.org V29_CH06_FinancialMngmt_tc.pdf",
       "page": null,
-      "table": "BAR^P12^BAR_P12: Update Diagnosis/Procedure",
+      "table": "BAR^P12^BAR_P12: Update Diagnosis/Procedures",
       "identicalToPrimary": true
     }
   ],

@@ -3,13 +3,12 @@
   "messageType": "SLR",
   "triggerEvent": "S28",
   "version": "2.9",
-  "description": "Notification of Sterilization Lot Deletion",
-  "title": "Notification of Sterilization Lot Deletion",
-  "sectionHeading": "17.5.1 SLR/ACK/SLS - Request New Sterilization Lot (Event S28)",
+  "description": "Request New Sterilization",
+  "title": "Request New Sterilization",
   "source": {
-    "pdf": "hl7.eu std29/ch17.html",
+    "pdf": "hl7.org V29_CH17_MaterialsMngmt_tc.pdf",
     "pages": null,
-    "table": "SLR^S28^SLR_S28: Notification of Sterilization Lot Deletion"
+    "table": "SLR^S28^SLR_S28: Request New Sterilization"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "S28"
       ],
       "eventPrinted": "S28",
-      "pdf": "hl7.eu std29/ch17.html",
+      "pdf": "hl7.org V29_CH17_MaterialsMngmt_tc.pdf",
       "page": null,
-      "table": "SLR^S28^SLR_S28: Notification of Sterilization Lot Deletion",
+      "table": "SLR^S28^SLR_S28: Request New Sterilization",
       "identicalToPrimary": true
     },
     {
@@ -27,9 +26,9 @@
         "S28"
       ],
       "eventPrinted": "S28",
-      "pdf": "hl7.eu std29/ch17.html",
+      "pdf": "hl7.org V29_CH17_MaterialsMngmt_tc.pdf",
       "page": null,
-      "table": "SLS^S28^SLR_S28: Notification of Sterilization Lot Deletion",
+      "table": "SLS^S28^SLR_S28: Request New Sterilization",
       "identicalToPrimary": true
     },
     {
@@ -37,9 +36,9 @@
         "S29"
       ],
       "eventPrinted": "S29",
-      "pdf": "hl7.eu std29/ch17.html",
+      "pdf": "hl7.org V29_CH17_MaterialsMngmt_tc.pdf",
       "page": null,
-      "table": "SLR^S29^SLR_S28: Notification of Sterilization Lot Deletion",
+      "table": "SLR^S29^SLR_S28: Request Sterilization Lot Deletion",
       "identicalToPrimary": true
     },
     {
@@ -47,9 +46,9 @@
         "S29"
       ],
       "eventPrinted": "S29",
-      "pdf": "hl7.eu std29/ch17.html",
+      "pdf": "hl7.org V29_CH17_MaterialsMngmt_tc.pdf",
       "page": null,
-      "table": "SLS^S29^SLR_S28: Notification of Sterilization Lot Deletion",
+      "table": "SLS^S29^SLR_S28: Request New Sterilization",
       "identicalToPrimary": true
     },
     {
@@ -57,9 +56,9 @@
         "S30"
       ],
       "eventPrinted": "S30",
-      "pdf": "hl7.eu std29/ch17.html",
+      "pdf": "hl7.org V29_CH17_MaterialsMngmt_tc.pdf",
       "page": null,
-      "table": "STI^S30^SLR_S28: Notification of Sterilization Lot Deletion",
+      "table": "STI^S30^SLR_S28: Sterilization Item Request",
       "identicalToPrimary": true
     },
     {
@@ -67,9 +66,9 @@
         "S30"
       ],
       "eventPrinted": "S30",
-      "pdf": "hl7.eu std29/ch17.html",
+      "pdf": "hl7.org V29_CH17_MaterialsMngmt_tc.pdf",
       "page": null,
-      "table": "STS^S30^SLR_S28: Notification of Sterilization Lot Deletion",
+      "table": "STS^S30^SLR_S28: Sterilization Item Request",
       "identicalToPrimary": true
     },
     {
@@ -77,9 +76,9 @@
         "S34"
       ],
       "eventPrinted": "S34",
-      "pdf": "hl7.eu std29/ch17.html",
+      "pdf": "hl7.org V29_CH17_MaterialsMngmt_tc.pdf",
       "page": null,
-      "table": "SLN^S34^SLR_S28: Notification of Sterilization Lot Deletion",
+      "table": "SLN^S34^SLR_S28: Notification of New Sterilization Lot",
       "identicalToPrimary": true
     },
     {
@@ -87,7 +86,7 @@
         "S35"
       ],
       "eventPrinted": "S35",
-      "pdf": "hl7.eu std29/ch17.html",
+      "pdf": "hl7.org V29_CH17_MaterialsMngmt_tc.pdf",
       "page": null,
       "table": "SLN^S35^SLR_S28: Notification of Sterilization Lot Deletion",
       "identicalToPrimary": true

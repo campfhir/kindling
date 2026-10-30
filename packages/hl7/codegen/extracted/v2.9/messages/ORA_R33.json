@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Observation Report Acknowledgement",
   "title": "Observation Report Acknowledgement",
-  "sectionHeading": "7.3.7 ORA  Observation Report Acknowledgement (Event R33)",
   "source": {
-    "pdf": "hl7.eu std29/ch07.html",
+    "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
     "pages": null,
     "table": "ORA^R33^ORA_R33: Observation Report Acknowledgement"
   },
@@ -17,7 +16,7 @@
         "R33"
       ],
       "eventPrinted": "R33",
-      "pdf": "hl7.eu std29/ch07.html",
+      "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
       "page": null,
       "table": "ORA^R33^ORA_R33: Observation Report Acknowledgement",
       "identicalToPrimary": true

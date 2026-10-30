@@ -3,13 +3,12 @@
   "messageType": "DBC",
   "triggerEvent": "O41",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "4.16.4 DBC - Create Donor Record Message (Event O41 )",
+  "description": "Create Donor Record Message",
+  "title": "Create Donor Record Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "DBC^O41^DBC_O41: "
+    "table": "DBC^O41^DBC_O41: Create Donor Record Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "O41"
       ],
       "eventPrinted": "O41",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "DBC^O41^DBC_O41: ",
+      "table": "DBC^O41^DBC_O41: Create Donor Record Message",
       "identicalToPrimary": true
     }
   ],

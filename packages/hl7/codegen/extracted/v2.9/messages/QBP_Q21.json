@@ -3,12 +3,12 @@
   "messageType": "QBP",
   "triggerEvent": "Q21",
   "version": "2.9",
-  "description": "Query Personnel Information Message",
-  "title": "Query Personnel Information Message",
+  "description": "Query By Parameter",
+  "title": "Query By Parameter",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
-    "table": "QBP^Q21^QBP_Q21: Query Personnel Information Message"
+    "table": "QBP^Q21^QBP_Q21: Query By Parameter"
   },
   "triggerEvents": [
     {
@@ -16,9 +16,9 @@
         "Q21"
       ],
       "eventPrinted": "Q21",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "QBP^Q21^QBP_Q21: Query Personnel Information Message",
+      "table": "QBP^Q21^QBP_Q21: Query By Parameter",
       "identicalToPrimary": true
     },
     {
@@ -26,9 +26,9 @@
         "Q22"
       ],
       "eventPrinted": "Q22",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "QBP^Q22^QBP_Q21: Query Personnel Information Message",
+      "table": "QBP^Q22^QBP_Q21: Query By Parameter",
       "identicalToPrimary": true
     },
     {
@@ -36,9 +36,9 @@
         "Q23"
       ],
       "eventPrinted": "Q23",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "QBP^Q23^QBP_Q21: Query Personnel Information Message",
+      "table": "QBP^Q23^QBP_Q21: Query By Parameter",
       "identicalToPrimary": true
     },
     {
@@ -46,9 +46,9 @@
         "Q24"
       ],
       "eventPrinted": "Q24",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "QBP^Q24^QBP_Q21: Query Personnel Information Message",
+      "table": "QBP^Q24^QBP_Q21: Query By Parameter",
       "identicalToPrimary": true
     },
     {
@@ -56,9 +56,9 @@
         "Q32"
       ],
       "eventPrinted": "Q32",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "QBP^Q32^QBP_Q21: Query Personnel Information Message",
+      "table": "QBP^Q32^QBP_Q21: Query By Parameter",
       "identicalToPrimary": true
     }
   ],

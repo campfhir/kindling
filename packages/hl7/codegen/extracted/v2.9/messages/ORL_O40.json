@@ -3,12 +3,12 @@
   "messageType": "ORL",
   "triggerEvent": "O40",
   "version": "2.9",
-  "description": "Specimen Shipment Centric Laboratory Order Acknowl",
-  "title": "Specimen Shipment Centric Laboratory Order Acknowl",
+  "description": "Specimen Shipment Centric Laboratory Order Acknowledgment Message (Patient Required)",
+  "title": "Specimen Shipment Centric Laboratory Order Acknowledgment Message (Patient Required)",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "ORL^O40^ORL_O40: Specimen Shipment Centric Laboratory Order Acknowl"
+    "table": "ORL^O40^ORL_O40: Specimen Shipment Centric Laboratory Order Acknowledgment Message (Patient Required)"
   },
   "triggerEvents": [
     {
@@ -16,9 +16,9 @@
         "O40"
       ],
       "eventPrinted": "O40",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "ORL^O40^ORL_O40: Specimen Shipment Centric Laboratory Order Acknowl",
+      "table": "ORL^O40^ORL_O40: Specimen Shipment Centric Laboratory Order Acknowledgment Message (Patient Required)",
       "identicalToPrimary": true
     }
   ],

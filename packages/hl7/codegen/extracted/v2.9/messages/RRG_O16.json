@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Pharmacy/Treatment Give Acknowledgment Message",
   "title": "Pharmacy/Treatment Give Acknowledgment Message",
-  "sectionHeading": "4A.3.12 RRG - Pharmacy/Treatment Give Acknowledgment Message (Event O16)",
   "source": {
-    "pdf": "hl7.eu std29/ch04A.html",
+    "pdf": "hl7.org V29_CH04A_Orders.pdf",
     "pages": null,
     "table": "RRG^O16^RRG_O16: Pharmacy/Treatment Give Acknowledgment Message"
   },
@@ -17,7 +16,7 @@
         "O16"
       ],
       "eventPrinted": "O16",
-      "pdf": "hl7.eu std29/ch04A.html",
+      "pdf": "hl7.org V29_CH04A_Orders.pdf",
       "page": null,
       "table": "RRG^O16^RRG_O16: Pharmacy/Treatment Give Acknowledgment Message",
       "identicalToPrimary": true

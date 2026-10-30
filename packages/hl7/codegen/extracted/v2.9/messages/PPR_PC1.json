@@ -5,11 +5,10 @@
   "version": "2.9",
   "description": "Patient Problem Message",
   "title": "Patient Problem Message",
-  "sectionHeading": "12.3.2 PPR/ACK - Patient Problem Message (Events PC1, PC2, PC3)",
   "source": {
-    "pdf": "hl7.eu std29/ch12.html",
+    "pdf": "hl7.org V29_CH12_PatientCare.pdf",
     "pages": null,
-    "table": "PPR^PC1,PC2,PC3^PPR_PC1: Patient Problem Message"
+    "table": "PPR^PC1-PC3^PPR_PC1: Patient Problem Message"
   },
   "triggerEvents": [
     {
@@ -18,10 +17,10 @@
         "PC2",
         "PC3"
       ],
-      "eventPrinted": "PC1,PC2,PC3",
-      "pdf": "hl7.eu std29/ch12.html",
+      "eventPrinted": "PC1-PC3",
+      "pdf": "hl7.org V29_CH12_PatientCare.pdf",
       "page": null,
-      "table": "PPR^PC1,PC2,PC3^PPR_PC1: Patient Problem Message",
+      "table": "PPR^PC1-PC3^PPR_PC1: Patient Problem Message",
       "identicalToPrimary": true
     }
   ],

@@ -3,13 +3,12 @@
   "messageType": "OSU",
   "triggerEvent": "O52",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "4.4.19 OSU  Order Status Update Acknowledgement (Event O52)",
+  "description": "Order Status Update Acknowledgement Message",
+  "title": "Order Status Update Acknowledgement Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "OSU^O52^OSU_O52: "
+    "table": "OSU^O52^OSU_O52: Order Status Update Acknowledgement Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "O52"
       ],
       "eventPrinted": "O52",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "OSU^O52^OSU_O52: ",
+      "table": "OSU^O52^OSU_O52: Order Status Update Acknowledgement Message",
       "identicalToPrimary": true
     }
   ],

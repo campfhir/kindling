@@ -3,13 +3,12 @@
   "messageType": "ADT",
   "triggerEvent": "A03",
   "version": "2.9",
-  "description": "ADT Discharge Message",
-  "title": "ADT Discharge Message",
-  "sectionHeading": "3.3.3 ADT/ACK - Discharge/End Visit (Event A03)",
+  "description": "ADT Message",
+  "title": "ADT Message",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
-    "table": "ADT^A03^ADT_A03: ADT Discharge Message"
+    "table": "ADT^A03^ADT_A03: ADT Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "A03"
       ],
       "eventPrinted": "A03",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A03^ADT_A03: ADT Discharge Message",
+      "table": "ADT^A03^ADT_A03: ADT Message",
       "identicalToPrimary": true
     }
   ],

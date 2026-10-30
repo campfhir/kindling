@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Collaborative Care Fetch",
   "title": "Collaborative Care Fetch",
-  "sectionHeading": "11.7.2 CCF/CCI  Collaborative Care Fetch / Collaborative Care Information (Event I22)",
   "source": {
-    "pdf": "hl7.eu std29/ch11.html",
+    "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
     "pages": null,
     "table": "CCF^I22^CCF_I22: Collaborative Care Fetch"
   },
@@ -17,7 +16,7 @@
         "I22"
       ],
       "eventPrinted": "I22",
-      "pdf": "hl7.eu std29/ch11.html",
+      "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
       "page": null,
       "table": "CCF^I22^CCF_I22: Collaborative Care Fetch",
       "identicalToPrimary": true

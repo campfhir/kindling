@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "ADT Message",
   "title": "ADT Message",
-  "sectionHeading": "3.3.15 ADT/ACK - Pending Transfer (Event A15)",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
     "table": "ADT^A15^ADT_A15: ADT Message"
   },
@@ -17,7 +16,7 @@
         "A15"
       ],
       "eventPrinted": "A15",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
       "table": "ADT^A15^ADT_A15: ADT Message",
       "identicalToPrimary": true

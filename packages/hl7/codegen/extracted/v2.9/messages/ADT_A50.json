@@ -3,13 +3,12 @@
   "messageType": "ADT",
   "triggerEvent": "A50",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "3.3.50 ADT/ACK - Change Visit Number (Event A50)",
+  "description": "ADT Message",
+  "title": "ADT Message",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
-    "table": "ADT^A50^ADT_A50: "
+    "table": "ADT^A50^ADT_A50: ADT Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "A50"
       ],
       "eventPrinted": "A50",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A50^ADT_A50: ",
+      "table": "ADT^A50^ADT_A50: ADT Message",
       "identicalToPrimary": true
     },
     {
@@ -27,9 +26,9 @@
         "A51"
       ],
       "eventPrinted": "A51",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A51^ADT_A50: ",
+      "table": "ADT^A51^ADT_A50: ADT Message",
       "identicalToPrimary": true
     }
   ],

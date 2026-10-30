@@ -25,7 +25,7 @@
  *   --hl7eu-list: hl7.eu's message structure list (hl7v<n>msgstruct.htm, fetched by fetch-sources.sh), printed from the HL7
  *   database: every structure's syntax with its group names, and its events. A second hl7.eu reading beside the chapter
  *   tables (v2.9, which has no Caristix or HAPI); where the two disagree the list decides, since the chapter tables are
- *   read as text and carry typos ("[{ PRT }}").
+ *   read as text and carry typos ("[{ PRT }}"), unless the chapters are the official ones (--hl7org), which decide.
  *
  * Reads are local only; nothing is fetched here.
  */
@@ -189,7 +189,9 @@ const hl7eu = new Map<string, Line[]>();
 /** Events a heading groups with a captioned table ("(events PC6, PC7, PC8)" over "PGL^PC6^PGL_PC6"): they share it unless they get a table of their own. */
 const hl7euAliases: { key: string; lines: Line[] }[] = [];
 if (hl7euDir && existsSync(hl7euDir)) {
-  for (const f of [...new Set([...readdirSync(hl7euDir).filter((f) => f.endsWith(".htm")), ...hl7orgFiles])].sort()) {
+  // a chapter converted from the PDF replaces hl7.eu's page of it whatever the case of its name (hl7.eu v2.9 has ch04A.htm)
+  const pdfChapters = new Set(hl7orgFiles.map((f) => f.toLowerCase()));
+  for (const f of [...new Set([...readdirSync(hl7euDir).filter((f) => f.endsWith(".htm") && !pdfChapters.has(f.toLowerCase())), ...hl7orgFiles])].sort()) {
     const fromPdf = hl7orgFiles.includes(f);
     const raw = readFileSync(join(fromPdf ? hl7orgDir! : hl7euDir, f)).toString("latin1");
     // A converted PDF chapter holds each message table whole, so its end is the table's end; the prose after it
@@ -413,7 +415,11 @@ function decide(ours: Line[], eu?: Line[], cx?: Line[], hp?: Line[], ls?: Line[]
   const e = eu && shape(eu), c = cx && shape(cx), h = hp && shape(hp), o = shape(ours), l = ls && shape(ls);
   let decided: string | undefined;
   let basis: string;
-  if (l !== undefined) {
+  if (l !== undefined && e !== undefined && hl7orgFiles.length) {
+    // the official chapters (hl7.org) decide; hl7.eu's structure list cross-checks them
+    decided = e;
+    basis = e === l ? "hl7.org chapter and hl7.eu list agree" : "hl7.org chapter (hl7.eu list differs)";
+  } else if (l !== undefined) {
     // hl7.eu's structure list beside its chapter tables: the list decides, the chapter reading cross-checks it
     decided = l;
     basis = e === undefined ? "hl7.eu list (no chapter table read)" : e === l ? "hl7.eu list and chapter agree" : "hl7.eu list (chapter reading differs)";
@@ -446,14 +452,24 @@ async function main(): Promise<void> {
     .filter(([k]) => k.endsWith("_STRUCTURE"))
     .map(([k, v]) => [k.replace(/_STRUCTURE$/, ""), v] as const)
     .sort(([a], [b]) => a.localeCompare(b));
+  // With the structure list (v2.9), an event the chapters print no table for (SIU^S13, which uses SIU_S12) is checked
+  // against the chapter table of an event whose structure is ours too: the one it shares.
+  const sharedTable = new Map<string, { event: string; lines: Line[] }>();
+  if (hl7euList.size) for (const [event, items] of ours) {
+    const key = JSON.stringify(items);
+    const lines = hl7eu.get(event);
+    if (lines && !sharedTable.has(key)) sharedTable.set(key, { event, lines });
+  }
   const results = ours.map(([event, items]) => {
     const o = renderOurs(items);
     const note = versionNotes[event];
-    const eu = note?.hl7eu === "ignore" ? undefined : hl7eu.get(event);
+    const shared = hl7eu.has(event) ? undefined : sharedTable.get(JSON.stringify(items));
+    const eu = note?.hl7eu === "ignore" ? undefined : hl7eu.get(event) ?? shared?.lines;
     const cx = readCaristix(event);
     const hp = readHapi(event);
     const ls = readList(event);
     const d = decide(o, eu, cx, hp, ls);
+    if (shared && eu) d.basis += ` (the table of ${shared.event}, whose structure it uses)`;
     const status = d.matches ? "ok" : note?.accept ? "accepted" : d.undecided ? "undecided" : "differs";
     return { event, ours: o, eu, cx, hp, ls, ...d, note, status };
   });
@@ -470,7 +486,7 @@ async function main(): Promise<void> {
   lines.push("|---|---|---|");
   lines.push(hl7euDir ? `| hl7.eu | the printed chapters, \`https://www.hl7.eu/HL7v2x/v${SHORT}/std${SHORT}/ch<n>.htm\`, message tables read as text | Authoritative |` : `| hl7.eu | no chapter pages for ${VERSION} | — |`);
   if (hl7orgFiles.length) lines.push(`| hl7.org | the official chapter PDFs for ${hl7orgFiles.map((f) => f.replace(".htm", "")).join(", ")} (name and SHA-256 in \`codegen/validate/sources/${VERSION}-hl7org.tsv\`), converted by \`codegen/extract/pdf-chapter.ts\`; in the hl7.eu column they replace the hl7.eu page of that chapter | Authoritative |`);
-  if (hl7euList.size) lines.push(`| hl7.eu list | the message structure list, \`https://www.hl7.eu/HL7v2x/v${SHORT}/hl7v${SHORT}msgstruct.htm\`, printed from the HL7 database: each structure's syntax and its events | Authoritative where it and the chapter table disagree |`);
+  if (hl7euList.size) lines.push(`| hl7.eu list | the message structure list, \`https://www.hl7.eu/HL7v2x/v${SHORT}/hl7v${SHORT}msgstruct.htm\`, printed from the HL7 database: each structure's syntax and its events | ${hl7orgFiles.length ? "Cross-check of the official chapters" : "Authoritative where it and the chapter table disagree"} |`);
   lines.push(`| Caristix | \`https://hl7-definition.caristix.com/v2-api/1/HL7v${API}/TriggerEvents/<EVENT>\` | Validation reference |`);
   lines.push(`| HAPI | \`hapi-structures-v${SHORT}/.../model/v${SHORT}/message/<EVENT>.java\` and its group classes, with the event map | Cross-check |`);
   lines.push("");
@@ -488,7 +504,9 @@ async function main(): Promise<void> {
   lines.push("## Summary");
   lines.push("");
   lines.push(`- ${results.length} message structures: ${counts.ok} ok, ${counts.accepted} accepted differences, ${counts.differs} unexplained differences, ${counts.undecided} undecided.`);
-  if (hl7euList.size) lines.push("- hl7.eu's structure list is read too: it decides, and the chapter reading (the hl7.eu column) cross-checks it; a `differs` in the hl7.eu column with the list matching ours is the chapter table or its reading, not our structure.");
+  if (hl7euList.size) lines.push(hl7orgFiles.length
+    ? "- hl7.eu's structure list is read too, as a cross-check of the official chapters (the hl7.eu column), which decide."
+    : "- hl7.eu's structure list is read too: it decides, and the chapter reading (the hl7.eu column) cross-checks it; a `differs` in the hl7.eu column with the list matching ours is the chapter table or its reading, not our structure.");
   lines.push(`- Sources present: hl7.eu ${results.filter((r) => r.eu).length}, Caristix ${results.filter((r) => r.cx).length}, HAPI ${results.filter((r) => r.hp).length}${hl7euList.size ? `, hl7.eu list ${results.filter((r) => r.ls).length}` : ""}.`);
   // Events the sources define for this version that we do not implement.
   const implemented = new Set(ours.map(([event]) => event));

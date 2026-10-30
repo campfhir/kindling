@@ -137,6 +137,7 @@ import { parseMFK_M15 } from "./MFK_M15.ts";
 import { parseMFK_M16 } from "./MFK_M16.ts";
 import { parseMFK_M17 } from "./MFK_M17.ts";
 import { parseMFK_M18 } from "./MFK_M18.ts";
+import { parseMFK_M19 } from "./MFK_M19.ts";
 import { parseMFN_M02 } from "./MFN_M02.ts";
 import { parseMFN_M04 } from "./MFN_M04.ts";
 import { parseMFN_M05 } from "./MFN_M05.ts";
@@ -234,13 +235,13 @@ import { parseQBP_Z97 } from "./QBP_Z97.ts";
 import { parseQBP_Z99 } from "./QBP_Z99.ts";
 import { parseQCN_J01 } from "./QCN_J01.ts";
 import { parseQSB_Q16 } from "./QSB_Q16.ts";
+import { parseQSB_Z83 } from "./QSB_Z83.ts";
 import { parseQSX_J02 } from "./QSX_J02.ts";
 import { parseRAS_O17 } from "./RAS_O17.ts";
 import { parseRCV_O59 } from "./RCV_O59.ts";
 import { parseRDE_O11 } from "./RDE_O11.ts";
 import { parseRDE_O25 } from "./RDE_O25.ts";
 import { parseRDE_O49 } from "./RDE_O49.ts";
-import { parseRDR_RDR } from "./RDR_RDR.ts";
 import { parseRDS_O13 } from "./RDS_O13.ts";
 import { parseRDY_K15 } from "./RDY_K15.ts";
 import { parseRDY_Z80 } from "./RDY_Z80.ts";
@@ -355,7 +356,6 @@ import { parseSTI_S30 } from "./STI_S30.ts";
 import { parseSTS_S30 } from "./STS_S30.ts";
 import { parseTCR_U11 } from "./TCR_U11.ts";
 import { parseTCU_U10 } from "./TCU_U10.ts";
-import { parseUDM_Q05 } from "./UDM_Q05.ts";
 import { parseVXU_V04 } from "./VXU_V04.ts";
 
 /** Parses one message string into its structured form. */
@@ -494,6 +494,7 @@ export const MESSAGES = {
   MFK_M16: parseMFK_M16,
   MFK_M17: parseMFK_M17,
   MFK_M18: parseMFK_M18,
+  MFK_M19: parseMFK_M19,
   MFN_M02: parseMFN_M02,
   MFN_M04: parseMFN_M04,
   MFN_M05: parseMFN_M05,
@@ -591,13 +592,13 @@ export const MESSAGES = {
   QBP_Z99: parseQBP_Z99,
   QCN_J01: parseQCN_J01,
   QSB_Q16: parseQSB_Q16,
+  QSB_Z83: parseQSB_Z83,
   QSX_J02: parseQSX_J02,
   RAS_O17: parseRAS_O17,
   RCV_O59: parseRCV_O59,
   RDE_O11: parseRDE_O11,
   RDE_O25: parseRDE_O25,
   RDE_O49: parseRDE_O49,
-  RDR_RDR: parseRDR_RDR,
   RDS_O13: parseRDS_O13,
   RDY_K15: parseRDY_K15,
   RDY_Z80: parseRDY_Z80,
@@ -712,7 +713,6 @@ export const MESSAGES = {
   STS_S30: parseSTS_S30,
   TCR_U11: parseTCR_U11,
   TCU_U10: parseTCU_U10,
-  UDM_Q05: parseUDM_Q05,
   VXU_V04: parseVXU_V04,
 } as const satisfies Record<string, MessageParser>;
 

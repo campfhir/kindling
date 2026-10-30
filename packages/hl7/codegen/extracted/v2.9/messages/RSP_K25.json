@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Personnel Information Response Message",
   "title": "Personnel Information Response Message",
-  "sectionHeading": "15.3.7 QBP/RSP  Query Information (Event Q25/K25)",
   "source": {
-    "pdf": "hl7.eu std29/ch15.html",
+    "pdf": "hl7.org V29_CH15_PersMngmt_tc.pdf",
     "pages": null,
     "table": "RSP^K25^RSP_K25: Personnel Information Response Message"
   },
@@ -17,7 +16,7 @@
         "K25"
       ],
       "eventPrinted": "K25",
-      "pdf": "hl7.eu std29/ch15.html",
+      "pdf": "hl7.org V29_CH15_PersMngmt_tc.pdf",
       "page": null,
       "table": "RSP^K25^RSP_K25: Personnel Information Response Message",
       "identicalToPrimary": true
@@ -205,7 +204,7 @@
           "usage": null,
           "page": null,
           "description": "deprecated as of v2.9",
-          "status": "deprecated",
+          "status": "deprec ated",
           "chapterRef": "15.4.7"
         }
       ],

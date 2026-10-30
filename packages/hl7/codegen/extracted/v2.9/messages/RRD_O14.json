@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Pharmacy/Treatment Dispense Acknowledgment Message",
   "title": "Pharmacy/Treatment Dispense Acknowledgment Message",
-  "sectionHeading": "4A.3.9 RRD - Pharmacy/Treatment Dispense Acknowledgement Message (Event O14)",
   "source": {
-    "pdf": "hl7.eu std29/ch04A.html",
+    "pdf": "hl7.org V29_CH04A_Orders.pdf",
     "pages": null,
     "table": "RRD^O14^RRD_O14: Pharmacy/Treatment Dispense Acknowledgment Message"
   },
@@ -17,7 +16,7 @@
         "O14"
       ],
       "eventPrinted": "O14",
-      "pdf": "hl7.eu std29/ch04A.html",
+      "pdf": "hl7.org V29_CH04A_Orders.pdf",
       "page": null,
       "table": "RRD^O14^RRD_O14: Pharmacy/Treatment Dispense Acknowledgment Message",
       "identicalToPrimary": true

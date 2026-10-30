@@ -3,13 +3,12 @@
   "messageType": "OML",
   "triggerEvent": "O59",
   "version": "2.9",
-  "description": "Non-Stock Supply Order Message",
-  "title": "Non-Stock Supply Order Message",
-  "sectionHeading": "4.4.22 OML  Laboratory Result Interpretation Request Message (Event O59)",
+  "description": "Laboratory Order Message",
+  "title": "Laboratory Order Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "OML^O59^OML_O59: Non-Stock Supply Order Message"
+    "table": "OML^O59^OML_O59: Laboratory Order Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "O59"
       ],
       "eventPrinted": "O59",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "OML^O59^OML_O59: Non-Stock Supply Order Message",
+      "table": "OML^O59^OML_O59: Laboratory Order Message",
       "identicalToPrimary": true
     }
   ],
@@ -579,7 +578,7 @@
                       "maxOccurs": 1,
                       "usage": null,
                       "page": null,
-                      "description": "Patient Identification - previous result",
+                      "description": "Patient Identification â previous result",
                       "chapterRef": "3"
                     },
                     {
@@ -589,7 +588,7 @@
                       "maxOccurs": 1,
                       "usage": null,
                       "page": null,
-                      "description": "Additional Demographics - previous result",
+                      "description": "Additional Demographics â previous result",
                       "chapterRef": "3"
                     },
                     {
@@ -619,7 +618,7 @@
                       "maxOccurs": 1,
                       "usage": null,
                       "page": null,
-                      "description": "Patient Visit - previous result",
+                      "description": "Patient Visit â previous result",
                       "chapterRef": "3"
                     },
                     {
@@ -629,7 +628,7 @@
                       "maxOccurs": 1,
                       "usage": null,
                       "page": null,
-                      "description": "Patient Visit Add. Info - previous result",
+                      "description": "Patient Visit Add. Info â previous result",
                       "chapterRef": "3"
                     },
                     {

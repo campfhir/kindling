@@ -3,13 +3,12 @@
   "messageType": "OMQ",
   "triggerEvent": "O57",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "4.4.20 OMQ  General Order Message with Document Payload (Event O57)",
+  "description": "General Order Message with Document Payload",
+  "title": "General Order Message with Document Payload",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "OMQ^O57^OMQ_O57: "
+    "table": "OMQ^O57^OMQ_O57: General Order Message with Document Payload"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "O57"
       ],
       "eventPrinted": "O57",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "OMQ^O57^OMQ_O57: ",
+      "table": "OMQ^O57^OMQ_O57: General Order Message with Document Payload",
       "identicalToPrimary": true
     }
   ],
@@ -374,7 +373,7 @@
                   "maxOccurs": 1,
                   "usage": null,
                   "page": null,
-                  "description": "Patient Identification - previous result",
+                  "description": "Patient Identification â previous result",
                   "chapterRef": "3"
                 },
                 {
@@ -384,7 +383,7 @@
                   "maxOccurs": 1,
                   "usage": null,
                   "page": null,
-                  "description": "Additional Demographics - previous result",
+                  "description": "Additional Demographics â previous result",
                   "chapterRef": "3"
                 },
                 {
@@ -425,7 +424,7 @@
                   "maxOccurs": 1,
                   "usage": null,
                   "page": null,
-                  "description": "Patient Visit - previous result",
+                  "description": "Patient Visit â previous result",
                   "chapterRef": "3"
                 },
                 {
@@ -435,7 +434,7 @@
                   "maxOccurs": 1,
                   "usage": null,
                   "page": null,
-                  "description": "Patient Visit Add. Info - previous result",
+                  "description": "Patient Visit Add. Info â previous result",
                   "chapterRef": "3"
                 },
                 {

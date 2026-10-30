@@ -3,13 +3,12 @@
   "messageType": "BRT",
   "triggerEvent": "O32",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "4.13.7 BRT  Blood Product Transfusion/Disposition Acknowledgment (Event O32)",
+  "description": "Description",
+  "title": "Description",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "BRT^O32^BRT_O32: "
+    "table": "BRT^O32^BRT_O32: Description"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "O32"
       ],
       "eventPrinted": "O32",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "BRT^O32^BRT_O32: ",
+      "table": "BRT^O32^BRT_O32: Description",
       "identicalToPrimary": true
     }
   ],

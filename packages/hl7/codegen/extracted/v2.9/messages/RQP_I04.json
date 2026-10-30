@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Request Patient Demographics",
   "title": "Request Patient Demographics",
-  "sectionHeading": "11.3.4 RQP/RPI - request for patient demographic data (Event I04)",
   "source": {
-    "pdf": "hl7.eu std29/ch11.html",
+    "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
     "pages": null,
     "table": "RQP^I04^RQP_I04: Request Patient Demographics"
   },
@@ -17,7 +16,7 @@
         "I04"
       ],
       "eventPrinted": "I04",
-      "pdf": "hl7.eu std29/ch11.html",
+      "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
       "page": null,
       "table": "RQP^I04^RQP_I04: Request Patient Demographics",
       "identicalToPrimary": true

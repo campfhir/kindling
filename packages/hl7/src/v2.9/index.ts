@@ -330,6 +330,7 @@ export { createMFK_M15, parseMFK_M15, MFK_M15_STRUCTURE, type ParsedMFK_M15 } fr
 export { createMFK_M16, parseMFK_M16, MFK_M16_STRUCTURE, type ParsedMFK_M16 } from "./MFK_M16.ts";
 export { createMFK_M17, parseMFK_M17, MFK_M17_STRUCTURE, type ParsedMFK_M17 } from "./MFK_M17.ts";
 export { createMFK_M18, parseMFK_M18, MFK_M18_STRUCTURE, type ParsedMFK_M18 } from "./MFK_M18.ts";
+export { createMFK_M19, parseMFK_M19, MFK_M19_STRUCTURE, type ParsedMFK_M19 } from "./MFK_M19.ts";
 export { createMFN_M02, parseMFN_M02, MFN_M02_STRUCTURE, type ParsedMFN_M02 } from "./MFN_M02.ts";
 export { createMFN_M04, parseMFN_M04, MFN_M04_STRUCTURE, type ParsedMFN_M04 } from "./MFN_M04.ts";
 export { createMFN_M05, parseMFN_M05, MFN_M05_STRUCTURE, type ParsedMFN_M05 } from "./MFN_M05.ts";
@@ -427,13 +428,13 @@ export { createQBP_Z97, parseQBP_Z97, QBP_Z97_STRUCTURE, type ParsedQBP_Z97 } fr
 export { createQBP_Z99, parseQBP_Z99, QBP_Z99_STRUCTURE, type ParsedQBP_Z99 } from "./QBP_Z99.ts";
 export { createQCN_J01, parseQCN_J01, QCN_J01_STRUCTURE, type ParsedQCN_J01 } from "./QCN_J01.ts";
 export { createQSB_Q16, parseQSB_Q16, QSB_Q16_STRUCTURE, type ParsedQSB_Q16 } from "./QSB_Q16.ts";
+export { createQSB_Z83, parseQSB_Z83, QSB_Z83_STRUCTURE, type ParsedQSB_Z83 } from "./QSB_Z83.ts";
 export { createQSX_J02, parseQSX_J02, QSX_J02_STRUCTURE, type ParsedQSX_J02 } from "./QSX_J02.ts";
 export { createRAS_O17, parseRAS_O17, RAS_O17_STRUCTURE, type ParsedRAS_O17 } from "./RAS_O17.ts";
 export { createRCV_O59, parseRCV_O59, RCV_O59_STRUCTURE, type ParsedRCV_O59 } from "./RCV_O59.ts";
 export { createRDE_O11, parseRDE_O11, RDE_O11_STRUCTURE, type ParsedRDE_O11 } from "./RDE_O11.ts";
 export { createRDE_O25, parseRDE_O25, RDE_O25_STRUCTURE, type ParsedRDE_O25 } from "./RDE_O25.ts";
 export { createRDE_O49, parseRDE_O49, RDE_O49_STRUCTURE, type ParsedRDE_O49 } from "./RDE_O49.ts";
-export { createRDR_RDR, parseRDR_RDR, RDR_RDR_STRUCTURE, type ParsedRDR_RDR } from "./RDR_RDR.ts";
 export { createRDS_O13, parseRDS_O13, RDS_O13_STRUCTURE, type ParsedRDS_O13 } from "./RDS_O13.ts";
 export { createRDY_K15, parseRDY_K15, RDY_K15_STRUCTURE, type ParsedRDY_K15 } from "./RDY_K15.ts";
 export { createRDY_Z80, parseRDY_Z80, RDY_Z80_STRUCTURE, type ParsedRDY_Z80 } from "./RDY_Z80.ts";
@@ -548,6 +549,5 @@ export { createSTI_S30, parseSTI_S30, STI_S30_STRUCTURE, type ParsedSTI_S30 } fr
 export { createSTS_S30, parseSTS_S30, STS_S30_STRUCTURE, type ParsedSTS_S30 } from "./STS_S30.ts";
 export { createTCR_U11, parseTCR_U11, TCR_U11_STRUCTURE, type ParsedTCR_U11 } from "./TCR_U11.ts";
 export { createTCU_U10, parseTCU_U10, TCU_U10_STRUCTURE, type ParsedTCU_U10 } from "./TCU_U10.ts";
-export { createUDM_Q05, parseUDM_Q05, UDM_Q05_STRUCTURE, type ParsedUDM_Q05 } from "./UDM_Q05.ts";
 export { createVXU_V04, parseVXU_V04, VXU_V04_STRUCTURE, type ParsedVXU_V04 } from "./VXU_V04.ts";
 export { MESSAGES, type MessageStructure, type ParsedMessage } from "./registry.ts";

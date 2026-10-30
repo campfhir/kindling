@@ -3,13 +3,12 @@
   "messageType": "MFN",
   "triggerEvent": "M09",
   "version": "2.9",
-  "description": "Master File Notification - Test/Observation (Categ",
-  "title": "Master File Notification - Test/Observation (Categ",
-  "sectionHeading": "8.8.4 MFN/MFK - Master File Notification - Test/Observation (Categorical) (Event M09)",
+  "description": "Master File Notification - Test/Observation (Categorical)",
+  "title": "Master File Notification - Test/Observation (Categorical)",
   "source": {
-    "pdf": "hl7.eu std29/ch08.html",
+    "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
     "pages": null,
-    "table": "MFN^M09^MFN_M09: Master File Notification - Test/Observation (Categ"
+    "table": "MFN^M09^MFN_M09: Master File Notification - Test/Observation (Categorical)"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "M09"
       ],
       "eventPrinted": "M09",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
-      "table": "MFN^M09^MFN_M09: Master File Notification - Test/Observation (Categ",
+      "table": "MFN^M09^MFN_M09: Master File Notification - Test/Observation (Categorical)",
       "identicalToPrimary": true
     }
   ],

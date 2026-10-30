@@ -5,11 +5,10 @@
   "version": "2.9",
   "description": "Collaborative Care Referral",
   "title": "Collaborative Care Referral",
-  "sectionHeading": "11.6.2 CCR/ACK  Collaborative Care Referral (Events I16, I17 and I18)",
   "source": {
-    "pdf": "hl7.eu std29/ch11.html",
+    "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
     "pages": null,
-    "table": "CCR^I16,I17,I18^CCR_I16: Collaborative Care Referral"
+    "table": "CCR^I16-I18^CCR_I16: Collaborative Care Referral"
   },
   "triggerEvents": [
     {
@@ -18,10 +17,10 @@
         "I17",
         "I18"
       ],
-      "eventPrinted": "I16,I17,I18",
-      "pdf": "hl7.eu std29/ch11.html",
+      "eventPrinted": "I16-I18",
+      "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
       "page": null,
-      "table": "CCR^I16,I17,I18^CCR_I16: Collaborative Care Referral",
+      "table": "CCR^I16-I18^CCR_I16: Collaborative Care Referral",
       "identicalToPrimary": true
     }
   ],
@@ -364,7 +363,7 @@
           "maxOccurs": 1,
           "usage": null,
           "page": null,
-          "description": "Insurance Additional Info \u0013 Cert.",
+          "description": "Insurance Additional Info â Cert.",
           "chapterRef": "6"
         }
       ],
@@ -429,7 +428,7 @@
                           "maxOccurs": 1,
                           "usage": null,
                           "page": null,
-                          "description": "Appointment Information \u0013 General Resource",
+                          "description": "Appointment Information â General Resource",
                           "chapterRef": "10"
                         },
                         {
@@ -439,7 +438,7 @@
                           "maxOccurs": 1,
                           "usage": null,
                           "page": null,
-                          "description": "Appointment Information \u0013 Location",
+                          "description": "Appointment Information â Location",
                           "chapterRef": "10"
                         },
                         {
@@ -449,7 +448,7 @@
                           "maxOccurs": 1,
                           "usage": null,
                           "page": null,
-                          "description": "Appointment Information \u0013 Personnel",
+                          "description": "Appointment Information â Personnel",
                           "chapterRef": "10"
                         }
                       ],
@@ -821,7 +820,7 @@
           "maxOccurs": 1,
           "usage": null,
           "page": null,
-          "description": "Patient Visit \u0013 Additional Info.",
+          "description": "Patient Visit â Additional Info.",
           "chapterRef": "3"
         }
       ],

@@ -3,13 +3,12 @@
   "messageType": "ADT",
   "triggerEvent": "A17",
   "version": "2.9",
-  "description": "Swap",
-  "title": "Swap",
-  "sectionHeading": "3.3.17 ADT/ACK - Swap Patients (Event A17)",
+  "description": "ADT Message",
+  "title": "ADT Message",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
-    "table": "ADT^A17^ADT_A17: Swap"
+    "table": "ADT^A17^ADT_A17: ADT Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "A17"
       ],
       "eventPrinted": "A17",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A17^ADT_A17: Swap",
+      "table": "ADT^A17^ADT_A17: ADT Message",
       "identicalToPrimary": true
     }
   ],

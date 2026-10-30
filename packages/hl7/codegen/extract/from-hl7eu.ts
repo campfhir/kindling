@@ -269,7 +269,10 @@ const fromPdf = new Map<string, string>(); // file -> "hl7.org V28_CH16_eClaims.
 if (existsSync(hl7orgDir)) {
   for (const f of readdirSync(hl7orgDir).filter((f) => /^ch\d+[A-Za-z]?\.htm$/.test(f))) {
     fromPdf.set(f, read(join(hl7orgDir, f)).match(/<!-- source: (hl7\.org \S+)/)?.[1] ?? `hl7.org ${f}`);
-    if (!chapterFiles.includes(f)) chapterFiles.push(f);
+    // the PDF's chapter replaces hl7.eu's page of it whatever the case of its name (hl7.eu v2.9 has ch04A.htm)
+    const same = chapterFiles.findIndex((c) => c.toLowerCase() === f.toLowerCase());
+    if (same !== -1) chapterFiles.splice(same, 1);
+    chapterFiles.push(f);
   }
   chapterFiles.sort();
 }

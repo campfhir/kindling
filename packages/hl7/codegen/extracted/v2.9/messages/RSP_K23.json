@@ -6,7 +6,7 @@
   "description": "Segment Pattern Response",
   "title": "Segment Pattern Response",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
     "table": "RSP^K23^RSP_K23: Segment Pattern Response"
   },
@@ -16,9 +16,19 @@
         "K23"
       ],
       "eventPrinted": "K23",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
       "table": "RSP^K23^RSP_K23: Segment Pattern Response",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "K24"
+      ],
+      "eventPrinted": "K24",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
+      "page": null,
+      "table": "RSP^K24^RSP_K23: Segment Pattern Response",
       "identicalToPrimary": true
     }
   ],

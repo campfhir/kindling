@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Sterilization Configuration Notification",
   "title": "Sterilization Configuration Notification",
-  "sectionHeading": "17.6.1 STC/ACK - Notification of Sterilization Configuration (Event S33)",
   "source": {
-    "pdf": "hl7.eu std29/ch17.html",
+    "pdf": "hl7.org V29_CH17_MaterialsMngmt_tc.pdf",
     "pages": null,
     "table": "STC^S33^STC_S33: Sterilization Configuration Notification"
   },
@@ -17,7 +16,7 @@
         "S33"
       ],
       "eventPrinted": "S33",
-      "pdf": "hl7.eu std29/ch17.html",
+      "pdf": "hl7.org V29_CH17_MaterialsMngmt_tc.pdf",
       "page": null,
       "table": "STC^S33^STC_S33: Sterilization Configuration Notification",
       "identicalToPrimary": true

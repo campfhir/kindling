@@ -5,11 +5,10 @@
   "version": "2.9",
   "description": "Patient Goal Message",
   "title": "Patient Goal Message",
-  "sectionHeading": "12.3.1 PGL/ACK - Patient Goal Message (Events PC6, PC7, PC8)",
   "source": {
-    "pdf": "hl7.eu std29/ch12.html",
+    "pdf": "hl7.org V29_CH12_PatientCare.pdf",
     "pages": null,
-    "table": "PGL^PC6,PC7,PC8^PGL_PC6: Patient Goal Message"
+    "table": "PGL^PC6-PC8^PGL_PC6: Patient Goal Message"
   },
   "triggerEvents": [
     {
@@ -18,10 +17,10 @@
         "PC7",
         "PC8"
       ],
-      "eventPrinted": "PC6,PC7,PC8",
-      "pdf": "hl7.eu std29/ch12.html",
+      "eventPrinted": "PC6-PC8",
+      "pdf": "hl7.org V29_CH12_PatientCare.pdf",
       "page": null,
-      "table": "PGL^PC6,PC7,PC8^PGL_PC6: Patient Goal Message",
+      "table": "PGL^PC6-PC8^PGL_PC6: Patient Goal Message",
       "identicalToPrimary": true
     }
   ],

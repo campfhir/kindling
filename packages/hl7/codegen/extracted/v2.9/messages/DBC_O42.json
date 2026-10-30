@@ -3,13 +3,12 @@
   "messageType": "DBU",
   "triggerEvent": "O42",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "4.16.5 DBU - Update Donor Record Message (Event O42)",
+  "description": "Update Donor Record Message",
+  "title": "Update Donor Record Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "DBU^O42^DBC_O42: "
+    "table": "DBU^O42^DBC_O42: Update Donor Record Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "O42"
       ],
       "eventPrinted": "O42",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "DBU^O42^DBC_O42: ",
+      "table": "DBU^O42^DBC_O42: Update Donor Record Message",
       "identicalToPrimary": true
     }
   ],

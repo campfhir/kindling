@@ -3,13 +3,12 @@
   "messageType": "ADT",
   "triggerEvent": "A60",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "3.3.60 ADT/ACK - Update Adverse Reaction Information (Event A60)",
+  "description": "ADT Message",
+  "title": "ADT Message",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
-    "table": "ADT^A60^ADT_A60: "
+    "table": "ADT^A60^ADT_A60: ADT Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "A60"
       ],
       "eventPrinted": "A60",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A60^ADT_A60: ",
+      "table": "ADT^A60^ADT_A60: ADT Message",
       "identicalToPrimary": true
     }
   ],

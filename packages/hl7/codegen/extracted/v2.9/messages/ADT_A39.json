@@ -3,13 +3,12 @@
   "messageType": "ADT",
   "triggerEvent": "A40",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "3.3.40 ADT/ACK - Merge Patient - Patient Identifier List (Event A40)",
+  "description": "ADT Message",
+  "title": "ADT Message",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
-    "table": "ADT^A40^ADT_A39: "
+    "table": "ADT^A40^ADT_A39: ADT Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "A40"
       ],
       "eventPrinted": "A40",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A40^ADT_A39: ",
+      "table": "ADT^A40^ADT_A39: ADT Message",
       "identicalToPrimary": true
     },
     {
@@ -27,9 +26,9 @@
         "A41"
       ],
       "eventPrinted": "A41",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A41^ADT_A39: ",
+      "table": "ADT^A41^ADT_A39: ADT Message",
       "identicalToPrimary": true
     },
     {
@@ -37,9 +36,9 @@
         "A42"
       ],
       "eventPrinted": "A42",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A42^ADT_A39: ",
+      "table": "ADT^A42^ADT_A39: ADT Message",
       "identicalToPrimary": true
     }
   ],

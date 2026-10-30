@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Observation Message",
   "title": "Observation Message",
-  "sectionHeading": "7.3.10 OUL  Unsolicited Order Oriented Observation Message (Event R24)",
   "source": {
-    "pdf": "hl7.eu std29/ch07.html",
+    "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
     "pages": null,
     "table": "OUL^R24^OUL_R24: Observation Message"
   },
@@ -17,7 +16,7 @@
         "R24"
       ],
       "eventPrinted": "R24",
-      "pdf": "hl7.eu std29/ch07.html",
+      "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
       "page": null,
       "table": "OUL^R24^OUL_R24: Observation Message",
       "identicalToPrimary": true
@@ -220,7 +219,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Patient Visit \u0013 Additional Information",
+              "description": "Patient Visit â Additional Information",
               "chapterRef": "3"
             },
             {
@@ -367,7 +366,7 @@
           "usage": null,
           "page": null,
           "description": "Deprecated as of V2.8",
-          "status": "Deprecated",
+          "status": "Deprec ated",
           "chapterRef": "7"
         },
         {

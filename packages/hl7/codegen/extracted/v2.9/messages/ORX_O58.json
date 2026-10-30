@@ -3,13 +3,12 @@
   "messageType": "ORX",
   "triggerEvent": "O58",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "4.4.21 ORX  General Order Message with Document Payload Acknowledgement Message (Event O58)",
+  "description": "General Order Message with Document Payload Acknowledgement Message",
+  "title": "General Order Message with Document Payload Acknowledgement Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "ORX^O58^ORX_O58: "
+    "table": "ORX^O58^ORX_O58: General Order Message with Document Payload Acknowledgement Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "O58"
       ],
       "eventPrinted": "O58",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "ORX^O58^ORX_O58: ",
+      "table": "ORX^O58^ORX_O58: General Order Message with Document Payload Acknowledgement Message",
       "identicalToPrimary": true
     }
   ],

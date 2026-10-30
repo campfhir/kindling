@@ -6,7 +6,7 @@
   "description": "Response Grammar: Pharmacy Dispense Message",
   "title": "Response Grammar: Pharmacy Dispense Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04A.html",
+    "pdf": "hl7.org V29_CH04A_Orders.pdf",
     "pages": null,
     "table": "RSP^K31^RSP_K31: Response Grammar: Pharmacy Dispense Message"
   },
@@ -16,7 +16,7 @@
         "K31"
       ],
       "eventPrinted": "K31",
-      "pdf": "hl7.eu std29/ch04A.html",
+      "pdf": "hl7.org V29_CH04A_Orders.pdf",
       "page": null,
       "table": "RSP^K31^RSP_K31: Response Grammar: Pharmacy Dispense Message",
       "identicalToPrimary": true
@@ -193,7 +193,7 @@
                   "maxOccurs": 1,
                   "usage": null,
                   "page": null,
-                  "description": "Patient Visit \u0013 Additional Info",
+                  "description": "Patient Visit â Additional Info",
                   "chapterRef": "3"
                 },
                 {

@@ -1,29 +1,24 @@
 {
   "structure": "QBP_Q13",
   "messageType": "QBP",
-  "triggerEvent": "Z75",
+  "triggerEvent": "Z99",
   "version": "2.9",
   "description": "Query Grammar: QBP Message",
   "title": "Query Grammar: QBP Message",
   "source": {
-    "pdf": "hl7.eu std29/ch05.html",
+    "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
     "pages": null,
-    "table": "QBP^Z75,Z77,Z91,Z93,Z95,Z99^QBP_Q13: Query Grammar: QBP Message"
+    "table": "QBP^Z99^QBP_Q13: Query Grammar: QBP Message"
   },
   "triggerEvents": [
     {
       "events": [
-        "Z75",
-        "Z77",
-        "Z91",
-        "Z93",
-        "Z95",
         "Z99"
       ],
-      "eventPrinted": "Z75,Z77,Z91,Z93,Z95,Z99",
-      "pdf": "hl7.eu std29/ch05.html",
+      "eventPrinted": "Z99",
+      "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
       "page": null,
-      "table": "QBP^Z75,Z77,Z91,Z93,Z95,Z99^QBP_Q13: Query Grammar: QBP Message",
+      "table": "QBP^Z99^QBP_Q13: Query Grammar: QBP Message",
       "identicalToPrimary": true
     }
   ],

@@ -3,13 +3,12 @@
   "messageType": "MFN",
   "triggerEvent": "M15",
   "version": "2.9",
-  "description": "Master File Notification - Inventory Item",
-  "title": "Master File Notification - Inventory Item",
-  "sectionHeading": "8.12.1 MFN/MFK - Inventory Item Master File Message (Event M15)",
+  "description": "Master File Notification â Inventory Item",
+  "title": "Master File Notification â Inventory Item",
   "source": {
-    "pdf": "hl7.eu std29/ch08.html",
+    "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
     "pages": null,
-    "table": "MFN^M15^MFN_M15: Master File Notification - Inventory Item"
+    "table": "MFN^M15^MFN_M15: Master File Notification â Inventory Item"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "M15"
       ],
       "eventPrinted": "M15",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
-      "table": "MFN^M15^MFN_M15: Master File Notification - Inventory Item",
+      "table": "MFN^M15^MFN_M15: Master File Notification â Inventory Item",
       "identicalToPrimary": true
     }
   ],

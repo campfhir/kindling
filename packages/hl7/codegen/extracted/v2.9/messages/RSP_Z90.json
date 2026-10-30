@@ -3,12 +3,12 @@
   "messageType": "RSP",
   "triggerEvent": "Z90",
   "version": "2.9",
-  "description": "Response Grammar: Pharmacy Information Comprehens",
-  "title": "Response Grammar: Pharmacy Information Comprehens",
+  "description": "Response Grammar: Pharmacy Information Comprehensive",
+  "title": "Response Grammar: Pharmacy Information Comprehensive",
   "source": {
-    "pdf": "hl7.eu std29/ch05.html",
+    "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
     "pages": null,
-    "table": "RSP^Z90^RSP_Z90: Response Grammar: Pharmacy Information Comprehens"
+    "table": "RSP^Z90^RSP_Z90: Response Grammar: Pharmacy Information Comprehensive"
   },
   "triggerEvents": [
     {
@@ -16,9 +16,9 @@
         "Z90"
       ],
       "eventPrinted": "Z90",
-      "pdf": "hl7.eu std29/ch05.html",
+      "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
       "page": null,
-      "table": "RSP^Z90^RSP_Z90: Response Grammar: Pharmacy Information Comprehens",
+      "table": "RSP^Z90^RSP_Z90: Response Grammar: Pharmacy Information Comprehensive",
       "identicalToPrimary": true
     }
   ],
@@ -172,7 +172,7 @@
                   "maxOccurs": 1,
                   "usage": null,
                   "page": null,
-                  "description": "Patient Visit \u0013 Additional Info",
+                  "description": "Patient Visit â Additional Info",
                   "chapterRef": "3.4.4"
                 }
               ],

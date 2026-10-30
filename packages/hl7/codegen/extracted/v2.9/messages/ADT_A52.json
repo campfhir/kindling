@@ -3,13 +3,12 @@
   "messageType": "ADT",
   "triggerEvent": "A52",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "3.3.52 ADT/ACK- Cancel Leave of Absence for a Patient (Event A52)",
+  "description": "ADT Message",
+  "title": "ADT Message",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
-    "table": "ADT^A52^ADT_A52: "
+    "table": "ADT^A52^ADT_A52: ADT Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "A52"
       ],
       "eventPrinted": "A52",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A52^ADT_A52: ",
+      "table": "ADT^A52^ADT_A52: ADT Message",
       "identicalToPrimary": true
     },
     {
@@ -27,9 +26,9 @@
         "A53"
       ],
       "eventPrinted": "A53",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A53^ADT_A52: ",
+      "table": "ADT^A53^ADT_A52: ADT Message",
       "identicalToPrimary": true
     }
   ],

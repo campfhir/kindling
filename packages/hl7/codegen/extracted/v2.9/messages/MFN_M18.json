@@ -3,13 +3,12 @@
   "messageType": "MFN",
   "triggerEvent": "M18",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "8.8.8 MFN/MFK  Master File Notification  Test/Observation (Payer) (Event M18)",
+  "description": "Master File Notification â Test/Observation (Payer)",
+  "title": "Master File Notification â Test/Observation (Payer)",
   "source": {
-    "pdf": "hl7.eu std29/ch08.html",
+    "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
     "pages": null,
-    "table": "MFN^M18^MFN_M18: "
+    "table": "MFN^M18^MFN_M18: Master File Notification â Test/Observation (Payer)"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "M18"
       ],
       "eventPrinted": "M18",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
-      "table": "MFN^M18^MFN_M18: ",
+      "table": "MFN^M18^MFN_M18: Master File Notification â Test/Observation (Payer)",
       "identicalToPrimary": true
     }
   ],

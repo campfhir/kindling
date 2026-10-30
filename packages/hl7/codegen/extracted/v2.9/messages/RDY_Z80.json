@@ -3,12 +3,12 @@
   "messageType": "RDY",
   "triggerEvent": "Z80",
   "version": "2.9",
-  "description": "",
-  "title": "",
+  "description": "Response Grammar: Dispense History",
+  "title": "Response Grammar: Dispense History",
   "source": {
-    "pdf": "hl7.eu std29/ch05.html",
+    "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
     "pages": null,
-    "table": "RDY^Z80^RDY_Z80: "
+    "table": "RDY^Z80^RDY_Z80: Response Grammar: Dispense History"
   },
   "triggerEvents": [
     {
@@ -16,9 +16,9 @@
         "Z80"
       ],
       "eventPrinted": "Z80",
-      "pdf": "hl7.eu std29/ch05.html",
+      "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
       "page": null,
-      "table": "RDY^Z80^RDY_Z80: ",
+      "table": "RDY^Z80^RDY_Z80: Response Grammar: Dispense History",
       "identicalToPrimary": true
     }
   ],

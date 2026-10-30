@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Return Patient List",
   "title": "Return Patient List",
-  "sectionHeading": "11.3.3 RQI/RPR - Request/Receipt of Patient Selection List (Event I03)",
   "source": {
-    "pdf": "hl7.eu std29/ch11.html",
+    "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
     "pages": null,
     "table": "RPR^I03^RPR_I03: Return Patient List"
   },
@@ -17,7 +16,7 @@
         "I03"
       ],
       "eventPrinted": "I03",
-      "pdf": "hl7.eu std29/ch11.html",
+      "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
       "page": null,
       "table": "RPR^I03^RPR_I03: Return Patient List",
       "identicalToPrimary": true

@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Population/Location-Based Laboratory Order Message",
   "title": "Population/Location-Based Laboratory Order Message",
-  "sectionHeading": "4.4.16 OPL  Population/Location-Based Laboratory Order Message (Event O37)",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
     "table": "OPL^O37^OPL_O37: Population/Location-Based Laboratory Order Message"
   },
@@ -17,7 +16,7 @@
         "O37"
       ],
       "eventPrinted": "O37",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
       "table": "OPL^O37^OPL_O37: Population/Location-Based Laboratory Order Message",
       "identicalToPrimary": true
@@ -585,7 +584,7 @@
                   "maxOccurs": 1,
                   "usage": null,
                   "page": null,
-                  "description": "Patient Visit - Additional Information",
+                  "description": "Patient Visit â Additional Information",
                   "chapterRef": "3"
                 },
                 {

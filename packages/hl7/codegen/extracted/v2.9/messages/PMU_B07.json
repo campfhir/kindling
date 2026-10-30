@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Grant Certificate Message",
   "title": "Grant Certificate Message",
-  "sectionHeading": "15.3.8 PMU/ACK  Grant Certificate/Permission (Event B07)",
   "source": {
-    "pdf": "hl7.eu std29/ch15.html",
+    "pdf": "hl7.org V29_CH15_PersMngmt_tc.pdf",
     "pages": null,
     "table": "PMU^B07^PMU_B07: Grant Certificate Message"
   },
@@ -17,7 +16,7 @@
         "B07"
       ],
       "eventPrinted": "B07",
-      "pdf": "hl7.eu std29/ch15.html",
+      "pdf": "hl7.org V29_CH15_PersMngmt_tc.pdf",
       "page": null,
       "table": "PMU^B07^PMU_B07: Grant Certificate Message",
       "identicalToPrimary": true
@@ -115,7 +114,7 @@
           "usage": null,
           "page": null,
           "description": "deprecated as of v2.9",
-          "status": "deprecated",
+          "status": "depreca ted",
           "chapterRef": "15.4.7"
         }
       ],

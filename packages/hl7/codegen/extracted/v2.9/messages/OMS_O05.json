@@ -6,7 +6,7 @@
   "description": "Stock Requisition Order Message",
   "title": "Stock Requisition Order Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
     "table": "OMS^O05^OMS_O05: Stock Requisition Order Message"
   },
@@ -16,7 +16,7 @@
         "O05"
       ],
       "eventPrinted": "O05",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
       "table": "OMS^O05^OMS_O05: Stock Requisition Order Message",
       "identicalToPrimary": true
@@ -149,7 +149,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Patient Visit - Additional Info",
+              "description": "Patient Visit â Additional Info",
               "chapterRef": "3"
             },
             {

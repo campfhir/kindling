@@ -3,13 +3,12 @@
   "messageType": "RQI",
   "triggerEvent": "I01",
   "version": "2.9",
-  "description": "Patient Insurance Information",
-  "title": "Patient Insurance Information",
-  "sectionHeading": "11.3.1 RQI/RPI - Request for Insurance Information (Event I01)",
+  "description": "Request Patient Information",
+  "title": "Request Patient Information",
   "source": {
-    "pdf": "hl7.eu std29/ch11.html",
+    "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
     "pages": null,
-    "table": "RQI^I01^RQI_I01: Patient Insurance Information"
+    "table": "RQI^I01^RQI_I01: Request Patient Information"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "I01"
       ],
       "eventPrinted": "I01",
-      "pdf": "hl7.eu std29/ch11.html",
+      "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
       "page": null,
-      "table": "RQI^I01^RQI_I01: Patient Insurance Information",
+      "table": "RQI^I01^RQI_I01: Request Patient Information",
       "identicalToPrimary": true
     },
     {
@@ -27,9 +26,9 @@
         "I02"
       ],
       "eventPrinted": "I02",
-      "pdf": "hl7.eu std29/ch11.html",
+      "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
       "page": null,
-      "table": "RQI^I02^RQI_I01: Patient Insurance Information",
+      "table": "RQI^I02^RQI_I01: Request Patient Information",
       "identicalToPrimary": true
     },
     {
@@ -37,9 +36,9 @@
         "I03"
       ],
       "eventPrinted": "I03",
-      "pdf": "hl7.eu std29/ch11.html",
+      "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
       "page": null,
-      "table": "RQI^I03^RQI_I01: Patient Insurance Information",
+      "table": "RQI^I03^RQI_I01: Request Patient Information",
       "identicalToPrimary": false
     },
     {
@@ -47,7 +46,7 @@
         "I07"
       ],
       "eventPrinted": "I07",
-      "pdf": "hl7.eu std29/ch11.html",
+      "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
       "page": null,
       "table": "PIN^I07^RQI_I01: Patient Insurance Information",
       "identicalToPrimary": true
@@ -179,7 +178,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Insurance Add''l Info - Cert",
+              "description": "Insurance Add'l Info - Cert",
               "chapterRef": "6"
             }
           ],
@@ -208,9 +207,9 @@
   "variants": [
     {
       "eventPrinted": "I03",
-      "pdf": "hl7.eu std29/ch11.html",
+      "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
       "pages": null,
-      "table": "RQI^I03^RQI_I01: Patient Insurance Information",
+      "table": "RQI^I03^RQI_I01: Request Patient Information",
       "items": [
         {
           "kind": "segment",
@@ -337,7 +336,7 @@
                   "maxOccurs": 1,
                   "usage": null,
                   "page": null,
-                  "description": "Insurance Add''l Info - Cert",
+                  "description": "Insurance Add'l Info - Cert",
                   "chapterRef": "6"
                 }
               ],

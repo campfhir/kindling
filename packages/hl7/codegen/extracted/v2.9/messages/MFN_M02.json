@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Master File Notification for Staff/Practitioner",
   "title": "Master File Notification for Staff/Practitioner",
-  "sectionHeading": "8.7.1 MFN/MFK - Staff/Practitioner Master File Message (Event M02)",
   "source": {
-    "pdf": "hl7.eu std29/ch08.html",
+    "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
     "pages": null,
     "table": "MFN^M02^MFN_M02: Master File Notification for Staff/Practitioner"
   },
@@ -17,7 +16,7 @@
         "M02"
       ],
       "eventPrinted": "M02",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
       "table": "MFN^M02^MFN_M02: Master File Notification for Staff/Practitioner",
       "identicalToPrimary": true

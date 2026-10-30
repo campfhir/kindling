@@ -1,7 +1,7 @@
 /**
  * Builder, parser and structure for RDY^K15 messages (HL7 v2.9).
  *
- * Structure: MSH [{SFT}] [UAC] MSA [ERR] QAK QPD [{DSP}] [DSC]
+ * Structure: MSH [{SFT}] [UAC] MSA [{ERR}] QAK QPD [{DSP}] [DSC]
  *
  * @module
  */
@@ -26,7 +26,7 @@ export const RDY_K15_STRUCTURE: StructureItem[] = [
   { name: "SFT", required: false, repeating: true },
   { name: "UAC", required: false, repeating: false },
   { name: "MSA", required: true, repeating: false },
-  { name: "ERR", required: false, repeating: false },
+  { name: "ERR", required: false, repeating: true },
   { name: "QAK", required: true, repeating: false },
   { name: "QPD", required: true, repeating: false },
   { name: "DSP", required: false, repeating: true },
@@ -43,8 +43,8 @@ export interface ParsedRDY_K15 extends ParsedMessageBase {
   uac?: UAC;
   /** The MSA segment. */
   acknowledgment: MSA;
-  /** The ERR segment. */
-  error?: ERR;
+  /** The ERR segments. */
+  errors?: ERR[];
   /** The QAK segment. */
   queryAcknowledgment: QAK;
   /** The QPD segment. */
@@ -94,8 +94,8 @@ export interface RDY_K15Options {
   software?: SFT[];
   /** The UAC segment. */
   uac?: UAC;
-  /** The ERR segment. */
-  error?: ERR;
+  /** The ERR segments. */
+  errors?: ERR[];
   /** The DSP segments. */
   displayLines?: DSP[];
   /** The DSC segment. */

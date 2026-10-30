@@ -3,13 +3,12 @@
   "messageType": "ADT",
   "triggerEvent": "A09",
   "version": "2.9",
-  "description": "Track/Cancel",
-  "title": "Track/Cancel",
-  "sectionHeading": "3.3.9 ADT/ACK - Patient Departing - Tracking (Event A09)",
+  "description": "ADT Message",
+  "title": "ADT Message",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
-    "table": "ADT^A09^ADT_A09: Track/Cancel"
+    "table": "ADT^A09^ADT_A09: ADT Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "A09"
       ],
       "eventPrinted": "A09",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A09^ADT_A09: Track/Cancel",
+      "table": "ADT^A09^ADT_A09: ADT Message",
       "identicalToPrimary": true
     },
     {
@@ -27,9 +26,9 @@
         "A10"
       ],
       "eventPrinted": "A10",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A10^ADT_A09: Track/Cancel",
+      "table": "ADT^A10^ADT_A09: ADT Message",
       "identicalToPrimary": true
     },
     {
@@ -37,9 +36,9 @@
         "A11"
       ],
       "eventPrinted": "A11",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A11^ADT_A09: Track/Cancel",
+      "table": "ADT^A11^ADT_A09: ADT Message",
       "identicalToPrimary": false
     }
   ],
@@ -178,9 +177,9 @@
   "variants": [
     {
       "eventPrinted": "A11",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "pages": null,
-      "table": "ADT^A11^ADT_A09: Track/Cancel",
+      "table": "ADT^A11^ADT_A09: ADT Message",
       "items": [
         {
           "kind": "segment",

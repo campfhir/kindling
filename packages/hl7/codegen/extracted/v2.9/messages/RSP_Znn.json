@@ -1,24 +1,24 @@
 {
-  "structure": "RSP_K24",
+  "structure": "RSP_Znn",
   "messageType": "RSP",
-  "triggerEvent": "K24",
+  "triggerEvent": "Znn",
   "version": "2.9",
-  "description": "3.3.59 QBP/RSP - Allocate Identifiers (QBP) and Response (RSP) (Events Q24 and K24)",
-  "title": "3.3.59 QBP/RSP - Allocate Identifiers (QBP) and Response (RSP) (Events Q24 and K24)",
+  "description": "Response Grammar: RSP Message",
+  "title": "Response Grammar: RSP Message",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
     "pages": null,
-    "table": "RSP^K24^RSP_K24: 3.3.59 QBP/RSP - Allocate Identifiers (QBP) and Response (RSP) (Events Q24 and K24)"
+    "table": "RSP^Znn^RSP_Znn: Response Grammar: RSP Message"
   },
   "triggerEvents": [
     {
       "events": [
-        "K24"
+        "Znn"
       ],
-      "eventPrinted": "K24",
-      "pdf": "hl7.eu std29/ch03.html",
+      "eventPrinted": "Znn",
+      "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
       "page": null,
-      "table": "RSP^K24^RSP_K24: 3.3.59 QBP/RSP - Allocate Identifiers (QBP) and Response (RSP) (Events Q24 and K24)",
+      "table": "RSP^Znn^RSP_Znn: Response Grammar: RSP Message",
       "identicalToPrimary": true
     }
   ],
@@ -31,7 +31,7 @@
       "usage": null,
       "page": null,
       "description": "Message Header",
-      "chapterRef": "2"
+      "chapterRef": "2.15.9"
     },
     {
       "kind": "segment",
@@ -41,7 +41,7 @@
       "usage": null,
       "page": null,
       "description": "Software Segment",
-      "chapterRef": "2"
+      "chapterRef": "2.15.12"
     },
     {
       "kind": "segment",
@@ -51,7 +51,7 @@
       "usage": null,
       "page": null,
       "description": "User Authentication Credential",
-      "chapterRef": "2"
+      "chapterRef": "2.14.13"
     },
     {
       "kind": "segment",
@@ -60,8 +60,8 @@
       "maxOccurs": 1,
       "usage": null,
       "page": null,
-      "description": "Message Acknowledgment",
-      "chapterRef": "2"
+      "description": "Message Acknowledgement",
+      "chapterRef": "2.15.8"
     },
     {
       "kind": "segment",
@@ -71,7 +71,7 @@
       "usage": null,
       "page": null,
       "description": "Error",
-      "chapterRef": "2"
+      "chapterRef": "2.15.5"
     },
     {
       "kind": "segment",
@@ -80,8 +80,8 @@
       "maxOccurs": 1,
       "usage": null,
       "page": null,
-      "description": "Query Acknowledgment",
-      "chapterRef": "5"
+      "description": "Query Acknowledgement",
+      "chapterRef": "5.5.2"
     },
     {
       "kind": "segment",
@@ -90,28 +90,18 @@
       "maxOccurs": 1,
       "usage": null,
       "page": null,
-      "description": "Query Parameter Definition Segment",
-      "chapterRef": "5"
+      "description": "Query Parameter Definition",
+      "chapterRef": "5.5.4"
     },
     {
-      "kind": "group",
-      "name": "QUERY_RESPONSE",
-      "items": [
-        {
-          "kind": "segment",
-          "name": "PID",
-          "minOccurs": 1,
-          "maxOccurs": 1,
-          "usage": null,
-          "page": null,
-          "description": "Patient Identification",
-          "chapterRef": "3"
-        }
-      ],
-      "minOccurs": 0,
+      "kind": "placeholder",
+      "text": "[...]",
+      "minOccurs": 1,
       "maxOccurs": 1,
       "usage": null,
-      "page": null
+      "page": null,
+      "notation": "[...]",
+      "description": "(additional segments according to the data to be produced)"
     },
     {
       "kind": "segment",
@@ -121,7 +111,7 @@
       "usage": null,
       "page": null,
       "description": "Continuation Pointer",
-      "chapterRef": "2"
+      "chapterRef": "2.15.4"
     }
   ],
   "variants": []

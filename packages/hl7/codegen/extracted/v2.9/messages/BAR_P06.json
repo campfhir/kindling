@@ -6,7 +6,7 @@
   "description": "End Billing Account",
   "title": "End Billing Account",
   "source": {
-    "pdf": "hl7.eu std29/ch06.html",
+    "pdf": "hl7.org V29_CH06_FinancialMngmt_tc.pdf",
     "pages": null,
     "table": "BAR^P06^BAR_P06: End Billing Account"
   },
@@ -16,7 +16,7 @@
         "P06"
       ],
       "eventPrinted": "P06",
-      "pdf": "hl7.eu std29/ch06.html",
+      "pdf": "hl7.org V29_CH06_FinancialMngmt_tc.pdf",
       "page": null,
       "table": "BAR^P06^BAR_P06: End Billing Account",
       "identicalToPrimary": true

@@ -3,24 +3,22 @@
   "messageType": "QBP",
   "triggerEvent": "Q15",
   "version": "2.9",
-  "description": "Query Grammar: QBS Message",
-  "title": "Query Grammar: QBS Message",
+  "description": "Query By Parameter",
+  "title": "Query By Parameter",
   "source": {
-    "pdf": "hl7.eu std29/ch05.html",
+    "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
     "pages": null,
-    "table": "QBP^Q15,Z79,Z97^QBP_Q15: Query Grammar: QBS Message"
+    "table": "QBP^Q15^QBP_Q15: Query By Parameter"
   },
   "triggerEvents": [
     {
       "events": [
-        "Q15",
-        "Z79",
-        "Z97"
+        "Q15"
       ],
-      "eventPrinted": "Q15,Z79,Z97",
-      "pdf": "hl7.eu std29/ch05.html",
+      "eventPrinted": "Q15",
+      "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
       "page": null,
-      "table": "QBP^Q15,Z79,Z97^QBP_Q15: Query Grammar: QBS Message",
+      "table": "QBP^Q15^QBP_Q15: Query By Parameter",
       "identicalToPrimary": true
     }
   ],

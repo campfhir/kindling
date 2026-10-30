@@ -3,13 +3,12 @@
   "messageType": "MFN",
   "triggerEvent": "M16",
   "version": "2.9",
-  "description": "Master File Notification - Inventory Item Enhanced",
-  "title": "Master File Notification - Inventory Item Enhanced",
-  "sectionHeading": "8.12.2 MFN/MFK - Inventory Item Master File Message  Enhanced (Event M16)",
+  "description": "Master File Notification â Inventory Item Enhanced",
+  "title": "Master File Notification â Inventory Item Enhanced",
   "source": {
-    "pdf": "hl7.eu std29/ch08.html",
+    "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
     "pages": null,
-    "table": "MFN^M16^MFN_M16: Master File Notification - Inventory Item Enhanced"
+    "table": "MFN^M16^MFN_M16: Master File Notification â Inventory Item Enhanced"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "M16"
       ],
       "eventPrinted": "M16",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
-      "table": "MFN^M16^MFN_M16: Master File Notification - Inventory Item Enhanced",
+      "table": "MFN^M16^MFN_M16: Master File Notification â Inventory Item Enhanced",
       "identicalToPrimary": true
     }
   ],

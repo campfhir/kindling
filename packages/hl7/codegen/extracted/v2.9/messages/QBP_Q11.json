@@ -3,27 +3,52 @@
   "messageType": "QBP",
   "triggerEvent": "Q11",
   "version": "2.9",
-  "description": "Query Grammar: QBS Message",
-  "title": "Query Grammar: QBS Message",
+  "description": "Query By Parameter",
+  "title": "Query By Parameter",
   "source": {
-    "pdf": "hl7.eu std29/ch04A.html",
+    "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
     "pages": null,
-    "table": "QBP^Q11,Q31,Z81,Z85,Z87,Z89^QBP_Q11: Query Grammar: QBS Message"
+    "table": "QBP^Q11^QBP_Q11: Query By Parameter"
   },
   "triggerEvents": [
     {
       "events": [
-        "Q11",
-        "Q31",
-        "Z81",
-        "Z85",
-        "Z87",
+        "Q31"
+      ],
+      "eventPrinted": "Q31",
+      "pdf": "hl7.org V29_CH04A_Orders.pdf",
+      "page": null,
+      "table": "QBP^Q31^QBP_Q11: Query Grammar: QBP Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Q11"
+      ],
+      "eventPrinted": "Q11",
+      "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
+      "page": null,
+      "table": "QBP^Q11^QBP_Q11: Query By Parameter",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Z87"
+      ],
+      "eventPrinted": "Z87",
+      "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
+      "page": null,
+      "table": "QBP^Z87^QBP_Q11: Query Grammar: QBS Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
         "Z89"
       ],
-      "eventPrinted": "Q11,Q31,Z81,Z85,Z87,Z89",
-      "pdf": "hl7.eu std29/ch04A.html",
+      "eventPrinted": "Z89",
+      "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
       "page": null,
-      "table": "QBP^Q11,Q31,Z81,Z85,Z87,Z89^QBP_Q11: Query Grammar: QBS Message",
+      "table": "QBP^Z89^QBP_Q11: Query Grammar: QBS Message",
       "identicalToPrimary": true
     }
   ],
@@ -35,8 +60,8 @@
       "maxOccurs": 1,
       "usage": null,
       "page": null,
-      "description": "Message Header Segment",
-      "chapterRef": "2"
+      "description": "Message Header",
+      "chapterRef": "2.15.9"
     },
     {
       "kind": "segment",
@@ -45,7 +70,7 @@
       "maxOccurs": "*",
       "usage": null,
       "page": null,
-      "description": "Access Restrictions",
+      "description": "Access Restriction",
       "chapterRef": "3"
     },
     {
@@ -55,8 +80,8 @@
       "maxOccurs": "*",
       "usage": null,
       "page": null,
-      "description": "Software",
-      "chapterRef": "2"
+      "description": "Software Segment",
+      "chapterRef": "2.15.12"
     },
     {
       "kind": "segment",
@@ -66,7 +91,7 @@
       "usage": null,
       "page": null,
       "description": "User Authentication Credential",
-      "chapterRef": "2"
+      "chapterRef": "2.14.13"
     },
     {
       "kind": "segment",
@@ -75,8 +100,8 @@
       "maxOccurs": 1,
       "usage": null,
       "page": null,
-      "description": "Query Parameter Definition",
-      "chapterRef": "5"
+      "description": "Query Parameter Definition Segment",
+      "chapterRef": "5.5.4"
     },
     {
       "kind": "group",
@@ -105,8 +130,8 @@
       "maxOccurs": 1,
       "usage": null,
       "page": null,
-      "description": "Response Control Parameter",
-      "chapterRef": "5"
+      "description": "Response Control Parameters",
+      "chapterRef": "5.5.6"
     },
     {
       "kind": "segment",
@@ -116,7 +141,7 @@
       "usage": null,
       "page": null,
       "description": "Continuation Pointer",
-      "chapterRef": "2"
+      "chapterRef": "2.15.4"
     }
   ],
   "variants": []

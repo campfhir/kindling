@@ -3,13 +3,12 @@
   "messageType": "ORP",
   "triggerEvent": "O10",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "4A.3.4 ORP - Pharmacy/Treatment Order Acknowledgment (Event O10)",
+  "description": "Description",
+  "title": "Description",
   "source": {
-    "pdf": "hl7.eu std29/ch04A.html",
+    "pdf": "hl7.org V29_CH04A_Orders.pdf",
     "pages": null,
-    "table": "ORP^O10^ORP_O10: "
+    "table": "ORP^O10^ORP_O10: Description"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "O10"
       ],
       "eventPrinted": "O10",
-      "pdf": "hl7.eu std29/ch04A.html",
+      "pdf": "hl7.org V29_CH04A_Orders.pdf",
       "page": null,
-      "table": "ORP^O10^ORP_O10: ",
+      "table": "ORP^O10^ORP_O10: Description",
       "identicalToPrimary": true
     }
   ],

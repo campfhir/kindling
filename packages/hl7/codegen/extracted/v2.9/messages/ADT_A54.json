@@ -3,13 +3,12 @@
   "messageType": "ADT",
   "triggerEvent": "A54",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "3.3.54 ADT/ACK - Change Attending Doctor (Event A54)",
+  "description": "ADT Message",
+  "title": "ADT Message",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
-    "table": "ADT^A54^ADT_A54: "
+    "table": "ADT^A54^ADT_A54: ADT Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "A54"
       ],
       "eventPrinted": "A54",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A54^ADT_A54: ",
+      "table": "ADT^A54^ADT_A54: ADT Message",
       "identicalToPrimary": true
     },
     {
@@ -27,9 +26,9 @@
         "A55"
       ],
       "eventPrinted": "A55",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A55^ADT_A54: ",
+      "table": "ADT^A55^ADT_A54: ADT Message",
       "identicalToPrimary": true
     }
   ],

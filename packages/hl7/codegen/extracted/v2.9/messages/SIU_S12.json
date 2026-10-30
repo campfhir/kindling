@@ -6,9 +6,9 @@
   "description": "Schedule Information Unsolicited",
   "title": "Schedule Information Unsolicited",
   "source": {
-    "pdf": "hl7.eu std29/ch10.html",
+    "pdf": "hl7.org V29_CH10_Scheduling_tc.pdf",
     "pages": null,
-    "table": "SIU^S12,S13,S14,S15,S16,S17,S18,S19,S20,S21,S22,S23,S24,S26,S27^SIU_S12: Schedule Information Unsolicited"
+    "table": "SIU^S12-S24,S26,S27^SIU_S12: Schedule Information Unsolicited"
   },
   "triggerEvents": [
     {
@@ -29,10 +29,10 @@
         "S26",
         "S27"
       ],
-      "eventPrinted": "S12,S13,S14,S15,S16,S17,S18,S19,S20,S21,S22,S23,S24,S26,S27",
-      "pdf": "hl7.eu std29/ch10.html",
+      "eventPrinted": "S12-S24,S26,S27",
+      "pdf": "hl7.org V29_CH10_Scheduling_tc.pdf",
       "page": null,
-      "table": "SIU^S12,S13,S14,S15,S16,S17,S18,S19,S20,S21,S22,S23,S24,S26,S27^SIU_S12: Schedule Information Unsolicited",
+      "table": "SIU^S12-S24,S26,S27^SIU_S12: Schedule Information Unsolicited",
       "identicalToPrimary": true
     }
   ],

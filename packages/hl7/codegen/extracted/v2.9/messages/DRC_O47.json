@@ -3,13 +3,12 @@
   "messageType": "DRC",
   "triggerEvent": "O47",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "4.16.14 DRC - Donor Request to Collect (Event O47)",
+  "description": "Donor Request to Collect Message",
+  "title": "Donor Request to Collect Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "DRC^O47^DRC_O47: "
+    "table": "DRC^O47^DRC_O47: Donor Request to Collect Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "O47"
       ],
       "eventPrinted": "O47",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "DRC^O47^DRC_O47: ",
+      "table": "DRC^O47^DRC_O47: Donor Request to Collect Message",
       "identicalToPrimary": true
     }
   ],

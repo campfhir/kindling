@@ -3,13 +3,12 @@
   "messageType": "RDE",
   "triggerEvent": "O11",
   "version": "2.9",
-  "description": "Pharmacy/Treatment Refill Authorization Request",
-  "title": "Pharmacy/Treatment Refill Authorization Request",
-  "sectionHeading": "4A.3.6 RDE - Pharmacy/Treatment Encoded Order Message (Event O11)",
+  "description": "Pharmacy/Treatment Encoded Order Message",
+  "title": "Pharmacy/Treatment Encoded Order Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04A.html",
+    "pdf": "hl7.org V29_CH04A_Orders.pdf",
     "pages": null,
-    "table": "RDE^O11^RDE_O11: Pharmacy/Treatment Refill Authorization Request"
+    "table": "RDE^O11^RDE_O11: Pharmacy/Treatment Encoded Order Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "O11"
       ],
       "eventPrinted": "O11",
-      "pdf": "hl7.eu std29/ch04A.html",
+      "pdf": "hl7.org V29_CH04A_Orders.pdf",
       "page": null,
-      "table": "RDE^O11^RDE_O11: Pharmacy/Treatment Refill Authorization Request",
+      "table": "RDE^O11^RDE_O11: Pharmacy/Treatment Encoded Order Message",
       "identicalToPrimary": true
     },
     {
@@ -27,7 +26,7 @@
         "O25"
       ],
       "eventPrinted": "O25",
-      "pdf": "hl7.eu std29/ch04A.html",
+      "pdf": "hl7.org V29_CH04A_Orders.pdf",
       "page": null,
       "table": "RDE^O25^RDE_O11: Pharmacy/Treatment Refill Authorization Request",
       "identicalToPrimary": false
@@ -160,7 +159,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Patient Visit \u0013 Additional Info",
+              "description": "Patient Visit â Additional Info",
               "chapterRef": "3"
             },
             {
@@ -629,7 +628,7 @@
   "variants": [
     {
       "eventPrinted": "O25",
-      "pdf": "hl7.eu std29/ch04A.html",
+      "pdf": "hl7.org V29_CH04A_Orders.pdf",
       "pages": null,
       "table": "RDE^O25^RDE_O11: Pharmacy/Treatment Refill Authorization Request",
       "items": [
@@ -759,7 +758,7 @@
                   "maxOccurs": 1,
                   "usage": null,
                   "page": null,
-                  "description": "Patient Visit \u0013 Additional Info",
+                  "description": "Patient Visit â Additional Info",
                   "chapterRef": "3"
                 },
                 {

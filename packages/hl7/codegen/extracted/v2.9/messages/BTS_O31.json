@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Blood Product Transfusion/Disposition Message",
   "title": "Blood Product Transfusion/Disposition Message",
-  "sectionHeading": "4.13.6 BTS  Blood Product Transfusion/Disposition Message (Event O31)",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
     "table": "BTS^O31^BTS_O31: Blood Product Transfusion/Disposition Message"
   },
@@ -17,7 +16,7 @@
         "O31"
       ],
       "eventPrinted": "O31",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
       "table": "BTS^O31^BTS_O31: Blood Product Transfusion/Disposition Message",
       "identicalToPrimary": true
@@ -139,7 +138,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Patient Visit - Additional Info",
+              "description": "Patient Visit â Additional Info",
               "chapterRef": "3"
             },
             {

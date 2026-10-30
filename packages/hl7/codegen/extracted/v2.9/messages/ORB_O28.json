@@ -3,13 +3,12 @@
   "messageType": "ORB",
   "triggerEvent": "O28",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "4.13.3 ORB  Blood Product Order Acknowledgment (Event O28)",
+  "description": "Description",
+  "title": "Description",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "ORB^O28^ORB_O28: "
+    "table": "ORB^O28^ORB_O28: Description"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "O28"
       ],
       "eventPrinted": "O28",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "ORB^O28^ORB_O28: ",
+      "table": "ORB^O28^ORB_O28: Description",
       "identicalToPrimary": true
     }
   ],

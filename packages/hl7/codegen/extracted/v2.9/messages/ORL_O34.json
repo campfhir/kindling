@@ -3,12 +3,12 @@
   "messageType": "ORL",
   "triggerEvent": "O34",
   "version": "2.9",
-  "description": "Laboratory Order Acknowledgment Message - Multipl",
-  "title": "Laboratory Order Acknowledgment Message - Multipl",
+  "description": "Laboratory Order Acknowledgment Message â Multiple Order Per Specimen (Patient Required)",
+  "title": "Laboratory Order Acknowledgment Message â Multiple Order Per Specimen (Patient Required)",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "ORL^O34^ORL_O34: Laboratory Order Acknowledgment Message - Multipl"
+    "table": "ORL^O34^ORL_O34: Laboratory Order Acknowledgment Message â Multiple Order Per Specimen (Patient Required)"
   },
   "triggerEvents": [
     {
@@ -16,9 +16,9 @@
         "O34"
       ],
       "eventPrinted": "O34",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "ORL^O34^ORL_O34: Laboratory Order Acknowledgment Message - Multipl",
+      "table": "ORL^O34^ORL_O34: Laboratory Order Acknowledgment Message â Multiple Order Per Specimen (Patient Required)",
       "identicalToPrimary": true
     }
   ],

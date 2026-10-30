@@ -34,12 +34,12 @@ const file = `ch${chapter.toLowerCase().padStart(2, "0")}`;
 const sha = createHash("sha256").update(readFileSync(pdfPath)).digest("hex");
 const lines = execFileSync("pdftotext", ["-layout", pdfPath, "-"], { encoding: "utf8", maxBuffer: 1 << 28 }).split("\n");
 
-const CAPTION = /^\s*([A-Z][A-Z0-9]{2}\^\S+?\^[A-Z][A-Z0-9_]*)\s*:\s*(.*\S)\s*$/;
+const CAPTION = /^\s*([A-Z][A-Z0-9]{2}\^\S+?\^[A-Z][A-Za-z0-9_]*)\s*:\s*(.*\S)\s*$/;
 const HEADING = /^\s*(\d+[A-Za-z]?(?:\.\d+)+)\s+(\S.*\S)\s*$/;
 const HEADER = /^\s*Segments?\s{2,}Descriptions?\b/;
 const COLUMN4 = /Chapte|Sec(?:tion)?\b/; // "Chapter" (wrapped as "Chapte"/"r"), "Sec Ref", "Section Reference"
-const FURNITURE = /Health Level Seven|©|^\s*Page \d+\s*$|Final Standard|^\s*Chapter \d+[A-Za-z]?:/;
-const NOTATION = /^(?:[[\]{}<>|]|\.\.\.|[A-Z][A-Z0-9]{2}|\s)+$/;
+const FURNITURE = /Health Level Seven|©|^\s*Page \d+\s*$|Final Standard|Normative (?:Standard|Publication)|^\s*Chapter \d+[A-Za-z]?:/;
+const NOTATION = /^(?:[[\]{}<>|]|\.\.\.|[A-Z][A-Z0-9]{2}|Hxx|\s)+$/; // Hxx: "any segment" in the order detail choice (v2.9 ch12)
 const escape = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 /** Runs of text separated by two or more spaces, with the column each starts at. */
@@ -48,7 +48,7 @@ const tokens = (line: string) => [...line.matchAll(/\S+(?: \S+)*/g)].map((m) => 
 /** The index of the repeated table header when lines[from] starts a page-foot footnote before it, else -1. */
 function continuesAfterFootnote(from: number): number {
   let k = from;
-  for (let n = 0; k < lines.length && n < 6 && !FURNITURE.test(lines[k]); k++) if (lines[k].trim()) n++;
+  for (let n = 0; k < lines.length && n < 14 && !FURNITURE.test(lines[k]); k++) if (lines[k].trim()) n++; // v2.9 DFT^P11: five footnotes
   if (!FURNITURE.test(lines[k] ?? "")) return -1;
   while (k < lines.length && (!lines[k].trim() || FURNITURE.test(lines[k]))) k++;
   return HEADER.test(lines[k] ?? "") ? k : -1;
@@ -87,11 +87,20 @@ for (let i = 0; i < lines.length; i++) {
       if (HEADER.test(l)) { columns(l); continue; }
       if (!l.trim() || FURNITURE.test(l)) continue;
       if (CAPTION.test(l) || HEADING.test(l)) break;
+      // the acknowledgement choreography table that follows a message table from v2.9 on ends it
+      if (/^\s*Acknowledge?ment Choreography\b/i.test(l) || /\b[A-Z][A-Z0-9]{2}\^[A-Z0-9]{3}\^/.test(l)) break;
       const cells = ["", "", "", ""];
       for (const t of tokens(l)) {
-        const col = t.at < desc - 1 ? 0 : t.at < status - 1 ? 1 : t.at < chap - 1 ? 2 : 3;
+        let col = t.at < desc - 1 ? 0 : t.at < status - 1 ? 1 : t.at < chap - 1 ? 2 : 3;
+        // a footnote number printed in the segment column ("[ DRG ] 8", "[ { 10", a "7" above DG1: v2.9 DFT^P11)
+        if (col === 0) t.text = t.text.replace(/(^|\s)\d{1,2}(?=\s|$)/g, "").trim();
+        if (!t.text) continue;
+        // a description printed a few columns early ("[ UAC ]   User Authentication Credential", v2.9 RSP^K25)
+        if (col === 0 && cells[0] && !NOTATION.test(t.text)) col = 1;
         cells[col] += (cells[col] ? " " : "") + t.text;
       }
+      // a footnote digit printed against a bracket ("[ {1   --- COMMON_ORDER begin", v2.9 DFT^P03)
+      cells[0] = cells[0].replace(/([[\]{}<>|])\d+/g, "$1");
       if (cells[0] && NOTATION.test(cells[0])) {
         if (pending) { cells[1] = cells[1] ? `${pending} ${cells[1]}` : pending; pending = ""; }
         rows.push(cells);
@@ -102,7 +111,15 @@ for (let i = 0; i < lines.length; i++) {
       // the rest of a header that wraps ("Chapte" / "r", "Section" / "Reference") comes before any row
       else if (!cells[0] && !rows.length) continue;
       // a line with an empty segment column continues the row before it, in whichever column it wraps
-      else if (!cells[0] && cells.some(Boolean) && rows.length) cells.forEach((c, k) => { if (c) rows[rows.length - 1][k] += ` ${c}`; });
+      else if (!cells[0] && cells.some(Boolean) && rows.length) cells.forEach((c, k) => {
+        if (!c) return;
+        const prev = rows[rows.length - 1];
+        // a description below a complete group marker belongs to the row printed after it (v2.9 DFT^P11: "7  Diagnosis
+        // (global across all FT1s)" sits above its DG1 under "[ {  --- DIAGNOSIS begin")
+        if (k === 1 && /--- \S+ (?:begin|end)$/.test(prev[1]) && !/^(?:begin|end)\b/.test(c)) { pending = pending ? `${pending} ${c}` : c; return; }
+        // a group name broken across lines ("--- SUBJECT_POPULATION_OR_LOCATION_IDENTIFICAT" / "ION begin") joins without a space
+        prev[k] += k === 1 && /--- [A-Z_]+$/.test(prev[k]) && /^[A-Z_]+\b/.test(c) && !/^(begin|end)\b/.test(c) ? c : ` ${c}`;
+      });
       else {
         // a footnote at the foot of the page ("8" / "This error segment ...") sits between a row and the header
         // the table repeats on the next page: skip it when page furniture and then the header follow within a few lines

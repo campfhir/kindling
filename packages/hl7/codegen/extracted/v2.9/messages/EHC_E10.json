@@ -6,7 +6,7 @@
   "description": "Edit/Adjudication Results",
   "title": "Edit/Adjudication Results",
   "source": {
-    "pdf": "hl7.eu std29/ch16.html",
+    "pdf": "hl7.org V29_CH16_eClaims_tc.pdf",
     "pages": null,
     "table": "EHC^E10^EHC_E10: Edit/Adjudication Results"
   },
@@ -16,7 +16,7 @@
         "E10"
       ],
       "eventPrinted": "E10",
-      "pdf": "hl7.eu std29/ch16.html",
+      "pdf": "hl7.org V29_CH16_eClaims_tc.pdf",
       "page": null,
       "table": "EHC^E10^EHC_E10: Edit/Adjudication Results",
       "identicalToPrimary": true

@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Master File Notification - Site Defined",
   "title": "Master File Notification - Site Defined",
-  "sectionHeading": "8.4.3 MFN/MFK - Master File Notification - Site Defined (Event M14)",
   "source": {
-    "pdf": "hl7.eu std29/ch08.html",
+    "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
     "pages": null,
     "table": "MFN^M14^MFN_Znn: Master File Notification - Site Defined"
   },
@@ -17,7 +16,7 @@
         "M14"
       ],
       "eventPrinted": "M14",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
       "table": "MFN^M14^MFN_Znn: Master File Notification - Site Defined",
       "identicalToPrimary": true

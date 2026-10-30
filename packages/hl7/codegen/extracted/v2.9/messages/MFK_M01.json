@@ -3,13 +3,12 @@
   "messageType": "MFK",
   "triggerEvent": "M13",
   "version": "2.9",
-  "description": "Master File Acknowledgment",
-  "title": "Master File Acknowledgment",
-  "sectionHeading": "8.4.2 MFN/MFK - Master File Notification - General (Event M13)",
+  "description": "Master File Application Acknowledgment",
+  "title": "Master File Application Acknowledgment",
   "source": {
-    "pdf": "hl7.eu std29/ch08.html",
+    "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
     "pages": null,
-    "table": "MFK^M13^MFK_M01: Master File Acknowledgment"
+    "table": "MFK^M13^MFK_M01: Master File Application Acknowledgment"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "M13"
       ],
       "eventPrinted": "M13",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
-      "table": "MFK^M13^MFK_M01: Master File Acknowledgment",
+      "table": "MFK^M13^MFK_M01: Master File Application Acknowledgment",
       "identicalToPrimary": true
     },
     {
@@ -27,9 +26,9 @@
         "M14"
       ],
       "eventPrinted": "M14",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
-      "table": "MFK^M14^MFK_M01: Master File Acknowledgment",
+      "table": "MFK^M14^MFK_M01: Master File Application Acknowledgment",
       "identicalToPrimary": true
     },
     {
@@ -37,7 +36,7 @@
         "M02"
       ],
       "eventPrinted": "M02",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
       "table": "MFK^M02^MFK_M01: Master File Acknowledgment",
       "identicalToPrimary": true
@@ -47,9 +46,9 @@
         "M08"
       ],
       "eventPrinted": "M08",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
-      "table": "MFK^M08^MFK_M01: Master File Acknowledgment",
+      "table": "MFK^M08^MFK_M01: Master File Application Acknowledgment",
       "identicalToPrimary": true
     },
     {
@@ -57,9 +56,9 @@
         "M09"
       ],
       "eventPrinted": "M09",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
-      "table": "MFK^M09^MFK_M01: Master File Acknowledgment",
+      "table": "MFK^M09^MFK_M01: Master File Application Acknowledgment",
       "identicalToPrimary": true
     },
     {
@@ -67,9 +66,9 @@
         "M10"
       ],
       "eventPrinted": "M10",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
-      "table": "MFK^M10^MFK_M01: Master File Acknowledgment",
+      "table": "MFK^M10^MFK_M01: Master File Application Acknowledgment",
       "identicalToPrimary": true
     },
     {
@@ -77,9 +76,9 @@
         "M11"
       ],
       "eventPrinted": "M11",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
-      "table": "MFK^M11^MFK_M01: Master File Acknowledgment",
+      "table": "MFK^M11^MFK_M01: Master File Application Acknowledgment",
       "identicalToPrimary": true
     },
     {
@@ -87,9 +86,9 @@
         "M12"
       ],
       "eventPrinted": "M12",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
-      "table": "MFK^M12^MFK_M01: Master File Acknowledgment",
+      "table": "MFK^M12^MFK_M01: Master File Application Acknowledgment",
       "identicalToPrimary": true
     },
     {
@@ -97,9 +96,9 @@
         "M18"
       ],
       "eventPrinted": "M18",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
-      "table": "MFK^M18^MFK_M01: Master File Acknowledgment",
+      "table": "MFK^M18^MFK_M01: Master File Application Acknowledgment",
       "identicalToPrimary": true
     },
     {
@@ -107,7 +106,7 @@
         "M05"
       ],
       "eventPrinted": "M05",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
       "table": "MFK^M05^MFK_M01: Master File Acknowledgment",
       "identicalToPrimary": true
@@ -117,7 +116,7 @@
         "M04"
       ],
       "eventPrinted": "M04",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
       "table": "MFK^M04^MFK_M01: Master File Acknowledgment",
       "identicalToPrimary": true
@@ -127,7 +126,7 @@
         "M06"
       ],
       "eventPrinted": "M06",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
       "table": "MFK^M06^MFK_M01: Master File Acknowledgment",
       "identicalToPrimary": true
@@ -137,7 +136,7 @@
         "M07"
       ],
       "eventPrinted": "M07",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
       "table": "MFK^M07^MFK_M01: Master File Acknowledgment",
       "identicalToPrimary": true
@@ -147,7 +146,7 @@
         "M15"
       ],
       "eventPrinted": "M15",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
       "table": "MFK^M15^MFK_M01: Master File Acknowledgment",
       "identicalToPrimary": true
@@ -157,7 +156,7 @@
         "M16"
       ],
       "eventPrinted": "M16",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
       "table": "MFK^M16^MFK_M01: Master File Acknowledgment",
       "identicalToPrimary": true
@@ -167,9 +166,19 @@
         "M17"
       ],
       "eventPrinted": "M17",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
       "table": "MFK^M17^MFK_M01: Master File Acknowledgment",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "M19"
+      ],
+      "eventPrinted": "M19",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
+      "page": null,
+      "table": "MFK^M19^MFK_M01: Master File Acknowledgment",
       "identicalToPrimary": true
     }
   ],

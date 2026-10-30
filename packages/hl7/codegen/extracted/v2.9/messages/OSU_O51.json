@@ -3,12 +3,12 @@
   "messageType": "OSU",
   "triggerEvent": "O51",
   "version": "2.9",
-  "description": "",
-  "title": "",
+  "description": "Order Status Update Message",
+  "title": "Order Status Update Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "OSU^O51^OSU_O51: "
+    "table": "OSU^O51^OSU_O51: Order Status Update Message"
   },
   "triggerEvents": [
     {
@@ -16,9 +16,9 @@
         "O51"
       ],
       "eventPrinted": "O51",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "OSU^O51^OSU_O51: ",
+      "table": "OSU^O51^OSU_O51: Order Status Update Message",
       "identicalToPrimary": true
     }
   ],

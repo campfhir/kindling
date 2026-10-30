@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Revoke Certificate Message",
   "title": "Revoke Certificate Message",
-  "sectionHeading": "15.3.9 PMU/ACK  Revoke Certificate/Permission (Event B08)",
   "source": {
-    "pdf": "hl7.eu std29/ch15.html",
+    "pdf": "hl7.org V29_CH15_PersMngmt_tc.pdf",
     "pages": null,
     "table": "PMU^B08^PMU_B08: Revoke Certificate Message"
   },
@@ -17,7 +16,7 @@
         "B08"
       ],
       "eventPrinted": "B08",
-      "pdf": "hl7.eu std29/ch15.html",
+      "pdf": "hl7.org V29_CH15_PersMngmt_tc.pdf",
       "page": null,
       "table": "PMU^B08^PMU_B08: Revoke Certificate Message",
       "identicalToPrimary": true

@@ -5,11 +5,10 @@
   "version": "2.9",
   "description": "Return Referral Information",
   "title": "Return Referral Information",
-  "sectionHeading": "11.5.2 REF/RRI - Patient Referral (Event I12)",
   "source": {
-    "pdf": "hl7.eu std29/ch11.html",
+    "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
     "pages": null,
-    "table": "RRI^I12,I13,I14,I15^RRI_I12: Return Referral Information"
+    "table": "RRI^I12-I15^RRI_I12: Return Referral Information"
   },
   "triggerEvents": [
     {
@@ -19,10 +18,10 @@
         "I14",
         "I15"
       ],
-      "eventPrinted": "I12,I13,I14,I15",
-      "pdf": "hl7.eu std29/ch11.html",
+      "eventPrinted": "I12-I15",
+      "pdf": "hl7.org V29_CH11_PatientReferral_tc.pdf",
       "page": null,
-      "table": "RRI^I12,I13,I14,I15^RRI_I12: Return Referral Information",
+      "table": "RRI^I12-I15^RRI_I12: Return Referral Information",
       "identicalToPrimary": true
     }
   ],

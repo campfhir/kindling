@@ -3,13 +3,12 @@
   "messageType": "SDR",
   "triggerEvent": "S31",
   "version": "2.9",
-  "description": "Anti-Microbial Device Data Notification",
-  "title": "Anti-Microbial Device Data Notification",
-  "sectionHeading": "17.5.4 SDR/ACK/SDS - Request Anti-Microbial Device Data (Event S31)",
+  "description": "Anti-Microbial Device Data Request",
+  "title": "Anti-Microbial Device Data Request",
   "source": {
-    "pdf": "hl7.eu std29/ch17.html",
+    "pdf": "hl7.org V29_CH17_MaterialsMngmt_tc.pdf",
     "pages": null,
-    "table": "SDR^S31^SDR_S31: Anti-Microbial Device Data Notification"
+    "table": "SDR^S31^SDR_S31: Anti-Microbial Device Data Request"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "S31"
       ],
       "eventPrinted": "S31",
-      "pdf": "hl7.eu std29/ch17.html",
+      "pdf": "hl7.org V29_CH17_MaterialsMngmt_tc.pdf",
       "page": null,
-      "table": "SDR^S31^SDR_S31: Anti-Microbial Device Data Notification",
+      "table": "SDR^S31^SDR_S31: Anti-Microbial Device Data Request",
       "identicalToPrimary": true
     },
     {
@@ -27,9 +26,9 @@
         "S31"
       ],
       "eventPrinted": "S31",
-      "pdf": "hl7.eu std29/ch17.html",
+      "pdf": "hl7.org V29_CH17_MaterialsMngmt_tc.pdf",
       "page": null,
-      "table": "SDS^S31^SDR_S31: Anti-Microbial Device Data Notification",
+      "table": "SDS^S31^SDR_S31: Anti-Microbial Device Data Request",
       "identicalToPrimary": true
     },
     {
@@ -37,7 +36,7 @@
         "S36"
       ],
       "eventPrinted": "S36",
-      "pdf": "hl7.eu std29/ch17.html",
+      "pdf": "hl7.org V29_CH17_MaterialsMngmt_tc.pdf",
       "page": null,
       "table": "SDN^S36^SDR_S31: Anti-Microbial Device Data Notification",
       "identicalToPrimary": true

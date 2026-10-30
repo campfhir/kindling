@@ -6,7 +6,7 @@
   "description": "Payment/Remittance Advice",
   "title": "Payment/Remittance Advice",
   "source": {
-    "pdf": "hl7.eu std29/ch16.html",
+    "pdf": "hl7.org V29_CH16_eClaims_tc.pdf",
     "pages": null,
     "table": "EHC^E15^EHC_E15: Payment/Remittance Advice"
   },
@@ -16,7 +16,7 @@
         "E15"
       ],
       "eventPrinted": "E15",
-      "pdf": "hl7.eu std29/ch16.html",
+      "pdf": "hl7.org V29_CH16_eClaims_tc.pdf",
       "page": null,
       "table": "EHC^E15^EHC_E15: Payment/Remittance Advice",
       "identicalToPrimary": true
@@ -206,8 +206,8 @@
           "maxOccurs": 1,
           "usage": null,
           "page": null,
-          "description": "Role",
-          "status": "B"
+          "description": "Deprecated as of V2.9Role",
+          "status": "Deprec atedB"
         }
       ],
       "minOccurs": 0,

@@ -3,13 +3,12 @@
   "messageType": "MFN",
   "triggerEvent": "M04",
   "version": "2.9",
-  "description": "Master File Notification - Charge Description",
-  "title": "Master File Notification - Charge Description",
-  "sectionHeading": "8.10.1 MFN/MFK - Charge Description Master File Message (Event M04)",
+  "description": "Master File Notification â Charge Description",
+  "title": "Master File Notification â Charge Description",
   "source": {
-    "pdf": "hl7.eu std29/ch08.html",
+    "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
     "pages": null,
-    "table": "MFN^M04^MFN_M04: Master File Notification - Charge Description"
+    "table": "MFN^M04^MFN_M04: Master File Notification â Charge Description"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "M04"
       ],
       "eventPrinted": "M04",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
-      "table": "MFN^M04^MFN_M04: Master File Notification - Charge Description",
+      "table": "MFN^M04^MFN_M04: Master File Notification â Charge Description",
       "identicalToPrimary": true
     }
   ],

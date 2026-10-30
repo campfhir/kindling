@@ -1,7 +1,7 @@
 /**
  * Builder, parser and structure for OML^O39 messages (HL7 v2.9).
  *
- * Structure: MSH [{ARV}] [{SFT}] [UAC] [{NTE}] [ PATIENT: PID [PD1] [{PRT}] [ OCCUPATIONAL_DATA_FOR_HEALTH: [{OH1}] [{OH2}] [OH3] [{OH4}] ] [{NTE}] [{ NEXT_OF_KIN: NK1 [{OH2}] [OH3] }] [{ARV}] [ PATIENT_VISIT: PV1 [PV2] [{PRT}] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC [{NTE}] [{PRT}] [{ TIMING: TQ1 [{TQ2}] }] [ OBSERVATION_REQUEST: OBR [TCD] [{NTE}] [{PRT}] [CTD] [{DG1}] [{REL}] [{ OBSERVATION: OBX [{PRT}] [TCD] [{NTE}] }] [{ SPECIMEN_SHIPMENT: SHP [{ SHIPMENT_OBSERVATION: OBX [{PRT}] }] { PACKAGE: PAC [{ SPECIMEN_IN_PACKAGE: SPM [{NTE}] [{ SPECIMEN_OBSERVATION: OBX [{PRT}] }] [{ SPECIMEN_CONTAINER_IN_PACKAGE: SAC [{NTE}] [{ CONTAINER_OBSERVATION: OBX [{PRT}] }] }] }] } }] ] [{FT1}] [{CTI}] [BLG] } [{ DEVICE: DEV [{OBX}] }]
+ * Structure: MSH [{ARV}] [{SFT}] [UAC] [{NTE}] [ PATIENT: PID [PD1] [{PRT}] [ OCCUPATIONAL_DATA_FOR_HEALTH: [{OH1}] [{OH2}] [OH3] [{OH4}] ] [{NTE}] [{ NEXT_OF_KIN: NK1 [{OH2}] [OH3] }] [{ARV}] [ PATIENT_VISIT: PV1 [PV2] [{PRT}] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC [{NTE}] [{PRT}] [{ TIMING: TQ1 [{TQ2}] }] [ OBSERVATION_REQUEST: OBR [TCD] [{NTE}] [{PRT}] [CTD] [{DG1}] [REL] [{ OBSERVATION: OBX [{PRT}] [TCD] [{NTE}] }] [{ SPECIMEN_SHIPMENT: SHP [{ SHIPMENT_OBSERVATION: OBX [{PRT}] }] { PACKAGE: PAC [{ SPECIMEN_IN_PACKAGE: SPM [{NTE}] [{ SPECIMEN_OBSERVATION: OBX [{PRT}] }] [{ SPECIMEN_CONTAINER_IN_PACKAGE: SAC [{NTE}] [{ CONTAINER_OBSERVATION: OBX [{PRT}] }] }] }] } }] ] [{FT1}] [{CTI}] [BLG] } [{ DEVICE: DEV [{OBX}] }]
  *
  * @module
  */
@@ -138,7 +138,7 @@ export const OML_O39_STRUCTURE: StructureItem[] = [
           { name: "PRT", required: false, repeating: true },
           { name: "CTD", required: false, repeating: false },
           { name: "DG1", required: false, repeating: true },
-          { name: "REL", required: false, repeating: true },
+          { name: "REL", required: false, repeating: false },
           {
             name: "OBSERVATION",
             required: false,
@@ -339,8 +339,8 @@ export interface ParsedObservationRequest {
   contact?: CTD;
   /** The DG1 segments. */
   diagnoses?: DG1[];
-  /** The REL segments. */
-  relList?: REL[];
+  /** The REL segment. */
+  rel?: REL;
   /** The OBSERVATION groups. */
   observations?: ParsedObservation[];
   /** The SPECIMEN SHIPMENT groups. */
@@ -622,8 +622,8 @@ export interface ObservationRequestGroup {
   contact?: CTD;
   /** The DG1 segments. */
   diagnoses?: DG1[];
-  /** The REL segments. */
-  relList?: REL[];
+  /** The REL segment. */
+  rel?: REL;
   /** The OBSERVATION groups. */
   observations?: ObservationGroup[];
   /** The SPECIMEN SHIPMENT groups. */

@@ -3,13 +3,12 @@
   "messageType": "MFN",
   "triggerEvent": "M07",
   "version": "2.9",
-  "description": "Master File Notification - Clinical Study without",
-  "title": "Master File Notification - Clinical Study without",
-  "sectionHeading": "8.11.1 MFN/MFK - Clinical Trials Master File Message (Event M06-M07)",
+  "description": "Master File Notification â Clinical Study without Phases but with Schedules",
+  "title": "Master File Notification â Clinical Study without Phases but with Schedules",
   "source": {
-    "pdf": "hl7.eu std29/ch08.html",
+    "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
     "pages": null,
-    "table": "MFN^M07^MFN_M07: Master File Notification - Clinical Study without"
+    "table": "MFN^M07^MFN_M07: Master File Notification â Clinical Study without Phases but with Schedules"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "M07"
       ],
       "eventPrinted": "M07",
-      "pdf": "hl7.eu std29/ch08.html",
+      "pdf": "hl7.org V29_CH08_MasterFiles_tc.pdf",
       "page": null,
-      "table": "MFN^M07^MFN_M07: Master File Notification - Clinical Study without",
+      "table": "MFN^M07^MFN_M07: Master File Notification â Clinical Study without Phases but with Schedules",
       "identicalToPrimary": true
     }
   ],

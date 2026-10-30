@@ -6,9 +6,9 @@
   "description": "Schedule Request Message",
   "title": "Schedule Request Message",
   "source": {
-    "pdf": "hl7.eu std29/ch10.html",
+    "pdf": "hl7.org V29_CH10_Scheduling_tc.pdf",
     "pages": null,
-    "table": "SRM^S01,S02,S03,S04,S05,S06,S07,S08,S09,S10,S11^SRM_S01: Schedule Request Message"
+    "table": "SRM^S01-S11^SRM_S01: Schedule Request Message"
   },
   "triggerEvents": [
     {
@@ -25,10 +25,10 @@
         "S10",
         "S11"
       ],
-      "eventPrinted": "S01,S02,S03,S04,S05,S06,S07,S08,S09,S10,S11",
-      "pdf": "hl7.eu std29/ch10.html",
+      "eventPrinted": "S01-S11",
+      "pdf": "hl7.org V29_CH10_Scheduling_tc.pdf",
       "page": null,
-      "table": "SRM^S01,S02,S03,S04,S05,S06,S07,S08,S09,S10,S11^SRM_S01: Schedule Request Message",
+      "table": "SRM^S01-S11^SRM_S01: Schedule Request Message",
       "identicalToPrimary": true
     }
   ],

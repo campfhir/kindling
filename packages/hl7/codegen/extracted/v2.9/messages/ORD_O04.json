@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Dietary Order Acknowledgment Message",
   "title": "Dietary Order Acknowledgment Message",
-  "sectionHeading": "4.7.2 ORD - dietary order acknowledgment (Event O04)",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
     "table": "ORD^O04^ORD_O04: Dietary Order Acknowledgment Message"
   },
@@ -17,7 +16,7 @@
         "O04"
       ],
       "eventPrinted": "O04",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
       "table": "ORD^O04^ORD_O04: Dietary Order Acknowledgment Message",
       "identicalToPrimary": true

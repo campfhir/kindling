@@ -5,11 +5,10 @@
   "version": "2.9",
   "description": "Product Experience Message",
   "title": "Product Experience Message",
-  "sectionHeading": "7.11.1 PEX - Product Experience Message (Events P07, P08)",
   "source": {
-    "pdf": "hl7.eu std29/ch07.html",
+    "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
     "pages": null,
-    "table": "PEX^P07,P08^PEX_P07: Product Experience Message"
+    "table": "PEX^P07-P08^PEX_P07: Product Experience Message"
   },
   "triggerEvents": [
     {
@@ -17,10 +16,10 @@
         "P07",
         "P08"
       ],
-      "eventPrinted": "P07,P08",
-      "pdf": "hl7.eu std29/ch07.html",
+      "eventPrinted": "P07-P08",
+      "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
       "page": null,
-      "table": "PEX^P07,P08^PEX_P07: Product Experience Message",
+      "table": "PEX^P07-P08^PEX_P07: Product Experience Message",
       "identicalToPrimary": true
     }
   ],

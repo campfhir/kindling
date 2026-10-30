@@ -3,12 +3,12 @@
   "messageType": "RSP",
   "triggerEvent": "K34",
   "version": "2.9",
-  "description": "",
-  "title": "",
+  "description": "Segment Pattern Response Message",
+  "title": "Segment Pattern Response Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "RSP^K34^RSP_O34: "
+    "table": "RSP^K34^RSP_O34: Segment Pattern Response Message"
   },
   "triggerEvents": [
     {
@@ -16,9 +16,9 @@
         "K34"
       ],
       "eventPrinted": "K34",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "RSP^K34^RSP_O34: ",
+      "table": "RSP^K34^RSP_O34: Segment Pattern Response Message",
       "identicalToPrimary": true
     }
   ],

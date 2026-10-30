@@ -3,13 +3,12 @@
   "messageType": "ADT",
   "triggerEvent": "A43",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "3.3.43 ADT/ACK - Move Patient Information - Patient Identifier List (Event A43)",
+  "description": "ADT Message",
+  "title": "ADT Message",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
-    "table": "ADT^A43^ADT_A43: "
+    "table": "ADT^A43^ADT_A43: ADT Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "A43"
       ],
       "eventPrinted": "A43",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A43^ADT_A43: ",
+      "table": "ADT^A43^ADT_A43: ADT Message",
       "identicalToPrimary": true
     },
     {
@@ -27,9 +26,9 @@
         "A49"
       ],
       "eventPrinted": "A49",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A49^ADT_A43: ",
+      "table": "ADT^A49^ADT_A43: ADT Message",
       "identicalToPrimary": true
     }
   ],

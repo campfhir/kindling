@@ -3,12 +3,12 @@
   "messageType": "RSP",
   "triggerEvent": "K33",
   "version": "2.9",
-  "description": "",
-  "title": "",
+  "description": "Get Donor Record Candidates Response Message",
+  "title": "Get Donor Record Candidates Response Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04.html",
+    "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
     "pages": null,
-    "table": "RSP^K33^RSP_O33: "
+    "table": "RSP^K33^RSP_O33: Get Donor Record Candidates Response Message"
   },
   "triggerEvents": [
     {
@@ -16,9 +16,9 @@
         "K33"
       ],
       "eventPrinted": "K33",
-      "pdf": "hl7.eu std29/ch04.html",
+      "pdf": "hl7.org v29_CH04_Orders_tc.pdf",
       "page": null,
-      "table": "RSP^K33^RSP_O33: ",
+      "table": "RSP^K33^RSP_O33: Get Donor Record Candidates Response Message",
       "identicalToPrimary": true
     }
   ],

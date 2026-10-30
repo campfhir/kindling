@@ -3,13 +3,12 @@
   "messageType": "ADT",
   "triggerEvent": "A12",
   "version": "2.9",
-  "description": "Track/Cancel (2)",
-  "title": "Track/Cancel (2)",
-  "sectionHeading": "3.3.12 ADT/ACK - Cancel Transfer (Event A12)",
+  "description": "ADT Message",
+  "title": "ADT Message",
   "source": {
-    "pdf": "hl7.eu std29/ch03.html",
+    "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
     "pages": null,
-    "table": "ADT^A12^ADT_A12: Track/Cancel (2)"
+    "table": "ADT^A12^ADT_A12: ADT Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "A12"
       ],
       "eventPrinted": "A12",
-      "pdf": "hl7.eu std29/ch03.html",
+      "pdf": "hl7.org V29_CH03_PatientAdmin_tc.pdf",
       "page": null,
-      "table": "ADT^A12^ADT_A12: Track/Cancel (2)",
+      "table": "ADT^A12^ADT_A12: ADT Message",
       "identicalToPrimary": true
     }
   ],

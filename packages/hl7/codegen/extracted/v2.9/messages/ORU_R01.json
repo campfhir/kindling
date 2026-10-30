@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Observation Message",
   "title": "Observation Message",
-  "sectionHeading": "7.3.1 ORU  Unsolicited Observation Message (Event R01)",
   "source": {
-    "pdf": "hl7.eu std29/ch07.html",
+    "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
     "pages": null,
     "table": "ORU^R01^ORU_R01: Observation Message"
   },
@@ -17,7 +16,7 @@
         "R01"
       ],
       "eventPrinted": "R01",
-      "pdf": "hl7.eu std29/ch07.html",
+      "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
       "page": null,
       "table": "ORU^R01^ORU_R01: Observation Message",
       "identicalToPrimary": true
@@ -27,7 +26,7 @@
         "R40"
       ],
       "eventPrinted": "R40",
-      "pdf": "hl7.eu std29/ch07.html",
+      "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
       "page": null,
       "table": "ORU^R40^ORU_R01: Observation Message",
       "identicalToPrimary": false
@@ -37,7 +36,7 @@
         "R42"
       ],
       "eventPrinted": "R42",
-      "pdf": "hl7.eu std29/ch07.html",
+      "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
       "page": null,
       "table": "ORU^R42^ORU_R01: Observation Message",
       "identicalToPrimary": true
@@ -47,7 +46,7 @@
         "R43"
       ],
       "eventPrinted": "R43",
-      "pdf": "hl7.eu std29/ch07.html",
+      "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
       "page": null,
       "table": "ORU^R43^ORU_R01: Observation Message",
       "identicalToPrimary": true
@@ -678,7 +677,7 @@
   "variants": [
     {
       "eventPrinted": "R40",
-      "pdf": "hl7.eu std29/ch07.html",
+      "pdf": "hl7.org V29_CH07_Observations_tc.pdf",
       "pages": null,
       "table": "ORU^R40^ORU_R01: Observation Message",
       "items": [

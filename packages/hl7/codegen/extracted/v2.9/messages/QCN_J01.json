@@ -3,13 +3,12 @@
   "messageType": "QCN",
   "triggerEvent": "J01",
   "version": "2.9",
-  "description": "Cancel Subscription",
-  "title": "Cancel Subscription",
-  "sectionHeading": "5.4.6 QCN/ACK  cancel query/acknowledge message (Event J01)",
+  "description": "Cancel Query",
+  "title": "Cancel Query",
   "source": {
-    "pdf": "hl7.eu std29/ch05.html",
+    "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
     "pages": null,
-    "table": "QCN^J01^QCN_J01: Cancel Subscription"
+    "table": "QCN^J01^QCN_J01: Cancel Query"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "J01"
       ],
       "eventPrinted": "J01",
-      "pdf": "hl7.eu std29/ch05.html",
+      "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
       "page": null,
-      "table": "QCN^J01^QCN_J01: Cancel Subscription",
+      "table": "QCN^J01^QCN_J01: Cancel Query",
       "identicalToPrimary": true
     },
     {
@@ -27,7 +26,7 @@
         "J02"
       ],
       "eventPrinted": "J02",
-      "pdf": "hl7.eu std29/ch05.html",
+      "pdf": "hl7.org V29_CH05_Queries_tc.pdf",
       "page": null,
       "table": "QSX^J02^QCN_J01: Cancel Subscription",
       "identicalToPrimary": true

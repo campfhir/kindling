@@ -3,13 +3,12 @@
   "messageType": "RCV",
   "triggerEvent": "O59",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "4A.3.26 RCV - Pharmacy/Treatment Dispense Message (Event O59)",
+  "description": "Pharmacy/Treatment Dispense Message",
+  "title": "Pharmacy/Treatment Dispense Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04A.html",
+    "pdf": "hl7.org V29_CH04A_Orders.pdf",
     "pages": null,
-    "table": "RCV^O59^RCV_O59: "
+    "table": "RCV^O59^RCV_O59: Pharmacy/Treatment Dispense Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "O59"
       ],
       "eventPrinted": "O59",
-      "pdf": "hl7.eu std29/ch04A.html",
+      "pdf": "hl7.org V29_CH04A_Orders.pdf",
       "page": null,
-      "table": "RCV^O59^RCV_O59: ",
+      "table": "RCV^O59^RCV_O59: Pharmacy/Treatment Dispense Message",
       "identicalToPrimary": true
     }
   ],
@@ -139,7 +138,7 @@
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Patient Visit \u0013 Additional Info",
+              "description": "Patient Visit â Additional Info",
               "chapterRef": "3"
             },
             {

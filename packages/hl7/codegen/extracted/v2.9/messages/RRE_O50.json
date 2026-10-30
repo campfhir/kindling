@@ -3,13 +3,12 @@
   "messageType": "RRE",
   "triggerEvent": "O50",
   "version": "2.9",
-  "description": "",
-  "title": "",
-  "sectionHeading": "4A.3.25 RRE - Pharmacy/Treatment Encoded Order Acknowledgment (Event O50)",
+  "description": "Pharmacy/Treatment Encoded Order Acknowledgment Message",
+  "title": "Pharmacy/Treatment Encoded Order Acknowledgment Message",
   "source": {
-    "pdf": "hl7.eu std29/ch04A.html",
+    "pdf": "hl7.org V29_CH04A_Orders.pdf",
     "pages": null,
-    "table": "RRE^O50^RRE_O50: "
+    "table": "RRE^O50^RRE_O50: Pharmacy/Treatment Encoded Order Acknowledgment Message"
   },
   "triggerEvents": [
     {
@@ -17,9 +16,9 @@
         "O50"
       ],
       "eventPrinted": "O50",
-      "pdf": "hl7.eu std29/ch04A.html",
+      "pdf": "hl7.org V29_CH04A_Orders.pdf",
       "page": null,
-      "table": "RRE^O50^RRE_O50: ",
+      "table": "RRE^O50^RRE_O50: Pharmacy/Treatment Encoded Order Acknowledgment Message",
       "identicalToPrimary": true
     }
   ],
@@ -280,7 +279,7 @@
               "usage": null,
               "page": null,
               "description": "Participation (for Order)",
-              "status": "Deprecated",
+              "status": "Deprec ated",
               "chapterRef": "7"
             }
           ],

@@ -5,9 +5,8 @@
   "version": "2.9",
   "description": "Equipment Log/Service Message",
   "title": "Equipment Log/Service Message",
-  "sectionHeading": "13.3.12 LSU/ACK - Automated Equipment Log/Service Update (Event U12)",
   "source": {
-    "pdf": "hl7.eu std29/ch13.html",
+    "pdf": "hl7.org V29_CH13_ClinicalLabAuto_tc.pdf",
     "pages": null,
     "table": "LSU^U12^LSU_U12: Equipment Log/Service Message"
   },
@@ -17,7 +16,7 @@
         "U12"
       ],
       "eventPrinted": "U12",
-      "pdf": "hl7.eu std29/ch13.html",
+      "pdf": "hl7.org V29_CH13_ClinicalLabAuto_tc.pdf",
       "page": null,
       "table": "LSU^U12^LSU_U12: Equipment Log/Service Message",
       "identicalToPrimary": true
@@ -27,7 +26,7 @@
         "U13"
       ],
       "eventPrinted": "U13",
-      "pdf": "hl7.eu std29/ch13.html",
+      "pdf": "hl7.org V29_CH13_ClinicalLabAuto_tc.pdf",
       "page": null,
       "table": "LSR^U13^LSU_U12: Equipment Log/Service Message",
       "identicalToPrimary": true

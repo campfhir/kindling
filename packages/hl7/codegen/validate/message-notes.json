@@ -2431,5 +2431,242 @@
       "accept": true,
       "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
     }
+  },
+  "v2.9": {
+    "ADT_A05": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 3 (V29_CH03_PatientAdmin_tc.pdf) prints \"[{ PRT }}\" and \"[{ IAM }}\" in this table, unpaired brackets; the ledger's reader of the table nests the rows after them. Our structure reads them as the importer does (optional, repeating; OH3 and REL optional and single by the hand decisions in codegen/extracted/v2.9/overrides.json) and equals hl7.eu's message structure list. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "ADT_A06": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 3 (V29_CH03_PatientAdmin_tc.pdf) prints \"[ OH3 }\" in this table, unpaired brackets; the ledger's reader of the table nests the rows after them. Our structure reads them as the importer does (optional, repeating; OH3 and REL optional and single by the hand decisions in codegen/extracted/v2.9/overrides.json) and equals hl7.eu's message structure list. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "ADT_A07": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 3 (V29_CH03_PatientAdmin_tc.pdf) prints \"[{ OH2 }}\", \"[ OH3 }\" and \"[{ PRT }}\" in this table, unpaired brackets; the ledger's reader of the table nests the rows after them. Our structure reads them as the importer does (optional, repeating; OH3 and REL optional and single by the hand decisions in codegen/extracted/v2.9/overrides.json) and equals hl7.eu's message structure list. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "ADT_A08": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 3 (V29_CH03_PatientAdmin_tc.pdf) prints \"[{ OH2 }}\", \"[ OH3 }\" and \"[{ PRT }}\" in this table, unpaired brackets; the ledger's reader of the table nests the rows after them. Our structure reads them as the importer does (optional, repeating; OH3 and REL optional and single by the hand decisions in codegen/extracted/v2.9/overrides.json) and equals hl7.eu's message structure list. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "ADT_A17": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 3 (V29_CH03_PatientAdmin_tc.pdf) prints \"[{ PRT }}\" in this table, unpaired brackets; the ledger's reader of the table nests the rows after them. Our structure reads them as the importer does (optional, repeating; OH3 and REL optional and single by the hand decisions in codegen/extracted/v2.9/overrides.json) and equals hl7.eu's message structure list. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "BAR_P01": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 6 (V29_CH06_FinancialMngmt_tc.pdf) prints DIAGNOSIS (DG1) as a group holding one segment (\"--- NAME begin\" / \"--- NAME end\" rows), which our structure keeps; the ledger's reader takes it for the segment alone. hl7.eu's message structure list (hl7v29msgstruct.htm) also puts [{ARV}] after MSH, which the official chapter does not print; the official chapter decides. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "BAR_P05": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 6 (V29_CH06_FinancialMngmt_tc.pdf) prints DIAGNOSIS (DG1) as a group holding one segment (\"--- NAME begin\" / \"--- NAME end\" rows), which our structure keeps; the ledger's reader takes it for the segment alone. hl7.eu's message structure list (hl7v29msgstruct.htm) also puts [{ARV}] after MSH, which the official chapter does not print; the official chapter decides. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "BAR_P10": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 6 (V29_CH06_FinancialMngmt_tc.pdf) prints DIAGNOSIS (DG1) as a group holding one segment (\"--- NAME begin\" / \"--- NAME end\" rows), which our structure keeps; the ledger's reader takes it for the segment alone. hl7.eu's message structure list (hl7v29msgstruct.htm) also puts [{ARV}] after MSH, which the official chapter does not print; the official chapter decides. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "BAR_P12": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 6 (V29_CH06_FinancialMngmt_tc.pdf) prints DIAGNOSIS (DG1) as a group holding one segment (\"--- NAME begin\" / \"--- NAME end\" rows), which our structure keeps; the ledger's reader takes it for the segment alone. hl7.eu's message structure list (hl7v29msgstruct.htm) also puts [{ARV}] after MSH, which the official chapter does not print; the official chapter decides. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "BRP_O30": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "Our structure follows the begin/end rows the official v2.9 chapter 4 (v29_CH04_Orders_tc.pdf) prints for RESPONSE and the groups in it; the ledger's reader of the table nests PATIENT and ORDER differently (as for v2.8 to v2.8.2). hl7.eu's message structure list (hl7v29msgstruct.htm) also puts [{ARV}] after MSH, which the official chapter does not print; the official chapter decides. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "DFT_P03": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The ledger's reader takes the \"OBR  Order Detail Segment\" row of ORDER for the order detail choice; the official v2.9 chapter 6 (V29_CH06_FinancialMngmt_tc.pdf) prints OBR alone, as our structure has it, and adds the groups FINANCIAL_OBSERVATION_STANDALONE and FINANCIAL_ORDER_STANDALONE that hl7.eu's chapter page lacks. hl7.eu's message structure list (hl7v29msgstruct.htm) also puts [{ARV}] after MSH, which the official chapter does not print; the official chapter decides. The list also differs in the new groups (\"{NTE}\" where the official chapter prints \"[ { NTE } ]\"); the official chapter decides. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "DFT_P11": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The ledger's reader takes the \"OBR  Order Detail Segment\" row of ORDER for the order detail choice; the official v2.9 chapter 6 (V29_CH06_FinancialMngmt_tc.pdf) prints OBR alone, as our structure has it, and adds the groups FINANCIAL_OBSERVATION_STANDALONE and FINANCIAL_ORDER_STANDALONE that hl7.eu's chapter page lacks. hl7.eu's message structure list (hl7v29msgstruct.htm) also puts [{ARV}] after MSH, which the official chapter does not print; the official chapter decides. The list also differs in the new groups (\"{NTE}\" where the official chapter prints \"[ { NTE } ]\"); the official chapter decides. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "EHC_E01": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 16 (V29_CH16_eClaims_tc.pdf) prints INVOICE_INFORMATION_SUBMIT inside \"<\" ... \">\" with no \"|\": a choice of one alternative. Our structure reads it as that group, as for v2.8 to v2.8.2; the ledger's reader leaves the group out, and hl7.eu's message structure list renders it as a choice of its rows. hl7.eu's message structure list (hl7v29msgstruct.htm) also puts [{ARV}] after MSH, which the official chapter does not print; the official chapter decides. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "EHC_E02": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 16 (V29_CH16_eClaims_tc.pdf) prints INVOICE_INFORMATION_CANCEL inside \"<\" ... \">\" with no \"|\": a choice of one alternative. Our structure reads it as that group, as for v2.8 to v2.8.2; the ledger's reader leaves the group out, and hl7.eu's message structure list renders it as a choice of its rows. hl7.eu's message structure list (hl7v29msgstruct.htm) also puts [{ARV}] after MSH, which the official chapter does not print; the official chapter decides. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "EHC_E04": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 16 (V29_CH16_eClaims_tc.pdf) prints REASSESSMENT_REQUEST_INFO inside \"<\" ... \">\" with no \"|\": a choice of one alternative. Our structure reads it as that group, as for v2.8 to v2.8.2; the ledger's reader leaves the group out, and hl7.eu's message structure list renders it as a choice of its rows. hl7.eu's message structure list (hl7v29msgstruct.htm) also puts [{ARV}] after MSH, which the official chapter does not print; the official chapter decides. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "EHC_E15": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 16 (V29_CH16_eClaims_tc.pdf) prints PAYMENT_REMITTANCE_HEADER_INFO inside \"<\" ... \">\" with no \"|\": a choice of one alternative. Our structure reads it as that group, as for v2.8 to v2.8.2; the ledger's reader leaves the group out, and hl7.eu's message structure list renders it as a choice of its rows. hl7.eu's message structure list (hl7v29msgstruct.htm) also puts [{ARV}] after MSH, which the official chapter does not print; the official chapter decides. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "EHC_E20": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 16 (V29_CH16_eClaims_tc.pdf) prints AUTHORIZATION_REQUEST inside \"<\" ... \">\" with no \"|\": a choice of one alternative. Our structure reads it as that group, as for v2.8 to v2.8.2; the ledger's reader leaves the group out, and hl7.eu's message structure list renders it as a choice of its rows. hl7.eu's message structure list (hl7v29msgstruct.htm) also puts [{ARV}] after MSH, which the official chapter does not print; the official chapter decides. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "EHC_E21": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 16 (V29_CH16_eClaims_tc.pdf) prints AUTHORIZATION_REQUEST inside \"<\" ... \">\" with no \"|\": a choice of one alternative. Our structure reads it as that group, as for v2.8 to v2.8.2; the ledger's reader leaves the group out, and hl7.eu's message structure list renders it as a choice of its rows. hl7.eu's message structure list (hl7v29msgstruct.htm) also puts [{ARV}] after MSH, which the official chapter does not print; the official chapter decides. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "EHC_E24": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 16 (V29_CH16_eClaims_tc.pdf) prints AUTHORIZATION_RESPONSE_INFO inside \"<\" ... \">\" with no \"|\": a choice of one alternative. Our structure reads it as that group, as for v2.8 to v2.8.2; the ledger's reader leaves the group out, and hl7.eu's message structure list renders it as a choice of its rows. hl7.eu's message structure list (hl7v29msgstruct.htm) also puts [{ARV}] after MSH, which the official chapter does not print; the official chapter decides. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "MFN_M19": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 8 (V29_CH08_MasterFiles_tc.pdf) prints PACKAGING (PKG) as a group holding one segment (\"--- NAME begin\" / \"--- NAME end\" rows), which our structure keeps; the ledger's reader takes it for the segment alone. hl7.eu's message structure list has the group as ours. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "OMI_O23": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 4 (v29_CH04_Orders_tc.pdf) prints \"[REL}\" in this table, unpaired brackets; the ledger's reader of the table nests the rows after them. Our structure reads them as the importer does (optional, repeating; OH3 and REL optional and single by the hand decisions in codegen/extracted/v2.9/overrides.json) and equals hl7.eu's message structure list. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "OML_O21": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 4 (v29_CH04_Orders_tc.pdf) prints \"[{NTE]]\" in this table, unpaired brackets; the ledger's reader of the table nests the rows after them. Our structure reads them as the importer does (optional, repeating; OH3 and REL optional and single by the hand decisions in codegen/extracted/v2.9/overrides.json) and equals hl7.eu's message structure list. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "OML_O35": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 4 (v29_CH04_Orders_tc.pdf) prints \"[REL}\" in this table, unpaired brackets; the ledger's reader of the table nests the rows after them. Our structure reads them as the importer does (optional, repeating; OH3 and REL optional and single by the hand decisions in codegen/extracted/v2.9/overrides.json) and equals hl7.eu's message structure list. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "OML_O39": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 4 (v29_CH04_Orders_tc.pdf) prints \"[REL}\" in this table, unpaired brackets; the ledger's reader of the table nests the rows after them. Our structure reads them as the importer does (optional, repeating; OH3 and REL optional and single by the hand decisions in codegen/extracted/v2.9/overrides.json) and equals hl7.eu's message structure list. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "OML_O59": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 4 (v29_CH04_Orders_tc.pdf) prints \"[{NTE]]\" in this table, unpaired brackets; the ledger's reader of the table nests the rows after them. Our structure reads them as the importer does (optional, repeating; OH3 and REL optional and single by the hand decisions in codegen/extracted/v2.9/overrides.json) and equals hl7.eu's message structure list. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "OPR_O38": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "Our structure follows the begin/end rows the official v2.9 chapter 4 (v29_CH04_Orders_tc.pdf) prints for RESPONSE and the groups in it, and equals hl7.eu's message structure list; the ledger's reader of the table nests PATIENT and ORDER differently (as for v2.8 to v2.8.2). Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "ORB_O28": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "Our structure follows the begin/end rows the official v2.9 chapter 4 (v29_CH04_Orders_tc.pdf) prints for RESPONSE and the groups in it, and equals hl7.eu's message structure list; the ledger's reader of the table nests PATIENT and ORDER differently (as for v2.8 to v2.8.2). Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "ORL_O40": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "Our structure follows the begin/end rows the official v2.9 chapter 4 (v29_CH04_Orders_tc.pdf) prints for RESPONSE and the groups in it, and equals hl7.eu's message structure list; the ledger's reader of the table nests PATIENT and ORDER differently (as for v2.8 to v2.8.2). Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "ORL_O53": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 4 (v29_CH04_Orders_tc.pdf) prints \"[{ARV]]\" in this table, unpaired brackets; the ledger's reader of the table nests the rows after them. Our structure reads them as the importer does (optional, repeating; OH3 and REL optional and single by the hand decisions in codegen/extracted/v2.9/overrides.json) and equals hl7.eu's message structure list. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "ORL_O56": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "Our structure follows the begin/end rows the official v2.9 chapter 4 (v29_CH04_Orders_tc.pdf) prints for RESPONSE and the groups in it, and equals hl7.eu's message structure list; the ledger's reader of the table nests PATIENT and ORDER differently (as for v2.8 to v2.8.2). Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "OSM_R26": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 7 (V29_CH07_Observations_tc.pdf) prints \"{[ARV}]\" in this table, unpaired brackets; the ledger's reader of the table nests the rows after them. Our structure reads them as the importer does (optional, repeating; OH3 and REL optional and single by the hand decisions in codegen/extracted/v2.9/overrides.json) and equals hl7.eu's message structure list. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "OSU_O52": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 4 (v29_CH04_Orders_tc.pdf) prints \"[{ARV]}\" in this table, unpaired brackets; the ledger's reader of the table nests the rows after them. Our structure reads them as the importer does (optional, repeating; OH3 and REL optional and single by the hand decisions in codegen/extracted/v2.9/overrides.json) and equals hl7.eu's message structure list. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "QBP_E03": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 16 (V29_CH16_eClaims_tc.pdf) prints QUERY_INFORMATION inside \"<\" ... \">\" with no \"|\": a choice of one alternative. Our structure reads it as that group, as for v2.8 to v2.8.2; the ledger's reader leaves the group out, and hl7.eu's message structure list renders it as a choice of its rows. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "QBP_E22": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 16 (V29_CH16_eClaims_tc.pdf) prints QUERY inside \"<\" ... \">\" with no \"|\": a choice of one alternative. Our structure reads it as that group, as for v2.8 to v2.8.2; the ledger's reader leaves the group out, and hl7.eu's message structure list renders it as a choice of its rows. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "QBP_Q15": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The ledger's reader of the official v2.9 chapter 5 (V29_CH05_Queries_tc.pdf) table runs on into the RDY^K15 table that follows it (MSA, ERR, QAK, DSP). hl7.eu's message structure list prints an optional \"[ Hxx ]\" (any segment) after QPD, a placeholder the importer drops (the ledger renders it as an empty group). Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "QBP_Z79": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "Uses the QBP_Q15 structure (overrides.json). The ledger's reader of the official v2.9 chapter 5 (V29_CH05_Queries_tc.pdf) table runs on into the RDY^K15 table that follows it (MSA, ERR, QAK, DSP). hl7.eu's message structure list prints an optional \"[ Hxx ]\" (any segment) after QPD, a placeholder the importer drops (the ledger renders it as an empty group). Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "QBP_Z97": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "Uses the QBP_Q15 structure (overrides.json). The ledger's reader of the official v2.9 chapter 5 (V29_CH05_Queries_tc.pdf) table runs on into the RDY^K15 table that follows it (MSA, ERR, QAK, DSP). hl7.eu's message structure list prints an optional \"[ Hxx ]\" (any segment) after QPD, a placeholder the importer drops (the ledger renders it as an empty group). Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "RSP_E03": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 16 (V29_CH16_eClaims_tc.pdf) prints QUERY_ACK_IPR inside \"<\" ... \">\" with no \"|\": a choice of one alternative. Our structure reads it as that group, as for v2.8 to v2.8.2; the ledger's reader leaves the group out, and hl7.eu's message structure list renders it as a choice of its rows. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "RSP_E22": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 16 (V29_CH16_eClaims_tc.pdf) prints QUERY_ACK inside \"<\" ... \">\" with no \"|\": a choice of one alternative. Our structure reads it as that group, as for v2.8 to v2.8.2; the ledger's reader leaves the group out, and hl7.eu's message structure list renders it as a choice of its rows. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "RSP_K23": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 3 (V29_CH03_PatientAdmin_tc.pdf) prints QUERY_RESPONSE (PID) as a group holding one segment (\"--- NAME begin\" / \"--- NAME end\" rows), which our structure keeps; the ledger's reader takes it for the segment alone. hl7.eu's message structure list (hl7v29msgstruct.htm) also puts [{ARV}] after MSH, which the official chapter does not print; the official chapter decides. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "RSP_K24": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 3 (V29_CH03_PatientAdmin_tc.pdf) prints QUERY_RESPONSE (PID) as a group holding one segment (\"--- NAME begin\" / \"--- NAME end\" rows), which our structure keeps; the ledger's reader takes it for the segment alone. hl7.eu's message structure list has no RSP_K24 structure. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "SCN_S37": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 17 (V29_CH17_MaterialsMngmt_tc.pdf) prints ANTI-MICROBIAL_DEVICE_CYCLE_DATA inside \"<\" ... \">\" with no \"|\": a choice of one alternative. Our structure reads it as that group, as for v2.8 to v2.8.2; the ledger's reader leaves the group out, and hl7.eu's message structure list renders it as a choice of its rows. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "SDN_S36": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 17 (V29_CH17_MaterialsMngmt_tc.pdf) prints ANTI-MICROBIAL_DEVICE_DATA inside \"<\" ... \">\" with no \"|\": a choice of one alternative. Our structure reads it as that group, as for v2.8 to v2.8.2; the ledger's reader leaves the group out, and hl7.eu's message structure list renders it as a choice of its rows. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "SDR_S31": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 17 (V29_CH17_MaterialsMngmt_tc.pdf) prints ANTI-MICROBIAL_DEVICE_DATA inside \"<\" ... \">\" with no \"|\": a choice of one alternative. Our structure reads it as that group, as for v2.8 to v2.8.2; the ledger's reader leaves the group out, and hl7.eu's message structure list renders it as a choice of its rows. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "SDS_S31": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 17 (V29_CH17_MaterialsMngmt_tc.pdf) prints ANTI-MICROBIAL_DEVICE_DATA inside \"<\" ... \">\" with no \"|\": a choice of one alternative. Our structure reads it as that group, as for v2.8 to v2.8.2; the ledger's reader leaves the group out, and hl7.eu's message structure list renders it as a choice of its rows. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "SMD_S32": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 17 (V29_CH17_MaterialsMngmt_tc.pdf) prints ANTI-MICROBIAL_DEVICE_CYCLE_DATA inside \"<\" ... \">\" with no \"|\": a choice of one alternative. Our structure reads it as that group, as for v2.8 to v2.8.2; the ledger's reader leaves the group out, and hl7.eu's message structure list renders it as a choice of its rows. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    },
+    "SMS_S32": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The official v2.9 chapter 17 (V29_CH17_MaterialsMngmt_tc.pdf) prints ANTI-MICROBIAL_DEVICE_CYCLE_DATA inside \"<\" ... \">\" with no \"|\": a choice of one alternative. Our structure reads it as that group, as for v2.8 to v2.8.2; the ledger's reader leaves the group out, and hl7.eu's message structure list renders it as a choice of its rows. Caristix answers HTTP 500 for 2.9 and HAPI has no v2.9 module."
+    }
   }
 }

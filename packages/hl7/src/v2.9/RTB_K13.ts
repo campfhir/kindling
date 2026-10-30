@@ -1,7 +1,7 @@
 /**
  * Builder, parser and structure for RTB^K13 messages (HL7 v2.9).
  *
- * Structure: MSH [{SFT}] [UAC] MSA [ERR] QAK QPD [ ROW_DEFINITION: RDF [{RDT}] ] [DSC]
+ * Structure: MSH [{SFT}] [UAC] MSA [{ERR}] QAK QPD [ ROW_DEFINITION: RDF [{RDT}] ] [DSC]
  *
  * @module
  */
@@ -27,7 +27,7 @@ export const RTB_K13_STRUCTURE: StructureItem[] = [
   { name: "SFT", required: false, repeating: true },
   { name: "UAC", required: false, repeating: false },
   { name: "MSA", required: true, repeating: false },
-  { name: "ERR", required: false, repeating: false },
+  { name: "ERR", required: false, repeating: true },
   { name: "QAK", required: true, repeating: false },
   { name: "QPD", required: true, repeating: false },
   {
@@ -60,8 +60,8 @@ export interface ParsedRTB_K13 extends ParsedMessageBase {
   uac?: UAC;
   /** The MSA segment. */
   acknowledgment: MSA;
-  /** The ERR segment. */
-  error?: ERR;
+  /** The ERR segments. */
+  errors?: ERR[];
   /** The QAK segment. */
   queryAcknowledgment: QAK;
   /** The QPD segment. */
@@ -120,8 +120,8 @@ export interface RTB_K13Options {
   software?: SFT[];
   /** The UAC segment. */
   uac?: UAC;
-  /** The ERR segment. */
-  error?: ERR;
+  /** The ERR segments. */
+  errors?: ERR[];
   /** The ROW DEFINITION group. */
   rowDefinition?: RowDefinitionGroup;
   /** The DSC segment. */
