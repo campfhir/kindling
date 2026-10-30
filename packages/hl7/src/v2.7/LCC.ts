@@ -27,25 +27,25 @@ export class LCC extends BaseSegment {
     this.fields = [];
   }
 
-  /** LCC-1 Primary Key Value (PL, max 0, required) (chainable). */
+  /** LCC-1 Primary Key Value (PL, required) (chainable). */
   primaryKeyValue(value: string | PL): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** LCC-2 Location Department (CWE, max 0, required) (chainable). */
+  /** LCC-2 Location Department (CWE, required) (chainable). */
   locationDepartment(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** LCC-3 Accommodation Type (CWE, max 0, optional, repeating) (chainable). */
+  /** LCC-3 Accommodation Type (CWE, optional, repeating) (chainable). */
   accommodationType(...values: Repeated<string | CodedElement>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** LCC-4 Charge Code (CWE, max 0, required, repeating) (chainable). */
+  /** LCC-4 Charge Code (CWE, required, repeating) (chainable). */
   chargeCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;

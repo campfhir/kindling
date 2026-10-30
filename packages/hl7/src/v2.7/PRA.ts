@@ -28,19 +28,19 @@ export class PRA extends BaseSegment {
     this.fields = [];
   }
 
-  /** PRA-1 Primary Key Value (CWE, max 0, conditional) (chainable). */
+  /** PRA-1 Primary Key Value (CWE, conditional) (chainable). */
   primaryKeyValue(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRA-2 Practitioner Group (CWE, max 0, optional, repeating) (chainable). */
+  /** PRA-2 Practitioner Group (CWE, optional, repeating) (chainable). */
   practitionerGroup(...values: Repeated<string | CodedElement>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PRA-3 Practitioner Category (CWE, max 0, optional, repeating) (chainable). */
+  /** PRA-3 Practitioner Category (CWE, optional, repeating) (chainable). */
   practitionerCategory(...values: Repeated<string | CodedElement>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
@@ -52,43 +52,43 @@ export class PRA extends BaseSegment {
     return this;
   }
 
-  /** PRA-5 Specialty (SPD, max 0, optional, repeating) (chainable). */
+  /** PRA-5 Specialty (SPD, optional, repeating) (chainable). */
   specialty(...values: Repeated<string>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** PRA-6 Practitioner ID Numbers (PLN, max 0, backward compatibility, repeating) (chainable). */
+  /** PRA-6 Practitioner ID Numbers (PLN, backward compatibility, repeating) (chainable). */
   practitionerIdNumbers(...values: Repeated<string | PLN>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(plnParts(v)))));
     return this;
   }
 
-  /** PRA-7 Privileges (PIP, max 0, optional, repeating) (chainable). */
+  /** PRA-7 Privileges (PIP, optional, repeating) (chainable). */
   privileges(...values: Repeated<string>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** PRA-8 Date Entered Practice (DT, max 0, optional) (chainable). */
+  /** PRA-8 Date Entered Practice (DT, optional) (chainable). */
   dateEnteredPractice(value: string | Date, format?: HL7DateLayout): this {
     this.fields[7] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** PRA-9 Institution (CWE, max 0, optional) (chainable). */
+  /** PRA-9 Institution (CWE, optional) (chainable). */
   institution(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRA-10 Date Left Practice (DT, max 0, optional) (chainable). */
+  /** PRA-10 Date Left Practice (DT, optional) (chainable). */
   dateLeftPractice(value: string | Date, format?: HL7DateLayout): this {
     this.fields[9] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** PRA-11 Government Reimbursement Billing Eligibility (CWE, max 0, optional, repeating) (chainable). */
+  /** PRA-11 Government Reimbursement Billing Eligibility (CWE, optional, repeating) (chainable). */
   governmentReimbursementBillingEligibility(...values: Repeated<string | CodedElement>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;

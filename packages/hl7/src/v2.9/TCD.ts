@@ -27,31 +27,31 @@ export class TCD extends BaseSegment {
     this.fields = [];
   }
 
-  /** TCD-1 Universal Service Identifier (CWE, max 0, required) (chainable). */
+  /** TCD-1 Universal Service Identifier (CWE, required) (chainable). */
   universalServiceIdentifier(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** TCD-2 Auto-Dilution Factor (SN, max 0, optional) (chainable). */
+  /** TCD-2 Auto-Dilution Factor (SN, optional) (chainable). */
   autoDilutionFactor(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** TCD-3 Rerun Dilution Factor (SN, max 0, optional) (chainable). */
+  /** TCD-3 Rerun Dilution Factor (SN, optional) (chainable). */
   rerunDilutionFactor(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** TCD-4 Pre-Dilution Factor (SN, max 0, optional) (chainable). */
+  /** TCD-4 Pre-Dilution Factor (SN, optional) (chainable). */
   preDilutionFactor(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** TCD-5 Endogenous Content of Pre-Dilution Diluent (SN, max 0, optional) (chainable). */
+  /** TCD-5 Endogenous Content of Pre-Dilution Diluent (SN, optional) (chainable). */
   endogenousContentOfPreDilutionDiluent(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
@@ -69,25 +69,25 @@ export class TCD extends BaseSegment {
     return this;
   }
 
-  /** TCD-8 Analyte Repeat Status (CWE, max 0, optional) (chainable). */
+  /** TCD-8 Analyte Repeat Status (CWE, optional) (chainable). */
   analyteRepeatStatus(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** TCD-9 Specimen Consumption Quantity (CQ, max 0, optional) (chainable). */
+  /** TCD-9 Specimen Consumption Quantity (CQ, optional) (chainable). */
   specimenConsumptionQuantity(value: string | CQ): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** TCD-10 Pool Size (NM, max 0, optional) (chainable). */
+  /** TCD-10 Pool Size (NM, optional) (chainable). */
   poolSize(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
   }
 
-  /** TCD-11 Auto-Dilution Type (CWE, max 0, optional) (chainable). */
+  /** TCD-11 Auto-Dilution Type (CWE, optional) (chainable). */
   autoDilutionType(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

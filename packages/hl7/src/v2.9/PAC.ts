@@ -33,43 +33,43 @@ export class PAC extends BaseSegment {
     return this;
   }
 
-  /** PAC-2 Package ID (EI, max 0, conditional) (chainable). */
+  /** PAC-2 Package ID (EI, conditional) (chainable). */
   packageId(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** PAC-3 Parent Package ID (EI, max 0, optional) (chainable). */
+  /** PAC-3 Parent Package ID (EI, optional) (chainable). */
   parentPackageId(value: string | EI): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** PAC-4 Position in Parent Package (NA, max 0, optional) (chainable). */
+  /** PAC-4 Position in Parent Package (NA, optional) (chainable). */
   positionInParentPackage(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** PAC-5 Package Type (CWE, max 0, required) (chainable). */
+  /** PAC-5 Package Type (CWE, required) (chainable). */
   packageType(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PAC-6 Package Condition (CWE, max 0, optional, repeating) (chainable). */
+  /** PAC-6 Package Condition (CWE, optional, repeating) (chainable). */
   packageCondition(...values: Repeated<string | CodedElement>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PAC-7 Package Handling Code (CWE, max 0, optional, repeating) (chainable). */
+  /** PAC-7 Package Handling Code (CWE, optional, repeating) (chainable). */
   packageHandlingCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PAC-8 Package Risk Code (CWE, max 0, optional, repeating) (chainable). */
+  /** PAC-8 Package Risk Code (CWE, optional, repeating) (chainable). */
   packageRiskCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;

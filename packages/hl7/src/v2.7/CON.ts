@@ -34,85 +34,85 @@ export class CON extends BaseSegment {
     return this;
   }
 
-  /** CON-2 Consent Type (CWE, max 0, optional) (chainable). */
+  /** CON-2 Consent Type (CWE, optional) (chainable). */
   consentType(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CON-3 Consent Form ID and Version (ST, max 0, optional) (chainable). */
+  /** CON-3 Consent Form ID and Version (ST, optional) (chainable). */
   consentFormIdAndVersion(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** CON-4 Consent Form Number (EI, max 0, optional) (chainable). */
+  /** CON-4 Consent Form Number (EI, optional) (chainable). */
   consentFormNumber(value: string | EI): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** CON-5 Consent Text (FT, max 0, optional, repeating) (chainable). */
+  /** CON-5 Consent Text (FT, optional, repeating) (chainable). */
   consentText(...values: Repeated<string>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** CON-6 Subject-specific Consent Text (FT, max 0, optional, repeating) (chainable). */
+  /** CON-6 Subject-specific Consent Text (FT, optional, repeating) (chainable). */
   subjectSpecificConsentText(...values: Repeated<string>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** CON-7 Consent Background Information (FT, max 0, optional, repeating) (chainable). */
+  /** CON-7 Consent Background Information (FT, optional, repeating) (chainable). */
   consentBackgroundInformation(...values: Repeated<string>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** CON-8 Subject-specific Consent Background Text (FT, max 0, optional, repeating) (chainable). */
+  /** CON-8 Subject-specific Consent Background Text (FT, optional, repeating) (chainable). */
   subjectSpecificConsentBackgroundText(...values: Repeated<string>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** CON-9 Consenter-imposed limitations (FT, max 0, optional, repeating) (chainable). */
+  /** CON-9 Consenter-imposed limitations (FT, optional, repeating) (chainable). */
   consenterImposedLimitations(...values: Repeated<string>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** CON-10 Consent Mode (CNE, max 0, optional) (chainable). */
+  /** CON-10 Consent Mode (CNE, optional) (chainable). */
   consentMode(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CON-11 Consent Status (CNE, max 0, required) (chainable). */
+  /** CON-11 Consent Status (CNE, required) (chainable). */
   consentStatus(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CON-12 Consent Discussion Date/Time (DTM, max 0, optional) (chainable). */
+  /** CON-12 Consent Discussion Date/Time (DTM, optional) (chainable). */
   consentDiscussionDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[11] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CON-13 Consent Decision Date/Time (DTM, max 0, optional) (chainable). */
+  /** CON-13 Consent Decision Date/Time (DTM, optional) (chainable). */
   consentDecisionDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CON-14 Consent Effective Date/Time (DTM, max 0, optional) (chainable). */
+  /** CON-14 Consent Effective Date/Time (DTM, optional) (chainable). */
   consentEffectiveDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[13] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CON-15 Consent End Date/Time (DTM, max 0, optional) (chainable). */
+  /** CON-15 Consent End Date/Time (DTM, optional) (chainable). */
   consentEndDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[14] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
@@ -130,7 +130,7 @@ export class CON extends BaseSegment {
     return this;
   }
 
-  /** CON-18 Language Translated To (CWE, max 0, optional) (chainable). */
+  /** CON-18 Language Translated To (CWE, optional) (chainable). */
   languageTranslatedTo(value: string | CodedElement): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -142,7 +142,7 @@ export class CON extends BaseSegment {
     return this;
   }
 
-  /** CON-20 Consent Bypass Reason (CWE, max 0, optional) (chainable). */
+  /** CON-20 Consent Bypass Reason (CWE, optional) (chainable). */
   consentBypassReason(value: string | CodedElement): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -154,25 +154,25 @@ export class CON extends BaseSegment {
     return this;
   }
 
-  /** CON-22 Consent Non-disclosure Reason (CWE, max 0, optional) (chainable). */
+  /** CON-22 Consent Non-disclosure Reason (CWE, optional) (chainable). */
   consentNonDisclosureReason(value: string | CodedElement): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CON-23 Non-subject Consenter Reason (CWE, max 0, optional) (chainable). */
+  /** CON-23 Non-subject Consenter Reason (CWE, optional) (chainable). */
   nonSubjectConsenterReason(value: string | CodedElement): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CON-24 Consenter ID (XPN, max 0, required, repeating) (chainable). */
+  /** CON-24 Consenter ID (XPN, required, repeating) (chainable). */
   consenterId(...values: Repeated<string | XPN>[]): this {
     this.fields[23] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** CON-25 Relationship to Subject (CWE, max 0, required, repeating) (chainable). */
+  /** CON-25 Relationship to Subject (CWE, required, repeating) (chainable). */
   relationshipToSubject(...values: Repeated<string | CodedElement>[]): this {
     this.fields[24] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;

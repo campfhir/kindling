@@ -28,19 +28,19 @@ export class RMI extends BaseSegment {
     this.fields = [];
   }
 
-  /** RMI-1 Risk Management Incident Code (CWE, max 0, optional) (chainable). */
+  /** RMI-1 Risk Management Incident Code (CWE, optional) (chainable). */
   riskManagementIncidentCode(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RMI-2 Date/Time Incident (DTM, max 0, optional) (chainable). */
+  /** RMI-2 Date/Time Incident (DTM, optional) (chainable). */
   dateTimeIncident(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** RMI-3 Incident Type Code (CWE, max 0, optional) (chainable). */
+  /** RMI-3 Incident Type Code (CWE, optional) (chainable). */
   incidentTypeCode(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

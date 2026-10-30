@@ -33,37 +33,37 @@ export class PYE extends BaseSegment {
     return this;
   }
 
-  /** PYE-2 Payee Type (CWE, max 0, required) (chainable). */
+  /** PYE-2 Payee Type (CWE, required) (chainable). */
   payeeType(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PYE-3 Payee Relationship to Invoice (Patient) (CWE, max 0, conditional) (chainable). */
+  /** PYE-3 Payee Relationship to Invoice (Patient) (CWE, conditional) (chainable). */
   payeeRelationshipToInvoicePatient(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PYE-4 Payee Identification List (XON, max 0, conditional) (chainable). */
+  /** PYE-4 Payee Identification List (XON, conditional) (chainable). */
   payeeIdentificationList(value: string | XON): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** PYE-5 Payee Person Name (XPN, max 0, conditional) (chainable). */
+  /** PYE-5 Payee Person Name (XPN, conditional) (chainable). */
   payeePersonName(value: string | XPN): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(xpnParts(value)));
     return this;
   }
 
-  /** PYE-6 Payee Address (XAD, max 0, conditional) (chainable). */
+  /** PYE-6 Payee Address (XAD, conditional) (chainable). */
   payeeAddress(value: string | XAD): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(xadParts(value)));
     return this;
   }
 
-  /** PYE-7 Payment Method (CWE, max 0, optional) (chainable). */
+  /** PYE-7 Payment Method (CWE, optional) (chainable). */
   paymentMethod(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

@@ -27,7 +27,7 @@ export class QRI extends BaseSegment {
     this.fields = [];
   }
 
-  /** QRI-1 Candidate Confidence (NM, max 0, optional) (chainable). */
+  /** QRI-1 Candidate Confidence (NM, optional) (chainable). */
   candidateConfidence(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
@@ -39,7 +39,7 @@ export class QRI extends BaseSegment {
     return this;
   }
 
-  /** QRI-3 Algorithm Descriptor (CWE, max 0, optional) (chainable). */
+  /** QRI-3 Algorithm Descriptor (CWE, optional) (chainable). */
   algorithmDescriptor(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

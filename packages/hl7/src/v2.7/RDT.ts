@@ -27,7 +27,7 @@ export class RDT extends BaseSegment {
     this.fields = [];
   }
 
-  /** RDT-1 Column Value (varies, max 0, required) (chainable). */
+  /** RDT-1 Column Value (varies, required) (chainable). */
   columnValue(value: string): this {
     this.fields[0] = this.createField(value);
     return this;

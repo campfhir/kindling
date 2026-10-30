@@ -28,13 +28,13 @@ export class ADJ extends BaseSegment {
     this.fields = [];
   }
 
-  /** ADJ-1 Provider Adjustment Number (EI, max 0, required) (chainable). */
+  /** ADJ-1 Provider Adjustment Number (EI, required) (chainable). */
   providerAdjustmentNumber(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** ADJ-2 Payer Adjustment Number (EI, max 0, required) (chainable). */
+  /** ADJ-2 Payer Adjustment Number (EI, required) (chainable). */
   payerAdjustmentNumber(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
@@ -46,73 +46,73 @@ export class ADJ extends BaseSegment {
     return this;
   }
 
-  /** ADJ-4 Adjustment Category (CWE, max 0, required) (chainable). */
+  /** ADJ-4 Adjustment Category (CWE, required) (chainable). */
   adjustmentCategory(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ADJ-5 Adjustment Amount (CP, max 0, optional, repeating) (chainable). */
+  /** ADJ-5 Adjustment Amount (CP, optional, repeating) (chainable). */
   adjustmentAmount(...values: Repeated<string | CP>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cpParts(v)))));
     return this;
   }
 
-  /** ADJ-6 Adjustment Quantity (CQ, max 0, optional) (chainable). */
+  /** ADJ-6 Adjustment Quantity (CQ, optional) (chainable). */
   adjustmentQuantity(value: string | CQ): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** ADJ-7 Adjustment Reason PA (CWE, max 0, conditional) (chainable). */
+  /** ADJ-7 Adjustment Reason PA (CWE, conditional) (chainable). */
   adjustmentReasonPa(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ADJ-8 Adjustment Description (ST, max 0, optional) (chainable). */
+  /** ADJ-8 Adjustment Description (ST, optional) (chainable). */
   adjustmentDescription(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** ADJ-9 Original Value (NM, max 0, optional) (chainable). */
+  /** ADJ-9 Original Value (NM, optional) (chainable). */
   originalValue(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** ADJ-10 Substitute Value (NM, max 0, optional) (chainable). */
+  /** ADJ-10 Substitute Value (NM, optional) (chainable). */
   substituteValue(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
   }
 
-  /** ADJ-11 Adjustment Action (CWE, max 0, optional) (chainable). */
+  /** ADJ-11 Adjustment Action (CWE, optional) (chainable). */
   adjustmentAction(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ADJ-12 Provider Adjustment Number Cross Reference (EI, max 0, optional) (chainable). */
+  /** ADJ-12 Provider Adjustment Number Cross Reference (EI, optional) (chainable). */
   providerAdjustmentNumberCrossReference(value: string | EI): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** ADJ-13 Provider Product/Service Line Item Number Cross Reference (EI, max 0, optional) (chainable). */
+  /** ADJ-13 Provider Product/Service Line Item Number Cross Reference (EI, optional) (chainable). */
   providerProductServiceLineItemNumberCrossReference(value: string | EI): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** ADJ-14 Adjustment Date (DTM, max 0, required) (chainable). */
+  /** ADJ-14 Adjustment Date (DTM, required) (chainable). */
   adjustmentDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[13] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** ADJ-15 Responsible Organization (XON, max 0, optional) (chainable). */
+  /** ADJ-15 Responsible Organization (XON, optional) (chainable). */
   responsibleOrganization(value: string | XON): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;

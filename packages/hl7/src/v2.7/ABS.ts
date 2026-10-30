@@ -28,55 +28,55 @@ export class ABS extends BaseSegment {
     this.fields = [];
   }
 
-  /** ABS-1 Discharge Care Provider (XCN, max 0, optional) (chainable). */
+  /** ABS-1 Discharge Care Provider (XCN, optional) (chainable). */
   dischargeCareProvider(value: string | XCN): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** ABS-2 Transfer Medical Service Code (CWE, max 0, optional) (chainable). */
+  /** ABS-2 Transfer Medical Service Code (CWE, optional) (chainable). */
   transferMedicalServiceCode(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ABS-3 Severity of Illness Code (CWE, max 0, optional) (chainable). */
+  /** ABS-3 Severity of Illness Code (CWE, optional) (chainable). */
   severityOfIllnessCode(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ABS-4 Date/Time of Attestation (DTM, max 0, optional) (chainable). */
+  /** ABS-4 Date/Time of Attestation (DTM, optional) (chainable). */
   dateTimeOfAttestation(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** ABS-5 Attested By (XCN, max 0, optional) (chainable). */
+  /** ABS-5 Attested By (XCN, optional) (chainable). */
   attestedBy(value: string | XCN): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** ABS-6 Triage Code (CWE, max 0, optional) (chainable). */
+  /** ABS-6 Triage Code (CWE, optional) (chainable). */
   triageCode(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ABS-7 Abstract Completion Date/Time (DTM, max 0, optional) (chainable). */
+  /** ABS-7 Abstract Completion Date/Time (DTM, optional) (chainable). */
   abstractCompletionDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** ABS-8 Abstracted By (XCN, max 0, optional) (chainable). */
+  /** ABS-8 Abstracted By (XCN, optional) (chainable). */
   abstractedBy(value: string | XCN): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** ABS-9 Case Category Code (CWE, max 0, optional) (chainable). */
+  /** ABS-9 Case Category Code (CWE, optional) (chainable). */
   caseCategoryCode(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -88,19 +88,19 @@ export class ABS extends BaseSegment {
     return this;
   }
 
-  /** ABS-11 Gestation Category Code (CWE, max 0, optional) (chainable). */
+  /** ABS-11 Gestation Category Code (CWE, optional) (chainable). */
   gestationCategoryCode(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ABS-12 Gestation Period - Weeks (NM, max 0, optional) (chainable). */
+  /** ABS-12 Gestation Period - Weeks (NM, optional) (chainable). */
   gestationPeriodWeeks(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
   }
 
-  /** ABS-13 Newborn Code (CWE, max 0, optional) (chainable). */
+  /** ABS-13 Newborn Code (CWE, optional) (chainable). */
   newbornCode(value: string | CodedElement): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

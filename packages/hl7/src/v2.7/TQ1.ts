@@ -34,61 +34,61 @@ export class TQ1 extends BaseSegment {
     return this;
   }
 
-  /** TQ1-2 Quantity (CQ, max 0, optional) (chainable). */
+  /** TQ1-2 Quantity (CQ, optional) (chainable). */
   quantity(value: string | CQ): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** TQ1-3 Repeat Pattern (RPT, max 0, optional, repeating) (chainable). */
+  /** TQ1-3 Repeat Pattern (RPT, optional, repeating) (chainable). */
   repeatPattern(...values: Repeated<string>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** TQ1-4 Explicit Time (TM, max 0, optional, repeating) (chainable). */
+  /** TQ1-4 Explicit Time (TM, optional, repeating) (chainable). */
   explicitTime(...values: Repeated<string>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** TQ1-5 Relative Time and Units (CQ, max 0, optional, repeating) (chainable). */
+  /** TQ1-5 Relative Time and Units (CQ, optional, repeating) (chainable). */
   relativeTimeAndUnits(...values: Repeated<string | CQ>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cqParts(v)))));
     return this;
   }
 
-  /** TQ1-6 Service Duration (CQ, max 0, optional) (chainable). */
+  /** TQ1-6 Service Duration (CQ, optional) (chainable). */
   serviceDuration(value: string | CQ): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** TQ1-7 Start date/time (DTM, max 0, optional) (chainable). */
+  /** TQ1-7 Start date/time (DTM, optional) (chainable). */
   startDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** TQ1-8 End date/time (DTM, max 0, optional) (chainable). */
+  /** TQ1-8 End date/time (DTM, optional) (chainable). */
   endDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** TQ1-9 Priority (CWE, max 0, optional, repeating) (chainable). */
+  /** TQ1-9 Priority (CWE, optional, repeating) (chainable). */
   priority(...values: Repeated<string | CodedElement>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** TQ1-10 Condition text (TX, max 0, optional) (chainable). */
+  /** TQ1-10 Condition text (TX, optional) (chainable). */
   conditionText(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
   }
 
-  /** TQ1-11 Text instruction (TX, max 0, optional) (chainable). */
+  /** TQ1-11 Text instruction (TX, optional) (chainable). */
   textInstruction(value: string): this {
     this.fields[10] = this.createField(value);
     return this;
@@ -100,13 +100,13 @@ export class TQ1 extends BaseSegment {
     return this;
   }
 
-  /** TQ1-13 Occurrence duration (CQ, max 0, optional) (chainable). */
+  /** TQ1-13 Occurrence duration (CQ, optional) (chainable). */
   occurrenceDuration(value: string | CQ): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** TQ1-14 Total occurrences (NM, max 0, optional) (chainable). */
+  /** TQ1-14 Total occurrences (NM, optional) (chainable). */
   totalOccurrences(value: string): this {
     this.fields[13] = this.createField(value);
     return this;

@@ -28,73 +28,73 @@ export class AUT extends BaseSegment {
     this.fields = [];
   }
 
-  /** AUT-1 Authorizing Payor, Plan ID (CWE, max 0, optional) (chainable). */
+  /** AUT-1 Authorizing Payor, Plan ID (CWE, optional) (chainable). */
   authorizingPayorPlanId(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AUT-2 Authorizing Payor, Company ID (CWE, max 0, required) (chainable). */
+  /** AUT-2 Authorizing Payor, Company ID (CWE, required) (chainable). */
   authorizingPayorCompanyId(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AUT-3 Authorizing Payor, Company Name (ST, max 0, optional) (chainable). */
+  /** AUT-3 Authorizing Payor, Company Name (ST, optional) (chainable). */
   authorizingPayorCompanyName(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** AUT-4 Authorization Effective Date (DTM, max 0, optional) (chainable). */
+  /** AUT-4 Authorization Effective Date (DTM, optional) (chainable). */
   authorizationEffectiveDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** AUT-5 Authorization Expiration Date (DTM, max 0, optional) (chainable). */
+  /** AUT-5 Authorization Expiration Date (DTM, optional) (chainable). */
   authorizationExpirationDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** AUT-6 Authorization Identifier (EI, max 0, conditional) (chainable). */
+  /** AUT-6 Authorization Identifier (EI, conditional) (chainable). */
   authorizationIdentifier(value: string | EI): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** AUT-7 Reimbursement Limit (CP, max 0, optional) (chainable). */
+  /** AUT-7 Reimbursement Limit (CP, optional) (chainable). */
   reimbursementLimit(value: string | CP): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** AUT-8 Requested Number of Treatments (CQ, max 0, optional) (chainable). */
+  /** AUT-8 Requested Number of Treatments (CQ, optional) (chainable). */
   requestedNumberOfTreatments(value: string | CQ): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** AUT-9 Authorized Number of Treatments (CQ, max 0, optional) (chainable). */
+  /** AUT-9 Authorized Number of Treatments (CQ, optional) (chainable). */
   authorizedNumberOfTreatments(value: string | CQ): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** AUT-10 Process Date (DTM, max 0, optional) (chainable). */
+  /** AUT-10 Process Date (DTM, optional) (chainable). */
   processDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[9] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** AUT-11 Requested Discipline(s) (CWE, max 0, optional, repeating) (chainable). */
+  /** AUT-11 Requested Discipline(s) (CWE, optional, repeating) (chainable). */
   requestedDisciplineS(...values: Repeated<string | CodedElement>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** AUT-12 Authorized Discipline(s) (CWE, max 0, optional, repeating) (chainable). */
+  /** AUT-12 Authorized Discipline(s) (CWE, optional, repeating) (chainable). */
   authorizedDisciplineS(...values: Repeated<string | CodedElement>[]): this {
     this.fields[11] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;

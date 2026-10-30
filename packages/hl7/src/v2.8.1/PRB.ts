@@ -28,169 +28,169 @@ export class PRB extends BaseSegment {
     this.fields = [];
   }
 
-  /** PRB-1 Action Code (ID, max 0, required) (chainable). */
+  /** PRB-1 Action Code (ID, required) (chainable). */
   actionCode(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** PRB-2 Action Date/Time (DTM, max 0, required) (chainable). */
+  /** PRB-2 Action Date/Time (DTM, required) (chainable). */
   actionDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PRB-3 Problem ID (CWE, max 0, required) (chainable). */
+  /** PRB-3 Problem ID (CWE, required) (chainable). */
   problemId(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRB-4 Problem Instance ID (EI, max 0, required) (chainable). */
+  /** PRB-4 Problem Instance ID (EI, required) (chainable). */
   problemInstanceId(value: string | EI): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** PRB-5 Episode of Care ID (EI, max 0, optional) (chainable). */
+  /** PRB-5 Episode of Care ID (EI, optional) (chainable). */
   episodeOfCareId(value: string | EI): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** PRB-6 Problem List Priority (NM, max 0, optional) (chainable). */
+  /** PRB-6 Problem List Priority (NM, optional) (chainable). */
   problemListPriority(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
   }
 
-  /** PRB-7 Problem Established Date/Time (DTM, max 0, optional) (chainable). */
+  /** PRB-7 Problem Established Date/Time (DTM, optional) (chainable). */
   problemEstablishedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PRB-8 Anticipated Problem Resolution Date/Time (DTM, max 0, optional) (chainable). */
+  /** PRB-8 Anticipated Problem Resolution Date/Time (DTM, optional) (chainable). */
   anticipatedProblemResolutionDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PRB-9 Actual Problem Resolution Date/Time (DTM, max 0, optional) (chainable). */
+  /** PRB-9 Actual Problem Resolution Date/Time (DTM, optional) (chainable). */
   actualProblemResolutionDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[8] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PRB-10 Problem Classification (CWE, max 0, optional) (chainable). */
+  /** PRB-10 Problem Classification (CWE, optional) (chainable). */
   problemClassification(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRB-11 Problem Management Discipline (CWE, max 0, optional, repeating) (chainable). */
+  /** PRB-11 Problem Management Discipline (CWE, optional, repeating) (chainable). */
   problemManagementDiscipline(...values: Repeated<string | CodedElement>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PRB-12 Problem Persistence (CWE, max 0, optional) (chainable). */
+  /** PRB-12 Problem Persistence (CWE, optional) (chainable). */
   problemPersistence(value: string | CodedElement): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRB-13 Problem Confirmation Status (CWE, max 0, optional) (chainable). */
+  /** PRB-13 Problem Confirmation Status (CWE, optional) (chainable). */
   problemConfirmationStatus(value: string | CodedElement): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRB-14 Problem Life Cycle Status (CWE, max 0, optional) (chainable). */
+  /** PRB-14 Problem Life Cycle Status (CWE, optional) (chainable). */
   problemLifeCycleStatus(value: string | CodedElement): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRB-15 Problem Life Cycle Status Date/Time (DTM, max 0, optional) (chainable). */
+  /** PRB-15 Problem Life Cycle Status Date/Time (DTM, optional) (chainable). */
   problemLifeCycleStatusDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[14] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PRB-16 Problem Date of Onset (DTM, max 0, optional) (chainable). */
+  /** PRB-16 Problem Date of Onset (DTM, optional) (chainable). */
   problemDateOfOnset(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[15] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PRB-17 Problem Onset Text (ST, max 0, optional) (chainable). */
+  /** PRB-17 Problem Onset Text (ST, optional) (chainable). */
   problemOnsetText(value: string): this {
     this.fields[16] = this.createField(value);
     return this;
   }
 
-  /** PRB-18 Problem Ranking (CWE, max 0, optional) (chainable). */
+  /** PRB-18 Problem Ranking (CWE, optional) (chainable). */
   problemRanking(value: string | CodedElement): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRB-19 Certainty of Problem (CWE, max 0, optional) (chainable). */
+  /** PRB-19 Certainty of Problem (CWE, optional) (chainable). */
   certaintyOfProblem(value: string | CodedElement): this {
     this.fields[18] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRB-20 Probability of Problem (0-1) (NM, max 0, optional) (chainable). */
+  /** PRB-20 Probability of Problem (0-1) (NM, optional) (chainable). */
   probabilityOfProblem01(value: string): this {
     this.fields[19] = this.createField(value);
     return this;
   }
 
-  /** PRB-21 Individual Awareness of Problem (CWE, max 0, optional) (chainable). */
+  /** PRB-21 Individual Awareness of Problem (CWE, optional) (chainable). */
   individualAwarenessOfProblem(value: string | CodedElement): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRB-22 Problem Prognosis (CWE, max 0, optional) (chainable). */
+  /** PRB-22 Problem Prognosis (CWE, optional) (chainable). */
   problemPrognosis(value: string | CodedElement): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRB-23 Individual Awareness of Prognosis (CWE, max 0, optional) (chainable). */
+  /** PRB-23 Individual Awareness of Prognosis (CWE, optional) (chainable). */
   individualAwarenessOfPrognosis(value: string | CodedElement): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRB-24 Family/Significant Other Awareness of Problem/Prognosis (ST, max 0, optional) (chainable). */
+  /** PRB-24 Family/Significant Other Awareness of Problem/Prognosis (ST, optional) (chainable). */
   familySignificantOtherAwarenessOfProblemPrognosis(value: string): this {
     this.fields[23] = this.createField(value);
     return this;
   }
 
-  /** PRB-25 Security/Sensitivity (CWE, max 0, optional) (chainable). */
+  /** PRB-25 Security/Sensitivity (CWE, optional) (chainable). */
   securitySensitivity(value: string | CodedElement): this {
     this.fields[24] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRB-26 Problem Severity (CWE, max 0, optional) (chainable). */
+  /** PRB-26 Problem Severity (CWE, optional) (chainable). */
   problemSeverity(value: string | CodedElement): this {
     this.fields[25] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRB-27 Problem Perspective (CWE, max 0, optional) (chainable). */
+  /** PRB-27 Problem Perspective (CWE, optional) (chainable). */
   problemPerspective(value: string | CodedElement): this {
     this.fields[26] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRB-28 Mood Code (CNE, max 0, conditional) (chainable). */
+  /** PRB-28 Mood Code (CNE, conditional) (chainable). */
   moodCode(value: string | CodedElement): this {
     this.fields[27] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

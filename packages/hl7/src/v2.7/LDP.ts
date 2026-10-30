@@ -28,31 +28,31 @@ export class LDP extends BaseSegment {
     this.fields = [];
   }
 
-  /** LDP-1 Primary Key Value (PL, max 0, required) (chainable). */
+  /** LDP-1 Primary Key Value (PL, required) (chainable). */
   primaryKeyValue(value: string | PL): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** LDP-2 Location Department (CWE, max 0, required) (chainable). */
+  /** LDP-2 Location Department (CWE, required) (chainable). */
   locationDepartment(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** LDP-3 Location Service (CWE, max 0, optional, repeating) (chainable). */
+  /** LDP-3 Location Service (CWE, optional, repeating) (chainable). */
   locationService(...values: Repeated<string | CodedElement>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** LDP-4 Specialty Type (CWE, max 0, optional, repeating) (chainable). */
+  /** LDP-4 Specialty Type (CWE, optional, repeating) (chainable). */
   specialtyType(...values: Repeated<string | CodedElement>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** LDP-5 Valid Patient Classes (CWE, max 0, optional, repeating) (chainable). */
+  /** LDP-5 Valid Patient Classes (CWE, optional, repeating) (chainable). */
   validPatientClasses(...values: Repeated<string | CodedElement>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
@@ -64,37 +64,37 @@ export class LDP extends BaseSegment {
     return this;
   }
 
-  /** LDP-7 Activation Date (DTM, max 0, optional) (chainable). */
+  /** LDP-7 Activation Date (DTM, optional) (chainable). */
   activationDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** LDP-8 Inactivation Date (DTM, max 0, optional) (chainable). */
+  /** LDP-8 Inactivation Date (DTM, optional) (chainable). */
   inactivationDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** LDP-9 Inactivated Reason (ST, max 0, optional) (chainable). */
+  /** LDP-9 Inactivated Reason (ST, optional) (chainable). */
   inactivatedReason(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** LDP-10 Visiting Hours (VH, max 0, optional, repeating) (chainable). */
+  /** LDP-10 Visiting Hours (VH, optional, repeating) (chainable). */
   visitingHours(...values: Repeated<string | VH>[]): this {
     this.fields[9] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(vhParts(v)))));
     return this;
   }
 
-  /** LDP-11 Contact Phone (XTN, max 0, optional) (chainable). */
+  /** LDP-11 Contact Phone (XTN, optional) (chainable). */
   contactPhone(value: string | XTN): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(xtnParts(value)));
     return this;
   }
 
-  /** LDP-12 Location Cost Center (CWE, max 0, optional) (chainable). */
+  /** LDP-12 Location Cost Center (CWE, optional) (chainable). */
   locationCostCenter(value: string | CodedElement): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

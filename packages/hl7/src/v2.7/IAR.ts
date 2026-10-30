@@ -27,25 +27,25 @@ export class IAR extends BaseSegment {
     this.fields = [];
   }
 
-  /** IAR-1 Allergy Reaction Code (CWE, max 0, required) (chainable). */
+  /** IAR-1 Allergy Reaction Code (CWE, required) (chainable). */
   allergyReactionCode(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IAR-2 Allergy Severity Code (CWE, max 0, required) (chainable). */
+  /** IAR-2 Allergy Severity Code (CWE, required) (chainable). */
   allergySeverityCode(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IAR-3 Sensitivity to Causative Agent Code (CWE, max 0, optional) (chainable). */
+  /** IAR-3 Sensitivity to Causative Agent Code (CWE, optional) (chainable). */
   sensitivityToCausativeAgentCode(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IAR-4 Management (ST, max 0, optional) (chainable). */
+  /** IAR-4 Management (ST, optional) (chainable). */
   management(value: string): this {
     this.fields[3] = this.createField(value);
     return this;

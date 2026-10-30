@@ -27,31 +27,31 @@ export class GP1 extends BaseSegment {
     this.fields = [];
   }
 
-  /** GP1-1 Type of Bill Code (CWE, max 0, required) (chainable). */
+  /** GP1-1 Type of Bill Code (CWE, required) (chainable). */
   typeOfBillCode(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GP1-2 Revenue Code (CWE, max 0, optional, repeating) (chainable). */
+  /** GP1-2 Revenue Code (CWE, optional, repeating) (chainable). */
   revenueCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** GP1-3 Overall Claim Disposition Code (CWE, max 0, optional) (chainable). */
+  /** GP1-3 Overall Claim Disposition Code (CWE, optional) (chainable). */
   overallClaimDispositionCode(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GP1-4 OCE Edits per Visit Code (CWE, max 0, optional, repeating) (chainable). */
+  /** GP1-4 OCE Edits per Visit Code (CWE, optional, repeating) (chainable). */
   oceEditsPerVisitCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** GP1-5 Outlier Cost (CP, max 0, optional) (chainable). */
+  /** GP1-5 Outlier Cost (CP, optional) (chainable). */
   outlierCost(value: string | CP): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;

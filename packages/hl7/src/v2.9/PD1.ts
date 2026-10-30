@@ -28,19 +28,19 @@ export class PD1 extends BaseSegment {
     this.fields = [];
   }
 
-  /** PD1-1 Living Dependency (CWE, max 0, optional, repeating) (chainable). */
+  /** PD1-1 Living Dependency (CWE, optional, repeating) (chainable). */
   livingDependency(...values: Repeated<string | CodedElement>[]): this {
     this.fields[0] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PD1-2 Living Arrangement (CWE, max 0, optional) (chainable). */
+  /** PD1-2 Living Arrangement (CWE, optional) (chainable). */
   livingArrangement(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PD1-3 Patient Primary Facility (XON, max 0, optional, repeating) (chainable). */
+  /** PD1-3 Patient Primary Facility (XON, optional, repeating) (chainable). */
   patientPrimaryFacility(...values: Repeated<string | XON>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
@@ -52,25 +52,25 @@ export class PD1 extends BaseSegment {
     return this;
   }
 
-  /** PD1-5 Student Indicator (CWE, max 0, optional) (chainable). */
+  /** PD1-5 Student Indicator (CWE, optional) (chainable). */
   studentIndicator(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PD1-6 Handicap (CWE, max 0, optional) (chainable). */
+  /** PD1-6 Handicap (CWE, optional) (chainable). */
   handicap(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PD1-7 Living Will Code (CWE, max 0, optional) (chainable). */
+  /** PD1-7 Living Will Code (CWE, optional) (chainable). */
   livingWillCode(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PD1-8 Organ Donor Code (CWE, max 0, optional) (chainable). */
+  /** PD1-8 Organ Donor Code (CWE, optional) (chainable). */
   organDonorCode(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -82,13 +82,13 @@ export class PD1 extends BaseSegment {
     return this;
   }
 
-  /** PD1-10 Duplicate Patient (CX, max 0, optional, repeating) (chainable). */
+  /** PD1-10 Duplicate Patient (CX, optional, repeating) (chainable). */
   duplicatePatient(...values: Repeated<string | CX>[]): this {
     this.fields[9] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
   }
 
-  /** PD1-11 Publicity Code (CWE, max 0, optional) (chainable). */
+  /** PD1-11 Publicity Code (CWE, optional) (chainable). */
   publicityCode(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -100,67 +100,67 @@ export class PD1 extends BaseSegment {
     return this;
   }
 
-  /** PD1-13 Protection Indicator Effective Date (DT, max 0, backward compatibility) (chainable). */
+  /** PD1-13 Protection Indicator Effective Date (DT, backward compatibility) (chainable). */
   protectionIndicatorEffectiveDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[12] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** PD1-14 Place of Worship (XON, max 0, optional, repeating) (chainable). */
+  /** PD1-14 Place of Worship (XON, optional, repeating) (chainable). */
   placeOfWorship(...values: Repeated<string | XON>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** PD1-15 Advance Directive Code (CWE, max 0, conditional, repeating) (chainable). */
+  /** PD1-15 Advance Directive Code (CWE, conditional, repeating) (chainable). */
   advanceDirectiveCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[14] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PD1-16 Immunization Registry Status (CWE, max 0, optional) (chainable). */
+  /** PD1-16 Immunization Registry Status (CWE, optional) (chainable). */
   immunizationRegistryStatus(value: string | CodedElement): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PD1-17 Immunization Registry Status Effective Date (DT, max 0, optional) (chainable). */
+  /** PD1-17 Immunization Registry Status Effective Date (DT, optional) (chainable). */
   immunizationRegistryStatusEffectiveDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[16] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** PD1-18 Publicity Code Effective Date (DT, max 0, optional) (chainable). */
+  /** PD1-18 Publicity Code Effective Date (DT, optional) (chainable). */
   publicityCodeEffectiveDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[17] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** PD1-19 Military Branch (CWE, max 0, optional) (chainable). */
+  /** PD1-19 Military Branch (CWE, optional) (chainable). */
   militaryBranch(value: string | CodedElement): this {
     this.fields[18] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PD1-20 Military Rank/Grade (CWE, max 0, optional) (chainable). */
+  /** PD1-20 Military Rank/Grade (CWE, optional) (chainable). */
   militaryRankGrade(value: string | CodedElement): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PD1-21 Military Status (CWE, max 0, optional) (chainable). */
+  /** PD1-21 Military Status (CWE, optional) (chainable). */
   militaryStatus(value: string | CodedElement): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PD1-22 Advance Directive Last Verified Date (DT, max 0, optional) (chainable). */
+  /** PD1-22 Advance Directive Last Verified Date (DT, optional) (chainable). */
   advanceDirectiveLastVerifiedDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[21] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** PD1-23 Retirement Date (DT, max 0, optional) (chainable). */
+  /** PD1-23 Retirement Date (DT, optional) (chainable). */
   retirementDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[22] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;

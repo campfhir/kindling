@@ -28,97 +28,97 @@ export class CSR extends BaseSegment {
     this.fields = [];
   }
 
-  /** CSR-1 Sponsor Study ID (EI, max 0, required) (chainable). */
+  /** CSR-1 Sponsor Study ID (EI, required) (chainable). */
   sponsorStudyId(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** CSR-2 Alternate Study ID (EI, max 0, optional) (chainable). */
+  /** CSR-2 Alternate Study ID (EI, optional) (chainable). */
   alternateStudyId(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** CSR-3 Institution Registering the Patient (CWE, max 0, optional) (chainable). */
+  /** CSR-3 Institution Registering the Patient (CWE, optional) (chainable). */
   institutionRegisteringThePatient(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CSR-4 Sponsor Patient ID (CX, max 0, required) (chainable). */
+  /** CSR-4 Sponsor Patient ID (CX, required) (chainable). */
   sponsorPatientId(value: string | CX): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
   }
 
-  /** CSR-5 Alternate Patient ID (CX, max 0, optional) (chainable). */
+  /** CSR-5 Alternate Patient ID (CX, optional) (chainable). */
   alternatePatientId(value: string | CX): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
   }
 
-  /** CSR-6 Date/Time of Patient Study Registration (DTM, max 0, required) (chainable). */
+  /** CSR-6 Date/Time of Patient Study Registration (DTM, required) (chainable). */
   dateTimeOfPatientStudyRegistration(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CSR-7 Person Performing Study Registration (XCN, max 0, optional, repeating) (chainable). */
+  /** CSR-7 Person Performing Study Registration (XCN, optional, repeating) (chainable). */
   personPerformingStudyRegistration(...values: Repeated<string | XCN>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** CSR-8 Study Authorizing Provider (XCN, max 0, required, repeating) (chainable). */
+  /** CSR-8 Study Authorizing Provider (XCN, required, repeating) (chainable). */
   studyAuthorizingProvider(...values: Repeated<string | XCN>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** CSR-9 Date/Time Patient Study Consent Signed (DTM, max 0, conditional) (chainable). */
+  /** CSR-9 Date/Time Patient Study Consent Signed (DTM, conditional) (chainable). */
   dateTimePatientStudyConsentSigned(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[8] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CSR-10 Patient Study Eligibility Status (CWE, max 0, conditional) (chainable). */
+  /** CSR-10 Patient Study Eligibility Status (CWE, conditional) (chainable). */
   patientStudyEligibilityStatus(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CSR-11 Study Randomization Date/time (DTM, max 0, optional, repeating) (chainable). */
+  /** CSR-11 Study Randomization Date/time (DTM, optional, repeating) (chainable). */
   studyRandomizationDateTime(...values: Repeated<string | Date>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(formatHL7Date(v, DateTimeLayout))));
     return this;
   }
 
-  /** CSR-12 Randomized Study Arm (CWE, max 0, optional, repeating) (chainable). */
+  /** CSR-12 Randomized Study Arm (CWE, optional, repeating) (chainable). */
   randomizedStudyArm(...values: Repeated<string | CodedElement>[]): this {
     this.fields[11] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** CSR-13 Stratum for Study Randomization (CWE, max 0, optional, repeating) (chainable). */
+  /** CSR-13 Stratum for Study Randomization (CWE, optional, repeating) (chainable). */
   stratumForStudyRandomization(...values: Repeated<string | CodedElement>[]): this {
     this.fields[12] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** CSR-14 Patient Evaluability Status (CWE, max 0, conditional) (chainable). */
+  /** CSR-14 Patient Evaluability Status (CWE, conditional) (chainable). */
   patientEvaluabilityStatus(value: string | CodedElement): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CSR-15 Date/Time Ended Study (DTM, max 0, conditional) (chainable). */
+  /** CSR-15 Date/Time Ended Study (DTM, conditional) (chainable). */
   dateTimeEndedStudy(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[14] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CSR-16 Reason Ended Study (CWE, max 0, conditional) (chainable). */
+  /** CSR-16 Reason Ended Study (CWE, conditional) (chainable). */
   reasonEndedStudy(value: string | CodedElement): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

@@ -34,43 +34,43 @@ export class PKG extends BaseSegment {
     return this;
   }
 
-  /** PKG-2 Packaging Units (CWE, max 0, optional) (chainable). */
+  /** PKG-2 Packaging Units (CWE, optional) (chainable). */
   packagingUnits(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PKG-3 Default Order Unit Of Measure Indicator (CNE, max 0, optional) (chainable). */
+  /** PKG-3 Default Order Unit Of Measure Indicator (CNE, optional) (chainable). */
   defaultOrderUnitOfMeasureIndicator(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PKG-4 Package Quantity (NM, max 0, optional) (chainable). */
+  /** PKG-4 Package Quantity (NM, optional) (chainable). */
   packageQuantity(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** PKG-5 Price (CP, max 0, optional) (chainable). */
+  /** PKG-5 Price (CP, optional) (chainable). */
   price(value: string | CP): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** PKG-6 Future Item Price (CP, max 0, optional) (chainable). */
+  /** PKG-6 Future Item Price (CP, optional) (chainable). */
   futureItemPrice(value: string | CP): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** PKG-7 Future Item Price Effective Date (DTM, max 0, optional) (chainable). */
+  /** PKG-7 Future Item Price Effective Date (DTM, optional) (chainable). */
   futureItemPriceEffectiveDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PKG-8 Global Trade Item Number (CWE, max 0, optional) (chainable). */
+  /** PKG-8 Global Trade Item Number (CWE, optional) (chainable). */
   globalTradeItemNumber(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

@@ -33,61 +33,61 @@ export class REL extends BaseSegment {
     return this;
   }
 
-  /** REL-2 Relationship Type (CWE, max 0, required) (chainable). */
+  /** REL-2 Relationship Type (CWE, required) (chainable). */
   relationshipType(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** REL-3 This Relationship Instance Identifier (EI, max 0, required) (chainable). */
+  /** REL-3 This Relationship Instance Identifier (EI, required) (chainable). */
   thisRelationshipInstanceIdentifier(value: string | EI): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** REL-4 Source Information Instance Identifier (EI, max 0, required) (chainable). */
+  /** REL-4 Source Information Instance Identifier (EI, required) (chainable). */
   sourceInformationInstanceIdentifier(value: string | EI): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** REL-5 Target Information Instance Identifier (EI, max 0, required) (chainable). */
+  /** REL-5 Target Information Instance Identifier (EI, required) (chainable). */
   targetInformationInstanceIdentifier(value: string | EI): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** REL-6 Asserting Entity Instance ID (EI, max 0, optional) (chainable). */
+  /** REL-6 Asserting Entity Instance ID (EI, optional) (chainable). */
   assertingEntityInstanceId(value: string | EI): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** REL-7 Asserting Person (XCN, max 0, optional) (chainable). */
+  /** REL-7 Asserting Person (XCN, optional) (chainable). */
   assertingPerson(value: string | XCN): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** REL-8 Asserting Organization (XON, max 0, optional) (chainable). */
+  /** REL-8 Asserting Organization (XON, optional) (chainable). */
   assertingOrganization(value: string | XON): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** REL-9 Assertor Address (XAD, max 0, optional) (chainable). */
+  /** REL-9 Assertor Address (XAD, optional) (chainable). */
   assertorAddress(value: string | XAD): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(xadParts(value)));
     return this;
   }
 
-  /** REL-10 Assertor Contact (XTN, max 0, optional) (chainable). */
+  /** REL-10 Assertor Contact (XTN, optional) (chainable). */
   assertorContact(value: string | XTN): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(xtnParts(value)));
     return this;
   }
 
-  /** REL-11 Assertion Date Range (DR, max 0, optional) (chainable). */
+  /** REL-11 Assertion Date Range (DR, optional) (chainable). */
   assertionDateRange(value: string | DR): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(drParts(value)));
     return this;
@@ -99,19 +99,19 @@ export class REL extends BaseSegment {
     return this;
   }
 
-  /** REL-13 Certainty of Relationship (CWE, max 0, optional) (chainable). */
+  /** REL-13 Certainty of Relationship (CWE, optional) (chainable). */
   certaintyOfRelationship(value: string | CodedElement): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** REL-14 Priority No (NM, max 0, optional) (chainable). */
+  /** REL-14 Priority No (NM, optional) (chainable). */
   priorityNo(value: string): this {
     this.fields[13] = this.createField(value);
     return this;
   }
 
-  /** REL-15 Priority Sequence No (rel preference for consideration) (NM, max 0, optional) (chainable). */
+  /** REL-15 Priority Sequence No (rel preference for consideration) (NM, optional) (chainable). */
   prioritySequenceNoRelPreferenceForConsideration(value: string): this {
     this.fields[14] = this.createField(value);
     return this;

@@ -34,7 +34,7 @@ export class BPX extends BaseSegment {
     return this;
   }
 
-  /** BPX-2 BP Dispense Status (CWE, max 0, required) (chainable). */
+  /** BPX-2 BP Dispense Status (CWE, required) (chainable). */
   bpDispenseStatus(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -46,109 +46,109 @@ export class BPX extends BaseSegment {
     return this;
   }
 
-  /** BPX-4 BP Date/Time of Status (DTM, max 0, required) (chainable). */
+  /** BPX-4 BP Date/Time of Status (DTM, required) (chainable). */
   bpDateTimeOfStatus(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** BPX-5 BC Donation ID (EI, max 0, conditional) (chainable). */
+  /** BPX-5 BC Donation ID (EI, conditional) (chainable). */
   bcDonationId(value: string | EI): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** BPX-6 BC Component (CNE, max 0, conditional) (chainable). */
+  /** BPX-6 BC Component (CNE, conditional) (chainable). */
   bcComponent(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** BPX-7 BC Donation Type / Intended Use (CNE, max 0, optional) (chainable). */
+  /** BPX-7 BC Donation Type / Intended Use (CNE, optional) (chainable). */
   bcDonationTypeIntendedUse(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** BPX-8 CP Commercial Product (CWE, max 0, conditional) (chainable). */
+  /** BPX-8 CP Commercial Product (CWE, conditional) (chainable). */
   cpCommercialProduct(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** BPX-9 CP Manufacturer (XON, max 0, conditional) (chainable). */
+  /** BPX-9 CP Manufacturer (XON, conditional) (chainable). */
   cpManufacturer(value: string | XON): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** BPX-10 CP Lot Number (EI, max 0, conditional) (chainable). */
+  /** BPX-10 CP Lot Number (EI, conditional) (chainable). */
   cpLotNumber(value: string | EI): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** BPX-11 BP Blood Group (CNE, max 0, optional) (chainable). */
+  /** BPX-11 BP Blood Group (CNE, optional) (chainable). */
   bpBloodGroup(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** BPX-12 BC Special Testing (CNE, max 0, optional, repeating) (chainable). */
+  /** BPX-12 BC Special Testing (CNE, optional, repeating) (chainable). */
   bcSpecialTesting(...values: Repeated<string | CodedElement>[]): this {
     this.fields[11] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** BPX-13 BP Expiration Date/Time (DTM, max 0, optional) (chainable). */
+  /** BPX-13 BP Expiration Date/Time (DTM, optional) (chainable). */
   bpExpirationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** BPX-14 BP Quantity (NM, max 0, required) (chainable). */
+  /** BPX-14 BP Quantity (NM, required) (chainable). */
   bpQuantity(value: string): this {
     this.fields[13] = this.createField(value);
     return this;
   }
 
-  /** BPX-15 BP Amount (NM, max 0, optional) (chainable). */
+  /** BPX-15 BP Amount (NM, optional) (chainable). */
   bpAmount(value: string): this {
     this.fields[14] = this.createField(value);
     return this;
   }
 
-  /** BPX-16 BP Units (CWE, max 0, optional) (chainable). */
+  /** BPX-16 BP Units (CWE, optional) (chainable). */
   bpUnits(value: string | CodedElement): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** BPX-17 BP Unique ID (EI, max 0, optional) (chainable). */
+  /** BPX-17 BP Unique ID (EI, optional) (chainable). */
   bpUniqueId(value: string | EI): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** BPX-18 BP Actual Dispensed To Location (PL, max 0, optional) (chainable). */
+  /** BPX-18 BP Actual Dispensed To Location (PL, optional) (chainable). */
   bpActualDispensedToLocation(value: string | PL): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** BPX-19 BP Actual Dispensed To Address (XAD, max 0, optional) (chainable). */
+  /** BPX-19 BP Actual Dispensed To Address (XAD, optional) (chainable). */
   bpActualDispensedToAddress(value: string | XAD): this {
     this.fields[18] = this.createField(typeof value === "string" ? value : components(xadParts(value)));
     return this;
   }
 
-  /** BPX-20 BP Dispensed to Receiver (XCN, max 0, optional) (chainable). */
+  /** BPX-20 BP Dispensed to Receiver (XCN, optional) (chainable). */
   bpDispensedToReceiver(value: string | XCN): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** BPX-21 BP Dispensing Individual (XCN, max 0, optional) (chainable). */
+  /** BPX-21 BP Dispensing Individual (XCN, optional) (chainable). */
   bpDispensingIndividual(value: string | XCN): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;

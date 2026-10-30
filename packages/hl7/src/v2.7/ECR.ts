@@ -28,19 +28,19 @@ export class ECR extends BaseSegment {
     this.fields = [];
   }
 
-  /** ECR-1 Command Response (CWE, max 0, required) (chainable). */
+  /** ECR-1 Command Response (CWE, required) (chainable). */
   commandResponse(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ECR-2 Date/Time Completed (DTM, max 0, required) (chainable). */
+  /** ECR-2 Date/Time Completed (DTM, required) (chainable). */
   dateTimeCompleted(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** ECR-3 Command Response Parameters (TX, max 0, optional, repeating) (chainable). */
+  /** ECR-3 Command Response Parameters (TX, optional, repeating) (chainable). */
   commandResponseParameters(...values: Repeated<string>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;

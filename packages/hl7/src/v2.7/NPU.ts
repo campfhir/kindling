@@ -27,13 +27,13 @@ export class NPU extends BaseSegment {
     this.fields = [];
   }
 
-  /** NPU-1 Bed Location (PL, max 0, required) (chainable). */
+  /** NPU-1 Bed Location (PL, required) (chainable). */
   bedLocation(value: string | PL): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** NPU-2 Bed Status (CWE, max 0, optional) (chainable). */
+  /** NPU-2 Bed Status (CWE, optional) (chainable). */
   bedStatus(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

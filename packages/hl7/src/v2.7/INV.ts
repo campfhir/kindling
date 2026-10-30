@@ -28,79 +28,79 @@ export class INV extends BaseSegment {
     this.fields = [];
   }
 
-  /** INV-1 Substance Identifier (CWE, max 0, required) (chainable). */
+  /** INV-1 Substance Identifier (CWE, required) (chainable). */
   substanceIdentifier(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** INV-2 Substance Status (CWE, max 0, required, repeating) (chainable). */
+  /** INV-2 Substance Status (CWE, required, repeating) (chainable). */
   substanceStatus(...values: Repeated<string | CodedElement>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** INV-3 Substance Type (CWE, max 0, optional) (chainable). */
+  /** INV-3 Substance Type (CWE, optional) (chainable). */
   substanceType(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** INV-4 Inventory Container Identifier (CWE, max 0, optional) (chainable). */
+  /** INV-4 Inventory Container Identifier (CWE, optional) (chainable). */
   inventoryContainerIdentifier(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** INV-5 Container Carrier Identifier (CWE, max 0, optional) (chainable). */
+  /** INV-5 Container Carrier Identifier (CWE, optional) (chainable). */
   containerCarrierIdentifier(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** INV-6 Position on Carrier (CWE, max 0, optional) (chainable). */
+  /** INV-6 Position on Carrier (CWE, optional) (chainable). */
   positionOnCarrier(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** INV-7 Initial Quantity (NM, max 0, optional) (chainable). */
+  /** INV-7 Initial Quantity (NM, optional) (chainable). */
   initialQuantity(value: string): this {
     this.fields[6] = this.createField(value);
     return this;
   }
 
-  /** INV-8 Current Quantity (NM, max 0, optional) (chainable). */
+  /** INV-8 Current Quantity (NM, optional) (chainable). */
   currentQuantity(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** INV-9 Available Quantity (NM, max 0, optional) (chainable). */
+  /** INV-9 Available Quantity (NM, optional) (chainable). */
   availableQuantity(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** INV-10 Consumption Quantity (NM, max 0, optional) (chainable). */
+  /** INV-10 Consumption Quantity (NM, optional) (chainable). */
   consumptionQuantity(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
   }
 
-  /** INV-11 Quantity Units (CWE, max 0, optional) (chainable). */
+  /** INV-11 Quantity Units (CWE, optional) (chainable). */
   quantityUnits(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** INV-12 Expiration Date/Time (DTM, max 0, optional) (chainable). */
+  /** INV-12 Expiration Date/Time (DTM, optional) (chainable). */
   expirationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[11] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** INV-13 First Used Date/Time (DTM, max 0, optional) (chainable). */
+  /** INV-13 First Used Date/Time (DTM, optional) (chainable). */
   firstUsedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
@@ -112,37 +112,37 @@ export class INV extends BaseSegment {
     return this;
   }
 
-  /** INV-15 Test/Fluid Identifier(s) (CWE, max 0, optional, repeating) (chainable). */
+  /** INV-15 Test/Fluid Identifier(s) (CWE, optional, repeating) (chainable). */
   testFluidIdentifierS(...values: Repeated<string | CodedElement>[]): this {
     this.fields[14] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** INV-16 Manufacturer Lot Number (ST, max 0, optional) (chainable). */
+  /** INV-16 Manufacturer Lot Number (ST, optional) (chainable). */
   manufacturerLotNumber(value: string): this {
     this.fields[15] = this.createField(value);
     return this;
   }
 
-  /** INV-17 Manufacturer Identifier (CWE, max 0, optional) (chainable). */
+  /** INV-17 Manufacturer Identifier (CWE, optional) (chainable). */
   manufacturerIdentifier(value: string | CodedElement): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** INV-18 Supplier Identifier (CWE, max 0, optional) (chainable). */
+  /** INV-18 Supplier Identifier (CWE, optional) (chainable). */
   supplierIdentifier(value: string | CodedElement): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** INV-19 On Board Stability Time (CQ, max 0, optional) (chainable). */
+  /** INV-19 On Board Stability Time (CQ, optional) (chainable). */
   onBoardStabilityTime(value: string | CQ): this {
     this.fields[18] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** INV-20 Target Value (CQ, max 0, optional) (chainable). */
+  /** INV-20 Target Value (CQ, optional) (chainable). */
   targetValue(value: string | CQ): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;

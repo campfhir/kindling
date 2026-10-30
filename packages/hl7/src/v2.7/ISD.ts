@@ -27,19 +27,19 @@ export class ISD extends BaseSegment {
     this.fields = [];
   }
 
-  /** ISD-1 Reference Interaction Number (NM, max 0, required) (chainable). */
+  /** ISD-1 Reference Interaction Number (NM, required) (chainable). */
   referenceInteractionNumber(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** ISD-2 Interaction Type Identifier (CWE, max 0, optional) (chainable). */
+  /** ISD-2 Interaction Type Identifier (CWE, optional) (chainable). */
   interactionTypeIdentifier(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ISD-3 Interaction Active State (CWE, max 0, required) (chainable). */
+  /** ISD-3 Interaction Active State (CWE, required) (chainable). */
   interactionActiveState(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

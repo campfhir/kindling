@@ -28,169 +28,169 @@ export class AUT extends BaseSegment {
     this.fields = [];
   }
 
-  /** AUT-1 Authorizing Payor, Plan ID (CWE, max 0, optional) (chainable). */
+  /** AUT-1 Authorizing Payor, Plan ID (CWE, optional) (chainable). */
   authorizingPayorPlanId(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AUT-2 Authorizing Payor, Company ID (CWE, max 0, required) (chainable). */
+  /** AUT-2 Authorizing Payor, Company ID (CWE, required) (chainable). */
   authorizingPayorCompanyId(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AUT-3 Authorizing Payor, Company Name (ST, max 0, optional) (chainable). */
+  /** AUT-3 Authorizing Payor, Company Name (ST, optional) (chainable). */
   authorizingPayorCompanyName(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** AUT-4 Authorization Effective Date (DTM, max 0, optional) (chainable). */
+  /** AUT-4 Authorization Effective Date (DTM, optional) (chainable). */
   authorizationEffectiveDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** AUT-5 Authorization Expiration Date (DTM, max 0, optional) (chainable). */
+  /** AUT-5 Authorization Expiration Date (DTM, optional) (chainable). */
   authorizationExpirationDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** AUT-6 Authorization Identifier (EI, max 0, conditional) (chainable). */
+  /** AUT-6 Authorization Identifier (EI, conditional) (chainable). */
   authorizationIdentifier(value: string | EI): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** AUT-7 Reimbursement Limit (CP, max 0, optional) (chainable). */
+  /** AUT-7 Reimbursement Limit (CP, optional) (chainable). */
   reimbursementLimit(value: string | CP): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** AUT-8 Requested Number of Treatments (CQ, max 0, optional) (chainable). */
+  /** AUT-8 Requested Number of Treatments (CQ, optional) (chainable). */
   requestedNumberOfTreatments(value: string | CQ): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** AUT-9 Authorized Number of Treatments (CQ, max 0, optional) (chainable). */
+  /** AUT-9 Authorized Number of Treatments (CQ, optional) (chainable). */
   authorizedNumberOfTreatments(value: string | CQ): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** AUT-10 Process Date (DTM, max 0, optional) (chainable). */
+  /** AUT-10 Process Date (DTM, optional) (chainable). */
   processDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[9] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** AUT-11 Requested Discipline(s) (CWE, max 0, optional, repeating) (chainable). */
+  /** AUT-11 Requested Discipline(s) (CWE, optional, repeating) (chainable). */
   requestedDisciplineS(...values: Repeated<string | CodedElement>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** AUT-12 Authorized Discipline(s) (CWE, max 0, optional, repeating) (chainable). */
+  /** AUT-12 Authorized Discipline(s) (CWE, optional, repeating) (chainable). */
   authorizedDisciplineS(...values: Repeated<string | CodedElement>[]): this {
     this.fields[11] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** AUT-13 Authorization Referral Type (CWE, max 0, required) (chainable). */
+  /** AUT-13 Authorization Referral Type (CWE, required) (chainable). */
   authorizationReferralType(value: string | CodedElement): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AUT-14 Approval Status (CWE, max 0, optional) (chainable). */
+  /** AUT-14 Approval Status (CWE, optional) (chainable). */
   approvalStatus(value: string | CodedElement): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AUT-15 Planned Treatment Stop Date (DTM, max 0, optional) (chainable). */
+  /** AUT-15 Planned Treatment Stop Date (DTM, optional) (chainable). */
   plannedTreatmentStopDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[14] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** AUT-16 Clinical Service (CWE, max 0, optional) (chainable). */
+  /** AUT-16 Clinical Service (CWE, optional) (chainable). */
   clinicalService(value: string | CodedElement): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AUT-17 Reason Text (ST, max 0, optional) (chainable). */
+  /** AUT-17 Reason Text (ST, optional) (chainable). */
   reasonText(value: string): this {
     this.fields[16] = this.createField(value);
     return this;
   }
 
-  /** AUT-18 Number of Authorized Treatments/Units (CQ, max 0, optional) (chainable). */
+  /** AUT-18 Number of Authorized Treatments/Units (CQ, optional) (chainable). */
   numberOfAuthorizedTreatmentsUnits(value: string | CQ): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** AUT-19 Number of Used Treatments/Units (CQ, max 0, optional) (chainable). */
+  /** AUT-19 Number of Used Treatments/Units (CQ, optional) (chainable). */
   numberOfUsedTreatmentsUnits(value: string | CQ): this {
     this.fields[18] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** AUT-20 Number of Schedule Treatments/Units (CQ, max 0, optional) (chainable). */
+  /** AUT-20 Number of Schedule Treatments/Units (CQ, optional) (chainable). */
   numberOfScheduleTreatmentsUnits(value: string | CQ): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** AUT-21 Encounter Type (CWE, max 0, optional) (chainable). */
+  /** AUT-21 Encounter Type (CWE, optional) (chainable). */
   encounterType(value: string | CodedElement): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AUT-22 Remaining Benefit Amount (MO, max 0, optional) (chainable). */
+  /** AUT-22 Remaining Benefit Amount (MO, optional) (chainable). */
   remainingBenefitAmount(value: string | MO): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(moParts(value)));
     return this;
   }
 
-  /** AUT-23 Authorized Provider (XON, max 0, optional) (chainable). */
+  /** AUT-23 Authorized Provider (XON, optional) (chainable). */
   authorizedProvider(value: string | XON): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** AUT-24 Authorized Health Professional (XCN, max 0, optional) (chainable). */
+  /** AUT-24 Authorized Health Professional (XCN, optional) (chainable). */
   authorizedHealthProfessional(value: string | XCN): this {
     this.fields[23] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** AUT-25 Source Text (ST, max 0, optional) (chainable). */
+  /** AUT-25 Source Text (ST, optional) (chainable). */
   sourceText(value: string): this {
     this.fields[24] = this.createField(value);
     return this;
   }
 
-  /** AUT-26 Source Date (DTM, max 0, optional) (chainable). */
+  /** AUT-26 Source Date (DTM, optional) (chainable). */
   sourceDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[25] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** AUT-27 Source Phone (XTN, max 0, optional) (chainable). */
+  /** AUT-27 Source Phone (XTN, optional) (chainable). */
   sourcePhone(value: string | XTN): this {
     this.fields[26] = this.createField(typeof value === "string" ? value : components(xtnParts(value)));
     return this;
   }
 
-  /** AUT-28 Comment (ST, max 0, optional) (chainable). */
+  /** AUT-28 Comment (ST, optional) (chainable). */
   comment(value: string): this {
     this.fields[27] = this.createField(value);
     return this;

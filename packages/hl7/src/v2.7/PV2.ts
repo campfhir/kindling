@@ -28,85 +28,85 @@ export class PV2 extends BaseSegment {
     this.fields = [];
   }
 
-  /** PV2-1 Prior Pending Location (PL, max 0, conditional) (chainable). */
+  /** PV2-1 Prior Pending Location (PL, conditional) (chainable). */
   priorPendingLocation(value: string | PL): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** PV2-2 Accommodation Code (CWE, max 0, optional) (chainable). */
+  /** PV2-2 Accommodation Code (CWE, optional) (chainable). */
   accommodationCode(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV2-3 Admit Reason (CWE, max 0, optional) (chainable). */
+  /** PV2-3 Admit Reason (CWE, optional) (chainable). */
   admitReason(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV2-4 Transfer Reason (CWE, max 0, optional) (chainable). */
+  /** PV2-4 Transfer Reason (CWE, optional) (chainable). */
   transferReason(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV2-5 Patient Valuables (ST, max 0, optional, repeating) (chainable). */
+  /** PV2-5 Patient Valuables (ST, optional, repeating) (chainable). */
   patientValuables(...values: Repeated<string>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** PV2-6 Patient Valuables Location (ST, max 0, optional) (chainable). */
+  /** PV2-6 Patient Valuables Location (ST, optional) (chainable). */
   patientValuablesLocation(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
   }
 
-  /** PV2-7 Visit User Code (CWE, max 0, optional, repeating) (chainable). */
+  /** PV2-7 Visit User Code (CWE, optional, repeating) (chainable). */
   visitUserCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PV2-8 Expected Admit Date/Time (DTM, max 0, optional) (chainable). */
+  /** PV2-8 Expected Admit Date/Time (DTM, optional) (chainable). */
   expectedAdmitDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PV2-9 Expected Discharge Date/Time (DTM, max 0, optional) (chainable). */
+  /** PV2-9 Expected Discharge Date/Time (DTM, optional) (chainable). */
   expectedDischargeDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[8] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PV2-10 Estimated Length of Inpatient Stay (NM, max 0, optional) (chainable). */
+  /** PV2-10 Estimated Length of Inpatient Stay (NM, optional) (chainable). */
   estimatedLengthOfInpatientStay(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
   }
 
-  /** PV2-11 Actual Length of Inpatient Stay (NM, max 0, optional) (chainable). */
+  /** PV2-11 Actual Length of Inpatient Stay (NM, optional) (chainable). */
   actualLengthOfInpatientStay(value: string): this {
     this.fields[10] = this.createField(value);
     return this;
   }
 
-  /** PV2-12 Visit Description (ST, max 0, optional) (chainable). */
+  /** PV2-12 Visit Description (ST, optional) (chainable). */
   visitDescription(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
   }
 
-  /** PV2-13 Referral Source Code (XCN, max 0, optional, repeating) (chainable). */
+  /** PV2-13 Referral Source Code (XCN, optional, repeating) (chainable). */
   referralSourceCode(...values: Repeated<string | XCN>[]): this {
     this.fields[12] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** PV2-14 Previous Service Date (DT, max 0, optional) (chainable). */
+  /** PV2-14 Previous Service Date (DT, optional) (chainable). */
   previousServiceDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[13] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
@@ -118,19 +118,19 @@ export class PV2 extends BaseSegment {
     return this;
   }
 
-  /** PV2-16 Purge Status Code (CWE, max 0, optional) (chainable). */
+  /** PV2-16 Purge Status Code (CWE, optional) (chainable). */
   purgeStatusCode(value: string | CodedElement): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV2-17 Purge Status Date (DT, max 0, optional) (chainable). */
+  /** PV2-17 Purge Status Date (DT, optional) (chainable). */
   purgeStatusDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[16] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** PV2-18 Special Program Code (CWE, max 0, optional) (chainable). */
+  /** PV2-18 Special Program Code (CWE, optional) (chainable). */
   specialProgramCode(value: string | CodedElement): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -142,13 +142,13 @@ export class PV2 extends BaseSegment {
     return this;
   }
 
-  /** PV2-20 Expected Number of Insurance Plans (NM, max 0, optional) (chainable). */
+  /** PV2-20 Expected Number of Insurance Plans (NM, optional) (chainable). */
   expectedNumberOfInsurancePlans(value: string): this {
     this.fields[19] = this.createField(value);
     return this;
   }
 
-  /** PV2-21 Visit Publicity Code (CWE, max 0, optional) (chainable). */
+  /** PV2-21 Visit Publicity Code (CWE, optional) (chainable). */
   visitPublicityCode(value: string | CodedElement): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -160,55 +160,55 @@ export class PV2 extends BaseSegment {
     return this;
   }
 
-  /** PV2-23 Clinic Organization Name (XON, max 0, optional, repeating) (chainable). */
+  /** PV2-23 Clinic Organization Name (XON, optional, repeating) (chainable). */
   clinicOrganizationName(...values: Repeated<string | XON>[]): this {
     this.fields[22] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** PV2-24 Patient Status Code (CWE, max 0, optional) (chainable). */
+  /** PV2-24 Patient Status Code (CWE, optional) (chainable). */
   patientStatusCode(value: string | CodedElement): this {
     this.fields[23] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV2-25 Visit Priority Code (CWE, max 0, optional) (chainable). */
+  /** PV2-25 Visit Priority Code (CWE, optional) (chainable). */
   visitPriorityCode(value: string | CodedElement): this {
     this.fields[24] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV2-26 Previous Treatment Date (DT, max 0, optional) (chainable). */
+  /** PV2-26 Previous Treatment Date (DT, optional) (chainable). */
   previousTreatmentDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[25] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** PV2-27 Expected Discharge Disposition (CWE, max 0, optional) (chainable). */
+  /** PV2-27 Expected Discharge Disposition (CWE, optional) (chainable). */
   expectedDischargeDisposition(value: string | CodedElement): this {
     this.fields[26] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV2-28 Signature on File Date (DT, max 0, optional) (chainable). */
+  /** PV2-28 Signature on File Date (DT, optional) (chainable). */
   signatureOnFileDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[27] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** PV2-29 First Similar Illness Date (DT, max 0, optional) (chainable). */
+  /** PV2-29 First Similar Illness Date (DT, optional) (chainable). */
   firstSimilarIllnessDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[28] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** PV2-30 Patient Charge Adjustment Code (CWE, max 0, optional) (chainable). */
+  /** PV2-30 Patient Charge Adjustment Code (CWE, optional) (chainable). */
   patientChargeAdjustmentCode(value: string | CodedElement): this {
     this.fields[29] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV2-31 Recurring Service Code (CWE, max 0, optional) (chainable). */
+  /** PV2-31 Recurring Service Code (CWE, optional) (chainable). */
   recurringServiceCode(value: string | CodedElement): this {
     this.fields[30] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -220,7 +220,7 @@ export class PV2 extends BaseSegment {
     return this;
   }
 
-  /** PV2-33 Expected Surgery Date and Time (DTM, max 0, optional) (chainable). */
+  /** PV2-33 Expected Surgery Date and Time (DTM, optional) (chainable). */
   expectedSurgeryDateAndTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[32] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
@@ -250,79 +250,79 @@ export class PV2 extends BaseSegment {
     return this;
   }
 
-  /** PV2-38 Mode of Arrival Code (CWE, max 0, optional) (chainable). */
+  /** PV2-38 Mode of Arrival Code (CWE, optional) (chainable). */
   modeOfArrivalCode(value: string | CodedElement): this {
     this.fields[37] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV2-39 Recreational Drug Use Code (CWE, max 0, optional, repeating) (chainable). */
+  /** PV2-39 Recreational Drug Use Code (CWE, optional, repeating) (chainable). */
   recreationalDrugUseCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[38] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PV2-40 Admission Level of Care Code (CWE, max 0, optional) (chainable). */
+  /** PV2-40 Admission Level of Care Code (CWE, optional) (chainable). */
   admissionLevelOfCareCode(value: string | CodedElement): this {
     this.fields[39] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV2-41 Precaution Code (CWE, max 0, optional, repeating) (chainable). */
+  /** PV2-41 Precaution Code (CWE, optional, repeating) (chainable). */
   precautionCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[40] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PV2-42 Patient Condition Code (CWE, max 0, optional) (chainable). */
+  /** PV2-42 Patient Condition Code (CWE, optional) (chainable). */
   patientConditionCode(value: string | CodedElement): this {
     this.fields[41] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV2-43 Living Will Code (CWE, max 0, optional) (chainable). */
+  /** PV2-43 Living Will Code (CWE, optional) (chainable). */
   livingWillCode(value: string | CodedElement): this {
     this.fields[42] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV2-44 Organ Donor Code (CWE, max 0, optional) (chainable). */
+  /** PV2-44 Organ Donor Code (CWE, optional) (chainable). */
   organDonorCode(value: string | CodedElement): this {
     this.fields[43] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV2-45 Advance Directive Code (CWE, max 0, conditional, repeating) (chainable). */
+  /** PV2-45 Advance Directive Code (CWE, conditional, repeating) (chainable). */
   advanceDirectiveCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[44] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PV2-46 Patient Status Effective Date (DT, max 0, optional) (chainable). */
+  /** PV2-46 Patient Status Effective Date (DT, optional) (chainable). */
   patientStatusEffectiveDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[45] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** PV2-47 Expected LOA Return Date/Time (DTM, max 0, conditional) (chainable). */
+  /** PV2-47 Expected LOA Return Date/Time (DTM, conditional) (chainable). */
   expectedLoaReturnDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[46] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PV2-48 Expected Pre-admission Testing Date/Time (DTM, max 0, optional) (chainable). */
+  /** PV2-48 Expected Pre-admission Testing Date/Time (DTM, optional) (chainable). */
   expectedPreAdmissionTestingDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[47] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PV2-49 Notify Clergy Code (CWE, max 0, optional, repeating) (chainable). */
+  /** PV2-49 Notify Clergy Code (CWE, optional, repeating) (chainable). */
   notifyClergyCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[48] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PV2-50 Advance Directive Last Verified Date (DT, max 0, optional) (chainable). */
+  /** PV2-50 Advance Directive Last Verified Date (DT, optional) (chainable). */
   advanceDirectiveLastVerifiedDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[49] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;

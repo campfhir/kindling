@@ -27,31 +27,31 @@ export class SLT extends BaseSegment {
     this.fields = [];
   }
 
-  /** SLT-1 Device Number (EI, max 0, optional) (chainable). */
+  /** SLT-1 Device Number (EI, optional) (chainable). */
   deviceNumber(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** SLT-2 Device Name (ST, max 0, optional) (chainable). */
+  /** SLT-2 Device Name (ST, optional) (chainable). */
   deviceName(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** SLT-3 Lot Number (EI, max 0, optional) (chainable). */
+  /** SLT-3 Lot Number (EI, optional) (chainable). */
   lotNumber(value: string | EI): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** SLT-4 Item Identifier (EI, max 0, optional) (chainable). */
+  /** SLT-4 Item Identifier (EI, optional) (chainable). */
   itemIdentifier(value: string | EI): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** SLT-5 Bar Code (ST, max 0, optional) (chainable). */
+  /** SLT-5 Bar Code (ST, optional) (chainable). */
   barCode(value: string): this {
     this.fields[4] = this.createField(value);
     return this;

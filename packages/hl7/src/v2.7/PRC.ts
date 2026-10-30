@@ -28,85 +28,85 @@ export class PRC extends BaseSegment {
     this.fields = [];
   }
 
-  /** PRC-1 Primary Key Value (CWE, max 0, required) (chainable). */
+  /** PRC-1 Primary Key Value (CWE, required) (chainable). */
   primaryKeyValue(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRC-2 Facility ID (CWE, max 0, optional, repeating) (chainable). */
+  /** PRC-2 Facility ID (CWE, optional, repeating) (chainable). */
   facilityId(...values: Repeated<string | CodedElement>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PRC-3 Department (CWE, max 0, optional, repeating) (chainable). */
+  /** PRC-3 Department (CWE, optional, repeating) (chainable). */
   department(...values: Repeated<string | CodedElement>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PRC-4 Valid Patient Classes (CWE, max 0, optional, repeating) (chainable). */
+  /** PRC-4 Valid Patient Classes (CWE, optional, repeating) (chainable). */
   validPatientClasses(...values: Repeated<string | CodedElement>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PRC-5 Price (CP, max 0, conditional, repeating) (chainable). */
+  /** PRC-5 Price (CP, conditional, repeating) (chainable). */
   price(...values: Repeated<string | CP>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cpParts(v)))));
     return this;
   }
 
-  /** PRC-6 Formula (ST, max 0, optional, repeating) (chainable). */
+  /** PRC-6 Formula (ST, optional, repeating) (chainable). */
   formula(...values: Repeated<string>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** PRC-7 Minimum Quantity (NM, max 0, optional) (chainable). */
+  /** PRC-7 Minimum Quantity (NM, optional) (chainable). */
   minimumQuantity(value: string): this {
     this.fields[6] = this.createField(value);
     return this;
   }
 
-  /** PRC-8 Maximum Quantity (NM, max 0, optional) (chainable). */
+  /** PRC-8 Maximum Quantity (NM, optional) (chainable). */
   maximumQuantity(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** PRC-9 Minimum Price (MO, max 0, optional) (chainable). */
+  /** PRC-9 Minimum Price (MO, optional) (chainable). */
   minimumPrice(value: string | MO): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(moParts(value)));
     return this;
   }
 
-  /** PRC-10 Maximum Price (MO, max 0, optional) (chainable). */
+  /** PRC-10 Maximum Price (MO, optional) (chainable). */
   maximumPrice(value: string | MO): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(moParts(value)));
     return this;
   }
 
-  /** PRC-11 Effective Start Date (DTM, max 0, optional) (chainable). */
+  /** PRC-11 Effective Start Date (DTM, optional) (chainable). */
   effectiveStartDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[10] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PRC-12 Effective End Date (DTM, max 0, optional) (chainable). */
+  /** PRC-12 Effective End Date (DTM, optional) (chainable). */
   effectiveEndDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[11] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PRC-13 Price Override Flag (CWE, max 0, optional) (chainable). */
+  /** PRC-13 Price Override Flag (CWE, optional) (chainable). */
   priceOverrideFlag(value: string | CodedElement): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRC-14 Billing Category (CWE, max 0, optional, repeating) (chainable). */
+  /** PRC-14 Billing Category (CWE, optional, repeating) (chainable). */
   billingCategory(...values: Repeated<string | CodedElement>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
@@ -124,13 +124,13 @@ export class PRC extends BaseSegment {
     return this;
   }
 
-  /** PRC-17 Cost (MO, max 0, optional) (chainable). */
+  /** PRC-17 Cost (MO, optional) (chainable). */
   cost(value: string | MO): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(moParts(value)));
     return this;
   }
 
-  /** PRC-18 Charge on Indicator (CWE, max 0, optional) (chainable). */
+  /** PRC-18 Charge on Indicator (CWE, optional) (chainable). */
   chargeOnIndicator(value: string | CodedElement): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

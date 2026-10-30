@@ -33,61 +33,61 @@ export class VND extends BaseSegment {
     return this;
   }
 
-  /** VND-2 Vendor Identifier (EI, max 0, required) (chainable). */
+  /** VND-2 Vendor Identifier (EI, required) (chainable). */
   vendorIdentifier(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** VND-3 Vendor Name (ST, max 0, optional) (chainable). */
+  /** VND-3 Vendor Name (ST, optional) (chainable). */
   vendorName(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** VND-4 Vendor Catalog Number (EI, max 0, optional) (chainable). */
+  /** VND-4 Vendor Catalog Number (EI, optional) (chainable). */
   vendorCatalogNumber(value: string | EI): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** VND-5 Primary Vendor Indicator (CNE, max 0, optional) (chainable). */
+  /** VND-5 Primary Vendor Indicator (CNE, optional) (chainable). */
   primaryVendorIndicator(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** VND-6 Corporation (EI, max 0, optional, repeating) (chainable). */
+  /** VND-6 Corporation (EI, optional, repeating) (chainable). */
   corporation(...values: Repeated<string | EI>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;
   }
 
-  /** VND-7 Primary Contact (XCN, max 0, optional) (chainable). */
+  /** VND-7 Primary Contact (XCN, optional) (chainable). */
   primaryContact(value: string | XCN): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** VND-8 Contract Adjustment (MOP, max 0, optional) (chainable). */
+  /** VND-8 Contract Adjustment (MOP, optional) (chainable). */
   contractAdjustment(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** VND-9 Associated Contract ID (EI, max 0, optional, repeating) (chainable). */
+  /** VND-9 Associated Contract ID (EI, optional, repeating) (chainable). */
   associatedContractId(...values: Repeated<string | EI>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;
   }
 
-  /** VND-10 Class of Trade (ST, max 0, optional, repeating) (chainable). */
+  /** VND-10 Class of Trade (ST, optional, repeating) (chainable). */
   classOfTrade(...values: Repeated<string>[]): this {
     this.fields[9] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** VND-11 Pricing Tier Level (CWE, max 0, optional) (chainable). */
+  /** VND-11 Pricing Tier Level (CWE, optional) (chainable). */
   pricingTierLevel(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

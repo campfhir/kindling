@@ -28,37 +28,37 @@ export class SFT extends BaseSegment {
     this.fields = [];
   }
 
-  /** SFT-1 Software Vendor Organization (XON, max 0, required) (chainable). */
+  /** SFT-1 Software Vendor Organization (XON, required) (chainable). */
   softwareVendorOrganization(value: string | XON): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** SFT-2 Software Certified Version or Release Number (ST, max 0, required) (chainable). */
+  /** SFT-2 Software Certified Version or Release Number (ST, required) (chainable). */
   softwareCertifiedVersionOrReleaseNumber(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** SFT-3 Software Product Name (ST, max 0, required) (chainable). */
+  /** SFT-3 Software Product Name (ST, required) (chainable). */
   softwareProductName(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** SFT-4 Software Binary ID (ST, max 0, required) (chainable). */
+  /** SFT-4 Software Binary ID (ST, required) (chainable). */
   softwareBinaryId(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** SFT-5 Software Product Information (TX, max 0, optional) (chainable). */
+  /** SFT-5 Software Product Information (TX, optional) (chainable). */
   softwareProductInformation(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** SFT-6 Software Install Date (DTM, max 0, optional) (chainable). */
+  /** SFT-6 Software Install Date (DTM, optional) (chainable). */
   softwareInstallDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;

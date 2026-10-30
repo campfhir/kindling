@@ -23,19 +23,19 @@ import { components, xonParts, xadParts, xcnParts, type XON, type XAD, type XCN 
  * Extends the v2.5 OBX: OBX-20 Reserved for harmonization with V2.6 (new); OBX-21 Reserved for harmonization with V2.6 (new); OBX-22 Reserved for harmonization with V2.6 (new); OBX-23 Performing Organization Name (new); OBX-24 Performing Organization Address (new); OBX-25 Performing Organization Medical Director (new).
  */
 export class OBX extends OBX_base {
-  /** OBX-20 Reserved for harmonization with V2.6 (VARIES, max 0, X) (chainable). */
+  /** OBX-20 Reserved for harmonization with V2.6 (VARIES, X) (chainable). */
   reservedForHarmonizationWithV26(value: string): this {
     this.fields[19] = this.createField(value);
     return this;
   }
 
-  /** OBX-21 Reserved for harmonization with V2.6 (VARIES, max 0, X) (chainable). */
+  /** OBX-21 Reserved for harmonization with V2.6 (VARIES, X) (chainable). */
   reservedForHarmonizationWithV2621(value: string): this {
     this.fields[20] = this.createField(value);
     return this;
   }
 
-  /** OBX-22 Reserved for harmonization with V2.6 (VARIES, max 0, X) (chainable). */
+  /** OBX-22 Reserved for harmonization with V2.6 (VARIES, X) (chainable). */
   reservedForHarmonizationWithV2622(value: string): this {
     this.fields[21] = this.createField(value);
     return this;

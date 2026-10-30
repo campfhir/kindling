@@ -27,151 +27,151 @@ export class ARQ extends BaseSegment {
     this.fields = [];
   }
 
-  /** ARQ-1 Placer Appointment ID (EI, max 0, required) (chainable). */
+  /** ARQ-1 Placer Appointment ID (EI, required) (chainable). */
   placerAppointmentId(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** ARQ-2 Filler Appointment ID (EI, max 0, conditional) (chainable). */
+  /** ARQ-2 Filler Appointment ID (EI, conditional) (chainable). */
   fillerAppointmentId(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** ARQ-3 Occurrence Number (NM, max 0, conditional) (chainable). */
+  /** ARQ-3 Occurrence Number (NM, conditional) (chainable). */
   occurrenceNumber(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** ARQ-4 Placer Group Number (EIP, max 0, optional) (chainable). */
+  /** ARQ-4 Placer Group Number (EIP, optional) (chainable). */
   placerGroupNumber(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** ARQ-5 Schedule ID (CWE, max 0, optional) (chainable). */
+  /** ARQ-5 Schedule ID (CWE, optional) (chainable). */
   scheduleId(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ARQ-6 Request Event Reason (CWE, max 0, optional) (chainable). */
+  /** ARQ-6 Request Event Reason (CWE, optional) (chainable). */
   requestEventReason(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ARQ-7 Appointment Reason (CWE, max 0, optional) (chainable). */
+  /** ARQ-7 Appointment Reason (CWE, optional) (chainable). */
   appointmentReason(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ARQ-8 Appointment Type (CWE, max 0, optional) (chainable). */
+  /** ARQ-8 Appointment Type (CWE, optional) (chainable). */
   appointmentType(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ARQ-9 Appointment Duration (NM, max 0, optional) (chainable). */
+  /** ARQ-9 Appointment Duration (NM, optional) (chainable). */
   appointmentDuration(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** ARQ-10 Appointment Duration Units (CNE, max 0, optional) (chainable). */
+  /** ARQ-10 Appointment Duration Units (CNE, optional) (chainable). */
   appointmentDurationUnits(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ARQ-11 Requested Start Date/Time Range (DR, max 0, optional, repeating) (chainable). */
+  /** ARQ-11 Requested Start Date/Time Range (DR, optional, repeating) (chainable). */
   requestedStartDateTimeRange(...values: Repeated<string | DR>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(drParts(v)))));
     return this;
   }
 
-  /** ARQ-12 Priority (ST, max 0, optional) (chainable). */
+  /** ARQ-12 Priority (ST, optional) (chainable). */
   priority(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
   }
 
-  /** ARQ-13 Repeating Interval (RI, max 0, optional) (chainable). */
+  /** ARQ-13 Repeating Interval (RI, optional) (chainable). */
   repeatingInterval(value: string | RI): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(riParts(value)));
     return this;
   }
 
-  /** ARQ-14 Repeating Interval Duration (ST, max 0, optional) (chainable). */
+  /** ARQ-14 Repeating Interval Duration (ST, optional) (chainable). */
   repeatingIntervalDuration(value: string): this {
     this.fields[13] = this.createField(value);
     return this;
   }
 
-  /** ARQ-15 Placer Contact Person (XCN, max 0, required, repeating) (chainable). */
+  /** ARQ-15 Placer Contact Person (XCN, required, repeating) (chainable). */
   placerContactPerson(...values: Repeated<string | XCN>[]): this {
     this.fields[14] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** ARQ-16 Placer Contact Phone Number (XTN, max 0, optional, repeating) (chainable). */
+  /** ARQ-16 Placer Contact Phone Number (XTN, optional, repeating) (chainable). */
   placerContactPhoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[15] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** ARQ-17 Placer Contact Address (XAD, max 0, optional, repeating) (chainable). */
+  /** ARQ-17 Placer Contact Address (XAD, optional, repeating) (chainable). */
   placerContactAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[16] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** ARQ-18 Placer Contact Location (PL, max 0, optional) (chainable). */
+  /** ARQ-18 Placer Contact Location (PL, optional) (chainable). */
   placerContactLocation(value: string | PL): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** ARQ-19 Entered By Person (XCN, max 0, required, repeating) (chainable). */
+  /** ARQ-19 Entered By Person (XCN, required, repeating) (chainable). */
   enteredByPerson(...values: Repeated<string | XCN>[]): this {
     this.fields[18] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** ARQ-20 Entered By Phone Number (XTN, max 0, optional, repeating) (chainable). */
+  /** ARQ-20 Entered By Phone Number (XTN, optional, repeating) (chainable). */
   enteredByPhoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[19] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** ARQ-21 Entered By Location (PL, max 0, optional) (chainable). */
+  /** ARQ-21 Entered By Location (PL, optional) (chainable). */
   enteredByLocation(value: string | PL): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** ARQ-22 Parent Placer Appointment ID (EI, max 0, optional) (chainable). */
+  /** ARQ-22 Parent Placer Appointment ID (EI, optional) (chainable). */
   parentPlacerAppointmentId(value: string | EI): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** ARQ-23 Parent Filler Appointment ID (EI, max 0, optional) (chainable). */
+  /** ARQ-23 Parent Filler Appointment ID (EI, optional) (chainable). */
   parentFillerAppointmentId(value: string | EI): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** ARQ-24 Placer Order Number (EI, max 0, conditional, repeating) (chainable). */
+  /** ARQ-24 Placer Order Number (EI, conditional, repeating) (chainable). */
   placerOrderNumber(...values: Repeated<string | EI>[]): this {
     this.fields[23] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;
   }
 
-  /** ARQ-25 Filler Order Number (EI, max 0, conditional, repeating) (chainable). */
+  /** ARQ-25 Filler Order Number (EI, conditional, repeating) (chainable). */
   fillerOrderNumber(...values: Repeated<string | EI>[]): this {
     this.fields[24] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;

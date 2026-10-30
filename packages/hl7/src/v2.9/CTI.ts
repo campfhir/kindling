@@ -27,19 +27,19 @@ export class CTI extends BaseSegment {
     this.fields = [];
   }
 
-  /** CTI-1 Sponsor Study ID (EI, max 0, required) (chainable). */
+  /** CTI-1 Sponsor Study ID (EI, required) (chainable). */
   sponsorStudyId(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** CTI-2 Study Phase Identifier (CWE, max 0, conditional) (chainable). */
+  /** CTI-2 Study Phase Identifier (CWE, conditional) (chainable). */
   studyPhaseIdentifier(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CTI-3 Study Scheduled Time Point (CWE, max 0, optional) (chainable). */
+  /** CTI-3 Study Scheduled Time Point (CWE, optional) (chainable). */
   studyScheduledTimePoint(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

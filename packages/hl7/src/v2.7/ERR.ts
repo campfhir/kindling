@@ -33,13 +33,13 @@ export class ERR extends BaseSegment {
     return this;
   }
 
-  /** ERR-2 Error Location (ERL, max 0, optional, repeating) (chainable). */
+  /** ERR-2 Error Location (ERL, optional, repeating) (chainable). */
   errorLocation(...values: Repeated<string>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** ERR-3 HL7 Error Code (CWE, max 0, required) (chainable). */
+  /** ERR-3 HL7 Error Code (CWE, required) (chainable). */
   hl7ErrorCode(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -51,49 +51,49 @@ export class ERR extends BaseSegment {
     return this;
   }
 
-  /** ERR-5 Application Error Code (CWE, max 0, optional) (chainable). */
+  /** ERR-5 Application Error Code (CWE, optional) (chainable). */
   applicationErrorCode(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ERR-6 Application Error Parameter (ST, max 0, optional, repeating) (chainable). */
+  /** ERR-6 Application Error Parameter (ST, optional, repeating) (chainable). */
   applicationErrorParameter(...values: Repeated<string>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** ERR-7 Diagnostic Information (TX, max 0, optional) (chainable). */
+  /** ERR-7 Diagnostic Information (TX, optional) (chainable). */
   diagnosticInformation(value: string): this {
     this.fields[6] = this.createField(value);
     return this;
   }
 
-  /** ERR-8 User Message (TX, max 0, optional) (chainable). */
+  /** ERR-8 User Message (TX, optional) (chainable). */
   userMessage(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** ERR-9 Inform Person Indicator (CWE, max 0, optional, repeating) (chainable). */
+  /** ERR-9 Inform Person Indicator (CWE, optional, repeating) (chainable). */
   informPersonIndicator(...values: Repeated<string | CodedElement>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** ERR-10 Override Type (CWE, max 0, optional) (chainable). */
+  /** ERR-10 Override Type (CWE, optional) (chainable). */
   overrideType(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ERR-11 Override Reason Code (CWE, max 0, optional, repeating) (chainable). */
+  /** ERR-11 Override Reason Code (CWE, optional, repeating) (chainable). */
   overrideReasonCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** ERR-12 Help Desk Contact Point (XTN, max 0, optional, repeating) (chainable). */
+  /** ERR-12 Help Desk Contact Point (XTN, optional, repeating) (chainable). */
   helpDeskContactPoint(...values: Repeated<string | XTN>[]): this {
     this.fields[11] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;

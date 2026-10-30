@@ -28,73 +28,73 @@ export class IVC extends BaseSegment {
     this.fields = [];
   }
 
-  /** IVC-1 Provider Invoice Number (EI, max 0, required) (chainable). */
+  /** IVC-1 Provider Invoice Number (EI, required) (chainable). */
   providerInvoiceNumber(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** IVC-2 Payer Invoice Number (EI, max 0, optional) (chainable). */
+  /** IVC-2 Payer Invoice Number (EI, optional) (chainable). */
   payerInvoiceNumber(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** IVC-3 Contract/Agreement Number (EI, max 0, optional) (chainable). */
+  /** IVC-3 Contract/Agreement Number (EI, optional) (chainable). */
   contractAgreementNumber(value: string | EI): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** IVC-4 Invoice Control (CWE, max 0, required) (chainable). */
+  /** IVC-4 Invoice Control (CWE, required) (chainable). */
   invoiceControl(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IVC-5 Invoice Reason (CWE, max 0, required) (chainable). */
+  /** IVC-5 Invoice Reason (CWE, required) (chainable). */
   invoiceReason(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IVC-6 Invoice Type (CWE, max 0, required) (chainable). */
+  /** IVC-6 Invoice Type (CWE, required) (chainable). */
   invoiceType(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IVC-7 Invoice Date/Time (DTM, max 0, required) (chainable). */
+  /** IVC-7 Invoice Date/Time (DTM, required) (chainable). */
   invoiceDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** IVC-8 Invoice Amount (CP, max 0, required) (chainable). */
+  /** IVC-8 Invoice Amount (CP, required) (chainable). */
   invoiceAmount(value: string | CP): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** IVC-9 Payment Terms (ST, max 0, optional) (chainable). */
+  /** IVC-9 Payment Terms (ST, optional) (chainable). */
   paymentTerms(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** IVC-10 Provider Organization (XON, max 0, required) (chainable). */
+  /** IVC-10 Provider Organization (XON, required) (chainable). */
   providerOrganization(value: string | XON): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** IVC-11 Payer Organization (XON, max 0, required) (chainable). */
+  /** IVC-11 Payer Organization (XON, required) (chainable). */
   payerOrganization(value: string | XON): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** IVC-12 Attention (XCN, max 0, optional) (chainable). */
+  /** IVC-12 Attention (XCN, optional) (chainable). */
   attention(value: string | XCN): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
@@ -106,61 +106,61 @@ export class IVC extends BaseSegment {
     return this;
   }
 
-  /** IVC-14 Invoice Booking Period (DTM, max 0, optional) (chainable). */
+  /** IVC-14 Invoice Booking Period (DTM, optional) (chainable). */
   invoiceBookingPeriod(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[13] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** IVC-15 Origin (ST, max 0, optional) (chainable). */
+  /** IVC-15 Origin (ST, optional) (chainable). */
   origin(value: string): this {
     this.fields[14] = this.createField(value);
     return this;
   }
 
-  /** IVC-16 Invoice Fixed Amount (CP, max 0, optional) (chainable). */
+  /** IVC-16 Invoice Fixed Amount (CP, optional) (chainable). */
   invoiceFixedAmount(value: string | CP): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** IVC-17 Special Costs (CP, max 0, optional) (chainable). */
+  /** IVC-17 Special Costs (CP, optional) (chainable). */
   specialCosts(value: string | CP): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** IVC-18 Amount for Doctors Treatment (CP, max 0, optional) (chainable). */
+  /** IVC-18 Amount for Doctors Treatment (CP, optional) (chainable). */
   amountForDoctorsTreatment(value: string | CP): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** IVC-19 Responsible Physician (XCN, max 0, optional) (chainable). */
+  /** IVC-19 Responsible Physician (XCN, optional) (chainable). */
   responsiblePhysician(value: string | XCN): this {
     this.fields[18] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** IVC-20 Cost Center (CX, max 0, optional) (chainable). */
+  /** IVC-20 Cost Center (CX, optional) (chainable). */
   costCenter(value: string | CX): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
   }
 
-  /** IVC-21 Invoice Prepaid Amount (CP, max 0, optional) (chainable). */
+  /** IVC-21 Invoice Prepaid Amount (CP, optional) (chainable). */
   invoicePrepaidAmount(value: string | CP): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** IVC-22 Total Invoice Amount without Prepaid Amount (CP, max 0, optional) (chainable). */
+  /** IVC-22 Total Invoice Amount without Prepaid Amount (CP, optional) (chainable). */
   totalInvoiceAmountWithoutPrepaidAmount(value: string | CP): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** IVC-23 Total-Amount of VAT (CP, max 0, conditional) (chainable). */
+  /** IVC-23 Total-Amount of VAT (CP, conditional) (chainable). */
   totalAmountOfVat(value: string | CP): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
@@ -172,37 +172,37 @@ export class IVC extends BaseSegment {
     return this;
   }
 
-  /** IVC-25 Benefit Group (CWE, max 0, required) (chainable). */
+  /** IVC-25 Benefit Group (CWE, required) (chainable). */
   benefitGroup(value: string | CodedElement): this {
     this.fields[24] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IVC-26 Provider Tax ID (ST, max 0, optional) (chainable). */
+  /** IVC-26 Provider Tax ID (ST, optional) (chainable). */
   providerTaxId(value: string): this {
     this.fields[25] = this.createField(value);
     return this;
   }
 
-  /** IVC-27 Payer Tax ID (ST, max 0, optional) (chainable). */
+  /** IVC-27 Payer Tax ID (ST, optional) (chainable). */
   payerTaxId(value: string): this {
     this.fields[26] = this.createField(value);
     return this;
   }
 
-  /** IVC-28 Provider Tax Status (CWE, max 0, optional) (chainable). */
+  /** IVC-28 Provider Tax Status (CWE, optional) (chainable). */
   providerTaxStatus(value: string | CodedElement): this {
     this.fields[27] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IVC-29 Payer Tax Status (CWE, max 0, optional) (chainable). */
+  /** IVC-29 Payer Tax Status (CWE, optional) (chainable). */
   payerTaxStatus(value: string | CodedElement): this {
     this.fields[28] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IVC-30 Sales Tax ID (ST, max 0, optional) (chainable). */
+  /** IVC-30 Sales Tax ID (ST, optional) (chainable). */
   salesTaxId(value: string): this {
     this.fields[29] = this.createField(value);
     return this;

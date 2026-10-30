@@ -33,55 +33,55 @@ export class ARV extends BaseSegment {
     return this;
   }
 
-  /** ARV-2 Access Restriction Action Code (CNE, max 0, required) (chainable). */
+  /** ARV-2 Access Restriction Action Code (CNE, required) (chainable). */
   accessRestrictionActionCode(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ARV-3 Access Restriction Value (CWE, max 0, required) (chainable). */
+  /** ARV-3 Access Restriction Value (CWE, required) (chainable). */
   accessRestrictionValue(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ARV-4 Access Restriction Reason (CWE, max 0, optional, repeating) (chainable). */
+  /** ARV-4 Access Restriction Reason (CWE, optional, repeating) (chainable). */
   accessRestrictionReason(...values: Repeated<string | CodedElement>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** ARV-5 Special Access Restriction Instructions (ST, max 0, optional, repeating) (chainable). */
+  /** ARV-5 Special Access Restriction Instructions (ST, optional, repeating) (chainable). */
   specialAccessRestrictionInstructions(...values: Repeated<string>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** ARV-6 Access Restriction Date Range (DR, max 0, optional) (chainable). */
+  /** ARV-6 Access Restriction Date Range (DR, optional) (chainable). */
   accessRestrictionDateRange(value: string | DR): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(drParts(value)));
     return this;
   }
 
-  /** ARV-7 Security Classification Tag (CWE, max 0, required) (chainable). */
+  /** ARV-7 Security Classification Tag (CWE, required) (chainable). */
   securityClassificationTag(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ARV-8 Security Handling Instructions (CWE, max 0, optional, repeating) (chainable). */
+  /** ARV-8 Security Handling Instructions (CWE, optional, repeating) (chainable). */
   securityHandlingInstructions(...values: Repeated<string | CodedElement>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** ARV-9 Access Restriction Message Location (ERL, max 0, optional, repeating) (chainable). */
+  /** ARV-9 Access Restriction Message Location (ERL, optional, repeating) (chainable). */
   accessRestrictionMessageLocation(...values: Repeated<string>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** ARV-10 Access Restriction Instance Identifier (EI, max 0, conditional) (chainable). */
+  /** ARV-10 Access Restriction Instance Identifier (EI, conditional) (chainable). */
   accessRestrictionInstanceIdentifier(value: string | EI): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;

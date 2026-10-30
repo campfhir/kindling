@@ -27,79 +27,79 @@ export class OMC extends BaseSegment {
     this.fields = [];
   }
 
-  /** OMC-1 Sequence Number - Test/Observation Master File (NM, max 0, optional) (chainable). */
+  /** OMC-1 Sequence Number - Test/Observation Master File (NM, optional) (chainable). */
   sequenceNumberTestObservationMasterFile(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** OMC-2 Segment Action Code (ID, max 0, conditional) (chainable). */
+  /** OMC-2 Segment Action Code (ID, conditional) (chainable). */
   segmentActionCode(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** OMC-3 Segment Unique Key (EI, max 0, conditional) (chainable). */
+  /** OMC-3 Segment Unique Key (EI, conditional) (chainable). */
   segmentUniqueKey(value: string | EI): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** OMC-4 Clinical Information Request (CWE, max 0, required) (chainable). */
+  /** OMC-4 Clinical Information Request (CWE, required) (chainable). */
   clinicalInformationRequest(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OMC-5 Collection Event/Process Step (CWE, max 0, required, repeating) (chainable). */
+  /** OMC-5 Collection Event/Process Step (CWE, required, repeating) (chainable). */
   collectionEventProcessStep(...values: Repeated<string | CodedElement>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OMC-6 Communication Location (CWE, max 0, required) (chainable). */
+  /** OMC-6 Communication Location (CWE, required) (chainable). */
   communicationLocation(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OMC-7 Answer Required (ID, max 0, optional) (chainable). */
+  /** OMC-7 Answer Required (ID, optional) (chainable). */
   answerRequired(value: string): this {
     this.fields[6] = this.createField(value);
     return this;
   }
 
-  /** OMC-8 Hint/Help Text (ST, max 0, optional) (chainable). */
+  /** OMC-8 Hint/Help Text (ST, optional) (chainable). */
   hintHelpText(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** OMC-9 Type of Answer (varies, max 0, optional) (chainable). */
+  /** OMC-9 Type of Answer (varies, optional) (chainable). */
   typeOfAnswer(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** OMC-10 Multiple Answers Allowed (ID, max 0, optional) (chainable). */
+  /** OMC-10 Multiple Answers Allowed (ID, optional) (chainable). */
   multipleAnswersAllowed(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
   }
 
-  /** OMC-11 Answer Choices (CWE, max 0, optional, repeating) (chainable). */
+  /** OMC-11 Answer Choices (CWE, optional, repeating) (chainable). */
   answerChoices(...values: Repeated<string | CodedElement>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OMC-12 Character Limit (NM, max 0, optional) (chainable). */
+  /** OMC-12 Character Limit (NM, optional) (chainable). */
   characterLimit(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
   }
 
-  /** OMC-13 Number of Decimals (NM, max 0, optional) (chainable). */
+  /** OMC-13 Number of Decimals (NM, optional) (chainable). */
   numberOfDecimals(value: string): this {
     this.fields[12] = this.createField(value);
     return this;

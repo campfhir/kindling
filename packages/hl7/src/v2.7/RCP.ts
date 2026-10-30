@@ -34,19 +34,19 @@ export class RCP extends BaseSegment {
     return this;
   }
 
-  /** RCP-2 Quantity Limited Request (CQ, max 0, optional) (chainable). */
+  /** RCP-2 Quantity Limited Request (CQ, optional) (chainable). */
   quantityLimitedRequest(value: string | CQ): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** RCP-3 Response Modality (CNE, max 0, optional) (chainable). */
+  /** RCP-3 Response Modality (CNE, optional) (chainable). */
   responseModality(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RCP-4 Execution and Delivery Time (DTM, max 0, conditional) (chainable). */
+  /** RCP-4 Execution and Delivery Time (DTM, conditional) (chainable). */
   executionAndDeliveryTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
@@ -58,7 +58,7 @@ export class RCP extends BaseSegment {
     return this;
   }
 
-  /** RCP-6 Sort-by Field (SRT, max 0, optional, repeating) (chainable). */
+  /** RCP-6 Sort-by Field (SRT, optional, repeating) (chainable). */
   sortByField(...values: Repeated<string>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;

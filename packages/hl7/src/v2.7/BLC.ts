@@ -27,13 +27,13 @@ export class BLC extends BaseSegment {
     this.fields = [];
   }
 
-  /** BLC-1 Blood Product Code (CWE, max 0, optional) (chainable). */
+  /** BLC-1 Blood Product Code (CWE, optional) (chainable). */
   bloodProductCode(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** BLC-2 Blood Amount (CQ, max 0, optional) (chainable). */
+  /** BLC-2 Blood Amount (CQ, optional) (chainable). */
   bloodAmount(value: string | CQ): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;

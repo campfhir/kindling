@@ -34,37 +34,37 @@ export class EVN extends BaseSegment {
     return this;
   }
 
-  /** EVN-2 Recorded Date/Time (DTM, max 0, required) (chainable). */
+  /** EVN-2 Recorded Date/Time (DTM, required) (chainable). */
   recordedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** EVN-3 Date/Time Planned Event (DTM, max 0, optional) (chainable). */
+  /** EVN-3 Date/Time Planned Event (DTM, optional) (chainable). */
   dateTimePlannedEvent(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** EVN-4 Event Reason Code (CWE, max 0, optional) (chainable). */
+  /** EVN-4 Event Reason Code (CWE, optional) (chainable). */
   eventReasonCode(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** EVN-5 Operator ID (XCN, max 0, optional, repeating) (chainable). */
+  /** EVN-5 Operator ID (XCN, optional, repeating) (chainable). */
   operatorId(...values: Repeated<string | XCN>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** EVN-6 Event Occurred (DTM, max 0, optional) (chainable). */
+  /** EVN-6 Event Occurred (DTM, optional) (chainable). */
   eventOccurred(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** EVN-7 Event Facility (HD, max 0, optional) (chainable). */
+  /** EVN-7 Event Facility (HD, optional) (chainable). */
   eventFacility(value: string): this {
     this.fields[6] = this.createField(value);
     return this;

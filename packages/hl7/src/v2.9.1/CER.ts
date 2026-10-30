@@ -34,31 +34,31 @@ export class CER extends BaseSegment {
     return this;
   }
 
-  /** CER-2 Serial Number (ST, max 0, optional) (chainable). */
+  /** CER-2 Serial Number (ST, optional) (chainable). */
   serialNumber(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** CER-3 Version (ST, max 0, optional) (chainable). */
+  /** CER-3 Version (ST, optional) (chainable). */
   version(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** CER-4 Granting Authority (XON, max 0, optional) (chainable). */
+  /** CER-4 Granting Authority (XON, optional) (chainable). */
   grantingAuthority(value: string | XON): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** CER-5 Issuing Authority (XCN, max 0, optional) (chainable). */
+  /** CER-5 Issuing Authority (XCN, optional) (chainable). */
   issuingAuthority(value: string | XCN): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** CER-6 Signature (ED, max 0, optional) (chainable). */
+  /** CER-6 Signature (ED, optional) (chainable). */
   signature(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
@@ -70,55 +70,55 @@ export class CER extends BaseSegment {
     return this;
   }
 
-  /** CER-8 Granting State/Province (CWE, max 0, optional) (chainable). */
+  /** CER-8 Granting State/Province (CWE, optional) (chainable). */
   grantingStateProvince(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CER-9 Granting County/Parish (CWE, max 0, optional) (chainable). */
+  /** CER-9 Granting County/Parish (CWE, optional) (chainable). */
   grantingCountyParish(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CER-10 Certificate Type (CWE, max 0, optional) (chainable). */
+  /** CER-10 Certificate Type (CWE, optional) (chainable). */
   certificateType(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CER-11 Certificate Domain (CWE, max 0, optional) (chainable). */
+  /** CER-11 Certificate Domain (CWE, optional) (chainable). */
   certificateDomain(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CER-12 Subject ID (EI, max 0, conditional) (chainable). */
+  /** CER-12 Subject ID (EI, conditional) (chainable). */
   subjectId(value: string | EI): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** CER-13 Subject Name (ST, max 0, required) (chainable). */
+  /** CER-13 Subject Name (ST, required) (chainable). */
   subjectName(value: string): this {
     this.fields[12] = this.createField(value);
     return this;
   }
 
-  /** CER-14 Subject Directory Attribute Extension (CWE, max 0, optional, repeating) (chainable). */
+  /** CER-14 Subject Directory Attribute Extension (CWE, optional, repeating) (chainable). */
   subjectDirectoryAttributeExtension(...values: Repeated<string | CodedElement>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** CER-15 Subject Public Key Info (CWE, max 0, optional) (chainable). */
+  /** CER-15 Subject Public Key Info (CWE, optional) (chainable). */
   subjectPublicKeyInfo(value: string | CodedElement): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CER-16 Authority Key Identifier (CWE, max 0, optional) (chainable). */
+  /** CER-16 Authority Key Identifier (CWE, optional) (chainable). */
   authorityKeyIdentifier(value: string | CodedElement): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -130,7 +130,7 @@ export class CER extends BaseSegment {
     return this;
   }
 
-  /** CER-18 CRL Distribution Point (CWE, max 0, optional, repeating) (chainable). */
+  /** CER-18 CRL Distribution Point (CWE, optional, repeating) (chainable). */
   crlDistributionPoint(...values: Repeated<string | CodedElement>[]): this {
     this.fields[17] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
@@ -142,73 +142,73 @@ export class CER extends BaseSegment {
     return this;
   }
 
-  /** CER-20 Jurisdiction State/Province (CWE, max 0, optional) (chainable). */
+  /** CER-20 Jurisdiction State/Province (CWE, optional) (chainable). */
   jurisdictionStateProvince(value: string | CodedElement): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CER-21 Jurisdiction County/Parish (CWE, max 0, optional) (chainable). */
+  /** CER-21 Jurisdiction County/Parish (CWE, optional) (chainable). */
   jurisdictionCountyParish(value: string | CodedElement): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CER-22 Jurisdiction Breadth (CWE, max 0, optional, repeating) (chainable). */
+  /** CER-22 Jurisdiction Breadth (CWE, optional, repeating) (chainable). */
   jurisdictionBreadth(...values: Repeated<string | CodedElement>[]): this {
     this.fields[21] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** CER-23 Granting Date (DTM, max 0, optional) (chainable). */
+  /** CER-23 Granting Date (DTM, optional) (chainable). */
   grantingDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[22] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CER-24 Issuing Date (DTM, max 0, optional) (chainable). */
+  /** CER-24 Issuing Date (DTM, optional) (chainable). */
   issuingDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[23] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CER-25 Activation Date (DTM, max 0, optional) (chainable). */
+  /** CER-25 Activation Date (DTM, optional) (chainable). */
   activationDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[24] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CER-26 Inactivation Date (DTM, max 0, optional) (chainable). */
+  /** CER-26 Inactivation Date (DTM, optional) (chainable). */
   inactivationDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[25] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CER-27 Expiration Date (DTM, max 0, optional) (chainable). */
+  /** CER-27 Expiration Date (DTM, optional) (chainable). */
   expirationDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[26] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CER-28 Renewal Date (DTM, max 0, optional) (chainable). */
+  /** CER-28 Renewal Date (DTM, optional) (chainable). */
   renewalDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[27] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CER-29 Revocation Date (DTM, max 0, optional) (chainable). */
+  /** CER-29 Revocation Date (DTM, optional) (chainable). */
   revocationDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[28] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CER-30 Revocation Reason Code (CWE, max 0, optional) (chainable). */
+  /** CER-30 Revocation Reason Code (CWE, optional) (chainable). */
   revocationReasonCode(value: string | CodedElement): this {
     this.fields[29] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CER-31 Certificate Status Code (CWE, max 0, optional) (chainable). */
+  /** CER-31 Certificate Status Code (CWE, optional) (chainable). */
   certificateStatusCode(value: string | CodedElement): this {
     this.fields[30] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

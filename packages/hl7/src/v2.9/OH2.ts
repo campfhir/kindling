@@ -28,7 +28,7 @@ export class OH2 extends BaseSegment {
     this.fields = [];
   }
 
-  /** OH2-1 Set ID (SI, max 0, required) (chainable). */
+  /** OH2-1 Set ID (SI, required) (chainable). */
   setId(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
@@ -40,97 +40,97 @@ export class OH2 extends BaseSegment {
     return this;
   }
 
-  /** OH2-3 Entered Date (DT, max 0, optional) (chainable). */
+  /** OH2-3 Entered Date (DT, optional) (chainable). */
   enteredDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[2] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** OH2-4 Occupation (CWE, max 0, required) (chainable). */
+  /** OH2-4 Occupation (CWE, required) (chainable). */
   occupation(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OH2-5 Industry (CWE, max 0, required) (chainable). */
+  /** OH2-5 Industry (CWE, required) (chainable). */
   industry(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OH2-6 Work Classification (CWE, max 0, optional) (chainable). */
+  /** OH2-6 Work Classification (CWE, optional) (chainable). */
   workClassification(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OH2-7 Job Start Date (DT, max 0, optional) (chainable). */
+  /** OH2-7 Job Start Date (DT, optional) (chainable). */
   jobStartDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** OH2-8 Job End Date (DT, max 0, optional) (chainable). */
+  /** OH2-8 Job End Date (DT, optional) (chainable). */
   jobEndDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[7] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** OH2-9 Work Schedule (CWE, max 0, optional) (chainable). */
+  /** OH2-9 Work Schedule (CWE, optional) (chainable). */
   workSchedule(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OH2-10 Average Hours worked per Day (NM, max 0, optional) (chainable). */
+  /** OH2-10 Average Hours worked per Day (NM, optional) (chainable). */
   averageHoursWorkedPerDay(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
   }
 
-  /** OH2-11 Average Days Worked per Week (NM, max 0, optional) (chainable). */
+  /** OH2-11 Average Days Worked per Week (NM, optional) (chainable). */
   averageDaysWorkedPerWeek(value: string): this {
     this.fields[10] = this.createField(value);
     return this;
   }
 
-  /** OH2-12 Employer Organization (XON, max 0, optional) (chainable). */
+  /** OH2-12 Employer Organization (XON, optional) (chainable). */
   employerOrganization(value: string | XON): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** OH2-13 Employer Address (XAD, max 0, optional, repeating) (chainable). */
+  /** OH2-13 Employer Address (XAD, optional, repeating) (chainable). */
   employerAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[12] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** OH2-14 Supervisory Level (CWE, max 0, optional) (chainable). */
+  /** OH2-14 Supervisory Level (CWE, optional) (chainable). */
   supervisoryLevel(value: string | CodedElement): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OH2-15 Job Duties (ST, max 0, optional, repeating) (chainable). */
+  /** OH2-15 Job Duties (ST, optional, repeating) (chainable). */
   jobDuties(...values: Repeated<string>[]): this {
     this.fields[14] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** OH2-16 Occupational Hazards (FT, max 0, optional, repeating) (chainable). */
+  /** OH2-16 Occupational Hazards (FT, optional, repeating) (chainable). */
   occupationalHazards(...values: Repeated<string>[]): this {
     this.fields[15] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** OH2-17 Job Unique Identifier (EI, max 0, optional) (chainable). */
+  /** OH2-17 Job Unique Identifier (EI, optional) (chainable). */
   jobUniqueIdentifier(value: string | EI): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** OH2-18 Current Job Indicator (CWE, max 0, optional) (chainable). */
+  /** OH2-18 Current Job Indicator (CWE, optional) (chainable). */
   currentJobIndicator(value: string | CodedElement): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

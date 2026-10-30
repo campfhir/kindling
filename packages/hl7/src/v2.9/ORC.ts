@@ -34,19 +34,19 @@ export class ORC extends BaseSegment {
     return this;
   }
 
-  /** ORC-2 Placer Order Number (EI, max 0, conditional) (chainable). */
+  /** ORC-2 Placer Order Number (EI, conditional) (chainable). */
   placerOrderNumber(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** ORC-3 Filler Order Number (EI, max 0, conditional) (chainable). */
+  /** ORC-3 Filler Order Number (EI, conditional) (chainable). */
   fillerOrderNumber(value: string | EI): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** ORC-4 Placer Order Group Number (EI, max 0, optional) (chainable). */
+  /** ORC-4 Placer Order Group Number (EI, optional) (chainable). */
   placerOrderGroupNumber(value: string | EI): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
@@ -70,19 +70,19 @@ export class ORC extends BaseSegment {
     return this;
   }
 
-  /** ORC-8 Parent Order (EIP, max 0, optional, repeating) (chainable). */
+  /** ORC-8 Parent Order (EIP, optional, repeating) (chainable). */
   parentOrder(...values: Repeated<string>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** ORC-9 Date/Time of Order Event (DTM, max 0, optional) (chainable). */
+  /** ORC-9 Date/Time of Order Event (DTM, optional) (chainable). */
   dateTimeOfOrderEvent(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[8] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** ORC-10 Entered By (XCN, max 0, W) (chainable). */
+  /** ORC-10 Entered By (XCN, W) (chainable). */
   enteredBy(value: string | XCN): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
@@ -100,25 +100,25 @@ export class ORC extends BaseSegment {
     return this;
   }
 
-  /** ORC-13 Enterer's Location (PL, max 0, optional) (chainable). */
+  /** ORC-13 Enterer's Location (PL, optional) (chainable). */
   entererSLocation(value: string | PL): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** ORC-14 Call Back Phone Number (XTN, max 0, optional, repeating) (chainable). */
+  /** ORC-14 Call Back Phone Number (XTN, optional, repeating) (chainable). */
   callBackPhoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** ORC-15 Order Effective Date/Time (DTM, max 0, optional) (chainable). */
+  /** ORC-15 Order Effective Date/Time (DTM, optional) (chainable). */
   orderEffectiveDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[14] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** ORC-16 Order Control Code Reason (CWE, max 0, optional) (chainable). */
+  /** ORC-16 Order Control Code Reason (CWE, optional) (chainable). */
   orderControlCodeReason(value: string | CodedElement): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -142,7 +142,7 @@ export class ORC extends BaseSegment {
     return this;
   }
 
-  /** ORC-20 Advanced Beneficiary Notice Code (CWE, max 0, optional) (chainable). */
+  /** ORC-20 Advanced Beneficiary Notice Code (CWE, optional) (chainable). */
   advancedBeneficiaryNoticeCode(value: string | CodedElement): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -172,37 +172,37 @@ export class ORC extends BaseSegment {
     return this;
   }
 
-  /** ORC-25 Order Status Modifier (CWE, max 0, optional) (chainable). */
+  /** ORC-25 Order Status Modifier (CWE, optional) (chainable). */
   orderStatusModifier(value: string | CodedElement): this {
     this.fields[24] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ORC-26 Advanced Beneficiary Notice Override Reason (CWE, max 0, conditional) (chainable). */
+  /** ORC-26 Advanced Beneficiary Notice Override Reason (CWE, conditional) (chainable). */
   advancedBeneficiaryNoticeOverrideReason(value: string | CodedElement): this {
     this.fields[25] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ORC-27 Filler's Expected Availability Date/Time (DTM, max 0, optional) (chainable). */
+  /** ORC-27 Filler's Expected Availability Date/Time (DTM, optional) (chainable). */
   fillerSExpectedAvailabilityDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[26] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** ORC-28 Confidentiality Code (CWE, max 0, optional) (chainable). */
+  /** ORC-28 Confidentiality Code (CWE, optional) (chainable). */
   confidentialityCode(value: string | CodedElement): this {
     this.fields[27] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ORC-29 Order Type (CWE, max 0, optional) (chainable). */
+  /** ORC-29 Order Type (CWE, optional) (chainable). */
   orderType(value: string | CodedElement): this {
     this.fields[28] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ORC-30 Enterer Authorization Mode (CNE, max 0, optional) (chainable). */
+  /** ORC-30 Enterer Authorization Mode (CNE, optional) (chainable). */
   entererAuthorizationMode(value: string | CodedElement): this {
     this.fields[29] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -214,19 +214,19 @@ export class ORC extends BaseSegment {
     return this;
   }
 
-  /** ORC-32 Advanced Beneficiary Notice Date (DT, max 0, optional) (chainable). */
+  /** ORC-32 Advanced Beneficiary Notice Date (DT, optional) (chainable). */
   advancedBeneficiaryNoticeDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[31] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** ORC-33 Alternate Placer Order Number (CX, max 0, optional, repeating) (chainable). */
+  /** ORC-33 Alternate Placer Order Number (CX, optional, repeating) (chainable). */
   alternatePlacerOrderNumber(...values: Repeated<string | CX>[]): this {
     this.fields[32] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
   }
 
-  /** ORC-34 Order Workflow Profile (CWE, max 0, optional, repeating) (chainable). */
+  /** ORC-34 Order Workflow Profile (CWE, optional, repeating) (chainable). */
   orderWorkflowProfile(...values: Repeated<string | CodedElement>[]): this {
     this.fields[33] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
@@ -238,19 +238,19 @@ export class ORC extends BaseSegment {
     return this;
   }
 
-  /** ORC-36 Order Status Date Range (DR, max 0, optional) (chainable). */
+  /** ORC-36 Order Status Date Range (DR, optional) (chainable). */
   orderStatusDateRange(value: string | DR): this {
     this.fields[35] = this.createField(typeof value === "string" ? value : components(drParts(value)));
     return this;
   }
 
-  /** ORC-37 Order Creation Date/Time (DTM, max 0, optional) (chainable). */
+  /** ORC-37 Order Creation Date/Time (DTM, optional) (chainable). */
   orderCreationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[36] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** ORC-38 Filler Order Group Number (EI, max 0, optional) (chainable). */
+  /** ORC-38 Filler Order Group Number (EI, optional) (chainable). */
   fillerOrderGroupNumber(value: string | EI): this {
     this.fields[37] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;

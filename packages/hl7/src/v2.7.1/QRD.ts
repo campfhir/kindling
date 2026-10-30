@@ -27,7 +27,7 @@ export class QRD extends BaseSegment {
     this.fields = [];
   }
 
-  /** QRD-1 QRD.1 (ST, max 0, optional) (chainable). */
+  /** QRD-1 QRD.1 (ST, optional) (chainable). */
   qrd1(value: string): this {
     this.fields[0] = this.createField(value);
     return this;

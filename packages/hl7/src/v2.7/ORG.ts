@@ -33,13 +33,13 @@ export class ORG extends BaseSegment {
     return this;
   }
 
-  /** ORG-2 Organization Unit Code (CWE, max 0, optional) (chainable). */
+  /** ORG-2 Organization Unit Code (CWE, optional) (chainable). */
   organizationUnitCode(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ORG-3 Organization Unit Type Code (CWE, max 0, optional) (chainable). */
+  /** ORG-3 Organization Unit Type Code (CWE, optional) (chainable). */
   organizationUnitTypeCode(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -51,37 +51,37 @@ export class ORG extends BaseSegment {
     return this;
   }
 
-  /** ORG-5 Practitioner Org Unit Identifier (CX, max 0, optional) (chainable). */
+  /** ORG-5 Practitioner Org Unit Identifier (CX, optional) (chainable). */
   practitionerOrgUnitIdentifier(value: string | CX): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
   }
 
-  /** ORG-6 Health Care Provider Type Code (CWE, max 0, optional) (chainable). */
+  /** ORG-6 Health Care Provider Type Code (CWE, optional) (chainable). */
   healthCareProviderTypeCode(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ORG-7 Health Care Provider Classification Code (CWE, max 0, optional) (chainable). */
+  /** ORG-7 Health Care Provider Classification Code (CWE, optional) (chainable). */
   healthCareProviderClassificationCode(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ORG-8 Health Care Provider Area of Specialization Code (CWE, max 0, optional) (chainable). */
+  /** ORG-8 Health Care Provider Area of Specialization Code (CWE, optional) (chainable). */
   healthCareProviderAreaOfSpecializationCode(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ORG-9 Effective Date Range (DR, max 0, optional) (chainable). */
+  /** ORG-9 Effective Date Range (DR, optional) (chainable). */
   effectiveDateRange(value: string | DR): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(drParts(value)));
     return this;
   }
 
-  /** ORG-10 Employment Status Code (CWE, max 0, optional) (chainable). */
+  /** ORG-10 Employment Status Code (CWE, optional) (chainable). */
   employmentStatusCode(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -99,7 +99,7 @@ export class ORG extends BaseSegment {
     return this;
   }
 
-  /** ORG-13 Cost Center Code (CWE, max 0, optional, repeating) (chainable). */
+  /** ORG-13 Cost Center Code (CWE, optional, repeating) (chainable). */
   costCenterCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[12] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;

@@ -40,73 +40,73 @@ export class AIG extends BaseSegment {
     return this;
   }
 
-  /** AIG-3 Resource ID (CWE, max 0, conditional) (chainable). */
+  /** AIG-3 Resource ID (CWE, conditional) (chainable). */
   resourceId(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIG-4 Resource Type (CWE, max 0, required) (chainable). */
+  /** AIG-4 Resource Type (CWE, required) (chainable). */
   resourceType(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIG-5 Resource Group (CWE, max 0, optional, repeating) (chainable). */
+  /** AIG-5 Resource Group (CWE, optional, repeating) (chainable). */
   resourceGroup(...values: Repeated<string | CodedElement>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** AIG-6 Resource Quantity (NM, max 0, optional) (chainable). */
+  /** AIG-6 Resource Quantity (NM, optional) (chainable). */
   resourceQuantity(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
   }
 
-  /** AIG-7 Resource Quantity Units (CNE, max 0, optional) (chainable). */
+  /** AIG-7 Resource Quantity Units (CNE, optional) (chainable). */
   resourceQuantityUnits(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIG-8 Start Date/Time (DTM, max 0, conditional) (chainable). */
+  /** AIG-8 Start Date/Time (DTM, conditional) (chainable). */
   startDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** AIG-9 Start Date/Time Offset (NM, max 0, conditional) (chainable). */
+  /** AIG-9 Start Date/Time Offset (NM, conditional) (chainable). */
   startDateTimeOffset(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** AIG-10 Start Date/Time Offset Units (CNE, max 0, conditional) (chainable). */
+  /** AIG-10 Start Date/Time Offset Units (CNE, conditional) (chainable). */
   startDateTimeOffsetUnits(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIG-11 Duration (NM, max 0, optional) (chainable). */
+  /** AIG-11 Duration (NM, optional) (chainable). */
   duration(value: string): this {
     this.fields[10] = this.createField(value);
     return this;
   }
 
-  /** AIG-12 Duration Units (CNE, max 0, optional) (chainable). */
+  /** AIG-12 Duration Units (CNE, optional) (chainable). */
   durationUnits(value: string | CodedElement): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIG-13 Allow Substitution Code (CWE, max 0, conditional) (chainable). */
+  /** AIG-13 Allow Substitution Code (CWE, conditional) (chainable). */
   allowSubstitutionCode(value: string | CodedElement): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIG-14 Filler Status Code (CWE, max 0, conditional) (chainable). */
+  /** AIG-14 Filler Status Code (CWE, conditional) (chainable). */
   fillerStatusCode(value: string | CodedElement): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

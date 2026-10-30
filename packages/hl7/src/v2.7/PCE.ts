@@ -33,19 +33,19 @@ export class PCE extends BaseSegment {
     return this;
   }
 
-  /** PCE-2 Cost Center Account Number (CX, max 0, optional) (chainable). */
+  /** PCE-2 Cost Center Account Number (CX, optional) (chainable). */
   costCenterAccountNumber(value: string | CX): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
   }
 
-  /** PCE-3 Transaction Code (CWE, max 0, optional) (chainable). */
+  /** PCE-3 Transaction Code (CWE, optional) (chainable). */
   transactionCode(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PCE-4 Transaction amount - unit (CP, max 0, optional) (chainable). */
+  /** PCE-4 Transaction amount - unit (CP, optional) (chainable). */
   transactionAmountUnit(value: string | CP): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;

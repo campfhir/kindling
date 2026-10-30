@@ -28,7 +28,7 @@ export class OH1 extends BaseSegment {
     this.fields = [];
   }
 
-  /** OH1-1 Set ID (SI, max 0, required) (chainable). */
+  /** OH1-1 Set ID (SI, required) (chainable). */
   setId(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
@@ -40,31 +40,31 @@ export class OH1 extends BaseSegment {
     return this;
   }
 
-  /** OH1-3 Employment Status (CWE, max 0, required) (chainable). */
+  /** OH1-3 Employment Status (CWE, required) (chainable). */
   employmentStatus(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OH1-4 Employment Status Start Date (DT, max 0, optional) (chainable). */
+  /** OH1-4 Employment Status Start Date (DT, optional) (chainable). */
   employmentStatusStartDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** OH1-5 Employment Status End Date (DT, max 0, optional) (chainable). */
+  /** OH1-5 Employment Status End Date (DT, optional) (chainable). */
   employmentStatusEndDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[4] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** OH1-6 Entered Date (DT, max 0, required) (chainable). */
+  /** OH1-6 Entered Date (DT, required) (chainable). */
   enteredDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[5] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** OH1-7 Employment Status Unique Identifier (EI, max 0, optional) (chainable). */
+  /** OH1-7 Employment Status Unique Identifier (EI, optional) (chainable). */
   employmentStatusUniqueIdentifier(value: string | EI): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;

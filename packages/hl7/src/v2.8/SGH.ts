@@ -33,7 +33,7 @@ export class SGH extends BaseSegment {
     return this;
   }
 
-  /** SGH-2 Segment Group Name (ST, max 0, optional) (chainable). */
+  /** SGH-2 Segment Group Name (ST, optional) (chainable). */
   segmentGroupName(value: string): this {
     this.fields[1] = this.createField(value);
     return this;

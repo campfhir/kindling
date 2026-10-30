@@ -39,19 +39,19 @@ export class TQ2 extends BaseSegment {
     return this;
   }
 
-  /** TQ2-3 Related Placer Number (EI, max 0, conditional, repeating) (chainable). */
+  /** TQ2-3 Related Placer Number (EI, conditional, repeating) (chainable). */
   relatedPlacerNumber(...values: Repeated<string | EI>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;
   }
 
-  /** TQ2-4 Related Filler Number (EI, max 0, conditional, repeating) (chainable). */
+  /** TQ2-4 Related Filler Number (EI, conditional, repeating) (chainable). */
   relatedFillerNumber(...values: Repeated<string | EI>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;
   }
 
-  /** TQ2-5 Related Placer Group Number (EI, max 0, conditional, repeating) (chainable). */
+  /** TQ2-5 Related Placer Group Number (EI, conditional, repeating) (chainable). */
   relatedPlacerGroupNumber(...values: Repeated<string | EI>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;
@@ -69,13 +69,13 @@ export class TQ2 extends BaseSegment {
     return this;
   }
 
-  /** TQ2-8 Sequence Condition Time Interval (CQ, max 0, optional) (chainable). */
+  /** TQ2-8 Sequence Condition Time Interval (CQ, optional) (chainable). */
   sequenceConditionTimeInterval(value: string | CQ): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** TQ2-9 Cyclic Group Maximum Number of Repeats (NM, max 0, optional) (chainable). */
+  /** TQ2-9 Cyclic Group Maximum Number of Repeats (NM, optional) (chainable). */
   cyclicGroupMaximumNumberOfRepeats(value: string): this {
     this.fields[8] = this.createField(value);
     return this;

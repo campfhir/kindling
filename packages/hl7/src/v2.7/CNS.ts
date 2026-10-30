@@ -28,37 +28,37 @@ export class CNS extends BaseSegment {
     this.fields = [];
   }
 
-  /** CNS-1 Starting Notification Reference Number (NM, max 0, optional) (chainable). */
+  /** CNS-1 Starting Notification Reference Number (NM, optional) (chainable). */
   startingNotificationReferenceNumber(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** CNS-2 Ending Notification Reference Number (NM, max 0, optional) (chainable). */
+  /** CNS-2 Ending Notification Reference Number (NM, optional) (chainable). */
   endingNotificationReferenceNumber(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** CNS-3 Starting Notification Date/Time (DTM, max 0, optional) (chainable). */
+  /** CNS-3 Starting Notification Date/Time (DTM, optional) (chainable). */
   startingNotificationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CNS-4 Ending Notification Date/Time (DTM, max 0, optional) (chainable). */
+  /** CNS-4 Ending Notification Date/Time (DTM, optional) (chainable). */
   endingNotificationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CNS-5 Starting Notification Code (CWE, max 0, optional) (chainable). */
+  /** CNS-5 Starting Notification Code (CWE, optional) (chainable). */
   startingNotificationCode(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CNS-6 Ending Notification Code (CWE, max 0, optional) (chainable). */
+  /** CNS-6 Ending Notification Code (CWE, optional) (chainable). */
   endingNotificationCode(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

@@ -28,145 +28,145 @@ export class PM1 extends BaseSegment {
     this.fields = [];
   }
 
-  /** PM1-1 Health Plan ID (CWE, max 0, required) (chainable). */
+  /** PM1-1 Health Plan ID (CWE, required) (chainable). */
   healthPlanId(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PM1-2 Insurance Company ID (CX, max 0, required, repeating) (chainable). */
+  /** PM1-2 Insurance Company ID (CX, required, repeating) (chainable). */
   insuranceCompanyId(...values: Repeated<string | CX>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
   }
 
-  /** PM1-3 Insurance Company Name (XON, max 0, optional, repeating) (chainable). */
+  /** PM1-3 Insurance Company Name (XON, optional, repeating) (chainable). */
   insuranceCompanyName(...values: Repeated<string | XON>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** PM1-4 Insurance Company Address (XAD, max 0, optional, repeating) (chainable). */
+  /** PM1-4 Insurance Company Address (XAD, optional, repeating) (chainable). */
   insuranceCompanyAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** PM1-5 Insurance Co Contact Person (XPN, max 0, optional, repeating) (chainable). */
+  /** PM1-5 Insurance Co Contact Person (XPN, optional, repeating) (chainable). */
   insuranceCoContactPerson(...values: Repeated<string | XPN>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** PM1-6 Insurance Co Phone Number (XTN, max 0, optional, repeating) (chainable). */
+  /** PM1-6 Insurance Co Phone Number (XTN, optional, repeating) (chainable). */
   insuranceCoPhoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** PM1-7 Group Number (ST, max 0, optional) (chainable). */
+  /** PM1-7 Group Number (ST, optional) (chainable). */
   groupNumber(value: string): this {
     this.fields[6] = this.createField(value);
     return this;
   }
 
-  /** PM1-8 Group Name (XON, max 0, optional, repeating) (chainable). */
+  /** PM1-8 Group Name (XON, optional, repeating) (chainable). */
   groupName(...values: Repeated<string | XON>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** PM1-9 Plan Effective Date (DT, max 0, optional) (chainable). */
+  /** PM1-9 Plan Effective Date (DT, optional) (chainable). */
   planEffectiveDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[8] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** PM1-10 Plan Expiration Date (DT, max 0, optional) (chainable). */
+  /** PM1-10 Plan Expiration Date (DT, optional) (chainable). */
   planExpirationDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[9] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** PM1-11 Patient DOB Required (ID, max 0, optional) (chainable). */
+  /** PM1-11 Patient DOB Required (ID, optional) (chainable). */
   patientDobRequired(value: string): this {
     this.fields[10] = this.createField(value);
     return this;
   }
 
-  /** PM1-12 Patient Gender Required (ID, max 0, optional) (chainable). */
+  /** PM1-12 Patient Gender Required (ID, optional) (chainable). */
   patientGenderRequired(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
   }
 
-  /** PM1-13 Patient Relationship Required (ID, max 0, optional) (chainable). */
+  /** PM1-13 Patient Relationship Required (ID, optional) (chainable). */
   patientRelationshipRequired(value: string): this {
     this.fields[12] = this.createField(value);
     return this;
   }
 
-  /** PM1-14 Patient Signature Required (ID, max 0, optional) (chainable). */
+  /** PM1-14 Patient Signature Required (ID, optional) (chainable). */
   patientSignatureRequired(value: string): this {
     this.fields[13] = this.createField(value);
     return this;
   }
 
-  /** PM1-15 Diagnosis Required (ID, max 0, optional) (chainable). */
+  /** PM1-15 Diagnosis Required (ID, optional) (chainable). */
   diagnosisRequired(value: string): this {
     this.fields[14] = this.createField(value);
     return this;
   }
 
-  /** PM1-16 Service Required (ID, max 0, optional) (chainable). */
+  /** PM1-16 Service Required (ID, optional) (chainable). */
   serviceRequired(value: string): this {
     this.fields[15] = this.createField(value);
     return this;
   }
 
-  /** PM1-17 Patient Name Required (ID, max 0, optional) (chainable). */
+  /** PM1-17 Patient Name Required (ID, optional) (chainable). */
   patientNameRequired(value: string): this {
     this.fields[16] = this.createField(value);
     return this;
   }
 
-  /** PM1-18 Patient Address Required (ID, max 0, optional) (chainable). */
+  /** PM1-18 Patient Address Required (ID, optional) (chainable). */
   patientAddressRequired(value: string): this {
     this.fields[17] = this.createField(value);
     return this;
   }
 
-  /** PM1-19 Subscribers Name Required (ID, max 0, optional) (chainable). */
+  /** PM1-19 Subscribers Name Required (ID, optional) (chainable). */
   subscribersNameRequired(value: string): this {
     this.fields[18] = this.createField(value);
     return this;
   }
 
-  /** PM1-20 Workman's Comp Indicator (ID, max 0, optional) (chainable). */
+  /** PM1-20 Workman's Comp Indicator (ID, optional) (chainable). */
   workmanSCompIndicator(value: string): this {
     this.fields[19] = this.createField(value);
     return this;
   }
 
-  /** PM1-21 Bill Type Required (ID, max 0, optional) (chainable). */
+  /** PM1-21 Bill Type Required (ID, optional) (chainable). */
   billTypeRequired(value: string): this {
     this.fields[20] = this.createField(value);
     return this;
   }
 
-  /** PM1-22 Commercial Carrier Name and Address Required (ID, max 0, optional) (chainable). */
+  /** PM1-22 Commercial Carrier Name and Address Required (ID, optional) (chainable). */
   commercialCarrierNameAndAddressRequired(value: string): this {
     this.fields[21] = this.createField(value);
     return this;
   }
 
-  /** PM1-23 Policy Number Pattern (ST, max 0, optional) (chainable). */
+  /** PM1-23 Policy Number Pattern (ST, optional) (chainable). */
   policyNumberPattern(value: string): this {
     this.fields[22] = this.createField(value);
     return this;
   }
 
-  /** PM1-24 Group Number Pattern (ST, max 0, optional) (chainable). */
+  /** PM1-24 Group Number Pattern (ST, optional) (chainable). */
   groupNumberPattern(value: string): this {
     this.fields[23] = this.createField(value);
     return this;

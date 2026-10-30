@@ -28,43 +28,43 @@ export class PEO extends BaseSegment {
     this.fields = [];
   }
 
-  /** PEO-1 Event Identifiers Used (CWE, max 0, optional, repeating) (chainable). */
+  /** PEO-1 Event Identifiers Used (CWE, optional, repeating) (chainable). */
   eventIdentifiersUsed(...values: Repeated<string | CodedElement>[]): this {
     this.fields[0] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PEO-2 Event Symptom/Diagnosis Code (CWE, max 0, optional, repeating) (chainable). */
+  /** PEO-2 Event Symptom/Diagnosis Code (CWE, optional, repeating) (chainable). */
   eventSymptomDiagnosisCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PEO-3 Event Onset Date/Time (DTM, max 0, required) (chainable). */
+  /** PEO-3 Event Onset Date/Time (DTM, required) (chainable). */
   eventOnsetDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PEO-4 Event Exacerbation Date/Time (DTM, max 0, optional) (chainable). */
+  /** PEO-4 Event Exacerbation Date/Time (DTM, optional) (chainable). */
   eventExacerbationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PEO-5 Event Improved Date/Time (DTM, max 0, optional) (chainable). */
+  /** PEO-5 Event Improved Date/Time (DTM, optional) (chainable). */
   eventImprovedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PEO-6 Event Ended Data/Time (DTM, max 0, optional) (chainable). */
+  /** PEO-6 Event Ended Data/Time (DTM, optional) (chainable). */
   eventEndedDataTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PEO-7 Event Location Occurred Address (XAD, max 0, optional, repeating) (chainable). */
+  /** PEO-7 Event Location Occurred Address (XAD, optional, repeating) (chainable). */
   eventLocationOccurredAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
@@ -100,55 +100,55 @@ export class PEO extends BaseSegment {
     return this;
   }
 
-  /** PEO-13 Event Description from Others (FT, max 0, optional, repeating) (chainable). */
+  /** PEO-13 Event Description from Others (FT, optional, repeating) (chainable). */
   eventDescriptionFromOthers(...values: Repeated<string>[]): this {
     this.fields[12] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** PEO-14 Event Description from Original Reporter (FT, max 0, optional, repeating) (chainable). */
+  /** PEO-14 Event Description from Original Reporter (FT, optional, repeating) (chainable). */
   eventDescriptionFromOriginalReporter(...values: Repeated<string>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** PEO-15 Event Description from Patient (FT, max 0, optional, repeating) (chainable). */
+  /** PEO-15 Event Description from Patient (FT, optional, repeating) (chainable). */
   eventDescriptionFromPatient(...values: Repeated<string>[]): this {
     this.fields[14] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** PEO-16 Event Description from Practitioner (FT, max 0, optional, repeating) (chainable). */
+  /** PEO-16 Event Description from Practitioner (FT, optional, repeating) (chainable). */
   eventDescriptionFromPractitioner(...values: Repeated<string>[]): this {
     this.fields[15] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** PEO-17 Event Description from Autopsy (FT, max 0, optional, repeating) (chainable). */
+  /** PEO-17 Event Description from Autopsy (FT, optional, repeating) (chainable). */
   eventDescriptionFromAutopsy(...values: Repeated<string>[]): this {
     this.fields[16] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** PEO-18 Cause Of Death (CWE, max 0, optional, repeating) (chainable). */
+  /** PEO-18 Cause Of Death (CWE, optional, repeating) (chainable). */
   causeOfDeath(...values: Repeated<string | CodedElement>[]): this {
     this.fields[17] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PEO-19 Primary Observer Name (XPN, max 0, optional, repeating) (chainable). */
+  /** PEO-19 Primary Observer Name (XPN, optional, repeating) (chainable). */
   primaryObserverName(...values: Repeated<string | XPN>[]): this {
     this.fields[18] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** PEO-20 Primary Observer Address (XAD, max 0, optional, repeating) (chainable). */
+  /** PEO-20 Primary Observer Address (XAD, optional, repeating) (chainable). */
   primaryObserverAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[19] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** PEO-21 Primary Observer Telephone (XTN, max 0, optional, repeating) (chainable). */
+  /** PEO-21 Primary Observer Telephone (XTN, optional, repeating) (chainable). */
   primaryObserverTelephone(...values: Repeated<string | XTN>[]): this {
     this.fields[20] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
@@ -166,7 +166,7 @@ export class PEO extends BaseSegment {
     return this;
   }
 
-  /** PEO-24 Primary Observer Aware Date/Time (DTM, max 0, optional) (chainable). */
+  /** PEO-24 Primary Observer Aware Date/Time (DTM, optional) (chainable). */
   primaryObserverAwareDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[23] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;

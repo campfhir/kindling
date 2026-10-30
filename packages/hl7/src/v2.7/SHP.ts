@@ -28,67 +28,67 @@ export class SHP extends BaseSegment {
     this.fields = [];
   }
 
-  /** SHP-1 Shipment ID (EI, max 0, required) (chainable). */
+  /** SHP-1 Shipment ID (EI, required) (chainable). */
   shipmentId(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** SHP-2 Internal Shipment ID (EI, max 0, optional, repeating) (chainable). */
+  /** SHP-2 Internal Shipment ID (EI, optional, repeating) (chainable). */
   internalShipmentId(...values: Repeated<string | EI>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;
   }
 
-  /** SHP-3 Shipment Status (CWE, max 0, optional) (chainable). */
+  /** SHP-3 Shipment Status (CWE, optional) (chainable). */
   shipmentStatus(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SHP-4 Shipment Status Date/Time (DTM, max 0, required) (chainable). */
+  /** SHP-4 Shipment Status Date/Time (DTM, required) (chainable). */
   shipmentStatusDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** SHP-5 Shipment Status Reason (TX, max 0, optional) (chainable). */
+  /** SHP-5 Shipment Status Reason (TX, optional) (chainable). */
   shipmentStatusReason(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** SHP-6 Shipment Priority (CWE, max 0, optional) (chainable). */
+  /** SHP-6 Shipment Priority (CWE, optional) (chainable). */
   shipmentPriority(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SHP-7 Shipment Confidentiality (CWE, max 0, optional, repeating) (chainable). */
+  /** SHP-7 Shipment Confidentiality (CWE, optional, repeating) (chainable). */
   shipmentConfidentiality(...values: Repeated<string | CodedElement>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** SHP-8 Number of Packages in Shipment (NM, max 0, optional) (chainable). */
+  /** SHP-8 Number of Packages in Shipment (NM, optional) (chainable). */
   numberOfPackagesInShipment(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** SHP-9 Shipment Condition (CWE, max 0, optional, repeating) (chainable). */
+  /** SHP-9 Shipment Condition (CWE, optional, repeating) (chainable). */
   shipmentCondition(...values: Repeated<string | CodedElement>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** SHP-10 Shipment Handling Code (CWE, max 0, optional, repeating) (chainable). */
+  /** SHP-10 Shipment Handling Code (CWE, optional, repeating) (chainable). */
   shipmentHandlingCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[9] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** SHP-11 Shipment Risk Code (CWE, max 0, optional, repeating) (chainable). */
+  /** SHP-11 Shipment Risk Code (CWE, optional, repeating) (chainable). */
   shipmentRiskCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;

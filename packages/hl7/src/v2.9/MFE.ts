@@ -34,19 +34,19 @@ export class MFE extends BaseSegment {
     return this;
   }
 
-  /** MFE-2 MFN Control ID (ST, max 0, conditional) (chainable). */
+  /** MFE-2 MFN Control ID (ST, conditional) (chainable). */
   mfnControlId(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** MFE-3 Effective Date/Time (DTM, max 0, optional) (chainable). */
+  /** MFE-3 Effective Date/Time (DTM, optional) (chainable). */
   effectiveDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** MFE-4 Primary Key Value (Varies, max 0, required, repeating) (chainable). */
+  /** MFE-4 Primary Key Value (Varies, required, repeating) (chainable). */
   primaryKeyValue(...values: Repeated<string>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
@@ -58,13 +58,13 @@ export class MFE extends BaseSegment {
     return this;
   }
 
-  /** MFE-6 Entered Date/Time (DTM, max 0, optional) (chainable). */
+  /** MFE-6 Entered Date/Time (DTM, optional) (chainable). */
   enteredDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** MFE-7 Entered By (XCN, max 0, optional) (chainable). */
+  /** MFE-7 Entered By (XCN, optional) (chainable). */
   enteredBy(value: string | XCN): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;

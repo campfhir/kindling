@@ -33,25 +33,25 @@ export class AFF extends BaseSegment {
     return this;
   }
 
-  /** AFF-2 Professional Organization (XON, max 0, required) (chainable). */
+  /** AFF-2 Professional Organization (XON, required) (chainable). */
   professionalOrganization(value: string | XON): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** AFF-3 Professional Organization Address (XAD, max 0, optional) (chainable). */
+  /** AFF-3 Professional Organization Address (XAD, optional) (chainable). */
   professionalOrganizationAddress(value: string | XAD): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(xadParts(value)));
     return this;
   }
 
-  /** AFF-4 Professional Organization Affiliation Date Range (DR, max 0, optional, repeating) (chainable). */
+  /** AFF-4 Professional Organization Affiliation Date Range (DR, optional, repeating) (chainable). */
   professionalOrganizationAffiliationDateRange(...values: Repeated<string | DR>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(drParts(v)))));
     return this;
   }
 
-  /** AFF-5 Professional Affiliation Additional Information (ST, max 0, optional) (chainable). */
+  /** AFF-5 Professional Affiliation Additional Information (ST, optional) (chainable). */
   professionalAffiliationAdditionalInformation(value: string): this {
     this.fields[4] = this.createField(value);
     return this;

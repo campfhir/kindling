@@ -27,13 +27,13 @@ export class ECD extends BaseSegment {
     this.fields = [];
   }
 
-  /** ECD-1 Reference Command Number (NM, max 0, required) (chainable). */
+  /** ECD-1 Reference Command Number (NM, required) (chainable). */
   referenceCommandNumber(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** ECD-2 Remote Control Command (CWE, max 0, required) (chainable). */
+  /** ECD-2 Remote Control Command (CWE, required) (chainable). */
   remoteControlCommand(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -51,7 +51,7 @@ export class ECD extends BaseSegment {
     return this;
   }
 
-  /** ECD-5 Parameters (TX, max 0, optional, repeating) (chainable). */
+  /** ECD-5 Parameters (TX, optional, repeating) (chainable). */
   parameters(...values: Repeated<string>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;

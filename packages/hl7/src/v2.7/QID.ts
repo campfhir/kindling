@@ -27,13 +27,13 @@ export class QID extends BaseSegment {
     this.fields = [];
   }
 
-  /** QID-1 Query Tag (ST, max 0, required) (chainable). */
+  /** QID-1 Query Tag (ST, required) (chainable). */
   queryTag(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** QID-2 Message Query Name (CWE, max 0, required) (chainable). */
+  /** QID-2 Message Query Name (CWE, required) (chainable). */
   messageQueryName(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

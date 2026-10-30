@@ -27,13 +27,13 @@ export class ZL7 extends BaseSegment {
     this.fields = [];
   }
 
-  /** ZL7-1 Display-sort-key (NM, max 0, required) (chainable). */
+  /** ZL7-1 Display-sort-key (NM, required) (chainable). */
   displaySortKey(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** ZL7-2 Display-sort-key (NM, max 0, required) (chainable). */
+  /** ZL7-2 Display-sort-key (NM, required) (chainable). */
   displaySortKey2(value: string): this {
     this.fields[1] = this.createField(value);
     return this;

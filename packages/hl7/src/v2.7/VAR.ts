@@ -28,37 +28,37 @@ export class VAR extends BaseSegment {
     this.fields = [];
   }
 
-  /** VAR-1 Variance Instance ID (EI, max 0, required) (chainable). */
+  /** VAR-1 Variance Instance ID (EI, required) (chainable). */
   varianceInstanceId(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** VAR-2 Documented Date/Time (DTM, max 0, required) (chainable). */
+  /** VAR-2 Documented Date/Time (DTM, required) (chainable). */
   documentedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** VAR-3 Stated Variance Date/Time (DTM, max 0, optional) (chainable). */
+  /** VAR-3 Stated Variance Date/Time (DTM, optional) (chainable). */
   statedVarianceDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** VAR-4 Variance Originator (XCN, max 0, optional, repeating) (chainable). */
+  /** VAR-4 Variance Originator (XCN, optional, repeating) (chainable). */
   varianceOriginator(...values: Repeated<string | XCN>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** VAR-5 Variance Classification (CWE, max 0, optional) (chainable). */
+  /** VAR-5 Variance Classification (CWE, optional) (chainable). */
   varianceClassification(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** VAR-6 Variance Description (ST, max 0, optional, repeating) (chainable). */
+  /** VAR-6 Variance Description (ST, optional, repeating) (chainable). */
   varianceDescription(...values: Repeated<string>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;

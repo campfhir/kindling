@@ -27,25 +27,25 @@ export class STZ extends BaseSegment {
     this.fields = [];
   }
 
-  /** STZ-1 Sterilization Type (CWE, max 0, optional) (chainable). */
+  /** STZ-1 Sterilization Type (CWE, optional) (chainable). */
   sterilizationType(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** STZ-2 Sterilization Cycle (CWE, max 0, optional) (chainable). */
+  /** STZ-2 Sterilization Cycle (CWE, optional) (chainable). */
   sterilizationCycle(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** STZ-3 Maintenance Cycle (CWE, max 0, optional) (chainable). */
+  /** STZ-3 Maintenance Cycle (CWE, optional) (chainable). */
   maintenanceCycle(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** STZ-4 Maintenance Type (CWE, max 0, optional) (chainable). */
+  /** STZ-4 Maintenance Type (CWE, optional) (chainable). */
   maintenanceType(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

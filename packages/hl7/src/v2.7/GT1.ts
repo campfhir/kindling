@@ -34,79 +34,79 @@ export class GT1 extends BaseSegment {
     return this;
   }
 
-  /** GT1-2 Guarantor Number (CX, max 0, optional, repeating) (chainable). */
+  /** GT1-2 Guarantor Number (CX, optional, repeating) (chainable). */
   guarantorNumber(...values: Repeated<string | CX>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
   }
 
-  /** GT1-3 Guarantor Name (XPN, max 0, required, repeating) (chainable). */
+  /** GT1-3 Guarantor Name (XPN, required, repeating) (chainable). */
   guarantorName(...values: Repeated<string | XPN>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** GT1-4 Guarantor Spouse Name (XPN, max 0, optional, repeating) (chainable). */
+  /** GT1-4 Guarantor Spouse Name (XPN, optional, repeating) (chainable). */
   guarantorSpouseName(...values: Repeated<string | XPN>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** GT1-5 Guarantor Address (XAD, max 0, optional, repeating) (chainable). */
+  /** GT1-5 Guarantor Address (XAD, optional, repeating) (chainable). */
   guarantorAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** GT1-6 Guarantor Ph Num - Home (XTN, max 0, optional, repeating) (chainable). */
+  /** GT1-6 Guarantor Ph Num - Home (XTN, optional, repeating) (chainable). */
   guarantorPhNumHome(...values: Repeated<string | XTN>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** GT1-7 Guarantor Ph Num - Business (XTN, max 0, optional, repeating) (chainable). */
+  /** GT1-7 Guarantor Ph Num - Business (XTN, optional, repeating) (chainable). */
   guarantorPhNumBusiness(...values: Repeated<string | XTN>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** GT1-8 Guarantor Date/Time Of Birth (DTM, max 0, optional) (chainable). */
+  /** GT1-8 Guarantor Date/Time Of Birth (DTM, optional) (chainable). */
   guarantorDateTimeOfBirth(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** GT1-9 Guarantor Administrative Sex (CWE, max 0, optional) (chainable). */
+  /** GT1-9 Guarantor Administrative Sex (CWE, optional) (chainable). */
   guarantorAdministrativeSex(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GT1-10 Guarantor Type (CWE, max 0, optional) (chainable). */
+  /** GT1-10 Guarantor Type (CWE, optional) (chainable). */
   guarantorType(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GT1-11 Guarantor Relationship (CWE, max 0, optional) (chainable). */
+  /** GT1-11 Guarantor Relationship (CWE, optional) (chainable). */
   guarantorRelationship(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GT1-12 Guarantor SSN (ST, max 0, optional) (chainable). */
+  /** GT1-12 Guarantor SSN (ST, optional) (chainable). */
   guarantorSsn(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
   }
 
-  /** GT1-13 Guarantor Date - Begin (DT, max 0, optional) (chainable). */
+  /** GT1-13 Guarantor Date - Begin (DT, optional) (chainable). */
   guarantorDateBegin(value: string | Date, format?: HL7DateLayout): this {
     this.fields[12] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** GT1-14 Guarantor Date - End (DT, max 0, optional) (chainable). */
+  /** GT1-14 Guarantor Date - End (DT, optional) (chainable). */
   guarantorDateEnd(value: string | Date, format?: HL7DateLayout): this {
     this.fields[13] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
@@ -118,37 +118,37 @@ export class GT1 extends BaseSegment {
     return this;
   }
 
-  /** GT1-16 Guarantor Employer Name (XPN, max 0, optional, repeating) (chainable). */
+  /** GT1-16 Guarantor Employer Name (XPN, optional, repeating) (chainable). */
   guarantorEmployerName(...values: Repeated<string | XPN>[]): this {
     this.fields[15] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** GT1-17 Guarantor Employer Address (XAD, max 0, optional, repeating) (chainable). */
+  /** GT1-17 Guarantor Employer Address (XAD, optional, repeating) (chainable). */
   guarantorEmployerAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[16] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** GT1-18 Guarantor Employer Phone Number (XTN, max 0, optional, repeating) (chainable). */
+  /** GT1-18 Guarantor Employer Phone Number (XTN, optional, repeating) (chainable). */
   guarantorEmployerPhoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[17] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** GT1-19 Guarantor Employee ID Number (CX, max 0, optional, repeating) (chainable). */
+  /** GT1-19 Guarantor Employee ID Number (CX, optional, repeating) (chainable). */
   guarantorEmployeeIdNumber(...values: Repeated<string | CX>[]): this {
     this.fields[18] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
   }
 
-  /** GT1-20 Guarantor Employment Status (CWE, max 0, optional) (chainable). */
+  /** GT1-20 Guarantor Employment Status (CWE, optional) (chainable). */
   guarantorEmploymentStatus(value: string | CodedElement): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GT1-21 Guarantor Organization Name (XON, max 0, optional, repeating) (chainable). */
+  /** GT1-21 Guarantor Organization Name (XON, optional, repeating) (chainable). */
   guarantorOrganizationName(...values: Repeated<string | XON>[]): this {
     this.fields[20] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
@@ -160,13 +160,13 @@ export class GT1 extends BaseSegment {
     return this;
   }
 
-  /** GT1-23 Guarantor Credit Rating Code (CWE, max 0, optional) (chainable). */
+  /** GT1-23 Guarantor Credit Rating Code (CWE, optional) (chainable). */
   guarantorCreditRatingCode(value: string | CodedElement): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GT1-24 Guarantor Death Date And Time (DTM, max 0, optional) (chainable). */
+  /** GT1-24 Guarantor Death Date And Time (DTM, optional) (chainable). */
   guarantorDeathDateAndTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[23] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
@@ -178,79 +178,79 @@ export class GT1 extends BaseSegment {
     return this;
   }
 
-  /** GT1-26 Guarantor Charge Adjustment Code (CWE, max 0, optional) (chainable). */
+  /** GT1-26 Guarantor Charge Adjustment Code (CWE, optional) (chainable). */
   guarantorChargeAdjustmentCode(value: string | CodedElement): this {
     this.fields[25] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GT1-27 Guarantor Household Annual Income (CP, max 0, optional) (chainable). */
+  /** GT1-27 Guarantor Household Annual Income (CP, optional) (chainable). */
   guarantorHouseholdAnnualIncome(value: string | CP): this {
     this.fields[26] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** GT1-28 Guarantor Household Size (NM, max 0, optional) (chainable). */
+  /** GT1-28 Guarantor Household Size (NM, optional) (chainable). */
   guarantorHouseholdSize(value: string): this {
     this.fields[27] = this.createField(value);
     return this;
   }
 
-  /** GT1-29 Guarantor Employer ID Number (CX, max 0, optional, repeating) (chainable). */
+  /** GT1-29 Guarantor Employer ID Number (CX, optional, repeating) (chainable). */
   guarantorEmployerIdNumber(...values: Repeated<string | CX>[]): this {
     this.fields[28] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
   }
 
-  /** GT1-30 Guarantor Marital Status Code (CWE, max 0, optional) (chainable). */
+  /** GT1-30 Guarantor Marital Status Code (CWE, optional) (chainable). */
   guarantorMaritalStatusCode(value: string | CodedElement): this {
     this.fields[29] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GT1-31 Guarantor Hire Effective Date (DT, max 0, optional) (chainable). */
+  /** GT1-31 Guarantor Hire Effective Date (DT, optional) (chainable). */
   guarantorHireEffectiveDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[30] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** GT1-32 Employment Stop Date (DT, max 0, optional) (chainable). */
+  /** GT1-32 Employment Stop Date (DT, optional) (chainable). */
   employmentStopDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[31] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** GT1-33 Living Dependency (CWE, max 0, optional) (chainable). */
+  /** GT1-33 Living Dependency (CWE, optional) (chainable). */
   livingDependency(value: string | CodedElement): this {
     this.fields[32] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GT1-34 Ambulatory Status (CWE, max 0, optional, repeating) (chainable). */
+  /** GT1-34 Ambulatory Status (CWE, optional, repeating) (chainable). */
   ambulatoryStatus(...values: Repeated<string | CodedElement>[]): this {
     this.fields[33] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** GT1-35 Citizenship (CWE, max 0, optional, repeating) (chainable). */
+  /** GT1-35 Citizenship (CWE, optional, repeating) (chainable). */
   citizenship(...values: Repeated<string | CodedElement>[]): this {
     this.fields[34] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** GT1-36 Primary Language (CWE, max 0, optional) (chainable). */
+  /** GT1-36 Primary Language (CWE, optional) (chainable). */
   primaryLanguage(value: string | CodedElement): this {
     this.fields[35] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GT1-37 Living Arrangement (CWE, max 0, optional) (chainable). */
+  /** GT1-37 Living Arrangement (CWE, optional) (chainable). */
   livingArrangement(value: string | CodedElement): this {
     this.fields[36] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GT1-38 Publicity Code (CWE, max 0, optional) (chainable). */
+  /** GT1-38 Publicity Code (CWE, optional) (chainable). */
   publicityCode(value: string | CodedElement): this {
     this.fields[37] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -262,109 +262,109 @@ export class GT1 extends BaseSegment {
     return this;
   }
 
-  /** GT1-40 Student Indicator (CWE, max 0, optional) (chainable). */
+  /** GT1-40 Student Indicator (CWE, optional) (chainable). */
   studentIndicator(value: string | CodedElement): this {
     this.fields[39] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GT1-41 Religion (CWE, max 0, optional) (chainable). */
+  /** GT1-41 Religion (CWE, optional) (chainable). */
   religion(value: string | CodedElement): this {
     this.fields[40] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GT1-42 Mother's Maiden Name (XPN, max 0, optional, repeating) (chainable). */
+  /** GT1-42 Mother's Maiden Name (XPN, optional, repeating) (chainable). */
   motherSMaidenName(...values: Repeated<string | XPN>[]): this {
     this.fields[41] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** GT1-43 Nationality (CWE, max 0, optional) (chainable). */
+  /** GT1-43 Nationality (CWE, optional) (chainable). */
   nationality(value: string | CodedElement): this {
     this.fields[42] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GT1-44 Ethnic Group (CWE, max 0, optional, repeating) (chainable). */
+  /** GT1-44 Ethnic Group (CWE, optional, repeating) (chainable). */
   ethnicGroup(...values: Repeated<string | CodedElement>[]): this {
     this.fields[43] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** GT1-45 Contact Person's Name (XPN, max 0, optional, repeating) (chainable). */
+  /** GT1-45 Contact Person's Name (XPN, optional, repeating) (chainable). */
   contactPersonSName(...values: Repeated<string | XPN>[]): this {
     this.fields[44] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** GT1-46 Contact Person's Telephone Number (XTN, max 0, optional, repeating) (chainable). */
+  /** GT1-46 Contact Person's Telephone Number (XTN, optional, repeating) (chainable). */
   contactPersonSTelephoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[45] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** GT1-47 Contact Reason (CWE, max 0, optional) (chainable). */
+  /** GT1-47 Contact Reason (CWE, optional) (chainable). */
   contactReason(value: string | CodedElement): this {
     this.fields[46] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GT1-48 Contact Relationship (CWE, max 0, optional) (chainable). */
+  /** GT1-48 Contact Relationship (CWE, optional) (chainable). */
   contactRelationship(value: string | CodedElement): this {
     this.fields[47] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GT1-49 Job Title (ST, max 0, optional) (chainable). */
+  /** GT1-49 Job Title (ST, optional) (chainable). */
   jobTitle(value: string): this {
     this.fields[48] = this.createField(value);
     return this;
   }
 
-  /** GT1-50 Job Code/Class (JCC, max 0, optional) (chainable). */
+  /** GT1-50 Job Code/Class (JCC, optional) (chainable). */
   jobCodeClass(value: string): this {
     this.fields[49] = this.createField(value);
     return this;
   }
 
-  /** GT1-51 Guarantor Employer's Organization Name (XON, max 0, optional, repeating) (chainable). */
+  /** GT1-51 Guarantor Employer's Organization Name (XON, optional, repeating) (chainable). */
   guarantorEmployerSOrganizationName(...values: Repeated<string | XON>[]): this {
     this.fields[50] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** GT1-52 Handicap (CWE, max 0, optional) (chainable). */
+  /** GT1-52 Handicap (CWE, optional) (chainable). */
   handicap(value: string | CodedElement): this {
     this.fields[51] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GT1-53 Job Status (CWE, max 0, optional) (chainable). */
+  /** GT1-53 Job Status (CWE, optional) (chainable). */
   jobStatus(value: string | CodedElement): this {
     this.fields[52] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GT1-54 Guarantor Financial Class (FC, max 0, optional) (chainable). */
+  /** GT1-54 Guarantor Financial Class (FC, optional) (chainable). */
   guarantorFinancialClass(value: string): this {
     this.fields[53] = this.createField(value);
     return this;
   }
 
-  /** GT1-55 Guarantor Race (CWE, max 0, optional, repeating) (chainable). */
+  /** GT1-55 Guarantor Race (CWE, optional, repeating) (chainable). */
   guarantorRace(...values: Repeated<string | CodedElement>[]): this {
     this.fields[54] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** GT1-56 Guarantor Birth Place (ST, max 0, optional) (chainable). */
+  /** GT1-56 Guarantor Birth Place (ST, optional) (chainable). */
   guarantorBirthPlace(value: string): this {
     this.fields[55] = this.createField(value);
     return this;
   }
 
-  /** GT1-57 VIP Indicator (CWE, max 0, optional) (chainable). */
+  /** GT1-57 VIP Indicator (CWE, optional) (chainable). */
   vipIndicator(value: string | CodedElement): this {
     this.fields[56] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

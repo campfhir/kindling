@@ -34,109 +34,109 @@ export class SPM extends BaseSegment {
     return this;
   }
 
-  /** SPM-2 Specimen Identifier (EIP, max 0, optional) (chainable). */
+  /** SPM-2 Specimen Identifier (EIP, optional) (chainable). */
   specimenIdentifier(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** SPM-3 Specimen Parent IDs (EIP, max 0, optional, repeating) (chainable). */
+  /** SPM-3 Specimen Parent IDs (EIP, optional, repeating) (chainable). */
   specimenParentIds(...values: Repeated<string>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** SPM-4 Specimen Type (CWE, max 0, required) (chainable). */
+  /** SPM-4 Specimen Type (CWE, required) (chainable). */
   specimenType(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SPM-5 Specimen Type Modifier (CWE, max 0, optional, repeating) (chainable). */
+  /** SPM-5 Specimen Type Modifier (CWE, optional, repeating) (chainable). */
   specimenTypeModifier(...values: Repeated<string | CodedElement>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** SPM-6 Specimen Additives (CWE, max 0, optional, repeating) (chainable). */
+  /** SPM-6 Specimen Additives (CWE, optional, repeating) (chainable). */
   specimenAdditives(...values: Repeated<string | CodedElement>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** SPM-7 Specimen Collection Method (CWE, max 0, optional) (chainable). */
+  /** SPM-7 Specimen Collection Method (CWE, optional) (chainable). */
   specimenCollectionMethod(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SPM-8 Specimen Source Site (CWE, max 0, optional) (chainable). */
+  /** SPM-8 Specimen Source Site (CWE, optional) (chainable). */
   specimenSourceSite(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SPM-9 Specimen Source Site Modifier (CWE, max 0, optional, repeating) (chainable). */
+  /** SPM-9 Specimen Source Site Modifier (CWE, optional, repeating) (chainable). */
   specimenSourceSiteModifier(...values: Repeated<string | CodedElement>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** SPM-10 Specimen Collection Site (CWE, max 0, optional) (chainable). */
+  /** SPM-10 Specimen Collection Site (CWE, optional) (chainable). */
   specimenCollectionSite(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SPM-11 Specimen Role (CWE, max 0, optional, repeating) (chainable). */
+  /** SPM-11 Specimen Role (CWE, optional, repeating) (chainable). */
   specimenRole(...values: Repeated<string | CodedElement>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** SPM-12 Specimen Collection Amount (CQ, max 0, optional) (chainable). */
+  /** SPM-12 Specimen Collection Amount (CQ, optional) (chainable). */
   specimenCollectionAmount(value: string | CQ): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SPM-13 Grouped Specimen Count (NM, max 0, conditional) (chainable). */
+  /** SPM-13 Grouped Specimen Count (NM, conditional) (chainable). */
   groupedSpecimenCount(value: string): this {
     this.fields[12] = this.createField(value);
     return this;
   }
 
-  /** SPM-14 Specimen Description (ST, max 0, optional, repeating) (chainable). */
+  /** SPM-14 Specimen Description (ST, optional, repeating) (chainable). */
   specimenDescription(...values: Repeated<string>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** SPM-15 Specimen Handling Code (CWE, max 0, optional, repeating) (chainable). */
+  /** SPM-15 Specimen Handling Code (CWE, optional, repeating) (chainable). */
   specimenHandlingCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[14] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** SPM-16 Specimen Risk Code (CWE, max 0, optional, repeating) (chainable). */
+  /** SPM-16 Specimen Risk Code (CWE, optional, repeating) (chainable). */
   specimenRiskCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[15] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** SPM-17 Specimen Collection Date/Time (DR, max 0, optional) (chainable). */
+  /** SPM-17 Specimen Collection Date/Time (DR, optional) (chainable). */
   specimenCollectionDateTime(value: string | DR): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(drParts(value)));
     return this;
   }
 
-  /** SPM-18 Specimen Received Date/Time (DTM, max 0, optional) (chainable). */
+  /** SPM-18 Specimen Received Date/Time (DTM, optional) (chainable). */
   specimenReceivedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[17] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** SPM-19 Specimen Expiration Date/Time (DTM, max 0, optional) (chainable). */
+  /** SPM-19 Specimen Expiration Date/Time (DTM, optional) (chainable). */
   specimenExpirationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[18] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
@@ -148,85 +148,85 @@ export class SPM extends BaseSegment {
     return this;
   }
 
-  /** SPM-21 Specimen Reject Reason (CWE, max 0, optional, repeating) (chainable). */
+  /** SPM-21 Specimen Reject Reason (CWE, optional, repeating) (chainable). */
   specimenRejectReason(...values: Repeated<string | CodedElement>[]): this {
     this.fields[20] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** SPM-22 Specimen Quality (CWE, max 0, optional) (chainable). */
+  /** SPM-22 Specimen Quality (CWE, optional) (chainable). */
   specimenQuality(value: string | CodedElement): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SPM-23 Specimen Appropriateness (CWE, max 0, optional) (chainable). */
+  /** SPM-23 Specimen Appropriateness (CWE, optional) (chainable). */
   specimenAppropriateness(value: string | CodedElement): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SPM-24 Specimen Condition (CWE, max 0, optional, repeating) (chainable). */
+  /** SPM-24 Specimen Condition (CWE, optional, repeating) (chainable). */
   specimenCondition(...values: Repeated<string | CodedElement>[]): this {
     this.fields[23] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** SPM-25 Specimen Current Quantity (CQ, max 0, optional) (chainable). */
+  /** SPM-25 Specimen Current Quantity (CQ, optional) (chainable). */
   specimenCurrentQuantity(value: string | CQ): this {
     this.fields[24] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SPM-26 Number of Specimen Containers (NM, max 0, optional) (chainable). */
+  /** SPM-26 Number of Specimen Containers (NM, optional) (chainable). */
   numberOfSpecimenContainers(value: string): this {
     this.fields[25] = this.createField(value);
     return this;
   }
 
-  /** SPM-27 Container Type (CWE, max 0, optional) (chainable). */
+  /** SPM-27 Container Type (CWE, optional) (chainable). */
   containerType(value: string | CodedElement): this {
     this.fields[26] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SPM-28 Container Condition (CWE, max 0, optional) (chainable). */
+  /** SPM-28 Container Condition (CWE, optional) (chainable). */
   containerCondition(value: string | CodedElement): this {
     this.fields[27] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SPM-29 Specimen Child Role (CWE, max 0, optional) (chainable). */
+  /** SPM-29 Specimen Child Role (CWE, optional) (chainable). */
   specimenChildRole(value: string | CodedElement): this {
     this.fields[28] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SPM-30 Accession ID (CX, max 0, optional, repeating) (chainable). */
+  /** SPM-30 Accession ID (CX, optional, repeating) (chainable). */
   accessionId(...values: Repeated<string | CX>[]): this {
     this.fields[29] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
   }
 
-  /** SPM-31 Other Specimen ID (CX, max 0, optional, repeating) (chainable). */
+  /** SPM-31 Other Specimen ID (CX, optional, repeating) (chainable). */
   otherSpecimenId(...values: Repeated<string | CX>[]): this {
     this.fields[30] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
   }
 
-  /** SPM-32 Shipment ID (EI, max 0, optional) (chainable). */
+  /** SPM-32 Shipment ID (EI, optional) (chainable). */
   shipmentId(value: string | EI): this {
     this.fields[31] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** SPM-33 Culture Start Date/Time (DTM, max 0, optional) (chainable). */
+  /** SPM-33 Culture Start Date/Time (DTM, optional) (chainable). */
   cultureStartDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[32] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** SPM-34 Culture Final Date/Time (DTM, max 0, optional) (chainable). */
+  /** SPM-34 Culture Final Date/Time (DTM, optional) (chainable). */
   cultureFinalDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[33] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;

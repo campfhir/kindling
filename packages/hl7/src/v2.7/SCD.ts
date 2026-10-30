@@ -28,223 +28,223 @@ export class SCD extends BaseSegment {
     this.fields = [];
   }
 
-  /** SCD-1 Cycle Start Time (TM, max 0, optional) (chainable). */
+  /** SCD-1 Cycle Start Time (TM, optional) (chainable). */
   cycleStartTime(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** SCD-2 Cycle Count (NM, max 0, optional) (chainable). */
+  /** SCD-2 Cycle Count (NM, optional) (chainable). */
   cycleCount(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** SCD-3 Temp Max (CQ, max 0, optional) (chainable). */
+  /** SCD-3 Temp Max (CQ, optional) (chainable). */
   tempMax(value: string | CQ): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SCD-4 Temp Min (CQ, max 0, optional) (chainable). */
+  /** SCD-4 Temp Min (CQ, optional) (chainable). */
   tempMin(value: string | CQ): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SCD-5 Load Number (NM, max 0, optional) (chainable). */
+  /** SCD-5 Load Number (NM, optional) (chainable). */
   loadNumber(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** SCD-6 Condition Time (CQ, max 0, optional) (chainable). */
+  /** SCD-6 Condition Time (CQ, optional) (chainable). */
   conditionTime(value: string | CQ): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SCD-7 Sterilize Time (CQ, max 0, optional) (chainable). */
+  /** SCD-7 Sterilize Time (CQ, optional) (chainable). */
   sterilizeTime(value: string | CQ): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SCD-8 Exhaust Time (CQ, max 0, optional) (chainable). */
+  /** SCD-8 Exhaust Time (CQ, optional) (chainable). */
   exhaustTime(value: string | CQ): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SCD-9 Total Cycle Time (CQ, max 0, optional) (chainable). */
+  /** SCD-9 Total Cycle Time (CQ, optional) (chainable). */
   totalCycleTime(value: string | CQ): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SCD-10 Device Status (CWE, max 0, optional) (chainable). */
+  /** SCD-10 Device Status (CWE, optional) (chainable). */
   deviceStatus(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SCD-11 Cycle Start Date/Time (DTM, max 0, optional) (chainable). */
+  /** SCD-11 Cycle Start Date/Time (DTM, optional) (chainable). */
   cycleStartDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[10] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** SCD-12 Dry Time (CQ, max 0, optional) (chainable). */
+  /** SCD-12 Dry Time (CQ, optional) (chainable). */
   dryTime(value: string | CQ): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SCD-13 Leak Rate (CQ, max 0, optional) (chainable). */
+  /** SCD-13 Leak Rate (CQ, optional) (chainable). */
   leakRate(value: string | CQ): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SCD-14 Control Temperature (CQ, max 0, optional) (chainable). */
+  /** SCD-14 Control Temperature (CQ, optional) (chainable). */
   controlTemperature(value: string | CQ): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SCD-15 Sterilizer Temperature (CQ, max 0, optional) (chainable). */
+  /** SCD-15 Sterilizer Temperature (CQ, optional) (chainable). */
   sterilizerTemperature(value: string | CQ): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SCD-16 Cycle Complete Time (TM, max 0, optional) (chainable). */
+  /** SCD-16 Cycle Complete Time (TM, optional) (chainable). */
   cycleCompleteTime(value: string): this {
     this.fields[15] = this.createField(value);
     return this;
   }
 
-  /** SCD-17 Under Temperature (CQ, max 0, optional) (chainable). */
+  /** SCD-17 Under Temperature (CQ, optional) (chainable). */
   underTemperature(value: string | CQ): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SCD-18 Over Temperature (CQ, max 0, optional) (chainable). */
+  /** SCD-18 Over Temperature (CQ, optional) (chainable). */
   overTemperature(value: string | CQ): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SCD-19 Abort Cycle (CNE, max 0, optional) (chainable). */
+  /** SCD-19 Abort Cycle (CNE, optional) (chainable). */
   abortCycle(value: string | CodedElement): this {
     this.fields[18] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SCD-20 Alarm (CNE, max 0, optional) (chainable). */
+  /** SCD-20 Alarm (CNE, optional) (chainable). */
   alarm(value: string | CodedElement): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SCD-21 Long in Charge Phase (CNE, max 0, optional) (chainable). */
+  /** SCD-21 Long in Charge Phase (CNE, optional) (chainable). */
   longInChargePhase(value: string | CodedElement): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SCD-22 Long in Exhaust Phase (CNE, max 0, optional) (chainable). */
+  /** SCD-22 Long in Exhaust Phase (CNE, optional) (chainable). */
   longInExhaustPhase(value: string | CodedElement): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SCD-23 Long in Fast Exhaust Phase (CNE, max 0, optional) (chainable). */
+  /** SCD-23 Long in Fast Exhaust Phase (CNE, optional) (chainable). */
   longInFastExhaustPhase(value: string | CodedElement): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SCD-24 Reset (CNE, max 0, optional) (chainable). */
+  /** SCD-24 Reset (CNE, optional) (chainable). */
   reset(value: string | CodedElement): this {
     this.fields[23] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SCD-25 Operator - Unload (XCN, max 0, optional) (chainable). */
+  /** SCD-25 Operator - Unload (XCN, optional) (chainable). */
   operatorUnload(value: string | XCN): this {
     this.fields[24] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** SCD-26 Door Open (CNE, max 0, optional) (chainable). */
+  /** SCD-26 Door Open (CNE, optional) (chainable). */
   doorOpen(value: string | CodedElement): this {
     this.fields[25] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SCD-27 Reading Failure (CNE, max 0, optional) (chainable). */
+  /** SCD-27 Reading Failure (CNE, optional) (chainable). */
   readingFailure(value: string | CodedElement): this {
     this.fields[26] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SCD-28 Cycle Type (CWE, max 0, optional) (chainable). */
+  /** SCD-28 Cycle Type (CWE, optional) (chainable). */
   cycleType(value: string | CodedElement): this {
     this.fields[27] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SCD-29 Thermal Rinse Time (CQ, max 0, optional) (chainable). */
+  /** SCD-29 Thermal Rinse Time (CQ, optional) (chainable). */
   thermalRinseTime(value: string | CQ): this {
     this.fields[28] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SCD-30 Wash Time (CQ, max 0, optional) (chainable). */
+  /** SCD-30 Wash Time (CQ, optional) (chainable). */
   washTime(value: string | CQ): this {
     this.fields[29] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SCD-31 Injection Rate (CQ, max 0, optional) (chainable). */
+  /** SCD-31 Injection Rate (CQ, optional) (chainable). */
   injectionRate(value: string | CQ): this {
     this.fields[30] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SCD-32 Procedure Code (CNE, max 0, optional) (chainable). */
+  /** SCD-32 Procedure Code (CNE, optional) (chainable). */
   procedureCode(value: string | CodedElement): this {
     this.fields[31] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SCD-33 Patient Identifier List (CX, max 0, optional, repeating) (chainable). */
+  /** SCD-33 Patient Identifier List (CX, optional, repeating) (chainable). */
   patientIdentifierList(...values: Repeated<string | CX>[]): this {
     this.fields[32] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
   }
 
-  /** SCD-34 Attending Doctor (XCN, max 0, optional) (chainable). */
+  /** SCD-34 Attending Doctor (XCN, optional) (chainable). */
   attendingDoctor(value: string | XCN): this {
     this.fields[33] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** SCD-35 Dilution Factor (SN, max 0, optional) (chainable). */
+  /** SCD-35 Dilution Factor (SN, optional) (chainable). */
   dilutionFactor(value: string): this {
     this.fields[34] = this.createField(value);
     return this;
   }
 
-  /** SCD-36 Fill Time (CQ, max 0, optional) (chainable). */
+  /** SCD-36 Fill Time (CQ, optional) (chainable). */
   fillTime(value: string | CQ): this {
     this.fields[35] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SCD-37 Inlet Temperature (CQ, max 0, optional) (chainable). */
+  /** SCD-37 Inlet Temperature (CQ, optional) (chainable). */
   inletTemperature(value: string | CQ): this {
     this.fields[36] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;

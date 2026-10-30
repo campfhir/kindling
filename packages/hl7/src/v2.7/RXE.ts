@@ -34,43 +34,43 @@ export class RXE extends BaseSegment {
     return this;
   }
 
-  /** RXE-2 Give Code (CWE, max 0, required) (chainable). */
+  /** RXE-2 Give Code (CWE, required) (chainable). */
   giveCode(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXE-3 Give Amount - Minimum (NM, max 0, required) (chainable). */
+  /** RXE-3 Give Amount - Minimum (NM, required) (chainable). */
   giveAmountMinimum(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** RXE-4 Give Amount - Maximum (NM, max 0, optional) (chainable). */
+  /** RXE-4 Give Amount - Maximum (NM, optional) (chainable). */
   giveAmountMaximum(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** RXE-5 Give Units (CWE, max 0, required) (chainable). */
+  /** RXE-5 Give Units (CWE, required) (chainable). */
   giveUnits(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXE-6 Give Dosage Form (CWE, max 0, optional) (chainable). */
+  /** RXE-6 Give Dosage Form (CWE, optional) (chainable). */
   giveDosageForm(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXE-7 Provider's Administration Instructions (CWE, max 0, optional, repeating) (chainable). */
+  /** RXE-7 Provider's Administration Instructions (CWE, optional, repeating) (chainable). */
   providerSAdministrationInstructions(...values: Repeated<string | CodedElement>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** RXE-8 Deliver-to Location (LA1, max 0, W) (chainable). */
+  /** RXE-8 Deliver-to Location (LA1, W) (chainable). */
   deliverToLocation(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
@@ -82,61 +82,61 @@ export class RXE extends BaseSegment {
     return this;
   }
 
-  /** RXE-10 Dispense Amount (NM, max 0, conditional) (chainable). */
+  /** RXE-10 Dispense Amount (NM, conditional) (chainable). */
   dispenseAmount(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
   }
 
-  /** RXE-11 Dispense Units (CWE, max 0, conditional) (chainable). */
+  /** RXE-11 Dispense Units (CWE, conditional) (chainable). */
   dispenseUnits(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXE-12 Number Of Refills (NM, max 0, optional) (chainable). */
+  /** RXE-12 Number Of Refills (NM, optional) (chainable). */
   numberOfRefills(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
   }
 
-  /** RXE-13 Ordering Provider's DEA Number (XCN, max 0, backward compatibility, repeating) (chainable). */
+  /** RXE-13 Ordering Provider's DEA Number (XCN, backward compatibility, repeating) (chainable). */
   orderingProviderSDeaNumber(...values: Repeated<string | XCN>[]): this {
     this.fields[12] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** RXE-14 Pharmacist/Treatment Supplier's Verifier ID (XCN, max 0, backward compatibility, repeating) (chainable). */
+  /** RXE-14 Pharmacist/Treatment Supplier's Verifier ID (XCN, backward compatibility, repeating) (chainable). */
   pharmacistTreatmentSupplierSVerifierId(...values: Repeated<string | XCN>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** RXE-15 Prescription Number (ST, max 0, conditional) (chainable). */
+  /** RXE-15 Prescription Number (ST, conditional) (chainable). */
   prescriptionNumber(value: string): this {
     this.fields[14] = this.createField(value);
     return this;
   }
 
-  /** RXE-16 Number of Refills Remaining (NM, max 0, conditional) (chainable). */
+  /** RXE-16 Number of Refills Remaining (NM, conditional) (chainable). */
   numberOfRefillsRemaining(value: string): this {
     this.fields[15] = this.createField(value);
     return this;
   }
 
-  /** RXE-17 Number of Refills/Doses Dispensed (NM, max 0, conditional) (chainable). */
+  /** RXE-17 Number of Refills/Doses Dispensed (NM, conditional) (chainable). */
   numberOfRefillsDosesDispensed(value: string): this {
     this.fields[16] = this.createField(value);
     return this;
   }
 
-  /** RXE-18 D/T of Most Recent Refill or Dose Dispensed (DTM, max 0, conditional) (chainable). */
+  /** RXE-18 D/T of Most Recent Refill or Dose Dispensed (DTM, conditional) (chainable). */
   dTOfMostRecentRefillOrDoseDispensed(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[17] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** RXE-19 Total Daily Dose (CQ, max 0, conditional) (chainable). */
+  /** RXE-19 Total Daily Dose (CQ, conditional) (chainable). */
   totalDailyDose(value: string | CQ): this {
     this.fields[18] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
@@ -148,55 +148,55 @@ export class RXE extends BaseSegment {
     return this;
   }
 
-  /** RXE-21 Pharmacy/Treatment Supplier's Special Dispensing Instructions (CWE, max 0, optional, repeating) (chainable). */
+  /** RXE-21 Pharmacy/Treatment Supplier's Special Dispensing Instructions (CWE, optional, repeating) (chainable). */
   pharmacyTreatmentSupplierSSpecialDispensingInstructions(...values: Repeated<string | CodedElement>[]): this {
     this.fields[20] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** RXE-22 Give Per (Time Unit) (ST, max 0, conditional) (chainable). */
+  /** RXE-22 Give Per (Time Unit) (ST, conditional) (chainable). */
   givePerTimeUnit(value: string): this {
     this.fields[21] = this.createField(value);
     return this;
   }
 
-  /** RXE-23 Give Rate Amount (ST, max 0, optional) (chainable). */
+  /** RXE-23 Give Rate Amount (ST, optional) (chainable). */
   giveRateAmount(value: string): this {
     this.fields[22] = this.createField(value);
     return this;
   }
 
-  /** RXE-24 Give Rate Units (CWE, max 0, optional) (chainable). */
+  /** RXE-24 Give Rate Units (CWE, optional) (chainable). */
   giveRateUnits(value: string | CodedElement): this {
     this.fields[23] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXE-25 Give Strength (NM, max 0, optional) (chainable). */
+  /** RXE-25 Give Strength (NM, optional) (chainable). */
   giveStrength(value: string): this {
     this.fields[24] = this.createField(value);
     return this;
   }
 
-  /** RXE-26 Give Strength Units (CWE, max 0, optional) (chainable). */
+  /** RXE-26 Give Strength Units (CWE, optional) (chainable). */
   giveStrengthUnits(value: string | CodedElement): this {
     this.fields[25] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXE-27 Give Indication (CWE, max 0, optional, repeating) (chainable). */
+  /** RXE-27 Give Indication (CWE, optional, repeating) (chainable). */
   giveIndication(...values: Repeated<string | CodedElement>[]): this {
     this.fields[26] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** RXE-28 Dispense Package Size (NM, max 0, optional) (chainable). */
+  /** RXE-28 Dispense Package Size (NM, optional) (chainable). */
   dispensePackageSize(value: string): this {
     this.fields[27] = this.createField(value);
     return this;
   }
 
-  /** RXE-29 Dispense Package Size Unit (CWE, max 0, optional) (chainable). */
+  /** RXE-29 Dispense Package Size Unit (CWE, optional) (chainable). */
   dispensePackageSizeUnit(value: string | CodedElement): this {
     this.fields[28] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -208,31 +208,31 @@ export class RXE extends BaseSegment {
     return this;
   }
 
-  /** RXE-31 Supplementary Code (CWE, max 0, optional, repeating) (chainable). */
+  /** RXE-31 Supplementary Code (CWE, optional, repeating) (chainable). */
   supplementaryCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[30] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** RXE-32 Original Order Date/Time (DTM, max 0, optional) (chainable). */
+  /** RXE-32 Original Order Date/Time (DTM, optional) (chainable). */
   originalOrderDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[31] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** RXE-33 Give Drug Strength Volume (NM, max 0, optional) (chainable). */
+  /** RXE-33 Give Drug Strength Volume (NM, optional) (chainable). */
   giveDrugStrengthVolume(value: string): this {
     this.fields[32] = this.createField(value);
     return this;
   }
 
-  /** RXE-34 Give Drug Strength Volume Units (CWE, max 0, optional) (chainable). */
+  /** RXE-34 Give Drug Strength Volume Units (CWE, optional) (chainable). */
   giveDrugStrengthVolumeUnits(value: string | CodedElement): this {
     this.fields[33] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXE-35 Controlled Substance Schedule (CWE, max 0, optional) (chainable). */
+  /** RXE-35 Controlled Substance Schedule (CWE, optional) (chainable). */
   controlledSubstanceSchedule(value: string | CodedElement): this {
     this.fields[34] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -244,43 +244,43 @@ export class RXE extends BaseSegment {
     return this;
   }
 
-  /** RXE-37 Pharmaceutical Substance Alternative (CWE, max 0, optional, repeating) (chainable). */
+  /** RXE-37 Pharmaceutical Substance Alternative (CWE, optional, repeating) (chainable). */
   pharmaceuticalSubstanceAlternative(...values: Repeated<string | CodedElement>[]): this {
     this.fields[36] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** RXE-38 Pharmacy of Most Recent Fill (CWE, max 0, optional) (chainable). */
+  /** RXE-38 Pharmacy of Most Recent Fill (CWE, optional) (chainable). */
   pharmacyOfMostRecentFill(value: string | CodedElement): this {
     this.fields[37] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXE-39 Initial Dispense Amount (NM, max 0, optional) (chainable). */
+  /** RXE-39 Initial Dispense Amount (NM, optional) (chainable). */
   initialDispenseAmount(value: string): this {
     this.fields[38] = this.createField(value);
     return this;
   }
 
-  /** RXE-40 Dispensing Pharmacy (CWE, max 0, backward compatibility) (chainable). */
+  /** RXE-40 Dispensing Pharmacy (CWE, backward compatibility) (chainable). */
   dispensingPharmacy(value: string | CodedElement): this {
     this.fields[39] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXE-41 Dispensing Pharmacy Address (XAD, max 0, backward compatibility) (chainable). */
+  /** RXE-41 Dispensing Pharmacy Address (XAD, backward compatibility) (chainable). */
   dispensingPharmacyAddress(value: string | XAD): this {
     this.fields[40] = this.createField(typeof value === "string" ? value : components(xadParts(value)));
     return this;
   }
 
-  /** RXE-42 Deliver-to Patient Location (PL, max 0, optional) (chainable). */
+  /** RXE-42 Deliver-to Patient Location (PL, optional) (chainable). */
   deliverToPatientLocation(value: string | PL): this {
     this.fields[41] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** RXE-43 Deliver-to Address (XAD, max 0, optional) (chainable). */
+  /** RXE-43 Deliver-to Address (XAD, optional) (chainable). */
   deliverToAddress(value: string | XAD): this {
     this.fields[42] = this.createField(typeof value === "string" ? value : components(xadParts(value)));
     return this;
@@ -292,7 +292,7 @@ export class RXE extends BaseSegment {
     return this;
   }
 
-  /** RXE-45 Pharmacy Phone Number (XTN, max 0, optional, repeating) (chainable). */
+  /** RXE-45 Pharmacy Phone Number (XTN, optional, repeating) (chainable). */
   pharmacyPhoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[44] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;

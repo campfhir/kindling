@@ -39,7 +39,7 @@ export class UB2 extends BaseSegment {
     return this;
   }
 
-  /** UB2-3 Condition Code (24-30) (CWE, max 0, optional, repeating) (chainable). */
+  /** UB2-3 Condition Code (24-30) (CWE, optional, repeating) (chainable). */
   conditionCode2430(...values: Repeated<string | CodedElement>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
@@ -57,19 +57,19 @@ export class UB2 extends BaseSegment {
     return this;
   }
 
-  /** UB2-6 Value Amount & Code (39-41) (UVC, max 0, optional, repeating) (chainable). */
+  /** UB2-6 Value Amount & Code (39-41) (UVC, optional, repeating) (chainable). */
   valueAmountCode3941(...values: Repeated<string>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** UB2-7 Occurrence Code & Date (32-35) (OCD, max 0, optional, repeating) (chainable). */
+  /** UB2-7 Occurrence Code & Date (32-35) (OCD, optional, repeating) (chainable). */
   occurrenceCodeDate3235(...values: Repeated<string>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** UB2-8 Occurrence Span Code/Dates (36) (OSP, max 0, optional, repeating) (chainable). */
+  /** UB2-8 Occurrence Span Code/Dates (36) (OSP, optional, repeating) (chainable). */
   occurrenceSpanCodeDates36(...values: Repeated<string>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;

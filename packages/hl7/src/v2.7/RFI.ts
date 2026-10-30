@@ -27,13 +27,13 @@ export class RFI extends BaseSegment {
     this.fields = [];
   }
 
-  /** RFI-1 Request Date (DTM, max 0, required) (chainable). */
+  /** RFI-1 Request Date (DTM, required) (chainable). */
   requestDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[0] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** RFI-2 Response Due Date (DTM, max 0, required) (chainable). */
+  /** RFI-2 Response Due Date (DTM, required) (chainable). */
   responseDueDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
@@ -45,7 +45,7 @@ export class RFI extends BaseSegment {
     return this;
   }
 
-  /** RFI-4 Date Additional Information Was Submitted (DTM, max 0, optional) (chainable). */
+  /** RFI-4 Date Additional Information Was Submitted (DTM, optional) (chainable). */
   dateAdditionalInformationWasSubmitted(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;

@@ -27,19 +27,19 @@ export class ODT extends BaseSegment {
     this.fields = [];
   }
 
-  /** ODT-1 Tray Type (CWE, max 0, required) (chainable). */
+  /** ODT-1 Tray Type (CWE, required) (chainable). */
   trayType(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ODT-2 Service Period (CWE, max 0, optional, repeating) (chainable). */
+  /** ODT-2 Service Period (CWE, optional, repeating) (chainable). */
   servicePeriod(...values: Repeated<string | CodedElement>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** ODT-3 Text Instruction (ST, max 0, optional) (chainable). */
+  /** ODT-3 Text Instruction (ST, optional) (chainable). */
   textInstruction(value: string): this {
     this.fields[2] = this.createField(value);
     return this;

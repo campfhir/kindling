@@ -27,7 +27,7 @@ export class GSC extends BaseSegment {
     this.fields = [];
   }
 
-  /** GSC-1 Set ID (SI, max 0, required) (chainable). */
+  /** GSC-1 Set ID (SI, required) (chainable). */
   setId(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
@@ -39,37 +39,37 @@ export class GSC extends BaseSegment {
     return this;
   }
 
-  /** GSC-3 GSC Instance Identifier (EI, max 0, conditional) (chainable). */
+  /** GSC-3 GSC Instance Identifier (EI, conditional) (chainable). */
   gscInstanceIdentifier(value: string | EI): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** GSC-4 Sex Parameter for Clinical Use (CWE, max 0, required) (chainable). */
+  /** GSC-4 Sex Parameter for Clinical Use (CWE, required) (chainable). */
   sexParameterForClinicalUse(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GSC-5 Validity Period (DR, max 0, optional) (chainable). */
+  /** GSC-5 Validity Period (DR, optional) (chainable). */
   validityPeriod(value: string | DR): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(drParts(value)));
     return this;
   }
 
-  /** GSC-6 Context (ERL, max 0, required, repeating) (chainable). */
+  /** GSC-6 Context (ERL, required, repeating) (chainable). */
   context(...values: Repeated<string>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** GSC-7 Evidence (ERL, max 0, optional, repeating) (chainable). */
+  /** GSC-7 Evidence (ERL, optional, repeating) (chainable). */
   evidence(...values: Repeated<string>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** GSC-8 Comment (TX, max 0, optional) (chainable). */
+  /** GSC-8 Comment (TX, optional) (chainable). */
   comment(value: string): this {
     this.fields[7] = this.createField(value);
     return this;

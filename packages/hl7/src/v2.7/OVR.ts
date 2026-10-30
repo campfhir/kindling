@@ -27,31 +27,31 @@ export class OVR extends BaseSegment {
     this.fields = [];
   }
 
-  /** OVR-1 Business Rule Override Type (CWE, max 0, optional) (chainable). */
+  /** OVR-1 Business Rule Override Type (CWE, optional) (chainable). */
   businessRuleOverrideType(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OVR-2 Business Rule Override Code (CWE, max 0, optional) (chainable). */
+  /** OVR-2 Business Rule Override Code (CWE, optional) (chainable). */
   businessRuleOverrideCode(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OVR-3 Override Comments (TX, max 0, optional) (chainable). */
+  /** OVR-3 Override Comments (TX, optional) (chainable). */
   overrideComments(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** OVR-4 Override Entered By (XCN, max 0, optional) (chainable). */
+  /** OVR-4 Override Entered By (XCN, optional) (chainable). */
   overrideEnteredBy(value: string | XCN): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** OVR-5 Override Authorized By (XCN, max 0, optional) (chainable). */
+  /** OVR-5 Override Authorized By (XCN, optional) (chainable). */
   overrideAuthorizedBy(value: string | XCN): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;

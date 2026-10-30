@@ -33,19 +33,19 @@ export class CM2 extends BaseSegment {
     return this;
   }
 
-  /** CM2-2 Scheduled Time Point (CWE, max 0, required) (chainable). */
+  /** CM2-2 Scheduled Time Point (CWE, required) (chainable). */
   scheduledTimePoint(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CM2-3 Description of Time Point (ST, max 0, optional) (chainable). */
+  /** CM2-3 Description of Time Point (ST, optional) (chainable). */
   descriptionOfTimePoint(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** CM2-4 Events Scheduled This Time Point (CWE, max 0, required, repeating) (chainable). */
+  /** CM2-4 Events Scheduled This Time Point (CWE, required, repeating) (chainable). */
   eventsScheduledThisTimePoint(...values: Repeated<string | CodedElement>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;

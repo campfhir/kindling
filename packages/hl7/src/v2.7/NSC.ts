@@ -27,55 +27,55 @@ export class NSC extends BaseSegment {
     this.fields = [];
   }
 
-  /** NSC-1 Application Change Type (CWE, max 0, required) (chainable). */
+  /** NSC-1 Application Change Type (CWE, required) (chainable). */
   applicationChangeType(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** NSC-2 Current CPU (ST, max 0, optional) (chainable). */
+  /** NSC-2 Current CPU (ST, optional) (chainable). */
   currentCpu(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** NSC-3 Current Fileserver (ST, max 0, optional) (chainable). */
+  /** NSC-3 Current Fileserver (ST, optional) (chainable). */
   currentFileserver(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** NSC-4 Current Application (HD, max 0, optional) (chainable). */
+  /** NSC-4 Current Application (HD, optional) (chainable). */
   currentApplication(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** NSC-5 Current Facility (HD, max 0, optional) (chainable). */
+  /** NSC-5 Current Facility (HD, optional) (chainable). */
   currentFacility(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** NSC-6 New CPU (ST, max 0, optional) (chainable). */
+  /** NSC-6 New CPU (ST, optional) (chainable). */
   newCpu(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
   }
 
-  /** NSC-7 New Fileserver (ST, max 0, optional) (chainable). */
+  /** NSC-7 New Fileserver (ST, optional) (chainable). */
   newFileserver(value: string): this {
     this.fields[6] = this.createField(value);
     return this;
   }
 
-  /** NSC-8 New Application (HD, max 0, optional) (chainable). */
+  /** NSC-8 New Application (HD, optional) (chainable). */
   newApplication(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** NSC-9 New Facility (HD, max 0, optional) (chainable). */
+  /** NSC-9 New Facility (HD, optional) (chainable). */
   newFacility(value: string): this {
     this.fields[8] = this.createField(value);
     return this;

@@ -27,7 +27,7 @@ export class DSC extends BaseSegment {
     this.fields = [];
   }
 
-  /** DSC-1 Continuation Pointer (ST, max 0, optional) (chainable). */
+  /** DSC-1 Continuation Pointer (ST, optional) (chainable). */
   continuationPointer(value: string): this {
     this.fields[0] = this.createField(value);
     return this;

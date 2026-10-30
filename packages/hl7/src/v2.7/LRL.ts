@@ -27,7 +27,7 @@ export class LRL extends BaseSegment {
     this.fields = [];
   }
 
-  /** LRL-1 Primary Key Value (PL, max 0, required) (chainable). */
+  /** LRL-1 Primary Key Value (PL, required) (chainable). */
   primaryKeyValue(value: string | PL): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
@@ -39,25 +39,25 @@ export class LRL extends BaseSegment {
     return this;
   }
 
-  /** LRL-3 Segment Unique Key (EI, max 0, optional) (chainable). */
+  /** LRL-3 Segment Unique Key (EI, optional) (chainable). */
   segmentUniqueKey(value: string | EI): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** LRL-4 Location Relationship ID (CWE, max 0, required) (chainable). */
+  /** LRL-4 Location Relationship ID (CWE, required) (chainable). */
   locationRelationshipId(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** LRL-5 Organizational Location Relationship Value (XON, max 0, conditional, repeating) (chainable). */
+  /** LRL-5 Organizational Location Relationship Value (XON, conditional, repeating) (chainable). */
   organizationalLocationRelationshipValue(...values: Repeated<string | XON>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** LRL-6 Patient Location Relationship Value (PL, max 0, conditional) (chainable). */
+  /** LRL-6 Patient Location Relationship Value (PL, conditional) (chainable). */
   patientLocationRelationshipValue(value: string | PL): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;

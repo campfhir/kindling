@@ -33,25 +33,25 @@ export class VND extends BaseSegment {
     return this;
   }
 
-  /** VND-2 Vendor Identifier (EI, max 0, required) (chainable). */
+  /** VND-2 Vendor Identifier (EI, required) (chainable). */
   vendorIdentifier(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** VND-3 Vendor Name (ST, max 0, optional) (chainable). */
+  /** VND-3 Vendor Name (ST, optional) (chainable). */
   vendorName(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** VND-4 Vendor Catalog Number (EI, max 0, optional) (chainable). */
+  /** VND-4 Vendor Catalog Number (EI, optional) (chainable). */
   vendorCatalogNumber(value: string | EI): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** VND-5 Primary Vendor Indicator (CNE, max 0, optional) (chainable). */
+  /** VND-5 Primary Vendor Indicator (CNE, optional) (chainable). */
   primaryVendorIndicator(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

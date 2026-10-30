@@ -28,31 +28,31 @@ export class EQP extends BaseSegment {
     this.fields = [];
   }
 
-  /** EQP-1 Event type (CWE, max 0, required) (chainable). */
+  /** EQP-1 Event type (CWE, required) (chainable). */
   eventType(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** EQP-2 File Name (ST, max 0, optional) (chainable). */
+  /** EQP-2 File Name (ST, optional) (chainable). */
   fileName(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** EQP-3 Start Date/Time (DTM, max 0, required) (chainable). */
+  /** EQP-3 Start Date/Time (DTM, required) (chainable). */
   startDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** EQP-4 End Date/Time (DTM, max 0, optional) (chainable). */
+  /** EQP-4 End Date/Time (DTM, optional) (chainable). */
   endDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** EQP-5 Transaction Data (FT, max 0, required) (chainable). */
+  /** EQP-5 Transaction Data (FT, required) (chainable). */
   transactionData(value: string): this {
     this.fields[4] = this.createField(value);
     return this;

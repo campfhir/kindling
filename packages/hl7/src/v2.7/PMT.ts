@@ -28,73 +28,73 @@ export class PMT extends BaseSegment {
     this.fields = [];
   }
 
-  /** PMT-1 Payment/Remittance Advice Number (EI, max 0, required) (chainable). */
+  /** PMT-1 Payment/Remittance Advice Number (EI, required) (chainable). */
   paymentRemittanceAdviceNumber(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** PMT-2 Payment/Remittance Effective Date/Time (DTM, max 0, required) (chainable). */
+  /** PMT-2 Payment/Remittance Effective Date/Time (DTM, required) (chainable). */
   paymentRemittanceEffectiveDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PMT-3 Payment/Remittance Expiration Date/Time (DTM, max 0, required) (chainable). */
+  /** PMT-3 Payment/Remittance Expiration Date/Time (DTM, required) (chainable). */
   paymentRemittanceExpirationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PMT-4 Payment Method (CWE, max 0, required) (chainable). */
+  /** PMT-4 Payment Method (CWE, required) (chainable). */
   paymentMethod(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PMT-5 Payment/Remittance Date/Time (DTM, max 0, required) (chainable). */
+  /** PMT-5 Payment/Remittance Date/Time (DTM, required) (chainable). */
   paymentRemittanceDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PMT-6 Payment/Remittance Amount (CP, max 0, required) (chainable). */
+  /** PMT-6 Payment/Remittance Amount (CP, required) (chainable). */
   paymentRemittanceAmount(value: string | CP): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** PMT-7 Check Number (EI, max 0, optional) (chainable). */
+  /** PMT-7 Check Number (EI, optional) (chainable). */
   checkNumber(value: string | EI): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** PMT-8 Payee Bank Identification (XON, max 0, optional) (chainable). */
+  /** PMT-8 Payee Bank Identification (XON, optional) (chainable). */
   payeeBankIdentification(value: string | XON): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** PMT-9 Payee Transit Number (ST, max 0, optional) (chainable). */
+  /** PMT-9 Payee Transit Number (ST, optional) (chainable). */
   payeeTransitNumber(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** PMT-10 Payee Bank Account ID (CX, max 0, optional) (chainable). */
+  /** PMT-10 Payee Bank Account ID (CX, optional) (chainable). */
   payeeBankAccountId(value: string | CX): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
   }
 
-  /** PMT-11 Payment Organization (XON, max 0, required) (chainable). */
+  /** PMT-11 Payment Organization (XON, required) (chainable). */
   paymentOrganization(value: string | XON): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** PMT-12 Code-Line (ST, max 0, optional) (chainable). */
+  /** PMT-12 Code-Line (ST, optional) (chainable). */
   codeLine(value: string): this {
     this.fields[11] = this.createField(value);
     return this;

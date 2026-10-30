@@ -28,31 +28,31 @@ export class EQU extends BaseSegment {
     this.fields = [];
   }
 
-  /** EQU-1 Equipment Instance Identifier (EI, max 0, required, repeating) (chainable). */
+  /** EQU-1 Equipment Instance Identifier (EI, required, repeating) (chainable). */
   equipmentInstanceIdentifier(...values: Repeated<string | EI>[]): this {
     this.fields[0] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;
   }
 
-  /** EQU-2 Event Date/Time (DTM, max 0, required) (chainable). */
+  /** EQU-2 Event Date/Time (DTM, required) (chainable). */
   eventDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** EQU-3 Equipment State (CWE, max 0, conditional) (chainable). */
+  /** EQU-3 Equipment State (CWE, conditional) (chainable). */
   equipmentState(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** EQU-4 Local/Remote Control State (CWE, max 0, optional) (chainable). */
+  /** EQU-4 Local/Remote Control State (CWE, optional) (chainable). */
   localRemoteControlState(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** EQU-5 Alert Level (CWE, max 0, optional) (chainable). */
+  /** EQU-5 Alert Level (CWE, optional) (chainable). */
   alertLevel(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

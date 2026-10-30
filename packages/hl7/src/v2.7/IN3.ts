@@ -34,13 +34,13 @@ export class IN3 extends BaseSegment {
     return this;
   }
 
-  /** IN3-2 Certification Number (CX, max 0, optional) (chainable). */
+  /** IN3-2 Certification Number (CX, optional) (chainable). */
   certificationNumber(value: string | CX): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
   }
 
-  /** IN3-3 Certified By (XCN, max 0, optional, repeating) (chainable). */
+  /** IN3-3 Certified By (XCN, optional, repeating) (chainable). */
   certifiedBy(...values: Repeated<string | XCN>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
@@ -52,127 +52,127 @@ export class IN3 extends BaseSegment {
     return this;
   }
 
-  /** IN3-5 Penalty (MOP, max 0, optional) (chainable). */
+  /** IN3-5 Penalty (MOP, optional) (chainable). */
   penalty(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** IN3-6 Certification Date/Time (DTM, max 0, optional) (chainable). */
+  /** IN3-6 Certification Date/Time (DTM, optional) (chainable). */
   certificationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** IN3-7 Certification Modify Date/Time (DTM, max 0, optional) (chainable). */
+  /** IN3-7 Certification Modify Date/Time (DTM, optional) (chainable). */
   certificationModifyDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** IN3-8 Operator (XCN, max 0, optional, repeating) (chainable). */
+  /** IN3-8 Operator (XCN, optional, repeating) (chainable). */
   operator(...values: Repeated<string | XCN>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** IN3-9 Certification Begin Date (DT, max 0, optional) (chainable). */
+  /** IN3-9 Certification Begin Date (DT, optional) (chainable). */
   certificationBeginDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[8] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** IN3-10 Certification End Date (DT, max 0, optional) (chainable). */
+  /** IN3-10 Certification End Date (DT, optional) (chainable). */
   certificationEndDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[9] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** IN3-11 Days (DTN, max 0, optional) (chainable). */
+  /** IN3-11 Days (DTN, optional) (chainable). */
   days(value: string): this {
     this.fields[10] = this.createField(value);
     return this;
   }
 
-  /** IN3-12 Non-Concur Code/Description (CWE, max 0, optional) (chainable). */
+  /** IN3-12 Non-Concur Code/Description (CWE, optional) (chainable). */
   nonConcurCodeDescription(value: string | CodedElement): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN3-13 Non-Concur Effective Date/Time (DTM, max 0, optional) (chainable). */
+  /** IN3-13 Non-Concur Effective Date/Time (DTM, optional) (chainable). */
   nonConcurEffectiveDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** IN3-14 Physician Reviewer (XCN, max 0, optional, repeating) (chainable). */
+  /** IN3-14 Physician Reviewer (XCN, optional, repeating) (chainable). */
   physicianReviewer(...values: Repeated<string | XCN>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** IN3-15 Certification Contact (ST, max 0, optional) (chainable). */
+  /** IN3-15 Certification Contact (ST, optional) (chainable). */
   certificationContact(value: string): this {
     this.fields[14] = this.createField(value);
     return this;
   }
 
-  /** IN3-16 Certification Contact Phone Number (XTN, max 0, optional, repeating) (chainable). */
+  /** IN3-16 Certification Contact Phone Number (XTN, optional, repeating) (chainable). */
   certificationContactPhoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[15] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** IN3-17 Appeal Reason (CWE, max 0, optional) (chainable). */
+  /** IN3-17 Appeal Reason (CWE, optional) (chainable). */
   appealReason(value: string | CodedElement): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN3-18 Certification Agency (CWE, max 0, optional) (chainable). */
+  /** IN3-18 Certification Agency (CWE, optional) (chainable). */
   certificationAgency(value: string | CodedElement): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN3-19 Certification Agency Phone Number (XTN, max 0, optional, repeating) (chainable). */
+  /** IN3-19 Certification Agency Phone Number (XTN, optional, repeating) (chainable). */
   certificationAgencyPhoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[18] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** IN3-20 Pre-Certification Requirement (ICD, max 0, optional, repeating) (chainable). */
+  /** IN3-20 Pre-Certification Requirement (ICD, optional, repeating) (chainable). */
   preCertificationRequirement(...values: Repeated<string>[]): this {
     this.fields[19] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** IN3-21 Case Manager (ST, max 0, optional) (chainable). */
+  /** IN3-21 Case Manager (ST, optional) (chainable). */
   caseManager(value: string): this {
     this.fields[20] = this.createField(value);
     return this;
   }
 
-  /** IN3-22 Second Opinion Date (DT, max 0, optional) (chainable). */
+  /** IN3-22 Second Opinion Date (DT, optional) (chainable). */
   secondOpinionDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[21] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** IN3-23 Second Opinion Status (CWE, max 0, optional) (chainable). */
+  /** IN3-23 Second Opinion Status (CWE, optional) (chainable). */
   secondOpinionStatus(value: string | CodedElement): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN3-24 Second Opinion Documentation Received (CWE, max 0, optional, repeating) (chainable). */
+  /** IN3-24 Second Opinion Documentation Received (CWE, optional, repeating) (chainable). */
   secondOpinionDocumentationReceived(...values: Repeated<string | CodedElement>[]): this {
     this.fields[23] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** IN3-25 Second Opinion Physician (XCN, max 0, optional, repeating) (chainable). */
+  /** IN3-25 Second Opinion Physician (XCN, optional, repeating) (chainable). */
   secondOpinionPhysician(...values: Repeated<string | XCN>[]): this {
     this.fields[24] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;

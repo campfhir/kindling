@@ -27,13 +27,13 @@ export class RDF extends BaseSegment {
     this.fields = [];
   }
 
-  /** RDF-1 Number of Columns per Row (NM, max 0, required) (chainable). */
+  /** RDF-1 Number of Columns per Row (NM, required) (chainable). */
   numberOfColumnsPerRow(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** RDF-2 Column Description (RCD, max 0, required, repeating) (chainable). */
+  /** RDF-2 Column Description (RCD, required, repeating) (chainable). */
   columnDescription(...values: Repeated<string | RCD>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(rcdParts(v)))));
     return this;

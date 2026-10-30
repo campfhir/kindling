@@ -33,7 +33,7 @@ export class SGT extends BaseSegment {
     return this;
   }
 
-  /** SGT-2 Segment Group Name (ST, max 0, optional) (chainable). */
+  /** SGT-2 Segment Group Name (ST, optional) (chainable). */
   segmentGroupName(value: string): this {
     this.fields[1] = this.createField(value);
     return this;

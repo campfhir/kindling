@@ -28,7 +28,7 @@ export class OH3 extends BaseSegment {
     this.fields = [];
   }
 
-  /** OH3-1 Set ID (SI, max 0, required) (chainable). */
+  /** OH3-1 Set ID (SI, required) (chainable). */
   setId(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
@@ -40,37 +40,37 @@ export class OH3 extends BaseSegment {
     return this;
   }
 
-  /** OH3-3 Occupation (CWE, max 0, required) (chainable). */
+  /** OH3-3 Occupation (CWE, required) (chainable). */
   occupation(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OH3-4 Industry (CWE, max 0, required) (chainable). */
+  /** OH3-4 Industry (CWE, required) (chainable). */
   industry(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OH3-5 Usual Occupation Duration (years) (NM, max 0, optional) (chainable). */
+  /** OH3-5 Usual Occupation Duration (years) (NM, optional) (chainable). */
   usualOccupationDurationYears(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** OH3-6 Start year (DT, max 0, optional) (chainable). */
+  /** OH3-6 Start year (DT, optional) (chainable). */
   startYear(value: string | Date, format?: HL7DateLayout): this {
     this.fields[5] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** OH3-7 Entered Date (DT, max 0, optional) (chainable). */
+  /** OH3-7 Entered Date (DT, optional) (chainable). */
   enteredDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** OH3-8 Work Unique Identifier (EI, max 0, optional) (chainable). */
+  /** OH3-8 Work Unique Identifier (EI, optional) (chainable). */
   workUniqueIdentifier(value: string | EI): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;

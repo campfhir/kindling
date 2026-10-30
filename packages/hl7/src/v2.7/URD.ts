@@ -27,7 +27,7 @@ export class URD extends BaseSegment {
     this.fields = [];
   }
 
-  /** URD-1 URD.1 (ST, max 0, optional) (chainable). */
+  /** URD-1 URD.1 (ST, optional) (chainable). */
   urd1(value: string): this {
     this.fields[0] = this.createField(value);
     return this;

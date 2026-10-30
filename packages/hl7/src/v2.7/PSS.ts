@@ -27,13 +27,13 @@ export class PSS extends BaseSegment {
     this.fields = [];
   }
 
-  /** PSS-1 Provider Product/Service Section Number (EI, max 0, required) (chainable). */
+  /** PSS-1 Provider Product/Service Section Number (EI, required) (chainable). */
   providerProductServiceSectionNumber(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** PSS-2 Payer Product/Service Section Number (EI, max 0, optional) (chainable). */
+  /** PSS-2 Payer Product/Service Section Number (EI, optional) (chainable). */
   payerProductServiceSectionNumber(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
@@ -45,13 +45,13 @@ export class PSS extends BaseSegment {
     return this;
   }
 
-  /** PSS-4 Billed Amount (CP, max 0, required) (chainable). */
+  /** PSS-4 Billed Amount (CP, required) (chainable). */
   billedAmount(value: string | CP): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** PSS-5 Section Description or Heading (ST, max 0, required) (chainable). */
+  /** PSS-5 Section Description or Heading (ST, required) (chainable). */
   sectionDescriptionOrHeading(value: string): this {
     this.fields[4] = this.createField(value);
     return this;

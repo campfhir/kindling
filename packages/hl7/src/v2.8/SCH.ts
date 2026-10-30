@@ -27,61 +27,61 @@ export class SCH extends BaseSegment {
     this.fields = [];
   }
 
-  /** SCH-1 Placer Appointment ID (EI, max 0, conditional) (chainable). */
+  /** SCH-1 Placer Appointment ID (EI, conditional) (chainable). */
   placerAppointmentId(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** SCH-2 Filler Appointment ID (EI, max 0, conditional) (chainable). */
+  /** SCH-2 Filler Appointment ID (EI, conditional) (chainable). */
   fillerAppointmentId(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** SCH-3 Occurrence Number (NM, max 0, conditional) (chainable). */
+  /** SCH-3 Occurrence Number (NM, conditional) (chainable). */
   occurrenceNumber(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** SCH-4 Placer Group Number (EIP, max 0, optional) (chainable). */
+  /** SCH-4 Placer Group Number (EIP, optional) (chainable). */
   placerGroupNumber(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** SCH-5 Schedule ID (CWE, max 0, optional) (chainable). */
+  /** SCH-5 Schedule ID (CWE, optional) (chainable). */
   scheduleId(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SCH-6 Event Reason (CWE, max 0, required) (chainable). */
+  /** SCH-6 Event Reason (CWE, required) (chainable). */
   eventReason(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SCH-7 Appointment Reason (CWE, max 0, optional) (chainable). */
+  /** SCH-7 Appointment Reason (CWE, optional) (chainable). */
   appointmentReason(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SCH-8 Appointment Type (CWE, max 0, optional) (chainable). */
+  /** SCH-8 Appointment Type (CWE, optional) (chainable). */
   appointmentType(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SCH-9 Appointment Duration (NM, max 0, W) (chainable). */
+  /** SCH-9 Appointment Duration (NM, W) (chainable). */
   appointmentDuration(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** SCH-10 Appointment Duration Units (CNE, max 0, backward compatibility) (chainable). */
+  /** SCH-10 Appointment Duration Units (CNE, backward compatibility) (chainable). */
   appointmentDurationUnits(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -93,97 +93,97 @@ export class SCH extends BaseSegment {
     return this;
   }
 
-  /** SCH-12 Placer Contact Person (XCN, max 0, optional, repeating) (chainable). */
+  /** SCH-12 Placer Contact Person (XCN, optional, repeating) (chainable). */
   placerContactPerson(...values: Repeated<string | XCN>[]): this {
     this.fields[11] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** SCH-13 Placer Contact Phone Number (XTN, max 0, optional) (chainable). */
+  /** SCH-13 Placer Contact Phone Number (XTN, optional) (chainable). */
   placerContactPhoneNumber(value: string | XTN): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(xtnParts(value)));
     return this;
   }
 
-  /** SCH-14 Placer Contact Address (XAD, max 0, optional, repeating) (chainable). */
+  /** SCH-14 Placer Contact Address (XAD, optional, repeating) (chainable). */
   placerContactAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** SCH-15 Placer Contact Location (PL, max 0, optional) (chainable). */
+  /** SCH-15 Placer Contact Location (PL, optional) (chainable). */
   placerContactLocation(value: string | PL): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** SCH-16 Filler Contact Person (XCN, max 0, required, repeating) (chainable). */
+  /** SCH-16 Filler Contact Person (XCN, required, repeating) (chainable). */
   fillerContactPerson(...values: Repeated<string | XCN>[]): this {
     this.fields[15] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** SCH-17 Filler Contact Phone Number (XTN, max 0, optional) (chainable). */
+  /** SCH-17 Filler Contact Phone Number (XTN, optional) (chainable). */
   fillerContactPhoneNumber(value: string | XTN): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(xtnParts(value)));
     return this;
   }
 
-  /** SCH-18 Filler Contact Address (XAD, max 0, optional, repeating) (chainable). */
+  /** SCH-18 Filler Contact Address (XAD, optional, repeating) (chainable). */
   fillerContactAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[17] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** SCH-19 Filler Contact Location (PL, max 0, optional) (chainable). */
+  /** SCH-19 Filler Contact Location (PL, optional) (chainable). */
   fillerContactLocation(value: string | PL): this {
     this.fields[18] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** SCH-20 Entered By Person (XCN, max 0, required, repeating) (chainable). */
+  /** SCH-20 Entered By Person (XCN, required, repeating) (chainable). */
   enteredByPerson(...values: Repeated<string | XCN>[]): this {
     this.fields[19] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** SCH-21 Entered By Phone Number (XTN, max 0, optional, repeating) (chainable). */
+  /** SCH-21 Entered By Phone Number (XTN, optional, repeating) (chainable). */
   enteredByPhoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[20] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** SCH-22 Entered By Location (PL, max 0, optional) (chainable). */
+  /** SCH-22 Entered By Location (PL, optional) (chainable). */
   enteredByLocation(value: string | PL): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** SCH-23 Parent Placer Appointment ID (EI, max 0, optional) (chainable). */
+  /** SCH-23 Parent Placer Appointment ID (EI, optional) (chainable). */
   parentPlacerAppointmentId(value: string | EI): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** SCH-24 Parent Filler Appointment ID (EI, max 0, conditional) (chainable). */
+  /** SCH-24 Parent Filler Appointment ID (EI, conditional) (chainable). */
   parentFillerAppointmentId(value: string | EI): this {
     this.fields[23] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** SCH-25 Filler Status Code (CWE, max 0, optional) (chainable). */
+  /** SCH-25 Filler Status Code (CWE, optional) (chainable). */
   fillerStatusCode(value: string | CodedElement): this {
     this.fields[24] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SCH-26 Placer Order Number (EI, max 0, conditional, repeating) (chainable). */
+  /** SCH-26 Placer Order Number (EI, conditional, repeating) (chainable). */
   placerOrderNumber(...values: Repeated<string | EI>[]): this {
     this.fields[25] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;
   }
 
-  /** SCH-27 Filler Order Number (EI, max 0, conditional, repeating) (chainable). */
+  /** SCH-27 Filler Order Number (EI, conditional, repeating) (chainable). */
   fillerOrderNumber(...values: Repeated<string | EI>[]): this {
     this.fields[26] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;

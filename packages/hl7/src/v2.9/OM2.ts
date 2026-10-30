@@ -27,61 +27,61 @@ export class OM2 extends BaseSegment {
     this.fields = [];
   }
 
-  /** OM2-1 Sequence Number - Test/Observation Master File (NM, max 0, optional) (chainable). */
+  /** OM2-1 Sequence Number - Test/Observation Master File (NM, optional) (chainable). */
   sequenceNumberTestObservationMasterFile(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** OM2-2 Units of Measure (CWE, max 0, optional) (chainable). */
+  /** OM2-2 Units of Measure (CWE, optional) (chainable). */
   unitsOfMeasure(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OM2-3 Range of Decimal Precision (NM, max 0, optional, repeating) (chainable). */
+  /** OM2-3 Range of Decimal Precision (NM, optional, repeating) (chainable). */
   rangeOfDecimalPrecision(...values: Repeated<string>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** OM2-4 Corresponding SI Units of Measure (CWE, max 0, optional) (chainable). */
+  /** OM2-4 Corresponding SI Units of Measure (CWE, optional) (chainable). */
   correspondingSiUnitsOfMeasure(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OM2-5 SI Conversion Factor (TX, max 0, optional) (chainable). */
+  /** OM2-5 SI Conversion Factor (TX, optional) (chainable). */
   siConversionFactor(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** OM2-6 Reference (Normal) Range for Ordinal and Continuous Observations (RFR, max 0, optional, repeating) (chainable). */
+  /** OM2-6 Reference (Normal) Range for Ordinal and Continuous Observations (RFR, optional, repeating) (chainable). */
   referenceNormalRangeForOrdinalAndContinuousObservations(...values: Repeated<string>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** OM2-7 Critical Range for Ordinal and Continuous Observations (RFR, max 0, optional, repeating) (chainable). */
+  /** OM2-7 Critical Range for Ordinal and Continuous Observations (RFR, optional, repeating) (chainable). */
   criticalRangeForOrdinalAndContinuousObservations(...values: Repeated<string>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** OM2-8 Absolute Range for Ordinal and Continuous Observations (RFR, max 0, optional) (chainable). */
+  /** OM2-8 Absolute Range for Ordinal and Continuous Observations (RFR, optional) (chainable). */
   absoluteRangeForOrdinalAndContinuousObservations(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** OM2-9 Delta Check Criteria (DLT, max 0, optional, repeating) (chainable). */
+  /** OM2-9 Delta Check Criteria (DLT, optional, repeating) (chainable). */
   deltaCheckCriteria(...values: Repeated<string>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** OM2-10 Minimum Meaningful Increments (NM, max 0, optional) (chainable). */
+  /** OM2-10 Minimum Meaningful Increments (NM, optional) (chainable). */
   minimumMeaningfulIncrements(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
