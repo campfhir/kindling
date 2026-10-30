@@ -1,0 +1,48 @@
+{
+  "structureFixes": [
+    {
+      "message": "RDE_O11",
+      "set": "TIMING_ENCODED",
+      "min": 1,
+      "max": "*",
+      "reason": "2026-10-30: hl7.eu std282/ch04a.html prints the TIMING_ENCODED group inside the RXV group of RDE^O11 as \"{\" ... \"}]\", the same unpaired brackets as std28, std281 and the official v2.8.1 chapter 4A. No Caristix (HTTP 500) or HAPI (no v282 module) for 2.8.2; keeps v2.8.1's reading (required, repeating), the hand decision the maintainer confirmed on 2026-10-29."
+    },
+    {
+      "message": "RDE_O25",
+      "set": "TIMING_ENCODED",
+      "min": 1,
+      "max": "*",
+      "reason": "2026-10-30: hl7.eu std282/ch04a.html prints the TIMING_ENCODED group inside the RXV group of RDE^O25 as \"{\" ... \"}]\", the same unpaired brackets as std28, std281 and the official v2.8.1 chapter 4A. No Caristix (HTTP 500) or HAPI (no v282 module) for 2.8.2; keeps v2.8.1's reading (required, repeating), the hand decision the maintainer confirmed on 2026-10-29."
+    }
+  ],
+  "sharedStructure": {
+    "QBP_Z75": {
+      "structure": "QBP_Q13",
+      "reason": "2026-10-30: hl7.eu std282/ch05.html, the query profile of Z75: \"Query Trigger QBP^Z75^QBP_Q13\"; hl7.eu prints no table for it. Same as v2.8.1 and the official v2.8 chapter 5."
+    },
+    "QBP_Z77": {
+      "structure": "QBP_Q13",
+      "reason": "2026-10-30: hl7.eu std282/ch05.html, the query profile of Z77: \"Query Trigger QBP^Z77^QBP_Q13\"; hl7.eu prints no table for it. Same as v2.8.1 and the official v2.8 chapter 5."
+    },
+    "QBP_Z79": {
+      "structure": "QBP_Q15",
+      "reason": "2026-10-30: hl7.eu std282/ch05.html, the query profile of Z79: \"Query Trigger QBP^Z79^QBP_Q15\"; hl7.eu prints no table for it. Same as v2.8.1 and the official v2.8 chapter 5."
+    },
+    "QBP_Z91": {
+      "structure": "QBP_Q13",
+      "reason": "2026-10-30: hl7.eu std282/ch05.html, the query profile of Z91: \"Query Trigger QBP^Z91^QBP_Q13\"; hl7.eu prints no table for it. Same as v2.8.1 and the official v2.8 chapter 5."
+    },
+    "QBP_Z93": {
+      "structure": "QBP_Q13",
+      "reason": "2026-10-30: hl7.eu std282/ch05.html, the query profile of Z93: \"Query Trigger QBP^Z93^QBP_Q13\"; hl7.eu prints no table for it. Same as v2.8.1 and the official v2.8 chapter 5."
+    },
+    "QBP_Z95": {
+      "structure": "QBP_Q13",
+      "reason": "2026-10-30: hl7.eu std282/ch05.html, the query profile of Z95: \"Query Trigger QBP^Z95^QBP_Q13\"; hl7.eu prints no table for it. Same as v2.8.1 and the official v2.8 chapter 5."
+    },
+    "QBP_Z97": {
+      "structure": "QBP_Q15",
+      "reason": "2026-10-30: hl7.eu std282/ch05.html, the query profile of Z97: \"Query Trigger QBP^Z97^QBP_Q15\"; hl7.eu prints no table for it. Same as v2.8.1 and the official v2.8 chapter 5."
+    }
+  }
+}

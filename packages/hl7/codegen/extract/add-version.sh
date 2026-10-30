@@ -5,7 +5,7 @@
 # Usage:  codegen/extract/add-version.sh <version> <sources-dir> [--keep-extraction]
 #   <sources-dir> is the folder codegen/validate/fetch-sources.sh wrote for the version.
 #   --keep-extraction skips the hl7.eu parse (an extraction from the PDFs is already in codegen/extracted/<version>).
-# The message ledger runs when Caristix events or HAPI message classes were pulled; a missing source is passed as empty folders.
+# The message ledger always runs; a missing Caristix or HAPI source is passed as empty folders.
 set -euo pipefail
 v=${1:?version, e.g. v2.7}
 dir=$(cd "${2:?sources dir}" && pwd)
@@ -51,10 +51,9 @@ regenerate
 
 npx tsx codegen/extract/verify-import.ts "$v"
 node codegen/validate/ledger.mjs "$v" "$dir" | tail -1
-# The message ledger needs one cross-check source: Caristix events or HAPI message classes (Caristix answers HTTP 500
-# for 2.8.1 on); a missing one is passed as an empty folder.
-if [ -n "$(ls "$dir/caristix/events" 2>/dev/null | grep -v _index)" ] || [ -n "$(ls "$dir/hapi/message" 2>/dev/null)" ]; then
-  hapi="$dir/hapi"; mkdir -p "$hapi/message" "$hapi/group" "$dir/caristix/events"
-  npx tsx codegen/validate/message-ledger.ts "$v" --caristix "$dir/caristix/events" \
-    --hapi "$hapi/message" "$hapi/group" "$hapi/eventmap.properties" --hl7eu "$dir/hl7eu/chapters" --hl7org "$dir/hl7org/chapters" | grep -v '^  differs'
-fi
+# The message ledger compares the structures with a second reading of the hl7.eu tables and with Caristix events and
+# HAPI message classes where they exist (Caristix answers HTTP 500 for 2.8.1 on; HAPI has no 2.8.2 on); a missing
+# source is passed as an empty folder, and with neither the hl7.eu reading is the only check.
+hapi="$dir/hapi"; mkdir -p "$hapi/message" "$hapi/group" "$dir/caristix/events"; touch "$hapi/eventmap.properties"
+npx tsx codegen/validate/message-ledger.ts "$v" --caristix "$dir/caristix/events" \
+  --hapi "$hapi/message" "$hapi/group" "$hapi/eventmap.properties" --hl7eu "$dir/hl7eu/chapters" --hl7org "$dir/hl7org/chapters" | grep -v '^  differs'

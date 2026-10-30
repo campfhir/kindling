@@ -60,7 +60,7 @@ const notes: { segments: Notes; brackets: Notes; events: Notes; skipped: Notes; 
 // ── Segments ─────────────────────────────────────────────────────────────────
 
 const NOT_GENERATED = new Set(["MSH", "BHS", "FHS"]);
-const OPT: Record<string, string> = { "C(R/X)": "C", "C(RE/X)": "C", "-": "O" };
+const OPT: Record<string, string> = { "C(R/X)": "C", "C(RE/X)": "C", "C(R/O)": "C", "-": "O" };
 
 interface Printed {
   seq: number; name: string; length: string; type: string; opt: string; rep: string; table: string; clen: string;
@@ -75,7 +75,10 @@ for (const [code, seg] of Object.entries(extracted)) {
     if (!(f.opt in OPT) && !["R", "O", "C", "B", "X", "W"].includes(f.opt)) throw new Error(`${code}-${f.seq}: unknown usage ${f.opt}`);
     if (OPT[f.opt]) notes.fields.push(`${code}-${f.seq} ${f.name}: usage ${f.opt} -> ${opt}`);
     let length = f.length.includes("..") ? f.length.split("..")[1] : f.length;
-    if (length === "" && f.clen) { length = f.clen.match(/\d+/)?.[0] ?? ""; }
+    // The length is the Length column. With none printed (v2.7 on prints most fields without one, and a C.LEN
+    // conformance length instead) it is "0", no maximum, as the segment ledger decides it (codegen/validate/ledger.mjs
+    // reads the Length column; Caristix and HAPI give 0) and as v2.7 to v2.8.1 record it.
+    if (length === "") length = "0";
     const repeating = f.rep === "∞" || f.rep === "y" || f.rep === "Y" || /^\d+$/.test(f.rep);
     const repeats = /^\d+$/.test(f.rep) ? { repeats: Number(f.rep) } : {};
     if (Object.keys(repeats).length) notes.fields.push(`${code}-${f.seq} ${f.name}: repeats up to ${f.rep} (rep "∞" with repeats)`);

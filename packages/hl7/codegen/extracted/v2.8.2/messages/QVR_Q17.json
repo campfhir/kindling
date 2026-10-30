@@ -1,0 +1,109 @@
+{
+  "structure": "QVR_Q17",
+  "messageType": "QVR",
+  "triggerEvent": "Q17",
+  "version": "2.8.2",
+  "description": "Query for Previous Events",
+  "title": "Query for Previous Events",
+  "sectionHeading": "5.4.5 QVR - query for previous events (Event Q17)",
+  "source": {
+    "pdf": "hl7.eu std282/ch05.html",
+    "pages": null,
+    "table": "QVR^Q17^QVR_Q17: Query for Previous Events"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Q17"
+      ],
+      "eventPrinted": "Q17",
+      "pdf": "hl7.eu std282/ch05.html",
+      "page": null,
+      "table": "QVR^Q17^QVR_Q17: Query for Previous Events",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2.15.9"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2.15.12"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2.14.13"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Event Definition Segment",
+      "chapterRef": "5.5.4"
+    },
+    {
+      "kind": "group",
+      "name": "QBP",
+      "items": [
+        {
+          "kind": "placeholder",
+          "text": "[ ... ]",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "notation": "[ ... ]",
+          "description": "Optional query by example segments"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "RCP",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Response Control Parameters",
+      "chapterRef": "5.5.6"
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Continuation Pointer",
+      "chapterRef": "2.15.4"
+    }
+  ],
+  "variants": []
+}
