@@ -7,13 +7,13 @@ A modular TypeScript library for building and parsing HL7v2 messages, published 
 ## Features
 
 - **Fluent Interface**: Type-safe segment construction with fluent API
-- **Parser**: Parse HL7v2 message strings back into structured data; `parse()` reads MSH-9 and
+- **Parser**: Parse HL7v2 message strings back into structured data; `parse()` (from `@campfhir/hl7/parse`) reads MSH-9 and
   MSH-12 and picks the right message parser itself (see [Parsing any message](#parsing-any-message))
-- **Batches**: `parseBatch()` and `encodeBatch()` for the HL7 batch protocol (FHS/BHS … BTS/FTS)
+- **Batches**: `parseBatch()` (from `@campfhir/hl7/parse`) and `encodeBatch()` for the HL7 batch protocol (FHS/BHS … BTS/FTS)
 - **Round-trip Support**: Build messages and parse them back with full fidelity
 - **Modular Architecture**: Organized by HL7 version for easy extension
 - **Version Support**: every HL7 v2 release from v2.1 to v2.9.1, the latest (v2.1, 2.2, 2.3, 2.3.1, 2.4, 2.5, 2.5.1, 2.6,
-  2.7, 2.7.1, 2.8, 2.8.1, 2.8.2, 2.9, 2.9.1), all dispatched by the root `parse()` (see [Versions](#versions))
+  2.7, 2.7.1, 2.8, 2.8.1, 2.8.2, 2.9, 2.9.1), all dispatched by `parse()` (see [Versions](#versions))
 - **Date Input**: Segment date methods accept `Date` objects with optional HL7 layout format, in addition to pre-formatted strings
 - **Value Extraction**: Path-based field/component extraction utility
 - **Custom Segments**: Build Z-segments and other custom segments with a simple field-setter API
@@ -30,10 +30,11 @@ See [ROADMAP.md](ROADMAP.md). Every release from v2.1 to v2.9.1 has its segments
 
 ```
 src/
-├── index.ts                  # Core type exports and the root parse()
-├── parse.ts                  # parse(), selectParser(): one message or a batch file
-├── dispatch.ts               # parseMessage(), identifyMessage(): MSH-9/MSH-12 dispatch to the generated parsers
-├── batch.ts                  # parseBatch(), encodeBatch(): the batch protocol (FHS/BHS … BTS/FTS)
+├── index.ts                  # Core type exports; the root loads no HL7 version
+├── parse.ts                  # @campfhir/hl7/parse: parse(), selectParser(), parseBatch(): one message or a batch file
+├── dispatch.ts               # parseMessage(), selectMessageParser(): MSH-9/MSH-12 dispatch; a version's registry loads on first use
+├── identify.ts               # identifyMessage(), isBatchInput(), SUPPORTED_VERSIONS: what an input says about itself
+├── batch.ts                  # the batch types and encodeBatch() (FHS/BHS … BTS/FTS)
 ├── types/                    # Version-agnostic core types
 │   ├── encoding.ts           # HL7 encoding characters
 │   ├── segment.ts            # Base segment types and classes
@@ -147,7 +148,7 @@ A few messages of each version from v2.6 on are not generated yet: their tables 
 or a placeholder group, which the message schema cannot express, or they wrap such a message (8 in v2.6,
 22–29 in the later versions; each version's `codegen/extracted/<version>/IMPORT.md` lists them with the reason).
 
-The root `parse()` dispatches every version: 1.0 parses v2.3, 1.1 adds v2.3.1, 1.2 adds v2.4 (2.0 drops
+`parse()` dispatches every version: 1.0 parses v2.3, 1.1 adds v2.3.1, 1.2 adds v2.4 (2.0 drops
 CommonJS and Node < 24), 2.1 adds v2.5 and 2.2 adds v2.5.1. The later versions arrived as modules first
 (2.3 adds v2.6, v2.7 and v2.7.1, 2.4 v2.8, 2.5 v2.8.1, 2.6 v2.8.2, 2.7 v2.9) and 2.8 adds v2.9.1 and
 dispatches v2.6 to v2.9.1. 2.9 adds v2.1 and v2.2. The fixture tests round-trip one generated message per
@@ -158,12 +159,24 @@ are for it: hl7.eu, Caristix and HAPI, and the official HL7 chapter PDFs where t
 decide). Each version has a segment ledger and a message ledger in [docs/validation](docs/validation/README.md)
 listing every field and structure, every disagreement between the sources and every dated decision.
 
+## Upgrading from 2.x
+
+3.0 moves the parser to its own entry point and makes it asynchronous:
+
+- `parse`, `selectParser`, `parseMessage`, `selectMessageParser` and `parseBatch` are imported from `@campfhir/hl7/parse`, not the root.
+- They return a Promise: `const result = await parse(raw);`. A version's parsers load the first time a message of that version is parsed, so importing the root no longer loads all fifteen versions (14 ms here, where it took 5.5 s before).
+- The message parser that `selectParser()` returns is still synchronous: `selected.val.parse(raw)`.
+- `identifyMessage`, `isBatchInput`, `SUPPORTED_VERSIONS` and `encodeBatch` remain on the root.
+
 ## Imports
 
 Core types, utilities, and the message editor are exported from the package root:
 
 ```typescript
-import { parse, BaseSegment, HL7Message, ParserUtils, extractValue, CustomSegment, MessageEditor } from '@campfhir/hl7';
+import { BaseSegment, HL7Message, ParserUtils, extractValue, CustomSegment, MessageEditor } from '@campfhir/hl7';
+
+// The parser: async, because a version's parsers load the first time a message of that version is parsed
+import { parse, selectParser, parseBatch } from '@campfhir/hl7/parse';
 
 // Date formatting utility (Go-style layout strings)
 import { dateUtils, DateOnly, DateTime } from '@campfhir/hl7';
@@ -220,7 +233,7 @@ conversion.
 
 ### Parsing any message
 
-The root `parse()` takes any HL7 v2 input. One message is dispatched on MSH-9 (message type and
+`parse()`, from `@campfhir/hl7/parse`, takes any HL7 v2 input and returns a Promise. One message is dispatched on MSH-9 (message type and
 trigger event) and MSH-12 (version) to the generated parser of that message in that version; the
 result has `kind: 'message'`, `version` and `structure`, and a `switch` or `if` on `structure`
 narrows `parsed` to the message's own shape (`ParsedADT_A01`, `ParsedORU_R01`, …), the very object
@@ -228,9 +241,9 @@ narrows `parsed` to the message's own shape (`ParsedADT_A01`, `ParsedORU_R01`, �
 `parseBatch()` instead and comes back with `kind: 'batch'` (see [Batches](#batches)).
 
 ```typescript
-import { parse } from '@campfhir/hl7';
+import { parse } from '@campfhir/hl7/parse';
 
-const result = parse(hl7String);
+const result = await parse(hl7String);
 if (!result.ok) throw new Error(result.err.message); // "Unknown HL7 v2.3 message type 'ZZZ^Z01' (MSH-9)", "ADT_A01 message must contain a PID segment", …
 if (result.val.kind === 'batch') return handleBatch(result.val); // fileHeader, batches, fileTrailer, warnings
 
@@ -250,15 +263,16 @@ switch (result.val.structure) {
 }
 ```
 
-`selectParser(hl7String)` stops one step earlier and returns the parser it would run: for a message
-`{ kind: 'message', version, structure, messageType, parse }`, for a batch `{ kind: 'batch', parse }`.
+`await selectParser(hl7String)` stops one step earlier and returns the parser it would run: for a message
+`{ kind: 'message', version, structure, messageType, parse }`, for a batch `{ kind: 'batch', parse }`. The
+message's `parse` is synchronous: the version is loaded by then.
 `parseMessage()` and `selectMessageParser()` are the single-message halves (a batch is an error to
-them), and `identifyMessage(hl7String)` returns only what MSH-9 and MSH-12 say. `MESSAGES` of
+them), and `identifyMessage(hl7String)` (from the root) returns only what MSH-9 and MSH-12 say. `MESSAGES` of
 `@campfhir/hl7/v2.3` is the map they dispatch on (message structure name → parser).
 
 `SUPPORTED_VERSIONS` lists the versions `parse()` dispatches (v2.1 to v2.9.1), and every other MSH-12
 value is an error. To parse such a feed anyway, or one that leaves MSH-12 empty, name the
-version to parse as: `parse(hl7String, { version: '2.5.1' })`. Each version's own parsers
+version to parse as: `await parse(hl7String, { version: '2.5.1' })`. Each version's own parsers
 (`parseADT_A01` of `@campfhir/hl7/v2.9.1`, …) can also be called directly.
 
 A message type's shape can differ between versions (v2.9.1's ADT_A01 has GSP, GSR and GSC, for example),
@@ -292,9 +306,10 @@ in `messages` carries the error, with the batch number, message number and line 
 A BTS-1 or FTS-1 count that disagrees with what the file holds is listed in `warnings`.
 
 ```typescript
-import { parseBatch, encodeBatch } from '@campfhir/hl7';
+import { parseBatch } from '@campfhir/hl7/parse';
+import { encodeBatch } from '@campfhir/hl7';
 
-const file = parseBatch(batchString);
+const file = await parseBatch(batchString);
 if (file.ok) {
   for (const [i, batch] of file.val.batches.entries()) {
     console.log(`batch ${i + 1}: ${batch.header?.encode()} … ${batch.trailer?.encode()}`);
@@ -546,7 +561,7 @@ new MessageEditor(message)
 
 ```bash
 npx tsx examples/oru-example.ts                    # Build ORU^R01 message
-npx tsx examples/parse-any-example.ts              # Root parse(): dispatch on MSH-9/MSH-12
+npx tsx examples/parse-any-example.ts              # parse() of @campfhir/hl7/parse: dispatch on MSH-9/MSH-12
 npx tsx examples/parser-example.ts                 # Parse and round-trip
 npx tsx examples/oru-r30-example.ts                # Build ORU^R30 (point-of-care)
 npx tsx examples/parse-modify-encode-example.ts    # Parse, modify, re-encode

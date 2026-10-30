@@ -115,9 +115,10 @@ message of the same version. The `wrappers()` helper builds such a family from a
 
 `pnpm barrels` also writes `src/<version>/registry.ts`: the `MESSAGES` map from message
 structure name (`ADT_A01`, `ACK`) to that version's `parse<MSG>()`, with the `MessageStructure`
-and `ParsedMessage<S>` types derived from it. The root `parse()` (`src/parse.ts`) reads MSH-9 and
-MSH-12 and dispatches on the registry of the version; a version is wired into it by adding its
-registry to the `REGISTRIES` table there, one version per release.
+and `ParsedMessage<S>` types derived from it. `parse()` (`src/parse.ts`) reads MSH-9 and MSH-12 and
+dispatches on the registry of the version, which `src/dispatch.ts` imports on first use. A version is wired in
+by adding its registry to the `LOADERS` table and its type to `Registries` there, and its name to
+`SUPPORTED_VERSIONS` in `src/identify.ts`, one version per release.
 
 ## Directory structure
 
