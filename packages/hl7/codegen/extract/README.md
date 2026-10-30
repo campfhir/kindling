@@ -21,8 +21,8 @@ ledgers); pass `--keep-extraction` when the extraction came from the PDFs. The s
 codegen/validate/fetch-sources.sh vX <dir> --record
 
 # 2. The extraction, either from hl7.eu (an official chapter PDF first converted into <dir>/hl7org/chapters replaces
-#    hl7.eu's page of that chapter, for a chapter hl7.eu lacks; --record keeps its checksum) ...
-npx tsx codegen/extract/pdf-chapter.ts vX <V28_CH16_Name.pdf> <dir> --record   # only where hl7.eu lacks the chapter
+#    hl7.eu's page of that chapter, as the authoritative text or where hl7.eu lacks it; --record keeps its checksum) ...
+npx tsx codegen/extract/pdf-chapter.ts vX <V281_CH04_Name.pdf> <dir> --record  # each official chapter PDF on hand
 npx tsx codegen/extract/from-hl7eu.ts vX <dir> codegen/extracted/vX
 #    ... or from the PDFs (BRIEF.md), then check it against them:
 npx tsx codegen/extract/check-completeness.ts <pdf-dir> codegen/extracted/vX

@@ -1,0 +1,277 @@
+{
+  "structure": "ORL_O34",
+  "messageType": "ORL",
+  "triggerEvent": "O34",
+  "version": "2.8.1",
+  "description": "Laboratory Order Acknowledgment Message â Multiple Order Per Specimen (Patient Required)",
+  "title": "Laboratory Order Acknowledgment Message â Multiple Order Per Specimen (Patient Required)",
+  "source": {
+    "pdf": "hl7.org V281_CH04_Orders.pdf",
+    "pages": null,
+    "table": "ORL^O34^ORL_O34: Laboratory Order Acknowledgment Message â Multiple Order Per Specimen (Patient Required)"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "O34"
+      ],
+      "eventPrinted": "O34",
+      "pdf": "hl7.org V281_CH04_Orders.pdf",
+      "page": null,
+      "table": "ORL^O34^ORL_O34: Laboratory Order Acknowledgment Message â Multiple Order Per Specimen (Patient Required)",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "NTE",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Notes and Comments (for Header)",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "RESPONSE",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Participation (for Patient)",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Access Restrictions",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "group",
+          "name": "SPECIMEN",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "SPM",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Specimen",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "group",
+              "name": "SPECIMEN OBSERVATION",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "OBX",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Observations related to specimen",
+                  "chapterRef": "7"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Participation (for Specimen Observation)",
+                  "chapterRef": "7"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "segment",
+              "name": "SAC",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Specimen Container"
+            },
+            {
+              "kind": "group",
+              "name": "ORDER",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "ORC",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Common Order",
+                  "chapterRef": "4"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Participation (for Order)",
+                  "chapterRef": "7"
+                },
+                {
+                  "kind": "group",
+                  "name": "TIMING",
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "TQ1",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Timing/Quantity",
+                      "chapterRef": "4"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "TQ2",
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "usage": null,
+                      "page": null,
+                      "description": "Timing/Quantity Order Sequence",
+                      "chapterRef": "4"
+                    }
+                  ],
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null
+                },
+                {
+                  "kind": "group",
+                  "name": "OBSERVATION_REQUEST",
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "OBR",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Observation Request",
+                      "chapterRef": "4"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PRT",
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "usage": null,
+                      "page": null,
+                      "description": "Participation (for Observation)",
+                      "chapterRef": "7"
+                    }
+                  ],
+                  "minOccurs": 0,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

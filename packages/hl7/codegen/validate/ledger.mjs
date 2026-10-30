@@ -64,7 +64,8 @@ const SPEC = specOf(VERSION);
 /**
  * Hand-written decisions and remarks, keyed by segment ("NSC") or field ("NSC-9"):
  * { date, note, count? (segment: the field count to use), decide? ({ type | rep | opt | len: value } replaces
- * the rule's value), accept? (["rep" | "type" | "opt" | "len"]: our divergence on that attribute is deliberate) }.
+ * the rule's value), name? (field: the name to use), accept? (["rep" | "type" | "opt" | "len"]: our divergence on
+ * that attribute is deliberate) }.
  */
 const NOTES = existsSync(notesFile) ? JSON.parse(readFileSync(notesFile, "utf8")) : {};
 const DATE = (() => {
@@ -343,11 +344,13 @@ for (const seg of segments) {
   const hp = readHapi(seg);
   const ours = readOurs(seg);
   const tests = readTests(seg, ours);
-  const counts = { hl7eu: eu?.length, caristix: cx?.length, hapi: hp?.length, ours: ours.count };
+  // a source's field count is its highest field number: a removed field leaves a gap, numbers are never reused (v2.8.1 RF1-18)
+  const top = (fields) => (fields ? Math.max(...fields.map((f) => f.seq)) : undefined);
+  const counts = { hl7eu: top(eu), caristix: top(cx), hapi: top(hp), ours: ours.count };
   const countDecision = NOTES[seg]?.count !== undefined
     ? { value: String(NOTES[seg].count), status: "manual", note: `decided by hand, see the note below` }
-    : decide(eu?.length, cx?.length, hp?.length, (n) => String(n));
-  const max = Math.max(eu?.length ?? 0, cx?.length ?? 0, hp?.length ?? 0, ours.count);
+    : decide(top(eu), top(cx), top(hp), (n) => String(n));
+  const max = Math.max(top(eu) ?? 0, top(cx) ?? 0, top(hp) ?? 0, ours.count);
   const rows = [];
   for (let seq = 1; seq <= max; seq++) {
     const e = eu?.find((f) => f.seq === seq);
@@ -364,7 +367,7 @@ for (const seg of segments) {
     const hpOpt = h?.opt === "O" && ["C", "B"].includes(euOpt || cxOpt) ? (euOpt || cxOpt) : h?.opt;
     const opt = decide(e?.opt, c?.opt, hpOpt, normOpt);
     const len = decide(e?.length, c?.length, h?.length, normLen);
-    const name = e?.name ?? c?.name ?? h?.name ?? s?.name ?? "";
+    const name = NOTES[`${seg}-${seq}`]?.name ?? e?.name ?? c?.name ?? h?.name ?? s?.name ?? "";
     const expectedCount = Number(countDecision.value ?? max);
     const inStandard = seq <= expectedCount;
     const issues = [];

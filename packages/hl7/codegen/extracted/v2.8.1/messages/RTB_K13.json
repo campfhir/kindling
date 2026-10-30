@@ -1,0 +1,188 @@
+{
+  "structure": "RTB_K13",
+  "messageType": "RTB",
+  "triggerEvent": "K13",
+  "version": "2.8.1",
+  "description": "Table Based Response",
+  "title": "Table Based Response",
+  "source": {
+    "pdf": "hl7.eu std281/ch05.html",
+    "pages": null,
+    "table": "RTB^K13^RTB_K13: Table Based Response"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "K13"
+      ],
+      "eventPrinted": "K13",
+      "pdf": "hl7.eu std281/ch05.html",
+      "page": null,
+      "table": "RTB^K13^RTB_K13: Table Based Response",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Z92"
+      ],
+      "eventPrinted": "Z92",
+      "pdf": "hl7.eu std281/ch05.html",
+      "page": null,
+      "table": "RTB^Z92^RTB_K13: Response Grammar: Who Am I",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Z78"
+      ],
+      "eventPrinted": "Z78",
+      "pdf": "hl7.eu std281/ch05.html",
+      "page": null,
+      "table": "RTB^Z78^RTB_K13: Response Grammar: Who Am I",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Z76"
+      ],
+      "eventPrinted": "Z76",
+      "pdf": "hl7.eu std281/ch05.html",
+      "page": null,
+      "table": "RTB^Z76^RTB_K13: Response Grammar: Who Am I",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Z94"
+      ],
+      "eventPrinted": "Z94",
+      "pdf": "hl7.eu std281/ch05.html",
+      "page": null,
+      "table": "RTB^Z94^RTB_K13: Response Grammar: Who Am I",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "Z96"
+      ],
+      "eventPrinted": "Z96",
+      "pdf": "hl7.eu std281/ch05.html",
+      "page": null,
+      "table": "RTB^Z96^RTB_K13: Response Grammar: Who Am I",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2.15.9"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2.15.12"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2.14.13"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgement",
+      "chapterRef": "2.15.8"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Error",
+      "chapterRef": "2.15.5"
+    },
+    {
+      "kind": "segment",
+      "name": "QAK",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Acknowledgement",
+      "chapterRef": "5.4.2"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Definition Segment",
+      "chapterRef": "5.5.4"
+    },
+    {
+      "kind": "group",
+      "name": "ROW_DEFINITION",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "RDF",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Table Row Definition Segment",
+          "chapterRef": "5.5.5.6"
+        },
+        {
+          "kind": "segment",
+          "name": "RDT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Table Row Data Segment",
+          "chapterRef": "5.5.6"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Continuation Pointer",
+      "chapterRef": "2.15.4"
+    }
+  ],
+  "variants": []
+}

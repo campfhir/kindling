@@ -1,0 +1,88 @@
+{
+  "structure": "LSU_U12",
+  "messageType": "LSU",
+  "triggerEvent": "U12",
+  "version": "2.8.1",
+  "description": "Equipment Log/Service Message",
+  "title": "Equipment Log/Service Message",
+  "source": {
+    "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
+    "pages": null,
+    "table": "LSU^U12^LSU_U12: Equipment Log/Service Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "U12"
+      ],
+      "eventPrinted": "U12",
+      "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
+      "page": null,
+      "table": "LSU^U12^LSU_U12: Equipment Log/Service Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "U13"
+      ],
+      "eventPrinted": "U13",
+      "pdf": "hl7.org V281_CH13_ClinicalLabAuto.pdf",
+      "page": null,
+      "table": "LSR^U13^LSU_U12: Equipment Log/Service Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EQU",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Equipment Detail",
+      "chapterRef": "13"
+    },
+    {
+      "kind": "segment",
+      "name": "EQP",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Equipment Log/Service",
+      "chapterRef": "13"
+    }
+  ],
+  "variants": []
+}

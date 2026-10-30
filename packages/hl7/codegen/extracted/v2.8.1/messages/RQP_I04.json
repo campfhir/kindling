@@ -1,0 +1,128 @@
+{
+  "structure": "RQP_I04",
+  "messageType": "RQP",
+  "triggerEvent": "I04",
+  "version": "2.8.1",
+  "description": "Request Patient Demographics",
+  "title": "Request Patient Demographics",
+  "source": {
+    "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
+    "pages": null,
+    "table": "RQP^I04^RQP_I04: Request Patient Demographics"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "I04"
+      ],
+      "eventPrinted": "I04",
+      "pdf": "hl7.org V281_CH11_PatientReferral.pdf",
+      "page": null,
+      "table": "RQP^I04^RQP_I04: Request Patient Demographics",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "PROVIDER",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PRD",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Provider Data",
+          "chapterRef": "11"
+        },
+        {
+          "kind": "segment",
+          "name": "CTD",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Contact Data",
+          "chapterRef": "11"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "NK1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Next of Kin/Associated Parties",
+      "chapterRef": "6"
+    },
+    {
+      "kind": "segment",
+      "name": "GT1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Guarantor",
+      "chapterRef": "6"
+    },
+    {
+      "kind": "segment",
+      "name": "NTE",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Notes and Comments",
+      "chapterRef": "2"
+    }
+  ],
+  "variants": []
+}

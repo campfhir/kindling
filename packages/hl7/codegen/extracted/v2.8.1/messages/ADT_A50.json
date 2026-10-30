@@ -1,0 +1,119 @@
+{
+  "structure": "ADT_A50",
+  "messageType": "ADT",
+  "triggerEvent": "A50",
+  "version": "2.8.1",
+  "description": "ADT Message",
+  "title": "ADT Message",
+  "sectionHeading": "3.3.50 ADT/ACK - Change Visit Number (Event A50)",
+  "source": {
+    "pdf": "hl7.eu std281/ch03.html",
+    "pages": null,
+    "table": "ADT^A50^ADT_A50: ADT Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A50"
+      ],
+      "eventPrinted": "A50",
+      "pdf": "hl7.eu std281/ch03.html",
+      "page": null,
+      "table": "ADT^A50^ADT_A50: ADT Message",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "A51"
+      ],
+      "eventPrinted": "A51",
+      "pdf": "hl7.eu std281/ch03.html",
+      "page": null,
+      "table": "ADT^A51^ADT_A50: ADT Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Event Type",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Identification",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PD1",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Additional Demographics",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "MRG",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Merge Information",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Patient Visit",
+      "chapterRef": "3"
+    }
+  ],
+  "variants": []
+}
