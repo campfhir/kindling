@@ -6,6 +6,7 @@
     "hl7apy-structure": "hl7apy's structure differs from the one the message ledger settled on (docs/validation/<version>-message-ledger.md: hl7.eu decides unless Caristix and HAPI agree against it); the generated message follows hl7apy's.",
     "hapi-example": "An example query profile that HAPI ships as a class and hl7apy lists as a message; not an event of the standard.",
     "unsupported-version": "MSH-12 names a version this package does not parse.",
+    "site-segments": "The sample carries site-defined Z segments, which no standard structure has: parse() skips them with a warning (`dropped`), so the round trip loses them.",
     "unknown-type": "MSH-9 names no message type of the version.",
     "nonconformant": "The sample does not follow the standard's message table for its version (the ledger of that version confirms ours): a required segment is missing or a segment is out of place, as `why` says.",
     "not-kept": "parse() reads the message but encode() does not write it back the same; `lossy` says what is lost.",
@@ -13,6 +14,40 @@
     "withdrawn": "The version withdrew the message (codegen/schemas/<version>/version.ts); hl7apy still lists it."
   },
   "generated": {
+    "v2.1.full.hl7": [
+      {
+        "messages": ["ADT^A03"],
+        "error": "ADT_A03 message must contain a PV1 segment",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy's v2.1 ADT_A03 ends after PID; hl7.eu hl7v21eventA03.htm, Caristix 2.1 and HAPI v21 all have MSH EVN PID PV1 (v2.1 message ledger ADT_A03)."
+      }
+    ],
+    "v2.1.min.hl7": [
+      {
+        "messages": ["ADT^A03"],
+        "error": "ADT_A03 message must contain a PV1 segment",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy's v2.1 ADT_A03 ends after PID; hl7.eu hl7v21eventA03.htm, Caristix 2.1 and HAPI v21 all have MSH EVN PID PV1 (v2.1 message ledger ADT_A03)."
+      },
+      {
+        "messages": ["DSR^Q03"],
+        "error": "DSR_Q03 message must contain a DSC segment",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy makes the v2.1 DSR_Q03 DSC optional; hl7.eu hl7v21eventQ03.htm, Caristix 2.1 and HAPI v21 all end MSH QRD [QRF] {DSP} DSC with a required DSC (v2.1 message ledger DSR_Q03)."
+      }
+    ],
+    "v2.2.full.hl7": [
+      {
+        "messages": ["ORM^O01"],
+        "error": "ORM_O01 message must contain at least",
+        "reason": "choice-alternatives"
+      },
+      {
+        "messages": ["ORR^O02"],
+        "error": "RQD segment at line 8 is not allowed",
+        "reason": "choice-alternatives"
+      }
+    ],
     "v2.3.min.hl7": [
       {
         "messages": ["ARD^A19^ARD_A19", "EDR^Q01^EDR_Q01", "ERP^Q01^ERP_Q01", "RAS^O01^RAS_O01"],
@@ -885,24 +920,6 @@
   },
   "external": {
     "sample-hl7-messages": {
-      "HL7V2Examples-master/Radiology/Mixed Rediology V2 Messages/FujiFilm2.hl7": [
-        {
-          "error": "HL7 version '2.2' (MSH-12) is not supported",
-          "reason": "unsupported-version"
-        }
-      ],
-      "HL7V2Examples-master/Radiology/Mixed Rediology V2 Messages/FujiFilm3.hl7": [
-        {
-          "error": "HL7 version '2.2' (MSH-12) is not supported",
-          "reason": "unsupported-version"
-        }
-      ],
-      "HL7V2Examples-master/Radiology/Mixed Rediology V2 Messages/FujiFilm4.hl7": [
-        {
-          "error": "HL7 version '2.2' (MSH-12) is not supported",
-          "reason": "unsupported-version"
-        }
-      ],
       "HL7V2Examples-master/Radiology/Mixed Rediology V2 Messages/Sample for DOH 20100223031515P2O1F1_(JKLUGEDI)_mdx_63.hl7": [
         {
           "error": "Unknown HL7 v2.3.1 message type 'ORU^HL7^ORU_HL7'",
@@ -924,6 +941,11 @@
         }
       ],
       "Mirth-Connect-Resources-master/Sample Collection.hl7": [
+        {
+          "messages": [65],
+          "dropped": ["ZOM", "ZCA"],
+          "reason": "site-segments"
+        },
         {
           "messages": [1],
           "error": "Unknown HL7 v2.3.1 message type 'ORU^RO1'",
@@ -953,11 +975,6 @@
           "error": "NTE segment at line 14 is not allowed at this position in VXU_V04",
           "reason": "nonconformant",
           "why": "An NTE right after RXR; in VXU^V04 notes follow an OBX."
-        },
-        {
-          "messages": [41, 65],
-          "error": "HL7 version '2.2' (MSH-12) is not supported",
-          "reason": "unsupported-version"
         },
         {
           "messages": [55],

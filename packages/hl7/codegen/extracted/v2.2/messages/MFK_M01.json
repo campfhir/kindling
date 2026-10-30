@@ -1,0 +1,68 @@
+{
+  "structure": "MFK_M01",
+  "messageType": "MFK",
+  "triggerEvent": "M01",
+  "version": "2.2",
+  "description": "Master files change not otherwise specified (for backwards comp.)",
+  "title": "Master files change not otherwise specified (for backwards comp.)",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventM01.htm",
+    "pages": null,
+    "table": "MFK^M01^MFK_M01: Master files change not otherwise specified (for backwards comp.)"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M01"
+      ],
+      "eventPrinted": "M01",
+      "pdf": "hl7.eu v22 hl7v22eventM01.htm",
+      "page": null,
+      "table": "MFK^M01^MFK_M01: Master files change not otherwise specified (for backwards comp.)",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MFA",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

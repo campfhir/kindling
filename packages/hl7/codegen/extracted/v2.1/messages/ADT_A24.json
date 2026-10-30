@@ -1,0 +1,68 @@
+{
+  "structure": "ADT_A24",
+  "messageType": "ADT",
+  "triggerEvent": "A24",
+  "version": "2.1",
+  "description": "Create a Patient Link Transaction",
+  "title": "Create a Patient Link Transaction",
+  "source": {
+    "pdf": "hl7.eu v21 hl7v21eventA24.htm",
+    "pages": null,
+    "table": "ADT^A24^ADT_A24: Create a Patient Link Transaction"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A24"
+      ],
+      "eventPrinted": "A24",
+      "pdf": "hl7.eu v21 hl7v21eventA24.htm",
+      "page": null,
+      "table": "ADT^A24^ADT_A24: Create a Patient Link Transaction",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

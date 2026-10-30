@@ -1,0 +1,76 @@
+{
+  "structure": "ADT_A27",
+  "messageType": "ADT",
+  "triggerEvent": "A27",
+  "version": "2.2",
+  "description": "Cancel Pending Admit",
+  "title": "Cancel Pending Admit",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventA27.htm",
+    "pages": null,
+    "table": "ADT^A27^ADT_A27: Cancel Pending Admit"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A27"
+      ],
+      "eventPrinted": "A27",
+      "pdf": "hl7.eu v22 hl7v22eventA27.htm",
+      "page": null,
+      "table": "ADT^A27^ADT_A27: Cancel Pending Admit",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV2",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "OBX",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

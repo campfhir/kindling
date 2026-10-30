@@ -1,0 +1,174 @@
+{
+  "structure": "ADT_A01",
+  "messageType": "ADT",
+  "triggerEvent": "A01",
+  "version": "2.2",
+  "description": "Admit a Patient",
+  "title": "Admit a Patient",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventA01.htm",
+    "pages": null,
+    "table": "ADT^A01^ADT_A01: Admit a Patient"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A01"
+      ],
+      "eventPrinted": "A01",
+      "pdf": "hl7.eu v22 hl7v22eventA01.htm",
+      "page": null,
+      "table": "ADT^A01^ADT_A01: Admit a Patient",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "NK1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV2",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "OBX",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "AL1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DG1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PR1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "GT1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "IN1",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "IN2",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "IN3",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "name": "INSURANCE"
+    },
+    {
+      "kind": "segment",
+      "name": "ACC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "UB1",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "UB2",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

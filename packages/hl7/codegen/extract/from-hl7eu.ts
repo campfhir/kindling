@@ -10,6 +10,8 @@
  *                              hl7.eu page of that chapter; its tables name the PDF as their source
  *   hl7eu-captioned/chapters/chNN.htm  the hl7.eu page with a caption before each message table (caption-chapters.ts,
  *                              for v2.9, which prints none), used in place of the page
+ *   hl7eu/events/<EVENT>.htm   the event pages, read when the version has no chapter pages (v2.1, v2.2): each prints
+ *                              the structures of the messages of its event -> messages/ (one structure per TYPE_EVENT)
  *
  * The message table notation is the standard's own: `[ ]` optional, `{ }` repeating, `< A | B >` a choice
  * across rows, and `--- NAME begin` / `--- NAME end` rows for groups. A row whose brackets do not pair is
@@ -20,6 +22,7 @@
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { readEventPages } from "./hl7eu-events.ts";
 
 const [version, sourcesDir, outDir] = process.argv.slice(2);
 if (!/^v\d+\.\d+(\.\d+)?$/.test(version ?? "") || !sourcesDir || !outDir) throw new Error("usage: from-hl7eu.ts <version> <sources-dir> <out-dir>");
@@ -380,10 +383,38 @@ function addTable(caption: RegExpMatchArray, title: string, body: string[], file
   tables.push({ type, events, eventPrinted, structure: named ?? `${type}_${events[0]}`, title, file, items, problems: own });
 }
 
+// ── Event pages (v2.1, v2.2) ──────────────────────────────────────────────────
+// hl7.eu has no chapter pages for v2.1 and v2.2: each event page prints the structures of the messages of its event
+// (read by hl7eu-events.ts, which the message ledger shares). These versions define no message structure IDs, so each
+// message's structure is named TYPE_EVENT. The receiving ACK is the general acknowledgment, extracted once.
+
+const eventsDir = join(sourcesDir, "hl7eu/events");
+if (chapterFiles.length === 0 && existsSync(eventsDir)) {
+  const pages = readEventPages(eventsDir);
+  readings.push(...pages.readings);
+  perEventAck += pages.ackCount;
+  for (const m of pages.messages) {
+    const file = `events/${m.file}`;
+    if (m.items.length === 0) {
+      crossReferences.push({ type: m.type, events: [m.event], eventPrinted: m.event, structure: `${m.type}_${m.event}`, title: m.title, file, text: "the event page prints no structure" });
+      continue;
+    }
+    tables.push({ type: m.type, events: [m.event], eventPrinted: m.event, structure: `${m.type}_${m.event}`, title: m.title, file, items: m.items as Item[], problems: m.problems });
+    problems.push(...m.problems);
+  }
+  if (pages.ack) {
+    readings.push(pages.ack.reading);
+    for (const event of pages.ack.misfits) problems.push(`ACK^${event}: the acknowledgment printed for the event is not the general one with optional items left out`);
+    tables.push({ type: "ACK", events: ["varies"], eventPrinted: "varies", structure: "ACK", title: "General Acknowledgment", file: `events/${pages.ack.file}`, items: pages.ack.items as Item[], problems: [] });
+  }
+}
+
 // ── Group tables by structure and write the files ────────────────────────────
 
 /** Items compared for identity: kinds, names, cardinality, nesting; descriptions are ignored. */
-const shape = (items: Item[]): unknown => items.map((i) => [i.kind, i.name ?? i.oneOf, i.minOccurs, i.maxOccurs, i.items ? shape(i.items) : null]);
+function shape(items: Item[]): unknown {
+  return items.map((i) => [i.kind, i.name ?? i.oneOf, i.minOccurs, i.maxOccurs, i.items ? shape(i.items) : null]);
+}
 
 /**
  * The same event can be printed twice (a pharmacy response in chapters 4 and 5, ORU^R01 beside its examples in
@@ -420,7 +451,8 @@ interface Occurrence { table: Table; event: string }
 const byStructure = new Map<string, Occurrence[]>();
 for (const t of tables) for (const event of t.events) byStructure.set(t.structure, [...(byStructure.get(t.structure) ?? []), { table: t, event }]);
 const eventLabel = (t: Table) => `${t.type}^${t.eventPrinted}^${t.structure}: ${t.title}`;
-const pdf = (t: Table) => fromPdf.get(t.file) ?? `hl7.eu std${short}/${t.file.replace(".htm", ".html")}`;
+const pdf = (t: Table) =>
+  fromPdf.get(t.file) ?? (t.file.startsWith("events/") ? `hl7.eu v${short} hl7v${short}event${t.file.slice(7)}` : `hl7.eu std${short}/${t.file.replace(".htm", ".html")}`);
 
 /** "3.3.1 ADT/ACK - Admit/Visit Notification (Event A01)": the contents entry that names this event. */
 function sectionFor(type: string, event: string): string | undefined {
@@ -493,7 +525,7 @@ ${fromPdf.size ? `\nChapters read from the official PDF instead of the hl7.eu pa
 - Message tables: ${tables.length} (plus ${perEventAck} per-event ACK tables, the general acknowledgment, not extracted), structures: ${structureFiles}, events in the index: ${index.length}, event tables that differ from their primary: ${variants}.
 - Withdrawn sections (a heading followed by an "Attention ... withdrawn" note): ${withdrawnSections.map((w) => `${w.heading} (${w.file})`).join("; ") || "none"}.
 - Withdrawn segments: ${withdrawnSegments.map((w) => `${w.heading} (${w.file})`).join("; ") || "none"}.
-- Tables with no rows (cross-references): ${crossReferences.map((x) => `${x.type}^${x.eventPrinted}`).join(", ") || "none"}.
+- Tables with no rows (cross-references, or events whose page prints no structure): ${crossReferences.map((x) => `${x.type}^${x.eventPrinted}`).join(", ") || "none"}.
 
 ## Problems found while parsing
 ${[...problems, ...bracketRows].map((p) => `- ${p}`).join("\n") || "- none"}

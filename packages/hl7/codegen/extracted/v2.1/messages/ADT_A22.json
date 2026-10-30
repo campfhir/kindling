@@ -1,0 +1,60 @@
+{
+  "structure": "ADT_A22",
+  "messageType": "ADT",
+  "triggerEvent": "A22",
+  "version": "2.1",
+  "description": "A Patient Returns From A \"Leave Of Absence\"",
+  "title": "A Patient Returns From A \"Leave Of Absence\"",
+  "source": {
+    "pdf": "hl7.eu v21 hl7v21eventA22.htm",
+    "pages": null,
+    "table": "ADT^A22^ADT_A22: A Patient Returns From A \"Leave Of Absence\""
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A22"
+      ],
+      "eventPrinted": "A22",
+      "pdf": "hl7.eu v21 hl7v21eventA22.htm",
+      "page": null,
+      "table": "ADT^A22^ADT_A22: A Patient Returns From A \"Leave Of Absence\"",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

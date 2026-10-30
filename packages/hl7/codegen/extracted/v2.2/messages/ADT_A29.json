@@ -1,0 +1,76 @@
+{
+  "structure": "ADT_A29",
+  "messageType": "ADT",
+  "triggerEvent": "A29",
+  "version": "2.2",
+  "description": "Delete person information",
+  "title": "Delete person information",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventA29.htm",
+    "pages": null,
+    "table": "ADT^A29^ADT_A29: Delete person information"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A29"
+      ],
+      "eventPrinted": "A29",
+      "pdf": "hl7.eu v22 hl7v22eventA29.htm",
+      "page": null,
+      "table": "ADT^A29^ADT_A29: Delete person information",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV2",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "OBX",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

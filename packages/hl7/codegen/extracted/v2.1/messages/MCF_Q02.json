@@ -1,0 +1,44 @@
+{
+  "structure": "MCF_Q02",
+  "messageType": "MCF",
+  "triggerEvent": "Q02",
+  "version": "2.1",
+  "description": "A Query is Sent for Deferred Response",
+  "title": "A Query is Sent for Deferred Response",
+  "source": {
+    "pdf": "hl7.eu v21 hl7v21eventQ02.htm",
+    "pages": null,
+    "table": "MCF^Q02^MCF_Q02: A Query is Sent for Deferred Response"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Q02"
+      ],
+      "eventPrinted": "Q02",
+      "pdf": "hl7.eu v21 hl7v21eventQ02.htm",
+      "page": null,
+      "table": "MCF^Q02^MCF_Q02: A Query is Sent for Deferred Response",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

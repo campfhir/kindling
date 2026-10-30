@@ -1,0 +1,76 @@
+{
+  "structure": "DSR_Q03",
+  "messageType": "DSR",
+  "triggerEvent": "Q03",
+  "version": "2.2",
+  "description": "Deferred Response to A Query",
+  "title": "Deferred Response to A Query",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventQ03.htm",
+    "pages": null,
+    "table": "DSR^Q03^DSR_Q03: Deferred Response to A Query"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Q03"
+      ],
+      "eventPrinted": "Q03",
+      "pdf": "hl7.eu v22 hl7v22eventQ03.htm",
+      "page": null,
+      "table": "DSR^Q03^DSR_Q03: Deferred Response to A Query",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "QRF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSP",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

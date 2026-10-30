@@ -1,0 +1,52 @@
+{
+  "structure": "ADT_A20",
+  "messageType": "ADT",
+  "triggerEvent": "A20",
+  "version": "2.2",
+  "description": "Bed Status Update",
+  "title": "Bed Status Update",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventA20.htm",
+    "pages": null,
+    "table": "ADT^A20^ADT_A20: Bed Status Update"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A20"
+      ],
+      "eventPrinted": "A20",
+      "pdf": "hl7.eu v22 hl7v22eventA20.htm",
+      "page": null,
+      "table": "ADT^A20^ADT_A20: Bed Status Update",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "NPU",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

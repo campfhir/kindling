@@ -1,0 +1,76 @@
+{
+  "structure": "ADT_A33",
+  "messageType": "ADT",
+  "triggerEvent": "A33",
+  "version": "2.2",
+  "description": "Cancel patient departing",
+  "title": "Cancel patient departing",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventA33.htm",
+    "pages": null,
+    "table": "ADT^A33^ADT_A33: Cancel patient departing"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A33"
+      ],
+      "eventPrinted": "A33",
+      "pdf": "hl7.eu v22 hl7v22eventA33.htm",
+      "page": null,
+      "table": "ADT^A33^ADT_A33: Cancel patient departing",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV2",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "OBX",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

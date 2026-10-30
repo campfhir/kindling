@@ -9,7 +9,7 @@ always the current list of what the parser does not take and why.
 ## `generated/` (committed)
 
 `v<version>.min.hl7` and `v<version>.full.hl7` for every version this package parses that hl7apy
-has (2.3, 2.3.1, 2.4, 2.5, 2.5.1, 2.6, 2.7, 2.8, 2.8.1 and 2.8.2; hl7apy 1.3.5 has no 2.7.1, 2.9 or
+has (2.1, 2.2, 2.3, 2.3.1, 2.4, 2.5, 2.5.1, 2.6, 2.7, 2.8, 2.8.1 and 2.8.2; hl7apy 1.3.5 has no 2.7.1, 2.9 or
 2.9.1, which `src/parse.test.ts` round-trips with a few hand-written messages), one message per message structure, written by `generate.py` from the
 structure definitions of [hl7apy](https://github.com/crs4/hl7apy) (MIT), the library that
 [iris-HL7v2Gen](https://github.com/mwaseem75/iris-HL7v2Gen) (MIT) builds its test-message generator
@@ -51,8 +51,8 @@ commit, and `expectations.json` refers to the files by path.
 
 The test reads every file that contains `MSH|` (PDF, DOCX, ZIP and Markdown files are skipped),
 removes MLLP framing, normalises line endings and splits a file at every `MSH` segment. The samples
-that do not parse are nonconformant (a missing EVN or PV1, segments out of order), in a version
-this package does not parse (2.2) or carry a mistyped MSH-9; each has a record in
+that do not parse are nonconformant (a missing EVN or PV1, segments out of order) or carry a mistyped
+MSH-9, and a few carry site-defined Z segments that `parse()` skips; each has a record in
 `expectations.json` saying which.
 
 To move a source to a newer commit, change its `commit` in `scripts/fetch-fixtures.mjs`, run

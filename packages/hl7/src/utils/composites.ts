@@ -785,3 +785,18 @@ export interface DLT {
   lengthOfTimeDays?: string;
 }
 export const dltParts = (v: DLT): Part[] => [rangeSubs(v.range), v.numericThreshold, v.change, v.lengthOfTimeDays];
+
+/**
+ * Message type (CM_MSG in v2.1 to v2.3, MSG from v2.3.1): <message type (ID)> ^ <trigger event (ID)> in v2.1 and
+ * v2.2 (hl7.eu `hl7v22segmMSH.htm`), with <message structure (ID)> from v2.3.1.
+ */
+export interface MSG {
+  readonly datatype?: "MSG";
+  /** MSG.1 Message Type (`ADT`) */
+  messageCode: string;
+  /** MSG.2 Trigger Event (`A01`) */
+  triggerEvent?: string;
+  /** MSG.3 Message Structure (`ADT_A01`), from v2.3.1 */
+  messageStructure?: string;
+}
+export const msgParts = (v: MSG): Part[] => [v.messageCode, v.triggerEvent, v.messageStructure];

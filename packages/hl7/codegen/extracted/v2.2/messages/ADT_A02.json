@@ -1,0 +1,76 @@
+{
+  "structure": "ADT_A02",
+  "messageType": "ADT",
+  "triggerEvent": "A02",
+  "version": "2.2",
+  "description": "Transfer a patient",
+  "title": "Transfer a patient",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventA02.htm",
+    "pages": null,
+    "table": "ADT^A02^ADT_A02: Transfer a patient"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A02"
+      ],
+      "eventPrinted": "A02",
+      "pdf": "hl7.eu v22 hl7v22eventA02.htm",
+      "page": null,
+      "table": "ADT^A02^ADT_A02: Transfer a patient",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV2",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "OBX",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

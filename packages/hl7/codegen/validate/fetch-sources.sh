@@ -81,6 +81,16 @@ if [ -s "$index" ]; then
   done
 fi
 fetch hl7eu msgstruct "https://www.hl7.eu/HL7v2x/v$short/hl7v${short}msgstruct.htm" "$OUT/hl7eu/msgstruct.htm"
+# v2.1 and v2.2 have no chapter pages: their message structures are printed on the event pages the event index names
+if ! ls "$OUT/hl7eu/chapters/"*.htm >/dev/null 2>&1; then
+  mkdir -p "$OUT/hl7eu/events"
+  fetch hl7eu events "https://www.hl7.eu/HL7v2x/v$short/hl7v${short}event.htm" "$OUT/hl7eu/events/_index.htm"
+  if [ -s "$OUT/hl7eu/events/_index.htm" ]; then
+    for event in $(grep -oE "hl7v${short}event[A-Z0-9]{3}\.htm" "$OUT/hl7eu/events/_index.htm" | sed -E "s/^hl7v${short}event//; s/\.htm$//" | sort -u); do
+      fetch hl7eu "event $event" "https://www.hl7.eu/HL7v2x/v$short/hl7v${short}event$event.htm" "$OUT/hl7eu/events/$event.htm"
+    done
+  fi
+fi
 
 # ---- Caristix: the event index, each event and each segment ---------------------------------------
 # Events live in caristix/events/ so a message named like a segment (ACK) is not read as a segment.

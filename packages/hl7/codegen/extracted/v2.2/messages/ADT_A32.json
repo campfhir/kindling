@@ -1,0 +1,76 @@
+{
+  "structure": "ADT_A32",
+  "messageType": "ADT",
+  "triggerEvent": "A32",
+  "version": "2.2",
+  "description": "Cancel patient arriving",
+  "title": "Cancel patient arriving",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventA32.htm",
+    "pages": null,
+    "table": "ADT^A32^ADT_A32: Cancel patient arriving"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A32"
+      ],
+      "eventPrinted": "A32",
+      "pdf": "hl7.eu v22 hl7v22eventA32.htm",
+      "page": null,
+      "table": "ADT^A32^ADT_A32: Cancel patient arriving",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV2",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "OBX",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

@@ -1,0 +1,70 @@
+{
+  "structure": "BAR_P02",
+  "messageType": "BAR",
+  "triggerEvent": "P02",
+  "version": "2.2",
+  "description": "Purge Patient Accounts",
+  "title": "Purge Patient Accounts",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventP02.htm",
+    "pages": null,
+    "table": "BAR^P02^BAR_P02: Purge Patient Accounts"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "P02"
+      ],
+      "eventPrinted": "P02",
+      "pdf": "hl7.eu v22 hl7v22eventP02.htm",
+      "page": null,
+      "table": "BAR^P02^BAR_P02: Purge Patient Accounts",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "PATIENT",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "PV1",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

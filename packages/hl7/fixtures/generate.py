@@ -28,7 +28,7 @@ from pathlib import Path
 import hl7apy
 from hl7apy import load_reference
 
-VERSIONS = ["2.3", "2.3.1", "2.4", "2.5", "2.5.1", "2.6", "2.7", "2.8", "2.8.1", "2.8.2"]  # hl7apy has no 2.7.1, 2.9 or 2.9.1
+VERSIONS = ["2.1", "2.2", "2.3", "2.3.1", "2.4", "2.5", "2.5.1", "2.6", "2.7", "2.8", "2.8.1", "2.8.2"]  # hl7apy has no 2.7.1, 2.9 or 2.9.1
 OUT = Path(__file__).parent / "generated"
 
 # A 2.3 / 2.3.1 message type is named after its event, not its structure, in hl7apy's lists.
@@ -151,6 +151,9 @@ class Generator:
                 continue  # the field separator is the one after "MSH"
             if name == "MSH" and index == 2:
                 value = "^~\\&"
+            elif name == "MSH" and long_name == "MESSAGE_TYPE" and self.version in ("2.1", "2.2"):
+                # v2.1 and v2.2 define no message structure IDs: MSH-9 is the type and event alone
+                value = event.replace("_", "^") if event else structure
             elif name == "MSH" and long_name == "MESSAGE_TYPE":
                 value = f"{event.replace('_', '^')}^{structure}" if event else structure
             elif name == "MSH" and long_name == "VERSION_ID":

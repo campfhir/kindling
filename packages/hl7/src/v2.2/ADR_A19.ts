@@ -1,0 +1,275 @@
+/**
+ * Builder, parser and structure for ADR^A19 messages (HL7 v2.2).
+ *
+ * Structure: MSH MSA [ERR] QRD { QUERY_RESPONSE: [EVN] PID [{NK1}] PV1 [PV2] [{OBX}] [{AL1}] [{DG1}] [{PR1}] [{GT1}] [{ INSURANCE: IN1 [IN2] [IN3] }] [ACC] [UB1] [UB2] } [DSC]
+ *
+ * @module
+ */
+// @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
+import type { StructureItem } from "../types/schema.ts";
+import type { Result } from "../types/result.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import { MSH } from "./MSH.ts";
+import { MSA } from "./MSA.ts";
+import { ERR } from "./ERR.ts";
+import { QRD } from "./QRD.ts";
+import { EVN } from "./EVN.ts";
+import { PID } from "./PID.ts";
+import { NK1 } from "./NK1.ts";
+import { PV1 } from "./PV1.ts";
+import { PV2 } from "./PV2.ts";
+import { OBX } from "./OBX.ts";
+import { AL1 } from "./AL1.ts";
+import { DG1 } from "./DG1.ts";
+import { PR1 } from "./PR1.ts";
+import { GT1 } from "./GT1.ts";
+import { IN1 } from "./IN1.ts";
+import { IN2 } from "./IN2.ts";
+import { IN3 } from "./IN3.ts";
+import { ACC } from "./ACC.ts";
+import { UB1 } from "./UB1.ts";
+import { UB2 } from "./UB2.ts";
+import { DSC } from "./DSC.ts";
+import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
+
+/** The segments, choices and groups of ADR^A19 (HL7 v2.2), in order. */
+export const ADR_A19_STRUCTURE: StructureItem[] = [
+  { name: "MSH", required: true, repeating: false },
+  { name: "MSA", required: true, repeating: false },
+  { name: "ERR", required: false, repeating: false },
+  { name: "QRD", required: true, repeating: false },
+  {
+    name: "QUERY_RESPONSE",
+    required: true,
+    repeating: true,
+    segments: [
+      { name: "EVN", required: false, repeating: false },
+      { name: "PID", required: true, repeating: false },
+      { name: "NK1", required: false, repeating: true },
+      { name: "PV1", required: true, repeating: false },
+      { name: "PV2", required: false, repeating: false },
+      { name: "OBX", required: false, repeating: true },
+      { name: "AL1", required: false, repeating: true },
+      { name: "DG1", required: false, repeating: true },
+      { name: "PR1", required: false, repeating: true },
+      { name: "GT1", required: false, repeating: true },
+      {
+        name: "INSURANCE",
+        required: false,
+        repeating: true,
+        segments: [
+          { name: "IN1", required: true, repeating: false },
+          { name: "IN2", required: false, repeating: false },
+          { name: "IN3", required: false, repeating: false },
+        ],
+      },
+      { name: "ACC", required: false, repeating: false },
+      { name: "UB1", required: false, repeating: false },
+      { name: "UB2", required: false, repeating: false },
+    ],
+  },
+  { name: "DSC", required: false, repeating: false },
+];
+
+/** The QUERY RESPONSE group of a parsed ADR^A19 (HL7 v2.2) message. */
+export interface ParsedQueryResponse {
+  /** The EVN segment. */
+  event?: EVN;
+  /** The PID segment. */
+  patient: PID;
+  /** The NK1 segments. */
+  nextOfKin?: NK1[];
+  /** The PV1 segment. */
+  visit: PV1;
+  /** The PV2 segment. */
+  visitDetails?: PV2;
+  /** The OBX segments. */
+  observations?: OBX[];
+  /** The AL1 segments. */
+  allergies?: AL1[];
+  /** The DG1 segments. */
+  diagnoses?: DG1[];
+  /** The PR1 segments. */
+  procedures?: PR1[];
+  /** The GT1 segments. */
+  guarantors?: GT1[];
+  /** The INSURANCE groups. */
+  insurances?: ParsedInsurance[];
+  /** The ACC segment. */
+  accident?: ACC;
+  /** The UB1 segment. */
+  ub82?: UB1;
+  /** The UB2 segment. */
+  ub92?: UB2;
+}
+
+/** The INSURANCE group of a parsed ADR^A19 (HL7 v2.2) message. */
+export interface ParsedInsurance {
+  /** The IN1 segment. */
+  insurance: IN1;
+  /** The IN2 segment. */
+  insuranceDetails?: IN2;
+  /** The IN3 segment. */
+  insuranceCertification?: IN3;
+}
+
+/** Structured result of parsing an HL7 ADR^A19 (HL7 v2.2) message. */
+export interface ParsedADR_A19 extends ParsedMessageBase {
+  /** The MSH segment. */
+  header: MSH;
+  /** The MSA segment. */
+  acknowledgment: MSA;
+  /** The ERR segment. */
+  error?: ERR;
+  /** The QRD segment. */
+  query: QRD;
+  /** The QUERY RESPONSE groups. */
+  queryResponses: ParsedQueryResponse[];
+  /** The DSC segment. */
+  continuation?: DSC;
+}
+
+/** The segment parsers of ADR^A19 (HL7 v2.2). */
+const PARSERS: SegmentParsers = {
+  MSH: (s) => MSH.parse(s),
+  MSA: (s, e) => MSA.parse(s, e),
+  ERR: (s, e) => ERR.parse(s, e),
+  QRD: (s, e) => QRD.parse(s, e),
+  EVN: (s, e) => EVN.parse(s, e),
+  PID: (s, e) => PID.parse(s, e),
+  NK1: (s, e) => NK1.parse(s, e),
+  PV1: (s, e) => PV1.parse(s, e),
+  PV2: (s, e) => PV2.parse(s, e),
+  OBX: (s, e) => OBX.parse(s, e),
+  AL1: (s, e) => AL1.parse(s, e),
+  DG1: (s, e) => DG1.parse(s, e),
+  PR1: (s, e) => PR1.parse(s, e),
+  GT1: (s, e) => GT1.parse(s, e),
+  IN1: (s, e) => IN1.parse(s, e),
+  IN2: (s, e) => IN2.parse(s, e),
+  IN3: (s, e) => IN3.parse(s, e),
+  ACC: (s, e) => ACC.parse(s, e),
+  UB1: (s, e) => UB1.parse(s, e),
+  UB2: (s, e) => UB2.parse(s, e),
+  DSC: (s, e) => DSC.parse(s, e),
+};
+
+/** Parser for HL7 ADR^A19 (HL7 v2.2) messages. */
+export class ADR_A19_Parser {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "ADR_A19";
+  /** The structure the message is parsed against. */
+  protected readonly structure: StructureItem[] = ADR_A19_STRUCTURE;
+  /** The segment parsers, keyed by segment name. */
+  protected readonly parsers: SegmentParsers = PARSERS;
+
+  /** Parses the input string into a structured instance. */
+  parse(messageString: string): Result<ParsedADR_A19> {
+    return parseStructure<ParsedADR_A19>(this.messageName, this.structure, this.parsers, messageString);
+  }
+}
+
+/** Parses an HL7 ADR^A19 (HL7 v2.2) message string into a structured result. */
+export function parseADR_A19(messageString: string): Result<ParsedADR_A19> {
+  return new ADR_A19_Parser().parse(messageString);
+}
+
+/** The QUERY RESPONSE group of an ADR^A19 (HL7 v2.2) message being built. */
+export interface QueryResponseGroup {
+  /** The EVN segment. */
+  event?: EVN;
+  /** The PID segment. */
+  patient: PID;
+  /** The NK1 segments. */
+  nextOfKin?: NK1[];
+  /** The PV1 segment. */
+  visit: PV1;
+  /** The PV2 segment. */
+  visitDetails?: PV2;
+  /** The OBX segments. */
+  observations?: OBX[];
+  /** The AL1 segments. */
+  allergies?: AL1[];
+  /** The DG1 segments. */
+  diagnoses?: DG1[];
+  /** The PR1 segments. */
+  procedures?: PR1[];
+  /** The GT1 segments. */
+  guarantors?: GT1[];
+  /** The INSURANCE groups. */
+  insurances?: InsuranceGroup[];
+  /** The ACC segment. */
+  accident?: ACC;
+  /** The UB1 segment. */
+  ub82?: UB1;
+  /** The UB2 segment. */
+  ub92?: UB2;
+}
+
+/** The INSURANCE group of an ADR^A19 (HL7 v2.2) message being built. */
+export interface InsuranceGroup {
+  /** The IN1 segment. */
+  insurance: IN1;
+  /** The IN2 segment. */
+  insuranceDetails?: IN2;
+  /** The IN3 segment. */
+  insuranceCertification?: IN3;
+}
+
+/** The optional segments and groups of an ADR^A19 (HL7 v2.2) message. */
+export interface ADR_A19Options {
+  /** The ERR segment. */
+  error?: ERR;
+  /** The DSC segment. */
+  continuation?: DSC;
+}
+
+/** Builder for HL7 ADR^A19 (HL7 v2.2) messages. */
+export class ADR_A19<TMSH extends MSH = MSH, TMSA extends MSA = MSA, TQRD extends QRD = QRD> {
+  /** The message name used in error messages. */
+  protected readonly messageName: string = "ADR_A19";
+  /** The structure the message is verified against and encoded in. */
+  protected readonly structure: StructureItem[] = ADR_A19_STRUCTURE;
+
+  /** Constructor. */
+  constructor(
+    public header: TMSH,
+    public acknowledgment: TMSA,
+    public query: TQRD,
+    public queryResponses: QueryResponseGroup[],
+    public options: ADR_A19Options = {},
+    protected encoding: EncodingCharacters = DEFAULT_ENCODING,
+  ) {}
+
+  /** The message as one object keyed by structure property name (what verify() and encode() work on). */
+  toInput(): StructureInput {
+    return { ...this.options, header: this.header, acknowledgment: this.acknowledgment, query: this.query, queryResponses: this.queryResponses };
+  }
+
+  /** Validates the message structure, returning a result. */
+  verify(): { valid: boolean; errors: string[] } {
+    const errors = verifyStructure(this.structure, this.toInput());
+    return { valid: errors.length === 0, errors };
+  }
+
+  /** Encodes this message to its HL7 wire string. */
+  encode(): string {
+    const verification = this.verify();
+    if (!verification.valid) {
+      throw new Error(`Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`);
+    }
+    return encodeStructure(this.structure, this.toInput(), this.encoding);
+  }
+}
+
+/** Builds an HL7 ADR^A19 (HL7 v2.2) message. */
+export function createADR_A19<TMSH extends MSH = MSH, TMSA extends MSA = MSA, TQRD extends QRD = QRD>(
+  header: TMSH,
+  acknowledgment: TMSA,
+  query: TQRD,
+  queryResponses: QueryResponseGroup[],
+  options: ADR_A19Options = {},
+  encoding: EncodingCharacters = DEFAULT_ENCODING,
+): ADR_A19<TMSH, TMSA, TQRD> {
+  return new ADR_A19(header, acknowledgment, query, queryResponses, options, encoding);
+}

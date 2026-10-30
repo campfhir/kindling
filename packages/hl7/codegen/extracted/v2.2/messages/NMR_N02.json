@@ -1,0 +1,118 @@
+{
+  "structure": "NMR_N02",
+  "messageType": "NMR",
+  "triggerEvent": "N02",
+  "version": "2.2",
+  "description": "Network Management Query",
+  "title": "Network Management Query",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventN02.htm",
+    "pages": null,
+    "table": "NMR^N02^NMR_N02: Network Management Query"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "N02"
+      ],
+      "eventPrinted": "N02",
+      "pdf": "hl7.eu v22 hl7v22eventN02.htm",
+      "page": null,
+      "table": "NMR^N02^NMR_N02: Network Management Query",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "CLOCK_AND_STATS_WITH_NOTES_ALT",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "NCK",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "NST",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "NSC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

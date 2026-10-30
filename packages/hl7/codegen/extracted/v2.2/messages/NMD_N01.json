@@ -1,0 +1,124 @@
+{
+  "structure": "NMD_N01",
+  "messageType": "NMD",
+  "triggerEvent": "N01",
+  "version": "2.2",
+  "description": "Network Management Data",
+  "title": "Network Management Data",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventN01.htm",
+    "pages": null,
+    "table": "NMD^N01^NMD_N01: Network Management Data"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "N01"
+      ],
+      "eventPrinted": "N01",
+      "pdf": "hl7.eu v22 hl7v22eventN01.htm",
+      "page": null,
+      "table": "NMD^N01^NMD_N01: Network Management Data",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "CLOCK_AND_STATS_WITH_NOTES",
+      "items": [
+        {
+          "kind": "group",
+          "name": "CLOCK",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "NCK",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "APP_STATS",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "NST",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "APP_STATUS",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "NSC",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

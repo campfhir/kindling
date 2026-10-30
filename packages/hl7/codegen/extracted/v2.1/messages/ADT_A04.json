@@ -1,0 +1,76 @@
+{
+  "structure": "ADT_A04",
+  "messageType": "ADT",
+  "triggerEvent": "A04",
+  "version": "2.1",
+  "description": "Register a Patient",
+  "title": "Register a Patient",
+  "source": {
+    "pdf": "hl7.eu v21 hl7v21eventA04.htm",
+    "pages": null,
+    "table": "ADT^A04^ADT_A04: Register a Patient"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A04"
+      ],
+      "eventPrinted": "A04",
+      "pdf": "hl7.eu v21 hl7v21eventA04.htm",
+      "page": null,
+      "table": "ADT^A04^ADT_A04: Register a Patient",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "NK1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DG1",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

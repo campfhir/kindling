@@ -5,6 +5,8 @@ import { parseBatch } from "./batch.ts";
 import { MESSAGES } from "./v2.3/registry.ts";
 import { MESSAGES as MESSAGES_231 } from "./v2.3.1/registry.ts";
 import { MESSAGES as MESSAGES_24 } from "./v2.4/registry.ts";
+import { MESSAGES as MESSAGES_21 } from "./v2.1/registry.ts";
+import { MESSAGES as MESSAGES_22 } from "./v2.2/registry.ts";
 import { parseADT_A01, parseACK, parseADT_A04 } from "./v2.3/index.ts";
 import * as par231 from "./v2.3.1/index.ts";
 import * as par24 from "./v2.4/index.ts";
@@ -86,14 +88,14 @@ describe("selectParser", () => {
   });
 
   test("rejects a version this release does not dispatch, unless the caller picks one", () => {
-    expect(SUPPORTED_VERSIONS).toEqual(["2.3", "2.3.1", "2.4", "2.5", "2.5.1", "2.6", "2.7", "2.7.1", "2.8", "2.8.1", "2.8.2", "2.9", "2.9.1"]);
-    const other = selectParser(MSH("ADT^A01", "2.2"));
+    expect(SUPPORTED_VERSIONS).toEqual(["2.1", "2.2", "2.3", "2.3.1", "2.4", "2.5", "2.5.1", "2.6", "2.7", "2.7.1", "2.8", "2.8.1", "2.8.2", "2.9", "2.9.1"]);
+    const other = selectParser(MSH("ADT^A01", "2.0"));
     expect(other.ok).toBe(false);
     expect(other.err?.message).toBe(
-      "HL7 version '2.2' (MSH-12) is not supported by this release, which parses 2.3, 2.3.1, 2.4, 2.5, 2.5.1, 2.6, 2.7, 2.7.1, 2.8, 2.8.1, 2.8.2, 2.9, 2.9.1; pass { version: \"2.9.1\" } to parse the message as that version",
+      "HL7 version '2.0' (MSH-12) is not supported by this release, which parses 2.1, 2.2, 2.3, 2.3.1, 2.4, 2.5, 2.5.1, 2.6, 2.7, 2.7.1, 2.8, 2.8.1, 2.8.2, 2.9, 2.9.1; pass { version: \"2.9.1\" } to parse the message as that version",
     );
-    const forced = select(MSH("ADT^A01", "2.2"), { version: "2.3" });
-    expect(forced).toMatchObject({ version: "2.3", structure: "ADT_A01", messageType: { version: "2.2" } });
+    const forced = select(MSH("ADT^A01", "2.0"), { version: "2.3" });
+    expect(forced).toMatchObject({ version: "2.3", structure: "ADT_A01", messageType: { version: "2.0" } });
   });
 
   test("rejects an empty MSH-12, unless the caller picks a version", () => {
@@ -153,6 +155,33 @@ describe("selectParser", () => {
     }
   });
 
+  test.each([
+    ["2.1", MESSAGES_21, 39],
+    ["2.2", MESSAGES_22, 73],
+  ] as const)("every v%s message structure is reached from its own MSH-9", (version, registry, count) => {
+    const names = Object.keys(registry);
+    expect(names).toHaveLength(count);
+    for (const name of names) {
+      const [code, event] = name.split("_");
+      const type = event ? `${code}^${event}` : `${code}^A01`;
+      const selected = select(MSH(type, version));
+      expect(selected.structure, type).toBe(name);
+      expect(selected.parse, type).toBe(registry[name as keyof typeof registry]);
+    }
+  });
+
+  test("v2.1 MSH-9 names the message type alone: the event comes from EVN-1, or is the type's only event", () => {
+    // hl7.eu hl7v21segmMSH.htm: MSH-9 is an ID (the message type); the trigger event is EVN-1
+    expect(select([MSH("ADT", "2.1"), "EVN|A04|19940101"].join("\r")).structure).toBe("ADT_A04");
+    expect(select([MSH("BAR", "2.1"), "EVN|P02|19940101"].join("\r")).structure).toBe("BAR_P02");
+    expect(select(MSH("ORM", "2.1")).structure).toBe("ORM_O01");
+    expect(select(MSH("ACK", "2.1")).structure).toBe("ACK");
+    // QRY has several v2.1 events (A19, Q01, Q02) and no EVN to choose between them
+    expect(selectParser(MSH("QRY", "2.1")).err?.message).toBe("Unknown HL7 v2.1 message type 'QRY' (MSH-9)");
+    // a trigger event that MSH-9 does name wins over EVN-1
+    expect(select([MSH("ADT^A01", "2.2"), "EVN|A04|19940101"].join("\r")).structure).toBe("ADT_A01");
+  });
+
   test("every v2.3 message structure is reached from its own MSH-9", () => {
     const names = Object.keys(MESSAGES);
     expect(names).toHaveLength(276);
@@ -169,7 +198,8 @@ describe("selectParser", () => {
 describe("parse", () => {
   test.each(SUPPORTED_VERSIONS.map((v) => [v]))("dispatches HL7 v%s and round-trips its ADT^A01, ACK and ORU^R01", (version) => {
     const messages = {
-      ADT_A01: [MSH("ADT^A01^ADT_A01", version), "EVN|A01|20231015120000", "PID|1||12345^^^HOSP^MR||Doe^John", "PV1|1|I|ICU^1^A"],
+      // NK1 is required in the v2.1 ADT^A01 (MSH EVN PID NK1 PV1 [DG1]) and optional from v2.2 on
+      ADT_A01: [MSH("ADT^A01^ADT_A01", version), "EVN|A01|20231015120000", "PID|1||12345^^^HOSP^MR||Doe^John", "NK1|1|Doe^Jane", "PV1|1|I|ICU^1^A"],
       ACK: [MSH("ACK^A01^ACK", version), "MSA|AA|MSG001"],
       ORU_R01: [MSH("ORU^R01^ORU_R01", version), "PID|1||12345", "OBR|1|||CBC^Complete Blood Count", "OBX|1|NM|718-7^Hemoglobin^LN||15.5|g/dL"],
     };
@@ -221,14 +251,14 @@ describe("parse", () => {
   test("passes selection errors through", () => {
     expect(parse("").err?.message).toBe("Empty message");
     expect(parse(MSH("ZZZ^Z01")).err?.message).toBe("Unknown HL7 v2.3 message type 'ZZZ^Z01' (MSH-9)");
-    expect(parse(MSH("ADT^A01", "2.2")).err?.message).toMatch(/not supported by this release/);
+    expect(parse(MSH("ADT^A01", "2.0")).err?.message).toMatch(/not supported by this release/);
   });
 
   test("parses a 2.2-labelled feed as 2.4 on request, and 2.3.1 to 2.5.1 feeds natively", () => {
     const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
-    const message = [MSH("ADT^A01^ADT_A01", "2.2"), "EVN|A01", "PID|1||1", "PV1|1|O", "ZPD|custom"].join("\r");
+    const message = [MSH("ADT^A01^ADT_A01", "2.0"), "EVN|A01", "PID|1||1", "PV1|1|O", "ZPD|custom"].join("\r");
     const result = parse(message, { version: "2.4" });
-    expect(result.val).toMatchObject({ kind: "message", version: "2.4", structure: "ADT_A01", messageType: { version: "2.2", messageStructure: "ADT_A01" } });
+    expect(result.val).toMatchObject({ kind: "message", version: "2.4", structure: "ADT_A01", messageType: { version: "2.0", messageStructure: "ADT_A01" } });
     // A 2.4 A01 ends with PDA and carries ROLs after PD1 and PV2.
     const v24 = parse([MSH("ADT^A01^ADT_A01", "2.4"), "EVN|A01", "PID|1||1", "ROL|1|AD|AT", "PV1|1|O", "PV2|", "ROL|2|AD|CP", "PDA|"].join("\r"));
     expect(v24.val).toMatchObject({ kind: "message", version: "2.4", structure: "ADT_A01" });

@@ -1,0 +1,68 @@
+{
+  "structure": "UDM_Q05",
+  "messageType": "UDM",
+  "triggerEvent": "Q05",
+  "version": "2.1",
+  "description": "Unsolicited Updates, ODM Message, Trigger Event Q05",
+  "title": "Unsolicited Updates, ODM Message, Trigger Event Q05",
+  "source": {
+    "pdf": "hl7.eu v21 hl7v21eventQ05.htm",
+    "pages": null,
+    "table": "UDM^Q05^UDM_Q05: Unsolicited Updates, ODM Message, Trigger Event Q05"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Q05"
+      ],
+      "eventPrinted": "Q05",
+      "pdf": "hl7.eu v21 hl7v21eventQ05.htm",
+      "page": null,
+      "table": "UDM^Q05^UDM_Q05: Unsolicited Updates, ODM Message, Trigger Event Q05",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "URD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "URS",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSP",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

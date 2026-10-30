@@ -1,0 +1,84 @@
+{
+  "structure": "DSR_Q01",
+  "messageType": "DSR",
+  "triggerEvent": "Q01",
+  "version": "2.2",
+  "description": "A Query is made for immediate Display Response",
+  "title": "A Query is made for immediate Display Response",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventQ01.htm",
+    "pages": null,
+    "table": "DSR^Q01^DSR_Q01: A Query is made for immediate Display Response"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Q01"
+      ],
+      "eventPrinted": "Q01",
+      "pdf": "hl7.eu v22 hl7v22eventQ01.htm",
+      "page": null,
+      "table": "DSR^Q01^DSR_Q01: A Query is made for immediate Display Response",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "QRF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSP",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

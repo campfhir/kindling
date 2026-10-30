@@ -1,0 +1,7 @@
+{
+  "PD1": {
+    "date": "2026-10-30",
+    "count": 0,
+    "note": "hl7.eu hl7v21segmPD1.htm names PD1 (\"PATIENT DEMOGRAPHICS\") in the v2.1 segment index and prints it with an empty field table. Caristix 2.1 gives it one placeholder field (PD1.1, ST); HAPI v21 has no PD1 class. No v2.1 message uses it. hl7.eu decides: no fields, as for ZL7 in v2.8 (ledger-v28-notes.json)."
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "structure": "ADT_A24",
+  "messageType": "ADT",
+  "triggerEvent": "A24",
+  "version": "2.2",
+  "description": "Link Patient Information",
+  "title": "Link Patient Information",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventA24.htm",
+    "pages": null,
+    "table": "ADT^A24^ADT_A24: Link Patient Information"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A24"
+      ],
+      "eventPrinted": "A24",
+      "pdf": "hl7.eu v22 hl7v22eventA24.htm",
+      "page": null,
+      "table": "ADT^A24^ADT_A24: Link Patient Information",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

@@ -1,0 +1,68 @@
+{
+  "structure": "DFT_P03",
+  "messageType": "DFT",
+  "triggerEvent": "P03",
+  "version": "2.1",
+  "description": "Post Detail Financial Transactions",
+  "title": "Post Detail Financial Transactions",
+  "source": {
+    "pdf": "hl7.eu v21 hl7v21eventP03.htm",
+    "pages": null,
+    "table": "DFT^P03^DFT_P03: Post Detail Financial Transactions"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "P03"
+      ],
+      "eventPrinted": "P03",
+      "pdf": "hl7.eu v21 hl7v21eventP03.htm",
+      "page": null,
+      "table": "DFT^P03^DFT_P03: Post Detail Financial Transactions",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "FT1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

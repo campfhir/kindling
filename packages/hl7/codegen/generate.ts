@@ -17,6 +17,8 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { VersionSchema } from "../src/types/schema.ts";
 import { segmentNames } from "../src/types/schema.ts";
+import { V2_1 } from "./schemas/v2.1/version.ts";
+import { V2_2 } from "./schemas/v2.2/version.ts";
 import { V2_3 } from "./schemas/v2.3/version.ts";
 import { V2_3_1 } from "./schemas/v2.3.1/version.ts";
 import { V2_4 } from "./schemas/v2.4/version.ts";
@@ -39,7 +41,7 @@ const DRY_RUN = process.argv.includes("--dry-run");
 
 // ── Registered versions — order matters (bases before derived) ────────────────
 
-const VERSIONS: VersionSchema[] = [V2_3, V2_3_1, V2_4, V2_5, V2_5_1, V2_6, V2_7, V2_7_1, V2_8, V2_8_1, V2_8_2, V2_9, V2_9_1];
+const VERSIONS: VersionSchema[] = [V2_1, V2_2, V2_3, V2_3_1, V2_4, V2_5, V2_5_1, V2_6, V2_7, V2_7_1, V2_8, V2_8_1, V2_8_2, V2_9, V2_9_1];
 
 
 // ── Helpers ───────────────────────────────────────────────────────────────────

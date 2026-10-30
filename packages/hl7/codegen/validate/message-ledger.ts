@@ -26,6 +26,8 @@
  *   database: every structure's syntax with its group names, and its events. A second hl7.eu reading beside the chapter
  *   tables (v2.9, which has no Caristix or HAPI); where the two disagree the list decides, since the chapter tables are
  *   read as text and carry typos ("[{ PRT }}"), unless the chapters are the official ones (--hl7org), which decide.
+ *   --hl7eu-events: the hl7.eu event pages (hl7eu/events, fetched for v2.1 and v2.2, which have no chapter pages), read by
+ *   codegen/extract/hl7eu-events.ts; they are the hl7.eu column, as the chapter tables are for the later versions.
  *
  * Reads are local only; nothing is fetched here.
  */
@@ -34,6 +36,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { StructureItem } from "../../src/types/schema.ts";
 import { isSegmentChoice, isSegmentGroup } from "../../src/types/schema.ts";
+import { readEventPages, type EventItem } from "../extract/hl7eu-events.ts";
 
 const ROOT = join(fileURLToPath(import.meta.url), "../../..");
 const args = process.argv.slice(2);
@@ -47,6 +50,7 @@ const hapi = option("--hapi", 3);
 const hl7euDir = option("--hl7eu")?.[0];
 const hl7orgDir = option("--hl7org")?.[0];
 const listFile = option("--hl7eu-list")?.[0];
+const eventsDir = option("--hl7eu-events")?.[0];
 const hl7orgFiles = hl7orgDir && existsSync(hl7orgDir) ? readdirSync(hl7orgDir).filter((f) => f.endsWith(".htm")) : [];
 if (!/^v\d+\.\d+(\.\d+)?$/.test(VERSION ?? "") || !caristixDir || !hapi) {
   console.error("Usage: message-ledger.ts <version> --caristix <dir> --hapi <messages-dir> <groups-dir> <eventmap.properties> [--hl7eu <chapters-dir>]");
@@ -253,6 +257,22 @@ if (hl7euDir && existsSync(hl7euDir)) {
     }
   }
   for (const { key, lines } of hl7euAliases) if (!hl7eu.has(key)) hl7eu.set(key, lines);
+}
+// The event pages (v2.1, v2.2): each message's structure as the extraction reads it, keyed TYPE_EVENT; the general
+// acknowledgment is ACK. A placeholder ("Zxx") is dropped, as the importer drops placeholder rows.
+if (eventsDir) {
+  const pages = readEventPages(eventsDir);
+  const renderEvent = (items: EventItem[], depth: number): Line[] =>
+    items.flatMap((i) => {
+      const pad = "  ".repeat(depth);
+      const required = i.minOccurs !== 0, repeating = i.maxOccurs === "*";
+      if (i.kind === "placeholder") return [];
+      if (i.kind === "choice") return [pad + mark(required, false, `<${i.oneOf!.join("|")}>`)];
+      if (i.kind === "group") return [pad + mark(required, repeating, `${i.name ?? "GROUP"}:`), ...renderEvent(i.items!, depth + 1)];
+      return [pad + mark(required, repeating, i.name!)];
+    });
+  for (const m of pages.messages) if (m.items.length && !hl7eu.has(`${m.type}_${m.event}`)) hl7eu.set(`${m.type}_${m.event}`, renderEvent(m.items, 0));
+  if (pages.ack) hl7eu.set("ACK", renderEvent(pages.ack.items, 0));
 }
 /**
  * Reads one table's abstract syntax: segment codes and brackets until the next table or heading.
@@ -484,7 +504,9 @@ async function main(): Promise<void> {
   lines.push("");
   lines.push("| Source | Where | Role |");
   lines.push("|---|---|---|");
-  lines.push(hl7euDir ? `| hl7.eu | the printed chapters, \`https://www.hl7.eu/HL7v2x/v${SHORT}/std${SHORT}/ch<n>.htm\`, message tables read as text | Authoritative |` : `| hl7.eu | no chapter pages for ${VERSION} | — |`);
+  lines.push(eventsDir
+    ? `| hl7.eu | the event pages, \`https://www.hl7.eu/HL7v2x/v${SHORT}/hl7v${SHORT}event<EVENT>.htm\` (${VERSION} has no chapter pages): each message's structure, read by \`codegen/extract/hl7eu-events.ts\` | Authoritative |`
+    : hl7euDir ? `| hl7.eu | the printed chapters, \`https://www.hl7.eu/HL7v2x/v${SHORT}/std${SHORT}/ch<n>.htm\`, message tables read as text | Authoritative |` : `| hl7.eu | no chapter pages for ${VERSION} | — |`);
   if (hl7orgFiles.length) lines.push(`| hl7.org | the official chapter PDFs for ${hl7orgFiles.map((f) => f.replace(".htm", "")).join(", ")} (name and SHA-256 in \`codegen/validate/sources/${VERSION}-hl7org.tsv\`), converted by \`codegen/extract/pdf-chapter.ts\`; in the hl7.eu column they replace the hl7.eu page of that chapter | Authoritative |`);
   if (hl7euList.size) lines.push(`| hl7.eu list | the message structure list, \`https://www.hl7.eu/HL7v2x/v${SHORT}/hl7v${SHORT}msgstruct.htm\`, printed from the HL7 database: each structure's syntax and its events | ${hl7orgFiles.length ? "Cross-check of the official chapters" : "Authoritative where it and the chapter table disagree"} |`);
   lines.push(`| Caristix | \`https://hl7-definition.caristix.com/v2-api/1/HL7v${API}/TriggerEvents/<EVENT>\` | Validation reference |`);

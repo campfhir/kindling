@@ -1,0 +1,52 @@
+{
+  "structure": "MFN_M01",
+  "messageType": "MFN",
+  "triggerEvent": "M01",
+  "version": "2.2",
+  "description": "Master files change not otherwise specified (for backwards comp.)",
+  "title": "Master files change not otherwise specified (for backwards comp.)",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventM01.htm",
+    "pages": null,
+    "table": "MFN^M01^MFN_M01: Master files change not otherwise specified (for backwards comp.)"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M01"
+      ],
+      "eventPrinted": "M01",
+      "pdf": "hl7.eu v22 hl7v22eventM01.htm",
+      "page": null,
+      "table": "MFN^M01^MFN_M01: Master files change not otherwise specified (for backwards comp.)",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MFE",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

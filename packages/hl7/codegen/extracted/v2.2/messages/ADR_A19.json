@@ -1,0 +1,216 @@
+{
+  "structure": "ADR_A19",
+  "messageType": "ADR",
+  "triggerEvent": "A19",
+  "version": "2.2",
+  "description": "Patient Query",
+  "title": "Patient Query",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventA19.htm",
+    "pages": null,
+    "table": "ADR^A19^ADR_A19: Patient Query"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A19"
+      ],
+      "eventPrinted": "A19",
+      "pdf": "hl7.eu v22 hl7v22eventA19.htm",
+      "page": null,
+      "table": "ADR^A19^ADR_A19: Patient Query",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "QUERY_RESPONSE",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "EVN",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "NK1",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "PV1",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "PV2",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "OBX",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "AL1",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "DG1",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "PR1",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "GT1",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "IN1",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "segment",
+              "name": "IN2",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "segment",
+              "name": "IN3",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "name": "INSURANCE"
+        },
+        {
+          "kind": "segment",
+          "name": "ACC",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "UB1",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "UB2",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

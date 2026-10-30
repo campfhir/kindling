@@ -1,0 +1,129 @@
+{
+  "structure": "ORR_O02",
+  "messageType": "ORR",
+  "triggerEvent": "O02",
+  "version": "2.2",
+  "description": "Response Message",
+  "title": "Response Message",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventO02.htm",
+    "pages": null,
+    "table": "ORR^O02^ORR_O02: Response Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "O02"
+      ],
+      "eventPrinted": "O02",
+      "pdf": "hl7.eu v22 hl7v22eventO02.htm",
+      "page": null,
+      "table": "ORR^O02^ORR_O02: Response Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "NTE",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "PATIENT",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "ORDER",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "ORC",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "group",
+              "name": "ORDER_DETAIL",
+              "items": [
+                {
+                  "kind": "choice",
+                  "oneOf": [
+                    "OBR",
+                    "RQD",
+                    "RQ1",
+                    "RXO",
+                    "ODS",
+                    "ODT"
+                  ],
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}
