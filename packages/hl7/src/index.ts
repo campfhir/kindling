@@ -1,6 +1,6 @@
 /**
  * `@campfhir/hl7` — a zero-dependency TypeScript library for building and
- * parsing HL7v2 messages (v2.3 … v2.5.1), runnable on Node.js, Bun,
+ * parsing HL7v2 messages (v2.3 … v2.9.1), runnable on Node.js, Bun,
  * browsers, and Cloudflare Workers.
  *
  * This root entrypoint exposes the root parser (`parse()`, which reads MSH-9 and MSH-12 and
@@ -11,7 +11,7 @@
  *
  * Versioned segments, parsers, and builders are imported from their own
  * subpaths, e.g. `@campfhir/hl7/v2.5.1` or
- * `@campfhir/hl7/v2.5.1`.
+ * `@campfhir/hl7/v2.9.1/ADT_A01`.
  *
  * @module
  */

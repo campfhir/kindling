@@ -111,9 +111,9 @@ describe("parseBatch", () => {
   });
 
   test("passes parse options to every message", () => {
-    const file = parseBatch([A01("1").replace("|P|2.3", "|P|2.6"), ACK("2").replace("|P|2.3", "|P|")].join("\r"));
+    const file = parseBatch([A01("1").replace("|P|2.3", "|P|2.2"), ACK("2").replace("|P|2.3", "|P|")].join("\r"));
     expect(file.val!.batches[0].messages.map((m) => m.ok)).toEqual([false, false]);
-    const forced = parseBatch([A01("1").replace("|P|2.3", "|P|2.6"), ACK("2").replace("|P|2.3", "|P|")].join("\r"), { version: "2.3" });
+    const forced = parseBatch([A01("1").replace("|P|2.3", "|P|2.2"), ACK("2").replace("|P|2.3", "|P|")].join("\r"), { version: "2.3" });
     expect(structures(forced.val!)).toEqual([["ADT_A01", "ACK"]]);
   });
 

@@ -13,18 +13,17 @@ A modular TypeScript library for building and parsing HL7v2 messages, published 
 - **Round-trip Support**: Build messages and parse them back with full fidelity
 - **Modular Architecture**: Organized by HL7 version for easy extension
 - **Version Support**: every HL7 v2 release from v2.3 to v2.9.1, the latest (v2.3, 2.3.1, 2.4, 2.5, 2.5.1, 2.6, 2.7, 2.7.1,
-  2.8, 2.8.1, 2.8.2, 2.9, 2.9.1); the root `parse()` dispatches v2.3 to v2.5.1 (see [Versions](#versions))
+  2.8, 2.8.1, 2.8.2, 2.9, 2.9.1), all dispatched by the root `parse()` (see [Versions](#versions))
 - **Date Input**: Segment date methods accept `Date` objects with optional HL7 layout format, in addition to pre-formatted strings
 - **Value Extraction**: Path-based field/component extraction utility
 - **Custom Segments**: Build Z-segments and other custom segments with a simple field-setter API
 - **Message Editor**: Fluent API for inserting segments into, or updating field values in, any built message without modifying the builder
-- **Comprehensive Tests**: 9,370 tests across 405 test files, co-located with source (Go style)
+- **Comprehensive Tests**: 11,651 tests across 405 test files (with the external fixtures fetched, as CI does), co-located with source (Go style)
 
 ## Roadmap
 
-See [ROADMAP.md](ROADMAP.md). Every release from v2.3 to v2.9.1 has its segments and messages; v2.3 through
-v2.5.1 are also dispatched by the root `parse()`, and wiring v2.6 to v2.9.1 into it, with their round-trip and
-position tests, is the next step. Checklists of the remaining [segments](docs/ROADMAP-SEGMENTS.md) and
+See [ROADMAP.md](ROADMAP.md). Every release from v2.3 to v2.9.1 has its segments and messages, and the root
+`parse()` dispatches all of them. Checklists of the remaining [segments](docs/ROADMAP-SEGMENTS.md) and
 [event types](docs/ROADMAP-EVENTS.md).
 
 ## Project Structure
@@ -144,11 +143,11 @@ A few messages of each version from v2.6 on are not generated yet: their tables 
 or a placeholder group, which the message schema cannot express, or they wrap such a message (8 in v2.6,
 22–29 in the later versions; each version's `codegen/extracted/<version>/IMPORT.md` lists them with the reason).
 
-The root `parse()` dispatches v2.3 to v2.5.1: 1.0 parses v2.3, 1.1 adds v2.3.1, 1.2 adds v2.4
-(2.0 drops CommonJS and Node < 24), 2.1 adds v2.5 and 2.2 adds v2.5.1. The later versions arrived as
-modules first: 2.3 adds v2.6, v2.7 and v2.7.1, 2.4 v2.8, 2.5 v2.8.1, 2.6 v2.8.2, 2.7 v2.9 and 2.8 v2.9.1.
-Their parsers and builders are imported from `@campfhir/hl7/<version>` directly; they join `parse()` once
-they have the round-trip tests the earlier versions have, see the [roadmap](ROADMAP.md).
+The root `parse()` dispatches every version: 1.0 parses v2.3, 1.1 adds v2.3.1, 1.2 adds v2.4 (2.0 drops
+CommonJS and Node < 24), 2.1 adds v2.5 and 2.2 adds v2.5.1. The later versions arrived as modules first
+(2.3 adds v2.6, v2.7 and v2.7.1, 2.4 v2.8, 2.5 v2.8.1, 2.6 v2.8.2, 2.7 v2.9) and 2.8 adds v2.9.1 and
+dispatches v2.6 to v2.9.1. The fixture tests round-trip one generated message per structure of v2.3 to
+v2.8.2 (hl7apy has no v2.7.1, v2.9 or v2.9.1) through `parse()`.
 
 Every segment field and every message structure of every version is checked against the sources there
 are for it: hl7.eu, Caristix and HAPI, and the official HL7 chapter PDFs where they were at hand (which
@@ -234,6 +233,7 @@ if (result.val.kind === 'batch') return handleBatch(result.val); // fileHeader, 
 switch (result.val.structure) {
   case 'ADT_A01':
   case 'ADT_A04':
+    // the ADT_A01 of every version: patient and visit are in all of them
     console.log(result.val.parsed.patient.encode(), result.val.parsed.visit.encode());
     break;
   case 'ORU_R01':
@@ -252,10 +252,20 @@ switch (result.val.structure) {
 them), and `identifyMessage(hl7String)` returns only what MSH-9 and MSH-12 say. `MESSAGES` of
 `@campfhir/hl7/v2.3` is the map they dispatch on (message structure name → parser).
 
-`SUPPORTED_VERSIONS` lists the versions `parse()` dispatches (v2.3 to v2.5.1), and every MSH-12 value
-outside that list is an error. To parse such a feed anyway, or one that leaves MSH-12 empty, name the
-version to parse as: `parse(hl7String, { version: '2.5.1' })`, or call the version's own parser
-(`parseADT_A01` of `@campfhir/hl7/v2.9.1`, …), which every version from v2.3 to v2.9.1 has.
+`SUPPORTED_VERSIONS` lists the versions `parse()` dispatches (v2.3 to v2.9.1), and every other MSH-12
+value (v2.1, v2.2) is an error. To parse such a feed anyway, or one that leaves MSH-12 empty, name the
+version to parse as: `parse(hl7String, { version: '2.5.1' })`. Each version's own parsers
+(`parseADT_A01` of `@campfhir/hl7/v2.9.1`, …) can also be called directly.
+
+A message type's shape can differ between versions (v2.9.1's ADT_A01 has GSP, GSR and GSC, for example),
+so `structure` alone narrows `parsed` to the union of that message across the versions; check `version`
+too for one version's exact type:
+
+```typescript
+if (result.val.version === '2.9.1' && result.val.structure === 'ADT_A01') {
+  result.val.parsed.patient; // ParsedADT_A01 of @campfhir/hl7/v2.9.1
+}
+```
 
 In v2.3 MSH-9 has two components, message type and trigger event (`ADT^A01`); the message
 structure component (`ADT^A01^ADT_A01`) arrives in v2.3.1. The dispatcher keys on
