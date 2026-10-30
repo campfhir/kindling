@@ -27,7 +27,7 @@ export class MRG extends BaseSegment {
     this.fields = [];
   }
 
-  /** MRG-1 Prior Patient Identifier List (CX, max 0, required, repeating) (chainable). */
+  /** MRG-1 Prior Patient Identifier List (CX, required, repeating) (chainable). */
   priorPatientIdentifierList(...values: Repeated<string | CX>[]): this {
     this.fields[0] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
@@ -39,7 +39,7 @@ export class MRG extends BaseSegment {
     return this;
   }
 
-  /** MRG-3 Prior Patient Account Number (CX, max 0, optional) (chainable). */
+  /** MRG-3 Prior Patient Account Number (CX, optional) (chainable). */
   priorPatientAccountNumber(value: string | CX): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
@@ -51,19 +51,19 @@ export class MRG extends BaseSegment {
     return this;
   }
 
-  /** MRG-5 Prior Visit Number (CX, max 0, optional) (chainable). */
+  /** MRG-5 Prior Visit Number (CX, optional) (chainable). */
   priorVisitNumber(value: string | CX): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
   }
 
-  /** MRG-6 Prior Alternate Visit ID (CX, max 0, optional) (chainable). */
+  /** MRG-6 Prior Alternate Visit ID (CX, optional) (chainable). */
   priorAlternateVisitId(value: string | CX): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
   }
 
-  /** MRG-7 Prior Patient Name (XPN, max 0, optional, repeating) (chainable). */
+  /** MRG-7 Prior Patient Name (XPN, optional, repeating) (chainable). */
   priorPatientName(...values: Repeated<string | XPN>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;

@@ -28,7 +28,7 @@ export class NTE extends BaseSegment {
     this.fields = [];
   }
 
-  /** NTE-1 Set ID (SI, max 0, optional) (chainable). */
+  /** NTE-1 Set ID (SI, optional) (chainable). */
   setId(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
@@ -40,43 +40,43 @@ export class NTE extends BaseSegment {
     return this;
   }
 
-  /** NTE-3 Comment (FT, max 0, conditional, repeating) (chainable). */
+  /** NTE-3 Comment (FT, conditional, repeating) (chainable). */
   comment(...values: Repeated<string>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** NTE-4 Comment Type (CWE, max 0, optional) (chainable). */
+  /** NTE-4 Comment Type (CWE, optional) (chainable). */
   commentType(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** NTE-5 Entered By (XCN, max 0, optional) (chainable). */
+  /** NTE-5 Entered By (XCN, optional) (chainable). */
   enteredBy(value: string | XCN): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** NTE-6 Entered Date/Time (DTM, max 0, optional) (chainable). */
+  /** NTE-6 Entered Date/Time (DTM, optional) (chainable). */
   enteredDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** NTE-7 Effective Start Date (DTM, max 0, optional) (chainable). */
+  /** NTE-7 Effective Start Date (DTM, optional) (chainable). */
   effectiveStartDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** NTE-8 Expiration Date (DTM, max 0, optional) (chainable). */
+  /** NTE-8 Expiration Date (DTM, optional) (chainable). */
   expirationDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** NTE-9 Coded Comment (CWE, max 0, optional, repeating) (chainable). */
+  /** NTE-9 Coded Comment (CWE, optional, repeating) (chainable). */
   codedComment(...values: Repeated<string | CodedElement>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;

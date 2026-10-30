@@ -33,67 +33,67 @@ export class BUI extends BaseSegment {
     return this;
   }
 
-  /** BUI-2 Blood Unit Identifier (EI, max 0, required) (chainable). */
+  /** BUI-2 Blood Unit Identifier (EI, required) (chainable). */
   bloodUnitIdentifier(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** BUI-3 Blood Unit Type (CWE, max 0, required) (chainable). */
+  /** BUI-3 Blood Unit Type (CWE, required) (chainable). */
   bloodUnitType(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** BUI-4 Blood Unit Weight (NM, max 0, required) (chainable). */
+  /** BUI-4 Blood Unit Weight (NM, required) (chainable). */
   bloodUnitWeight(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** BUI-5 Weight Units (CNE, max 0, required) (chainable). */
+  /** BUI-5 Weight Units (CNE, required) (chainable). */
   weightUnits(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** BUI-6 Blood Unit Volume (NM, max 0, required) (chainable). */
+  /** BUI-6 Blood Unit Volume (NM, required) (chainable). */
   bloodUnitVolume(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
   }
 
-  /** BUI-7 Volume Units (CNE, max 0, required) (chainable). */
+  /** BUI-7 Volume Units (CNE, required) (chainable). */
   volumeUnits(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** BUI-8 Container Catalog Number (ST, max 0, required) (chainable). */
+  /** BUI-8 Container Catalog Number (ST, required) (chainable). */
   containerCatalogNumber(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** BUI-9 Container Lot Number (ST, max 0, required) (chainable). */
+  /** BUI-9 Container Lot Number (ST, required) (chainable). */
   containerLotNumber(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** BUI-10 Container Manufacturer (XON, max 0, required) (chainable). */
+  /** BUI-10 Container Manufacturer (XON, required) (chainable). */
   containerManufacturer(value: string | XON): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** BUI-11 Transport Temperature (NR, max 0, required) (chainable). */
+  /** BUI-11 Transport Temperature (NR, required) (chainable). */
   transportTemperature(value: string): this {
     this.fields[10] = this.createField(value);
     return this;
   }
 
-  /** BUI-12 Transport Temperature Units (CNE, max 0, required) (chainable). */
+  /** BUI-12 Transport Temperature Units (CNE, required) (chainable). */
   transportTemperatureUnits(value: string | CodedElement): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

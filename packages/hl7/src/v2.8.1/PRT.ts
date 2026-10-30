@@ -34,85 +34,85 @@ export class PRT extends BaseSegment {
     return this;
   }
 
-  /** PRT-2 Action Code (ID, max 0, required) (chainable). */
+  /** PRT-2 Action Code (ID, required) (chainable). */
   actionCode(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** PRT-3 Action Reason (CWE, max 0, optional) (chainable). */
+  /** PRT-3 Action Reason (CWE, optional) (chainable). */
   actionReason(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRT-4 Participation (CWE, max 0, required) (chainable). */
+  /** PRT-4 Participation (CWE, required) (chainable). */
   participation(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRT-5 Participation Person (XCN, max 0, conditional, repeating) (chainable). */
+  /** PRT-5 Participation Person (XCN, conditional, repeating) (chainable). */
   participationPerson(...values: Repeated<string | XCN>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** PRT-6 Participation Person Provider Type (CWE, max 0, conditional) (chainable). */
+  /** PRT-6 Participation Person Provider Type (CWE, conditional) (chainable). */
   participationPersonProviderType(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRT-7 Participant Organization Unit Type (CWE, max 0, conditional) (chainable). */
+  /** PRT-7 Participant Organization Unit Type (CWE, conditional) (chainable). */
   participantOrganizationUnitType(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRT-8 Participation Organization (XON, max 0, conditional, repeating) (chainable). */
+  /** PRT-8 Participation Organization (XON, conditional, repeating) (chainable). */
   participationOrganization(...values: Repeated<string | XON>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** PRT-9 Participant Location (PL, max 0, conditional, repeating) (chainable). */
+  /** PRT-9 Participant Location (PL, conditional, repeating) (chainable). */
   participantLocation(...values: Repeated<string | PL>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(plParts(v)))));
     return this;
   }
 
-  /** PRT-10 Participation Device (EI, max 0, conditional, repeating) (chainable). */
+  /** PRT-10 Participation Device (EI, conditional, repeating) (chainable). */
   participationDevice(...values: Repeated<string | EI>[]): this {
     this.fields[9] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;
   }
 
-  /** PRT-11 Participation Begin Date/Time (arrival time) (DTM, max 0, optional) (chainable). */
+  /** PRT-11 Participation Begin Date/Time (arrival time) (DTM, optional) (chainable). */
   participationBeginDateTimeArrivalTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[10] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PRT-12 Participation End Date/Time (departure time) (DTM, max 0, optional) (chainable). */
+  /** PRT-12 Participation End Date/Time (departure time) (DTM, optional) (chainable). */
   participationEndDateTimeDepartureTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[11] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PRT-13 Participation Qualitative Duration (CWE, max 0, optional) (chainable). */
+  /** PRT-13 Participation Qualitative Duration (CWE, optional) (chainable). */
   participationQualitativeDuration(value: string | CodedElement): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRT-14 Participation Address (XAD, max 0, conditional, repeating) (chainable). */
+  /** PRT-14 Participation Address (XAD, conditional, repeating) (chainable). */
   participationAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** PRT-15 Participant Telecommunication Address (XTN, max 0, optional, repeating) (chainable). */
+  /** PRT-15 Participant Telecommunication Address (XTN, optional, repeating) (chainable). */
   participantTelecommunicationAddress(...values: Repeated<string | XTN>[]): this {
     this.fields[14] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;

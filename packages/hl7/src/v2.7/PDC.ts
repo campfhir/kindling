@@ -28,55 +28,55 @@ export class PDC extends BaseSegment {
     this.fields = [];
   }
 
-  /** PDC-1 Manufacturer/Distributor (XON, max 0, required, repeating) (chainable). */
+  /** PDC-1 Manufacturer/Distributor (XON, required, repeating) (chainable). */
   manufacturerDistributor(...values: Repeated<string | XON>[]): this {
     this.fields[0] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** PDC-2 Country (CWE, max 0, required) (chainable). */
+  /** PDC-2 Country (CWE, required) (chainable). */
   country(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PDC-3 Brand Name (ST, max 0, required) (chainable). */
+  /** PDC-3 Brand Name (ST, required) (chainable). */
   brandName(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** PDC-4 Device Family Name (ST, max 0, optional) (chainable). */
+  /** PDC-4 Device Family Name (ST, optional) (chainable). */
   deviceFamilyName(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** PDC-5 Generic Name (CWE, max 0, optional) (chainable). */
+  /** PDC-5 Generic Name (CWE, optional) (chainable). */
   genericName(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PDC-6 Model Identifier (ST, max 0, optional, repeating) (chainable). */
+  /** PDC-6 Model Identifier (ST, optional, repeating) (chainable). */
   modelIdentifier(...values: Repeated<string>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** PDC-7 Catalogue Identifier (ST, max 0, optional) (chainable). */
+  /** PDC-7 Catalogue Identifier (ST, optional) (chainable). */
   catalogueIdentifier(value: string): this {
     this.fields[6] = this.createField(value);
     return this;
   }
 
-  /** PDC-8 Other Identifier (ST, max 0, optional, repeating) (chainable). */
+  /** PDC-8 Other Identifier (ST, optional, repeating) (chainable). */
   otherIdentifier(...values: Repeated<string>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** PDC-9 Product Code (CWE, max 0, optional) (chainable). */
+  /** PDC-9 Product Code (CWE, optional) (chainable). */
   productCode(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -88,31 +88,31 @@ export class PDC extends BaseSegment {
     return this;
   }
 
-  /** PDC-11 Marketing Approval ID (ST, max 0, optional) (chainable). */
+  /** PDC-11 Marketing Approval ID (ST, optional) (chainable). */
   marketingApprovalId(value: string): this {
     this.fields[10] = this.createField(value);
     return this;
   }
 
-  /** PDC-12 Labeled Shelf Life (CQ, max 0, optional) (chainable). */
+  /** PDC-12 Labeled Shelf Life (CQ, optional) (chainable). */
   labeledShelfLife(value: string | CQ): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** PDC-13 Expected Shelf Life (CQ, max 0, optional) (chainable). */
+  /** PDC-13 Expected Shelf Life (CQ, optional) (chainable). */
   expectedShelfLife(value: string | CQ): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** PDC-14 Date First Marketed (DTM, max 0, optional) (chainable). */
+  /** PDC-14 Date First Marketed (DTM, optional) (chainable). */
   dateFirstMarketed(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[13] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PDC-15 Date Last Marketed (DTM, max 0, optional) (chainable). */
+  /** PDC-15 Date Last Marketed (DTM, optional) (chainable). */
   dateLastMarketed(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[14] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;

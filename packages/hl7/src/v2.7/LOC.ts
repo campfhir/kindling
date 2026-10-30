@@ -27,55 +27,55 @@ export class LOC extends BaseSegment {
     this.fields = [];
   }
 
-  /** LOC-1 Primary Key Value (PL, max 0, required) (chainable). */
+  /** LOC-1 Primary Key Value (PL, required) (chainable). */
   primaryKeyValue(value: string | PL): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** LOC-2 Location Description (ST, max 0, optional) (chainable). */
+  /** LOC-2 Location Description (ST, optional) (chainable). */
   locationDescription(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** LOC-3 Location Type (CWE, max 0, required, repeating) (chainable). */
+  /** LOC-3 Location Type (CWE, required, repeating) (chainable). */
   locationType(...values: Repeated<string | CodedElement>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** LOC-4 Organization Name (XON, max 0, optional, repeating) (chainable). */
+  /** LOC-4 Organization Name (XON, optional, repeating) (chainable). */
   organizationName(...values: Repeated<string | XON>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** LOC-5 Location Address (XAD, max 0, optional, repeating) (chainable). */
+  /** LOC-5 Location Address (XAD, optional, repeating) (chainable). */
   locationAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** LOC-6 Location Phone (XTN, max 0, optional, repeating) (chainable). */
+  /** LOC-6 Location Phone (XTN, optional, repeating) (chainable). */
   locationPhone(...values: Repeated<string | XTN>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** LOC-7 License Number (CWE, max 0, optional, repeating) (chainable). */
+  /** LOC-7 License Number (CWE, optional, repeating) (chainable). */
   licenseNumber(...values: Repeated<string | CodedElement>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** LOC-8 Location Equipment (CWE, max 0, optional, repeating) (chainable). */
+  /** LOC-8 Location Equipment (CWE, optional, repeating) (chainable). */
   locationEquipment(...values: Repeated<string | CodedElement>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** LOC-9 Location Service Code (CWE, max 0, optional) (chainable). */
+  /** LOC-9 Location Service Code (CWE, optional) (chainable). */
   locationServiceCode(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

@@ -34,49 +34,49 @@ export class EDU extends BaseSegment {
     return this;
   }
 
-  /** EDU-2 Academic Degree (CWE, max 0, optional) (chainable). */
+  /** EDU-2 Academic Degree (CWE, optional) (chainable). */
   academicDegree(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** EDU-3 Academic Degree Program Date Range (DR, max 0, optional) (chainable). */
+  /** EDU-3 Academic Degree Program Date Range (DR, optional) (chainable). */
   academicDegreeProgramDateRange(value: string | DR): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(drParts(value)));
     return this;
   }
 
-  /** EDU-4 Academic Degree Program Participation Date Range (DR, max 0, optional) (chainable). */
+  /** EDU-4 Academic Degree Program Participation Date Range (DR, optional) (chainable). */
   academicDegreeProgramParticipationDateRange(value: string | DR): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(drParts(value)));
     return this;
   }
 
-  /** EDU-5 Academic Degree Granted Date (DT, max 0, optional) (chainable). */
+  /** EDU-5 Academic Degree Granted Date (DT, optional) (chainable). */
   academicDegreeGrantedDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[4] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** EDU-6 School (XON, max 0, optional) (chainable). */
+  /** EDU-6 School (XON, optional) (chainable). */
   school(value: string | XON): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** EDU-7 School Type Code (CWE, max 0, optional) (chainable). */
+  /** EDU-7 School Type Code (CWE, optional) (chainable). */
   schoolTypeCode(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** EDU-8 School Address (XAD, max 0, optional) (chainable). */
+  /** EDU-8 School Address (XAD, optional) (chainable). */
   schoolAddress(value: string | XAD): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(xadParts(value)));
     return this;
   }
 
-  /** EDU-9 Major Field of Study (CWE, max 0, optional, repeating) (chainable). */
+  /** EDU-9 Major Field of Study (CWE, optional, repeating) (chainable). */
   majorFieldOfStudy(...values: Repeated<string | CodedElement>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;

@@ -45,7 +45,7 @@ export class MSA extends BaseSegment {
     return this;
   }
 
-  /** MSA-4 Expected Sequence Number (NM, max 0, optional) (chainable). */
+  /** MSA-4 Expected Sequence Number (NM, optional) (chainable). */
   expectedSequenceNumber(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
@@ -63,7 +63,7 @@ export class MSA extends BaseSegment {
     return this;
   }
 
-  /** MSA-7 Message Waiting Number (NM, max 0, optional) (chainable). */
+  /** MSA-7 Message Waiting Number (NM, optional) (chainable). */
   messageWaitingNumber(value: string): this {
     this.fields[6] = this.createField(value);
     return this;

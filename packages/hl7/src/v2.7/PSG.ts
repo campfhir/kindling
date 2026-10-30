@@ -27,13 +27,13 @@ export class PSG extends BaseSegment {
     this.fields = [];
   }
 
-  /** PSG-1 Provider Product/Service Group Number (EI, max 0, required) (chainable). */
+  /** PSG-1 Provider Product/Service Group Number (EI, required) (chainable). */
   providerProductServiceGroupNumber(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** PSG-2 Payer Product/Service Group Number (EI, max 0, optional) (chainable). */
+  /** PSG-2 Payer Product/Service Group Number (EI, optional) (chainable). */
   payerProductServiceGroupNumber(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
@@ -51,13 +51,13 @@ export class PSG extends BaseSegment {
     return this;
   }
 
-  /** PSG-5 Product/Service Group Billed Amount (CP, max 0, required) (chainable). */
+  /** PSG-5 Product/Service Group Billed Amount (CP, required) (chainable). */
   productServiceGroupBilledAmount(value: string | CP): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** PSG-6 Product/Service Group Description (ST, max 0, required) (chainable). */
+  /** PSG-6 Product/Service Group Description (ST, required) (chainable). */
   productServiceGroupDescription(value: string): this {
     this.fields[5] = this.createField(value);
     return this;

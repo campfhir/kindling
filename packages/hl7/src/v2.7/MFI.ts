@@ -28,13 +28,13 @@ export class MFI extends BaseSegment {
     this.fields = [];
   }
 
-  /** MFI-1 Master File Identifier (CWE, max 0, required) (chainable). */
+  /** MFI-1 Master File Identifier (CWE, required) (chainable). */
   masterFileIdentifier(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** MFI-2 Master File Application Identifier (HD, max 0, optional, repeating) (chainable). */
+  /** MFI-2 Master File Application Identifier (HD, optional, repeating) (chainable). */
   masterFileApplicationIdentifier(...values: Repeated<string>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
@@ -46,13 +46,13 @@ export class MFI extends BaseSegment {
     return this;
   }
 
-  /** MFI-4 Entered Date/Time (DTM, max 0, optional) (chainable). */
+  /** MFI-4 Entered Date/Time (DTM, optional) (chainable). */
   enteredDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** MFI-5 Effective Date/Time (DTM, max 0, optional) (chainable). */
+  /** MFI-5 Effective Date/Time (DTM, optional) (chainable). */
   effectiveDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;

@@ -33,13 +33,13 @@ export class CM1 extends BaseSegment {
     return this;
   }
 
-  /** CM1-2 Study Phase Identifier (CWE, max 0, required) (chainable). */
+  /** CM1-2 Study Phase Identifier (CWE, required) (chainable). */
   studyPhaseIdentifier(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CM1-3 Description of Study Phase (ST, max 0, required) (chainable). */
+  /** CM1-3 Description of Study Phase (ST, required) (chainable). */
   descriptionOfStudyPhase(value: string): this {
     this.fields[2] = this.createField(value);
     return this;

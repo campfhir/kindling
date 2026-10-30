@@ -27,13 +27,13 @@ export class SGH extends BaseSegment {
     this.fields = [];
   }
 
-  /** SGH-1 Set ID (SI, max 0, required) (chainable). */
+  /** SGH-1 Set ID (SI, required) (chainable). */
   setId(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** SGH-2 Segment Group Name (ST, max 0, optional) (chainable). */
+  /** SGH-2 Segment Group Name (ST, optional) (chainable). */
   segmentGroupName(value: string): this {
     this.fields[1] = this.createField(value);
     return this;

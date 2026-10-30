@@ -27,25 +27,25 @@ export class SID extends BaseSegment {
     this.fields = [];
   }
 
-  /** SID-1 Application/Method Identifier (CWE, max 0, conditional) (chainable). */
+  /** SID-1 Application/Method Identifier (CWE, conditional) (chainable). */
   applicationMethodIdentifier(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SID-2 Substance Lot Number (ST, max 0, conditional) (chainable). */
+  /** SID-2 Substance Lot Number (ST, conditional) (chainable). */
   substanceLotNumber(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** SID-3 Substance Container Identifier (ST, max 0, conditional) (chainable). */
+  /** SID-3 Substance Container Identifier (ST, conditional) (chainable). */
   substanceContainerIdentifier(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** SID-4 Substance Manufacturer Identifier (CWE, max 0, conditional) (chainable). */
+  /** SID-4 Substance Manufacturer Identifier (CWE, conditional) (chainable). */
   substanceManufacturerIdentifier(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

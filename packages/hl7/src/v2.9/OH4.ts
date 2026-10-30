@@ -28,7 +28,7 @@ export class OH4 extends BaseSegment {
     this.fields = [];
   }
 
-  /** OH4-1 Set ID (SI, max 0, required) (chainable). */
+  /** OH4-1 Set ID (SI, required) (chainable). */
   setId(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
@@ -40,25 +40,25 @@ export class OH4 extends BaseSegment {
     return this;
   }
 
-  /** OH4-3 Combat Zone Start Date (DT, max 0, required) (chainable). */
+  /** OH4-3 Combat Zone Start Date (DT, required) (chainable). */
   combatZoneStartDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[2] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** OH4-4 Combat Zone End Date (DT, max 0, optional) (chainable). */
+  /** OH4-4 Combat Zone End Date (DT, optional) (chainable). */
   combatZoneEndDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** OH4-5 Entered Date (DT, max 0, optional) (chainable). */
+  /** OH4-5 Entered Date (DT, optional) (chainable). */
   enteredDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[4] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** OH4-6 Combat Zone Unique Identifier (EI, max 0, optional) (chainable). */
+  /** OH4-6 Combat Zone Unique Identifier (EI, optional) (chainable). */
   combatZoneUniqueIdentifier(value: string | EI): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;

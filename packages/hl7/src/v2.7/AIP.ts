@@ -40,61 +40,61 @@ export class AIP extends BaseSegment {
     return this;
   }
 
-  /** AIP-3 Personnel Resource ID (XCN, max 0, conditional, repeating) (chainable). */
+  /** AIP-3 Personnel Resource ID (XCN, conditional, repeating) (chainable). */
   personnelResourceId(...values: Repeated<string | XCN>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** AIP-4 Resource Type (CWE, max 0, conditional) (chainable). */
+  /** AIP-4 Resource Type (CWE, conditional) (chainable). */
   resourceType(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIP-5 Resource Group (CWE, max 0, optional) (chainable). */
+  /** AIP-5 Resource Group (CWE, optional) (chainable). */
   resourceGroup(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIP-6 Start Date/Time (DTM, max 0, conditional) (chainable). */
+  /** AIP-6 Start Date/Time (DTM, conditional) (chainable). */
   startDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** AIP-7 Start Date/Time Offset (NM, max 0, conditional) (chainable). */
+  /** AIP-7 Start Date/Time Offset (NM, conditional) (chainable). */
   startDateTimeOffset(value: string): this {
     this.fields[6] = this.createField(value);
     return this;
   }
 
-  /** AIP-8 Start Date/Time Offset Units (CNE, max 0, conditional) (chainable). */
+  /** AIP-8 Start Date/Time Offset Units (CNE, conditional) (chainable). */
   startDateTimeOffsetUnits(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIP-9 Duration (NM, max 0, optional) (chainable). */
+  /** AIP-9 Duration (NM, optional) (chainable). */
   duration(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** AIP-10 Duration Units (CNE, max 0, optional) (chainable). */
+  /** AIP-10 Duration Units (CNE, optional) (chainable). */
   durationUnits(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIP-11 Allow Substitution Code (CWE, max 0, conditional) (chainable). */
+  /** AIP-11 Allow Substitution Code (CWE, conditional) (chainable). */
   allowSubstitutionCode(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIP-12 Filler Status Code (CWE, max 0, conditional) (chainable). */
+  /** AIP-12 Filler Status Code (CWE, conditional) (chainable). */
   fillerStatusCode(value: string | CodedElement): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

@@ -34,55 +34,55 @@ export class ILT extends BaseSegment {
     return this;
   }
 
-  /** ILT-2 Inventory Lot Number (ST, max 0, required) (chainable). */
+  /** ILT-2 Inventory Lot Number (ST, required) (chainable). */
   inventoryLotNumber(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** ILT-3 Inventory Expiration Date (DTM, max 0, optional) (chainable). */
+  /** ILT-3 Inventory Expiration Date (DTM, optional) (chainable). */
   inventoryExpirationDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** ILT-4 Inventory Received Date (DTM, max 0, optional) (chainable). */
+  /** ILT-4 Inventory Received Date (DTM, optional) (chainable). */
   inventoryReceivedDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** ILT-5 Inventory Received Quantity (NM, max 0, optional) (chainable). */
+  /** ILT-5 Inventory Received Quantity (NM, optional) (chainable). */
   inventoryReceivedQuantity(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** ILT-6 Inventory Received Quantity Unit (CWE, max 0, optional) (chainable). */
+  /** ILT-6 Inventory Received Quantity Unit (CWE, optional) (chainable). */
   inventoryReceivedQuantityUnit(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ILT-7 Inventory Received Item Cost (MO, max 0, optional) (chainable). */
+  /** ILT-7 Inventory Received Item Cost (MO, optional) (chainable). */
   inventoryReceivedItemCost(value: string | MO): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(moParts(value)));
     return this;
   }
 
-  /** ILT-8 Inventory On Hand Date (DTM, max 0, optional) (chainable). */
+  /** ILT-8 Inventory On Hand Date (DTM, optional) (chainable). */
   inventoryOnHandDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** ILT-9 Inventory On Hand Quantity (NM, max 0, optional) (chainable). */
+  /** ILT-9 Inventory On Hand Quantity (NM, optional) (chainable). */
   inventoryOnHandQuantity(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** ILT-10 Inventory On Hand Quantity Unit (CWE, max 0, optional) (chainable). */
+  /** ILT-10 Inventory On Hand Quantity Unit (CWE, optional) (chainable). */
   inventoryOnHandQuantityUnit(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

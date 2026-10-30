@@ -27,7 +27,7 @@ export class OM4 extends BaseSegment {
     this.fields = [];
   }
 
-  /** OM4-1 Sequence Number - Test/Observation Master File (NM, max 0, optional) (chainable). */
+  /** OM4-1 Sequence Number - Test/Observation Master File (NM, optional) (chainable). */
   sequenceNumberTestObservationMasterFile(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
@@ -45,55 +45,55 @@ export class OM4 extends BaseSegment {
     return this;
   }
 
-  /** OM4-4 Container Volume (NM, max 0, optional, repeating) (chainable). */
+  /** OM4-4 Container Volume (NM, optional, repeating) (chainable). */
   containerVolume(...values: Repeated<string>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** OM4-5 Container Units (CWE, max 0, optional, repeating) (chainable). */
+  /** OM4-5 Container Units (CWE, optional, repeating) (chainable). */
   containerUnits(...values: Repeated<string | CodedElement>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OM4-6 Specimen (CWE, max 0, optional) (chainable). */
+  /** OM4-6 Specimen (CWE, optional) (chainable). */
   specimen(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OM4-7 Additive (CWE, max 0, optional) (chainable). */
+  /** OM4-7 Additive (CWE, optional) (chainable). */
   additive(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OM4-8 Preparation (TX, max 0, optional) (chainable). */
+  /** OM4-8 Preparation (TX, optional) (chainable). */
   preparation(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** OM4-9 Special Handling Requirements (TX, max 0, optional) (chainable). */
+  /** OM4-9 Special Handling Requirements (TX, optional) (chainable). */
   specialHandlingRequirements(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** OM4-10 Normal Collection Volume (CQ, max 0, optional) (chainable). */
+  /** OM4-10 Normal Collection Volume (CQ, optional) (chainable). */
   normalCollectionVolume(value: string | CQ): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** OM4-11 Minimum Collection Volume (CQ, max 0, optional) (chainable). */
+  /** OM4-11 Minimum Collection Volume (CQ, optional) (chainable). */
   minimumCollectionVolume(value: string | CQ): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** OM4-12 Specimen Requirements (TX, max 0, optional) (chainable). */
+  /** OM4-12 Specimen Requirements (TX, optional) (chainable). */
   specimenRequirements(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
@@ -105,31 +105,31 @@ export class OM4 extends BaseSegment {
     return this;
   }
 
-  /** OM4-14 Specimen Retention Time (CQ, max 0, optional) (chainable). */
+  /** OM4-14 Specimen Retention Time (CQ, optional) (chainable). */
   specimenRetentionTime(value: string | CQ): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** OM4-15 Specimen Handling Code (CWE, max 0, optional, repeating) (chainable). */
+  /** OM4-15 Specimen Handling Code (CWE, optional, repeating) (chainable). */
   specimenHandlingCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[14] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OM4-16 Specimen Preference (ID, max 0, optional) (chainable). */
+  /** OM4-16 Specimen Preference (ID, optional) (chainable). */
   specimenPreference(value: string): this {
     this.fields[15] = this.createField(value);
     return this;
   }
 
-  /** OM4-17 Preferred Specimen/Attribture Sequence ID (NM, max 0, optional) (chainable). */
+  /** OM4-17 Preferred Specimen/Attribture Sequence ID (NM, optional) (chainable). */
   preferredSpecimenAttribtureSequenceId(value: string): this {
     this.fields[16] = this.createField(value);
     return this;
   }
 
-  /** OM4-18 Taxonomic Classification Code (CWE, max 0, optional, repeating) (chainable). */
+  /** OM4-18 Taxonomic Classification Code (CWE, optional, repeating) (chainable). */
   taxonomicClassificationCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[17] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;

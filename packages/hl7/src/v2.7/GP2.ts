@@ -27,85 +27,85 @@ export class GP2 extends BaseSegment {
     this.fields = [];
   }
 
-  /** GP2-1 Revenue Code (CWE, max 0, optional) (chainable). */
+  /** GP2-1 Revenue Code (CWE, optional) (chainable). */
   revenueCode(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GP2-2 Number of Service Units (NM, max 0, optional) (chainable). */
+  /** GP2-2 Number of Service Units (NM, optional) (chainable). */
   numberOfServiceUnits(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** GP2-3 Charge (CP, max 0, optional) (chainable). */
+  /** GP2-3 Charge (CP, optional) (chainable). */
   charge(value: string | CP): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** GP2-4 Reimbursement Action Code (CWE, max 0, optional) (chainable). */
+  /** GP2-4 Reimbursement Action Code (CWE, optional) (chainable). */
   reimbursementActionCode(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GP2-5 Denial or Rejection Code (CWE, max 0, optional) (chainable). */
+  /** GP2-5 Denial or Rejection Code (CWE, optional) (chainable). */
   denialOrRejectionCode(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GP2-6 OCE Edit Code (CWE, max 0, optional, repeating) (chainable). */
+  /** GP2-6 OCE Edit Code (CWE, optional, repeating) (chainable). */
   oceEditCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** GP2-7 Ambulatory Payment Classification Code (CWE, max 0, optional) (chainable). */
+  /** GP2-7 Ambulatory Payment Classification Code (CWE, optional) (chainable). */
   ambulatoryPaymentClassificationCode(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GP2-8 Modifier Edit Code (CWE, max 0, optional, repeating) (chainable). */
+  /** GP2-8 Modifier Edit Code (CWE, optional, repeating) (chainable). */
   modifierEditCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** GP2-9 Payment Adjustment Code (CWE, max 0, optional) (chainable). */
+  /** GP2-9 Payment Adjustment Code (CWE, optional) (chainable). */
   paymentAdjustmentCode(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GP2-10 Packaging Status Code (CWE, max 0, optional) (chainable). */
+  /** GP2-10 Packaging Status Code (CWE, optional) (chainable). */
   packagingStatusCode(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GP2-11 Expected CMS Payment Amount (CP, max 0, optional) (chainable). */
+  /** GP2-11 Expected CMS Payment Amount (CP, optional) (chainable). */
   expectedCmsPaymentAmount(value: string | CP): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** GP2-12 Reimbursement Type Code (CWE, max 0, optional) (chainable). */
+  /** GP2-12 Reimbursement Type Code (CWE, optional) (chainable). */
   reimbursementTypeCode(value: string | CodedElement): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GP2-13 Co-Pay Amount (CP, max 0, optional) (chainable). */
+  /** GP2-13 Co-Pay Amount (CP, optional) (chainable). */
   coPayAmount(value: string | CP): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** GP2-14 Pay Rate per Service Unit (NM, max 0, optional) (chainable). */
+  /** GP2-14 Pay Rate per Service Unit (NM, optional) (chainable). */
   payRatePerServiceUnit(value: string): this {
     this.fields[13] = this.createField(value);
     return this;

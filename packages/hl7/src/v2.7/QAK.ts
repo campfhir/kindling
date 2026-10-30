@@ -27,7 +27,7 @@ export class QAK extends BaseSegment {
     this.fields = [];
   }
 
-  /** QAK-1 Query Tag (ST, max 0, conditional) (chainable). */
+  /** QAK-1 Query Tag (ST, conditional) (chainable). */
   queryTag(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
@@ -39,25 +39,25 @@ export class QAK extends BaseSegment {
     return this;
   }
 
-  /** QAK-3 Message Query Name (CWE, max 0, optional) (chainable). */
+  /** QAK-3 Message Query Name (CWE, optional) (chainable). */
   messageQueryName(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** QAK-4 Hit Count Total (NM, max 0, optional) (chainable). */
+  /** QAK-4 Hit Count Total (NM, optional) (chainable). */
   hitCountTotal(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** QAK-5 This payload (NM, max 0, optional) (chainable). */
+  /** QAK-5 This payload (NM, optional) (chainable). */
   thisPayload(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** QAK-6 Hits remaining (NM, max 0, optional) (chainable). */
+  /** QAK-6 Hits remaining (NM, optional) (chainable). */
   hitsRemaining(value: string): this {
     this.fields[5] = this.createField(value);
     return this;

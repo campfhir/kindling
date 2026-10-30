@@ -28,145 +28,145 @@ export class RF1 extends BaseSegment {
     this.fields = [];
   }
 
-  /** RF1-1 Referral Status (CWE, max 0, optional) (chainable). */
+  /** RF1-1 Referral Status (CWE, optional) (chainable). */
   referralStatus(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RF1-2 Referral Priority (CWE, max 0, optional) (chainable). */
+  /** RF1-2 Referral Priority (CWE, optional) (chainable). */
   referralPriority(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RF1-3 Referral Type (CWE, max 0, optional) (chainable). */
+  /** RF1-3 Referral Type (CWE, optional) (chainable). */
   referralType(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RF1-4 Referral Disposition (CWE, max 0, optional, repeating) (chainable). */
+  /** RF1-4 Referral Disposition (CWE, optional, repeating) (chainable). */
   referralDisposition(...values: Repeated<string | CodedElement>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** RF1-5 Referral Category (CWE, max 0, optional) (chainable). */
+  /** RF1-5 Referral Category (CWE, optional) (chainable). */
   referralCategory(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RF1-6 Originating Referral Identifier (EI, max 0, required) (chainable). */
+  /** RF1-6 Originating Referral Identifier (EI, required) (chainable). */
   originatingReferralIdentifier(value: string | EI): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** RF1-7 Effective Date (DTM, max 0, optional) (chainable). */
+  /** RF1-7 Effective Date (DTM, optional) (chainable). */
   effectiveDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** RF1-8 Expiration Date (DTM, max 0, optional) (chainable). */
+  /** RF1-8 Expiration Date (DTM, optional) (chainable). */
   expirationDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** RF1-9 Process Date (DTM, max 0, optional) (chainable). */
+  /** RF1-9 Process Date (DTM, optional) (chainable). */
   processDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[8] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** RF1-10 Referral Reason (CWE, max 0, optional, repeating) (chainable). */
+  /** RF1-10 Referral Reason (CWE, optional, repeating) (chainable). */
   referralReason(...values: Repeated<string | CodedElement>[]): this {
     this.fields[9] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** RF1-11 External Referral Identifier (EI, max 0, optional, repeating) (chainable). */
+  /** RF1-11 External Referral Identifier (EI, optional, repeating) (chainable). */
   externalReferralIdentifier(...values: Repeated<string | EI>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;
   }
 
-  /** RF1-12 Referral Documentation Completion Status (CWE, max 0, optional) (chainable). */
+  /** RF1-12 Referral Documentation Completion Status (CWE, optional) (chainable). */
   referralDocumentationCompletionStatus(value: string | CodedElement): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RF1-13 Planned Treatment Stop Date (DTM, max 0, optional) (chainable). */
+  /** RF1-13 Planned Treatment Stop Date (DTM, optional) (chainable). */
   plannedTreatmentStopDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** RF1-14 Referral Reason Text (ST, max 0, optional) (chainable). */
+  /** RF1-14 Referral Reason Text (ST, optional) (chainable). */
   referralReasonText(value: string): this {
     this.fields[13] = this.createField(value);
     return this;
   }
 
-  /** RF1-15 Number of Authorized Treatments/Units (CQ, max 0, optional) (chainable). */
+  /** RF1-15 Number of Authorized Treatments/Units (CQ, optional) (chainable). */
   numberOfAuthorizedTreatmentsUnits(value: string | CQ): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** RF1-16 Number of Used Treatments/Units (CQ, max 0, optional) (chainable). */
+  /** RF1-16 Number of Used Treatments/Units (CQ, optional) (chainable). */
   numberOfUsedTreatmentsUnits(value: string | CQ): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** RF1-17 Number of Schedule Treatments/Units (CQ, max 0, optional) (chainable). */
+  /** RF1-17 Number of Schedule Treatments/Units (CQ, optional) (chainable). */
   numberOfScheduleTreatmentsUnits(value: string | CQ): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** RF1-18 Remaining Benefit Amount (MO, max 0, optional) (chainable). */
+  /** RF1-18 Remaining Benefit Amount (MO, optional) (chainable). */
   remainingBenefitAmount(value: string | MO): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(moParts(value)));
     return this;
   }
 
-  /** RF1-19 Authorized Provider (XON, max 0, optional) (chainable). */
+  /** RF1-19 Authorized Provider (XON, optional) (chainable). */
   authorizedProvider(value: string | XON): this {
     this.fields[18] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** RF1-20 Authorized Health Professional (XCN, max 0, optional) (chainable). */
+  /** RF1-20 Authorized Health Professional (XCN, optional) (chainable). */
   authorizedHealthProfessional(value: string | XCN): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** RF1-21 Source Text (ST, max 0, optional) (chainable). */
+  /** RF1-21 Source Text (ST, optional) (chainable). */
   sourceText(value: string): this {
     this.fields[20] = this.createField(value);
     return this;
   }
 
-  /** RF1-22 Source Date (DTM, max 0, optional) (chainable). */
+  /** RF1-22 Source Date (DTM, optional) (chainable). */
   sourceDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[21] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** RF1-23 Source Phone (XTN, max 0, optional) (chainable). */
+  /** RF1-23 Source Phone (XTN, optional) (chainable). */
   sourcePhone(value: string | XTN): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(xtnParts(value)));
     return this;
   }
 
-  /** RF1-24 Comment (ST, max 0, optional) (chainable). */
+  /** RF1-24 Comment (ST, optional) (chainable). */
   comment(value: string): this {
     this.fields[23] = this.createField(value);
     return this;

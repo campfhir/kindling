@@ -27,43 +27,43 @@ export class SDD extends BaseSegment {
     this.fields = [];
   }
 
-  /** SDD-1 Lot Number (EI, max 0, optional) (chainable). */
+  /** SDD-1 Lot Number (EI, optional) (chainable). */
   lotNumber(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** SDD-2 Device Number (EI, max 0, optional) (chainable). */
+  /** SDD-2 Device Number (EI, optional) (chainable). */
   deviceNumber(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** SDD-3 Device Name (ST, max 0, optional) (chainable). */
+  /** SDD-3 Device Name (ST, optional) (chainable). */
   deviceName(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** SDD-4 Device Data State (CWE, max 0, optional) (chainable). */
+  /** SDD-4 Device Data State (CWE, optional) (chainable). */
   deviceDataState(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SDD-5 Load Status (CWE, max 0, optional) (chainable). */
+  /** SDD-5 Load Status (CWE, optional) (chainable). */
   loadStatus(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SDD-6 Control Code (NM, max 0, optional) (chainable). */
+  /** SDD-6 Control Code (NM, optional) (chainable). */
   controlCode(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
   }
 
-  /** SDD-7 Operator Name (ST, max 0, optional) (chainable). */
+  /** SDD-7 Operator Name (ST, optional) (chainable). */
   operatorName(value: string): this {
     this.fields[6] = this.createField(value);
     return this;

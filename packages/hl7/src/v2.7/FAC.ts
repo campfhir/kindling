@@ -27,7 +27,7 @@ export class FAC extends BaseSegment {
     this.fields = [];
   }
 
-  /** FAC-1 Facility ID (EI, max 0, required) (chainable). */
+  /** FAC-1 Facility ID (EI, required) (chainable). */
   facilityId(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
@@ -39,61 +39,61 @@ export class FAC extends BaseSegment {
     return this;
   }
 
-  /** FAC-3 Facility Address (XAD, max 0, required, repeating) (chainable). */
+  /** FAC-3 Facility Address (XAD, required, repeating) (chainable). */
   facilityAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** FAC-4 Facility Telecommunication (XTN, max 0, required) (chainable). */
+  /** FAC-4 Facility Telecommunication (XTN, required) (chainable). */
   facilityTelecommunication(value: string | XTN): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(xtnParts(value)));
     return this;
   }
 
-  /** FAC-5 Contact Person (XCN, max 0, optional, repeating) (chainable). */
+  /** FAC-5 Contact Person (XCN, optional, repeating) (chainable). */
   contactPerson(...values: Repeated<string | XCN>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** FAC-6 Contact Title (ST, max 0, optional, repeating) (chainable). */
+  /** FAC-6 Contact Title (ST, optional, repeating) (chainable). */
   contactTitle(...values: Repeated<string>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** FAC-7 Contact Address (XAD, max 0, optional, repeating) (chainable). */
+  /** FAC-7 Contact Address (XAD, optional, repeating) (chainable). */
   contactAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** FAC-8 Contact Telecommunication (XTN, max 0, optional, repeating) (chainable). */
+  /** FAC-8 Contact Telecommunication (XTN, optional, repeating) (chainable). */
   contactTelecommunication(...values: Repeated<string | XTN>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** FAC-9 Signature Authority (XCN, max 0, required, repeating) (chainable). */
+  /** FAC-9 Signature Authority (XCN, required, repeating) (chainable). */
   signatureAuthority(...values: Repeated<string | XCN>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** FAC-10 Signature Authority Title (ST, max 0, optional) (chainable). */
+  /** FAC-10 Signature Authority Title (ST, optional) (chainable). */
   signatureAuthorityTitle(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
   }
 
-  /** FAC-11 Signature Authority Address (XAD, max 0, optional, repeating) (chainable). */
+  /** FAC-11 Signature Authority Address (XAD, optional, repeating) (chainable). */
   signatureAuthorityAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** FAC-12 Signature Authority Telecommunication (XTN, max 0, optional) (chainable). */
+  /** FAC-12 Signature Authority Telecommunication (XTN, optional) (chainable). */
   signatureAuthorityTelecommunication(value: string | XTN): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(xtnParts(value)));
     return this;

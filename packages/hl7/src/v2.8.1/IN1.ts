@@ -34,127 +34,127 @@ export class IN1 extends BaseSegment {
     return this;
   }
 
-  /** IN1-2 Health Plan ID (CWE, max 0, required) (chainable). */
+  /** IN1-2 Health Plan ID (CWE, required) (chainable). */
   healthPlanId(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN1-3 Insurance Company ID (CX, max 0, required, repeating) (chainable). */
+  /** IN1-3 Insurance Company ID (CX, required, repeating) (chainable). */
   insuranceCompanyId(...values: Repeated<string | CX>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
   }
 
-  /** IN1-4 Insurance Company Name (XON, max 0, optional, repeating) (chainable). */
+  /** IN1-4 Insurance Company Name (XON, optional, repeating) (chainable). */
   insuranceCompanyName(...values: Repeated<string | XON>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** IN1-5 Insurance Company Address (XAD, max 0, optional, repeating) (chainable). */
+  /** IN1-5 Insurance Company Address (XAD, optional, repeating) (chainable). */
   insuranceCompanyAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** IN1-6 Insurance Co Contact Person (XPN, max 0, optional, repeating) (chainable). */
+  /** IN1-6 Insurance Co Contact Person (XPN, optional, repeating) (chainable). */
   insuranceCoContactPerson(...values: Repeated<string | XPN>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** IN1-7 Insurance Co Phone Number (XTN, max 0, optional, repeating) (chainable). */
+  /** IN1-7 Insurance Co Phone Number (XTN, optional, repeating) (chainable). */
   insuranceCoPhoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** IN1-8 Group Number (ST, max 0, optional) (chainable). */
+  /** IN1-8 Group Number (ST, optional) (chainable). */
   groupNumber(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** IN1-9 Group Name (XON, max 0, optional, repeating) (chainable). */
+  /** IN1-9 Group Name (XON, optional, repeating) (chainable). */
   groupName(...values: Repeated<string | XON>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** IN1-10 Insured's Group Emp ID (CX, max 0, optional, repeating) (chainable). */
+  /** IN1-10 Insured's Group Emp ID (CX, optional, repeating) (chainable). */
   insuredSGroupEmpId(...values: Repeated<string | CX>[]): this {
     this.fields[9] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
   }
 
-  /** IN1-11 Insured's Group Emp Name (XON, max 0, optional, repeating) (chainable). */
+  /** IN1-11 Insured's Group Emp Name (XON, optional, repeating) (chainable). */
   insuredSGroupEmpName(...values: Repeated<string | XON>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** IN1-12 Plan Effective Date (DT, max 0, optional) (chainable). */
+  /** IN1-12 Plan Effective Date (DT, optional) (chainable). */
   planEffectiveDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[11] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** IN1-13 Plan Expiration Date (DT, max 0, optional) (chainable). */
+  /** IN1-13 Plan Expiration Date (DT, optional) (chainable). */
   planExpirationDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[12] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** IN1-14 Authorization Information (AUI, max 0, optional) (chainable). */
+  /** IN1-14 Authorization Information (AUI, optional) (chainable). */
   authorizationInformation(value: string): this {
     this.fields[13] = this.createField(value);
     return this;
   }
 
-  /** IN1-15 Plan Type (CWE, max 0, optional) (chainable). */
+  /** IN1-15 Plan Type (CWE, optional) (chainable). */
   planType(value: string | CodedElement): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN1-16 Name Of Insured (XPN, max 0, optional, repeating) (chainable). */
+  /** IN1-16 Name Of Insured (XPN, optional, repeating) (chainable). */
   nameOfInsured(...values: Repeated<string | XPN>[]): this {
     this.fields[15] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** IN1-17 Insured's Relationship To Patient (CWE, max 0, optional) (chainable). */
+  /** IN1-17 Insured's Relationship To Patient (CWE, optional) (chainable). */
   insuredSRelationshipToPatient(value: string | CodedElement): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN1-18 Insured's Date Of Birth (DTM, max 0, optional) (chainable). */
+  /** IN1-18 Insured's Date Of Birth (DTM, optional) (chainable). */
   insuredSDateOfBirth(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[17] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** IN1-19 Insured's Address (XAD, max 0, optional, repeating) (chainable). */
+  /** IN1-19 Insured's Address (XAD, optional, repeating) (chainable). */
   insuredSAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[18] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** IN1-20 Assignment Of Benefits (CWE, max 0, optional) (chainable). */
+  /** IN1-20 Assignment Of Benefits (CWE, optional) (chainable). */
   assignmentOfBenefits(value: string | CodedElement): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN1-21 Coordination Of Benefits (CWE, max 0, optional) (chainable). */
+  /** IN1-21 Coordination Of Benefits (CWE, optional) (chainable). */
   coordinationOfBenefits(value: string | CodedElement): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN1-22 Coord Of Ben. Priority (ST, max 0, optional) (chainable). */
+  /** IN1-22 Coord Of Ben. Priority (ST, optional) (chainable). */
   coordOfBenPriority(value: string): this {
     this.fields[21] = this.createField(value);
     return this;
@@ -166,7 +166,7 @@ export class IN1 extends BaseSegment {
     return this;
   }
 
-  /** IN1-24 Notice Of Admission Date (DT, max 0, optional) (chainable). */
+  /** IN1-24 Notice Of Admission Date (DT, optional) (chainable). */
   noticeOfAdmissionDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[23] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
@@ -178,73 +178,73 @@ export class IN1 extends BaseSegment {
     return this;
   }
 
-  /** IN1-26 Report Of Eligibility Date (DT, max 0, optional) (chainable). */
+  /** IN1-26 Report Of Eligibility Date (DT, optional) (chainable). */
   reportOfEligibilityDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[25] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** IN1-27 Release Information Code (CWE, max 0, optional) (chainable). */
+  /** IN1-27 Release Information Code (CWE, optional) (chainable). */
   releaseInformationCode(value: string | CodedElement): this {
     this.fields[26] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN1-28 Pre-Admit Cert (PAC) (ST, max 0, optional) (chainable). */
+  /** IN1-28 Pre-Admit Cert (PAC) (ST, optional) (chainable). */
   preAdmitCertPac(value: string): this {
     this.fields[27] = this.createField(value);
     return this;
   }
 
-  /** IN1-29 Verification Date/Time (DTM, max 0, optional) (chainable). */
+  /** IN1-29 Verification Date/Time (DTM, optional) (chainable). */
   verificationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[28] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** IN1-30 Verification By (XCN, max 0, optional, repeating) (chainable). */
+  /** IN1-30 Verification By (XCN, optional, repeating) (chainable). */
   verificationBy(...values: Repeated<string | XCN>[]): this {
     this.fields[29] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** IN1-31 Type Of Agreement Code (CWE, max 0, optional) (chainable). */
+  /** IN1-31 Type Of Agreement Code (CWE, optional) (chainable). */
   typeOfAgreementCode(value: string | CodedElement): this {
     this.fields[30] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN1-32 Billing Status (CWE, max 0, optional) (chainable). */
+  /** IN1-32 Billing Status (CWE, optional) (chainable). */
   billingStatus(value: string | CodedElement): this {
     this.fields[31] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN1-33 Lifetime Reserve Days (NM, max 0, optional) (chainable). */
+  /** IN1-33 Lifetime Reserve Days (NM, optional) (chainable). */
   lifetimeReserveDays(value: string): this {
     this.fields[32] = this.createField(value);
     return this;
   }
 
-  /** IN1-34 Delay Before L.R. Day (NM, max 0, optional) (chainable). */
+  /** IN1-34 Delay Before L.R. Day (NM, optional) (chainable). */
   delayBeforeLRDay(value: string): this {
     this.fields[33] = this.createField(value);
     return this;
   }
 
-  /** IN1-35 Company Plan Code (CWE, max 0, optional) (chainable). */
+  /** IN1-35 Company Plan Code (CWE, optional) (chainable). */
   companyPlanCode(value: string | CodedElement): this {
     this.fields[34] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN1-36 Policy Number (ST, max 0, optional) (chainable). */
+  /** IN1-36 Policy Number (ST, optional) (chainable). */
   policyNumber(value: string): this {
     this.fields[35] = this.createField(value);
     return this;
   }
 
-  /** IN1-37 Policy Deductible (CP, max 0, optional) (chainable). */
+  /** IN1-37 Policy Deductible (CP, optional) (chainable). */
   policyDeductible(value: string | CP): this {
     this.fields[36] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
@@ -256,7 +256,7 @@ export class IN1 extends BaseSegment {
     return this;
   }
 
-  /** IN1-39 Policy Limit - Days (NM, max 0, optional) (chainable). */
+  /** IN1-39 Policy Limit - Days (NM, optional) (chainable). */
   policyLimitDays(value: string): this {
     this.fields[38] = this.createField(value);
     return this;
@@ -274,85 +274,85 @@ export class IN1 extends BaseSegment {
     return this;
   }
 
-  /** IN1-42 Insured's Employment Status (CWE, max 0, optional) (chainable). */
+  /** IN1-42 Insured's Employment Status (CWE, optional) (chainable). */
   insuredSEmploymentStatus(value: string | CodedElement): this {
     this.fields[41] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN1-43 Insured's Administrative Sex (CWE, max 0, optional) (chainable). */
+  /** IN1-43 Insured's Administrative Sex (CWE, optional) (chainable). */
   insuredSAdministrativeSex(value: string | CodedElement): this {
     this.fields[42] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN1-44 Insured's Employer's Address (XAD, max 0, optional, repeating) (chainable). */
+  /** IN1-44 Insured's Employer's Address (XAD, optional, repeating) (chainable). */
   insuredSEmployerSAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[43] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** IN1-45 Verification Status (ST, max 0, optional) (chainable). */
+  /** IN1-45 Verification Status (ST, optional) (chainable). */
   verificationStatus(value: string): this {
     this.fields[44] = this.createField(value);
     return this;
   }
 
-  /** IN1-46 Prior Insurance Plan ID (CWE, max 0, optional) (chainable). */
+  /** IN1-46 Prior Insurance Plan ID (CWE, optional) (chainable). */
   priorInsurancePlanId(value: string | CodedElement): this {
     this.fields[45] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN1-47 Coverage Type (CWE, max 0, optional) (chainable). */
+  /** IN1-47 Coverage Type (CWE, optional) (chainable). */
   coverageType(value: string | CodedElement): this {
     this.fields[46] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN1-48 Handicap (CWE, max 0, optional) (chainable). */
+  /** IN1-48 Handicap (CWE, optional) (chainable). */
   handicap(value: string | CodedElement): this {
     this.fields[47] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN1-49 Insured's ID Number (CX, max 0, optional, repeating) (chainable). */
+  /** IN1-49 Insured's ID Number (CX, optional, repeating) (chainable). */
   insuredSIdNumber(...values: Repeated<string | CX>[]): this {
     this.fields[48] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
   }
 
-  /** IN1-50 Signature Code (CWE, max 0, optional) (chainable). */
+  /** IN1-50 Signature Code (CWE, optional) (chainable). */
   signatureCode(value: string | CodedElement): this {
     this.fields[49] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN1-51 Signature Code Date (DT, max 0, optional) (chainable). */
+  /** IN1-51 Signature Code Date (DT, optional) (chainable). */
   signatureCodeDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[50] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** IN1-52 Insured's Birth Place (ST, max 0, optional) (chainable). */
+  /** IN1-52 Insured's Birth Place (ST, optional) (chainable). */
   insuredSBirthPlace(value: string): this {
     this.fields[51] = this.createField(value);
     return this;
   }
 
-  /** IN1-53 VIP Indicator (CWE, max 0, optional) (chainable). */
+  /** IN1-53 VIP Indicator (CWE, optional) (chainable). */
   vipIndicator(value: string | CodedElement): this {
     this.fields[52] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IN1-54 External Health Plan Identifiers (CX, max 0, optional, repeating) (chainable). */
+  /** IN1-54 External Health Plan Identifiers (CX, optional, repeating) (chainable). */
   externalHealthPlanIdentifiers(...values: Repeated<string | CX>[]): this {
     this.fields[53] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
   }
 
-  /** IN1-55 Insurance Action Code (ID, max 0, optional) (chainable). */
+  /** IN1-55 Insurance Action Code (ID, optional) (chainable). */
   insuranceActionCode(value: string): this {
     this.fields[54] = this.createField(value);
     return this;

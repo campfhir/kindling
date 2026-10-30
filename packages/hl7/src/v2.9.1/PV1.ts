@@ -34,301 +34,301 @@ export class PV1 extends BaseSegment {
     return this;
   }
 
-  /** PV1-2 Patient Class (CWE, max 0, required) (chainable). */
+  /** PV1-2 Patient Class (CWE, required) (chainable). */
   patientClass(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-3 Assigned Patient Location (PL, max 0, optional) (chainable). */
+  /** PV1-3 Assigned Patient Location (PL, optional) (chainable). */
   assignedPatientLocation(value: string | PL): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** PV1-4 Admission Type (CWE, max 0, optional) (chainable). */
+  /** PV1-4 Admission Type (CWE, optional) (chainable). */
   admissionType(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-5 Preadmit Number (CX, max 0, optional) (chainable). */
+  /** PV1-5 Preadmit Number (CX, optional) (chainable). */
   preadmitNumber(value: string | CX): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
   }
 
-  /** PV1-6 Prior Patient Location (PL, max 0, optional) (chainable). */
+  /** PV1-6 Prior Patient Location (PL, optional) (chainable). */
   priorPatientLocation(value: string | PL): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** PV1-7 Attending Doctor (XCN, max 0, optional, repeating) (chainable). */
+  /** PV1-7 Attending Doctor (XCN, optional, repeating) (chainable). */
   attendingDoctor(...values: Repeated<string | XCN>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** PV1-8 Referring Doctor (XCN, max 0, optional, repeating) (chainable). */
+  /** PV1-8 Referring Doctor (XCN, optional, repeating) (chainable). */
   referringDoctor(...values: Repeated<string | XCN>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** PV1-9 Consulting Doctor (XCN, max 0, backward compatibility, repeating) (chainable). */
+  /** PV1-9 Consulting Doctor (XCN, backward compatibility, repeating) (chainable). */
   consultingDoctor(...values: Repeated<string | XCN>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** PV1-10 Hospital Service (CWE, max 0, optional) (chainable). */
+  /** PV1-10 Hospital Service (CWE, optional) (chainable). */
   hospitalService(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-11 Temporary Location (PL, max 0, optional) (chainable). */
+  /** PV1-11 Temporary Location (PL, optional) (chainable). */
   temporaryLocation(value: string | PL): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** PV1-12 Preadmit Test Indicator (CWE, max 0, optional) (chainable). */
+  /** PV1-12 Preadmit Test Indicator (CWE, optional) (chainable). */
   preadmitTestIndicator(value: string | CodedElement): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-13 Re-admission Indicator (CWE, max 0, optional) (chainable). */
+  /** PV1-13 Re-admission Indicator (CWE, optional) (chainable). */
   reAdmissionIndicator(value: string | CodedElement): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-14 Admit Source (CWE, max 0, optional) (chainable). */
+  /** PV1-14 Admit Source (CWE, optional) (chainable). */
   admitSource(value: string | CodedElement): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-15 Ambulatory Status (CWE, max 0, optional, repeating) (chainable). */
+  /** PV1-15 Ambulatory Status (CWE, optional, repeating) (chainable). */
   ambulatoryStatus(...values: Repeated<string | CodedElement>[]): this {
     this.fields[14] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PV1-16 VIP Indicator (CWE, max 0, optional) (chainable). */
+  /** PV1-16 VIP Indicator (CWE, optional) (chainable). */
   vipIndicator(value: string | CodedElement): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-17 Admitting Doctor (XCN, max 0, optional, repeating) (chainable). */
+  /** PV1-17 Admitting Doctor (XCN, optional, repeating) (chainable). */
   admittingDoctor(...values: Repeated<string | XCN>[]): this {
     this.fields[16] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** PV1-18 Patient Type (CWE, max 0, optional) (chainable). */
+  /** PV1-18 Patient Type (CWE, optional) (chainable). */
   patientType(value: string | CodedElement): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-19 Visit Number (CX, max 0, optional) (chainable). */
+  /** PV1-19 Visit Number (CX, optional) (chainable). */
   visitNumber(value: string | CX): this {
     this.fields[18] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
   }
 
-  /** PV1-20 Financial Class (FC, max 0, optional, repeating) (chainable). */
+  /** PV1-20 Financial Class (FC, optional, repeating) (chainable). */
   financialClass(...values: Repeated<string>[]): this {
     this.fields[19] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** PV1-21 Charge Price Indicator (CWE, max 0, optional) (chainable). */
+  /** PV1-21 Charge Price Indicator (CWE, optional) (chainable). */
   chargePriceIndicator(value: string | CodedElement): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-22 Courtesy Code (CWE, max 0, optional) (chainable). */
+  /** PV1-22 Courtesy Code (CWE, optional) (chainable). */
   courtesyCode(value: string | CodedElement): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-23 Credit Rating (CWE, max 0, optional) (chainable). */
+  /** PV1-23 Credit Rating (CWE, optional) (chainable). */
   creditRating(value: string | CodedElement): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-24 Contract Code (CWE, max 0, optional, repeating) (chainable). */
+  /** PV1-24 Contract Code (CWE, optional, repeating) (chainable). */
   contractCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[23] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PV1-25 Contract Effective Date (DT, max 0, optional, repeating) (chainable). */
+  /** PV1-25 Contract Effective Date (DT, optional, repeating) (chainable). */
   contractEffectiveDate(...values: Repeated<string | Date>[]): this {
     this.fields[24] = this.createRepeatingField(repetitions(values).map((v) => this.createField(formatHL7Date(v, DateLayout))));
     return this;
   }
 
-  /** PV1-26 Contract Amount (NM, max 0, optional, repeating) (chainable). */
+  /** PV1-26 Contract Amount (NM, optional, repeating) (chainable). */
   contractAmount(...values: Repeated<string>[]): this {
     this.fields[25] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** PV1-27 Contract Period (NM, max 0, optional, repeating) (chainable). */
+  /** PV1-27 Contract Period (NM, optional, repeating) (chainable). */
   contractPeriod(...values: Repeated<string>[]): this {
     this.fields[26] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** PV1-28 Interest Code (CWE, max 0, optional) (chainable). */
+  /** PV1-28 Interest Code (CWE, optional) (chainable). */
   interestCode(value: string | CodedElement): this {
     this.fields[27] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-29 Transfer to Bad Debt Code (CWE, max 0, optional) (chainable). */
+  /** PV1-29 Transfer to Bad Debt Code (CWE, optional) (chainable). */
   transferToBadDebtCode(value: string | CodedElement): this {
     this.fields[28] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-30 Transfer to Bad Debt Date (DT, max 0, optional) (chainable). */
+  /** PV1-30 Transfer to Bad Debt Date (DT, optional) (chainable). */
   transferToBadDebtDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[29] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** PV1-31 Bad Debt Agency Code (CWE, max 0, optional) (chainable). */
+  /** PV1-31 Bad Debt Agency Code (CWE, optional) (chainable). */
   badDebtAgencyCode(value: string | CodedElement): this {
     this.fields[30] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-32 Bad Debt Transfer Amount (NM, max 0, optional) (chainable). */
+  /** PV1-32 Bad Debt Transfer Amount (NM, optional) (chainable). */
   badDebtTransferAmount(value: string): this {
     this.fields[31] = this.createField(value);
     return this;
   }
 
-  /** PV1-33 Bad Debt Recovery Amount (NM, max 0, optional) (chainable). */
+  /** PV1-33 Bad Debt Recovery Amount (NM, optional) (chainable). */
   badDebtRecoveryAmount(value: string): this {
     this.fields[32] = this.createField(value);
     return this;
   }
 
-  /** PV1-34 Delete Account Indicator (CWE, max 0, optional) (chainable). */
+  /** PV1-34 Delete Account Indicator (CWE, optional) (chainable). */
   deleteAccountIndicator(value: string | CodedElement): this {
     this.fields[33] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-35 Delete Account Date (DT, max 0, optional) (chainable). */
+  /** PV1-35 Delete Account Date (DT, optional) (chainable). */
   deleteAccountDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[34] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** PV1-36 Discharge Disposition (CWE, max 0, optional) (chainable). */
+  /** PV1-36 Discharge Disposition (CWE, optional) (chainable). */
   dischargeDisposition(value: string | CodedElement): this {
     this.fields[35] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-37 Discharged to Location (DLD, max 0, optional) (chainable). */
+  /** PV1-37 Discharged to Location (DLD, optional) (chainable). */
   dischargedToLocation(value: string): this {
     this.fields[36] = this.createField(value);
     return this;
   }
 
-  /** PV1-38 Diet Type (CWE, max 0, optional) (chainable). */
+  /** PV1-38 Diet Type (CWE, optional) (chainable). */
   dietType(value: string | CodedElement): this {
     this.fields[37] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-39 Servicing Facility (CWE, max 0, optional) (chainable). */
+  /** PV1-39 Servicing Facility (CWE, optional) (chainable). */
   servicingFacility(value: string | CodedElement): this {
     this.fields[38] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-40 Bed Status (CWE, max 0, W) (chainable). */
+  /** PV1-40 Bed Status (CWE, W) (chainable). */
   bedStatus(value: string | CodedElement): this {
     this.fields[39] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-41 Account Status (CWE, max 0, optional) (chainable). */
+  /** PV1-41 Account Status (CWE, optional) (chainable). */
   accountStatus(value: string | CodedElement): this {
     this.fields[40] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PV1-42 Pending Location (PL, max 0, optional) (chainable). */
+  /** PV1-42 Pending Location (PL, optional) (chainable). */
   pendingLocation(value: string | PL): this {
     this.fields[41] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** PV1-43 Prior Temporary Location (PL, max 0, optional) (chainable). */
+  /** PV1-43 Prior Temporary Location (PL, optional) (chainable). */
   priorTemporaryLocation(value: string | PL): this {
     this.fields[42] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** PV1-44 Admit Date/Time (DTM, max 0, optional) (chainable). */
+  /** PV1-44 Admit Date/Time (DTM, optional) (chainable). */
   admitDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[43] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PV1-45 Discharge Date/Time (DTM, max 0, optional) (chainable). */
+  /** PV1-45 Discharge Date/Time (DTM, optional) (chainable). */
   dischargeDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[44] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PV1-46 Current Patient Balance (NM, max 0, optional) (chainable). */
+  /** PV1-46 Current Patient Balance (NM, optional) (chainable). */
   currentPatientBalance(value: string): this {
     this.fields[45] = this.createField(value);
     return this;
   }
 
-  /** PV1-47 Total Charges (NM, max 0, optional) (chainable). */
+  /** PV1-47 Total Charges (NM, optional) (chainable). */
   totalCharges(value: string): this {
     this.fields[46] = this.createField(value);
     return this;
   }
 
-  /** PV1-48 Total Adjustments (NM, max 0, optional) (chainable). */
+  /** PV1-48 Total Adjustments (NM, optional) (chainable). */
   totalAdjustments(value: string): this {
     this.fields[47] = this.createField(value);
     return this;
   }
 
-  /** PV1-49 Total Payments (NM, max 0, optional) (chainable). */
+  /** PV1-49 Total Payments (NM, optional) (chainable). */
   totalPayments(value: string): this {
     this.fields[48] = this.createField(value);
     return this;
   }
 
-  /** PV1-50 Alternate Visit ID (CX, max 0, optional, repeating) (chainable). */
+  /** PV1-50 Alternate Visit ID (CX, optional, repeating) (chainable). */
   alternateVisitId(...values: Repeated<string | CX>[]): this {
     this.fields[49] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
   }
 
-  /** PV1-51 Visit Indicator (CWE, max 0, optional) (chainable). */
+  /** PV1-51 Visit Indicator (CWE, optional) (chainable). */
   visitIndicator(value: string | CodedElement): this {
     this.fields[50] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -340,13 +340,13 @@ export class PV1 extends BaseSegment {
     return this;
   }
 
-  /** PV1-53 Service Episode Description (ST, max 0, optional) (chainable). */
+  /** PV1-53 Service Episode Description (ST, optional) (chainable). */
   serviceEpisodeDescription(value: string): this {
     this.fields[52] = this.createField(value);
     return this;
   }
 
-  /** PV1-54 Service Episode Identifier (CX, max 0, optional) (chainable). */
+  /** PV1-54 Service Episode Identifier (CX, optional) (chainable). */
   serviceEpisodeIdentifier(value: string | CX): this {
     this.fields[53] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;

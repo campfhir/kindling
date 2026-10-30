@@ -28,199 +28,199 @@ export class DON extends BaseSegment {
     this.fields = [];
   }
 
-  /** DON-1 Donation Identification Number (EI, max 0, conditional) (chainable). */
+  /** DON-1 Donation Identification Number (EI, conditional) (chainable). */
   donationIdentificationNumber(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** DON-2 Donation Type (CNE, max 0, conditional) (chainable). */
+  /** DON-2 Donation Type (CNE, conditional) (chainable). */
   donationType(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DON-3 Phlebotomy Start Date/Time (DTM, max 0, required) (chainable). */
+  /** DON-3 Phlebotomy Start Date/Time (DTM, required) (chainable). */
   phlebotomyStartDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** DON-4 Phlebotomy End Date/Time (DTM, max 0, required) (chainable). */
+  /** DON-4 Phlebotomy End Date/Time (DTM, required) (chainable). */
   phlebotomyEndDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** DON-5 Donation Duration (NM, max 0, required) (chainable). */
+  /** DON-5 Donation Duration (NM, required) (chainable). */
   donationDuration(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** DON-6 Donation Duration Units (CNE, max 0, required) (chainable). */
+  /** DON-6 Donation Duration Units (CNE, required) (chainable). */
   donationDurationUnits(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DON-7 Intended Procedure Type (CNE, max 0, required, repeating) (chainable). */
+  /** DON-7 Intended Procedure Type (CNE, required, repeating) (chainable). */
   intendedProcedureType(...values: Repeated<string | CodedElement>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** DON-8 Actual Procedure Type (CNE, max 0, required, repeating) (chainable). */
+  /** DON-8 Actual Procedure Type (CNE, required, repeating) (chainable). */
   actualProcedureType(...values: Repeated<string | CodedElement>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** DON-9 Donor Eligibility Flag (ID, max 0, required) (chainable). */
+  /** DON-9 Donor Eligibility Flag (ID, required) (chainable). */
   donorEligibilityFlag(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** DON-10 Donor Eligibility Procedure Type (CNE, max 0, required, repeating) (chainable). */
+  /** DON-10 Donor Eligibility Procedure Type (CNE, required, repeating) (chainable). */
   donorEligibilityProcedureType(...values: Repeated<string | CodedElement>[]): this {
     this.fields[9] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** DON-11 Donor Eligibility Date (DTM, max 0, required) (chainable). */
+  /** DON-11 Donor Eligibility Date (DTM, required) (chainable). */
   donorEligibilityDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[10] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** DON-12 Process Interruption (CNE, max 0, required) (chainable). */
+  /** DON-12 Process Interruption (CNE, required) (chainable). */
   processInterruption(value: string | CodedElement): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DON-13 Process Interruption Reason (CNE, max 0, required) (chainable). */
+  /** DON-13 Process Interruption Reason (CNE, required) (chainable). */
   processInterruptionReason(value: string | CodedElement): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DON-14 Phlebotomy Issue (CNE, max 0, required, repeating) (chainable). */
+  /** DON-14 Phlebotomy Issue (CNE, required, repeating) (chainable). */
   phlebotomyIssue(...values: Repeated<string | CodedElement>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** DON-15 Intended Recipient Blood Relative (ID, max 0, required) (chainable). */
+  /** DON-15 Intended Recipient Blood Relative (ID, required) (chainable). */
   intendedRecipientBloodRelative(value: string): this {
     this.fields[14] = this.createField(value);
     return this;
   }
 
-  /** DON-16 Intended Recipient Name (XPN, max 0, required) (chainable). */
+  /** DON-16 Intended Recipient Name (XPN, required) (chainable). */
   intendedRecipientName(value: string | XPN): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(xpnParts(value)));
     return this;
   }
 
-  /** DON-17 Intended Recipient DOB (DTM, max 0, required) (chainable). */
+  /** DON-17 Intended Recipient DOB (DTM, required) (chainable). */
   intendedRecipientDob(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[16] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** DON-18 Intended Recipient Facility (XON, max 0, required) (chainable). */
+  /** DON-18 Intended Recipient Facility (XON, required) (chainable). */
   intendedRecipientFacility(value: string | XON): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** DON-19 Intended Recipient Procedure Date (DTM, max 0, required) (chainable). */
+  /** DON-19 Intended Recipient Procedure Date (DTM, required) (chainable). */
   intendedRecipientProcedureDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[18] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** DON-20 Intended Recipient Ordering Provider (XPN, max 0, required) (chainable). */
+  /** DON-20 Intended Recipient Ordering Provider (XPN, required) (chainable). */
   intendedRecipientOrderingProvider(value: string | XPN): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(xpnParts(value)));
     return this;
   }
 
-  /** DON-21 Phlebotomy Status (CNE, max 0, required) (chainable). */
+  /** DON-21 Phlebotomy Status (CNE, required) (chainable). */
   phlebotomyStatus(value: string | CodedElement): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DON-22 Arm Stick (CNE, max 0, required) (chainable). */
+  /** DON-22 Arm Stick (CNE, required) (chainable). */
   armStick(value: string | CodedElement): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DON-23 Bleed Start Phlebotomist (XPN, max 0, required) (chainable). */
+  /** DON-23 Bleed Start Phlebotomist (XPN, required) (chainable). */
   bleedStartPhlebotomist(value: string | XPN): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(xpnParts(value)));
     return this;
   }
 
-  /** DON-24 Bleed End Phlebotomist (XPN, max 0, required) (chainable). */
+  /** DON-24 Bleed End Phlebotomist (XPN, required) (chainable). */
   bleedEndPhlebotomist(value: string | XPN): this {
     this.fields[23] = this.createField(typeof value === "string" ? value : components(xpnParts(value)));
     return this;
   }
 
-  /** DON-25 Aphaeresis Type Machine (ST, max 0, required) (chainable). */
+  /** DON-25 Aphaeresis Type Machine (ST, required) (chainable). */
   aphaeresisTypeMachine(value: string): this {
     this.fields[24] = this.createField(value);
     return this;
   }
 
-  /** DON-26 Aphaeresis Machine Serial Number (ST, max 0, required) (chainable). */
+  /** DON-26 Aphaeresis Machine Serial Number (ST, required) (chainable). */
   aphaeresisMachineSerialNumber(value: string): this {
     this.fields[25] = this.createField(value);
     return this;
   }
 
-  /** DON-27 Donor Reaction (ID, max 0, required) (chainable). */
+  /** DON-27 Donor Reaction (ID, required) (chainable). */
   donorReaction(value: string): this {
     this.fields[26] = this.createField(value);
     return this;
   }
 
-  /** DON-28 Final Review Staff ID (XPN, max 0, required) (chainable). */
+  /** DON-28 Final Review Staff ID (XPN, required) (chainable). */
   finalReviewStaffId(value: string | XPN): this {
     this.fields[27] = this.createField(typeof value === "string" ? value : components(xpnParts(value)));
     return this;
   }
 
-  /** DON-29 Final Review Date/Time (DTM, max 0, required) (chainable). */
+  /** DON-29 Final Review Date/Time (DTM, required) (chainable). */
   finalReviewDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[28] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** DON-30 Number of Tubes Collected (NM, max 0, required) (chainable). */
+  /** DON-30 Number of Tubes Collected (NM, required) (chainable). */
   numberOfTubesCollected(value: string): this {
     this.fields[29] = this.createField(value);
     return this;
   }
 
-  /** DON-31 Donation Sample Identifier (EI, max 0, required, repeating) (chainable). */
+  /** DON-31 Donation Sample Identifier (EI, required, repeating) (chainable). */
   donationSampleIdentifier(...values: Repeated<string | EI>[]): this {
     this.fields[30] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;
   }
 
-  /** DON-32 Donation Accept Staff (XCN, max 0, required) (chainable). */
+  /** DON-32 Donation Accept Staff (XCN, required) (chainable). */
   donationAcceptStaff(value: string | XCN): this {
     this.fields[31] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** DON-33 Donation Material Review Staff (XCN, max 0, required, repeating) (chainable). */
+  /** DON-33 Donation Material Review Staff (XCN, required, repeating) (chainable). */
   donationMaterialReviewStaff(...values: Repeated<string | XCN>[]): this {
     this.fields[32] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;

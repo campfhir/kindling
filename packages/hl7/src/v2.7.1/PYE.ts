@@ -33,37 +33,37 @@ export class PYE extends BaseSegment {
     return this;
   }
 
-  /** PYE-2 Payee Type (CWE, max 0, required) (chainable). */
+  /** PYE-2 Payee Type (CWE, required) (chainable). */
   payeeType(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PYE-3 Payee Relationship to Invoice (Patient) (CWE, max 0, conditional) (chainable). */
+  /** PYE-3 Payee Relationship to Invoice (Patient) (CWE, conditional) (chainable). */
   payeeRelationshipToInvoicePatient(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PYE-4 Payee Identification List (XON, max 0, conditional, repeating) (chainable). */
+  /** PYE-4 Payee Identification List (XON, conditional, repeating) (chainable). */
   payeeIdentificationList(...values: Repeated<string | XON>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** PYE-5 Payee Person Name (XPN, max 0, conditional, repeating) (chainable). */
+  /** PYE-5 Payee Person Name (XPN, conditional, repeating) (chainable). */
   payeePersonName(...values: Repeated<string | XPN>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** PYE-6 Payee Address (XAD, max 0, conditional, repeating) (chainable). */
+  /** PYE-6 Payee Address (XAD, conditional, repeating) (chainable). */
   payeeAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** PYE-7 Payment Method (CWE, max 0, optional) (chainable). */
+  /** PYE-7 Payment Method (CWE, optional) (chainable). */
   paymentMethod(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

@@ -28,13 +28,13 @@ export class PSL extends BaseSegment {
     this.fields = [];
   }
 
-  /** PSL-1 Provider Product/Service Line Item Number (EI, max 0, required) (chainable). */
+  /** PSL-1 Provider Product/Service Line Item Number (EI, required) (chainable). */
   providerProductServiceLineItemNumber(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** PSL-2 Payer Product/Service Line Item Number (EI, max 0, optional) (chainable). */
+  /** PSL-2 Payer Product/Service Line Item Number (EI, optional) (chainable). */
   payerProductServiceLineItemNumber(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
@@ -46,103 +46,103 @@ export class PSL extends BaseSegment {
     return this;
   }
 
-  /** PSL-4 Provider Tracking ID (EI, max 0, optional) (chainable). */
+  /** PSL-4 Provider Tracking ID (EI, optional) (chainable). */
   providerTrackingId(value: string | EI): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** PSL-5 Payer Tracking ID (EI, max 0, optional) (chainable). */
+  /** PSL-5 Payer Tracking ID (EI, optional) (chainable). */
   payerTrackingId(value: string | EI): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** PSL-6 Product/Service Line Item Status (CWE, max 0, required) (chainable). */
+  /** PSL-6 Product/Service Line Item Status (CWE, required) (chainable). */
   productServiceLineItemStatus(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PSL-7 Product/Service Code (CWE, max 0, required) (chainable). */
+  /** PSL-7 Product/Service Code (CWE, required) (chainable). */
   productServiceCode(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PSL-8 Product/Service Code Modifier (CWE, max 0, optional) (chainable). */
+  /** PSL-8 Product/Service Code Modifier (CWE, optional) (chainable). */
   productServiceCodeModifier(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PSL-9 Product/Service Code Description (ST, max 0, optional) (chainable). */
+  /** PSL-9 Product/Service Code Description (ST, optional) (chainable). */
   productServiceCodeDescription(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** PSL-10 Product/Service Effective Date (DTM, max 0, conditional) (chainable). */
+  /** PSL-10 Product/Service Effective Date (DTM, conditional) (chainable). */
   productServiceEffectiveDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[9] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PSL-11 Product/Service Expiration Date (DTM, max 0, optional) (chainable). */
+  /** PSL-11 Product/Service Expiration Date (DTM, optional) (chainable). */
   productServiceExpirationDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[10] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PSL-12 Product/Service Quantity (CQ, max 0, conditional) (chainable). */
+  /** PSL-12 Product/Service Quantity (CQ, conditional) (chainable). */
   productServiceQuantity(value: string | CQ): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** PSL-13 Product/Service Unit Cost (CP, max 0, conditional) (chainable). */
+  /** PSL-13 Product/Service Unit Cost (CP, conditional) (chainable). */
   productServiceUnitCost(value: string | CP): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** PSL-14 Number of Items per Unit (NM, max 0, conditional) (chainable). */
+  /** PSL-14 Number of Items per Unit (NM, conditional) (chainable). */
   numberOfItemsPerUnit(value: string): this {
     this.fields[13] = this.createField(value);
     return this;
   }
 
-  /** PSL-15 Product/Service Gross Amount (CP, max 0, conditional) (chainable). */
+  /** PSL-15 Product/Service Gross Amount (CP, conditional) (chainable). */
   productServiceGrossAmount(value: string | CP): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** PSL-16 Product/Service Billed Amount (CP, max 0, conditional) (chainable). */
+  /** PSL-16 Product/Service Billed Amount (CP, conditional) (chainable). */
   productServiceBilledAmount(value: string | CP): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** PSL-17 Product/Service Clarification Code Type (CWE, max 0, optional) (chainable). */
+  /** PSL-17 Product/Service Clarification Code Type (CWE, optional) (chainable). */
   productServiceClarificationCodeType(value: string | CodedElement): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PSL-18 Product/Service Clarification Code Value (ST, max 0, optional) (chainable). */
+  /** PSL-18 Product/Service Clarification Code Value (ST, optional) (chainable). */
   productServiceClarificationCodeValue(value: string): this {
     this.fields[17] = this.createField(value);
     return this;
   }
 
-  /** PSL-19 Health Document Reference Identifier (EI, max 0, optional) (chainable). */
+  /** PSL-19 Health Document Reference Identifier (EI, optional) (chainable). */
   healthDocumentReferenceIdentifier(value: string | EI): this {
     this.fields[18] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** PSL-20 Processing Consideration Code (CWE, max 0, optional) (chainable). */
+  /** PSL-20 Processing Consideration Code (CWE, optional) (chainable). */
   processingConsiderationCode(value: string | CodedElement): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -154,37 +154,37 @@ export class PSL extends BaseSegment {
     return this;
   }
 
-  /** PSL-22 Related Product/Service Code Indicator (CWE, max 0, optional) (chainable). */
+  /** PSL-22 Related Product/Service Code Indicator (CWE, optional) (chainable). */
   relatedProductServiceCodeIndicator(value: string | CodedElement): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PSL-23 Product/Service Amount for Physician (CP, max 0, optional) (chainable). */
+  /** PSL-23 Product/Service Amount for Physician (CP, optional) (chainable). */
   productServiceAmountForPhysician(value: string | CP): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** PSL-24 Product/Service Cost Factor (NM, max 0, optional) (chainable). */
+  /** PSL-24 Product/Service Cost Factor (NM, optional) (chainable). */
   productServiceCostFactor(value: string): this {
     this.fields[23] = this.createField(value);
     return this;
   }
 
-  /** PSL-25 Cost Center (CX, max 0, optional) (chainable). */
+  /** PSL-25 Cost Center (CX, optional) (chainable). */
   costCenter(value: string | CX): this {
     this.fields[24] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
   }
 
-  /** PSL-26 Billing Period (DR, max 0, optional) (chainable). */
+  /** PSL-26 Billing Period (DR, optional) (chainable). */
   billingPeriod(value: string | DR): this {
     this.fields[25] = this.createField(typeof value === "string" ? value : components(drParts(value)));
     return this;
   }
 
-  /** PSL-27 Days without Billing (NM, max 0, optional) (chainable). */
+  /** PSL-27 Days without Billing (NM, optional) (chainable). */
   daysWithoutBilling(value: string): this {
     this.fields[26] = this.createField(value);
     return this;
@@ -196,103 +196,103 @@ export class PSL extends BaseSegment {
     return this;
   }
 
-  /** PSL-29 Executing Physician ID (XCN, max 0, optional) (chainable). */
+  /** PSL-29 Executing Physician ID (XCN, optional) (chainable). */
   executingPhysicianId(value: string | XCN): this {
     this.fields[28] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** PSL-30 Responsible Physician ID (XCN, max 0, optional) (chainable). */
+  /** PSL-30 Responsible Physician ID (XCN, optional) (chainable). */
   responsiblePhysicianId(value: string | XCN): this {
     this.fields[29] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** PSL-31 Role Executing Physician (CWE, max 0, optional) (chainable). */
+  /** PSL-31 Role Executing Physician (CWE, optional) (chainable). */
   roleExecutingPhysician(value: string | CodedElement): this {
     this.fields[30] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PSL-32 Medical Role Executing Physician (CWE, max 0, optional) (chainable). */
+  /** PSL-32 Medical Role Executing Physician (CWE, optional) (chainable). */
   medicalRoleExecutingPhysician(value: string | CodedElement): this {
     this.fields[31] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PSL-33 Side of body (CWE, max 0, optional) (chainable). */
+  /** PSL-33 Side of body (CWE, optional) (chainable). */
   sideOfBody(value: string | CodedElement): this {
     this.fields[32] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PSL-34 Number of TP's PP (NM, max 0, optional) (chainable). */
+  /** PSL-34 Number of TP's PP (NM, optional) (chainable). */
   numberOfTpSPp(value: string): this {
     this.fields[33] = this.createField(value);
     return this;
   }
 
-  /** PSL-35 Value PP (CP, max 0, optional) (chainable). */
+  /** PSL-35 Value PP (CP, optional) (chainable). */
   valuePp(value: string | CP): this {
     this.fields[34] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** PSL-36 Internal Scaling Factor PP (NM, max 0, optional) (chainable). */
+  /** PSL-36 Internal Scaling Factor PP (NM, optional) (chainable). */
   internalScalingFactorPp(value: string): this {
     this.fields[35] = this.createField(value);
     return this;
   }
 
-  /** PSL-37 External Scaling Factor PP (NM, max 0, optional) (chainable). */
+  /** PSL-37 External Scaling Factor PP (NM, optional) (chainable). */
   externalScalingFactorPp(value: string): this {
     this.fields[36] = this.createField(value);
     return this;
   }
 
-  /** PSL-38 Amount PP (CP, max 0, optional) (chainable). */
+  /** PSL-38 Amount PP (CP, optional) (chainable). */
   amountPp(value: string | CP): this {
     this.fields[37] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** PSL-39 Number of TP's Technical Part (NM, max 0, optional) (chainable). */
+  /** PSL-39 Number of TP's Technical Part (NM, optional) (chainable). */
   numberOfTpSTechnicalPart(value: string): this {
     this.fields[38] = this.createField(value);
     return this;
   }
 
-  /** PSL-40 Value Technical Part (CP, max 0, optional) (chainable). */
+  /** PSL-40 Value Technical Part (CP, optional) (chainable). */
   valueTechnicalPart(value: string | CP): this {
     this.fields[39] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** PSL-41 Internal Scaling Factor Technical Part (NM, max 0, optional) (chainable). */
+  /** PSL-41 Internal Scaling Factor Technical Part (NM, optional) (chainable). */
   internalScalingFactorTechnicalPart(value: string): this {
     this.fields[40] = this.createField(value);
     return this;
   }
 
-  /** PSL-42 External Scaling Factor Technical Part (NM, max 0, optional) (chainable). */
+  /** PSL-42 External Scaling Factor Technical Part (NM, optional) (chainable). */
   externalScalingFactorTechnicalPart(value: string): this {
     this.fields[41] = this.createField(value);
     return this;
   }
 
-  /** PSL-43 Amount Technical Part (CP, max 0, optional) (chainable). */
+  /** PSL-43 Amount Technical Part (CP, optional) (chainable). */
   amountTechnicalPart(value: string | CP): this {
     this.fields[42] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** PSL-44 Total Amount Professional Part + Technical Part (CP, max 0, optional) (chainable). */
+  /** PSL-44 Total Amount Professional Part + Technical Part (CP, optional) (chainable). */
   totalAmountProfessionalPartTechnicalPart(value: string | CP): this {
     this.fields[43] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** PSL-45 Rate (NM, max 0, optional) (chainable). */
+  /** PSL-45 Rate (NM, optional) (chainable). */
   rate(value: string): this {
     this.fields[44] = this.createField(value);
     return this;
@@ -310,7 +310,7 @@ export class PSL extends BaseSegment {
     return this;
   }
 
-  /** PSL-48 Comment (ST, max 0, optional) (chainable). */
+  /** PSL-48 Comment (ST, optional) (chainable). */
   comment(value: string): this {
     this.fields[47] = this.createField(value);
     return this;

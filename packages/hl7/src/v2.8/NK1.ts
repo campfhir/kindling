@@ -34,127 +34,127 @@ export class NK1 extends BaseSegment {
     return this;
   }
 
-  /** NK1-2 Name (XPN, max 0, optional, repeating) (chainable). */
+  /** NK1-2 Name (XPN, optional, repeating) (chainable). */
   field2(...values: Repeated<string | XPN>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** NK1-3 Relationship (CWE, max 0, optional) (chainable). */
+  /** NK1-3 Relationship (CWE, optional) (chainable). */
   relationship(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** NK1-4 Address (XAD, max 0, optional, repeating) (chainable). */
+  /** NK1-4 Address (XAD, optional, repeating) (chainable). */
   address(...values: Repeated<string | XAD>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** NK1-5 Phone Number (XTN, max 0, backward compatibility, repeating) (chainable). */
+  /** NK1-5 Phone Number (XTN, backward compatibility, repeating) (chainable). */
   phoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** NK1-6 Business Phone Number (XTN, max 0, backward compatibility, repeating) (chainable). */
+  /** NK1-6 Business Phone Number (XTN, backward compatibility, repeating) (chainable). */
   businessPhoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** NK1-7 Contact Role (CWE, max 0, optional) (chainable). */
+  /** NK1-7 Contact Role (CWE, optional) (chainable). */
   contactRole(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** NK1-8 Start Date (DT, max 0, optional) (chainable). */
+  /** NK1-8 Start Date (DT, optional) (chainable). */
   startDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[7] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** NK1-9 End Date (DT, max 0, optional) (chainable). */
+  /** NK1-9 End Date (DT, optional) (chainable). */
   endDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[8] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** NK1-10 Next of Kin / Associated Parties Job Title (ST, max 0, optional) (chainable). */
+  /** NK1-10 Next of Kin / Associated Parties Job Title (ST, optional) (chainable). */
   nextOfKinAssociatedPartiesJobTitle(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
   }
 
-  /** NK1-11 Next of Kin / Associated Parties Job Code/Class (JCC, max 0, optional) (chainable). */
+  /** NK1-11 Next of Kin / Associated Parties Job Code/Class (JCC, optional) (chainable). */
   nextOfKinAssociatedPartiesJobCodeClass(value: string): this {
     this.fields[10] = this.createField(value);
     return this;
   }
 
-  /** NK1-12 Next of Kin / Associated Parties Employee Number (CX, max 0, optional) (chainable). */
+  /** NK1-12 Next of Kin / Associated Parties Employee Number (CX, optional) (chainable). */
   nextOfKinAssociatedPartiesEmployeeNumber(value: string | CX): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
   }
 
-  /** NK1-13 Organization Name (XON, max 0, optional, repeating) (chainable). */
+  /** NK1-13 Organization Name (XON, optional, repeating) (chainable). */
   organizationName(...values: Repeated<string | XON>[]): this {
     this.fields[12] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** NK1-14 Marital Status (CWE, max 0, optional) (chainable). */
+  /** NK1-14 Marital Status (CWE, optional) (chainable). */
   maritalStatus(value: string | CodedElement): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** NK1-15 Administrative Sex (CWE, max 0, optional) (chainable). */
+  /** NK1-15 Administrative Sex (CWE, optional) (chainable). */
   administrativeSex(value: string | CodedElement): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** NK1-16 Date/Time of Birth (DTM, max 0, optional) (chainable). */
+  /** NK1-16 Date/Time of Birth (DTM, optional) (chainable). */
   dateTimeOfBirth(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[15] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** NK1-17 Living Dependency (CWE, max 0, optional, repeating) (chainable). */
+  /** NK1-17 Living Dependency (CWE, optional, repeating) (chainable). */
   livingDependency(...values: Repeated<string | CodedElement>[]): this {
     this.fields[16] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** NK1-18 Ambulatory Status (CWE, max 0, optional, repeating) (chainable). */
+  /** NK1-18 Ambulatory Status (CWE, optional, repeating) (chainable). */
   ambulatoryStatus(...values: Repeated<string | CodedElement>[]): this {
     this.fields[17] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** NK1-19 Citizenship (CWE, max 0, optional, repeating) (chainable). */
+  /** NK1-19 Citizenship (CWE, optional, repeating) (chainable). */
   citizenship(...values: Repeated<string | CodedElement>[]): this {
     this.fields[18] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** NK1-20 Primary Language (CWE, max 0, optional) (chainable). */
+  /** NK1-20 Primary Language (CWE, optional) (chainable). */
   primaryLanguage(value: string | CodedElement): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** NK1-21 Living Arrangement (CWE, max 0, optional) (chainable). */
+  /** NK1-21 Living Arrangement (CWE, optional) (chainable). */
   livingArrangement(value: string | CodedElement): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** NK1-22 Publicity Code (CWE, max 0, optional) (chainable). */
+  /** NK1-22 Publicity Code (CWE, optional) (chainable). */
   publicityCode(value: string | CodedElement): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -166,109 +166,109 @@ export class NK1 extends BaseSegment {
     return this;
   }
 
-  /** NK1-24 Student Indicator (CWE, max 0, optional) (chainable). */
+  /** NK1-24 Student Indicator (CWE, optional) (chainable). */
   studentIndicator(value: string | CodedElement): this {
     this.fields[23] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** NK1-25 Religion (CWE, max 0, optional) (chainable). */
+  /** NK1-25 Religion (CWE, optional) (chainable). */
   religion(value: string | CodedElement): this {
     this.fields[24] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** NK1-26 Mother's Maiden Name (XPN, max 0, optional, repeating) (chainable). */
+  /** NK1-26 Mother's Maiden Name (XPN, optional, repeating) (chainable). */
   motherSMaidenName(...values: Repeated<string | XPN>[]): this {
     this.fields[25] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** NK1-27 Nationality (CWE, max 0, optional) (chainable). */
+  /** NK1-27 Nationality (CWE, optional) (chainable). */
   nationality(value: string | CodedElement): this {
     this.fields[26] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** NK1-28 Ethnic Group (CWE, max 0, optional, repeating) (chainable). */
+  /** NK1-28 Ethnic Group (CWE, optional, repeating) (chainable). */
   ethnicGroup(...values: Repeated<string | CodedElement>[]): this {
     this.fields[27] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** NK1-29 Contact Reason (CWE, max 0, optional, repeating) (chainable). */
+  /** NK1-29 Contact Reason (CWE, optional, repeating) (chainable). */
   contactReason(...values: Repeated<string | CodedElement>[]): this {
     this.fields[28] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** NK1-30 Contact Person's Name (XPN, max 0, optional, repeating) (chainable). */
+  /** NK1-30 Contact Person's Name (XPN, optional, repeating) (chainable). */
   contactPersonSName(...values: Repeated<string | XPN>[]): this {
     this.fields[29] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** NK1-31 Contact Person's Telephone Number (XTN, max 0, backward compatibility, repeating) (chainable). */
+  /** NK1-31 Contact Person's Telephone Number (XTN, backward compatibility, repeating) (chainable). */
   contactPersonSTelephoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[30] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** NK1-32 Contact Person's Address (XAD, max 0, optional, repeating) (chainable). */
+  /** NK1-32 Contact Person's Address (XAD, optional, repeating) (chainable). */
   contactPersonSAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[31] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** NK1-33 Next of Kin/Associated Party's Identifiers (CX, max 0, optional, repeating) (chainable). */
+  /** NK1-33 Next of Kin/Associated Party's Identifiers (CX, optional, repeating) (chainable). */
   nextOfKinAssociatedPartySIdentifiers(...values: Repeated<string | CX>[]): this {
     this.fields[32] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
   }
 
-  /** NK1-34 Job Status (CWE, max 0, optional) (chainable). */
+  /** NK1-34 Job Status (CWE, optional) (chainable). */
   jobStatus(value: string | CodedElement): this {
     this.fields[33] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** NK1-35 Race (CWE, max 0, optional, repeating) (chainable). */
+  /** NK1-35 Race (CWE, optional, repeating) (chainable). */
   race(...values: Repeated<string | CodedElement>[]): this {
     this.fields[34] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** NK1-36 Handicap (CWE, max 0, optional) (chainable). */
+  /** NK1-36 Handicap (CWE, optional) (chainable). */
   handicap(value: string | CodedElement): this {
     this.fields[35] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** NK1-37 Contact Person Social Security Number (ST, max 0, optional) (chainable). */
+  /** NK1-37 Contact Person Social Security Number (ST, optional) (chainable). */
   contactPersonSocialSecurityNumber(value: string): this {
     this.fields[36] = this.createField(value);
     return this;
   }
 
-  /** NK1-38 Next of Kin Birth Place (ST, max 0, optional) (chainable). */
+  /** NK1-38 Next of Kin Birth Place (ST, optional) (chainable). */
   nextOfKinBirthPlace(value: string): this {
     this.fields[37] = this.createField(value);
     return this;
   }
 
-  /** NK1-39 VIP Indicator (CWE, max 0, optional) (chainable). */
+  /** NK1-39 VIP Indicator (CWE, optional) (chainable). */
   vipIndicator(value: string | CodedElement): this {
     this.fields[38] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** NK1-40 Next of Kin Telecommunication Information (XTN, max 0, optional) (chainable). */
+  /** NK1-40 Next of Kin Telecommunication Information (XTN, optional) (chainable). */
   nextOfKinTelecommunicationInformation(value: string | XTN): this {
     this.fields[39] = this.createField(typeof value === "string" ? value : components(xtnParts(value)));
     return this;
   }
 
-  /** NK1-41 Contact Person's Telecommunication Information (XTN, max 0, optional) (chainable). */
+  /** NK1-41 Contact Person's Telecommunication Information (XTN, optional) (chainable). */
   contactPersonSTelecommunicationInformation(value: string | XTN): this {
     this.fields[40] = this.createField(typeof value === "string" ? value : components(xtnParts(value)));
     return this;

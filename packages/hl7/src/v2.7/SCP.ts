@@ -27,49 +27,49 @@ export class SCP extends BaseSegment {
     this.fields = [];
   }
 
-  /** SCP-1 Number Of Decontamination/Sterilization Devices (NM, max 0, optional) (chainable). */
+  /** SCP-1 Number Of Decontamination/Sterilization Devices (NM, optional) (chainable). */
   numberOfDecontaminationSterilizationDevices(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** SCP-2 Labor Calculation Type (CWE, max 0, optional) (chainable). */
+  /** SCP-2 Labor Calculation Type (CWE, optional) (chainable). */
   laborCalculationType(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SCP-3 Date Format (CWE, max 0, optional) (chainable). */
+  /** SCP-3 Date Format (CWE, optional) (chainable). */
   dateFormat(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SCP-4 Device Number (EI, max 0, optional) (chainable). */
+  /** SCP-4 Device Number (EI, optional) (chainable). */
   deviceNumber(value: string | EI): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** SCP-5 Device Name (ST, max 0, optional) (chainable). */
+  /** SCP-5 Device Name (ST, optional) (chainable). */
   deviceName(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** SCP-6 Device Model Name (ST, max 0, optional) (chainable). */
+  /** SCP-6 Device Model Name (ST, optional) (chainable). */
   deviceModelName(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
   }
 
-  /** SCP-7 Device Type (CWE, max 0, optional) (chainable). */
+  /** SCP-7 Device Type (CWE, optional) (chainable). */
   deviceType(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SCP-8 Lot Control (CWE, max 0, optional) (chainable). */
+  /** SCP-8 Lot Control (CWE, optional) (chainable). */
   lotControl(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

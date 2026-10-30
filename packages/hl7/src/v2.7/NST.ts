@@ -33,85 +33,85 @@ export class NST extends BaseSegment {
     return this;
   }
 
-  /** NST-2 Source Identifier (ST, max 0, optional) (chainable). */
+  /** NST-2 Source Identifier (ST, optional) (chainable). */
   sourceIdentifier(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** NST-3 Source Type (ID, max 0, optional) (chainable). */
+  /** NST-3 Source Type (ID, optional) (chainable). */
   sourceType(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** NST-4 Statistics Start (DTM, max 0, optional) (chainable). */
+  /** NST-4 Statistics Start (DTM, optional) (chainable). */
   statisticsStart(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** NST-5 Statistics End (DTM, max 0, optional) (chainable). */
+  /** NST-5 Statistics End (DTM, optional) (chainable). */
   statisticsEnd(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** NST-6 Receive Character Count (NM, max 0, optional) (chainable). */
+  /** NST-6 Receive Character Count (NM, optional) (chainable). */
   receiveCharacterCount(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
   }
 
-  /** NST-7 Send Character Count (NM, max 0, optional) (chainable). */
+  /** NST-7 Send Character Count (NM, optional) (chainable). */
   sendCharacterCount(value: string): this {
     this.fields[6] = this.createField(value);
     return this;
   }
 
-  /** NST-8 Messages Received (NM, max 0, optional) (chainable). */
+  /** NST-8 Messages Received (NM, optional) (chainable). */
   messagesReceived(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** NST-9 Messages Sent (NM, max 0, optional) (chainable). */
+  /** NST-9 Messages Sent (NM, optional) (chainable). */
   messagesSent(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** NST-10 Checksum Errors Received (NM, max 0, optional) (chainable). */
+  /** NST-10 Checksum Errors Received (NM, optional) (chainable). */
   checksumErrorsReceived(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
   }
 
-  /** NST-11 Length Errors Received (NM, max 0, optional) (chainable). */
+  /** NST-11 Length Errors Received (NM, optional) (chainable). */
   lengthErrorsReceived(value: string): this {
     this.fields[10] = this.createField(value);
     return this;
   }
 
-  /** NST-12 Other Errors Received (NM, max 0, optional) (chainable). */
+  /** NST-12 Other Errors Received (NM, optional) (chainable). */
   otherErrorsReceived(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
   }
 
-  /** NST-13 Connect Timeouts (NM, max 0, optional) (chainable). */
+  /** NST-13 Connect Timeouts (NM, optional) (chainable). */
   connectTimeouts(value: string): this {
     this.fields[12] = this.createField(value);
     return this;
   }
 
-  /** NST-14 Receive Timeouts (NM, max 0, optional) (chainable). */
+  /** NST-14 Receive Timeouts (NM, optional) (chainable). */
   receiveTimeouts(value: string): this {
     this.fields[13] = this.createField(value);
     return this;
   }
 
-  /** NST-15 Application control-level Errors (NM, max 0, optional) (chainable). */
+  /** NST-15 Application control-level Errors (NM, optional) (chainable). */
   applicationControlLevelErrors(value: string): this {
     this.fields[14] = this.createField(value);
     return this;

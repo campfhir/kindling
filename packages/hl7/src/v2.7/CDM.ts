@@ -27,43 +27,43 @@ export class CDM extends BaseSegment {
     this.fields = [];
   }
 
-  /** CDM-1 Primary Key Value (CWE, max 0, required) (chainable). */
+  /** CDM-1 Primary Key Value (CWE, required) (chainable). */
   primaryKeyValue(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CDM-2 Charge Code Alias (CWE, max 0, optional, repeating) (chainable). */
+  /** CDM-2 Charge Code Alias (CWE, optional, repeating) (chainable). */
   chargeCodeAlias(...values: Repeated<string | CodedElement>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** CDM-3 Charge Description Short (ST, max 0, required) (chainable). */
+  /** CDM-3 Charge Description Short (ST, required) (chainable). */
   chargeDescriptionShort(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** CDM-4 Charge Description Long (ST, max 0, optional) (chainable). */
+  /** CDM-4 Charge Description Long (ST, optional) (chainable). */
   chargeDescriptionLong(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** CDM-5 Description Override Indicator (CWE, max 0, optional) (chainable). */
+  /** CDM-5 Description Override Indicator (CWE, optional) (chainable). */
   descriptionOverrideIndicator(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CDM-6 Exploding Charges (CWE, max 0, optional, repeating) (chainable). */
+  /** CDM-6 Exploding Charges (CWE, optional, repeating) (chainable). */
   explodingCharges(...values: Repeated<string | CodedElement>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** CDM-7 Procedure Code (CNE, max 0, optional, repeating) (chainable). */
+  /** CDM-7 Procedure Code (CNE, optional, repeating) (chainable). */
   procedureCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
@@ -75,25 +75,25 @@ export class CDM extends BaseSegment {
     return this;
   }
 
-  /** CDM-9 Inventory Number (CWE, max 0, optional, repeating) (chainable). */
+  /** CDM-9 Inventory Number (CWE, optional, repeating) (chainable). */
   inventoryNumber(...values: Repeated<string | CodedElement>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** CDM-10 Resource Load (NM, max 0, optional) (chainable). */
+  /** CDM-10 Resource Load (NM, optional) (chainable). */
   resourceLoad(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
   }
 
-  /** CDM-11 Contract Number (CX, max 0, optional, repeating) (chainable). */
+  /** CDM-11 Contract Number (CX, optional, repeating) (chainable). */
   contractNumber(...values: Repeated<string | CX>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
   }
 
-  /** CDM-12 Contract Organization (XON, max 0, optional, repeating) (chainable). */
+  /** CDM-12 Contract Organization (XON, optional, repeating) (chainable). */
   contractOrganization(...values: Repeated<string | XON>[]): this {
     this.fields[11] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;

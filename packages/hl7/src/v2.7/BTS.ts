@@ -27,19 +27,19 @@ export class BTS extends BaseSegment {
     this.fields = [];
   }
 
-  /** BTS-1 Batch Message Count (ST, max 0, optional) (chainable). */
+  /** BTS-1 Batch Message Count (ST, optional) (chainable). */
   batchMessageCount(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** BTS-2 Batch Comment (ST, max 0, optional) (chainable). */
+  /** BTS-2 Batch Comment (ST, optional) (chainable). */
   batchComment(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** BTS-3 Batch Totals (NM, max 0, optional, repeating) (chainable). */
+  /** BTS-3 Batch Totals (NM, optional, repeating) (chainable). */
   batchTotals(...values: Repeated<string>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;

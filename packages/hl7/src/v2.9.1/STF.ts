@@ -28,37 +28,37 @@ export class STF extends BaseSegment {
     this.fields = [];
   }
 
-  /** STF-1 Primary Key Value  STF (CWE, max 0, conditional) (chainable). */
+  /** STF-1 Primary Key Value  STF (CWE, conditional) (chainable). */
   primaryKeyValueStf(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** STF-2 Staff Identifier List (CX, max 0, optional, repeating) (chainable). */
+  /** STF-2 Staff Identifier List (CX, optional, repeating) (chainable). */
   staffIdentifierList(...values: Repeated<string | CX>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
   }
 
-  /** STF-3 Staff Name (XPN, max 0, optional, repeating) (chainable). */
+  /** STF-3 Staff Name (XPN, optional, repeating) (chainable). */
   staffName(...values: Repeated<string | XPN>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** STF-4 Staff Type (CWE, max 0, optional, repeating) (chainable). */
+  /** STF-4 Staff Type (CWE, optional, repeating) (chainable). */
   staffType(...values: Repeated<string | CodedElement>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** STF-5 Administrative Sex (CWE, max 0, optional) (chainable). */
+  /** STF-5 Administrative Sex (CWE, optional) (chainable). */
   administrativeSex(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** STF-6 Date/Time of Birth (DTM, max 0, optional) (chainable). */
+  /** STF-6 Date/Time of Birth (DTM, optional) (chainable). */
   dateTimeOfBirth(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
@@ -70,79 +70,79 @@ export class STF extends BaseSegment {
     return this;
   }
 
-  /** STF-8 Department (CWE, max 0, optional, repeating) (chainable). */
+  /** STF-8 Department (CWE, optional, repeating) (chainable). */
   department(...values: Repeated<string | CodedElement>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** STF-9 Hospital Service  STF (CWE, max 0, optional, repeating) (chainable). */
+  /** STF-9 Hospital Service  STF (CWE, optional, repeating) (chainable). */
   hospitalServiceStf(...values: Repeated<string | CodedElement>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** STF-10 Phone (XTN, max 0, optional, repeating) (chainable). */
+  /** STF-10 Phone (XTN, optional, repeating) (chainable). */
   phone(...values: Repeated<string | XTN>[]): this {
     this.fields[9] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** STF-11 Office/Home Address/Birthplace (XAD, max 0, optional, repeating) (chainable). */
+  /** STF-11 Office/Home Address/Birthplace (XAD, optional, repeating) (chainable). */
   officeHomeAddressBirthplace(...values: Repeated<string | XAD>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** STF-12 Institution Activation Date (DIN, max 0, optional, repeating) (chainable). */
+  /** STF-12 Institution Activation Date (DIN, optional, repeating) (chainable). */
   institutionActivationDate(...values: Repeated<string>[]): this {
     this.fields[11] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** STF-13 Institution Inactivation Date (DIN, max 0, optional, repeating) (chainable). */
+  /** STF-13 Institution Inactivation Date (DIN, optional, repeating) (chainable). */
   institutionInactivationDate(...values: Repeated<string>[]): this {
     this.fields[12] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** STF-14 Backup Person ID (CWE, max 0, optional, repeating) (chainable). */
+  /** STF-14 Backup Person ID (CWE, optional, repeating) (chainable). */
   backupPersonId(...values: Repeated<string | CodedElement>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** STF-15 E-Mail Address (ST, max 0, backward compatibility, repeating) (chainable). */
+  /** STF-15 E-Mail Address (ST, backward compatibility, repeating) (chainable). */
   eMailAddress(...values: Repeated<string>[]): this {
     this.fields[14] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** STF-16 Preferred Method of Contact (CWE, max 0, optional) (chainable). */
+  /** STF-16 Preferred Method of Contact (CWE, optional) (chainable). */
   preferredMethodOfContact(value: string | CodedElement): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** STF-17 Marital Status (CWE, max 0, optional) (chainable). */
+  /** STF-17 Marital Status (CWE, optional) (chainable). */
   maritalStatus(value: string | CodedElement): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** STF-18 Job Title (ST, max 0, optional) (chainable). */
+  /** STF-18 Job Title (ST, optional) (chainable). */
   jobTitle(value: string): this {
     this.fields[17] = this.createField(value);
     return this;
   }
 
-  /** STF-19 Job Code/Class (JCC, max 0, optional) (chainable). */
+  /** STF-19 Job Code/Class (JCC, optional) (chainable). */
   jobCodeClass(value: string): this {
     this.fields[18] = this.createField(value);
     return this;
   }
 
-  /** STF-20 Employment Status Code (CWE, max 0, optional) (chainable). */
+  /** STF-20 Employment Status Code (CWE, optional) (chainable). */
   employmentStatusCode(value: string | CodedElement): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -154,7 +154,7 @@ export class STF extends BaseSegment {
     return this;
   }
 
-  /** STF-22 Driver's License Number  Staff (DLN, max 0, optional) (chainable). */
+  /** STF-22 Driver's License Number  Staff (DLN, optional) (chainable). */
   driverSLicenseNumberStaff(value: string): this {
     this.fields[21] = this.createField(value);
     return this;
@@ -166,31 +166,31 @@ export class STF extends BaseSegment {
     return this;
   }
 
-  /** STF-24 Auto Ins Expires (DT, max 0, optional) (chainable). */
+  /** STF-24 Auto Ins Expires (DT, optional) (chainable). */
   autoInsExpires(value: string | Date, format?: HL7DateLayout): this {
     this.fields[23] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** STF-25 Date Last DMV Review (DT, max 0, optional) (chainable). */
+  /** STF-25 Date Last DMV Review (DT, optional) (chainable). */
   dateLastDmvReview(value: string | Date, format?: HL7DateLayout): this {
     this.fields[24] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** STF-26 Date Next DMV Review (DT, max 0, optional) (chainable). */
+  /** STF-26 Date Next DMV Review (DT, optional) (chainable). */
   dateNextDmvReview(value: string | Date, format?: HL7DateLayout): this {
     this.fields[25] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** STF-27 Race (CWE, max 0, optional) (chainable). */
+  /** STF-27 Race (CWE, optional) (chainable). */
   race(value: string | CodedElement): this {
     this.fields[26] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** STF-28 Ethnic Group (CWE, max 0, optional) (chainable). */
+  /** STF-28 Ethnic Group (CWE, optional) (chainable). */
   ethnicGroup(value: string | CodedElement): this {
     this.fields[27] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -202,13 +202,13 @@ export class STF extends BaseSegment {
     return this;
   }
 
-  /** STF-30 Citizenship (CWE, max 0, optional, repeating) (chainable). */
+  /** STF-30 Citizenship (CWE, optional, repeating) (chainable). */
   citizenship(...values: Repeated<string | CodedElement>[]): this {
     this.fields[29] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** STF-31 Date/Time of Death (DTM, max 0, optional) (chainable). */
+  /** STF-31 Date/Time of Death (DTM, optional) (chainable). */
   dateTimeOfDeath(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[30] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
@@ -220,25 +220,25 @@ export class STF extends BaseSegment {
     return this;
   }
 
-  /** STF-33 Institution Relationship Type Code (CWE, max 0, optional) (chainable). */
+  /** STF-33 Institution Relationship Type Code (CWE, optional) (chainable). */
   institutionRelationshipTypeCode(value: string | CodedElement): this {
     this.fields[32] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** STF-34 Institution Relationship Period (DR, max 0, optional) (chainable). */
+  /** STF-34 Institution Relationship Period (DR, optional) (chainable). */
   institutionRelationshipPeriod(value: string | DR): this {
     this.fields[33] = this.createField(typeof value === "string" ? value : components(drParts(value)));
     return this;
   }
 
-  /** STF-35 Expected Return Date (DT, max 0, optional) (chainable). */
+  /** STF-35 Expected Return Date (DT, optional) (chainable). */
   expectedReturnDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[34] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** STF-36 Cost Center Code (CWE, max 0, optional, repeating) (chainable). */
+  /** STF-36 Cost Center Code (CWE, optional, repeating) (chainable). */
   costCenterCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[35] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
@@ -250,25 +250,25 @@ export class STF extends BaseSegment {
     return this;
   }
 
-  /** STF-38 Inactive Reason Code (CWE, max 0, optional) (chainable). */
+  /** STF-38 Inactive Reason Code (CWE, optional) (chainable). */
   inactiveReasonCode(value: string | CodedElement): this {
     this.fields[37] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** STF-39 Generic resource type or category (CWE, max 0, optional, repeating) (chainable). */
+  /** STF-39 Generic resource type or category (CWE, optional, repeating) (chainable). */
   genericResourceTypeOrCategory(...values: Repeated<string | CodedElement>[]): this {
     this.fields[38] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** STF-40 Religion (CWE, max 0, optional) (chainable). */
+  /** STF-40 Religion (CWE, optional) (chainable). */
   religion(value: string | CodedElement): this {
     this.fields[39] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** STF-41 Signature (ED, max 0, optional) (chainable). */
+  /** STF-41 Signature (ED, optional) (chainable). */
   signature(value: string): this {
     this.fields[40] = this.createField(value);
     return this;

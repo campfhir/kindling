@@ -28,115 +28,115 @@ export class RXA extends BaseSegment {
     this.fields = [];
   }
 
-  /** RXA-1 Give Sub-ID Counter (NM, max 0, required) (chainable). */
+  /** RXA-1 Give Sub-ID Counter (NM, required) (chainable). */
   giveSubIdCounter(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** RXA-2 Administration Sub-ID Counter (NM, max 0, required) (chainable). */
+  /** RXA-2 Administration Sub-ID Counter (NM, required) (chainable). */
   administrationSubIdCounter(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** RXA-3 Date/Time Start of Administration (DTM, max 0, required) (chainable). */
+  /** RXA-3 Date/Time Start of Administration (DTM, required) (chainable). */
   dateTimeStartOfAdministration(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** RXA-4 Date/Time End of Administration (DTM, max 0, required) (chainable). */
+  /** RXA-4 Date/Time End of Administration (DTM, required) (chainable). */
   dateTimeEndOfAdministration(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** RXA-5 Administered Code (CWE, max 0, required) (chainable). */
+  /** RXA-5 Administered Code (CWE, required) (chainable). */
   administeredCode(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXA-6 Administered Amount (NM, max 0, required) (chainable). */
+  /** RXA-6 Administered Amount (NM, required) (chainable). */
   administeredAmount(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
   }
 
-  /** RXA-7 Administered Units (CWE, max 0, conditional) (chainable). */
+  /** RXA-7 Administered Units (CWE, conditional) (chainable). */
   administeredUnits(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXA-8 Administered Dosage Form (CWE, max 0, optional) (chainable). */
+  /** RXA-8 Administered Dosage Form (CWE, optional) (chainable). */
   administeredDosageForm(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXA-9 Administration Notes (CWE, max 0, optional, repeating) (chainable). */
+  /** RXA-9 Administration Notes (CWE, optional, repeating) (chainable). */
   administrationNotes(...values: Repeated<string | CodedElement>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** RXA-10 Administering Provider (XCN, max 0, backward compatibility, repeating) (chainable). */
+  /** RXA-10 Administering Provider (XCN, backward compatibility, repeating) (chainable). */
   administeringProvider(...values: Repeated<string | XCN>[]): this {
     this.fields[9] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** RXA-11 Administered-at Location (LA2, max 0, backward compatibility) (chainable). */
+  /** RXA-11 Administered-at Location (LA2, backward compatibility) (chainable). */
   administeredAtLocation(value: string | LA2): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(la2Parts(value)));
     return this;
   }
 
-  /** RXA-12 Administered Per (Time Unit) (ST, max 0, conditional) (chainable). */
+  /** RXA-12 Administered Per (Time Unit) (ST, conditional) (chainable). */
   administeredPerTimeUnit(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
   }
 
-  /** RXA-13 Administered Strength (NM, max 0, optional) (chainable). */
+  /** RXA-13 Administered Strength (NM, optional) (chainable). */
   administeredStrength(value: string): this {
     this.fields[12] = this.createField(value);
     return this;
   }
 
-  /** RXA-14 Administered Strength Units (CWE, max 0, optional) (chainable). */
+  /** RXA-14 Administered Strength Units (CWE, optional) (chainable). */
   administeredStrengthUnits(value: string | CodedElement): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXA-15 Substance Lot Number (ST, max 0, optional, repeating) (chainable). */
+  /** RXA-15 Substance Lot Number (ST, optional, repeating) (chainable). */
   substanceLotNumber(...values: Repeated<string>[]): this {
     this.fields[14] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** RXA-16 Substance Expiration Date (DTM, max 0, optional, repeating) (chainable). */
+  /** RXA-16 Substance Expiration Date (DTM, optional, repeating) (chainable). */
   substanceExpirationDate(...values: Repeated<string | Date>[]): this {
     this.fields[15] = this.createRepeatingField(repetitions(values).map((v) => this.createField(formatHL7Date(v, DateTimeLayout))));
     return this;
   }
 
-  /** RXA-17 Substance Manufacturer Name (CWE, max 0, optional, repeating) (chainable). */
+  /** RXA-17 Substance Manufacturer Name (CWE, optional, repeating) (chainable). */
   substanceManufacturerName(...values: Repeated<string | CodedElement>[]): this {
     this.fields[16] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** RXA-18 Substance/Treatment Refusal Reason (CWE, max 0, optional, repeating) (chainable). */
+  /** RXA-18 Substance/Treatment Refusal Reason (CWE, optional, repeating) (chainable). */
   substanceTreatmentRefusalReason(...values: Repeated<string | CodedElement>[]): this {
     this.fields[17] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** RXA-19 Indication (CWE, max 0, optional, repeating) (chainable). */
+  /** RXA-19 Indication (CWE, optional, repeating) (chainable). */
   indication(...values: Repeated<string | CodedElement>[]): this {
     this.fields[18] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
@@ -154,25 +154,25 @@ export class RXA extends BaseSegment {
     return this;
   }
 
-  /** RXA-22 System Entry Date/Time (DTM, max 0, optional) (chainable). */
+  /** RXA-22 System Entry Date/Time (DTM, optional) (chainable). */
   systemEntryDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[21] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** RXA-23 Administered Drug Strength Volume (NM, max 0, optional) (chainable). */
+  /** RXA-23 Administered Drug Strength Volume (NM, optional) (chainable). */
   administeredDrugStrengthVolume(value: string): this {
     this.fields[22] = this.createField(value);
     return this;
   }
 
-  /** RXA-24 Administered Drug Strength Volume Units (CWE, max 0, optional) (chainable). */
+  /** RXA-24 Administered Drug Strength Volume Units (CWE, optional) (chainable). */
   administeredDrugStrengthVolumeUnits(value: string | CodedElement): this {
     this.fields[23] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXA-25 Administered Barcode Identifier (CWE, max 0, optional) (chainable). */
+  /** RXA-25 Administered Barcode Identifier (CWE, optional) (chainable). */
   administeredBarcodeIdentifier(value: string | CodedElement): this {
     this.fields[24] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -184,13 +184,13 @@ export class RXA extends BaseSegment {
     return this;
   }
 
-  /** RXA-27 Administer-at (PL, max 0, optional) (chainable). */
+  /** RXA-27 Administer-at (PL, optional) (chainable). */
   administerAt(value: string | PL): this {
     this.fields[26] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** RXA-28 Administered-at Address (XAD, max 0, optional) (chainable). */
+  /** RXA-28 Administered-at Address (XAD, optional) (chainable). */
   administeredAtAddress(value: string | XAD): this {
     this.fields[27] = this.createField(typeof value === "string" ? value : components(xadParts(value)));
     return this;

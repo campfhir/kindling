@@ -33,31 +33,31 @@ export class ARV extends BaseSegment {
     return this;
   }
 
-  /** ARV-2 Access Restriction Action Code (CNE, max 0, required) (chainable). */
+  /** ARV-2 Access Restriction Action Code (CNE, required) (chainable). */
   accessRestrictionActionCode(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ARV-3 Access Restriction Value (CWE, max 0, required) (chainable). */
+  /** ARV-3 Access Restriction Value (CWE, required) (chainable). */
   accessRestrictionValue(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ARV-4 Access Restriction Reason (CWE, max 0, optional, repeating) (chainable). */
+  /** ARV-4 Access Restriction Reason (CWE, optional, repeating) (chainable). */
   accessRestrictionReason(...values: Repeated<string | CodedElement>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** ARV-5 Special Access Restriction Instructions (ST, max 0, optional, repeating) (chainable). */
+  /** ARV-5 Special Access Restriction Instructions (ST, optional, repeating) (chainable). */
   specialAccessRestrictionInstructions(...values: Repeated<string>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** ARV-6 Access Restriction Date Range (DR, max 0, optional) (chainable). */
+  /** ARV-6 Access Restriction Date Range (DR, optional) (chainable). */
   accessRestrictionDateRange(value: string | DR): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(drParts(value)));
     return this;

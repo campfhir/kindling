@@ -40,7 +40,7 @@ export class PR1 extends BaseSegment {
     return this;
   }
 
-  /** PR1-3 Procedure Code (CNE, max 0, required) (chainable). */
+  /** PR1-3 Procedure Code (CNE, required) (chainable). */
   procedureCode(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -52,19 +52,19 @@ export class PR1 extends BaseSegment {
     return this;
   }
 
-  /** PR1-5 Procedure Date/Time (DTM, max 0, required) (chainable). */
+  /** PR1-5 Procedure Date/Time (DTM, required) (chainable). */
   procedureDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PR1-6 Procedure Functional Type (CWE, max 0, optional) (chainable). */
+  /** PR1-6 Procedure Functional Type (CWE, optional) (chainable). */
   procedureFunctionalType(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PR1-7 Procedure Minutes (NM, max 0, optional) (chainable). */
+  /** PR1-7 Procedure Minutes (NM, optional) (chainable). */
   procedureMinutes(value: string): this {
     this.fields[6] = this.createField(value);
     return this;
@@ -76,13 +76,13 @@ export class PR1 extends BaseSegment {
     return this;
   }
 
-  /** PR1-9 Anesthesia Code (CWE, max 0, optional) (chainable). */
+  /** PR1-9 Anesthesia Code (CWE, optional) (chainable). */
   anesthesiaCode(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PR1-10 Anesthesia Minutes (NM, max 0, optional) (chainable). */
+  /** PR1-10 Anesthesia Minutes (NM, optional) (chainable). */
   anesthesiaMinutes(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
@@ -100,7 +100,7 @@ export class PR1 extends BaseSegment {
     return this;
   }
 
-  /** PR1-13 Consent Code (CWE, max 0, optional) (chainable). */
+  /** PR1-13 Consent Code (CWE, optional) (chainable). */
   consentCode(value: string | CodedElement): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -112,31 +112,31 @@ export class PR1 extends BaseSegment {
     return this;
   }
 
-  /** PR1-15 Associated Diagnosis Code (CWE, max 0, optional) (chainable). */
+  /** PR1-15 Associated Diagnosis Code (CWE, optional) (chainable). */
   associatedDiagnosisCode(value: string | CodedElement): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PR1-16 Procedure Code Modifier (CNE, max 0, optional, repeating) (chainable). */
+  /** PR1-16 Procedure Code Modifier (CNE, optional, repeating) (chainable). */
   procedureCodeModifier(...values: Repeated<string | CodedElement>[]): this {
     this.fields[15] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PR1-17 Procedure DRG Type (CWE, max 0, optional) (chainable). */
+  /** PR1-17 Procedure DRG Type (CWE, optional) (chainable). */
   procedureDrgType(value: string | CodedElement): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PR1-18 Tissue Type Code (CWE, max 0, optional, repeating) (chainable). */
+  /** PR1-18 Tissue Type Code (CWE, optional, repeating) (chainable). */
   tissueTypeCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[17] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PR1-19 Procedure Identifier (EI, max 0, conditional) (chainable). */
+  /** PR1-19 Procedure Identifier (EI, conditional) (chainable). */
   procedureIdentifier(value: string | EI): this {
     this.fields[18] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
@@ -148,19 +148,19 @@ export class PR1 extends BaseSegment {
     return this;
   }
 
-  /** PR1-21 DRG Procedure Determination Status (CWE, max 0, optional) (chainable). */
+  /** PR1-21 DRG Procedure Determination Status (CWE, optional) (chainable). */
   drgProcedureDeterminationStatus(value: string | CodedElement): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PR1-22 DRG Procedure Relevance (CWE, max 0, optional) (chainable). */
+  /** PR1-22 DRG Procedure Relevance (CWE, optional) (chainable). */
   drgProcedureRelevance(value: string | CodedElement): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PR1-23 Treating Organizational Unit (PL, max 0, optional, repeating) (chainable). */
+  /** PR1-23 Treating Organizational Unit (PL, optional, repeating) (chainable). */
   treatingOrganizationalUnit(...values: Repeated<string | PL>[]): this {
     this.fields[22] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(plParts(v)))));
     return this;
@@ -172,7 +172,7 @@ export class PR1 extends BaseSegment {
     return this;
   }
 
-  /** PR1-25 Parent Procedure ID (EI, max 0, optional) (chainable). */
+  /** PR1-25 Parent Procedure ID (EI, optional) (chainable). */
   parentProcedureId(value: string | EI): this {
     this.fields[24] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;

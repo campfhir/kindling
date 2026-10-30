@@ -27,7 +27,7 @@ export class RXV extends BaseSegment {
     this.fields = [];
   }
 
-  /** RXV-1 Set ID (SI, max 0, optional) (chainable). */
+  /** RXV-1 Set ID (SI, optional) (chainable). */
   setId(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
@@ -39,25 +39,25 @@ export class RXV extends BaseSegment {
     return this;
   }
 
-  /** RXV-3 Bolus Dose Amount (NM, max 0, optional) (chainable). */
+  /** RXV-3 Bolus Dose Amount (NM, optional) (chainable). */
   bolusDoseAmount(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** RXV-4 Bolus Dose Amount Units (CWE, max 0, optional) (chainable). */
+  /** RXV-4 Bolus Dose Amount Units (CWE, optional) (chainable). */
   bolusDoseAmountUnits(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXV-5 Bolus Dose Volume (NM, max 0, optional) (chainable). */
+  /** RXV-5 Bolus Dose Volume (NM, optional) (chainable). */
   bolusDoseVolume(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** RXV-6 Bolus Dose Volume Units (CWE, max 0, optional) (chainable). */
+  /** RXV-6 Bolus Dose Volume Units (CWE, optional) (chainable). */
   bolusDoseVolumeUnits(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -69,85 +69,85 @@ export class RXV extends BaseSegment {
     return this;
   }
 
-  /** RXV-8 PCA Dose Amount (NM, max 0, optional) (chainable). */
+  /** RXV-8 PCA Dose Amount (NM, optional) (chainable). */
   pcaDoseAmount(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** RXV-9 PCA Dose Amount Units (CWE, max 0, optional) (chainable). */
+  /** RXV-9 PCA Dose Amount Units (CWE, optional) (chainable). */
   pcaDoseAmountUnits(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXV-10 PCA Dose Amount Volume (NM, max 0, optional) (chainable). */
+  /** RXV-10 PCA Dose Amount Volume (NM, optional) (chainable). */
   pcaDoseAmountVolume(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
   }
 
-  /** RXV-11 PCA Dose Amount Volume Units (CWE, max 0, optional) (chainable). */
+  /** RXV-11 PCA Dose Amount Volume Units (CWE, optional) (chainable). */
   pcaDoseAmountVolumeUnits(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXV-12 Max Dose Amount (NM, max 0, optional) (chainable). */
+  /** RXV-12 Max Dose Amount (NM, optional) (chainable). */
   maxDoseAmount(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
   }
 
-  /** RXV-13 Max Dose Amount Units (CWE, max 0, optional) (chainable). */
+  /** RXV-13 Max Dose Amount Units (CWE, optional) (chainable). */
   maxDoseAmountUnits(value: string | CodedElement): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXV-14 Max Dose Amount Volume (NM, max 0, optional) (chainable). */
+  /** RXV-14 Max Dose Amount Volume (NM, optional) (chainable). */
   maxDoseAmountVolume(value: string): this {
     this.fields[13] = this.createField(value);
     return this;
   }
 
-  /** RXV-15 Max Dose Amount Volume Units (CWE, max 0, optional) (chainable). */
+  /** RXV-15 Max Dose Amount Volume Units (CWE, optional) (chainable). */
   maxDoseAmountVolumeUnits(value: string | CodedElement): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXV-16 Max Dose per Time (CQ, max 0, required) (chainable). */
+  /** RXV-16 Max Dose per Time (CQ, required) (chainable). */
   maxDosePerTime(value: string | CQ): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** RXV-17 Lockout Interval (CQ, max 0, optional) (chainable). */
+  /** RXV-17 Lockout Interval (CQ, optional) (chainable). */
   lockoutInterval(value: string | CQ): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** RXV-18 Syringe Manufacturer (CWE, max 0, optional) (chainable). */
+  /** RXV-18 Syringe Manufacturer (CWE, optional) (chainable). */
   syringeManufacturer(value: string | CodedElement): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXV-19 Syringe Model Number (CWE, max 0, optional) (chainable). */
+  /** RXV-19 Syringe Model Number (CWE, optional) (chainable). */
   syringeModelNumber(value: string | CodedElement): this {
     this.fields[18] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXV-20 Syringe Size (NM, max 0, conditional) (chainable). */
+  /** RXV-20 Syringe Size (NM, conditional) (chainable). */
   syringeSize(value: string): this {
     this.fields[19] = this.createField(value);
     return this;
   }
 
-  /** RXV-21 Syringe Size Units (CWE, max 0, conditional) (chainable). */
+  /** RXV-21 Syringe Size Units (CWE, conditional) (chainable). */
   syringeSizeUnits(value: string | CodedElement): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

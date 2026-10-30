@@ -46,25 +46,25 @@ export class FT1 extends BaseSegment {
     return this;
   }
 
-  /** FT1-4 Transaction Date (DR, max 0, required) (chainable). */
+  /** FT1-4 Transaction Date (DR, required) (chainable). */
   transactionDate(value: string | DR): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(drParts(value)));
     return this;
   }
 
-  /** FT1-5 Transaction Posting Date (DTM, max 0, optional) (chainable). */
+  /** FT1-5 Transaction Posting Date (DTM, optional) (chainable). */
   transactionPostingDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** FT1-6 Transaction Type (CWE, max 0, required) (chainable). */
+  /** FT1-6 Transaction Type (CWE, required) (chainable). */
   transactionType(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** FT1-7 Transaction Code (CWE, max 0, required) (chainable). */
+  /** FT1-7 Transaction Code (CWE, required) (chainable). */
   transactionCode(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -82,127 +82,127 @@ export class FT1 extends BaseSegment {
     return this;
   }
 
-  /** FT1-10 Transaction Quantity (NM, max 0, optional) (chainable). */
+  /** FT1-10 Transaction Quantity (NM, optional) (chainable). */
   transactionQuantity(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
   }
 
-  /** FT1-11 Transaction Amount - Extended (CP, max 0, optional) (chainable). */
+  /** FT1-11 Transaction Amount - Extended (CP, optional) (chainable). */
   transactionAmountExtended(value: string | CP): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** FT1-12 Transaction amount - unit (CP, max 0, optional) (chainable). */
+  /** FT1-12 Transaction amount - unit (CP, optional) (chainable). */
   transactionAmountUnit(value: string | CP): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** FT1-13 Department Code (CWE, max 0, optional) (chainable). */
+  /** FT1-13 Department Code (CWE, optional) (chainable). */
   departmentCode(value: string | CodedElement): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** FT1-14 Health Plan ID (CWE, max 0, optional) (chainable). */
+  /** FT1-14 Health Plan ID (CWE, optional) (chainable). */
   healthPlanId(value: string | CodedElement): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** FT1-15 Insurance Amount (CP, max 0, optional) (chainable). */
+  /** FT1-15 Insurance Amount (CP, optional) (chainable). */
   insuranceAmount(value: string | CP): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** FT1-16 Assigned Patient Location (PL, max 0, optional) (chainable). */
+  /** FT1-16 Assigned Patient Location (PL, optional) (chainable). */
   assignedPatientLocation(value: string | PL): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** FT1-17 Fee Schedule (CWE, max 0, optional) (chainable). */
+  /** FT1-17 Fee Schedule (CWE, optional) (chainable). */
   feeSchedule(value: string | CodedElement): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** FT1-18 Patient Type (CWE, max 0, optional) (chainable). */
+  /** FT1-18 Patient Type (CWE, optional) (chainable). */
   patientType(value: string | CodedElement): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** FT1-19 Diagnosis Code (CWE, max 0, optional, repeating) (chainable). */
+  /** FT1-19 Diagnosis Code (CWE, optional, repeating) (chainable). */
   diagnosisCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[18] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** FT1-20 Performed By Code (XCN, max 0, optional, repeating) (chainable). */
+  /** FT1-20 Performed By Code (XCN, optional, repeating) (chainable). */
   performedByCode(...values: Repeated<string | XCN>[]): this {
     this.fields[19] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** FT1-21 Ordered By Code (XCN, max 0, optional, repeating) (chainable). */
+  /** FT1-21 Ordered By Code (XCN, optional, repeating) (chainable). */
   orderedByCode(...values: Repeated<string | XCN>[]): this {
     this.fields[20] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** FT1-22 Unit Cost (CP, max 0, optional) (chainable). */
+  /** FT1-22 Unit Cost (CP, optional) (chainable). */
   unitCost(value: string | CP): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** FT1-23 Filler Order Number (EI, max 0, optional) (chainable). */
+  /** FT1-23 Filler Order Number (EI, optional) (chainable). */
   fillerOrderNumber(value: string | EI): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** FT1-24 Entered By Code (XCN, max 0, optional, repeating) (chainable). */
+  /** FT1-24 Entered By Code (XCN, optional, repeating) (chainable). */
   enteredByCode(...values: Repeated<string | XCN>[]): this {
     this.fields[23] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** FT1-25 Procedure Code (CNE, max 0, optional) (chainable). */
+  /** FT1-25 Procedure Code (CNE, optional) (chainable). */
   procedureCode(value: string | CodedElement): this {
     this.fields[24] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** FT1-26 Procedure Code Modifier (CNE, max 0, optional, repeating) (chainable). */
+  /** FT1-26 Procedure Code Modifier (CNE, optional, repeating) (chainable). */
   procedureCodeModifier(...values: Repeated<string | CodedElement>[]): this {
     this.fields[25] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** FT1-27 Advanced Beneficiary Notice Code (CWE, max 0, optional) (chainable). */
+  /** FT1-27 Advanced Beneficiary Notice Code (CWE, optional) (chainable). */
   advancedBeneficiaryNoticeCode(value: string | CodedElement): this {
     this.fields[26] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** FT1-28 Medically Necessary Duplicate Procedure Reason (CWE, max 0, optional) (chainable). */
+  /** FT1-28 Medically Necessary Duplicate Procedure Reason (CWE, optional) (chainable). */
   medicallyNecessaryDuplicateProcedureReason(value: string | CodedElement): this {
     this.fields[27] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** FT1-29 NDC Code (CWE, max 0, optional) (chainable). */
+  /** FT1-29 NDC Code (CWE, optional) (chainable). */
   ndcCode(value: string | CodedElement): this {
     this.fields[28] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** FT1-30 Payment Reference ID (CX, max 0, optional) (chainable). */
+  /** FT1-30 Payment Reference ID (CX, optional) (chainable). */
   paymentReferenceId(value: string | CX): this {
     this.fields[29] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
@@ -214,73 +214,73 @@ export class FT1 extends BaseSegment {
     return this;
   }
 
-  /** FT1-32 Performing Facility (XON, max 0, optional, repeating) (chainable). */
+  /** FT1-32 Performing Facility (XON, optional, repeating) (chainable). */
   performingFacility(...values: Repeated<string | XON>[]): this {
     this.fields[31] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** FT1-33 Ordering Facility (XON, max 0, optional) (chainable). */
+  /** FT1-33 Ordering Facility (XON, optional) (chainable). */
   orderingFacility(value: string | XON): this {
     this.fields[32] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** FT1-34 Item Number (CWE, max 0, optional) (chainable). */
+  /** FT1-34 Item Number (CWE, optional) (chainable). */
   itemNumber(value: string | CodedElement): this {
     this.fields[33] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** FT1-35 Model Number (ST, max 0, optional) (chainable). */
+  /** FT1-35 Model Number (ST, optional) (chainable). */
   modelNumber(value: string): this {
     this.fields[34] = this.createField(value);
     return this;
   }
 
-  /** FT1-36 Special Processing Code (CWE, max 0, optional, repeating) (chainable). */
+  /** FT1-36 Special Processing Code (CWE, optional, repeating) (chainable). */
   specialProcessingCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[35] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** FT1-37 Clinic Code (CWE, max 0, optional) (chainable). */
+  /** FT1-37 Clinic Code (CWE, optional) (chainable). */
   clinicCode(value: string | CodedElement): this {
     this.fields[36] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** FT1-38 Referral Number (CX, max 0, optional) (chainable). */
+  /** FT1-38 Referral Number (CX, optional) (chainable). */
   referralNumber(value: string | CX): this {
     this.fields[37] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
   }
 
-  /** FT1-39 Authorization Number (CX, max 0, optional) (chainable). */
+  /** FT1-39 Authorization Number (CX, optional) (chainable). */
   authorizationNumber(value: string | CX): this {
     this.fields[38] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
   }
 
-  /** FT1-40 Service Provider Taxonomy Code (CWE, max 0, optional) (chainable). */
+  /** FT1-40 Service Provider Taxonomy Code (CWE, optional) (chainable). */
   serviceProviderTaxonomyCode(value: string | CodedElement): this {
     this.fields[39] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** FT1-41 Revenue Code (CWE, max 0, optional) (chainable). */
+  /** FT1-41 Revenue Code (CWE, optional) (chainable). */
   revenueCode(value: string | CodedElement): this {
     this.fields[40] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** FT1-42 Prescription Number (ST, max 0, optional) (chainable). */
+  /** FT1-42 Prescription Number (ST, optional) (chainable). */
   prescriptionNumber(value: string): this {
     this.fields[41] = this.createField(value);
     return this;
   }
 
-  /** FT1-43 NDC Qty and UOM (CQ, max 0, optional) (chainable). */
+  /** FT1-43 NDC Qty and UOM (CQ, optional) (chainable). */
   ndcQtyAndUom(value: string | CQ): this {
     this.fields[42] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;

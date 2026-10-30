@@ -28,49 +28,49 @@ export class IPR extends BaseSegment {
     this.fields = [];
   }
 
-  /** IPR-1 IPR Identifier (EI, max 0, required) (chainable). */
+  /** IPR-1 IPR Identifier (EI, required) (chainable). */
   iprIdentifier(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** IPR-2 Provider Cross Reference Identifier (EI, max 0, required) (chainable). */
+  /** IPR-2 Provider Cross Reference Identifier (EI, required) (chainable). */
   providerCrossReferenceIdentifier(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** IPR-3 Payer Cross Reference Identifier (EI, max 0, required) (chainable). */
+  /** IPR-3 Payer Cross Reference Identifier (EI, required) (chainable). */
   payerCrossReferenceIdentifier(value: string | EI): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** IPR-4 IPR Status (CWE, max 0, required) (chainable). */
+  /** IPR-4 IPR Status (CWE, required) (chainable). */
   iprStatus(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IPR-5 IPR Date/Time (DTM, max 0, required) (chainable). */
+  /** IPR-5 IPR Date/Time (DTM, required) (chainable). */
   iprDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** IPR-6 Adjudicated/Paid Amount (CP, max 0, optional) (chainable). */
+  /** IPR-6 Adjudicated/Paid Amount (CP, optional) (chainable). */
   adjudicatedPaidAmount(value: string | CP): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** IPR-7 Expected Payment Date/Time (DTM, max 0, optional) (chainable). */
+  /** IPR-7 Expected Payment Date/Time (DTM, optional) (chainable). */
   expectedPaymentDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** IPR-8 IPR Checksum (ST, max 0, required) (chainable). */
+  /** IPR-8 IPR Checksum (ST, required) (chainable). */
   iprChecksum(value: string): this {
     this.fields[7] = this.createField(value);
     return this;

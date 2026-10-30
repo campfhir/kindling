@@ -27,19 +27,19 @@ export class OM5 extends BaseSegment {
     this.fields = [];
   }
 
-  /** OM5-1 Sequence Number - Test/Observation Master File (NM, max 0, optional) (chainable). */
+  /** OM5-1 Sequence Number - Test/Observation Master File (NM, optional) (chainable). */
   sequenceNumberTestObservationMasterFile(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** OM5-2 Test/Observations Included Within an Ordered Test Battery (CWE, max 0, optional, repeating) (chainable). */
+  /** OM5-2 Test/Observations Included Within an Ordered Test Battery (CWE, optional, repeating) (chainable). */
   testObservationsIncludedWithinAnOrderedTestBattery(...values: Repeated<string | CodedElement>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OM5-3 Observation ID Suffixes (ST, max 0, optional) (chainable). */
+  /** OM5-3 Observation ID Suffixes (ST, optional) (chainable). */
   observationIdSuffixes(value: string): this {
     this.fields[2] = this.createField(value);
     return this;

@@ -28,85 +28,85 @@ export class PRD extends BaseSegment {
     this.fields = [];
   }
 
-  /** PRD-1 Provider Role (CWE, max 0, required, repeating) (chainable). */
+  /** PRD-1 Provider Role (CWE, required, repeating) (chainable). */
   providerRole(...values: Repeated<string | CodedElement>[]): this {
     this.fields[0] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PRD-2 Provider Name (XPN, max 0, optional, repeating) (chainable). */
+  /** PRD-2 Provider Name (XPN, optional, repeating) (chainable). */
   providerName(...values: Repeated<string | XPN>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** PRD-3 Provider Address (XAD, max 0, optional, repeating) (chainable). */
+  /** PRD-3 Provider Address (XAD, optional, repeating) (chainable). */
   providerAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** PRD-4 Provider Location (PL, max 0, optional) (chainable). */
+  /** PRD-4 Provider Location (PL, optional) (chainable). */
   providerLocation(value: string | PL): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** PRD-5 Provider Communication Information (XTN, max 0, optional, repeating) (chainable). */
+  /** PRD-5 Provider Communication Information (XTN, optional, repeating) (chainable). */
   providerCommunicationInformation(...values: Repeated<string | XTN>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** PRD-6 Preferred Method of Contact (CWE, max 0, optional) (chainable). */
+  /** PRD-6 Preferred Method of Contact (CWE, optional) (chainable). */
   preferredMethodOfContact(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRD-7 Provider Identifiers (PLN, max 0, optional, repeating) (chainable). */
+  /** PRD-7 Provider Identifiers (PLN, optional, repeating) (chainable). */
   providerIdentifiers(...values: Repeated<string | PLN>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(plnParts(v)))));
     return this;
   }
 
-  /** PRD-8 Effective Start Date of Provider Role (DTM, max 0, optional) (chainable). */
+  /** PRD-8 Effective Start Date of Provider Role (DTM, optional) (chainable). */
   effectiveStartDateOfProviderRole(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PRD-9 Effective End Date of Provider Role (DTM, max 0, optional, repeating) (chainable). */
+  /** PRD-9 Effective End Date of Provider Role (DTM, optional, repeating) (chainable). */
   effectiveEndDateOfProviderRole(...values: Repeated<string | Date>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(formatHL7Date(v, DateTimeLayout))));
     return this;
   }
 
-  /** PRD-10 Provider Organization Name and Identifier (XON, max 0, optional) (chainable). */
+  /** PRD-10 Provider Organization Name and Identifier (XON, optional) (chainable). */
   providerOrganizationNameAndIdentifier(value: string | XON): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** PRD-11 Provider Organization Address (XAD, max 0, optional, repeating) (chainable). */
+  /** PRD-11 Provider Organization Address (XAD, optional, repeating) (chainable). */
   providerOrganizationAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** PRD-12 Provider Organization Location Information (PL, max 0, optional, repeating) (chainable). */
+  /** PRD-12 Provider Organization Location Information (PL, optional, repeating) (chainable). */
   providerOrganizationLocationInformation(...values: Repeated<string | PL>[]): this {
     this.fields[11] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(plParts(v)))));
     return this;
   }
 
-  /** PRD-13 Provider Organization Communication Information (XTN, max 0, optional, repeating) (chainable). */
+  /** PRD-13 Provider Organization Communication Information (XTN, optional, repeating) (chainable). */
   providerOrganizationCommunicationInformation(...values: Repeated<string | XTN>[]): this {
     this.fields[12] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** PRD-14 Provider Organization Method of Contact (CWE, max 0, optional) (chainable). */
+  /** PRD-14 Provider Organization Method of Contact (CWE, optional) (chainable). */
   providerOrganizationMethodOfContact(value: string | CodedElement): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

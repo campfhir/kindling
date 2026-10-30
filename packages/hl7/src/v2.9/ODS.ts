@@ -33,19 +33,19 @@ export class ODS extends BaseSegment {
     return this;
   }
 
-  /** ODS-2 Service Period (CWE, max 0, optional, repeating) (chainable). */
+  /** ODS-2 Service Period (CWE, optional, repeating) (chainable). */
   servicePeriod(...values: Repeated<string | CodedElement>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** ODS-3 Diet, Supplement, or Preference Code (CWE, max 0, required, repeating) (chainable). */
+  /** ODS-3 Diet, Supplement, or Preference Code (CWE, required, repeating) (chainable). */
   dietSupplementOrPreferenceCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** ODS-4 Text Instruction (ST, max 0, optional, repeating) (chainable). */
+  /** ODS-4 Text Instruction (ST, optional, repeating) (chainable). */
   textInstruction(...values: Repeated<string>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;

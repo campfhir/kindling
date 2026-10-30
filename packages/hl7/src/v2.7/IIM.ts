@@ -28,91 +28,91 @@ export class IIM extends BaseSegment {
     this.fields = [];
   }
 
-  /** IIM-1 Primary Key Value (CWE, max 0, required) (chainable). */
+  /** IIM-1 Primary Key Value (CWE, required) (chainable). */
   primaryKeyValue(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IIM-2 Service Item Code (CWE, max 0, required) (chainable). */
+  /** IIM-2 Service Item Code (CWE, required) (chainable). */
   serviceItemCode(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IIM-3 Inventory Lot Number (ST, max 0, optional) (chainable). */
+  /** IIM-3 Inventory Lot Number (ST, optional) (chainable). */
   inventoryLotNumber(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** IIM-4 Inventory Expiration Date (DTM, max 0, optional) (chainable). */
+  /** IIM-4 Inventory Expiration Date (DTM, optional) (chainable). */
   inventoryExpirationDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** IIM-5 Inventory Manufacturer Name (CWE, max 0, optional) (chainable). */
+  /** IIM-5 Inventory Manufacturer Name (CWE, optional) (chainable). */
   inventoryManufacturerName(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IIM-6 Inventory Location (CWE, max 0, optional) (chainable). */
+  /** IIM-6 Inventory Location (CWE, optional) (chainable). */
   inventoryLocation(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IIM-7 Inventory Received Date (DTM, max 0, optional) (chainable). */
+  /** IIM-7 Inventory Received Date (DTM, optional) (chainable). */
   inventoryReceivedDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** IIM-8 Inventory Received Quantity (NM, max 0, optional) (chainable). */
+  /** IIM-8 Inventory Received Quantity (NM, optional) (chainable). */
   inventoryReceivedQuantity(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** IIM-9 Inventory Received Quantity Unit (CWE, max 0, optional) (chainable). */
+  /** IIM-9 Inventory Received Quantity Unit (CWE, optional) (chainable). */
   inventoryReceivedQuantityUnit(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IIM-10 Inventory Received Item Cost (MO, max 0, optional) (chainable). */
+  /** IIM-10 Inventory Received Item Cost (MO, optional) (chainable). */
   inventoryReceivedItemCost(value: string | MO): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(moParts(value)));
     return this;
   }
 
-  /** IIM-11 Inventory On Hand Date (DTM, max 0, optional) (chainable). */
+  /** IIM-11 Inventory On Hand Date (DTM, optional) (chainable). */
   inventoryOnHandDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[10] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** IIM-12 Inventory On Hand Quantity (NM, max 0, optional) (chainable). */
+  /** IIM-12 Inventory On Hand Quantity (NM, optional) (chainable). */
   inventoryOnHandQuantity(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
   }
 
-  /** IIM-13 Inventory On Hand Quantity Unit (CWE, max 0, optional) (chainable). */
+  /** IIM-13 Inventory On Hand Quantity Unit (CWE, optional) (chainable). */
   inventoryOnHandQuantityUnit(value: string | CodedElement): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IIM-14 Procedure Code (CNE, max 0, optional) (chainable). */
+  /** IIM-14 Procedure Code (CNE, optional) (chainable). */
   procedureCode(value: string | CodedElement): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IIM-15 Procedure Code Modifier (CNE, max 0, optional, repeating) (chainable). */
+  /** IIM-15 Procedure Code Modifier (CNE, optional, repeating) (chainable). */
   procedureCodeModifier(...values: Repeated<string | CodedElement>[]): this {
     this.fields[14] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;

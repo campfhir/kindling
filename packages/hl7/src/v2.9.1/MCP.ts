@@ -33,25 +33,25 @@ export class MCP extends BaseSegment {
     return this;
   }
 
-  /** MCP-2 Producer's Service/Test/Observation ID (CWE, max 0, required) (chainable). */
+  /** MCP-2 Producer's Service/Test/Observation ID (CWE, required) (chainable). */
   producerSServiceTestObservationId(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** MCP-3 Universal Service Price Range  Low Value (MO, max 0, optional) (chainable). */
+  /** MCP-3 Universal Service Price Range  Low Value (MO, optional) (chainable). */
   universalServicePriceRangeLowValue(value: string | MO): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(moParts(value)));
     return this;
   }
 
-  /** MCP-4 Universal Service Price Range  High Value (MO, max 0, optional) (chainable). */
+  /** MCP-4 Universal Service Price Range  High Value (MO, optional) (chainable). */
   universalServicePriceRangeHighValue(value: string | MO): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(moParts(value)));
     return this;
   }
 
-  /** MCP-5 Reason for Universal Service Cost Range (ST, max 0, conditional) (chainable). */
+  /** MCP-5 Reason for Universal Service Cost Range (ST, conditional) (chainable). */
   reasonForUniversalServiceCostRange(value: string): this {
     this.fields[4] = this.createField(value);
     return this;

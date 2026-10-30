@@ -27,7 +27,7 @@ export class UB1 extends BaseSegment {
     this.fields = [];
   }
 
-  /** UB1-1 Set ID (SI, max 0, W) (chainable). */
+  /** UB1-1 Set ID (SI, W) (chainable). */
   setId(value: string): this {
     this.fields[0] = this.createField(value);
     return this;

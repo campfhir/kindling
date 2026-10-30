@@ -27,13 +27,13 @@ export class OM6 extends BaseSegment {
     this.fields = [];
   }
 
-  /** OM6-1 Sequence Number - Test/Observation Master File (NM, max 0, optional) (chainable). */
+  /** OM6-1 Sequence Number - Test/Observation Master File (NM, optional) (chainable). */
   sequenceNumberTestObservationMasterFile(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** OM6-2 Derivation Rule (TX, max 0, optional) (chainable). */
+  /** OM6-2 Derivation Rule (TX, optional) (chainable). */
   derivationRule(value: string): this {
     this.fields[1] = this.createField(value);
     return this;

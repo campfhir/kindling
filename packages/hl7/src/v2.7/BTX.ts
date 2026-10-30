@@ -34,61 +34,61 @@ export class BTX extends BaseSegment {
     return this;
   }
 
-  /** BTX-2 BC Donation ID (EI, max 0, conditional) (chainable). */
+  /** BTX-2 BC Donation ID (EI, conditional) (chainable). */
   bcDonationId(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** BTX-3 BC Component (CNE, max 0, conditional) (chainable). */
+  /** BTX-3 BC Component (CNE, conditional) (chainable). */
   bcComponent(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** BTX-4 BC Blood Group (CNE, max 0, conditional) (chainable). */
+  /** BTX-4 BC Blood Group (CNE, conditional) (chainable). */
   bcBloodGroup(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** BTX-5 CP Commercial Product (CWE, max 0, conditional) (chainable). */
+  /** BTX-5 CP Commercial Product (CWE, conditional) (chainable). */
   cpCommercialProduct(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** BTX-6 CP Manufacturer (XON, max 0, conditional) (chainable). */
+  /** BTX-6 CP Manufacturer (XON, conditional) (chainable). */
   cpManufacturer(value: string | XON): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** BTX-7 CP Lot Number (EI, max 0, conditional) (chainable). */
+  /** BTX-7 CP Lot Number (EI, conditional) (chainable). */
   cpLotNumber(value: string | EI): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** BTX-8 BP Quantity (NM, max 0, required) (chainable). */
+  /** BTX-8 BP Quantity (NM, required) (chainable). */
   bpQuantity(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** BTX-9 BP Amount (NM, max 0, optional) (chainable). */
+  /** BTX-9 BP Amount (NM, optional) (chainable). */
   bpAmount(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** BTX-10 BP Units (CWE, max 0, optional) (chainable). */
+  /** BTX-10 BP Units (CWE, optional) (chainable). */
   bpUnits(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** BTX-11 BP Transfusion/Disposition Status (CWE, max 0, required) (chainable). */
+  /** BTX-11 BP Transfusion/Disposition Status (CWE, required) (chainable). */
   bpTransfusionDispositionStatus(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -100,43 +100,43 @@ export class BTX extends BaseSegment {
     return this;
   }
 
-  /** BTX-13 BP Date/Time of Status (DTM, max 0, required) (chainable). */
+  /** BTX-13 BP Date/Time of Status (DTM, required) (chainable). */
   bpDateTimeOfStatus(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** BTX-14 BP Transfusion Administrator (XCN, max 0, optional) (chainable). */
+  /** BTX-14 BP Transfusion Administrator (XCN, optional) (chainable). */
   bpTransfusionAdministrator(value: string | XCN): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** BTX-15 BP Transfusion Verifier (XCN, max 0, optional) (chainable). */
+  /** BTX-15 BP Transfusion Verifier (XCN, optional) (chainable). */
   bpTransfusionVerifier(value: string | XCN): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** BTX-16 BP Transfusion Start Date/Time of Status (DTM, max 0, optional) (chainable). */
+  /** BTX-16 BP Transfusion Start Date/Time of Status (DTM, optional) (chainable). */
   bpTransfusionStartDateTimeOfStatus(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[15] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** BTX-17 BP Transfusion End Date/Time of Status (DTM, max 0, optional) (chainable). */
+  /** BTX-17 BP Transfusion End Date/Time of Status (DTM, optional) (chainable). */
   bpTransfusionEndDateTimeOfStatus(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[16] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** BTX-18 BP Adverse Reaction Type (CWE, max 0, optional, repeating) (chainable). */
+  /** BTX-18 BP Adverse Reaction Type (CWE, optional, repeating) (chainable). */
   bpAdverseReactionType(...values: Repeated<string | CodedElement>[]): this {
     this.fields[17] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** BTX-19 BP Transfusion Interrupted Reason (CWE, max 0, optional) (chainable). */
+  /** BTX-19 BP Transfusion Interrupted Reason (CWE, optional) (chainable). */
   bpTransfusionInterruptedReason(value: string | CodedElement): this {
     this.fields[18] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

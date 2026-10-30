@@ -28,31 +28,31 @@ export class SAC extends BaseSegment {
     this.fields = [];
   }
 
-  /** SAC-1 External Accession Identifier (EI, max 0, optional) (chainable). */
+  /** SAC-1 External Accession Identifier (EI, optional) (chainable). */
   externalAccessionIdentifier(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** SAC-2 Accession Identifier (EI, max 0, optional) (chainable). */
+  /** SAC-2 Accession Identifier (EI, optional) (chainable). */
   accessionIdentifier(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** SAC-3 Container Identifier (EI, max 0, conditional) (chainable). */
+  /** SAC-3 Container Identifier (EI, conditional) (chainable). */
   containerIdentifier(value: string | EI): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** SAC-4 Primary (Parent) Container Identifier (EI, max 0, conditional) (chainable). */
+  /** SAC-4 Primary (Parent) Container Identifier (EI, conditional) (chainable). */
   primaryParentContainerIdentifier(value: string | EI): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** SAC-5 Equipment Container Identifier (EI, max 0, optional) (chainable). */
+  /** SAC-5 Equipment Container Identifier (EI, optional) (chainable). */
   equipmentContainerIdentifier(value: string | EI): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
@@ -64,259 +64,259 @@ export class SAC extends BaseSegment {
     return this;
   }
 
-  /** SAC-7 Registration Date/Time (DTM, max 0, optional) (chainable). */
+  /** SAC-7 Registration Date/Time (DTM, optional) (chainable). */
   registrationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** SAC-8 Container Status (CWE, max 0, optional) (chainable). */
+  /** SAC-8 Container Status (CWE, optional) (chainable). */
   containerStatus(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SAC-9 Carrier Type (CWE, max 0, optional) (chainable). */
+  /** SAC-9 Carrier Type (CWE, optional) (chainable). */
   carrierType(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SAC-10 Carrier Identifier (EI, max 0, optional) (chainable). */
+  /** SAC-10 Carrier Identifier (EI, optional) (chainable). */
   carrierIdentifier(value: string | EI): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** SAC-11 Position in Carrier (NA, max 0, optional) (chainable). */
+  /** SAC-11 Position in Carrier (NA, optional) (chainable). */
   positionInCarrier(value: string): this {
     this.fields[10] = this.createField(value);
     return this;
   }
 
-  /** SAC-12 Tray Type  SAC (CWE, max 0, optional) (chainable). */
+  /** SAC-12 Tray Type  SAC (CWE, optional) (chainable). */
   trayTypeSac(value: string | CodedElement): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SAC-13 Tray Identifier (EI, max 0, optional) (chainable). */
+  /** SAC-13 Tray Identifier (EI, optional) (chainable). */
   trayIdentifier(value: string | EI): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** SAC-14 Position in Tray (NA, max 0, optional) (chainable). */
+  /** SAC-14 Position in Tray (NA, optional) (chainable). */
   positionInTray(value: string): this {
     this.fields[13] = this.createField(value);
     return this;
   }
 
-  /** SAC-15 Location (CWE, max 0, optional, repeating) (chainable). */
+  /** SAC-15 Location (CWE, optional, repeating) (chainable). */
   location(...values: Repeated<string | CodedElement>[]): this {
     this.fields[14] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** SAC-16 Container Height (NM, max 0, optional) (chainable). */
+  /** SAC-16 Container Height (NM, optional) (chainable). */
   containerHeight(value: string): this {
     this.fields[15] = this.createField(value);
     return this;
   }
 
-  /** SAC-17 Container Diameter (NM, max 0, optional) (chainable). */
+  /** SAC-17 Container Diameter (NM, optional) (chainable). */
   containerDiameter(value: string): this {
     this.fields[16] = this.createField(value);
     return this;
   }
 
-  /** SAC-18 Barrier Delta (NM, max 0, optional) (chainable). */
+  /** SAC-18 Barrier Delta (NM, optional) (chainable). */
   barrierDelta(value: string): this {
     this.fields[17] = this.createField(value);
     return this;
   }
 
-  /** SAC-19 Bottom Delta (NM, max 0, optional) (chainable). */
+  /** SAC-19 Bottom Delta (NM, optional) (chainable). */
   bottomDelta(value: string): this {
     this.fields[18] = this.createField(value);
     return this;
   }
 
-  /** SAC-20 Container Height/Diameter/Delta Units (CWE, max 0, optional) (chainable). */
+  /** SAC-20 Container Height/Diameter/Delta Units (CWE, optional) (chainable). */
   containerHeightDiameterDeltaUnits(value: string | CodedElement): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SAC-21 Container Volume (NM, max 0, optional) (chainable). */
+  /** SAC-21 Container Volume (NM, optional) (chainable). */
   containerVolume(value: string): this {
     this.fields[20] = this.createField(value);
     return this;
   }
 
-  /** SAC-22 Available Specimen Volume (NM, max 0, optional) (chainable). */
+  /** SAC-22 Available Specimen Volume (NM, optional) (chainable). */
   availableSpecimenVolume(value: string): this {
     this.fields[21] = this.createField(value);
     return this;
   }
 
-  /** SAC-23 Initial Specimen Volume (NM, max 0, optional) (chainable). */
+  /** SAC-23 Initial Specimen Volume (NM, optional) (chainable). */
   initialSpecimenVolume(value: string): this {
     this.fields[22] = this.createField(value);
     return this;
   }
 
-  /** SAC-24 Volume Units (CWE, max 0, optional) (chainable). */
+  /** SAC-24 Volume Units (CWE, optional) (chainable). */
   volumeUnits(value: string | CodedElement): this {
     this.fields[23] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SAC-25 Separator Type (CWE, max 0, optional) (chainable). */
+  /** SAC-25 Separator Type (CWE, optional) (chainable). */
   separatorType(value: string | CodedElement): this {
     this.fields[24] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SAC-26 Cap Type (CWE, max 0, optional) (chainable). */
+  /** SAC-26 Cap Type (CWE, optional) (chainable). */
   capType(value: string | CodedElement): this {
     this.fields[25] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SAC-27 Additive (CWE, max 0, optional, repeating) (chainable). */
+  /** SAC-27 Additive (CWE, optional, repeating) (chainable). */
   additive(...values: Repeated<string | CodedElement>[]): this {
     this.fields[26] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** SAC-28 Specimen Component (CWE, max 0, optional) (chainable). */
+  /** SAC-28 Specimen Component (CWE, optional) (chainable). */
   specimenComponent(value: string | CodedElement): this {
     this.fields[27] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SAC-29 Dilution Factor (SN, max 0, optional) (chainable). */
+  /** SAC-29 Dilution Factor (SN, optional) (chainable). */
   dilutionFactor(value: string): this {
     this.fields[28] = this.createField(value);
     return this;
   }
 
-  /** SAC-30 Treatment (CWE, max 0, optional) (chainable). */
+  /** SAC-30 Treatment (CWE, optional) (chainable). */
   treatment(value: string | CodedElement): this {
     this.fields[29] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SAC-31 Temperature (SN, max 0, optional) (chainable). */
+  /** SAC-31 Temperature (SN, optional) (chainable). */
   temperature(value: string): this {
     this.fields[30] = this.createField(value);
     return this;
   }
 
-  /** SAC-32 Hemolysis Index (NM, max 0, optional) (chainable). */
+  /** SAC-32 Hemolysis Index (NM, optional) (chainable). */
   hemolysisIndex(value: string): this {
     this.fields[31] = this.createField(value);
     return this;
   }
 
-  /** SAC-33 Hemolysis Index Units (CWE, max 0, optional) (chainable). */
+  /** SAC-33 Hemolysis Index Units (CWE, optional) (chainable). */
   hemolysisIndexUnits(value: string | CodedElement): this {
     this.fields[32] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SAC-34 Lipemia Index (NM, max 0, optional) (chainable). */
+  /** SAC-34 Lipemia Index (NM, optional) (chainable). */
   lipemiaIndex(value: string): this {
     this.fields[33] = this.createField(value);
     return this;
   }
 
-  /** SAC-35 Lipemia Index Units (CWE, max 0, optional) (chainable). */
+  /** SAC-35 Lipemia Index Units (CWE, optional) (chainable). */
   lipemiaIndexUnits(value: string | CodedElement): this {
     this.fields[34] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SAC-36 Icterus Index (NM, max 0, optional) (chainable). */
+  /** SAC-36 Icterus Index (NM, optional) (chainable). */
   icterusIndex(value: string): this {
     this.fields[35] = this.createField(value);
     return this;
   }
 
-  /** SAC-37 Icterus Index Units (CWE, max 0, optional) (chainable). */
+  /** SAC-37 Icterus Index Units (CWE, optional) (chainable). */
   icterusIndexUnits(value: string | CodedElement): this {
     this.fields[36] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SAC-38 Fibrin Index (NM, max 0, optional) (chainable). */
+  /** SAC-38 Fibrin Index (NM, optional) (chainable). */
   fibrinIndex(value: string): this {
     this.fields[37] = this.createField(value);
     return this;
   }
 
-  /** SAC-39 Fibrin Index Units (CWE, max 0, optional) (chainable). */
+  /** SAC-39 Fibrin Index Units (CWE, optional) (chainable). */
   fibrinIndexUnits(value: string | CodedElement): this {
     this.fields[38] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SAC-40 System Induced Contaminants (CWE, max 0, optional, repeating) (chainable). */
+  /** SAC-40 System Induced Contaminants (CWE, optional, repeating) (chainable). */
   systemInducedContaminants(...values: Repeated<string | CodedElement>[]): this {
     this.fields[39] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** SAC-41 Drug Interference (CWE, max 0, optional, repeating) (chainable). */
+  /** SAC-41 Drug Interference (CWE, optional, repeating) (chainable). */
   drugInterference(...values: Repeated<string | CodedElement>[]): this {
     this.fields[40] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** SAC-42 Artificial Blood (CWE, max 0, optional) (chainable). */
+  /** SAC-42 Artificial Blood (CWE, optional) (chainable). */
   artificialBlood(value: string | CodedElement): this {
     this.fields[41] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SAC-43 Special Handling Code (CWE, max 0, optional, repeating) (chainable). */
+  /** SAC-43 Special Handling Code (CWE, optional, repeating) (chainable). */
   specialHandlingCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[42] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** SAC-44 Other Environmental Factors (CWE, max 0, optional, repeating) (chainable). */
+  /** SAC-44 Other Environmental Factors (CWE, optional, repeating) (chainable). */
   otherEnvironmentalFactors(...values: Repeated<string | CodedElement>[]): this {
     this.fields[43] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** SAC-45 Container Length (CQ, max 0, optional) (chainable). */
+  /** SAC-45 Container Length (CQ, optional) (chainable). */
   containerLength(value: string | CQ): this {
     this.fields[44] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SAC-46 Container Width (CQ, max 0, optional) (chainable). */
+  /** SAC-46 Container Width (CQ, optional) (chainable). */
   containerWidth(value: string | CQ): this {
     this.fields[45] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** SAC-47 Container Form (CWE, max 0, optional) (chainable). */
+  /** SAC-47 Container Form (CWE, optional) (chainable). */
   containerForm(value: string | CodedElement): this {
     this.fields[46] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SAC-48 Container Material (CWE, max 0, optional) (chainable). */
+  /** SAC-48 Container Material (CWE, optional) (chainable). */
   containerMaterial(value: string | CodedElement): this {
     this.fields[47] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** SAC-49 Container Common Name (CWE, max 0, optional) (chainable). */
+  /** SAC-49 Container Common Name (CWE, optional) (chainable). */
   containerCommonName(value: string | CodedElement): this {
     this.fields[48] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

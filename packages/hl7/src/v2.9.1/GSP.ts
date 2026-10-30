@@ -27,7 +27,7 @@ export class GSP extends BaseSegment {
     this.fields = [];
   }
 
-  /** GSP-1 Set ID (SI, max 0, required) (chainable). */
+  /** GSP-1 Set ID (SI, required) (chainable). */
   setId(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
@@ -39,31 +39,31 @@ export class GSP extends BaseSegment {
     return this;
   }
 
-  /** GSP-3 GSP Instance Identifier (EI, max 0, conditional) (chainable). */
+  /** GSP-3 GSP Instance Identifier (EI, conditional) (chainable). */
   gspInstanceIdentifier(value: string | EI): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** GSP-4 SOGI Concept (CWE, max 0, required) (chainable). */
+  /** GSP-4 SOGI Concept (CWE, required) (chainable). */
   sogiConcept(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GSP-5 SOGI Concept Value (CWE, max 0, required) (chainable). */
+  /** GSP-5 SOGI Concept Value (CWE, required) (chainable). */
   sogiConceptValue(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GSP-6 Validity Range (DR, max 0, optional) (chainable). */
+  /** GSP-6 Validity Range (DR, optional) (chainable). */
   validityRange(value: string | DR): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(drParts(value)));
     return this;
   }
 
-  /** GSP-7 Comment (TX, max 0, optional) (chainable). */
+  /** GSP-7 Comment (TX, optional) (chainable). */
   comment(value: string): this {
     this.fields[6] = this.createField(value);
     return this;

@@ -40,133 +40,133 @@ export class PRT extends BaseSegment {
     return this;
   }
 
-  /** PRT-3 Action Reason (CWE, max 0, optional) (chainable). */
+  /** PRT-3 Action Reason (CWE, optional) (chainable). */
   actionReason(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRT-4 Role of Participation (CWE, max 0, required) (chainable). */
+  /** PRT-4 Role of Participation (CWE, required) (chainable). */
   roleOfParticipation(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRT-5 Person (XCN, max 0, conditional, repeating) (chainable). */
+  /** PRT-5 Person (XCN, conditional, repeating) (chainable). */
   person(...values: Repeated<string | XCN>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** PRT-6 Person Provider Type (CWE, max 0, conditional) (chainable). */
+  /** PRT-6 Person Provider Type (CWE, conditional) (chainable). */
   personProviderType(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRT-7 Organization Unit Type (CWE, max 0, conditional) (chainable). */
+  /** PRT-7 Organization Unit Type (CWE, conditional) (chainable). */
   organizationUnitType(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRT-8 Organization (XON, max 0, conditional, repeating) (chainable). */
+  /** PRT-8 Organization (XON, conditional, repeating) (chainable). */
   organization(...values: Repeated<string | XON>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** PRT-9 Location (PL, max 0, conditional, repeating) (chainable). */
+  /** PRT-9 Location (PL, conditional, repeating) (chainable). */
   location(...values: Repeated<string | PL>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(plParts(v)))));
     return this;
   }
 
-  /** PRT-10 Device (EI, max 0, conditional, repeating) (chainable). */
+  /** PRT-10 Device (EI, conditional, repeating) (chainable). */
   device(...values: Repeated<string | EI>[]): this {
     this.fields[9] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;
   }
 
-  /** PRT-11 Begin Date/Time (arrival time) (DTM, max 0, optional) (chainable). */
+  /** PRT-11 Begin Date/Time (arrival time) (DTM, optional) (chainable). */
   beginDateTimeArrivalTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[10] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PRT-12 End Date/Time (departure time) (DTM, max 0, optional) (chainable). */
+  /** PRT-12 End Date/Time (departure time) (DTM, optional) (chainable). */
   endDateTimeDepartureTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[11] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PRT-13 Qualitative Duration (CWE, max 0, optional) (chainable). */
+  /** PRT-13 Qualitative Duration (CWE, optional) (chainable). */
   qualitativeDuration(value: string | CodedElement): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRT-14 Address (XAD, max 0, conditional, repeating) (chainable). */
+  /** PRT-14 Address (XAD, conditional, repeating) (chainable). */
   address(...values: Repeated<string | XAD>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** PRT-15 Telecommunication Address (XTN, max 0, optional, repeating) (chainable). */
+  /** PRT-15 Telecommunication Address (XTN, optional, repeating) (chainable). */
   telecommunicationAddress(...values: Repeated<string | XTN>[]): this {
     this.fields[14] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** PRT-16 UDI Device Identifier (EI, max 0, optional) (chainable). */
+  /** PRT-16 UDI Device Identifier (EI, optional) (chainable). */
   udiDeviceIdentifier(value: string | EI): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** PRT-17 Device Manufacture Date (DTM, max 0, optional) (chainable). */
+  /** PRT-17 Device Manufacture Date (DTM, optional) (chainable). */
   deviceManufactureDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[16] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PRT-18 Device Expiry Date (DTM, max 0, optional) (chainable). */
+  /** PRT-18 Device Expiry Date (DTM, optional) (chainable). */
   deviceExpiryDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[17] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PRT-19 Device Lot Number (ST, max 0, optional) (chainable). */
+  /** PRT-19 Device Lot Number (ST, optional) (chainable). */
   deviceLotNumber(value: string): this {
     this.fields[18] = this.createField(value);
     return this;
   }
 
-  /** PRT-20 Device Serial Number (ST, max 0, optional) (chainable). */
+  /** PRT-20 Device Serial Number (ST, optional) (chainable). */
   deviceSerialNumber(value: string): this {
     this.fields[19] = this.createField(value);
     return this;
   }
 
-  /** PRT-21 Device Donation Identification (EI, max 0, optional) (chainable). */
+  /** PRT-21 Device Donation Identification (EI, optional) (chainable). */
   deviceDonationIdentification(value: string | EI): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** PRT-22 Device Type (CNE, max 0, conditional) (chainable). */
+  /** PRT-22 Device Type (CNE, conditional) (chainable). */
   deviceType(value: string | CodedElement): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRT-23 Preferred Method of Contact (CWE, max 0, optional) (chainable). */
+  /** PRT-23 Preferred Method of Contact (CWE, optional) (chainable). */
   preferredMethodOfContact(value: string | CodedElement): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PRT-24 Contact Identifiers (PLN, max 0, optional, repeating) (chainable). */
+  /** PRT-24 Contact Identifiers (PLN, optional, repeating) (chainable). */
   contactIdentifiers(...values: Repeated<string | PLN>[]): this {
     this.fields[23] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(plnParts(v)))));
     return this;

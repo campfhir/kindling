@@ -33,19 +33,19 @@ export class LAN extends BaseSegment {
     return this;
   }
 
-  /** LAN-2 Language Code (CWE, max 0, required) (chainable). */
+  /** LAN-2 Language Code (CWE, required) (chainable). */
   languageCode(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** LAN-3 Language Ability Code (CWE, max 0, optional, repeating) (chainable). */
+  /** LAN-3 Language Ability Code (CWE, optional, repeating) (chainable). */
   languageAbilityCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** LAN-4 Language Proficiency Code (CWE, max 0, optional) (chainable). */
+  /** LAN-4 Language Proficiency Code (CWE, optional) (chainable). */
   languageProficiencyCode(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

@@ -28,61 +28,61 @@ export class OM7 extends BaseSegment {
     this.fields = [];
   }
 
-  /** OM7-1 Sequence Number - Test/Observation Master File (NM, max 0, required) (chainable). */
+  /** OM7-1 Sequence Number - Test/Observation Master File (NM, required) (chainable). */
   sequenceNumberTestObservationMasterFile(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** OM7-2 Universal Service Identifier (CWE, max 0, required) (chainable). */
+  /** OM7-2 Universal Service Identifier (CWE, required) (chainable). */
   universalServiceIdentifier(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OM7-3 Category Identifier (CWE, max 0, optional, repeating) (chainable). */
+  /** OM7-3 Category Identifier (CWE, optional, repeating) (chainable). */
   categoryIdentifier(...values: Repeated<string | CodedElement>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OM7-4 Category Description (TX, max 0, optional) (chainable). */
+  /** OM7-4 Category Description (TX, optional) (chainable). */
   categoryDescription(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** OM7-5 Category Synonym (ST, max 0, optional, repeating) (chainable). */
+  /** OM7-5 Category Synonym (ST, optional, repeating) (chainable). */
   categorySynonym(...values: Repeated<string>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** OM7-6 Effective Test/Service Start Date/Time (DTM, max 0, optional) (chainable). */
+  /** OM7-6 Effective Test/Service Start Date/Time (DTM, optional) (chainable). */
   effectiveTestServiceStartDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** OM7-7 Effective Test/Service End Date/Time (DTM, max 0, optional) (chainable). */
+  /** OM7-7 Effective Test/Service End Date/Time (DTM, optional) (chainable). */
   effectiveTestServiceEndDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** OM7-8 Test/Service Default Duration Quantity (NM, max 0, optional) (chainable). */
+  /** OM7-8 Test/Service Default Duration Quantity (NM, optional) (chainable). */
   testServiceDefaultDurationQuantity(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** OM7-9 Test/Service Default Duration Units (CWE, max 0, optional) (chainable). */
+  /** OM7-9 Test/Service Default Duration Units (CWE, optional) (chainable). */
   testServiceDefaultDurationUnits(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OM7-10 Test/Service Default Frequency (CWE, max 0, optional) (chainable). */
+  /** OM7-10 Test/Service Default Frequency (CWE, optional) (chainable). */
   testServiceDefaultFrequency(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -94,67 +94,67 @@ export class OM7 extends BaseSegment {
     return this;
   }
 
-  /** OM7-12 Consent Identifier (CWE, max 0, optional) (chainable). */
+  /** OM7-12 Consent Identifier (CWE, optional) (chainable). */
   consentIdentifier(value: string | CodedElement): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OM7-13 Consent Effective Start Date/Time (DTM, max 0, optional) (chainable). */
+  /** OM7-13 Consent Effective Start Date/Time (DTM, optional) (chainable). */
   consentEffectiveStartDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** OM7-14 Consent Effective End Date/Time (DTM, max 0, optional) (chainable). */
+  /** OM7-14 Consent Effective End Date/Time (DTM, optional) (chainable). */
   consentEffectiveEndDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[13] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** OM7-15 Consent Interval Quantity (NM, max 0, optional) (chainable). */
+  /** OM7-15 Consent Interval Quantity (NM, optional) (chainable). */
   consentIntervalQuantity(value: string): this {
     this.fields[14] = this.createField(value);
     return this;
   }
 
-  /** OM7-16 Consent Interval Units (CWE, max 0, conditional) (chainable). */
+  /** OM7-16 Consent Interval Units (CWE, conditional) (chainable). */
   consentIntervalUnits(value: string | CodedElement): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OM7-17 Consent Waiting Period Quantity (NM, max 0, optional) (chainable). */
+  /** OM7-17 Consent Waiting Period Quantity (NM, optional) (chainable). */
   consentWaitingPeriodQuantity(value: string): this {
     this.fields[16] = this.createField(value);
     return this;
   }
 
-  /** OM7-18 Consent Waiting Period Units (CWE, max 0, conditional) (chainable). */
+  /** OM7-18 Consent Waiting Period Units (CWE, conditional) (chainable). */
   consentWaitingPeriodUnits(value: string | CodedElement): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OM7-19 Effective Date/Time of Change (DTM, max 0, optional) (chainable). */
+  /** OM7-19 Effective Date/Time of Change (DTM, optional) (chainable). */
   effectiveDateTimeOfChange(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[18] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** OM7-20 Entered By (XCN, max 0, optional) (chainable). */
+  /** OM7-20 Entered By (XCN, optional) (chainable). */
   enteredBy(value: string | XCN): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** OM7-21 Orderable-at Location (PL, max 0, optional, repeating) (chainable). */
+  /** OM7-21 Orderable-at Location (PL, optional, repeating) (chainable). */
   orderableAtLocation(...values: Repeated<string | PL>[]): this {
     this.fields[20] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(plParts(v)))));
     return this;
   }
 
-  /** OM7-22 Formulary Status (CWE, max 0, optional) (chainable). */
+  /** OM7-22 Formulary Status (CWE, optional) (chainable). */
   formularyStatus(value: string | CodedElement): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -166,7 +166,7 @@ export class OM7 extends BaseSegment {
     return this;
   }
 
-  /** OM7-24 Primary Key Value (CWE, max 0, optional, repeating) (chainable). */
+  /** OM7-24 Primary Key Value (CWE, optional, repeating) (chainable). */
   primaryKeyValue(...values: Repeated<string | CodedElement>[]): this {
     this.fields[23] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;

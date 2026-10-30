@@ -34,67 +34,67 @@ export class AIS extends BaseSegment {
     return this;
   }
 
-  /** AIS-2 Segment Action Code (ID, max 0, conditional) (chainable). */
+  /** AIS-2 Segment Action Code (ID, conditional) (chainable). */
   segmentActionCode(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** AIS-3 Universal Service Identifier (CWE, max 0, required) (chainable). */
+  /** AIS-3 Universal Service Identifier (CWE, required) (chainable). */
   universalServiceIdentifier(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIS-4 Start Date/Time (DTM, max 0, conditional) (chainable). */
+  /** AIS-4 Start Date/Time (DTM, conditional) (chainable). */
   startDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** AIS-5 Start Date/Time Offset (NM, max 0, conditional) (chainable). */
+  /** AIS-5 Start Date/Time Offset (NM, conditional) (chainable). */
   startDateTimeOffset(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** AIS-6 Start Date/Time Offset Units (CNE, max 0, conditional) (chainable). */
+  /** AIS-6 Start Date/Time Offset Units (CNE, conditional) (chainable). */
   startDateTimeOffsetUnits(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIS-7 Duration (NM, max 0, optional) (chainable). */
+  /** AIS-7 Duration (NM, optional) (chainable). */
   duration(value: string): this {
     this.fields[6] = this.createField(value);
     return this;
   }
 
-  /** AIS-8 Duration Units (CNE, max 0, optional) (chainable). */
+  /** AIS-8 Duration Units (CNE, optional) (chainable). */
   durationUnits(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIS-9 Allow Substitution Code (CWE, max 0, conditional) (chainable). */
+  /** AIS-9 Allow Substitution Code (CWE, conditional) (chainable). */
   allowSubstitutionCode(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIS-10 Filler Status Code (CWE, max 0, conditional) (chainable). */
+  /** AIS-10 Filler Status Code (CWE, conditional) (chainable). */
   fillerStatusCode(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIS-11 Placer Supplemental Service Information (CWE, max 0, optional, repeating) (chainable). */
+  /** AIS-11 Placer Supplemental Service Information (CWE, optional, repeating) (chainable). */
   placerSupplementalServiceInformation(...values: Repeated<string | CodedElement>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** AIS-12 Filler Supplemental Service Information (CWE, max 0, optional, repeating) (chainable). */
+  /** AIS-12 Filler Supplemental Service Information (CWE, optional, repeating) (chainable). */
   fillerSupplementalServiceInformation(...values: Repeated<string | CodedElement>[]): this {
     this.fields[11] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;

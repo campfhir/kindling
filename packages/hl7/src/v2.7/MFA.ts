@@ -34,25 +34,25 @@ export class MFA extends BaseSegment {
     return this;
   }
 
-  /** MFA-2 MFN Control ID (ST, max 0, conditional) (chainable). */
+  /** MFA-2 MFN Control ID (ST, conditional) (chainable). */
   mfnControlId(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** MFA-3 Event Completion Date/Time (DTM, max 0, optional) (chainable). */
+  /** MFA-3 Event Completion Date/Time (DTM, optional) (chainable). */
   eventCompletionDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** MFA-4 MFN Record Level Error Return (CWE, max 0, required) (chainable). */
+  /** MFA-4 MFN Record Level Error Return (CWE, required) (chainable). */
   mfnRecordLevelErrorReturn(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** MFA-5 Primary Key Value (varies, max 0, required, repeating) (chainable). */
+  /** MFA-5 Primary Key Value (varies, required, repeating) (chainable). */
   primaryKeyValue(...values: Repeated<string>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;

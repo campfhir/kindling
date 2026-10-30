@@ -39,13 +39,13 @@ export class CDO extends BaseSegment {
     return this;
   }
 
-  /** CDO-3 Cumulative Dosage Limit (CQ, max 0, optional) (chainable). */
+  /** CDO-3 Cumulative Dosage Limit (CQ, optional) (chainable). */
   cumulativeDosageLimit(value: string | CQ): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** CDO-4 Cumulative Dosage Limit Time Interval (CQ, max 0, optional) (chainable). */
+  /** CDO-4 Cumulative Dosage Limit Time Interval (CQ, optional) (chainable). */
   cumulativeDosageLimitTimeInterval(value: string | CQ): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;

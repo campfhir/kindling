@@ -40,7 +40,7 @@ export class PID extends BaseSegment {
     return this;
   }
 
-  /** PID-3 Patient Identifier List (CX, max 0, required, repeating) (chainable). */
+  /** PID-3 Patient Identifier List (CX, required, repeating) (chainable). */
   patientIdentifierList(...values: Repeated<string | CX>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
@@ -52,25 +52,25 @@ export class PID extends BaseSegment {
     return this;
   }
 
-  /** PID-5 Patient Name (XPN, max 0, required, repeating) (chainable). */
+  /** PID-5 Patient Name (XPN, required, repeating) (chainable). */
   patientName(...values: Repeated<string | XPN>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** PID-6 Mother's Maiden Name (XPN, max 0, optional, repeating) (chainable). */
+  /** PID-6 Mother's Maiden Name (XPN, optional, repeating) (chainable). */
   motherSMaidenName(...values: Repeated<string | XPN>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** PID-7 Date/Time of Birth (DTM, max 0, optional) (chainable). */
+  /** PID-7 Date/Time of Birth (DTM, optional) (chainable). */
   dateTimeOfBirth(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PID-8 Administrative Sex (CWE, max 0, optional) (chainable). */
+  /** PID-8 Administrative Sex (CWE, optional) (chainable). */
   administrativeSex(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -82,13 +82,13 @@ export class PID extends BaseSegment {
     return this;
   }
 
-  /** PID-10 Race (CWE, max 0, optional, repeating) (chainable). */
+  /** PID-10 Race (CWE, optional, repeating) (chainable). */
   race(...values: Repeated<string | CodedElement>[]): this {
     this.fields[9] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PID-11 Patient Address (XAD, max 0, optional, repeating) (chainable). */
+  /** PID-11 Patient Address (XAD, optional, repeating) (chainable). */
   patientAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
@@ -100,37 +100,37 @@ export class PID extends BaseSegment {
     return this;
   }
 
-  /** PID-13 Phone Number - Home (XTN, max 0, W, repeating) (chainable). */
+  /** PID-13 Phone Number - Home (XTN, W, repeating) (chainable). */
   phoneNumberHome(...values: Repeated<string | XTN>[]): this {
     this.fields[12] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** PID-14 Phone Number - Business (XTN, max 0, W, repeating) (chainable). */
+  /** PID-14 Phone Number - Business (XTN, W, repeating) (chainable). */
   phoneNumberBusiness(...values: Repeated<string | XTN>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** PID-15 Primary Language (CWE, max 0, optional) (chainable). */
+  /** PID-15 Primary Language (CWE, optional) (chainable). */
   primaryLanguage(value: string | CodedElement): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PID-16 Marital Status (CWE, max 0, optional) (chainable). */
+  /** PID-16 Marital Status (CWE, optional) (chainable). */
   maritalStatus(value: string | CodedElement): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PID-17 Religion (CWE, max 0, optional) (chainable). */
+  /** PID-17 Religion (CWE, optional) (chainable). */
   religion(value: string | CodedElement): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PID-18 Patient Account Number (CX, max 0, optional) (chainable). */
+  /** PID-18 Patient Account Number (CX, optional) (chainable). */
   patientAccountNumber(value: string | CX): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
@@ -148,19 +148,19 @@ export class PID extends BaseSegment {
     return this;
   }
 
-  /** PID-21 Mother's Identifier (CX, max 0, optional, repeating) (chainable). */
+  /** PID-21 Mother's Identifier (CX, optional, repeating) (chainable). */
   motherSIdentifier(...values: Repeated<string | CX>[]): this {
     this.fields[20] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
   }
 
-  /** PID-22 Ethnic Group (CWE, max 0, optional, repeating) (chainable). */
+  /** PID-22 Ethnic Group (CWE, optional, repeating) (chainable). */
   ethnicGroup(...values: Repeated<string | CodedElement>[]): this {
     this.fields[21] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PID-23 Birth Place (ST, max 0, optional) (chainable). */
+  /** PID-23 Birth Place (ST, optional) (chainable). */
   birthPlace(value: string): this {
     this.fields[22] = this.createField(value);
     return this;
@@ -172,31 +172,31 @@ export class PID extends BaseSegment {
     return this;
   }
 
-  /** PID-25 Birth Order (NM, max 0, optional) (chainable). */
+  /** PID-25 Birth Order (NM, optional) (chainable). */
   birthOrder(value: string): this {
     this.fields[24] = this.createField(value);
     return this;
   }
 
-  /** PID-26 Citizenship (CWE, max 0, optional, repeating) (chainable). */
+  /** PID-26 Citizenship (CWE, optional, repeating) (chainable). */
   citizenship(...values: Repeated<string | CodedElement>[]): this {
     this.fields[25] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PID-27 Veterans Military Status (CWE, max 0, optional) (chainable). */
+  /** PID-27 Veterans Military Status (CWE, optional) (chainable). */
   veteransMilitaryStatus(value: string | CodedElement): this {
     this.fields[26] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PID-28 Nationality (CWE, max 0, W) (chainable). */
+  /** PID-28 Nationality (CWE, W) (chainable). */
   nationality(value: string | CodedElement): this {
     this.fields[27] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PID-29 Patient Death Date and Time (DTM, max 0, optional) (chainable). */
+  /** PID-29 Patient Death Date and Time (DTM, optional) (chainable). */
   patientDeathDateAndTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[28] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
@@ -214,55 +214,55 @@ export class PID extends BaseSegment {
     return this;
   }
 
-  /** PID-32 Identity Reliability Code (CWE, max 0, optional, repeating) (chainable). */
+  /** PID-32 Identity Reliability Code (CWE, optional, repeating) (chainable). */
   identityReliabilityCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[31] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PID-33 Last Update Date/Time (DTM, max 0, optional) (chainable). */
+  /** PID-33 Last Update Date/Time (DTM, optional) (chainable). */
   lastUpdateDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[32] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PID-34 Last Update Facility (HD, max 0, optional) (chainable). */
+  /** PID-34 Last Update Facility (HD, optional) (chainable). */
   lastUpdateFacility(value: string): this {
     this.fields[33] = this.createField(value);
     return this;
   }
 
-  /** PID-35 Taxonomic Classification Code (CWE, max 0, optional) (chainable). */
+  /** PID-35 Taxonomic Classification Code (CWE, optional) (chainable). */
   taxonomicClassificationCode(value: string | CodedElement): this {
     this.fields[34] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PID-36 Breed Code (CWE, max 0, backward compatibility) (chainable). */
+  /** PID-36 Breed Code (CWE, backward compatibility) (chainable). */
   breedCode(value: string | CodedElement): this {
     this.fields[35] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PID-37 Strain (ST, max 0, optional) (chainable). */
+  /** PID-37 Strain (ST, optional) (chainable). */
   strain(value: string): this {
     this.fields[36] = this.createField(value);
     return this;
   }
 
-  /** PID-38 Production Class Code (CWE, max 0, optional, repeating) (chainable). */
+  /** PID-38 Production Class Code (CWE, optional, repeating) (chainable). */
   productionClassCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[37] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PID-39 Tribal Citizenship (CWE, max 0, optional, repeating) (chainable). */
+  /** PID-39 Tribal Citizenship (CWE, optional, repeating) (chainable). */
   tribalCitizenship(...values: Repeated<string | CodedElement>[]): this {
     this.fields[38] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PID-40 Patient Telecommunication Information (XTN, max 0, optional, repeating) (chainable). */
+  /** PID-40 Patient Telecommunication Information (XTN, optional, repeating) (chainable). */
   patientTelecommunicationInformation(...values: Repeated<string | XTN>[]): this {
     this.fields[39] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;

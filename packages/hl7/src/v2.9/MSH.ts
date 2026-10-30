@@ -21,7 +21,7 @@ import { components, cweParts, type CodedElement } from "../utils/composites.ts"
  * Extends the v2.8.2 MSH: MSH-6 Receiving Facility (changed); MSH-26 Security Classification Tag (new); MSH-27 Security Handling Instructions (new); MSH-28 Special Access Restriction Instructions (new).
  */
 export class MSH extends MSH_base {
-  /** MSH-6 Receiving Facility (HD, max 0, optional, repeating) (chainable). */
+  /** MSH-6 Receiving Facility (HD, optional, repeating) (chainable). */
   override receivingFacility(...values: Repeated<string>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;

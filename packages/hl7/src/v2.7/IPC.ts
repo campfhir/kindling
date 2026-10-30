@@ -27,55 +27,55 @@ export class IPC extends BaseSegment {
     this.fields = [];
   }
 
-  /** IPC-1 Accession Identifier (EI, max 0, required) (chainable). */
+  /** IPC-1 Accession Identifier (EI, required) (chainable). */
   accessionIdentifier(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** IPC-2 Requested Procedure ID (EI, max 0, required) (chainable). */
+  /** IPC-2 Requested Procedure ID (EI, required) (chainable). */
   requestedProcedureId(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** IPC-3 Study Instance UID (EI, max 0, required) (chainable). */
+  /** IPC-3 Study Instance UID (EI, required) (chainable). */
   studyInstanceUid(value: string | EI): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** IPC-4 Scheduled Procedure Step ID (EI, max 0, required) (chainable). */
+  /** IPC-4 Scheduled Procedure Step ID (EI, required) (chainable). */
   scheduledProcedureStepId(value: string | EI): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** IPC-5 Modality (CWE, max 0, optional) (chainable). */
+  /** IPC-5 Modality (CWE, optional) (chainable). */
   modality(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IPC-6 Protocol Code (CWE, max 0, optional, repeating) (chainable). */
+  /** IPC-6 Protocol Code (CWE, optional, repeating) (chainable). */
   protocolCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** IPC-7 Scheduled Station Name (EI, max 0, optional) (chainable). */
+  /** IPC-7 Scheduled Station Name (EI, optional) (chainable). */
   scheduledStationName(value: string | EI): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** IPC-8 Scheduled Procedure Step Location (CWE, max 0, optional, repeating) (chainable). */
+  /** IPC-8 Scheduled Procedure Step Location (CWE, optional, repeating) (chainable). */
   scheduledProcedureStepLocation(...values: Repeated<string | CodedElement>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** IPC-9 Scheduled Station AE Title (ST, max 0, optional) (chainable). */
+  /** IPC-9 Scheduled Station AE Title (ST, optional) (chainable). */
   scheduledStationAeTitle(value: string): this {
     this.fields[8] = this.createField(value);
     return this;

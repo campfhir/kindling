@@ -28,127 +28,127 @@ export class CTR extends BaseSegment {
     this.fields = [];
   }
 
-  /** CTR-1 Contract Identifier (EI, max 0, required) (chainable). */
+  /** CTR-1 Contract Identifier (EI, required) (chainable). */
   contractIdentifier(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** CTR-2 Contract Description (ST, max 0, optional) (chainable). */
+  /** CTR-2 Contract Description (ST, optional) (chainable). */
   contractDescription(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** CTR-3 Contract Status (CWE, max 0, optional) (chainable). */
+  /** CTR-3 Contract Status (CWE, optional) (chainable). */
   contractStatus(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CTR-4 Effective Date (DTM, max 0, required) (chainable). */
+  /** CTR-4 Effective Date (DTM, required) (chainable). */
   effectiveDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CTR-5 Expiration Date (DTM, max 0, required) (chainable). */
+  /** CTR-5 Expiration Date (DTM, required) (chainable). */
   expirationDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CTR-6 Contract Owner Name (XPN, max 0, optional) (chainable). */
+  /** CTR-6 Contract Owner Name (XPN, optional) (chainable). */
   contractOwnerName(value: string | XPN): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(xpnParts(value)));
     return this;
   }
 
-  /** CTR-7 Contract Originator Name (XPN, max 0, optional) (chainable). */
+  /** CTR-7 Contract Originator Name (XPN, optional) (chainable). */
   contractOriginatorName(value: string | XPN): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(xpnParts(value)));
     return this;
   }
 
-  /** CTR-8 Supplier Type (CWE, max 0, required) (chainable). */
+  /** CTR-8 Supplier Type (CWE, required) (chainable). */
   supplierType(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CTR-9 Contract Type (CWE, max 0, optional) (chainable). */
+  /** CTR-9 Contract Type (CWE, optional) (chainable). */
   contractType(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CTR-10 Free On Board Freight Terms (CNE, max 0, optional) (chainable). */
+  /** CTR-10 Free On Board Freight Terms (CNE, optional) (chainable). */
   freeOnBoardFreightTerms(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CTR-11 Price Protection Date (DTM, max 0, optional) (chainable). */
+  /** CTR-11 Price Protection Date (DTM, optional) (chainable). */
   priceProtectionDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[10] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CTR-12 Fixed Price Contract Indicator (CNE, max 0, optional) (chainable). */
+  /** CTR-12 Fixed Price Contract Indicator (CNE, optional) (chainable). */
   fixedPriceContractIndicator(value: string | CodedElement): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CTR-13 Group Purchasing Organization (XON, max 0, optional) (chainable). */
+  /** CTR-13 Group Purchasing Organization (XON, optional) (chainable). */
   groupPurchasingOrganization(value: string | XON): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** CTR-14 Maximum Markup (MOP, max 0, optional) (chainable). */
+  /** CTR-14 Maximum Markup (MOP, optional) (chainable). */
   maximumMarkup(value: string): this {
     this.fields[13] = this.createField(value);
     return this;
   }
 
-  /** CTR-15 Actual Markup (MOP, max 0, optional) (chainable). */
+  /** CTR-15 Actual Markup (MOP, optional) (chainable). */
   actualMarkup(value: string): this {
     this.fields[14] = this.createField(value);
     return this;
   }
 
-  /** CTR-16 Corporation (XON, max 0, conditional, repeating) (chainable). */
+  /** CTR-16 Corporation (XON, conditional, repeating) (chainable). */
   corporation(...values: Repeated<string | XON>[]): this {
     this.fields[15] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** CTR-17 Parent of Corporation (XON, max 0, optional) (chainable). */
+  /** CTR-17 Parent of Corporation (XON, optional) (chainable). */
   parentOfCorporation(value: string | XON): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** CTR-18 Pricing Tier Level (CWE, max 0, optional) (chainable). */
+  /** CTR-18 Pricing Tier Level (CWE, optional) (chainable). */
   pricingTierLevel(value: string | CodedElement): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CTR-19 Contract Priority (ST, max 0, optional) (chainable). */
+  /** CTR-19 Contract Priority (ST, optional) (chainable). */
   contractPriority(value: string): this {
     this.fields[18] = this.createField(value);
     return this;
   }
 
-  /** CTR-20 Class of Trade (CWE, max 0, optional) (chainable). */
+  /** CTR-20 Class of Trade (CWE, optional) (chainable). */
   classOfTrade(value: string | CodedElement): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CTR-21 Associated Contract ID (EI, max 0, optional) (chainable). */
+  /** CTR-21 Associated Contract ID (EI, optional) (chainable). */
   associatedContractId(value: string | EI): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;

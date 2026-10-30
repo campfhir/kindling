@@ -28,61 +28,61 @@ export class PES extends BaseSegment {
     this.fields = [];
   }
 
-  /** PES-1 Sender Organization Name (XON, max 0, optional, repeating) (chainable). */
+  /** PES-1 Sender Organization Name (XON, optional, repeating) (chainable). */
   senderOrganizationName(...values: Repeated<string | XON>[]): this {
     this.fields[0] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** PES-2 Sender Individual Name (XCN, max 0, optional, repeating) (chainable). */
+  /** PES-2 Sender Individual Name (XCN, optional, repeating) (chainable). */
   senderIndividualName(...values: Repeated<string | XCN>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** PES-3 Sender Address (XAD, max 0, optional, repeating) (chainable). */
+  /** PES-3 Sender Address (XAD, optional, repeating) (chainable). */
   senderAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** PES-4 Sender Telephone (XTN, max 0, optional, repeating) (chainable). */
+  /** PES-4 Sender Telephone (XTN, optional, repeating) (chainable). */
   senderTelephone(...values: Repeated<string | XTN>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** PES-5 Sender Event Identifier (EI, max 0, optional) (chainable). */
+  /** PES-5 Sender Event Identifier (EI, optional) (chainable). */
   senderEventIdentifier(value: string | EI): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** PES-6 Sender Sequence Number (NM, max 0, optional) (chainable). */
+  /** PES-6 Sender Sequence Number (NM, optional) (chainable). */
   senderSequenceNumber(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
   }
 
-  /** PES-7 Sender Event Description (FT, max 0, optional, repeating) (chainable). */
+  /** PES-7 Sender Event Description (FT, optional, repeating) (chainable). */
   senderEventDescription(...values: Repeated<string>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** PES-8 Sender Comment (FT, max 0, optional) (chainable). */
+  /** PES-8 Sender Comment (FT, optional) (chainable). */
   senderComment(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** PES-9 Sender Aware Date/Time (DTM, max 0, optional) (chainable). */
+  /** PES-9 Sender Aware Date/Time (DTM, optional) (chainable). */
   senderAwareDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[8] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PES-10 Event Report Date (DTM, max 0, required) (chainable). */
+  /** PES-10 Event Report Date (DTM, required) (chainable). */
   eventReportDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[9] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;

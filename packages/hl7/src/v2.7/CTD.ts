@@ -27,43 +27,43 @@ export class CTD extends BaseSegment {
     this.fields = [];
   }
 
-  /** CTD-1 Contact Role (CWE, max 0, required, repeating) (chainable). */
+  /** CTD-1 Contact Role (CWE, required, repeating) (chainable). */
   contactRole(...values: Repeated<string | CodedElement>[]): this {
     this.fields[0] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** CTD-2 Contact Name (XPN, max 0, optional, repeating) (chainable). */
+  /** CTD-2 Contact Name (XPN, optional, repeating) (chainable). */
   contactName(...values: Repeated<string | XPN>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** CTD-3 Contact Address (XAD, max 0, optional, repeating) (chainable). */
+  /** CTD-3 Contact Address (XAD, optional, repeating) (chainable). */
   contactAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** CTD-4 Contact Location (PL, max 0, optional) (chainable). */
+  /** CTD-4 Contact Location (PL, optional) (chainable). */
   contactLocation(value: string | PL): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** CTD-5 Contact Communication Information (XTN, max 0, optional, repeating) (chainable). */
+  /** CTD-5 Contact Communication Information (XTN, optional, repeating) (chainable). */
   contactCommunicationInformation(...values: Repeated<string | XTN>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** CTD-6 Preferred Method of Contact (CWE, max 0, optional) (chainable). */
+  /** CTD-6 Preferred Method of Contact (CWE, optional) (chainable). */
   preferredMethodOfContact(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CTD-7 Contact Identifiers (PLN, max 0, optional, repeating) (chainable). */
+  /** CTD-7 Contact Identifiers (PLN, optional, repeating) (chainable). */
   contactIdentifiers(...values: Repeated<string | PLN>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(plnParts(v)))));
     return this;

@@ -27,13 +27,13 @@ export class UAC extends BaseSegment {
     this.fields = [];
   }
 
-  /** UAC-1 User Authentication Credential Type Code (CWE, max 0, required) (chainable). */
+  /** UAC-1 User Authentication Credential Type Code (CWE, required) (chainable). */
   userAuthenticationCredentialTypeCode(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** UAC-2 User Authentication Credential (ED, max 0, required) (chainable). */
+  /** UAC-2 User Authentication Credential (ED, required) (chainable). */
   userAuthenticationCredential(value: string): this {
     this.fields[1] = this.createField(value);
     return this;

@@ -28,19 +28,19 @@ export class CSS extends BaseSegment {
     this.fields = [];
   }
 
-  /** CSS-1 Study Scheduled Time Point (CWE, max 0, required) (chainable). */
+  /** CSS-1 Study Scheduled Time Point (CWE, required) (chainable). */
   studyScheduledTimePoint(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CSS-2 Study Scheduled Patient Time Point (DTM, max 0, optional) (chainable). */
+  /** CSS-2 Study Scheduled Patient Time Point (DTM, optional) (chainable). */
   studyScheduledPatientTimePoint(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CSS-3 Study Quality Control Codes (CWE, max 0, optional, repeating) (chainable). */
+  /** CSS-3 Study Quality Control Codes (CWE, optional, repeating) (chainable). */
   studyQualityControlCodes(...values: Repeated<string | CodedElement>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;

@@ -28,25 +28,25 @@ export class NDS extends BaseSegment {
     this.fields = [];
   }
 
-  /** NDS-1 Notification Reference Number (NM, max 0, required) (chainable). */
+  /** NDS-1 Notification Reference Number (NM, required) (chainable). */
   notificationReferenceNumber(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** NDS-2 Notification Date/Time (DTM, max 0, required) (chainable). */
+  /** NDS-2 Notification Date/Time (DTM, required) (chainable). */
   notificationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** NDS-3 Notification Alert Severity (CWE, max 0, required) (chainable). */
+  /** NDS-3 Notification Alert Severity (CWE, required) (chainable). */
   notificationAlertSeverity(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** NDS-4 Notification Code (CWE, max 0, required) (chainable). */
+  /** NDS-4 Notification Code (CWE, required) (chainable). */
   notificationCode(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

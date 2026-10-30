@@ -28,85 +28,85 @@ export class GOL extends BaseSegment {
     this.fields = [];
   }
 
-  /** GOL-1 Action Code (ID, max 0, required) (chainable). */
+  /** GOL-1 Action Code (ID, required) (chainable). */
   actionCode(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** GOL-2 Action Date/Time (DTM, max 0, required) (chainable). */
+  /** GOL-2 Action Date/Time (DTM, required) (chainable). */
   actionDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** GOL-3 Goal ID (CWE, max 0, required) (chainable). */
+  /** GOL-3 Goal ID (CWE, required) (chainable). */
   goalId(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GOL-4 Goal Instance ID (EI, max 0, required) (chainable). */
+  /** GOL-4 Goal Instance ID (EI, required) (chainable). */
   goalInstanceId(value: string | EI): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** GOL-5 Episode of Care ID (EI, max 0, optional) (chainable). */
+  /** GOL-5 Episode of Care ID (EI, optional) (chainable). */
   episodeOfCareId(value: string | EI): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** GOL-6 Goal List Priority (NM, max 0, optional) (chainable). */
+  /** GOL-6 Goal List Priority (NM, optional) (chainable). */
   goalListPriority(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
   }
 
-  /** GOL-7 Goal Established Date/Time (DTM, max 0, optional) (chainable). */
+  /** GOL-7 Goal Established Date/Time (DTM, optional) (chainable). */
   goalEstablishedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** GOL-8 Expected Goal Achieve Date/Time (DTM, max 0, optional) (chainable). */
+  /** GOL-8 Expected Goal Achieve Date/Time (DTM, optional) (chainable). */
   expectedGoalAchieveDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** GOL-9 Goal Classification (CWE, max 0, optional) (chainable). */
+  /** GOL-9 Goal Classification (CWE, optional) (chainable). */
   goalClassification(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GOL-10 Goal Management Discipline (CWE, max 0, optional) (chainable). */
+  /** GOL-10 Goal Management Discipline (CWE, optional) (chainable). */
   goalManagementDiscipline(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GOL-11 Current Goal Review Status (CWE, max 0, optional) (chainable). */
+  /** GOL-11 Current Goal Review Status (CWE, optional) (chainable). */
   currentGoalReviewStatus(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GOL-12 Current Goal Review Date/Time (DTM, max 0, optional) (chainable). */
+  /** GOL-12 Current Goal Review Date/Time (DTM, optional) (chainable). */
   currentGoalReviewDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[11] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** GOL-13 Next Goal Review Date/Time (DTM, max 0, optional) (chainable). */
+  /** GOL-13 Next Goal Review Date/Time (DTM, optional) (chainable). */
   nextGoalReviewDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** GOL-14 Previous Goal Review Date/Time (DTM, max 0, optional) (chainable). */
+  /** GOL-14 Previous Goal Review Date/Time (DTM, optional) (chainable). */
   previousGoalReviewDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[13] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
@@ -118,43 +118,43 @@ export class GOL extends BaseSegment {
     return this;
   }
 
-  /** GOL-16 Goal Evaluation (CWE, max 0, optional) (chainable). */
+  /** GOL-16 Goal Evaluation (CWE, optional) (chainable). */
   goalEvaluation(value: string | CodedElement): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GOL-17 Goal Evaluation Comment (ST, max 0, optional, repeating) (chainable). */
+  /** GOL-17 Goal Evaluation Comment (ST, optional, repeating) (chainable). */
   goalEvaluationComment(...values: Repeated<string>[]): this {
     this.fields[16] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** GOL-18 Goal Life Cycle Status (CWE, max 0, optional) (chainable). */
+  /** GOL-18 Goal Life Cycle Status (CWE, optional) (chainable). */
   goalLifeCycleStatus(value: string | CodedElement): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GOL-19 Goal Life Cycle Status Date/Time (DTM, max 0, optional) (chainable). */
+  /** GOL-19 Goal Life Cycle Status Date/Time (DTM, optional) (chainable). */
   goalLifeCycleStatusDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[18] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** GOL-20 Goal Target Type (CWE, max 0, optional, repeating) (chainable). */
+  /** GOL-20 Goal Target Type (CWE, optional, repeating) (chainable). */
   goalTargetType(...values: Repeated<string | CodedElement>[]): this {
     this.fields[19] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** GOL-21 Goal Target Name (XPN, max 0, optional, repeating) (chainable). */
+  /** GOL-21 Goal Target Name (XPN, optional, repeating) (chainable). */
   goalTargetName(...values: Repeated<string | XPN>[]): this {
     this.fields[20] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xpnParts(v)))));
     return this;
   }
 
-  /** GOL-22 Mood Code (CNE, max 0, conditional) (chainable). */
+  /** GOL-22 Mood Code (CNE, conditional) (chainable). */
   moodCode(value: string | CodedElement): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

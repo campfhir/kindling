@@ -28,13 +28,13 @@ export class RX1 extends BaseSegment {
     this.fields = [];
   }
 
-  /** RX1-1 UNUSED (ST, max 0, optional) (chainable). */
+  /** RX1-1 UNUSED (ST, optional) (chainable). */
   unused(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** RX1-2 UNUSED (ST, max 0, optional) (chainable). */
+  /** RX1-2 UNUSED (ST, optional) (chainable). */
   unused2(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
@@ -100,7 +100,7 @@ export class RX1 extends BaseSegment {
     return this;
   }
 
-  /** RX1-13 UNUSED (ST, max 0, optional) (chainable). */
+  /** RX1-13 UNUSED (ST, optional) (chainable). */
   unused13(value: string): this {
     this.fields[12] = this.createField(value);
     return this;
@@ -142,7 +142,7 @@ export class RX1 extends BaseSegment {
     return this;
   }
 
-  /** RX1-20 UNUSED (ST, max 0, optional) (chainable). */
+  /** RX1-20 UNUSED (ST, optional) (chainable). */
   unused20(value: string): this {
     this.fields[19] = this.createField(value);
     return this;
@@ -166,7 +166,7 @@ export class RX1 extends BaseSegment {
     return this;
   }
 
-  /** RX1-24 UNUSED (ST, max 0, optional) (chainable). */
+  /** RX1-24 UNUSED (ST, optional) (chainable). */
   unused24(value: string): this {
     this.fields[23] = this.createField(value);
     return this;

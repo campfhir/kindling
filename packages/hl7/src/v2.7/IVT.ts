@@ -33,151 +33,151 @@ export class IVT extends BaseSegment {
     return this;
   }
 
-  /** IVT-2 Inventory Location Identifier (EI, max 0, required) (chainable). */
+  /** IVT-2 Inventory Location Identifier (EI, required) (chainable). */
   inventoryLocationIdentifier(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** IVT-3 Inventory Location Name (ST, max 0, optional) (chainable). */
+  /** IVT-3 Inventory Location Name (ST, optional) (chainable). */
   inventoryLocationName(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** IVT-4 Source Location Identifier (EI, max 0, optional) (chainable). */
+  /** IVT-4 Source Location Identifier (EI, optional) (chainable). */
   sourceLocationIdentifier(value: string | EI): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** IVT-5 Source Location Name (ST, max 0, optional) (chainable). */
+  /** IVT-5 Source Location Name (ST, optional) (chainable). */
   sourceLocationName(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** IVT-6 Item Status (CWE, max 0, optional) (chainable). */
+  /** IVT-6 Item Status (CWE, optional) (chainable). */
   itemStatus(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IVT-7 Bin Location Identifier (EI, max 0, optional, repeating) (chainable). */
+  /** IVT-7 Bin Location Identifier (EI, optional, repeating) (chainable). */
   binLocationIdentifier(...values: Repeated<string | EI>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;
   }
 
-  /** IVT-8 Order Packaging (CWE, max 0, optional) (chainable). */
+  /** IVT-8 Order Packaging (CWE, optional) (chainable). */
   orderPackaging(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IVT-9 Issue Packaging (CWE, max 0, optional) (chainable). */
+  /** IVT-9 Issue Packaging (CWE, optional) (chainable). */
   issuePackaging(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IVT-10 Default Inventory Asset Account (EI, max 0, optional) (chainable). */
+  /** IVT-10 Default Inventory Asset Account (EI, optional) (chainable). */
   defaultInventoryAssetAccount(value: string | EI): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** IVT-11 Patient Chargeable Indicator (CNE, max 0, optional) (chainable). */
+  /** IVT-11 Patient Chargeable Indicator (CNE, optional) (chainable). */
   patientChargeableIndicator(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IVT-12 Transaction Code (CWE, max 0, optional) (chainable). */
+  /** IVT-12 Transaction Code (CWE, optional) (chainable). */
   transactionCode(value: string | CodedElement): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IVT-13 Transaction amount - unit (CP, max 0, optional) (chainable). */
+  /** IVT-13 Transaction amount - unit (CP, optional) (chainable). */
   transactionAmountUnit(value: string | CP): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** IVT-14 Item Importance Code (CWE, max 0, optional) (chainable). */
+  /** IVT-14 Item Importance Code (CWE, optional) (chainable). */
   itemImportanceCode(value: string | CodedElement): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IVT-15 Stocked Item Indicator (CNE, max 0, optional) (chainable). */
+  /** IVT-15 Stocked Item Indicator (CNE, optional) (chainable). */
   stockedItemIndicator(value: string | CodedElement): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IVT-16 Consignment Item Indicator (CNE, max 0, optional) (chainable). */
+  /** IVT-16 Consignment Item Indicator (CNE, optional) (chainable). */
   consignmentItemIndicator(value: string | CodedElement): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IVT-17 Reusable Item Indicator (CNE, max 0, optional) (chainable). */
+  /** IVT-17 Reusable Item Indicator (CNE, optional) (chainable). */
   reusableItemIndicator(value: string | CodedElement): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IVT-18 Reusable Cost (CP, max 0, optional) (chainable). */
+  /** IVT-18 Reusable Cost (CP, optional) (chainable). */
   reusableCost(value: string | CP): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** IVT-19 Substitute Item Identifier (EI, max 0, optional, repeating) (chainable). */
+  /** IVT-19 Substitute Item Identifier (EI, optional, repeating) (chainable). */
   substituteItemIdentifier(...values: Repeated<string | EI>[]): this {
     this.fields[18] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;
   }
 
-  /** IVT-20 Latex-Free Substitute Item Identifier (EI, max 0, optional) (chainable). */
+  /** IVT-20 Latex-Free Substitute Item Identifier (EI, optional) (chainable). */
   latexFreeSubstituteItemIdentifier(value: string | EI): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** IVT-21 Recommended Reorder Theory (CWE, max 0, optional) (chainable). */
+  /** IVT-21 Recommended Reorder Theory (CWE, optional) (chainable). */
   recommendedReorderTheory(value: string | CodedElement): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IVT-22 Recommended Safety Stock Days (NM, max 0, optional) (chainable). */
+  /** IVT-22 Recommended Safety Stock Days (NM, optional) (chainable). */
   recommendedSafetyStockDays(value: string): this {
     this.fields[21] = this.createField(value);
     return this;
   }
 
-  /** IVT-23 Recommended Maximum Days Inventory (NM, max 0, optional) (chainable). */
+  /** IVT-23 Recommended Maximum Days Inventory (NM, optional) (chainable). */
   recommendedMaximumDaysInventory(value: string): this {
     this.fields[22] = this.createField(value);
     return this;
   }
 
-  /** IVT-24 Recommended Order Point (NM, max 0, optional) (chainable). */
+  /** IVT-24 Recommended Order Point (NM, optional) (chainable). */
   recommendedOrderPoint(value: string): this {
     this.fields[23] = this.createField(value);
     return this;
   }
 
-  /** IVT-25 Recommended Order Amount (NM, max 0, optional) (chainable). */
+  /** IVT-25 Recommended Order Amount (NM, optional) (chainable). */
   recommendedOrderAmount(value: string): this {
     this.fields[24] = this.createField(value);
     return this;
   }
 
-  /** IVT-26 Operating Room Par Level Indicator (CNE, max 0, optional) (chainable). */
+  /** IVT-26 Operating Room Par Level Indicator (CNE, optional) (chainable). */
   operatingRoomParLevelIndicator(value: string | CodedElement): this {
     this.fields[25] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

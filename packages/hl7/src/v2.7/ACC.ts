@@ -28,25 +28,25 @@ export class ACC extends BaseSegment {
     this.fields = [];
   }
 
-  /** ACC-1 Accident Date/Time (DTM, max 0, optional) (chainable). */
+  /** ACC-1 Accident Date/Time (DTM, optional) (chainable). */
   accidentDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[0] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** ACC-2 Accident Code (CWE, max 0, optional) (chainable). */
+  /** ACC-2 Accident Code (CWE, optional) (chainable). */
   accidentCode(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ACC-3 Accident Location (ST, max 0, optional) (chainable). */
+  /** ACC-3 Accident Location (ST, optional) (chainable). */
   accidentLocation(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** ACC-4 Auto Accident State (CWE, max 0, backward compatibility) (chainable). */
+  /** ACC-4 Auto Accident State (CWE, backward compatibility) (chainable). */
   autoAccidentState(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -64,19 +64,19 @@ export class ACC extends BaseSegment {
     return this;
   }
 
-  /** ACC-7 Entered By (XCN, max 0, optional) (chainable). */
+  /** ACC-7 Entered By (XCN, optional) (chainable). */
   enteredBy(value: string | XCN): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** ACC-8 Accident Description (ST, max 0, optional) (chainable). */
+  /** ACC-8 Accident Description (ST, optional) (chainable). */
   accidentDescription(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** ACC-9 Brought In By (ST, max 0, optional) (chainable). */
+  /** ACC-9 Brought In By (ST, optional) (chainable). */
   broughtInBy(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
@@ -88,13 +88,13 @@ export class ACC extends BaseSegment {
     return this;
   }
 
-  /** ACC-11 Accident Address (XAD, max 0, optional) (chainable). */
+  /** ACC-11 Accident Address (XAD, optional) (chainable). */
   accidentAddress(value: string | XAD): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(xadParts(value)));
     return this;
   }
 
-  /** ACC-12 Degree of patient liability (NM, max 0, optional) (chainable). */
+  /** ACC-12 Degree of patient liability (NM, optional) (chainable). */
   degreeOfPatientLiability(value: string): this {
     this.fields[11] = this.createField(value);
     return this;

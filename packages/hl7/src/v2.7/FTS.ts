@@ -27,13 +27,13 @@ export class FTS extends BaseSegment {
     this.fields = [];
   }
 
-  /** FTS-1 File Batch Count (NM, max 0, optional) (chainable). */
+  /** FTS-1 File Batch Count (NM, optional) (chainable). */
   fileBatchCount(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** FTS-2 File Trailer Comment (ST, max 0, optional) (chainable). */
+  /** FTS-2 File Trailer Comment (ST, optional) (chainable). */
   fileTrailerComment(value: string): this {
     this.fields[1] = this.createField(value);
     return this;

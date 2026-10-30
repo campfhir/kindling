@@ -34,55 +34,55 @@ export class RQD extends BaseSegment {
     return this;
   }
 
-  /** RQD-2 Item Code - Internal (CWE, max 0, conditional) (chainable). */
+  /** RQD-2 Item Code - Internal (CWE, conditional) (chainable). */
   itemCodeInternal(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RQD-3 Item Code - External (CWE, max 0, conditional) (chainable). */
+  /** RQD-3 Item Code - External (CWE, conditional) (chainable). */
   itemCodeExternal(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RQD-4 Hospital Item Code (CWE, max 0, conditional) (chainable). */
+  /** RQD-4 Hospital Item Code (CWE, conditional) (chainable). */
   hospitalItemCode(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RQD-5 Requisition Quantity (NM, max 0, optional) (chainable). */
+  /** RQD-5 Requisition Quantity (NM, optional) (chainable). */
   requisitionQuantity(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** RQD-6 Requisition Unit of Measure (CWE, max 0, optional) (chainable). */
+  /** RQD-6 Requisition Unit of Measure (CWE, optional) (chainable). */
   requisitionUnitOfMeasure(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RQD-7 Cost Center Account Number (CX, max 0, optional) (chainable). */
+  /** RQD-7 Cost Center Account Number (CX, optional) (chainable). */
   costCenterAccountNumber(value: string | CX): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
   }
 
-  /** RQD-8 Item Natural Account Code (CWE, max 0, optional) (chainable). */
+  /** RQD-8 Item Natural Account Code (CWE, optional) (chainable). */
   itemNaturalAccountCode(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RQD-9 Deliver To ID (CWE, max 0, optional) (chainable). */
+  /** RQD-9 Deliver To ID (CWE, optional) (chainable). */
   deliverToId(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RQD-10 Date Needed (DT, max 0, optional) (chainable). */
+  /** RQD-10 Date Needed (DT, optional) (chainable). */
   dateNeeded(value: string | Date, format?: HL7DateLayout): this {
     this.fields[9] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;

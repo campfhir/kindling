@@ -27,31 +27,31 @@ export class RQ1 extends BaseSegment {
     this.fields = [];
   }
 
-  /** RQ1-1 Anticipated Price (ST, max 0, optional) (chainable). */
+  /** RQ1-1 Anticipated Price (ST, optional) (chainable). */
   anticipatedPrice(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** RQ1-2 Manufacturer Identifier (CWE, max 0, conditional) (chainable). */
+  /** RQ1-2 Manufacturer Identifier (CWE, conditional) (chainable). */
   manufacturerIdentifier(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RQ1-3 Manufacturer's Catalog (ST, max 0, conditional) (chainable). */
+  /** RQ1-3 Manufacturer's Catalog (ST, conditional) (chainable). */
   manufacturerSCatalog(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** RQ1-4 Vendor ID (CWE, max 0, conditional) (chainable). */
+  /** RQ1-4 Vendor ID (CWE, conditional) (chainable). */
   vendorId(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RQ1-5 Vendor Catalog (ST, max 0, conditional) (chainable). */
+  /** RQ1-5 Vendor Catalog (ST, conditional) (chainable). */
   vendorCatalog(value: string): this {
     this.fields[4] = this.createField(value);
     return this;

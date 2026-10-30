@@ -174,7 +174,7 @@ function setterFor(code: string, f: SpecField, name: string): string {
   const index = HEADER_SEGMENTS.has(code) ? f.seq - 2 : f.seq - 1;
   const method = f.overrides ? `override ${name}` : name;
   const repeat = isRepeating(f) ? ", repeating" : "";
-  const doc = `  /** ${code}-${f.seq} ${plainName(f.name)} (${f.type}, max ${f.length}, ${OPT[f.opt] ?? f.opt}${repeat}) (chainable). */`;
+  const doc = `  /** ${code}-${f.seq} ${plainName(f.name)} (${f.type}${f.length === "0" ? "" : `, max ${f.length}`}, ${OPT[f.opt] ?? f.opt}${repeat}) (chainable). */`;
   const date = DATE_LAYOUTS[f.type];
   if (date && isRepeating(f)) {
     return `${doc}

@@ -19,7 +19,7 @@ import { MSH as MSH_base } from "../v2.9/MSH.ts";
  * Extends the v2.9 MSH: MSH-6 Receiving Facility (changed).
  */
 export class MSH extends MSH_base {
-  /** MSH-6 Receiving Facility (HD, max 0, optional) (chainable). */
+  /** MSH-6 Receiving Facility (HD, optional) (chainable). */
   override receivingFacility(value: string): this {
     this.fields[4] = this.createField(value);
     return this;

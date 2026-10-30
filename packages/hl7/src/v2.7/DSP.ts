@@ -39,19 +39,19 @@ export class DSP extends BaseSegment {
     return this;
   }
 
-  /** DSP-3 Data Line (TX, max 0, required) (chainable). */
+  /** DSP-3 Data Line (TX, required) (chainable). */
   dataLine(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** DSP-4 Logical Break Point (ST, max 0, optional) (chainable). */
+  /** DSP-4 Logical Break Point (ST, optional) (chainable). */
   logicalBreakPoint(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** DSP-5 Result ID (TX, max 0, optional) (chainable). */
+  /** DSP-5 Result ID (TX, optional) (chainable). */
   resultId(value: string): this {
     this.fields[4] = this.createField(value);
     return this;

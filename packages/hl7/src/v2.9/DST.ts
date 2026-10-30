@@ -27,13 +27,13 @@ export class DST extends BaseSegment {
     this.fields = [];
   }
 
-  /** DST-1 Destination (CWE, max 0, required) (chainable). */
+  /** DST-1 Destination (CWE, required) (chainable). */
   destination(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DST-2 Route (CWE, max 0, optional, repeating) (chainable). */
+  /** DST-2 Route (CWE, optional, repeating) (chainable). */
   route(...values: Repeated<string | CodedElement>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;

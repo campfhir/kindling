@@ -34,91 +34,91 @@ export class TXA extends BaseSegment {
     return this;
   }
 
-  /** TXA-2 Document Type (CWE, max 0, required) (chainable). */
+  /** TXA-2 Document Type (CWE, required) (chainable). */
   documentType(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** TXA-3 Document Content Presentation (ID, max 0, conditional) (chainable). */
+  /** TXA-3 Document Content Presentation (ID, conditional) (chainable). */
   documentContentPresentation(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** TXA-4 Activity Date/Time (DTM, max 0, optional) (chainable). */
+  /** TXA-4 Activity Date/Time (DTM, optional) (chainable). */
   activityDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** TXA-5 Primary Activity Provider Code/Name (XCN, max 0, conditional, repeating) (chainable). */
+  /** TXA-5 Primary Activity Provider Code/Name (XCN, conditional, repeating) (chainable). */
   primaryActivityProviderCodeName(...values: Repeated<string | XCN>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** TXA-6 Origination Date/Time (DTM, max 0, optional) (chainable). */
+  /** TXA-6 Origination Date/Time (DTM, optional) (chainable). */
   originationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** TXA-7 Transcription Date/Time (DTM, max 0, conditional) (chainable). */
+  /** TXA-7 Transcription Date/Time (DTM, conditional) (chainable). */
   transcriptionDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** TXA-8 Edit Date/Time (DTM, max 0, optional, repeating) (chainable). */
+  /** TXA-8 Edit Date/Time (DTM, optional, repeating) (chainable). */
   editDateTime(...values: Repeated<string | Date>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(formatHL7Date(v, DateTimeLayout))));
     return this;
   }
 
-  /** TXA-9 Originator Code/Name (XCN, max 0, optional, repeating) (chainable). */
+  /** TXA-9 Originator Code/Name (XCN, optional, repeating) (chainable). */
   originatorCodeName(...values: Repeated<string | XCN>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** TXA-10 Assigned Document Authenticator (XCN, max 0, optional, repeating) (chainable). */
+  /** TXA-10 Assigned Document Authenticator (XCN, optional, repeating) (chainable). */
   assignedDocumentAuthenticator(...values: Repeated<string | XCN>[]): this {
     this.fields[9] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** TXA-11 Transcriptionist Code/Name (XCN, max 0, conditional, repeating) (chainable). */
+  /** TXA-11 Transcriptionist Code/Name (XCN, conditional, repeating) (chainable). */
   transcriptionistCodeName(...values: Repeated<string | XCN>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** TXA-12 Unique Document Number (EI, max 0, required) (chainable). */
+  /** TXA-12 Unique Document Number (EI, required) (chainable). */
   uniqueDocumentNumber(value: string | EI): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** TXA-13 Parent Document Number (EI, max 0, conditional) (chainable). */
+  /** TXA-13 Parent Document Number (EI, conditional) (chainable). */
   parentDocumentNumber(value: string | EI): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** TXA-14 Placer Order Number (EI, max 0, optional, repeating) (chainable). */
+  /** TXA-14 Placer Order Number (EI, optional, repeating) (chainable). */
   placerOrderNumber(...values: Repeated<string | EI>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;
   }
 
-  /** TXA-15 Filler Order Number (EI, max 0, optional) (chainable). */
+  /** TXA-15 Filler Order Number (EI, optional) (chainable). */
   fillerOrderNumber(value: string | EI): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** TXA-16 Unique Document File Name (ST, max 0, optional) (chainable). */
+  /** TXA-16 Unique Document File Name (ST, optional) (chainable). */
   uniqueDocumentFileName(value: string): this {
     this.fields[15] = this.createField(value);
     return this;
@@ -148,49 +148,49 @@ export class TXA extends BaseSegment {
     return this;
   }
 
-  /** TXA-21 Document Change Reason (ST, max 0, optional) (chainable). */
+  /** TXA-21 Document Change Reason (ST, optional) (chainable). */
   documentChangeReason(value: string): this {
     this.fields[20] = this.createField(value);
     return this;
   }
 
-  /** TXA-22 Authentication Person, Time Stamp (set) (PPN, max 0, conditional, repeating) (chainable). */
+  /** TXA-22 Authentication Person, Time Stamp (set) (PPN, conditional, repeating) (chainable). */
   authenticationPersonTimeStampSet(...values: Repeated<string | PPN>[]): this {
     this.fields[21] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(ppnParts(v)))));
     return this;
   }
 
-  /** TXA-23 Distributed Copies (Code and Name of Recipient(s) ) (XCN, max 0, optional, repeating) (chainable). */
+  /** TXA-23 Distributed Copies (Code and Name of Recipient(s) ) (XCN, optional, repeating) (chainable). */
   distributedCopiesCodeAndNameOfRecipientS(...values: Repeated<string | XCN>[]): this {
     this.fields[22] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** TXA-24 Folder Assignment (CWE, max 0, optional, repeating) (chainable). */
+  /** TXA-24 Folder Assignment (CWE, optional, repeating) (chainable). */
   folderAssignment(...values: Repeated<string | CodedElement>[]): this {
     this.fields[23] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** TXA-25 Document Title (ST, max 0, optional, repeating) (chainable). */
+  /** TXA-25 Document Title (ST, optional, repeating) (chainable). */
   documentTitle(...values: Repeated<string>[]): this {
     this.fields[24] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** TXA-26 Agreed Due Date/Time (DTM, max 0, optional) (chainable). */
+  /** TXA-26 Agreed Due Date/Time (DTM, optional) (chainable). */
   agreedDueDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[25] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** TXA-27 Creating Facility (HD, max 0, optional) (chainable). */
+  /** TXA-27 Creating Facility (HD, optional) (chainable). */
   creatingFacility(value: string): this {
     this.fields[26] = this.createField(value);
     return this;
   }
 
-  /** TXA-28 Creating Specialty (CWE, max 0, optional) (chainable). */
+  /** TXA-28 Creating Specialty (CWE, optional) (chainable). */
   creatingSpecialty(value: string | CodedElement): this {
     this.fields[27] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

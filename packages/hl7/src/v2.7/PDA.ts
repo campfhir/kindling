@@ -28,13 +28,13 @@ export class PDA extends BaseSegment {
     this.fields = [];
   }
 
-  /** PDA-1 Death Cause Code (CWE, max 0, optional, repeating) (chainable). */
+  /** PDA-1 Death Cause Code (CWE, optional, repeating) (chainable). */
   deathCauseCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[0] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** PDA-2 Death Location (PL, max 0, optional) (chainable). */
+  /** PDA-2 Death Location (PL, optional) (chainable). */
   deathLocation(value: string | PL): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
@@ -46,13 +46,13 @@ export class PDA extends BaseSegment {
     return this;
   }
 
-  /** PDA-4 Death Certificate Signed Date/Time (DTM, max 0, optional) (chainable). */
+  /** PDA-4 Death Certificate Signed Date/Time (DTM, optional) (chainable). */
   deathCertificateSignedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PDA-5 Death Certified By (XCN, max 0, optional) (chainable). */
+  /** PDA-5 Death Certified By (XCN, optional) (chainable). */
   deathCertifiedBy(value: string | XCN): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
@@ -64,13 +64,13 @@ export class PDA extends BaseSegment {
     return this;
   }
 
-  /** PDA-7 Autopsy Start and End Date/Time (DR, max 0, optional) (chainable). */
+  /** PDA-7 Autopsy Start and End Date/Time (DR, optional) (chainable). */
   autopsyStartAndEndDateTime(value: string | DR): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(drParts(value)));
     return this;
   }
 
-  /** PDA-8 Autopsy Performed By (XCN, max 0, optional) (chainable). */
+  /** PDA-8 Autopsy Performed By (XCN, optional) (chainable). */
   autopsyPerformedBy(value: string | XCN): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;

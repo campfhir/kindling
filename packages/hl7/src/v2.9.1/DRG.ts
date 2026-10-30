@@ -28,55 +28,55 @@ export class DRG extends BaseSegment {
     this.fields = [];
   }
 
-  /** DRG-1 Diagnostic Related Group (CNE, max 0, optional) (chainable). */
+  /** DRG-1 Diagnostic Related Group (CNE, optional) (chainable). */
   diagnosticRelatedGroup(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DRG-2 DRG Assigned Date/Time (DTM, max 0, optional) (chainable). */
+  /** DRG-2 DRG Assigned Date/Time (DTM, optional) (chainable). */
   drgAssignedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** DRG-3 DRG Approval Indicator (ID, max 0, optional) (chainable). */
+  /** DRG-3 DRG Approval Indicator (ID, optional) (chainable). */
   drgApprovalIndicator(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** DRG-4 DRG Grouper Review Code (CWE, max 0, optional) (chainable). */
+  /** DRG-4 DRG Grouper Review Code (CWE, optional) (chainable). */
   drgGrouperReviewCode(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DRG-5 Outlier Type (CWE, max 0, optional) (chainable). */
+  /** DRG-5 Outlier Type (CWE, optional) (chainable). */
   outlierType(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DRG-6 Outlier Days (NM, max 0, optional) (chainable). */
+  /** DRG-6 Outlier Days (NM, optional) (chainable). */
   outlierDays(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
   }
 
-  /** DRG-7 Outlier Cost (CP, max 0, optional) (chainable). */
+  /** DRG-7 Outlier Cost (CP, optional) (chainable). */
   outlierCost(value: string | CP): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** DRG-8 DRG Payor (CWE, max 0, optional) (chainable). */
+  /** DRG-8 DRG Payor (CWE, optional) (chainable). */
   drgPayor(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DRG-9 Outlier Reimbursement (CP, max 0, optional) (chainable). */
+  /** DRG-9 Outlier Reimbursement (CP, optional) (chainable). */
   outlierReimbursement(value: string | CP): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
@@ -88,139 +88,139 @@ export class DRG extends BaseSegment {
     return this;
   }
 
-  /** DRG-11 DRG Transfer Type (CWE, max 0, optional) (chainable). */
+  /** DRG-11 DRG Transfer Type (CWE, optional) (chainable). */
   drgTransferType(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DRG-12 Name of Coder (XPN, max 0, optional) (chainable). */
+  /** DRG-12 Name of Coder (XPN, optional) (chainable). */
   nameOfCoder(value: string | XPN): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(xpnParts(value)));
     return this;
   }
 
-  /** DRG-13 Grouper Status (CWE, max 0, optional) (chainable). */
+  /** DRG-13 Grouper Status (CWE, optional) (chainable). */
   grouperStatus(value: string | CodedElement): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DRG-14 PCCL Value Code (CWE, max 0, optional) (chainable). */
+  /** DRG-14 PCCL Value Code (CWE, optional) (chainable). */
   pcclValueCode(value: string | CodedElement): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DRG-15 Effective Weight (NM, max 0, optional) (chainable). */
+  /** DRG-15 Effective Weight (NM, optional) (chainable). */
   effectiveWeight(value: string): this {
     this.fields[14] = this.createField(value);
     return this;
   }
 
-  /** DRG-16 Monetary Amount (MO, max 0, optional) (chainable). */
+  /** DRG-16 Monetary Amount (MO, optional) (chainable). */
   monetaryAmount(value: string | MO): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(moParts(value)));
     return this;
   }
 
-  /** DRG-17 Status Patient (CWE, max 0, optional) (chainable). */
+  /** DRG-17 Status Patient (CWE, optional) (chainable). */
   statusPatient(value: string | CodedElement): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DRG-18 Grouper Software Name (ST, max 0, optional) (chainable). */
+  /** DRG-18 Grouper Software Name (ST, optional) (chainable). */
   grouperSoftwareName(value: string): this {
     this.fields[17] = this.createField(value);
     return this;
   }
 
-  /** DRG-19 Grouper Software Version (ST, max 0, optional) (chainable). */
+  /** DRG-19 Grouper Software Version (ST, optional) (chainable). */
   grouperSoftwareVersion(value: string): this {
     this.fields[18] = this.createField(value);
     return this;
   }
 
-  /** DRG-20 Status Financial Calculation (CWE, max 0, optional) (chainable). */
+  /** DRG-20 Status Financial Calculation (CWE, optional) (chainable). */
   statusFinancialCalculation(value: string | CodedElement): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DRG-21 Relative Discount/Surcharge (MO, max 0, optional) (chainable). */
+  /** DRG-21 Relative Discount/Surcharge (MO, optional) (chainable). */
   relativeDiscountSurcharge(value: string | MO): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(moParts(value)));
     return this;
   }
 
-  /** DRG-22 Basic Charge (MO, max 0, optional) (chainable). */
+  /** DRG-22 Basic Charge (MO, optional) (chainable). */
   basicCharge(value: string | MO): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(moParts(value)));
     return this;
   }
 
-  /** DRG-23 Total Charge (MO, max 0, optional) (chainable). */
+  /** DRG-23 Total Charge (MO, optional) (chainable). */
   totalCharge(value: string | MO): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(moParts(value)));
     return this;
   }
 
-  /** DRG-24 Discount/Surcharge (MO, max 0, optional) (chainable). */
+  /** DRG-24 Discount/Surcharge (MO, optional) (chainable). */
   discountSurcharge(value: string | MO): this {
     this.fields[23] = this.createField(typeof value === "string" ? value : components(moParts(value)));
     return this;
   }
 
-  /** DRG-25 Calculated Days (NM, max 0, optional) (chainable). */
+  /** DRG-25 Calculated Days (NM, optional) (chainable). */
   calculatedDays(value: string): this {
     this.fields[24] = this.createField(value);
     return this;
   }
 
-  /** DRG-26 Status Gender (CWE, max 0, optional) (chainable). */
+  /** DRG-26 Status Gender (CWE, optional) (chainable). */
   statusGender(value: string | CodedElement): this {
     this.fields[25] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DRG-27 Status Age (CWE, max 0, optional) (chainable). */
+  /** DRG-27 Status Age (CWE, optional) (chainable). */
   statusAge(value: string | CodedElement): this {
     this.fields[26] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DRG-28 Status Length of Stay (CWE, max 0, optional) (chainable). */
+  /** DRG-28 Status Length of Stay (CWE, optional) (chainable). */
   statusLengthOfStay(value: string | CodedElement): this {
     this.fields[27] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DRG-29 Status Same Day Flag (CWE, max 0, optional) (chainable). */
+  /** DRG-29 Status Same Day Flag (CWE, optional) (chainable). */
   statusSameDayFlag(value: string | CodedElement): this {
     this.fields[28] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DRG-30 Status Separation Mode (CWE, max 0, optional) (chainable). */
+  /** DRG-30 Status Separation Mode (CWE, optional) (chainable). */
   statusSeparationMode(value: string | CodedElement): this {
     this.fields[29] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DRG-31 Status Weight at Birth (CWE, max 0, optional) (chainable). */
+  /** DRG-31 Status Weight at Birth (CWE, optional) (chainable). */
   statusWeightAtBirth(value: string | CodedElement): this {
     this.fields[30] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DRG-32 Status Respiration Minutes (CWE, max 0, optional) (chainable). */
+  /** DRG-32 Status Respiration Minutes (CWE, optional) (chainable). */
   statusRespirationMinutes(value: string | CodedElement): this {
     this.fields[31] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DRG-33 Status Admission (CWE, max 0, optional) (chainable). */
+  /** DRG-33 Status Admission (CWE, optional) (chainable). */
   statusAdmission(value: string | CodedElement): this {
     this.fields[32] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

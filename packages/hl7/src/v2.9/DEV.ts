@@ -34,97 +34,97 @@ export class DEV extends BaseSegment {
     return this;
   }
 
-  /** DEV-2 Unique Device Identifier (EI, max 0, conditional) (chainable). */
+  /** DEV-2 Unique Device Identifier (EI, conditional) (chainable). */
   uniqueDeviceIdentifier(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** DEV-3 Device Type (CNE, max 0, conditional, repeating) (chainable). */
+  /** DEV-3 Device Type (CNE, conditional, repeating) (chainable). */
   deviceType(...values: Repeated<string | CodedElement>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** DEV-4 Device Status (CNE, max 0, optional, repeating) (chainable). */
+  /** DEV-4 Device Status (CNE, optional, repeating) (chainable). */
   deviceStatus(...values: Repeated<string | CodedElement>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** DEV-5 Manufacturer/Distributor (XON, max 0, optional) (chainable). */
+  /** DEV-5 Manufacturer/Distributor (XON, optional) (chainable). */
   manufacturerDistributor(value: string | XON): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** DEV-6 Brand Name (ST, max 0, optional) (chainable). */
+  /** DEV-6 Brand Name (ST, optional) (chainable). */
   brandName(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
   }
 
-  /** DEV-7 Model Identifier (ST, max 0, optional) (chainable). */
+  /** DEV-7 Model Identifier (ST, optional) (chainable). */
   modelIdentifier(value: string): this {
     this.fields[6] = this.createField(value);
     return this;
   }
 
-  /** DEV-8 Catalogue Identifier (ST, max 0, optional) (chainable). */
+  /** DEV-8 Catalogue Identifier (ST, optional) (chainable). */
   catalogueIdentifier(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** DEV-9 UDI Device Identifier (EI, max 0, optional) (chainable). */
+  /** DEV-9 UDI Device Identifier (EI, optional) (chainable). */
   udiDeviceIdentifier(value: string | EI): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** DEV-10 Device Lot Number (ST, max 0, optional) (chainable). */
+  /** DEV-10 Device Lot Number (ST, optional) (chainable). */
   deviceLotNumber(value: string): this {
     this.fields[9] = this.createField(value);
     return this;
   }
 
-  /** DEV-11 Device Serial Number (ST, max 0, optional) (chainable). */
+  /** DEV-11 Device Serial Number (ST, optional) (chainable). */
   deviceSerialNumber(value: string): this {
     this.fields[10] = this.createField(value);
     return this;
   }
 
-  /** DEV-12 Device Manufacture Date (DTM, max 0, optional) (chainable). */
+  /** DEV-12 Device Manufacture Date (DTM, optional) (chainable). */
   deviceManufactureDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[11] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** DEV-13 Device Expiry Date (DTM, max 0, optional) (chainable). */
+  /** DEV-13 Device Expiry Date (DTM, optional) (chainable). */
   deviceExpiryDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** DEV-14 Safety Characteristics (CWE, max 0, optional, repeating) (chainable). */
+  /** DEV-14 Safety Characteristics (CWE, optional, repeating) (chainable). */
   safetyCharacteristics(...values: Repeated<string | CodedElement>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** DEV-15 Device Donation Identification (EI, max 0, optional) (chainable). */
+  /** DEV-15 Device Donation Identification (EI, optional) (chainable). */
   deviceDonationIdentification(value: string | EI): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** DEV-16 Software Version Number (ST, max 0, optional) (chainable). */
+  /** DEV-16 Software Version Number (ST, optional) (chainable). */
   softwareVersionNumber(value: string): this {
     this.fields[15] = this.createField(value);
     return this;
   }
 
-  /** DEV-17 Implantation Status (CNE, max 0, optional) (chainable). */
+  /** DEV-17 Implantation Status (CNE, optional) (chainable). */
   implantationStatus(value: string | CodedElement): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

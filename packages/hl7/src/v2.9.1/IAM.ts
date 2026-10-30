@@ -34,25 +34,25 @@ export class IAM extends BaseSegment {
     return this;
   }
 
-  /** IAM-2 Allergen Type Code (CWE, max 0, optional) (chainable). */
+  /** IAM-2 Allergen Type Code (CWE, optional) (chainable). */
   allergenTypeCode(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IAM-3 Allergen Code/Mnemonic/Description (CWE, max 0, required) (chainable). */
+  /** IAM-3 Allergen Code/Mnemonic/Description (CWE, required) (chainable). */
   allergenCodeMnemonicDescription(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IAM-4 Allergy Severity Code (CWE, max 0, optional) (chainable). */
+  /** IAM-4 Allergy Severity Code (CWE, optional) (chainable). */
   allergySeverityCode(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IAM-5 Allergy Reaction Code (ST, max 0, optional, repeating) (chainable). */
+  /** IAM-5 Allergy Reaction Code (ST, optional, repeating) (chainable). */
   allergyReactionCode(...values: Repeated<string>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
@@ -64,145 +64,145 @@ export class IAM extends BaseSegment {
     return this;
   }
 
-  /** IAM-7 Allergy Unique Identifier (EI, max 0, conditional) (chainable). */
+  /** IAM-7 Allergy Unique Identifier (EI, conditional) (chainable). */
   allergyUniqueIdentifier(value: string | EI): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** IAM-8 Action Reason (ST, max 0, optional) (chainable). */
+  /** IAM-8 Action Reason (ST, optional) (chainable). */
   actionReason(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** IAM-9 Sensitivity to Causative Agent Code (CWE, max 0, optional) (chainable). */
+  /** IAM-9 Sensitivity to Causative Agent Code (CWE, optional) (chainable). */
   sensitivityToCausativeAgentCode(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IAM-10 Allergen Group Code/Mnemonic/Description (CWE, max 0, optional) (chainable). */
+  /** IAM-10 Allergen Group Code/Mnemonic/Description (CWE, optional) (chainable). */
   allergenGroupCodeMnemonicDescription(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IAM-11 Onset Date (DT, max 0, optional) (chainable). */
+  /** IAM-11 Onset Date (DT, optional) (chainable). */
   onsetDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[10] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** IAM-12 Onset Date Text (ST, max 0, optional) (chainable). */
+  /** IAM-12 Onset Date Text (ST, optional) (chainable). */
   onsetDateText(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
   }
 
-  /** IAM-13 Reported Date/Time (DTM, max 0, optional) (chainable). */
+  /** IAM-13 Reported Date/Time (DTM, optional) (chainable). */
   reportedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[12] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** IAM-14 Reported By (XPN, max 0, optional) (chainable). */
+  /** IAM-14 Reported By (XPN, optional) (chainable). */
   reportedBy(value: string | XPN): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(xpnParts(value)));
     return this;
   }
 
-  /** IAM-15 Relationship to Patient Code (CWE, max 0, optional) (chainable). */
+  /** IAM-15 Relationship to Patient Code (CWE, optional) (chainable). */
   relationshipToPatientCode(value: string | CodedElement): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IAM-16 Alert Device Code (CWE, max 0, optional) (chainable). */
+  /** IAM-16 Alert Device Code (CWE, optional) (chainable). */
   alertDeviceCode(value: string | CodedElement): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IAM-17 Allergy Clinical Status Code (CWE, max 0, optional) (chainable). */
+  /** IAM-17 Allergy Clinical Status Code (CWE, optional) (chainable). */
   allergyClinicalStatusCode(value: string | CodedElement): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IAM-18 Statused by Person (XCN, max 0, optional) (chainable). */
+  /** IAM-18 Statused by Person (XCN, optional) (chainable). */
   statusedByPerson(value: string | XCN): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** IAM-19 Statused by Organization (XON, max 0, optional) (chainable). */
+  /** IAM-19 Statused by Organization (XON, optional) (chainable). */
   statusedByOrganization(value: string | XON): this {
     this.fields[18] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** IAM-20 Statused at Date/Time (DTM, max 0, optional) (chainable). */
+  /** IAM-20 Statused at Date/Time (DTM, optional) (chainable). */
   statusedAtDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[19] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** IAM-21 Inactivated by Person (XCN, max 0, optional) (chainable). */
+  /** IAM-21 Inactivated by Person (XCN, optional) (chainable). */
   inactivatedByPerson(value: string | XCN): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** IAM-22 Inactivated Date/Time (DTM, max 0, optional) (chainable). */
+  /** IAM-22 Inactivated Date/Time (DTM, optional) (chainable). */
   inactivatedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[21] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** IAM-23 Initially Recorded by Person (XCN, max 0, optional) (chainable). */
+  /** IAM-23 Initially Recorded by Person (XCN, optional) (chainable). */
   initiallyRecordedByPerson(value: string | XCN): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** IAM-24 Initially Recorded Date/Time (DTM, max 0, optional) (chainable). */
+  /** IAM-24 Initially Recorded Date/Time (DTM, optional) (chainable). */
   initiallyRecordedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[23] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** IAM-25 Modified by Person (XCN, max 0, optional) (chainable). */
+  /** IAM-25 Modified by Person (XCN, optional) (chainable). */
   modifiedByPerson(value: string | XCN): this {
     this.fields[24] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
   }
 
-  /** IAM-26 Modified Date/Time (DTM, max 0, optional) (chainable). */
+  /** IAM-26 Modified Date/Time (DTM, optional) (chainable). */
   modifiedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[25] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** IAM-27 Clinician-Identified Allergen Code (CWE, max 0, optional) (chainable). */
+  /** IAM-27 Clinician-Identified Allergen Code (CWE, optional) (chainable). */
   clinicianIdentifiedAllergenCode(value: string | CodedElement): this {
     this.fields[26] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** IAM-28 Initially Recorded by Organization (XON, max 0, optional) (chainable). */
+  /** IAM-28 Initially Recorded by Organization (XON, optional) (chainable). */
   initiallyRecordedByOrganization(value: string | XON): this {
     this.fields[27] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** IAM-29 Modified by Organization (XON, max 0, optional) (chainable). */
+  /** IAM-29 Modified by Organization (XON, optional) (chainable). */
   modifiedByOrganization(value: string | XON): this {
     this.fields[28] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** IAM-30 Inactivated by Organization (XON, max 0, optional) (chainable). */
+  /** IAM-30 Inactivated by Organization (XON, optional) (chainable). */
   inactivatedByOrganization(value: string | XON): this {
     this.fields[29] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;

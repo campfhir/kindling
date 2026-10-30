@@ -34,73 +34,73 @@ export class BPO extends BaseSegment {
     return this;
   }
 
-  /** BPO-2 BP Universal Service Identifier (CWE, max 0, required) (chainable). */
+  /** BPO-2 BP Universal Service Identifier (CWE, required) (chainable). */
   bpUniversalServiceIdentifier(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** BPO-3 BP Processing Requirements (CWE, max 0, optional, repeating) (chainable). */
+  /** BPO-3 BP Processing Requirements (CWE, optional, repeating) (chainable). */
   bpProcessingRequirements(...values: Repeated<string | CodedElement>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** BPO-4 BP Quantity (NM, max 0, required) (chainable). */
+  /** BPO-4 BP Quantity (NM, required) (chainable). */
   bpQuantity(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** BPO-5 BP Amount (NM, max 0, optional) (chainable). */
+  /** BPO-5 BP Amount (NM, optional) (chainable). */
   bpAmount(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** BPO-6 BP Units (CWE, max 0, optional) (chainable). */
+  /** BPO-6 BP Units (CWE, optional) (chainable). */
   bpUnits(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** BPO-7 BP Intended Use Date/Time (DTM, max 0, optional) (chainable). */
+  /** BPO-7 BP Intended Use Date/Time (DTM, optional) (chainable). */
   bpIntendedUseDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** BPO-8 BP Intended Dispense From Location (PL, max 0, optional) (chainable). */
+  /** BPO-8 BP Intended Dispense From Location (PL, optional) (chainable). */
   bpIntendedDispenseFromLocation(value: string | PL): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** BPO-9 BP Intended Dispense From Address (XAD, max 0, optional) (chainable). */
+  /** BPO-9 BP Intended Dispense From Address (XAD, optional) (chainable). */
   bpIntendedDispenseFromAddress(value: string | XAD): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(xadParts(value)));
     return this;
   }
 
-  /** BPO-10 BP Requested Dispense Date/Time (DTM, max 0, optional) (chainable). */
+  /** BPO-10 BP Requested Dispense Date/Time (DTM, optional) (chainable). */
   bpRequestedDispenseDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[9] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** BPO-11 BP Requested Dispense To Location (PL, max 0, optional) (chainable). */
+  /** BPO-11 BP Requested Dispense To Location (PL, optional) (chainable). */
   bpRequestedDispenseToLocation(value: string | PL): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** BPO-12 BP Requested Dispense To Address (XAD, max 0, optional) (chainable). */
+  /** BPO-12 BP Requested Dispense To Address (XAD, optional) (chainable). */
   bpRequestedDispenseToAddress(value: string | XAD): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(xadParts(value)));
     return this;
   }
 
-  /** BPO-13 BP Indication for Use (CWE, max 0, optional, repeating) (chainable). */
+  /** BPO-13 BP Indication for Use (CWE, optional, repeating) (chainable). */
   bpIndicationForUse(...values: Repeated<string | CodedElement>[]): this {
     this.fields[12] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;

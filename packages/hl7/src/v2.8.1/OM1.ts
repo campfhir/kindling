@@ -28,13 +28,13 @@ export class OM1 extends BaseSegment {
     this.fields = [];
   }
 
-  /** OM1-1 Sequence Number - Test/Observation Master File (NM, max 0, required) (chainable). */
+  /** OM1-1 Sequence Number - Test/Observation Master File (NM, required) (chainable). */
   sequenceNumberTestObservationMasterFile(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** OM1-2 Producer's Service/Test/Observation ID (CWE, max 0, required) (chainable). */
+  /** OM1-2 Producer's Service/Test/Observation ID (CWE, required) (chainable). */
   producerSServiceTestObservationId(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -52,31 +52,31 @@ export class OM1 extends BaseSegment {
     return this;
   }
 
-  /** OM1-5 Producer ID (CWE, max 0, required) (chainable). */
+  /** OM1-5 Producer ID (CWE, required) (chainable). */
   producerId(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OM1-6 Observation Description (TX, max 0, optional) (chainable). */
+  /** OM1-6 Observation Description (TX, optional) (chainable). */
   observationDescription(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
   }
 
-  /** OM1-7 Other Service/Test/Observation IDs for the Observation (CWE, max 0, optional, repeating) (chainable). */
+  /** OM1-7 Other Service/Test/Observation IDs for the Observation (CWE, optional, repeating) (chainable). */
   otherServiceTestObservationIdsForTheObservation(...values: Repeated<string | CodedElement>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OM1-8 Other Names (ST, max 0, backward compatibility, repeating) (chainable). */
+  /** OM1-8 Other Names (ST, backward compatibility, repeating) (chainable). */
   otherNames(...values: Repeated<string>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** OM1-9 Preferred Report Name for the Observation (ST, max 0, optional) (chainable). */
+  /** OM1-9 Preferred Report Name for the Observation (ST, optional) (chainable). */
   preferredReportNameForTheObservation(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
@@ -88,7 +88,7 @@ export class OM1 extends BaseSegment {
     return this;
   }
 
-  /** OM1-11 Preferred Long Name for the Observation (ST, max 0, optional) (chainable). */
+  /** OM1-11 Preferred Long Name for the Observation (ST, optional) (chainable). */
   preferredLongNameForTheObservation(value: string): this {
     this.fields[10] = this.createField(value);
     return this;
@@ -100,13 +100,13 @@ export class OM1 extends BaseSegment {
     return this;
   }
 
-  /** OM1-13 Identity of Instrument Used to Perform this Study (CWE, max 0, optional, repeating) (chainable). */
+  /** OM1-13 Identity of Instrument Used to Perform this Study (CWE, optional, repeating) (chainable). */
   identityOfInstrumentUsedToPerformThisStudy(...values: Repeated<string | CodedElement>[]): this {
     this.fields[12] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OM1-14 Coded Representation of Method (CWE, max 0, optional, repeating) (chainable). */
+  /** OM1-14 Coded Representation of Method (CWE, optional, repeating) (chainable). */
   codedRepresentationOfMethod(...values: Repeated<string | CodedElement>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
@@ -118,13 +118,13 @@ export class OM1 extends BaseSegment {
     return this;
   }
 
-  /** OM1-16 Observation Producing Department/Section (CWE, max 0, backward compatibility, repeating) (chainable). */
+  /** OM1-16 Observation Producing Department/Section (CWE, backward compatibility, repeating) (chainable). */
   observationProducingDepartmentSection(...values: Repeated<string | CodedElement>[]): this {
     this.fields[15] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OM1-17 Telephone Number of Section (XTN, max 0, backward compatibility) (chainable). */
+  /** OM1-17 Telephone Number of Section (XTN, backward compatibility) (chainable). */
   telephoneNumberOfSection(value: string | XTN): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(xtnParts(value)));
     return this;
@@ -136,37 +136,37 @@ export class OM1 extends BaseSegment {
     return this;
   }
 
-  /** OM1-19 Report Subheader (CWE, max 0, optional) (chainable). */
+  /** OM1-19 Report Subheader (CWE, optional) (chainable). */
   reportSubheader(value: string | CodedElement): this {
     this.fields[18] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OM1-20 Report Display Order (ST, max 0, optional) (chainable). */
+  /** OM1-20 Report Display Order (ST, optional) (chainable). */
   reportDisplayOrder(value: string): this {
     this.fields[19] = this.createField(value);
     return this;
   }
 
-  /** OM1-21 Date/Time Stamp for Any Change in Definition for the Observation (DTM, max 0, optional) (chainable). */
+  /** OM1-21 Date/Time Stamp for Any Change in Definition for the Observation (DTM, optional) (chainable). */
   dateTimeStampForAnyChangeInDefinitionForTheObservation(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[20] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** OM1-22 Effective Date/Time of Change (DTM, max 0, optional) (chainable). */
+  /** OM1-22 Effective Date/Time of Change (DTM, optional) (chainable). */
   effectiveDateTimeOfChange(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[21] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** OM1-23 Typical Turn-Around Time (NM, max 0, optional) (chainable). */
+  /** OM1-23 Typical Turn-Around Time (NM, optional) (chainable). */
   typicalTurnAroundTime(value: string): this {
     this.fields[22] = this.createField(value);
     return this;
   }
 
-  /** OM1-24 Processing Time (NM, max 0, optional) (chainable). */
+  /** OM1-24 Processing Time (NM, optional) (chainable). */
   processingTime(value: string): this {
     this.fields[23] = this.createField(value);
     return this;
@@ -184,127 +184,127 @@ export class OM1 extends BaseSegment {
     return this;
   }
 
-  /** OM1-27 Outside Site(s) Where Observation May Be Performed (CWE, max 0, backward compatibility, repeating) (chainable). */
+  /** OM1-27 Outside Site(s) Where Observation May Be Performed (CWE, backward compatibility, repeating) (chainable). */
   outsideSiteSWhereObservationMayBePerformed(...values: Repeated<string | CodedElement>[]): this {
     this.fields[26] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OM1-28 Address of Outside Site(s) (XAD, max 0, backward compatibility, repeating) (chainable). */
+  /** OM1-28 Address of Outside Site(s) (XAD, backward compatibility, repeating) (chainable). */
   addressOfOutsideSiteS(...values: Repeated<string | XAD>[]): this {
     this.fields[27] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** OM1-29 Phone Number of Outside Site (XTN, max 0, backward compatibility) (chainable). */
+  /** OM1-29 Phone Number of Outside Site (XTN, backward compatibility) (chainable). */
   phoneNumberOfOutsideSite(value: string | XTN): this {
     this.fields[28] = this.createField(typeof value === "string" ? value : components(xtnParts(value)));
     return this;
   }
 
-  /** OM1-30 Confidentiality Code (CWE, max 0, optional) (chainable). */
+  /** OM1-30 Confidentiality Code (CWE, optional) (chainable). */
   confidentialityCode(value: string | CodedElement): this {
     this.fields[29] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OM1-31 Observations Required to Interpret this Observation (CWE, max 0, optional, repeating) (chainable). */
+  /** OM1-31 Observations Required to Interpret this Observation (CWE, optional, repeating) (chainable). */
   observationsRequiredToInterpretThisObservation(...values: Repeated<string | CodedElement>[]): this {
     this.fields[30] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OM1-32 Interpretation of Observations (TX, max 0, optional) (chainable). */
+  /** OM1-32 Interpretation of Observations (TX, optional) (chainable). */
   interpretationOfObservations(value: string): this {
     this.fields[31] = this.createField(value);
     return this;
   }
 
-  /** OM1-33 Contraindications to Observations (CWE, max 0, optional, repeating) (chainable). */
+  /** OM1-33 Contraindications to Observations (CWE, optional, repeating) (chainable). */
   contraindicationsToObservations(...values: Repeated<string | CodedElement>[]): this {
     this.fields[32] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OM1-34 Reflex Tests/Observations (CWE, max 0, optional, repeating) (chainable). */
+  /** OM1-34 Reflex Tests/Observations (CWE, optional, repeating) (chainable). */
   reflexTestsObservations(...values: Repeated<string | CodedElement>[]): this {
     this.fields[33] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OM1-35 Rules that Trigger Reflex Testing (TX, max 0, optional, repeating) (chainable). */
+  /** OM1-35 Rules that Trigger Reflex Testing (TX, optional, repeating) (chainable). */
   rulesThatTriggerReflexTesting(...values: Repeated<string>[]): this {
     this.fields[34] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** OM1-36 Fixed Canned Message (CWE, max 0, optional, repeating) (chainable). */
+  /** OM1-36 Fixed Canned Message (CWE, optional, repeating) (chainable). */
   fixedCannedMessage(...values: Repeated<string | CodedElement>[]): this {
     this.fields[35] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OM1-37 Patient Preparation (TX, max 0, optional, repeating) (chainable). */
+  /** OM1-37 Patient Preparation (TX, optional, repeating) (chainable). */
   patientPreparation(...values: Repeated<string>[]): this {
     this.fields[36] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** OM1-38 Procedure Medication (CWE, max 0, optional) (chainable). */
+  /** OM1-38 Procedure Medication (CWE, optional) (chainable). */
   procedureMedication(value: string | CodedElement): this {
     this.fields[37] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OM1-39 Factors that may Affect the Observation (TX, max 0, optional) (chainable). */
+  /** OM1-39 Factors that may Affect the Observation (TX, optional) (chainable). */
   factorsThatMayAffectTheObservation(value: string): this {
     this.fields[38] = this.createField(value);
     return this;
   }
 
-  /** OM1-40 Service/Test/Observation Performance Schedule (ST, max 0, optional, repeating) (chainable). */
+  /** OM1-40 Service/Test/Observation Performance Schedule (ST, optional, repeating) (chainable). */
   serviceTestObservationPerformanceSchedule(...values: Repeated<string>[]): this {
     this.fields[39] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** OM1-41 Description of Test Methods (TX, max 0, optional) (chainable). */
+  /** OM1-41 Description of Test Methods (TX, optional) (chainable). */
   descriptionOfTestMethods(value: string): this {
     this.fields[40] = this.createField(value);
     return this;
   }
 
-  /** OM1-42 Kind of Quantity Observed (CWE, max 0, optional) (chainable). */
+  /** OM1-42 Kind of Quantity Observed (CWE, optional) (chainable). */
   kindOfQuantityObserved(value: string | CodedElement): this {
     this.fields[41] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OM1-43 Point Versus Interval (CWE, max 0, optional) (chainable). */
+  /** OM1-43 Point Versus Interval (CWE, optional) (chainable). */
   pointVersusInterval(value: string | CodedElement): this {
     this.fields[42] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OM1-44 Challenge Information (TX, max 0, optional) (chainable). */
+  /** OM1-44 Challenge Information (TX, optional) (chainable). */
   challengeInformation(value: string): this {
     this.fields[43] = this.createField(value);
     return this;
   }
 
-  /** OM1-45 Relationship Modifier (CWE, max 0, optional) (chainable). */
+  /** OM1-45 Relationship Modifier (CWE, optional) (chainable). */
   relationshipModifier(value: string | CodedElement): this {
     this.fields[44] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OM1-46 Target Anatomic Site Of Test (CWE, max 0, optional) (chainable). */
+  /** OM1-46 Target Anatomic Site Of Test (CWE, optional) (chainable). */
   targetAnatomicSiteOfTest(value: string | CodedElement): this {
     this.fields[45] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OM1-47 Modality of Imaging Measurement (CWE, max 0, optional) (chainable). */
+  /** OM1-47 Modality of Imaging Measurement (CWE, optional) (chainable). */
   modalityOfImagingMeasurement(value: string | CodedElement): this {
     this.fields[46] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -322,37 +322,37 @@ export class OM1 extends BaseSegment {
     return this;
   }
 
-  /** OM1-50 Taxonomic Classification Code (CWE, max 0, optional) (chainable). */
+  /** OM1-50 Taxonomic Classification Code (CWE, optional) (chainable). */
   taxonomicClassificationCode(value: string | CodedElement): this {
     this.fields[49] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OM1-51 Other Names (ST, max 0, optional, repeating) (chainable). */
+  /** OM1-51 Other Names (ST, optional, repeating) (chainable). */
   otherNames51(...values: Repeated<string>[]): this {
     this.fields[50] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** OM1-52 Replacement Producer's Service/Test/Observation ID (CWE, max 0, optional, repeating) (chainable). */
+  /** OM1-52 Replacement Producer's Service/Test/Observation ID (CWE, optional, repeating) (chainable). */
   replacementProducerSServiceTestObservationId(...values: Repeated<string | CodedElement>[]): this {
     this.fields[51] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OM1-53 Prior Results Instructions (TX, max 0, optional, repeating) (chainable). */
+  /** OM1-53 Prior Results Instructions (TX, optional, repeating) (chainable). */
   priorResultsInstructions(...values: Repeated<string>[]): this {
     this.fields[52] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** OM1-54 Special Instructions (TX, max 0, optional) (chainable). */
+  /** OM1-54 Special Instructions (TX, optional) (chainable). */
   specialInstructions(value: string): this {
     this.fields[53] = this.createField(value);
     return this;
   }
 
-  /** OM1-55 Test Category (CWE, max 0, optional, repeating) (chainable). */
+  /** OM1-55 Test Category (CWE, optional, repeating) (chainable). */
   testCategory(...values: Repeated<string | CodedElement>[]): this {
     this.fields[54] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;

@@ -33,25 +33,25 @@ export class AL1 extends BaseSegment {
     return this;
   }
 
-  /** AL1-2 Allergen Type Code (CWE, max 0, optional) (chainable). */
+  /** AL1-2 Allergen Type Code (CWE, optional) (chainable). */
   allergenTypeCode(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AL1-3 Allergen Code/Mnemonic/Description (CWE, max 0, optional) (chainable). */
+  /** AL1-3 Allergen Code/Mnemonic/Description (CWE, optional) (chainable). */
   allergenCodeMnemonicDescription(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AL1-4 Allergy Severity Code (CWE, max 0, optional) (chainable). */
+  /** AL1-4 Allergy Severity Code (CWE, optional) (chainable). */
   allergySeverityCode(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AL1-5 Allergy Reaction Code (ST, max 0, optional, repeating) (chainable). */
+  /** AL1-5 Allergy Reaction Code (ST, optional, repeating) (chainable). */
   allergyReactionCode(...values: Repeated<string>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;

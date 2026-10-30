@@ -28,31 +28,31 @@ export class DPS extends BaseSegment {
     this.fields = [];
   }
 
-  /** DPS-1 Diagnosis Code (CWE, max 0, required) (chainable). */
+  /** DPS-1 Diagnosis Code (CWE, required) (chainable). */
   diagnosisCode(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DPS-2 Procedure Code (CWE, max 0, required, repeating) (chainable). */
+  /** DPS-2 Procedure Code (CWE, required, repeating) (chainable). */
   procedureCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** DPS-3 Effective Date/Time (DTM, max 0, optional) (chainable). */
+  /** DPS-3 Effective Date/Time (DTM, optional) (chainable). */
   effectiveDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** DPS-4 Expiration Date/Time (DTM, max 0, optional) (chainable). */
+  /** DPS-4 Expiration Date/Time (DTM, optional) (chainable). */
   expirationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** DPS-5 Type of Limitation (CNE, max 0, optional) (chainable). */
+  /** DPS-5 Type of Limitation (CNE, optional) (chainable). */
   typeOfLimitation(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

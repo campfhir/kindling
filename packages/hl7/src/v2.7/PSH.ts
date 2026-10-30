@@ -28,43 +28,43 @@ export class PSH extends BaseSegment {
     this.fields = [];
   }
 
-  /** PSH-1 Report Type (ST, max 0, required) (chainable). */
+  /** PSH-1 Report Type (ST, required) (chainable). */
   reportType(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** PSH-2 Report Form Identifier (ST, max 0, optional) (chainable). */
+  /** PSH-2 Report Form Identifier (ST, optional) (chainable). */
   reportFormIdentifier(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** PSH-3 Report Date (DTM, max 0, required) (chainable). */
+  /** PSH-3 Report Date (DTM, required) (chainable). */
   reportDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PSH-4 Report Interval Start Date (DTM, max 0, optional) (chainable). */
+  /** PSH-4 Report Interval Start Date (DTM, optional) (chainable). */
   reportIntervalStartDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PSH-5 Report Interval End Date (DTM, max 0, optional) (chainable). */
+  /** PSH-5 Report Interval End Date (DTM, optional) (chainable). */
   reportIntervalEndDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PSH-6 Quantity Manufactured (CQ, max 0, optional) (chainable). */
+  /** PSH-6 Quantity Manufactured (CQ, optional) (chainable). */
   quantityManufactured(value: string | CQ): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** PSH-7 Quantity Distributed (CQ, max 0, optional) (chainable). */
+  /** PSH-7 Quantity Distributed (CQ, optional) (chainable). */
   quantityDistributed(value: string | CQ): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
@@ -76,13 +76,13 @@ export class PSH extends BaseSegment {
     return this;
   }
 
-  /** PSH-9 Quantity Distributed Comment (FT, max 0, optional) (chainable). */
+  /** PSH-9 Quantity Distributed Comment (FT, optional) (chainable). */
   quantityDistributedComment(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** PSH-10 Quantity in Use (CQ, max 0, optional) (chainable). */
+  /** PSH-10 Quantity in Use (CQ, optional) (chainable). */
   quantityInUse(value: string | CQ): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
@@ -94,19 +94,19 @@ export class PSH extends BaseSegment {
     return this;
   }
 
-  /** PSH-12 Quantity in Use Comment (FT, max 0, optional) (chainable). */
+  /** PSH-12 Quantity in Use Comment (FT, optional) (chainable). */
   quantityInUseComment(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
   }
 
-  /** PSH-13 Number of Product Experience Reports Filed by Facility (NM, max 0, optional, repeating) (chainable). */
+  /** PSH-13 Number of Product Experience Reports Filed by Facility (NM, optional, repeating) (chainable). */
   numberOfProductExperienceReportsFiledByFacility(...values: Repeated<string>[]): this {
     this.fields[12] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** PSH-14 Number of Product Experience Reports Filed by Distributor (NM, max 0, optional, repeating) (chainable). */
+  /** PSH-14 Number of Product Experience Reports Filed by Distributor (NM, optional, repeating) (chainable). */
   numberOfProductExperienceReportsFiledByDistributor(...values: Repeated<string>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;

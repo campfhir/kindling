@@ -40,7 +40,7 @@ export class DG1 extends BaseSegment {
     return this;
   }
 
-  /** DG1-3 Diagnosis Code (CWE, max 0, required) (chainable). */
+  /** DG1-3 Diagnosis Code (CWE, required) (chainable). */
   diagnosisCode(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -52,55 +52,55 @@ export class DG1 extends BaseSegment {
     return this;
   }
 
-  /** DG1-5 Diagnosis Date/Time (DTM, max 0, optional) (chainable). */
+  /** DG1-5 Diagnosis Date/Time (DTM, optional) (chainable). */
   diagnosisDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** DG1-6 Diagnosis Type (CWE, max 0, required) (chainable). */
+  /** DG1-6 Diagnosis Type (CWE, required) (chainable). */
   diagnosisType(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DG1-7 Major Diagnostic Category (CNE, max 0, W) (chainable). */
+  /** DG1-7 Major Diagnostic Category (CNE, W) (chainable). */
   majorDiagnosticCategory(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DG1-8 Diagnostic Related Group (CNE, max 0, W) (chainable). */
+  /** DG1-8 Diagnostic Related Group (CNE, W) (chainable). */
   diagnosticRelatedGroup(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DG1-9 DRG Approval Indicator (ID, max 0, W) (chainable). */
+  /** DG1-9 DRG Approval Indicator (ID, W) (chainable). */
   drgApprovalIndicator(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** DG1-10 DRG Grouper Review Code (CWE, max 0, W) (chainable). */
+  /** DG1-10 DRG Grouper Review Code (CWE, W) (chainable). */
   drgGrouperReviewCode(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DG1-11 Outlier Type (CWE, max 0, W) (chainable). */
+  /** DG1-11 Outlier Type (CWE, W) (chainable). */
   outlierType(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DG1-12 Outlier Days (NM, max 0, W) (chainable). */
+  /** DG1-12 Outlier Days (NM, W) (chainable). */
   outlierDays(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
   }
 
-  /** DG1-13 Outlier Cost (CP, max 0, W) (chainable). */
+  /** DG1-13 Outlier Cost (CP, W) (chainable). */
   outlierCost(value: string | CP): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
@@ -112,19 +112,19 @@ export class DG1 extends BaseSegment {
     return this;
   }
 
-  /** DG1-15 Diagnosis Priority (NM, max 0, optional) (chainable). */
+  /** DG1-15 Diagnosis Priority (NM, optional) (chainable). */
   diagnosisPriority(value: string): this {
     this.fields[14] = this.createField(value);
     return this;
   }
 
-  /** DG1-16 Diagnosing Clinician (XCN, max 0, optional, repeating) (chainable). */
+  /** DG1-16 Diagnosing Clinician (XCN, optional, repeating) (chainable). */
   diagnosingClinician(...values: Repeated<string | XCN>[]): this {
     this.fields[15] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** DG1-17 Diagnosis Classification (CWE, max 0, optional) (chainable). */
+  /** DG1-17 Diagnosis Classification (CWE, optional) (chainable). */
   diagnosisClassification(value: string | CodedElement): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -136,13 +136,13 @@ export class DG1 extends BaseSegment {
     return this;
   }
 
-  /** DG1-19 Attestation Date/Time (DTM, max 0, optional) (chainable). */
+  /** DG1-19 Attestation Date/Time (DTM, optional) (chainable). */
   attestationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[18] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** DG1-20 Diagnosis Identifier (EI, max 0, conditional) (chainable). */
+  /** DG1-20 Diagnosis Identifier (EI, conditional) (chainable). */
   diagnosisIdentifier(value: string | EI): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
@@ -154,13 +154,13 @@ export class DG1 extends BaseSegment {
     return this;
   }
 
-  /** DG1-22 Parent Diagnosis (EI, max 0, conditional) (chainable). */
+  /** DG1-22 Parent Diagnosis (EI, conditional) (chainable). */
   parentDiagnosis(value: string | EI): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** DG1-23 DRG CCL Value Code (CWE, max 0, optional) (chainable). */
+  /** DG1-23 DRG CCL Value Code (CWE, optional) (chainable). */
   drgCclValueCode(value: string | CodedElement): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -172,13 +172,13 @@ export class DG1 extends BaseSegment {
     return this;
   }
 
-  /** DG1-25 DRG Diagnosis Determination Status (CWE, max 0, optional) (chainable). */
+  /** DG1-25 DRG Diagnosis Determination Status (CWE, optional) (chainable). */
   drgDiagnosisDeterminationStatus(value: string | CodedElement): this {
     this.fields[24] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DG1-26 Present On Admission (POA) Indicator (CWE, max 0, optional) (chainable). */
+  /** DG1-26 Present On Admission (POA) Indicator (CWE, optional) (chainable). */
   presentOnAdmissionPoaIndicator(value: string | CodedElement): this {
     this.fields[25] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

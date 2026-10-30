@@ -27,13 +27,13 @@ export class TCC extends BaseSegment {
     this.fields = [];
   }
 
-  /** TCC-1 Universal Service Identifier (CWE, max 0, required) (chainable). */
+  /** TCC-1 Universal Service Identifier (CWE, required) (chainable). */
   universalServiceIdentifier(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** TCC-2 Equipment Test Application Identifier (EI, max 0, required) (chainable). */
+  /** TCC-2 Equipment Test Application Identifier (EI, required) (chainable). */
   equipmentTestApplicationIdentifier(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
@@ -45,31 +45,31 @@ export class TCC extends BaseSegment {
     return this;
   }
 
-  /** TCC-4 Auto-Dilution Factor Default (SN, max 0, optional) (chainable). */
+  /** TCC-4 Auto-Dilution Factor Default (SN, optional) (chainable). */
   autoDilutionFactorDefault(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** TCC-5 Rerun Dilution Factor Default (SN, max 0, optional) (chainable). */
+  /** TCC-5 Rerun Dilution Factor Default (SN, optional) (chainable). */
   rerunDilutionFactorDefault(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** TCC-6 Pre-Dilution Factor Default (SN, max 0, optional) (chainable). */
+  /** TCC-6 Pre-Dilution Factor Default (SN, optional) (chainable). */
   preDilutionFactorDefault(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
   }
 
-  /** TCC-7 Endogenous Content of Pre-Dilution Diluent (SN, max 0, optional) (chainable). */
+  /** TCC-7 Endogenous Content of Pre-Dilution Diluent (SN, optional) (chainable). */
   endogenousContentOfPreDilutionDiluent(value: string): this {
     this.fields[6] = this.createField(value);
     return this;
   }
 
-  /** TCC-8 Inventory Limits Warning Level (NM, max 0, optional) (chainable). */
+  /** TCC-8 Inventory Limits Warning Level (NM, optional) (chainable). */
   inventoryLimitsWarningLevel(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
@@ -93,19 +93,19 @@ export class TCC extends BaseSegment {
     return this;
   }
 
-  /** TCC-12 Equipment Dynamic Range (SN, max 0, optional) (chainable). */
+  /** TCC-12 Equipment Dynamic Range (SN, optional) (chainable). */
   equipmentDynamicRange(value: string): this {
     this.fields[11] = this.createField(value);
     return this;
   }
 
-  /** TCC-13 Units (CWE, max 0, optional) (chainable). */
+  /** TCC-13 Units (CWE, optional) (chainable). */
   units(value: string | CodedElement): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** TCC-14 Processing Type (CWE, max 0, optional) (chainable). */
+  /** TCC-14 Processing Type (CWE, optional) (chainable). */
   processingType(value: string | CodedElement): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

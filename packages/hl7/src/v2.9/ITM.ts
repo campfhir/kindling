@@ -27,229 +27,229 @@ export class ITM extends BaseSegment {
     this.fields = [];
   }
 
-  /** ITM-1 Item Identifier (EI, max 0, required) (chainable). */
+  /** ITM-1 Item Identifier (EI, required) (chainable). */
   itemIdentifier(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** ITM-2 Item Description (ST, max 0, optional) (chainable). */
+  /** ITM-2 Item Description (ST, optional) (chainable). */
   itemDescription(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** ITM-3 Item Status (CWE, max 0, optional) (chainable). */
+  /** ITM-3 Item Status (CWE, optional) (chainable). */
   itemStatus(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-4 Item Type (CWE, max 0, optional) (chainable). */
+  /** ITM-4 Item Type (CWE, optional) (chainable). */
   itemType(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-5 Item Category (CWE, max 0, optional) (chainable). */
+  /** ITM-5 Item Category (CWE, optional) (chainable). */
   itemCategory(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-6 Subject to Expiration Indicator (CNE, max 0, optional) (chainable). */
+  /** ITM-6 Subject to Expiration Indicator (CNE, optional) (chainable). */
   subjectToExpirationIndicator(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-7 Manufacturer Identifier (EI, max 0, optional) (chainable). */
+  /** ITM-7 Manufacturer Identifier (EI, optional) (chainable). */
   manufacturerIdentifier(value: string | EI): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** ITM-8 Manufacturer Name (ST, max 0, optional) (chainable). */
+  /** ITM-8 Manufacturer Name (ST, optional) (chainable). */
   manufacturerName(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** ITM-9 Manufacturer Catalog Number (ST, max 0, optional) (chainable). */
+  /** ITM-9 Manufacturer Catalog Number (ST, optional) (chainable). */
   manufacturerCatalogNumber(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** ITM-10 Manufacturer Labeler Identification Code (CWE, max 0, optional) (chainable). */
+  /** ITM-10 Manufacturer Labeler Identification Code (CWE, optional) (chainable). */
   manufacturerLabelerIdentificationCode(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-11 Patient Chargeable Indicator (CNE, max 0, optional) (chainable). */
+  /** ITM-11 Patient Chargeable Indicator (CNE, optional) (chainable). */
   patientChargeableIndicator(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-12 Transaction Code (CWE, max 0, optional) (chainable). */
+  /** ITM-12 Transaction Code (CWE, optional) (chainable). */
   transactionCode(value: string | CodedElement): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-13 Transaction Amount - Unit (CP, max 0, optional) (chainable). */
+  /** ITM-13 Transaction Amount - Unit (CP, optional) (chainable). */
   transactionAmountUnit(value: string | CP): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cpParts(value)));
     return this;
   }
 
-  /** ITM-14 Stocked Item Indicator (CNE, max 0, optional) (chainable). */
+  /** ITM-14 Stocked Item Indicator (CNE, optional) (chainable). */
   stockedItemIndicator(value: string | CodedElement): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-15 Supply Risk Codes (CWE, max 0, optional) (chainable). */
+  /** ITM-15 Supply Risk Codes (CWE, optional) (chainable). */
   supplyRiskCodes(value: string | CodedElement): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-16 Approving Regulatory Agency (XON, max 0, optional, repeating) (chainable). */
+  /** ITM-16 Approving Regulatory Agency (XON, optional, repeating) (chainable). */
   approvingRegulatoryAgency(...values: Repeated<string | XON>[]): this {
     this.fields[15] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** ITM-17 Latex Indicator (CNE, max 0, optional) (chainable). */
+  /** ITM-17 Latex Indicator (CNE, optional) (chainable). */
   latexIndicator(value: string | CodedElement): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-18 Ruling Act (CWE, max 0, optional, repeating) (chainable). */
+  /** ITM-18 Ruling Act (CWE, optional, repeating) (chainable). */
   rulingAct(...values: Repeated<string | CodedElement>[]): this {
     this.fields[17] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** ITM-19 Item Natural Account Code (CWE, max 0, optional) (chainable). */
+  /** ITM-19 Item Natural Account Code (CWE, optional) (chainable). */
   itemNaturalAccountCode(value: string | CodedElement): this {
     this.fields[18] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-20 Approved To Buy Quantity (NM, max 0, optional) (chainable). */
+  /** ITM-20 Approved To Buy Quantity (NM, optional) (chainable). */
   approvedToBuyQuantity(value: string): this {
     this.fields[19] = this.createField(value);
     return this;
   }
 
-  /** ITM-21 Approved To Buy Price (MO, max 0, optional) (chainable). */
+  /** ITM-21 Approved To Buy Price (MO, optional) (chainable). */
   approvedToBuyPrice(value: string | MO): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(moParts(value)));
     return this;
   }
 
-  /** ITM-22 Taxable Item Indicator (CNE, max 0, optional) (chainable). */
+  /** ITM-22 Taxable Item Indicator (CNE, optional) (chainable). */
   taxableItemIndicator(value: string | CodedElement): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-23 Freight Charge Indicator (CNE, max 0, optional) (chainable). */
+  /** ITM-23 Freight Charge Indicator (CNE, optional) (chainable). */
   freightChargeIndicator(value: string | CodedElement): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-24 Item Set Indicator (CNE, max 0, optional) (chainable). */
+  /** ITM-24 Item Set Indicator (CNE, optional) (chainable). */
   itemSetIndicator(value: string | CodedElement): this {
     this.fields[23] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-25 Item Set Identifier (EI, max 0, optional) (chainable). */
+  /** ITM-25 Item Set Identifier (EI, optional) (chainable). */
   itemSetIdentifier(value: string | EI): this {
     this.fields[24] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** ITM-26 Track Department Usage Indicator (CNE, max 0, optional) (chainable). */
+  /** ITM-26 Track Department Usage Indicator (CNE, optional) (chainable). */
   trackDepartmentUsageIndicator(value: string | CodedElement): this {
     this.fields[25] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-27 Procedure Code (CNE, max 0, optional) (chainable). */
+  /** ITM-27 Procedure Code (CNE, optional) (chainable). */
   procedureCode(value: string | CodedElement): this {
     this.fields[26] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-28 Procedure Code Modifier (CNE, max 0, optional, repeating) (chainable). */
+  /** ITM-28 Procedure Code Modifier (CNE, optional, repeating) (chainable). */
   procedureCodeModifier(...values: Repeated<string | CodedElement>[]): this {
     this.fields[27] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** ITM-29 Special Handling Code (CWE, max 0, optional) (chainable). */
+  /** ITM-29 Special Handling Code (CWE, optional) (chainable). */
   specialHandlingCode(value: string | CodedElement): this {
     this.fields[28] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-30 Hazardous Indicator (CNE, max 0, optional) (chainable). */
+  /** ITM-30 Hazardous Indicator (CNE, optional) (chainable). */
   hazardousIndicator(value: string | CodedElement): this {
     this.fields[29] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-31 Sterile Indicator (CNE, max 0, optional) (chainable). */
+  /** ITM-31 Sterile Indicator (CNE, optional) (chainable). */
   sterileIndicator(value: string | CodedElement): this {
     this.fields[30] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-32 Material Data Safety Sheet Number (EI, max 0, optional) (chainable). */
+  /** ITM-32 Material Data Safety Sheet Number (EI, optional) (chainable). */
   materialDataSafetySheetNumber(value: string | EI): this {
     this.fields[31] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** ITM-33 United Nations Standard Products and Services Code (UNSPSC) (CWE, max 0, optional) (chainable). */
+  /** ITM-33 United Nations Standard Products and Services Code (UNSPSC) (CWE, optional) (chainable). */
   unitedNationsStandardProductsAndServicesCodeUnspsc(value: string | CodedElement): this {
     this.fields[32] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ITM-34 Contract Date (DR, max 0, optional) (chainable). */
+  /** ITM-34 Contract Date (DR, optional) (chainable). */
   contractDate(value: string | DR): this {
     this.fields[33] = this.createField(typeof value === "string" ? value : components(drParts(value)));
     return this;
   }
 
-  /** ITM-35 Manufacturer Contact Name (XPN, max 0, optional) (chainable). */
+  /** ITM-35 Manufacturer Contact Name (XPN, optional) (chainable). */
   manufacturerContactName(value: string | XPN): this {
     this.fields[34] = this.createField(typeof value === "string" ? value : components(xpnParts(value)));
     return this;
   }
 
-  /** ITM-36 Manufacturer Contact Information (XTN, max 0, optional) (chainable). */
+  /** ITM-36 Manufacturer Contact Information (XTN, optional) (chainable). */
   manufacturerContactInformation(value: string | XTN): this {
     this.fields[35] = this.createField(typeof value === "string" ? value : components(xtnParts(value)));
     return this;
   }
 
-  /** ITM-37 Class of Trade (ST, max 0, optional) (chainable). */
+  /** ITM-37 Class of Trade (ST, optional) (chainable). */
   classOfTrade(value: string): this {
     this.fields[36] = this.createField(value);
     return this;
   }
 
-  /** ITM-38 Field Level Event Code (ID, max 0, optional) (chainable). */
+  /** ITM-38 Field Level Event Code (ID, optional) (chainable). */
   fieldLevelEventCode(value: string): this {
     this.fields[37] = this.createField(value);
     return this;

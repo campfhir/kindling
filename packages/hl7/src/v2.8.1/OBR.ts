@@ -34,19 +34,19 @@ export class OBR extends BaseSegment {
     return this;
   }
 
-  /** OBR-2 Placer Order Number (EI, max 0, conditional) (chainable). */
+  /** OBR-2 Placer Order Number (EI, conditional) (chainable). */
   placerOrderNumber(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** OBR-3 Filler Order Number (EI, max 0, conditional) (chainable). */
+  /** OBR-3 Filler Order Number (EI, conditional) (chainable). */
   fillerOrderNumber(value: string | EI): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** OBR-4 Universal Service Identifier (CWE, max 0, required) (chainable). */
+  /** OBR-4 Universal Service Identifier (CWE, required) (chainable). */
   universalServiceIdentifier(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -64,25 +64,25 @@ export class OBR extends BaseSegment {
     return this;
   }
 
-  /** OBR-7 Observation Date/Time # (DTM, max 0, conditional) (chainable). */
+  /** OBR-7 Observation Date/Time # (DTM, conditional) (chainable). */
   observationDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** OBR-8 Observation End Date/Time # (DTM, max 0, optional) (chainable). */
+  /** OBR-8 Observation End Date/Time # (DTM, optional) (chainable). */
   observationEndDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** OBR-9 Collection Volume * (CQ, max 0, optional) (chainable). */
+  /** OBR-9 Collection Volume * (CQ, optional) (chainable). */
   collectionVolume(value: string | CQ): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** OBR-10 Collector Identifier * (XCN, max 0, backward compatibility, repeating) (chainable). */
+  /** OBR-10 Collector Identifier * (XCN, backward compatibility, repeating) (chainable). */
   collectorIdentifier(...values: Repeated<string | XCN>[]): this {
     this.fields[9] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
@@ -94,13 +94,13 @@ export class OBR extends BaseSegment {
     return this;
   }
 
-  /** OBR-12 Danger Code (CWE, max 0, optional) (chainable). */
+  /** OBR-12 Danger Code (CWE, optional) (chainable). */
   dangerCode(value: string | CodedElement): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OBR-13 Relevant Clinical Information (CWE, max 0, optional, repeating) (chainable). */
+  /** OBR-13 Relevant Clinical Information (CWE, optional, repeating) (chainable). */
   relevantClinicalInformation(...values: Repeated<string | CodedElement>[]): this {
     this.fields[12] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
@@ -118,49 +118,49 @@ export class OBR extends BaseSegment {
     return this;
   }
 
-  /** OBR-16 Ordering Provider (XCN, max 0, backward compatibility, repeating) (chainable). */
+  /** OBR-16 Ordering Provider (XCN, backward compatibility, repeating) (chainable). */
   orderingProvider(...values: Repeated<string | XCN>[]): this {
     this.fields[15] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** OBR-17 Order Callback Phone Number (XTN, max 0, optional, repeating) (chainable). */
+  /** OBR-17 Order Callback Phone Number (XTN, optional, repeating) (chainable). */
   orderCallbackPhoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[16] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** OBR-18 Placer Field 1 (ST, max 0, optional) (chainable). */
+  /** OBR-18 Placer Field 1 (ST, optional) (chainable). */
   placerField1(value: string): this {
     this.fields[17] = this.createField(value);
     return this;
   }
 
-  /** OBR-19 Placer Field 2 (ST, max 0, optional) (chainable). */
+  /** OBR-19 Placer Field 2 (ST, optional) (chainable). */
   placerField2(value: string): this {
     this.fields[18] = this.createField(value);
     return this;
   }
 
-  /** OBR-20 Filler Field 1 + (ST, max 0, optional) (chainable). */
+  /** OBR-20 Filler Field 1 + (ST, optional) (chainable). */
   fillerField1(value: string): this {
     this.fields[19] = this.createField(value);
     return this;
   }
 
-  /** OBR-21 Filler Field 2 + (ST, max 0, optional) (chainable). */
+  /** OBR-21 Filler Field 2 + (ST, optional) (chainable). */
   fillerField2(value: string): this {
     this.fields[20] = this.createField(value);
     return this;
   }
 
-  /** OBR-22 Results Rpt/Status Chng - Date/Time + (DTM, max 0, conditional) (chainable). */
+  /** OBR-22 Results Rpt/Status Chng - Date/Time + (DTM, conditional) (chainable). */
   resultsRptStatusChngDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[21] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** OBR-23 Charge to Practice + (MOC, max 0, optional) (chainable). */
+  /** OBR-23 Charge to Practice + (MOC, optional) (chainable). */
   chargeToPractice(value: string): this {
     this.fields[22] = this.createField(value);
     return this;
@@ -178,7 +178,7 @@ export class OBR extends BaseSegment {
     return this;
   }
 
-  /** OBR-26 Parent Result + (PRL, max 0, optional) (chainable). */
+  /** OBR-26 Parent Result + (PRL, optional) (chainable). */
   parentResult(value: string): this {
     this.fields[25] = this.createField(value);
     return this;
@@ -190,13 +190,13 @@ export class OBR extends BaseSegment {
     return this;
   }
 
-  /** OBR-28 Result Copies To (XCN, max 0, backward compatibility, repeating) (chainable). */
+  /** OBR-28 Result Copies To (XCN, backward compatibility, repeating) (chainable). */
   resultCopiesTo(...values: Repeated<string | XCN>[]): this {
     this.fields[27] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** OBR-29 Parent Results Observation Identifier (EIP, max 0, optional) (chainable). */
+  /** OBR-29 Parent Results Observation Identifier (EIP, optional) (chainable). */
   parentResultsObservationIdentifier(value: string): this {
     this.fields[28] = this.createField(value);
     return this;
@@ -208,61 +208,61 @@ export class OBR extends BaseSegment {
     return this;
   }
 
-  /** OBR-31 Reason for Study (CWE, max 0, optional, repeating) (chainable). */
+  /** OBR-31 Reason for Study (CWE, optional, repeating) (chainable). */
   reasonForStudy(...values: Repeated<string | CodedElement>[]): this {
     this.fields[30] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OBR-32 Principal Result Interpreter + (NDL, max 0, backward compatibility) (chainable). */
+  /** OBR-32 Principal Result Interpreter + (NDL, backward compatibility) (chainable). */
   principalResultInterpreter(value: string): this {
     this.fields[31] = this.createField(value);
     return this;
   }
 
-  /** OBR-33 Assistant Result Interpreter + (NDL, max 0, backward compatibility, repeating) (chainable). */
+  /** OBR-33 Assistant Result Interpreter + (NDL, backward compatibility, repeating) (chainable). */
   assistantResultInterpreter(...values: Repeated<string>[]): this {
     this.fields[32] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** OBR-34 Technician + (NDL, max 0, backward compatibility, repeating) (chainable). */
+  /** OBR-34 Technician + (NDL, backward compatibility, repeating) (chainable). */
   technician(...values: Repeated<string>[]): this {
     this.fields[33] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** OBR-35 Transcriptionist + (NDL, max 0, backward compatibility, repeating) (chainable). */
+  /** OBR-35 Transcriptionist + (NDL, backward compatibility, repeating) (chainable). */
   transcriptionist(...values: Repeated<string>[]): this {
     this.fields[34] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** OBR-36 Scheduled Date/Time + (DTM, max 0, optional) (chainable). */
+  /** OBR-36 Scheduled Date/Time + (DTM, optional) (chainable). */
   scheduledDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[35] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** OBR-37 Number of Sample Containers * (NM, max 0, optional) (chainable). */
+  /** OBR-37 Number of Sample Containers * (NM, optional) (chainable). */
   numberOfSampleContainers(value: string): this {
     this.fields[36] = this.createField(value);
     return this;
   }
 
-  /** OBR-38 Transport Logistics of Collected Sample * (CWE, max 0, optional, repeating) (chainable). */
+  /** OBR-38 Transport Logistics of Collected Sample * (CWE, optional, repeating) (chainable). */
   transportLogisticsOfCollectedSample(...values: Repeated<string | CodedElement>[]): this {
     this.fields[37] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OBR-39 Collector's Comment * (CWE, max 0, optional, repeating) (chainable). */
+  /** OBR-39 Collector's Comment * (CWE, optional, repeating) (chainable). */
   collectorSComment(...values: Repeated<string | CodedElement>[]): this {
     this.fields[38] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OBR-40 Transport Arrangement Responsibility (CWE, max 0, optional) (chainable). */
+  /** OBR-40 Transport Arrangement Responsibility (CWE, optional) (chainable). */
   transportArrangementResponsibility(value: string | CodedElement): this {
     this.fields[39] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -280,73 +280,73 @@ export class OBR extends BaseSegment {
     return this;
   }
 
-  /** OBR-43 Planned Patient Transport Comment (CWE, max 0, optional, repeating) (chainable). */
+  /** OBR-43 Planned Patient Transport Comment (CWE, optional, repeating) (chainable). */
   plannedPatientTransportComment(...values: Repeated<string | CodedElement>[]): this {
     this.fields[42] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OBR-44 Procedure Code (CNE, max 0, optional) (chainable). */
+  /** OBR-44 Procedure Code (CNE, optional) (chainable). */
   procedureCode(value: string | CodedElement): this {
     this.fields[43] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OBR-45 Procedure Code Modifier (CNE, max 0, optional, repeating) (chainable). */
+  /** OBR-45 Procedure Code Modifier (CNE, optional, repeating) (chainable). */
   procedureCodeModifier(...values: Repeated<string | CodedElement>[]): this {
     this.fields[44] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OBR-46 Placer Supplemental Service Information (CWE, max 0, optional, repeating) (chainable). */
+  /** OBR-46 Placer Supplemental Service Information (CWE, optional, repeating) (chainable). */
   placerSupplementalServiceInformation(...values: Repeated<string | CodedElement>[]): this {
     this.fields[45] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OBR-47 Filler Supplemental Service Information (CWE, max 0, optional, repeating) (chainable). */
+  /** OBR-47 Filler Supplemental Service Information (CWE, optional, repeating) (chainable). */
   fillerSupplementalServiceInformation(...values: Repeated<string | CodedElement>[]): this {
     this.fields[46] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OBR-48 Medically Necessary Duplicate Procedure Reason (CWE, max 0, conditional) (chainable). */
+  /** OBR-48 Medically Necessary Duplicate Procedure Reason (CWE, conditional) (chainable). */
   medicallyNecessaryDuplicateProcedureReason(value: string | CodedElement): this {
     this.fields[47] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OBR-49 Result Handling (CWE, max 0, optional) (chainable). */
+  /** OBR-49 Result Handling (CWE, optional) (chainable). */
   resultHandling(value: string | CodedElement): this {
     this.fields[48] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OBR-50 Parent Universal Service Identifier (CWE, max 0, backward compatibility) (chainable). */
+  /** OBR-50 Parent Universal Service Identifier (CWE, backward compatibility) (chainable). */
   parentUniversalServiceIdentifier(value: string | CodedElement): this {
     this.fields[49] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OBR-51 Observation Group ID (EI, max 0, optional) (chainable). */
+  /** OBR-51 Observation Group ID (EI, optional) (chainable). */
   observationGroupId(value: string | EI): this {
     this.fields[50] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** OBR-52 Parent Observation Group ID (EI, max 0, optional) (chainable). */
+  /** OBR-52 Parent Observation Group ID (EI, optional) (chainable). */
   parentObservationGroupId(value: string | EI): this {
     this.fields[51] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** OBR-53 Alternate Placer Order Number (CX, max 0, optional, repeating) (chainable). */
+  /** OBR-53 Alternate Placer Order Number (CX, optional, repeating) (chainable). */
   alternatePlacerOrderNumber(...values: Repeated<string | CX>[]): this {
     this.fields[52] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
   }
 
-  /** OBR-54 Parent Order (EIP, max 0, optional) (chainable). */
+  /** OBR-54 Parent Order (EIP, optional) (chainable). */
   parentOrder(value: string): this {
     this.fields[53] = this.createField(value);
     return this;

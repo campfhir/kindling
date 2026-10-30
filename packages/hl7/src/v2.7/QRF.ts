@@ -27,7 +27,7 @@ export class QRF extends BaseSegment {
     this.fields = [];
   }
 
-  /** QRF-1 QRF.1 (ST, max 0, optional) (chainable). */
+  /** QRF-1 QRF.1 (ST, optional) (chainable). */
   qrf1(value: string): this {
     this.fields[0] = this.createField(value);
     return this;

@@ -28,97 +28,97 @@ export class PCR extends BaseSegment {
     this.fields = [];
   }
 
-  /** PCR-1 Implicated Product (CWE, max 0, required) (chainable). */
+  /** PCR-1 Implicated Product (CWE, required) (chainable). */
   implicatedProduct(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PCR-2 Generic Product (IS, max 0, optional) (chainable). */
+  /** PCR-2 Generic Product (IS, optional) (chainable). */
   genericProduct(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** PCR-3 Product Class (CWE, max 0, optional) (chainable). */
+  /** PCR-3 Product Class (CWE, optional) (chainable). */
   productClass(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PCR-4 Total Duration Of Therapy (CQ, max 0, optional) (chainable). */
+  /** PCR-4 Total Duration Of Therapy (CQ, optional) (chainable). */
   totalDurationOfTherapy(value: string | CQ): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cqParts(value)));
     return this;
   }
 
-  /** PCR-5 Product Manufacture Date (DTM, max 0, optional) (chainable). */
+  /** PCR-5 Product Manufacture Date (DTM, optional) (chainable). */
   productManufactureDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PCR-6 Product Expiration Date (DTM, max 0, optional) (chainable). */
+  /** PCR-6 Product Expiration Date (DTM, optional) (chainable). */
   productExpirationDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PCR-7 Product Implantation Date (DTM, max 0, optional) (chainable). */
+  /** PCR-7 Product Implantation Date (DTM, optional) (chainable). */
   productImplantationDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PCR-8 Product Explantation Date (DTM, max 0, optional) (chainable). */
+  /** PCR-8 Product Explantation Date (DTM, optional) (chainable). */
   productExplantationDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PCR-9 Single Use Device (CWE, max 0, optional) (chainable). */
+  /** PCR-9 Single Use Device (CWE, optional) (chainable). */
   singleUseDevice(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PCR-10 Indication For Product Use (CWE, max 0, optional) (chainable). */
+  /** PCR-10 Indication For Product Use (CWE, optional) (chainable). */
   indicationForProductUse(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PCR-11 Product Problem (CWE, max 0, optional) (chainable). */
+  /** PCR-11 Product Problem (CWE, optional) (chainable). */
   productProblem(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PCR-12 Product Serial/Lot Number (ST, max 0, optional, repeating) (chainable). */
+  /** PCR-12 Product Serial/Lot Number (ST, optional, repeating) (chainable). */
   productSerialLotNumber(...values: Repeated<string>[]): this {
     this.fields[11] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** PCR-13 Product Available For Inspection (CWE, max 0, optional) (chainable). */
+  /** PCR-13 Product Available For Inspection (CWE, optional) (chainable). */
   productAvailableForInspection(value: string | CodedElement): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PCR-14 Product Evaluation Performed (CWE, max 0, optional) (chainable). */
+  /** PCR-14 Product Evaluation Performed (CWE, optional) (chainable). */
   productEvaluationPerformed(value: string | CodedElement): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PCR-15 Product Evaluation Status (CWE, max 0, optional) (chainable). */
+  /** PCR-15 Product Evaluation Status (CWE, optional) (chainable). */
   productEvaluationStatus(value: string | CodedElement): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PCR-16 Product Evaluation Results (CWE, max 0, optional) (chainable). */
+  /** PCR-16 Product Evaluation Results (CWE, optional) (chainable). */
   productEvaluationResults(value: string | CodedElement): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
@@ -130,7 +130,7 @@ export class PCR extends BaseSegment {
     return this;
   }
 
-  /** PCR-18 Date Product Returned To Manufacturer (DTM, max 0, optional) (chainable). */
+  /** PCR-18 Date Product Returned To Manufacturer (DTM, optional) (chainable). */
   dateProductReturnedToManufacturer(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[17] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;

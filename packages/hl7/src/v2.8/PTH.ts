@@ -34,37 +34,37 @@ export class PTH extends BaseSegment {
     return this;
   }
 
-  /** PTH-2 Pathway ID (CWE, max 0, required) (chainable). */
+  /** PTH-2 Pathway ID (CWE, required) (chainable). */
   pathwayId(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PTH-3 Pathway Instance ID (EI, max 0, required) (chainable). */
+  /** PTH-3 Pathway Instance ID (EI, required) (chainable). */
   pathwayInstanceId(value: string | EI): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** PTH-4 Pathway Established Date/Time (DTM, max 0, required) (chainable). */
+  /** PTH-4 Pathway Established Date/Time (DTM, required) (chainable). */
   pathwayEstablishedDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[3] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PTH-5 Pathway Life Cycle Status (CWE, max 0, optional) (chainable). */
+  /** PTH-5 Pathway Life Cycle Status (CWE, optional) (chainable). */
   pathwayLifeCycleStatus(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** PTH-6 Change Pathway Life Cycle Status Date/Time (DTM, max 0, conditional) (chainable). */
+  /** PTH-6 Change Pathway Life Cycle Status Date/Time (DTM, conditional) (chainable). */
   changePathwayLifeCycleStatusDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** PTH-7 Mood Code (CNE, max 0, conditional) (chainable). */
+  /** PTH-7 Mood Code (CNE, conditional) (chainable). */
   moodCode(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

@@ -28,25 +28,25 @@ export class CSP extends BaseSegment {
     this.fields = [];
   }
 
-  /** CSP-1 Study Phase Identifier (CWE, max 0, required) (chainable). */
+  /** CSP-1 Study Phase Identifier (CWE, required) (chainable). */
   studyPhaseIdentifier(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** CSP-2 Date/time Study Phase Began (DTM, max 0, required) (chainable). */
+  /** CSP-2 Date/time Study Phase Began (DTM, required) (chainable). */
   dateTimeStudyPhaseBegan(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[1] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CSP-3 Date/time Study Phase Ended (DTM, max 0, optional) (chainable). */
+  /** CSP-3 Date/time Study Phase Ended (DTM, optional) (chainable). */
   dateTimeStudyPhaseEnded(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[2] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** CSP-4 Study Phase Evaluability (CWE, max 0, conditional) (chainable). */
+  /** CSP-4 Study Phase Evaluability (CWE, conditional) (chainable). */
   studyPhaseEvaluability(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

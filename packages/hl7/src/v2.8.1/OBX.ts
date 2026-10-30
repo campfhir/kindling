@@ -40,43 +40,43 @@ export class OBX extends BaseSegment {
     return this;
   }
 
-  /** OBX-3 Observation Identifier (CWE, max 0, required) (chainable). */
+  /** OBX-3 Observation Identifier (CWE, required) (chainable). */
   observationIdentifier(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OBX-4 Observation Sub (ST, max 0, conditional) (chainable). */
+  /** OBX-4 Observation Sub (ST, conditional) (chainable). */
   observationSub(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** OBX-5 Observation Value (varies, max 0, conditional, repeating) (chainable). */
+  /** OBX-5 Observation Value (varies, conditional, repeating) (chainable). */
   observationValue(...values: Repeated<string>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }
 
-  /** OBX-6 Units (CWE, max 0, optional) (chainable). */
+  /** OBX-6 Units (CWE, optional) (chainable). */
   units(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OBX-7 References Range (ST, max 0, optional) (chainable). */
+  /** OBX-7 References Range (ST, optional) (chainable). */
   referencesRange(value: string): this {
     this.fields[6] = this.createField(value);
     return this;
   }
 
-  /** OBX-8 Interpretation Codes (CWE, max 0, optional, repeating) (chainable). */
+  /** OBX-8 Interpretation Codes (CWE, optional, repeating) (chainable). */
   interpretationCodes(...values: Repeated<string | CodedElement>[]): this {
     this.fields[7] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OBX-9 Probability (NM, max 0, optional) (chainable). */
+  /** OBX-9 Probability (NM, optional) (chainable). */
   probability(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
@@ -94,85 +94,85 @@ export class OBX extends BaseSegment {
     return this;
   }
 
-  /** OBX-12 Effective Date of Reference Range (DTM, max 0, optional) (chainable). */
+  /** OBX-12 Effective Date of Reference Range (DTM, optional) (chainable). */
   effectiveDateOfReferenceRange(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[11] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** OBX-13 User Defined Access Checks (ST, max 0, optional) (chainable). */
+  /** OBX-13 User Defined Access Checks (ST, optional) (chainable). */
   userDefinedAccessChecks(value: string): this {
     this.fields[12] = this.createField(value);
     return this;
   }
 
-  /** OBX-14 Date/Time of the Observation (DTM, max 0, optional) (chainable). */
+  /** OBX-14 Date/Time of the Observation (DTM, optional) (chainable). */
   dateTimeOfTheObservation(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[13] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** OBX-15 Producer's ID (CWE, max 0, backward compatibility) (chainable). */
+  /** OBX-15 Producer's ID (CWE, backward compatibility) (chainable). */
   producerSId(value: string | CodedElement): this {
     this.fields[14] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OBX-16 Responsible Observer (XCN, max 0, backward compatibility, repeating) (chainable). */
+  /** OBX-16 Responsible Observer (XCN, backward compatibility, repeating) (chainable). */
   responsibleObserver(...values: Repeated<string | XCN>[]): this {
     this.fields[15] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** OBX-17 Observation Method (CWE, max 0, optional, repeating) (chainable). */
+  /** OBX-17 Observation Method (CWE, optional, repeating) (chainable). */
   observationMethod(...values: Repeated<string | CodedElement>[]): this {
     this.fields[16] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OBX-18 Equipment Instance Identifier (EI, max 0, backward compatibility, repeating) (chainable). */
+  /** OBX-18 Equipment Instance Identifier (EI, backward compatibility, repeating) (chainable). */
   equipmentInstanceIdentifier(...values: Repeated<string | EI>[]): this {
     this.fields[17] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;
   }
 
-  /** OBX-19 Date/Time of the Analysis (DTM, max 0, optional) (chainable). */
+  /** OBX-19 Date/Time of the Analysis (DTM, optional) (chainable). */
   dateTimeOfTheAnalysis(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[18] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** OBX-20 Observation Site (CWE, max 0, optional, repeating) (chainable). */
+  /** OBX-20 Observation Site (CWE, optional, repeating) (chainable). */
   observationSite(...values: Repeated<string | CodedElement>[]): this {
     this.fields[19] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OBX-21 Observation Instance Identifier (EI, max 0, optional) (chainable). */
+  /** OBX-21 Observation Instance Identifier (EI, optional) (chainable). */
   observationInstanceIdentifier(value: string | EI): this {
     this.fields[20] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** OBX-22 Mood Code (CNE, max 0, conditional) (chainable). */
+  /** OBX-22 Mood Code (CNE, conditional) (chainable). */
   moodCode(value: string | CodedElement): this {
     this.fields[21] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OBX-23 Performing Organization Name (XON, max 0, backward compatibility) (chainable). */
+  /** OBX-23 Performing Organization Name (XON, backward compatibility) (chainable). */
   performingOrganizationName(value: string | XON): this {
     this.fields[22] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
   }
 
-  /** OBX-24 Performing Organization Address (XAD, max 0, backward compatibility) (chainable). */
+  /** OBX-24 Performing Organization Address (XAD, backward compatibility) (chainable). */
   performingOrganizationAddress(value: string | XAD): this {
     this.fields[23] = this.createField(typeof value === "string" ? value : components(xadParts(value)));
     return this;
   }
 
-  /** OBX-25 Performing Organization Medical Director (XCN, max 0, backward compatibility) (chainable). */
+  /** OBX-25 Performing Organization Medical Director (XCN, backward compatibility) (chainable). */
   performingOrganizationMedicalDirector(value: string | XCN): this {
     this.fields[24] = this.createField(typeof value === "string" ? value : components(xcnParts(value)));
     return this;
@@ -184,19 +184,19 @@ export class OBX extends BaseSegment {
     return this;
   }
 
-  /** OBX-27 Root Cause (CWE, max 0, optional) (chainable). */
+  /** OBX-27 Root Cause (CWE, optional) (chainable). */
   rootCause(value: string | CodedElement): this {
     this.fields[26] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OBX-28 Local Process Control (CWE, max 0, optional, repeating) (chainable). */
+  /** OBX-28 Local Process Control (CWE, optional, repeating) (chainable). */
   localProcessControl(...values: Repeated<string | CodedElement>[]): this {
     this.fields[27] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OBX-29 Observation Type (ID, max 0, optional) (chainable). */
+  /** OBX-29 Observation Type (ID, optional) (chainable). */
   observationType(value: string): this {
     this.fields[28] = this.createField(value);
     return this;

@@ -28,7 +28,7 @@ export class GSR extends BaseSegment {
     this.fields = [];
   }
 
-  /** GSR-1 Set ID (SI, max 0, required) (chainable). */
+  /** GSR-1 Set ID (SI, required) (chainable). */
   setId(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
@@ -40,49 +40,49 @@ export class GSR extends BaseSegment {
     return this;
   }
 
-  /** GSR-3 GSR Instance Identifier (EI, max 0, conditional) (chainable). */
+  /** GSR-3 GSR Instance Identifier (EI, conditional) (chainable). */
   gsrInstanceIdentifier(value: string | EI): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** GSR-4 Recorded Gender or Sex (CWE, max 0, required) (chainable). */
+  /** GSR-4 Recorded Gender or Sex (CWE, required) (chainable). */
   recordedGenderOrSex(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GSR-5 Source Document Field Label (CWE, max 0, optional) (chainable). */
+  /** GSR-5 Source Document Field Label (CWE, optional) (chainable). */
   sourceDocumentFieldLabel(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GSR-6 Source Document Type for Recorded Sex or Gender (CWE, max 0, optional) (chainable). */
+  /** GSR-6 Source Document Type for Recorded Sex or Gender (CWE, optional) (chainable). */
   sourceDocumentTypeForRecordedSexOrGender(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GSR-7 Source Document Jurisdiction for Recorded Sex or Gender (CWE, max 0, optional) (chainable). */
+  /** GSR-7 Source Document Jurisdiction for Recorded Sex or Gender (CWE, optional) (chainable). */
   sourceDocumentJurisdictionForRecordedSexOrGender(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** GSR-8 Acquisition Date (DTM, max 0, optional) (chainable). */
+  /** GSR-8 Acquisition Date (DTM, optional) (chainable). */
   acquisitionDate(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[7] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** GSR-9 Validity Period (DR, max 0, optional) (chainable). */
+  /** GSR-9 Validity Period (DR, optional) (chainable). */
   validityPeriod(value: string | DR): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(drParts(value)));
     return this;
   }
 
-  /** GSR-10 Comment (TX, max 0, optional) (chainable). */
+  /** GSR-10 Comment (TX, optional) (chainable). */
   comment(value: string): this {
     this.fields[9] = this.createField(value);
     return this;

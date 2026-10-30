@@ -39,7 +39,7 @@ export class RGS extends BaseSegment {
     return this;
   }
 
-  /** RGS-3 Resource Group ID (CWE, max 0, optional) (chainable). */
+  /** RGS-3 Resource Group ID (CWE, optional) (chainable). */
   resourceGroupId(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

@@ -34,61 +34,61 @@ export class CM0 extends BaseSegment {
     return this;
   }
 
-  /** CM0-2 Sponsor Study ID (EI, max 0, required) (chainable). */
+  /** CM0-2 Sponsor Study ID (EI, required) (chainable). */
   sponsorStudyId(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** CM0-3 Alternate Study ID (EI, max 0, optional, repeating) (chainable). */
+  /** CM0-3 Alternate Study ID (EI, optional, repeating) (chainable). */
   alternateStudyId(...values: Repeated<string | EI>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(eiParts(v)))));
     return this;
   }
 
-  /** CM0-4 Title of Study (ST, max 0, required) (chainable). */
+  /** CM0-4 Title of Study (ST, required) (chainable). */
   titleOfStudy(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** CM0-5 Chairman of Study (XCN, max 0, optional, repeating) (chainable). */
+  /** CM0-5 Chairman of Study (XCN, optional, repeating) (chainable). */
   chairmanOfStudy(...values: Repeated<string | XCN>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** CM0-6 Last IRB Approval Date (DT, max 0, optional) (chainable). */
+  /** CM0-6 Last IRB Approval Date (DT, optional) (chainable). */
   lastIrbApprovalDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[5] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** CM0-7 Total Accrual to Date (NM, max 0, optional) (chainable). */
+  /** CM0-7 Total Accrual to Date (NM, optional) (chainable). */
   totalAccrualToDate(value: string): this {
     this.fields[6] = this.createField(value);
     return this;
   }
 
-  /** CM0-8 Last Accrual Date (DT, max 0, optional) (chainable). */
+  /** CM0-8 Last Accrual Date (DT, optional) (chainable). */
   lastAccrualDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[7] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** CM0-9 Contact for Study (XCN, max 0, optional, repeating) (chainable). */
+  /** CM0-9 Contact for Study (XCN, optional, repeating) (chainable). */
   contactForStudy(...values: Repeated<string | XCN>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** CM0-10 Contact's Telephone Number (XTN, max 0, optional) (chainable). */
+  /** CM0-10 Contact's Telephone Number (XTN, optional) (chainable). */
   contactSTelephoneNumber(value: string | XTN): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(xtnParts(value)));
     return this;
   }
 
-  /** CM0-11 Contact's Address (XAD, max 0, optional, repeating) (chainable). */
+  /** CM0-11 Contact's Address (XAD, optional, repeating) (chainable). */
   contactSAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;

@@ -34,13 +34,13 @@ export class DB1 extends BaseSegment {
     return this;
   }
 
-  /** DB1-2 Disabled Person Code (CWE, max 0, optional) (chainable). */
+  /** DB1-2 Disabled Person Code (CWE, optional) (chainable). */
   disabledPersonCode(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DB1-3 Disabled Person Identifier (CX, max 0, optional, repeating) (chainable). */
+  /** DB1-3 Disabled Person Identifier (CX, optional, repeating) (chainable). */
   disabledPersonIdentifier(...values: Repeated<string | CX>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;
@@ -52,25 +52,25 @@ export class DB1 extends BaseSegment {
     return this;
   }
 
-  /** DB1-5 Disability Start Date (DT, max 0, optional) (chainable). */
+  /** DB1-5 Disability Start Date (DT, optional) (chainable). */
   disabilityStartDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[4] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** DB1-6 Disability End Date (DT, max 0, optional) (chainable). */
+  /** DB1-6 Disability End Date (DT, optional) (chainable). */
   disabilityEndDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[5] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** DB1-7 Disability Return to Work Date (DT, max 0, optional) (chainable). */
+  /** DB1-7 Disability Return to Work Date (DT, optional) (chainable). */
   disabilityReturnToWorkDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[6] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** DB1-8 Disability Unable to Work Date (DT, max 0, optional) (chainable). */
+  /** DB1-8 Disability Unable to Work Date (DT, optional) (chainable). */
   disabilityUnableToWorkDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[7] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;

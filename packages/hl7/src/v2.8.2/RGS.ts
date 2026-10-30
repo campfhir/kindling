@@ -33,13 +33,13 @@ export class RGS extends BaseSegment {
     return this;
   }
 
-  /** RGS-2 Segment Action Code (ID, max 0, conditional) (chainable). */
+  /** RGS-2 Segment Action Code (ID, conditional) (chainable). */
   segmentActionCode(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** RGS-3 Resource Group ID (CWE, max 0, optional) (chainable). */
+  /** RGS-3 Resource Group ID (CWE, optional) (chainable). */
   resourceGroupId(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

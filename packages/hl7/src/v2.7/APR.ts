@@ -27,31 +27,31 @@ export class APR extends BaseSegment {
     this.fields = [];
   }
 
-  /** APR-1 Time Selection Criteria (SCV, max 0, optional, repeating) (chainable). */
+  /** APR-1 Time Selection Criteria (SCV, optional, repeating) (chainable). */
   timeSelectionCriteria(...values: Repeated<string | SCV>[]): this {
     this.fields[0] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(scvParts(v)))));
     return this;
   }
 
-  /** APR-2 Resource Selection Criteria (SCV, max 0, optional, repeating) (chainable). */
+  /** APR-2 Resource Selection Criteria (SCV, optional, repeating) (chainable). */
   resourceSelectionCriteria(...values: Repeated<string | SCV>[]): this {
     this.fields[1] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(scvParts(v)))));
     return this;
   }
 
-  /** APR-3 Location Selection Criteria (SCV, max 0, optional, repeating) (chainable). */
+  /** APR-3 Location Selection Criteria (SCV, optional, repeating) (chainable). */
   locationSelectionCriteria(...values: Repeated<string | SCV>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(scvParts(v)))));
     return this;
   }
 
-  /** APR-4 Slot Spacing Criteria (NM, max 0, optional) (chainable). */
+  /** APR-4 Slot Spacing Criteria (NM, optional) (chainable). */
   slotSpacingCriteria(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** APR-5 Filler Override Criteria (SCV, max 0, optional, repeating) (chainable). */
+  /** APR-5 Filler Override Criteria (SCV, optional, repeating) (chainable). */
   fillerOverrideCriteria(...values: Repeated<string | SCV>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(scvParts(v)))));
     return this;

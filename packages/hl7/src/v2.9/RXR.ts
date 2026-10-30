@@ -27,37 +27,37 @@ export class RXR extends BaseSegment {
     this.fields = [];
   }
 
-  /** RXR-1 Route (CWE, max 0, required) (chainable). */
+  /** RXR-1 Route (CWE, required) (chainable). */
   route(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXR-2 Administration Site (CWE, max 0, optional) (chainable). */
+  /** RXR-2 Administration Site (CWE, optional) (chainable). */
   administrationSite(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXR-3 Administration Device (CWE, max 0, optional) (chainable). */
+  /** RXR-3 Administration Device (CWE, optional) (chainable). */
   administrationDevice(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXR-4 Administration Method (CWE, max 0, optional) (chainable). */
+  /** RXR-4 Administration Method (CWE, optional) (chainable). */
   administrationMethod(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXR-5 Routing Instruction (CWE, max 0, optional) (chainable). */
+  /** RXR-5 Routing Instruction (CWE, optional) (chainable). */
   routingInstruction(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXR-6 Administration Site Modifier (CWE, max 0, optional) (chainable). */
+  /** RXR-6 Administration Site Modifier (CWE, optional) (chainable). */
   administrationSiteModifier(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

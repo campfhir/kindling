@@ -27,7 +27,7 @@ export class ADD extends BaseSegment {
     this.fields = [];
   }
 
-  /** ADD-1 Addendum Continuation Pointer (ST, max 0, optional) (chainable). */
+  /** ADD-1 Addendum Continuation Pointer (ST, optional) (chainable). */
   addendumContinuationPointer(value: string): this {
     this.fields[0] = this.createField(value);
     return this;

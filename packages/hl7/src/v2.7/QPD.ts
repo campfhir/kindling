@@ -27,19 +27,19 @@ export class QPD extends BaseSegment {
     this.fields = [];
   }
 
-  /** QPD-1 Message Query Name (CWE, max 0, required) (chainable). */
+  /** QPD-1 Message Query Name (CWE, required) (chainable). */
   messageQueryName(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** QPD-2 Query Tag (ST, max 0, conditional) (chainable). */
+  /** QPD-2 Query Tag (ST, conditional) (chainable). */
   queryTag(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** QPD-3 User Parameters (in successive fields) (varies, max 0, optional) (chainable). */
+  /** QPD-3 User Parameters (in successive fields) (varies, optional) (chainable). */
   userParametersInSuccessiveFields(value: string): this {
     this.fields[2] = this.createField(value);
     return this;

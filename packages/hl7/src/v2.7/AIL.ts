@@ -40,61 +40,61 @@ export class AIL extends BaseSegment {
     return this;
   }
 
-  /** AIL-3 Location Resource ID (PL, max 0, conditional, repeating) (chainable). */
+  /** AIL-3 Location Resource ID (PL, conditional, repeating) (chainable). */
   locationResourceId(...values: Repeated<string | PL>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(plParts(v)))));
     return this;
   }
 
-  /** AIL-4 Location Type (CWE, max 0, conditional) (chainable). */
+  /** AIL-4 Location Type (CWE, conditional) (chainable). */
   locationType(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIL-5 Location Group (CWE, max 0, optional) (chainable). */
+  /** AIL-5 Location Group (CWE, optional) (chainable). */
   locationGroup(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIL-6 Start Date/Time (DTM, max 0, conditional) (chainable). */
+  /** AIL-6 Start Date/Time (DTM, conditional) (chainable). */
   startDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** AIL-7 Start Date/Time Offset (NM, max 0, conditional) (chainable). */
+  /** AIL-7 Start Date/Time Offset (NM, conditional) (chainable). */
   startDateTimeOffset(value: string): this {
     this.fields[6] = this.createField(value);
     return this;
   }
 
-  /** AIL-8 Start Date/Time Offset Units (CNE, max 0, conditional) (chainable). */
+  /** AIL-8 Start Date/Time Offset Units (CNE, conditional) (chainable). */
   startDateTimeOffsetUnits(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIL-9 Duration (NM, max 0, optional) (chainable). */
+  /** AIL-9 Duration (NM, optional) (chainable). */
   duration(value: string): this {
     this.fields[8] = this.createField(value);
     return this;
   }
 
-  /** AIL-10 Duration Units (CNE, max 0, optional) (chainable). */
+  /** AIL-10 Duration Units (CNE, optional) (chainable). */
   durationUnits(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIL-11 Allow Substitution Code (CWE, max 0, conditional) (chainable). */
+  /** AIL-11 Allow Substitution Code (CWE, conditional) (chainable). */
   allowSubstitutionCode(value: string | CodedElement): this {
     this.fields[10] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** AIL-12 Filler Status Code (CWE, max 0, conditional) (chainable). */
+  /** AIL-12 Filler Status Code (CWE, conditional) (chainable). */
   fillerStatusCode(value: string | CodedElement): this {
     this.fields[11] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

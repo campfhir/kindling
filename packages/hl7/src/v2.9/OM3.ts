@@ -27,37 +27,37 @@ export class OM3 extends BaseSegment {
     this.fields = [];
   }
 
-  /** OM3-1 Sequence Number - Test/Observation Master File (NM, max 0, optional) (chainable). */
+  /** OM3-1 Sequence Number - Test/Observation Master File (NM, optional) (chainable). */
   sequenceNumberTestObservationMasterFile(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
   }
 
-  /** OM3-2 Preferred Coding System (CWE, max 0, optional) (chainable). */
+  /** OM3-2 Preferred Coding System (CWE, optional) (chainable). */
   preferredCodingSystem(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** OM3-3 Valid Coded "Answers" (CWE, max 0, optional, repeating) (chainable). */
+  /** OM3-3 Valid Coded "Answers" (CWE, optional, repeating) (chainable). */
   validCodedAnswers(...values: Repeated<string | CodedElement>[]): this {
     this.fields[2] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OM3-4 Normal Text/Codes for Categorical Observations (CWE, max 0, optional, repeating) (chainable). */
+  /** OM3-4 Normal Text/Codes for Categorical Observations (CWE, optional, repeating) (chainable). */
   normalTextCodesForCategoricalObservations(...values: Repeated<string | CodedElement>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OM3-5 Abnormal Text/Codes for Categorical Observations (CWE, max 0, optional, repeating) (chainable). */
+  /** OM3-5 Abnormal Text/Codes for Categorical Observations (CWE, optional, repeating) (chainable). */
   abnormalTextCodesForCategoricalObservations(...values: Repeated<string | CodedElement>[]): this {
     this.fields[4] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** OM3-6 Critical Text/Codes for Categorical Observations (CWE, max 0, optional, repeating) (chainable). */
+  /** OM3-6 Critical Text/Codes for Categorical Observations (CWE, optional, repeating) (chainable). */
   criticalTextCodesForCategoricalObservations(...values: Repeated<string | CodedElement>[]): this {
     this.fields[5] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;

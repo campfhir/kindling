@@ -33,49 +33,49 @@ export class RXC extends BaseSegment {
     return this;
   }
 
-  /** RXC-2 Component Code (CWE, max 0, required) (chainable). */
+  /** RXC-2 Component Code (CWE, required) (chainable). */
   componentCode(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXC-3 Component Amount (NM, max 0, required) (chainable). */
+  /** RXC-3 Component Amount (NM, required) (chainable). */
   componentAmount(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** RXC-4 Component Units (CWE, max 0, required) (chainable). */
+  /** RXC-4 Component Units (CWE, required) (chainable). */
   componentUnits(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXC-5 Component Strength (NM, max 0, optional) (chainable). */
+  /** RXC-5 Component Strength (NM, optional) (chainable). */
   componentStrength(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** RXC-6 Component Strength Units (CWE, max 0, optional) (chainable). */
+  /** RXC-6 Component Strength Units (CWE, optional) (chainable). */
   componentStrengthUnits(value: string | CodedElement): this {
     this.fields[5] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** RXC-7 Supplementary Code (CWE, max 0, optional, repeating) (chainable). */
+  /** RXC-7 Supplementary Code (CWE, optional, repeating) (chainable). */
   supplementaryCode(...values: Repeated<string | CodedElement>[]): this {
     this.fields[6] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** RXC-8 Component Drug Strength Volume (NM, max 0, optional) (chainable). */
+  /** RXC-8 Component Drug Strength Volume (NM, optional) (chainable). */
   componentDrugStrengthVolume(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** RXC-9 Component Drug Strength Volume Units (CWE, max 0, optional) (chainable). */
+  /** RXC-9 Component Drug Strength Volume Units (CWE, optional) (chainable). */
   componentDrugStrengthVolumeUnits(value: string | CodedElement): this {
     this.fields[8] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

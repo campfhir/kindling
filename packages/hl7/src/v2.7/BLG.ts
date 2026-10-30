@@ -27,7 +27,7 @@ export class BLG extends BaseSegment {
     this.fields = [];
   }
 
-  /** BLG-1 When to Charge (CCD, max 0, optional) (chainable). */
+  /** BLG-1 When to Charge (CCD, optional) (chainable). */
   whenToCharge(value: string): this {
     this.fields[0] = this.createField(value);
     return this;
@@ -39,13 +39,13 @@ export class BLG extends BaseSegment {
     return this;
   }
 
-  /** BLG-3 Account ID (CX, max 0, optional) (chainable). */
+  /** BLG-3 Account ID (CX, optional) (chainable). */
   accountId(value: string | CX): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cxParts(value)));
     return this;
   }
 
-  /** BLG-4 Charge Type Reason (CWE, max 0, optional) (chainable). */
+  /** BLG-4 Charge Type Reason (CWE, optional) (chainable). */
   chargeTypeReason(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

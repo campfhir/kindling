@@ -34,19 +34,19 @@ export class ORC extends BaseSegment {
     return this;
   }
 
-  /** ORC-2 Placer Order Number (EI, max 0, conditional) (chainable). */
+  /** ORC-2 Placer Order Number (EI, conditional) (chainable). */
   placerOrderNumber(value: string | EI): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** ORC-3 Filler Order Number (EI, max 0, conditional) (chainable). */
+  /** ORC-3 Filler Order Number (EI, conditional) (chainable). */
   fillerOrderNumber(value: string | EI): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** ORC-4 Placer Group Number (EI, max 0, optional) (chainable). */
+  /** ORC-4 Placer Group Number (EI, optional) (chainable). */
   placerGroupNumber(value: string | EI): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
@@ -70,157 +70,157 @@ export class ORC extends BaseSegment {
     return this;
   }
 
-  /** ORC-8 Parent (EIP, max 0, optional) (chainable). */
+  /** ORC-8 Parent (EIP, optional) (chainable). */
   parent(value: string): this {
     this.fields[7] = this.createField(value);
     return this;
   }
 
-  /** ORC-9 Date/Time of Transaction (DTM, max 0, optional) (chainable). */
+  /** ORC-9 Date/Time of Transaction (DTM, optional) (chainable). */
   dateTimeOfTransaction(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[8] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** ORC-10 Entered By (XCN, max 0, backward compatibility, repeating) (chainable). */
+  /** ORC-10 Entered By (XCN, backward compatibility, repeating) (chainable). */
   enteredBy(...values: Repeated<string | XCN>[]): this {
     this.fields[9] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** ORC-11 Verified By (XCN, max 0, backward compatibility, repeating) (chainable). */
+  /** ORC-11 Verified By (XCN, backward compatibility, repeating) (chainable). */
   verifiedBy(...values: Repeated<string | XCN>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** ORC-12 Ordering Provider (XCN, max 0, backward compatibility, repeating) (chainable). */
+  /** ORC-12 Ordering Provider (XCN, backward compatibility, repeating) (chainable). */
   orderingProvider(...values: Repeated<string | XCN>[]): this {
     this.fields[11] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** ORC-13 Enterer's Location (PL, max 0, optional) (chainable). */
+  /** ORC-13 Enterer's Location (PL, optional) (chainable). */
   entererSLocation(value: string | PL): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** ORC-14 Call Back Phone Number (XTN, max 0, optional, repeating) (chainable). */
+  /** ORC-14 Call Back Phone Number (XTN, optional, repeating) (chainable). */
   callBackPhoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[13] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** ORC-15 Order Effective Date/Time (DTM, max 0, optional) (chainable). */
+  /** ORC-15 Order Effective Date/Time (DTM, optional) (chainable). */
   orderEffectiveDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[14] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** ORC-16 Order Control Code Reason (CWE, max 0, optional) (chainable). */
+  /** ORC-16 Order Control Code Reason (CWE, optional) (chainable). */
   orderControlCodeReason(value: string | CodedElement): this {
     this.fields[15] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ORC-17 Entering Organization (CWE, max 0, backward compatibility) (chainable). */
+  /** ORC-17 Entering Organization (CWE, backward compatibility) (chainable). */
   enteringOrganization(value: string | CodedElement): this {
     this.fields[16] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ORC-18 Entering Device (CWE, max 0, backward compatibility) (chainable). */
+  /** ORC-18 Entering Device (CWE, backward compatibility) (chainable). */
   enteringDevice(value: string | CodedElement): this {
     this.fields[17] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ORC-19 Action By (XCN, max 0, backward compatibility, repeating) (chainable). */
+  /** ORC-19 Action By (XCN, backward compatibility, repeating) (chainable). */
   actionBy(...values: Repeated<string | XCN>[]): this {
     this.fields[18] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** ORC-20 Advanced Beneficiary Notice Code (CWE, max 0, optional) (chainable). */
+  /** ORC-20 Advanced Beneficiary Notice Code (CWE, optional) (chainable). */
   advancedBeneficiaryNoticeCode(value: string | CodedElement): this {
     this.fields[19] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ORC-21 Ordering Facility Name (XON, max 0, backward compatibility, repeating) (chainable). */
+  /** ORC-21 Ordering Facility Name (XON, backward compatibility, repeating) (chainable). */
   orderingFacilityName(...values: Repeated<string | XON>[]): this {
     this.fields[20] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xonParts(v)))));
     return this;
   }
 
-  /** ORC-22 Ordering Facility Address (XAD, max 0, backward compatibility, repeating) (chainable). */
+  /** ORC-22 Ordering Facility Address (XAD, backward compatibility, repeating) (chainable). */
   orderingFacilityAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[21] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** ORC-23 Ordering Facility Phone Number (XTN, max 0, backward compatibility, repeating) (chainable). */
+  /** ORC-23 Ordering Facility Phone Number (XTN, backward compatibility, repeating) (chainable). */
   orderingFacilityPhoneNumber(...values: Repeated<string | XTN>[]): this {
     this.fields[22] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** ORC-24 Ordering Provider Address (XAD, max 0, backward compatibility, repeating) (chainable). */
+  /** ORC-24 Ordering Provider Address (XAD, backward compatibility, repeating) (chainable). */
   orderingProviderAddress(...values: Repeated<string | XAD>[]): this {
     this.fields[23] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** ORC-25 Order Status Modifier (CWE, max 0, optional) (chainable). */
+  /** ORC-25 Order Status Modifier (CWE, optional) (chainable). */
   orderStatusModifier(value: string | CodedElement): this {
     this.fields[24] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ORC-26 Advanced Beneficiary Notice Override Reason (CWE, max 0, conditional) (chainable). */
+  /** ORC-26 Advanced Beneficiary Notice Override Reason (CWE, conditional) (chainable). */
   advancedBeneficiaryNoticeOverrideReason(value: string | CodedElement): this {
     this.fields[25] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ORC-27 Filler's Expected Availability Date/Time (DTM, max 0, optional) (chainable). */
+  /** ORC-27 Filler's Expected Availability Date/Time (DTM, optional) (chainable). */
   fillerSExpectedAvailabilityDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[26] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** ORC-28 Confidentiality Code (CWE, max 0, optional) (chainable). */
+  /** ORC-28 Confidentiality Code (CWE, optional) (chainable). */
   confidentialityCode(value: string | CodedElement): this {
     this.fields[27] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ORC-29 Order Type (CWE, max 0, optional) (chainable). */
+  /** ORC-29 Order Type (CWE, optional) (chainable). */
   orderType(value: string | CodedElement): this {
     this.fields[28] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ORC-30 Enterer Authorization Mode (CNE, max 0, optional) (chainable). */
+  /** ORC-30 Enterer Authorization Mode (CNE, optional) (chainable). */
   entererAuthorizationMode(value: string | CodedElement): this {
     this.fields[29] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ORC-31 Parent Universal Service Identifier (CWE, max 0, backward compatibility) (chainable). */
+  /** ORC-31 Parent Universal Service Identifier (CWE, backward compatibility) (chainable). */
   parentUniversalServiceIdentifier(value: string | CodedElement): this {
     this.fields[30] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ORC-32 Advanced Beneficiary Notice Date (DT, max 0, optional) (chainable). */
+  /** ORC-32 Advanced Beneficiary Notice Date (DT, optional) (chainable). */
   advancedBeneficiaryNoticeDate(value: string | Date, format?: HL7DateLayout): this {
     this.fields[31] = this.createField(formatHL7Date(value, format ?? DateLayout));
     return this;
   }
 
-  /** ORC-33 Alternate Placer Order Number (CX, max 0, optional, repeating) (chainable). */
+  /** ORC-33 Alternate Placer Order Number (CX, optional, repeating) (chainable). */
   alternatePlacerOrderNumber(...values: Repeated<string | CX>[]): this {
     this.fields[32] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cxParts(v)))));
     return this;

@@ -27,31 +27,31 @@ export class LCH extends BaseSegment {
     this.fields = [];
   }
 
-  /** LCH-1 Primary Key Value (PL, max 0, required) (chainable). */
+  /** LCH-1 Primary Key Value (PL, required) (chainable). */
   primaryKeyValue(value: string | PL): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** LCH-2 Segment Action Code (ID, max 0, optional) (chainable). */
+  /** LCH-2 Segment Action Code (ID, optional) (chainable). */
   segmentActionCode(value: string): this {
     this.fields[1] = this.createField(value);
     return this;
   }
 
-  /** LCH-3 Segment Unique Key (EI, max 0, optional) (chainable). */
+  /** LCH-3 Segment Unique Key (EI, optional) (chainable). */
   segmentUniqueKey(value: string | EI): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
   }
 
-  /** LCH-4 Location Characteristic ID (CWE, max 0, required) (chainable). */
+  /** LCH-4 Location Characteristic ID (CWE, required) (chainable). */
   locationCharacteristicId(value: string | CodedElement): this {
     this.fields[3] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** LCH-5 Location Characteristic Value (CWE, max 0, required) (chainable). */
+  /** LCH-5 Location Characteristic Value (CWE, required) (chainable). */
   locationCharacteristicValue(value: string | CodedElement): this {
     this.fields[4] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;

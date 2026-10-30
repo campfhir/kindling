@@ -27,31 +27,31 @@ export class DMI extends BaseSegment {
     this.fields = [];
   }
 
-  /** DMI-1 Diagnostic Related Group (CNE, max 0, optional) (chainable). */
+  /** DMI-1 Diagnostic Related Group (CNE, optional) (chainable). */
   diagnosticRelatedGroup(value: string | CodedElement): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DMI-2 Major Diagnostic Category (CNE, max 0, conditional) (chainable). */
+  /** DMI-2 Major Diagnostic Category (CNE, conditional) (chainable). */
   majorDiagnosticCategory(value: string | CodedElement): this {
     this.fields[1] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** DMI-3 Lower and Upper Trim Points (NR, max 0, conditional) (chainable). */
+  /** DMI-3 Lower and Upper Trim Points (NR, conditional) (chainable). */
   lowerAndUpperTrimPoints(value: string): this {
     this.fields[2] = this.createField(value);
     return this;
   }
 
-  /** DMI-4 Average Length of Stay (NM, max 0, conditional) (chainable). */
+  /** DMI-4 Average Length of Stay (NM, conditional) (chainable). */
   averageLengthOfStay(value: string): this {
     this.fields[3] = this.createField(value);
     return this;
   }
 
-  /** DMI-5 Relative Weight (NM, max 0, conditional) (chainable). */
+  /** DMI-5 Relative Weight (NM, conditional) (chainable). */
   relativeWeight(value: string): this {
     this.fields[4] = this.createField(value);
     return this;

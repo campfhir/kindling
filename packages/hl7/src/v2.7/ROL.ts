@@ -28,7 +28,7 @@ export class ROL extends BaseSegment {
     this.fields = [];
   }
 
-  /** ROL-1 Role Instance ID (EI, max 0, conditional) (chainable). */
+  /** ROL-1 Role Instance ID (EI, conditional) (chainable). */
   roleInstanceId(value: string | EI): this {
     this.fields[0] = this.createField(typeof value === "string" ? value : components(eiParts(value)));
     return this;
@@ -40,73 +40,73 @@ export class ROL extends BaseSegment {
     return this;
   }
 
-  /** ROL-3 Role (CWE, max 0, required) (chainable). */
+  /** ROL-3 Role (CWE, required) (chainable). */
   role(value: string | CodedElement): this {
     this.fields[2] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ROL-4 Role Person (XCN, max 0, required, repeating) (chainable). */
+  /** ROL-4 Role Person (XCN, required, repeating) (chainable). */
   rolePerson(...values: Repeated<string | XCN>[]): this {
     this.fields[3] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xcnParts(v)))));
     return this;
   }
 
-  /** ROL-5 Role Begin Date/Time (DTM, max 0, optional) (chainable). */
+  /** ROL-5 Role Begin Date/Time (DTM, optional) (chainable). */
   roleBeginDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[4] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** ROL-6 Role End Date/Time (DTM, max 0, optional) (chainable). */
+  /** ROL-6 Role End Date/Time (DTM, optional) (chainable). */
   roleEndDateTime(value: string | Date, format?: HL7DateTimeLayout): this {
     this.fields[5] = this.createField(formatHL7Date(value, format ?? DateTimeLayout));
     return this;
   }
 
-  /** ROL-7 Role Duration (CWE, max 0, optional) (chainable). */
+  /** ROL-7 Role Duration (CWE, optional) (chainable). */
   roleDuration(value: string | CodedElement): this {
     this.fields[6] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ROL-8 Role Action Reason (CWE, max 0, optional) (chainable). */
+  /** ROL-8 Role Action Reason (CWE, optional) (chainable). */
   roleActionReason(value: string | CodedElement): this {
     this.fields[7] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ROL-9 Provider Type (CWE, max 0, optional, repeating) (chainable). */
+  /** ROL-9 Provider Type (CWE, optional, repeating) (chainable). */
   providerType(...values: Repeated<string | CodedElement>[]): this {
     this.fields[8] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(cweParts(v)))));
     return this;
   }
 
-  /** ROL-10 Organization Unit Type (CWE, max 0, optional) (chainable). */
+  /** ROL-10 Organization Unit Type (CWE, optional) (chainable). */
   organizationUnitType(value: string | CodedElement): this {
     this.fields[9] = this.createField(typeof value === "string" ? value : components(cweParts(value)));
     return this;
   }
 
-  /** ROL-11 Office/Home Address/Birthplace (XAD, max 0, optional, repeating) (chainable). */
+  /** ROL-11 Office/Home Address/Birthplace (XAD, optional, repeating) (chainable). */
   officeHomeAddressBirthplace(...values: Repeated<string | XAD>[]): this {
     this.fields[10] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xadParts(v)))));
     return this;
   }
 
-  /** ROL-12 Phone (XTN, max 0, optional, repeating) (chainable). */
+  /** ROL-12 Phone (XTN, optional, repeating) (chainable). */
   phone(...values: Repeated<string | XTN>[]): this {
     this.fields[11] = this.createRepeatingField(repetitions(values).map((v) => this.createField(typeof v === "string" ? v : components(xtnParts(v)))));
     return this;
   }
 
-  /** ROL-13 Person's Location (PL, max 0, optional) (chainable). */
+  /** ROL-13 Person's Location (PL, optional) (chainable). */
   personSLocation(value: string | PL): this {
     this.fields[12] = this.createField(typeof value === "string" ? value : components(plParts(value)));
     return this;
   }
 
-  /** ROL-14 Organization (XON, max 0, optional) (chainable). */
+  /** ROL-14 Organization (XON, optional) (chainable). */
   organization(value: string | XON): this {
     this.fields[13] = this.createField(typeof value === "string" ? value : components(xonParts(value)));
     return this;
