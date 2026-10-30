@@ -243,7 +243,14 @@ export { createBRP_O30, parseBRP_O30, BRP_O30_STRUCTURE, type ParsedBRP_O30 } fr
 export { createBRT_O32, parseBRT_O32, BRT_O32_STRUCTURE, type ParsedBRT_O32 } from "./BRT_O32.ts";
 export { createBTS_O31, parseBTS_O31, BTS_O31_STRUCTURE, type ParsedBTS_O31 } from "./BTS_O31.ts";
 export { createCCF_I22, parseCCF_I22, CCF_I22_STRUCTURE, type ParsedCCF_I22 } from "./CCF_I22.ts";
+export { createCCI_I22, parseCCI_I22, CCI_I22_STRUCTURE, type ParsedCCI_I22 } from "./CCI_I22.ts";
+export { createCCM_I21, parseCCM_I21, CCM_I21_STRUCTURE, type ParsedCCM_I21 } from "./CCM_I21.ts";
 export { createCCQ_I19, parseCCQ_I19, CCQ_I19_STRUCTURE, type ParsedCCQ_I19 } from "./CCQ_I19.ts";
+export { createCCR_I16, parseCCR_I16, CCR_I16_STRUCTURE, type ParsedCCR_I16 } from "./CCR_I16.ts";
+export { createCCR_I17, parseCCR_I17, CCR_I17_STRUCTURE, type ParsedCCR_I17 } from "./CCR_I17.ts";
+export { createCCR_I18, parseCCR_I18, CCR_I18_STRUCTURE, type ParsedCCR_I18 } from "./CCR_I18.ts";
+export { createCCU_I20, parseCCU_I20, CCU_I20_STRUCTURE, type ParsedCCU_I20 } from "./CCU_I20.ts";
+export { createCQU_I19, parseCQU_I19, CQU_I19_STRUCTURE, type ParsedCQU_I19 } from "./CQU_I19.ts";
 export { createCRM_C01, parseCRM_C01, CRM_C01_STRUCTURE, type ParsedCRM_C01 } from "./CRM_C01.ts";
 export { createCRM_C02, parseCRM_C02, CRM_C02_STRUCTURE, type ParsedCRM_C02 } from "./CRM_C02.ts";
 export { createCRM_C03, parseCRM_C03, CRM_C03_STRUCTURE, type ParsedCRM_C03 } from "./CRM_C03.ts";
@@ -270,6 +277,7 @@ export { createEHC_E13, parseEHC_E13, EHC_E13_STRUCTURE, type ParsedEHC_E13 } fr
 export { createEHC_E15, parseEHC_E15, EHC_E15_STRUCTURE, type ParsedEHC_E15 } from "./EHC_E15.ts";
 export { createEHC_E20, parseEHC_E20, EHC_E20_STRUCTURE, type ParsedEHC_E20 } from "./EHC_E20.ts";
 export { createEHC_E21, parseEHC_E21, EHC_E21_STRUCTURE, type ParsedEHC_E21 } from "./EHC_E21.ts";
+export { createEHC_E24, parseEHC_E24, EHC_E24_STRUCTURE, type ParsedEHC_E24 } from "./EHC_E24.ts";
 export { createESR_U02, parseESR_U02, ESR_U02_STRUCTURE, type ParsedESR_U02 } from "./ESR_U02.ts";
 export { createESU_U01, parseESU_U01, ESU_U01_STRUCTURE, type ParsedESU_U01 } from "./ESU_U01.ts";
 export { createINR_U06, parseINR_U06, INR_U06_STRUCTURE, type ParsedINR_U06 } from "./INR_U06.ts";
@@ -459,6 +467,9 @@ export { createRTB_Z78, parseRTB_Z78, RTB_Z78_STRUCTURE, type ParsedRTB_Z78 } fr
 export { createRTB_Z92, parseRTB_Z92, RTB_Z92_STRUCTURE, type ParsedRTB_Z92 } from "./RTB_Z92.ts";
 export { createRTB_Z94, parseRTB_Z94, RTB_Z94_STRUCTURE, type ParsedRTB_Z94 } from "./RTB_Z94.ts";
 export { createRTB_Z96, parseRTB_Z96, RTB_Z96_STRUCTURE, type ParsedRTB_Z96 } from "./RTB_Z96.ts";
+export { createSCN_S37, parseSCN_S37, SCN_S37_STRUCTURE, type ParsedSCN_S37 } from "./SCN_S37.ts";
+export { createSDN_S36, parseSDN_S36, SDN_S36_STRUCTURE, type ParsedSDN_S36 } from "./SDN_S36.ts";
+export { createSDR_S31, parseSDR_S31, SDR_S31_STRUCTURE, type ParsedSDR_S31 } from "./SDR_S31.ts";
 export { createSIU_S12, parseSIU_S12, SIU_S12_STRUCTURE, type ParsedSIU_S12 } from "./SIU_S12.ts";
 export { createSIU_S13, parseSIU_S13, SIU_S13_STRUCTURE, type ParsedSIU_S13 } from "./SIU_S13.ts";
 export { createSIU_S14, parseSIU_S14, SIU_S14_STRUCTURE, type ParsedSIU_S14 } from "./SIU_S14.ts";
@@ -478,6 +489,7 @@ export { createSLN_S34, parseSLN_S34, SLN_S34_STRUCTURE, type ParsedSLN_S34 } fr
 export { createSLN_S35, parseSLN_S35, SLN_S35_STRUCTURE, type ParsedSLN_S35 } from "./SLN_S35.ts";
 export { createSLR_S28, parseSLR_S28, SLR_S28_STRUCTURE, type ParsedSLR_S28 } from "./SLR_S28.ts";
 export { createSLR_S29, parseSLR_S29, SLR_S29_STRUCTURE, type ParsedSLR_S29 } from "./SLR_S29.ts";
+export { createSMD_S32, parseSMD_S32, SMD_S32_STRUCTURE, type ParsedSMD_S32 } from "./SMD_S32.ts";
 export { createSRM_S01, parseSRM_S01, SRM_S01_STRUCTURE, type ParsedSRM_S01 } from "./SRM_S01.ts";
 export { createSRM_S02, parseSRM_S02, SRM_S02_STRUCTURE, type ParsedSRM_S02 } from "./SRM_S02.ts";
 export { createSRM_S03, parseSRM_S03, SRM_S03_STRUCTURE, type ParsedSRM_S03 } from "./SRM_S03.ts";

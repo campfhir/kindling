@@ -8,8 +8,9 @@
  *   group("PROCEDURE", "optional", "repeating", [req("PR1"), optList("ROL")])   [{ PROCEDURE: PR1 [{ROL}] }]
  *   group("VISIT", "optional", "single", [req("PV1"), opt("PV2")])              [ VISIT: PV1 [PV2] ]
  *   choice(["OBR", "RQD"], "required")                                        <OBR|RQD>
+ *   groupChoice([group("A", "optional", "single", [...]), group("B", ...)], "required")   <{ A: ... }|{ B: ... }>
  */
-import type { MessageSchema, SegmentChoice, SegmentDefinition, SegmentGroup, StructureItem } from "../../src/types/schema";
+import type { GroupChoice, MessageSchema, SegmentChoice, SegmentDefinition, SegmentGroup, StructureItem } from "../../src/types/schema";
 
 type SegmentExtras = Pick<SegmentDefinition, "as" | "minOccurrences" | "maxOccurrences">;
 type GroupExtras = Pick<SegmentGroup, "as" | "minOccurrences" | "maxOccurrences" | "inline" | "exportTypeName" | "builderTypeName">;
@@ -39,6 +40,13 @@ export const group = (name: string, usage: Usage, cardinality: Cardinality, segm
 
 /** One of several segments at one position, e.g. `choice(["OBR", "RQD"], "required")`. */
 export const choice = (oneOf: string[], usage: Usage, as?: string): SegmentChoice => ({ oneOf, required: usage === "required", ...(as ? { as } : {}) });
+
+/** One of several alternative groups at one position; the alternatives must start with different segments. */
+export const groupChoice = (alternatives: SegmentGroup[], usage: Usage, as?: string): GroupChoice => ({
+  alternatives,
+  required: usage === "required",
+  ...(as ? { as } : {}),
+});
 
 /** The optional repeating SFT (Software) segment that follows MSH from v2.5 on. */
 export const SFT = optList("SFT");

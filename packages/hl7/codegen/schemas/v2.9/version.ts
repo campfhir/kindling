@@ -16,7 +16,7 @@ export const V2_9: VersionSchema = {
   withdrawnMessages: [
     // Withdrawn in the 2.9 index.
     "RDR_RDR",
-    // Not generated: the schema type cannot express their structure yet (choice of groups, unnamed group); see IMPORT.md.
+    // Not generated: the table holds a placeholder group, an open choice (etc.) or a choice of one group the schema cannot express yet; see IMPORT.md.
     "CCI_I22",
     "CCM_I21",
     "CCR_I16",

@@ -9,7 +9,7 @@ message ledgers against Caristix and HAPI.
 - Message tables: 292 (plus 115 per-event ACK tables, the general acknowledgment, not extracted), structures: 192, events in the index: 378, event tables that differ from their primary: 20.
 - Withdrawn sections (a heading followed by an "Attention ... withdrawn" note): 3.3.30 ADT/ACK - Merge Person Information (Event A30) (ch03.htm); 3.3.34 ADT/ACK - Merge Patient Information - Patient ID Only (Event A34) (ch03.htm); 3.3.35 ADT/ACK - Merge Patient Information - Account Number Only (Event A35) (ch03.htm); 3.3.36 ADT/ACK - Merge Patient Information - Patient ID & Account Number (Event A36) (ch03.htm); 3.3.39 ADT/ACK - Merge Person - Patient ID (Event A39) (ch03.htm); 3.3.46 ADT/ACK - Change Patient ID (Event A46) (ch03.htm); 3.3.48 ADT/ACK - Change Alternate Patient ID (Event A48) (ch03.htm); 4.4.1 ORM - general order message (ch04.htm); 4.4.2 ORR - general order response message response to any ORM (ch04.htm); 4.4.3 OSQ/OSR- query response for order (ch04.htm).
 - Withdrawn segments: 6.5.10 UB1 - Uniform Billing 1 Segment (ch06.htm).
-- Tables with no rows (cross-references): QBP^Q25.
+- Tables with no rows (cross-references, or events whose page prints no structure): QBP^Q25.
 
 ## Problems found while parsing
 - OML^O39^OML_O39: group SPECIMEN_IN_PACKAGE: brackets "[{" / "}"
@@ -38,8 +38,18 @@ message ledgers against Caristix and HAPI.
 - QBP^Z79^QBP_Q15: rows printed without a table element after the caption, read as the table
 - QBP^Z75^QBP_Q13: rows printed without a table element after the caption, read as the table
 - MF_SITE_DEFINED: a group of MFE and a placeholder row is read as MFE alone
+- RESOURCE_OBJECT: "<" ... ">" of single segments separated by "|" is a choice of those segments
+- CLINICAL_HISTORY_OBJECT: "<" ... ">" of single segments separated by "|" is a choice of those segments
+- ROLE_CLINICAL_HISTORY_OBJECT: "<" ... ">" of single segments separated by "|" is a choice of those segments
+- ROLE_PROBLEM_OBJECT: "<" ... ">" of single segments separated by "|" is a choice of those segments
+- ROLE_GOAL_OBJECT: "<" ... ">" of single segments separated by "|" is a choice of those segments
+- ROLE_PATHWAY_OBJECT: "<" ... ">" of single segments separated by "|" is a choice of those segments
+- CLINICAL_ORDER_OBJECT: "<" ... ">" of single segments separated by "|" is a choice of those segments
 - PGL^PC6-PC8^PGL_PC6: the choice "OBR | etc." is read as <OBR|RQD|RQ1|RXO|ODS|ODT>
 - QBP^Q25^QBP_Q21: rows printed without a table element after the caption, read as the table
+- AUTHORIZATION_RESPONSE_INFO: a choice of one group ("<" ... ">" with no "|") is read as that group
+- ANTI-MICROBIAL_DEVICE_DATA: a choice of one group ("<" ... ">" with no "|") is read as that group
+- ANTI-MICROBIAL_DEVICE_CYCLE_DATA: a choice of one group ("<" ... ">" with no "|") is read as that group
 
 ## Tables printed twice
 - QBP^Znn: printed in ch05.htm and ch05.htm and ch05.htm and ch05.htm; kept ch05.htm; the prints are identical

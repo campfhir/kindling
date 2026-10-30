@@ -4,7 +4,7 @@
  * its README and IMPORT.md for every decision). Do not edit by hand: rerun the importer.
  */
 import type { MessageSchema, StructureItem } from "../../../src/types/schema";
-import { choice, group, opt, optList, req, reqList } from "../helpers";
+import { choice, group, groupChoice, opt, optList, req, reqList } from "../helpers";
 
 const v2_8_ACK_STRUCTURE: StructureItem[] = [
   req("MSH"),
@@ -4778,6 +4778,374 @@ const v2_8_RRI_I12_STRUCTURE: StructureItem[] = [
   optList("NTE"),
 ];
 
+const v2_8_CCM_I21_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  req("PID"),
+  opt("PD1"),
+  optList("NK1"),
+  group("INSURANCE", "optional", "repeating", [
+    req("IN1"),
+    opt("IN2"),
+    opt("IN3"),
+  ]),
+  group("APPOINTMENT_HISTORY", "optional", "repeating", [
+    req("SCH"),
+    group("RESOURCES", "optional", "repeating", [
+      req("RGS"),
+      group("RESOURCE_DETAIL", "optional", "repeating", [
+        choice(["AIS", "AIG", "AIL", "AIP"], "required"),
+        group("RESOURCE_OBSERVATION", "optional", "repeating", [
+          req("OBX"),
+          optList("PRT"),
+        ]),
+      ]),
+    ]),
+  ]),
+  group("CLINICAL_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("CLINICAL_HISTORY_DETAIL", "optional", "repeating", [
+      choice(["OBR", "ODS", "PR1", "RF1", "AL1", "IAM", "ACC", "RMI", "DB1", "DG1", "DRG", "PDA"], "required"),
+      group("CLINICAL_HISTORY_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    group("ROLE_CLINICAL_HISTORY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PATIENT_VISITS", "required", "repeating", [
+    req("PV1"),
+    opt("PV2"),
+  ]),
+  group("MEDICATION_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("MEDICATION_ORDER_DETAIL", "optional", "single", [
+      req("RXO"),
+      reqList("RXR"),
+      optList("RXC"),
+      group("MEDICATION_ORDER_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    group("MEDICATION_ENCODING_DETAIL", "optional", "single", [
+      req("RXE"),
+      reqList("RXR"),
+      optList("RXC"),
+      group("MEDICATION_ENCODING_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    group("MEDICATION_ADMINISTRATION_DETAIL", "optional", "repeating", [
+      reqList("RXA"),
+      req("RXR"),
+      group("MEDICATION_ADMINISTRATION_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PROBLEM", "optional", "repeating", [
+    req("PRB"),
+    optList("VAR"),
+    group("ROLE_PROBLEM", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    group("PROBLEM_OBSERVATION", "optional", "repeating", [
+      req("OBX"),
+      optList("PRT"),
+    ]),
+  ]),
+  group("GOAL", "optional", "repeating", [
+    req("GOL"),
+    optList("VAR"),
+    group("ROLE_GOAL", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    group("GOAL_OBSERVATION", "optional", "repeating", [
+      req("OBX"),
+      optList("PRT"),
+    ]),
+  ]),
+  group("PATHWAY", "optional", "repeating", [
+    req("PTH"),
+    optList("VAR"),
+    group("ROLE_PATHWAY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    group("PATHWAY_OBSERVATION", "optional", "repeating", [
+      req("OBX"),
+      optList("PRT"),
+    ]),
+  ]),
+  optList("REL"),
+];
+
+const v2_8_CCR_I16_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  reqList("RF1"),
+  group("PROVIDER_CONTACT", "required", "repeating", [
+    req("PRD"),
+    optList("CTD"),
+  ]),
+  group("CLINICAL_ORDER", "optional", "repeating", [
+    req("ORC"),
+    group("CLINICAL_ORDER_TIMING", "optional", "repeating", [
+      req("TQ1"),
+      optList("TQ2"),
+    ]),
+    group("CLINICAL_ORDER_DETAIL", "required", "repeating", [
+      choice(["OBR", "RXO", "ODS", "PR1"], "required"),
+      group("CLINICAL_ORDER_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PATIENT", "required", "repeating", [
+    req("PID"),
+    opt("PD1"),
+  ]),
+  optList("NK1"),
+  group("INSURANCE", "optional", "repeating", [
+    req("IN1"),
+    opt("IN2"),
+    opt("IN3"),
+  ]),
+  group("APPOINTMENT_HISTORY", "optional", "repeating", [
+    req("SCH"),
+    group("RESOURCES", "optional", "repeating", [
+      req("RGS"),
+      group("RESOURCE_DETAIL", "optional", "repeating", [
+        choice(["AIS", "AIG", "AIL", "AIP"], "required"),
+        group("RESOURCE_OBSERVATION", "optional", "repeating", [
+          req("OBX"),
+          optList("PRT"),
+        ]),
+      ]),
+    ]),
+  ]),
+  group("CLINICAL_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("CLINICAL_HISTORY_DETAIL", "optional", "repeating", [
+      choice(["OBR", "ODS", "PR1", "RF1", "AL1", "IAM", "ACC", "RMI", "DB1", "DG1", "DRG"], "required"),
+      group("CLINICAL_HISTORY_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    group("ROLE_CLINICAL_HISTORY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PATIENT_VISITS", "required", "repeating", [
+    req("PV1"),
+    opt("PV2"),
+  ]),
+  group("MEDICATION_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("MEDICATION_ORDER_DETAIL", "optional", "single", [
+      req("RXO"),
+      reqList("RXR"),
+      optList("RXC"),
+      group("MEDICATION_ORDER_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    group("MEDICATION_ENCODING_DETAIL", "optional", "single", [
+      req("RXE"),
+      reqList("RXR"),
+      optList("RXC"),
+      group("MEDICATION_ENCODING_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    group("MEDICATION_ADMINISTRATION_DETAIL", "optional", "repeating", [
+      reqList("RXA"),
+      req("RXR"),
+      group("MEDICATION_ADMINISTRATION_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PROBLEM", "optional", "repeating", [
+    req("PRB"),
+    optList("VAR"),
+    group("ROLE_PROBLEM", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    group("ROLE_OBSERVATION", "optional", "repeating", [
+      req("OBX"),
+      optList("PRT"),
+    ]),
+  ]),
+  group("GOAL", "optional", "repeating", [
+    req("GOL"),
+    optList("VAR"),
+    group("ROLE_GOAL", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    group("GOAL_OBSERVATION", "optional", "repeating", [
+      req("OBX"),
+      optList("PRT"),
+    ]),
+  ]),
+  group("PATHWAY", "optional", "repeating", [
+    req("PTH"),
+    optList("VAR"),
+    group("ROLE_PATHWAY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    group("PATHWAY_OBSERVATION", "optional", "repeating", [
+      req("OBX"),
+      optList("PRT"),
+    ]),
+  ]),
+  optList("REL"),
+];
+
+const v2_8_CCU_I20_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  req("RF1"),
+  group("PROVIDER_CONTACT", "optional", "repeating", [
+    req("PRD"),
+    optList("CTD"),
+  ]),
+  group("PATIENT", "optional", "repeating", [
+    req("PID"),
+    opt("PD1"),
+  ]),
+  optList("NK1"),
+  group("INSURANCE", "optional", "repeating", [
+    req("IN1"),
+    opt("IN2"),
+    opt("IN3"),
+  ]),
+  group("APPOINTMENT_HISTORY", "optional", "repeating", [
+    req("SCH"),
+    group("RESOURCES", "optional", "repeating", [
+      req("RGS"),
+      group("RESOURCE_DETAIL", "optional", "repeating", [
+        choice(["AIS", "AIG", "AIL", "AIP"], "required"),
+        group("RESOURCE_OBSERVATION", "optional", "repeating", [
+          req("OBX"),
+          optList("PRT"),
+        ]),
+      ]),
+    ]),
+  ]),
+  group("CLINICAL_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("CLINICAL_HISTORY_DETAIL", "optional", "repeating", [
+      choice(["OBR", "ODS", "PR1", "RF1", "AL1", "IAM", "ACC", "RMI", "DB1", "DG1", "DRG", "PDA"], "required"),
+      group("CLINICAL_HISTORY_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    group("ROLE_CLINICAL_HISTORY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PATIENT_VISITS", "required", "repeating", [
+    req("PV1"),
+    opt("PV2"),
+  ]),
+  group("MEDICATION_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("MEDICATION_ORDER_DETAIL", "optional", "single", [
+      req("RXO"),
+      reqList("RXR"),
+      optList("RXC"),
+      group("MEDICATION_ORDER_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    group("MEDICATION_ENCODING_DETAIL", "optional", "single", [
+      req("RXE"),
+      reqList("RXR"),
+      optList("RXC"),
+      group("MEDICATION_ENCODING_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    group("MEDICATION_ADMINISTRATION_DETAIL", "optional", "repeating", [
+      reqList("RXA"),
+      req("RXR"),
+      group("MEDICATION_ADMINISTRATION_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PROBLEM", "optional", "repeating", [
+    req("PRB"),
+    optList("VAR"),
+    group("ROLE_PROBLEM", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    group("PROBLEM_OBSERVATION", "optional", "repeating", [
+      req("OBX"),
+      optList("PRT"),
+    ]),
+  ]),
+  group("GOAL", "optional", "repeating", [
+    req("GOL"),
+    optList("VAR"),
+    group("ROLE_GOAL", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    group("GOAL_OBSERVATION", "optional", "repeating", [
+      req("OBX"),
+      optList("PRT"),
+    ]),
+  ]),
+  group("PATHWAY", "optional", "repeating", [
+    req("PTH"),
+    optList("VAR"),
+    group("ROLE_PATHWAY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    group("PATHWAY_OBSERVATION", "optional", "repeating", [
+      req("OBX"),
+      optList("PRT"),
+    ]),
+  ]),
+  optList("REL"),
+];
+
 const v2_8_CCQ_I19_STRUCTURE: StructureItem[] = [
   req("MSH"),
   optList("SFT"),
@@ -4790,11 +5158,248 @@ const v2_8_CCQ_I19_STRUCTURE: StructureItem[] = [
   optList("REL"),
 ];
 
+const v2_8_CQU_I19_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  req("MSA"),
+  optList("ERR"),
+  req("RF1"),
+  group("PROVIDER_CONTACT", "optional", "repeating", [
+    req("PRD"),
+    optList("CTD"),
+  ]),
+  group("PATIENT", "optional", "repeating", [
+    req("PID"),
+    opt("PD1"),
+  ]),
+  optList("NK1"),
+  group("INSURANCE", "optional", "repeating", [
+    req("IN1"),
+    opt("IN2"),
+    opt("IN3"),
+  ]),
+  group("APPOINTMENT_HISTORY", "optional", "repeating", [
+    req("SCH"),
+    group("RESOURCES", "optional", "repeating", [
+      req("RGS"),
+      group("RESOURCE_DETAIL", "optional", "repeating", [
+        choice(["AIS", "AIG", "AIL", "AIP"], "required"),
+        group("RESOURCE_OBSERVATION", "optional", "repeating", [
+          req("OBX"),
+          optList("PRT"),
+        ]),
+      ]),
+    ]),
+  ]),
+  group("CLINICAL_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("CLINICAL_HISTORY_DETAIL", "optional", "repeating", [
+      choice(["OBR", "ODS", "PR1", "RF1", "AL1", "IAM", "ACC", "RMI", "DB1", "DG1", "DRG", "PDA"], "required"),
+      group("CLINICAL_HISTORY_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    group("ROLE_CLINICAL_HISTORY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ], { exportTypeName: "ParsedRoleClinicalHistory1", builderTypeName: "RoleClinicalHistory1Group" }),
+    optList("CTI"),
+  ]),
+  group("PATIENT_VISITS", "required", "repeating", [
+    req("PV1"),
+    opt("PV2"),
+  ]),
+  group("MEDICATION_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("MEDICATION_ORDER_DETAIL", "optional", "single", [
+      req("RXO"),
+      reqList("RXR"),
+      optList("RXC"),
+      group("MEDICATION_ORDER_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    group("MEDICATION_ENCODING_DETAIL", "optional", "single", [
+      req("RXE"),
+      reqList("RXR"),
+      optList("RXC"),
+      group("MEDICATION_ENCODING_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    group("MEDICATION_ADMINISTRATION_DETAIL", "optional", "repeating", [
+      reqList("RXA"),
+      req("RXR"),
+      group("MEDICATION_ADMINISTRATION_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PROBLEM", "optional", "repeating", [
+    req("PRB"),
+    optList("VAR"),
+    group("ROLE_PROBLEM", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    group("PROBLEM_OBSERVATION", "optional", "repeating", [
+      req("OBX"),
+      optList("PRT"),
+    ]),
+  ]),
+  group("GOAL", "optional", "repeating", [
+    req("GOL"),
+    optList("VAR"),
+    group("ROLE_GOAL", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    group("GOAL_OBSERVATION", "optional", "repeating", [
+      req("OBX"),
+      optList("PRT"),
+    ]),
+  ]),
+  group("PATHWAY", "optional", "repeating", [
+    req("PTH"),
+    optList("VAR"),
+    group("ROLE_CLINICAL_HISTORY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ], { exportTypeName: "ParsedRoleClinicalHistory2", builderTypeName: "RoleClinicalHistory2Group" }),
+    group("PATHWAY_OBSERVATION", "optional", "repeating", [
+      req("OBX"),
+      optList("PRT"),
+    ]),
+  ]),
+  optList("REL"),
+];
+
 const v2_8_CCF_I22_STRUCTURE: StructureItem[] = [
   req("MSH"),
   optList("SFT"),
   opt("UAC"),
   req("PID"),
+];
+
+const v2_8_CCI_I22_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  req("MSA"),
+  optList("ERR"),
+  req("PID"),
+  opt("PD1"),
+  optList("NK1"),
+  group("INSURANCE", "optional", "repeating", [
+    req("IN1"),
+    opt("IN2"),
+    opt("IN3"),
+  ]),
+  group("APPOINTMENT_HISTORY", "optional", "repeating", [
+    req("SCH"),
+    group("RESOURCES", "optional", "repeating", [
+      req("RGS"),
+      group("RESOURCE_DETAIL", "optional", "repeating", [
+        choice(["AIS", "AIG", "AIL", "AIP"], "required"),
+        group("RESOURCE_OBSERVATION", "optional", "repeating", [
+          req("OBX"),
+          optList("PRT"),
+        ]),
+      ]),
+    ]),
+  ]),
+  group("CLINICAL_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("CLINICAL_HISTORY_DETAIL", "optional", "repeating", [
+      choice(["OBR", "ODS", "PR1", "RF1", "AL1", "IAM", "ACC", "RMI", "DB1", "DG1", "DRG", "PDA"], "required"),
+      group("CLINICAL_HISTORY_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    group("ROLE_CLINICAL_HISTORY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PATIENT_VISITS", "required", "repeating", [
+    req("PV1"),
+    opt("PV2"),
+  ]),
+  group("MEDICATION_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("MEDICATION_ORDER_DETAIL", "optional", "single", [
+      req("RXO"),
+      reqList("RXR"),
+      optList("RXC"),
+      group("MEDICATION_ORDER_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    group("MEDICATION_ENCODING_DETAIL", "optional", "single", [
+      req("RXE"),
+      reqList("RXR"),
+      optList("RXC"),
+      group("MEDICATION_ENCODING_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    group("MEDICATION_ADMINISTRATION_DETAIL", "optional", "repeating", [
+      reqList("RXA"),
+      req("RXR"),
+      group("MEDICATION_ADMINISTRATION_OBSERVATION", "optional", "repeating", [
+        req("OBX"),
+        optList("PRT"),
+      ]),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PROBLEM", "optional", "repeating", [
+    req("PRB"),
+    optList("VAR"),
+    group("ROLE_PROBLEM", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    group("PROBLEM_OBSERVATION", "optional", "repeating", [
+      req("OBX"),
+      optList("PRT"),
+    ]),
+  ]),
+  group("GOAL", "optional", "repeating", [
+    req("GOL"),
+    optList("VAR"),
+    group("ROLE_GOAL", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    group("GOAL_OBSERVATION", "optional", "repeating", [
+      req("OBX"),
+      optList("PRT"),
+    ]),
+  ]),
+  group("PATHWAY", "optional", "repeating", [
+    req("PTH"),
+    optList("VAR"),
+    group("ROLE_PATHWAY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    group("PATHWAY_OBSERVATION", "optional", "repeating", [
+      req("OBX"),
+      optList("PRT"),
+    ]),
+  ]),
+  optList("REL"),
 ];
 
 const v2_8_PGL_PC6_STRUCTURE: StructureItem[] = [
@@ -5693,8 +6298,15 @@ export const V2_8_MESSAGES: MessageSchema[] = [
   { messageType: "RRI", triggerEvent: "I13", version: "2.8", structure: v2_8_RRI_I12_STRUCTURE, baseMessage: "RRI_I12" },
   { messageType: "RRI", triggerEvent: "I14", version: "2.8", structure: v2_8_RRI_I12_STRUCTURE, baseMessage: "RRI_I12" },
   { messageType: "RRI", triggerEvent: "I15", version: "2.8", structure: v2_8_RRI_I12_STRUCTURE, baseMessage: "RRI_I12" },
+  { messageType: "CCM", triggerEvent: "I21", version: "2.8", structure: v2_8_CCM_I21_STRUCTURE },
+  { messageType: "CCR", triggerEvent: "I16", version: "2.8", structure: v2_8_CCR_I16_STRUCTURE },
+  { messageType: "CCR", triggerEvent: "I17", version: "2.8", structure: v2_8_CCR_I16_STRUCTURE, baseMessage: "CCR_I16" },
+  { messageType: "CCR", triggerEvent: "I18", version: "2.8", structure: v2_8_CCR_I16_STRUCTURE, baseMessage: "CCR_I16" },
+  { messageType: "CCU", triggerEvent: "I20", version: "2.8", structure: v2_8_CCU_I20_STRUCTURE },
   { messageType: "CCQ", triggerEvent: "I19", version: "2.8", structure: v2_8_CCQ_I19_STRUCTURE },
+  { messageType: "CQU", triggerEvent: "I19", version: "2.8", structure: v2_8_CQU_I19_STRUCTURE },
   { messageType: "CCF", triggerEvent: "I22", version: "2.8", structure: v2_8_CCF_I22_STRUCTURE },
+  { messageType: "CCI", triggerEvent: "I22", version: "2.8", structure: v2_8_CCI_I22_STRUCTURE },
   { messageType: "PGL", triggerEvent: "PC6", version: "2.8", structure: v2_8_PGL_PC6_STRUCTURE },
   { messageType: "PGL", triggerEvent: "PC7", version: "2.8", structure: v2_8_PGL_PC6_STRUCTURE, baseMessage: "PGL_PC6" },
   { messageType: "PGL", triggerEvent: "PC8", version: "2.8", structure: v2_8_PGL_PC6_STRUCTURE, baseMessage: "PGL_PC6" },

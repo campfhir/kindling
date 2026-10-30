@@ -334,7 +334,7 @@
     "codegen": "tsx codegen/generate.ts",
     "test:positions": "tsx codegen/generate-field-position-tests.ts",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "NODE_OPTIONS=--max-old-space-size=8192 tsc --noEmit",
     "exports": "node codegen/generate-package-exports.mjs",
     "codegen:check": "pnpm codegen && pnpm barrels && pnpm exports && test -z \"$(git status --porcelain -- src package.json)\"",
     "fixtures:fetch": "node scripts/fetch-fixtures.mjs",

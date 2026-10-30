@@ -14,15 +14,11 @@ export const V2_6: VersionSchema = {
   reexport: true,
   ownSegments: [],
   withdrawnMessages: [
-    // Not generated: the schema type cannot express their structure yet (choice of groups, unnamed group); see IMPORT.md.
+    // Not generated: the table holds a placeholder group, an open choice (etc.) or a choice of one group the schema cannot express yet; see IMPORT.md.
     "QBP_Q11",
     "QBP_Q13",
     "QVR_Q17",
     "RSP_K11",
-    "SCN_S37",
-    "SDN_S36",
-    "SDR_S31",
-    "SMD_S32",
     // Absent from the extraction: not in the 2.6 index and not generated. They may be withdrawn earlier or missed by the extraction; check the pages before relying on them.
     "EDR_R07",
     "EQQ_Q04",

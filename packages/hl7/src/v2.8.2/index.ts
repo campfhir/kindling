@@ -253,7 +253,14 @@ export { createBRP_O30, parseBRP_O30, BRP_O30_STRUCTURE, type ParsedBRP_O30 } fr
 export { createBRT_O32, parseBRT_O32, BRT_O32_STRUCTURE, type ParsedBRT_O32 } from "./BRT_O32.ts";
 export { createBTS_O31, parseBTS_O31, BTS_O31_STRUCTURE, type ParsedBTS_O31 } from "./BTS_O31.ts";
 export { createCCF_I22, parseCCF_I22, CCF_I22_STRUCTURE, type ParsedCCF_I22 } from "./CCF_I22.ts";
+export { createCCI_I22, parseCCI_I22, CCI_I22_STRUCTURE, type ParsedCCI_I22 } from "./CCI_I22.ts";
+export { createCCM_I21, parseCCM_I21, CCM_I21_STRUCTURE, type ParsedCCM_I21 } from "./CCM_I21.ts";
 export { createCCQ_I19, parseCCQ_I19, CCQ_I19_STRUCTURE, type ParsedCCQ_I19 } from "./CCQ_I19.ts";
+export { createCCR_I16, parseCCR_I16, CCR_I16_STRUCTURE, type ParsedCCR_I16 } from "./CCR_I16.ts";
+export { createCCR_I17, parseCCR_I17, CCR_I17_STRUCTURE, type ParsedCCR_I17 } from "./CCR_I17.ts";
+export { createCCR_I18, parseCCR_I18, CCR_I18_STRUCTURE, type ParsedCCR_I18 } from "./CCR_I18.ts";
+export { createCCU_I20, parseCCU_I20, CCU_I20_STRUCTURE, type ParsedCCU_I20 } from "./CCU_I20.ts";
+export { createCQU_I19, parseCQU_I19, CQU_I19_STRUCTURE, type ParsedCQU_I19 } from "./CQU_I19.ts";
 export { createCRM_C01, parseCRM_C01, CRM_C01_STRUCTURE, type ParsedCRM_C01 } from "./CRM_C01.ts";
 export { createCRM_C02, parseCRM_C02, CRM_C02_STRUCTURE, type ParsedCRM_C02 } from "./CRM_C02.ts";
 export { createCRM_C03, parseCRM_C03, CRM_C03_STRUCTURE, type ParsedCRM_C03 } from "./CRM_C03.ts";

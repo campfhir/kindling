@@ -19,6 +19,8 @@ import {
   type SegmentGroup,
   type StructureItem,
   builderTypeName,
+  firstSegments,
+  isGroupChoice,
   isSegmentChoice,
   isSegmentGroup,
   itemField,
@@ -44,7 +46,8 @@ const versionLabel = (version: string) => `HL7 ${version}`;
 
 /** Wraps a structure item's name in the standard's optionality/repetition brackets. */
 function bracket(item: StructureItem, inner: string): string {
-  const rep = item.repeating ? `{${inner}}` : inner;
+  const repeating = "repeating" in item && item.repeating;
+  const rep = repeating ? `{${inner}}` : inner;
   return item.required ? rep : `[${rep}]`;
 }
 
@@ -53,6 +56,9 @@ export function describeStructure(items: StructureItem[]): string {
   return items
     .map((item) => {
       if (isSegmentChoice(item)) return bracket(item, `<${item.oneOf.join("|")}>`);
+      if (isGroupChoice(item)) {
+        return bracket(item, `<${item.alternatives.map((a) => ` ${a.name}: ${describeStructure(a.segments)} `).join("|")}>`);
+      }
       if (isSegmentGroup(item)) return bracket(item, ` ${item.name}: ${describeStructure(item.segments)} `);
       return bracket(item, item.name);
     })
@@ -85,9 +91,13 @@ interface Field {
   doc: string;
 }
 
-/** The group interfaces a message needs (non-inline groups, in order of appearance). */
+/** The group interfaces a message needs (non-inline groups, alternatives of group choices included, in order of appearance). */
 export function collectGroups(items: StructureItem[], out: SegmentGroup[] = []): SegmentGroup[] {
   for (const item of items) {
+    if (isGroupChoice(item)) {
+      for (const alternative of item.alternatives) collectGroups([alternative], out);
+      continue;
+    }
     if (!isSegmentGroup(item)) continue;
     if (!item.inline) out.push(item);
     collectGroups(item.segments, out);
@@ -103,7 +113,7 @@ export function collectGroups(items: StructureItem[], out: SegmentGroup[] = []):
 export function validateStructure(schema: MessageSchema): void {
   const msg = messageName(schema);
   const first = schema.structure[0];
-  if (!first || isSegmentChoice(first) || isSegmentGroup(first) || first.name !== "MSH") {
+  if (!first || isSegmentChoice(first) || isGroupChoice(first) || isSegmentGroup(first) || first.name !== "MSH") {
     throw new Error(`${msg}: the structure must start with MSH`);
   }
   const typeNames = new Set<string>();
@@ -123,7 +133,27 @@ export function validateStructure(schema: MessageSchema): void {
       const field = itemField(item);
       if (seen.has(field)) throw new Error(`${msg}: property "${field}" is used twice in ${where}; set \`as\` on one of the items`);
       seen.add(field);
-      if (isSegmentGroup(item)) checkLevel(item.segments, `${where}/${item.name}`);
+      if (isGroupChoice(item)) {
+        checkAlternatives(item, `${where}/${field}`);
+        for (const alternative of item.alternatives) checkLevel(alternative.segments, `${where}/${alternative.name}`);
+      } else if (isSegmentGroup(item)) checkLevel(item.segments, `${where}/${item.name}`);
+    }
+  };
+  /**
+   * The alternatives of a group choice are single groups that start with different segments, so the parser can
+   * tell them apart by the next segment.
+   */
+  const checkAlternatives = (choice: { alternatives: SegmentGroup[] }, where: string) => {
+    const starts = new Map<string, string>();
+    for (const alternative of choice.alternatives) {
+      if (alternative.repeating || alternative.inline) throw new Error(`${msg}: alternative ${alternative.name} of ${where} must be a single, non-inline group`);
+      const first = firstSegments(alternative);
+      if (first.length === 0) throw new Error(`${msg}: alternative ${alternative.name} of ${where} starts with no segment`);
+      for (const segment of first) {
+        const other = starts.get(segment);
+        if (other) throw new Error(`${msg}: alternatives ${other} and ${alternative.name} of ${where} both start with ${segment}`);
+        starts.set(segment, alternative.name);
+      }
     }
   };
   checkLevel(schema.structure, msg);
@@ -132,6 +162,7 @@ export function validateStructure(schema: MessageSchema): void {
 /** Human description of a field for its doc comment. */
 function fieldDoc(item: StructureItem): string {
   if (isSegmentChoice(item)) return `One of ${item.oneOf.join(", ")}.`;
+  if (isGroupChoice(item)) return `One of the ${item.alternatives.map((a) => a.name.replace(/_/g, " ")).join(", ")} groups.`;
   if (isSegmentGroup(item)) return `The ${item.name.replace(/_/g, " ")} group${item.repeating ? "s" : ""}.`;
   return `The ${item.name} segment${item.repeating ? "s" : ""}.`;
 }
@@ -153,6 +184,10 @@ function levelFields(
       continue;
     }
     const optionalItem = forceOptional || !item.required;
+    if (isGroupChoice(item)) {
+      out.push({ name: itemField(item), tsType: groupChoiceType(item, groupType), optional: optionalItem, doc: fieldDoc(item) });
+      continue;
+    }
     let base: string;
     if (isSegmentChoice(item)) base = item.oneOf.join(" | ");
     else if (isSegmentGroup(item)) base = groupType(item);
@@ -166,6 +201,14 @@ function levelFields(
     });
   }
   return out;
+}
+
+/**
+ * The type of a group choice: a union of the alternatives, each tagged with its group name in `kind`, so that
+ * `switch (x.kind)` narrows to one alternative's fields.
+ */
+function groupChoiceType(choice: { alternatives: SegmentGroup[] }, groupType: (g: SegmentGroup) => string): string {
+  return choice.alternatives.map((a) => `(${groupType(a)} & { kind: "${a.name}" })`).join(" | ");
 }
 
 function renderInterface(name: string, doc: string, fields: Field[], extendsClause = ""): string {
@@ -205,6 +248,8 @@ function builderParams(schema: MessageSchema): Param[] {
     const name = itemField(item);
     if (isSegmentChoice(item)) {
       params.push({ name, tsType: item.oneOf.join(" | ") });
+    } else if (isGroupChoice(item)) {
+      params.push({ name, tsType: groupChoiceType(item, builderTypeName) });
     } else if (isSegmentGroup(item)) {
       if (item.inline) throw new Error(`${messageName(schema)}: a required inline group (${item.name}) is not supported at the top level`);
       params.push({ name, tsType: item.repeating ? `${builderTypeName(item)}[]` : builderTypeName(item) });
@@ -244,6 +289,12 @@ function renderItem(item: StructureItem, depth: number): string {
     parts.push(`required: ${item.required}`);
     if (item.as) parts.push(`as: "${item.as}"`);
     return `${pad}{ ${parts.join(", ")} }`;
+  }
+  if (isGroupChoice(item)) {
+    parts.push(`required: ${item.required}`);
+    if (item.as) parts.push(`as: "${item.as}"`);
+    const alternatives = item.alternatives.map((a) => renderItem(a, depth + 2)).join(",\n");
+    return [`${pad}{`, ...parts.map((p) => `${inner}${p},`), `${inner}alternatives: [`, `${alternatives},`, `${inner}],`, `${pad}}`].join("\n");
   }
   parts.push(`name: "${item.name}"`, `required: ${item.required}`, `repeating: ${item.repeating}`);
   if (item.minOccurrences !== undefined) parts.push(`minOccurrences: ${item.minOccurrences}`);
@@ -481,7 +532,7 @@ export function generateBuilderWrapper(schema: MessageSchema, version: string): 
   const groupTypes = collectGroups(schema.structure).map(builderTypeName);
   // Segment classes the positional parameters mention (generic bounds, repeating segments, choices).
   const positional = splitTopLevel(schema).positional;
-  const paramSegments = [...new Set(positional.flatMap((item) => (isSegmentGroup(item) ? [] : isSegmentChoice(item) ? item.oneOf : [item.name])))];
+  const paramSegments = [...new Set(positional.flatMap((item) => (isSegmentGroup(item) || isGroupChoice(item) ? [] : isSegmentChoice(item) ? item.oneOf : [item.name])))];
   const segImports = paramSegments.map((s) => `import type { ${s} } from "./${s}.ts";`);
   const baseImports = [base, `type ${base}Options`, ...groupTypes.map((t) => `type ${t}`)].join(", ");
   const reexport = groupTypes.length ? `export type { ${groupTypes.join(", ")} };\n` : "";

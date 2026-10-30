@@ -70,71 +70,62 @@
       "description": "Error"
     },
     {
-      "kind": "choice",
+      "kind": "group",
       "name": "AUTHORIZATION_RESPONSE_INFO",
-      "alternatives": [
+      "items": [
+        {
+          "kind": "segment",
+          "name": "IVC",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Invoice"
+        },
         {
           "kind": "group",
+          "name": "PSL_ITEM_INFO",
           "items": [
             {
               "kind": "segment",
-              "name": "IVC",
+              "name": "PSL",
               "minOccurs": 1,
               "maxOccurs": 1,
               "usage": null,
               "page": null,
-              "description": "Invoice"
+              "description": "Product/Service Line Item"
+            },
+            {
+              "kind": "segment",
+              "name": "AUT",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Authorization"
             },
             {
               "kind": "group",
-              "name": "PSL_ITEM_INFO",
+              "name": "PAYER_ADJUSTMENT",
               "items": [
                 {
                   "kind": "segment",
-                  "name": "PSL",
+                  "name": "ADJ",
                   "minOccurs": 1,
                   "maxOccurs": 1,
                   "usage": null,
                   "page": null,
-                  "description": "Product/Service Line Item"
-                },
-                {
-                  "kind": "segment",
-                  "name": "AUT",
-                  "minOccurs": 0,
-                  "maxOccurs": 1,
-                  "usage": null,
-                  "page": null,
-                  "description": "Authorization"
-                },
-                {
-                  "kind": "group",
-                  "name": "PAYER_ADJUSTMENT",
-                  "items": [
-                    {
-                      "kind": "segment",
-                      "name": "ADJ",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Adjustment"
-                    }
-                  ],
-                  "minOccurs": 0,
-                  "maxOccurs": "*",
-                  "usage": null,
-                  "page": null
+                  "description": "Adjustment"
                 }
               ],
-              "minOccurs": 1,
+              "minOccurs": 0,
               "maxOccurs": "*",
               "usage": null,
               "page": null
             }
           ],
           "minOccurs": 1,
-          "maxOccurs": 1,
+          "maxOccurs": "*",
           "usage": null,
           "page": null
         }

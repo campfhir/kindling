@@ -122,6 +122,13 @@ const readings: string[] = [];
 const ORDER_DETAIL = ["OBR", "RQD", "RQ1", "RXO", "ODS", "ODT"];
 /** Closes a group: cardinality from its opening and closing brackets, flagged when they do not pair. */
 function closeGroup(frame: Frame, closers: string[], closerRow: string, into: Item[], problemsOut: string[]): void {
+  // "<" ... ">" around single segments with "|" between them (v2.7 CCI^I22: "< AIS | AIG | AIL | AIP >") is a choice of
+  // those segments, as "<OBR|RQD>" on one row is. Read as one group of them the segments would be required in sequence.
+  if (frame.item.kind === "choice" && frame.pipes && frame.alt?.items?.length && frame.alt.items.every((i) => i.kind === "segment")) {
+    readings.push(`${frame.item.name ?? "(unnamed)"}: "<" ... ">" of single segments separated by "|" is a choice of those segments`);
+    frame.item = { kind: "choice", oneOf: frame.alt.items.map((i) => i.name!), minOccurs: 1, maxOccurs: 1, usage: null, page: null };
+    frame.alt = undefined;
+  }
   // "<" ... ">" around one group and no "|" (v2.8 chapter 16: < --- INVOICE_INFORMATION_SUBMIT begin ... >) is a
   // choice of one alternative: that group, which the earlier versions print as a plain group.
   if (frame.item.kind === "choice" && frame.item.alternatives?.length === 1 && !frame.pipes) {

@@ -362,6 +362,9 @@ import { parseRTB_Z78 } from "./RTB_Z78.ts";
 import { parseRTB_Z92 } from "./RTB_Z92.ts";
 import { parseRTB_Z94 } from "./RTB_Z94.ts";
 import { parseRTB_Z96 } from "./RTB_Z96.ts";
+import { parseSCN_S37 } from "./SCN_S37.ts";
+import { parseSDN_S36 } from "./SDN_S36.ts";
+import { parseSDR_S31 } from "./SDR_S31.ts";
 import { parseSIU_S12 } from "./SIU_S12.ts";
 import { parseSIU_S13 } from "./SIU_S13.ts";
 import { parseSIU_S14 } from "./SIU_S14.ts";
@@ -380,6 +383,7 @@ import { parseSLN_S34 } from "./SLN_S34.ts";
 import { parseSLN_S35 } from "./SLN_S35.ts";
 import { parseSLR_S28 } from "./SLR_S28.ts";
 import { parseSLR_S29 } from "./SLR_S29.ts";
+import { parseSMD_S32 } from "./SMD_S32.ts";
 import { parseSQM_S25 } from "./SQM_S25.ts";
 import { parseSQR_S25 } from "./SQR_S25.ts";
 import { parseSRM_S01 } from "./SRM_S01.ts";
@@ -778,6 +782,9 @@ export const MESSAGES = {
   RTB_Z92: parseRTB_Z92,
   RTB_Z94: parseRTB_Z94,
   RTB_Z96: parseRTB_Z96,
+  SCN_S37: parseSCN_S37,
+  SDN_S36: parseSDN_S36,
+  SDR_S31: parseSDR_S31,
   SIU_S12: parseSIU_S12,
   SIU_S13: parseSIU_S13,
   SIU_S14: parseSIU_S14,
@@ -796,6 +803,7 @@ export const MESSAGES = {
   SLN_S35: parseSLN_S35,
   SLR_S28: parseSLR_S28,
   SLR_S29: parseSLR_S29,
+  SMD_S32: parseSMD_S32,
   SQM_S25: parseSQM_S25,
   SQR_S25: parseSQR_S25,
   SRM_S01: parseSRM_S01,

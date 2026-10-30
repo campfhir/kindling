@@ -21,9 +21,11 @@ import type { EncodingCharacters } from "./encoding.ts";
 import type { Segment } from "./segment.ts";
 import { HL7Message } from "./message.ts";
 import {
+  type GroupChoice,
   type SegmentGroup,
   type StructureItem,
   firstSegments,
+  isGroupChoice,
   isRequired,
   isSegmentChoice,
   isSegmentGroup,
@@ -56,9 +58,15 @@ export interface ParsedMessageBase {
 /** "an MSH segment", "a PID segment": segment names are spelled out letter by letter. */
 const article = (name: string) => (/^[AEFHILMNORSX]/.test(name) ? "an" : "a");
 
+/** The alternative of a group choice that `kind` names, if any. */
+function alternativeNamed(choice: GroupChoice, kind: unknown): SegmentGroup | undefined {
+  return choice.alternatives.find((alternative) => alternative.name === kind);
+}
+
 /** Describes what a missing required item is, for error messages. */
 function describeMissing(messageName: string, item: StructureItem): string {
   if (isSegmentChoice(item)) return `${messageName} message must contain one of ${item.oneOf.join(", ")}`;
+  if (isGroupChoice(item)) return `${messageName} message must contain one of ${item.alternatives.map((a) => firstSegments(a).join("/")).join(", ")}`;
   if (isSegmentGroup(item)) {
     return `${messageName} message must contain at least one ${firstSegments(item).join("/")} segment`;
   }
@@ -82,7 +90,7 @@ export function parseStructure<T extends ParsedMessageBase = ParsedMessageBase &
     if (!header.ok || !header.val) return header as Result<never>;
     const { segments, msh, encoding, message } = header.val;
     const known = new Set(segmentNames(structure));
-    const items = structure.filter((item) => isSegmentChoice(item) || isSegmentGroup(item) || item.name !== "MSH");
+    const items = structure.filter((item) => isSegmentChoice(item) || isGroupChoice(item) || isSegmentGroup(item) || item.name !== "MSH");
 
     let pos = 1;
     let failure: Result<never> | undefined;
@@ -117,7 +125,7 @@ export function parseStructure<T extends ParsedMessageBase = ParsedMessageBase &
     const emptyLists = (list: StructureItem[], out: StructureValue) => {
       for (const item of list) {
         if (isSegmentGroup(item) && item.inline) emptyLists(item.segments, out);
-        else if (!isSegmentChoice(item) && item.repeating) out[itemField(item)] = [];
+        else if (!isSegmentChoice(item) && !isGroupChoice(item) && item.repeating) out[itemField(item)] = [];
       }
     };
 
@@ -134,6 +142,21 @@ export function parseStructure<T extends ParsedMessageBase = ParsedMessageBase &
             const seg = consume(next);
             if (!seg) return false;
             out[field] = seg;
+          } else if (item.required) {
+            failure = { ok: false, err: new Err(describeMissing(messageName, item)) } as Result<never>;
+            return false;
+          }
+          continue;
+        }
+        if (isGroupChoice(item)) {
+          // The alternatives start with different segments (checked when the structure is generated), so the
+          // next segment picks the one that is present.
+          const next = peek();
+          const chosen = next ? item.alternatives.find((alternative) => firstSegments(alternative).includes(next)) : undefined;
+          if (chosen) {
+            const instance: StructureValue = {};
+            if (!parseSequence(chosen.segments, instance, outer)) return false;
+            out[field] = { kind: chosen.name, ...instance };
           } else if (item.required) {
             failure = { ok: false, err: new Err(describeMissing(messageName, item)) } as Result<never>;
             return false;
@@ -281,7 +304,10 @@ function encodeItems(items: StructureItem[], value: StructureInput, encoding: En
     }
     const v = value[itemField(item)];
     if (v === undefined || v === null) continue;
-    if (isSegmentGroup(item)) {
+    if (isGroupChoice(item)) {
+      const chosen = alternativeNamed(item, (v as StructureInput).kind);
+      if (chosen) encodeItems(chosen.segments, v as StructureInput, encoding, out);
+    } else if (isSegmentGroup(item)) {
       const instances = item.repeating ? (v as StructureInput[]) : [v as StructureInput];
       for (const instance of instances) encodeItems(item.segments, instance, encoding, out);
     } else if (!isSegmentChoice(item) && item.repeating) {
@@ -321,6 +347,21 @@ export function verifyStructure(structure: StructureItem[], value: StructureInpu
         } else if (!isSegmentLike(v) || !item.oneOf.includes((v as Segment).name)) {
           errors.push(`${where}${field} must be one of ${item.oneOf.join(", ")}`);
         }
+        continue;
+      }
+      if (isGroupChoice(item)) {
+        if (v === undefined || v === null) {
+          if (item.required) errors.push(`${where}One of the ${item.alternatives.map((a) => a.name.replace(/_/g, " ")).join(", ")} groups is required`);
+          continue;
+        }
+        const chosen = typeof v === "object" ? alternativeNamed(item, (v as StructureInput).kind) : undefined;
+        if (!chosen) {
+          errors.push(`${where}${field} must be one of ${item.alternatives.map((a) => a.name).join(", ")}`);
+          continue;
+        }
+        const instance = { ...(v as StructureInput) };
+        delete instance.kind;
+        check(chosen.segments, instance, `${where}${chosen.name.replace(/_/g, " ")} group`);
         continue;
       }
       if (isSegmentGroup(item) && item.inline) {
