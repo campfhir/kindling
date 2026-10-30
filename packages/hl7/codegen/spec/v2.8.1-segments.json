@@ -12415,7 +12415,7 @@
    },
    {
     "seq": 5,
-    "name": "Deliver-To Location",
+    "name": "Priority",
     "length": "0",
     "type": "-",
     "opt": "W",
@@ -12425,7 +12425,7 @@
    },
    {
     "seq": 6,
-    "name": "Deliver-To Location",
+    "name": "Requested Date/Time",
     "length": "0",
     "type": "-",
     "opt": "W",
@@ -12505,7 +12505,7 @@
    },
    {
     "seq": 14,
-    "name": "Deliver-To Location",
+    "name": "Specimen Received Date/Time *",
     "length": "0",
     "type": "-",
     "opt": "W",
@@ -12515,7 +12515,7 @@
    },
    {
     "seq": 15,
-    "name": "Deliver-To Location",
+    "name": "Specimen Source",
     "length": "0",
     "type": "-",
     "opt": "W",
@@ -12636,7 +12636,7 @@
    },
    {
     "seq": 27,
-    "name": "Deliver-To Location",
+    "name": "Quantity/Timing",
     "length": "0",
     "type": "-",
     "opt": "W",
@@ -14596,7 +14596,7 @@
    },
    {
     "seq": 7,
-    "name": "Deliver-To Location",
+    "name": "Quantity/Timing",
     "length": "0",
     "type": "-",
     "opt": "W",

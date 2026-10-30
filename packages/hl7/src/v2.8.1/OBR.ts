@@ -52,14 +52,14 @@ export class OBR extends BaseSegment {
     return this;
   }
 
-  /** OBR-5 Deliver-To Location (-, max 0, W) (chainable). */
-  deliverToLocation(value: string): this {
+  /** OBR-5 Priority (-, max 0, W) (chainable). */
+  priority(value: string): this {
     this.fields[4] = this.createField(value);
     return this;
   }
 
-  /** OBR-6 Deliver-To Location (-, max 0, W) (chainable). */
-  deliverToLocation6(value: string): this {
+  /** OBR-6 Requested Date/Time (-, max 0, W) (chainable). */
+  requestedDateTime(value: string): this {
     this.fields[5] = this.createField(value);
     return this;
   }
@@ -106,14 +106,14 @@ export class OBR extends BaseSegment {
     return this;
   }
 
-  /** OBR-14 Deliver-To Location (-, max 0, W) (chainable). */
-  deliverToLocation14(value: string): this {
+  /** OBR-14 Specimen Received Date/Time * (-, max 0, W) (chainable). */
+  specimenReceivedDateTime(value: string): this {
     this.fields[13] = this.createField(value);
     return this;
   }
 
-  /** OBR-15 Deliver-To Location (-, max 0, W) (chainable). */
-  deliverToLocation15(value: string): this {
+  /** OBR-15 Specimen Source (-, max 0, W) (chainable). */
+  specimenSource(value: string): this {
     this.fields[14] = this.createField(value);
     return this;
   }
@@ -184,8 +184,8 @@ export class OBR extends BaseSegment {
     return this;
   }
 
-  /** OBR-27 Deliver-To Location (-, max 0, W, repeating) (chainable). */
-  deliverToLocation27(...values: Repeated<string>[]): this {
+  /** OBR-27 Quantity/Timing (-, max 0, W, repeating) (chainable). */
+  quantityTiming(...values: Repeated<string>[]): this {
     this.fields[26] = this.createRepeatingField(repetitions(values).map((v) => this.createField(v)));
     return this;
   }

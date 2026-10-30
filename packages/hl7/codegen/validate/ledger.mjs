@@ -22,7 +22,7 @@
  *
  * <version> is a directory name (v2.3, v2.3.1); <sources-dir> holds hl7eu/<SEG>.htm, caristix/<SEG>.json
  * and hapi/<SEG>.java (see codegen/validate/fetch-sources.sh). Reads are local only; nothing is fetched here.
- * --fix-spec writes the decided type / repeat / usage / length of every field of the classes generated
+ * --fix-spec writes the decided type / repeat / usage / length (and a name a field note sets) of every field of the classes generated
  * from this version's spec into that spec (then regenerate those classes and run the script again).
  * --adopt copies the named segments' tables from the base version's spec into this version's spec, with
  * the decided values applied, so `generate-segments.ts --version <version>` can produce the version's own
@@ -504,6 +504,12 @@ function applyDecisions(seg, rows, entry) {
       if (key === "rep") f.rep = value === "Y" ? "∞" : "-";
       else f[key] = value;
     };
+    const named = NOTES[`${seg}-${x.seq}`]?.name;
+    if (named && f.name !== named) {
+      console.log(`${seg}-${x.seq} name: ${f.name} -> ${named}`);
+      f.name = named;
+      changed++;
+    }
     set("type", x.type.value, (v) => normType(v));
     set("rep", x.rep.value, (v) => normRep(v));
     set("opt", x.opt.value, (v) => normOpt(v));
