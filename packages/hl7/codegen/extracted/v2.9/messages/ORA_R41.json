@@ -1,0 +1,89 @@
+{
+  "structure": "ORA_R41",
+  "messageType": "ORA",
+  "triggerEvent": "R41",
+  "version": "2.9",
+  "description": "",
+  "title": "",
+  "sectionHeading": "7.3.13 ORA  Observation Report Alert Acknowledgement (Event R41)",
+  "source": {
+    "pdf": "hl7.eu std29/ch07.html",
+    "pages": null,
+    "table": "ORA^R41^ORA_R41: "
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "R41"
+      ],
+      "eventPrinted": "R41",
+      "pdf": "hl7.eu std29/ch07.html",
+      "page": null,
+      "table": "ORA^R41^ORA_R41: ",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "PRT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Participation (Acknowledging User)",
+      "chapterRef": "7"
+    }
+  ],
+  "variants": []
+}

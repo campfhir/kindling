@@ -1,0 +1,1326 @@
+{
+  "structure": "CQU_I19",
+  "messageType": "CQU",
+  "triggerEvent": "I19",
+  "version": "2.9",
+  "description": "Collaborative Care Referral",
+  "title": "Collaborative Care Referral",
+  "sectionHeading": "11.7.1 CCQ/CQU  Collaborative Care Query/Collaborative Care Query Update (Event I19)",
+  "source": {
+    "pdf": "hl7.eu std29/ch11.html",
+    "pages": null,
+    "table": "CQU^I19^CQU_I19: Collaborative Care Referral"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "I19"
+      ],
+      "eventPrinted": "I19",
+      "pdf": "hl7.eu std29/ch11.html",
+      "page": null,
+      "table": "CQU^I19^CQU_I19: Collaborative Care Referral",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "RF1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Referral Information",
+      "chapterRef": "11"
+    },
+    {
+      "kind": "group",
+      "name": "PROVIDER_CONTACT",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PRD",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Provider Data",
+          "chapterRef": "11"
+        },
+        {
+          "kind": "segment",
+          "name": "CTD",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Contact Data",
+          "chapterRef": "11"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "PATIENT",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Additional Demographics",
+          "chapterRef": "3"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "NK1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Next of Kin / Associated Parties",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "group",
+      "name": "INSURANCE",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "IN1",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Insurance",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "IN2",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Insurance Additional Info.",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "IN3",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Insurance Additional Info \u0013 Cert.",
+          "chapterRef": "6"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "APPOINTMENT_HISTORY",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "SCH",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Schedule Activity Information",
+          "chapterRef": "10"
+        },
+        {
+          "kind": "group",
+          "name": "RESOURCES",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "RGS",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Resource Group Segment",
+              "chapterRef": "10"
+            },
+            {
+              "kind": "group",
+              "name": "RESOURCE_DETAIL",
+              "items": [
+                {
+                  "kind": "choice",
+                  "name": "RESOURCE_OBJECT",
+                  "alternatives": [
+                    {
+                      "kind": "group",
+                      "items": [
+                        {
+                          "kind": "segment",
+                          "name": "AIS",
+                          "minOccurs": 1,
+                          "maxOccurs": 1,
+                          "usage": null,
+                          "page": null,
+                          "description": "Appointment Information - Service",
+                          "chapterRef": "10"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "AIG",
+                          "minOccurs": 1,
+                          "maxOccurs": 1,
+                          "usage": null,
+                          "page": null,
+                          "description": "Appointment Information \u0013 General Resource",
+                          "chapterRef": "10"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "AIL",
+                          "minOccurs": 1,
+                          "maxOccurs": 1,
+                          "usage": null,
+                          "page": null,
+                          "description": "Appointment Information \u0013 Location",
+                          "chapterRef": "10"
+                        },
+                        {
+                          "kind": "segment",
+                          "name": "AIP",
+                          "minOccurs": 1,
+                          "maxOccurs": 1,
+                          "usage": null,
+                          "page": null,
+                          "description": "Appointment Information \u0013 Personnel",
+                          "chapterRef": "10"
+                        }
+                      ],
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null
+                    }
+                  ],
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null
+                },
+                {
+                  "kind": "group",
+                  "name": "RESOURCE_OBSERVATION",
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "OBX",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Observation/Result",
+                      "chapterRef": "7"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PRT",
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "usage": null,
+                      "page": null,
+                      "description": "Participation",
+                      "chapterRef": "7"
+                    }
+                  ],
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "CLINICAL_HISTORY",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "ORC",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Common Order",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "group",
+          "name": "CLINICAL_HISTORY_DETAIL",
+          "items": [
+            {
+              "kind": "choice",
+              "name": "CLINICAL_HISTORY_OBJECT",
+              "alternatives": [
+                {
+                  "kind": "group",
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "OBR",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Observation",
+                      "chapterRef": "4"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PRT",
+                      "minOccurs": 0,
+                      "maxOccurs": "*",
+                      "usage": null,
+                      "page": null,
+                      "description": "Participation",
+                      "chapterRef": "7"
+                    }
+                  ],
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null
+                },
+                {
+                  "kind": "group",
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "ODS",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Dietary Order, Suppl., Prefer.",
+                      "chapterRef": "4"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PR1",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Procedure",
+                      "chapterRef": "6"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "RF1",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Referral Information",
+                      "chapterRef": "11"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "AL1",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Allergy Information",
+                      "chapterRef": "3"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "IAM",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Patient adverse reaction information",
+                      "chapterRef": "3"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "ACC",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Accident Information",
+                      "chapterRef": "6"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "RMI",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Risk Management Incident",
+                      "chapterRef": "6"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "DB1",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Disability Information",
+                      "chapterRef": "3"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "DG1",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Diagnosis",
+                      "chapterRef": "6"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "DRG",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Diagnosis Related Group",
+                      "chapterRef": "6"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PDA",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Patient Death and Autopsy",
+                      "chapterRef": "3"
+                    }
+                  ],
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null
+                }
+              ],
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "group",
+              "name": "CLINICAL_HISTORY_OBSERVATION",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "OBX",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Observation/Result",
+                  "chapterRef": "7"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Participation",
+                  "chapterRef": "7"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "PARTICIPATION_CLINICAL_HISTORY",
+          "items": [
+            {
+              "kind": "choice",
+              "name": "PARTICIPATION_CLINICAL_HISTORY_OBJECT",
+              "alternatives": [
+                {
+                  "kind": "group",
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "ROL",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "For backwards compatibility only as of V2.9",
+                      "status": "B",
+                      "chapterRef": "15"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PRT",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Participation (CLINICAL_HISTORY)",
+                      "chapterRef": "7"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PRD",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Provider Data (CLINICAL_HISTORY)",
+                      "chapterRef": "11"
+                    }
+                  ],
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null
+                }
+              ],
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "segment",
+              "name": "VAR",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Variance (CLINICAL_HISTORY)",
+              "chapterRef": "15"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "CTI",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Clinical Trial Identification",
+          "chapterRef": "7"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "PATIENT_VISITS",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PV1",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Visit",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PV2",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Visit \u0013 Additional Info.",
+          "chapterRef": "3"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "MEDICATION_HISTORY",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "ORC",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Common Order",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "group",
+          "name": "MEDICATION_ORDER_DETAIL",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "RXO",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Pharmacy/Treatment Order",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Participation",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "RXR",
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Pharmacy/Treatment Route",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "segment",
+              "name": "RXC",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Pharmacy/Treatment Component (for RXO)",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "group",
+              "name": "MEDICATION_ORDER_OBSERVATION",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "OBX",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Observation/Result",
+                  "chapterRef": "7"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Participation",
+                  "chapterRef": "7"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "MEDICATION_ENCODING_DETAIL",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "RXE",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Pharmacy/Treatment Encoded Order",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Participation",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "RXR",
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Pharmacy/Treatment Route",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "segment",
+              "name": "RXC",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Pharmacy/Treatment Component (for RXE)",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "group",
+              "name": "MEDICATION_ENCODING_OBSERVATION",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "OBX",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Observation/Result",
+                  "chapterRef": "7"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Participation",
+                  "chapterRef": "7"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "MEDICATION_ADMINISTRATION_DETAIL",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "RXA",
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Pharmacy/Treatment Administration",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Participation",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "RXR",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Pharmacy/Treatment Route",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "group",
+              "name": "MEDICATION_ADMINISTRATION_OBSERVATION",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "OBX",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Observation/Result",
+                  "chapterRef": "7"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Participation",
+                  "chapterRef": "7"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "CTI",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Clinical Trial Identification",
+          "chapterRef": "7"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "PROBLEM",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PRB",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Problem",
+          "chapterRef": "12"
+        },
+        {
+          "kind": "segment",
+          "name": "VAR",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Variance (Problem)",
+          "chapterRef": "15"
+        },
+        {
+          "kind": "group",
+          "name": "PARTICIPATION_PROBLEM",
+          "items": [
+            {
+              "kind": "choice",
+              "name": "PARTICIPATION_PROBLEM_OBJECT",
+              "alternatives": [
+                {
+                  "kind": "group",
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "ROL",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "For backwards compatibility only as of V2.9",
+                      "status": "B",
+                      "chapterRef": "15"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PRT",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Participation (Goal Role)",
+                      "chapterRef": "7"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PRD",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Provider Data (Problem Role)",
+                      "chapterRef": "11"
+                    }
+                  ],
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null
+                }
+              ],
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "segment",
+              "name": "VAR",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Variance (Problem Role)",
+              "chapterRef": "15"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "PROBLEM_OBSERVATION",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Observation/Result",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Participation",
+              "chapterRef": "7"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "GOAL",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "GOL",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Goal",
+          "chapterRef": "12"
+        },
+        {
+          "kind": "segment",
+          "name": "VAR",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Variance (Goal)",
+          "chapterRef": "15"
+        },
+        {
+          "kind": "group",
+          "name": "PARTICIPATION_GOAL",
+          "items": [
+            {
+              "kind": "choice",
+              "name": "PARTICIPATION_GOAL_OBJECT",
+              "alternatives": [
+                {
+                  "kind": "group",
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "ROL",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "For backwards compatibility only as of V2.9",
+                      "status": "B",
+                      "chapterRef": "15"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PRT",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Participation (Goal Role)",
+                      "chapterRef": "7"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PRD",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Provider Data (Goal Role)",
+                      "chapterRef": "11"
+                    }
+                  ],
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null
+                }
+              ],
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "segment",
+              "name": "VAR",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Variance (Goal Role)",
+              "chapterRef": "15"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "GOAL_OBSERVATION",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Observation/Result",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Participation",
+              "chapterRef": "7"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "PATHWAY",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PTH",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Pathway",
+          "chapterRef": "12"
+        },
+        {
+          "kind": "segment",
+          "name": "VAR",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Variance (Pathway)",
+          "chapterRef": "15"
+        },
+        {
+          "kind": "group",
+          "name": "PARTICIPATION_PATHWAY",
+          "items": [
+            {
+              "kind": "choice",
+              "name": "PARTICIPATION_PATHWAY_OBJECT",
+              "alternatives": [
+                {
+                  "kind": "group",
+                  "items": [
+                    {
+                      "kind": "segment",
+                      "name": "ROL",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "For backwards compatibility only as of V2.9",
+                      "status": "B",
+                      "chapterRef": "15"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PRT",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Participation (Pathway Participation)",
+                      "chapterRef": "7"
+                    },
+                    {
+                      "kind": "segment",
+                      "name": "PRD",
+                      "minOccurs": 1,
+                      "maxOccurs": 1,
+                      "usage": null,
+                      "page": null,
+                      "description": "Provider Data (Pathway Participation)",
+                      "chapterRef": "11"
+                    }
+                  ],
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null
+                }
+              ],
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null
+            },
+            {
+              "kind": "segment",
+              "name": "VAR",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Variance (Pathway Participation)",
+              "chapterRef": "15"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "PATHWAY_OBSERVATION",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Observation/Result",
+              "chapterRef": "7"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Participation",
+              "chapterRef": "7"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "REL",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Relationship",
+      "chapterRef": "11"
+    }
+  ],
+  "variants": []
+}

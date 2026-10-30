@@ -1,0 +1,79 @@
+{
+  "structure": "QBP_O34",
+  "messageType": "QBP",
+  "triggerEvent": "Q34",
+  "version": "2.9",
+  "description": "",
+  "title": "",
+  "sectionHeading": "4.16.8 QBP - Get Donor Record (Event Q34)",
+  "source": {
+    "pdf": "hl7.eu std29/ch04.html",
+    "pages": null,
+    "table": "QBP^Q34^QBP_O34: "
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Q34"
+      ],
+      "eventPrinted": "Q34",
+      "pdf": "hl7.eu std29/ch04.html",
+      "page": null,
+      "table": "QBP^Q34^QBP_O34: ",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Parameter Definition Segment",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "RCP",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Response Control Parameters",
+      "chapterRef": "5"
+    }
+  ],
+  "variants": []
+}

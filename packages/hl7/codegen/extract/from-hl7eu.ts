@@ -8,6 +8,8 @@
  *   hl7eu/chapters/chNN.htm    every message table, captioned `TYPE^EVENT^STRUCTURE` -> messages/
  *   hl7org/chapters/chNN.htm   a chapter converted from the official PDF (pdf-chapter.ts), used in place of the
  *                              hl7.eu page of that chapter; its tables name the PDF as their source
+ *   hl7eu-captioned/chapters/chNN.htm  the hl7.eu page with a caption before each message table (caption-chapters.ts,
+ *                              for v2.9, which prints none), used in place of the page
  *
  * The message table notation is the standard's own: `[ ]` optional, `{ }` repeating, `< A | B >` a choice
  * across rows, and `--- NAME begin` / `--- NAME end` rows for groups. A row whose brackets do not pair is
@@ -271,9 +273,14 @@ if (existsSync(hl7orgDir)) {
   }
   chapterFiles.sort();
 }
+// A page captioned by caption-chapters.ts (hl7eu-captioned/chapters/chNN.htm: v2.9 prints its message tables without
+// "TYPE^EVENT^STRUCTURE" lines) is the hl7.eu page with those lines added; it is read in place of the page.
+const captionedDir = join(sourcesDir, "hl7eu-captioned/chapters");
+const chapterDir = (file: string) =>
+  fromPdf.has(file) ? hl7orgDir : existsSync(join(captionedDir, file)) ? captionedDir : join(sourcesDir, "hl7eu/chapters");
 const tocHeadings: { number: string; text: string }[] = [];
 for (const file of chapterFiles) {
-  const html = read(join(fromPdf.has(file) ? hl7orgDir : join(sourcesDir, "hl7eu/chapters"), file));
+  const html = read(join(chapterDir(file), file));
   // A section heading followed by an "Attention ... withdrawn" note: a withdrawn message (its type is the heading's first
   // code) or, when the heading names a segment, a withdrawn segment. Field headings ("OBR-5 ...") are not sections.
   const headingTags = [...html.matchAll(/<H[2-5][^>]*>([\s\S]*?)<\/H[2-5]>/gi)];

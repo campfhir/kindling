@@ -13,6 +13,11 @@ keep=${3:-}
 cd "$(dirname "$0")/../.."
 const="V$(echo "${v#v}" | tr . _)"
 
+# v2.9's chapter pages print their message tables without captions: caption-chapters.ts adds them from the headings
+# and hl7.eu's message structure list (it leaves pages that caption their own tables alone)
+if [ "$keep" != --keep-extraction ] && [ -s "$dir/hl7eu/msgstruct.htm" ]; then
+  npx tsx codegen/extract/caption-chapters.ts "$v" "$dir" | awk 'NR == 1'
+fi
 [ "$keep" = --keep-extraction ] || npx tsx codegen/extract/from-hl7eu.ts "$v" "$dir" "codegen/extracted/$v"
 npx tsx codegen/extract/import-extraction.ts "$v"
 
@@ -54,6 +59,9 @@ node codegen/validate/ledger.mjs "$v" "$dir" | tail -1
 # The message ledger compares the structures with a second reading of the hl7.eu tables and with Caristix events and
 # HAPI message classes where they exist (Caristix answers HTTP 500 for 2.8.1 on; HAPI has no 2.8.2 on); a missing
 # source is passed as an empty folder, and with neither the hl7.eu reading is the only check.
+# hl7.eu's message structure list is the second reading for a version whose chapter tables print no captions (v2.9)
+list=""; [ -d "$dir/hl7eu-captioned" ] && list="$dir/hl7eu/msgstruct.htm"
 hapi="$dir/hapi"; mkdir -p "$hapi/message" "$hapi/group" "$dir/caristix/events"; touch "$hapi/eventmap.properties"
 npx tsx codegen/validate/message-ledger.ts "$v" --caristix "$dir/caristix/events" \
-  --hapi "$hapi/message" "$hapi/group" "$hapi/eventmap.properties" --hl7eu "$dir/hl7eu/chapters" --hl7org "$dir/hl7org/chapters" | grep -v '^  differs'
+  --hapi "$hapi/message" "$hapi/group" "$hapi/eventmap.properties" --hl7eu "$dir/hl7eu/chapters" --hl7org "$dir/hl7org/chapters" \
+  ${list:+--hl7eu-list "$list"} | grep -v '^  differs'

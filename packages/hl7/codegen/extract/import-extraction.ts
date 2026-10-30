@@ -217,12 +217,16 @@ const eventsOut: EventEntry[] = [];
 // (RQC^I06^RQC_I05 prints [GT1], RQC^I05^RQC_I05 [{GT1}]), decided by hand to follow the structure ID:
 // they wrap the primary event. Recorded with the citation in overrides.json:
 //   { "sharePrimary": { "RQC_I06": "citation and reason" } }
+// A captioned table that is no message of the standard (v2.9 chapter 2 prints its notation example, WRP^Z02 "Widget
+// Reports", as a table), recorded with the reason in overrides.json: { "notMessages": { "WRP_Z02": "citation and reason" } }
+const NOT_MESSAGES: Record<string, string> = existsSync(join(DIR, "overrides.json")) ? (readJson(join(DIR, "overrides.json")).notMessages ?? {}) : {};
 const SHARE_PRIMARY: Record<string, string> = existsSync(join(DIR, "overrides.json")) ? (readJson(join(DIR, "overrides.json")).sharePrimary ?? {}) : {};
 
 for (const e of index.filter((x) => x.status !== "withdrawn")) {
   const name = e.triggerEvent ? `${e.messageType}_${e.triggerEvent}` : e.messageType;
   if (e.definedBy) { notes.events.push(`${name}: cross-reference only (${e.definedBy}), not generated`); continue; }
   if (e.triggerEvent && /^[A-Z]nn$/.test(e.triggerEvent)) { notes.events.push(`${name}: grammar template, not an event`); continue; }
+  if (name in NOT_MESSAGES) { notes.events.push(`${name}: not a message, not generated. ${NOT_MESSAGES[name]}`); continue; }
   const file = loadFile(e.structure);
   const triggerEvent = e.triggerEvent ?? "";
   const common = { name, messageType: e.messageType, triggerEvent };

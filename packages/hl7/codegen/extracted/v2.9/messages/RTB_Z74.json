@@ -1,0 +1,138 @@
+{
+  "structure": "RTB_Z74",
+  "messageType": "RTB",
+  "triggerEvent": "Z74",
+  "version": "2.9",
+  "description": "Personnel Information Message",
+  "title": "Personnel Information Message",
+  "source": {
+    "pdf": "hl7.eu std29/ch04.html",
+    "pages": null,
+    "table": "RTB^Z74^RTB_Z74: Personnel Information Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Z74"
+      ],
+      "eventPrinted": "Z74",
+      "pdf": "hl7.eu std29/ch04.html",
+      "page": null,
+      "table": "RTB^Z74^RTB_Z74: Personnel Information Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2.15.9"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgement",
+      "chapterRef": "2.15.8"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Error",
+      "chapterRef": "2.15.5"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2.15.12"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QAK",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Acknowledgement",
+      "chapterRef": "5.5.2"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Parameter Definition",
+      "chapterRef": "5.5.4"
+    },
+    {
+      "kind": "group",
+      "name": "ROW_DEFINITION",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "RDF",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Table Row Definition Segment",
+          "chapterRef": "5.5.7"
+        },
+        {
+          "kind": "segment",
+          "name": "RDT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Table Row Data Segment",
+          "chapterRef": "5.5.8"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Continuation Pointer",
+      "chapterRef": "2.15.4"
+    }
+  ],
+  "variants": []
+}

@@ -1,0 +1,99 @@
+{
+  "structure": "PMU_B08",
+  "messageType": "PMU",
+  "triggerEvent": "B08",
+  "version": "2.9",
+  "description": "Revoke Certificate Message",
+  "title": "Revoke Certificate Message",
+  "sectionHeading": "15.3.9 PMU/ACK  Revoke Certificate/Permission (Event B08)",
+  "source": {
+    "pdf": "hl7.eu std29/ch15.html",
+    "pages": null,
+    "table": "PMU^B08^PMU_B08: Revoke Certificate Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "B08"
+      ],
+      "eventPrinted": "B08",
+      "pdf": "hl7.eu std29/ch15.html",
+      "page": null,
+      "table": "PMU^B08^PMU_B08: Revoke Certificate Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Event Type",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "STF",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Staff",
+      "chapterRef": "15.4.8"
+    },
+    {
+      "kind": "segment",
+      "name": "PRA",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Practitioner",
+      "chapterRef": "15.4.6"
+    },
+    {
+      "kind": "segment",
+      "name": "CER",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Certificate",
+      "chapterRef": "15.4.2"
+    }
+  ],
+  "variants": []
+}

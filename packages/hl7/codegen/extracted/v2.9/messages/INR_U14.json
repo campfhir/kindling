@@ -1,0 +1,79 @@
+{
+  "structure": "INR_U14",
+  "messageType": "INR",
+  "triggerEvent": "U14",
+  "version": "2.9",
+  "description": "",
+  "title": "",
+  "sectionHeading": "13.3.14 INR/ACK  Automated Equipment Inventory Request (Event U14)",
+  "source": {
+    "pdf": "hl7.eu std29/ch13.html",
+    "pages": null,
+    "table": "INR^U14^INR_U14: "
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "U14"
+      ],
+      "eventPrinted": "U14",
+      "pdf": "hl7.eu std29/ch13.html",
+      "page": null,
+      "table": "INR^U14^INR_U14: ",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EQU",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Equipment Detail",
+      "chapterRef": "13"
+    },
+    {
+      "kind": "segment",
+      "name": "INV",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Inventory Detail",
+      "chapterRef": "13"
+    }
+  ],
+  "variants": []
+}

@@ -1,0 +1,78 @@
+{
+  "structure": "QBP_Z73",
+  "messageType": "QBP",
+  "triggerEvent": "Z73",
+  "version": "2.9",
+  "description": "",
+  "title": "",
+  "source": {
+    "pdf": "hl7.eu std29/ch04.html",
+    "pages": null,
+    "table": "QBP^Z73^QBP_Z73: "
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Z73"
+      ],
+      "eventPrinted": "Z73",
+      "pdf": "hl7.eu std29/ch04.html",
+      "page": null,
+      "table": "QBP^Z73^QBP_Z73: ",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header Segment",
+      "chapterRef": "2.15.9"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2.15.12"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Parameter Definition",
+      "chapterRef": "5.5.4"
+    },
+    {
+      "kind": "segment",
+      "name": "RCP",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Response Control Parameter",
+      "chapterRef": "5.5.6"
+    }
+  ],
+  "variants": []
+}

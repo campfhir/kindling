@@ -1,0 +1,130 @@
+{
+  "structure": "EHC_E24",
+  "messageType": "EHC",
+  "triggerEvent": "E24",
+  "version": "2.9",
+  "description": "Authorization Response",
+  "title": "Authorization Response",
+  "source": {
+    "pdf": "hl7.eu std29/ch16.html",
+    "pages": null,
+    "table": "EHC^E24^EHC_E24: Authorization Response"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E24"
+      ],
+      "eventPrinted": "E24",
+      "pdf": "hl7.eu std29/ch16.html",
+      "page": null,
+      "table": "EHC^E24^EHC_E24: Authorization Response",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgement"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Error"
+    },
+    {
+      "kind": "group",
+      "name": "AUTHORIZATION_RESPONSE_INFO",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "IVC",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Invoice"
+        },
+        {
+          "kind": "group",
+          "name": "PSL_ITEM_INFO",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PSL",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Product/Service Line Item"
+            },
+            {
+              "kind": "segment",
+              "name": "AUT",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Authorization"
+            },
+            {
+              "kind": "segment",
+              "name": "ADJ",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Adjustment"
+            }
+          ],
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

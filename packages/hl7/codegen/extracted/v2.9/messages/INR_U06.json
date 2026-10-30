@@ -1,0 +1,90 @@
+{
+  "structure": "INR_U06",
+  "messageType": "INR",
+  "triggerEvent": "U06",
+  "version": "2.9",
+  "description": "Inventory Request Message",
+  "title": "Inventory Request Message",
+  "sectionHeading": "13.3.6 INR/ACK  Automated Equipment Inventory Request (Event U06)",
+  "source": {
+    "pdf": "hl7.eu std29/ch13.html",
+    "pages": null,
+    "table": "INR^U06^INR_U06: Inventory Request Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "U06"
+      ],
+      "eventPrinted": "U06",
+      "pdf": "hl7.eu std29/ch13.html",
+      "page": null,
+      "table": "INR^U06^INR_U06: Inventory Request Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EQU",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Equipment Detail",
+      "chapterRef": "13"
+    },
+    {
+      "kind": "segment",
+      "name": "INV",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Inventory Detail",
+      "chapterRef": "13"
+    },
+    {
+      "kind": "segment",
+      "name": "ROL",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Role Detail",
+      "status": "B",
+      "chapterRef": "12"
+    }
+  ],
+  "variants": []
+}

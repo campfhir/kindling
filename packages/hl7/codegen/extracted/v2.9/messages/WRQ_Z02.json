@@ -1,0 +1,146 @@
+{
+  "structure": "WRQ_Z02",
+  "messageType": "WRP",
+  "triggerEvent": "Z02",
+  "version": "2.9",
+  "description": "Widget Reports",
+  "title": "Widget Reports",
+  "source": {
+    "pdf": "hl7.eu std29/ch02.html",
+    "pages": null,
+    "table": "WRP^Z02^WRQ_Z02: Widget Reports"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Z02"
+      ],
+      "eventPrinted": "Z02",
+      "pdf": "hl7.eu std29/ch02.html",
+      "page": null,
+      "table": "WRP^Z02^WRQ_Z02: Widget Reports",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "placeholder",
+      "text": "Segments",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "notation": "Segments",
+      "description": "Description",
+      "status": "Status",
+      "chapterRef": "Chapter"
+    },
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Error Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "Widget",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "WDN",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Widget Description",
+          "chapterRef": "XX"
+        },
+        {
+          "kind": "segment",
+          "name": "WPN",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Widget Portion",
+          "chapterRef": "XX"
+        },
+        {
+          "kind": "group",
+          "items": [
+            {
+              "kind": "choice",
+              "oneOf": [
+                "ABC",
+                "NTE",
+                "DEF",
+                "GHI",
+                "PRT",
+                "NTE"
+              ],
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "A better concept group ABC, etc.",
+              "chapterRef": "XX XX XX XX"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

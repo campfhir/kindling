@@ -1,0 +1,31 @@
+{
+  "notMessages": {
+    "WRP_Z02": "2026-10-30: hl7.eu std29/ch02.html introduces it as an example of the abstract message syntax (\"Consider the hypothetical triggering event a widget report is requested. It might be served by the Widget Request (WRQ) and Widget Report (WRP) messages\") and prints its table captioned \"WRP^Z02^WRQ_Z02: Widget Reports\", with segments (WDN, WPN, ...) that no chapter defines. Not a message of the standard."
+  },
+  "sharedStructure": {
+    "RQA_I09": {
+      "structure": "RQA_I08",
+      "reason": "2026-10-30: hl7.eu std29/ch11.html 11.4.3 \"RQA/RPA - Request for Modification to an Authorization (Event I09)\" prints no table; hl7.eu's message structure list (hl7v29msgstruct.htm) names I09 among the events of RQA_I08 (as Sender)."
+    },
+    "RQA_I10": {
+      "structure": "RQA_I08",
+      "reason": "2026-10-30: hl7.eu std29/ch11.html 11.4.4 (Event I10) prints no table; hl7v29msgstruct.htm names I10 among the events of RQA_I08 (as Sender)."
+    },
+    "RQA_I11": {
+      "structure": "RQA_I08",
+      "reason": "2026-10-30: hl7.eu std29/ch11.html 11.4.5 (Event I11) prints no table; hl7v29msgstruct.htm names I11 among the events of RQA_I08 (as Sender)."
+    },
+    "RPA_I09": {
+      "structure": "RPA_I08",
+      "reason": "2026-10-30: hl7.eu std29/ch11.html 11.4.3 (Event I09) prints no table; hl7v29msgstruct.htm names I09 among the events of RPA_I08 (as Recipient)."
+    },
+    "RPA_I10": {
+      "structure": "RPA_I08",
+      "reason": "2026-10-30: hl7.eu std29/ch11.html 11.4.4 (Event I10) prints no table; hl7v29msgstruct.htm names I10 among the events of RPA_I08 (as Recipient)."
+    },
+    "RPA_I11": {
+      "structure": "RPA_I08",
+      "reason": "2026-10-30: hl7.eu std29/ch11.html 11.4.5 (Event I11) prints no table; hl7v29msgstruct.htm names I11 among the events of RPA_I08 (as Recipient)."
+    }
+  }
+}

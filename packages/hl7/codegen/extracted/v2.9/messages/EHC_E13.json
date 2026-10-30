@@ -1,0 +1,241 @@
+{
+  "structure": "EHC_E13",
+  "messageType": "EHC",
+  "triggerEvent": "E13",
+  "version": "2.9",
+  "description": "Additional Information Response",
+  "title": "Additional Information Response",
+  "source": {
+    "pdf": "hl7.eu std29/ch16.html",
+    "pages": null,
+    "table": "EHC^E13^EHC_E13: Additional Information Response"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E13"
+      ],
+      "eventPrinted": "E13",
+      "pdf": "hl7.eu std29/ch16.html",
+      "page": null,
+      "table": "EHC^E13^EHC_E13: Additional Information Response",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgement"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Error"
+    },
+    {
+      "kind": "segment",
+      "name": "RFI",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Request for Information"
+    },
+    {
+      "kind": "segment",
+      "name": "CTD",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Contact Data"
+    },
+    {
+      "kind": "segment",
+      "name": "IVC",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Invoice"
+    },
+    {
+      "kind": "segment",
+      "name": "PSS",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Product/Service Section"
+    },
+    {
+      "kind": "segment",
+      "name": "PSG",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Product/Service Group"
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Person Identification"
+    },
+    {
+      "kind": "segment",
+      "name": "PRT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Participation",
+      "chapterRef": "4"
+    },
+    {
+      "kind": "segment",
+      "name": "PSL",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Product/Service Line Item"
+    },
+    {
+      "kind": "group",
+      "name": "REQUEST",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "CTD",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Contact Data"
+        },
+        {
+          "kind": "segment",
+          "name": "OBR",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Observation Request"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Participation",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Notes and Comments"
+        },
+        {
+          "kind": "group",
+          "name": "RESPONSE",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OBX",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Observation Result"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Participation",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Notes and Comments"
+            },
+            {
+              "kind": "segment",
+              "name": "TXA",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Transcription Document Header"
+            }
+          ],
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

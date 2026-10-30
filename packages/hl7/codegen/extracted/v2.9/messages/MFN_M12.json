@@ -1,0 +1,139 @@
+{
+  "structure": "MFN_M12",
+  "messageType": "MFN",
+  "triggerEvent": "M12",
+  "version": "2.9",
+  "description": "Master File Notification - Additional Basic Observ",
+  "title": "Master File Notification - Additional Basic Observ",
+  "sectionHeading": "8.8.7 MFN/MFK - Master File Notification - Additional Basic Observation/Service Attributes (Event M12)",
+  "source": {
+    "pdf": "hl7.eu std29/ch08.html",
+    "pages": null,
+    "table": "MFN^M12^MFN_M12: Master File Notification - Additional Basic Observ"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M12"
+      ],
+      "eventPrinted": "M12",
+      "pdf": "hl7.eu std29/ch08.html",
+      "page": null,
+      "table": "MFN^M12^MFN_M12: Master File Notification - Additional Basic Observ",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "group",
+      "name": "MF_OBS_ATTRIBUTES",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Master File Entry",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "OM1",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "General Segment (Fields That Apply to Most Observations)",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Participation",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "group",
+          "name": "MF_OBS_OTHER_ATTRIBUTES",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "OM7",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Other Basic Observation/Service Attributes",
+              "chapterRef": "8"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Participation",
+              "chapterRef": "4"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

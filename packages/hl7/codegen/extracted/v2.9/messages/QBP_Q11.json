@@ -1,0 +1,123 @@
+{
+  "structure": "QBP_Q11",
+  "messageType": "QBP",
+  "triggerEvent": "Q11",
+  "version": "2.9",
+  "description": "Query Grammar: QBS Message",
+  "title": "Query Grammar: QBS Message",
+  "source": {
+    "pdf": "hl7.eu std29/ch04A.html",
+    "pages": null,
+    "table": "QBP^Q11,Q31,Z81,Z85,Z87,Z89^QBP_Q11: Query Grammar: QBS Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Q11",
+        "Q31",
+        "Z81",
+        "Z85",
+        "Z87",
+        "Z89"
+      ],
+      "eventPrinted": "Q11,Q31,Z81,Z85,Z87,Z89",
+      "pdf": "hl7.eu std29/ch04A.html",
+      "page": null,
+      "table": "QBP^Q11,Q31,Z81,Z85,Z87,Z89^QBP_Q11: Query Grammar: QBS Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Access Restrictions",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Parameter Definition",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "group",
+      "name": "QBP",
+      "items": [
+        {
+          "kind": "placeholder",
+          "text": "[...]",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "notation": "[...]",
+          "description": "Optional query by example segments"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "RCP",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Response Control Parameter",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Continuation Pointer",
+      "chapterRef": "2"
+    }
+  ],
+  "variants": []
+}

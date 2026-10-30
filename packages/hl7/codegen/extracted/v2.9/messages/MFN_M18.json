@@ -1,0 +1,139 @@
+{
+  "structure": "MFN_M18",
+  "messageType": "MFN",
+  "triggerEvent": "M18",
+  "version": "2.9",
+  "description": "",
+  "title": "",
+  "sectionHeading": "8.8.8 MFN/MFK  Master File Notification  Test/Observation (Payer) (Event M18)",
+  "source": {
+    "pdf": "hl7.eu std29/ch08.html",
+    "pages": null,
+    "table": "MFN^M18^MFN_M18: "
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M18"
+      ],
+      "eventPrinted": "M18",
+      "pdf": "hl7.eu std29/ch08.html",
+      "page": null,
+      "table": "MFN^M18^MFN_M18: ",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Master File Identification",
+      "chapterRef": "8"
+    },
+    {
+      "kind": "group",
+      "name": "MF_PAYER",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "MFE",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Master File Entry",
+          "chapterRef": "8"
+        },
+        {
+          "kind": "group",
+          "name": "PAYER_MF_ENTRY",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PM1",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Payer Master File",
+              "chapterRef": "8"
+            },
+            {
+              "kind": "group",
+              "name": "PAYER_MF_COVERAGE",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "MCP",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Master File Coverage Policy",
+                  "chapterRef": "8"
+                },
+                {
+                  "kind": "segment",
+                  "name": "DPS",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Diagnosis and Procedure",
+                  "chapterRef": "8"
+                }
+              ],
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

@@ -1,0 +1,90 @@
+{
+  "structure": "ESU_U01",
+  "messageType": "ESU",
+  "triggerEvent": "U01",
+  "version": "2.9",
+  "description": "Equipment Status Message",
+  "title": "Equipment Status Message",
+  "sectionHeading": "13.3.1 ESU/ACK - Automated Equipment Status Update (Event U01)",
+  "source": {
+    "pdf": "hl7.eu std29/ch13.html",
+    "pages": null,
+    "table": "ESU^U01^ESU_U01: Equipment Status Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "U01"
+      ],
+      "eventPrinted": "U01",
+      "pdf": "hl7.eu std29/ch13.html",
+      "page": null,
+      "table": "ESU^U01^ESU_U01: Equipment Status Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EQU",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Equipment Detail",
+      "chapterRef": "13"
+    },
+    {
+      "kind": "segment",
+      "name": "ISD",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Interaction Status Detail",
+      "chapterRef": "13"
+    },
+    {
+      "kind": "segment",
+      "name": "ROL",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Role Detail",
+      "status": "B",
+      "chapterRef": "12"
+    }
+  ],
+  "variants": []
+}
