@@ -34,6 +34,30 @@ Do not rely on other sites (vendor guides, blogs, whitepapers, package docs) or 
 If those sources cannot confirm a fact, say so and flag it as unverified instead of
 guessing. Cite the page used in the PR or commit when a spec decision is made.
 
+## Validating X12 and PDMP (ASAP) facts
+
+The X12 implementation guides (TR3s) and the ASAP standard are sold, not published, so facts about
+them come from free public sources that reprint or apply them:
+
+- X12: x12.org public pages and requests for interpretation, CMS and Medicare contractor (MAC)
+  companion guides and edit spreadsheets, and state Medicaid companion guides.
+- ASAP (`@campfhir/pdmp`): state PDMP data-submission dispenser guides published by state boards of
+  pharmacy or health departments, and asapnet.org's public pages.
+
+Do not rely on vendor marketing pages, blogs or memory alone; a vendor guide may only cross-check.
+Companion guides add payer and state rules on top of the standard: record a fact as the standard's
+only when several independent guides agree, and treat requirement codes from a single guide as that
+guide's rule. Facts are tracked with their sources, dates and disagreements in
+`packages/x12/docs/validation/` and `packages/pdmp/docs/validation/`; check them before looking a
+fact up again, and flag what no public source confirms as unverified instead of guessing.
+
+X12's published examples (https://x12.org/examples) are X12's intellectual property and "cannot be
+reproduced or recreated without the express consent of ASC X12" (https://x12.org/examples/disclaimers).
+Test against them through `packages/x12/scripts/fetch-examples.mjs` (`pnpm fixtures:fetch`, into the
+uncommitted `fixtures/external/`), cite them by link, and describe rather than quote them in a
+ledger; never commit them or fixtures copied from their names and identifiers. X12 Glass needs a
+paid license and is not a free public source.
+
 ## Repository layout
 
 This is a pnpm workspace. Every npm package lives in `packages/<name>` and publishes as

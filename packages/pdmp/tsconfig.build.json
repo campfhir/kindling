@@ -1,0 +1,13 @@
+{
+  // The declarations of the published package: one .d.ts per source file under dist/, next to the
+  // .js that tsup writes (`.ts` import specifiers are rewritten to `.js` by
+  // rewriteRelativeImportExtensions). Tests are left out. `pnpm build` runs this after tsup.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+    "outDir": "./dist"
+  },
+  "exclude": ["node_modules", "dist", "examples", "src/**/*.test.ts"]
+}

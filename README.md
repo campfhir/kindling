@@ -9,8 +9,8 @@ as its own bundle with its own version.
 | Package | Folder | What it does | Status |
 |---|---|---|---|
 | [`@campfhir/hl7`](https://www.npmjs.com/package/@campfhir/hl7) | [`packages/hl7`](packages/hl7) | Build and parse HL7 v2 messages (every release from v2.1 to v2.9.1) | published |
-| `@campfhir/x12` | `packages/x12` | X12 EDI transaction sets | planned |
-| `@campfhir/pdmp` | `packages/pdmp` | PDMP (prescription drug monitoring) reporting formats | planned |
+| `@campfhir/x12` | [`packages/x12`](packages/x12) | Build and parse X12 EDI interchanges; typed 270/271 eligibility and 999 acknowledgments | 0.1 (not yet published) |
+| `@campfhir/pdmp` | [`packages/pdmp`](packages/pdmp) | Build and parse ASAP PDMP (prescription drug monitoring) reports: the envelope and loops now, typed 4.2A/4.2B segments next | 0.1 (not yet published) |
 | `@campfhir/fhir-r4` | `packages/fhir-r4` | FHIR R4 resources | planned |
 | `@campfhir/fhir-r5` | `packages/fhir-r5` | FHIR R5 resources | planned |
 
@@ -32,7 +32,9 @@ See [ROADMAP.md](ROADMAP.md) for where each package is heading.
 ```
 .
 ├── packages/
-│   └── hl7/                 # @campfhir/hl7 — src/, codegen/, examples/, docs/, README.md
+│   ├── hl7/                 # @campfhir/hl7 — src/, codegen/, examples/, docs/, README.md
+│   ├── x12/                 # @campfhir/x12 — src/, docs/validation/, README.md
+│   └── pdmp/                # @campfhir/pdmp — src/, docs/validation/, README.md
 ├── .github/
 │   ├── workflows/           # ci.yml, publish.yml, bump-version.yml, tag-releases.yml
 │   └── scripts/             # release helpers (all workspace-aware)

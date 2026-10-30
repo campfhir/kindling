@@ -52,9 +52,15 @@ which does not rewrite `workspace:` specifiers, so switch that step to pack with
 Packages are versioned and released independently. Only the package whose version changed is
 published.
 
-- Every PR and push to `main` runs **lint, typecheck, codegen check, tests (Node 24 and 26),
-  build and a smoke test** of every built entry point of every package
-  (`.github/workflows/ci.yml`).
+- Every PR and push to `main` runs CI (`.github/workflows/ci.yml`) **in jobs of each package's
+  own**: `check <package>` (lint, typecheck, build, a smoke test of every built entry point,
+  `npm pack --dry-run`) and `test <package> (Node 24 / 26)`, after fetching the package's
+  external fixtures (`fixtures:fetch`, when it has one). A failing package does not cancel or hide
+  the others. A PR checks only the packages it touches, or every package when it changes a file they
+  share (root manifests, the lockfile, `tsconfig.base.json`, `eslint.config.mjs`, `.github/`); a push
+  to `main` checks every package. If branch protection requires status checks, require each
+  package's jobs by name (`check @campfhir/hl7`, `test @campfhir/hl7 (Node 24)`, …) rather than a
+  job that waits for all of them, so one package's failure does not block merging another's work.
 - To prepare a release, run **Bump version** from the Actions tab with the release branch
   selected and the package to bump (`hl7`, `x12`, …) as input. It commits the bump to that branch
   and starts CI on it; it refuses to run on `main`. You can also edit the package's `version` by

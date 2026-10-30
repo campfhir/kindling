@@ -13,12 +13,39 @@ concurrency:
 permissions:
   contents: read
 
-# Every job runs across the whole workspace (packages/*), so a new package is covered as soon
-# as it has the standard scripts (lint via the root eslint config, typecheck, test, build).
-# Tests run on every supported Node release line (engines: >=24); other jobs use Node 24.
+# Every package (packages/*) is checked in jobs of its own, so one package's failure never cancels
+# or hides another's: `check <package>` (lint, typecheck, build, smoke test, pack) and
+# `test <package> (Node <n>)` on every supported Node release line (engines: >=24). A pull request
+# checks only the packages it touches, or all of them when it changes a file they share
+# (.github/scripts/ci-packages.mjs); a push to main and a manual run check every package. A new
+# package is covered as soon as it has the standard scripts.
 jobs:
-  lint-typecheck:
+  plan:
     runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.plan.outputs.packages }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: Find the packages to check
+        id: plan
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: node .github/scripts/ci-packages.mjs >> "$GITHUB_OUTPUT"
+
+  check:
+    needs: plan
+    if: needs.plan.outputs.packages != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJson(needs.plan.outputs.packages) }}
+    name: check ${{ matrix.package.name }}
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
@@ -27,15 +54,28 @@ jobs:
           node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm lint
-      - run: pnpm typecheck
+      - name: Lint
+        run: pnpm exec eslint "packages/${{ matrix.package.folder }}"
+      - name: Typecheck
+        run: pnpm --filter "${{ matrix.package.name }}" typecheck
+      - name: Build
+        run: pnpm --filter "${{ matrix.package.name }}" build
+      - name: Smoke-test every built entry point
+        run: node .github/scripts/smoke-test.mjs "${{ matrix.package.folder }}"
+      - name: Check what the package would publish
+        working-directory: packages/${{ matrix.package.folder }}
+        run: npm pack --dry-run
 
   test:
+    needs: plan
+    if: needs.plan.outputs.packages != '[]'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
+        package: ${{ fromJson(needs.plan.outputs.packages) }}
         node-version: [24, 26]
+    name: test ${{ matrix.package.name }} (Node ${{ matrix.node-version }})
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
@@ -44,22 +84,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - name: Fetch the external HL7 sample messages (fixture tests)
-        run: pnpm --filter @campfhir/hl7 fixtures:fetch
-      - run: pnpm test
-
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v7
-        with:
-          node-version: 24
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      - name: Smoke-test every built entry point
-        run: pnpm smoke
-      - name: Check what each package would publish
-        run: pnpm -r exec npm pack --dry-run
+      # External samples a package's tests read but this repository does not redistribute: hl7's
+      # sample message collections, X12's published examples (packages/x12/scripts/fetch-examples.mjs).
+      - name: Fetch external fixtures
+        run: pnpm --filter "${{ matrix.package.name }}" run --if-present fixtures:fetch
+      - name: Test
+        run: pnpm --filter "${{ matrix.package.name }}" test
