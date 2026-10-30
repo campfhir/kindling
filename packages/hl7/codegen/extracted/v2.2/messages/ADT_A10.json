@@ -1,0 +1,84 @@
+{
+  "structure": "ADT_A10",
+  "messageType": "ADT",
+  "triggerEvent": "A10",
+  "version": "2.2",
+  "description": "Patient Arriving",
+  "title": "Patient Arriving",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventA10.htm",
+    "pages": null,
+    "table": "ADT^A10^ADT_A10: Patient Arriving"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A10"
+      ],
+      "eventPrinted": "A10",
+      "pdf": "hl7.eu v22 hl7v22eventA10.htm",
+      "page": null,
+      "table": "ADT^A10^ADT_A10: Patient Arriving",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV2",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "OBX",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DG1",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

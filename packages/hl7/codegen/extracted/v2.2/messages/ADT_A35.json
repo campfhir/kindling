@@ -1,0 +1,60 @@
+{
+  "structure": "ADT_A35",
+  "messageType": "ADT",
+  "triggerEvent": "A35",
+  "version": "2.2",
+  "description": "Merge patient information - account number only",
+  "title": "Merge patient information - account number only",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventA35.htm",
+    "pages": null,
+    "table": "ADT^A35^ADT_A35: Merge patient information - account number only"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A35"
+      ],
+      "eventPrinted": "A35",
+      "pdf": "hl7.eu v22 hl7v22eventA35.htm",
+      "page": null,
+      "table": "ADT^A35^ADT_A35: Merge patient information - account number only",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MRG",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

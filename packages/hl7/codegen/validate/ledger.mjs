@@ -484,7 +484,10 @@ for (const r of results) {
 /** Writes the decided type / repeat / usage / length of a segment's rows into a spec entry; returns the number of changes. */
 function applyDecisions(seg, rows, entry) {
   let changed = 0;
+  // a field count decided by hand (a segment note's count) is not exceeded: a source's extra fields are not added
+  const limit = NOTES[seg]?.count;
   for (const x of rows) {
+    if (limit !== undefined && x.seq > limit) continue;
     const f = entry.fields.find((q) => q.seq === x.seq);
     if (!f) {
       if (x.type.value) {

@@ -1,0 +1,84 @@
+{
+  "structure": "ADT_A14",
+  "messageType": "ADT",
+  "triggerEvent": "A14",
+  "version": "2.1",
+  "description": "Pending Admit",
+  "title": "Pending Admit",
+  "source": {
+    "pdf": "hl7.eu v21 hl7v21eventA14.htm",
+    "pages": null,
+    "table": "ADT^A14^ADT_A14: Pending Admit"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A14"
+      ],
+      "eventPrinted": "A14",
+      "pdf": "hl7.eu v21 hl7v21eventA14.htm",
+      "page": null,
+      "table": "ADT^A14^ADT_A14: Pending Admit",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PD1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "NK1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DG1",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

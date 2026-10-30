@@ -1,0 +1,94 @@
+{
+  "structure": "ADR_A19",
+  "messageType": "ADR",
+  "triggerEvent": "A19",
+  "version": "2.1",
+  "description": "Patient Query",
+  "title": "Patient Query",
+  "source": {
+    "pdf": "hl7.eu v21 hl7v21eventA19.htm",
+    "pages": null,
+    "table": "ADR^A19^ADR_A19: Patient Query"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A19"
+      ],
+      "eventPrinted": "A19",
+      "pdf": "hl7.eu v21 hl7v21eventA19.htm",
+      "page": null,
+      "table": "ADR^A19^ADR_A19: Patient Query",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "QUERY_RESPONSE",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "EVN",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "PV1",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

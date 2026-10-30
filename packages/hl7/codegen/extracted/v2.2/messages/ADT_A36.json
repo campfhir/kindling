@@ -1,0 +1,60 @@
+{
+  "structure": "ADT_A36",
+  "messageType": "ADT",
+  "triggerEvent": "A36",
+  "version": "2.2",
+  "description": "Merge patient information - pat ID and account number",
+  "title": "Merge patient information - pat ID and account number",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventA36.htm",
+    "pages": null,
+    "table": "ADT^A36^ADT_A36: Merge patient information - pat ID and account number"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A36"
+      ],
+      "eventPrinted": "A36",
+      "pdf": "hl7.eu v22 hl7v22eventA36.htm",
+      "page": null,
+      "table": "ADT^A36^ADT_A36: Merge patient information - pat ID and account number",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MRG",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

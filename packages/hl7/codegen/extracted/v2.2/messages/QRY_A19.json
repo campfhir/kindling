@@ -1,0 +1,52 @@
+{
+  "structure": "QRY_A19",
+  "messageType": "QRY",
+  "triggerEvent": "A19",
+  "version": "2.2",
+  "description": "Patient Query",
+  "title": "Patient Query",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventA19.htm",
+    "pages": null,
+    "table": "QRY^A19^QRY_A19: Patient Query"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A19"
+      ],
+      "eventPrinted": "A19",
+      "pdf": "hl7.eu v22 hl7v22eventA19.htm",
+      "page": null,
+      "table": "QRY^A19^QRY_A19: Patient Query",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "QRF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

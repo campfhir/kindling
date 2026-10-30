@@ -1,0 +1,52 @@
+{
+  "structure": "ADT_A20",
+  "messageType": "ADT",
+  "triggerEvent": "A20",
+  "version": "2.1",
+  "description": "Nursing/Census Application Updates",
+  "title": "Nursing/Census Application Updates",
+  "source": {
+    "pdf": "hl7.eu v21 hl7v21eventA20.htm",
+    "pages": null,
+    "table": "ADT^A20^ADT_A20: Nursing/Census Application Updates"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A20"
+      ],
+      "eventPrinted": "A20",
+      "pdf": "hl7.eu v21 hl7v21eventA20.htm",
+      "page": null,
+      "table": "ADT^A20^ADT_A20: Nursing/Census Application Updates",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "NPU",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

@@ -1,0 +1,68 @@
+{
+  "structure": "ADT_A15",
+  "messageType": "ADT",
+  "triggerEvent": "A15",
+  "version": "2.1",
+  "description": "Pending Transfer",
+  "title": "Pending Transfer",
+  "source": {
+    "pdf": "hl7.eu v21 hl7v21eventA15.htm",
+    "pages": null,
+    "table": "ADT^A15^ADT_A15: Pending Transfer"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A15"
+      ],
+      "eventPrinted": "A15",
+      "pdf": "hl7.eu v21 hl7v21eventA15.htm",
+      "page": null,
+      "table": "ADT^A15^ADT_A15: Pending Transfer",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DG1",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

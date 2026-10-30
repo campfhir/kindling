@@ -1,0 +1,52 @@
+{
+  "structure": "ACK",
+  "messageType": "ACK",
+  "triggerEvent": null,
+  "version": "2.1",
+  "description": "General Acknowledgment",
+  "title": "General Acknowledgment",
+  "source": {
+    "pdf": "hl7.eu v21 hl7v21eventA01.htm",
+    "pages": null,
+    "table": "ACK^varies^ACK: General Acknowledgment"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "varies"
+      ],
+      "eventPrinted": "varies",
+      "pdf": "hl7.eu v21 hl7v21eventA01.htm",
+      "page": null,
+      "table": "ACK^varies^ACK: General Acknowledgment",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

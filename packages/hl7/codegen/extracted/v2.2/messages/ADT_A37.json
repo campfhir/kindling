@@ -1,0 +1,76 @@
+{
+  "structure": "ADT_A37",
+  "messageType": "ADT",
+  "triggerEvent": "A37",
+  "version": "2.2",
+  "description": "unlink patient information",
+  "title": "unlink patient information",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventA37.htm",
+    "pages": null,
+    "table": "ADT^A37^ADT_A37: unlink patient information"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A37"
+      ],
+      "eventPrinted": "A37",
+      "pdf": "hl7.eu v22 hl7v22eventA37.htm",
+      "page": null,
+      "table": "ADT^A37^ADT_A37: unlink patient information",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

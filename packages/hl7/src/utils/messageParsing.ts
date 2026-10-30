@@ -8,7 +8,7 @@ import type { Result } from "../types/result.ts";
 import type { ErrResult } from "../types/err.ts";
 import type { EncodingCharacters } from "../types/encoding.ts";
 import { HL7Message } from "../types/message.ts";
-import type { MSH } from "../v2.3/MSH.ts";
+import type { MessageHeaderSegment } from "../types/header.ts";
 
 /** Splits a message into non-empty segment strings (CR, LF or CRLF delimited). */
 export function splitSegments(messageString: string): string[] {
@@ -16,7 +16,7 @@ export function splitSegments(messageString: string): string[] {
 }
 
 /** The pieces every parser needs once the leading MSH segment has been read. */
-export interface MessageHeader<TMsh extends MSH> {
+export interface MessageHeader<TMsh extends MessageHeaderSegment> {
   segments: string[];
   msh: TMsh;
   encoding: EncodingCharacters;
@@ -28,7 +28,7 @@ export interface MessageHeader<TMsh extends MSH> {
  * HL7Message container. Returns an error for an empty message or one that does
  * not start with MSH.
  */
-export function readMessageHeader<TMsh extends MSH>(
+export function readMessageHeader<TMsh extends MessageHeaderSegment>(
   messageString: string,
   parseMsh: (s: string) => Result<TMsh>,
 ): Result<MessageHeader<TMsh>> {

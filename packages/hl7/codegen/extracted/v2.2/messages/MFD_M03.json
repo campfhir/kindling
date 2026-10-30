@@ -1,0 +1,52 @@
+{
+  "structure": "MFD_M03",
+  "messageType": "MFD",
+  "triggerEvent": "M03",
+  "version": "2.2",
+  "description": "Master files change - Test/Observation",
+  "title": "Master files change - Test/Observation",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventM03.htm",
+    "pages": null,
+    "table": "MFD^M03^MFD_M03: Master files change - Test/Observation"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M03"
+      ],
+      "eventPrinted": "M03",
+      "pdf": "hl7.eu v22 hl7v22eventM03.htm",
+      "page": null,
+      "table": "MFD^M03^MFD_M03: Master files change - Test/Observation",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MFA",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

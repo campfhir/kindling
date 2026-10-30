@@ -1,0 +1,76 @@
+{
+  "structure": "DSR_R03",
+  "messageType": "DSR",
+  "triggerEvent": "R03",
+  "version": "2.2",
+  "description": "Display-oriented results, query/unsol. update",
+  "title": "Display-oriented results, query/unsol. update",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventR03.htm",
+    "pages": null,
+    "table": "DSR^R03^DSR_R03: Display-oriented results, query/unsol. update"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "R03"
+      ],
+      "eventPrinted": "R03",
+      "pdf": "hl7.eu v22 hl7v22eventR03.htm",
+      "page": null,
+      "table": "DSR^R03^DSR_R03: Display-oriented results, query/unsol. update",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "QRF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSP",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

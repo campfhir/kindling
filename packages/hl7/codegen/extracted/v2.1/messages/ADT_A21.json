@@ -1,0 +1,60 @@
+{
+  "structure": "ADT_A21",
+  "messageType": "ADT",
+  "triggerEvent": "A21",
+  "version": "2.1",
+  "description": "A Patient Goes On A \"Leave Of Absence\"",
+  "title": "A Patient Goes On A \"Leave Of Absence\"",
+  "source": {
+    "pdf": "hl7.eu v21 hl7v21eventA21.htm",
+    "pages": null,
+    "table": "ADT^A21^ADT_A21: A Patient Goes On A \"Leave Of Absence\""
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A21"
+      ],
+      "eventPrinted": "A21",
+      "pdf": "hl7.eu v21 hl7v21eventA21.htm",
+      "page": null,
+      "table": "ADT^A21^ADT_A21: A Patient Goes On A \"Leave Of Absence\"",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

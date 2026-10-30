@@ -15,11 +15,16 @@ const="V$(echo "${v#v}" | tr . _)"
 
 # v2.9's chapter pages print their message tables without captions: caption-chapters.ts adds them from the headings
 # and hl7.eu's message structure list (it leaves pages that caption their own tables alone)
-if [ "$keep" != --keep-extraction ] && [ -s "$dir/hl7eu/msgstruct.htm" ]; then
+# (v2.1 and v2.2 have no chapter pages at all: their structures are on the event pages, which from-hl7eu.ts reads)
+if [ "$keep" != --keep-extraction ] && [ -s "$dir/hl7eu/msgstruct.htm" ] && [ ! -d "$dir/hl7eu/events" ]; then
   npx tsx codegen/extract/caption-chapters.ts "$v" "$dir" | awk 'NR == 1'
 fi
 [ "$keep" = --keep-extraction ] || npx tsx codegen/extract/from-hl7eu.ts "$v" "$dir" "codegen/extracted/$v"
 npx tsx codegen/extract/import-extraction.ts "$v"
+
+# A standalone version (v2.1, v2.2: no baseVersion in its version.ts) generates every segment from its spec, MSH, BHS and
+# FHS included, so there is nothing to adopt from a base version.
+standalone=""; grep -q "baseVersion:" "codegen/schemas/$v/version.ts" || standalone=1
 
 # Register the version in codegen/generate.ts (after the last registered one) if it is not there yet.
 if ! grep -q "schemas/$v/version.ts" codegen/generate.ts; then
@@ -50,7 +55,7 @@ regenerate() {
   pnpm -s exports >/dev/null
 }
 regenerate
-node codegen/validate/ledger.mjs "$v" "$dir" --adopt MSH,BHS,FHS | tail -1
+[ -n "$standalone" ] || node codegen/validate/ledger.mjs "$v" "$dir" --adopt MSH,BHS,FHS | tail -1
 node codegen/validate/ledger.mjs "$v" "$dir" --fix-spec | tail -1
 regenerate
 
@@ -61,7 +66,9 @@ node codegen/validate/ledger.mjs "$v" "$dir" | tail -1
 # source is passed as an empty folder, and with neither the hl7.eu reading is the only check.
 # hl7.eu's message structure list is the second reading for a version whose chapter tables print no captions (v2.9)
 list=""; [ -d "$dir/hl7eu-captioned" ] && list="$dir/hl7eu/msgstruct.htm"
+# v2.1 and v2.2 have no chapter pages: the event pages are the hl7.eu reading
+events=""; [ -d "$dir/hl7eu/events" ] && events="$dir/hl7eu/events"
 hapi="$dir/hapi"; mkdir -p "$hapi/message" "$hapi/group" "$dir/caristix/events"; touch "$hapi/eventmap.properties"
 npx tsx codegen/validate/message-ledger.ts "$v" --caristix "$dir/caristix/events" \
   --hapi "$hapi/message" "$hapi/group" "$hapi/eventmap.properties" --hl7eu "$dir/hl7eu/chapters" --hl7org "$dir/hl7org/chapters" \
-  ${list:+--hl7eu-list "$list"} | grep -v '^  differs'
+  ${list:+--hl7eu-list "$list"} ${events:+--hl7eu-events "$events"} | grep -v '^  differs'

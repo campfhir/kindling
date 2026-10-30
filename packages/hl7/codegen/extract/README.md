@@ -9,6 +9,7 @@ There are two ways to make one, and everything after it is the same.
 | The official hl7.org chapter PDFs, read by an agent that has them | [BRIEF.md](BRIEF.md), checked with `check-completeness.ts` | 2.9.1 (its own PR) |
 | The hl7.eu pages `fetch-sources.sh` pulled | `from-hl7eu.ts` (deterministic parser) | 2.6 onward |
 | An official chapter PDF where hl7.eu lacks the chapter, converted to an hl7.eu-shaped page | `pdf-chapter.ts`, then `from-hl7eu.ts` | 2.8 chapter 16 |
+| The hl7.eu event pages, for a version with no chapter pages (one structure per TYPE_EVENT) | `from-hl7eu.ts`, reading them with `hl7eu-events.ts` | 2.1 and 2.2 |
 
 ## The steps, in order
 
@@ -62,6 +63,13 @@ A difference the message ledger reports is either fixed (in the extraction, or b
 another event's structure but prints a different table, and the structure ID is followed) or accepted with a dated note in
 `codegen/validate/message-notes.json`. Never accept a difference without saying which source agrees with the
 structure and why the others differ.
+
+## Versions of their own (v2.1, v2.2)
+
+The releases before v2.3 are imported as versions of their own (`STANDALONE` in `import-extraction.ts`): their
+`version.ts` has no `baseVersion`, every segment is generated from the spec (MSH, BHS and FHS on the shared header base
+in `src/types/header.ts`, so `add-version.sh` adopts nothing), and no later version re-exports them. Register such a
+version in `codegen/generate.ts` before v2.3, and the root `parse()` in `src/dispatch.ts`.
 
 ## What the importer cannot express yet
 

@@ -1,0 +1,68 @@
+{
+  "structure": "MFK_M02",
+  "messageType": "MFK",
+  "triggerEvent": "M02",
+  "version": "2.2",
+  "description": "Master files change - Staff Practitioneer",
+  "title": "Master files change - Staff Practitioneer",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventM02.htm",
+    "pages": null,
+    "table": "MFK^M02^MFK_M02: Master files change - Staff Practitioneer"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "M02"
+      ],
+      "eventPrinted": "M02",
+      "pdf": "hl7.eu v22 hl7v22eventM02.htm",
+      "page": null,
+      "table": "MFK^M02^MFK_M02: Master files change - Staff Practitioneer",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MFI",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MFA",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

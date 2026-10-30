@@ -31,15 +31,15 @@ import {
   segmentNames,
 } from "./schema.ts";
 import { readMessageHeader, segmentParseFailure } from "../utils/messageParsing.ts";
-import type { MSH } from "../v2.3/MSH.ts";
+import type { MessageHeaderSegment } from "./header.ts";
 
 /** Parses one raw segment string (not MSH) into a segment of the right class. */
 export type SegmentParser = (segmentString: string, encoding: EncodingCharacters) => Result<Segment>;
 
 /** The segment parsers of a message: `MSH` parses the header, every other entry a segment type. */
 export interface SegmentParsers {
-  MSH: (segmentString: string) => Result<MSH>;
-  [segment: string]: ((s: string, e: EncodingCharacters) => Result<Segment>) | ((s: string) => Result<MSH>);
+  MSH: (segmentString: string) => Result<MessageHeaderSegment>;
+  [segment: string]: ((s: string, e: EncodingCharacters) => Result<Segment>) | ((s: string) => Result<MessageHeaderSegment>);
 }
 
 /** The parsed value of a group instance (or of the whole message), keyed by item field name. */
@@ -49,8 +49,8 @@ export type StructureValue = Record<string, unknown>;
 export interface ParsedMessageBase {
   /** All segments in wire order. */
   message: HL7Message;
-  /** The message header (MSH). */
-  header: MSH;
+  /** The message header (MSH) of the message's version. */
+  header: MessageHeaderSegment;
 }
 
 /** "an MSH segment", "a PID segment": segment names are spelled out letter by letter. */

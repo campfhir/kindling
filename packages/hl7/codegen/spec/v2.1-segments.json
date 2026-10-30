@@ -1,0 +1,4582 @@
+{
+ "ACC": {
+  "title": "ACCIDENT",
+  "source": "hl7.eu v21 hl7v21segmACC.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "ACCIDENT DATE/TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "ACCIDENT CODE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0050",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "ACCIDENT LOCATION",
+    "length": "25",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "ADD": {
+  "title": "ADDENDUM",
+  "source": "hl7.eu v21 hl7v21segmADD.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "ADDENDUM CONTINUATION POINTER",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "BHS": {
+  "title": "BATCH HEADER",
+  "source": "hl7.eu v21 hl7v21segmBHS.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "BATCH FIELD SEPARATOR",
+    "length": "1",
+    "type": "ST",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "BATCH ENCODING CHARACTERS",
+    "length": "3",
+    "type": "ST",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "BATCH SENDING APPLICATION",
+    "length": "15",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "BATCH SENDING FACILITY",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "BATCH RECEIVING APPLICATION",
+    "length": "15",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 6,
+    "name": "BATCH RECEIVING FACILITY",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 7,
+    "name": "BATCH CREATION DATE/TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 8,
+    "name": "BATCH SECURITY",
+    "length": "40",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 9,
+    "name": "BATCH NAME/ID/TYPE",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 10,
+    "name": "BATCH COMMENT",
+    "length": "80",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 11,
+    "name": "BATCH CONTROL ID",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 12,
+    "name": "REFERENCE BATCH CONTROL ID",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "BLG": {
+  "title": "BILLING",
+  "source": "hl7.eu v21 hl7v21segmBLG.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "WHEN TO CHARGE",
+    "length": "15",
+    "type": "CM",
+    "opt": "O",
+    "rep": "-",
+    "table": "0100",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "CHARGE TYPE",
+    "length": "50",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0122",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "ACCOUNT ID",
+    "length": "100",
+    "type": "CM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "BTS": {
+  "title": "BATCH TRAILER",
+  "source": "hl7.eu v21 hl7v21segmBTS.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "BATCH MESSAGE COUNT",
+    "length": "10",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "BATCH COMMENT",
+    "length": "80",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "BATCH TOTALS",
+    "length": "100",
+    "type": "CM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "DG1": {
+  "title": "DIAGNOSIS",
+  "source": "hl7.eu v21 hl7v21segmDG1.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "SET ID - DIAGNOSIS",
+    "length": "4",
+    "type": "SI",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "DIAGNOSIS CODING METHOD",
+    "length": "2",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0053",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "DIAGNOSIS CODE",
+    "length": "8",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0051",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "DIAGNOSIS DESCRIPTION",
+    "length": "40",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "DIAGNOSIS DATE/TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 6,
+    "name": "DIAGNOSIS/DRG TYPE",
+    "length": "2",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0052",
+    "inherited": false
+   },
+   {
+    "seq": 7,
+    "name": "MAJOR DIAGNOSTIC CATEGORY",
+    "length": "4",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "0118",
+    "inherited": false
+   },
+   {
+    "seq": 8,
+    "name": "DIAGNOSTIC RELATED GROUP",
+    "length": "4",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0055",
+    "inherited": false
+   },
+   {
+    "seq": 9,
+    "name": "DRG APPROVAL INDICATOR",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 10,
+    "name": "DRG GROUPER REVIEW CODE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0056",
+    "inherited": false
+   },
+   {
+    "seq": 11,
+    "name": "OUTLIER TYPE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0083",
+    "inherited": false
+   },
+   {
+    "seq": 12,
+    "name": "OUTLIER DAYS",
+    "length": "3",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 13,
+    "name": "OUTLIER COST",
+    "length": "12",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 14,
+    "name": "GROUPER VERSION AND TYPE",
+    "length": "4",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "DSC": {
+  "title": "CONTINUATION POINTER",
+  "source": "hl7.eu v21 hl7v21segmDSC.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "CONTINUATION POINTER",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "DSP": {
+  "title": "DISPLAY DATA",
+  "source": "hl7.eu v21 hl7v21segmDSP.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "SET ID - DISPLAY DATA",
+    "length": "4",
+    "type": "SI",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "DISPLAY LEVEL",
+    "length": "4",
+    "type": "SI",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "DATA LINE",
+    "length": "300",
+    "type": "TX",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "LOGICAL BREAK POINT",
+    "length": "2",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "RESULT ID",
+    "length": "20",
+    "type": "TX",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "ERR": {
+  "title": "ERROR",
+  "source": "hl7.eu v21 hl7v21segmERR.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "ERROR CODE AND LOCATION",
+    "length": "80",
+    "type": "ID",
+    "opt": "R",
+    "rep": "∞",
+    "table": "0060",
+    "inherited": false
+   }
+  ]
+ },
+ "EVN": {
+  "title": "EVENT TYPE",
+  "source": "hl7.eu v21 hl7v21segmEVN.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "EVENT TYPE CODE",
+    "length": "3",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0003",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "DATE/TIME OF EVENT",
+    "length": "19",
+    "type": "TS",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "DATE/TIME PLANNED EVENT",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "EVENT REASON CODE",
+    "length": "3",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0062",
+    "inherited": false
+   }
+  ]
+ },
+ "FHS": {
+  "title": "FILE HEADER",
+  "source": "hl7.eu v21 hl7v21segmFHS.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "FILE FIELD SEPARATOR",
+    "length": "1",
+    "type": "ST",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "FILE ENCODING CHARACTERS",
+    "length": "4",
+    "type": "ST",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "FILE SENDING APPLICATION",
+    "length": "15",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "FILE SENDING FACILITY",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "FILE RECEIVING APPLICATION",
+    "length": "15",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 6,
+    "name": "FILE RECEIVING FACILITY",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 7,
+    "name": "DATE/TIME OF FILE CREATION",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 8,
+    "name": "FILE SECURITY",
+    "length": "40",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 9,
+    "name": "FILE NAME/ID",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 10,
+    "name": "FILE HEADER COMMENT",
+    "length": "80",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 11,
+    "name": "FILE CONTROL ID",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 12,
+    "name": "REFERENCE FILE CONTROL ID",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "FT1": {
+  "title": "FINANCIAL TRANSACTION",
+  "source": "hl7.eu v21 hl7v21segmFT1.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "SET ID - FINANCIAL TRANSACTION",
+    "length": "4",
+    "type": "SI",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "TRANSACTION ID",
+    "length": "12",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "TRANSACTION BATCH ID",
+    "length": "5",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "TRANSACTION DATE",
+    "length": "8",
+    "type": "DT",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "TRANSACTION POSTING DATE",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 6,
+    "name": "TRANSACTION TYPE",
+    "length": "8",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0017",
+    "inherited": false
+   },
+   {
+    "seq": 7,
+    "name": "TRANSACTION CODE",
+    "length": "20",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0096",
+    "inherited": false
+   },
+   {
+    "seq": 8,
+    "name": "TRANSACTION DESCRIPTION",
+    "length": "40",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 9,
+    "name": "TRANSACTION DESCRIPTION - ALT",
+    "length": "40",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 10,
+    "name": "TRANSACTION AMOUNT - EXTENDED",
+    "length": "12",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 11,
+    "name": "TRANSACTION QUANTITY",
+    "length": "4",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 12,
+    "name": "TRANSACTION AMOUNT - UNIT",
+    "length": "12",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 13,
+    "name": "DEPARTMENT CODE",
+    "length": "16",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "0049",
+    "inherited": false
+   },
+   {
+    "seq": 14,
+    "name": "INSURANCE PLAN ID",
+    "length": "8",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0072",
+    "inherited": false
+   },
+   {
+    "seq": 15,
+    "name": "INSURANCE AMOUNT",
+    "length": "12",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 16,
+    "name": "PATIENT LOCATION",
+    "length": "12",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "0079",
+    "inherited": false
+   },
+   {
+    "seq": 17,
+    "name": "FEE SCHEDULE",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0024",
+    "inherited": false
+   },
+   {
+    "seq": 18,
+    "name": "PATIENT TYPE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0018",
+    "inherited": false
+   },
+   {
+    "seq": 19,
+    "name": "DIAGNOSIS CODE",
+    "length": "8",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0051",
+    "inherited": false
+   },
+   {
+    "seq": 20,
+    "name": "PERFORMED BY CODE",
+    "length": "60",
+    "type": "CN",
+    "opt": "O",
+    "rep": "-",
+    "table": "0084",
+    "inherited": false
+   },
+   {
+    "seq": 21,
+    "name": "ORDERED BY CODE",
+    "length": "60",
+    "type": "CN",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 22,
+    "name": "UNIT COST",
+    "length": "12",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "FTS": {
+  "title": "FILE TRAILER",
+  "source": "hl7.eu v21 hl7v21segmFTS.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "FILE BATCH COUNT",
+    "length": "10",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "FILE TRAILER COMMENT",
+    "length": "80",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "GT1": {
+  "title": "GUARANTOR",
+  "source": "hl7.eu v21 hl7v21segmGT1.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "SET ID - GUARANTOR",
+    "length": "4",
+    "type": "SI",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "GUARANTOR NUMBER",
+    "length": "20",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "GUARANTOR NAME",
+    "length": "48",
+    "type": "PN",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "GUARANTOR SPOUSE NAME",
+    "length": "48",
+    "type": "PN",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "GUARANTOR ADDRESS",
+    "length": "106",
+    "type": "AD",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 6,
+    "name": "GUARANTOR PH. NUM.- HOME",
+    "length": "40",
+    "type": "TN",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 7,
+    "name": "GUARANTOR PH. NUM-BUSINESS",
+    "length": "40",
+    "type": "TN",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 8,
+    "name": "GUARANTOR DATE OF BIRTH",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 9,
+    "name": "GUARANTOR SEX",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0001",
+    "inherited": false
+   },
+   {
+    "seq": 10,
+    "name": "GUARANTOR TYPE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0068",
+    "inherited": false
+   },
+   {
+    "seq": 11,
+    "name": "GUARANTOR RELATIONSHIP",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0063",
+    "inherited": false
+   },
+   {
+    "seq": 12,
+    "name": "GUARANTOR SSN",
+    "length": "11",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 13,
+    "name": "GUARANTOR DATE - BEGIN",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 14,
+    "name": "GUARANTOR DATE - END",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 15,
+    "name": "GUARANTOR PRIORITY",
+    "length": "2",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 16,
+    "name": "GUARANTOR EMPLOYER NAME",
+    "length": "45",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 17,
+    "name": "GUARANTOR EMPLOYER ADDRESS",
+    "length": "106",
+    "type": "AD",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 18,
+    "name": "GUARANTOR EMPLOY PHONE #",
+    "length": "40",
+    "type": "TN",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 19,
+    "name": "GUARANTOR EMPLOYEE ID NUM",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 20,
+    "name": "GUARANTOR EMPLOYMENT STATUS",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0066",
+    "inherited": false
+   }
+  ]
+ },
+ "IN1": {
+  "title": "INSURANCE",
+  "source": "hl7.eu v21 hl7v21segmIN1.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "SET ID - INSURANCE",
+    "length": "4",
+    "type": "SI",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "INSURANCE PLAN ID",
+    "length": "8",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0072",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "INSURANCE COMPANY ID",
+    "length": "6",
+    "type": "ST",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "INSURANCE COMPANY NAME",
+    "length": "45",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "INSURANCE COMPANY ADDRESS",
+    "length": "106",
+    "type": "AD",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 6,
+    "name": "INSURANCE CO. CONTACT PERS",
+    "length": "48",
+    "type": "PN",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 7,
+    "name": "INSURANCE CO PHONE NUMBER",
+    "length": "40",
+    "type": "TN",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 8,
+    "name": "GROUP NUMBER",
+    "length": "12",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 9,
+    "name": "GROUP NAME",
+    "length": "35",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 10,
+    "name": "INSURED'S GROUP EMP. ID",
+    "length": "12",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 11,
+    "name": "INSURED'S GROUP EMP. NAME",
+    "length": "45",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 12,
+    "name": "PLAN EFFECTIVE DATE",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 13,
+    "name": "PLAN EXPIRATION DATE",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 14,
+    "name": "AUTHORIZATION INFORMATION",
+    "length": "55",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 15,
+    "name": "PLAN TYPE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0086",
+    "inherited": false
+   },
+   {
+    "seq": 16,
+    "name": "NAME OF INSURED",
+    "length": "48",
+    "type": "PN",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 17,
+    "name": "INSURED'S RELATIONSHIP TO PATIENT",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0063",
+    "inherited": false
+   },
+   {
+    "seq": 18,
+    "name": "INSURED'S DATE OF BIRTH",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 19,
+    "name": "INSURED'S ADDRESS",
+    "length": "106",
+    "type": "AD",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 20,
+    "name": "ASSIGNMENT OF BENEFITS",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 21,
+    "name": "COORDINATION OF BENEFITS",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 22,
+    "name": "COORD OF BEN. PRIORITY",
+    "length": "2",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 23,
+    "name": "NOTICE OF ADMISSION CODE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0081",
+    "inherited": false
+   },
+   {
+    "seq": 24,
+    "name": "NOTICE OF ADMISSION DATE",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 25,
+    "name": "RPT OF ELIGIBILITY CODE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0094",
+    "inherited": false
+   },
+   {
+    "seq": 26,
+    "name": "RPT OF ELIGIBILITY DATE",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 27,
+    "name": "RELEASE INFORMATION CODE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0093",
+    "inherited": false
+   },
+   {
+    "seq": 28,
+    "name": "PRE-ADMIT CERT. (PAC)",
+    "length": "15",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 29,
+    "name": "VERIFICATION DATE",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 30,
+    "name": "VERIFICATION BY",
+    "length": "60",
+    "type": "CM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 31,
+    "name": "TYPE OF AGREEMENT CODE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0098",
+    "inherited": false
+   },
+   {
+    "seq": 32,
+    "name": "BILLING STATUS",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0022",
+    "inherited": false
+   },
+   {
+    "seq": 33,
+    "name": "LIFETIME RESERVE DAYS",
+    "length": "4",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 34,
+    "name": "DELAY BEFORE L. R. DAY",
+    "length": "4",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 35,
+    "name": "COMPANY PLAN CODE",
+    "length": "8",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "0042",
+    "inherited": false
+   },
+   {
+    "seq": 36,
+    "name": "POLICY NUMBER",
+    "length": "15",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 37,
+    "name": "POLICY DEDUCTIBLE",
+    "length": "12",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 38,
+    "name": "POLICY LIMIT - AMOUNT",
+    "length": "12",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 39,
+    "name": "POLICY LIMIT - DAYS",
+    "length": "4",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 40,
+    "name": "ROOM RATE - SEMI-PRIVATE",
+    "length": "12",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 41,
+    "name": "ROOM RATE - PRIVATE",
+    "length": "12",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 42,
+    "name": "INSURED'S EMPLOYMENT STATUS",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0066",
+    "inherited": false
+   },
+   {
+    "seq": 43,
+    "name": "INSURED'S SEX",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0001",
+    "inherited": false
+   },
+   {
+    "seq": 44,
+    "name": "INSURED'S EMPLOYER ADDRESS",
+    "length": "106",
+    "type": "AD",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "MRG": {
+  "title": "MERGE PATIENT INFORMATION",
+  "source": "hl7.eu v21 hl7v21segmMRG.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "PRIOR PATIENT ID - INTERNAL",
+    "length": "16",
+    "type": "CK",
+    "opt": "R",
+    "rep": "-",
+    "table": "0061",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "PRIOR ALTERNATE PATIENT ID",
+    "length": "16",
+    "type": "CK",
+    "opt": "O",
+    "rep": "-",
+    "table": "0061",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "PRIOR PATIENT ACCOUNT NUMBER",
+    "length": "20",
+    "type": "CK",
+    "opt": "O",
+    "rep": "-",
+    "table": "0061",
+    "inherited": false
+   }
+  ]
+ },
+ "MSA": {
+  "title": "MESSAGE ACKNOWLEDGMENT",
+  "source": "hl7.eu v21 hl7v21segmMSA.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "ACKNOWLEDGMENT CODE",
+    "length": "2",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0008",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "MESSAGE CONTROL ID",
+    "length": "20",
+    "type": "ST",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "TEXT MESSAGE",
+    "length": "80",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "EXPECTED SEQUENCE NUMBER",
+    "length": "15",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "DELAYED ACKNOWLEDGMENT TYPE",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0102",
+    "inherited": false
+   }
+  ]
+ },
+ "MSH": {
+  "title": "MESSAGE HEADER",
+  "source": "hl7.eu v21 hl7v21segmMSH.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "FIELD SEPARATOR",
+    "length": "1",
+    "type": "ST",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "ENCODING CHARACTERS",
+    "length": "4",
+    "type": "ST",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "SENDING APPLICATION",
+    "length": "15",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "SENDING FACILITY",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "RECEIVING APPLICATION",
+    "length": "15",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 6,
+    "name": "RECEIVING FACILITY",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 7,
+    "name": "DATE/TIME OF MESSAGE",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 8,
+    "name": "Security",
+    "length": "40",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 9,
+    "name": "MESSAGE TYPE",
+    "length": "7",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0076",
+    "inherited": false
+   },
+   {
+    "seq": 10,
+    "name": "MESSAGE CONTROL ID",
+    "length": "20",
+    "type": "ST",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 11,
+    "name": "PROCESSING ID",
+    "length": "1",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0103",
+    "inherited": false
+   },
+   {
+    "seq": 12,
+    "name": "VERSION ID",
+    "length": "8",
+    "type": "NM",
+    "opt": "R",
+    "rep": "-",
+    "table": "0104",
+    "inherited": false
+   },
+   {
+    "seq": 13,
+    "name": "SEQUENCE NUMBER",
+    "length": "15",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 14,
+    "name": "CONTINUATION POINTER",
+    "length": "180",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "NCK": {
+  "title": "SYSTEM CLOCK",
+  "source": "hl7.eu v21 hl7v21segmNCK.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "SYSTEM DATE/TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "NK1": {
+  "title": "NEXT OF KIN",
+  "source": "hl7.eu v21 hl7v21segmNK1.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "SET ID - NEXT OF KIN",
+    "length": "4",
+    "type": "SI",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "NEXT OF KIN NAME",
+    "length": "48",
+    "type": "PN",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "NEXT OF KIN RELATIONSHIP",
+    "length": "15",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "0063",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "NEXT OF KIN - ADDRESS",
+    "length": "106",
+    "type": "AD",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "NEXT OF KIN - PHONE NUMBER",
+    "length": "40",
+    "type": "TN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "NPU": {
+  "title": "NON-PATIENT UPDATE",
+  "source": "hl7.eu v21 hl7v21segmNPU.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "BED LOCATION",
+    "length": "12",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0079",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "BED STATUS",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0116",
+    "inherited": false
+   }
+  ]
+ },
+ "NSC": {
+  "title": "STATUS CHANGE",
+  "source": "hl7.eu v21 hl7v21segmNSC.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "NETWORK CHANGE TYPE",
+    "length": "4",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "CURRENT CPU",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "CURRENT FILESERVER",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "CURRENT APPLICATION",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "CURRENT FACILITY",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 6,
+    "name": "NEW CPU",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 7,
+    "name": "NEW FILESERVER",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 8,
+    "name": "NEW APPLICATION",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 9,
+    "name": "NEW FACILITY",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "NST": {
+  "title": "STATISTICS",
+  "source": "hl7.eu v21 hl7v21segmNST.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "STATISTICS AVAILABLE",
+    "length": "1",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "SOURCE IDENTIFIER",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "SOURCE TYPE",
+    "length": "3",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "STATISTICS START",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "STATISTICS END",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 6,
+    "name": "RECEIVE CHARACTER COUNT",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 7,
+    "name": "SEND CHARACTER COUNT",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 8,
+    "name": "MESSAGES RECEIVED",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 9,
+    "name": "MESSAGES SENT",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 10,
+    "name": "CHECKSUM ERRORS RECEIVED",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 11,
+    "name": "LENGTH ERRORS RECEIVED",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 12,
+    "name": "OTHER ERRORS RECEIVED",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 13,
+    "name": "CONNECT TIMEOUTS",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 14,
+    "name": "RECEIVE TIMEOUTS",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 15,
+    "name": "NETWORK ERRORS",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "NTE": {
+  "title": "NOTES AND COMMENTS",
+  "source": "hl7.eu v21 hl7v21segmNTE.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "SET ID - NOTES AND COMMENTS",
+    "length": "4",
+    "type": "SI",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "SOURCE OF COMMENT",
+    "length": "8",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0105",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "COMMENT",
+    "length": "120",
+    "type": "TX",
+    "opt": "R",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "OBR": {
+  "title": "OBSERVATION REQUEST",
+  "source": "hl7.eu v21 hl7v21segmOBR.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "SET ID - OBSERVATION REQUEST",
+    "length": "4",
+    "type": "SI",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "PLACER ORDER #",
+    "length": "75",
+    "type": "CM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "FILLER ORDER #",
+    "length": "75",
+    "type": "CM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "UNIVERSAL SERVICE IDENT.",
+    "length": "200",
+    "type": "CE",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "PRIORITY",
+    "length": "2",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 6,
+    "name": "REQUESTED DATE-TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 7,
+    "name": "OBSERVATION DATE/TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 8,
+    "name": "OBSERVATION END DATE/TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 9,
+    "name": "COLLECTION VOLUME",
+    "length": "20",
+    "type": "CQ",
+    "opt": "R",
+    "rep": "-",
+    "table": "0036",
+    "inherited": false
+   },
+   {
+    "seq": 10,
+    "name": "COLLECTOR IDENTIFIER",
+    "length": "60",
+    "type": "CN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 11,
+    "name": "SPECIMEN ACTION CODE",
+    "length": "1",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "0065",
+    "inherited": false
+   },
+   {
+    "seq": 12,
+    "name": "DANGER CODE",
+    "length": "60",
+    "type": "CM",
+    "opt": "O",
+    "rep": "-",
+    "table": "0047",
+    "inherited": false
+   },
+   {
+    "seq": 13,
+    "name": "RELEVANT CLINICAL INFO.",
+    "length": "300",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 14,
+    "name": "SPECIMEN RECEIVED DATE/TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 15,
+    "name": "SPECIMEN SOURCE",
+    "length": "300",
+    "type": "CM",
+    "opt": "O",
+    "rep": "-",
+    "table": "0070",
+    "inherited": false
+   },
+   {
+    "seq": 16,
+    "name": "ORDERING PROVIDER",
+    "length": "60",
+    "type": "CN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0010",
+    "inherited": false
+   },
+   {
+    "seq": 17,
+    "name": "ORDER CALL-BACK PHONE NUM",
+    "length": "40",
+    "type": "TN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false,
+    "repeats": 2
+   },
+   {
+    "seq": 18,
+    "name": "PLACERS FIELD #1",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 19,
+    "name": "PLACERS FIELD #2",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 20,
+    "name": "FILLERS FIELD #1",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 21,
+    "name": "FILLERS FIELD #2",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 22,
+    "name": "RESULTS RPT/STATUS CHNG - DATE/T",
+    "length": "19",
+    "type": "TS",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 23,
+    "name": "CHARGE TO PRACTICE",
+    "length": "40",
+    "type": "CM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 24,
+    "name": "DIAGNOSTIC SERV SECT ID",
+    "length": "10",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0074",
+    "inherited": false
+   },
+   {
+    "seq": 25,
+    "name": "RESULT STATUS",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0123",
+    "inherited": false
+   },
+   {
+    "seq": 26,
+    "name": "LINKED RESULTS",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 27,
+    "name": "QUANTITY/TIMING",
+    "length": "200",
+    "type": "CM",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 28,
+    "name": "RESULT COPIES TO",
+    "length": "80",
+    "type": "CN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false,
+    "repeats": 5
+   },
+   {
+    "seq": 29,
+    "name": "PARENT ACCESSION #",
+    "length": "150",
+    "type": "CM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 30,
+    "name": "TRANSPORTATION MODE",
+    "length": "20",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0124",
+    "inherited": false
+   },
+   {
+    "seq": 31,
+    "name": "REASON FOR STUDY",
+    "length": "300",
+    "type": "CE",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 32,
+    "name": "PRINCIPAL RESULT INTERPRETER",
+    "length": "60",
+    "type": "CN",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 33,
+    "name": "ASSISTANT RESULT INTERPRETER",
+    "length": "60",
+    "type": "CN",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 34,
+    "name": "TECHNICIAN",
+    "length": "60",
+    "type": "CN",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 35,
+    "name": "TRANSCRIPTIONIST",
+    "length": "60",
+    "type": "CN",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 36,
+    "name": "SCHEDULED - DATE/TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "OBX": {
+  "title": "RESULT",
+  "source": "hl7.eu v21 hl7v21segmOBX.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "SET ID - OBSERVATION SIMPLE",
+    "length": "4",
+    "type": "SI",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "VALUE TYPE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0125",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "OBSERVATION IDENTIFIER",
+    "length": "80",
+    "type": "CE",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "OBSERVATION SUB-ID",
+    "length": "20",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "OBSERVATION RESULTS",
+    "length": "65",
+    "type": "ST",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 6,
+    "name": "UNITS",
+    "length": "20",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 7,
+    "name": "REFERENCES RANGE",
+    "length": "60",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 8,
+    "name": "ABNORMAL FLAGS",
+    "length": "10",
+    "type": "ST",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0078",
+    "inherited": false,
+    "repeats": 5
+   },
+   {
+    "seq": 9,
+    "name": "PROBABILITY",
+    "length": "5",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 10,
+    "name": "NATURE OF ABNORMAL TEST",
+    "length": "5",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0080",
+    "inherited": false
+   },
+   {
+    "seq": 11,
+    "name": "OBSERV RESULT STATUS",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0085",
+    "inherited": false
+   },
+   {
+    "seq": 12,
+    "name": "DATE LAST OBS NORMAL VALUES",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "ORC": {
+  "title": "COMMON ORDER",
+  "source": "hl7.eu v21 hl7v21segmORC.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "ORDER CONTROL",
+    "length": "2",
+    "type": "ST",
+    "opt": "R",
+    "rep": "-",
+    "table": "0119",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "PLACER ORDER #",
+    "length": "75",
+    "type": "CM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "FILLER ORDER #",
+    "length": "75",
+    "type": "CM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "PLACER GROUP #",
+    "length": "75",
+    "type": "CM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "ORDER STATUS",
+    "length": "2",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "0038",
+    "inherited": false
+   },
+   {
+    "seq": 6,
+    "name": "RESPONSE FLAG",
+    "length": "1",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "0121",
+    "inherited": false
+   },
+   {
+    "seq": 7,
+    "name": "TIMING/QUANTITY",
+    "length": "200",
+    "type": "CM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 8,
+    "name": "PARENT",
+    "length": "200",
+    "type": "CM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 9,
+    "name": "DATE/TIME OF TRANSACTION",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 10,
+    "name": "ENTERED BY",
+    "length": "80",
+    "type": "CN",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 11,
+    "name": "VERIFIED BY",
+    "length": "80",
+    "type": "CN",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 12,
+    "name": "ORDERING PROVIDER",
+    "length": "80",
+    "type": "CN",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 13,
+    "name": "ENTERER'S LOCATION",
+    "length": "80",
+    "type": "CM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 14,
+    "name": "CALL BACK PHONE NUMBER",
+    "length": "40",
+    "type": "TN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false,
+    "repeats": 2
+   }
+  ]
+ },
+ "ORO": {
+  "title": "ORDER OTHER",
+  "source": "hl7.eu v21 hl7v21segmORO.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "ORDER ITEM ID",
+    "length": "200",
+    "type": "CE",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "SUBSTITUTE ALLOWED",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "RESULTS COPIES TO",
+    "length": "80",
+    "type": "CN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "STOCK LOCATION",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0012",
+    "inherited": false
+   }
+  ]
+ },
+ "PD1": {
+  "title": "PATIENT DEMOGRAPHICS",
+  "source": "hl7.eu v21 hl7v21segmPD1.htm",
+  "fields": []
+ },
+ "PID": {
+  "title": "PATIENT IDENTIFICATION",
+  "source": "hl7.eu v21 hl7v21segmPID.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "SET ID - PATIENT ID",
+    "length": "4",
+    "type": "SI",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "PATIENT ID EXTERNAL (EXTERNAL ID)",
+    "length": "16",
+    "type": "CK",
+    "opt": "O",
+    "rep": "-",
+    "table": "0061",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "PATIENT ID INTERNAL (INTERNAL ID)",
+    "length": "16",
+    "type": "CK",
+    "opt": "R",
+    "rep": "-",
+    "table": "0061",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "ALTERNATE PATIENT ID",
+    "length": "12",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "PATIENT NAME",
+    "length": "48",
+    "type": "PN",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 6,
+    "name": "MOTHER'S MAIDEN NAME",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 7,
+    "name": "DATE OF BIRTH",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 8,
+    "name": "SEX",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0001",
+    "inherited": false
+   },
+   {
+    "seq": 9,
+    "name": "PATIENT ALIAS",
+    "length": "48",
+    "type": "PN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 10,
+    "name": "ETHNIC GROUP",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0005",
+    "inherited": false
+   },
+   {
+    "seq": 11,
+    "name": "PATIENT ADDRESS",
+    "length": "106",
+    "type": "AD",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 12,
+    "name": "COUNTY CODE",
+    "length": "4",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 13,
+    "name": "PHONE NUMBER - HOME",
+    "length": "40",
+    "type": "TN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false,
+    "repeats": 3
+   },
+   {
+    "seq": 14,
+    "name": "PHONE NUMBER - BUSINESS",
+    "length": "40",
+    "type": "TN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false,
+    "repeats": 3
+   },
+   {
+    "seq": 15,
+    "name": "LANGUAGE - PATIENT",
+    "length": "25",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 16,
+    "name": "MARITAL STATUS",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0002",
+    "inherited": false
+   },
+   {
+    "seq": 17,
+    "name": "RELIGION",
+    "length": "3",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0006",
+    "inherited": false
+   },
+   {
+    "seq": 18,
+    "name": "PATIENT ACCOUNT NUMBER",
+    "length": "20",
+    "type": "CK",
+    "opt": "O",
+    "rep": "-",
+    "table": "0061",
+    "inherited": false
+   },
+   {
+    "seq": 19,
+    "name": "SSN NUMBER - PATIENT",
+    "length": "16",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 20,
+    "name": "DRIVER'S LIC NUM - PATIENT",
+    "length": "25",
+    "type": "CM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "PR1": {
+  "title": "PROCEDURES",
+  "source": "hl7.eu v21 hl7v21segmPR1.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "SET ID - PROCEDURE",
+    "length": "4",
+    "type": "SI",
+    "opt": "R",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "PROCEDURE CODING METHOD.",
+    "length": "2",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0089",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "PROCEDURE CODE",
+    "length": "10",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0088",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "PROCEDURE DESCRIPTION",
+    "length": "40",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "PROCEDURE DATE/TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 6,
+    "name": "PROCEDURE TYPE",
+    "length": "2",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0090",
+    "inherited": false
+   },
+   {
+    "seq": 7,
+    "name": "PROCEDURE MINUTES",
+    "length": "4",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 8,
+    "name": "ANESTHESIOLOGIST",
+    "length": "60",
+    "type": "CN",
+    "opt": "O",
+    "rep": "-",
+    "table": "0010",
+    "inherited": false
+   },
+   {
+    "seq": 9,
+    "name": "ANESTHESIA CODE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0019",
+    "inherited": false
+   },
+   {
+    "seq": 10,
+    "name": "ANESTHESIA MINUTES",
+    "length": "4",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 11,
+    "name": "SURGEON",
+    "length": "60",
+    "type": "CN",
+    "opt": "O",
+    "rep": "-",
+    "table": "0010",
+    "inherited": false
+   },
+   {
+    "seq": 12,
+    "name": "RESIDENT CODE",
+    "length": "60",
+    "type": "CN",
+    "opt": "O",
+    "rep": "-",
+    "table": "0010",
+    "inherited": false
+   },
+   {
+    "seq": 13,
+    "name": "CONSENT CODE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0059",
+    "inherited": false
+   }
+  ]
+ },
+ "PV1": {
+  "title": "PATIENT VISIT",
+  "source": "hl7.eu v21 hl7v21segmPV1.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "SET ID - PATIENT VISIT",
+    "length": "4",
+    "type": "SI",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "PATIENT CLASS",
+    "length": "1",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0004",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "ASSIGNED PATIENT LOCATION",
+    "length": "12",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0079",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "ADMISSION TYPE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0007",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "PRE-ADMIT NUMBER",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 6,
+    "name": "PRIOR PATIENT LOCATION",
+    "length": "12",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0079",
+    "inherited": false
+   },
+   {
+    "seq": 7,
+    "name": "ATTENDING DOCTOR",
+    "length": "60",
+    "type": "CN",
+    "opt": "O",
+    "rep": "-",
+    "table": "0010",
+    "inherited": false
+   },
+   {
+    "seq": 8,
+    "name": "REFERRING DOCTOR",
+    "length": "60",
+    "type": "CN",
+    "opt": "O",
+    "rep": "-",
+    "table": "0010",
+    "inherited": false
+   },
+   {
+    "seq": 9,
+    "name": "CONSULTING DOCTOR",
+    "length": "60",
+    "type": "CN",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0010",
+    "inherited": false
+   },
+   {
+    "seq": 10,
+    "name": "HOSPITAL SERVICE",
+    "length": "3",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0069",
+    "inherited": false
+   },
+   {
+    "seq": 11,
+    "name": "TEMPORARY LOCATION",
+    "length": "12",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0079",
+    "inherited": false
+   },
+   {
+    "seq": 12,
+    "name": "PRE-ADMIT TEST INDICATOR",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0087",
+    "inherited": false
+   },
+   {
+    "seq": 13,
+    "name": "RE-ADMISSION INDICATOR",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0092",
+    "inherited": false
+   },
+   {
+    "seq": 14,
+    "name": "ADMIT SOURCE",
+    "length": "3",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0023",
+    "inherited": false
+   },
+   {
+    "seq": 15,
+    "name": "AMBULATORY STATUS",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0009",
+    "inherited": false
+   },
+   {
+    "seq": 16,
+    "name": "VIP INDICATOR",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0099",
+    "inherited": false
+   },
+   {
+    "seq": 17,
+    "name": "ADMITTING DOCTOR",
+    "length": "60",
+    "type": "CN",
+    "opt": "O",
+    "rep": "-",
+    "table": "0010",
+    "inherited": false
+   },
+   {
+    "seq": 18,
+    "name": "PATIENT TYPE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0018",
+    "inherited": false
+   },
+   {
+    "seq": 19,
+    "name": "VISIT NUMBER",
+    "length": "4",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 20,
+    "name": "FINANCIAL CLASS",
+    "length": "11",
+    "type": "ID",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0064",
+    "inherited": false,
+    "repeats": 4
+   },
+   {
+    "seq": 21,
+    "name": "CHARGE PRICE INDICATOR",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0032",
+    "inherited": false
+   },
+   {
+    "seq": 22,
+    "name": "COURTESY CODE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0045",
+    "inherited": false
+   },
+   {
+    "seq": 23,
+    "name": "CREDIT RATING",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0046",
+    "inherited": false
+   },
+   {
+    "seq": 24,
+    "name": "CONTRACT CODE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0044",
+    "inherited": false
+   },
+   {
+    "seq": 25,
+    "name": "CONTRACT EFFECTIVE DATE",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 26,
+    "name": "CONTRACT AMOUNT",
+    "length": "12",
+    "type": "NM",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 27,
+    "name": "CONTRACT PERIOD",
+    "length": "3",
+    "type": "NM",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 28,
+    "name": "INTEREST CODE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0073",
+    "inherited": false
+   },
+   {
+    "seq": 29,
+    "name": "TRANSFER TO BAD DEBT CODE",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0110",
+    "inherited": false
+   },
+   {
+    "seq": 30,
+    "name": "TRANSFER TO BAD DEBT DATE",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 31,
+    "name": "BAD DEBT AGENCY CODE",
+    "length": "10",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "0021",
+    "inherited": false
+   },
+   {
+    "seq": 32,
+    "name": "BAD DEBT TRANSFER AMOUNT",
+    "length": "12",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 33,
+    "name": "BAD DEBT RECOVERY AMOUNT",
+    "length": "12",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 34,
+    "name": "DELETE ACCOUNT INDICATOR",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0111",
+    "inherited": false
+   },
+   {
+    "seq": 35,
+    "name": "DELETE ACCOUNT DATE",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 36,
+    "name": "DISCHARGE DISPOSITION",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0112",
+    "inherited": false
+   },
+   {
+    "seq": 37,
+    "name": "DISCHARGED TO LOCATION",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0113",
+    "inherited": false
+   },
+   {
+    "seq": 38,
+    "name": "DIET TYPE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0114",
+    "inherited": false
+   },
+   {
+    "seq": 39,
+    "name": "SERVICING FACILITY",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0115",
+    "inherited": false
+   },
+   {
+    "seq": 40,
+    "name": "BED STATUS",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0116",
+    "inherited": false
+   },
+   {
+    "seq": 41,
+    "name": "ACCOUNT STATUS",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0117",
+    "inherited": false
+   },
+   {
+    "seq": 42,
+    "name": "PENDING LOCATION",
+    "length": "12",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0079",
+    "inherited": false
+   },
+   {
+    "seq": 43,
+    "name": "PRIOR TEMPORARY LOCATION",
+    "length": "12",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0079",
+    "inherited": false
+   },
+   {
+    "seq": 44,
+    "name": "ADMIT DATE/TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 45,
+    "name": "DISCHARGE DATE/TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 46,
+    "name": "CURRENT PATIENT BALANCE",
+    "length": "12",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 47,
+    "name": "TOTAL CHARGES",
+    "length": "12",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 48,
+    "name": "TOTAL ADJUSTMENTS",
+    "length": "12",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 49,
+    "name": "TOTAL PAYMENTS",
+    "length": "12",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "QRD": {
+  "title": "QUERY DEFINITION",
+  "source": "hl7.eu v21 hl7v21segmQRD.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "QUERY DATE/TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "QUERY FORMAT CODE",
+    "length": "1",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0106",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "QUERY PRIORITY",
+    "length": "1",
+    "type": "ID",
+    "opt": "R",
+    "rep": "-",
+    "table": "0091",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "QUERY ID",
+    "length": "10",
+    "type": "ST",
+    "opt": "R",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "DEFERRED RESPONSE TYPE",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0107",
+    "inherited": false
+   },
+   {
+    "seq": 6,
+    "name": "DEFERRED RESPONSE DATE/TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 7,
+    "name": "QUANTITY LIMITED REQUEST",
+    "length": "5",
+    "type": "CQ",
+    "opt": "R",
+    "rep": "-",
+    "table": "0126",
+    "inherited": false
+   },
+   {
+    "seq": 8,
+    "name": "WHO SUBJECT FILTER",
+    "length": "20",
+    "type": "ST",
+    "opt": "R",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 9,
+    "name": "WHAT SUBJECT FILTER",
+    "length": "3",
+    "type": "ID",
+    "opt": "R",
+    "rep": "∞",
+    "table": "0048",
+    "inherited": false
+   },
+   {
+    "seq": 10,
+    "name": "WHAT DEPARTMENT DATA CODE",
+    "length": "20",
+    "type": "ST",
+    "opt": "R",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 11,
+    "name": "WHAT DATA CODE VALUE QUAL.",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 12,
+    "name": "QUERY RESULTS LEVEL",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0108",
+    "inherited": false
+   }
+  ]
+ },
+ "QRF": {
+  "title": "QUERY FILTER",
+  "source": "hl7.eu v21 hl7v21segmQRF.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "WHERE SUBJECT FILTER",
+    "length": "20",
+    "type": "ST",
+    "opt": "R",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "WHEN DATA START DATE/TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "WHEN DATA END DATE/TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "WHAT USER QUALIFIER",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "OTHER QRY SUBJECT FILTER",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "RX1": {
+  "title": "PHARMACY ORDER",
+  "source": "hl7.eu v21 hl7v21segmRX1.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "UNUSED",
+    "length": "0",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "UNUSED",
+    "length": "0",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "ROUTE",
+    "length": "8",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "0033",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "SITE ADMINISTERED",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "0034",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "IV SOLUTION RATE",
+    "length": "10",
+    "type": "CQ",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 6,
+    "name": "DRUG STRENGTH",
+    "length": "14",
+    "type": "CQ",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 7,
+    "name": "FINAL CONCENTRATION",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 8,
+    "name": "FINAL VOLUME IN ML.",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 9,
+    "name": "DRUG DOSE",
+    "length": "10",
+    "type": "CM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 10,
+    "name": "DRUG ROLE",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 11,
+    "name": "PRESCRIPTION SEQUENCE #",
+    "length": "3",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 12,
+    "name": "QUANTITY DISPENSED",
+    "length": "4",
+    "type": "CQ",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 13,
+    "name": "UNUSED",
+    "length": "0",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 14,
+    "name": "DRUG ID",
+    "length": "5",
+    "type": "CE_0057",
+    "opt": "O",
+    "rep": "-",
+    "table": "0057",
+    "inherited": false
+   },
+   {
+    "seq": 15,
+    "name": "COMPONENT DRUG IDS",
+    "length": "5",
+    "type": "ID",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false,
+    "repeats": 5
+   },
+   {
+    "seq": 16,
+    "name": "PRESCRIPTION TYPE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 17,
+    "name": "SUBSTITUTION STATUS",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 18,
+    "name": "RX ORDER STATUS",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0038",
+    "inherited": false
+   },
+   {
+    "seq": 19,
+    "name": "NUMBER OF REFILLS",
+    "length": "3",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 20,
+    "name": "UNUSED",
+    "length": "0",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 21,
+    "name": "REFILLS REMAINING",
+    "length": "3",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 22,
+    "name": "DEA CLASS",
+    "length": "5",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 23,
+    "name": "ORDERING MD'S DEA NUMBER",
+    "length": "10",
+    "type": "NM",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 24,
+    "name": "UNUSED",
+    "length": "0",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 25,
+    "name": "LAST REFILL DATE/TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 26,
+    "name": "RX NUMBER",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 27,
+    "name": "PRN STATUS",
+    "length": "5",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 28,
+    "name": "PHARMACY INSTRUCTIONS",
+    "length": "80",
+    "type": "TX",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false,
+    "repeats": 5
+   },
+   {
+    "seq": 29,
+    "name": "PATIENT INSTRUCTIONS",
+    "length": "80",
+    "type": "TX",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false,
+    "repeats": 5
+   },
+   {
+    "seq": 30,
+    "name": "INSTRUCTIONS (SIG)",
+    "length": "500",
+    "type": "TX",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "UB1": {
+  "title": "UB82 DATA",
+  "source": "hl7.eu v21 hl7v21segmUB1.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "SET ID - UB82",
+    "length": "4",
+    "type": "SI",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "BLOOD DEDUCTIBLE",
+    "length": "1",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "BLOOD FURN.-PINTS OF (40)",
+    "length": "2",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "BLOOD REPLACED-PINTS (41)",
+    "length": "2",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "BLOOD NOT RPLCD-PINTS(42)",
+    "length": "2",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 6,
+    "name": "CO-INSURANCE DAYS (25)",
+    "length": "2",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 7,
+    "name": "CONDITION CODE",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0043",
+    "inherited": false,
+    "repeats": 5
+   },
+   {
+    "seq": 8,
+    "name": "COVERED DAYS - (23)",
+    "length": "3",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 9,
+    "name": "NON COVERED DAYS - (24)",
+    "length": "3",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 10,
+    "name": "VALUE AMOUNT & CODE",
+    "length": "12",
+    "type": "CM",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false,
+    "repeats": 8
+   },
+   {
+    "seq": 11,
+    "name": "NUMBER OF GRACE DAYS (90)",
+    "length": "2",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 12,
+    "name": "SPEC. PROG. INDICATOR(44)",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 13,
+    "name": "PSRO/UR APPROVAL IND. (87)",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 14,
+    "name": "PSRO/UR APRVD STAY-FM(88)",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 15,
+    "name": "PSRO/UR APRVD STAY-TO(89)",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 16,
+    "name": "OCCURRENCE (28-32)",
+    "length": "20",
+    "type": "ID",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false,
+    "repeats": 5
+   },
+   {
+    "seq": 17,
+    "name": "OCCURRENCE SPAN (33)",
+    "length": "2",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 18,
+    "name": "OCCURRENCE SPAN START DATE(33)",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 19,
+    "name": "OCCUR. SPAN END DATE (33)",
+    "length": "8",
+    "type": "DT",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 20,
+    "name": "UB-82 LOCATOR 2",
+    "length": "30",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 21,
+    "name": "UB-82 LOCATOR 9",
+    "length": "7",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 22,
+    "name": "UB-82 LOCATOR 27",
+    "length": "8",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 23,
+    "name": "UB-82 LOCATOR 45",
+    "length": "17",
+    "type": "ST",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ },
+ "URD": {
+  "title": "RESULTS/UPDATE DEFINITION",
+  "source": "hl7.eu v21 hl7v21segmURD.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "R/U DATE/TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "REPORT PRIORITY",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0109",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "R/U WHO SUBJECT DEFINITION",
+    "length": "20",
+    "type": "ST",
+    "opt": "R",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "R/U WHAT SUBJECT DEFINITION",
+    "length": "3",
+    "type": "ID",
+    "opt": "O",
+    "rep": "∞",
+    "table": "0048",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "R/U WHAT DEPARTMENT CODE",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 6,
+    "name": "R/U DISPLAY/PRINT LOCATIONS",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 7,
+    "name": "R/U RESULTS LEVEL",
+    "length": "1",
+    "type": "ID",
+    "opt": "O",
+    "rep": "-",
+    "table": "0108",
+    "inherited": false
+   }
+  ]
+ },
+ "URS": {
+  "title": "UNSOLICITED SELECTION",
+  "source": "hl7.eu v21 hl7v21segmURS.htm",
+  "fields": [
+   {
+    "seq": 1,
+    "name": "R/U WHERE SUBJECT DEFINITION",
+    "length": "20",
+    "type": "ST",
+    "opt": "R",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 2,
+    "name": "R/U WHEN DATA START DATE/TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 3,
+    "name": "R/U WHEN DATA END DATE/TIME",
+    "length": "19",
+    "type": "TS",
+    "opt": "O",
+    "rep": "-",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 4,
+    "name": "R/U WHAT USER QUALIFIER",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   },
+   {
+    "seq": 5,
+    "name": "R/U OTHER RESULTS SUBJECT DEFINI",
+    "length": "20",
+    "type": "ST",
+    "opt": "O",
+    "rep": "∞",
+    "table": "",
+    "inherited": false
+   }
+  ]
+ }
+}

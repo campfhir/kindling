@@ -1,0 +1,60 @@
+{
+  "structure": "QRY_Q02",
+  "messageType": "QRY",
+  "triggerEvent": "Q02",
+  "version": "2.2",
+  "description": "A Query is Sent for Deferred Response",
+  "title": "A Query is Sent for Deferred Response",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventQ02.htm",
+    "pages": null,
+    "table": "QRY^Q02^QRY_Q02: A Query is Sent for Deferred Response"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "Q02"
+      ],
+      "eventPrinted": "Q02",
+      "pdf": "hl7.eu v22 hl7v22eventQ02.htm",
+      "page": null,
+      "table": "QRY^Q02^QRY_Q02: A Query is Sent for Deferred Response",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "QRF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

@@ -1,6 +1,6 @@
 /**
  * `@campfhir/hl7` — a zero-dependency TypeScript library for building and
- * parsing HL7v2 messages (v2.3 … v2.9.1), runnable on Node.js, Bun,
+ * parsing HL7v2 messages (v2.1 … v2.9.1), runnable on Node.js, Bun,
  * browsers, and Cloudflare Workers.
  *
  * This root entrypoint exposes the root parser (`parse()`, which reads MSH-9 and MSH-12 and
@@ -19,6 +19,7 @@
 // Core types — version-agnostic
 export { type EncodingCharacters, DEFAULT_ENCODING } from "./types/encoding.ts";
 export { type Segment, type Field, type Component, BaseSegment } from "./types/segment.ts";
+export { type MessageHeaderSegment, type MessageTypeValue, HeaderSegment, MessageHeaderBase } from "./types/header.ts";
 export { type Message, HL7Message } from "./types/message.ts";
 export {
   type MessageSchema,

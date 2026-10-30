@@ -16,8 +16,12 @@
  * `<type>_<event>` first (`ADT_A01`), then on the type alone (`ACK`, whose event names the message
  * it acknowledges), then on MSH-9.3 when a sender includes it.
  *
- * Every HL7 v2 release from v2.3 to v2.9.1 is dispatched: 1.0 dispatched v2.3, 1.1 added v2.3.1, 1.2
- * v2.4, 2.1 v2.5, 2.2 v2.5.1, and 2.8 v2.6 to v2.9.1. A message of another version (v2.1, v2.2) is an
+ * In v2.1, MSH-9 is the message type alone (an ID: hl7.eu `hl7v21segmMSH.htm`, Caristix v2.1 MSH) and the trigger
+ * event travels in EVN-1 (Event Type Code). A message whose MSH-9 names no trigger event is therefore keyed on
+ * `<type>_<EVN-1>` when its EVN names one, and otherwise on the only event of its type in the version, if it has one.
+ *
+ * Every HL7 v2 release from v2.1 to v2.9.1 is dispatched: 1.0 dispatched v2.3, 1.1 added v2.3.1, 1.2
+ * v2.4, 2.1 v2.5, 2.2 v2.5.1, 2.8 v2.6 to v2.9.1, and 2.9 v2.1 and v2.2. A message of another version is an
  * error unless `options.version` names the version to parse it as.
  *
  * @module
@@ -27,6 +31,9 @@ import type { ParsedMessageBase } from "./types/structure.ts";
 import { Err } from "./utils/err.ts";
 import { readMessageHeader, splitSegments } from "./utils/messageParsing.ts";
 import { MSH } from "./v2.3/MSH.ts";
+import { ParserUtils } from "./types/parser.ts";
+import { MESSAGES as V2_1 } from "./v2.1/registry.ts";
+import { MESSAGES as V2_2 } from "./v2.2/registry.ts";
 import { MESSAGES as V2_3 } from "./v2.3/registry.ts";
 import { MESSAGES as V2_3_1 } from "./v2.3.1/registry.ts";
 import { MESSAGES as V2_4 } from "./v2.4/registry.ts";
@@ -43,6 +50,8 @@ import { MESSAGES as V2_9_1 } from "./v2.9.1/registry.ts";
 
 /** The message registries the root parser dispatches on, keyed by the MSH-12 value. */
 const REGISTRIES = {
+  "2.1": V2_1,
+  "2.2": V2_2,
   "2.3": V2_3,
   "2.3.1": V2_3_1,
   "2.4": V2_4,
@@ -168,14 +177,32 @@ export function identifyMessage(messageString: string): Result<MessageType> {
 const has = (object: object, key: string) => Object.prototype.hasOwnProperty.call(object, key);
 const isSupported = (version: string): version is HL7Version => has(REGISTRIES, version);
 
-/** `ADT^A01` → `ADT_A01`; `ACK^A01` → `ACK`; `ADT^^ADT_A01` → `ADT_A01`. */
-function resolveStructure(registry: Record<string, unknown>, type: MessageType): string | undefined {
+/** EVN-1 Event Type Code of a message (`A01`), or "" when it has no EVN or the field is empty. */
+function eventTypeCode(messageString: string): string {
+  const lines = splitSegments(messageString);
+  const separator = lines[0]?.[3];
+  const evn = separator ? lines.find((line) => line.startsWith(`EVN${separator}`)) : undefined;
+  if (!evn || !separator) return "";
+  const encoding = { fieldSeparator: separator, componentSeparator: lines[0][4] ?? "^", repetitionSeparator: lines[0][5] ?? "~", escapeCharacter: lines[0][6] ?? "\\", subComponentSeparator: lines[0][7] ?? "&" };
+  return ParserUtils.getComponent(ParserUtils.parseField(evn.split(separator)[1] ?? "", encoding), 0).trim();
+}
+
+/**
+ * `ADT^A01` → `ADT_A01`; `ACK^A01` → `ACK`; `ADT^^ADT_A01` → `ADT_A01`. With no trigger event in MSH-9 (v2.1):
+ * `ADT` and EVN-1 `A01` → `ADT_A01`, and `ORM` → `ORM_O01`, the only ORM event of the version.
+ */
+function resolveStructure(registry: Record<string, unknown>, type: MessageType, messageString: string): string | undefined {
   const candidates = [
     type.triggerEvent ? `${type.messageCode}_${type.triggerEvent}` : undefined,
     type.messageCode,
     type.messageStructure,
   ];
-  return candidates.find((name) => name && has(registry, name));
+  const found = candidates.find((name) => name && has(registry, name));
+  if (found || type.triggerEvent || type.messageStructure) return found;
+  const event = eventTypeCode(messageString);
+  if (event && has(registry, `${type.messageCode}_${event}`)) return `${type.messageCode}_${event}`;
+  const ofType = Object.keys(registry).filter((name) => name.startsWith(`${type.messageCode}_`));
+  return ofType.length === 1 ? ofType[0] : undefined;
 }
 
 /**
@@ -200,7 +227,7 @@ export function selectMessageParser(messageString: string, options: ParseOptions
   }
 
   const registry: Record<string, (messageString: string) => Result<ParsedMessageBase>> = REGISTRIES[version];
-  const structure = resolveStructure(registry, messageType);
+  const structure = resolveStructure(registry, messageType, messageString);
   if (!structure) {
     const shown = [messageType.messageCode, messageType.triggerEvent, messageType.messageStructure].filter(Boolean).join("^");
     return fail(`Unknown HL7 v${version} message type '${shown}' (MSH-9)`);

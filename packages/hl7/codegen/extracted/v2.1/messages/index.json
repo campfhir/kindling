@@ -1,0 +1,354 @@
+[
+  {
+    "structure": "ADT_A01",
+    "messageType": "ADT",
+    "triggerEvent": "A01",
+    "description": "Admit a Patient",
+    "pdf": "hl7.eu v21 hl7v21eventA01.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A02",
+    "messageType": "ADT",
+    "triggerEvent": "A02",
+    "description": "Transfer a Patient",
+    "pdf": "hl7.eu v21 hl7v21eventA02.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A03",
+    "messageType": "ADT",
+    "triggerEvent": "A03",
+    "description": "Discharge a Patient",
+    "pdf": "hl7.eu v21 hl7v21eventA03.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A04",
+    "messageType": "ADT",
+    "triggerEvent": "A04",
+    "description": "Register a Patient",
+    "pdf": "hl7.eu v21 hl7v21eventA04.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A05",
+    "messageType": "ADT",
+    "triggerEvent": "A05",
+    "description": "Pre-admit a Patient",
+    "pdf": "hl7.eu v21 hl7v21eventA05.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A06",
+    "messageType": "ADT",
+    "triggerEvent": "A06",
+    "description": "Transfer an Outpatient to Inpatient",
+    "pdf": "hl7.eu v21 hl7v21eventA06.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A07",
+    "messageType": "ADT",
+    "triggerEvent": "A07",
+    "description": "Transfer an Inpatient to Outpatient",
+    "pdf": "hl7.eu v21 hl7v21eventA07.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A08",
+    "messageType": "ADT",
+    "triggerEvent": "A08",
+    "description": "Update Patient Information",
+    "pdf": "hl7.eu v21 hl7v21eventA08.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A09",
+    "messageType": "ADT",
+    "triggerEvent": "A09",
+    "description": "Patient Departing",
+    "pdf": "hl7.eu v21 hl7v21eventA09.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A10",
+    "messageType": "ADT",
+    "triggerEvent": "A10",
+    "description": "Patient Arriving",
+    "pdf": "hl7.eu v21 hl7v21eventA10.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A11",
+    "messageType": "ADT",
+    "triggerEvent": "A11",
+    "description": "Cancel Admit",
+    "pdf": "hl7.eu v21 hl7v21eventA11.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A12",
+    "messageType": "ADT",
+    "triggerEvent": "A12",
+    "description": "Cancel Transfer",
+    "pdf": "hl7.eu v21 hl7v21eventA12.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A13",
+    "messageType": "ADT",
+    "triggerEvent": "A13",
+    "description": "Cancel Discharge",
+    "pdf": "hl7.eu v21 hl7v21eventA13.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A14",
+    "messageType": "ADT",
+    "triggerEvent": "A14",
+    "description": "Pending Admit",
+    "pdf": "hl7.eu v21 hl7v21eventA14.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A15",
+    "messageType": "ADT",
+    "triggerEvent": "A15",
+    "description": "Pending Transfer",
+    "pdf": "hl7.eu v21 hl7v21eventA15.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A16",
+    "messageType": "ADT",
+    "triggerEvent": "A16",
+    "description": "Pending Discharge",
+    "pdf": "hl7.eu v21 hl7v21eventA16.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A17",
+    "messageType": "ADT",
+    "triggerEvent": "A17",
+    "description": "Swap Patients",
+    "pdf": "hl7.eu v21 hl7v21eventA17.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A18",
+    "messageType": "ADT",
+    "triggerEvent": "A18",
+    "description": "Merge Patient Information",
+    "pdf": "hl7.eu v21 hl7v21eventA18.htm",
+    "page": null
+  },
+  {
+    "structure": "QRY_A19",
+    "messageType": "QRY",
+    "triggerEvent": "A19",
+    "description": "Patient Query",
+    "pdf": "hl7.eu v21 hl7v21eventA19.htm",
+    "page": null
+  },
+  {
+    "structure": "ADR_A19",
+    "messageType": "ADR",
+    "triggerEvent": "A19",
+    "description": "Patient Query",
+    "pdf": "hl7.eu v21 hl7v21eventA19.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A20",
+    "messageType": "ADT",
+    "triggerEvent": "A20",
+    "description": "Nursing/Census Application Updates",
+    "pdf": "hl7.eu v21 hl7v21eventA20.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A21",
+    "messageType": "ADT",
+    "triggerEvent": "A21",
+    "description": "A Patient Goes On A \"Leave Of Absence\"",
+    "pdf": "hl7.eu v21 hl7v21eventA21.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A22",
+    "messageType": "ADT",
+    "triggerEvent": "A22",
+    "description": "A Patient Returns From A \"Leave Of Absence\"",
+    "pdf": "hl7.eu v21 hl7v21eventA22.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A23",
+    "messageType": "ADT",
+    "triggerEvent": "A23",
+    "description": "Delete a Patient Record",
+    "pdf": "hl7.eu v21 hl7v21eventA23.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A24",
+    "messageType": "ADT",
+    "triggerEvent": "A24",
+    "description": "Create a Patient Link Transaction",
+    "pdf": "hl7.eu v21 hl7v21eventA24.htm",
+    "page": null
+  },
+  {
+    "structure": "ORM_O01",
+    "messageType": "ORM",
+    "triggerEvent": "O01",
+    "description": "Order Message",
+    "pdf": "hl7.eu v21 hl7v21eventO01.htm",
+    "page": null
+  },
+  {
+    "structure": "ORR_O02",
+    "messageType": "ORR",
+    "triggerEvent": "O02",
+    "description": "Respone Message",
+    "pdf": "hl7.eu v21 hl7v21eventO02.htm",
+    "page": null
+  },
+  {
+    "structure": "BAR_P01",
+    "messageType": "BAR",
+    "triggerEvent": "P01",
+    "description": "Add and Update Patient Accounts",
+    "pdf": "hl7.eu v21 hl7v21eventP01.htm",
+    "page": null
+  },
+  {
+    "structure": "BAR_P02",
+    "messageType": "BAR",
+    "triggerEvent": "P02",
+    "description": "Purge Patient Accounts",
+    "pdf": "hl7.eu v21 hl7v21eventP02.htm",
+    "page": null
+  },
+  {
+    "structure": "DFT_P03",
+    "messageType": "DFT",
+    "triggerEvent": "P03",
+    "description": "Post Detail Financial Transactions",
+    "pdf": "hl7.eu v21 hl7v21eventP03.htm",
+    "page": null
+  },
+  {
+    "structure": "QRY_Q01",
+    "messageType": "QRY",
+    "triggerEvent": "Q01",
+    "description": "A Query is Made for Immediate Response",
+    "pdf": "hl7.eu v21 hl7v21eventQ01.htm",
+    "page": null
+  },
+  {
+    "structure": "DSR_Q01",
+    "messageType": "DSR",
+    "triggerEvent": "Q01",
+    "description": "A Query is Made for Immediate Response",
+    "pdf": "hl7.eu v21 hl7v21eventQ01.htm",
+    "page": null
+  },
+  {
+    "structure": "QRY_Q02",
+    "messageType": "QRY",
+    "triggerEvent": "Q02",
+    "description": "A Query is Sent for Deferred Response",
+    "pdf": "hl7.eu v21 hl7v21eventQ02.htm",
+    "page": null
+  },
+  {
+    "structure": "MCF_Q02",
+    "messageType": "MCF",
+    "triggerEvent": "Q02",
+    "description": "A Query is Sent for Deferred Response",
+    "pdf": "hl7.eu v21 hl7v21eventQ02.htm",
+    "page": null
+  },
+  {
+    "structure": "DSR_Q03",
+    "messageType": "DSR",
+    "triggerEvent": "Q03",
+    "description": "Deferred Response to A Query",
+    "pdf": "hl7.eu v21 hl7v21eventQ03.htm",
+    "page": null
+  },
+  {
+    "structure": "UDM_Q05",
+    "messageType": "UDM",
+    "triggerEvent": "Q05",
+    "description": "Unsolicited Updates, ODM Message, Trigger Event Q05",
+    "pdf": "hl7.eu v21 hl7v21eventQ05.htm",
+    "page": null
+  },
+  {
+    "structure": "ORU_R01",
+    "messageType": "ORU",
+    "triggerEvent": "R01",
+    "description": "Unsolicited transmission of requested Obersvation",
+    "pdf": "hl7.eu v21 hl7v21eventR01.htm",
+    "page": null
+  },
+  {
+    "structure": "ORU_R03",
+    "messageType": "ORU",
+    "triggerEvent": "R03",
+    "description": "Display oriented results, queyr/unsol. update",
+    "pdf": "hl7.eu v21 hl7v21eventR03.htm",
+    "page": null
+  },
+  {
+    "structure": "ACK",
+    "messageType": "ACK",
+    "triggerEvent": null,
+    "description": "General Acknowledgment",
+    "pdf": "hl7.eu v21 hl7v21eventA01.htm",
+    "page": null
+  },
+  {
+    "structure": "QRY_P04",
+    "messageType": "QRY",
+    "triggerEvent": "P04",
+    "description": "Generate bills and A/R statements",
+    "pdf": "hl7.eu v21 hl7v21eventP04.htm",
+    "page": null,
+    "definedBy": "the event page prints no structure",
+    "note": "the table body is empty or a cross-reference; no structure of its own"
+  },
+  {
+    "structure": "DSR_P04",
+    "messageType": "DSR",
+    "triggerEvent": "P04",
+    "description": "Generate bills and A/R statements",
+    "pdf": "hl7.eu v21 hl7v21eventP04.htm",
+    "page": null,
+    "definedBy": "the event page prints no structure",
+    "note": "the table body is empty or a cross-reference; no structure of its own"
+  },
+  {
+    "structure": "QRY_R02",
+    "messageType": "QRY",
+    "triggerEvent": "R02",
+    "description": "Query for results of observation",
+    "pdf": "hl7.eu v21 hl7v21eventR02.htm",
+    "page": null,
+    "definedBy": "the event page prints no structure",
+    "note": "the table body is empty or a cross-reference; no structure of its own"
+  },
+  {
+    "structure": "ORF_R02",
+    "messageType": "ORF",
+    "triggerEvent": "R02",
+    "description": "Query for results of observation",
+    "pdf": "hl7.eu v21 hl7v21eventR02.htm",
+    "page": null,
+    "definedBy": "the event page prints no structure",
+    "note": "the table body is empty or a cross-reference; no structure of its own"
+  }
+]

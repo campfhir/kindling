@@ -66,6 +66,15 @@ How the HL7 facts in `@campfhir/hl7` were checked, and against what.
   2.9.1 from the official chapter PDFs (chapters 2–17, `codegen/validate/sources/v2.9.1-hl7org.tsv`), as 2.9; hl7.eu
   has segment pages and its message structure list for 2.9.1 but no chapter pages. The 47 accepted structures are
   2.9's, each note adapted to what the v2.9.1 list shows.
+- [`v2.2-segment-ledger.md`](v2.2-segment-ledger.md), [`v2.2-message-ledger.md`](v2.2-message-ledger.md),
+  [`v2.1-segment-ledger.md`](v2.1-segment-ledger.md) and [`v2.1-message-ledger.md`](v2.1-message-ledger.md): the two
+  releases before v2.3, each a version of its own (no base version: every segment, MSH, BHS and FHS included, is
+  generated from the version's spec). hl7.eu has segment pages for them but no chapter pages; the message structures
+  are on hl7.eu's event pages (`hl7v22event<EVENT>.htm`, fetched into `hl7eu/events` by `fetch-sources.sh` when a
+  version has no chapter pages), read by `codegen/extract/hl7eu-events.ts` for the extraction and for the message
+  ledger (`--hl7eu-events`), and checked against Caristix and HAPI as for the other versions. Both message ledgers
+  match hl7.eu on every structure. v2.1 PD1, which hl7.eu prints with no fields, keeps none
+  (`ledger-v21-notes.json`). The v2.2 pharmacy messages only Caristix lists are listed as not implemented.
 - [`v2.3-hl7eu-sweep.md`](v2.3-hl7eu-sweep.md) and
   [`v2.3-hapi-crosscheck.md`](v2.3-hapi-crosscheck.md): the first sweeps (2026-10-19), superseded
   by the ledger and kept for the history of the decisions.

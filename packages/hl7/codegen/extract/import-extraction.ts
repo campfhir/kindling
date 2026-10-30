@@ -38,14 +38,24 @@ if (!/^v\d+\.\d+(\.\d+)?$/.test(version ?? "")) throw new Error("usage: import-e
 
 /** The versions in release order. A version re-exports the latest earlier one already imported (or --base). */
 const CHAIN = ["v2.5.1", "v2.6", "v2.7", "v2.7.1", "v2.8", "v2.8.1", "v2.8.2", "v2.9", "v2.9.1"];
-if (!CHAIN.includes(version)) throw new Error(`${version} is not in the version chain`);
+/**
+ * Versions older than the hand-written v2.3 base, imported on their own: no base version, every segment (MSH, BHS and
+ * FHS included) generated from the spec, and nothing re-exported from or to another version.
+ */
+const STANDALONE = ["v2.1", "v2.2"];
+const standalone = STANDALONE.includes(version);
+if (!CHAIN.includes(version) && !standalone) throw new Error(`${version} is not in the version chain`);
 const baseFlag = process.argv.indexOf("--base");
-const base = baseFlag !== -1
-  ? process.argv[baseFlag + 1]
-  : CHAIN.slice(0, CHAIN.indexOf(version)).reverse().find((v) => existsSync(join(ROOT, "codegen/schemas", v, "version.ts")));
-if (!base) throw new Error(`no earlier version of ${version} has a schema directory`);
-const baseSchema = ((await import(`../schemas/${base}/version.ts`)) as Record<string, VersionSchema>)[`V${base.slice(1).replace(/\./g, "_")}`];
-if (!baseSchema) throw new Error(`schemas/${base}/version.ts does not export V${base.slice(1).replace(/\./g, "_")}`);
+const base = standalone
+  ? undefined
+  : baseFlag !== -1
+    ? process.argv[baseFlag + 1]
+    : CHAIN.slice(0, CHAIN.indexOf(version)).reverse().find((v) => existsSync(join(ROOT, "codegen/schemas", v, "version.ts")));
+if (!base && !standalone) throw new Error(`no earlier version of ${version} has a schema directory`);
+const baseSchema: Pick<VersionSchema, "messages"> = base
+  ? ((await import(`../schemas/${base}/version.ts`)) as Record<string, VersionSchema>)[`V${base.slice(1).replace(/\./g, "_")}`]
+  : { messages: [] };
+if (!baseSchema) throw new Error(`schemas/${base}/version.ts does not export V${base!.slice(1).replace(/\./g, "_")}`);
 const schemaVersion = version.slice(1);
 const DIR = join(ROOT, "codegen/extracted", version);
 const SCHEMA_DIR = join(ROOT, "codegen/schemas", version);
@@ -59,8 +69,10 @@ const notes: { segments: Notes; brackets: Notes; events: Notes; skipped: Notes; 
 
 // ── Segments ─────────────────────────────────────────────────────────────────
 
-const NOT_GENERATED = new Set(["MSH", "BHS", "FHS"]);
-const OPT: Record<string, string> = { "C(R/X)": "C", "C(RE/X)": "C", "C(R/O)": "C", "-": "O" };
+// A standalone version has no base to mirror its header segments from: they are generated (types/header.ts).
+const NOT_GENERATED = new Set(standalone ? [] : ["MSH", "BHS", "FHS"]);
+// "" is no usage printed: the hl7.eu v2.1 and v2.2 pages leave the r/o/c column blank for an optional field.
+const OPT: Record<string, string> = { "C(R/X)": "C", "C(RE/X)": "C", "C(R/O)": "C", "-": "O", "": "O" };
 
 interface Printed {
   seq: number; name: string; length: string; type: string; opt: string; rep: string; table: string; clen: string;
@@ -73,7 +85,7 @@ for (const [code, seg] of Object.entries(extracted)) {
   const fields = seg.fields.map((f) => {
     const opt = OPT[f.opt] ?? f.opt;
     if (!(f.opt in OPT) && !["R", "O", "C", "B", "X", "W"].includes(f.opt)) throw new Error(`${code}-${f.seq}: unknown usage ${f.opt}`);
-    if (OPT[f.opt]) notes.fields.push(`${code}-${f.seq} ${f.name}: usage ${f.opt} -> ${opt}`);
+    if (OPT[f.opt] && f.opt !== "") notes.fields.push(`${code}-${f.seq} ${f.name}: usage ${f.opt} -> ${opt}`);
     let length = f.length.includes("..") ? f.length.split("..")[1] : f.length;
     // The length is the Length column. With none printed (v2.7 on prints most fields without one, and a C.LEN
     // conformance length instead) it is "0", no maximum, as the segment ledger decides it (codegen/validate/ledger.mjs
@@ -224,7 +236,7 @@ const SHARE_PRIMARY: Record<string, string> = existsSync(join(DIR, "overrides.js
 
 for (const e of index.filter((x) => x.status !== "withdrawn")) {
   const name = e.triggerEvent ? `${e.messageType}_${e.triggerEvent}` : e.messageType;
-  if (e.definedBy) { notes.events.push(`${name}: cross-reference only (${e.definedBy}), not generated`); continue; }
+  if (e.definedBy) { notes.events.push(`${name}: ${/prints no structure/.test(e.definedBy) ? e.definedBy : `cross-reference only (${e.definedBy})`}, not generated`); continue; }
   if (e.triggerEvent && /^[A-Z]nn$/.test(e.triggerEvent)) { notes.events.push(`${name}: grammar template, not an event`); continue; }
   if (name in NOT_MESSAGES) { notes.events.push(`${name}: not a message, not generated. ${NOT_MESSAGES[name]}`); continue; }
   const file = loadFile(e.structure);
@@ -418,7 +430,25 @@ const withdrawnList = [...withdrawnByIndex, ...withdrawnByText, ...skippedNames,
 for (const n of withdrawnByText) notes.skipped.push(`${n}: withdrawn, ${PDF_WITHDRAWN[n]}`);
 notes.skipped.push(`withdrawn in the index: ${withdrawnByIndex.sort().join(" ")}`);
 notes.events.push(`absent from the extraction (not in the index, not generated): ${missing.sort().join(" ")}`);
-writeFileSync(join(SCHEMA_DIR, "version.ts"), `import type { VersionSchema } from "../../../src/types/schema";
+const blankUsage = Object.values(extracted).reduce((n, seg) => n + seg.fields.filter((f) => f.opt === "").length, 0);
+if (blankUsage) notes.segments.push(`${blankUsage} fields print no usage (blank r/o/c): read as O, optional; the segment ledger checks each against Caristix and HAPI`);
+if (standalone) writeFileSync(join(SCHEMA_DIR, "version.ts"), `import type { VersionSchema } from "../../../src/types/schema";
+import { ${constName}_MESSAGES } from "./messages";
+
+/**
+ * v${schemaVersion}: HL7 v2 release ${schemaVersion}, a version of its own: it extends no other version and none extends it.
+ * Every segment is generated from codegen/spec/v${schemaVersion}-segments.json (MSH, BHS and FHS on top of the shared
+ * header base in src/types/header.ts). Messages are imported from the hl7.eu event pages (codegen/extracted/v${schemaVersion},
+ * IMPORT.md); v${schemaVersion} defines no message structure IDs, so each message is TYPE_EVENT.
+ */
+export const ${constName}: VersionSchema = {
+  version: "v${schemaVersion}",
+  withdrawnMessages: ${skippedNames.length ? `[\n${section("Not generated: the schema type cannot express their structure yet; see IMPORT.md.", skippedNames)}  ]` : "[]"},
+  segments: [],
+  messages: ${constName}_MESSAGES,
+};
+`);
+else writeFileSync(join(SCHEMA_DIR, "version.ts"), `import type { VersionSchema } from "../../../src/types/schema";
 import { V${schemaVersion.replace(/\./g, "_")}_MESSAGES } from "./messages";
 
 /**

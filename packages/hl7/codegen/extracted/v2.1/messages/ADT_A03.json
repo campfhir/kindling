@@ -1,0 +1,60 @@
+{
+  "structure": "ADT_A03",
+  "messageType": "ADT",
+  "triggerEvent": "A03",
+  "version": "2.1",
+  "description": "Discharge a Patient",
+  "title": "Discharge a Patient",
+  "source": {
+    "pdf": "hl7.eu v21 hl7v21eventA03.htm",
+    "pages": null,
+    "table": "ADT^A03^ADT_A03: Discharge a Patient"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A03"
+      ],
+      "eventPrinted": "A03",
+      "pdf": "hl7.eu v21 hl7v21eventA03.htm",
+      "page": null,
+      "table": "ADT^A03^ADT_A03: Discharge a Patient",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

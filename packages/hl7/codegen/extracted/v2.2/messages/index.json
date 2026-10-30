@@ -1,0 +1,586 @@
+[
+  {
+    "structure": "ADT_A01",
+    "messageType": "ADT",
+    "triggerEvent": "A01",
+    "description": "Admit a Patient",
+    "pdf": "hl7.eu v22 hl7v22eventA01.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A02",
+    "messageType": "ADT",
+    "triggerEvent": "A02",
+    "description": "Transfer a patient",
+    "pdf": "hl7.eu v22 hl7v22eventA02.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A03",
+    "messageType": "ADT",
+    "triggerEvent": "A03",
+    "description": "Discharge a patient",
+    "pdf": "hl7.eu v22 hl7v22eventA03.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A04",
+    "messageType": "ADT",
+    "triggerEvent": "A04",
+    "description": "Register a Patient",
+    "pdf": "hl7.eu v22 hl7v22eventA04.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A05",
+    "messageType": "ADT",
+    "triggerEvent": "A05",
+    "description": "Pre-admit a Patient",
+    "pdf": "hl7.eu v22 hl7v22eventA05.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A06",
+    "messageType": "ADT",
+    "triggerEvent": "A06",
+    "description": "Transfer an Outpatient to Inpatient",
+    "pdf": "hl7.eu v22 hl7v22eventA06.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A07",
+    "messageType": "ADT",
+    "triggerEvent": "A07",
+    "description": "Transfer an Inpatient to Outpatient",
+    "pdf": "hl7.eu v22 hl7v22eventA07.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A08",
+    "messageType": "ADT",
+    "triggerEvent": "A08",
+    "description": "Update Patient Information",
+    "pdf": "hl7.eu v22 hl7v22eventA08.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A09",
+    "messageType": "ADT",
+    "triggerEvent": "A09",
+    "description": "Patient Departing",
+    "pdf": "hl7.eu v22 hl7v22eventA09.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A10",
+    "messageType": "ADT",
+    "triggerEvent": "A10",
+    "description": "Patient Arriving",
+    "pdf": "hl7.eu v22 hl7v22eventA10.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A11",
+    "messageType": "ADT",
+    "triggerEvent": "A11",
+    "description": "Cancel Admit",
+    "pdf": "hl7.eu v22 hl7v22eventA11.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A12",
+    "messageType": "ADT",
+    "triggerEvent": "A12",
+    "description": "Cancel Transfer",
+    "pdf": "hl7.eu v22 hl7v22eventA12.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A13",
+    "messageType": "ADT",
+    "triggerEvent": "A13",
+    "description": "Cancel Discharge",
+    "pdf": "hl7.eu v22 hl7v22eventA13.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A14",
+    "messageType": "ADT",
+    "triggerEvent": "A14",
+    "description": "Pending Admit",
+    "pdf": "hl7.eu v22 hl7v22eventA14.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A15",
+    "messageType": "ADT",
+    "triggerEvent": "A15",
+    "description": "Pending Transfer",
+    "pdf": "hl7.eu v22 hl7v22eventA15.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A16",
+    "messageType": "ADT",
+    "triggerEvent": "A16",
+    "description": "Pending Discharge",
+    "pdf": "hl7.eu v22 hl7v22eventA16.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A17",
+    "messageType": "ADT",
+    "triggerEvent": "A17",
+    "description": "Swap Patients",
+    "pdf": "hl7.eu v22 hl7v22eventA17.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A18",
+    "messageType": "ADT",
+    "triggerEvent": "A18",
+    "description": "Merge Patient Information",
+    "pdf": "hl7.eu v22 hl7v22eventA18.htm",
+    "page": null
+  },
+  {
+    "structure": "QRY_A19",
+    "messageType": "QRY",
+    "triggerEvent": "A19",
+    "description": "Patient Query",
+    "pdf": "hl7.eu v22 hl7v22eventA19.htm",
+    "page": null
+  },
+  {
+    "structure": "ADR_A19",
+    "messageType": "ADR",
+    "triggerEvent": "A19",
+    "description": "Patient Query",
+    "pdf": "hl7.eu v22 hl7v22eventA19.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A20",
+    "messageType": "ADT",
+    "triggerEvent": "A20",
+    "description": "Bed Status Update",
+    "pdf": "hl7.eu v22 hl7v22eventA20.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A21",
+    "messageType": "ADT",
+    "triggerEvent": "A21",
+    "description": "A Patient Goes On A \"Leave Of Absence\"",
+    "pdf": "hl7.eu v22 hl7v22eventA21.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A22",
+    "messageType": "ADT",
+    "triggerEvent": "A22",
+    "description": "A Patient Returns From A \"Leave Of Absence\"",
+    "pdf": "hl7.eu v22 hl7v22eventA22.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A23",
+    "messageType": "ADT",
+    "triggerEvent": "A23",
+    "description": "Delete a Patient Record",
+    "pdf": "hl7.eu v22 hl7v22eventA23.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A24",
+    "messageType": "ADT",
+    "triggerEvent": "A24",
+    "description": "Link Patient Information",
+    "pdf": "hl7.eu v22 hl7v22eventA24.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A25",
+    "messageType": "ADT",
+    "triggerEvent": "A25",
+    "description": "Cancel Pending Discharge",
+    "pdf": "hl7.eu v22 hl7v22eventA25.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A26",
+    "messageType": "ADT",
+    "triggerEvent": "A26",
+    "description": "Cancel Pending Transfer",
+    "pdf": "hl7.eu v22 hl7v22eventA26.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A27",
+    "messageType": "ADT",
+    "triggerEvent": "A27",
+    "description": "Cancel Pending Admit",
+    "pdf": "hl7.eu v22 hl7v22eventA27.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A28",
+    "messageType": "ADT",
+    "triggerEvent": "A28",
+    "description": "Add person information",
+    "pdf": "hl7.eu v22 hl7v22eventA28.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A29",
+    "messageType": "ADT",
+    "triggerEvent": "A29",
+    "description": "Delete person information",
+    "pdf": "hl7.eu v22 hl7v22eventA29.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A30",
+    "messageType": "ADT",
+    "triggerEvent": "A30",
+    "description": "Merge Patient information",
+    "pdf": "hl7.eu v22 hl7v22eventA30.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A31",
+    "messageType": "ADT",
+    "triggerEvent": "A31",
+    "description": "Update person information",
+    "pdf": "hl7.eu v22 hl7v22eventA31.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A32",
+    "messageType": "ADT",
+    "triggerEvent": "A32",
+    "description": "Cancel patient arriving",
+    "pdf": "hl7.eu v22 hl7v22eventA32.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A33",
+    "messageType": "ADT",
+    "triggerEvent": "A33",
+    "description": "Cancel patient departing",
+    "pdf": "hl7.eu v22 hl7v22eventA33.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A34",
+    "messageType": "ADT",
+    "triggerEvent": "A34",
+    "description": "Merge patient information - patient ID only",
+    "pdf": "hl7.eu v22 hl7v22eventA34.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A35",
+    "messageType": "ADT",
+    "triggerEvent": "A35",
+    "description": "Merge patient information - account number only",
+    "pdf": "hl7.eu v22 hl7v22eventA35.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A36",
+    "messageType": "ADT",
+    "triggerEvent": "A36",
+    "description": "Merge patient information - pat ID and account number",
+    "pdf": "hl7.eu v22 hl7v22eventA36.htm",
+    "page": null
+  },
+  {
+    "structure": "ADT_A37",
+    "messageType": "ADT",
+    "triggerEvent": "A37",
+    "description": "unlink patient information",
+    "pdf": "hl7.eu v22 hl7v22eventA37.htm",
+    "page": null
+  },
+  {
+    "structure": "MFN_M01",
+    "messageType": "MFN",
+    "triggerEvent": "M01",
+    "description": "Master files change not otherwise specified (for backwards comp.)",
+    "pdf": "hl7.eu v22 hl7v22eventM01.htm",
+    "page": null
+  },
+  {
+    "structure": "MFK_M01",
+    "messageType": "MFK",
+    "triggerEvent": "M01",
+    "description": "Master files change not otherwise specified (for backwards comp.)",
+    "pdf": "hl7.eu v22 hl7v22eventM01.htm",
+    "page": null
+  },
+  {
+    "structure": "MFD_M01",
+    "messageType": "MFD",
+    "triggerEvent": "M01",
+    "description": "Master files change not otherwise specified (for backwards comp.)",
+    "pdf": "hl7.eu v22 hl7v22eventM01.htm",
+    "page": null
+  },
+  {
+    "structure": "MFQ_M01",
+    "messageType": "MFQ",
+    "triggerEvent": "M01",
+    "description": "Master files change not otherwise specified (for backwards comp.)",
+    "pdf": "hl7.eu v22 hl7v22eventM01.htm",
+    "page": null
+  },
+  {
+    "structure": "MFR_M01",
+    "messageType": "MFR",
+    "triggerEvent": "M01",
+    "description": "Master files change not otherwise specified (for backwards comp.)",
+    "pdf": "hl7.eu v22 hl7v22eventM01.htm",
+    "page": null
+  },
+  {
+    "structure": "MFN_M02",
+    "messageType": "MFN",
+    "triggerEvent": "M02",
+    "description": "Master files change - Staff Practitioneer",
+    "pdf": "hl7.eu v22 hl7v22eventM02.htm",
+    "page": null
+  },
+  {
+    "structure": "MFK_M02",
+    "messageType": "MFK",
+    "triggerEvent": "M02",
+    "description": "Master files change - Staff Practitioneer",
+    "pdf": "hl7.eu v22 hl7v22eventM02.htm",
+    "page": null
+  },
+  {
+    "structure": "MFD_M02",
+    "messageType": "MFD",
+    "triggerEvent": "M02",
+    "description": "Master files change - Staff Practitioneer",
+    "pdf": "hl7.eu v22 hl7v22eventM02.htm",
+    "page": null
+  },
+  {
+    "structure": "MFQ_M02",
+    "messageType": "MFQ",
+    "triggerEvent": "M02",
+    "description": "Master files change - Staff Practitioneer",
+    "pdf": "hl7.eu v22 hl7v22eventM02.htm",
+    "page": null
+  },
+  {
+    "structure": "MFR_M02",
+    "messageType": "MFR",
+    "triggerEvent": "M02",
+    "description": "Master files change - Staff Practitioneer",
+    "pdf": "hl7.eu v22 hl7v22eventM02.htm",
+    "page": null
+  },
+  {
+    "structure": "MFN_M03",
+    "messageType": "MFN",
+    "triggerEvent": "M03",
+    "description": "Master files change - Test/Observation",
+    "pdf": "hl7.eu v22 hl7v22eventM03.htm",
+    "page": null
+  },
+  {
+    "structure": "MFK_M03",
+    "messageType": "MFK",
+    "triggerEvent": "M03",
+    "description": "Master files change - Test/Observation",
+    "pdf": "hl7.eu v22 hl7v22eventM03.htm",
+    "page": null
+  },
+  {
+    "structure": "MFD_M03",
+    "messageType": "MFD",
+    "triggerEvent": "M03",
+    "description": "Master files change - Test/Observation",
+    "pdf": "hl7.eu v22 hl7v22eventM03.htm",
+    "page": null
+  },
+  {
+    "structure": "MFQ_M03",
+    "messageType": "MFQ",
+    "triggerEvent": "M03",
+    "description": "Master files change - Test/Observation",
+    "pdf": "hl7.eu v22 hl7v22eventM03.htm",
+    "page": null
+  },
+  {
+    "structure": "MFR_M03",
+    "messageType": "MFR",
+    "triggerEvent": "M03",
+    "description": "Master files change - Test/Observation",
+    "pdf": "hl7.eu v22 hl7v22eventM03.htm",
+    "page": null
+  },
+  {
+    "structure": "NMD_N01",
+    "messageType": "NMD",
+    "triggerEvent": "N01",
+    "description": "Network Management Data",
+    "pdf": "hl7.eu v22 hl7v22eventN01.htm",
+    "page": null
+  },
+  {
+    "structure": "NMQ_N02",
+    "messageType": "NMQ",
+    "triggerEvent": "N02",
+    "description": "Network Management Query",
+    "pdf": "hl7.eu v22 hl7v22eventN02.htm",
+    "page": null
+  },
+  {
+    "structure": "NMR_N02",
+    "messageType": "NMR",
+    "triggerEvent": "N02",
+    "description": "Network Management Query",
+    "pdf": "hl7.eu v22 hl7v22eventN02.htm",
+    "page": null
+  },
+  {
+    "structure": "ORM_O01",
+    "messageType": "ORM",
+    "triggerEvent": "O01",
+    "description": "Order Message",
+    "pdf": "hl7.eu v22 hl7v22eventO01.htm",
+    "page": null
+  },
+  {
+    "structure": "ORR_O02",
+    "messageType": "ORR",
+    "triggerEvent": "O02",
+    "description": "Response Message",
+    "pdf": "hl7.eu v22 hl7v22eventO02.htm",
+    "page": null
+  },
+  {
+    "structure": "BAR_P01",
+    "messageType": "BAR",
+    "triggerEvent": "P01",
+    "description": "Add and Update Patient Accounts",
+    "pdf": "hl7.eu v22 hl7v22eventP01.htm",
+    "page": null
+  },
+  {
+    "structure": "BAR_P02",
+    "messageType": "BAR",
+    "triggerEvent": "P02",
+    "description": "Purge Patient Accounts",
+    "pdf": "hl7.eu v22 hl7v22eventP02.htm",
+    "page": null
+  },
+  {
+    "structure": "DFT_P03",
+    "messageType": "DFT",
+    "triggerEvent": "P03",
+    "description": "Post Detail Financial Transactions",
+    "pdf": "hl7.eu v22 hl7v22eventP03.htm",
+    "page": null
+  },
+  {
+    "structure": "QRY_P04",
+    "messageType": "QRY",
+    "triggerEvent": "P04",
+    "description": "Generate bills and A/R statements",
+    "pdf": "hl7.eu v22 hl7v22eventP04.htm",
+    "page": null
+  },
+  {
+    "structure": "DSR_P04",
+    "messageType": "DSR",
+    "triggerEvent": "P04",
+    "description": "Generate bills and A/R statements",
+    "pdf": "hl7.eu v22 hl7v22eventP04.htm",
+    "page": null
+  },
+  {
+    "structure": "QRY_Q01",
+    "messageType": "QRY",
+    "triggerEvent": "Q01",
+    "description": "A Query is made for immediate Display Response",
+    "pdf": "hl7.eu v22 hl7v22eventQ01.htm",
+    "page": null
+  },
+  {
+    "structure": "DSR_Q01",
+    "messageType": "DSR",
+    "triggerEvent": "Q01",
+    "description": "A Query is made for immediate Display Response",
+    "pdf": "hl7.eu v22 hl7v22eventQ01.htm",
+    "page": null
+  },
+  {
+    "structure": "QRY_Q02",
+    "messageType": "QRY",
+    "triggerEvent": "Q02",
+    "description": "A Query is Sent for Deferred Response",
+    "pdf": "hl7.eu v22 hl7v22eventQ02.htm",
+    "page": null
+  },
+  {
+    "structure": "DSR_Q03",
+    "messageType": "DSR",
+    "triggerEvent": "Q03",
+    "description": "Deferred Response to A Query",
+    "pdf": "hl7.eu v22 hl7v22eventQ03.htm",
+    "page": null
+  },
+  {
+    "structure": "UDM_Q05",
+    "messageType": "UDM",
+    "triggerEvent": "Q05",
+    "description": "Unsolicited Display Update Message",
+    "pdf": "hl7.eu v22 hl7v22eventQ05.htm",
+    "page": null
+  },
+  {
+    "structure": "ORU_R01",
+    "messageType": "ORU",
+    "triggerEvent": "R01",
+    "description": "Unsolicited Transmission Of Requested Information",
+    "pdf": "hl7.eu v22 hl7v22eventR01.htm",
+    "page": null
+  },
+  {
+    "structure": "QRY_R02",
+    "messageType": "QRY",
+    "triggerEvent": "R02",
+    "description": "Query for results of observation",
+    "pdf": "hl7.eu v22 hl7v22eventR02.htm",
+    "page": null
+  },
+  {
+    "structure": "DSR_R03",
+    "messageType": "DSR",
+    "triggerEvent": "R03",
+    "description": "Display-oriented results, query/unsol. update",
+    "pdf": "hl7.eu v22 hl7v22eventR03.htm",
+    "page": null
+  },
+  {
+    "structure": "ORF_R04",
+    "messageType": "ORF",
+    "triggerEvent": "R04",
+    "description": "Response to query; transmission of requested observation",
+    "pdf": "hl7.eu v22 hl7v22eventR04.htm",
+    "page": null
+  },
+  {
+    "structure": "ACK",
+    "messageType": "ACK",
+    "triggerEvent": null,
+    "description": "General Acknowledgment",
+    "pdf": "hl7.eu v22 hl7v22eventA01.htm",
+    "page": null
+  }
+]

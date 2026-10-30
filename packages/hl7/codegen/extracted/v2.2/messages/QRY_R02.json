@@ -1,0 +1,60 @@
+{
+  "structure": "QRY_R02",
+  "messageType": "QRY",
+  "triggerEvent": "R02",
+  "version": "2.2",
+  "description": "Query for results of observation",
+  "title": "Query for results of observation",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventR02.htm",
+    "pages": null,
+    "table": "QRY^R02^QRY_R02: Query for results of observation"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "R02"
+      ],
+      "eventPrinted": "R02",
+      "pdf": "hl7.eu v22 hl7v22eventR02.htm",
+      "page": null,
+      "table": "QRY^R02^QRY_R02: Query for results of observation",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "QRF",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

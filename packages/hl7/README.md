@@ -12,17 +12,17 @@ A modular TypeScript library for building and parsing HL7v2 messages, published 
 - **Batches**: `parseBatch()` and `encodeBatch()` for the HL7 batch protocol (FHS/BHS … BTS/FTS)
 - **Round-trip Support**: Build messages and parse them back with full fidelity
 - **Modular Architecture**: Organized by HL7 version for easy extension
-- **Version Support**: every HL7 v2 release from v2.3 to v2.9.1, the latest (v2.3, 2.3.1, 2.4, 2.5, 2.5.1, 2.6, 2.7, 2.7.1,
-  2.8, 2.8.1, 2.8.2, 2.9, 2.9.1), all dispatched by the root `parse()` (see [Versions](#versions))
+- **Version Support**: every HL7 v2 release from v2.1 to v2.9.1, the latest (v2.1, 2.2, 2.3, 2.3.1, 2.4, 2.5, 2.5.1, 2.6,
+  2.7, 2.7.1, 2.8, 2.8.1, 2.8.2, 2.9, 2.9.1), all dispatched by the root `parse()` (see [Versions](#versions))
 - **Date Input**: Segment date methods accept `Date` objects with optional HL7 layout format, in addition to pre-formatted strings
 - **Value Extraction**: Path-based field/component extraction utility
 - **Custom Segments**: Build Z-segments and other custom segments with a simple field-setter API
 - **Message Editor**: Fluent API for inserting segments into, or updating field values in, any built message without modifying the builder
-- **Comprehensive Tests**: 11,651 tests across 405 test files (with the external fixtures fetched, as CI does), co-located with source (Go style)
+- **Comprehensive Tests**: 13,567 tests across 409 test files (with the external fixtures fetched, as CI does), co-located with source (Go style)
 
 ## Roadmap
 
-See [ROADMAP.md](ROADMAP.md). Every release from v2.3 to v2.9.1 has its segments and messages, and the root
+See [ROADMAP.md](ROADMAP.md). Every release from v2.1 to v2.9.1 has its segments and messages, and the root
 `parse()` dispatches all of them. Checklists of the remaining [segments](docs/ROADMAP-SEGMENTS.md) and
 [event types](docs/ROADMAP-EVENTS.md).
 
@@ -121,10 +121,14 @@ Every supported version has its own subpath, `@campfhir/hl7/<version>`, with its
 re-export it, so `src/v2.4` `NK1` *is* the v2.3 `NK1` class, while a segment whose field table
 changed gets a subclass in that version (`src/v2.4` `PID` extends the 2.3.1 `PID` with PID-31 to
 PID-38). From v2.6 on a changed segment gets a class of its own, generated from that version's table.
+v2.1 and v2.2 stand alone: they extend no version and no version extends them, so every one of their
+segments is a class of its own (`@campfhir/hl7/v2.2` `PID` is not the v2.3 `PID`).
 Segments are available from the version that introduced them:
 
 | Version | Based on | Notes |
 |---|---|---|
+| `v2.1` | — | Standalone: 39 structures and 38 segments, each a class of its own generated from the 2.1 tables. Imported from the hl7.eu segment and event pages (hl7.eu has no 2.1 chapter pages), checked against Caristix and HAPI. QRY^P04 and QRY^R02 have no structure in any source and are not generated |
+| `v2.2` | — | Standalone: 73 structures (ADT^A01–A37, the master file messages MFN/MFK/MFD/MFQ/MFR^M01–M03, the network management NMD/NMQ/NMR, ORM/ORR, ORU/ORF, the queries, BAR/DFT) and 62 segments, each a class of its own. Imported from the hl7.eu segment and event pages, checked against Caristix and HAPI. The pharmacy messages only Caristix lists (RDE/RDS/RGV/RAS^O01–O02 and their responses, QRY^Q26–Q30) are not implemented |
 | `v2.3` | — | Base implementation |
 | `v2.3.1` | v2.3 | Complete: every message generated against the 2.3.1 field tables (53 segments have their own class, the rest re-export v2.3's); the 2.3.1 structure changes (QAK, renumbered queries, repeating IN3, NK1 in ORU, PD1 in SIU, …) applied |
 | `v2.4` | v2.3.1 | Complete: every message (334 structures, 57 new in 2.4: OML/ORL, OMG/ORG, OMP/ORP, OUL^R21, QBP/RSP/RTB/RDY and the other chapter 5 queries, the chapter 13 automation messages, PMU^B01–B06, BAR^P10, ADT A52–A55 and A60–A62) generated against the 2.4 field tables (94 segments have their own class, 28 of them new in 2.4); the 2.4 structure changes (ROL and PDA in ADT, CTD/FT1 in ORM and ORU, required order detail in ORR/OSR, …) applied |
@@ -146,8 +150,8 @@ or a placeholder group, which the message schema cannot express, or they wrap su
 The root `parse()` dispatches every version: 1.0 parses v2.3, 1.1 adds v2.3.1, 1.2 adds v2.4 (2.0 drops
 CommonJS and Node < 24), 2.1 adds v2.5 and 2.2 adds v2.5.1. The later versions arrived as modules first
 (2.3 adds v2.6, v2.7 and v2.7.1, 2.4 v2.8, 2.5 v2.8.1, 2.6 v2.8.2, 2.7 v2.9) and 2.8 adds v2.9.1 and
-dispatches v2.6 to v2.9.1. The fixture tests round-trip one generated message per structure of v2.3 to
-v2.8.2 (hl7apy has no v2.7.1, v2.9 or v2.9.1) through `parse()`.
+dispatches v2.6 to v2.9.1. 2.9 adds v2.1 and v2.2. The fixture tests round-trip one generated message per
+structure of v2.1 to v2.8.2 (hl7apy has no v2.7.1, v2.9 or v2.9.1) through `parse()`.
 
 Every segment field and every message structure of every version is checked against the sources there
 are for it: hl7.eu, Caristix and HAPI, and the official HL7 chapter PDFs where they were at hand (which
@@ -252,8 +256,8 @@ switch (result.val.structure) {
 them), and `identifyMessage(hl7String)` returns only what MSH-9 and MSH-12 say. `MESSAGES` of
 `@campfhir/hl7/v2.3` is the map they dispatch on (message structure name → parser).
 
-`SUPPORTED_VERSIONS` lists the versions `parse()` dispatches (v2.3 to v2.9.1), and every other MSH-12
-value (v2.1, v2.2) is an error. To parse such a feed anyway, or one that leaves MSH-12 empty, name the
+`SUPPORTED_VERSIONS` lists the versions `parse()` dispatches (v2.1 to v2.9.1), and every other MSH-12
+value is an error. To parse such a feed anyway, or one that leaves MSH-12 empty, name the
 version to parse as: `parse(hl7String, { version: '2.5.1' })`. Each version's own parsers
 (`parseADT_A01` of `@campfhir/hl7/v2.9.1`, …) can also be called directly.
 
@@ -267,10 +271,14 @@ if (result.val.version === '2.9.1' && result.val.structure === 'ADT_A01') {
 }
 ```
 
-In v2.3 MSH-9 has two components, message type and trigger event (`ADT^A01`); the message
+In v2.2 and v2.3 MSH-9 has two components, message type and trigger event (`ADT^A01`); the message
 structure component (`ADT^A01^ADT_A01`) arrives in v2.3.1. The dispatcher keys on
 `<type>_<event>` first, then on the type alone (`ACK`, whose event names the message it
-acknowledges), then on MSH-9.3 when a sender includes it.
+acknowledges), then on MSH-9.3 when a sender includes it. In v2.1 MSH-9 is the message type alone
+(`ADT`) and the trigger event travels in EVN-1, so a message whose MSH-9 names no event is keyed on
+`<type>_<EVN-1>` (`ADT` with `EVN|A04` is `ADT_A04`), or on the only event of its type in the version
+(`ORM` is `ORM_O01`). v2.1 and v2.2 define no message structure IDs: each of their messages is
+`<type>_<event>`.
 
 ### Batches
 
@@ -584,7 +592,7 @@ against), not a parser.
 
 ### Version Organization
 
-Segments and messages are organized by HL7 version (`v2.3` … `v2.9.1`), supporting:
+Segments and messages are organized by HL7 version (`v2.1` … `v2.9.1`), supporting:
 - Multiple versions simultaneously
 - Adding new versions without affecting existing code
 - Version-specific business logic

@@ -1,0 +1,84 @@
+{
+  "structure": "DSR_P04",
+  "messageType": "DSR",
+  "triggerEvent": "P04",
+  "version": "2.2",
+  "description": "Generate bills and A/R statements",
+  "title": "Generate bills and A/R statements",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventP04.htm",
+    "pages": null,
+    "table": "DSR^P04^DSR_P04: Generate bills and A/R statements"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "P04"
+      ],
+      "eventPrinted": "P04",
+      "pdf": "hl7.eu v22 hl7v22eventP04.htm",
+      "page": null,
+      "table": "DSR^P04^DSR_P04: Generate bills and A/R statements",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "QRD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "QRF",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSP",
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

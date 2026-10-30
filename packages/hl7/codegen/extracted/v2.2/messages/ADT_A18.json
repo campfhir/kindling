@@ -1,0 +1,68 @@
+{
+  "structure": "ADT_A18",
+  "messageType": "ADT",
+  "triggerEvent": "A18",
+  "version": "2.2",
+  "description": "Merge Patient Information",
+  "title": "Merge Patient Information",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventA18.htm",
+    "pages": null,
+    "table": "ADT^A18^ADT_A18: Merge Patient Information"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A18"
+      ],
+      "eventPrinted": "A18",
+      "pdf": "hl7.eu v22 hl7v22eventA18.htm",
+      "page": null,
+      "table": "ADT^A18^ADT_A18: Merge Patient Information",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MRG",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PV1",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

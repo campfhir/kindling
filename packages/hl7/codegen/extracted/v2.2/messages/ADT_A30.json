@@ -1,0 +1,60 @@
+{
+  "structure": "ADT_A30",
+  "messageType": "ADT",
+  "triggerEvent": "A30",
+  "version": "2.2",
+  "description": "Merge Patient information",
+  "title": "Merge Patient information",
+  "source": {
+    "pdf": "hl7.eu v22 hl7v22eventA30.htm",
+    "pages": null,
+    "table": "ADT^A30^ADT_A30: Merge Patient information"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "A30"
+      ],
+      "eventPrinted": "A30",
+      "pdf": "hl7.eu v22 hl7v22eventA30.htm",
+      "page": null,
+      "table": "ADT^A30^ADT_A30: Merge Patient information",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "EVN",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "PID",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "MRG",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}
