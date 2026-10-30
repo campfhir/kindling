@@ -1,0 +1,196 @@
+{
+  "structure": "DER_O44",
+  "messageType": "DER",
+  "triggerEvent": "O44",
+  "version": "2.8.2",
+  "description": "Donor Registration - Minimal Message",
+  "title": "Donor Registration - Minimal Message",
+  "sectionHeading": "4.16.11 DER - Donor Eligibility Request (Event O44)",
+  "source": {
+    "pdf": "hl7.eu std282/ch04.html",
+    "pages": null,
+    "table": "DER^O44^DER_O44: Donor Registration - Minimal Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "O44"
+      ],
+      "eventPrinted": "O44",
+      "pdf": "hl7.eu std282/ch04.html",
+      "page": null,
+      "table": "DER^O44^DER_O44: Donor Registration - Minimal Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "placeholder",
+      "text": "Segment",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "notation": "Segment",
+      "description": "Description",
+      "status": "Satus",
+      "chapterRef": "Chapter"
+    },
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential"
+    },
+    {
+      "kind": "group",
+      "name": "DONOR",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Identification Segment"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Additional Demographics",
+          "status": "DB"
+        },
+        {
+          "kind": "segment",
+          "name": "OBX",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Donor Observations",
+          "status": "DB"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Notes and Comments (for Donor)",
+          "status": "DB"
+        },
+        {
+          "kind": "segment",
+          "name": "AL1",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Allergy Information",
+          "status": "DB"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Access Restrictions",
+          "status": "DB"
+        },
+        {
+          "kind": "group",
+          "name": "DONOR_REGISTRATION",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PV1",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Patient Visit (Donor Registration)"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes and Comments (for Donor Registration)",
+              "status": "DB"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "DONOR_ORDER",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "OBR",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Observation",
+          "status": "DB"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Notes and Comments (for Detail)",
+          "status": "DB"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

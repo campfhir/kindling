@@ -1,0 +1,138 @@
+{
+  "structure": "RSP_K23",
+  "messageType": "RSP",
+  "triggerEvent": "K23",
+  "version": "2.8.2",
+  "description": "Segment Pattern Response",
+  "title": "Segment Pattern Response",
+  "source": {
+    "pdf": "hl7.eu std282/ch03.html",
+    "pages": null,
+    "table": "RSP^K23^RSP_K23: Segment Pattern Response"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "K23"
+      ],
+      "eventPrinted": "K23",
+      "pdf": "hl7.eu std282/ch03.html",
+      "page": null,
+      "table": "RSP^K23^RSP_K23: Segment Pattern Response",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "K24"
+      ],
+      "eventPrinted": "K24",
+      "pdf": "hl7.eu std282/ch03.html",
+      "page": null,
+      "table": "RSP^K24^RSP_K23: Segment Pattern Response",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "MSA",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Acknowledgement",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ERR",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Error",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "QAK",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Acknowledgement",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "segment",
+      "name": "QPD",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Query Parameter Definition Segment",
+      "chapterRef": "5"
+    },
+    {
+      "kind": "group",
+      "name": "QUERY_RESPONSE",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "DSC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Continuation Pointer",
+      "chapterRef": "2"
+    }
+  ],
+  "variants": []
+}

@@ -49,6 +49,12 @@ How the HL7 facts in `@campfhir/hl7` were checked, and against what.
   9, 11, 13, 14 and 16 are read from the official PDFs (checksums in `codegen/validate/sources/v2.8.1-hl7org.tsv`)
   and take the place of the hl7.eu pages in the message ledger. The 60 accepted structures are all v2.8's,
   resolved there; each note says so and what HAPI v281 shows.
+- [`v2.8.2-segment-ledger.md`](v2.8.2-segment-ledger.md) and [`v2.8.2-message-ledger.md`](v2.8.2-message-ledger.md):
+  2.8.2 from hl7.eu alone (Caristix answers HTTP 500, HAPI has no v2.8.2 module), so the segment ledger has
+  nothing to contradict hl7.eu, and the message ledger compares the structures with its own second reading of the
+  hl7.eu tables. A field with no Length printed has length 0 (`import-extraction.ts`), as the ledger decides it for
+  earlier versions; TQ2-6's "2.." is recorded in `ledger-v282-notes.json`. The 100 accepted structures are identical
+  to v2.8.1's and carry its resolution.
 - [`v2.3-hl7eu-sweep.md`](v2.3-hl7eu-sweep.md) and
   [`v2.3-hapi-crosscheck.md`](v2.3-hapi-crosscheck.md): the first sweeps (2026-10-19), superseded
   by the ledger and kept for the history of the decisions.
@@ -88,7 +94,8 @@ marked `inherited`), which `generate-segments.ts` turns into a subclass with set
 changed fields only.
 
 The message ledger reads the Caristix trigger-event JSON, HAPI's message and group classes with its
-event map, and the hl7.eu chapter pages, all of them from the folder `fetch-sources.sh` writes. The
+event map, and the hl7.eu chapter pages, all of them from the folder `fetch-sources.sh` writes. A missing
+Caristix or HAPI source is an empty folder; with neither (2.8.2), the hl7.eu reading is the only check. The
 scaffold for a version's missing events reads the same Caristix events:
 
 ```sh

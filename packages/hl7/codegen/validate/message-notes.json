@@ -1929,5 +1929,507 @@
       "accept": true,
       "note": "The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 hl7.eu prints no table of its own for it (it shares a structure printed for another event) and Caristix 2.8 agreed. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 has no class for it."
     }
+  },
+  "v2.8.2": {
+    "ACK": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints the general acknowledgment in chapter 2 (2.13.1, \"ACK^varies^ACK: General Acknowledgment\"), which the ledger's hl7.eu reader does not take as a message table, as with std281; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "BRP_O30": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "DFT_P03": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "DFT_P11": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "EHC_E01": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single). Caristix makes the AUT of the product/service line repeat ([{AUT}]); the PDF prints [AUT].\" Caristix 2.8.1 answers HTTP 500; HAPI v281 differs, as HAPI v28 did.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "EHC_E02": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single).\" Caristix 2.8.1 answers HTTP 500; HAPI v281 differs, as HAPI v28 did.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "EHC_E04": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single). Caristix makes IVC optional and repeating ([{IVC}]); the PDF prints IVC.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 differs, as HAPI v28 did.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "EHC_E15": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single). Caristix makes PMT optional and repeating ([{PMT}]); the PDF prints PMT.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 differs, as HAPI v28 did.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "EHC_E20": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single). Caristix makes IVC repeat and PID and IN1 optional, and DIAGNOSIS single; the PDF prints IVC, PID, IN1 and \"[ --- DIAGNOSIS begin\" around \"{ DG1 [{NTE}] }\" ([{DIAGNOSIS}]).\" Caristix 2.8.1 answers HTTP 500; HAPI v281 differs, as HAPI v28 did.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "EHC_E21": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single).\" Caristix 2.8.1 answers HTTP 500; HAPI v281 differs, as HAPI v28 did.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "EHC_E24": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single).\" Caristix 2.8.1 answers HTTP 500; HAPI v281 differs, as HAPI v28 did.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "MFK_M02": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"The ledger's hl7.eu reader runs on into the table that follows this one in std28/ch08.html and appends its segments. The printed table is the structure and equals Caristix 2.8 (HAPI v28 has an MFK_M01 class only, with no event map entry for MFK_M02).\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "MFK_M06": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"The ledger's hl7.eu reader runs on into the table that follows this one in std28/ch08.html and appends its segments. The printed table is the structure and equals Caristix 2.8 (HAPI v28 has an MFK_M01 class only, with no event map entry for MFK_M06).\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "MFK_M08": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"The ledger's hl7.eu reader runs on into the table that follows this one in std28/ch08.html and appends its segments. The printed table is the structure and equals Caristix 2.8 (HAPI v28 has an MFK_M01 class only, with no event map entry for MFK_M08).\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "MFK_M09": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"The ledger's hl7.eu reader runs on into the table that follows this one in std28/ch08.html and appends its segments. The printed table is the structure and equals Caristix 2.8 (HAPI v28 has an MFK_M01 class only, with no event map entry for MFK_M09).\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "MFK_M10": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"The ledger's hl7.eu reader runs on into the table that follows this one in std28/ch08.html and appends its segments. The printed table is the structure and equals Caristix 2.8 (HAPI v28 has an MFK_M01 class only, with no event map entry for MFK_M10).\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "MFK_M11": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"The ledger's hl7.eu reader runs on into the table that follows this one in std28/ch08.html. The printed table (ending [{MFA}]) is the structure; Caristix 2.8 leaves out [{MFA}] and HAPI v28 has no MFK_M11, so hl7.eu decides. Same as v2.7.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "MFK_M12": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"The ledger's hl7.eu reader runs on into the table that follows this one in std28/ch08.html and appends its segments. The printed table is the structure and equals Caristix 2.8 (HAPI v28 has an MFK_M01 class only, with no event map entry for MFK_M12).\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "MFN_M05": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "OPR_O38": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"hl7.eu std28/ch04.html prints RESPONSE as [ ... ] (--- RESPONSE begin/end rows). The ledger's hl7.eu reader reads it as [{ }]; the structure keeps the printed [RESPONSE] and equals Caristix 2.8 (HAPI v28 makes RESPONSE repeat). Same as v2.7.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 differs, as HAPI v28 did.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "ORA_R33": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "ORA_R41": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "ORB_O28": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "ORG_O20": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "ORL_O40": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "PEX_P07": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "PEX_P08": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "QBP_E03": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single).\" Caristix 2.8.1 answers HTTP 500; HAPI v281 differs, as HAPI v28 did.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "QBP_E22": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single).\" Caristix 2.8.1 answers HTTP 500; HAPI v281 differs, as HAPI v28 did.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "QBP_Z73": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "QBP_Z75": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"No table of its own: the official HL7 v2.8 chapter 5 names the QBP_Q13 structure, printed in 5.3.1.2 as QBP^Z99^QBP_Q13 (codegen/extracted/v2.8/overrides.json sharedStructure); the structure equals that table. Caristix 2.8 has the generic query by parameter shape instead (a QBP placeholder group where 5.3.1.2 prints [PID], and no first [RDF]); hl7.eu prints no table and HAPI v28 has no QBP_Z75.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it. hl7.eu std281 names the structure in the query profile's Query Trigger row (overrides.json sharedStructure).\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "QBP_Z77": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"No table of its own: the official HL7 v2.8 chapter 5 names the QBP_Q13 structure, printed in 5.3.1.2 as QBP^Z99^QBP_Q13 (codegen/extracted/v2.8/overrides.json sharedStructure); the structure equals that table. Caristix 2.8 has the generic query by parameter shape instead (a QBP placeholder group where 5.3.1.2 prints [PID], and no first [RDF]); hl7.eu prints no table and HAPI v28 has no QBP_Z77.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it. hl7.eu std281 names the structure in the query profile's Query Trigger row (overrides.json sharedStructure).\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "QBP_Z79": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"No table of its own: the official HL7 v2.8 chapter 5 names the QBP_Q15 structure (5.4.3) (codegen/extracted/v2.8/overrides.json sharedStructure); the structure is QBP_Q15's, whose site-defined placeholder row ([ Hxx ]) is dropped as in every version. Caristix 2.8 keeps the placeholder; hl7.eu prints no table and HAPI v28 has no QBP_Z79.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it. hl7.eu std281 names the structure in the query profile's Query Trigger row (overrides.json sharedStructure).\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "QBP_Z91": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"No table of its own: the official HL7 v2.8 chapter 5 names the QBP_Q13 structure, printed in 5.3.1.2 as QBP^Z99^QBP_Q13 (codegen/extracted/v2.8/overrides.json sharedStructure); the structure equals that table. Caristix 2.8 has the generic query by parameter shape instead (a QBP placeholder group where 5.3.1.2 prints [PID], and no first [RDF]); hl7.eu prints no table and HAPI v28 has no QBP_Z91.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it. hl7.eu std281 names the structure in the query profile's Query Trigger row (overrides.json sharedStructure).\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "QBP_Z93": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"No table of its own: the official HL7 v2.8 chapter 5 names the QBP_Q13 structure, printed in 5.3.1.2 as QBP^Z99^QBP_Q13 (codegen/extracted/v2.8/overrides.json sharedStructure); the structure equals that table. Caristix 2.8 has the generic query by parameter shape instead (a QBP placeholder group where 5.3.1.2 prints [PID], and no first [RDF]); hl7.eu prints no table and HAPI v28 has no QBP_Z93.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it. hl7.eu std281 names the structure in the query profile's Query Trigger row (overrides.json sharedStructure).\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "QBP_Z95": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"No table of its own: the official HL7 v2.8 chapter 5 names the QBP_Q13 structure, printed in 5.3.1.2 as QBP^Z99^QBP_Q13 (codegen/extracted/v2.8/overrides.json sharedStructure); the structure equals that table. Caristix 2.8 has the generic query by parameter shape instead (a QBP placeholder group where 5.3.1.2 prints [PID], and no first [RDF]); hl7.eu prints no table and HAPI v28 has no QBP_Z95.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it. hl7.eu std281 names the structure in the query profile's Query Trigger row (overrides.json sharedStructure).\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "QBP_Z97": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"No table of its own: the official HL7 v2.8 chapter 5 names the QBP_Q15 structure (5.4.3) (codegen/extracted/v2.8/overrides.json sharedStructure); the structure is QBP_Q15's, whose site-defined placeholder row ([ Hxx ]) is dropped as in every version. Caristix 2.8 keeps the placeholder; hl7.eu prints no table and HAPI v28 has no QBP_Z97.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it. hl7.eu std281 names the structure in the query profile's Query Trigger row (overrides.json sharedStructure).\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RDE_O11": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282/ch04a.html prints the TIMING_ENCODED group inside the RXV group as \"{\" ... \"}]\" (as std28, std281 and the official v2.8.1 chapter 4A do); the ledger's hl7.eu reader also runs on past the table into the notes after it. The structure equals v2.8.1's: the inner TIMING_ENCODED keeps the required, repeating {TIMING_ENCODED}, the hand decision the maintainer confirmed on 2026-10-29 (codegen/extracted/v2.8.2/overrides.json). Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RDR_RDR": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RDS_O13": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RDY_Z80": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"hl7.eu std28/ch05.html prints [{DSP}] in the response table; the ledger's hl7.eu reader also takes the DSP lines of the example display that follows. The structure equals HAPI v28; Caristix 2.8 has a SEGMENT_PATTERN placeholder where hl7.eu has [{DSP}].\" Caristix 2.8.1 answers HTTP 500; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RDY_Z98": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "REF_I13": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "REF_I14": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "REF_I15": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RPA_I08": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"The ledger's hl7.eu reader runs past the end of this table in std28/ch11.html and appends the segments that follow it. The printed table (RPA^I08-I11) is the structure and equals HAPI v28; Caristix 2.8 leaves out the [{PRT}] after OBX and makes MSA optional, so hl7.eu decides.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RPA_I09": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"hl7.eu std28/ch11.html prints one table for RPA^I08-I11 (structure RPA_I08), so this event shares the RPA_I08 structure and has no hl7.eu table of its own; HAPI v28 has an RPA_I08 class and no event map entry for this event. Caristix 2.8 leaves out the [{PRT}] after OBX, as for RPA_I08, where hl7.eu and HAPI agree.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RPA_I10": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"hl7.eu std28/ch11.html prints one table for RPA^I08-I11 (structure RPA_I08), so this event shares the RPA_I08 structure and has no hl7.eu table of its own; HAPI v28 has an RPA_I08 class and no event map entry for this event. Caristix 2.8 leaves out the [{PRT}] after OBX, as for RPA_I08, where hl7.eu and HAPI agree.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RPA_I11": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"hl7.eu std28/ch11.html prints one table for RPA^I08-I11 (structure RPA_I08), so this event shares the RPA_I08 structure and has no hl7.eu table of its own; HAPI v28 has an RPA_I08 class and no event map entry for this event. Caristix 2.8 leaves out the [{PRT}] after OBX, as for RPA_I08, where hl7.eu and HAPI agree.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RQA_I09": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RQA_I10": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RQA_I11": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RRD_O14": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RRI_I12": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"The ledger's hl7.eu reader runs past the end of this table in std28/ch11.html and appends the segments that follow it. The printed table (RRI^I12-I15) is the structure and equals HAPI v28; Caristix 2.8 leaves out the [{PRT}] after OBX, so hl7.eu decides.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RRI_I13": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"hl7.eu std28/ch11.html prints one table for RRI^I12-I15 (structure RRI_I12), so this event shares the RRI_I12 structure and has no hl7.eu table of its own; HAPI v28 has an RRI_I12 class and no event map entry for this event. Caristix 2.8 leaves out the [{PRT}] after OBX, as for RRI_I12, where hl7.eu and HAPI agree.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RRI_I14": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"hl7.eu std28/ch11.html prints one table for RRI^I12-I15 (structure RRI_I12), so this event shares the RRI_I12 structure and has no hl7.eu table of its own; HAPI v28 has an RRI_I12 class and no event map entry for this event. Caristix 2.8 leaves out the [{PRT}] after OBX, as for RRI_I12, where hl7.eu and HAPI agree.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RRI_I15": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"hl7.eu std28/ch11.html prints one table for RRI^I12-I15 (structure RRI_I12), so this event shares the RRI_I12 structure and has no hl7.eu table of its own; HAPI v28 has an RRI_I12 class and no event map entry for this event. Caristix 2.8 leaves out the [{PRT}] after OBX, as for RRI_I12, where hl7.eu and HAPI agree.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RSP_E03": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single). Caristix makes QUERY_ACK_IPR optional; the PDF prints it required.\" Caristix 2.8.1 answers HTTP 500; HAPI v281 differs, as HAPI v28 did.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RSP_E22": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"Read from the official HL7 v2.8 chapter 16 (V28_CH16_eClaims.pdf; hl7.eu has no chapter 16 for v2.8, its ch16 page repeats chapter 17), which prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single).\" Caristix 2.8.1 answers HTTP 500; HAPI v281 differs, as HAPI v28 did.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RSP_K23": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "RSP_K24": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SCN_S37": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"hl7.eu std28/ch17.html prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single).\" Caristix 2.8.1 answers HTTP 500; HAPI v281 differs, as HAPI v28 did.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SDN_S36": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"hl7.eu std28/ch17.html prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single).\" Caristix 2.8.1 answers HTTP 500; HAPI v281 differs, as HAPI v28 did.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SDR_S31": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"hl7.eu std28/ch17.html prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single).\" Caristix 2.8.1 answers HTTP 500; HAPI v281 differs, as HAPI v28 did.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SIU_S13": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SIU_S14": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SIU_S15": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SIU_S16": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SIU_S17": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SIU_S18": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SIU_S19": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SIU_S20": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SIU_S21": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SIU_S22": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SIU_S23": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SIU_S24": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SIU_S26": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SIU_S27": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SMD_S32": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it, so the v2.8 note applies: \"hl7.eu std28/ch17.html prints this table with its segments inside \"<\" ... \">\" around one named group and no \"|\", a choice of one alternative. The structure reads it as that named group (as v2.7 prints it, a plain group, and as Caristix 2.8 has it); the ledger's reader of the hl7.eu column and HAPI v28 leave the group out (the same segments, required and single).\" Caristix 2.8.1 answers HTTP 500; HAPI v281 differs, as HAPI v28 did.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRM_S02": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRM_S03": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRM_S04": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRM_S05": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRM_S06": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRM_S07": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRM_S08": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRM_S09": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRM_S10": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRM_S11": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "hl7.eu std282 prints no table of its own for this event (it shares a structure printed for another event), as std281 did; the structure is the same as v2.8.1's, which HAPI v281 matched. Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRR_S02": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 hl7.eu prints no table of its own for it (it shares a structure printed for another event) and Caristix 2.8 agreed. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRR_S03": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 hl7.eu prints no table of its own for it (it shares a structure printed for another event) and Caristix 2.8 agreed. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRR_S04": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 hl7.eu prints no table of its own for it (it shares a structure printed for another event) and Caristix 2.8 agreed. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRR_S05": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 hl7.eu prints no table of its own for it (it shares a structure printed for another event) and Caristix 2.8 agreed. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRR_S06": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 hl7.eu prints no table of its own for it (it shares a structure printed for another event) and Caristix 2.8 agreed. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRR_S07": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 hl7.eu prints no table of its own for it (it shares a structure printed for another event) and Caristix 2.8 agreed. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRR_S08": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 hl7.eu prints no table of its own for it (it shares a structure printed for another event) and Caristix 2.8 agreed. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRR_S09": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 hl7.eu prints no table of its own for it (it shares a structure printed for another event) and Caristix 2.8 agreed. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRR_S10": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 hl7.eu prints no table of its own for it (it shares a structure printed for another event) and Caristix 2.8 agreed. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "SRR_S11": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 hl7.eu prints no table of its own for it (it shares a structure printed for another event) and Caristix 2.8 agreed. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 has no class for it.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    },
+    "VXU_V04": {
+      "date": "2026-10-30",
+      "accept": true,
+      "note": "The structure is the same as v2.8.1's (hl7.eu std282's table imports to the identical structure), so the v2.8.1 resolution applies: \"The structure is the same as v2.8's and hl7.eu std281 reads as std28 does for it; in v2.8 Caristix 2.8 and HAPI v28 agreed on it against the ledger's reading of the hl7.eu table. Caristix 2.8.1 answers HTTP 500, so the rule has no second source; HAPI v281 agrees with the structure.\" Caristix answers HTTP 500 for 2.8.2 and HAPI has no v2.8.2 module, so nothing cross-checks it."
+    }
   }
 }
