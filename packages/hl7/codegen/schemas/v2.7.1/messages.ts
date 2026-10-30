@@ -4,7 +4,7 @@
  * its README and IMPORT.md for every decision). Do not edit by hand: rerun the importer.
  */
 import type { MessageSchema, StructureItem } from "../../../src/types/schema";
-import { choice, group, opt, optList, req, reqList } from "../helpers";
+import { choice, group, groupChoice, opt, optList, req, reqList } from "../helpers";
 
 const v2_7_1_ACK_STRUCTURE: StructureItem[] = [
   req("MSH"),
@@ -4321,6 +4321,299 @@ const v2_7_1_RRI_I12_STRUCTURE: StructureItem[] = [
   optList("NTE"),
 ];
 
+const v2_7_1_CCM_I21_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  req("PID"),
+  opt("PD1"),
+  optList("NK1"),
+  group("INSURANCE", "optional", "repeating", [
+    req("IN1"),
+    opt("IN2"),
+    opt("IN3"),
+  ]),
+  group("APPOINTMENT_HISTORY", "optional", "repeating", [
+    req("SCH"),
+    group("RESOURCES", "optional", "repeating", [
+      req("RGS"),
+      group("RESOURCE_DETAIL", "optional", "repeating", [
+        choice(["AIS", "AIG", "AIL", "AIP"], "required"),
+        optList("OBX"),
+      ]),
+    ]),
+  ]),
+  group("CLINICAL_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("CLINICAL_HISTORY_DETAIL", "optional", "repeating", [
+      choice(["OBR", "ODS", "PR1", "RF1", "AL1", "IAM", "ACC", "RMI", "DB1", "DG1", "DRG", "PDA"], "required"),
+      optList("OBX"),
+    ]),
+    group("ROLE_CLINICAL_HISTORY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PATIENT_VISITS", "required", "repeating", [
+    req("PV1"),
+    opt("PV2"),
+  ]),
+  group("MEDICATION_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("MEDICATION_ORDER_DETAIL", "optional", "single", [
+      req("RXO"),
+      reqList("RXR"),
+      optList("RXC"),
+      optList("OBX"),
+    ]),
+    group("MEDICATION_ENCODING_DETAIL", "optional", "single", [
+      req("RXE"),
+      reqList("RXR"),
+      optList("RXC"),
+      optList("OBX"),
+    ]),
+    group("MEDICATION_ADMINISTRATION_DETAIL", "optional", "repeating", [
+      reqList("RXA"),
+      req("RXR"),
+      optList("OBX"),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PROBLEM", "optional", "repeating", [
+    req("PRB"),
+    optList("VAR"),
+    group("ROLE_PROBLEM", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("OBX"),
+  ]),
+  group("GOAL", "optional", "repeating", [
+    req("GOL"),
+    optList("VAR"),
+    group("ROLE_GOAL", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("OBX"),
+  ]),
+  group("PATHWAY", "optional", "repeating", [
+    req("PTH"),
+    optList("VAR"),
+    group("ROLE_PATHWAY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("OBX"),
+  ]),
+  optList("REL"),
+];
+
+const v2_7_1_CCR_I16_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  reqList("RF1"),
+  group("PROVIDER_CONTACT", "required", "repeating", [
+    req("PRD"),
+    optList("CTD"),
+  ]),
+  group("CLINICAL_ORDER", "optional", "repeating", [
+    req("ORC"),
+    group("CLINICAL_ORDER_TIMING", "optional", "repeating", [
+      req("TQ1"),
+      optList("TQ2"),
+    ]),
+    group("CLINICAL_ORDER_DETAIL", "required", "repeating", [
+      choice(["OBR", "RXO", "ODS", "PR1"], "required"),
+      optList("OBX"),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PATIENT", "required", "repeating", [
+    req("PID"),
+    opt("PD1"),
+  ]),
+  optList("NK1"),
+  group("INSURANCE", "optional", "repeating", [
+    req("IN1"),
+    opt("IN2"),
+    opt("IN3"),
+  ]),
+  group("APPOINTMENT_HISTORY", "optional", "repeating", [
+    req("SCH"),
+    group("RESOURCES", "optional", "repeating", [
+      req("RGS"),
+      group("RESOURCE_DETAIL", "optional", "repeating", [
+        choice(["AIS", "AIG", "AIL", "AIP"], "required"),
+        optList("OBX"),
+      ]),
+    ]),
+  ]),
+  group("CLINICAL_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("CLINICAL_HISTORY_DETAIL", "optional", "repeating", [
+      choice(["OBR", "ODS", "PR1", "RF1", "AL1", "IAM", "ACC", "RMI", "DB1", "DG1", "DRG"], "required"),
+      optList("OBX"),
+    ]),
+    group("ROLE_CLINICAL_HISTORY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PATIENT_VISITS", "required", "repeating", [
+    req("PV1"),
+    opt("PV2"),
+  ]),
+  group("MEDICATION_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("MEDICATION_ORDER_DETAIL", "optional", "single", [
+      req("RXO"),
+      reqList("RXR"),
+      optList("RXC"),
+      optList("OBX"),
+    ]),
+    group("MEDICATION_ENCODING_DETAIL", "optional", "single", [
+      req("RXE"),
+      reqList("RXR"),
+      optList("RXC"),
+      optList("OBX"),
+    ]),
+    group("MEDICATION_ADMINISTRATION_DETAIL", "optional", "repeating", [
+      reqList("RXA"),
+      req("RXR"),
+      optList("OBX"),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PROBLEM", "optional", "repeating", [
+    req("PRB"),
+    optList("VAR"),
+    group("ROLE_PROBLEM", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("OBX"),
+  ]),
+  group("GOAL", "optional", "repeating", [
+    req("GOL"),
+    optList("VAR"),
+    group("ROLE_GOAL", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("OBX"),
+  ]),
+  group("PATHWAY", "optional", "repeating", [
+    req("PTH"),
+    optList("VAR"),
+    group("ROLE_PATHWAY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("OBX"),
+  ]),
+  optList("REL"),
+];
+
+const v2_7_1_CCU_I20_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  req("RF1"),
+  group("PROVIDER_CONTACT", "optional", "repeating", [
+    req("PRD"),
+    optList("CTD"),
+  ]),
+  group("PATIENT", "optional", "repeating", [
+    req("PID"),
+    opt("PD1"),
+  ]),
+  optList("NK1"),
+  group("INSURANCE", "optional", "repeating", [
+    req("IN1"),
+    opt("IN2"),
+    opt("IN3"),
+  ]),
+  group("APPOINTMENT_HISTORY", "optional", "repeating", [
+    req("SCH"),
+    group("RESOURCES", "optional", "repeating", [
+      req("RGS"),
+      group("RESOURCE_DETAIL", "optional", "repeating", [
+        choice(["AIS", "AIG", "AIL", "AIP"], "required"),
+        optList("OBX"),
+      ]),
+    ]),
+  ]),
+  group("CLINICAL_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("CLINICAL_HISTORY_DETAIL", "optional", "repeating", [
+      choice(["OBR", "ODS", "PR1", "RF1", "AL1", "IAM", "ACC", "RMI", "DB1", "DG1", "DRG", "PDA"], "required"),
+      optList("OBX"),
+    ]),
+    group("ROLE_CLINICAL_HISTORY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PATIENT_VISITS", "required", "repeating", [
+    req("PV1"),
+    opt("PV2"),
+  ]),
+  group("MEDICATION_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("MEDICATION_ORDER_DETAIL", "optional", "single", [
+      req("RXO"),
+      reqList("RXR"),
+      optList("RXC"),
+      optList("OBX"),
+    ]),
+    group("MEDICATION_ENCODING_DETAIL", "optional", "single", [
+      req("RXE"),
+      reqList("RXR"),
+      optList("RXC"),
+      optList("OBX"),
+    ]),
+    group("MEDICATION_ADMINISTRATION_DETAIL", "optional", "repeating", [
+      reqList("RXA"),
+      req("RXR"),
+      optList("OBX"),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PROBLEM", "optional", "repeating", [
+    req("PRB"),
+    optList("VAR"),
+    group("ROLE_PROBLEM", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("OBX"),
+  ]),
+  group("GOAL", "optional", "repeating", [
+    req("GOL"),
+    optList("VAR"),
+    group("ROLE_GOAL", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("OBX"),
+  ]),
+  group("PATHWAY", "optional", "repeating", [
+    req("PTH"),
+    optList("VAR"),
+    group("ROLE_PATHWAY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("OBX"),
+  ]),
+  optList("REL"),
+];
+
 const v2_7_1_CCQ_I19_STRUCTURE: StructureItem[] = [
   req("MSH"),
   optList("SFT"),
@@ -4333,11 +4626,200 @@ const v2_7_1_CCQ_I19_STRUCTURE: StructureItem[] = [
   optList("REL"),
 ];
 
+const v2_7_1_CQU_I19_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  req("MSA"),
+  optList("ERR"),
+  req("RF1"),
+  group("PROVIDER_CONTACT", "optional", "repeating", [
+    req("PRD"),
+    optList("CTD"),
+  ]),
+  group("PATIENT", "optional", "repeating", [
+    req("PID"),
+    opt("PD1"),
+  ]),
+  optList("NK1"),
+  group("INSURANCE", "optional", "repeating", [
+    req("IN1"),
+    opt("IN2"),
+    opt("IN3"),
+  ]),
+  group("APPOINTMENT_HISTORY", "optional", "repeating", [
+    req("SCH"),
+    group("RESOURCES", "optional", "repeating", [
+      req("RGS"),
+      group("RESOURCE_DETAIL", "optional", "repeating", [
+        choice(["AIS", "AIG", "AIL", "AIP"], "required"),
+        optList("OBX"),
+      ]),
+    ]),
+  ]),
+  group("CLINICAL_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("CLINICAL_HISTORY_DETAIL", "optional", "repeating", [
+      choice(["OBR", "ODS", "PR1", "RF1", "AL1", "IAM", "ACC", "RMI", "DB1", "DG1", "DRG", "PDA"], "required"),
+      optList("OBX"),
+    ]),
+    group("ROLE_CLINICAL_HISTORY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ], { exportTypeName: "ParsedRoleClinicalHistory1", builderTypeName: "RoleClinicalHistory1Group" }),
+    optList("CTI"),
+  ]),
+  group("PATIENT_VISITS", "required", "repeating", [
+    req("PV1"),
+    opt("PV2"),
+  ]),
+  group("MEDICATION_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("MEDICATION_ORDER_DETAIL", "optional", "single", [
+      req("RXO"),
+      reqList("RXR"),
+      optList("RXC"),
+      optList("OBX"),
+    ]),
+    group("MEDICATION_ENCODING_DETAIL", "optional", "single", [
+      req("RXE"),
+      reqList("RXR"),
+      optList("RXC"),
+      optList("OBX"),
+    ]),
+    group("MEDICATION_ADMINISTRATION_DETAIL", "optional", "repeating", [
+      reqList("RXA"),
+      req("RXR"),
+      optList("OBX"),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PROBLEM", "optional", "repeating", [
+    req("PRB"),
+    optList("VAR"),
+    group("ROLE_PROBLEM", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("OBX"),
+  ]),
+  group("GOAL", "optional", "repeating", [
+    req("GOL"),
+    optList("VAR"),
+    group("ROLE_GOAL", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("OBX"),
+  ]),
+  group("PATHWAY", "optional", "repeating", [
+    req("PTH"),
+    optList("VAR"),
+    group("ROLE_CLINICAL_HISTORY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ], { exportTypeName: "ParsedRoleClinicalHistory2", builderTypeName: "RoleClinicalHistory2Group" }),
+    optList("OBX"),
+  ]),
+  optList("REL"),
+];
+
 const v2_7_1_CCF_I22_STRUCTURE: StructureItem[] = [
   req("MSH"),
   optList("SFT"),
   opt("UAC"),
   req("PID"),
+];
+
+const v2_7_1_CCI_I22_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  req("MSA"),
+  optList("ERR"),
+  req("PID"),
+  opt("PD1"),
+  optList("NK1"),
+  group("INSURANCE", "optional", "repeating", [
+    req("IN1"),
+    opt("IN2"),
+    opt("IN3"),
+  ]),
+  group("APPOINTMENT_HISTORY", "optional", "repeating", [
+    req("SCH"),
+    group("RESOURCES", "optional", "repeating", [
+      req("RGS"),
+      group("RESOURCE_DETAIL", "optional", "repeating", [
+        choice(["AIS", "AIG", "AIL", "AIP"], "required"),
+        optList("OBX"),
+      ]),
+    ]),
+  ]),
+  group("CLINICAL_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("CLINICAL_HISTORY_DETAIL", "optional", "repeating", [
+      choice(["OBR", "ODS", "PR1", "RF1", "AL1", "IAM", "ACC", "RMI", "DB1", "DG1", "DRG", "PDA"], "required"),
+      optList("OBX"),
+    ]),
+    group("ROLE_CLINICAL_HISTORY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PATIENT_VISITS", "required", "repeating", [
+    req("PV1"),
+    opt("PV2"),
+  ]),
+  group("MEDICATION_HISTORY", "optional", "repeating", [
+    req("ORC"),
+    group("MEDICATION_ORDER_DETAIL", "optional", "single", [
+      req("RXO"),
+      reqList("RXR"),
+      optList("RXC"),
+      optList("OBX"),
+    ]),
+    group("MEDICATION_ENCODING_DETAIL", "optional", "single", [
+      req("RXE"),
+      reqList("RXR"),
+      optList("RXC"),
+      optList("OBX"),
+    ]),
+    group("MEDICATION_ADMINISTRATION_DETAIL", "optional", "repeating", [
+      reqList("RXA"),
+      req("RXR"),
+      optList("OBX"),
+    ]),
+    optList("CTI"),
+  ]),
+  group("PROBLEM", "optional", "repeating", [
+    req("PRB"),
+    optList("VAR"),
+    group("ROLE_PROBLEM", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("OBX"),
+  ]),
+  group("GOAL", "optional", "repeating", [
+    req("GOL"),
+    optList("VAR"),
+    group("ROLE_GOAL", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("OBX"),
+  ]),
+  group("PATHWAY", "optional", "repeating", [
+    req("PTH"),
+    optList("VAR"),
+    group("ROLE_PATHWAY", "optional", "repeating", [
+      choice(["ROL", "PRD"], "required"),
+      optList("VAR"),
+    ]),
+    optList("OBX"),
+  ]),
+  optList("REL"),
 ];
 
 const v2_7_1_PGL_PC6_STRUCTURE: StructureItem[] = [
@@ -4918,11 +5400,49 @@ const v2_7_1_RSP_E22_STRUCTURE: StructureItem[] = [
   ]),
 ];
 
+const v2_7_1_EHC_E24_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  optList("UAC"),
+  req("MSA"),
+  optList("ERR"),
+  group("AUTHORIZATION_RESPONSE_INFO", "required", "single", [
+    req("IVC"),
+    group("PSL_ITEM_INFO", "required", "repeating", [
+      req("PSL"),
+      opt("AUT"),
+      group("PAYER_ADJUSTMENT", "optional", "repeating", [
+        req("ADJ"),
+      ]),
+    ]),
+  ]),
+];
+
 const v2_7_1_SLR_S28_STRUCTURE: StructureItem[] = [
   req("MSH"),
   optList("SFT"),
   opt("UAC"),
   reqList("SLT"),
+];
+
+const v2_7_1_SDR_S31_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  group("ANTI_MICROBIAL_DEVICE_DATA", "required", "single", [
+    req("SDD"),
+    optList("SCD"),
+  ]),
+];
+
+const v2_7_1_SMD_S32_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  group("ANTI_MICROBIAL_DEVICE_CYCLE_DATA", "required", "single", [
+    req("SDD"),
+    optList("SCD"),
+  ]),
 ];
 
 const v2_7_1_STC_S33_STRUCTURE: StructureItem[] = [
@@ -5208,8 +5728,15 @@ export const V2_7_1_MESSAGES: MessageSchema[] = [
   { messageType: "RRI", triggerEvent: "I13", version: "2.7.1", structure: v2_7_1_RRI_I12_STRUCTURE, baseMessage: "RRI_I12" },
   { messageType: "RRI", triggerEvent: "I14", version: "2.7.1", structure: v2_7_1_RRI_I12_STRUCTURE, baseMessage: "RRI_I12" },
   { messageType: "RRI", triggerEvent: "I15", version: "2.7.1", structure: v2_7_1_RRI_I12_STRUCTURE, baseMessage: "RRI_I12" },
+  { messageType: "CCM", triggerEvent: "I21", version: "2.7.1", structure: v2_7_1_CCM_I21_STRUCTURE },
+  { messageType: "CCR", triggerEvent: "I16", version: "2.7.1", structure: v2_7_1_CCR_I16_STRUCTURE },
+  { messageType: "CCR", triggerEvent: "I17", version: "2.7.1", structure: v2_7_1_CCR_I16_STRUCTURE, baseMessage: "CCR_I16" },
+  { messageType: "CCR", triggerEvent: "I18", version: "2.7.1", structure: v2_7_1_CCR_I16_STRUCTURE, baseMessage: "CCR_I16" },
+  { messageType: "CCU", triggerEvent: "I20", version: "2.7.1", structure: v2_7_1_CCU_I20_STRUCTURE },
   { messageType: "CCQ", triggerEvent: "I19", version: "2.7.1", structure: v2_7_1_CCQ_I19_STRUCTURE },
+  { messageType: "CQU", triggerEvent: "I19", version: "2.7.1", structure: v2_7_1_CQU_I19_STRUCTURE },
   { messageType: "CCF", triggerEvent: "I22", version: "2.7.1", structure: v2_7_1_CCF_I22_STRUCTURE },
+  { messageType: "CCI", triggerEvent: "I22", version: "2.7.1", structure: v2_7_1_CCI_I22_STRUCTURE },
   { messageType: "PGL", triggerEvent: "PC6", version: "2.7.1", structure: v2_7_1_PGL_PC6_STRUCTURE },
   { messageType: "PGL", triggerEvent: "PC7", version: "2.7.1", structure: v2_7_1_PGL_PC6_STRUCTURE, baseMessage: "PGL_PC6" },
   { messageType: "PGL", triggerEvent: "PC8", version: "2.7.1", structure: v2_7_1_PGL_PC6_STRUCTURE, baseMessage: "PGL_PC6" },
@@ -5253,10 +5780,15 @@ export const V2_7_1_MESSAGES: MessageSchema[] = [
   { messageType: "EHC", triggerEvent: "E21", version: "2.7.1", structure: v2_7_1_EHC_E21_STRUCTURE },
   { messageType: "QBP", triggerEvent: "E22", version: "2.7.1", structure: v2_7_1_QBP_E22_STRUCTURE },
   { messageType: "RSP", triggerEvent: "E22", version: "2.7.1", structure: v2_7_1_RSP_E22_STRUCTURE },
+  { messageType: "EHC", triggerEvent: "E24", version: "2.7.1", structure: v2_7_1_EHC_E24_STRUCTURE },
   { messageType: "SLR", triggerEvent: "S28", version: "2.7.1", structure: v2_7_1_SLR_S28_STRUCTURE },
   { messageType: "SLR", triggerEvent: "S29", version: "2.7.1", structure: v2_7_1_SLR_S28_STRUCTURE, baseMessage: "SLR_S28" },
   { messageType: "STI", triggerEvent: "S30", version: "2.7.1", structure: v2_7_1_SLR_S28_STRUCTURE, baseMessage: "SLR_S28" },
   { messageType: "SLN", triggerEvent: "S34", version: "2.7.1", structure: v2_7_1_SLR_S28_STRUCTURE, baseMessage: "SLR_S28" },
   { messageType: "SLN", triggerEvent: "S35", version: "2.7.1", structure: v2_7_1_SLR_S28_STRUCTURE, baseMessage: "SLR_S28" },
+  { messageType: "SDR", triggerEvent: "S31", version: "2.7.1", structure: v2_7_1_SDR_S31_STRUCTURE },
+  { messageType: "SDN", triggerEvent: "S36", version: "2.7.1", structure: v2_7_1_SDR_S31_STRUCTURE, baseMessage: "SDR_S31" },
+  { messageType: "SMD", triggerEvent: "S32", version: "2.7.1", structure: v2_7_1_SMD_S32_STRUCTURE },
+  { messageType: "SCN", triggerEvent: "S37", version: "2.7.1", structure: v2_7_1_SMD_S32_STRUCTURE, baseMessage: "SMD_S32" },
   { messageType: "STC", triggerEvent: "S33", version: "2.7.1", structure: v2_7_1_STC_S33_STRUCTURE },
 ];

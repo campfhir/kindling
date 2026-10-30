@@ -67,7 +67,14 @@ import { parseBRP_O30 } from "./BRP_O30.ts";
 import { parseBRT_O32 } from "./BRT_O32.ts";
 import { parseBTS_O31 } from "./BTS_O31.ts";
 import { parseCCF_I22 } from "./CCF_I22.ts";
+import { parseCCI_I22 } from "./CCI_I22.ts";
+import { parseCCM_I21 } from "./CCM_I21.ts";
 import { parseCCQ_I19 } from "./CCQ_I19.ts";
+import { parseCCR_I16 } from "./CCR_I16.ts";
+import { parseCCR_I17 } from "./CCR_I17.ts";
+import { parseCCR_I18 } from "./CCR_I18.ts";
+import { parseCCU_I20 } from "./CCU_I20.ts";
+import { parseCQU_I19 } from "./CQU_I19.ts";
 import { parseCRM_C01 } from "./CRM_C01.ts";
 import { parseCRM_C02 } from "./CRM_C02.ts";
 import { parseCRM_C03 } from "./CRM_C03.ts";
@@ -408,7 +415,14 @@ export const MESSAGES = {
   BRT_O32: parseBRT_O32,
   BTS_O31: parseBTS_O31,
   CCF_I22: parseCCF_I22,
+  CCI_I22: parseCCI_I22,
+  CCM_I21: parseCCM_I21,
   CCQ_I19: parseCCQ_I19,
+  CCR_I16: parseCCR_I16,
+  CCR_I17: parseCCR_I17,
+  CCR_I18: parseCCR_I18,
+  CCU_I20: parseCCU_I20,
+  CQU_I19: parseCQU_I19,
   CRM_C01: parseCRM_C01,
   CRM_C02: parseCRM_C02,
   CRM_C03: parseCRM_C03,

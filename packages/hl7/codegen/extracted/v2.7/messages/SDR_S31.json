@@ -65,37 +65,28 @@
       "chapterRef": "2"
     },
     {
-      "kind": "choice",
+      "kind": "group",
       "name": "ANTI-MICROBIAL_DEVICE_DATA",
-      "alternatives": [
+      "items": [
         {
-          "kind": "group",
-          "items": [
-            {
-              "kind": "segment",
-              "name": "SDD",
-              "minOccurs": 1,
-              "maxOccurs": 1,
-              "usage": null,
-              "page": null,
-              "description": "Sterilization Device",
-              "chapterRef": "17"
-            },
-            {
-              "kind": "segment",
-              "name": "SCD",
-              "minOccurs": 0,
-              "maxOccurs": "*",
-              "usage": null,
-              "page": null,
-              "description": "Sterilization Cycle",
-              "chapterRef": "17"
-            }
-          ],
+          "kind": "segment",
+          "name": "SDD",
           "minOccurs": 1,
           "maxOccurs": 1,
           "usage": null,
-          "page": null
+          "page": null,
+          "description": "Sterilization Device",
+          "chapterRef": "17"
+        },
+        {
+          "kind": "segment",
+          "name": "SCD",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Sterilization Cycle",
+          "chapterRef": "17"
         }
       ],
       "minOccurs": 1,

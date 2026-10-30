@@ -4,7 +4,7 @@
  * its README and IMPORT.md for every decision). Do not edit by hand: rerun the importer.
  */
 import type { MessageSchema, StructureItem } from "../../../src/types/schema";
-import { choice, group, opt, optList, req, reqList } from "../helpers";
+import { choice, group, groupChoice, opt, optList, req, reqList } from "../helpers";
 
 const v2_6_ACK_STRUCTURE: StructureItem[] = [
   req("MSH"),
@@ -5916,6 +5916,26 @@ const v2_6_SLR_S28_STRUCTURE: StructureItem[] = [
   reqList("SLT"),
 ];
 
+const v2_6_SDR_S31_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  group("ANTI_MICROBIAL_DEVICE_DATA", "required", "single", [
+    req("SDD"),
+    optList("SCD"),
+  ]),
+];
+
+const v2_6_SMD_S32_STRUCTURE: StructureItem[] = [
+  req("MSH"),
+  optList("SFT"),
+  opt("UAC"),
+  group("ANTI_MICROBIAL_DEVICE_CYCLE_DATA", "required", "single", [
+    req("SDD"),
+    optList("SCD"),
+  ]),
+];
+
 const v2_6_STC_S33_STRUCTURE: StructureItem[] = [
   req("MSH"),
   optList("SFT"),
@@ -6333,5 +6353,9 @@ export const V2_6_MESSAGES: MessageSchema[] = [
   { messageType: "STI", triggerEvent: "S30", version: "2.6", structure: v2_6_SLR_S28_STRUCTURE, baseMessage: "SLR_S28" },
   { messageType: "SLN", triggerEvent: "S34", version: "2.6", structure: v2_6_SLR_S28_STRUCTURE, baseMessage: "SLR_S28" },
   { messageType: "SLN", triggerEvent: "S35", version: "2.6", structure: v2_6_SLR_S28_STRUCTURE, baseMessage: "SLR_S28" },
+  { messageType: "SDR", triggerEvent: "S31", version: "2.6", structure: v2_6_SDR_S31_STRUCTURE },
+  { messageType: "SDN", triggerEvent: "S36", version: "2.6", structure: v2_6_SDR_S31_STRUCTURE, baseMessage: "SDR_S31" },
+  { messageType: "SMD", triggerEvent: "S32", version: "2.6", structure: v2_6_SMD_S32_STRUCTURE },
+  { messageType: "SCN", triggerEvent: "S37", version: "2.6", structure: v2_6_SMD_S32_STRUCTURE, baseMessage: "SMD_S32" },
   { messageType: "STC", triggerEvent: "S33", version: "2.6", structure: v2_6_STC_S33_STRUCTURE },
 ];

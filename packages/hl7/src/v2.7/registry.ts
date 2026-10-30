@@ -67,7 +67,14 @@ import { parseBRP_O30 } from "./BRP_O30.ts";
 import { parseBRT_O32 } from "./BRT_O32.ts";
 import { parseBTS_O31 } from "./BTS_O31.ts";
 import { parseCCF_I22 } from "./CCF_I22.ts";
+import { parseCCI_I22 } from "./CCI_I22.ts";
+import { parseCCM_I21 } from "./CCM_I21.ts";
 import { parseCCQ_I19 } from "./CCQ_I19.ts";
+import { parseCCR_I16 } from "./CCR_I16.ts";
+import { parseCCR_I17 } from "./CCR_I17.ts";
+import { parseCCR_I18 } from "./CCR_I18.ts";
+import { parseCCU_I20 } from "./CCU_I20.ts";
+import { parseCQU_I19 } from "./CQU_I19.ts";
 import { parseCRM_C01 } from "./CRM_C01.ts";
 import { parseCRM_C02 } from "./CRM_C02.ts";
 import { parseCRM_C03 } from "./CRM_C03.ts";
@@ -94,6 +101,7 @@ import { parseEHC_E13 } from "./EHC_E13.ts";
 import { parseEHC_E15 } from "./EHC_E15.ts";
 import { parseEHC_E20 } from "./EHC_E20.ts";
 import { parseEHC_E21 } from "./EHC_E21.ts";
+import { parseEHC_E24 } from "./EHC_E24.ts";
 import { parseESR_U02 } from "./ESR_U02.ts";
 import { parseESU_U01 } from "./ESU_U01.ts";
 import { parseINR_U06 } from "./INR_U06.ts";
@@ -283,6 +291,9 @@ import { parseRTB_Z78 } from "./RTB_Z78.ts";
 import { parseRTB_Z92 } from "./RTB_Z92.ts";
 import { parseRTB_Z94 } from "./RTB_Z94.ts";
 import { parseRTB_Z96 } from "./RTB_Z96.ts";
+import { parseSCN_S37 } from "./SCN_S37.ts";
+import { parseSDN_S36 } from "./SDN_S36.ts";
+import { parseSDR_S31 } from "./SDR_S31.ts";
 import { parseSIU_S12 } from "./SIU_S12.ts";
 import { parseSIU_S13 } from "./SIU_S13.ts";
 import { parseSIU_S14 } from "./SIU_S14.ts";
@@ -302,6 +313,7 @@ import { parseSLN_S34 } from "./SLN_S34.ts";
 import { parseSLN_S35 } from "./SLN_S35.ts";
 import { parseSLR_S28 } from "./SLR_S28.ts";
 import { parseSLR_S29 } from "./SLR_S29.ts";
+import { parseSMD_S32 } from "./SMD_S32.ts";
 import { parseSRM_S01 } from "./SRM_S01.ts";
 import { parseSRM_S02 } from "./SRM_S02.ts";
 import { parseSRM_S03 } from "./SRM_S03.ts";
@@ -399,7 +411,14 @@ export const MESSAGES = {
   BRT_O32: parseBRT_O32,
   BTS_O31: parseBTS_O31,
   CCF_I22: parseCCF_I22,
+  CCI_I22: parseCCI_I22,
+  CCM_I21: parseCCM_I21,
   CCQ_I19: parseCCQ_I19,
+  CCR_I16: parseCCR_I16,
+  CCR_I17: parseCCR_I17,
+  CCR_I18: parseCCR_I18,
+  CCU_I20: parseCCU_I20,
+  CQU_I19: parseCQU_I19,
   CRM_C01: parseCRM_C01,
   CRM_C02: parseCRM_C02,
   CRM_C03: parseCRM_C03,
@@ -426,6 +445,7 @@ export const MESSAGES = {
   EHC_E15: parseEHC_E15,
   EHC_E20: parseEHC_E20,
   EHC_E21: parseEHC_E21,
+  EHC_E24: parseEHC_E24,
   ESR_U02: parseESR_U02,
   ESU_U01: parseESU_U01,
   INR_U06: parseINR_U06,
@@ -615,6 +635,9 @@ export const MESSAGES = {
   RTB_Z92: parseRTB_Z92,
   RTB_Z94: parseRTB_Z94,
   RTB_Z96: parseRTB_Z96,
+  SCN_S37: parseSCN_S37,
+  SDN_S36: parseSDN_S36,
+  SDR_S31: parseSDR_S31,
   SIU_S12: parseSIU_S12,
   SIU_S13: parseSIU_S13,
   SIU_S14: parseSIU_S14,
@@ -634,6 +657,7 @@ export const MESSAGES = {
   SLN_S35: parseSLN_S35,
   SLR_S28: parseSLR_S28,
   SLR_S29: parseSLR_S29,
+  SMD_S32: parseSMD_S32,
   SRM_S01: parseSRM_S01,
   SRM_S02: parseSRM_S02,
   SRM_S03: parseSRM_S03,

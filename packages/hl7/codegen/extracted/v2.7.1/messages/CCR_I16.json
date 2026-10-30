@@ -146,57 +146,11 @@
           "items": [
             {
               "kind": "choice",
-              "name": "CLINICAL_ORDER_OBJECT",
-              "alternatives": [
-                {
-                  "kind": "group",
-                  "items": [
-                    {
-                      "kind": "segment",
-                      "name": "OBR",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Observation |",
-                      "chapterRef": "4"
-                    },
-                    {
-                      "kind": "segment",
-                      "name": "RXO",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Pharmacy/Treatment Order",
-                      "chapterRef": "4"
-                    },
-                    {
-                      "kind": "segment",
-                      "name": "ODS",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Dietary Order, Suppl., Prefer.",
-                      "chapterRef": "4"
-                    },
-                    {
-                      "kind": "segment",
-                      "name": "PR1",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Procedure",
-                      "chapterRef": "6"
-                    }
-                  ],
-                  "minOccurs": 1,
-                  "maxOccurs": 1,
-                  "usage": null,
-                  "page": null
-                }
+              "oneOf": [
+                "OBR",
+                "RXO",
+                "ODS",
+                "PR1"
               ],
               "minOccurs": 1,
               "maxOccurs": 1,
@@ -349,57 +303,11 @@
               "items": [
                 {
                   "kind": "choice",
-                  "name": "RESOURCE_OBJECT",
-                  "alternatives": [
-                    {
-                      "kind": "group",
-                      "items": [
-                        {
-                          "kind": "segment",
-                          "name": "AIS",
-                          "minOccurs": 1,
-                          "maxOccurs": 1,
-                          "usage": null,
-                          "page": null,
-                          "description": "Appointment Information - Service",
-                          "chapterRef": "10"
-                        },
-                        {
-                          "kind": "segment",
-                          "name": "AIG",
-                          "minOccurs": 1,
-                          "maxOccurs": 1,
-                          "usage": null,
-                          "page": null,
-                          "description": "Appointment Information - General Resource",
-                          "chapterRef": "10"
-                        },
-                        {
-                          "kind": "segment",
-                          "name": "AIL",
-                          "minOccurs": 1,
-                          "maxOccurs": 1,
-                          "usage": null,
-                          "page": null,
-                          "description": "Appointment Information - Location",
-                          "chapterRef": "10"
-                        },
-                        {
-                          "kind": "segment",
-                          "name": "AIP",
-                          "minOccurs": 1,
-                          "maxOccurs": 1,
-                          "usage": null,
-                          "page": null,
-                          "description": "Appointment Information - Personnel",
-                          "chapterRef": "10"
-                        }
-                      ],
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null
-                    }
+                  "oneOf": [
+                    "AIS",
+                    "AIG",
+                    "AIL",
+                    "AIP"
                   ],
                   "minOccurs": 1,
                   "maxOccurs": 1,
@@ -454,127 +362,18 @@
           "items": [
             {
               "kind": "choice",
-              "name": "CLINICAL_HISTORY_OBJECT",
-              "alternatives": [
-                {
-                  "kind": "group",
-                  "items": [
-                    {
-                      "kind": "segment",
-                      "name": "OBR",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Observation",
-                      "chapterRef": "4"
-                    },
-                    {
-                      "kind": "segment",
-                      "name": "ODS",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Dietary Order, Suppl., Prefer.",
-                      "chapterRef": "4"
-                    },
-                    {
-                      "kind": "segment",
-                      "name": "PR1",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Procedure",
-                      "chapterRef": "6"
-                    },
-                    {
-                      "kind": "segment",
-                      "name": "RF1",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Referral Information",
-                      "chapterRef": "11"
-                    },
-                    {
-                      "kind": "segment",
-                      "name": "AL1",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Allergy Information",
-                      "chapterRef": "3"
-                    },
-                    {
-                      "kind": "segment",
-                      "name": "IAM",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Patient adverse reaction information",
-                      "chapterRef": "3"
-                    },
-                    {
-                      "kind": "segment",
-                      "name": "ACC",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Accident Information",
-                      "chapterRef": "6"
-                    },
-                    {
-                      "kind": "segment",
-                      "name": "RMI",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Risk Management Incident",
-                      "chapterRef": "6"
-                    },
-                    {
-                      "kind": "segment",
-                      "name": "DB1",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Disability Information",
-                      "chapterRef": "3"
-                    },
-                    {
-                      "kind": "segment",
-                      "name": "DG1",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Diagnosis",
-                      "chapterRef": "6"
-                    },
-                    {
-                      "kind": "segment",
-                      "name": "DRG",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Diagnosis Related Group",
-                      "chapterRef": "6"
-                    }
-                  ],
-                  "minOccurs": 1,
-                  "maxOccurs": 1,
-                  "usage": null,
-                  "page": null
-                }
+              "oneOf": [
+                "OBR",
+                "ODS",
+                "PR1",
+                "RF1",
+                "AL1",
+                "IAM",
+                "ACC",
+                "RMI",
+                "DB1",
+                "DG1",
+                "DRG"
               ],
               "minOccurs": 1,
               "maxOccurs": 1,
@@ -603,37 +402,9 @@
           "items": [
             {
               "kind": "choice",
-              "name": "ROLE_CLINICAL_HISTORY_OBJECT",
-              "alternatives": [
-                {
-                  "kind": "group",
-                  "items": [
-                    {
-                      "kind": "segment",
-                      "name": "ROL",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Role (CLINICAL_HISTORY)",
-                      "chapterRef": "15"
-                    },
-                    {
-                      "kind": "segment",
-                      "name": "PRD",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Provider Data (CLINICAL_HISTORY)",
-                      "chapterRef": "11"
-                    }
-                  ],
-                  "minOccurs": 1,
-                  "maxOccurs": 1,
-                  "usage": null,
-                  "page": null
-                }
+              "oneOf": [
+                "ROL",
+                "PRD"
               ],
               "minOccurs": 1,
               "maxOccurs": 1,
@@ -902,37 +673,9 @@
           "items": [
             {
               "kind": "choice",
-              "name": "ROLE_PROBLEM_OBJECT",
-              "alternatives": [
-                {
-                  "kind": "group",
-                  "items": [
-                    {
-                      "kind": "segment",
-                      "name": "ROL",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Role (Problem Role)",
-                      "chapterRef": "15"
-                    },
-                    {
-                      "kind": "segment",
-                      "name": "PRD",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Provider Data (Problem Role)",
-                      "chapterRef": "11"
-                    }
-                  ],
-                  "minOccurs": 1,
-                  "maxOccurs": 1,
-                  "usage": null,
-                  "page": null
-                }
+              "oneOf": [
+                "ROL",
+                "PRD"
               ],
               "minOccurs": 1,
               "maxOccurs": 1,
@@ -1001,37 +744,9 @@
           "items": [
             {
               "kind": "choice",
-              "name": "ROLE_GOAL_OBJECT",
-              "alternatives": [
-                {
-                  "kind": "group",
-                  "items": [
-                    {
-                      "kind": "segment",
-                      "name": "ROL",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Role (Goal Role)",
-                      "chapterRef": "15"
-                    },
-                    {
-                      "kind": "segment",
-                      "name": "PRD",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Provider Data (Goal Role)",
-                      "chapterRef": "11"
-                    }
-                  ],
-                  "minOccurs": 1,
-                  "maxOccurs": 1,
-                  "usage": null,
-                  "page": null
-                }
+              "oneOf": [
+                "ROL",
+                "PRD"
               ],
               "minOccurs": 1,
               "maxOccurs": 1,
@@ -1100,37 +815,9 @@
           "items": [
             {
               "kind": "choice",
-              "name": "ROLE_PATHWAY_OBJECT",
-              "alternatives": [
-                {
-                  "kind": "group",
-                  "items": [
-                    {
-                      "kind": "segment",
-                      "name": "ROL",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Role (Pathway Role)",
-                      "chapterRef": "15"
-                    },
-                    {
-                      "kind": "segment",
-                      "name": "PRD",
-                      "minOccurs": 1,
-                      "maxOccurs": 1,
-                      "usage": null,
-                      "page": null,
-                      "description": "Provider Data (Pathway Role)",
-                      "chapterRef": "11"
-                    }
-                  ],
-                  "minOccurs": 1,
-                  "maxOccurs": 1,
-                  "usage": null,
-                  "page": null
-                }
+              "oneOf": [
+                "ROL",
+                "PRD"
               ],
               "minOccurs": 1,
               "maxOccurs": 1,

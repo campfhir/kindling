@@ -18,8 +18,8 @@ if the committed output drifts (`pnpm codegen:check`).
 ## How it works
 
 A message is described once, as the standard's message table reads, by a `MessageSchema`
-(`src/types/schema.ts`): an ordered list of segments, choices (`<OBR|RQD|...>`) and groups, each
-required or optional, repeating or not. From every message of every registered version codegen
+(`src/types/schema.ts`): an ordered list of segments, choices of segments (`<OBR|RQD|...>`), choices of
+groups (`<{OBR} | {ODS}>`, see below) and groups, each required or optional, repeating or not. From every message of every registered version codegen
 writes one module, `src/<v>/<MSG>.ts` (next to the version's segments), in three parts:
 
 | Part | Contents |
@@ -56,13 +56,18 @@ Property names come from the structure and read as what the segment holds, not i
 `observationRequest`, `MSH` → `header`); a segment appearing once at a level uses the singular,
 a repeating one the plural. Segments missing from the table fall back to their code (`zpd`,
 `zpdList`). A group is camel-cased and pluralised when it repeats (`PATIENT_RESULT` →
-`patientResults`), a choice is `segment`. Names only have to be unique within one level, so the
+`patientResults`), a choice of segments is `segment` and a choice of groups is `group`. Names only have to be unique within one level, so the
 same segment can be `visit` in one message and sit inside a `visits` group in another; override
 with `as` when two items at one level would clash (`optList("ROL", { as: "visitRoles" })`,
 `optList("NTE", { as: "patientNotes" })`) or to keep a specific name (`as: "insuranceGroups"`).
 Codegen refuses a structure with duplicate names at one level. Group type names default to
 `Parsed<PascalCase>` and `<PascalCase>Group`; override them with `exportTypeName` and
 `builderTypeName`.
+
+A choice of groups (`groupChoice([group("ORDER_OBR", ...), group("ORDER_RQD", ...)], "required")`) holds one
+of its alternatives, each a single group that starts with segments no other alternative starts with (checked when
+the message is generated). The parsed result and the builder input carry the chosen alternative with its group
+name in `kind`, so the generated type is a discriminated union: `switch (order.kind)` narrows to that group's fields.
 
 A group marked `inline: true` contributes its fields to the enclosing object instead of nesting
 them (`PATIENT: PID [PD1] [VISIT: PV1 [PV2]]` reads as `patient`, `patientDemographics`, `visit`,

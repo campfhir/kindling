@@ -65,8 +65,23 @@ export interface SegmentGroup {
   as?: string;
 }
 
-/** An item of a message structure: a segment, a choice of segments, or a group. */
-export type StructureItem = SegmentDefinition | SegmentChoice | SegmentGroup;
+/**
+ * One of several alternative groups at one position (`<{OBR+PRT} | {ODS+PR1}>` in the standard's
+ * table). Exactly one alternative is present when the choice is required, none when it is optional.
+ * The parsed result and the builder input carry the chosen alternative under `as` (default
+ * `group`), with its group name in `kind`, so the generated types form a discriminated union on it.
+ */
+export interface GroupChoice {
+  /** The alternative groups. Each is single (not repeating) and starts with segments no other alternative starts with. */
+  alternatives: SegmentGroup[];
+  /** The required value. */
+  required: boolean;
+  /** Property name in the parsed result and the builder input (defaults to `group`). */
+  as?: string;
+}
+
+/** An item of a message structure: a segment, a choice of segments, a choice of groups, or a group. */
+export type StructureItem = SegmentDefinition | SegmentChoice | GroupChoice | SegmentGroup;
 
 /** Message Schema. */
 export interface MessageSchema {
@@ -125,6 +140,11 @@ export function isSegmentGroup(item: StructureItem): item is SegmentGroup {
 /** Is Segment Choice. */
 export function isSegmentChoice(item: StructureItem): item is SegmentChoice {
   return "oneOf" in item;
+}
+
+/** Is Group Choice. */
+export function isGroupChoice(item: StructureItem): item is GroupChoice {
+  return "alternatives" in item;
 }
 
 /** Lower-camel-cases an upper-snake-case group name (`PATIENT_RESULT` -> `patientResult`). */
@@ -304,6 +324,7 @@ export const SEGMENT_NAMES: Record<string, [one: string, many: string]> = {
 export function itemField(item: StructureItem): string {
   if (item.as) return item.as;
   if (isSegmentChoice(item)) return "segment";
+  if (isGroupChoice(item)) return "group";
   if (isSegmentGroup(item)) {
     const base = camelCase(item.name);
     return item.repeating && !base.endsWith("s") ? `${base}s` : base;
@@ -329,6 +350,7 @@ export function builderTypeName(group: SegmentGroup): string {
 /** Segment names that can start an instance of the item (the leading items up to the first required one). */
 export function firstSegments(item: StructureItem): string[] {
   if (isSegmentChoice(item)) return [...item.oneOf];
+  if (isGroupChoice(item)) return item.alternatives.flatMap(firstSegments);
   if (!isSegmentGroup(item)) return [item.name];
   const out: string[] = [];
   for (const child of item.segments) {
@@ -341,6 +363,7 @@ export function firstSegments(item: StructureItem): string[] {
 /** Does the item require at least one segment to be present? (A group of only optional items does not.) */
 export function isRequired(item: StructureItem): boolean {
   if (!item.required) return false;
+  if (isGroupChoice(item)) return true;
   if (!isSegmentGroup(item)) return true;
   return item.segments.some(isRequired);
 }
@@ -351,6 +374,7 @@ export function segmentNames(items: StructureItem[]): string[] {
   const walk = (list: StructureItem[]) => {
     for (const item of list) {
       if (isSegmentChoice(item)) item.oneOf.forEach((n) => seen.add(n));
+      else if (isGroupChoice(item)) item.alternatives.forEach((a) => walk([a]));
       else if (isSegmentGroup(item)) walk(item.segments);
       else seen.add(item.name);
     }

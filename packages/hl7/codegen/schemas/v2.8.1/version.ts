@@ -14,7 +14,7 @@ export const V2_8_1: VersionSchema = {
   reexport: true,
   ownSegments: [],
   withdrawnMessages: [
-    // Not generated: the schema type cannot express their structure yet (choice of groups, unnamed group); see IMPORT.md.
+    // Not generated: the table holds a placeholder group, an open choice (etc.) or a choice of one group the schema cannot express yet; see IMPORT.md.
     "CCI_I22",
     "CCM_I21",
     "CCR_I16",

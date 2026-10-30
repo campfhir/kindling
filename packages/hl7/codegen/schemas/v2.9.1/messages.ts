@@ -4,7 +4,7 @@
  * its README and IMPORT.md for every decision). Do not edit by hand: rerun the importer.
  */
 import type { MessageSchema, StructureItem } from "../../../src/types/schema";
-import { choice, group, opt, optList, req, reqList } from "../helpers";
+import { choice, group, groupChoice, opt, optList, req, reqList } from "../helpers";
 
 const v2_9_1_ACK_STRUCTURE: StructureItem[] = [
   req("MSH"),

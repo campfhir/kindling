@@ -9,7 +9,7 @@ message ledgers against Caristix and HAPI.
 - Message tables: 330 (plus 124 per-event ACK tables, the general acknowledgment, not extracted), structures: 215, events in the index: 423, event tables that differ from their primary: 47.
 - Withdrawn sections (a heading followed by an "Attention ... withdrawn" note): none.
 - Withdrawn segments: none.
-- Tables with no rows (cross-references): QBP^Q25.
+- Tables with no rows (cross-references, or events whose page prints no structure): QBP^Q25.
 
 ## Problems found while parsing
 - BRP^O30^BRP_O30: group RESPONSE is not closed (opened with "[")
@@ -28,6 +28,8 @@ message ledgers against Caristix and HAPI.
 - PPV^PCA^PPV_PCA: the choice "OBR | etc." is read as <OBR|RQD|RQ1|RXO|ODS|ODT>
 - PTR^PCF^PTR_PCF: the choice "OBR | etc." is read as <OBR|RQD|RQ1|RXO|ODS|ODT>
 - PPT^PCL^PPT_PCL: the choice "OBR | etc." is read as <OBR|RQD|RQ1|RXO|ODS|ODT>
+- ANTI-MICROBIAL DEVICE DATA: a choice of one group ("<" ... ">" with no "|") is read as that group
+- ANTI-MICROBIAL DEVICE CYCLE DATA: a choice of one group ("<" ... ">" with no "|") is read as that group
 
 ## Tables printed twice
 - RDR^RDR: printed in ch04.htm and ch05.htm; kept ch04.htm; the prints DIFFER

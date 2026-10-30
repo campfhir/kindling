@@ -63,8 +63,8 @@ const folder = version.replace(/\./g, "_");
 const readJson = (p: string) => JSON.parse(readFileSync(p, "utf8"));
 
 type Notes = string[];
-const notes: { segments: Notes; brackets: Notes; events: Notes; skipped: Notes; placeholders: Notes; fields: Notes; names: Notes } = {
-  segments: [], brackets: [], events: [], skipped: [], placeholders: [], fields: [], names: [],
+const notes: { segments: Notes; brackets: Notes; events: Notes; skipped: Notes; placeholders: Notes; fields: Notes; names: Notes; choices: Notes } = {
+  segments: [], brackets: [], events: [], skipped: [], placeholders: [], fields: [], names: [], choices: [],
 };
 
 // ── Segments ─────────────────────────────────────────────────────────────────
@@ -163,7 +163,26 @@ function countGroups(items: Item[], into: Map<string, number>): void {
   for (const item of items) {
     if (item.kind === "group" && item.name) into.set(item.name, (into.get(item.name) ?? 0) + 1);
     if (item.items) countGroups(item.items, into);
+    for (const alternative of item.alternatives ?? []) countGroups([alternativeGroup(alternative)], into);
   }
+}
+/** The first segment in reading order (through groups and the first alternative of a choice), if any. */
+function firstSegmentOf(items: Item[]): string | undefined {
+  for (const item of items) {
+    if (item.kind === "segment") return item.name;
+    if (item.kind === "choice" && item.oneOf) return item.oneOf[0];
+    const inner = firstSegmentOf(item.items ?? []) ?? (item.alternatives ? firstSegmentOf(item.alternatives[0]?.items ?? []) : undefined);
+    if (inner) return inner;
+  }
+  return undefined;
+}
+/**
+ * An alternative of a choice of groups as the group it is: unnamed ones are named after their first segment, as
+ * unnamed groups are elsewhere (MFR_M05's LDP_GROUP).
+ */
+function alternativeGroup(alternative: Item): Item {
+  const name = alternative.name ?? `${firstSegmentOf(alternative.items ?? []) ?? "UNNAMED"}_GROUP`;
+  return { kind: "group", name, items: alternative.items, minOccurs: 1, maxOccurs: 1, usage: null, page: null };
 }
 function render(items: Item[], where: string, depth: number): Code[] {
   // Property names at one level must be unique. An item whose default name (itemField) is already taken gets an `as`:
@@ -189,8 +208,21 @@ function render(items: Item[], where: string, depth: number): Code[] {
       const as = asName ? `, { as: ${JSON.stringify(asName)} }` : "";
       const fn = min === 1 ? (max === "*" ? "reqList" : "req") : (max === "*" ? "optList" : "opt");
       out.push(`${pad}${fn}(${JSON.stringify(name)}${as ? as : ""}),`);
+    } else if (item.kind === "choice" && !item.oneOf) {
+      // A choice of groups (`<{OBR+PRT} | {ODS+PR1}>`) is generated when every alternative is a group of segments.
+      // An alternative with no segment is the standard's open "etc." (the other alternatives are not printed), and
+      // a choice of one group is not a choice: both stay not generated.
+      const alternatives = item.alternatives ?? [];
+      const names = alternatives.map((a) => alternativeGroup(a).name).join(" | ");
+      if (alternatives.length < 2) throw new Unrepresentable(`${where}: choice with alternatives (${alternatives.length} group${alternatives.length === 1 ? "" : "s"})`);
+      if (alternatives.some((a) => firstSegmentOf(a.items ?? []) === undefined)) throw new Unrepresentable(`${where}: choice with an open alternative (etc.) among ${names}`);
+      const { min } = cardinality(item, where);
+      const alternativeLines = alternatives.flatMap((a) => render([alternativeGroup(a)], where, depth + 1));
+      const choiceAs = claim("group", (n) => `group${n}`);
+      out.push(`${pad}groupChoice([`, ...alternativeLines, `${pad}], ${min === 1 ? '"required"' : '"optional"'}${choiceAs ? `, ${JSON.stringify(choiceAs)}` : ""}),`);
+      notes.choices.push(`${where}: choice of groups ${names}${choiceAs ? ` (as ${choiceAs})` : ""}`);
     } else if (item.kind === "choice") {
-      if (!item.oneOf) throw new Unrepresentable(`${where}: choice with alternatives (${(item.alternatives ?? []).map((a) => a.kind).join(",")})`);
+      if (!item.oneOf) throw new Error(`${where}: choice without segments or alternatives`);
       const { min } = cardinality(item, where);
       const oneOf = item.oneOf.map((s) => JSON.stringify(s)).join(", ");
       const choiceAs = claim("segment", (n) => `segment${n}`);
@@ -388,7 +420,7 @@ const header = `/**
  * its README and IMPORT.md for every decision). Do not edit by hand: rerun the importer.
  */
 import type { MessageSchema, StructureItem } from "../../../src/types/schema";
-import { choice, group, opt, optList, req, reqList } from "../helpers";
+import { choice, group, groupChoice, opt, optList, req, reqList } from "../helpers";
 `;
 mkdirSync(SCHEMA_DIR, { recursive: true });
 writeFileSync(join(SCHEMA_DIR, "messages.ts"), `${header}\n${constsOut.join("\n\n")}\n\nexport const V${schemaVersion.replace(/\./g, "_")}_MESSAGES: MessageSchema[] = [\n${emitted.join("\n")}\n];\n`);
@@ -464,7 +496,7 @@ export const ${constName}: VersionSchema = {
   reexport: true,
   ownSegments: [],
   withdrawnMessages: [
-${section(`Withdrawn in the ${schemaVersion} index.`, withdrawnByIndex)}${section("Withdrawn as printed in the chapter text, not in the index.", withdrawnByText)}${section("Not generated: the schema type cannot express their structure yet (choice of groups, unnamed group); see IMPORT.md.", skippedNames)}${section(`Absent from the extraction: not in the ${schemaVersion} index and not generated. They may be withdrawn earlier or missed by the extraction; check the ${fromHl7eu ? "pages" : "PDFs"} before relying on them.`, missing)}  ],
+${section(`Withdrawn in the ${schemaVersion} index.`, withdrawnByIndex)}${section("Withdrawn as printed in the chapter text, not in the index.", withdrawnByText)}${section("Not generated: the table holds a placeholder group, an open choice (etc.) or a choice of one group the schema cannot express yet; see IMPORT.md.", skippedNames)}${section(`Absent from the extraction: not in the ${schemaVersion} index and not generated. They may be withdrawn earlier or missed by the extraction; check the ${fromHl7eu ? "pages" : "PDFs"} before relying on them.`, missing)}  ],
   segments: [],
   messages: V${schemaVersion.replace(/\./g, "_")}_MESSAGES,
 };
@@ -490,6 +522,9 @@ ${notes.names.map((n) => `- ${n}`).join("\n") || "- none"}
 
 ## Structure fixes (applied by rule, from overrides.json)
 ${appliedFixes.map((f) => `- ${f}`).join("\n") || "- none"}
+
+## Choices of groups (generated as groupChoice)
+${notes.choices.map((n) => `- ${n}`).join("\n") || "- none"}
 
 ## Bracket mismatches (intent from the printed brackets, see the rule in the importer)
 ${notes.brackets.map((n) => `- ${n}`).join("\n")}

@@ -324,3 +324,56 @@ describe("inline groups", () => {
   });
 });
 
+
+describe("group choices", () => {
+  // MSH PID (ORDER_OBR: OBR [{NTE}] | ORDER_RQD: RQD)
+  const CHOICE: StructureItem[] = [
+    { name: "MSH", required: true, repeating: false },
+    { name: "PID", required: true, repeating: false },
+    {
+      alternatives: [
+        { name: "ORDER_OBR", required: true, repeating: false, segments: [
+          { name: "OBR", required: true, repeating: false },
+          { name: "NTE", required: false, repeating: true },
+        ] },
+        { name: "ORDER_RQD", required: true, repeating: false, segments: [{ name: "RQD", required: true, repeating: false }] },
+      ],
+      required: true,
+      as: "order",
+    },
+  ];
+
+  test("parses the alternative that is present, tagged with its group name in kind", () => {
+    const obr = parseStructure<any>("TEST", CHOICE, PARSERS, wire("PID|1", "OBR|1", "NTE|1"));
+    expect(obr.ok).toBe(true);
+    expect(obr.val.order.kind).toBe("ORDER_OBR");
+    expect(obr.val.order.observationRequest.name).toBe("OBR");
+    expect(obr.val.order.notes).toHaveLength(1);
+
+    const rqd = parseStructure<any>("TEST", CHOICE, PARSERS, wire("PID|1", "RQD|1"));
+    expect(rqd.ok).toBe(true);
+    expect(rqd.val.order).toEqual({ kind: "ORDER_RQD", requisition: expect.objectContaining({ name: "RQD" }) });
+  });
+
+  test("reports a missing required choice with the first segment of each alternative", () => {
+    expect(parseStructure("TEST", CHOICE, PARSERS, wire("PID|1")).err!.message).toBe("TEST message must contain one of OBR, RQD");
+  });
+
+  test("encodes the chosen alternative in structure order", () => {
+    const msh = new MSH().sendingApplication("APP").messageType({ messageCode: "ORU", triggerEvent: "R01" });
+    const input = { header: msh, patient: new PID(), order: { kind: "ORDER_RQD", requisition: new RQD() } };
+    expect(encodeStructure(CHOICE, input, DEFAULT_ENCODING).split("\r").map((s) => s.slice(0, 3))).toEqual(["MSH", "PID", "RQD"]);
+    expect(verifyStructure(CHOICE, input)).toEqual([]);
+  });
+
+  test("verifies the chosen alternative's segments and rejects an unknown kind", () => {
+    const msh = new MSH().sendingApplication("APP").messageType({ messageCode: "ORU", triggerEvent: "R01" });
+    expect(verifyStructure(CHOICE, { header: msh, patient: new PID(), order: { kind: "ORDER_OBR" } })).toEqual([
+      "ORDER OBR group: OBR segment is required",
+    ]);
+    expect(verifyStructure(CHOICE, { header: msh, patient: new PID(), order: { kind: "ORDER_XYZ" } })).toEqual([
+      "order must be one of ORDER_OBR, ORDER_RQD",
+    ]);
+    expect(verifyStructure(CHOICE, { header: msh, patient: new PID() })).toEqual(["One of the ORDER OBR, ORDER RQD groups is required"]);
+  });
+});
