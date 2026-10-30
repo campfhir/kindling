@@ -1,0 +1,88 @@
+{
+  "structure": "QBP_E03",
+  "messageType": "QBP",
+  "triggerEvent": "E03",
+  "version": "2.9.1",
+  "description": "Query HealthCare Services Invoice",
+  "title": "Query HealthCare Services Invoice",
+  "source": {
+    "pdf": "hl7.org V291_CH16_eClaims_2024SEP.pdf",
+    "pages": null,
+    "table": "QBP^E03^QBP_E03: Query HealthCare Services Invoice"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "E03"
+      ],
+      "eventPrinted": "E03",
+      "pdf": "hl7.org V291_CH16_eClaims_2024SEP.pdf",
+      "page": null,
+      "table": "QBP^E03^QBP_E03: Query HealthCare Services Invoice",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Secondary Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "QUERY_INFORMATION",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "QPD",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Query Parameter Definition",
+          "chapterRef": "5"
+        },
+        {
+          "kind": "segment",
+          "name": "RCP",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Response Control Parameter",
+          "chapterRef": "5"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

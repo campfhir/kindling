@@ -8,7 +8,9 @@
     "unsupported-version": "MSH-12 names a version this package does not parse.",
     "unknown-type": "MSH-9 names no message type of the version.",
     "nonconformant": "The sample does not follow the standard's message table for its version (the ledger of that version confirms ours): a required segment is missing or a segment is out of place, as `why` says.",
-    "not-kept": "parse() reads the message but encode() does not write it back the same; `lossy` says what is lost."
+    "not-kept": "parse() reads the message but encode() does not write it back the same; `lossy` says what is lost.",
+    "not-generated": "The version's message table holds a choice between groups or a placeholder group, which the message schema cannot express, or the message wraps such a message: it is not generated (codegen/extracted/<version>/IMPORT.md lists it with the reason).",
+    "withdrawn": "The version withdrew the message (codegen/schemas/<version>/version.ts); hl7apy still lists it."
   },
   "generated": {
     "v2.3.min.hl7": [
@@ -248,6 +250,636 @@
         "error": "Unknown HL7 v2.5.1 message type",
         "reason": "hl7apy-name",
         "why": "Q11 is the trigger of the QBP^Q11 query; its response is RSP^K11."
+      }
+    ],
+    "v2.6.min.hl7": [
+      {
+        "messages": ["RSP^Q11^RSP_Q11"],
+        "error": "Unknown HL7 v2.6 message type",
+        "reason": "hl7apy-name",
+        "why": "RSP^Q11^RSP_Q11 names no event of v2.6: the response to QBP^Q11 is RSP^K11; Q11 is no RSP event."
+      },
+      {
+        "messages": ["SDR^S32^SDR_S32"],
+        "error": "Unknown HL7 v2.6 message type",
+        "reason": "hl7apy-name",
+        "why": "SDR^S32^SDR_S32 names no event of v2.6: SDR_S32 is the structure of SMD^S32 and SCN^S37 (both generated); S32 is no SDR event."
+      },
+      {
+        "messages": ["QBP^Q15^QBP_Q15"],
+        "error": "RCP segment at line 4 is not allowed",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy prints MSH QPD RCP RCP; the v2.6 message ledger (QBP_Q15) settles on MSH [{SFT}] [UAC] [EVN] QPD RCP [DSC]."
+      },
+      {
+        "messages": ["QBP^Q11^QBP_Q11", "QBP^Q13^QBP_Q13", "QVR^Q17^QVR_Q17", "RSP^K11^RSP_K11", "SDR^S31^SDR_S31"],
+        "error": "Unknown HL7 v2.6 message type",
+        "reason": "not-generated"
+      }
+    ],
+    "v2.6.full.hl7": [
+      {
+        "messages": ["ORM^O01^ORM_O01", "OSR^Q06^OSR_Q06"],
+        "error": "RQD segment at line 15 is not allowed",
+        "reason": "choice-alternatives"
+      },
+      {
+        "messages": ["ORR^O02^ORR_O02"],
+        "error": "RQD segment at line 9 is not allowed",
+        "reason": "choice-alternatives"
+      },
+      {
+        "messages": ["RSP^Q11^RSP_Q11"],
+        "error": "Unknown HL7 v2.6 message type",
+        "reason": "hl7apy-name",
+        "why": "RSP^Q11^RSP_Q11 names no event of v2.6: the response to QBP^Q11 is RSP^K11; Q11 is no RSP event."
+      },
+      {
+        "messages": ["SDR^S32^SDR_S32"],
+        "error": "Unknown HL7 v2.6 message type",
+        "reason": "hl7apy-name",
+        "why": "SDR^S32^SDR_S32 names no event of v2.6: SDR_S32 is the structure of SMD^S32 and SCN^S37 (both generated); S32 is no SDR event."
+      },
+      {
+        "messages": ["ADT^A30^ADT_A30"],
+        "dropped": ["ARV"],
+        "reason": "hl7apy-structure",
+        "why": "hl7apy prints MSH SFT UAC EVN PID PD1 ARV MRG; the v2.6 message ledger (ADT_A30) settles on MSH [{SFT}] [UAC] EVN PID [PD1] MRG, which has no place for ARV."
+      },
+      {
+        "messages": ["ADT^A43^ADT_A43"],
+        "dropped": ["ARV", "ARV"],
+        "reason": "hl7apy-structure",
+        "why": "hl7apy prints MSH SFT UAC EVN PID PD1 ARV MRG PID PD1 ARV MRG; the v2.6 message ledger (ADT_A43) settles on MSH [{SFT}] [UAC] EVN { PATIENT: PID [PD1] MRG }, which has no place for ARV."
+      },
+      {
+        "messages": ["EHC^E15^EHC_E15"],
+        "error": "ROL segment at line 19 is not allowed",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy prints MSH SFT UAC PMT PYE IPR IVC PSS PSG PSL ADJ IPR IVC PSS PSG PSL ADJ ADJ ROL ADJ ROL; the v2.6 message ledger (EHC_E15) settles on MSH [{SFT}] [{UAC}]  PAYMENT_REMITTANCE_HEADER_INFO: PMT PYE  [{ PAYMENT_REMITTANCE_DETAIL_INFO: IPR IVC { PRODUCT_SERVICE_SECTION: PSS { PRODUCT_SERVICE_GROUP: PSG { PSL_ITEM_INFO: PSL [{ADJ}] } } } }] [{ ADJUSTMENT_PAYEE: ADJ [ROL] }]."
+      },
+      {
+        "messages": ["MFK^M01^MFK_M01"],
+        "dropped": ["UAC"],
+        "reason": "hl7apy-structure",
+        "why": "hl7apy prints MSH SFT UAC MSA ERR MFI MFA; the v2.6 message ledger (MFK_M01) settles on MSH [{SFT}] MSA [{ERR}] MFI [{MFA}], which has no place for UAC."
+      },
+      {
+        "messages": ["QBP^Q15^QBP_Q15"],
+        "error": "RCP segment at line 7 is not allowed",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy prints MSH SFT UAC QPD RCP DSC RCP DSC; the v2.6 message ledger (QBP_Q15) settles on MSH [{SFT}] [UAC] [EVN] QPD RCP [DSC]."
+      },
+      {
+        "messages": ["QBP^Q11^QBP_Q11", "QBP^Q13^QBP_Q13", "RSP^K11^RSP_K11", "SDR^S31^SDR_S31"],
+        "error": "Unknown HL7 v2.6 message type",
+        "reason": "not-generated"
+      }
+    ],
+    "v2.7.min.hl7": [
+      {
+        "messages": ["SDR^S32^SDR_S32"],
+        "error": "Unknown HL7 v2.7 message type",
+        "reason": "hl7apy-name",
+        "why": "SDR^S32^SDR_S32 names no event of v2.7: SDR_S32 is the structure of SMD^S32 and SCN^S37 (both generated); S32 is no SDR event."
+      },
+      {
+        "messages": ["CCI^I22^CCI_I22", "CCM^I21^CCM_I21", "CCR^I16^CCR_I16", "CCU^I20^CCU_I20", "CQU^I19^CQU_I19", "EHC^E24^EHC_E24", "PPG^PCG^PPG_PCG", "PPP^PCB^PPP_PCB", "PPR^PC1^PPR_PC1", "QBP^Q11^QBP_Q11", "QBP^Q13^QBP_Q13", "QVR^Q17^QVR_Q17", "RSP^K11^RSP_K11", "SDR^S31^SDR_S31"],
+        "error": "Unknown HL7 v2.7 message type",
+        "reason": "not-generated"
+      },
+      {
+        "messages": ["ADT^A39^ADT_A39", "MFK^M01^MFK_M01"],
+        "error": "Unknown HL7 v2.7 message type",
+        "reason": "withdrawn"
+      }
+    ],
+    "v2.7.full.hl7": [
+      {
+        "messages": ["SDR^S32^SDR_S32"],
+        "error": "Unknown HL7 v2.7 message type",
+        "reason": "hl7apy-name",
+        "why": "SDR^S32^SDR_S32 names no event of v2.7: SDR_S32 is the structure of SMD^S32 and SCN^S37 (both generated); S32 is no SDR event."
+      },
+      {
+        "messages": ["EHC^E15^EHC_E15"],
+        "error": "ROL segment at line 19 is not allowed",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy prints MSH SFT UAC PMT PYE IPR IVC PSS PSG PSL ADJ IPR IVC PSS PSG PSL ADJ ADJ ROL ADJ ROL; the v2.7 message ledger (EHC_E15) settles on MSH [{SFT}] [{UAC}]  PAYMENT_REMITTANCE_HEADER_INFO: PMT PYE  [{ PAYMENT_REMITTANCE_DETAIL_INFO: IPR IVC { PRODUCT_SERVICE_SECTION: PSS { PRODUCT_SERVICE_GROUP: PSG { PSL_ITEM_INFO: PSL [{ADJ}] } } } }] [{ ADJUSTMENT_PAYEE: ADJ [ROL] }]."
+      },
+      {
+        "messages": ["CCI^I22^CCI_I22", "CCM^I21^CCM_I21", "CCU^I20^CCU_I20", "CQU^I19^CQU_I19", "EHC^E24^EHC_E24", "QBP^Q11^QBP_Q11", "QBP^Q13^QBP_Q13", "SDR^S31^SDR_S31"],
+        "error": "Unknown HL7 v2.7 message type",
+        "reason": "not-generated"
+      },
+      {
+        "messages": ["ADT^A39^ADT_A39", "MFK^M01^MFK_M01"],
+        "error": "Unknown HL7 v2.7 message type",
+        "reason": "withdrawn"
+      }
+    ],
+    "v2.8.min.hl7": [
+      {
+        "messages": ["DBC^O42^DBC_O42"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "hl7apy-name",
+        "why": "DBC^O42^DBC_O42 names no event of v2.8: the standard's event is DBU^O42, which uses the DBC_O42 structure (generated)."
+      },
+      {
+        "messages": ["QBP^O33^QBP_O33"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "hl7apy-name",
+        "why": "QBP^O33^QBP_O33 names no event of v2.8: the standard's events are QBP^Q33 and QBP^Q34, which use the QBP_O33 and QBP_O34 structures (generated)."
+      },
+      {
+        "messages": ["QBP^O34^QBP_O34"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "hl7apy-name",
+        "why": "QBP^O34^QBP_O34 names no event of v2.8: the standard's events are QBP^Q33 and QBP^Q34, which use the QBP_O33 and QBP_O34 structures (generated)."
+      },
+      {
+        "messages": ["QBP^Q13^QBP_Q13"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "hl7apy-name",
+        "why": "QBP^Q13^QBP_Q13 names no event of v2.8: QBP_Q13 is the structure the QBP^Z75/Z77/Z91/Z93/Z95 query profiles name (generated as QBP^Z99 and its wrappers); Q13 is no event of the version."
+      },
+      {
+        "messages": ["RSP^O33^RSP_O33"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "hl7apy-name",
+        "why": "RSP^O33^RSP_O33 names no event of v2.8: the standard's events are RSP^K33 and RSP^K34, which use the RSP_O33 and RSP_O34 structures (generated)."
+      },
+      {
+        "messages": ["RSP^O34^RSP_O34"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "hl7apy-name",
+        "why": "RSP^O34^RSP_O34 names no event of v2.8: the standard's events are RSP^K33 and RSP^K34, which use the RSP_O33 and RSP_O34 structures (generated)."
+      },
+      {
+        "messages": ["SDR^S32^SDR_S32"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "hl7apy-name",
+        "why": "SDR^S32^SDR_S32 names no event of v2.8: SDR_S32 is the structure of SMD^S32 and SCN^S37 (both generated); S32 is no SDR event."
+      },
+      {
+        "messages": ["RDE^O11^RDE_O11"],
+        "error": "RXR segment at line 5 is not allowed",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy prints MSH ORC RXE TQ1 RXR; the v2.8 message ledger (RDE_O11) settles on MSH [{SFT}] [UAC] [{NTE}] [ PATIENT: PID [PD1] [{PRT}] [{NTE}] [{ARV}] [ PATIENT_VISIT: PV1 [PV2] [{PRT}] [{ARV}] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC [{PRT}] [{ TIMING: TQ1 [{TQ2}] }] [ ORDER_DETAIL: RXO [{PRT}] [{NTE}] {RXR} [{ COMPONENT: RXC [{NTE}] }] ] RXE [{PRT}] [{NTE}] { TIMING_ENCODED: TQ1 [{TQ2}] } [{ RXV_GROUP: RXV [{PRT}] [{NTE}] { TIMING_ENCODED: TQ1 [{TQ2}] } {RXR} [{RXC}] [{CDO}] [{ OBSERVATION: OBX [{PRT}] [{NTE}] }] [{FT1}] [BLG] [{CTI}] }] }."
+      },
+      {
+        "messages": ["CCI^I22^CCI_I22", "CCM^I21^CCM_I21", "CCR^I16^CCR_I16", "CCU^I20^CCU_I20", "CQU^I19^CQU_I19", "PPG^PCG^PPG_PCG", "PPP^PCB^PPP_PCB", "PPR^PC1^PPR_PC1", "QBP^Q11^QBP_Q11", "QVR^Q17^QVR_Q17", "RSP^K11^RSP_K11"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "not-generated"
+      },
+      {
+        "messages": ["ADT^A39^ADT_A39"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "withdrawn",
+        "why": "ADT^A39 is withdrawn as of v2.7 (codegen/schemas/v2.7/version.ts lists ADT_A39); hl7apy still lists it for v2.8."
+      },
+      {
+        "messages": ["MFK^M01^MFK_M01"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "withdrawn",
+        "why": "MFK^M01 is withdrawn as of v2.7 (codegen/schemas/v2.7/version.ts lists MFK_M01); hl7apy still lists it for v2.8."
+      }
+    ],
+    "v2.8.full.hl7": [
+      {
+        "messages": ["DBC^O42^DBC_O42"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "hl7apy-name",
+        "why": "DBC^O42^DBC_O42 names no event of v2.8: the standard's event is DBU^O42, which uses the DBC_O42 structure (generated)."
+      },
+      {
+        "messages": ["QBP^O33^QBP_O33"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "hl7apy-name",
+        "why": "QBP^O33^QBP_O33 names no event of v2.8: the standard's events are QBP^Q33 and QBP^Q34, which use the QBP_O33 and QBP_O34 structures (generated)."
+      },
+      {
+        "messages": ["QBP^O34^QBP_O34"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "hl7apy-name",
+        "why": "QBP^O34^QBP_O34 names no event of v2.8: the standard's events are QBP^Q33 and QBP^Q34, which use the QBP_O33 and QBP_O34 structures (generated)."
+      },
+      {
+        "messages": ["QBP^Q13^QBP_Q13"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "hl7apy-name",
+        "why": "QBP^Q13^QBP_Q13 names no event of v2.8: QBP_Q13 is the structure the QBP^Z75/Z77/Z91/Z93/Z95 query profiles name (generated as QBP^Z99 and its wrappers); Q13 is no event of the version."
+      },
+      {
+        "messages": ["RSP^O33^RSP_O33"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "hl7apy-name",
+        "why": "RSP^O33^RSP_O33 names no event of v2.8: the standard's events are RSP^K33 and RSP^K34, which use the RSP_O33 and RSP_O34 structures (generated)."
+      },
+      {
+        "messages": ["RSP^O34^RSP_O34"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "hl7apy-name",
+        "why": "RSP^O34^RSP_O34 names no event of v2.8: the standard's events are RSP^K33 and RSP^K34, which use the RSP_O33 and RSP_O34 structures (generated)."
+      },
+      {
+        "messages": ["SDR^S32^SDR_S32"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "hl7apy-name",
+        "why": "SDR^S32^SDR_S32 names no event of v2.8: SDR_S32 is the structure of SMD^S32 and SCN^S37 (both generated); S32 is no SDR event."
+      },
+      {
+        "messages": ["EHC^E15^EHC_E15"],
+        "error": "PRT segment at line 19 is not allowed",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy prints MSH SFT UAC PMT PYE IPR IVC PSS PSG PSL ADJ IPR IVC PSS PSG PSL ADJ ADJ PRT ROL ADJ PRT ROL; the v2.8 message ledger (EHC_E15) settles on MSH [{SFT}] [{UAC}]  PAYMENT_REMITTANCE_HEADER_INFO: PMT PYE  [{ PAYMENT_REMITTANCE_DETAIL_INFO: IPR IVC { PRODUCT_SERVICE_SECTION: PSS { PRODUCT_SERVICE_GROUP: PSG { PSL_ITEM_INFO: PSL [{ADJ}] } } } }] [{ ADJUSTMENT_PAYEE: ADJ [PRT] [ROL] }]."
+      },
+      {
+        "messages": ["OMQ^O42^OMQ_O42"],
+        "error": "ORC segment at line 51 is not allowed",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy prints MSH SFT UAC NTE PID PD1 PRT NTE NK1 ARV PV1 PV2 PRT IN1 IN2 IN3 GT1 AL1 ORC PRT OBX PRT TXA CTD DG1 OBX PRT NTE PID PD1 PRT ARV PV1 PV2 PRT AL1 ORC PRT OBR TQ1 TQ2 NTE PRT CTD OBX PRT NTE FT1 CTI BLG ORC PRT OBX PRT TXA CTD DG1 OBX PRT NTE PID PD1 PRT ARV PV1 PV2 PRT AL1 ORC PRT OBR TQ1 TQ2 NTE PRT CTD OBX PRT NTE FT1 CTI BLG; the v2.8 message ledger (OMQ_O42) settles on MSH [{SFT}] [UAC] [{NTE}] [ PATIENT: PID [PD1] [{PRT}] [{NTE}] [{NK1}] [{ARV}] [ PATIENT_VISIT: PV1 [PV2] [{PRT}] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC [{PRT}] OBX [{PRT}] TXA [CTD] [{DG1}] [{ ORDER_DOCUMENT: SGH OBX [{PRT}] [TXA] [{NTE}] SGT }] } [{ OBSERVATION: OBX [{PRT}] [{NTE}] }] [{ PRIOR_RESULT: [ PATIENT_PRIOR: PID [PD1] [{PRT}] [{ARV}] ] [ PATIENT_VISIT_PRIOR: PV1 [PV2] [{PRT}] ] [{AL1}] { ORDER_PRIOR: ORC [{PRT}] OBR [{ TIMING_PRIOR: TQ1 [{TQ2}] }] [{NTE}] [{PRT}] [CTD] { OBSERVATION_PRIOR: OBX [{PRT}] [{NTE}] } } }] [{FT1}] [{CTI}] [BLG]."
+      },
+      {
+        "messages": ["CCI^I22^CCI_I22", "CCM^I21^CCM_I21", "CCR^I16^CCR_I16", "CCU^I20^CCU_I20", "CQU^I19^CQU_I19"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "not-generated"
+      },
+      {
+        "messages": ["ADT^A39^ADT_A39"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "withdrawn",
+        "why": "ADT^A39 is withdrawn as of v2.7 (codegen/schemas/v2.7/version.ts lists ADT_A39); hl7apy still lists it for v2.8."
+      },
+      {
+        "messages": ["MFK^M01^MFK_M01"],
+        "error": "Unknown HL7 v2.8 message type",
+        "reason": "withdrawn",
+        "why": "MFK^M01 is withdrawn as of v2.7 (codegen/schemas/v2.7/version.ts lists MFK_M01); hl7apy still lists it for v2.8."
+      }
+    ],
+    "v2.8.1.min.hl7": [
+      {
+        "messages": ["DBC^O42^DBC_O42"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "DBC^O42^DBC_O42 names no event of v2.8.1: the standard's event is DBU^O42, which uses the DBC_O42 structure (generated)."
+      },
+      {
+        "messages": ["ORL^O41^ORL_O41"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "ORL^O41^ORL_O41 names no event of v2.8.1: ORL_O41 to ORL_O44 are the patient-optional structures the standard prints for ORL^O22, O34, O36 and O40; messages are keyed by event, and each of those events is generated with its patient-required structure."
+      },
+      {
+        "messages": ["ORL^O42^ORL_O42"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "ORL^O42^ORL_O42 names no event of v2.8.1: ORL_O41 to ORL_O44 are the patient-optional structures the standard prints for ORL^O22, O34, O36 and O40; messages are keyed by event, and each of those events is generated with its patient-required structure."
+      },
+      {
+        "messages": ["ORL^O43^ORL_O43"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "ORL^O43^ORL_O43 names no event of v2.8.1: ORL_O41 to ORL_O44 are the patient-optional structures the standard prints for ORL^O22, O34, O36 and O40; messages are keyed by event, and each of those events is generated with its patient-required structure."
+      },
+      {
+        "messages": ["ORL^O44^ORL_O44"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "ORL^O44^ORL_O44 names no event of v2.8.1: ORL_O41 to ORL_O44 are the patient-optional structures the standard prints for ORL^O22, O34, O36 and O40; messages are keyed by event, and each of those events is generated with its patient-required structure."
+      },
+      {
+        "messages": ["QBP^O33^QBP_O33"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "QBP^O33^QBP_O33 names no event of v2.8.1: the standard's events are QBP^Q33 and QBP^Q34, which use the QBP_O33 and QBP_O34 structures (generated)."
+      },
+      {
+        "messages": ["QBP^O34^QBP_O34"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "QBP^O34^QBP_O34 names no event of v2.8.1: the standard's events are QBP^Q33 and QBP^Q34, which use the QBP_O33 and QBP_O34 structures (generated)."
+      },
+      {
+        "messages": ["QBP^Q13^QBP_Q13"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "QBP^Q13^QBP_Q13 names no event of v2.8.1: QBP_Q13 is the structure the QBP^Z75/Z77/Z91/Z93/Z95 query profiles name (generated as QBP^Z99 and its wrappers); Q13 is no event of the version."
+      },
+      {
+        "messages": ["RSP^O33^RSP_O33"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "RSP^O33^RSP_O33 names no event of v2.8.1: the standard's events are RSP^K33 and RSP^K34, which use the RSP_O33 and RSP_O34 structures (generated)."
+      },
+      {
+        "messages": ["RSP^O34^RSP_O34"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "RSP^O34^RSP_O34 names no event of v2.8.1: the standard's events are RSP^K33 and RSP^K34, which use the RSP_O33 and RSP_O34 structures (generated)."
+      },
+      {
+        "messages": ["SDR^S32^SDR_S32"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "SDR^S32^SDR_S32 names no event of v2.8.1: SDR_S32 is the structure of SMD^S32 and SCN^S37 (both generated); S32 is no SDR event."
+      },
+      {
+        "messages": ["RDE^O11^RDE_O11"],
+        "error": "RXR segment at line 5 is not allowed",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy prints MSH ORC RXE TQ1 RXR; the v2.8.1 message ledger (RDE_O11) settles on MSH [{SFT}] [UAC] [{NTE}] [ PATIENT: PID [PD1] [{PRT}] [{NTE}] [{ARV}] [ PATIENT_VISIT: PV1 [PV2] [{PRT}] [{ARV}] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC [{PRT}] [{ TIMING: TQ1 [{TQ2}] }] [ ORDER_DETAIL: RXO [{PRT}] [{NTE}] {RXR} [{ COMPONENT: RXC [{NTE}] }] ] RXE [{PRT}] [{NTE}] { TIMING_ENCODED: TQ1 [{TQ2}] } [{ RXV_GROUP: RXV [{PRT}] [{NTE}] { TIMING_ENCODED: TQ1 [{TQ2}] } {RXR} [{RXC}] [{CDO}] [{ OBSERVATION: OBX [{PRT}] [{NTE}] }] [{FT1}] [BLG] [{CTI}] }] }."
+      },
+      {
+        "messages": ["CCI^I22^CCI_I22", "CCM^I21^CCM_I21", "CCR^I16^CCR_I16", "CCU^I20^CCU_I20", "CQU^I19^CQU_I19", "PPG^PCG^PPG_PCG", "PPP^PCB^PPP_PCB", "PPR^PC1^PPR_PC1", "QBP^Q11^QBP_Q11", "QVR^Q17^QVR_Q17", "RSP^K11^RSP_K11"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "not-generated"
+      },
+      {
+        "messages": ["ADT^A39^ADT_A39"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "withdrawn",
+        "why": "ADT^A39 is withdrawn as of v2.7 (codegen/schemas/v2.7/version.ts lists ADT_A39); hl7apy still lists it for v2.8.1."
+      },
+      {
+        "messages": ["MFK^M01^MFK_M01"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "withdrawn",
+        "why": "MFK^M01 is withdrawn as of v2.7 (codegen/schemas/v2.7/version.ts lists MFK_M01); hl7apy still lists it for v2.8.1."
+      }
+    ],
+    "v2.8.1.full.hl7": [
+      {
+        "messages": ["DBC^O42^DBC_O42"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "DBC^O42^DBC_O42 names no event of v2.8.1: the standard's event is DBU^O42, which uses the DBC_O42 structure (generated)."
+      },
+      {
+        "messages": ["ORL^O41^ORL_O41"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "ORL^O41^ORL_O41 names no event of v2.8.1: ORL_O41 to ORL_O44 are the patient-optional structures the standard prints for ORL^O22, O34, O36 and O40; messages are keyed by event, and each of those events is generated with its patient-required structure."
+      },
+      {
+        "messages": ["ORL^O42^ORL_O42"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "ORL^O42^ORL_O42 names no event of v2.8.1: ORL_O41 to ORL_O44 are the patient-optional structures the standard prints for ORL^O22, O34, O36 and O40; messages are keyed by event, and each of those events is generated with its patient-required structure."
+      },
+      {
+        "messages": ["ORL^O43^ORL_O43"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "ORL^O43^ORL_O43 names no event of v2.8.1: ORL_O41 to ORL_O44 are the patient-optional structures the standard prints for ORL^O22, O34, O36 and O40; messages are keyed by event, and each of those events is generated with its patient-required structure."
+      },
+      {
+        "messages": ["ORL^O44^ORL_O44"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "ORL^O44^ORL_O44 names no event of v2.8.1: ORL_O41 to ORL_O44 are the patient-optional structures the standard prints for ORL^O22, O34, O36 and O40; messages are keyed by event, and each of those events is generated with its patient-required structure."
+      },
+      {
+        "messages": ["QBP^O33^QBP_O33"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "QBP^O33^QBP_O33 names no event of v2.8.1: the standard's events are QBP^Q33 and QBP^Q34, which use the QBP_O33 and QBP_O34 structures (generated)."
+      },
+      {
+        "messages": ["QBP^O34^QBP_O34"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "QBP^O34^QBP_O34 names no event of v2.8.1: the standard's events are QBP^Q33 and QBP^Q34, which use the QBP_O33 and QBP_O34 structures (generated)."
+      },
+      {
+        "messages": ["QBP^Q13^QBP_Q13"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "QBP^Q13^QBP_Q13 names no event of v2.8.1: QBP_Q13 is the structure the QBP^Z75/Z77/Z91/Z93/Z95 query profiles name (generated as QBP^Z99 and its wrappers); Q13 is no event of the version."
+      },
+      {
+        "messages": ["RSP^O33^RSP_O33"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "RSP^O33^RSP_O33 names no event of v2.8.1: the standard's events are RSP^K33 and RSP^K34, which use the RSP_O33 and RSP_O34 structures (generated)."
+      },
+      {
+        "messages": ["RSP^O34^RSP_O34"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "RSP^O34^RSP_O34 names no event of v2.8.1: the standard's events are RSP^K33 and RSP^K34, which use the RSP_O33 and RSP_O34 structures (generated)."
+      },
+      {
+        "messages": ["SDR^S32^SDR_S32"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "hl7apy-name",
+        "why": "SDR^S32^SDR_S32 names no event of v2.8.1: SDR_S32 is the structure of SMD^S32 and SCN^S37 (both generated); S32 is no SDR event."
+      },
+      {
+        "messages": ["EHC^E15^EHC_E15"],
+        "error": "PRT segment at line 19 is not allowed",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy prints MSH SFT UAC PMT PYE IPR IVC PSS PSG PSL ADJ IPR IVC PSS PSG PSL ADJ ADJ PRT ROL ADJ PRT ROL; the v2.8.1 message ledger (EHC_E15) settles on MSH [{SFT}] [{UAC}]  PAYMENT_REMITTANCE_HEADER_INFO: PMT PYE  [{ PAYMENT_REMITTANCE_DETAIL_INFO: IPR IVC { PRODUCT_SERVICE_SECTION: PSS { PRODUCT_SERVICE_GROUP: PSG { PSL_ITEM_INFO: PSL [{ADJ}] } } } }] [{ ADJUSTMENT_PAYEE: ADJ [PRT] [ROL] }]."
+      },
+      {
+        "messages": ["CCI^I22^CCI_I22", "CCM^I21^CCM_I21", "CCR^I16^CCR_I16", "CCU^I20^CCU_I20", "CQU^I19^CQU_I19"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "not-generated"
+      },
+      {
+        "messages": ["ADT^A39^ADT_A39"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "withdrawn",
+        "why": "ADT^A39 is withdrawn as of v2.7 (codegen/schemas/v2.7/version.ts lists ADT_A39); hl7apy still lists it for v2.8.1."
+      },
+      {
+        "messages": ["MFK^M01^MFK_M01"],
+        "error": "Unknown HL7 v2.8.1 message type",
+        "reason": "withdrawn",
+        "why": "MFK^M01 is withdrawn as of v2.7 (codegen/schemas/v2.7/version.ts lists MFK_M01); hl7apy still lists it for v2.8.1."
+      }
+    ],
+    "v2.8.2.min.hl7": [
+      {
+        "messages": ["DBC^O42^DBC_O42"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "DBC^O42^DBC_O42 names no event of v2.8.2: the standard's event is DBU^O42, which uses the DBC_O42 structure (generated)."
+      },
+      {
+        "messages": ["ORL^O41^ORL_O41"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "ORL^O41^ORL_O41 names no event of v2.8.2: ORL_O41 to ORL_O44 are the patient-optional structures the standard prints for ORL^O22, O34, O36 and O40; messages are keyed by event, and each of those events is generated with its patient-required structure."
+      },
+      {
+        "messages": ["ORL^O42^ORL_O42"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "ORL^O42^ORL_O42 names no event of v2.8.2: ORL_O41 to ORL_O44 are the patient-optional structures the standard prints for ORL^O22, O34, O36 and O40; messages are keyed by event, and each of those events is generated with its patient-required structure."
+      },
+      {
+        "messages": ["ORL^O43^ORL_O43"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "ORL^O43^ORL_O43 names no event of v2.8.2: ORL_O41 to ORL_O44 are the patient-optional structures the standard prints for ORL^O22, O34, O36 and O40; messages are keyed by event, and each of those events is generated with its patient-required structure."
+      },
+      {
+        "messages": ["ORL^O44^ORL_O44"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "ORL^O44^ORL_O44 names no event of v2.8.2: ORL_O41 to ORL_O44 are the patient-optional structures the standard prints for ORL^O22, O34, O36 and O40; messages are keyed by event, and each of those events is generated with its patient-required structure."
+      },
+      {
+        "messages": ["QBP^O33^QBP_O33"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "QBP^O33^QBP_O33 names no event of v2.8.2: the standard's events are QBP^Q33 and QBP^Q34, which use the QBP_O33 and QBP_O34 structures (generated)."
+      },
+      {
+        "messages": ["QBP^O34^QBP_O34"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "QBP^O34^QBP_O34 names no event of v2.8.2: the standard's events are QBP^Q33 and QBP^Q34, which use the QBP_O33 and QBP_O34 structures (generated)."
+      },
+      {
+        "messages": ["QBP^Q13^QBP_Q13"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "QBP^Q13^QBP_Q13 names no event of v2.8.2: QBP_Q13 is the structure the QBP^Z75/Z77/Z91/Z93/Z95 query profiles name (generated as QBP^Z99 and its wrappers); Q13 is no event of the version."
+      },
+      {
+        "messages": ["RSP^O33^RSP_O33"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "RSP^O33^RSP_O33 names no event of v2.8.2: the standard's events are RSP^K33 and RSP^K34, which use the RSP_O33 and RSP_O34 structures (generated)."
+      },
+      {
+        "messages": ["RSP^O34^RSP_O34"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "RSP^O34^RSP_O34 names no event of v2.8.2: the standard's events are RSP^K33 and RSP^K34, which use the RSP_O33 and RSP_O34 structures (generated)."
+      },
+      {
+        "messages": ["SDR^S32^SDR_S32"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "SDR^S32^SDR_S32 names no event of v2.8.2: SDR_S32 is the structure of SMD^S32 and SCN^S37 (both generated); S32 is no SDR event."
+      },
+      {
+        "messages": ["RDE^O11^RDE_O11"],
+        "error": "RXR segment at line 5 is not allowed",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy prints MSH ORC RXE TQ1 RXR; the v2.8.2 message ledger (RDE_O11) settles on MSH [{SFT}] [UAC] [{NTE}] [ PATIENT: PID [PD1] [{PRT}] [{NTE}] [{ARV}] [ PATIENT_VISIT: PV1 [PV2] [{PRT}] [{ARV}] ] [{ INSURANCE: IN1 [IN2] [IN3] }] [GT1] [{AL1}] ] { ORDER: ORC [{PRT}] [{ TIMING: TQ1 [{TQ2}] }] [ ORDER_DETAIL: RXO [{PRT}] [{NTE}] {RXR} [{ COMPONENT: RXC [{NTE}] }] ] RXE [{PRT}] [{NTE}] { TIMING_ENCODED: TQ1 [{TQ2}] } [{ RXV_GROUP: RXV [{PRT}] [{NTE}] { TIMING_ENCODED: TQ1 [{TQ2}] } {RXR} [{RXC}] [{CDO}] [{ OBSERVATION: OBX [{PRT}] [{NTE}] }] [{FT1}] [BLG] [{CTI}] }] }."
+      },
+      {
+        "messages": ["CCI^I22^CCI_I22", "CCM^I21^CCM_I21", "CCR^I16^CCR_I16", "CCU^I20^CCU_I20", "CQU^I19^CQU_I19", "PPG^PCG^PPG_PCG", "PPP^PCB^PPP_PCB", "PPR^PC1^PPR_PC1", "QBP^Q11^QBP_Q11", "QVR^Q17^QVR_Q17", "RSP^K11^RSP_K11"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "not-generated"
+      },
+      {
+        "messages": ["ADT^A39^ADT_A39"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "withdrawn",
+        "why": "ADT^A39 is withdrawn as of v2.7 (codegen/schemas/v2.7/version.ts lists ADT_A39); hl7apy still lists it for v2.8.2."
+      },
+      {
+        "messages": ["MFK^M01^MFK_M01"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "withdrawn",
+        "why": "MFK^M01 is withdrawn as of v2.7 (codegen/schemas/v2.7/version.ts lists MFK_M01); hl7apy still lists it for v2.8.2."
+      }
+    ],
+    "v2.8.2.full.hl7": [
+      {
+        "messages": ["DBC^O42^DBC_O42"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "DBC^O42^DBC_O42 names no event of v2.8.2: the standard's event is DBU^O42, which uses the DBC_O42 structure (generated)."
+      },
+      {
+        "messages": ["ORL^O41^ORL_O41"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "ORL^O41^ORL_O41 names no event of v2.8.2: ORL_O41 to ORL_O44 are the patient-optional structures the standard prints for ORL^O22, O34, O36 and O40; messages are keyed by event, and each of those events is generated with its patient-required structure."
+      },
+      {
+        "messages": ["ORL^O42^ORL_O42"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "ORL^O42^ORL_O42 names no event of v2.8.2: ORL_O41 to ORL_O44 are the patient-optional structures the standard prints for ORL^O22, O34, O36 and O40; messages are keyed by event, and each of those events is generated with its patient-required structure."
+      },
+      {
+        "messages": ["ORL^O43^ORL_O43"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "ORL^O43^ORL_O43 names no event of v2.8.2: ORL_O41 to ORL_O44 are the patient-optional structures the standard prints for ORL^O22, O34, O36 and O40; messages are keyed by event, and each of those events is generated with its patient-required structure."
+      },
+      {
+        "messages": ["ORL^O44^ORL_O44"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "ORL^O44^ORL_O44 names no event of v2.8.2: ORL_O41 to ORL_O44 are the patient-optional structures the standard prints for ORL^O22, O34, O36 and O40; messages are keyed by event, and each of those events is generated with its patient-required structure."
+      },
+      {
+        "messages": ["QBP^O33^QBP_O33"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "QBP^O33^QBP_O33 names no event of v2.8.2: the standard's events are QBP^Q33 and QBP^Q34, which use the QBP_O33 and QBP_O34 structures (generated)."
+      },
+      {
+        "messages": ["QBP^O34^QBP_O34"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "QBP^O34^QBP_O34 names no event of v2.8.2: the standard's events are QBP^Q33 and QBP^Q34, which use the QBP_O33 and QBP_O34 structures (generated)."
+      },
+      {
+        "messages": ["QBP^Q13^QBP_Q13"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "QBP^Q13^QBP_Q13 names no event of v2.8.2: QBP_Q13 is the structure the QBP^Z75/Z77/Z91/Z93/Z95 query profiles name (generated as QBP^Z99 and its wrappers); Q13 is no event of the version."
+      },
+      {
+        "messages": ["RSP^O33^RSP_O33"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "RSP^O33^RSP_O33 names no event of v2.8.2: the standard's events are RSP^K33 and RSP^K34, which use the RSP_O33 and RSP_O34 structures (generated)."
+      },
+      {
+        "messages": ["RSP^O34^RSP_O34"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "RSP^O34^RSP_O34 names no event of v2.8.2: the standard's events are RSP^K33 and RSP^K34, which use the RSP_O33 and RSP_O34 structures (generated)."
+      },
+      {
+        "messages": ["SDR^S32^SDR_S32"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "hl7apy-name",
+        "why": "SDR^S32^SDR_S32 names no event of v2.8.2: SDR_S32 is the structure of SMD^S32 and SCN^S37 (both generated); S32 is no SDR event."
+      },
+      {
+        "messages": ["EHC^E15^EHC_E15"],
+        "error": "PRT segment at line 19 is not allowed",
+        "reason": "hl7apy-structure",
+        "why": "hl7apy prints MSH SFT UAC PMT PYE IPR IVC PSS PSG PSL ADJ IPR IVC PSS PSG PSL ADJ ADJ PRT ROL ADJ PRT ROL; the v2.8.2 message ledger (EHC_E15) settles on MSH [{SFT}] [{UAC}]  PAYMENT_REMITTANCE_HEADER_INFO: PMT PYE  [{ PAYMENT_REMITTANCE_DETAIL_INFO: IPR IVC { PRODUCT_SERVICE_SECTION: PSS { PRODUCT_SERVICE_GROUP: PSG { PSL_ITEM_INFO: PSL [{ADJ}] } } } }] [{ ADJUSTMENT_PAYEE: ADJ [PRT] [ROL] }]."
+      },
+      {
+        "messages": ["CCI^I22^CCI_I22", "CCM^I21^CCM_I21", "CCR^I16^CCR_I16", "CCU^I20^CCU_I20", "CQU^I19^CQU_I19"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "not-generated"
+      },
+      {
+        "messages": ["ADT^A39^ADT_A39"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "withdrawn",
+        "why": "ADT^A39 is withdrawn as of v2.7 (codegen/schemas/v2.7/version.ts lists ADT_A39); hl7apy still lists it for v2.8.2."
+      },
+      {
+        "messages": ["MFK^M01^MFK_M01"],
+        "error": "Unknown HL7 v2.8.2 message type",
+        "reason": "withdrawn",
+        "why": "MFK^M01 is withdrawn as of v2.7 (codegen/schemas/v2.7/version.ts lists MFK_M01); hl7apy still lists it for v2.8.2."
       }
     ]
   },

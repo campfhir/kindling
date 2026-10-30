@@ -1,0 +1,119 @@
+{
+  "structure": "TCU_U10",
+  "messageType": "TCU",
+  "triggerEvent": "U10",
+  "version": "2.9.1",
+  "description": "Test Code Settings Update",
+  "title": "Test Code Settings Update",
+  "source": {
+    "pdf": "hl7.org V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+    "pages": null,
+    "table": "TCU^U10^TCU_U10: Test Code Settings Update"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "U10"
+      ],
+      "eventPrinted": "U10",
+      "pdf": "hl7.org V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": null,
+      "table": "TCU^U10^TCU_U10: Test Code Settings Update",
+      "identicalToPrimary": true
+    },
+    {
+      "events": [
+        "U11"
+      ],
+      "eventPrinted": "U11",
+      "pdf": "hl7.org V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": null,
+      "table": "TCR^U11^TCU_U10: Test Code Settings Request",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EQU",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Equipment Detail",
+      "chapterRef": "13"
+    },
+    {
+      "kind": "group",
+      "name": "TEST_CONFIGURATION",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "SPM",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Specimen",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "TCC",
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Test Code Configuration",
+          "chapterRef": "13"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "ROL",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Role Detail",
+      "status": "B",
+      "chapterRef": "12"
+    }
+  ],
+  "variants": []
+}

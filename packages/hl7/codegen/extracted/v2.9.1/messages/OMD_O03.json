@@ -1,0 +1,479 @@
+{
+  "structure": "OMD_O03",
+  "messageType": "OMD",
+  "triggerEvent": "O03",
+  "version": "2.9.1",
+  "description": "Dietary Order",
+  "title": "Dietary Order",
+  "source": {
+    "pdf": "hl7.org V291_CH04_Orders_2024SEP.pdf",
+    "pages": null,
+    "table": "OMD^O03^OMD_O03: Dietary Order"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "O03"
+      ],
+      "eventPrinted": "O03",
+      "pdf": "hl7.org V291_CH04_Orders_2024SEP.pdf",
+      "page": null,
+      "table": "OMD^O03^OMD_O03: Dietary Order",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "ARV",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Access Restrictions",
+      "chapterRef": "3"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "NTE",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Notes and Comments (for Header)",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "group",
+      "name": "PATIENT",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "PID",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Patient Identification",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PD1",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Additional Demographics",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSP",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Person Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSR",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Recorded Gender and Sex",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "GSC",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Sex Parameter for Clinical Use",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Participation (for Patient)",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "segment",
+          "name": "ARV",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "For backwards compatibility only as of V2.9.",
+          "status": "B",
+          "chapterRef": "3"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Notes and Comments (for Patient ID)",
+          "chapterRef": "2"
+        },
+        {
+          "kind": "group",
+          "name": "PATIENT_VISIT",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "PV1",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Patient Visit",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "PV2",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Patient Visit â Additional Info",
+              "chapterRef": "3"
+            },
+            {
+              "kind": "segment",
+              "name": "PRT",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Participation (for Patient Visit)",
+              "chapterRef": "7"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "INSURANCE",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "IN1",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Insurance",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "IN2",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Insurance Additional Information",
+              "chapterRef": "6"
+            },
+            {
+              "kind": "segment",
+              "name": "IN3",
+              "minOccurs": 0,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Insurance Additional Information, Certification",
+              "chapterRef": "6"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "GT1",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Guarantor",
+          "chapterRef": "6"
+        },
+        {
+          "kind": "segment",
+          "name": "AL1",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Allergy Information",
+          "chapterRef": "3"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "ORDER_DIET",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "ORC",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Common Order Segment",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Participation",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "group",
+          "name": "TIMING_DIET",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "TQ1",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Timing/Quantity",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "segment",
+              "name": "TQ2",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Timing/Quantity Order Sequence",
+              "chapterRef": "4"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "group",
+          "name": "DIET",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "ODS",
+              "minOccurs": 1,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Dietary Orders, Suppl., Prefer.",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "segment",
+              "name": "NTE",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Notes and Comments (for ODS)",
+              "chapterRef": "2"
+            },
+            {
+              "kind": "group",
+              "name": "OBSERVATION",
+              "items": [
+                {
+                  "kind": "segment",
+                  "name": "OBX",
+                  "minOccurs": 1,
+                  "maxOccurs": 1,
+                  "usage": null,
+                  "page": null,
+                  "description": "Results",
+                  "chapterRef": "7"
+                },
+                {
+                  "kind": "segment",
+                  "name": "PRT",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Participation",
+                  "chapterRef": "7"
+                },
+                {
+                  "kind": "segment",
+                  "name": "NTE",
+                  "minOccurs": 0,
+                  "maxOccurs": "*",
+                  "usage": null,
+                  "page": null,
+                  "description": "Notes and Comments (for OBX)",
+                  "chapterRef": "2"
+                }
+              ],
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "group",
+      "name": "ORDER_TRAY",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "ORC",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Common Order Segment",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "segment",
+          "name": "PRT",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Participation",
+          "chapterRef": "7"
+        },
+        {
+          "kind": "group",
+          "name": "TIMING_TRAY",
+          "items": [
+            {
+              "kind": "segment",
+              "name": "TQ1",
+              "minOccurs": 1,
+              "maxOccurs": 1,
+              "usage": null,
+              "page": null,
+              "description": "Timing/Quantity",
+              "chapterRef": "4"
+            },
+            {
+              "kind": "segment",
+              "name": "TQ2",
+              "minOccurs": 0,
+              "maxOccurs": "*",
+              "usage": null,
+              "page": null,
+              "description": "Timing/Quantity Order Sequence",
+              "chapterRef": "4"
+            }
+          ],
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null
+        },
+        {
+          "kind": "segment",
+          "name": "ODT",
+          "minOccurs": 1,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Diet Tray Instructions",
+          "chapterRef": "4"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": "*",
+          "usage": null,
+          "page": null,
+          "description": "Notes and Comments (for ODT)",
+          "chapterRef": "2"
+        }
+      ],
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    }
+  ],
+  "variants": []
+}

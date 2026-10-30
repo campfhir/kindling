@@ -51,6 +51,8 @@ export abstract class BaseSegment implements Segment {
   /** Encodes this message to its HL7 wire string. */
   encode(_encoding?: EncodingCharacters): string {
     const encoding = _encoding ?? DEFAULT_ENCODING;
+    // a segment with no fields (parsed from a bare "QRD", a withdrawn segment's line) is its name alone
+    if (this.fields.length === 0) return this.name;
     const encodedFields = this.fields.map((field) =>
       this.encodeField(field, encoding),
     );

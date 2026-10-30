@@ -1,0 +1,109 @@
+{
+  "structure": "EAN_U09",
+  "messageType": "EAN",
+  "triggerEvent": "U09",
+  "version": "2.9.1",
+  "description": "Equipment Status Message",
+  "title": "Equipment Status Message",
+  "source": {
+    "pdf": "hl7.org V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+    "pages": null,
+    "table": "EAN^U09^EAN_U09: Equipment Status Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "U09"
+      ],
+      "eventPrinted": "U09",
+      "pdf": "hl7.org V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": null,
+      "table": "EAN^U09^EAN_U09: Equipment Status Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EQU",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Equipment Detail",
+      "chapterRef": "13"
+    },
+    {
+      "kind": "group",
+      "name": "NOTIFICATION",
+      "items": [
+        {
+          "kind": "segment",
+          "name": "NDS",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Notification Detail",
+          "chapterRef": "13"
+        },
+        {
+          "kind": "segment",
+          "name": "NTE",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "usage": null,
+          "page": null,
+          "description": "Notification Note",
+          "chapterRef": "2"
+        }
+      ],
+      "minOccurs": 1,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null
+    },
+    {
+      "kind": "segment",
+      "name": "ROL",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Role Detail",
+      "status": "B",
+      "chapterRef": "12"
+    }
+  ],
+  "variants": []
+}

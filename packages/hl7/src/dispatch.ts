@@ -16,8 +16,9 @@
  * `<type>_<event>` first (`ADT_A01`), then on the type alone (`ACK`, whose event names the message
  * it acknowledges), then on MSH-9.3 when a sender includes it.
  *
- * Versions are wired one per release: 1.0 dispatched HL7 v2.3, 1.1 added v2.3.1, 1.2 adds v2.4. A
- * message of another version is an error unless `options.version` names the version to parse it as.
+ * Every HL7 v2 release from v2.3 to v2.9.1 is dispatched: 1.0 dispatched v2.3, 1.1 added v2.3.1, 1.2
+ * v2.4, 2.1 v2.5, 2.2 v2.5.1, and 2.8 v2.6 to v2.9.1. A message of another version (v2.1, v2.2) is an
+ * error unless `options.version` names the version to parse it as.
  *
  * @module
  */
@@ -31,6 +32,14 @@ import { MESSAGES as V2_3_1 } from "./v2.3.1/registry.ts";
 import { MESSAGES as V2_4 } from "./v2.4/registry.ts";
 import { MESSAGES as V2_5 } from "./v2.5/registry.ts";
 import { MESSAGES as V2_5_1 } from "./v2.5.1/registry.ts";
+import { MESSAGES as V2_6 } from "./v2.6/registry.ts";
+import { MESSAGES as V2_7 } from "./v2.7/registry.ts";
+import { MESSAGES as V2_7_1 } from "./v2.7.1/registry.ts";
+import { MESSAGES as V2_8 } from "./v2.8/registry.ts";
+import { MESSAGES as V2_8_1 } from "./v2.8.1/registry.ts";
+import { MESSAGES as V2_8_2 } from "./v2.8.2/registry.ts";
+import { MESSAGES as V2_9 } from "./v2.9/registry.ts";
+import { MESSAGES as V2_9_1 } from "./v2.9.1/registry.ts";
 
 /** The message registries the root parser dispatches on, keyed by the MSH-12 value. */
 const REGISTRIES = {
@@ -39,6 +48,14 @@ const REGISTRIES = {
   "2.4": V2_4,
   "2.5": V2_5,
   "2.5.1": V2_5_1,
+  "2.6": V2_6,
+  "2.7": V2_7,
+  "2.7.1": V2_7_1,
+  "2.8": V2_8,
+  "2.8.1": V2_8_1,
+  "2.8.2": V2_8_2,
+  "2.9": V2_9,
+  "2.9.1": V2_9_1,
 } as const;
 
 type Registries = typeof REGISTRIES;
@@ -191,7 +208,7 @@ export function selectMessageParser(messageString: string, options: ParseOptions
   return {
     ok: true,
     val: { kind: "message", version, structure, messageType, parse: registry[structure] },
-  } as Result<SelectedMessageParser>;
+  } as unknown as Result<SelectedMessageParser>;
 }
 
 /**
@@ -203,8 +220,14 @@ export function selectMessageParser(messageString: string, options: ParseOptions
 export function parseMessage(messageString: string, options: ParseOptions = {}): Result<ParsedHL7Message> {
   const selected = selectMessageParser(messageString, options);
   if (!selected.ok || !selected.val) return selected as Result<never>;
-  const { version, structure, messageType } = selected.val;
-  const result = selected.val.parse(messageString);
+  // One plain shape for the call: the union over every version and structure is too large to call through.
+  const { version, structure, messageType, parse } = selected.val as unknown as {
+    version: HL7Version;
+    structure: string;
+    messageType: MessageType;
+    parse: (messageString: string) => Result<ParsedMessageBase>;
+  };
+  const result = parse(messageString);
   if (!result.ok || !result.val) return result as Result<never>;
-  return { ok: true, val: { kind: "message", version, structure, messageType, parsed: result.val } } as Result<ParsedHL7Message>;
+  return { ok: true, val: { kind: "message", version, structure, messageType, parsed: result.val } } as unknown as Result<ParsedHL7Message>;
 }

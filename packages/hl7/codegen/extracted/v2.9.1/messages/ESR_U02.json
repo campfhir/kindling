@@ -1,0 +1,79 @@
+{
+  "structure": "ESR_U02",
+  "messageType": "ESR",
+  "triggerEvent": "U02",
+  "version": "2.9.1",
+  "description": "Equipment Status Message",
+  "title": "Equipment Status Message",
+  "source": {
+    "pdf": "hl7.org V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+    "pages": null,
+    "table": "ESR^U02^ESR_U02: Equipment Status Message"
+  },
+  "triggerEvents": [
+    {
+      "events": [
+        "U02"
+      ],
+      "eventPrinted": "U02",
+      "pdf": "hl7.org V291_CH13_ClinicalLabAuto_2024SEP.pdf",
+      "page": null,
+      "table": "ESR^U02^ESR_U02: Equipment Status Message",
+      "identicalToPrimary": true
+    }
+  ],
+  "items": [
+    {
+      "kind": "segment",
+      "name": "MSH",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Message Header",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "SFT",
+      "minOccurs": 0,
+      "maxOccurs": "*",
+      "usage": null,
+      "page": null,
+      "description": "Software Segment",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "UAC",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "User Authentication Credential",
+      "chapterRef": "2"
+    },
+    {
+      "kind": "segment",
+      "name": "EQU",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Equipment Detail",
+      "chapterRef": "13"
+    },
+    {
+      "kind": "segment",
+      "name": "ROL",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "usage": null,
+      "page": null,
+      "description": "Role Detail",
+      "status": "B",
+      "chapterRef": "12"
+    }
+  ],
+  "variants": []
+}
