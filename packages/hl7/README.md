@@ -12,7 +12,8 @@ A modular TypeScript library for building and parsing HL7v2 messages, published 
 - **Batches**: `parseBatch()` and `encodeBatch()` for the HL7 batch protocol (FHS/BHS … BTS/FTS)
 - **Round-trip Support**: Build messages and parse them back with full fidelity
 - **Modular Architecture**: Organized by HL7 version for easy extension
-- **Version Support**: HL7 v2.3, v2.3.1, v2.4, v2.5 and v2.5.1 (see [Versions](#versions))
+- **Version Support**: every HL7 v2 release from v2.3 to v2.9.1, the latest (v2.3, 2.3.1, 2.4, 2.5, 2.5.1, 2.6, 2.7, 2.7.1,
+  2.8, 2.8.1, 2.8.2, 2.9, 2.9.1); the root `parse()` dispatches v2.3 to v2.5.1 (see [Versions](#versions))
 - **Date Input**: Segment date methods accept `Date` objects with optional HL7 layout format, in addition to pre-formatted strings
 - **Value Extraction**: Path-based field/component extraction utility
 - **Custom Segments**: Build Z-segments and other custom segments with a simple field-setter API
@@ -21,9 +22,10 @@ A modular TypeScript library for building and parsing HL7v2 messages, published 
 
 ## Roadmap
 
-See [ROADMAP.md](ROADMAP.md) — v2.3 through v2.5.1 are complete; the next step is the latest HL7 version,
-v2.9.1, with its plan in the same file. Checklists of the remaining [segments](docs/ROADMAP-SEGMENTS.md)
-and [event types](docs/ROADMAP-EVENTS.md).
+See [ROADMAP.md](ROADMAP.md). Every release from v2.3 to v2.9.1 has its segments and messages; v2.3 through
+v2.5.1 are also dispatched by the root `parse()`, and wiring v2.6 to v2.9.1 into it, with their round-trip and
+position tests, is the next step. Checklists of the remaining [segments](docs/ROADMAP-SEGMENTS.md) and
+[event types](docs/ROADMAP-EVENTS.md).
 
 ## Project Structure
 
@@ -46,10 +48,10 @@ src/
 │   ├── CustomSegment.ts      # Generic segment for Z-segments and custom use
 │   └── MessageEditor.ts      # Fluent segment insertion API
 │   └── structure.ts          # Structure-driven parse / verify / encode engine
-├── v2.3/ … v2.7/             # One folder per version: its segments (PID.ts) and messages (ORU_R01.ts) side by side
-│   │                         #   segments: v2.3 hand-written; later versions subclass the ones whose table changed and
-│   │                         #   re-export the rest (2.3.1: 53 changed; 2.4: 66 changed + 28 new; 2.5: 49 changed + 6 new;
-│   │                         #   2.5.1: OBR, OBX, ORC)
+├── v2.3/ … v2.9.1/           # One folder per version: its segments (PID.ts) and messages (ORU_R01.ts) side by side
+│   │                         #   segments: v2.3 hand-written; v2.3.1 to v2.5.1 subclass the ones whose table changed;
+│   │                         #   v2.6 on are generated from the version's segment spec (codegen/spec/), and a segment
+│   │                         #   whose table did not change re-exports the earlier version's class
 │   │                         #   messages (generated): one module per message with its builder, parser and structure;
 │   │                         #   index.ts = the version barrel, registry.ts = structure name → parser
 └── testdata/                 # 30 sample HL7 messages for integration tests
@@ -70,7 +72,10 @@ queries QRY Q26–Q30 with ROR/RAR/RDR/RER/RGR, ORU W01, and the patient care, r
 trial, product experience and application management messages: PPR/PRR, PGL/PPV, PPP/PTR, PPG/PPT,
 QRY PC4/PC9/PCE/PCK, RQI/RPI/RPL/RPR, RQP, RQC/RCI/RCL, PIN, RQA/RPA, REF/RRI, CRM, CSU, PEX, SUR,
 NMQ/NMR/NMD — every trigger event of the HL7 v2.3 event list), each in the shape the
-standard gives it for that version. See [codegen/README.md](codegen/README.md).
+standard gives it for that version. See [codegen/README.md](codegen/README.md). From v2.6 on, a version's
+segment spec and message schemas are imported from the standard itself, from hl7.eu's pages or the official
+chapter PDFs, by the tools in [codegen/extract](codegen/extract/README.md); every decision the import makes is
+recorded in `codegen/extracted/<version>/IMPORT.md`.
 
 ## Installation
 
@@ -116,7 +121,8 @@ also work, but they are not an officially tested target.
 Every supported version has its own subpath, `@campfhir/hl7/<version>`, with its segments and messages. Versions that are structurally identical to their predecessor simply
 re-export it, so `src/v2.4` `NK1` *is* the v2.3 `NK1` class, while a segment whose field table
 changed gets a subclass in that version (`src/v2.4` `PID` extends the 2.3.1 `PID` with PID-31 to
-PID-38). Segments are available from the version that introduced them:
+PID-38). From v2.6 on a changed segment gets a class of its own, generated from that version's table.
+Segments are available from the version that introduced them:
 
 | Version | Based on | Notes |
 |---|---|---|
@@ -125,12 +131,29 @@ PID-38). Segments are available from the version that introduced them:
 | `v2.4` | v2.3.1 | Complete: every message (334 structures, 57 new in 2.4: OML/ORL, OMG/ORG, OMP/ORP, OUL^R21, QBP/RSP/RTB/RDY and the other chapter 5 queries, the chapter 13 automation messages, PMU^B01–B06, BAR^P10, ADT A52–A55 and A60–A62) generated against the 2.4 field tables (94 segments have their own class, 28 of them new in 2.4); the 2.4 structure changes (ROL and PDA in ADT, CTD/FT1 in ORM and ORU, required order detail in ORR/OSR, …) applied |
 | `v2.5` | v2.4 | Complete: every message (387 structures, 50 new in 2.5: OML^O33/O35 and ORL^O34/O36, OUL^R22–R24, OMI/ORI, OMB/ORB, the BPS/BRP/BTS/BRT blood bank messages, RDE^O25/RRE^O26, QBP^Q31/RSP^K31 and the chapter 5 Z73–Z99 conformance queries, PMU^B07/B08, BAR^P12, DFT^P11) generated against the 2.5 field tables (55 segments have their own class, 6 of them new in 2.5: BPO, BPX, BTX, CON, IPC, OVR); the 2.5 structure changes (`[{SFT}]` after MSH in every message except the ones kept from earlier releases, TIMING groups after ORC, SPECIMEN groups, repeating ERR in the acknowledgments, A03/A16 with the A01 segments, …) applied |
 | `v2.5.1` | v2.5 | Complete: every message (387 structures) generated against the 2.5.1 field tables (OBR, OBX and ORC have their own class: OBR-50, OBX-20 to OBX-25, ORC-31; the rest re-export v2.5's); the two 2.5.1 structure changes (`[{SFT}]` in QRY^PC4/PC9/PCE/PCK, no NTE after RXE in RRE^O26) applied |
+| `v2.6` | v2.5.1 | 410 structures (37 new: the chapter 16 e-claims messages EHC^E01–E24 with QBP/RSP^E03/E22, the chapter 17 materials messages SLR/SLN/STI/STC, OPL/OPR, OPU^R25, MFN/MFK^M14–M17); 171 segments generated from the 2.6 tables. Imported from hl7.eu, checked against Caristix and HAPI |
+| `v2.7` | v2.6 | 326 structures (9 new: CCF/CCQ^I19–I22, OML^O39/ORL^O40, ORA^R33, OSM^R26, QBP^Q32/RSP^K32, SIU^S27; the messages withdrawn as of 2.7 left out); 175 segments. Imported from hl7.eu, checked against Caristix and HAPI |
+| `v2.7.1` | v2.7 | 326 structures, the same as 2.7; 23 segments have their own class, the rest re-export 2.7's. Imported from hl7.eu, checked against Caristix |
+| `v2.8` | v2.7.1 | 335 structures (22 new: the donor messages DBC/DBU/DEL/DEO/DER/DPR/DRC/DRG^O41–O48, OMQ/ORX/OSU, ORU^R40/ORA^R41, QBP/RSP^Q33/Q34/K33/K34, SCN/SDN/SDR/SMD); 181 segments, 58 with their own class. Imported from hl7.eu (chapter 16 from the official PDF), checked against Caristix and HAPI |
+| `v2.8.1` | v2.8 | 335 structures; 29 segments with their own class. Imported from hl7.eu and the official PDFs of chapters 4, 4A, 9, 11, 13, 14 and 16, checked against HAPI |
+| `v2.8.2` | v2.8.1 | 337 structures (MFN/MFK^M18 new); 185 segments (DPS, MCP, OMC, PM1 new), 24 with their own class. Imported from hl7.eu alone (no second source exists for it) |
+| `v2.9` | v2.8.2 | 351 structures (22 new: OML^O59/RCV^O59, ORL^O53–O56, ORU^R42/R43, RDE^O49/RRE^O50, OMQ/ORX/OSU on O57/O58/O51–O52, MFN/MFK^M19, INR^U14, the chapter 17 SLS/STS/SDS/SMS); 192 segments. Imported from the official chapter PDFs, checked against hl7.eu |
+| `v2.9.1` | v2.9 | 351 structures, with the gender harmony segments GSP, GSR and GSC in the patient, next-of-kin, guarantor (now a GUARANTOR group) and insurance parts; 195 segments. Imported from the official chapter PDFs, checked against hl7.eu |
 
-The root `parse()` dispatches a version once it is complete: 1.0 parses v2.3, 1.1 adds v2.3.1,
-1.2 adds v2.4 (2.0 drops CommonJS and Node < 24), 2.1 adds v2.5 and 2.2 adds v2.5.1; a later
-version (the latest, v2.9.1, and the releases between) would join in its own minor release, see the [roadmap](ROADMAP.md). Every segment field
-and every message structure of a dispatched version has been checked against hl7.eu, Caristix and
-HAPI: see [docs/validation](docs/validation/README.md).
+A few messages of each version from v2.6 on are not generated yet: their tables hold a choice between groups
+or a placeholder group, which the message schema cannot express, or they wrap such a message (8 in v2.6,
+22–29 in the later versions; each version's `codegen/extracted/<version>/IMPORT.md` lists them with the reason).
+
+The root `parse()` dispatches v2.3 to v2.5.1: 1.0 parses v2.3, 1.1 adds v2.3.1, 1.2 adds v2.4
+(2.0 drops CommonJS and Node < 24), 2.1 adds v2.5 and 2.2 adds v2.5.1. The later versions arrived as
+modules first: 2.3 adds v2.6, v2.7 and v2.7.1, 2.4 v2.8, 2.5 v2.8.1, 2.6 v2.8.2, 2.7 v2.9 and 2.8 v2.9.1.
+Their parsers and builders are imported from `@campfhir/hl7/<version>` directly; they join `parse()` once
+they have the round-trip tests the earlier versions have, see the [roadmap](ROADMAP.md).
+
+Every segment field and every message structure of every version is checked against the sources there
+are for it: hl7.eu, Caristix and HAPI, and the official HL7 chapter PDFs where they were at hand (which
+decide). Each version has a segment ledger and a message ledger in [docs/validation](docs/validation/README.md)
+listing every field and structure, every disagreement between the sources and every dated decision.
 
 ## Imports
 
@@ -229,11 +252,10 @@ switch (result.val.structure) {
 them), and `identifyMessage(hl7String)` returns only what MSH-9 and MSH-12 say. `MESSAGES` of
 `@campfhir/hl7/v2.3` is the map they dispatch on (message structure name → parser).
 
-Versions are wired one per release (`SUPPORTED_VERSIONS`): 1.0 dispatches HL7 v2.3, 1.1 adds v2.3.1,
-1.2 adds v2.4, and every MSH-12 value outside that list is an error until its release. To parse such a feed anyway, or one
-that leaves MSH-12 empty, name the version to parse as: `parse(hl7String, { version: '2.4' })`.
-The individual parsers of every version (`parseADT_A01` of `@campfhir/hl7/v2.5.1`, …)
-stay available regardless.
+`SUPPORTED_VERSIONS` lists the versions `parse()` dispatches (v2.3 to v2.5.1), and every MSH-12 value
+outside that list is an error. To parse such a feed anyway, or one that leaves MSH-12 empty, name the
+version to parse as: `parse(hl7String, { version: '2.5.1' })`, or call the version's own parser
+(`parseADT_A01` of `@campfhir/hl7/v2.9.1`, …), which every version from v2.3 to v2.9.1 has.
 
 In v2.3 MSH-9 has two components, message type and trigger event (`ADT^A01`); the message
 structure component (`ADT^A01^ADT_A01`) arrives in v2.3.1. The dispatcher keys on
@@ -552,7 +574,7 @@ against), not a parser.
 
 ### Version Organization
 
-Segments, builders, and parsers are organized by HL7 version (`v2.3`, `v2.5.1`), supporting:
+Segments and messages are organized by HL7 version (`v2.3` … `v2.9.1`), supporting:
 - Multiple versions simultaneously
 - Adding new versions without affecting existing code
 - Version-specific business logic
@@ -572,8 +594,14 @@ Segments, builders, and parsers are organized by HL7 version (`v2.3`, `v2.5.1`),
 
 ### Adding a New HL7 Version
 
-1. Add `codegen/schemas/v2.X/version.ts` naming its base version and the messages whose structure changed
-2. Hand-write the segments the version introduces in `src/v2.X/`; everything else is generated or mirrored from the base version
+1. Pull the sources: `codegen/validate/fetch-sources.sh v2.X <dir> --record` (hl7.eu, Caristix, HAPI); convert any
+   official chapter PDFs with `codegen/extract/pdf-chapter.ts`
+2. Import: `codegen/extract/add-version.sh v2.X <dir>` extracts the segment and message tables, writes the segment
+   spec, the message schemas and `version.ts`, generates `src/v2.X/`, and builds the two validation ledgers
+3. Settle what the ledgers report: fix the extraction, or record the decision with its date and source in
+   `codegen/extracted/v2.X/overrides.json` or the notes files (see [docs/validation](docs/validation/README.md))
+
+The steps are described in [codegen/extract/README.md](codegen/extract/README.md).
 
 ## Design Decisions
 
