@@ -9,5 +9,35 @@
       "len": "0"
     },
     "note": "hl7.eu hl7v281segmRF1.htm prints no row for RF1-18 (field 17 is followed by 19; the table ends at 25, Action Code). In v2.8 RF1-18 is Remaining Benefit Amount (MO). HAPI v281 instead renumbers RF1 to 24 fields, shifting 19-25 down by one; HL7 field numbers are not reused, so hl7.eu's numbering stands and RF1-18 is kept as a withdrawn position (no type) under its v2.8 name. Caristix 2.8.1 answers HTTP 500."
+  },
+  "OBR-5": {
+    "date": "2026-10-30",
+    "name": "Priority",
+    "note": "The official v2.8.1 chapter 4 (V281_CH04_Orders.pdf, HL7 Attribute Table – OBR – Observation Request, and 4.5.3.5 OBR-5: \"retained for backward compatibilty only as of v 2.4\") names this withdrawn field Priority, as v2.8 and hl7.eu std282 do (the PDF spells \"compatibilty\" so). hl7.eu hl7v281segmOBR.htm and HAPI v281 both print \"Deliver-To Location\" (HAPI numbers the repeats \"Deliver-To Location Number 2\" ...); hl7.org is authoritative, so the official name stands."
+  },
+  "OBR-6": {
+    "date": "2026-10-30",
+    "name": "Requested Date/Time",
+    "note": "The official v2.8.1 chapter 4 (V281_CH04_Orders.pdf, HL7 Attribute Table – OBR – Observation Request, and 4.5.3.6 OBR-6: \"retained for backward compatibilty only as of v 2.4\") names this withdrawn field Requested Date/Time, as v2.8 and hl7.eu std282 do (the PDF spells \"compatibilty\" so). hl7.eu hl7v281segmOBR.htm and HAPI v281 both print \"Deliver-To Location\" (HAPI numbers the repeats \"Deliver-To Location Number 2\" ...); hl7.org is authoritative, so the official name stands."
+  },
+  "OBR-14": {
+    "date": "2026-10-30",
+    "name": "Specimen Received Date/Time *",
+    "note": "The official v2.8.1 chapter 4 (V281_CH04_Orders.pdf, HL7 Attribute Table – OBR – Observation Request, and 4.5.3.14 OBR-14: \"retained for backward compatibilty only as of v 2.5\") names this withdrawn field Specimen Received Date/Time *, as v2.8 and hl7.eu std282 do (the PDF spells \"compatibilty\" so). hl7.eu hl7v281segmOBR.htm and HAPI v281 both print \"Deliver-To Location\" (HAPI numbers the repeats \"Deliver-To Location Number 2\" ...); hl7.org is authoritative, so the official name stands."
+  },
+  "OBR-15": {
+    "date": "2026-10-30",
+    "name": "Specimen Source",
+    "note": "The official v2.8.1 chapter 4 (V281_CH04_Orders.pdf, HL7 Attribute Table – OBR – Observation Request, and 4.5.3.15 OBR-15: \"retained for backward compatibilty only as of v 2.5\") names this withdrawn field Specimen Source, as v2.8 and hl7.eu std282 do (the PDF spells \"compatibilty\" so). hl7.eu hl7v281segmOBR.htm and HAPI v281 both print \"Deliver-To Location\" (HAPI numbers the repeats \"Deliver-To Location Number 2\" ...); hl7.org is authoritative, so the official name stands."
+  },
+  "OBR-27": {
+    "date": "2026-10-30",
+    "name": "Quantity/Timing",
+    "note": "The official v2.8.1 chapter 4 (V281_CH04_Orders.pdf, HL7 Attribute Table – OBR – Observation Request, and 4.5.3.27 OBR-27: \"retained for backward compatibilty only as of v 2.5\") names this withdrawn field Quantity/Timing, as v2.8 and hl7.eu std282 do (the PDF spells \"compatibilty\" so). hl7.eu hl7v281segmOBR.htm and HAPI v281 both print \"Deliver-To Location\" (HAPI numbers the repeats \"Deliver-To Location Number 2\" ...); hl7.org is authoritative, so the official name stands."
+  },
+  "ORC-7": {
+    "date": "2026-10-30",
+    "name": "Quantity/Timing",
+    "note": "The official v2.8.1 chapter 4 (V281_CH04_Orders.pdf, HL7 Attribute Table – ORC – Common Order, and 4.5.1.7 ORC-7: \"retained for backward compatibilty only as of v 2.5\") names this withdrawn field Quantity/Timing, as v2.8 and hl7.eu std282 do (the PDF spells \"compatibilty\" so). hl7.eu hl7v281segmORC.htm and HAPI v281 both print \"Deliver-To Location\" (HAPI numbers the repeats \"Deliver-To Location Number 2\" ...); hl7.org is authoritative, so the official name stands."
   }
 }
