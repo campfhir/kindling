@@ -1,6 +1,6 @@
 {
   "name": "@campfhir/hl7",
-  "version": "2.9.0",
+  "version": "3.0.0",
   "description": "Zero-dependency TypeScript library for building and parsing HL7v2 messages (v2.1 to v2.9.1). Runs on Node.js, Bun, browsers, and Cloudflare Workers.",
   "type": "module",
   "sideEffects": false,
@@ -310,6 +310,10 @@
     "./builders/v2.5.1/*": {
       "types": "./dist/v2.5.1/*.d.ts",
       "default": "./dist/v2.5.1/*.js"
+    },
+    "./parse": {
+      "types": "./dist/parse.d.ts",
+      "default": "./dist/parse.js"
     },
     "./utils/dateUtils": {
       "types": "./dist/utils/dateUtils.d.ts",

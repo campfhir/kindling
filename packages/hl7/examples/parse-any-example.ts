@@ -1,4 +1,4 @@
-import { parse, selectParser } from "../src/index.ts";
+import { parse, selectParser } from "../src/parse.ts";
 
 /**
  * Example: parse messages of unknown type with the root parser.
@@ -23,7 +23,7 @@ MSA|AA|MSG001`,
 ];
 
 for (const raw of messages) {
-  const selected = selectParser(raw);
+  const selected = await selectParser(raw);
   if (!selected.ok) {
     console.log(`✗ ${selected.err.message}`);
     continue;
@@ -31,7 +31,7 @@ for (const raw of messages) {
   if (selected.val.kind === "batch") continue;
   console.log(`→ ${selected.val.messageType.messageCode}^${selected.val.messageType.triggerEvent} is ${selected.val.structure} (HL7 v${selected.val.version})`);
 
-  const result = parse(raw);
+  const result = await parse(raw);
   if (!result.ok) {
     console.log(`✗ ${result.err.message}`);
     continue;
@@ -55,7 +55,7 @@ for (const raw of messages) {
 }
 
 // A batch file: parse() hands it to parseBatch(); every message is dispatched, a bad one does not fail the batch.
-const batch = parse(
+const batch = await parse(
   [
     "FHS|^~\\&|ADT|Hospital|EMR|Clinic|20231115140500||nightly",
     "BHS|^~\\&|ADT|Hospital|EMR|Clinic|20231115140500||adt",

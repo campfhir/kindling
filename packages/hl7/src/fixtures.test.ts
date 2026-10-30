@@ -9,6 +9,13 @@ import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import { parse } from "./parse.ts";
 import expectations from "../fixtures/expectations.json" with { type: "json" };
+import { SUPPORTED_VERSIONS } from "./identify.ts";
+
+// The first message of a version loads that version's registry, about half a second cold. Load them
+// all up front, so the timed tests measure the parse and not the load.
+beforeAll(async () => {
+  for (const version of SUPPORTED_VERSIONS) await parse(`MSH|^~\\&|A|B|C|D|20240101||ACK|1|P|${version}\rMSA|AA|1`);
+}, 120_000);
 
 const FIXTURES = join(import.meta.dirname, "..", "fixtures");
 const GENERATED = join(FIXTURES, "generated");
@@ -35,13 +42,13 @@ function expectationFor(records: Expectation[] | undefined, key: string | number
 }
 
 /** Parses one message and checks it against its expectation (none: it parses and round-trips exactly). */
-function check(wire: string, expectation: Expectation | undefined) {
+async function check(wire: string, expectation: Expectation | undefined) {
   const warnings: string[] = [];
   const warn = console.warn;
   console.warn = (m: string) => warnings.push(m);
   let result;
   try {
-    result = parse(wire);
+    result = await parse(wire);
   } finally {
     console.warn = warn;
   }
@@ -70,13 +77,13 @@ describe("generated fixtures (hl7apy structures)", () => {
     const records = (expectations.generated as Record<string, Expectation[]>)[file];
     const messages = readFileSync(join(GENERATED, file), "utf8").split("\r\r").map((m) => m.replace(/\r+$/, "")).filter(Boolean);
     describe(file, () => {
-      test.each(messages.map((m, i) => [`#${i + 1} ${m.split("\r")[0].split("|")[8]}`, m] as const))("%s", (label, wire) => {
-        check(wire, expectationFor(records, label.slice(label.indexOf(" ") + 1), used));
+      test.each(messages.map((m, i) => [`#${i + 1} ${m.split("\r")[0].split("|")[8]}`, m] as const))("%s", async (label, wire) => {
+        await check(wire, expectationFor(records, label.slice(label.indexOf(" ") + 1), used));
       });
     });
   }
 
-  test("every expectation matched a message", () => {
+  test("every expectation matched a message", async () => {
     const stale = Object.entries(expectations.generated).flatMap(([file, records]) => (records as Expectation[]).filter((r) => !used.has(r)).map((r) => `${file}: ${r.messages?.join(", ")}`));
     expect(stale).toEqual([]);
   });
@@ -123,14 +130,14 @@ for (const [source, files] of Object.entries(expectations.external)) {
       seen.add(name);
       const records = (files as Record<string, Expectation[]>)[name];
       describe(name, () => {
-        test.each(messages.map((m, i) => [`#${i + 1} ${m.split("\r")[0].split("|")[8]}`, i + 1, m] as const))("%s", (_label, index, wire) => {
+        test.each(messages.map((m, i) => [`#${i + 1} ${m.split("\r")[0].split("|")[8]}`, i + 1, m] as const))("%s", async (_label, index, wire) => {
           count++;
-          check(wire, expectationFor(records, index, used));
+          await check(wire, expectationFor(records, index, used));
         });
       });
     }
 
-    test("every expectation matched a message", () => {
+    test("every expectation matched a message", async () => {
       const stale = Object.entries(files as Record<string, Expectation[]>).flatMap(([name, records]) =>
         !seen.has(name) ? [`${name}: no such file`] : records.filter((r) => !used.has(r)).map((r) => `${name}: ${r.messages?.join(", ") ?? "the message"}`),
       );

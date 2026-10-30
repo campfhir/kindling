@@ -69,7 +69,7 @@ structure and why the others differ.
 The releases before v2.3 are imported as versions of their own (`STANDALONE` in `import-extraction.ts`): their
 `version.ts` has no `baseVersion`, every segment is generated from the spec (MSH, BHS and FHS on the shared header base
 in `src/types/header.ts`, so `add-version.sh` adopts nothing), and no later version re-exports them. Register such a
-version in `codegen/generate.ts` before v2.3, and the root `parse()` in `src/dispatch.ts`.
+version in `codegen/generate.ts` before v2.3, and the version registry loader in `src/dispatch.ts`.
 
 ## What the importer cannot express yet
 
