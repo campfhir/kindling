@@ -1,6 +1,6 @@
 {
   "name": "@campfhir/hl7",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Zero-dependency TypeScript library for building and parsing HL7v2 messages (v2.1 to v2.9.1). Runs on Node.js, Bun, browsers, and Cloudflare Workers.",
   "type": "module",
   "sideEffects": false,
@@ -325,8 +325,7 @@
   ],
   "scripts": {
     "barrels": "tsx codegen/generate-barrels.ts",
-    "prebuild": "tsx codegen/generate-barrels.ts && node codegen/generate-package-exports.mjs",
-    "build": "tsup && tsc -p tsconfig.build.json",
+      "build": "tsup && tsc -p tsconfig.build.json",
     "watch": "tsup --watch",
     "clean": "rm -rf dist",
     "test": "vitest run",
