@@ -3,7 +3,7 @@ name: Publish
 # Stages every workspace package whose package.json version is not on npm yet. Each package is
 # verified (lint, typecheck, test, build, smoke test) and staged in its own job, so one package's
 # failure never blocks another. A maintainer then approves the staged version with 2FA. A version
-# that is already staged and waiting for approval is skipped (.github/scripts/staged.mjs).
+# that is already staged and waiting for approval is reported with a notice, not as a failure.
 on:
   push:
     branches: [main]
@@ -54,19 +54,7 @@ jobs:
       - run: npm install -g npm@latest
       - run: pnpm install --frozen-lockfile
 
-      # unpublished.mjs only sees live versions; a version staged by an earlier run and still
-      # waiting for approval would be staged again, which npm refuses (E409). "unknown" (the stages
-      # could not be listed) stages as before.
-      - name: Is ${{ matrix.name }}@${{ matrix.version }} already staged?
-        id: staged
-        run: node .github/scripts/staged.mjs "${{ matrix.name }}" "${{ matrix.version }}" >> "$GITHUB_OUTPUT"
-
-      - name: Already staged
-        if: steps.staged.outputs.staged == 'true'
-        run: echo "::notice title=${{ matrix.name }}@${{ matrix.version }}::Already staged on npm and waiting for approval (npm stage approve <stage-id>, or the Staged Packages tab on npmjs.com); not staged again."
-
       - name: Verify ${{ matrix.name }}
-        if: steps.staged.outputs.staged != 'true'
         run: |
           pnpm exec eslint "packages/${{ matrix.folder }}"
           pnpm --filter "${{ matrix.name }}" typecheck
@@ -76,10 +64,24 @@ jobs:
           node .github/scripts/smoke-test.mjs "${{ matrix.folder }}"
 
       - name: Stage ${{ matrix.name }}@${{ matrix.version }} on npm
-        if: steps.staged.outputs.staged != 'true'
         working-directory: packages/${{ matrix.folder }}
         # Authenticates via OIDC: the package's npm trusted publisher must point at this
         # repository (campfhir/kindling) and workflow file (publish.yml). The version only goes
         # live after a maintainer approves it with 2FA: `npm stage approve <stage-id>` or the
         # Staged Packages tab on npmjs.com. Needs npm >= 11.15.0.
-        run: npm stage publish
+        #
+        # unpublished.mjs only sees live versions, so a version staged by an earlier run and still
+        # waiting for approval is staged again here, and npm refuses with E409 "Cannot stage
+        # previously published version". As the version is not live (unpublished.mjs checked), that
+        # error means it is already staged: report it with a notice and succeed. Every other error
+        # fails the job. (The token trusted publishing exchanges cannot list stages, so the job cannot
+        # ask beforehand: GET /-/stage answers 401 to it.)
+        run: |
+          set +e
+          npm stage publish 2>&1 | tee "$RUNNER_TEMP/stage.log"
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ] && grep -q 'Cannot stage previously published version' "$RUNNER_TEMP/stage.log"; then
+            echo "::notice title=${{ matrix.name }}@${{ matrix.version }}::Already staged on npm and waiting for approval (npm stage approve <stage-id>, or the Staged Packages tab on npmjs.com); not staged again."
+            exit 0
+          fi
+          exit "$status"
