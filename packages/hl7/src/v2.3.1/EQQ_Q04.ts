@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { EQL } from "./EQL.ts";
 import { DSC } from "./DSC.ts";
@@ -30,6 +31,12 @@ export interface ParsedEQQ_Q04 extends ParsedMessageBase {
   /** The DSC segment. */
   continuation?: DSC;
 }
+
+/**
+ * An HL7 EQQ^Q04 (HL7 v2.3.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedEQQ_Q04>(message, "2.3.1", "EQQ_Q04")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedEQQ_Q04 = ParsedHL7MessageOf<"2.3.1", "EQQ_Q04", ParsedEQQ_Q04>;
 
 /** The segment parsers of EQQ^Q04 (HL7 v2.3.1). */
 const PARSERS: SegmentParsers = {

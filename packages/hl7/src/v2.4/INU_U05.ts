@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { EQU } from "./EQU.ts";
 import { INV } from "./INV.ts";
@@ -34,6 +35,12 @@ export interface ParsedINU_U05 extends ParsedMessageBase {
   /** The ROL segment. */
   role?: ROL;
 }
+
+/**
+ * An HL7 INU^U05 (HL7 v2.4) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedINU_U05>(message, "2.4", "INU_U05")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedINU_U05 = ParsedHL7MessageOf<"2.4", "INU_U05", ParsedINU_U05>;
 
 /** The segment parsers of INU^U05 (HL7 v2.4). */
 const PARSERS: SegmentParsers = {

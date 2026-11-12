@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -38,6 +39,12 @@ export interface ParsedINR_U14 extends ParsedMessageBase {
   /** The INV segments. */
   inventoryDetails?: INV[];
 }
+
+/**
+ * An HL7 INR^U14 (HL7 v2.9.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedINR_U14>(message, "2.9.1", "INR_U14")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedINR_U14 = ParsedHL7MessageOf<"2.9.1", "INR_U14", ParsedINR_U14>;
 
 /** The segment parsers of INR^U14 (HL7 v2.9.1). */
 const PARSERS: SegmentParsers = {

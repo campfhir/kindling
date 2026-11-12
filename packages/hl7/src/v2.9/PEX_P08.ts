@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { PEX_P07_Parser, type ParsedPEX_P07, PEX_P07, type PEX_P07Options, type VisitGroup, type ExperienceGroup, type PexObservationGroup, type PexCauseGroup, type RxOrderGroup, type TimingQtyGroup, type RxAdministrationGroup, type ObservationGroup, type AssociatedPersonGroup, type AssociatedRxOrderGroup, type Nk1TimingQtyGroup, type AssociatedRxAdminGroup, type AssociatedObservationGroup, type StudyGroup } from "./PEX_P07.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -19,6 +20,12 @@ export { PEX_P07_STRUCTURE as PEX_P08_STRUCTURE } from "./PEX_P07.ts";
 export type { ParsedVisit, ParsedExperience, ParsedPexObservation, ParsedPexCause, ParsedRxOrder, ParsedTimingQty, ParsedRxAdministration, ParsedObservation, ParsedAssociatedPerson, ParsedAssociatedRxOrder, ParsedNk1TimingQty, ParsedAssociatedRxAdmin, ParsedAssociatedObservation, ParsedStudy } from "./PEX_P07.ts";
 /** Structured result of parsing an HL7 PEX^P08 (HL7 v2.9) message. */
 export type ParsedPEX_P08 = ParsedPEX_P07;
+
+/**
+ * An HL7 PEX^P08 (HL7 v2.9) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedPEX_P08>(message, "2.9", "PEX_P08")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedPEX_P08 = ParsedHL7MessageOf<"2.9", "PEX_P08", ParsedPEX_P08>;
 
 /** Parser for HL7 PEX^P08 (HL7 v2.9) messages. */
 export class PEX_P08_Parser extends PEX_P07_Parser {

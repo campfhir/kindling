@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { EVN } from "./EVN.ts";
 import { PID } from "./PID.ts";
@@ -55,6 +56,12 @@ export interface ParsedADT_A39 extends ParsedMessageBase {
   /** The PATIENT groups. */
   patients: ParsedMergePatient[];
 }
+
+/**
+ * An HL7 ADT^A39 (HL7 v2.3.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedADT_A39>(message, "2.3.1", "ADT_A39")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedADT_A39 = ParsedHL7MessageOf<"2.3.1", "ADT_A39", ParsedADT_A39>;
 
 /** The segment parsers of ADT^A39 (HL7 v2.3.1). */
 const PARSERS: SegmentParsers = {

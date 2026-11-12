@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -71,6 +72,12 @@ export interface ParsedRTB_K13 extends ParsedMessageBase {
   /** The DSC segment. */
   continuation?: DSC;
 }
+
+/**
+ * An HL7 RTB^K13 (HL7 v2.6) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRTB_K13>(message, "2.6", "RTB_K13")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRTB_K13 = ParsedHL7MessageOf<"2.6", "RTB_K13", ParsedRTB_K13>;
 
 /** The segment parsers of RTB^K13 (HL7 v2.6). */
 const PARSERS: SegmentParsers = {

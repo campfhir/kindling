@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { MSA } from "./MSA.ts";
 import { ERR } from "./ERR.ts";
@@ -113,6 +114,12 @@ export interface ParsedRER_RER extends ParsedMessageBase {
   /** The DSC segment. */
   continuation?: DSC;
 }
+
+/**
+ * An HL7 RER^RER (HL7 v2.6) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRER_RER>(message, "2.6", "RER_RER")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRER_RER = ParsedHL7MessageOf<"2.6", "RER_RER", ParsedRER_RER>;
 
 /** The segment parsers of RER^RER (HL7 v2.6). */
 const PARSERS: SegmentParsers = {

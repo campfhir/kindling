@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { MSA } from "./MSA.ts";
@@ -295,6 +296,12 @@ export interface ParsedPPV_PCA extends ParsedMessageBase {
   /** The PATIENT groups. */
   patients: ParsedCarePatient[];
 }
+
+/**
+ * An HL7 PPV^PCA (HL7 v2.5) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedPPV_PCA>(message, "2.5", "PPV_PCA")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedPPV_PCA = ParsedHL7MessageOf<"2.5", "PPV_PCA", ParsedPPV_PCA>;
 
 /** The segment parsers of PPV^PCA (HL7 v2.5). */
 const PARSERS: SegmentParsers = {

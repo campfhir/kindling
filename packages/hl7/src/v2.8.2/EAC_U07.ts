@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -84,6 +85,12 @@ export interface ParsedEAC_U07 extends ParsedMessageBase {
   /** The COMMAND groups. */
   commands: ParsedCommand[];
 }
+
+/**
+ * An HL7 EAC^U07 (HL7 v2.8.2) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedEAC_U07>(message, "2.8.2", "EAC_U07")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedEAC_U07 = ParsedHL7MessageOf<"2.8.2", "EAC_U07", ParsedEAC_U07>;
 
 /** The segment parsers of EAC^U07 (HL7 v2.8.2). */
 const PARSERS: SegmentParsers = {

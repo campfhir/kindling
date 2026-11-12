@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { PPP_PCB_Parser, type ParsedPPP_PCB, PPP_PCB, type PPP_PCBOptions, type PatientVisitGroup, type PathwayGroup, type PathwayRoleGroup, type ProblemGroup, type ProblemRoleGroup, type ProblemObservationGroup, type GoalGroup, type GoalRoleGroup, type GoalObservationGroup, type OrderGroup, type OrderDetailGroup, type OrderObservationGroup } from "./PPP_PCB.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { PPP_PCB_STRUCTURE as PPP_PCC_STRUCTURE } from "./PPP_PCB.ts";
 export type { ParsedPatientVisit, ParsedPathway, ParsedPathwayRole, ParsedProblem, ParsedProblemRole, ParsedProblemObservation, ParsedGoal, ParsedGoalRole, ParsedGoalObservation, ParsedOrder, ParsedOrderDetail, ParsedOrderObservation } from "./PPP_PCB.ts";
 /** Structured result of parsing an HL7 PPP^PCC (HL7 v2.6) message. */
 export type ParsedPPP_PCC = ParsedPPP_PCB;
+
+/**
+ * An HL7 PPP^PCC (HL7 v2.6) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedPPP_PCC>(message, "2.6", "PPP_PCC")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedPPP_PCC = ParsedHL7MessageOf<"2.6", "PPP_PCC", ParsedPPP_PCC>;
 
 /** Parser for HL7 PPP^PCC (HL7 v2.6) messages. */
 export class PPP_PCC_Parser extends PPP_PCB_Parser {

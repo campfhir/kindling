@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { ADT_A05_Parser, type ParsedADT_A05, ADT_A05, type ADT_A05Options, type ProcedureGroup, type InsuranceGroup } from "./ADT_A05.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -20,6 +21,12 @@ export { ADT_A05_STRUCTURE as ADT_A14_STRUCTURE } from "./ADT_A05.ts";
 export type { ParsedProcedure, ParsedInsurance } from "./ADT_A05.ts";
 /** Structured result of parsing an HL7 ADT^A14 (HL7 v2.8.2) message. */
 export type ParsedADT_A14 = ParsedADT_A05;
+
+/**
+ * An HL7 ADT^A14 (HL7 v2.8.2) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedADT_A14>(message, "2.8.2", "ADT_A14")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedADT_A14 = ParsedHL7MessageOf<"2.8.2", "ADT_A14", ParsedADT_A14>;
 
 /** Parser for HL7 ADT^A14 (HL7 v2.8.2) messages. */
 export class ADT_A14_Parser extends ADT_A05_Parser {

@@ -292,20 +292,16 @@ several versions narrows to each one it handles in turn.
 
 `DispatchedMessage` brings in the declarations of every message of its version (about 1,000 files).
 Code that handles a few message types can bring in only those with `isMessage()` (or
-`assertMessage()`), which checks the structure as well as the version. The type is built from each
-message module's own `Parsed<MSG>`, so the type checker loads ORU and its segments (about 150 files)
-and not SIU:
+`assertMessage()`), which checks the structure as well as the version. Every message module exports
+its `Dispatched<MSG>` type, so the type checker loads ORU and its segments (about 150 files) and
+not SIU:
 
 ```typescript
-import { parse, isMessage, type ParsedHL7MessageOf } from '@campfhir/hl7/parse';
-import type { ParsedORU_R01 } from '@campfhir/hl7/v2.5.1/ORU_R01';
-import type { ParsedORU_R30 } from '@campfhir/hl7/v2.5.1/ORU_R30';
+import { parse, isMessage } from '@campfhir/hl7/parse';
+import type { DispatchedORU_R01 } from '@campfhir/hl7/v2.5.1/ORU_R01';
+import type { DispatchedORU_R30 } from '@campfhir/hl7/v2.5.1/ORU_R30';
 
-type ORU =
-  | ParsedHL7MessageOf<'2.5.1', 'ORU_R01', ParsedORU_R01>
-  | ParsedHL7MessageOf<'2.5.1', 'ORU_R30', ParsedORU_R30>;
-
-if (result.val.kind === 'message' && isMessage<ORU>(result.val, '2.5.1', 'ORU_R01', 'ORU_R30')) {
+if (result.val.kind === 'message' && isMessage<DispatchedORU_R01 | DispatchedORU_R30>(result.val, '2.5.1', 'ORU_R01', 'ORU_R30')) {
   if (result.val.structure === 'ORU_R01') result.val.parsed.patientResults;
 }
 ```

@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -168,6 +169,12 @@ export interface ParsedORF_R04 extends ParsedMessageBase {
   /** The DSC segment. */
   continuation?: DSC;
 }
+
+/**
+ * An HL7 ORF^R04 (HL7 v2.6) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedORF_R04>(message, "2.6", "ORF_R04")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedORF_R04 = ParsedHL7MessageOf<"2.6", "ORF_R04", ParsedORF_R04>;
 
 /** The segment parsers of ORF^R04 (HL7 v2.6). */
 const PARSERS: SegmentParsers = {

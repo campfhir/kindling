@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { RRE_O12_Parser, type ParsedRRE_O12, RRE_O12, type RRE_O12Options, type ResponseGroup, type PatientGroup, type OrderGroup, type TimingGroup, type EncodingGroup, type TimingEncodedGroup } from "./RRE_O12.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { RRE_O12_STRUCTURE as RRE_O26_STRUCTURE } from "./RRE_O12.ts";
 export type { ParsedResponse, ParsedPatient, ParsedOrder, ParsedTiming, ParsedEncoding, ParsedTimingEncoded } from "./RRE_O12.ts";
 /** Structured result of parsing an HL7 RRE^O26 (HL7 v2.8.2) message. */
 export type ParsedRRE_O26 = ParsedRRE_O12;
+
+/**
+ * An HL7 RRE^O26 (HL7 v2.8.2) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRRE_O26>(message, "2.8.2", "RRE_O26")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRRE_O26 = ParsedHL7MessageOf<"2.8.2", "RRE_O26", ParsedRRE_O26>;
 
 /** Parser for HL7 RRE^O26 (HL7 v2.8.2) messages. */
 export class RRE_O26_Parser extends RRE_O12_Parser {

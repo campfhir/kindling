@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { SLR_S28_Parser, type ParsedSLR_S28, SLR_S28, type SLR_S28Options } from "./SLR_S28.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -17,6 +18,12 @@ export { SLR_S28_STRUCTURE as STI_S30_STRUCTURE } from "./SLR_S28.ts";
 
 /** Structured result of parsing an HL7 STI^S30 (HL7 v2.9) message. */
 export type ParsedSTI_S30 = ParsedSLR_S28;
+
+/**
+ * An HL7 STI^S30 (HL7 v2.9) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedSTI_S30>(message, "2.9", "STI_S30")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedSTI_S30 = ParsedHL7MessageOf<"2.9", "STI_S30", ParsedSTI_S30>;
 
 /** Parser for HL7 STI^S30 (HL7 v2.9) messages. */
 export class STI_S30_Parser extends SLR_S28_Parser {

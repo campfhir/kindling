@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { MSA } from "./MSA.ts";
 import { ERR } from "./ERR.ts";
@@ -124,6 +125,12 @@ export interface ParsedRAR_RAR extends ParsedMessageBase {
   /** The DSC segment. */
   continuation?: DSC;
 }
+
+/**
+ * An HL7 RAR^RAR (HL7 v2.5) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRAR_RAR>(message, "2.5", "RAR_RAR")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRAR_RAR = ParsedHL7MessageOf<"2.5", "RAR_RAR", ParsedRAR_RAR>;
 
 /** The segment parsers of RAR^RAR (HL7 v2.5). */
 const PARSERS: SegmentParsers = {

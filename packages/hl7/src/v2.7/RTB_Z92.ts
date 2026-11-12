@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { RTB_K13_Parser, type ParsedRTB_K13, RTB_K13, type RTB_K13Options, type RowDefinitionGroup } from "./RTB_K13.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -20,6 +21,12 @@ export { RTB_K13_STRUCTURE as RTB_Z92_STRUCTURE } from "./RTB_K13.ts";
 export type { ParsedRowDefinition } from "./RTB_K13.ts";
 /** Structured result of parsing an HL7 RTB^Z92 (HL7 v2.7) message. */
 export type ParsedRTB_Z92 = ParsedRTB_K13;
+
+/**
+ * An HL7 RTB^Z92 (HL7 v2.7) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRTB_Z92>(message, "2.7", "RTB_Z92")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRTB_Z92 = ParsedHL7MessageOf<"2.7", "RTB_Z92", ParsedRTB_Z92>;
 
 /** Parser for HL7 RTB^Z92 (HL7 v2.7) messages. */
 export class RTB_Z92_Parser extends RTB_K13_Parser {

@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { ARV } from "./ARV.ts";
 import { SFT } from "./SFT.ts";
@@ -202,6 +203,12 @@ export interface ParsedORU_R32 extends ParsedMessageBase {
   /** The DEVICE groups. */
   devices?: ParsedDevice[];
 }
+
+/**
+ * An HL7 ORU^R32 (HL7 v2.9.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedORU_R32>(message, "2.9.1", "ORU_R32")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedORU_R32 = ParsedHL7MessageOf<"2.9.1", "ORU_R32", ParsedORU_R32>;
 
 /** The segment parsers of ORU^R32 (HL7 v2.9.1). */
 const PARSERS: SegmentParsers = {

@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { MSA } from "./MSA.ts";
 import { ERR } from "./ERR.ts";
@@ -185,6 +186,12 @@ export interface ParsedORL_O36 extends ParsedMessageBase {
   /** The RESPONSE group. */
   response?: ParsedResponse;
 }
+
+/**
+ * An HL7 ORL^O36 (HL7 v2.8.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedORL_O36>(message, "2.8.1", "ORL_O36")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedORL_O36 = ParsedHL7MessageOf<"2.8.1", "ORL_O36", ParsedORL_O36>;
 
 /** The segment parsers of ORL^O36 (HL7 v2.8.1). */
 const PARSERS: SegmentParsers = {

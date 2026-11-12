@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { CSU_C09_Parser, type ParsedCSU_C09, CSU_C09, type CSU_C09Options, type PatientGroup, type VisitGroup, type StudyPhaseGroup, type StudyScheduleGroup, type StudyObservationGroup, type TimingQtyGroup, type StudyPharmGroup, type CommonOrderGroup, type RxAdminGroup } from "./CSU_C09.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -17,6 +18,12 @@ export { CSU_C09_STRUCTURE as CSU_C10_STRUCTURE } from "./CSU_C09.ts";
 export type { ParsedPatient, ParsedVisit, ParsedStudyPhase, ParsedStudySchedule, ParsedStudyObservation, ParsedTimingQty, ParsedStudyPharm, ParsedCommonOrder, ParsedRxAdmin } from "./CSU_C09.ts";
 /** Structured result of parsing an HL7 CSU^C10 (HL7 v2.7.1) message. */
 export type ParsedCSU_C10 = ParsedCSU_C09;
+
+/**
+ * An HL7 CSU^C10 (HL7 v2.7.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedCSU_C10>(message, "2.7.1", "CSU_C10")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedCSU_C10 = ParsedHL7MessageOf<"2.7.1", "CSU_C10", ParsedCSU_C10>;
 
 /** Parser for HL7 CSU^C10 (HL7 v2.7.1) messages. */
 export class CSU_C10_Parser extends CSU_C09_Parser {

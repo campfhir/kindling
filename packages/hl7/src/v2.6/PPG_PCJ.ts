@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { PPG_PCG_Parser, type ParsedPPG_PCG, PPG_PCG, type PPG_PCGOptions, type PatientVisitGroup, type PathwayGroup, type PathwayRoleGroup, type GoalGroup, type GoalRoleGroup, type GoalObservationGroup, type ProblemGroup, type ProblemRoleGroup, type ProblemObservationGroup, type OrderGroup, type OrderDetailGroup, type OrderObservationGroup } from "./PPG_PCG.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { PPG_PCG_STRUCTURE as PPG_PCJ_STRUCTURE } from "./PPG_PCG.ts";
 export type { ParsedPatientVisit, ParsedPathway, ParsedPathwayRole, ParsedGoal, ParsedGoalRole, ParsedGoalObservation, ParsedProblem, ParsedProblemRole, ParsedProblemObservation, ParsedOrder, ParsedOrderDetail, ParsedOrderObservation } from "./PPG_PCG.ts";
 /** Structured result of parsing an HL7 PPG^PCJ (HL7 v2.6) message. */
 export type ParsedPPG_PCJ = ParsedPPG_PCG;
+
+/**
+ * An HL7 PPG^PCJ (HL7 v2.6) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedPPG_PCJ>(message, "2.6", "PPG_PCJ")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedPPG_PCJ = ParsedHL7MessageOf<"2.6", "PPG_PCJ", ParsedPPG_PCJ>;
 
 /** Parser for HL7 PPG^PCJ (HL7 v2.6) messages. */
 export class PPG_PCJ_Parser extends PPG_PCG_Parser {

@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { CRM_C01_Parser, type ParsedCRM_C01, CRM_C01, type CRM_C01Options, type PatientGroup } from "./CRM_C01.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -17,6 +18,12 @@ export { CRM_C01_STRUCTURE as CRM_C05_STRUCTURE } from "./CRM_C01.ts";
 export type { ParsedPatient } from "./CRM_C01.ts";
 /** Structured result of parsing an HL7 CRM^C05 (HL7 v2.4) message. */
 export type ParsedCRM_C05 = ParsedCRM_C01;
+
+/**
+ * An HL7 CRM^C05 (HL7 v2.4) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedCRM_C05>(message, "2.4", "CRM_C05")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedCRM_C05 = ParsedHL7MessageOf<"2.4", "CRM_C05", ParsedCRM_C05>;
 
 /** Parser for HL7 CRM^C05 (HL7 v2.4) messages. */
 export class CRM_C05_Parser extends CRM_C01_Parser {

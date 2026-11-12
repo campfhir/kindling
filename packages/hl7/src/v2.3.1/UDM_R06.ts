@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { UDM_Q05_Parser, type ParsedUDM_Q05, UDM_Q05, type UDM_Q05Options } from "./UDM_Q05.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { UDM_Q05_STRUCTURE as UDM_R06_STRUCTURE } from "./UDM_Q05.ts";
 
 /** Structured result of parsing an HL7 UDM^R06 (HL7 v2.3.1) message. */
 export type ParsedUDM_R06 = ParsedUDM_Q05;
+
+/**
+ * An HL7 UDM^R06 (HL7 v2.3.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedUDM_R06>(message, "2.3.1", "UDM_R06")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedUDM_R06 = ParsedHL7MessageOf<"2.3.1", "UDM_R06", ParsedUDM_R06>;
 
 /** Parser for HL7 UDM^R06 (HL7 v2.3.1) messages. */
 export class UDM_R06_Parser extends UDM_Q05_Parser {

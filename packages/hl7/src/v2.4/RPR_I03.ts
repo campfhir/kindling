@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { MSA } from "./MSA.ts";
 import { PRD } from "./PRD.ts";
@@ -55,6 +56,12 @@ export interface ParsedRPR_I03 extends ParsedMessageBase {
   /** The NTE segments. */
   notes?: NTE[];
 }
+
+/**
+ * An HL7 RPR^I03 (HL7 v2.4) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRPR_I03>(message, "2.4", "RPR_I03")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRPR_I03 = ParsedHL7MessageOf<"2.4", "RPR_I03", ParsedRPR_I03>;
 
 /** The segment parsers of RPR^I03 (HL7 v2.4). */
 const PARSERS: SegmentParsers = {

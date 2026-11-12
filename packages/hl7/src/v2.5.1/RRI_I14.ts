@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result as ParseResult } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { RRI_I12_Parser, type ParsedRRI_I12, RRI_I12, type RRI_I12Options, type Provider, type ProcedureGroup, type Observation, type Result } from "./RRI_I12.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { RRI_I12_STRUCTURE as RRI_I14_STRUCTURE } from "./RRI_I12.ts";
 export type { ParsedProvider, ParsedProcedure, ParsedObservation, ParsedResult } from "./RRI_I12.ts";
 /** Structured result of parsing an HL7 RRI^I14 (HL7 v2.5.1) message. */
 export type ParsedRRI_I14 = ParsedRRI_I12;
+
+/**
+ * An HL7 RRI^I14 (HL7 v2.5.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRRI_I14>(message, "2.5.1", "RRI_I14")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRRI_I14 = ParsedHL7MessageOf<"2.5.1", "RRI_I14", ParsedRRI_I14>;
 
 /** Parser for HL7 RRI^I14 (HL7 v2.5.1) messages. */
 export class RRI_I14_Parser extends RRI_I12_Parser {

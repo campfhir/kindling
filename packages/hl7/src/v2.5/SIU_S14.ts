@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { SIU_S12_Parser, type ParsedSIU_S12, SIU_S12, type SIU_S12Options, type SIUPatientGroup, type SIUResourcesGroup, type SIUServiceGroup, type SIUGeneralResourceGroup, type SIULocationResourceGroup, type SIUPersonnelResourceGroup } from "./SIU_S12.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { SIU_S12_STRUCTURE as SIU_S14_STRUCTURE } from "./SIU_S12.ts";
 export type { ParsedSIUPatient, ParsedSIUResources, ParsedSIUService, ParsedSIUGeneralResource, ParsedSIULocationResource, ParsedSIUPersonnelResource } from "./SIU_S12.ts";
 /** Structured result of parsing an HL7 SIU^S14 (HL7 v2.5) message. */
 export type ParsedSIU_S14 = ParsedSIU_S12;
+
+/**
+ * An HL7 SIU^S14 (HL7 v2.5) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedSIU_S14>(message, "2.5", "SIU_S14")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedSIU_S14 = ParsedHL7MessageOf<"2.5", "SIU_S14", ParsedSIU_S14>;
 
 /** Parser for HL7 SIU^S14 (HL7 v2.5) messages. */
 export class SIU_S14_Parser extends SIU_S12_Parser {

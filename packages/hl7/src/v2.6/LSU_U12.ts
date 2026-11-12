@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -42,6 +43,12 @@ export interface ParsedLSU_U12 extends ParsedMessageBase {
   /** The ROL segment. */
   role?: ROL;
 }
+
+/**
+ * An HL7 LSU^U12 (HL7 v2.6) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedLSU_U12>(message, "2.6", "LSU_U12")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedLSU_U12 = ParsedHL7MessageOf<"2.6", "LSU_U12", ParsedLSU_U12>;
 
 /** The segment parsers of LSU^U12 (HL7 v2.6). */
 const PARSERS: SegmentParsers = {

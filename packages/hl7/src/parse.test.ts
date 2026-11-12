@@ -2,7 +2,9 @@ import { describe, test, expect, vi } from "vitest";
 import { parse, parseBatch, selectParser, type ParsedHL7, type SelectedParser } from "./parse.ts";
 import { identifyMessage, isBatchInput, SUPPORTED_VERSIONS } from "./identify.ts";
 import { parseMessage, selectMessageParser, isVersion, assertVersion, isMessage, assertMessage, type ParsedHL7MessageOf } from "./dispatch.ts";
-import type { ParsedACK } from "./v2.3/ACK.ts";
+import type { DispatchedACK } from "./v2.3/ACK.ts";
+import type { DispatchedADT_A01 } from "./v2.3/ADT_A01.ts";
+import type { DispatchedORU_R01 } from "./v2.3/ORU_R01.ts";
 import type { DispatchedMessage as V23Message, DispatchedParser as V23Parser } from "./v2.3/registry.ts";
 import type { DispatchedMessage as V231Message } from "./v2.3.1/registry.ts";
 import type { DispatchedMessage as V24Message } from "./v2.4/registry.ts";
@@ -265,8 +267,11 @@ describe("parse", () => {
   });
 
   test("isMessage() and assertMessage() narrow to the structures of one version", async () => {
-    type A01 = ParsedHL7MessageOf<"2.3", "ADT_A01", ParsedADT_A01>;
-    type Results = ParsedHL7MessageOf<"2.3", "ORU_R01", ParsedORU_R01> | ParsedHL7MessageOf<"2.3", "ACK", ParsedACK>;
+    type A01 = DispatchedADT_A01;
+    type Results = DispatchedORU_R01 | DispatchedACK;
+    // The generated alias is the hand-built type.
+    const same: ParsedHL7MessageOf<"2.3", "ADT_A01", ParsedADT_A01> extends A01 ? (A01 extends ParsedHL7MessageOf<"2.3", "ADT_A01", ParsedADT_A01> ? true : false) : false = true;
+    expect(same).toBe(true);
     const value = await parsedMessage(A01);
     expect(isMessage<A01>(value, "2.3", "ADT_A01")).toBe(true);
     expect(isMessage<Results>(value, "2.3", "ORU_R01", "ACK")).toBe(false);

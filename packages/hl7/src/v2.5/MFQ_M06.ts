@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MFQ_M01_Parser, type ParsedMFQ_M01, MFQ_M01, type MFQ_M01Options } from "./MFQ_M01.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -17,6 +18,12 @@ export { MFQ_M01_STRUCTURE as MFQ_M06_STRUCTURE } from "./MFQ_M01.ts";
 
 /** Structured result of parsing an HL7 MFQ^M06 (HL7 v2.5) message. */
 export type ParsedMFQ_M06 = ParsedMFQ_M01;
+
+/**
+ * An HL7 MFQ^M06 (HL7 v2.5) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedMFQ_M06>(message, "2.5", "MFQ_M06")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedMFQ_M06 = ParsedHL7MessageOf<"2.5", "MFQ_M06", ParsedMFQ_M06>;
 
 /** Parser for HL7 MFQ^M06 (HL7 v2.5) messages. */
 export class MFQ_M06_Parser extends MFQ_M01_Parser {

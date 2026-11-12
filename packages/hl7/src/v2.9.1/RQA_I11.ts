@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { RQA_I08_Parser, type ParsedRQA_I08, RQA_I08, type RQA_I08Options, type Authorization1Group, type ProviderGroup, type NextOfKinGroup, type GuarantorInsuranceGroup, type InsuranceGroup, type ProcedureGroup, type Authorization2Group, type ObservationGroup, type ResultsGroup, type VisitGroup } from "./RQA_I08.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { RQA_I08_STRUCTURE as RQA_I11_STRUCTURE } from "./RQA_I08.ts";
 export type { ParsedAuthorization1, ParsedProvider, ParsedNextOfKin, ParsedGuarantorInsurance, ParsedInsurance, ParsedProcedure, ParsedAuthorization2, ParsedObservation, ParsedResults, ParsedVisit } from "./RQA_I08.ts";
 /** Structured result of parsing an HL7 RQA^I11 (HL7 v2.9.1) message. */
 export type ParsedRQA_I11 = ParsedRQA_I08;
+
+/**
+ * An HL7 RQA^I11 (HL7 v2.9.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRQA_I11>(message, "2.9.1", "RQA_I11")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRQA_I11 = ParsedHL7MessageOf<"2.9.1", "RQA_I11", ParsedRQA_I11>;
 
 /** Parser for HL7 RQA^I11 (HL7 v2.9.1) messages. */
 export class RQA_I11_Parser extends RQA_I08_Parser {

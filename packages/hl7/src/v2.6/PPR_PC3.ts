@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { PPR_PC1_Parser, type ParsedPPR_PC1, PPR_PC1, type PPR_PC1Options, type PatientVisitGroup, type ProblemGroup, type ProblemRoleGroup, type PathwayGroup, type ProblemObservationGroup, type GoalGroup, type GoalRoleGroup, type GoalObservationGroup, type OrderGroup, type OrderDetailGroup, type OrderObservationGroup } from "./PPR_PC1.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { PPR_PC1_STRUCTURE as PPR_PC3_STRUCTURE } from "./PPR_PC1.ts";
 export type { ParsedPatientVisit, ParsedProblem, ParsedProblemRole, ParsedPathway, ParsedProblemObservation, ParsedGoal, ParsedGoalRole, ParsedGoalObservation, ParsedOrder, ParsedOrderDetail, ParsedOrderObservation } from "./PPR_PC1.ts";
 /** Structured result of parsing an HL7 PPR^PC3 (HL7 v2.6) message. */
 export type ParsedPPR_PC3 = ParsedPPR_PC1;
+
+/**
+ * An HL7 PPR^PC3 (HL7 v2.6) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedPPR_PC3>(message, "2.6", "PPR_PC3")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedPPR_PC3 = ParsedHL7MessageOf<"2.6", "PPR_PC3", ParsedPPR_PC3>;
 
 /** Parser for HL7 PPR^PC3 (HL7 v2.6) messages. */
 export class PPR_PC3_Parser extends PPR_PC1_Parser {

@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { QRD } from "./QRD.ts";
 import { QRF } from "./QRF.ts";
@@ -156,6 +157,12 @@ export interface ParsedSQM_S25 extends ParsedMessageBase {
   /** The DSC segment. */
   continuation?: DSC;
 }
+
+/**
+ * An HL7 SQM^S25 (HL7 v2.6) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedSQM_S25>(message, "2.6", "SQM_S25")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedSQM_S25 = ParsedHL7MessageOf<"2.6", "SQM_S25", ParsedSQM_S25>;
 
 /** The segment parsers of SQM^S25 (HL7 v2.6). */
 const PARSERS: SegmentParsers = {

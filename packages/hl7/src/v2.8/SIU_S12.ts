@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SCH } from "./SCH.ts";
 import { TQ1 } from "./TQ1.ts";
@@ -168,6 +169,12 @@ export interface ParsedSIU_S12 extends ParsedMessageBase {
   /** The RESOURCES groups. */
   resources: ParsedResources[];
 }
+
+/**
+ * An HL7 SIU^S12 (HL7 v2.8) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedSIU_S12>(message, "2.8", "SIU_S12")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedSIU_S12 = ParsedHL7MessageOf<"2.8", "SIU_S12", ParsedSIU_S12>;
 
 /** The segment parsers of SIU^S12 (HL7 v2.8). */
 const PARSERS: SegmentParsers = {

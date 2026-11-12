@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { EVN } from "./EVN.ts";
 import { PID } from "./PID.ts";
@@ -42,6 +43,12 @@ export interface ParsedADT_A21 extends ParsedMessageBase {
   /** The OBX segments. */
   observations?: OBX[];
 }
+
+/**
+ * An HL7 ADT^A21 (HL7 v2.2) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedADT_A21>(message, "2.2", "ADT_A21")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedADT_A21 = ParsedHL7MessageOf<"2.2", "ADT_A21", ParsedADT_A21>;
 
 /** The segment parsers of ADT^A21 (HL7 v2.2). */
 const PARSERS: SegmentParsers = {

@@ -44,6 +44,20 @@ function messageLabel(schema: MessageSchema): string {
 /** "HL7 v2.3" from a directory name "v2.3". */
 const versionLabel = (version: string) => `HL7 ${version}`;
 
+/**
+ * The \`Dispatched<MSG>\` alias of a message module: the message as the root \`parse()\` returns it,
+ * which \`isMessage()\` of \`@campfhir/hl7/parse\` narrows to.
+ */
+const dispatchedAlias = (name: string, label: string, version: string) => {
+  const id = version.replace(/^v/, "");
+  return `/**
+ * An HL7 ${label} (${versionLabel(version)}) message as the root \`parse()\` returns it. Narrow a parsed
+ * message to it with \`isMessage<Dispatched${name}>(message, "${id}", "${name}")\` of \`@campfhir/hl7/parse\`.
+ */
+export type Dispatched${name} = ParsedHL7MessageOf<"${id}", "${name}", Parsed${name}>;
+`;
+};
+
 /** Wraps a structure item's name in the standard's optionality/repetition brackets. */
 function bracket(item: StructureItem, inner: string): string {
   const repeating = "repeating" in item && item.repeating;
@@ -347,6 +361,7 @@ export function generateMessageParser(schema: MessageSchema, version: string): s
     `import type { Result } from "../types/result.ts";`,
     `import type { StructureItem } from "../types/schema.ts";`,
     `import { parseStructure, type ParsedMessageBase, type SegmentParsers } from "../types/structure.ts";`,
+    `import type { ParsedHL7MessageOf } from "../dispatch.ts";`,
     `import { ${name}_STRUCTURE } from "./${name}.ts";`,
     ...segments.map((s) => `import { ${s} } from "./${s}.ts";`),
   ].join("\n");
@@ -376,6 +391,7 @@ export function generateMessageParser(schema: MessageSchema, version: string): s
   return `${moduleDoc("Parser", schema, version)}${imports}
 
 ${groupInterfaces}${groupInterfaces ? "\n" : ""}${parsedInterface}
+${dispatchedAlias(name, label, version)}
 /** The segment parsers of ${label} (${versionLabel(version)}). */
 const PARSERS: SegmentParsers = {
 ${parsers}
@@ -411,11 +427,13 @@ export function generateParserWrapper(schema: MessageSchema, version: string): s
   const groupTypes = collectGroups(schema.structure).map(parsedTypeName);
   const reexport = groupTypes.length ? `export type { ${groupTypes.join(", ")} } from "./${base}_Parser.ts";\n` : "";
   return `${moduleDoc("Parser", schema, version, [`Shares the ${base.replace("_", "^")} structure.`])}import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { ${base}_Parser, type Parsed${base} } from "./${base}_Parser.ts";
 
 ${reexport}/** Structured result of parsing an HL7 ${label} (${versionLabel(version)}) message. */
 export type Parsed${name} = Parsed${base};
 
+${dispatchedAlias(name, label, version)}
 /** Parser for HL7 ${label} (${versionLabel(version)}) messages. */
 export class ${name}_Parser extends ${base}_Parser {
   /** The message name used in error messages. */

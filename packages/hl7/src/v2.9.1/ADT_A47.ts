@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { ADT_A44_Parser, type ParsedADT_A44, ADT_A44, type ADT_A44Options, type PatientGroup } from "./ADT_A44.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { ADT_A44_STRUCTURE as ADT_A47_STRUCTURE } from "./ADT_A44.ts";
 export type { ParsedPatient } from "./ADT_A44.ts";
 /** Structured result of parsing an HL7 ADT^A47 (HL7 v2.9.1) message. */
 export type ParsedADT_A47 = ParsedADT_A44;
+
+/**
+ * An HL7 ADT^A47 (HL7 v2.9.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedADT_A47>(message, "2.9.1", "ADT_A47")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedADT_A47 = ParsedHL7MessageOf<"2.9.1", "ADT_A47", ParsedADT_A47>;
 
 /** Parser for HL7 ADT^A47 (HL7 v2.9.1) messages. */
 export class ADT_A47_Parser extends ADT_A44_Parser {

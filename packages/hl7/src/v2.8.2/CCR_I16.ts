@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -685,6 +686,12 @@ export interface ParsedCCR_I16 extends ParsedMessageBase {
   /** The REL segments. */
   relList?: REL[];
 }
+
+/**
+ * An HL7 CCR^I16 (HL7 v2.8.2) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedCCR_I16>(message, "2.8.2", "CCR_I16")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedCCR_I16 = ParsedHL7MessageOf<"2.8.2", "CCR_I16", ParsedCCR_I16>;
 
 /** The segment parsers of CCR^I16 (HL7 v2.8.2). */
 const PARSERS: SegmentParsers = {

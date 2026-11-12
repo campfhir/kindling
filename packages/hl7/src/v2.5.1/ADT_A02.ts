@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { EVN } from "./EVN.ts";
@@ -65,6 +66,12 @@ export interface ParsedADT_A02 extends ParsedMessageBase {
   /** The PDA segment. */
   deathAndAutopsy?: PDA;
 }
+
+/**
+ * An HL7 ADT^A02 (HL7 v2.5.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedADT_A02>(message, "2.5.1", "ADT_A02")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedADT_A02 = ParsedHL7MessageOf<"2.5.1", "ADT_A02", ParsedADT_A02>;
 
 /** The segment parsers of ADT^A02 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {

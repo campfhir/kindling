@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -138,6 +139,12 @@ export interface ParsedEHC_E10 extends ParsedMessageBase {
   /** The INVOICE PROCESSING RESULTS INFO groups. */
   invoiceProcessingResultsInfos: ParsedInvoiceProcessingResultsInfo[];
 }
+
+/**
+ * An HL7 EHC^E10 (HL7 v2.9.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedEHC_E10>(message, "2.9.1", "EHC_E10")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedEHC_E10 = ParsedHL7MessageOf<"2.9.1", "EHC_E10", ParsedEHC_E10>;
 
 /** The segment parsers of EHC^E10 (HL7 v2.9.1). */
 const PARSERS: SegmentParsers = {

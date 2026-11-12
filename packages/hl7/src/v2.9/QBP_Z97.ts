@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { QBP_Q15_Parser, type ParsedQBP_Q15, QBP_Q15, type QBP_Q15Options } from "./QBP_Q15.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { QBP_Q15_STRUCTURE as QBP_Z97_STRUCTURE } from "./QBP_Q15.ts";
 
 /** Structured result of parsing an HL7 QBP^Z97 (HL7 v2.9) message. */
 export type ParsedQBP_Z97 = ParsedQBP_Q15;
+
+/**
+ * An HL7 QBP^Z97 (HL7 v2.9) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedQBP_Z97>(message, "2.9", "QBP_Z97")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedQBP_Z97 = ParsedHL7MessageOf<"2.9", "QBP_Z97", ParsedQBP_Z97>;
 
 /** Parser for HL7 QBP^Z97 (HL7 v2.9) messages. */
 export class QBP_Z97_Parser extends QBP_Q15_Parser {

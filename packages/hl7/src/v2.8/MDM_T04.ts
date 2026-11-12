@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MDM_T02_Parser, type ParsedMDM_T02, MDM_T02, type MDM_T02Options, type CommonOrderGroup, type TimingGroup, type ObservationGroup } from "./MDM_T02.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -21,6 +22,12 @@ export { MDM_T02_STRUCTURE as MDM_T04_STRUCTURE } from "./MDM_T02.ts";
 export type { ParsedCommonOrder, ParsedTiming, ParsedObservation } from "./MDM_T02.ts";
 /** Structured result of parsing an HL7 MDM^T04 (HL7 v2.8) message. */
 export type ParsedMDM_T04 = ParsedMDM_T02;
+
+/**
+ * An HL7 MDM^T04 (HL7 v2.8) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedMDM_T04>(message, "2.8", "MDM_T04")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedMDM_T04 = ParsedHL7MessageOf<"2.8", "MDM_T04", ParsedMDM_T04>;
 
 /** Parser for HL7 MDM^T04 (HL7 v2.8) messages. */
 export class MDM_T04_Parser extends MDM_T02_Parser {

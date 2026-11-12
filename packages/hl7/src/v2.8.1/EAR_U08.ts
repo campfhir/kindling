@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -76,6 +77,12 @@ export interface ParsedEAR_U08 extends ParsedMessageBase {
   /** The COMMAND RESPONSE groups. */
   commandResponses: ParsedCommandResponse[];
 }
+
+/**
+ * An HL7 EAR^U08 (HL7 v2.8.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedEAR_U08>(message, "2.8.1", "EAR_U08")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedEAR_U08 = ParsedHL7MessageOf<"2.8.1", "EAR_U08", ParsedEAR_U08>;
 
 /** The segment parsers of EAR^U08 (HL7 v2.8.1). */
 const PARSERS: SegmentParsers = {

@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -105,6 +106,12 @@ export interface ParsedRQI_I03 extends ParsedMessageBase {
   /** The NTE segments. */
   notes?: NTE[];
 }
+
+/**
+ * An HL7 RQI^I03 (HL7 v2.8.2) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRQI_I03>(message, "2.8.2", "RQI_I03")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRQI_I03 = ParsedHL7MessageOf<"2.8.2", "RQI_I03", ParsedRQI_I03>;
 
 /** The segment parsers of RQI^I03 (HL7 v2.8.2). */
 const PARSERS: SegmentParsers = {

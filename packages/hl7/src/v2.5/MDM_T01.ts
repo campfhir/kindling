@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { EVN } from "./EVN.ts";
@@ -90,6 +91,12 @@ export interface ParsedMDM_T01 extends ParsedMessageBase {
   /** The TXA segment. */
   document: TXA;
 }
+
+/**
+ * An HL7 MDM^T01 (HL7 v2.5) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedMDM_T01>(message, "2.5", "MDM_T01")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedMDM_T01 = ParsedHL7MessageOf<"2.5", "MDM_T01", ParsedMDM_T01>;
 
 /** The segment parsers of MDM^T01 (HL7 v2.5). */
 const PARSERS: SegmentParsers = {

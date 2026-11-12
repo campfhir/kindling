@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { MSA } from "./MSA.ts";
 import { ERR } from "./ERR.ts";
@@ -106,6 +107,12 @@ export interface ParsedORD_O02 extends ParsedMessageBase {
   /** The ORDER TRAY groups. */
   trayOrders?: ParsedTrayOrder[];
 }
+
+/**
+ * An HL7 ORD^O02 (HL7 v2.3.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedORD_O02>(message, "2.3.1", "ORD_O02")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedORD_O02 = ParsedHL7MessageOf<"2.3.1", "ORD_O02", ParsedORD_O02>;
 
 /** The segment parsers of ORD^O02 (HL7 v2.3.1). */
 const PARSERS: SegmentParsers = {

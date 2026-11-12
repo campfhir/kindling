@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { QPD } from "./QPD.ts";
@@ -38,6 +39,12 @@ export interface ParsedQSB_Z83 extends ParsedMessageBase {
   /** The DSC segment. */
   continuation?: DSC;
 }
+
+/**
+ * An HL7 QSB^Z83 (HL7 v2.5.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedQSB_Z83>(message, "2.5.1", "QSB_Z83")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedQSB_Z83 = ParsedHL7MessageOf<"2.5.1", "QSB_Z83", ParsedQSB_Z83>;
 
 /** The segment parsers of QSB^Z83 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {

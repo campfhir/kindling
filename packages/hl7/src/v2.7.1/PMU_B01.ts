@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -70,6 +71,12 @@ export interface ParsedPMU_B01 extends ParsedMessageBase {
   /** The ROL segments. */
   roles?: ROL[];
 }
+
+/**
+ * An HL7 PMU^B01 (HL7 v2.7.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedPMU_B01>(message, "2.7.1", "PMU_B01")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedPMU_B01 = ParsedHL7MessageOf<"2.7.1", "PMU_B01", ParsedPMU_B01>;
 
 /** The segment parsers of PMU^B01 (HL7 v2.7.1). */
 const PARSERS: SegmentParsers = {

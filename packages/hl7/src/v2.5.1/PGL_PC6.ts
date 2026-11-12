@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { PID } from "./PID.ts";
@@ -266,6 +267,12 @@ export interface ParsedPGL_PC6 extends ParsedMessageBase {
   /** The GOAL groups. */
   goals: ParsedGoal[];
 }
+
+/**
+ * An HL7 PGL^PC6 (HL7 v2.5.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedPGL_PC6>(message, "2.5.1", "PGL_PC6")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedPGL_PC6 = ParsedHL7MessageOf<"2.5.1", "PGL_PC6", ParsedPGL_PC6>;
 
 /** The segment parsers of PGL^PC6 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {

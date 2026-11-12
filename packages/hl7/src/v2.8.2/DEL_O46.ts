@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -94,6 +95,12 @@ export interface ParsedDEL_O46 extends ParsedMessageBase {
   /** The NTE segments. */
   notes?: NTE[];
 }
+
+/**
+ * An HL7 DEL^O46 (HL7 v2.8.2) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedDEL_O46>(message, "2.8.2", "DEL_O46")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedDEL_O46 = ParsedHL7MessageOf<"2.8.2", "DEL_O46", ParsedDEL_O46>;
 
 /** The segment parsers of DEL^O46 (HL7 v2.8.2). */
 const PARSERS: SegmentParsers = {

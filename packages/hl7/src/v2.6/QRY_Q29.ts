@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { QRY_Q01_Parser, type ParsedQRY_Q01, QRY_Q01, type QRY_Q01Options } from "./QRY_Q01.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -17,6 +18,12 @@ export { QRY_Q01_STRUCTURE as QRY_Q29_STRUCTURE } from "./QRY_Q01.ts";
 
 /** Structured result of parsing an HL7 QRY^Q29 (HL7 v2.6) message. */
 export type ParsedQRY_Q29 = ParsedQRY_Q01;
+
+/**
+ * An HL7 QRY^Q29 (HL7 v2.6) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedQRY_Q29>(message, "2.6", "QRY_Q29")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedQRY_Q29 = ParsedHL7MessageOf<"2.6", "QRY_Q29", ParsedQRY_Q29>;
 
 /** Parser for HL7 QRY^Q29 (HL7 v2.6) messages. */
 export class QRY_Q29_Parser extends QRY_Q01_Parser {

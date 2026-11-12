@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { MSA } from "./MSA.ts";
 import { ARV } from "./ARV.ts";
@@ -90,6 +91,12 @@ export interface ParsedOSU_O52 extends ParsedMessageBase {
   /** The ORDER STATUS groups. */
   orderStatus: ParsedOrderStatus[];
 }
+
+/**
+ * An HL7 OSU^O52 (HL7 v2.9) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedOSU_O52>(message, "2.9", "OSU_O52")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedOSU_O52 = ParsedHL7MessageOf<"2.9", "OSU_O52", ParsedOSU_O52>;
 
 /** The segment parsers of OSU^O52 (HL7 v2.9). */
 const PARSERS: SegmentParsers = {

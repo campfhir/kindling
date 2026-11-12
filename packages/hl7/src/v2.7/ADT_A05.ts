@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -152,6 +153,12 @@ export interface ParsedADT_A05 extends ParsedMessageBase {
   /** The UB2 segment. */
   ub92?: UB2;
 }
+
+/**
+ * An HL7 ADT^A05 (HL7 v2.7) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedADT_A05>(message, "2.7", "ADT_A05")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedADT_A05 = ParsedHL7MessageOf<"2.7", "ADT_A05", ParsedADT_A05>;
 
 /** The segment parsers of ADT^A05 (HL7 v2.7). */
 const PARSERS: SegmentParsers = {

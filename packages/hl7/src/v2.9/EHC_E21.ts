@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -72,6 +73,12 @@ export interface ParsedEHC_E21 extends ParsedMessageBase {
   /** The AUTHORIZATION REQUEST group. */
   authorizationRequest: ParsedAuthorizationRequest;
 }
+
+/**
+ * An HL7 EHC^E21 (HL7 v2.9) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedEHC_E21>(message, "2.9", "EHC_E21")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedEHC_E21 = ParsedHL7MessageOf<"2.9", "EHC_E21", ParsedEHC_E21>;
 
 /** The segment parsers of EHC^E21 (HL7 v2.9). */
 const PARSERS: SegmentParsers = {

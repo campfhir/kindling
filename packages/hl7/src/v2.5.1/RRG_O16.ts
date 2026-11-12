@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { MSA } from "./MSA.ts";
 import { ERR } from "./ERR.ts";
@@ -140,6 +141,12 @@ export interface ParsedRRG_O16 extends ParsedMessageBase {
   /** The ORDER groups. */
   orders?: ParsedOrder[];
 }
+
+/**
+ * An HL7 RRG^O16 (HL7 v2.5.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRRG_O16>(message, "2.5.1", "RRG_O16")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRRG_O16 = ParsedHL7MessageOf<"2.5.1", "RRG_O16", ParsedRRG_O16>;
 
 /** The segment parsers of RRG^O16 (HL7 v2.5.1). */
 const PARSERS: SegmentParsers = {

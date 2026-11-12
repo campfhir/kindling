@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { VTQ } from "./VTQ.ts";
 import { RDF } from "./RDF.ts";
@@ -34,6 +35,12 @@ export interface ParsedVQQ_Q01 extends ParsedMessageBase {
   /** The DSC segment. */
   continuation?: DSC;
 }
+
+/**
+ * An HL7 VQQ^Q01 (HL7 v2.3) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedVQQ_Q01>(message, "2.3", "VQQ_Q01")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedVQQ_Q01 = ParsedHL7MessageOf<"2.3", "VQQ_Q01", ParsedVQQ_Q01>;
 
 /** The segment parsers of VQQ^Q01 (HL7 v2.3). */
 const PARSERS: SegmentParsers = {

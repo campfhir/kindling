@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { QRD } from "./QRD.ts";
 import { QRF } from "./QRF.ts";
@@ -67,6 +68,12 @@ export interface ParsedRQC_I06 extends ParsedMessageBase {
   /** The NTE segments. */
   notes?: NTE[];
 }
+
+/**
+ * An HL7 RQC^I06 (HL7 v2.3.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRQC_I06>(message, "2.3.1", "RQC_I06")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRQC_I06 = ParsedHL7MessageOf<"2.3.1", "RQC_I06", ParsedRQC_I06>;
 
 /** The segment parsers of RQC^I06 (HL7 v2.3.1). */
 const PARSERS: SegmentParsers = {

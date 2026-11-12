@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -110,6 +111,12 @@ export interface ParsedMFN_M19 extends ParsedMessageBase {
   /** The CONTRACT RECORD groups. */
   contractRecords: ParsedContractRecord[];
 }
+
+/**
+ * An HL7 MFN^M19 (HL7 v2.9.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedMFN_M19>(message, "2.9.1", "MFN_M19")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedMFN_M19 = ParsedHL7MessageOf<"2.9.1", "MFN_M19", ParsedMFN_M19>;
 
 /** The segment parsers of MFN^M19 (HL7 v2.9.1). */
 const PARSERS: SegmentParsers = {

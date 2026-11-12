@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { EVN } from "./EVN.ts";
 import { PID } from "./PID.ts";
@@ -151,6 +152,12 @@ export interface ParsedBAR_P01 extends ParsedMessageBase {
   /** The VISIT groups. */
   visits: ParsedBARVisit[];
 }
+
+/**
+ * An HL7 BAR^P01 (HL7 v2.4) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedBAR_P01>(message, "2.4", "BAR_P01")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedBAR_P01 = ParsedHL7MessageOf<"2.4", "BAR_P01", ParsedBAR_P01>;
 
 /** The segment parsers of BAR^P01 (HL7 v2.4). */
 const PARSERS: SegmentParsers = {

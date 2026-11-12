@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -144,6 +145,12 @@ export interface ParsedBPS_O29 extends ParsedMessageBase {
   /** The ORDER groups. */
   orders: ParsedOrder[];
 }
+
+/**
+ * An HL7 BPS^O29 (HL7 v2.6) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedBPS_O29>(message, "2.6", "BPS_O29")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedBPS_O29 = ParsedHL7MessageOf<"2.6", "BPS_O29", ParsedBPS_O29>;
 
 /** The segment parsers of BPS^O29 (HL7 v2.6). */
 const PARSERS: SegmentParsers = {

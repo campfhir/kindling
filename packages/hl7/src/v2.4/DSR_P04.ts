@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { DSR_Q01_Parser, type ParsedDSR_Q01, DSR_Q01, type DSR_Q01Options } from "./DSR_Q01.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -19,6 +20,12 @@ export { DSR_Q01_STRUCTURE as DSR_P04_STRUCTURE } from "./DSR_Q01.ts";
 
 /** Structured result of parsing an HL7 DSR^P04 (HL7 v2.4) message. */
 export type ParsedDSR_P04 = ParsedDSR_Q01;
+
+/**
+ * An HL7 DSR^P04 (HL7 v2.4) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedDSR_P04>(message, "2.4", "DSR_P04")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedDSR_P04 = ParsedHL7MessageOf<"2.4", "DSR_P04", ParsedDSR_P04>;
 
 /** Parser for HL7 DSR^P04 (HL7 v2.4) messages. */
 export class DSR_P04_Parser extends DSR_Q01_Parser {

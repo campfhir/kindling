@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -76,6 +77,12 @@ export interface ParsedRSP_E03 extends ParsedMessageBase {
   /** The QUERY ACK group. */
   queryAck: ParsedQueryAck;
 }
+
+/**
+ * An HL7 RSP^E03 (HL7 v2.7) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRSP_E03>(message, "2.7", "RSP_E03")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRSP_E03 = ParsedHL7MessageOf<"2.7", "RSP_E03", ParsedRSP_E03>;
 
 /** The segment parsers of RSP^E03 (HL7 v2.7). */
 const PARSERS: SegmentParsers = {

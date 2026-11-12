@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -151,6 +152,12 @@ export interface ParsedEHC_E15 extends ParsedMessageBase {
   /** The ADJUSTMENT PAYEE groups. */
   adjustmentPayees?: ParsedAdjustmentPayee[];
 }
+
+/**
+ * An HL7 EHC^E15 (HL7 v2.8) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedEHC_E15>(message, "2.8", "EHC_E15")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedEHC_E15 = ParsedHL7MessageOf<"2.8", "EHC_E15", ParsedEHC_E15>;
 
 /** The segment parsers of EHC^E15 (HL7 v2.8). */
 const PARSERS: SegmentParsers = {

@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { MSA } from "./MSA.ts";
 import { SFT } from "./SFT.ts";
@@ -163,6 +164,12 @@ export interface ParsedVXR_V03 extends ParsedMessageBase {
   /** The ORDER groups. */
   orders?: ParsedVaccination[];
 }
+
+/**
+ * An HL7 VXR^V03 (HL7 v2.5) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedVXR_V03>(message, "2.5", "VXR_V03")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedVXR_V03 = ParsedHL7MessageOf<"2.5", "VXR_V03", ParsedVXR_V03>;
 
 /** The segment parsers of VXR^V03 (HL7 v2.5). */
 const PARSERS: SegmentParsers = {

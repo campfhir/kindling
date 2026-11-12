@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { PID } from "./PID.ts";
 import { PD1 } from "./PD1.ts";
@@ -164,6 +165,12 @@ export interface ParsedCSU_C09 extends ParsedMessageBase {
   /** The PATIENT groups. */
   patients: ParsedPatient[];
 }
+
+/**
+ * An HL7 CSU^C09 (HL7 v2.3.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedCSU_C09>(message, "2.3.1", "CSU_C09")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedCSU_C09 = ParsedHL7MessageOf<"2.3.1", "CSU_C09", ParsedCSU_C09>;
 
 /** The segment parsers of CSU^C09 (HL7 v2.3.1). */
 const PARSERS: SegmentParsers = {

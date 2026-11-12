@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { BAR_P01_Parser, type ParsedBAR_P01, BAR_P01, type BAR_P01Options, type BARVisitGroup, type BARProcedureGroup, type BARInsuranceGroup } from "./BAR_P01.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -19,6 +20,12 @@ export { BAR_P01_STRUCTURE as BAR_P05_STRUCTURE } from "./BAR_P01.ts";
 export type { ParsedBARVisit, ParsedBARProcedure, ParsedBARInsurance } from "./BAR_P01.ts";
 /** Structured result of parsing an HL7 BAR^P05 (HL7 v2.3.1) message. */
 export type ParsedBAR_P05 = ParsedBAR_P01;
+
+/**
+ * An HL7 BAR^P05 (HL7 v2.3.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedBAR_P05>(message, "2.3.1", "BAR_P05")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedBAR_P05 = ParsedHL7MessageOf<"2.3.1", "BAR_P05", ParsedBAR_P05>;
 
 /** Parser for HL7 BAR^P05 (HL7 v2.3.1) messages. */
 export class BAR_P05_Parser extends BAR_P01_Parser {

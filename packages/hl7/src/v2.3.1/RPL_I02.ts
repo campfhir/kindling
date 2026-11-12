@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { MSA } from "./MSA.ts";
 import { PRD } from "./PRD.ts";
@@ -59,6 +60,12 @@ export interface ParsedRPL_I02 extends ParsedMessageBase {
   /** The DSC segment. */
   continuation?: DSC;
 }
+
+/**
+ * An HL7 RPL^I02 (HL7 v2.3.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRPL_I02>(message, "2.3.1", "RPL_I02")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRPL_I02 = ParsedHL7MessageOf<"2.3.1", "RPL_I02", ParsedRPL_I02>;
 
 /** The segment parsers of RPL^I02 (HL7 v2.3.1). */
 const PARSERS: SegmentParsers = {

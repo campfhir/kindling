@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { QBP_Q21_Parser, type ParsedQBP_Q21, QBP_Q21, type QBP_Q21Options } from "./QBP_Q21.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { QBP_Q21_STRUCTURE as QBP_Q32_STRUCTURE } from "./QBP_Q21.ts";
 
 /** Structured result of parsing an HL7 QBP^Q32 (HL7 v2.9.1) message. */
 export type ParsedQBP_Q32 = ParsedQBP_Q21;
+
+/**
+ * An HL7 QBP^Q32 (HL7 v2.9.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedQBP_Q32>(message, "2.9.1", "QBP_Q32")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedQBP_Q32 = ParsedHL7MessageOf<"2.9.1", "QBP_Q32", ParsedQBP_Q32>;
 
 /** Parser for HL7 QBP^Q32 (HL7 v2.9.1) messages. */
 export class QBP_Q32_Parser extends QBP_Q21_Parser {

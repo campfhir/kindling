@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { RPI_I01_Parser, type ParsedRPI_I01, RPI_I01, type RPI_I01Options, type Provider, type InsuranceGroup } from "./RPI_I01.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -19,6 +20,12 @@ export { RPI_I01_STRUCTURE as RPI_I04_STRUCTURE } from "./RPI_I01.ts";
 export type { ParsedProvider, ParsedInsurance } from "./RPI_I01.ts";
 /** Structured result of parsing an HL7 RPI^I04 (HL7 v2.5) message. */
 export type ParsedRPI_I04 = ParsedRPI_I01;
+
+/**
+ * An HL7 RPI^I04 (HL7 v2.5) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRPI_I04>(message, "2.5", "RPI_I04")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRPI_I04 = ParsedHL7MessageOf<"2.5", "RPI_I04", ParsedRPI_I04>;
 
 /** Parser for HL7 RPI^I04 (HL7 v2.5) messages. */
 export class RPI_I04_Parser extends RPI_I01_Parser {

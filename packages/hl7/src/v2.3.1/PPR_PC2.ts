@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { PPR_PC1_Parser, type ParsedPPR_PC1, PPR_PC1, type PPR_PC1Options, type Problem, type ProblemRole, type ProblemPathway, type ProblemObservation, type Goal, type GoalRole, type GoalObservation, type CareOrder, type OrderDetail, type OrderObservation } from "./PPR_PC1.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { PPR_PC1_STRUCTURE as PPR_PC2_STRUCTURE } from "./PPR_PC1.ts";
 export type { ParsedProblem, ParsedProblemRole, ParsedProblemPathway, ParsedProblemObservation, ParsedGoal, ParsedGoalRole, ParsedGoalObservation, ParsedCareOrder, ParsedOrderDetail, ParsedOrderObservation } from "./PPR_PC1.ts";
 /** Structured result of parsing an HL7 PPR^PC2 (HL7 v2.3.1) message. */
 export type ParsedPPR_PC2 = ParsedPPR_PC1;
+
+/**
+ * An HL7 PPR^PC2 (HL7 v2.3.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedPPR_PC2>(message, "2.3.1", "PPR_PC2")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedPPR_PC2 = ParsedHL7MessageOf<"2.3.1", "PPR_PC2", ParsedPPR_PC2>;
 
 /** Parser for HL7 PPR^PC2 (HL7 v2.3.1) messages. */
 export class PPR_PC2_Parser extends PPR_PC1_Parser {

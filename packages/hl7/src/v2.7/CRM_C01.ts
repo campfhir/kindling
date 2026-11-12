@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -79,6 +80,12 @@ export interface ParsedCRM_C01 extends ParsedMessageBase {
   /** The PATIENT groups. */
   patients: ParsedPatient[];
 }
+
+/**
+ * An HL7 CRM^C01 (HL7 v2.7) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedCRM_C01>(message, "2.7", "CRM_C01")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedCRM_C01 = ParsedHL7MessageOf<"2.7", "CRM_C01", ParsedCRM_C01>;
 
 /** The segment parsers of CRM^C01 (HL7 v2.7). */
 const PARSERS: SegmentParsers = {

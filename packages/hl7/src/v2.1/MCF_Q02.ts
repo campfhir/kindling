@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { MSA } from "./MSA.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
@@ -26,6 +27,12 @@ export interface ParsedMCF_Q02 extends ParsedMessageBase {
   /** The MSA segment. */
   acknowledgment: MSA;
 }
+
+/**
+ * An HL7 MCF^Q02 (HL7 v2.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedMCF_Q02>(message, "2.1", "MCF_Q02")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedMCF_Q02 = ParsedHL7MessageOf<"2.1", "MCF_Q02", ParsedMCF_Q02>;
 
 /** The segment parsers of MCF^Q02 (HL7 v2.1). */
 const PARSERS: SegmentParsers = {

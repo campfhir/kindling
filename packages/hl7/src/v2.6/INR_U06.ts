@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -42,6 +43,12 @@ export interface ParsedINR_U06 extends ParsedMessageBase {
   /** The ROL segment. */
   role?: ROL;
 }
+
+/**
+ * An HL7 INR^U06 (HL7 v2.6) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedINR_U06>(message, "2.6", "INR_U06")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedINR_U06 = ParsedHL7MessageOf<"2.6", "INR_U06", ParsedINR_U06>;
 
 /** The segment parsers of INR^U06 (HL7 v2.6). */
 const PARSERS: SegmentParsers = {

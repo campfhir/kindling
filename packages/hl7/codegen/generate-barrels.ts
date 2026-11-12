@@ -52,7 +52,7 @@ function versionBarrel(absDir: string, version: string): string {
  * @module
  */
 ${segments.map((name) => `export * from "./${name}.ts";`).join("\n")}
-${messages.map((name) => `export { create${name}, parse${name}, ${name}_STRUCTURE, type Parsed${name} } from "./${name}.ts";`).join("\n")}
+${messages.map((name) => `export { create${name}, parse${name}, ${name}_STRUCTURE, type Parsed${name}, type Dispatched${name} } from "./${name}.ts";`).join("\n")}
 export { MESSAGES, type MessageStructure, type ParsedMessage, type DispatchedMessage, type DispatchedParser } from "./registry.ts";
 `;
 }
