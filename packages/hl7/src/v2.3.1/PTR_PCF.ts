@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { MSA } from "./MSA.ts";
 import { ERR } from "./ERR.ts";
@@ -313,6 +314,12 @@ export interface ParsedPTR_PCF extends ParsedMessageBase {
   /** The PATIENT groups. */
   patients: ParsedCarePatient[];
 }
+
+/**
+ * An HL7 PTR^PCF (HL7 v2.3.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedPTR_PCF>(message, "2.3.1", "PTR_PCF")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedPTR_PCF = ParsedHL7MessageOf<"2.3.1", "PTR_PCF", ParsedPTR_PCF>;
 
 /** The segment parsers of PTR^PCF (HL7 v2.3.1). */
 const PARSERS: SegmentParsers = {

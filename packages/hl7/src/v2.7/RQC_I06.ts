@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { RQC_I05_Parser, type ParsedRQC_I05, RQC_I05, type RQC_I05Options, type ProviderGroup } from "./RQC_I05.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -19,6 +20,12 @@ export { RQC_I05_STRUCTURE as RQC_I06_STRUCTURE } from "./RQC_I05.ts";
 export type { ParsedProvider } from "./RQC_I05.ts";
 /** Structured result of parsing an HL7 RQC^I06 (HL7 v2.7) message. */
 export type ParsedRQC_I06 = ParsedRQC_I05;
+
+/**
+ * An HL7 RQC^I06 (HL7 v2.7) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRQC_I06>(message, "2.7", "RQC_I06")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRQC_I06 = ParsedHL7MessageOf<"2.7", "RQC_I06", ParsedRQC_I06>;
 
 /** Parser for HL7 RQC^I06 (HL7 v2.7) messages. */
 export class RQC_I06_Parser extends RQC_I05_Parser {

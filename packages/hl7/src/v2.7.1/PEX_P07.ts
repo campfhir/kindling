@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -343,6 +344,12 @@ export interface ParsedPEX_P07 extends ParsedMessageBase {
   /** The EXPERIENCE groups. */
   experiences: ParsedExperience[];
 }
+
+/**
+ * An HL7 PEX^P07 (HL7 v2.7.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedPEX_P07>(message, "2.7.1", "PEX_P07")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedPEX_P07 = ParsedHL7MessageOf<"2.7.1", "PEX_P07", ParsedPEX_P07>;
 
 /** The segment parsers of PEX^P07 (HL7 v2.7.1). */
 const PARSERS: SegmentParsers = {

@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { ARV } from "./ARV.ts";
 import { SFT } from "./SFT.ts";
@@ -468,6 +469,12 @@ export interface ParsedOML_O39 extends ParsedMessageBase {
   /** The DEVICE groups. */
   devices?: ParsedDevice[];
 }
+
+/**
+ * An HL7 OML^O39 (HL7 v2.9.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedOML_O39>(message, "2.9.1", "OML_O39")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedOML_O39 = ParsedHL7MessageOf<"2.9.1", "OML_O39", ParsedOML_O39>;
 
 /** The segment parsers of OML^O39 (HL7 v2.9.1). */
 const PARSERS: SegmentParsers = {

@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -51,6 +52,12 @@ export interface ParsedQBP_E22 extends ParsedMessageBase {
   /** The QUERY group. */
   query: ParsedQuery;
 }
+
+/**
+ * An HL7 QBP^E22 (HL7 v2.7) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedQBP_E22>(message, "2.7", "QBP_E22")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedQBP_E22 = ParsedHL7MessageOf<"2.7", "QBP_E22", ParsedQBP_E22>;
 
 /** The segment parsers of QBP^E22 (HL7 v2.7). */
 const PARSERS: SegmentParsers = {

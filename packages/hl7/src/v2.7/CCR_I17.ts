@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { CCR_I16_Parser, type ParsedCCR_I16, CCR_I16, type CCR_I16Options, type ProviderContactGroup, type ClinicalOrderGroup, type ClinicalOrderTimingGroup, type ClinicalOrderDetailGroup, type PatientGroup, type InsuranceGroup, type AppointmentHistoryGroup, type ResourcesGroup, type ResourceDetailGroup, type ClinicalHistoryGroup, type ClinicalHistoryDetailGroup, type RoleClinicalHistoryGroup, type PatientVisitsGroup, type MedicationHistoryGroup, type MedicationOrderDetailGroup, type MedicationEncodingDetailGroup, type MedicationAdministrationDetailGroup, type ProblemGroup, type RoleProblemGroup, type GoalGroup, type RoleGoalGroup, type RoleGoalObjectGroup, type PathwayGroup, type RolePathwayGroup } from "./CCR_I16.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { CCR_I16_STRUCTURE as CCR_I17_STRUCTURE } from "./CCR_I16.ts";
 export type { ParsedProviderContact, ParsedClinicalOrder, ParsedClinicalOrderTiming, ParsedClinicalOrderDetail, ParsedPatient, ParsedInsurance, ParsedAppointmentHistory, ParsedResources, ParsedResourceDetail, ParsedClinicalHistory, ParsedClinicalHistoryDetail, ParsedRoleClinicalHistory, ParsedPatientVisits, ParsedMedicationHistory, ParsedMedicationOrderDetail, ParsedMedicationEncodingDetail, ParsedMedicationAdministrationDetail, ParsedProblem, ParsedRoleProblem, ParsedGoal, ParsedRoleGoal, ParsedRoleGoalObject, ParsedPathway, ParsedRolePathway } from "./CCR_I16.ts";
 /** Structured result of parsing an HL7 CCR^I17 (HL7 v2.7) message. */
 export type ParsedCCR_I17 = ParsedCCR_I16;
+
+/**
+ * An HL7 CCR^I17 (HL7 v2.7) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedCCR_I17>(message, "2.7", "CCR_I17")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedCCR_I17 = ParsedHL7MessageOf<"2.7", "CCR_I17", ParsedCCR_I17>;
 
 /** Parser for HL7 CCR^I17 (HL7 v2.7) messages. */
 export class CCR_I17_Parser extends CCR_I16_Parser {

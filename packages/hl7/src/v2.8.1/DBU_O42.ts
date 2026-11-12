@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -67,6 +68,12 @@ export interface ParsedDBU_O42 extends ParsedMessageBase {
   /** The DONOR group. */
   donor?: ParsedDonor;
 }
+
+/**
+ * An HL7 DBU^O42 (HL7 v2.8.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedDBU_O42>(message, "2.8.1", "DBU_O42")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedDBU_O42 = ParsedHL7MessageOf<"2.8.1", "DBU_O42", ParsedDBU_O42>;
 
 /** The segment parsers of DBU^O42 (HL7 v2.8.1). */
 const PARSERS: SegmentParsers = {

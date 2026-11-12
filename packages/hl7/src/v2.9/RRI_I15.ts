@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { RRI_I12_Parser, type ParsedRRI_I12, RRI_I12, type RRI_I12Options, type AuthorizationContact21Group, type ProviderContactGroup, type ProcedureGroup, type AuthorizationContact22Group, type ObservationGroup, type ResultsNotesGroup, type PatientVisitGroup } from "./RRI_I12.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { RRI_I12_STRUCTURE as RRI_I15_STRUCTURE } from "./RRI_I12.ts";
 export type { ParsedAuthorizationContact21, ParsedProviderContact, ParsedProcedure, ParsedAuthorizationContact22, ParsedObservation, ParsedResultsNotes, ParsedPatientVisit } from "./RRI_I12.ts";
 /** Structured result of parsing an HL7 RRI^I15 (HL7 v2.9) message. */
 export type ParsedRRI_I15 = ParsedRRI_I12;
+
+/**
+ * An HL7 RRI^I15 (HL7 v2.9) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRRI_I15>(message, "2.9", "RRI_I15")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRRI_I15 = ParsedHL7MessageOf<"2.9", "RRI_I15", ParsedRRI_I15>;
 
 /** Parser for HL7 RRI^I15 (HL7 v2.9) messages. */
 export class RRI_I15_Parser extends RRI_I12_Parser {

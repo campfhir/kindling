@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { ORU_R01_Parser, type ParsedORU_R01, ORU_R01, type ORU_R01Options, type PatientResult, type OrderObservation, type ObservationGroup } from "./ORU_R01.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -17,6 +18,12 @@ export { ORU_R01_STRUCTURE as ORU_W01_STRUCTURE } from "./ORU_R01.ts";
 export type { ParsedPatientResult, ParsedOrderObservation, ParsedObservation } from "./ORU_R01.ts";
 /** Structured result of parsing an HL7 ORU^W01 (HL7 v2.3.1) message. */
 export type ParsedORU_W01 = ParsedORU_R01;
+
+/**
+ * An HL7 ORU^W01 (HL7 v2.3.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedORU_W01>(message, "2.3.1", "ORU_W01")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedORU_W01 = ParsedHL7MessageOf<"2.3.1", "ORU_W01", ParsedORU_W01>;
 
 /** Parser for HL7 ORU^W01 (HL7 v2.3.1) messages. */
 export class ORU_W01_Parser extends ORU_R01_Parser {

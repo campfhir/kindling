@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -34,6 +35,12 @@ export interface ParsedCCF_I22 extends ParsedMessageBase {
   /** The PID segment. */
   patient: PID;
 }
+
+/**
+ * An HL7 CCF^I22 (HL7 v2.8) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedCCF_I22>(message, "2.8", "CCF_I22")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedCCF_I22 = ParsedHL7MessageOf<"2.8", "CCF_I22", ParsedCCF_I22>;
 
 /** The segment parsers of CCF^I22 (HL7 v2.8). */
 const PARSERS: SegmentParsers = {

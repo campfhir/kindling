@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -38,6 +39,12 @@ export interface ParsedQBP_Z73 extends ParsedMessageBase {
   /** The RCP segment. */
   responseControl: RCP;
 }
+
+/**
+ * An HL7 QBP^Z73 (HL7 v2.8) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedQBP_Z73>(message, "2.8", "QBP_Z73")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedQBP_Z73 = ParsedHL7MessageOf<"2.8", "QBP_Z73", ParsedQBP_Z73>;
 
 /** The segment parsers of QBP^Z73 (HL7 v2.8). */
 const PARSERS: SegmentParsers = {

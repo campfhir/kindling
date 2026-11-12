@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { RSP_K23_Parser, type ParsedRSP_K23, RSP_K23, type RSP_K23Options, type QueryResponseGroup } from "./RSP_K23.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -20,6 +21,12 @@ export { RSP_K23_STRUCTURE as RSP_K24_STRUCTURE } from "./RSP_K23.ts";
 export type { ParsedQueryResponse } from "./RSP_K23.ts";
 /** Structured result of parsing an HL7 RSP^K24 (HL7 v2.8) message. */
 export type ParsedRSP_K24 = ParsedRSP_K23;
+
+/**
+ * An HL7 RSP^K24 (HL7 v2.8) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRSP_K24>(message, "2.8", "RSP_K24")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRSP_K24 = ParsedHL7MessageOf<"2.8", "RSP_K24", ParsedRSP_K24>;
 
 /** Parser for HL7 RSP^K24 (HL7 v2.8) messages. */
 export class RSP_K24_Parser extends RSP_K23_Parser {

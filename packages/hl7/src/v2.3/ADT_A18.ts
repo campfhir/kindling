@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { EVN } from "./EVN.ts";
 import { PID } from "./PID.ts";
@@ -42,6 +43,12 @@ export interface ParsedADT_A18 extends ParsedMessageBase {
   /** The PV1 segment. */
   visit: PV1;
 }
+
+/**
+ * An HL7 ADT^A18 (HL7 v2.3) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedADT_A18>(message, "2.3", "ADT_A18")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedADT_A18 = ParsedHL7MessageOf<"2.3", "ADT_A18", ParsedADT_A18>;
 
 /** The segment parsers of ADT^A18 (HL7 v2.3). */
 const PARSERS: SegmentParsers = {

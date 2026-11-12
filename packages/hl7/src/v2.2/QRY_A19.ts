@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { QRD } from "./QRD.ts";
 import { QRF } from "./QRF.ts";
@@ -30,6 +31,12 @@ export interface ParsedQRY_A19 extends ParsedMessageBase {
   /** The QRF segment. */
   queryFilter?: QRF;
 }
+
+/**
+ * An HL7 QRY^A19 (HL7 v2.2) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedQRY_A19>(message, "2.2", "QRY_A19")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedQRY_A19 = ParsedHL7MessageOf<"2.2", "QRY_A19", ParsedQRY_A19>;
 
 /** The segment parsers of QRY^A19 (HL7 v2.2). */
 const PARSERS: SegmentParsers = {

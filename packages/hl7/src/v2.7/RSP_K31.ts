@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { MSA } from "./MSA.ts";
 import { ERR } from "./ERR.ts";
@@ -300,6 +301,12 @@ export interface ParsedRSP_K31 extends ParsedMessageBase {
   /** The DSC segment. */
   continuation?: DSC;
 }
+
+/**
+ * An HL7 RSP^K31 (HL7 v2.7) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRSP_K31>(message, "2.7", "RSP_K31")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRSP_K31 = ParsedHL7MessageOf<"2.7", "RSP_K31", ParsedRSP_K31>;
 
 /** The segment parsers of RSP^K31 (HL7 v2.7). */
 const PARSERS: SegmentParsers = {

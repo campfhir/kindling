@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { NCK } from "./NCK.ts";
@@ -86,6 +87,12 @@ export interface ParsedNMD_N02 extends ParsedMessageBase {
   /** The CLOCK AND STATS WITH NOTES groups. */
   clockAndStatistics: ParsedClockAndStatistics[];
 }
+
+/**
+ * An HL7 NMD^N02 (HL7 v2.5) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedNMD_N02>(message, "2.5", "NMD_N02")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedNMD_N02 = ParsedHL7MessageOf<"2.5", "NMD_N02", ParsedNMD_N02>;
 
 /** The segment parsers of NMD^N02 (HL7 v2.5). */
 const PARSERS: SegmentParsers = {

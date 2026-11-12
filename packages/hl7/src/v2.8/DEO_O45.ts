@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -118,6 +119,12 @@ export interface ParsedDEO_O45 extends ParsedMessageBase {
   /** The DONATION ORDER groups. */
   donationOrders: ParsedDonationOrder[];
 }
+
+/**
+ * An HL7 DEO^O45 (HL7 v2.8) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedDEO_O45>(message, "2.8", "DEO_O45")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedDEO_O45 = ParsedHL7MessageOf<"2.8", "DEO_O45", ParsedDEO_O45>;
 
 /** The segment parsers of DEO^O45 (HL7 v2.8). */
 const PARSERS: SegmentParsers = {

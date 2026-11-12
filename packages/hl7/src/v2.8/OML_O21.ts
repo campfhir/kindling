@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -445,6 +446,12 @@ export interface ParsedOML_O21 extends ParsedMessageBase {
   /** The ORDER groups. */
   orders: ParsedOrder[];
 }
+
+/**
+ * An HL7 OML^O21 (HL7 v2.8) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedOML_O21>(message, "2.8", "OML_O21")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedOML_O21 = ParsedHL7MessageOf<"2.8", "OML_O21", ParsedOML_O21>;
 
 /** The segment parsers of OML^O21 (HL7 v2.8). */
 const PARSERS: SegmentParsers = {

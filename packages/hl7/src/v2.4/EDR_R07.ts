@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { MSA } from "./MSA.ts";
 import { ERR } from "./ERR.ts";
@@ -42,6 +43,12 @@ export interface ParsedEDR_R07 extends ParsedMessageBase {
   /** The DSC segment. */
   continuation?: DSC;
 }
+
+/**
+ * An HL7 EDR^R07 (HL7 v2.4) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedEDR_R07>(message, "2.4", "EDR_R07")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedEDR_R07 = ParsedHL7MessageOf<"2.4", "EDR_R07", ParsedEDR_R07>;
 
 /** The segment parsers of EDR^R07 (HL7 v2.4). */
 const PARSERS: SegmentParsers = {

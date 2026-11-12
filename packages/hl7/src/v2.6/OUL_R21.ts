@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { NTE } from "./NTE.ts";
@@ -176,6 +177,12 @@ export interface ParsedOUL_R21 extends ParsedMessageBase {
   /** The DSC segment. */
   continuation?: DSC;
 }
+
+/**
+ * An HL7 OUL^R21 (HL7 v2.6) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedOUL_R21>(message, "2.6", "OUL_R21")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedOUL_R21 = ParsedHL7MessageOf<"2.6", "OUL_R21", ParsedOUL_R21>;
 
 /** The segment parsers of OUL^R21 (HL7 v2.6). */
 const PARSERS: SegmentParsers = {

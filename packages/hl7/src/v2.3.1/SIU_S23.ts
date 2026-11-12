@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { SIU_S12_Parser, type ParsedSIU_S12, SIU_S12, type SIU_S12Options, type SIUPatientGroup, type SIUResourcesGroup, type SIUServiceGroup, type SIUGeneralResourceGroup, type SIULocationResourceGroup, type SIUPersonnelResourceGroup } from "./SIU_S12.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { SIU_S12_STRUCTURE as SIU_S23_STRUCTURE } from "./SIU_S12.ts";
 export type { ParsedSIUPatient, ParsedSIUResources, ParsedSIUService, ParsedSIUGeneralResource, ParsedSIULocationResource, ParsedSIUPersonnelResource } from "./SIU_S12.ts";
 /** Structured result of parsing an HL7 SIU^S23 (HL7 v2.3.1) message. */
 export type ParsedSIU_S23 = ParsedSIU_S12;
+
+/**
+ * An HL7 SIU^S23 (HL7 v2.3.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedSIU_S23>(message, "2.3.1", "SIU_S23")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedSIU_S23 = ParsedHL7MessageOf<"2.3.1", "SIU_S23", ParsedSIU_S23>;
 
 /** Parser for HL7 SIU^S23 (HL7 v2.3.1) messages. */
 export class SIU_S23_Parser extends SIU_S12_Parser {

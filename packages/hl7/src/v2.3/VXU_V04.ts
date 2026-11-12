@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { PID } from "./PID.ts";
 import { PD1 } from "./PD1.ts";
@@ -121,6 +122,12 @@ export interface ParsedVXU_V04 extends ParsedMessageBase {
   /** The ORDER groups. */
   orders?: ParsedVaccination[];
 }
+
+/**
+ * An HL7 VXU^V04 (HL7 v2.3) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedVXU_V04>(message, "2.3", "VXU_V04")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedVXU_V04 = ParsedHL7MessageOf<"2.3", "VXU_V04", ParsedVXU_V04>;
 
 /** The segment parsers of VXU^V04 (HL7 v2.3). */
 const PARSERS: SegmentParsers = {

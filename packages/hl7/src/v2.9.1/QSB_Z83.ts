@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { QSB_Q16_Parser, type ParsedQSB_Q16, QSB_Q16, type QSB_Q16Options } from "./QSB_Q16.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { QSB_Q16_STRUCTURE as QSB_Z83_STRUCTURE } from "./QSB_Q16.ts";
 
 /** Structured result of parsing an HL7 QSB^Z83 (HL7 v2.9.1) message. */
 export type ParsedQSB_Z83 = ParsedQSB_Q16;
+
+/**
+ * An HL7 QSB^Z83 (HL7 v2.9.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedQSB_Z83>(message, "2.9.1", "QSB_Z83")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedQSB_Z83 = ParsedHL7MessageOf<"2.9.1", "QSB_Z83", ParsedQSB_Z83>;
 
 /** Parser for HL7 QSB^Z83 (HL7 v2.9.1) messages. */
 export class QSB_Z83_Parser extends QSB_Q16_Parser {

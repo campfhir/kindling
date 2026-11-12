@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -42,6 +43,12 @@ export interface ParsedORA_R41 extends ParsedMessageBase {
   /** The PRT segments. */
   prtList?: PRT[];
 }
+
+/**
+ * An HL7 ORA^R41 (HL7 v2.9.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedORA_R41>(message, "2.9.1", "ORA_R41")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedORA_R41 = ParsedHL7MessageOf<"2.9.1", "ORA_R41", ParsedORA_R41>;
 
 /** The segment parsers of ORA^R41 (HL7 v2.9.1). */
 const PARSERS: SegmentParsers = {

@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { ARV } from "./ARV.ts";
 import { SFT } from "./SFT.ts";
@@ -333,6 +334,12 @@ export interface ParsedRDE_O25 extends ParsedMessageBase {
   /** The ORDER groups. */
   orders: ParsedOrder[];
 }
+
+/**
+ * An HL7 RDE^O25 (HL7 v2.9) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRDE_O25>(message, "2.9", "RDE_O25")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRDE_O25 = ParsedHL7MessageOf<"2.9", "RDE_O25", ParsedRDE_O25>;
 
 /** The segment parsers of RDE^O25 (HL7 v2.9). */
 const PARSERS: SegmentParsers = {

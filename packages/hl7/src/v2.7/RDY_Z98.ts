@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { RDY_K15_Parser, type ParsedRDY_K15, RDY_K15, type RDY_K15Options } from "./RDY_K15.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -19,6 +20,12 @@ export { RDY_K15_STRUCTURE as RDY_Z98_STRUCTURE } from "./RDY_K15.ts";
 
 /** Structured result of parsing an HL7 RDY^Z98 (HL7 v2.7) message. */
 export type ParsedRDY_Z98 = ParsedRDY_K15;
+
+/**
+ * An HL7 RDY^Z98 (HL7 v2.7) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRDY_Z98>(message, "2.7", "RDY_Z98")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRDY_Z98 = ParsedHL7MessageOf<"2.7", "RDY_Z98", ParsedRDY_Z98>;
 
 /** Parser for HL7 RDY^Z98 (HL7 v2.7) messages. */
 export class RDY_Z98_Parser extends RDY_K15_Parser {

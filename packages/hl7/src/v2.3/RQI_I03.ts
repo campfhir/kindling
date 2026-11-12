@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { RQI_I01_Parser, type ParsedRQI_I01, RQI_I01, type RQI_I01Options, type Provider, type InsuranceGroup } from "./RQI_I01.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { RQI_I01_STRUCTURE as RQI_I03_STRUCTURE } from "./RQI_I01.ts";
 export type { ParsedProvider, ParsedInsurance } from "./RQI_I01.ts";
 /** Structured result of parsing an HL7 RQI^I03 (HL7 v2.3) message. */
 export type ParsedRQI_I03 = ParsedRQI_I01;
+
+/**
+ * An HL7 RQI^I03 (HL7 v2.3) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRQI_I03>(message, "2.3", "RQI_I03")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRQI_I03 = ParsedHL7MessageOf<"2.3", "RQI_I03", ParsedRQI_I03>;
 
 /** Parser for HL7 RQI^I03 (HL7 v2.3) messages. */
 export class RQI_I03_Parser extends RQI_I01_Parser {

@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { ARV } from "./ARV.ts";
 import { SFT } from "./SFT.ts";
@@ -74,6 +75,12 @@ export interface ParsedRSP_K33 extends ParsedMessageBase {
   /** The DONOR group. */
   donor?: ParsedDonor;
 }
+
+/**
+ * An HL7 RSP^K33 (HL7 v2.9) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRSP_K33>(message, "2.9", "RSP_K33")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRSP_K33 = ParsedHL7MessageOf<"2.9", "RSP_K33", ParsedRSP_K33>;
 
 /** The segment parsers of RSP^K33 (HL7 v2.9). */
 const PARSERS: SegmentParsers = {

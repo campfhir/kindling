@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { MFI } from "./MFI.ts";
 import { MFA } from "./MFA.ts";
@@ -30,6 +31,12 @@ export interface ParsedMFD_MFA extends ParsedMessageBase {
   /** The MFA segments. */
   entryAcknowledgments?: MFA[];
 }
+
+/**
+ * An HL7 MFD^MFA (HL7 v2.3.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedMFD_MFA>(message, "2.3.1", "MFD_MFA")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedMFD_MFA = ParsedHL7MessageOf<"2.3.1", "MFD_MFA", ParsedMFD_MFA>;
 
 /** The segment parsers of MFD^MFA (HL7 v2.3.1). */
 const PARSERS: SegmentParsers = {

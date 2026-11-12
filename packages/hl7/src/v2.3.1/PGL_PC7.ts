@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { PGL_PC6_Parser, type ParsedPGL_PC6, PGL_PC6, type PGL_PC6Options, type Goal, type GoalRole, type GoalPathway, type GoalObservation, type Problem, type ProblemRole, type ProblemObservation, type CareOrder, type OrderDetail, type OrderObservation } from "./PGL_PC6.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { PGL_PC6_STRUCTURE as PGL_PC7_STRUCTURE } from "./PGL_PC6.ts";
 export type { ParsedGoal, ParsedGoalRole, ParsedGoalPathway, ParsedGoalObservation, ParsedProblem, ParsedProblemRole, ParsedProblemObservation, ParsedCareOrder, ParsedOrderDetail, ParsedOrderObservation } from "./PGL_PC6.ts";
 /** Structured result of parsing an HL7 PGL^PC7 (HL7 v2.3.1) message. */
 export type ParsedPGL_PC7 = ParsedPGL_PC6;
+
+/**
+ * An HL7 PGL^PC7 (HL7 v2.3.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedPGL_PC7>(message, "2.3.1", "PGL_PC7")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedPGL_PC7 = ParsedHL7MessageOf<"2.3.1", "PGL_PC7", ParsedPGL_PC7>;
 
 /** Parser for HL7 PGL^PC7 (HL7 v2.3.1) messages. */
 export class PGL_PC7_Parser extends PGL_PC6_Parser {

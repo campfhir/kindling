@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { TCU_U10_Parser, type ParsedTCU_U10, TCU_U10, type TCU_U10Options, type TestConfigurationGroup } from "./TCU_U10.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { TCU_U10_STRUCTURE as TCR_U11_STRUCTURE } from "./TCU_U10.ts";
 export type { ParsedTestConfiguration } from "./TCU_U10.ts";
 /** Structured result of parsing an HL7 TCR^U11 (HL7 v2.8) message. */
 export type ParsedTCR_U11 = ParsedTCU_U10;
+
+/**
+ * An HL7 TCR^U11 (HL7 v2.8) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedTCR_U11>(message, "2.8", "TCR_U11")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedTCR_U11 = ParsedHL7MessageOf<"2.8", "TCR_U11", ParsedTCR_U11>;
 
 /** Parser for HL7 TCR^U11 (HL7 v2.8) messages. */
 export class TCR_U11_Parser extends TCU_U10_Parser {

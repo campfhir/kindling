@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { ARV } from "./ARV.ts";
 import { SFT } from "./SFT.ts";
@@ -90,6 +91,12 @@ export interface ParsedDBC_O41 extends ParsedMessageBase {
   /** The DONOR group. */
   donor?: ParsedDonor;
 }
+
+/**
+ * An HL7 DBC^O41 (HL7 v2.9) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedDBC_O41>(message, "2.9", "DBC_O41")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedDBC_O41 = ParsedHL7MessageOf<"2.9", "DBC_O41", ParsedDBC_O41>;
 
 /** The segment parsers of DBC^O41 (HL7 v2.9). */
 const PARSERS: SegmentParsers = {

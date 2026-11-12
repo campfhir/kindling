@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -141,6 +142,12 @@ export interface ParsedMFN_M16 extends ParsedMessageBase {
   /** The MATERIAL ITEM RECORD groups. */
   materialItemRecords: ParsedMaterialItemRecord[];
 }
+
+/**
+ * An HL7 MFN^M16 (HL7 v2.6) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedMFN_M16>(message, "2.6", "MFN_M16")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedMFN_M16 = ParsedHL7MessageOf<"2.6", "MFN_M16", ParsedMFN_M16>;
 
 /** The segment parsers of MFN^M16 (HL7 v2.6). */
 const PARSERS: SegmentParsers = {

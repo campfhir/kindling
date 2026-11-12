@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { MSA } from "./MSA.ts";
 import { ERR } from "./ERR.ts";
@@ -105,6 +106,12 @@ export interface ParsedBRT_O32 extends ParsedMessageBase {
   /** The RESPONSE group. */
   response?: ParsedResponse;
 }
+
+/**
+ * An HL7 BRT^O32 (HL7 v2.7.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedBRT_O32>(message, "2.7.1", "BRT_O32")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedBRT_O32 = ParsedHL7MessageOf<"2.7.1", "BRT_O32", ParsedBRT_O32>;
 
 /** The segment parsers of BRT^O32 (HL7 v2.7.1). */
 const PARSERS: SegmentParsers = {

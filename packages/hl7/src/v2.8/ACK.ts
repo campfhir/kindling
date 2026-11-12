@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -38,6 +39,12 @@ export interface ParsedACK extends ParsedMessageBase {
   /** The ERR segments. */
   errors?: ERR[];
 }
+
+/**
+ * An HL7 ACK (HL7 v2.8) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedACK>(message, "2.8", "ACK")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedACK = ParsedHL7MessageOf<"2.8", "ACK", ParsedACK>;
 
 /** The segment parsers of ACK (HL7 v2.8). */
 const PARSERS: SegmentParsers = {

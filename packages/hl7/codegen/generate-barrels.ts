@@ -52,8 +52,8 @@ function versionBarrel(absDir: string, version: string): string {
  * @module
  */
 ${segments.map((name) => `export * from "./${name}.ts";`).join("\n")}
-${messages.map((name) => `export { create${name}, parse${name}, ${name}_STRUCTURE, type Parsed${name} } from "./${name}.ts";`).join("\n")}
-export { MESSAGES, type MessageStructure, type ParsedMessage } from "./registry.ts";
+${messages.map((name) => `export { create${name}, parse${name}, ${name}_STRUCTURE, type Parsed${name}, type Dispatched${name} } from "./${name}.ts";`).join("\n")}
+export { MESSAGES, type MessageStructure, type ParsedMessage, type DispatchedMessage, type DispatchedParser } from "./registry.ts";
 `;
 }
 
@@ -70,6 +70,7 @@ function messageRegistry(absDir: string, version: string): string {
  */
 import type { Result } from "../types/result.ts";
 import type { ParsedMessageBase } from "../types/structure.ts";
+import type { ParsedHL7MessageOf, SelectedMessageParserOf } from "../dispatch.ts";
 ${imports}
 
 /** Parses one message string into its structured form. */
@@ -86,6 +87,20 @@ export type MessageStructure = keyof typeof MESSAGES;
 /** The parsed form of an HL7 ${version} message structure (a union of all of them by default). */
 export type ParsedMessage<S extends MessageStructure = MessageStructure> =
   (typeof MESSAGES)[S] extends (messageString: string) => Result<infer T> ? T : never;
+
+/**
+ * An HL7 ${version} message as the root \`parse()\` returns it, a union over its structures, so a
+ * \`switch\` on \`structure\` narrows \`parsed\`. Narrow a parsed message to it with
+ * \`isVersion<DispatchedMessage>(message, "${version.replace(/^v/, "")}")\` of \`@campfhir/hl7/parse\`.
+ */
+export type DispatchedMessage<S extends MessageStructure = MessageStructure> = {
+  [K in S]: ParsedHL7MessageOf<"${version.replace(/^v/, "")}", K, ParsedMessage<K>>;
+}[S];
+
+/** The parser \`selectParser()\` picks for an HL7 ${version} message, a union over its structures. */
+export type DispatchedParser<S extends MessageStructure = MessageStructure> = {
+  [K in S]: SelectedMessageParserOf<"${version.replace(/^v/, "")}", K, ParsedMessage<K>>;
+}[S];
 `;
 }
 

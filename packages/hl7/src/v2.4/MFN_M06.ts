@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { MFI } from "./MFI.ts";
 import { MFE } from "./MFE.ts";
@@ -70,6 +71,12 @@ export interface ParsedMFN_M06 extends ParsedMessageBase {
   /** The MF CLIN STUDY groups. */
   entries: ParsedClinicalStudyEntry[];
 }
+
+/**
+ * An HL7 MFN^M06 (HL7 v2.4) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedMFN_M06>(message, "2.4", "MFN_M06")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedMFN_M06 = ParsedHL7MessageOf<"2.4", "MFN_M06", ParsedMFN_M06>;
 
 /** The segment parsers of MFN^M06 (HL7 v2.4). */
 const PARSERS: SegmentParsers = {

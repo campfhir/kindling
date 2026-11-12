@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { RPA_I08_Parser, type ParsedRPA_I08, RPA_I08, type RPA_I08Options, type Authorization1Group, type ProviderGroup, type InsuranceGroup, type ProcedureGroup, type Authorization2Group, type ObservationGroup, type ResultsGroup, type VisitGroup } from "./RPA_I08.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -19,6 +20,12 @@ export { RPA_I08_STRUCTURE as RPA_I11_STRUCTURE } from "./RPA_I08.ts";
 export type { ParsedAuthorization1, ParsedProvider, ParsedInsurance, ParsedProcedure, ParsedAuthorization2, ParsedObservation, ParsedResults, ParsedVisit } from "./RPA_I08.ts";
 /** Structured result of parsing an HL7 RPA^I11 (HL7 v2.8.2) message. */
 export type ParsedRPA_I11 = ParsedRPA_I08;
+
+/**
+ * An HL7 RPA^I11 (HL7 v2.8.2) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedRPA_I11>(message, "2.8.2", "RPA_I11")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedRPA_I11 = ParsedHL7MessageOf<"2.8.2", "RPA_I11", ParsedRPA_I11>;
 
 /** Parser for HL7 RPA^I11 (HL7 v2.8.2) messages. */
 export class RPA_I11_Parser extends RPA_I08_Parser {

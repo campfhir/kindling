@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result as ParseResult } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { REF_I12_Parser, type ParsedREF_I12, REF_I12, type REF_I12Options, type Provider, type InsuranceGroup, type ProcedureGroup, type Observation, type Result } from "./REF_I12.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { REF_I12_STRUCTURE as REF_I14_STRUCTURE } from "./REF_I12.ts";
 export type { ParsedProvider, ParsedInsurance, ParsedProcedure, ParsedObservation, ParsedResult } from "./REF_I12.ts";
 /** Structured result of parsing an HL7 REF^I14 (HL7 v2.5) message. */
 export type ParsedREF_I14 = ParsedREF_I12;
+
+/**
+ * An HL7 REF^I14 (HL7 v2.5) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedREF_I14>(message, "2.5", "REF_I14")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedREF_I14 = ParsedHL7MessageOf<"2.5", "REF_I14", ParsedREF_I14>;
 
 /** Parser for HL7 REF^I14 (HL7 v2.5) messages. */
 export class REF_I14_Parser extends REF_I12_Parser {

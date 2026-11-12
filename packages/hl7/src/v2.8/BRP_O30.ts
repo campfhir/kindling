@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { MSA } from "./MSA.ts";
 import { ERR } from "./ERR.ts";
@@ -129,6 +130,12 @@ export interface ParsedBRP_O30 extends ParsedMessageBase {
   /** The RESPONSE group. */
   response?: ParsedResponse;
 }
+
+/**
+ * An HL7 BRP^O30 (HL7 v2.8) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedBRP_O30>(message, "2.8", "BRP_O30")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedBRP_O30 = ParsedHL7MessageOf<"2.8", "BRP_O30", ParsedBRP_O30>;
 
 /** The segment parsers of BRP^O30 (HL7 v2.8). */
 const PARSERS: SegmentParsers = {

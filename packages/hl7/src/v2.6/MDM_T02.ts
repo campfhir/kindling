@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -112,6 +113,12 @@ export interface ParsedMDM_T02 extends ParsedMessageBase {
   /** The OBSERVATION groups. */
   observations: ParsedObservation[];
 }
+
+/**
+ * An HL7 MDM^T02 (HL7 v2.6) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedMDM_T02>(message, "2.6", "MDM_T02")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedMDM_T02 = ParsedHL7MessageOf<"2.6", "MDM_T02", ParsedMDM_T02>;
 
 /** The segment parsers of MDM^T02 (HL7 v2.6). */
 const PARSERS: SegmentParsers = {

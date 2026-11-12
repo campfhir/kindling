@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { PID } from "./PID.ts";
@@ -105,6 +106,12 @@ export interface ParsedORU_R30 extends ParsedMessageBase {
   /** The OBSERVATION groups. */
   observations: ParsedObservation[];
 }
+
+/**
+ * An HL7 ORU^R30 (HL7 v2.5) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedORU_R30>(message, "2.5", "ORU_R30")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedORU_R30 = ParsedHL7MessageOf<"2.5", "ORU_R30", ParsedORU_R30>;
 
 /** The segment parsers of ORU^R30 (HL7 v2.5). */
 const PARSERS: SegmentParsers = {

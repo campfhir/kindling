@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { QCN_J01_Parser, type ParsedQCN_J01, QCN_J01, type QCN_J01Options } from "./QCN_J01.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -17,6 +18,12 @@ export { QCN_J01_STRUCTURE as QSX_J02_STRUCTURE } from "./QCN_J01.ts";
 
 /** Structured result of parsing an HL7 QSX^J02 (HL7 v2.9.1) message. */
 export type ParsedQSX_J02 = ParsedQCN_J01;
+
+/**
+ * An HL7 QSX^J02 (HL7 v2.9.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedQSX_J02>(message, "2.9.1", "QSX_J02")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedQSX_J02 = ParsedHL7MessageOf<"2.9.1", "QSX_J02", ParsedQSX_J02>;
 
 /** Parser for HL7 QSX^J02 (HL7 v2.9.1) messages. */
 export class QSX_J02_Parser extends QCN_J01_Parser {

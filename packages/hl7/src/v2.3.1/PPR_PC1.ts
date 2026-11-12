@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { PID } from "./PID.ts";
 import { PV1 } from "./PV1.ts";
@@ -262,6 +263,12 @@ export interface ParsedPPR_PC1 extends ParsedMessageBase {
   /** The PROBLEM groups. */
   problems: ParsedProblem[];
 }
+
+/**
+ * An HL7 PPR^PC1 (HL7 v2.3.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedPPR_PC1>(message, "2.3.1", "PPR_PC1")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedPPR_PC1 = ParsedHL7MessageOf<"2.3.1", "PPR_PC1", ParsedPPR_PC1>;
 
 /** The segment parsers of PPR^PC1 (HL7 v2.3.1). */
 const PARSERS: SegmentParsers = {

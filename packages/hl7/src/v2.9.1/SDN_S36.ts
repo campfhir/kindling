@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { SDR_S31_Parser, type ParsedSDR_S31, SDR_S31, type SDR_S31Options, type AntiMicrobialDeviceDataGroup } from "./SDR_S31.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -17,6 +18,12 @@ export { SDR_S31_STRUCTURE as SDN_S36_STRUCTURE } from "./SDR_S31.ts";
 export type { ParsedAntiMicrobialDeviceData } from "./SDR_S31.ts";
 /** Structured result of parsing an HL7 SDN^S36 (HL7 v2.9.1) message. */
 export type ParsedSDN_S36 = ParsedSDR_S31;
+
+/**
+ * An HL7 SDN^S36 (HL7 v2.9.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedSDN_S36>(message, "2.9.1", "SDN_S36")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedSDN_S36 = ParsedHL7MessageOf<"2.9.1", "SDN_S36", ParsedSDN_S36>;
 
 /** Parser for HL7 SDN^S36 (HL7 v2.9.1) messages. */
 export class SDN_S36_Parser extends SDR_S31_Parser {

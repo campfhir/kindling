@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { EVN } from "./EVN.ts";
@@ -62,6 +63,12 @@ export interface ParsedADT_A38 extends ParsedMessageBase {
   /** The DRG segment. */
   diagnosisRelatedGroup?: DRG;
 }
+
+/**
+ * An HL7 ADT^A38 (HL7 v2.5) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedADT_A38>(message, "2.5", "ADT_A38")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedADT_A38 = ParsedHL7MessageOf<"2.5", "ADT_A38", ParsedADT_A38>;
 
 /** The segment parsers of ADT^A38 (HL7 v2.5). */
 const PARSERS: SegmentParsers = {

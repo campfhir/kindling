@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { SRR_S01_Parser, type ParsedSRR_S01, SRR_S01, type SRR_S01Options, type SRRScheduleGroup, type SRRPatientGroup, type SRRResourcesGroup, type SRRServiceGroup, type SRRGeneralResourceGroup, type SRRLocationResourceGroup, type SRRPersonnelResourceGroup } from "./SRR_S01.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { SRR_S01_STRUCTURE as SRR_S09_STRUCTURE } from "./SRR_S01.ts";
 export type { ParsedSRRSchedule, ParsedSRRPatient, ParsedSRRResources, ParsedSRRService, ParsedSRRGeneralResource, ParsedSRRLocationResource, ParsedSRRPersonnelResource } from "./SRR_S01.ts";
 /** Structured result of parsing an HL7 SRR^S09 (HL7 v2.5.1) message. */
 export type ParsedSRR_S09 = ParsedSRR_S01;
+
+/**
+ * An HL7 SRR^S09 (HL7 v2.5.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedSRR_S09>(message, "2.5.1", "SRR_S09")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedSRR_S09 = ParsedHL7MessageOf<"2.5.1", "SRR_S09", ParsedSRR_S09>;
 
 /** Parser for HL7 SRR^S09 (HL7 v2.5.1) messages. */
 export class SRR_S09_Parser extends SRR_S01_Parser {

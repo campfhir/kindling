@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -338,6 +339,12 @@ export interface ParsedOMQ_O42 extends ParsedMessageBase {
   /** The ORDER groups. */
   orders: ParsedOrder[];
 }
+
+/**
+ * An HL7 OMQ^O42 (HL7 v2.8.2) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedOMQ_O42>(message, "2.8.2", "OMQ_O42")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedOMQ_O42 = ParsedHL7MessageOf<"2.8.2", "OMQ_O42", ParsedOMQ_O42>;
 
 /** The segment parsers of OMQ^O42 (HL7 v2.8.2). */
 const PARSERS: SegmentParsers = {

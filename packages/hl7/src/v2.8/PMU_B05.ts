@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { PMU_B04_Parser, type ParsedPMU_B04, PMU_B04, type PMU_B04Options } from "./PMU_B04.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { PMU_B04_STRUCTURE as PMU_B05_STRUCTURE } from "./PMU_B04.ts";
 
 /** Structured result of parsing an HL7 PMU^B05 (HL7 v2.8) message. */
 export type ParsedPMU_B05 = ParsedPMU_B04;
+
+/**
+ * An HL7 PMU^B05 (HL7 v2.8) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedPMU_B05>(message, "2.8", "PMU_B05")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedPMU_B05 = ParsedHL7MessageOf<"2.8", "PMU_B05", ParsedPMU_B05>;
 
 /** Parser for HL7 PMU^B05 (HL7 v2.8) messages. */
 export class PMU_B05_Parser extends PMU_B04_Parser {

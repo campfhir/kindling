@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -79,6 +80,12 @@ export interface ParsedBAR_P12 extends ParsedMessageBase {
   /** The OBX segment. */
   observation?: OBX;
 }
+
+/**
+ * An HL7 BAR^P12 (HL7 v2.8.2) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedBAR_P12>(message, "2.8.2", "BAR_P12")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedBAR_P12 = ParsedHL7MessageOf<"2.8.2", "BAR_P12", ParsedBAR_P12>;
 
 /** The segment parsers of BAR^P12 (HL7 v2.8.2). */
 const PARSERS: SegmentParsers = {

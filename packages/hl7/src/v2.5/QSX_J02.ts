@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { QID } from "./QID.ts";
@@ -30,6 +31,12 @@ export interface ParsedQSX_J02 extends ParsedMessageBase {
   /** The QID segment. */
   queryIdentification: QID;
 }
+
+/**
+ * An HL7 QSX^J02 (HL7 v2.5) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedQSX_J02>(message, "2.5", "QSX_J02")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedQSX_J02 = ParsedHL7MessageOf<"2.5", "QSX_J02", ParsedQSX_J02>;
 
 /** The segment parsers of QSX^J02 (HL7 v2.5). */
 const PARSERS: SegmentParsers = {

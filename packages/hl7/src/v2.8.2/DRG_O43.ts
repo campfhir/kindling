@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -87,6 +88,12 @@ export interface ParsedDRG_O43 extends ParsedMessageBase {
   /** The DONOR group. */
   donor?: ParsedDonor;
 }
+
+/**
+ * An HL7 DRG^O43 (HL7 v2.8.2) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedDRG_O43>(message, "2.8.2", "DRG_O43")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedDRG_O43 = ParsedHL7MessageOf<"2.8.2", "DRG_O43", ParsedDRG_O43>;
 
 /** The segment parsers of DRG^O43 (HL7 v2.8.2). */
 const PARSERS: SegmentParsers = {

@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { LSU_U12_Parser, type ParsedLSU_U12, LSU_U12, type LSU_U12Options } from "./LSU_U12.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -18,6 +19,12 @@ export { LSU_U12_STRUCTURE as LSR_U13_STRUCTURE } from "./LSU_U12.ts";
 
 /** Structured result of parsing an HL7 LSR^U13 (HL7 v2.9) message. */
 export type ParsedLSR_U13 = ParsedLSU_U12;
+
+/**
+ * An HL7 LSR^U13 (HL7 v2.9) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedLSR_U13>(message, "2.9", "LSR_U13")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedLSR_U13 = ParsedHL7MessageOf<"2.9", "LSR_U13", ParsedLSR_U13>;
 
 /** Parser for HL7 LSR^U13 (HL7 v2.9) messages. */
 export class LSR_U13_Parser extends LSU_U12_Parser {

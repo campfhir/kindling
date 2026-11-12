@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { ORF_R04_Parser, type ParsedORF_R04, ORF_R04, type ORF_R04Options, type QueryResponse, type ResponseOrderGroup, type ObservationGroup } from "./ORF_R04.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -19,6 +20,12 @@ export { ORF_R04_STRUCTURE as ORF_W02_STRUCTURE } from "./ORF_R04.ts";
 export type { ParsedQueryResponse, ParsedResponseOrder, ParsedObservation } from "./ORF_R04.ts";
 /** Structured result of parsing an HL7 ORF^W02 (HL7 v2.4) message. */
 export type ParsedORF_W02 = ParsedORF_R04;
+
+/**
+ * An HL7 ORF^W02 (HL7 v2.4) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedORF_W02>(message, "2.4", "ORF_W02")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedORF_W02 = ParsedHL7MessageOf<"2.4", "ORF_W02", ParsedORF_W02>;
 
 /** Parser for HL7 ORF^W02 (HL7 v2.4) messages. */
 export class ORF_W02_Parser extends ORF_R04_Parser {

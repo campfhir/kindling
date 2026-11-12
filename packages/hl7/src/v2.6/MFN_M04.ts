@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -59,6 +60,12 @@ export interface ParsedMFN_M04 extends ParsedMessageBase {
   /** The MF CDM groups. */
   mfCdms: ParsedMfCdm[];
 }
+
+/**
+ * An HL7 MFN^M04 (HL7 v2.6) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedMFN_M04>(message, "2.6", "MFN_M04")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedMFN_M04 = ParsedHL7MessageOf<"2.6", "MFN_M04", ParsedMFN_M04>;
 
 /** The segment parsers of MFN^M04 (HL7 v2.6). */
 const PARSERS: SegmentParsers = {

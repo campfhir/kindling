@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -80,6 +81,12 @@ export interface ParsedMFN_M11 extends ParsedMessageBase {
   /** The MF TEST CALCULATED groups. */
   mfTestCalculateds: ParsedMfTestCalculated[];
 }
+
+/**
+ * An HL7 MFN^M11 (HL7 v2.8.1) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedMFN_M11>(message, "2.8.1", "MFN_M11")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedMFN_M11 = ParsedHL7MessageOf<"2.8.1", "MFN_M11", ParsedMFN_M11>;
 
 /** The segment parsers of MFN^M11 (HL7 v2.8.1). */
 const PARSERS: SegmentParsers = {

@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { MSA } from "./MSA.ts";
@@ -131,6 +132,12 @@ export interface ParsedORF_W02 extends ParsedMessageBase {
   /** The DSC segment. */
   continuation?: DSC;
 }
+
+/**
+ * An HL7 ORF^W02 (HL7 v2.5) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedORF_W02>(message, "2.5", "ORF_W02")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedORF_W02 = ParsedHL7MessageOf<"2.5", "ORF_W02", ParsedORF_W02>;
 
 /** The segment parsers of ORF^W02 (HL7 v2.5). */
 const PARSERS: SegmentParsers = {

@@ -1,11 +1,13 @@
-import { parse, selectParser } from "../src/parse.ts";
+import { parse, selectParser, isVersion } from "../src/parse.ts";
+import type { DispatchedMessage } from "../src/v2.3/registry.ts";
 
 /**
  * Example: parse messages of unknown type with the root parser.
  *
  * `parse()` reads MSH-9 and MSH-12, picks the generated parser of that message in that version
- * and runs it; `structure` narrows `parsed` to the message's own shape. A batch file comes back
- * with `kind: "batch"` instead.
+ * and runs it. `isVersion<DispatchedMessage>()` narrows the result to one version's messages, then
+ * `structure` narrows `parsed` to the message's own shape. A batch file comes back with
+ * `kind: "batch"` instead.
  */
 const messages = [
   `MSH|^~\\&|ADT|Hospital|EMR|Clinic|20231115140500||ADT^A01|MSG001|P|2.3
@@ -37,6 +39,10 @@ for (const raw of messages) {
     continue;
   }
   if (result.val.kind === "batch") continue;
+  if (!isVersion<DispatchedMessage>(result.val, "2.3")) {
+    console.log(`  v${result.val.version} ${result.val.structure}: ${result.val.parsed.message.encode().split("\r").length} segments`);
+    continue;
+  }
   switch (result.val.structure) {
     case "ADT_A01":
       console.log(`  admitted ${result.val.parsed.patient.encode()} to ${result.val.parsed.visit.encode()}`);

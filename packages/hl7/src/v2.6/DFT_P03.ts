@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
 import { UAC } from "./UAC.ts";
@@ -297,6 +298,12 @@ export interface ParsedDFT_P03 extends ParsedMessageBase {
   /** The ACC segment. */
   accident?: ACC;
 }
+
+/**
+ * An HL7 DFT^P03 (HL7 v2.6) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedDFT_P03>(message, "2.6", "DFT_P03")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedDFT_P03 = ParsedHL7MessageOf<"2.6", "DFT_P03", ParsedDFT_P03>;
 
 /** The segment parsers of DFT^P03 (HL7 v2.6). */
 const PARSERS: SegmentParsers = {

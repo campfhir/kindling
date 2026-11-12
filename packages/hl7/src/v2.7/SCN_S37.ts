@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { SMD_S32_Parser, type ParsedSMD_S32, SMD_S32, type SMD_S32Options, type AntiMicrobialDeviceCycleDataGroup } from "./SMD_S32.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -17,6 +18,12 @@ export { SMD_S32_STRUCTURE as SCN_S37_STRUCTURE } from "./SMD_S32.ts";
 export type { ParsedAntiMicrobialDeviceCycleData } from "./SMD_S32.ts";
 /** Structured result of parsing an HL7 SCN^S37 (HL7 v2.7) message. */
 export type ParsedSCN_S37 = ParsedSMD_S32;
+
+/**
+ * An HL7 SCN^S37 (HL7 v2.7) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedSCN_S37>(message, "2.7", "SCN_S37")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedSCN_S37 = ParsedHL7MessageOf<"2.7", "SCN_S37", ParsedSCN_S37>;
 
 /** Parser for HL7 SCN^S37 (HL7 v2.7) messages. */
 export class SCN_S37_Parser extends SMD_S32_Parser {

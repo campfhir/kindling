@@ -8,6 +8,7 @@
  */
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { Result } from "../types/result.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { ORU_R01_Parser, type ParsedORU_R01, ORU_R01, type ORU_R01Options, type PatientResultGroup, type PatientGroup, type NextOfKinGroup, type PatientObservationGroup, type VisitGroup, type InsuranceGroup, type OrderObservationGroup, type CommonOrderGroup, type OrderDocumentGroup, type ObservationParticipationGroup, type TimingQtyGroup, type ObservationGroup, type SpecimenGroup, type SpecimenObservationGroup, type DeviceGroup } from "./ORU_R01.ts";
 import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";
 import type { MSH } from "./MSH.ts";
@@ -17,6 +18,12 @@ export { ORU_R01_STRUCTURE as ORU_R43_STRUCTURE } from "./ORU_R01.ts";
 export type { ParsedPatientResult, ParsedPatient, ParsedNextOfKin, ParsedPatientObservation, ParsedVisit, ParsedInsurance, ParsedOrderObservation, ParsedCommonOrder, ParsedOrderDocument, ParsedObservationParticipation, ParsedTimingQty, ParsedObservation, ParsedSpecimen, ParsedSpecimenObservation, ParsedDevice } from "./ORU_R01.ts";
 /** Structured result of parsing an HL7 ORU^R43 (HL7 v2.9) message. */
 export type ParsedORU_R43 = ParsedORU_R01;
+
+/**
+ * An HL7 ORU^R43 (HL7 v2.9) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedORU_R43>(message, "2.9", "ORU_R43")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedORU_R43 = ParsedHL7MessageOf<"2.9", "ORU_R43", ParsedORU_R43>;
 
 /** Parser for HL7 ORU^R43 (HL7 v2.9) messages. */
 export class ORU_R43_Parser extends ORU_R01_Parser {

@@ -9,6 +9,7 @@
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
 import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { FAC } from "./FAC.ts";
 import { PSH } from "./PSH.ts";
@@ -86,6 +87,12 @@ export interface ParsedSUR_P09 extends ParsedMessageBase {
   /** The FACILITY groups. */
   facilitys: ParsedFacility[];
 }
+
+/**
+ * An HL7 SUR^P09 (HL7 v2.6) message as the root `parse()` returns it. Narrow a parsed
+ * message to it with `isMessage<DispatchedSUR_P09>(message, "2.6", "SUR_P09")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedSUR_P09 = ParsedHL7MessageOf<"2.6", "SUR_P09", ParsedSUR_P09>;
 
 /** The segment parsers of SUR^P09 (HL7 v2.6). */
 const PARSERS: SegmentParsers = {
