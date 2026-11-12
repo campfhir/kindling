@@ -167,8 +167,9 @@ listing every field and structure, every disagreement between the sources and ev
 
 - A parsed message's `structure` is a string and `parsed` a `ParsedMessageBase` until it is narrowed
   to one version: `isVersion<DispatchedMessage>(result.val, '2.5.1')` (or `assertVersion`, which
-  throws), with `DispatchedMessage` imported as a type from `@campfhir/hl7/v2.5.1`. A check on
-  `structure` alone no longer narrows `parsed`.
+  throws), with `DispatchedMessage` imported as a type from `@campfhir/hl7/v2.5.1`, or to a few
+  message types with `isMessage<M>(result.val, '2.5.1', 'ORU_R01')`. A check on `structure` alone
+  no longer narrows `parsed`.
 - `selectParser()`'s message parser narrows the same way with `DispatchedParser`.
 - `MessageStructureOf` and `ParsedMessageOf` are gone: use `MessageStructure` and `ParsedMessage` of
   the version's entry. `ParsedHL7MessageOf` and `SelectedMessageParserOf` take the parsed type as a
@@ -288,6 +289,28 @@ switch (result.val.structure) {
 `isVersion<M>()` checks that the version passed is the one `M` describes
 (`isVersion<DispatchedMessage>(m, '2.4')` with v2.5.1's type does not compile). Code that handles
 several versions narrows to each one it handles in turn.
+
+`DispatchedMessage` brings in the declarations of every message of its version (about 1,000 files).
+Code that handles a few message types can bring in only those with `isMessage()` (or
+`assertMessage()`), which checks the structure as well as the version. The type is built from each
+message module's own `Parsed<MSG>`, so the type checker loads ORU and its segments (about 150 files)
+and not SIU:
+
+```typescript
+import { parse, isMessage, type ParsedHL7MessageOf } from '@campfhir/hl7/parse';
+import type { ParsedORU_R01 } from '@campfhir/hl7/v2.5.1/ORU_R01';
+import type { ParsedORU_R30 } from '@campfhir/hl7/v2.5.1/ORU_R30';
+
+type ORU =
+  | ParsedHL7MessageOf<'2.5.1', 'ORU_R01', ParsedORU_R01>
+  | ParsedHL7MessageOf<'2.5.1', 'ORU_R30', ParsedORU_R30>;
+
+if (result.val.kind === 'message' && isMessage<ORU>(result.val, '2.5.1', 'ORU_R01', 'ORU_R30')) {
+  if (result.val.structure === 'ORU_R01') result.val.parsed.patientResults;
+}
+```
+
+The compiler checks the version and the structures passed against the type.
 
 `await selectParser(hl7String)` stops one step earlier and returns the parser it would run: for a message
 `{ kind: 'message', version, structure, messageType, parse }`, for a batch `{ kind: 'batch', parse }`. The

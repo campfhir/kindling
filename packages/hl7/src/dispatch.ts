@@ -136,6 +136,50 @@ export function isVersion<M extends { version: HL7Version }>(message: { kind: "m
 }
 
 /**
+ * Whether a parsed message (or a selected parser) is one of the structures `M` describes, in its
+ * version, narrowing it to `M`. `M` is built from the message modules alone, so a program that
+ * handles ORU messages loads the declarations of ORU and its segments, not those of the whole
+ * version:
+ *
+ * ```ts
+ * import { parse, isMessage, type ParsedHL7MessageOf } from "@campfhir/hl7/parse";
+ * import type { ParsedORU_R01 } from "@campfhir/hl7/v2.5.1/ORU_R01";
+ * import type { ParsedORU_R30 } from "@campfhir/hl7/v2.5.1/ORU_R30";
+ *
+ * type ORU = ParsedHL7MessageOf<"2.5.1", "ORU_R01", ParsedORU_R01> | ParsedHL7MessageOf<"2.5.1", "ORU_R30", ParsedORU_R30>;
+ *
+ * const result = await parse(raw);
+ * if (result.ok && result.val.kind === "message" && isMessage<ORU>(result.val, "2.5.1", "ORU_R01", "ORU_R30")) {
+ *   if (result.val.structure === "ORU_R01") result.val.parsed.patientResults;
+ * }
+ * ```
+ *
+ * The compiler checks `version` and `structures` against `M`; that each `Parsed<MSG>` is the one of
+ * that version is up to the import path it comes from.
+ */
+export function isMessage<M extends { version: HL7Version; structure: string }>(
+  message: { kind: "message"; version: HL7Version; structure: string },
+  version: M["version"],
+  ...structures: [M["structure"], ...M["structure"][]]
+): message is M & typeof message {
+  return message.version === version && (structures as string[]).includes(message.structure);
+}
+
+/**
+ * `isMessage()` as an assertion: narrows `message` to `M`, or throws when the message is of another
+ * version or structure.
+ */
+export function assertMessage<M extends { version: HL7Version; structure: string }>(
+  message: { kind: "message"; version: HL7Version; structure: string },
+  version: M["version"],
+  ...structures: [M["structure"], ...M["structure"][]]
+): asserts message is M & typeof message {
+  if (!isMessage<M>(message, version, ...structures)) {
+    throw new Err(`Expected an HL7 v${version} ${structures.join(" or ")} message, got a v${message.version} ${message.structure}`);
+  }
+}
+
+/**
  * `isVersion()` as an assertion: narrows `message` to `M`, or throws when the message is of another
  * version.
  */

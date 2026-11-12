@@ -53,6 +53,8 @@ export {
   selectMessageParser,
   isVersion,
   assertVersion,
+  isMessage,
+  assertMessage,
   type ParsedHL7Message,
   type ParsedHL7MessageOf,
   type SelectedMessageParser,

@@ -1,7 +1,8 @@
 import { describe, test, expect, vi } from "vitest";
 import { parse, parseBatch, selectParser, type ParsedHL7, type SelectedParser } from "./parse.ts";
 import { identifyMessage, isBatchInput, SUPPORTED_VERSIONS } from "./identify.ts";
-import { parseMessage, selectMessageParser, isVersion, assertVersion } from "./dispatch.ts";
+import { parseMessage, selectMessageParser, isVersion, assertVersion, isMessage, assertMessage, type ParsedHL7MessageOf } from "./dispatch.ts";
+import type { ParsedACK } from "./v2.3/ACK.ts";
 import type { DispatchedMessage as V23Message, DispatchedParser as V23Parser } from "./v2.3/registry.ts";
 import type { DispatchedMessage as V231Message } from "./v2.3.1/registry.ts";
 import type { DispatchedMessage as V24Message } from "./v2.4/registry.ts";
@@ -261,6 +262,27 @@ describe("parse", () => {
     if (!isVersion<V23Parser>(selected, "2.3") || selected.structure !== "ADT_A01") throw new Error("expected a v2.3 ADT_A01 parser");
     const parsed: ParsedADT_A01 = selected.parse(A01).val!;
     expect(parsed.patient).toBeTruthy();
+  });
+
+  test("isMessage() and assertMessage() narrow to the structures of one version", async () => {
+    type A01 = ParsedHL7MessageOf<"2.3", "ADT_A01", ParsedADT_A01>;
+    type Results = ParsedHL7MessageOf<"2.3", "ORU_R01", ParsedORU_R01> | ParsedHL7MessageOf<"2.3", "ACK", ParsedACK>;
+    const value = await parsedMessage(A01);
+    expect(isMessage<A01>(value, "2.3", "ADT_A01")).toBe(true);
+    expect(isMessage<Results>(value, "2.3", "ORU_R01", "ACK")).toBe(false);
+    expect(() => assertMessage<Results>(value, "2.3", "ORU_R01", "ACK")).toThrow("Expected an HL7 v2.3 ORU_R01 or ACK message, got a v2.3 ADT_A01");
+    // @ts-expect-error the structures must be those the type describes
+    isMessage<A01>(value, "2.3", "ORU_R01");
+    // @ts-expect-error and so must the version
+    isMessage<A01>(value, "2.4", "ADT_A01");
+    assertMessage<A01>(value, "2.3", "ADT_A01");
+    const parsed: ParsedADT_A01 = value.parsed;
+    expect(parsed.patient.fields[4].components[0].subComponents[0]).toBe("Doe");
+
+    const ack = await parsedMessage(ACK);
+    if (!isMessage<Results>(ack, "2.3", "ORU_R01", "ACK")) throw new Error("expected an ORU_R01 or ACK");
+    if (ack.structure === "ACK") expect(ack.parsed.acknowledgment.encode()).toBe("MSA|AA|MSG001");
+    else throw new Error("expected ACK");
   });
 
   test("passes the chosen parser's structural errors through", async () => {
