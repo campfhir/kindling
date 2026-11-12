@@ -159,6 +159,21 @@ are for it: hl7.eu, Caristix and HAPI, and the official HL7 chapter PDFs where t
 decide). Each version has a segment ledger and a message ledger in [docs/validation](docs/validation/README.md)
 listing every field and structure, every disagreement between the sources and every dated decision.
 
+## Upgrading from 3.x
+
+4.0 types the parser without any version's message types, so importing the root or
+`@campfhir/hl7/parse` no longer makes the type checker load all fifteen versions' declarations
+(91 files where it was 6,753):
+
+- A parsed message's `structure` is a string and `parsed` a `ParsedMessageBase` until it is narrowed
+  to one version: `isVersion<DispatchedMessage>(result.val, '2.5.1')` (or `assertVersion`, which
+  throws), with `DispatchedMessage` imported as a type from `@campfhir/hl7/v2.5.1`. A check on
+  `structure` alone no longer narrows `parsed`.
+- `selectParser()`'s message parser narrows the same way with `DispatchedParser`.
+- `MessageStructureOf` and `ParsedMessageOf` are gone: use `MessageStructure` and `ParsedMessage` of
+  the version's entry. `ParsedHL7MessageOf` and `SelectedMessageParserOf` take the parsed type as a
+  third parameter.
+
 ## Upgrading from 2.x
 
 3.0 moves the parser to its own entry point and makes it asynchronous:
@@ -272,16 +287,7 @@ switch (result.val.structure) {
 
 `isVersion<M>()` checks that the version passed is the one `M` describes
 (`isVersion<DispatchedMessage>(m, '2.4')` with v2.5.1's type does not compile). Code that handles
-many versions can take the union over all of them, in which `structure` alone narrows `parsed` to
-that message across the versions, from `@campfhir/hl7/all-versions`; it brings in every version's
-declarations (about 6,700 files) and adds nothing at runtime:
-
-```typescript
-import type { AnyParsedHL7Message } from '@campfhir/hl7/all-versions';
-
-const message = result.val as AnyParsedHL7Message;
-if (message.structure === 'ADT_A01') message.parsed.patient; // the ADT_A01 of every version
-```
+several versions narrows to each one it handles in turn.
 
 `await selectParser(hl7String)` stops one step earlier and returns the parser it would run: for a message
 `{ kind: 'message', version, structure, messageType, parse }`, for a batch `{ kind: 'batch', parse }`. The

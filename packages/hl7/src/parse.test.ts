@@ -2,7 +2,6 @@ import { describe, test, expect, vi } from "vitest";
 import { parse, parseBatch, selectParser, type ParsedHL7, type SelectedParser } from "./parse.ts";
 import { identifyMessage, isBatchInput, SUPPORTED_VERSIONS } from "./identify.ts";
 import { parseMessage, selectMessageParser, isVersion, assertVersion } from "./dispatch.ts";
-import type { AnyParsedHL7Message } from "./all-versions.ts";
 import type { DispatchedMessage as V23Message, DispatchedParser as V23Parser } from "./v2.3/registry.ts";
 import type { DispatchedMessage as V231Message } from "./v2.3.1/registry.ts";
 import type { DispatchedMessage as V24Message } from "./v2.4/registry.ts";
@@ -262,12 +261,6 @@ describe("parse", () => {
     if (!isVersion<V23Parser>(selected, "2.3") || selected.structure !== "ADT_A01") throw new Error("expected a v2.3 ADT_A01 parser");
     const parsed: ParsedADT_A01 = selected.parse(A01).val!;
     expect(parsed.patient).toBeTruthy();
-  });
-
-  test("the all-versions types narrow on structure across every version", async () => {
-    const value = (await parsedMessage(A01)) as AnyParsedHL7Message;
-    if (value.structure !== "ADT_A01") throw new Error("expected ADT_A01");
-    expect(value.parsed.patient.fields[4].components[0].subComponents[0]).toBe("Doe"); // PID in every version's ADT_A01
   });
 
   test("passes the chosen parser's structural errors through", async () => {

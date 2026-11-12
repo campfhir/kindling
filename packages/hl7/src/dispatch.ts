@@ -17,9 +17,6 @@
  * }
  * ```
  *
- * `@campfhir/hl7/all-versions` has the union over every version for code that wants it and accepts
- * the cost.
- *
  * @module
  */
 import type { Result } from "./types/result.ts";
