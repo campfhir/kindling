@@ -1,7 +1,11 @@
 import { describe, test, expect, vi } from "vitest";
 import { parse, parseBatch, selectParser, type ParsedHL7, type SelectedParser } from "./parse.ts";
 import { identifyMessage, isBatchInput, SUPPORTED_VERSIONS } from "./identify.ts";
-import { parseMessage, selectMessageParser } from "./dispatch.ts";
+import { parseMessage, selectMessageParser, isVersion, assertVersion } from "./dispatch.ts";
+import type { AnyParsedHL7Message } from "./all-versions.ts";
+import type { DispatchedMessage as V23Message, DispatchedParser as V23Parser } from "./v2.3/registry.ts";
+import type { DispatchedMessage as V231Message } from "./v2.3.1/registry.ts";
+import type { DispatchedMessage as V24Message } from "./v2.4/registry.ts";
 import { MESSAGES } from "./v2.3/registry.ts";
 import { MESSAGES as MESSAGES_231 } from "./v2.3.1/registry.ts";
 import { MESSAGES as MESSAGES_24 } from "./v2.4/registry.ts";
@@ -218,8 +222,8 @@ describe("parse", () => {
     expect(value.version).toBe("2.3");
     expect(value.structure).toBe("ADT_A01");
     expect(value.messageType).toEqual({ messageCode: "ADT", triggerEvent: "A01", version: "2.3" });
-    if (value.version === "2.3" && value.structure === "ADT_A01") {
-      const parsed: ParsedADT_A01 = value.parsed; // narrowed by the discriminants
+    if (isVersion<V23Message>(value, "2.3") && value.structure === "ADT_A01") {
+      const parsed: ParsedADT_A01 = value.parsed; // narrowed by the version, then the structure
       expect(parsed.patient.fields[4].components[0].subComponents[0]).toBe("Doe");
       expect(parsed.visit.fields[1].components[0].subComponents[0]).toBe("I");
       expect(parsed.message.encode()).toBe(A01);
@@ -234,12 +238,36 @@ describe("parse", () => {
   test("ACK and ORU^R01 narrow to their own shapes", async () => {
     const ack = await parsedMessage(ACK);
     expect(ack.structure).toBe("ACK");
+    assertVersion<V23Message>(ack, "2.3");
     if (ack.structure === "ACK") expect(ack.parsed.acknowledgment.fields[0].components[0].subComponents[0]).toBe("AA");
 
     const oru = await parsedMessage(ORU);
-    if (oru.version !== "2.3" || oru.structure !== "ORU_R01") throw new Error("expected a v2.3 ORU_R01");
+    if (!isVersion<V23Message>(oru, "2.3") || oru.structure !== "ORU_R01") throw new Error("expected a v2.3 ORU_R01");
     const parsed: ParsedORU_R01 = oru.parsed;
     expect(parsed.patientResults[0].orderObservations[0].observations![0].observation.fields[4].components[0].subComponents[0]).toBe("15.5");
+  });
+
+  test("isVersion() and assertVersion() narrow to one version's messages and check the version", async () => {
+    const value = await parsedMessage(A01);
+    expect(isVersion<V23Message>(value, "2.3")).toBe(true);
+    expect(isVersion<V24Message>(value, "2.4")).toBe(false);
+    expect(() => assertVersion<V24Message>(value, "2.4")).toThrow("Expected an HL7 v2.4 message, got v2.3");
+    // @ts-expect-error the version must be the one the type describes
+    isVersion<V23Message>(value, "2.4");
+    assertVersion<V23Message>(value, "2.3");
+    const structure: V23Message["structure"] = value.structure; // a v2.3 structure name, no longer a string
+    expect(structure).toBe("ADT_A01");
+
+    const selected = await select(A01);
+    if (!isVersion<V23Parser>(selected, "2.3") || selected.structure !== "ADT_A01") throw new Error("expected a v2.3 ADT_A01 parser");
+    const parsed: ParsedADT_A01 = selected.parse(A01).val!;
+    expect(parsed.patient).toBeTruthy();
+  });
+
+  test("the all-versions types narrow on structure across every version", async () => {
+    const value = (await parsedMessage(A01)) as AnyParsedHL7Message;
+    if (value.structure !== "ADT_A01") throw new Error("expected ADT_A01");
+    expect(value.parsed.patient.fields[4].components[0].subComponents[0]).toBe("Doe"); // PID in every version's ADT_A01
   });
 
   test("passes the chosen parser's structural errors through", async () => {
@@ -262,7 +290,7 @@ describe("parse", () => {
     // A 2.4 A01 ends with PDA and carries ROLs after PD1 and PV2.
     const v24 = await parse([MSH("ADT^A01^ADT_A01", "2.4"), "EVN|A01", "PID|1||1", "ROL|1|AD|AT", "PV1|1|O", "PV2|", "ROL|2|AD|CP", "PDA|"].join("\r"));
     expect(v24.val).toMatchObject({ kind: "message", version: "2.4", structure: "ADT_A01" });
-    if (v24.val?.kind === "message" && v24.val.version === "2.4" && v24.val.structure === "ADT_A01") {
+    if (v24.val?.kind === "message" && isVersion<V24Message>(v24.val, "2.4") && v24.val.structure === "ADT_A01") {
       expect(v24.val.parsed.roles).toHaveLength(1);
       expect(v24.val.parsed.visitRoles).toHaveLength(1);
       expect(v24.val.parsed.deathAndAutopsy).toBeTruthy();
@@ -271,7 +299,7 @@ describe("parse", () => {
     }
     const native = await parse([MSH("ADT^A01^ADT_A01", "2.3.1"), "EVN|A01", "PID|1||1", "PV1|1|O", "IN1|1|PLAN", "IN3|1", "IN3|2"].join("\r"));
     expect(native.val).toMatchObject({ kind: "message", version: "2.3.1", structure: "ADT_A01" });
-    if (native.val?.kind === "message" && native.val.version === "2.3.1" && native.val.structure === "ADT_A01") {
+    if (native.val?.kind === "message" && isVersion<V231Message>(native.val, "2.3.1") && native.val.structure === "ADT_A01") {
       expect(native.val.parsed.insuranceGroups![0].insuranceCertifications).toHaveLength(2); // IN3 repeats from 2.3.1
     } else {
       throw new Error("expected a 2.3.1 ADT_A01");

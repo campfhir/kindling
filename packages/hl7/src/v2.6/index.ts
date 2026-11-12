@@ -592,4 +592,4 @@ export { createVXQ_V01, parseVXQ_V01, VXQ_V01_STRUCTURE, type ParsedVXQ_V01 } fr
 export { createVXR_V03, parseVXR_V03, VXR_V03_STRUCTURE, type ParsedVXR_V03 } from "./VXR_V03.ts";
 export { createVXU_V04, parseVXU_V04, VXU_V04_STRUCTURE, type ParsedVXU_V04 } from "./VXU_V04.ts";
 export { createVXX_V02, parseVXX_V02, VXX_V02_STRUCTURE, type ParsedVXX_V02 } from "./VXX_V02.ts";
-export { MESSAGES, type MessageStructure, type ParsedMessage } from "./registry.ts";
+export { MESSAGES, type MessageStructure, type ParsedMessage, type DispatchedMessage, type DispatchedParser } from "./registry.ts";

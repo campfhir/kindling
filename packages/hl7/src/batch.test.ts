@@ -1,6 +1,7 @@
 import { describe, test, expect } from "vitest";
 import { encodeBatch } from "./batch.ts";
-import { parse, parseBatch } from "./parse.ts";
+import { parse, parseBatch, isVersion } from "./parse.ts";
+import type { DispatchedMessage } from "./v2.3/registry.ts";
 import { BHS, BTS, FHS, FTS, MSH, MSA, QRD } from "./v2.3/index.ts";
 import { createACK } from "./v2.3/index.ts";
 
@@ -40,7 +41,7 @@ describe("parseBatch", () => {
     // Each message is exactly what parse() returns for it on its own.
     expect(file.batches[0].messages[0].val).toEqual((await parse(A01("M1"))).val);
     const first = file.batches[0].messages[0].val!;
-    if (first.structure === "ADT_A01") expect(first.parsed.visit.fields[1].components[0].subComponents[0]).toBe("I");
+    if (isVersion<DispatchedMessage>(first, "2.3") && first.structure === "ADT_A01") expect(first.parsed.visit.fields[1].components[0].subComponents[0]).toBe("I");
   });
 
   test("round trips through encodeBatch", async () => {

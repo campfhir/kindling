@@ -6,6 +6,7 @@
  */
 import type { Result } from "../types/result.ts";
 import type { ParsedMessageBase } from "../types/structure.ts";
+import type { ParsedHL7MessageOf, SelectedMessageParserOf } from "../dispatch.ts";
 import { parseACK } from "./ACK.ts";
 import { parseADT_A01 } from "./ADT_A01.ts";
 import { parseADT_A02 } from "./ADT_A02.ts";
@@ -690,3 +691,17 @@ export type MessageStructure = keyof typeof MESSAGES;
 /** The parsed form of an HL7 v2.8.1 message structure (a union of all of them by default). */
 export type ParsedMessage<S extends MessageStructure = MessageStructure> =
   (typeof MESSAGES)[S] extends (messageString: string) => Result<infer T> ? T : never;
+
+/**
+ * An HL7 v2.8.1 message as the root `parse()` returns it, a union over its structures, so a
+ * `switch` on `structure` narrows `parsed`. Narrow a parsed message to it with
+ * `isVersion<DispatchedMessage>(message, "2.8.1")` of `@campfhir/hl7/parse`.
+ */
+export type DispatchedMessage<S extends MessageStructure = MessageStructure> = {
+  [K in S]: ParsedHL7MessageOf<"2.8.1", K, ParsedMessage<K>>;
+}[S];
+
+/** The parser `selectParser()` picks for an HL7 v2.8.1 message, a union over its structures. */
+export type DispatchedParser<S extends MessageStructure = MessageStructure> = {
+  [K in S]: SelectedMessageParserOf<"2.8.1", K, ParsedMessage<K>>;
+}[S];

@@ -11,14 +11,20 @@
  * ```ts
  * import { parse } from "@campfhir/hl7/parse";
  *
+ * import type { DispatchedMessage } from "@campfhir/hl7/v2.5.1";
+ *
  * const result = await parse(raw);
  * if (!result.ok) throw new Error(result.err.message);
  * if (result.val.kind === "batch") {
  *   result.val.batches[0].messages[0]; // Result<ParsedHL7Message>
- * } else if (result.val.structure === "ADT_A01") {
- *   result.val.parsed.patient; // PID, typed as ParsedADT_A01
+ * } else if (isVersion<DispatchedMessage>(result.val, "2.5.1") && result.val.structure === "ADT_A01") {
+ *   result.val.parsed.patient; // PID, typed as ParsedADT_A01 of v2.5.1
  * }
  * ```
+ *
+ * This entry is typed without any version's message types: a message's `structure` is a string and
+ * `parsed` a `ParsedMessageBase` until `isVersion()` narrows it to the `DispatchedMessage` of one
+ * version, so the type checker loads only the versions a program names.
  *
  * `selectParser()` stops one step earlier and returns the parser `parse()` would run, a message
  * parser (`kind: "message"`, with its version and structure name) or the batch parser
@@ -45,8 +51,8 @@ import type { ParsedBatch, ParsedBatchFile } from "./batch.ts";
 export {
   parseMessage,
   selectMessageParser,
-  type MessageStructureOf,
-  type ParsedMessageOf,
+  isVersion,
+  assertVersion,
   type ParsedHL7Message,
   type ParsedHL7MessageOf,
   type SelectedMessageParser,

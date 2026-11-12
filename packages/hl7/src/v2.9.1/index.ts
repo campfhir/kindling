@@ -553,4 +553,4 @@ export { createSTS_S30, parseSTS_S30, STS_S30_STRUCTURE, type ParsedSTS_S30 } fr
 export { createTCR_U11, parseTCR_U11, TCR_U11_STRUCTURE, type ParsedTCR_U11 } from "./TCR_U11.ts";
 export { createTCU_U10, parseTCU_U10, TCU_U10_STRUCTURE, type ParsedTCU_U10 } from "./TCU_U10.ts";
 export { createVXU_V04, parseVXU_V04, VXU_V04_STRUCTURE, type ParsedVXU_V04 } from "./VXU_V04.ts";
-export { MESSAGES, type MessageStructure, type ParsedMessage } from "./registry.ts";
+export { MESSAGES, type MessageStructure, type ParsedMessage, type DispatchedMessage, type DispatchedParser } from "./registry.ts";

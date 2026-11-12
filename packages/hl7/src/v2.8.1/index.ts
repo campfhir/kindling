@@ -523,4 +523,4 @@ export { createTCR_U11, parseTCR_U11, TCR_U11_STRUCTURE, type ParsedTCR_U11 } fr
 export { createTCU_U10, parseTCU_U10, TCU_U10_STRUCTURE, type ParsedTCU_U10 } from "./TCU_U10.ts";
 export { createUDM_Q05, parseUDM_Q05, UDM_Q05_STRUCTURE, type ParsedUDM_Q05 } from "./UDM_Q05.ts";
 export { createVXU_V04, parseVXU_V04, VXU_V04_STRUCTURE, type ParsedVXU_V04 } from "./VXU_V04.ts";
-export { MESSAGES, type MessageStructure, type ParsedMessage } from "./registry.ts";
+export { MESSAGES, type MessageStructure, type ParsedMessage, type DispatchedMessage, type DispatchedParser } from "./registry.ts";

@@ -138,4 +138,4 @@ export { createQRY_Q01, parseQRY_Q01, QRY_Q01_STRUCTURE, type ParsedQRY_Q01 } fr
 export { createQRY_Q02, parseQRY_Q02, QRY_Q02_STRUCTURE, type ParsedQRY_Q02 } from "./QRY_Q02.ts";
 export { createQRY_R02, parseQRY_R02, QRY_R02_STRUCTURE, type ParsedQRY_R02 } from "./QRY_R02.ts";
 export { createUDM_Q05, parseUDM_Q05, UDM_Q05_STRUCTURE, type ParsedUDM_Q05 } from "./UDM_Q05.ts";
-export { MESSAGES, type MessageStructure, type ParsedMessage } from "./registry.ts";
+export { MESSAGES, type MessageStructure, type ParsedMessage, type DispatchedMessage, type DispatchedParser } from "./registry.ts";

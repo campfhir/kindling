@@ -4,12 +4,21 @@
  * that message and runs it. Each version's registry is imported the first time a message of that
  * version is dispatched, and stays loaded after that. `parse()` of `./parse.ts` adds the batch protocol.
  *
+ * The results are typed without any version's message types (`structure` is a string, `parsed` a
+ * `ParsedMessageBase`), so importing the parser does not load fifteen versions of declarations into
+ * the type checker. One version's types are brought in where they are wanted:
+ *
  * ```ts
+ * import type { DispatchedMessage } from "@campfhir/hl7/v2.3";
+ *
  * const result = await parseMessage(raw);
- * if (result.ok && result.val.structure === "ADT_A01") {
- *   result.val.parsed.patient; // PID, typed as ParsedADT_A01
+ * if (result.ok && isVersion<DispatchedMessage>(result.val, "2.3") && result.val.structure === "ADT_A01") {
+ *   result.val.parsed.patient; // PID, typed as ParsedADT_A01 of v2.3
  * }
  * ```
+ *
+ * `@campfhir/hl7/all-versions` has the union over every version for code that wants it and accepts
+ * the cost.
  *
  * @module
  */
@@ -17,22 +26,6 @@ import type { Result } from "./types/result.ts";
 import type { ParsedMessageBase } from "./types/structure.ts";
 import { Err } from "./utils/err.ts";
 import { identifyMessage, eventTypeCode, SUPPORTED_VERSIONS, type HL7Version, type MessageType, type ParseOptions } from "./identify.ts";
-import type { MESSAGES as V2_1 } from "./v2.1/registry.ts";
-import type { MESSAGES as V2_2 } from "./v2.2/registry.ts";
-import type { MESSAGES as V2_3 } from "./v2.3/registry.ts";
-import type { MESSAGES as V2_3_1 } from "./v2.3.1/registry.ts";
-import type { MESSAGES as V2_4 } from "./v2.4/registry.ts";
-import type { MESSAGES as V2_5 } from "./v2.5/registry.ts";
-import type { MESSAGES as V2_5_1 } from "./v2.5.1/registry.ts";
-import type { MESSAGES as V2_6 } from "./v2.6/registry.ts";
-import type { MESSAGES as V2_7 } from "./v2.7/registry.ts";
-import type { MESSAGES as V2_7_1 } from "./v2.7.1/registry.ts";
-import type { MESSAGES as V2_8 } from "./v2.8/registry.ts";
-import type { MESSAGES as V2_8_1 } from "./v2.8.1/registry.ts";
-import type { MESSAGES as V2_8_2 } from "./v2.8.2/registry.ts";
-import type { MESSAGES as V2_9 } from "./v2.9/registry.ts";
-import type { MESSAGES as V2_9_1 } from "./v2.9.1/registry.ts";
-
 /** The message registry of one version: message structure name → generated parser. */
 type Messages = Record<string, (messageString: string) => Result<ParsedMessageBase>>;
 
@@ -70,34 +63,12 @@ function loadRegistry(version: HL7Version): Promise<Messages> {
   return registry;
 }
 
-/** The message registries by version, typed (type-only imports: they add nothing at runtime). */
-type Registries = {
-  "2.1": typeof V2_1;
-  "2.2": typeof V2_2;
-  "2.3": typeof V2_3;
-  "2.3.1": typeof V2_3_1;
-  "2.4": typeof V2_4;
-  "2.5": typeof V2_5;
-  "2.5.1": typeof V2_5_1;
-  "2.6": typeof V2_6;
-  "2.7": typeof V2_7;
-  "2.7.1": typeof V2_7_1;
-  "2.8": typeof V2_8;
-  "2.8.1": typeof V2_8_1;
-  "2.8.2": typeof V2_8_2;
-  "2.9": typeof V2_9;
-  "2.9.1": typeof V2_9_1;
-};
-
-/** The message structure names of one version (`"ADT_A01" | "ACK" | ...`). */
-export type MessageStructureOf<V extends HL7Version> = keyof Registries[V] & string;
-
-/** The parsed form of one message structure of one version. */
-export type ParsedMessageOf<V extends HL7Version, S extends MessageStructureOf<V>> =
-  Registries[V][S] extends (messageString: string) => Result<infer T> ? T : never;
-
-/** The parser picked for a message: its version, structure name, and the function to run. */
-export interface SelectedMessageParserOf<V extends HL7Version, S extends MessageStructureOf<V>> {
+/**
+ * The parser picked for a message: its version, structure name, and the function to run. `P` is the
+ * parsed form; it is `ParsedMessageBase` unless one version's types are brought in, as
+ * `DispatchedParser` of `@campfhir/hl7/<version>` does.
+ */
+export interface SelectedMessageParserOf<V extends HL7Version, S extends string, P = ParsedMessageBase> {
   /** Tells a message parser from a batch parser in `selectParser()`'s result. */
   kind: "message";
   /** The version the message is parsed as. */
@@ -107,32 +78,73 @@ export interface SelectedMessageParserOf<V extends HL7Version, S extends Message
   /** What MSH-9 and MSH-12 said. */
   messageType: MessageType;
   /** The generated parser of that message (`parseADT_A01` of `@campfhir/hl7/v2.3`). Synchronous: the registry is loaded already. */
-  parse: (messageString: string) => Result<ParsedMessageOf<V, S>>;
+  parse: (messageString: string) => Result<P>;
 }
 
-/** The parser picked for a message, as a union over every version and structure. */
-export type SelectedMessageParser = {
-  [V in HL7Version]: { [S in MessageStructureOf<V>]: SelectedMessageParserOf<V, S> }[MessageStructureOf<V>];
-}[HL7Version];
+/**
+ * The parser picked for a message, in any version. Typed without any version's message types, so
+ * importing the parser costs the type checker nothing per version; `isVersion()` narrows it to one
+ * version's `DispatchedParser`.
+ */
+export type SelectedMessageParser = SelectedMessageParserOf<HL7Version, string>;
 
-/** A message parsed by the root parser: the discriminants and the structured message. */
-export interface ParsedHL7MessageOf<V extends HL7Version, S extends MessageStructureOf<V>> {
+/**
+ * A message parsed by the root parser: the discriminants and the structured message. `P` is the
+ * parsed form; it is `ParsedMessageBase` unless one version's types are brought in, as
+ * `DispatchedMessage` of `@campfhir/hl7/<version>` does.
+ */
+export interface ParsedHL7MessageOf<V extends HL7Version, S extends string, P = ParsedMessageBase> {
   /** Tells a message from a batch file in `parse()`'s result. */
   kind: "message";
   /** The version the message was parsed as. */
   version: V;
-  /** The message structure name (`ADT_A01`): switch on it to narrow `parsed`. */
+  /** The message structure name (`ADT_A01`): once the version is narrowed, switch on it to narrow `parsed`. */
   structure: S;
   /** What MSH-9 and MSH-12 said. */
   messageType: MessageType;
   /** The structured message, the same object the message's own `parse<MSG>()` returns. */
-  parsed: ParsedMessageOf<V, S>;
+  parsed: P;
 }
 
-/** A message parsed by the root parser, as a union over every version and structure. */
-export type ParsedHL7Message = {
-  [V in HL7Version]: { [S in MessageStructureOf<V>]: ParsedHL7MessageOf<V, S> }[MessageStructureOf<V>];
-}[HL7Version];
+/**
+ * A message parsed by the root parser, in any version: `version` is the union of the dispatched
+ * versions, `structure` a string and `parsed` a `ParsedMessageBase` (`parsed.message` and its
+ * segments). Typed without any version's message types, so importing the parser does not make the
+ * type checker load all fifteen versions. Narrow it to one version's message types with
+ * `isVersion<DispatchedMessage>(message, "2.5.1")`, `DispatchedMessage` being the type of
+ * `@campfhir/hl7/v2.5.1`; then a `switch` on `structure` narrows `parsed`.
+ */
+export type ParsedHL7Message = ParsedHL7MessageOf<HL7Version, string>;
+
+/**
+ * Whether a parsed message (or a selected parser) is of the version `M` describes, narrowing it to
+ * `M`. `M` is one version's `DispatchedMessage` (or `DispatchedParser`) type, and `version` must be
+ * that version, which the compiler checks:
+ *
+ * ```ts
+ * import { parse, isVersion } from "@campfhir/hl7/parse";
+ * import type { DispatchedMessage } from "@campfhir/hl7/v2.5.1";
+ *
+ * const result = await parse(raw);
+ * if (result.ok && result.val.kind === "message" && isVersion<DispatchedMessage>(result.val, "2.5.1")) {
+ *   if (result.val.structure === "ADT_A01") result.val.parsed.patient; // ParsedADT_A01 of v2.5.1
+ * }
+ * ```
+ *
+ * The structure needs no check of its own: the dispatcher only returns structures of the version's
+ * registry, which is what `M` is generated from.
+ */
+export function isVersion<M extends { version: HL7Version }>(message: { kind: "message"; version: HL7Version }, version: M["version"]): message is M & typeof message {
+  return message.version === version;
+}
+
+/**
+ * `isVersion()` as an assertion: narrows `message` to `M`, or throws when the message is of another
+ * version.
+ */
+export function assertVersion<M extends { version: HL7Version }>(message: { kind: "message"; version: HL7Version }, version: M["version"]): asserts message is M & typeof message {
+  if (message.version !== version) throw new Err(`Expected an HL7 v${version} message, got v${message.version}`);
+}
 
 const fail = (message: string): Result<never> => ({ ok: false, err: new Err(message) });
 const has = (object: object, key: string) => Object.prototype.hasOwnProperty.call(object, key);
@@ -184,10 +196,7 @@ export async function selectMessageParser(messageString: string, options: ParseO
     const shown = [messageType.messageCode, messageType.triggerEvent, messageType.messageStructure].filter(Boolean).join("^");
     return fail(`Unknown HL7 v${version} message type '${shown}' (MSH-9)`);
   }
-  return {
-    ok: true,
-    val: { kind: "message", version, structure, messageType, parse: registry[structure] },
-  } as unknown as Result<SelectedMessageParser>;
+  return { ok: true, val: { kind: "message", version, structure, messageType, parse: registry[structure] } };
 }
 
 /**
@@ -199,14 +208,8 @@ export async function selectMessageParser(messageString: string, options: ParseO
 export async function parseMessage(messageString: string, options: ParseOptions = {}): Promise<Result<ParsedHL7Message>> {
   const selected = await selectMessageParser(messageString, options);
   if (!selected.ok || !selected.val) return selected as Result<never>;
-  // One plain shape for the call: the union over every version and structure is too large to call through.
-  const { version, structure, messageType, parse } = selected.val as unknown as {
-    version: HL7Version;
-    structure: string;
-    messageType: MessageType;
-    parse: (messageString: string) => Result<ParsedMessageBase>;
-  };
+  const { version, structure, messageType, parse } = selected.val;
   const result = parse(messageString);
   if (!result.ok || !result.val) return result as Result<never>;
-  return { ok: true, val: { kind: "message", version, structure, messageType, parsed: result.val } } as unknown as Result<ParsedHL7Message>;
+  return { ok: true, val: { kind: "message", version, structure, messageType, parsed: result.val } };
 }

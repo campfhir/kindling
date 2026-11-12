@@ -235,22 +235,29 @@ conversion.
 
 `parse()`, from `@campfhir/hl7/parse`, takes any HL7 v2 input and returns a Promise. One message is dispatched on MSH-9 (message type and
 trigger event) and MSH-12 (version) to the generated parser of that message in that version; the
-result has `kind: 'message'`, `version` and `structure`, and a `switch` or `if` on `structure`
-narrows `parsed` to the message's own shape (`ParsedADT_A01`, `ParsedORU_R01`, …), the very object
-`parseADT_A01()` would return. A batch file (FHS or BHS first, or more than one MSH) is parsed by
-`parseBatch()` instead and comes back with `kind: 'batch'` (see [Batches](#batches)).
+result has `kind: 'message'`, `version`, `structure` and `parsed`, the very object `parseADT_A01()`
+would return. A batch file (FHS or BHS first, or more than one MSH) is parsed by `parseBatch()`
+instead and comes back with `kind: 'batch'` (see [Batches](#batches)).
+
+The parser is typed without any version's message types, so importing it (or the root) does not
+make the type checker load fifteen versions of declarations: `version` is the union of the
+supported versions, `structure` a string and `parsed` a `ParsedMessageBase` (`parsed.message` and
+its segments). Bring in the version you handle with its `DispatchedMessage` type and narrow to it
+with `isVersion()` (or `assertVersion()`, which throws on another version); a `switch` on
+`structure` then narrows `parsed` to the message's own shape (`ParsedADT_A01`, `ParsedORU_R01`, …):
 
 ```typescript
-import { parse } from '@campfhir/hl7/parse';
+import { parse, isVersion } from '@campfhir/hl7/parse';
+import type { DispatchedMessage } from '@campfhir/hl7/v2.5.1';
 
 const result = await parse(hl7String);
 if (!result.ok) throw new Error(result.err.message); // "Unknown HL7 v2.3 message type 'ZZZ^Z01' (MSH-9)", "ADT_A01 message must contain a PID segment", …
 if (result.val.kind === 'batch') return handleBatch(result.val); // fileHeader, batches, fileTrailer, warnings
+if (!isVersion<DispatchedMessage>(result.val, '2.5.1')) throw new Error(`unexpected v${result.val.version}`);
 
 switch (result.val.structure) {
   case 'ADT_A01':
   case 'ADT_A04':
-    // the ADT_A01 of every version: patient and visit are in all of them
     console.log(result.val.parsed.patient.encode(), result.val.parsed.visit.encode());
     break;
   case 'ORU_R01':
@@ -263,9 +270,22 @@ switch (result.val.structure) {
 }
 ```
 
+`isVersion<M>()` checks that the version passed is the one `M` describes
+(`isVersion<DispatchedMessage>(m, '2.4')` with v2.5.1's type does not compile). Code that handles
+many versions can take the union over all of them, in which `structure` alone narrows `parsed` to
+that message across the versions, from `@campfhir/hl7/all-versions`; it brings in every version's
+declarations (about 6,700 files) and adds nothing at runtime:
+
+```typescript
+import type { AnyParsedHL7Message } from '@campfhir/hl7/all-versions';
+
+const message = result.val as AnyParsedHL7Message;
+if (message.structure === 'ADT_A01') message.parsed.patient; // the ADT_A01 of every version
+```
+
 `await selectParser(hl7String)` stops one step earlier and returns the parser it would run: for a message
 `{ kind: 'message', version, structure, messageType, parse }`, for a batch `{ kind: 'batch', parse }`. The
-message's `parse` is synchronous: the version is loaded by then.
+message's `parse` is synchronous: the version is loaded by then, and `isVersion<DispatchedParser>()` narrows it to one version as it does a parsed message.
 `parseMessage()` and `selectMessageParser()` are the single-message halves (a batch is an error to
 them), and `identifyMessage(hl7String)` (from the root) returns only what MSH-9 and MSH-12 say. `MESSAGES` of
 `@campfhir/hl7/v2.3` is the map they dispatch on (message structure name → parser).
@@ -274,16 +294,6 @@ them), and `identifyMessage(hl7String)` (from the root) returns only what MSH-9 
 value is an error. To parse such a feed anyway, or one that leaves MSH-12 empty, name the
 version to parse as: `await parse(hl7String, { version: '2.5.1' })`. Each version's own parsers
 (`parseADT_A01` of `@campfhir/hl7/v2.9.1`, …) can also be called directly.
-
-A message type's shape can differ between versions (v2.9.1's ADT_A01 has GSP, GSR and GSC, for example),
-so `structure` alone narrows `parsed` to the union of that message across the versions; check `version`
-too for one version's exact type:
-
-```typescript
-if (result.val.version === '2.9.1' && result.val.structure === 'ADT_A01') {
-  result.val.parsed.patient; // ParsedADT_A01 of @campfhir/hl7/v2.9.1
-}
-```
 
 In v2.2 and v2.3 MSH-9 has two components, message type and trigger event (`ADT^A01`); the message
 structure component (`ADT^A01^ADT_A01`) arrives in v2.3.1. The dispatcher keys on

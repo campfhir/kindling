@@ -315,6 +315,10 @@
       "types": "./dist/parse.d.ts",
       "default": "./dist/parse.js"
     },
+    "./all-versions": {
+      "types": "./dist/all-versions.d.ts",
+      "default": "./dist/all-versions.js"
+    },
     "./utils/dateUtils": {
       "types": "./dist/utils/dateUtils.d.ts",
       "default": "./dist/utils/dateUtils.js"
