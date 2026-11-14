@@ -161,12 +161,14 @@ listing every field and structure, every disagreement between the sources and ev
 
 ## Changes in 4.1
 
-A message's `encode()` (every builder, `HL7Message` and `MessageEditor`) now ends with a segment
-terminator: `MSH|…\rPID|…\r` where 4.0 wrote `MSH|…\rPID|…`. The parser already accepted both. Code
-that compares an encoded message with a string, or splits it on `\r` and counts the parts, sees
-the extra `\r` (`.split('\r').filter(Boolean)` or `stripWire()` give the 4.0 shape). A segment's
-`encode()` and `encodeStructure()` are unchanged. `encode({ mllp: true })` frames the message for
-MLLP as `<VT>message<FS><CR>`.
+New: `encode({ mllp: true })` frames a message for MLLP as `<VT>message<FS><CR>`, on every
+builder, `HL7Message` and `MessageEditor`.
+
+Fixed: a message's `encode()` left out the terminator after its last segment. It now writes
+`MSH|…\rPID|…\r` where 4.0 wrote `MSH|…\rPID|…`; the parser accepts both. Code that compared an
+encoded message with a string, or split it on `\r` and counted the parts, sees the extra `\r`
+(`stripWire()` or `.split('\r').filter(Boolean)` give the old shape). A segment's `encode()` and
+`encodeStructure()` are unchanged.
 
 ## Upgrading from 3.x
 
