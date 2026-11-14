@@ -31,7 +31,7 @@ import { ParserUtils } from "../types/parser.ts";
 const msh = (type: string, event: string) => new MSH().messageType({ messageCode: type, triggerEvent: event }).messageControlId("E1");
 const msa = () => new MSA().acknowledgmentCode("AA").messageControlId("E1");
 const qak = () => new QAK().queryTag("TAG1").queryResponseStatus("OK");
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("enhanced-mode queries (v2.3)", () => {
   test("EQQ^Q01 is MSH EQL [DSC]", () => {

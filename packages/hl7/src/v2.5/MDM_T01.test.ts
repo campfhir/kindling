@@ -23,7 +23,7 @@ const evn = (ev: string) => new EVN().eventTypeCode(ev);
 const pid = () => new PID().setId("1").patientName({ familyName: "Doe" });
 const pv1 = () => new PV1().patientClass("I");
 const txa = () => new TXA().setId("1").documentType("CN");
-const types = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const types = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 const MSH_LINE = (ev: string) => `MSH|^~\\&|HIS|HOSP|EMR|HOSP|20231015120000||MDM^${ev}^MDM_${ev}|MSG001|P|2.5`;
 
 describe("MDM_T01 / MDM_T02 (v2.5): SFT, common orders with timing, OBX with NTEs", () => {

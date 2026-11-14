@@ -8,7 +8,7 @@
 // @generated message — edit the schema under codegen/schemas and run `pnpm codegen`
 import type { StructureItem } from "../types/schema.ts";
 import type { Result } from "../types/result.ts";
-import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";
+import { parseStructure, type ParsedMessageBase, type SegmentParsers, encodeMessage, verifyStructure, type StructureInput, type EncodeOptions } from "../types/structure.ts";
 import type { ParsedHL7MessageOf } from "../dispatch.ts";
 import { MSH } from "./MSH.ts";
 import { SFT } from "./SFT.ts";
@@ -469,13 +469,16 @@ export class PGL_PC6<TMSH extends MSH = MSH, TPID extends PID = PID> {
     return { valid: errors.length === 0, errors };
   }
 
-  /** Encodes this message to its HL7 wire string. */
-  encode(): string {
+  /**
+   * Encodes this message to its HL7 wire string, every segment ending with `\r`. Pass
+   * `{ mllp: true }` to frame it for MLLP as `<VT>message<FS><CR>`.
+   */
+  encode(options?: EncodeOptions): string {
     const verification = this.verify();
     if (!verification.valid) {
       throw new Error(`Cannot encode invalid ${this.messageName} message:\n${verification.errors.join("\n")}`);
     }
-    return encodeStructure(this.structure, this.toInput(), this.encoding);
+    return encodeMessage(this.structure, this.toInput(), this.encoding, options);
   }
 }
 

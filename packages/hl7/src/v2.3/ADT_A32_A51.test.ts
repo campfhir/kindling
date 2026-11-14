@@ -33,7 +33,7 @@ for (const [label, builders, parsers] of [
         const create = (builders as Record<string, unknown>)[`createADT_${event}`] as typeof b23.createADT_A02;
         const parse = (parsers as Record<string, unknown>)[`parseADT_${event}`] as (s: string) => Result<{ patient: unknown }>;
         const encoded = create(msh(event), new EVN().eventTypeCode(event), pid(), new PV1().patientClass("I")).encode();
-        expect(encoded.split("\r").map((s) => s.substring(0, 3))).toEqual(["MSH", "EVN", "PID", "PV1"]);
+        expect(encoded.split("\r").filter(Boolean).map((s) => s.substring(0, 3))).toEqual(["MSH", "EVN", "PID", "PV1"]);
         expect(encoded).toContain(`ADT^${event}`);
         const parsed = parse(encoded);
         expect(parsed.ok).toBe(true);
@@ -49,7 +49,7 @@ for (const [label, builders, parsers] of [
         const parse = (parsers as Record<string, unknown>)[`parseADT_${event}`] as (s: string) => Result<{ merge: unknown }>;
         const mrg = new MRG().priorPatientId({ id: "OLD-1" });
         const encoded = create(msh(event), new EVN().eventTypeCode(event), pid(), mrg).encode();
-        expect(encoded.split("\r").map((s) => s.substring(0, 3))).toEqual(["MSH", "EVN", "PID", "MRG"]);
+        expect(encoded.split("\r").filter(Boolean).map((s) => s.substring(0, 3))).toEqual(["MSH", "EVN", "PID", "MRG"]);
         const parsed = parse(encoded);
         expect(parsed.ok).toBe(true);
         expect(parsed.val!.merge).toBeTruthy();
@@ -64,7 +64,7 @@ for (const [label, builders, parsers] of [
         const parse = (parsers as Record<string, unknown>)[`parseADT_${event}`] as (s: string) => Result<{ merge: unknown; visit: unknown }>;
         const mrg = new MRG().priorPatientId({ id: "OLD-1" });
         const encoded = create(msh(event), new EVN().eventTypeCode(event), pid(), mrg, new PV1().patientClass("I")).encode();
-        expect(encoded.split("\r").map((s) => s.substring(0, 3))).toEqual(["MSH", "EVN", "PID", "MRG", "PV1"]);
+        expect(encoded.split("\r").filter(Boolean).map((s) => s.substring(0, 3))).toEqual(["MSH", "EVN", "PID", "MRG", "PV1"]);
         const parsed = parse(encoded);
         expect(parsed.ok).toBe(true);
         expect(parsed.val!.merge).toBeTruthy();

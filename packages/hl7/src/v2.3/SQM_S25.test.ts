@@ -24,7 +24,7 @@ import { ParserUtils } from "../types/parser.ts";
 
 const msh = (type: string) => new MSH().messageType({ messageCode: type, triggerEvent: "S25" }).messageControlId("S1");
 const qrd = () => new QRD().queryDateTime("20231015120000").queryFormatCode("R").queryPriority("I").queryId("Q1");
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("SQM_S25 (v2.3)", () => {
   test("the REQUEST group is inlined: appointmentRequest, patient and resources sit at the top level", () => {

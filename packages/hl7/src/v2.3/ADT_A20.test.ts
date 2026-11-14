@@ -11,7 +11,7 @@ const msh = () => new MSH().sendingApplication("ADT").messageType({ messageCode:
 
 test("ADT_A20 encodes MSH EVN NPU and round-trips through v2.3 and v2.5.1", () => {
   const wire = createADT_A20(msh(), new EVN().eventTypeCode("A20"), new NPU().bedStatus("C")).encode();
-  expect(wire.split("\r").map((s) => s.slice(0, 3))).toEqual(["MSH", "EVN", "NPU"]);
+  expect(wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3))).toEqual(["MSH", "EVN", "NPU"]);
   for (const parse of [parseADT_A20, parseADT_A20_v251]) {
     const result = parse(wire);
     expect(result.ok).toBe(true);

@@ -33,7 +33,7 @@ describe("parseADT_A24", () => {
     expect(patient2.disabilities).toHaveLength(0);
 
     expect(message.segments).toHaveLength(8);
-    expect(message.encode()).toBe(fullMessage);
+    expect(message.encode()).toBe(`${fullMessage}\r`);
   });
 
   test("accepts the minimal message (MSH, EVN and two PIDs)", () => {

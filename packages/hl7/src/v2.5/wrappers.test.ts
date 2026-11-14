@@ -23,7 +23,7 @@ const MSH_LINE = (type: string, ev: string) => `MSH|^~\\&|APP|HOSP|EMR|HOSP|2023
 
 test("v2.5 ADT wrappers accept SFT and PDA; the v2.4 ones accept PDA only", () => {
   const wire = createADT_A08(new MSH().messageType({ messageCode: "ADT", triggerEvent: "A08" }), new EVN(), new PID(), new PV1(), { software: [new SFT()] }).encode();
-  expect(wire.split("\r").map((s) => s.slice(0, 3))).toEqual(["MSH", "SFT", "EVN", "PID", "PV1"]);
+  expect(wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3))).toEqual(["MSH", "SFT", "EVN", "PID", "PV1"]);
   expect(parseADT_A08(wire).val!.software).toHaveLength(1);
   const withPda = [MSH_LINE("ADT", "A08"), "EVN|A08", "PID|1", "PV1|1|I", "PDA|I10"].join("\r");
   expect(parseADT_A08(withPda).val!.deathAndAutopsy).toBeTruthy();

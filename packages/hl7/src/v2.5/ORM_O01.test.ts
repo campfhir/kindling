@@ -26,7 +26,7 @@ describe("ORM_O01 (v2.5)", () => {
   test("encodes without SFT and with one IN3 per insurance group (hl7.eu ch4 4.4.1, Caristix 2.5, HAPI v25)", () => {
     const msg = message();
     expect(msg.verify().valid).toBe(true);
-    expect(msg.encode().split("\r").map((s) => s.slice(0, 3))).toEqual(["MSH", "PID", "IN1", "IN3", "ORC"]);
+    expect(msg.encode().split("\r").filter(Boolean).map((s) => s.slice(0, 3))).toEqual(["MSH", "PID", "IN1", "IN3", "ORC"]);
   });
 
   test("parses in v2.5 and, the structure being the 2.4 one, in v2.4 too", () => {

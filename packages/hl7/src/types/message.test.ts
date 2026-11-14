@@ -52,7 +52,7 @@ test("HL7Message encode with single segment", () => {
   message.addSegment(segment);
   const encoded = message.encode();
 
-  expect(encoded).toBe("TST|value1");
+  expect(encoded).toBe("TST|value1\r");
 });
 
 test("HL7Message encode with multiple segments", () => {
@@ -69,7 +69,7 @@ test("HL7Message encode with multiple segments", () => {
 
   const encoded = message.encode();
 
-  expect(encoded).toBe("TST|value1\rTST|value2");
+  expect(encoded).toBe("TST|value1\rTST|value2\r");
 });
 
 test("HL7Message encode separates segments with carriage return", () => {
@@ -82,7 +82,7 @@ test("HL7Message encode separates segments with carriage return", () => {
   }
 
   const encoded = message.encode();
-  const segments = encoded.split("\r");
+  const segments = encoded.split("\r").filter(Boolean);
 
   expect(segments.length).toBe(3);
   expect(segments[0]).toBe("TST|value0");

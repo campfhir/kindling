@@ -16,7 +16,7 @@ import { ParserUtils } from "../types/parser.ts";
 
 const msh = (ev: string) => new MSH().sendingApplication("ADT").messageType({ messageCode: "ADT", triggerEvent: ev });
 const MSH_LINE = (ev: string) => `MSH|^~\\&|ADT|HOSP|EMR|HOSP|20231015120000||ADT^${ev}^ADT_${ev}|MSG001|P|2.4`;
-const types = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const types = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("ADT_A01 (v2.4): PDA, ROLs and repeating IN3, no SFT", () => {
   test("encodes and round-trips, and the wrapper events (A08) use the v2.4 shape", () => {

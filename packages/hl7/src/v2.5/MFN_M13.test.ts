@@ -35,7 +35,7 @@ const msa = () => new MSA().acknowledgmentCode("AA").messageControlId("Q1");
 const qrd = () => new QRD().queryFormatCode("R").queryPriority("I").queryId("Q1");
 const mfi = (file: string) => new MFI().masterFileIdentifier({ identifier: file }).fileLevelEventCode("UPD");
 const mfe = (key: string) => new MFE().recordLevelEventCode("MAD").primaryKeyValue(key);
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("master files (v2.5)", () => {
   test("MFN^M13 is MSH [{SFT}] MFI {MFE}; the other notifications gain SFT", () => {
@@ -73,7 +73,7 @@ describe("master files (v2.5)", () => {
     expect(parsed.entries[0].departmentCharacteristics).toHaveLength(1);
     expect(parsed.message.encode()).toBe(m05);
     // v2.4 nests the departments: the LCH after the second LDP belongs to that department there.
-    const v24 = parseMFR_M05_v24(m05.split("\r").filter((s) => !s.startsWith("ERR")).join("\r")).val!;
+    const v24 = parseMFR_M05_v24(m05.split("\r").filter(Boolean).filter((s) => !s.startsWith("ERR")).join("\r")).val!;
     expect(v24.entries[0].departments).toHaveLength(2);
     expect(v24.entries[0].departments[1].locationCharacteristics).toHaveLength(1);
 

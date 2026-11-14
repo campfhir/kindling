@@ -16,7 +16,7 @@ import { ORG } from "./ORG.ts";
 import { CDM } from "./CDM.ts";
 
 const msh = (event: string) => new MSH().messageType({ messageCode: "MFR", triggerEvent: event }).messageControlId("R1");
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("MFR (v2.4)", () => {
   test("adds QAK; the staff record carries ORG", () => {

@@ -40,7 +40,7 @@ for (const raw of messages) {
   }
   if (result.val.kind === "batch") continue;
   if (!isVersion<DispatchedMessage>(result.val, "2.3")) {
-    console.log(`  v${result.val.version} ${result.val.structure}: ${result.val.parsed.message.encode().split("\r").length} segments`);
+    console.log(`  v${result.val.version} ${result.val.structure}: ${result.val.parsed.message.encode().split("\r").filter(Boolean).length} segments`);
     continue;
   }
   switch (result.val.structure) {
@@ -56,7 +56,7 @@ for (const raw of messages) {
       console.log(`  ${result.val.parsed.acknowledgment.encode()}`);
       break;
     default:
-      console.log(`  ${result.val.parsed.message.encode().split("\r").length} segments`);
+      console.log(`  ${result.val.parsed.message.encode().split("\r").filter(Boolean).length} segments`);
   }
 }
 

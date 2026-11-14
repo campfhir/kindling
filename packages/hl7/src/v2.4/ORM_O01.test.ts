@@ -29,7 +29,7 @@ import { FT1 } from "./FT1.ts";
 const makeMSH = () =>
   new MSH().sendingApplication("ORDERS").messageType({ messageCode: "ORM", triggerEvent: "O01" }).messageControlId("M1");
 const makeORC = (n = "ORD1") => new ORC().orderControl("NW").placerOrderNumber(n);
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 function fullMessage() {
   return createORM_O01(
@@ -162,7 +162,7 @@ describe("ORM_O01 parser", () => {
     expect(val.orders[1].detail?.segment).toBeInstanceOf(RXO);
 
     // every segment survives into the message container
-    expect(val.message.segments).toHaveLength(wire.split("\r").length);
+    expect(val.message.segments).toHaveLength(wire.split("\r").filter(Boolean).length);
   });
 
   test.each([

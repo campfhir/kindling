@@ -159,6 +159,17 @@ are for it: hl7.eu, Caristix and HAPI, and the official HL7 chapter PDFs where t
 decide). Each version has a segment ledger and a message ledger in [docs/validation](docs/validation/README.md)
 listing every field and structure, every disagreement between the sources and every dated decision.
 
+## Changes in 4.1
+
+New: `encode({ mllp: true })` frames a message for MLLP as `<VT>message<FS><CR>`, on every
+builder, `HL7Message` and `MessageEditor`.
+
+Fixed: a message's `encode()` left out the terminator after its last segment. It now writes
+`MSH|…\rPID|…\r` where 4.0 wrote `MSH|…\rPID|…`; the parser accepts both. Code that compared an
+encoded message with a string, or split it on `\r` and counted the parts, sees the extra `\r`
+(`stripWire()` or `.split('\r').filter(Boolean)` give the old shape). A segment's `encode()` and
+`encodeStructure()` are unchanged.
+
 ## Upgrading from 3.x
 
 4.0 types the parser without any version's message types, so importing the root or
@@ -426,6 +437,17 @@ const message = createORU_R01(msh, [patientResult]);
 console.log(message.encode());
 ```
 
+`encode()` ends every segment with the segment terminator `\r`, the last one included. To send
+the message over MLLP, pass `{ mllp: true }` and it is framed as `<VT>message<FS><CR>`
+(`0x0B` … `0x1C 0x0D`):
+
+```typescript
+socket.write(message.encode({ mllp: true })); // "\x0bMSH|…\rPID|…\r…\r\x1c\r"
+```
+
+`toWire(segments, options)` applies the same terminators and frame to segments you encoded
+yourself, and `stripWire(wire)` removes them (both from `@campfhir/hl7`).
+
 ### Parsing an ORU^R01 Message
 
 ```typescript
@@ -528,7 +550,7 @@ zpd.encode(); // ZPD|extra-patient-data|comp1^comp2|sub1a&sub1b^sub2
 
 ### Message Editor
 
-`MessageEditor` lets you insert segments into, or update field values in, any built message without modifying the builder. All operations are applied at `encode()` time and can be freely chained.
+`MessageEditor` lets you insert segments into, or update field values in, any built message without modifying the builder. All operations are applied at `encode()` time and can be freely chained. The editor's `encode()` takes the same `{ mllp: true }` option as a builder's, and a raw string given to it may already be MLLP-framed or `\r`-terminated.
 
 #### Inserting segments
 

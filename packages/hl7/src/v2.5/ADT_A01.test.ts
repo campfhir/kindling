@@ -36,7 +36,7 @@ const evn = (ev: string) => new EVN().eventTypeCode(ev);
 const pid = () => new PID().setId("1").patientName({ familyName: "Doe", givenName: "John" });
 const pv1 = () => new PV1().patientClass("I");
 const sft = () => new SFT().softwareVendorOrganization("Kindling").softwareVersion("0.13").softwareProductName("hl7");
-const types = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const types = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 const MSH_LINE = (ev: string) => `MSH|^~\\&|ADT|HOSP|EMR|HOSP|20231015120000||ADT^${ev}^ADT_${ev}|MSG001|P|2.5`;
 
 describe("ADT_A01 (v2.5): SFT, visit ROLs, insurance IN3/ROL and PDA", () => {

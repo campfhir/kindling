@@ -214,7 +214,7 @@ describe("parse", () => {
       const result = await parse(wire);
       expect(result.err?.message).toBeUndefined();
       expect(result.val).toMatchObject({ kind: "message", version, structure });
-      if (result.val?.kind === "message") expect(result.val.parsed.message.encode()).toBe(wire);
+      if (result.val?.kind === "message") expect(result.val.parsed.message.encode()).toBe(`${wire}\r`);
     }
   }, 60_000); // the first message of a version loads its registry: cold under vitest, the transform is most of it
 
@@ -228,7 +228,7 @@ describe("parse", () => {
       const parsed: ParsedADT_A01 = value.parsed; // narrowed by the version, then the structure
       expect(parsed.patient.fields[4].components[0].subComponents[0]).toBe("Doe");
       expect(parsed.visit.fields[1].components[0].subComponents[0]).toBe("I");
-      expect(parsed.message.encode()).toBe(A01);
+      expect(parsed.message.encode()).toBe(`${A01}\r`);
     } else {
       throw new Error("expected ADT_A01");
     }
@@ -328,8 +328,8 @@ describe("parse", () => {
   });
 
   test("accepts LF and CRLF segment terminators", async () => {
-    expect((await parsedMessage(A01.split("\r").join("\n"))).structure).toBe("ADT_A01");
-    expect((await parsedMessage(A01.split("\r").join("\r\n"))).structure).toBe("ADT_A01");
+    expect((await parsedMessage(A01.split("\r").filter(Boolean).join("\n"))).structure).toBe("ADT_A01");
+    expect((await parsedMessage(A01.split("\r").filter(Boolean).join("\r\n"))).structure).toBe("ADT_A01");
   });
 
   test("a batch file comes back from the batch parser, not as an error", async () => {

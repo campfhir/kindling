@@ -16,7 +16,7 @@ import { ParserUtils } from "../types/parser.ts";
 
 const msh = (type: string) => new MSH().messageType({ messageCode: type, triggerEvent: "T12" }).messageControlId("D1");
 const qrd = () => new QRD().queryDateTime("20231015120000").queryFormatCode("R").queryPriority("I").queryId("Q1");
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("QRY_T12 and DOC_T12 (v2.3)", () => {
   test("QRY^T12 is MSH QRD [QRF]", () => {

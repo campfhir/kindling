@@ -11,7 +11,7 @@ import { RXA } from "./RXA.ts";
 const makeMSH = () => new MSH().messageType({ messageCode: "VXU", triggerEvent: "V04" }).messageControlId("V1");
 const makePID = () => new PID().setId("1");
 const makeRXA = (n = "1") => new RXA().giveSubIdCounter("0").administrationSubIdCounter(n).administeredCode({ code: "08", text: "Hep B" });
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 const msh = () => makeMSH().encode();
 
 const withGt1 = () => createVXU_V04(makeMSH(), makePID(), {

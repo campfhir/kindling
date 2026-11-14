@@ -22,7 +22,15 @@
 export { type EncodingCharacters, DEFAULT_ENCODING } from "./types/encoding.ts";
 export { type Segment, type Field, type Component, BaseSegment } from "./types/segment.ts";
 export { type MessageHeaderSegment, type MessageTypeValue, HeaderSegment, MessageHeaderBase } from "./types/header.ts";
-export { type Message, HL7Message } from "./types/message.ts";
+export {
+  type Message,
+  type EncodeOptions,
+  HL7Message,
+  MLLP_START,
+  MLLP_END,
+  toWire,
+  stripWire,
+} from "./types/message.ts";
 export {
   type MessageSchema,
   type SegmentDefinition,
@@ -37,6 +45,7 @@ export {
   parseStructure,
   verifyStructure,
   encodeStructure,
+  encodeMessage,
   type ParsedMessageBase,
   type SegmentParsers,
   type StructureInput,

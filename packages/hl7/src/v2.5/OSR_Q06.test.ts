@@ -12,7 +12,7 @@ import { ORC } from "./ORC.ts";
 import { TQ1 } from "./TQ1.ts";
 import { RQD } from "./RQD.ts";
 
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("OSR_Q06 (v2.5)", () => {
   test("ERR repeats and precedes SFT; orders gain the TIMING group", () => {

@@ -63,9 +63,9 @@ async function check(wire: string, expectation: Expectation | undefined) {
   if (result.val.kind !== "message") return;
   const dropped = expectation?.dropped ?? [];
   expect(warnings.map((w) => /Skipping unsupported segment type '(\w+)'/.exec(w)?.[1] ?? w)).toEqual(dropped);
-  const kept = dropped.length ? wire.split("\r").filter((s) => !dropped.includes(s.substring(0, 3))).join("\r") : wire;
-  if (expectation?.lossy !== undefined) expect(result.val.parsed.message.encode(), `expected the round trip to lose: ${expectation.lossy}`).not.toBe(kept);
-  else expect(result.val.parsed.message.encode()).toBe(kept);
+  const kept = dropped.length ? wire.split("\r").filter(Boolean).filter((s) => !dropped.includes(s.substring(0, 3))).join("\r") : wire;
+  if (expectation?.lossy !== undefined) expect(result.val.parsed.message.encode(), `expected the round trip to lose: ${expectation.lossy}`).not.toBe(`${kept}\r`);
+  else expect(result.val.parsed.message.encode()).toBe(`${kept}\r`);
 }
 
 describe("generated fixtures (hl7apy structures)", () => {
@@ -77,7 +77,7 @@ describe("generated fixtures (hl7apy structures)", () => {
     const records = (expectations.generated as Record<string, Expectation[]>)[file];
     const messages = readFileSync(join(GENERATED, file), "utf8").split("\r\r").map((m) => m.replace(/\r+$/, "")).filter(Boolean);
     describe(file, () => {
-      test.each(messages.map((m, i) => [`#${i + 1} ${m.split("\r")[0].split("|")[8]}`, m] as const))("%s", async (label, wire) => {
+      test.each(messages.map((m, i) => [`#${i + 1} ${m.split("\r").filter(Boolean)[0].split("|")[8]}`, m] as const))("%s", async (label, wire) => {
         await check(wire, expectationFor(records, label.slice(label.indexOf(" ") + 1), used));
       });
     });
@@ -130,7 +130,7 @@ for (const [source, files] of Object.entries(expectations.external)) {
       seen.add(name);
       const records = (files as Record<string, Expectation[]>)[name];
       describe(name, () => {
-        test.each(messages.map((m, i) => [`#${i + 1} ${m.split("\r")[0].split("|")[8]}`, i + 1, m] as const))("%s", async (_label, index, wire) => {
+        test.each(messages.map((m, i) => [`#${i + 1} ${m.split("\r").filter(Boolean)[0].split("|")[8]}`, i + 1, m] as const))("%s", async (_label, index, wire) => {
           count++;
           await check(wire, expectationFor(records, index, used));
         });

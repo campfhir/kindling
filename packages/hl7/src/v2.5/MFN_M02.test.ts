@@ -22,7 +22,7 @@ import { ParserUtils } from "../types/parser.ts";
 
 const msh = () => new MSH().sendingApplication("HR").messageType({ messageCode: "MFN", triggerEvent: "M02" }).messageControlId("1");
 const mfi = () => new MFI().masterFileIdentifier({ identifier: "PRA" }).fileLevelEventCode("UPD").responseLevelCode("NE");
-const types = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const types = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 const MSH_LINE = "MSH|^~\\&|HR|HOSP|EMR|HOSP|20231015120000||MFN^M02^MFN_M02|MSG001|P|2.5";
 
 describe("MFN_M02 (v2.5): staff entries with ORG, AFF, LAN, EDU, CER and NTE", () => {

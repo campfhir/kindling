@@ -18,7 +18,7 @@ test("DFT_P03 (v2.4): order groups without timing, no FT1 note, no SFT", () => {
   const wire = createDFT_P03(msh, new EVN().eventTypeCode("P03"), new PID().setId("1"), [
     { transaction: new FT1().setId("1"), orders: [{ commonOrder: new ORC().orderControl("NW"), observationRequest: new OBR().setId("1"), notes: [new NTE()], observations: [{ observation: new OBX().setId("1") }] }] },
   ], { roles: [new ROL()], orders: [{ observationRequest: new OBR().setId("2") }] }).encode();
-  expect(wire.split("\r").map((s) => s.slice(0, 3))).toEqual(["MSH", "EVN", "PID", "ROL", "OBR", "FT1", "ORC", "OBR", "NTE", "OBX"]);
+  expect(wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3))).toEqual(["MSH", "EVN", "PID", "ROL", "OBR", "FT1", "ORC", "OBR", "NTE", "OBX"]);
   const result = parseDFT_P03(wire);
   expect(result.ok).toBe(true);
   expect(result.val!.roles).toHaveLength(1);

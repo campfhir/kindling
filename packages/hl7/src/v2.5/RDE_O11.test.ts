@@ -43,7 +43,7 @@ const msa = () => new MSA().acknowledgmentCode("AA").messageControlId("P1");
 const orc = () => new ORC().orderControl("NW");
 const rxr = () => new RXR().route({ code: "PO" });
 const tq1 = (n: string) => new TQ1().setId(n);
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("pharmacy (v2.5)", () => {
   test("RDE^O11 gains SFT, the timing groups, RXE notes, COMPONENT groups, FT1 and BLG", () => {

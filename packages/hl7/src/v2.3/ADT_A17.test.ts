@@ -64,7 +64,7 @@ test("encode() emits both patient groups in spec order", () => {
     observations: [new OBX().setId("1").valueType("ST")],
   };
   const p2 = makePatient("2", "Roe", "102");
-  const segments = createADT_A17(makeMSH(), makeEVN(), [p1, p2]).encode().split("\r");
+  const segments = createADT_A17(makeMSH(), makeEVN(), [p1, p2]).encode().split("\r").filter(Boolean);
   expect(segments.map((s) => s.substring(0, 3))).toEqual([
     "MSH", "EVN", "PID", "PD1", "PV1", "PV2", "DB1", "DB1", "OBX", "PID", "PV1",
   ]);

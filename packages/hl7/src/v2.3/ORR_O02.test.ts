@@ -12,7 +12,7 @@ import { CTI } from "./CTI.ts";
 
 const makeMSH = () => new MSH().messageType({ messageCode: "ORR", triggerEvent: "O02" }).messageControlId("R1");
 const makeMSA = () => new MSA().acknowledgmentCode("AA").messageControlId("M1");
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 const fullMessage = () =>
   createORR_O02(makeMSH(), makeMSA(), {
@@ -76,7 +76,7 @@ describe("ORR_O02 parser", () => {
     expect(val.orders![0].clinicalTrials).toHaveLength(1);
     expect(val.orders![1].segment).toBeUndefined();
     expect(val.orders![1].notes).toEqual([]);
-    expect(val.message.segments).toHaveLength(wire.split("\r").length);
+    expect(val.message.segments).toHaveLength(wire.split("\r").filter(Boolean).length);
   });
 
   test("everything after MSA is optional", () => {

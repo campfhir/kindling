@@ -68,7 +68,7 @@ test("verify() fails when PV1 is missing", () => {
 
 test("encode() produces correct segment order", () => {
   const msg = createADT_A28(makeMSH(), makeEVN(), makePID(), makePV1());
-  const names = msg.encode().split("\r").map((s) => s.substring(0, 3));
+  const names = msg.encode().split("\r").filter(Boolean).map((s) => s.substring(0, 3));
   expect(names).toEqual(["MSH", "EVN", "PID", "PV1"]);
 });
 
@@ -76,7 +76,7 @@ test("encode() includes NK1 before PV1", () => {
   const msg = createADT_A28(makeMSH(), makeEVN(), makePID(), makePV1(), {
     nextOfKin: [new NK1().setId("1")],
   });
-  const names = msg.encode().split("\r").map((s) => s.substring(0, 3));
+  const names = msg.encode().split("\r").filter(Boolean).map((s) => s.substring(0, 3));
   expect(names.indexOf("NK1")).toBeLessThan(names.indexOf("PV1"));
 });
 
@@ -84,7 +84,7 @@ test("encode() places procedure groups after PV1", () => {
   const msg = createADT_A28(makeMSH(), makeEVN(), makePID(), makePV1(), {
     procedures: [{ procedure: new PR1().setId("1") }],
   });
-  const names = msg.encode().split("\r").map((s) => s.substring(0, 3));
+  const names = msg.encode().split("\r").filter(Boolean).map((s) => s.substring(0, 3));
   expect(names.indexOf("PR1")).toBeGreaterThan(names.indexOf("PV1"));
 });
 
@@ -93,7 +93,7 @@ test("encode() places GT1 before IN1", () => {
     guarantors: [new GT1().setId("1")],
     insuranceGroups: [{ insurance: new IN1().setId("1").insurancePlanId({ code: "PPO" }) }],
   });
-  const names = msg.encode().split("\r").map((s) => s.substring(0, 3));
+  const names = msg.encode().split("\r").filter(Boolean).map((s) => s.substring(0, 3));
   expect(names.indexOf("GT1")).toBeLessThan(names.indexOf("IN1"));
 });
 
@@ -105,7 +105,7 @@ test("encode() interleaves IN2 and IN3 inside insurance group", () => {
       insuranceCertifications: [new IN3().setId("1")],
     }],
   });
-  const names = msg.encode().split("\r").map((s) => s.substring(0, 3));
+  const names = msg.encode().split("\r").filter(Boolean).map((s) => s.substring(0, 3));
   expect(names.indexOf("IN2")).toBeGreaterThan(names.indexOf("IN1"));
   expect(names.indexOf("IN3")).toBeGreaterThan(names.indexOf("IN2"));
 });
@@ -114,7 +114,7 @@ test("encode() includes AL1 list after PV1", () => {
   const msg = createADT_A28(makeMSH(), makeEVN(), makePID(), makePV1(), {
     allergies: [new AL1().setId("1")],
   });
-  const names = msg.encode().split("\r").map((s) => s.substring(0, 3));
+  const names = msg.encode().split("\r").filter(Boolean).map((s) => s.substring(0, 3));
   expect(names.includes("AL1")).toBe(true);
   expect(names.indexOf("AL1")).toBeGreaterThan(names.indexOf("PV1"));
 });

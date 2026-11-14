@@ -46,7 +46,7 @@ const msh = (type: string, event: string) => new MSH().messageType({ messageCode
 const msa = () => new MSA().acknowledgmentCode("AA").messageControlId("R1");
 const qrd = () => new QRD().queryFormatCode("R").queryPriority("I").queryId("Q1");
 const providers = () => [{ provider: new PRD(), contacts: [new CTD(), new CTD()] }, { provider: new PRD() }];
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("referrals (v2.3)", () => {
   test("RQI^I01 and RPI^I01 carry providers, the patient and the inlined guarantor/insurance group", () => {

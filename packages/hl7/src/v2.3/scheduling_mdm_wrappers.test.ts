@@ -67,7 +67,7 @@ for (const [label, builders, parsers, is251] of [
       const name = `MDM_T${pad(n)}`;
       const content = is251 ? [{ observation: new OBX().setId("1") }] : [new OBX().setId("1")];
       const encoded = builders[`create${name}`](msh("MDM", `T${pad(n)}`), new EVN().eventTypeCode(`T${pad(n)}`), new PID().setId("1"), new PV1().patientClass("I"), new TXA().setId("1"), content).encode();
-      expect((encoded as string).split("\r").map((s: string) => s.slice(0, 3))).toEqual(["MSH", "EVN", "PID", "PV1", "TXA", "OBX"]);
+      expect((encoded as string).split("\r").filter(Boolean).map((s: string) => s.slice(0, 3))).toEqual(["MSH", "EVN", "PID", "PV1", "TXA", "OBX"]);
       check(name, encoded, `MSH|^~\\&|TEST|||||MDM^T${pad(n)}\rEVN|1\rPID|1\rPV1|1\rTXA|1`, new RegExp(`${name} message must contain at least one OBX`));
     });
   });

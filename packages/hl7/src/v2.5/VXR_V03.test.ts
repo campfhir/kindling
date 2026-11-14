@@ -20,7 +20,7 @@ const msh = (type: string, event: string) => new MSH().messageType({ messageCode
 const msa = () => new MSA().acknowledgmentCode("AA").messageControlId("Q1");
 const qrd = () => new QRD().queryFormatCode("R").queryPriority("I").queryId("Q1");
 const rxa = () => new RXA().giveSubIdCounter("0").administrationSubIdCounter("1").administeredCode({ code: "08" });
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("VXR_V03 and VXX_V02 (v2.5)", () => {
   test("SFT follows MSA; GT1 (v2.4) and the TIMING group with a required ORC (v2.5) are new", () => {

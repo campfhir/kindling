@@ -38,7 +38,7 @@ const msa = () => new MSA().acknowledgmentCode("AA").messageControlId("Q1");
 const qrd = () => new QRD().queryFormatCode("R").queryPriority("I").queryId("Q1").whatSubjectFilter({ code: "MFQ" });
 const mfi = (file: string) => new MFI().masterFileIdentifier({ identifier: file }).fileLevelEventCode("UPD");
 const mfe = (key: string) => new MFE().recordLevelEventCode("MAD").primaryKeyValue(key);
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("MFR (v2.3)", () => {
   test("M01 answers with bare entries; M03 and M08–M11 wrap it", () => {

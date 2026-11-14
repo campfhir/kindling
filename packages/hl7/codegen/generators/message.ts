@@ -462,7 +462,7 @@ export function generateMessageBuilder(schema: MessageSchema, version: string): 
   const imports = [
     `import { DEFAULT_ENCODING, type EncodingCharacters } from "../types/encoding.ts";`,
     `import type { StructureItem } from "../types/schema.ts";`,
-    `import { encodeStructure, verifyStructure, type StructureInput } from "../types/structure.ts";`,
+    `import { encodeMessage, verifyStructure, type StructureInput, type EncodeOptions } from "../types/structure.ts";`,
     `import { ${name}_STRUCTURE } from "./${name}.ts";`,
     ...segments.map((s) => `import type { ${s} } from "./${s}.ts";`),
   ].join("\n");
@@ -522,13 +522,16 @@ ${ctorParams}
     return { valid: errors.length === 0, errors };
   }
 
-  /** Encodes this message to its HL7 wire string. */
-  encode(): string {
+  /**
+   * Encodes this message to its HL7 wire string, every segment ending with \`\\r\`. Pass
+   * \`{ mllp: true }\` to frame it for MLLP as \`<VT>message<FS><CR>\`.
+   */
+  encode(options?: EncodeOptions): string {
     const verification = this.verify();
     if (!verification.valid) {
       throw new Error(\`Cannot encode invalid \${this.messageName} message:\\n\${verification.errors.join("\\n")}\`);
     }
-    return encodeStructure(this.structure, this.toInput(), this.encoding);
+    return encodeMessage(this.structure, this.toInput(), this.encoding, options);
   }
 }
 

@@ -22,7 +22,7 @@ import { IN3 } from "./IN3.ts";
 const msh = () => new MSH().sendingApplication("BILL").messageType({ messageCode: "DFT", triggerEvent: "P03" });
 const evn = () => new EVN().eventTypeCode("P03");
 const pid = () => new PID().setId("1").patientName({ familyName: "Doe" });
-const types = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const types = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 const MSH_LINE = "MSH|^~\\&|BILL|HOSP|AR|HOSP|20231015120000||DFT^P03^DFT_P03|MSG001|P|2.5";
 
 describe("DFT_P03 (v2.5): SFT, ROLs, order groups, FT1 notes, repeating IN3", () => {

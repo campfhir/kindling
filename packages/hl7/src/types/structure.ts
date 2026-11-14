@@ -19,7 +19,8 @@ import { Err } from "../utils/err.ts";
 import type { Result } from "./result.ts";
 import type { EncodingCharacters } from "./encoding.ts";
 import type { Segment } from "./segment.ts";
-import { HL7Message } from "./message.ts";
+import { HL7Message, toWire, type EncodeOptions } from "./message.ts";
+export type { EncodeOptions } from "./message.ts";
 import {
   type GroupChoice,
   type SegmentGroup,
@@ -318,7 +319,25 @@ function encodeItems(items: StructureItem[], value: StructureInput, encoding: En
   }
 }
 
-/** Encodes a builder's input (including `header`) against `structure` into the wire string. */
+/**
+ * Encodes a builder's input object as a message wire string: {@link encodeStructure} with every
+ * segment terminated by `\r` (the last one included) and, with `options.mllp`, an MLLP frame.
+ */
+export function encodeMessage(
+  structure: StructureItem[],
+  value: StructureInput,
+  encoding: EncodingCharacters,
+  options?: EncodeOptions,
+): string {
+  const out: string[] = [];
+  encodeItems(structure, value, encoding, out);
+  return toWire(out, options);
+}
+
+/**
+ * Encodes a builder's input (including `header`) against `structure`: its segments joined by `\r`,
+ * with no terminator after the last one. A builder's `encode()` uses {@link encodeMessage}.
+ */
 export function encodeStructure(structure: StructureItem[], value: StructureInput, encoding: EncodingCharacters): string {
   const out: string[] = [];
   encodeItems(structure, value, encoding, out);

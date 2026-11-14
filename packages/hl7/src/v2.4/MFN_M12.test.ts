@@ -19,7 +19,7 @@ import { ParserUtils } from "../types/parser.ts";
 
 const msh = (type: string, event: string) => new MSH().messageType({ messageCode: type, triggerEvent: event }).messageControlId("M1");
 const mfi = () => new MFI().masterFileIdentifier({ identifier: "OME" }).fileLevelEventCode("UPD");
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("MFN_M12 (v2.4)", () => {
   test("each entry is MFE OM1 [OM7]", () => {
@@ -31,7 +31,7 @@ describe("MFN_M12 (v2.4)", () => {
     expect(msg).toBeInstanceOf(MFN_M12);
     const wire = msg.encode();
     expect(names(wire)).toEqual(["MSH", "MFI", "MFE", "OM1", "OM7", "MFE", "OM1"]);
-    expect(wire.split("\r")[4]).toBe("OM7|1|GLU^Glucose|LAB~CHEM||||||||N");
+    expect(wire.split("\r").filter(Boolean)[4]).toBe("OM7|1|GLU^Glucose|LAB~CHEM||||||||N");
     const parsed = parseMFN_M12(wire).val!;
     expect(parsed.entries).toHaveLength(2);
     expect(ParserUtils.getComponent(parsed.entries[0].additionalAttributes!.fields[1], 1)).toBe("Glucose");

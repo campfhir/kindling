@@ -25,7 +25,7 @@ import { ParserUtils } from "../types/parser.ts";
 const msh = () => new MSH().sendingApplication("BILL").messageType({ messageCode: "DFT", triggerEvent: "P03" });
 const evn = () => new EVN().eventTypeCode("P03");
 const pid = () => new PID().setId("1").patientName({ familyName: "Doe", givenName: "John" });
-const types = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const types = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 const MSH_LINE = "MSH|^~\\&|BILL|HOSP|AR|HOSP|20231015120000||DFT^P03^DFT_P03|MSG001|P|2.3";
 
 describe("DFT_P03 builder (v2.3)", () => {

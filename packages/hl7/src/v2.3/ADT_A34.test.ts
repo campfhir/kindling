@@ -64,7 +64,7 @@ test("encode() throws when message is invalid", () => {
 
 test("encode() produces correct segment order for minimal message", () => {
   const msg = createADT_A34(makeMSH(), makeEVN(), makePID(), makeMRG());
-  const segments = msg.encode().split("\r");
+  const segments = msg.encode().split("\r").filter(Boolean);
 
   expect(segments.map((s) => s.substring(0, 3))).toEqual(["MSH", "EVN", "PID", "MRG"]);
 });
@@ -78,7 +78,7 @@ test("verify() fails when EVN is missing", () => {
 test("encode() places optional PD1 after PID and before MRG", () => {
   const pd1 = new PD1();
   const msg = createADT_A34(makeMSH(), makeEVN(), makePID(), makeMRG(), { patientDemographics: pd1 });
-  const segments = msg.encode().split("\r");
+  const segments = msg.encode().split("\r").filter(Boolean);
   const names = segments.map((s) => s.substring(0, 3));
 
   expect(names.indexOf("PD1")).toBeGreaterThan(names.indexOf("PID"));
@@ -102,7 +102,7 @@ test("A34 has no PV1: a PV1 in the input is skipped as an unknown segment", () =
 test("encode() includes all optional segments in correct order", () => {
   const pd1 = new PD1();
   const msg = createADT_A34(makeMSH(), makeEVN(), makePID(), makeMRG(), { patientDemographics: pd1 });
-  const segments = msg.encode().split("\r");
+  const segments = msg.encode().split("\r").filter(Boolean);
   const names = segments.map((s) => s.substring(0, 3));
 
   expect(names).toEqual(["MSH", "EVN", "PID", "PD1", "MRG"]);

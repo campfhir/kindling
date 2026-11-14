@@ -14,7 +14,7 @@ import { AIS } from "./AIS.ts";
 
 const msh = () => new MSH().sendingApplication("RIS").messageType({ messageCode: "SRR", triggerEvent: "S01" });
 const msa = () => new MSA().acknowledgmentCode("AA").messageControlId("MSG001");
-const types = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const types = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 const MSH_LINE = "MSH|^~\\&|RIS|HOSP|SCHED|HOSP|20231015120000||SRR^S01^SRR_S01|MSG002|P|2.5";
 
 describe("SRR_S01 (v2.5): repeating ERR and TQ1 after SCH", () => {

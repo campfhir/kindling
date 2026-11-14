@@ -26,7 +26,7 @@ const msh = (ev: string) => new MSH().sendingApplication("ADT").messageType({ me
 const evn = (ev: string) => new EVN().eventTypeCode(ev);
 const pid = (id = "1") => new PID().setId(id);
 const sft = () => new SFT().softwareVendorOrganization("Kindling");
-const types = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const types = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 const MSH_LINE = (ev: string) => `MSH|^~\\&|ADT|HOSP|AR|HOSP|20231015120000||BAR^${ev}^BAR_${ev}|MSG001|P|2.5`;
 
 describe("BAR (v2.5): SFT after MSH on every event", () => {

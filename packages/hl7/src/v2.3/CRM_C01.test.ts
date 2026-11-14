@@ -46,7 +46,7 @@ import { QRD } from "./QRD.ts";
 import { ERR } from "./ERR.ts";
 
 const msh = (type: string, event: string) => new MSH().messageType({ messageCode: type, triggerEvent: event }).messageControlId("M1");
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("clinical trials (v2.3)", () => {
   test("CRM^C01 registers patients; C02–C08 wrap it", () => {

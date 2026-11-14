@@ -104,7 +104,7 @@ describe("parseStructure", () => {
       "ORC|NW", "OBR|1", "NTE|1||obr note", "OBX|1|ST|A||x", "NTE|1||obx note", "OBX|2|ST|B||y", "DG1|1",
       "RQD|1", "OBX|1|ST|C||z",
       "PID|2||2||Roe", "OBR|9",
-    ));
+    ) + "\r");
   });
 
   test("a shared start segment goes to the sibling group when the next segment only fits there", () => {

@@ -32,7 +32,7 @@ import { QRD } from "./QRD.ts";
 
 const msh = (type: string, event: string) => new MSH().messageType({ messageCode: type, triggerEvent: event }).messageControlId("C1");
 const qrd = () => new QRD().queryFormatCode("R").queryPriority("I").queryId("Q1");
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 const problem = () => ({
   problem: new PRB().actionCode("AD"),
   notes: [new NTE()],

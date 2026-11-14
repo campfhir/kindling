@@ -81,7 +81,7 @@ test("encode() throws when message is invalid", () => {
 
 test("encode() produces correct segment order for minimal message", () => {
   const msg = createADT_A01(makeMSH(), makeEVN(), makePID(), makePV1());
-  const segments = msg.encode().split("\r");
+  const segments = msg.encode().split("\r").filter(Boolean);
 
   expect(segments[0].startsWith("MSH|")).toBe(true);
   expect(segments[1].startsWith("EVN|")).toBe(true);
@@ -96,7 +96,7 @@ test("encode() includes optional PD1 and NK1 before PV1", () => {
     patientDemographics: pd1,
     nextOfKin: [nk1],
   });
-  const segments = msg.encode().split("\r");
+  const segments = msg.encode().split("\r").filter(Boolean);
   const names = segments.map((s) => s.substring(0, 3));
 
   expect(names.indexOf("PD1")).toBeLessThan(names.indexOf("PV1"));
@@ -115,7 +115,7 @@ test("encode() places AL1 and DG1 after PV1", () => {
     allergies: [al1],
     diagnoses: [dg1],
   });
-  const segments = msg.encode().split("\r");
+  const segments = msg.encode().split("\r").filter(Boolean);
   const names = segments.map((s) => s.substring(0, 3));
 
   expect(names.indexOf("AL1")).toBeGreaterThan(names.indexOf("PV1"));
@@ -127,7 +127,7 @@ test("encode() places procedure groups after DRG", () => {
   const msg = createADT_A01(makeMSH(), makeEVN(), makePID(), makePV1(), {
     procedures: [{ procedure: pr1 }],
   });
-  const segments = msg.encode().split("\r");
+  const segments = msg.encode().split("\r").filter(Boolean);
   const names = segments.map((s) => s.substring(0, 3));
 
   expect(names.includes("PR1")).toBe(true);
@@ -140,7 +140,7 @@ test("encode() interleaves ROL inside procedure group", () => {
   const msg = createADT_A01(makeMSH(), makeEVN(), makePID(), makePV1(), {
     procedures: [{ procedure: pr1, roles: [rol] }],
   });
-  const segments = msg.encode().split("\r");
+  const segments = msg.encode().split("\r").filter(Boolean);
   const names = segments.map((s) => s.substring(0, 3));
 
   const pr1Idx = names.indexOf("PR1");
@@ -155,7 +155,7 @@ test("encode() places GT1 before insurance groups", () => {
     guarantors: [gt1],
     insuranceGroups: [{ insurance: in1 }],
   });
-  const segments = msg.encode().split("\r");
+  const segments = msg.encode().split("\r").filter(Boolean);
   const names = segments.map((s) => s.substring(0, 3));
 
   expect(names.indexOf("GT1")).toBeLessThan(names.indexOf("IN1"));
@@ -168,7 +168,7 @@ test("encode() interleaves IN2 and IN3 inside insurance group", () => {
   const msg = createADT_A01(makeMSH(), makeEVN(), makePID(), makePV1(), {
     insuranceGroups: [{ insurance: in1, insuranceDetails: in2, insuranceCertification: in3 }],
   });
-  const segments = msg.encode().split("\r");
+  const segments = msg.encode().split("\r").filter(Boolean);
   const names = segments.map((s) => s.substring(0, 3));
 
   const in1Idx = names.indexOf("IN1");
@@ -184,7 +184,7 @@ test("encode() handles multiple insurance groups in order", () => {
   const msg = createADT_A01(makeMSH(), makeEVN(), makePID(), makePV1(), {
     insuranceGroups: [{ insurance: in1a }, { insurance: in1b }],
   });
-  const segments = msg.encode().split("\r");
+  const segments = msg.encode().split("\r").filter(Boolean);
   const in1Segments = segments.filter((s) => s.startsWith("IN1|"));
   expect(in1Segments).toHaveLength(2);
 });

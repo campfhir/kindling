@@ -20,7 +20,7 @@ const msh = (event: string) => new MSH().messageType({ messageCode: "ORF", trigg
 const msa = () => new MSA().acknowledgmentCode("AA").messageControlId("Q1");
 const qrd = () => new QRD().queryDateTime("20231015120000").queryFormatCode("R").queryPriority("I").queryId("Q1");
 const obr = (n: string) => new OBR().setId(n).universalServiceIdentifier({ identifier: "CBC" });
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("ORF_R04 (v2.3)", () => {
   test("each query response is an inlined patient followed by its orders and observations", () => {

@@ -27,7 +27,7 @@ import { FT1 } from "./FT1.ts";
 const msh = (type: string, event: string) => new MSH().messageType({ messageCode: type, triggerEvent: event }).messageControlId("P1");
 const orc = () => new ORC().orderControl("NW");
 const rxr = () => new RXR().route({ code: "PO" });
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("orders and pharmacy (v2.4)", () => {
   test("RDE^O11 is the v2.3 RDE^O01 with optional observations; the O01 name is withdrawn", () => {
