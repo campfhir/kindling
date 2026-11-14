@@ -51,7 +51,7 @@ const msa = () => new MSA().acknowledgmentCode("AA").messageControlId("O1");
 const orc = (control: string) => new ORC().orderControl(control);
 const qrd = () => new QRD().queryFormatCode("R").queryPriority("I").queryId("Q1").whatSubjectFilter({ code: "RAR" });
 const rxr = () => new RXR().route({ code: "PO" });
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("OMD_O01 / ORD_O02 (v2.3)", () => {
   test("diet orders carry ODS lists with required observations; tray orders carry ODTs", () => {

@@ -19,7 +19,7 @@ import { ParserUtils } from "../types/parser.ts";
 const msh = (type: string, event: string) => new MSH().messageType({ messageCode: type, triggerEvent: event }).messageControlId("M1");
 const mfi = (file: string) => new MFI().masterFileIdentifier({ identifier: file }).fileLevelEventCode("UPD");
 const mfe = (key: string) => new MFE().recordLevelEventCode("MAD").primaryKeyValue(key);
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("MFN_M15 and MFN_M12 (v2.5)", () => {
   test("each inventory item entry is MFE IIM", () => {
@@ -28,7 +28,7 @@ describe("MFN_M15 and MFN_M12 (v2.5)", () => {
     expect(msg).toBeInstanceOf(MFN_M15);
     const wire = msg.encode();
     expect(names(wire)).toEqual(["MSH", "SFT", "MFI", "MFE", "IIM"]);
-    expect(wire.split("\r")[4]).toBe("IIM|INV1^Reagent A|GLU|LOT42|||||||||12");
+    expect(wire.split("\r").filter(Boolean)[4]).toBe("IIM|INV1^Reagent A|GLU|LOT42|||||||||12");
     const parsed = parseMFN_M15(wire).val!;
     expect(ParserUtils.getComponent(parsed.entries[0].inventoryItem.fields[0], 1)).toBe("Reagent A");
     expect(parsed.message.encode()).toBe(wire);

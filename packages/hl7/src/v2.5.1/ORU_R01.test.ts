@@ -68,7 +68,7 @@ test("ORU_R01 encodes valid message with minimal data", () => {
   ]);
 
   const encoded = message.encode();
-  const segments = encoded.split("\r");
+  const segments = encoded.split("\r").filter(Boolean);
 
   expect(segments.length).toBe(4);
   expect(segments[0].startsWith("MSH|")).toBeTruthy();
@@ -94,7 +94,7 @@ test("ORU_R01 encodes message with PV1", () => {
   ]);
 
   const encoded = message.encode();
-  const segments = encoded.split("\r");
+  const segments = encoded.split("\r").filter(Boolean);
 
   expect(segments.length).toBe(5);
   expect(segments[2].substring(0, 3)).toBe("PV1");
@@ -117,7 +117,7 @@ test("ORU_R01 handles multiple OBX segments", () => {
   ]);
 
   const encoded = message.encode();
-  const segments = encoded.split("\r");
+  const segments = encoded.split("\r").filter(Boolean);
 
   expect(segments.length).toBe(6);
 });
@@ -144,7 +144,7 @@ test("ORU_R01 handles multiple order observations", () => {
   ]);
 
   const encoded = message.encode();
-  const segments = encoded.split("\r");
+  const segments = encoded.split("\r").filter(Boolean);
 
   expect(segments.length).toBe(6);
 });
@@ -172,7 +172,7 @@ test("ORU_R01 handles multiple patient results", () => {
   ]);
 
   const encoded = message.encode();
-  const segments = encoded.split("\r");
+  const segments = encoded.split("\r").filter(Boolean);
 
   expect(segments.length).toBe(7);
 });
@@ -229,7 +229,7 @@ test("ORU_R01 handles patient result without PID", () => {
   ]);
 
   const encoded = message.encode();
-  const segments = encoded.split("\r");
+  const segments = encoded.split("\r").filter(Boolean);
 
   expect(segments.length).toBe(3);
   expect(segments[0].substring(0, 3)).toBe("MSH");

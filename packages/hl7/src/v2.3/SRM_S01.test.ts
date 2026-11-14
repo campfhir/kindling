@@ -19,7 +19,7 @@ import { ParserUtils } from "../types/parser.ts";
 
 const msh = () => new MSH().sendingApplication("SCHED").messageType({ messageCode: "SRM", triggerEvent: "S01" });
 const arq = () => new ARQ().placerAppointmentId("PLACER1");
-const types = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const types = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("SRM_S01 builder (v2.3)", () => {
   test("verify() requires MSH, ARQ and a RESOURCES group", () => {

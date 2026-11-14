@@ -1,6 +1,7 @@
 import type { Segment } from "../types/segment.ts";
 import { type EncodingCharacters, DEFAULT_ENCODING } from "../types/encoding.ts";
 import { type PathComponents, parsePath } from "./ValueExtractor.ts";
+import { type EncodeOptions, stripWire, toWire } from "../types/message.ts";
 
 type Position = "before" | "after";
 type Mode = { type: "last" } | { type: "each" } | { type: "nth"; n: number };
@@ -71,7 +72,7 @@ interface Insertion {
 }
 
 interface Encodable {
-  encode(...args: unknown[]): string;
+  encode(options?: EncodeOptions): string;
 }
 
 function applyInsertion(
@@ -173,14 +174,18 @@ export class MessageEditor {
     return this;
   }
 
-  /** Encodes this message to its HL7 wire string. */
-  encode(...args: unknown[]): string {
-    let lines = this.message.encode(...args).split("\r");
+  /**
+   * Encodes the edited message to its HL7 wire string, every segment ending with `\r`. Pass
+   * `{ mllp: true }` to frame it for MLLP as `<VT>message<FS><CR>`. A source string's own MLLP
+   * frame and line endings are replaced.
+   */
+  encode(options?: EncodeOptions): string {
+    let lines = stripWire(this.message.encode()).split(/\r\n|\r|\n/);
     lines = applyUpdates(lines, this.updates, this.encoding);
     for (const insertion of this.insertions) {
       lines = applyInsertion(lines, insertion, this.encoding);
     }
-    return lines.join("\r");
+    return toWire(lines, options);
   }
 }
 

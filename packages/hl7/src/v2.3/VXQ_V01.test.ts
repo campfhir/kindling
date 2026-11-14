@@ -25,7 +25,7 @@ const msh = (type: string, event: string) => new MSH().messageType({ messageCode
 const msa = () => new MSA().acknowledgmentCode("AA").messageControlId("V1");
 const qrd = () => new QRD().queryDateTime("20231015120000").queryFormatCode("R").queryPriority("I").queryId("Q1").whoSubjectFilter({ id: "12345", familyName: "DOE" });
 const rxa = (n: string) => new RXA().giveSubIdCounter("0").administrationSubIdCounter(n).administeredCode({ code: "08", text: "Hep B" });
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("VXQ_V01 (v2.3)", () => {
   test("is MSH QRD [QRF]", () => {

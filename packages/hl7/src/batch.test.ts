@@ -52,7 +52,7 @@ describe("parseBatch", () => {
       fileTrailer: file.fileTrailer,
     });
     expect(encoded).toBe(FILE);
-    expect(encodeBatch({ batches: [{ messages: [A01("X") + "\r"] }] }, { terminator: "\n" })).toBe(A01("X").split("\r").join("\n"));
+    expect(encodeBatch({ batches: [{ messages: [A01("X") + "\r"] }] }, { terminator: "\n" })).toBe(A01("X").split("\r").filter(Boolean).join("\n"));
   });
 
   test("every envelope segment is optional", async () => {
@@ -126,8 +126,8 @@ describe("parseBatch", () => {
   });
 
   test("accepts LF and CRLF terminators and ignores blank lines", async () => {
-    expect(structures((await parseBatch(FILE.split("\r").join("\n"))).val!)).toEqual([["ADT_A01", "ORU_R01"], ["ACK"]]);
-    expect(structures((await parseBatch(FILE.split("\r").join("\r\n") + "\r\n\r\n")).val!)).toEqual([["ADT_A01", "ORU_R01"], ["ACK"]]);
+    expect(structures((await parseBatch(FILE.split("\r").filter(Boolean).join("\n"))).val!)).toEqual([["ADT_A01", "ORU_R01"], ["ACK"]]);
+    expect(structures((await parseBatch(FILE.split("\r").filter(Boolean).join("\r\n") + "\r\n\r\n")).val!)).toEqual([["ADT_A01", "ORU_R01"], ["ACK"]]);
   });
 
   test("rejects what the structure does not allow", async () => {
@@ -162,7 +162,7 @@ describe("encodeBatch", () => {
       ],
       fileTrailer: new FTS().fileBatchCount("2"),
     });
-    expect(wire.split("\r")).toEqual([
+    expect(wire.split("\r").filter(Boolean)).toEqual([
       "FHS|^~\\&|EMR||||||acks",
       "BHS|^~\\&|EMR",
       "QRD|20231015",

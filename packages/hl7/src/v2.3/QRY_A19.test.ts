@@ -21,7 +21,7 @@ import { ParserUtils } from "../types/parser.ts";
 
 const msh = (type: string, event: string) => new MSH().sendingApplication("ADT").messageType({ messageCode: type, triggerEvent: event }).messageControlId("Q1");
 const qrd = () => new QRD().queryDateTime("20231015120000").queryFormatCode("R").queryPriority("I").queryId("Q1").whoSubjectFilter({ id: "12345" }).whatSubjectFilter({ code: "DEM" });
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("QRY_A19 (v2.3)", () => {
   test("encodes MSH QRD [QRF] and parses back", () => {

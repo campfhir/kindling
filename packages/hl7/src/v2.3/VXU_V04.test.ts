@@ -21,7 +21,7 @@ const makeMSH = () => new MSH().messageType({ messageCode: "VXU", triggerEvent: 
 const makePID = () => new PID().setId("1");
 const makeRXA = (n = "1") => new RXA().giveSubIdCounter("0").administrationSubIdCounter(n).administeredCode({ code: "08", text: "Hep B" });
 const makeORC = () => new ORC().orderControl("RE");
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 const msh = () => makeMSH().encode();
 
 function fullMessage() {
@@ -110,7 +110,7 @@ describe("VXU_V04 parser (v2.3)", () => {
     expect(val.orders![0].route).toBeInstanceOf(RXR);
     expect(val.orders![0].observations!.map((o) => o.notes!.length)).toEqual([2, 0]);
     expect(val.orders![1].commonOrder).toBeUndefined();
-    expect(val.message.segments).toHaveLength(wire.split("\r").length);
+    expect(val.message.segments).toHaveLength(wire.split("\r").filter(Boolean).length);
   });
 
   test("the vaccination groups are optional", () => {

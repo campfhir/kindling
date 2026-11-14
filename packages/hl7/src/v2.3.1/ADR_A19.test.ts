@@ -15,7 +15,7 @@ import { IN3 } from "./IN3.ts";
 import { ROL } from "../v2.4/ROL.ts";
 
 const msh = () => new MSH().messageType({ messageCode: "ADR", triggerEvent: "A19" }).messageControlId("Q1");
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("ADR_A19 (v2.3.1)", () => {
   const wire = () =>
@@ -35,7 +35,7 @@ describe("ADR_A19 (v2.3.1)", () => {
   test("the v2.3 parser skips the unknown QAK and rejects the second IN3; the v2.4 parser accepts the message (and ROLs)", () => {
     expect(parseADR_A19_v23(wire()).err!.message).toBe("IN3 segment at line 9 is not allowed at this position in ADR_A19");
     expect(parseADR_A19_v24(wire()).ok).toBe(true);
-    const withRoles = [...wire().split("\r").slice(0, 6), new ROL().roleInstanceId({ entityId: "1" }).encode(), "IN1|1", "ROL|2"].join("\r");
+    const withRoles = [...wire().split("\r").filter(Boolean).slice(0, 6), new ROL().roleInstanceId({ entityId: "1" }).encode(), "IN1|1", "ROL|2"].join("\r");
     const v24 = parseADR_A19_v24(withRoles).val!;
     expect(v24.queryResponses[0].visitRoles).toHaveLength(1);
     expect(v24.queryResponses[0].insuranceGroups![0].roles).toHaveLength(1);

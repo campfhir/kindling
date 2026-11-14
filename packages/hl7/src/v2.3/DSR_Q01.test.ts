@@ -23,7 +23,7 @@ const msh = (type: string, event: string) => new MSH().messageType({ messageCode
 const msa = () => new MSA().acknowledgmentCode("AA").messageControlId("Q1");
 const qrd = () => new QRD().queryDateTime("20231015120000").queryFormatCode("D").queryPriority("I").queryId("Q1");
 const lines = (...text: string[]) => text.map((t, i) => new DSP().setId(String(i + 1)).dataLine(t));
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("DSR_Q01 family (v2.3)", () => {
   test("DSR^Q01 carries the display lines after the query definition", () => {

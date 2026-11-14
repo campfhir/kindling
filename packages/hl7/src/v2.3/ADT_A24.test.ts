@@ -49,7 +49,7 @@ test("encode() throws when message is invalid", () => {
 test("encode() emits both patient groups in spec order", () => {
   const p1 = { patient: makePID("1", "Doe"), patientDemographics: new PD1(), visit: new PV1().patientClass("O"), disabilities: [new DB1().setId("1")] };
   const p2 = { patient: makePID("2", "Roe"), visit: new PV1().patientClass("I") };
-  const segments = createADT_A24(makeMSH(), makeEVN(), [p1, p2]).encode().split("\r");
+  const segments = createADT_A24(makeMSH(), makeEVN(), [p1, p2]).encode().split("\r").filter(Boolean);
   expect(segments.map((s) => s.substring(0, 3))).toEqual(["MSH", "EVN", "PID", "PD1", "PV1", "DB1", "PID", "PV1"]);
 });
 

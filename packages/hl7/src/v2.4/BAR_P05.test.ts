@@ -22,7 +22,7 @@ import { ParserUtils } from "../types/parser.ts";
 const msh = (ev: string) => new MSH().sendingApplication("ADT").messageType({ messageCode: "BAR", triggerEvent: ev });
 const evn = (ev: string) => new EVN().eventTypeCode(ev);
 const pid = () => new PID().setId("1");
-const types = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const types = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 const MSH_LINE = (ev: string) => `MSH|^~\\&|ADT|HOSP|AR|HOSP|20231015120000||BAR^${ev}^BAR_${ev}|MSG001|P|2.4`;
 
 describe("BAR (v2.4): ROLs, repeating IN3, and ABS/BLC/RMI in P05", () => {

@@ -26,7 +26,7 @@ describe("ACK builder", () => {
   });
 
   test("encodes MSH, MSA and no ERR by default", () => {
-    const segments = createACK(makeMSH(), makeMSA()).encode().split("\r");
+    const segments = createACK(makeMSH(), makeMSA()).encode().split("\r").filter(Boolean);
     expect(segments.map((s) => s.slice(0, 3))).toEqual(["MSH", "MSA"]);
     expect(segments[1]).toBe("MSA|AA|MSG1");
   });
@@ -36,7 +36,7 @@ describe("ACK builder", () => {
       software: [new SFT(), new SFT()],
       errors: [new ERR().errorLocation({ segmentId: "PID" }), new ERR().severity("E")],
     }).encode();
-    expect(wire.split("\r").map((s) => s.slice(0, 3))).toEqual(["MSH", "SFT", "SFT", "MSA", "ERR", "ERR"]);
+    expect(wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3))).toEqual(["MSH", "SFT", "SFT", "MSA", "ERR", "ERR"]);
   });
 });
 
@@ -56,7 +56,7 @@ describe("ACK round trip", () => {
     expect(result.val.acknowledgment.encode()).toBe("MSA|AA|MSG1|ok");
     expect(result.val.errors).toHaveLength(2);
     expect(result.val.errors![0].encode()).toBe("ERR||PID^1^5|101^Required field missing|E");
-    expect(result.val.message.segments).toHaveLength(wire.split("\r").length);
+    expect(result.val.message.segments).toHaveLength(wire.split("\r").filter(Boolean).length);
   });
 
   test("SFT and ERR are optional", () => {

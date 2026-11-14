@@ -11,7 +11,7 @@ import { SCH } from "./SCH.ts";
 import { TQ1 } from "./TQ1.ts";
 import { RGS } from "./RGS.ts";
 
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("SQR_S25 (v2.5)", () => {
   test("ERR repeats and each schedule may carry TQ1s after SCH", () => {

@@ -22,7 +22,7 @@ import { OBX } from "./OBX.ts";
 const msh = (event: string) => new MSH().messageType({ messageCode: "ORF", triggerEvent: event }).messageControlId("R1");
 const msa = () => new MSA().acknowledgmentCode("AA").messageControlId("Q1");
 const qrd = () => new QRD().queryFormatCode("R").queryPriority("I").queryId("Q1");
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("ORF_R04 (v2.5)", () => {
   test("adds SFT, the TIMING QTY groups, CTD and a trailing repeating ERR + QAK", () => {
@@ -60,7 +60,7 @@ describe("ORF_R04 (v2.5)", () => {
     expect(names(wire)).toEqual(["MSH", "MSA", "QRD", "OBR", "CTD", "ERR"]);
     expect(parseORF_W02(wire).val!.queryResponses[0].orders[0].contact!.name).toBe("CTD");
     // A TQ1 is not part of ORF^W02, so the parser skips it as an unknown segment.
-    const withTq1 = parseORF_W02([...wire.split("\r").slice(0, 4), "TQ1|1", "CTD|", "ERR|"].join("\r"));
+    const withTq1 = parseORF_W02([...wire.split("\r").filter(Boolean).slice(0, 4), "TQ1|1", "CTD|", "ERR|"].join("\r"));
     expect(withTq1.ok).toBe(true);
     expect(withTq1.val!.message.segments.map((s) => s.name)).toEqual(["MSH", "MSA", "QRD", "OBR", "CTD", "ERR"]);
     // @ts-expect-error timings are not part of ORF^W02

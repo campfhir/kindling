@@ -45,7 +45,7 @@ const msa = () => new MSA().acknowledgmentCode("AA").messageControlId("P1");
 const orc = (control: string) => new ORC().orderControl(control);
 const rxr = () => new RXR().route({ code: "PO" });
 const nte = (text: string) => new NTE().comment(text);
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("RDO_O01 / RRO_O02 (v2.3)", () => {
   test("the order detail is RXO [{NTE}] {RXR} [ {RXC} [{NTE}] ] [{ OBX [{NTE}] }]", () => {

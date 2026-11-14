@@ -21,7 +21,7 @@ const pid = () => new PID().setId("1").patientName({ familyName: "Smith", givenN
 const orc = () => new ORC().orderControl("NW").placerOrderNumber("POC1");
 const obr = () => new OBR().setId("1").universalServiceIdentifier({ identifier: "GLUC", text: "Glucose", nameOfCodingSystem: "LN" });
 const obx = (id: string, value: string) => new OBX().setId(id).valueType("NM").observationValue(value);
-const types = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const types = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("ORU_R30 builder (v2.5.1)", () => {
   test("createORU_R30 returns an ORU_R30; R31 and R32 are their own classes", () => {

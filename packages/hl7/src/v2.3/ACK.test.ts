@@ -25,14 +25,14 @@ describe("ACK builder", () => {
   });
 
   test("encodes MSH, MSA and no ERR by default", () => {
-    const segments = createACK(makeMSH(), makeMSA()).encode().split("\r");
+    const segments = createACK(makeMSH(), makeMSA()).encode().split("\r").filter(Boolean);
     expect(segments.map((s) => s.slice(0, 3))).toEqual(["MSH", "MSA"]);
     expect(segments[1]).toBe("MSA|AA|MSG1");
   });
 
   test("encodes ERR after MSA", () => {
     const err = new ERR().errorCodeAndLocation("101");
-    const segments = createACK(makeMSH(), makeMSA(), { error: err }).encode().split("\r");
+    const segments = createACK(makeMSH(), makeMSA(), { error: err }).encode().split("\r").filter(Boolean);
     expect(segments.map((s) => s.slice(0, 3))).toEqual(["MSH", "MSA", "ERR"]);
   });
 });

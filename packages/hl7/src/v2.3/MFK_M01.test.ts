@@ -23,7 +23,7 @@ const msh = (type: string, event: string) => new MSH().messageType({ messageCode
 const msa = () => new MSA().acknowledgmentCode("AA").messageControlId("M1");
 const mfi = () => new MFI().masterFileIdentifier({ identifier: "CDM" }).fileLevelEventCode("UPD");
 const mfa = (key: string) => new MFA().recordLevelEventCode("MAD").mfnControlId(key).errorReturnCodeAndOrText({ identifier: "S" });
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("MFK_M01 family (v2.3)", () => {
   test("acknowledges each entry with an MFA", () => {

@@ -13,7 +13,7 @@ import { ORG } from "./ORG.ts";
 import { ParserUtils } from "../types/parser.ts";
 
 const msh = () => new MSH().sendingApplication("HR").messageType({ messageCode: "MFN", triggerEvent: "M02" }).messageControlId("1");
-const types = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const types = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("MFN_M02 (v2.4): ORG in the staff entry", () => {
   test("encodes and parses the ORG segment; v2.3 skips it with a warning", () => {

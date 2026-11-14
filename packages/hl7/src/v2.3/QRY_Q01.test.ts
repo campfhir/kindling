@@ -20,7 +20,7 @@ import { ParserUtils } from "../types/parser.ts";
 
 const msh = (type: string, event: string) => new MSH().messageType({ messageCode: type, triggerEvent: event }).messageControlId("Q1");
 const qrd = () => new QRD().queryDateTime("20231015120000").queryFormatCode("D").queryPriority("D").queryId("Q1").deferredResponseType("B");
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("QRY_Q01 family (v2.3)", () => {
   test("QRY^Q01 encodes MSH QRD [QRF] [DSC] and parses back", () => {

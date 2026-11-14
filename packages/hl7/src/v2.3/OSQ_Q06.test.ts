@@ -19,7 +19,7 @@ import { DSC } from "./DSC.ts";
 const msh = (type: string) => new MSH().messageType({ messageCode: type, triggerEvent: "Q06" }).messageControlId("O1");
 const msa = () => new MSA().acknowledgmentCode("AA").messageControlId("Q1");
 const qrd = () => new QRD().queryDateTime("20231015120000").queryFormatCode("R").queryPriority("I").queryId("Q1");
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("OSQ_Q06 (v2.3)", () => {
   test("is MSH QRD [QRF] [DSC]", () => {

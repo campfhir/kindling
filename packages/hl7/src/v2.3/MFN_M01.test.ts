@@ -44,7 +44,7 @@ import { ParserUtils } from "../types/parser.ts";
 const msh = (event: string) => new MSH().messageType({ messageCode: "MFN", triggerEvent: event }).messageControlId("M1");
 const mfi = (file: string) => new MFI().masterFileIdentifier({ identifier: file }).fileLevelEventCode("UPD");
 const mfe = (key: string) => new MFE().recordLevelEventCode("MAD").primaryKeyValue(key);
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("master file notifications (v2.3)", () => {
   test("MFN^M01 carries bare entries; MFN^M03 an OM1 per entry", () => {
@@ -117,7 +117,7 @@ describe("master file notifications (v2.3)", () => {
     expect(names(m07)).toEqual(["MSH", "MFI", "MFE", "CM0", "CM2"]);
     expect(parseMFN_M07(m07).val!.entries[0].studySchedules).toHaveLength(1);
     // A CM1 is not part of M07.
-    expect(parseMFN_M07([...m07.split("\r"), "CM1|1"].join("\r")).val!.message.segments.map((s) => s.name)).not.toContain("CM1");
+    expect(parseMFN_M07([...m07.split("\r").filter(Boolean), "CM1|1"].join("\r")).val!.message.segments.map((s) => s.name)).not.toContain("CM1");
   });
 
   test("MFN^M08–M11 carry OM1 and the detail segments of their kind of test", () => {

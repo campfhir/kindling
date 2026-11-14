@@ -21,7 +21,7 @@ import { ParserUtils } from "../types/parser.ts";
 
 const MSH_LINE = (ev = "R30") => `MSH|^~\\&|POC|Lab|LIS|Hospital|20251119120000||ORU^${ev}|MSG001|P|2.5.1`;
 const minimal = ["PID|1||98765^^^MRN||Smith^Jane^M", "ORC|NW|POC12345", "OBR|1|POC12345||GLUC^Glucose^LN", "OBX|1|NM|2339-0^Glucose POC^LN|1|185|mg/dL"];
-const types = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const types = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("ORU_R30_Parser", () => {
   const parser = new ORU_R30_Parser();
@@ -70,7 +70,7 @@ describe("ORU_R30_Parser", () => {
     expect(v.timings![0].timingRelationships).toHaveLength(1);
     expect(v.observations.map((o) => o.notes!.length)).toEqual([2, 0]);
     expect(v.message.segments).toHaveLength(15);
-    expect(v.message.encode()).toBe(wire);
+    expect(v.message.encode()).toBe(`${wire}\r`);
   });
 
   it("R31 and R32 parse under their own names", () => {

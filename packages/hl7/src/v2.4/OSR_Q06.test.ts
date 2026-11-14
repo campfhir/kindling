@@ -13,7 +13,7 @@ import { OBR } from "./OBR.ts";
 const msh = () => new MSH().messageType({ messageCode: "OSR", triggerEvent: "Q06" }).messageControlId("O1");
 const msa = () => new MSA().acknowledgmentCode("AA").messageControlId("Q1");
 const qrd = () => new QRD().queryFormatCode("R").queryPriority("I").queryId("Q1");
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("OSR_Q06 (v2.4)", () => {
   test("an order without a detail segment fails verification in v2.4 but not in v2.3", () => {

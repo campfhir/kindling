@@ -51,7 +51,7 @@ import { NK1 } from "./NK1.ts";
 const msh = (type: string, event: string) => new MSH().messageType({ messageCode: type, triggerEvent: event }).messageControlId("M1");
 const msa = () => new MSA().acknowledgmentCode("AA").messageControlId("Q1");
 const qrd = () => new QRD().queryFormatCode("R").queryPriority("I").queryId("Q1");
-const names = (wire: string) => wire.split("\r").map((s) => s.slice(0, 3));
+const names = (wire: string) => wire.split("\r").filter(Boolean).map((s) => s.slice(0, 3));
 
 describe("patient care (v2.5)", () => {
   test("PPR^PC1 and QRY^PC9 take SFT; QRY^PC4 keeps the v2.3 shape", () => {

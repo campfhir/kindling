@@ -47,7 +47,7 @@ describe("parseADT_A17", () => {
 
   test("re-encodes to the original wire string", () => {
     const result = parseADT_A17(fullMessage);
-    expect(result.val!.message.encode()).toBe(fullMessage);
+    expect(result.val!.message.encode()).toBe(`${fullMessage}\r`);
   });
 
   test("fails without EVN", () => {

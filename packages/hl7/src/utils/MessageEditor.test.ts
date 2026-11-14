@@ -13,7 +13,7 @@ const BASE = [
 ].join("\r");
 
 function lines(encoded: string) {
-  return encoded.split("\r");
+  return encoded.split("\r").filter(Boolean);
 }
 
 describe("MessageEditor.append", () => {
@@ -99,7 +99,7 @@ describe("MessageEditor.insert.after", () => {
     const result = new MessageEditor(BASE)
       .insert(zseg).after("NK1").commit()
       .encode();
-    expect(result).toBe(BASE);
+    expect(result).toBe(`${BASE}\r`);
   });
 
   test("nth beyond count does nothing", () => {
@@ -107,7 +107,7 @@ describe("MessageEditor.insert.after", () => {
     const result = new MessageEditor(BASE)
       .insert(zseg).after("PID").nth(99).commit()
       .encode();
-    expect(result).toBe(BASE);
+    expect(result).toBe(`${BASE}\r`);
   });
 });
 
@@ -204,7 +204,7 @@ describe("MessageEditor.update", () => {
     const result = new MessageEditor(BASE)
       .update("BADPATH", "x")
       .encode();
-    expect(result).toBe(BASE);
+    expect(result).toBe(`${BASE}\r`);
   });
 
   test("update chains with insert", () => {
